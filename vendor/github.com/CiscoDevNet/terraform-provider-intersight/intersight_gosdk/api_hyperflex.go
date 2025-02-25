@@ -56,8 +56,8 @@ func (r ApiCreateHyperflexAppCatalogRequest) Execute() (*HyperflexAppCatalog, *h
 /*
 CreateHyperflexAppCatalog Create a 'hyperflex.AppCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexAppCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexAppCatalogRequest
 */
 func (a *HyperflexApiService) CreateHyperflexAppCatalog(ctx context.Context) ApiCreateHyperflexAppCatalogRequest {
 	return ApiCreateHyperflexAppCatalogRequest{
@@ -67,7 +67,8 @@ func (a *HyperflexApiService) CreateHyperflexAppCatalog(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return HyperflexAppCatalog
+//
+//	@return HyperflexAppCatalog
 func (a *HyperflexApiService) CreateHyperflexAppCatalogExecute(r ApiCreateHyperflexAppCatalogRequest) (*HyperflexAppCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateHyperflexAutoSupportPolicyRequest) Execute() (*HyperflexAutoSup
 /*
 CreateHyperflexAutoSupportPolicy Create a 'hyperflex.AutoSupportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexAutoSupportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexAutoSupportPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicy(ctx context.Context) ApiCreateHyperflexAutoSupportPolicyRequest {
 	return ApiCreateHyperflexAutoSupportPolicyRequest{
@@ -248,7 +249,8 @@ func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexAutoSupportPolicy
+//
+//	@return HyperflexAutoSupportPolicy
 func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicyExecute(r ApiCreateHyperflexAutoSupportPolicyRequest) (*HyperflexAutoSupportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -418,8 +420,8 @@ func (r ApiCreateHyperflexCapabilityInfoRequest) Execute() (*HyperflexCapability
 /*
 CreateHyperflexCapabilityInfo Create a 'hyperflex.CapabilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexCapabilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexCapabilityInfoRequest
 */
 func (a *HyperflexApiService) CreateHyperflexCapabilityInfo(ctx context.Context) ApiCreateHyperflexCapabilityInfoRequest {
 	return ApiCreateHyperflexCapabilityInfoRequest{
@@ -429,7 +431,8 @@ func (a *HyperflexApiService) CreateHyperflexCapabilityInfo(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return HyperflexCapabilityInfo
+//
+//	@return HyperflexCapabilityInfo
 func (a *HyperflexApiService) CreateHyperflexCapabilityInfoExecute(r ApiCreateHyperflexCapabilityInfoRequest) (*HyperflexCapabilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -599,8 +602,8 @@ func (r ApiCreateHyperflexClusterBackupPolicyRequest) Execute() (*HyperflexClust
 /*
 CreateHyperflexClusterBackupPolicy Create a 'hyperflex.ClusterBackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterBackupPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicy(ctx context.Context) ApiCreateHyperflexClusterBackupPolicyRequest {
 	return ApiCreateHyperflexClusterBackupPolicyRequest{
@@ -610,7 +613,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicy
+//
+//	@return HyperflexClusterBackupPolicy
 func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyExecute(r ApiCreateHyperflexClusterBackupPolicyRequest) (*HyperflexClusterBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -780,8 +784,8 @@ func (r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) Execute() (*Hype
 /*
 CreateHyperflexClusterBackupPolicyDeployment Create a 'hyperflex.ClusterBackupPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterBackupPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterBackupPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeployment(ctx context.Context) ApiCreateHyperflexClusterBackupPolicyDeploymentRequest {
 	return ApiCreateHyperflexClusterBackupPolicyDeploymentRequest{
@@ -791,7 +795,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeployment(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyDeployment
+//
+//	@return HyperflexClusterBackupPolicyDeployment
 func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeploymentExecute(r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) (*HyperflexClusterBackupPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -961,8 +966,8 @@ func (r ApiCreateHyperflexClusterNetworkPolicyRequest) Execute() (*HyperflexClus
 /*
 CreateHyperflexClusterNetworkPolicy Create a 'hyperflex.ClusterNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterNetworkPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicy(ctx context.Context) ApiCreateHyperflexClusterNetworkPolicyRequest {
 	return ApiCreateHyperflexClusterNetworkPolicyRequest{
@@ -972,7 +977,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexClusterNetworkPolicy
+//
+//	@return HyperflexClusterNetworkPolicy
 func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicyExecute(r ApiCreateHyperflexClusterNetworkPolicyRequest) (*HyperflexClusterNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1142,8 +1148,8 @@ func (r ApiCreateHyperflexClusterProfileRequest) Execute() (*HyperflexClusterPro
 /*
 CreateHyperflexClusterProfile Create a 'hyperflex.ClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterProfileRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterProfile(ctx context.Context) ApiCreateHyperflexClusterProfileRequest {
 	return ApiCreateHyperflexClusterProfileRequest{
@@ -1153,7 +1159,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterProfile(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return HyperflexClusterProfile
+//
+//	@return HyperflexClusterProfile
 func (a *HyperflexApiService) CreateHyperflexClusterProfileExecute(r ApiCreateHyperflexClusterProfileRequest) (*HyperflexClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1323,8 +1330,8 @@ func (r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) Execute() (*Hy
 /*
 CreateHyperflexClusterReplicationNetworkPolicy Create a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterReplicationNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterReplicationNetworkPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicy(ctx context.Context) ApiCreateHyperflexClusterReplicationNetworkPolicyRequest {
 	return ApiCreateHyperflexClusterReplicationNetworkPolicyRequest{
@@ -1334,7 +1341,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicy(ctx
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicy
+//
+//	@return HyperflexClusterReplicationNetworkPolicy
 func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyExecute(r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) (*HyperflexClusterReplicationNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1504,8 +1512,8 @@ func (r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Exec
 /*
 CreateHyperflexClusterReplicationNetworkPolicyDeployment Create a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDeployment(ctx context.Context) ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest {
 	return ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest{
@@ -1515,7 +1523,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDepl
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicyDeployment
+//
+//	@return HyperflexClusterReplicationNetworkPolicyDeployment
 func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (*HyperflexClusterReplicationNetworkPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1685,8 +1694,8 @@ func (r ApiCreateHyperflexClusterStoragePolicyRequest) Execute() (*HyperflexClus
 /*
 CreateHyperflexClusterStoragePolicy Create a 'hyperflex.ClusterStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexClusterStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexClusterStoragePolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicy(ctx context.Context) ApiCreateHyperflexClusterStoragePolicyRequest {
 	return ApiCreateHyperflexClusterStoragePolicyRequest{
@@ -1696,7 +1705,8 @@ func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexClusterStoragePolicy
+//
+//	@return HyperflexClusterStoragePolicy
 func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicyExecute(r ApiCreateHyperflexClusterStoragePolicyRequest) (*HyperflexClusterStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1866,8 +1876,8 @@ func (r ApiCreateHyperflexExtFcStoragePolicyRequest) Execute() (*HyperflexExtFcS
 /*
 CreateHyperflexExtFcStoragePolicy Create a 'hyperflex.ExtFcStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexExtFcStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexExtFcStoragePolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicy(ctx context.Context) ApiCreateHyperflexExtFcStoragePolicyRequest {
 	return ApiCreateHyperflexExtFcStoragePolicyRequest{
@@ -1877,7 +1887,8 @@ func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexExtFcStoragePolicy
+//
+//	@return HyperflexExtFcStoragePolicy
 func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicyExecute(r ApiCreateHyperflexExtFcStoragePolicyRequest) (*HyperflexExtFcStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2047,8 +2058,8 @@ func (r ApiCreateHyperflexExtIscsiStoragePolicyRequest) Execute() (*HyperflexExt
 /*
 CreateHyperflexExtIscsiStoragePolicy Create a 'hyperflex.ExtIscsiStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexExtIscsiStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexExtIscsiStoragePolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicy(ctx context.Context) ApiCreateHyperflexExtIscsiStoragePolicyRequest {
 	return ApiCreateHyperflexExtIscsiStoragePolicyRequest{
@@ -2058,7 +2069,8 @@ func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicy(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexExtIscsiStoragePolicy
+//
+//	@return HyperflexExtIscsiStoragePolicy
 func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicyExecute(r ApiCreateHyperflexExtIscsiStoragePolicyRequest) (*HyperflexExtIscsiStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2228,8 +2240,8 @@ func (r ApiCreateHyperflexFeatureLimitExternalRequest) Execute() (*HyperflexFeat
 /*
 CreateHyperflexFeatureLimitExternal Create a 'hyperflex.FeatureLimitExternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexFeatureLimitExternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexFeatureLimitExternalRequest
 */
 func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternal(ctx context.Context) ApiCreateHyperflexFeatureLimitExternalRequest {
 	return ApiCreateHyperflexFeatureLimitExternalRequest{
@@ -2239,7 +2251,8 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternal(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitExternal
+//
+//	@return HyperflexFeatureLimitExternal
 func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternalExecute(r ApiCreateHyperflexFeatureLimitExternalRequest) (*HyperflexFeatureLimitExternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2409,8 +2422,8 @@ func (r ApiCreateHyperflexFeatureLimitInternalRequest) Execute() (*HyperflexFeat
 /*
 CreateHyperflexFeatureLimitInternal Create a 'hyperflex.FeatureLimitInternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexFeatureLimitInternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexFeatureLimitInternalRequest
 */
 func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternal(ctx context.Context) ApiCreateHyperflexFeatureLimitInternalRequest {
 	return ApiCreateHyperflexFeatureLimitInternalRequest{
@@ -2420,7 +2433,8 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternal(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitInternal
+//
+//	@return HyperflexFeatureLimitInternal
 func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternalExecute(r ApiCreateHyperflexFeatureLimitInternalRequest) (*HyperflexFeatureLimitInternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2590,8 +2604,8 @@ func (r ApiCreateHyperflexHealthCheckDefinitionRequest) Execute() (*HyperflexHea
 /*
 CreateHyperflexHealthCheckDefinition Create a 'hyperflex.HealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexHealthCheckDefinitionRequest
 */
 func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinition(ctx context.Context) ApiCreateHyperflexHealthCheckDefinitionRequest {
 	return ApiCreateHyperflexHealthCheckDefinitionRequest{
@@ -2601,7 +2615,8 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinition(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckDefinition
+//
+//	@return HyperflexHealthCheckDefinition
 func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinitionExecute(r ApiCreateHyperflexHealthCheckDefinitionRequest) (*HyperflexHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2771,8 +2786,8 @@ func (r ApiCreateHyperflexHealthCheckPackageChecksumRequest) Execute() (*Hyperfl
 /*
 CreateHyperflexHealthCheckPackageChecksum Create a 'hyperflex.HealthCheckPackageChecksum' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexHealthCheckPackageChecksumRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexHealthCheckPackageChecksumRequest
 */
 func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksum(ctx context.Context) ApiCreateHyperflexHealthCheckPackageChecksumRequest {
 	return ApiCreateHyperflexHealthCheckPackageChecksumRequest{
@@ -2782,7 +2797,8 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksum(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckPackageChecksum
+//
+//	@return HyperflexHealthCheckPackageChecksum
 func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksumExecute(r ApiCreateHyperflexHealthCheckPackageChecksumRequest) (*HyperflexHealthCheckPackageChecksum, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2952,8 +2968,8 @@ func (r ApiCreateHyperflexHxdpVersionRequest) Execute() (*HyperflexHxdpVersion, 
 /*
 CreateHyperflexHxdpVersion Create a 'hyperflex.HxdpVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexHxdpVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexHxdpVersionRequest
 */
 func (a *HyperflexApiService) CreateHyperflexHxdpVersion(ctx context.Context) ApiCreateHyperflexHxdpVersionRequest {
 	return ApiCreateHyperflexHxdpVersionRequest{
@@ -2963,7 +2979,8 @@ func (a *HyperflexApiService) CreateHyperflexHxdpVersion(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return HyperflexHxdpVersion
+//
+//	@return HyperflexHxdpVersion
 func (a *HyperflexApiService) CreateHyperflexHxdpVersionExecute(r ApiCreateHyperflexHxdpVersionRequest) (*HyperflexHxdpVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3133,8 +3150,8 @@ func (r ApiCreateHyperflexKeyEncryptionKeyRequest) Execute() (*HyperflexKeyEncry
 /*
 CreateHyperflexKeyEncryptionKey Create a 'hyperflex.KeyEncryptionKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexKeyEncryptionKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexKeyEncryptionKeyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexKeyEncryptionKey(ctx context.Context) ApiCreateHyperflexKeyEncryptionKeyRequest {
 	return ApiCreateHyperflexKeyEncryptionKeyRequest{
@@ -3144,7 +3161,8 @@ func (a *HyperflexApiService) CreateHyperflexKeyEncryptionKey(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexKeyEncryptionKey
+//
+//	@return HyperflexKeyEncryptionKey
 func (a *HyperflexApiService) CreateHyperflexKeyEncryptionKeyExecute(r ApiCreateHyperflexKeyEncryptionKeyRequest) (*HyperflexKeyEncryptionKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3314,8 +3332,8 @@ func (r ApiCreateHyperflexLocalCredentialPolicyRequest) Execute() (*HyperflexLoc
 /*
 CreateHyperflexLocalCredentialPolicy Create a 'hyperflex.LocalCredentialPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexLocalCredentialPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexLocalCredentialPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicy(ctx context.Context) ApiCreateHyperflexLocalCredentialPolicyRequest {
 	return ApiCreateHyperflexLocalCredentialPolicyRequest{
@@ -3325,7 +3343,8 @@ func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicy(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexLocalCredentialPolicy
+//
+//	@return HyperflexLocalCredentialPolicy
 func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicyExecute(r ApiCreateHyperflexLocalCredentialPolicyRequest) (*HyperflexLocalCredentialPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3495,8 +3514,8 @@ func (r ApiCreateHyperflexNodeConfigPolicyRequest) Execute() (*HyperflexNodeConf
 /*
 CreateHyperflexNodeConfigPolicy Create a 'hyperflex.NodeConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexNodeConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexNodeConfigPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicy(ctx context.Context) ApiCreateHyperflexNodeConfigPolicyRequest {
 	return ApiCreateHyperflexNodeConfigPolicyRequest{
@@ -3506,7 +3525,8 @@ func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexNodeConfigPolicy
+//
+//	@return HyperflexNodeConfigPolicy
 func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicyExecute(r ApiCreateHyperflexNodeConfigPolicyRequest) (*HyperflexNodeConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3676,8 +3696,8 @@ func (r ApiCreateHyperflexNodeProfileRequest) Execute() (*HyperflexNodeProfile, 
 /*
 CreateHyperflexNodeProfile Create a 'hyperflex.NodeProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexNodeProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexNodeProfileRequest
 */
 func (a *HyperflexApiService) CreateHyperflexNodeProfile(ctx context.Context) ApiCreateHyperflexNodeProfileRequest {
 	return ApiCreateHyperflexNodeProfileRequest{
@@ -3687,7 +3707,8 @@ func (a *HyperflexApiService) CreateHyperflexNodeProfile(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return HyperflexNodeProfile
+//
+//	@return HyperflexNodeProfile
 func (a *HyperflexApiService) CreateHyperflexNodeProfileExecute(r ApiCreateHyperflexNodeProfileRequest) (*HyperflexNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3857,8 +3878,8 @@ func (r ApiCreateHyperflexProxySettingPolicyRequest) Execute() (*HyperflexProxyS
 /*
 CreateHyperflexProxySettingPolicy Create a 'hyperflex.ProxySettingPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexProxySettingPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexProxySettingPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexProxySettingPolicy(ctx context.Context) ApiCreateHyperflexProxySettingPolicyRequest {
 	return ApiCreateHyperflexProxySettingPolicyRequest{
@@ -3868,7 +3889,8 @@ func (a *HyperflexApiService) CreateHyperflexProxySettingPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexProxySettingPolicy
+//
+//	@return HyperflexProxySettingPolicy
 func (a *HyperflexApiService) CreateHyperflexProxySettingPolicyExecute(r ApiCreateHyperflexProxySettingPolicyRequest) (*HyperflexProxySettingPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4038,8 +4060,8 @@ func (r ApiCreateHyperflexReduceReSyncRequest) Execute() (*HyperflexReduceReSync
 /*
 CreateHyperflexReduceReSync Create a 'hyperflex.ReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexReduceReSyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexReduceReSyncRequest
 */
 func (a *HyperflexApiService) CreateHyperflexReduceReSync(ctx context.Context) ApiCreateHyperflexReduceReSyncRequest {
 	return ApiCreateHyperflexReduceReSyncRequest{
@@ -4049,7 +4071,8 @@ func (a *HyperflexApiService) CreateHyperflexReduceReSync(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return HyperflexReduceReSync
+//
+//	@return HyperflexReduceReSync
 func (a *HyperflexApiService) CreateHyperflexReduceReSyncExecute(r ApiCreateHyperflexReduceReSyncRequest) (*HyperflexReduceReSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4219,8 +4242,8 @@ func (r ApiCreateHyperflexServerFirmwareVersionRequest) Execute() (*HyperflexSer
 /*
 CreateHyperflexServerFirmwareVersion Create a 'hyperflex.ServerFirmwareVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexServerFirmwareVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexServerFirmwareVersionRequest
 */
 func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersion(ctx context.Context) ApiCreateHyperflexServerFirmwareVersionRequest {
 	return ApiCreateHyperflexServerFirmwareVersionRequest{
@@ -4230,7 +4253,8 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersion(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersion
+//
+//	@return HyperflexServerFirmwareVersion
 func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionExecute(r ApiCreateHyperflexServerFirmwareVersionRequest) (*HyperflexServerFirmwareVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4400,8 +4424,8 @@ func (r ApiCreateHyperflexServerFirmwareVersionEntryRequest) Execute() (*Hyperfl
 /*
 CreateHyperflexServerFirmwareVersionEntry Create a 'hyperflex.ServerFirmwareVersionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexServerFirmwareVersionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexServerFirmwareVersionEntryRequest
 */
 func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntry(ctx context.Context) ApiCreateHyperflexServerFirmwareVersionEntryRequest {
 	return ApiCreateHyperflexServerFirmwareVersionEntryRequest{
@@ -4411,7 +4435,8 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntry(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersionEntry
+//
+//	@return HyperflexServerFirmwareVersionEntry
 func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntryExecute(r ApiCreateHyperflexServerFirmwareVersionEntryRequest) (*HyperflexServerFirmwareVersionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4581,8 +4606,8 @@ func (r ApiCreateHyperflexServerModelRequest) Execute() (*HyperflexServerModel, 
 /*
 CreateHyperflexServerModel Create a 'hyperflex.ServerModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexServerModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexServerModelRequest
 */
 func (a *HyperflexApiService) CreateHyperflexServerModel(ctx context.Context) ApiCreateHyperflexServerModelRequest {
 	return ApiCreateHyperflexServerModelRequest{
@@ -4592,7 +4617,8 @@ func (a *HyperflexApiService) CreateHyperflexServerModel(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return HyperflexServerModel
+//
+//	@return HyperflexServerModel
 func (a *HyperflexApiService) CreateHyperflexServerModelExecute(r ApiCreateHyperflexServerModelRequest) (*HyperflexServerModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4762,8 +4788,8 @@ func (r ApiCreateHyperflexServiceAuthTokenRequest) Execute() (*HyperflexServiceA
 /*
 CreateHyperflexServiceAuthToken Create a 'hyperflex.ServiceAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexServiceAuthTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexServiceAuthTokenRequest
 */
 func (a *HyperflexApiService) CreateHyperflexServiceAuthToken(ctx context.Context) ApiCreateHyperflexServiceAuthTokenRequest {
 	return ApiCreateHyperflexServiceAuthTokenRequest{
@@ -4773,7 +4799,8 @@ func (a *HyperflexApiService) CreateHyperflexServiceAuthToken(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexServiceAuthToken
+//
+//	@return HyperflexServiceAuthToken
 func (a *HyperflexApiService) CreateHyperflexServiceAuthTokenExecute(r ApiCreateHyperflexServiceAuthTokenRequest) (*HyperflexServiceAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4943,8 +4970,8 @@ func (r ApiCreateHyperflexSoftwareDistributionComponentRequest) Execute() (*Hype
 /*
 CreateHyperflexSoftwareDistributionComponent Create a 'hyperflex.SoftwareDistributionComponent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexSoftwareDistributionComponentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexSoftwareDistributionComponentRequest
 */
 func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionComponent(ctx context.Context) ApiCreateHyperflexSoftwareDistributionComponentRequest {
 	return ApiCreateHyperflexSoftwareDistributionComponentRequest{
@@ -4954,7 +4981,8 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionComponent(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionComponent
+//
+//	@return HyperflexSoftwareDistributionComponent
 func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionComponentExecute(r ApiCreateHyperflexSoftwareDistributionComponentRequest) (*HyperflexSoftwareDistributionComponent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5124,8 +5152,8 @@ func (r ApiCreateHyperflexSoftwareDistributionEntryRequest) Execute() (*Hyperfle
 /*
 CreateHyperflexSoftwareDistributionEntry Create a 'hyperflex.SoftwareDistributionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexSoftwareDistributionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexSoftwareDistributionEntryRequest
 */
 func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionEntry(ctx context.Context) ApiCreateHyperflexSoftwareDistributionEntryRequest {
 	return ApiCreateHyperflexSoftwareDistributionEntryRequest{
@@ -5135,7 +5163,8 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionEntry(ctx conte
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionEntry
+//
+//	@return HyperflexSoftwareDistributionEntry
 func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionEntryExecute(r ApiCreateHyperflexSoftwareDistributionEntryRequest) (*HyperflexSoftwareDistributionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5305,8 +5334,8 @@ func (r ApiCreateHyperflexSoftwareDistributionVersionRequest) Execute() (*Hyperf
 /*
 CreateHyperflexSoftwareDistributionVersion Create a 'hyperflex.SoftwareDistributionVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexSoftwareDistributionVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexSoftwareDistributionVersionRequest
 */
 func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionVersion(ctx context.Context) ApiCreateHyperflexSoftwareDistributionVersionRequest {
 	return ApiCreateHyperflexSoftwareDistributionVersionRequest{
@@ -5316,7 +5345,8 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionVersion(ctx con
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionVersion
+//
+//	@return HyperflexSoftwareDistributionVersion
 func (a *HyperflexApiService) CreateHyperflexSoftwareDistributionVersionExecute(r ApiCreateHyperflexSoftwareDistributionVersionRequest) (*HyperflexSoftwareDistributionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5486,8 +5516,8 @@ func (r ApiCreateHyperflexSoftwareVersionPolicyRequest) Execute() (*HyperflexSof
 /*
 CreateHyperflexSoftwareVersionPolicy Create a 'hyperflex.SoftwareVersionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexSoftwareVersionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexSoftwareVersionPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicy(ctx context.Context) ApiCreateHyperflexSoftwareVersionPolicyRequest {
 	return ApiCreateHyperflexSoftwareVersionPolicyRequest{
@@ -5497,7 +5527,8 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicy(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareVersionPolicy
+//
+//	@return HyperflexSoftwareVersionPolicy
 func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicyExecute(r ApiCreateHyperflexSoftwareVersionPolicyRequest) (*HyperflexSoftwareVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5667,8 +5698,8 @@ func (r ApiCreateHyperflexStartReduceReSyncRequest) Execute() (*HyperflexStartRe
 /*
 CreateHyperflexStartReduceReSync Create a 'hyperflex.StartReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexStartReduceReSyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexStartReduceReSyncRequest
 */
 func (a *HyperflexApiService) CreateHyperflexStartReduceReSync(ctx context.Context) ApiCreateHyperflexStartReduceReSyncRequest {
 	return ApiCreateHyperflexStartReduceReSyncRequest{
@@ -5678,7 +5709,8 @@ func (a *HyperflexApiService) CreateHyperflexStartReduceReSync(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexStartReduceReSync
+//
+//	@return HyperflexStartReduceReSync
 func (a *HyperflexApiService) CreateHyperflexStartReduceReSyncExecute(r ApiCreateHyperflexStartReduceReSyncRequest) (*HyperflexStartReduceReSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5848,8 +5880,8 @@ func (r ApiCreateHyperflexSysConfigPolicyRequest) Execute() (*HyperflexSysConfig
 /*
 CreateHyperflexSysConfigPolicy Create a 'hyperflex.SysConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexSysConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexSysConfigPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexSysConfigPolicy(ctx context.Context) ApiCreateHyperflexSysConfigPolicyRequest {
 	return ApiCreateHyperflexSysConfigPolicyRequest{
@@ -5859,7 +5891,8 @@ func (a *HyperflexApiService) CreateHyperflexSysConfigPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexSysConfigPolicy
+//
+//	@return HyperflexSysConfigPolicy
 func (a *HyperflexApiService) CreateHyperflexSysConfigPolicyExecute(r ApiCreateHyperflexSysConfigPolicyRequest) (*HyperflexSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6029,8 +6062,8 @@ func (r ApiCreateHyperflexUcsmConfigPolicyRequest) Execute() (*HyperflexUcsmConf
 /*
 CreateHyperflexUcsmConfigPolicy Create a 'hyperflex.UcsmConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexUcsmConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexUcsmConfigPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicy(ctx context.Context) ApiCreateHyperflexUcsmConfigPolicyRequest {
 	return ApiCreateHyperflexUcsmConfigPolicyRequest{
@@ -6040,7 +6073,8 @@ func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexUcsmConfigPolicy
+//
+//	@return HyperflexUcsmConfigPolicy
 func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicyExecute(r ApiCreateHyperflexUcsmConfigPolicyRequest) (*HyperflexUcsmConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6210,8 +6244,8 @@ func (r ApiCreateHyperflexVcenterConfigPolicyRequest) Execute() (*HyperflexVcent
 /*
 CreateHyperflexVcenterConfigPolicy Create a 'hyperflex.VcenterConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexVcenterConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexVcenterConfigPolicyRequest
 */
 func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicy(ctx context.Context) ApiCreateHyperflexVcenterConfigPolicyRequest {
 	return ApiCreateHyperflexVcenterConfigPolicyRequest{
@@ -6221,7 +6255,8 @@ func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexVcenterConfigPolicy
+//
+//	@return HyperflexVcenterConfigPolicy
 func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicyExecute(r ApiCreateHyperflexVcenterConfigPolicyRequest) (*HyperflexVcenterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6391,8 +6426,8 @@ func (r ApiCreateHyperflexVmImportOperationRequest) Execute() (*HyperflexVmImpor
 /*
 CreateHyperflexVmImportOperation Create a 'hyperflex.VmImportOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexVmImportOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexVmImportOperationRequest
 */
 func (a *HyperflexApiService) CreateHyperflexVmImportOperation(ctx context.Context) ApiCreateHyperflexVmImportOperationRequest {
 	return ApiCreateHyperflexVmImportOperationRequest{
@@ -6402,7 +6437,8 @@ func (a *HyperflexApiService) CreateHyperflexVmImportOperation(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexVmImportOperation
+//
+//	@return HyperflexVmImportOperation
 func (a *HyperflexApiService) CreateHyperflexVmImportOperationExecute(r ApiCreateHyperflexVmImportOperationRequest) (*HyperflexVmImportOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6572,8 +6608,8 @@ func (r ApiCreateHyperflexVmRestoreOperationRequest) Execute() (*HyperflexVmRest
 /*
 CreateHyperflexVmRestoreOperation Create a 'hyperflex.VmRestoreOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHyperflexVmRestoreOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHyperflexVmRestoreOperationRequest
 */
 func (a *HyperflexApiService) CreateHyperflexVmRestoreOperation(ctx context.Context) ApiCreateHyperflexVmRestoreOperationRequest {
 	return ApiCreateHyperflexVmRestoreOperationRequest{
@@ -6583,7 +6619,8 @@ func (a *HyperflexApiService) CreateHyperflexVmRestoreOperation(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexVmRestoreOperation
+//
+//	@return HyperflexVmRestoreOperation
 func (a *HyperflexApiService) CreateHyperflexVmRestoreOperationExecute(r ApiCreateHyperflexVmRestoreOperationRequest) (*HyperflexVmRestoreOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6733,9 +6770,9 @@ func (r ApiDeleteHyperflexAppCatalogRequest) Execute() (*http.Response, error) {
 /*
 DeleteHyperflexAppCatalog Delete a 'hyperflex.AppCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexAppCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexAppCatalogRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexAppCatalog(ctx context.Context, moid string) ApiDeleteHyperflexAppCatalogRequest {
 	return ApiDeleteHyperflexAppCatalogRequest{
@@ -6875,9 +6912,9 @@ func (r ApiDeleteHyperflexAutoSupportPolicyRequest) Execute() (*http.Response, e
 /*
 DeleteHyperflexAutoSupportPolicy Delete a 'hyperflex.AutoSupportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexAutoSupportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexAutoSupportPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexAutoSupportPolicy(ctx context.Context, moid string) ApiDeleteHyperflexAutoSupportPolicyRequest {
 	return ApiDeleteHyperflexAutoSupportPolicyRequest{
@@ -7017,9 +7054,9 @@ func (r ApiDeleteHyperflexBackupClusterRequest) Execute() (*http.Response, error
 /*
 DeleteHyperflexBackupCluster Delete a 'hyperflex.BackupCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexBackupClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexBackupClusterRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexBackupCluster(ctx context.Context, moid string) ApiDeleteHyperflexBackupClusterRequest {
 	return ApiDeleteHyperflexBackupClusterRequest{
@@ -7159,9 +7196,9 @@ func (r ApiDeleteHyperflexCapabilityInfoRequest) Execute() (*http.Response, erro
 /*
 DeleteHyperflexCapabilityInfo Delete a 'hyperflex.CapabilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexCapabilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexCapabilityInfoRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexCapabilityInfo(ctx context.Context, moid string) ApiDeleteHyperflexCapabilityInfoRequest {
 	return ApiDeleteHyperflexCapabilityInfoRequest{
@@ -7301,9 +7338,9 @@ func (r ApiDeleteHyperflexClusterBackupPolicyRequest) Execute() (*http.Response,
 /*
 DeleteHyperflexClusterBackupPolicy Delete a 'hyperflex.ClusterBackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterBackupPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicy(ctx context.Context, moid string) ApiDeleteHyperflexClusterBackupPolicyRequest {
 	return ApiDeleteHyperflexClusterBackupPolicyRequest{
@@ -7443,9 +7480,9 @@ func (r ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest) Execute() (*http
 /*
 DeleteHyperflexClusterBackupPolicyDeployment Delete a 'hyperflex.ClusterBackupPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyDeployment(ctx context.Context, moid string) ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest {
 	return ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest{
@@ -7585,9 +7622,9 @@ func (r ApiDeleteHyperflexClusterBackupPolicyInventoryRequest) Execute() (*http.
 /*
 DeleteHyperflexClusterBackupPolicyInventory Delete a 'hyperflex.ClusterBackupPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterBackupPolicyInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterBackupPolicyInventoryRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyInventory(ctx context.Context, moid string) ApiDeleteHyperflexClusterBackupPolicyInventoryRequest {
 	return ApiDeleteHyperflexClusterBackupPolicyInventoryRequest{
@@ -7727,9 +7764,9 @@ func (r ApiDeleteHyperflexClusterNetworkPolicyRequest) Execute() (*http.Response
 /*
 DeleteHyperflexClusterNetworkPolicy Delete a 'hyperflex.ClusterNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterNetworkPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterNetworkPolicy(ctx context.Context, moid string) ApiDeleteHyperflexClusterNetworkPolicyRequest {
 	return ApiDeleteHyperflexClusterNetworkPolicyRequest{
@@ -7869,9 +7906,9 @@ func (r ApiDeleteHyperflexClusterProfileRequest) Execute() (*http.Response, erro
 /*
 DeleteHyperflexClusterProfile Delete a 'hyperflex.ClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterProfileRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterProfile(ctx context.Context, moid string) ApiDeleteHyperflexClusterProfileRequest {
 	return ApiDeleteHyperflexClusterProfileRequest{
@@ -8011,9 +8048,9 @@ func (r ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest) Execute() (*ht
 /*
 DeleteHyperflexClusterReplicationNetworkPolicy Delete a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicy(ctx context.Context, moid string) ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest {
 	return ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest{
@@ -8153,9 +8190,9 @@ func (r ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Exec
 /*
 DeleteHyperflexClusterReplicationNetworkPolicyDeployment Delete a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyDeployment(ctx context.Context, moid string) ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest {
 	return ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest{
@@ -8295,9 +8332,9 @@ func (r ApiDeleteHyperflexClusterStoragePolicyRequest) Execute() (*http.Response
 /*
 DeleteHyperflexClusterStoragePolicy Delete a 'hyperflex.ClusterStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexClusterStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexClusterStoragePolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexClusterStoragePolicy(ctx context.Context, moid string) ApiDeleteHyperflexClusterStoragePolicyRequest {
 	return ApiDeleteHyperflexClusterStoragePolicyRequest{
@@ -8437,9 +8474,9 @@ func (r ApiDeleteHyperflexExtFcStoragePolicyRequest) Execute() (*http.Response, 
 /*
 DeleteHyperflexExtFcStoragePolicy Delete a 'hyperflex.ExtFcStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexExtFcStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexExtFcStoragePolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexExtFcStoragePolicy(ctx context.Context, moid string) ApiDeleteHyperflexExtFcStoragePolicyRequest {
 	return ApiDeleteHyperflexExtFcStoragePolicyRequest{
@@ -8579,9 +8616,9 @@ func (r ApiDeleteHyperflexExtIscsiStoragePolicyRequest) Execute() (*http.Respons
 /*
 DeleteHyperflexExtIscsiStoragePolicy Delete a 'hyperflex.ExtIscsiStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexExtIscsiStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexExtIscsiStoragePolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexExtIscsiStoragePolicy(ctx context.Context, moid string) ApiDeleteHyperflexExtIscsiStoragePolicyRequest {
 	return ApiDeleteHyperflexExtIscsiStoragePolicyRequest{
@@ -8721,9 +8758,9 @@ func (r ApiDeleteHyperflexFeatureLimitExternalRequest) Execute() (*http.Response
 /*
 DeleteHyperflexFeatureLimitExternal Delete a 'hyperflex.FeatureLimitExternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexFeatureLimitExternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexFeatureLimitExternalRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexFeatureLimitExternal(ctx context.Context, moid string) ApiDeleteHyperflexFeatureLimitExternalRequest {
 	return ApiDeleteHyperflexFeatureLimitExternalRequest{
@@ -8863,9 +8900,9 @@ func (r ApiDeleteHyperflexFeatureLimitInternalRequest) Execute() (*http.Response
 /*
 DeleteHyperflexFeatureLimitInternal Delete a 'hyperflex.FeatureLimitInternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexFeatureLimitInternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexFeatureLimitInternalRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexFeatureLimitInternal(ctx context.Context, moid string) ApiDeleteHyperflexFeatureLimitInternalRequest {
 	return ApiDeleteHyperflexFeatureLimitInternalRequest{
@@ -9005,9 +9042,9 @@ func (r ApiDeleteHyperflexHealthCheckDefinitionRequest) Execute() (*http.Respons
 /*
 DeleteHyperflexHealthCheckDefinition Delete a 'hyperflex.HealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexHealthCheckDefinitionRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexHealthCheckDefinition(ctx context.Context, moid string) ApiDeleteHyperflexHealthCheckDefinitionRequest {
 	return ApiDeleteHyperflexHealthCheckDefinitionRequest{
@@ -9147,9 +9184,9 @@ func (r ApiDeleteHyperflexHealthCheckPackageChecksumRequest) Execute() (*http.Re
 /*
 DeleteHyperflexHealthCheckPackageChecksum Delete a 'hyperflex.HealthCheckPackageChecksum' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexHealthCheckPackageChecksumRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexHealthCheckPackageChecksumRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexHealthCheckPackageChecksum(ctx context.Context, moid string) ApiDeleteHyperflexHealthCheckPackageChecksumRequest {
 	return ApiDeleteHyperflexHealthCheckPackageChecksumRequest{
@@ -9289,9 +9326,9 @@ func (r ApiDeleteHyperflexHxdpVersionRequest) Execute() (*http.Response, error) 
 /*
 DeleteHyperflexHxdpVersion Delete a 'hyperflex.HxdpVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexHxdpVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexHxdpVersionRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexHxdpVersion(ctx context.Context, moid string) ApiDeleteHyperflexHxdpVersionRequest {
 	return ApiDeleteHyperflexHxdpVersionRequest{
@@ -9431,9 +9468,9 @@ func (r ApiDeleteHyperflexKeyEncryptionKeyRequest) Execute() (*http.Response, er
 /*
 DeleteHyperflexKeyEncryptionKey Delete a 'hyperflex.KeyEncryptionKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexKeyEncryptionKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexKeyEncryptionKeyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexKeyEncryptionKey(ctx context.Context, moid string) ApiDeleteHyperflexKeyEncryptionKeyRequest {
 	return ApiDeleteHyperflexKeyEncryptionKeyRequest{
@@ -9573,9 +9610,9 @@ func (r ApiDeleteHyperflexLocalCredentialPolicyRequest) Execute() (*http.Respons
 /*
 DeleteHyperflexLocalCredentialPolicy Delete a 'hyperflex.LocalCredentialPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexLocalCredentialPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexLocalCredentialPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexLocalCredentialPolicy(ctx context.Context, moid string) ApiDeleteHyperflexLocalCredentialPolicyRequest {
 	return ApiDeleteHyperflexLocalCredentialPolicyRequest{
@@ -9715,9 +9752,9 @@ func (r ApiDeleteHyperflexNodeConfigPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteHyperflexNodeConfigPolicy Delete a 'hyperflex.NodeConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexNodeConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexNodeConfigPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexNodeConfigPolicy(ctx context.Context, moid string) ApiDeleteHyperflexNodeConfigPolicyRequest {
 	return ApiDeleteHyperflexNodeConfigPolicyRequest{
@@ -9857,9 +9894,9 @@ func (r ApiDeleteHyperflexNodeProfileRequest) Execute() (*http.Response, error) 
 /*
 DeleteHyperflexNodeProfile Delete a 'hyperflex.NodeProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexNodeProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexNodeProfileRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexNodeProfile(ctx context.Context, moid string) ApiDeleteHyperflexNodeProfileRequest {
 	return ApiDeleteHyperflexNodeProfileRequest{
@@ -9999,9 +10036,9 @@ func (r ApiDeleteHyperflexProxySettingPolicyRequest) Execute() (*http.Response, 
 /*
 DeleteHyperflexProxySettingPolicy Delete a 'hyperflex.ProxySettingPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexProxySettingPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexProxySettingPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexProxySettingPolicy(ctx context.Context, moid string) ApiDeleteHyperflexProxySettingPolicyRequest {
 	return ApiDeleteHyperflexProxySettingPolicyRequest{
@@ -10141,9 +10178,9 @@ func (r ApiDeleteHyperflexReduceReSyncRequest) Execute() (*http.Response, error)
 /*
 DeleteHyperflexReduceReSync Delete a 'hyperflex.ReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexReduceReSyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexReduceReSyncRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexReduceReSync(ctx context.Context, moid string) ApiDeleteHyperflexReduceReSyncRequest {
 	return ApiDeleteHyperflexReduceReSyncRequest{
@@ -10283,9 +10320,9 @@ func (r ApiDeleteHyperflexServerFirmwareVersionRequest) Execute() (*http.Respons
 /*
 DeleteHyperflexServerFirmwareVersion Delete a 'hyperflex.ServerFirmwareVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexServerFirmwareVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexServerFirmwareVersionRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersion(ctx context.Context, moid string) ApiDeleteHyperflexServerFirmwareVersionRequest {
 	return ApiDeleteHyperflexServerFirmwareVersionRequest{
@@ -10425,9 +10462,9 @@ func (r ApiDeleteHyperflexServerFirmwareVersionEntryRequest) Execute() (*http.Re
 /*
 DeleteHyperflexServerFirmwareVersionEntry Delete a 'hyperflex.ServerFirmwareVersionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexServerFirmwareVersionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexServerFirmwareVersionEntryRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionEntry(ctx context.Context, moid string) ApiDeleteHyperflexServerFirmwareVersionEntryRequest {
 	return ApiDeleteHyperflexServerFirmwareVersionEntryRequest{
@@ -10567,9 +10604,9 @@ func (r ApiDeleteHyperflexServerModelRequest) Execute() (*http.Response, error) 
 /*
 DeleteHyperflexServerModel Delete a 'hyperflex.ServerModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexServerModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexServerModelRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexServerModel(ctx context.Context, moid string) ApiDeleteHyperflexServerModelRequest {
 	return ApiDeleteHyperflexServerModelRequest{
@@ -10709,9 +10746,9 @@ func (r ApiDeleteHyperflexServiceAuthTokenRequest) Execute() (*http.Response, er
 /*
 DeleteHyperflexServiceAuthToken Delete a 'hyperflex.ServiceAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexServiceAuthTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexServiceAuthTokenRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexServiceAuthToken(ctx context.Context, moid string) ApiDeleteHyperflexServiceAuthTokenRequest {
 	return ApiDeleteHyperflexServiceAuthTokenRequest{
@@ -10851,9 +10888,9 @@ func (r ApiDeleteHyperflexSoftwareDistributionComponentRequest) Execute() (*http
 /*
 DeleteHyperflexSoftwareDistributionComponent Delete a 'hyperflex.SoftwareDistributionComponent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexSoftwareDistributionComponentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexSoftwareDistributionComponentRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexSoftwareDistributionComponent(ctx context.Context, moid string) ApiDeleteHyperflexSoftwareDistributionComponentRequest {
 	return ApiDeleteHyperflexSoftwareDistributionComponentRequest{
@@ -10993,9 +11030,9 @@ func (r ApiDeleteHyperflexSoftwareDistributionEntryRequest) Execute() (*http.Res
 /*
 DeleteHyperflexSoftwareDistributionEntry Delete a 'hyperflex.SoftwareDistributionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexSoftwareDistributionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexSoftwareDistributionEntryRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexSoftwareDistributionEntry(ctx context.Context, moid string) ApiDeleteHyperflexSoftwareDistributionEntryRequest {
 	return ApiDeleteHyperflexSoftwareDistributionEntryRequest{
@@ -11135,9 +11172,9 @@ func (r ApiDeleteHyperflexSoftwareDistributionVersionRequest) Execute() (*http.R
 /*
 DeleteHyperflexSoftwareDistributionVersion Delete a 'hyperflex.SoftwareDistributionVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexSoftwareDistributionVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexSoftwareDistributionVersionRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexSoftwareDistributionVersion(ctx context.Context, moid string) ApiDeleteHyperflexSoftwareDistributionVersionRequest {
 	return ApiDeleteHyperflexSoftwareDistributionVersionRequest{
@@ -11277,9 +11314,9 @@ func (r ApiDeleteHyperflexSoftwareVersionPolicyRequest) Execute() (*http.Respons
 /*
 DeleteHyperflexSoftwareVersionPolicy Delete a 'hyperflex.SoftwareVersionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexSoftwareVersionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexSoftwareVersionPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexSoftwareVersionPolicy(ctx context.Context, moid string) ApiDeleteHyperflexSoftwareVersionPolicyRequest {
 	return ApiDeleteHyperflexSoftwareVersionPolicyRequest{
@@ -11419,9 +11456,9 @@ func (r ApiDeleteHyperflexSysConfigPolicyRequest) Execute() (*http.Response, err
 /*
 DeleteHyperflexSysConfigPolicy Delete a 'hyperflex.SysConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexSysConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexSysConfigPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexSysConfigPolicy(ctx context.Context, moid string) ApiDeleteHyperflexSysConfigPolicyRequest {
 	return ApiDeleteHyperflexSysConfigPolicyRequest{
@@ -11561,9 +11598,9 @@ func (r ApiDeleteHyperflexUcsmConfigPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteHyperflexUcsmConfigPolicy Delete a 'hyperflex.UcsmConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexUcsmConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexUcsmConfigPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexUcsmConfigPolicy(ctx context.Context, moid string) ApiDeleteHyperflexUcsmConfigPolicyRequest {
 	return ApiDeleteHyperflexUcsmConfigPolicyRequest{
@@ -11703,9 +11740,9 @@ func (r ApiDeleteHyperflexVcenterConfigPolicyRequest) Execute() (*http.Response,
 /*
 DeleteHyperflexVcenterConfigPolicy Delete a 'hyperflex.VcenterConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexVcenterConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexVcenterConfigPolicyRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexVcenterConfigPolicy(ctx context.Context, moid string) ApiDeleteHyperflexVcenterConfigPolicyRequest {
 	return ApiDeleteHyperflexVcenterConfigPolicyRequest{
@@ -11845,9 +11882,9 @@ func (r ApiDeleteHyperflexVmBackupInfoRequest) Execute() (*http.Response, error)
 /*
 DeleteHyperflexVmBackupInfo Delete a 'hyperflex.VmBackupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexVmBackupInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexVmBackupInfoRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexVmBackupInfo(ctx context.Context, moid string) ApiDeleteHyperflexVmBackupInfoRequest {
 	return ApiDeleteHyperflexVmBackupInfoRequest{
@@ -11987,9 +12024,9 @@ func (r ApiDeleteHyperflexVmImportOperationRequest) Execute() (*http.Response, e
 /*
 DeleteHyperflexVmImportOperation Delete a 'hyperflex.VmImportOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexVmImportOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexVmImportOperationRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexVmImportOperation(ctx context.Context, moid string) ApiDeleteHyperflexVmImportOperationRequest {
 	return ApiDeleteHyperflexVmImportOperationRequest{
@@ -12129,9 +12166,9 @@ func (r ApiDeleteHyperflexVmRestoreOperationRequest) Execute() (*http.Response, 
 /*
 DeleteHyperflexVmRestoreOperation Delete a 'hyperflex.VmRestoreOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexVmRestoreOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexVmRestoreOperationRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexVmRestoreOperation(ctx context.Context, moid string) ApiDeleteHyperflexVmRestoreOperationRequest {
 	return ApiDeleteHyperflexVmRestoreOperationRequest{
@@ -12271,9 +12308,9 @@ func (r ApiDeleteHyperflexVmSnapshotInfoRequest) Execute() (*http.Response, erro
 /*
 DeleteHyperflexVmSnapshotInfo Delete a 'hyperflex.VmSnapshotInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHyperflexVmSnapshotInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHyperflexVmSnapshotInfoRequest
 */
 func (a *HyperflexApiService) DeleteHyperflexVmSnapshotInfo(ctx context.Context, moid string) ApiDeleteHyperflexVmSnapshotInfoRequest {
 	return ApiDeleteHyperflexVmSnapshotInfoRequest{
@@ -12413,9 +12450,9 @@ func (r ApiGetHyperflexAlarmByMoidRequest) Execute() (*HyperflexAlarm, *http.Res
 /*
 GetHyperflexAlarmByMoid Read a 'hyperflex.Alarm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexAlarmByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexAlarmByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexAlarmByMoid(ctx context.Context, moid string) ApiGetHyperflexAlarmByMoidRequest {
 	return ApiGetHyperflexAlarmByMoidRequest{
@@ -12426,7 +12463,8 @@ func (a *HyperflexApiService) GetHyperflexAlarmByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return HyperflexAlarm
+//
+//	@return HyperflexAlarm
 func (a *HyperflexApiService) GetHyperflexAlarmByMoidExecute(r ApiGetHyperflexAlarmByMoidRequest) (*HyperflexAlarm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12642,8 +12680,8 @@ func (r ApiGetHyperflexAlarmListRequest) Execute() (*HyperflexAlarmResponse, *ht
 /*
 GetHyperflexAlarmList Read a 'hyperflex.Alarm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexAlarmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexAlarmListRequest
 */
 func (a *HyperflexApiService) GetHyperflexAlarmList(ctx context.Context) ApiGetHyperflexAlarmListRequest {
 	return ApiGetHyperflexAlarmListRequest{
@@ -12653,7 +12691,8 @@ func (a *HyperflexApiService) GetHyperflexAlarmList(ctx context.Context) ApiGetH
 }
 
 // Execute executes the request
-//  @return HyperflexAlarmResponse
+//
+//	@return HyperflexAlarmResponse
 func (a *HyperflexApiService) GetHyperflexAlarmListExecute(r ApiGetHyperflexAlarmListRequest) (*HyperflexAlarmResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12840,9 +12879,9 @@ func (r ApiGetHyperflexAppCatalogByMoidRequest) Execute() (*HyperflexAppCatalog,
 /*
 GetHyperflexAppCatalogByMoid Read a 'hyperflex.AppCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexAppCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexAppCatalogByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexAppCatalogByMoid(ctx context.Context, moid string) ApiGetHyperflexAppCatalogByMoidRequest {
 	return ApiGetHyperflexAppCatalogByMoidRequest{
@@ -12853,7 +12892,8 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return HyperflexAppCatalog
+//
+//	@return HyperflexAppCatalog
 func (a *HyperflexApiService) GetHyperflexAppCatalogByMoidExecute(r ApiGetHyperflexAppCatalogByMoidRequest) (*HyperflexAppCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13069,8 +13109,8 @@ func (r ApiGetHyperflexAppCatalogListRequest) Execute() (*HyperflexAppCatalogRes
 /*
 GetHyperflexAppCatalogList Read a 'hyperflex.AppCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexAppCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexAppCatalogListRequest
 */
 func (a *HyperflexApiService) GetHyperflexAppCatalogList(ctx context.Context) ApiGetHyperflexAppCatalogListRequest {
 	return ApiGetHyperflexAppCatalogListRequest{
@@ -13080,7 +13120,8 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return HyperflexAppCatalogResponse
+//
+//	@return HyperflexAppCatalogResponse
 func (a *HyperflexApiService) GetHyperflexAppCatalogListExecute(r ApiGetHyperflexAppCatalogListRequest) (*HyperflexAppCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13267,9 +13308,9 @@ func (r ApiGetHyperflexAutoSupportPolicyByMoidRequest) Execute() (*HyperflexAuto
 /*
 GetHyperflexAutoSupportPolicyByMoid Read a 'hyperflex.AutoSupportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexAutoSupportPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexAutoSupportPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexAutoSupportPolicyByMoidRequest {
 	return ApiGetHyperflexAutoSupportPolicyByMoidRequest{
@@ -13280,7 +13321,8 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexAutoSupportPolicy
+//
+//	@return HyperflexAutoSupportPolicy
 func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoidExecute(r ApiGetHyperflexAutoSupportPolicyByMoidRequest) (*HyperflexAutoSupportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13496,8 +13538,8 @@ func (r ApiGetHyperflexAutoSupportPolicyListRequest) Execute() (*HyperflexAutoSu
 /*
 GetHyperflexAutoSupportPolicyList Read a 'hyperflex.AutoSupportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexAutoSupportPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexAutoSupportPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyList(ctx context.Context) ApiGetHyperflexAutoSupportPolicyListRequest {
 	return ApiGetHyperflexAutoSupportPolicyListRequest{
@@ -13507,7 +13549,8 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexAutoSupportPolicyResponse
+//
+//	@return HyperflexAutoSupportPolicyResponse
 func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyListExecute(r ApiGetHyperflexAutoSupportPolicyListRequest) (*HyperflexAutoSupportPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13694,9 +13737,9 @@ func (r ApiGetHyperflexBackupClusterByMoidRequest) Execute() (*HyperflexBackupCl
 /*
 GetHyperflexBackupClusterByMoid Read a 'hyperflex.BackupCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexBackupClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexBackupClusterByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexBackupClusterByMoid(ctx context.Context, moid string) ApiGetHyperflexBackupClusterByMoidRequest {
 	return ApiGetHyperflexBackupClusterByMoidRequest{
@@ -13707,7 +13750,8 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexBackupCluster
+//
+//	@return HyperflexBackupCluster
 func (a *HyperflexApiService) GetHyperflexBackupClusterByMoidExecute(r ApiGetHyperflexBackupClusterByMoidRequest) (*HyperflexBackupCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13923,8 +13967,8 @@ func (r ApiGetHyperflexBackupClusterListRequest) Execute() (*HyperflexBackupClus
 /*
 GetHyperflexBackupClusterList Read a 'hyperflex.BackupCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexBackupClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexBackupClusterListRequest
 */
 func (a *HyperflexApiService) GetHyperflexBackupClusterList(ctx context.Context) ApiGetHyperflexBackupClusterListRequest {
 	return ApiGetHyperflexBackupClusterListRequest{
@@ -13934,7 +13978,8 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return HyperflexBackupClusterResponse
+//
+//	@return HyperflexBackupClusterResponse
 func (a *HyperflexApiService) GetHyperflexBackupClusterListExecute(r ApiGetHyperflexBackupClusterListRequest) (*HyperflexBackupClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14121,9 +14166,9 @@ func (r ApiGetHyperflexCapabilityInfoByMoidRequest) Execute() (*HyperflexCapabil
 /*
 GetHyperflexCapabilityInfoByMoid Read a 'hyperflex.CapabilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexCapabilityInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexCapabilityInfoByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoid(ctx context.Context, moid string) ApiGetHyperflexCapabilityInfoByMoidRequest {
 	return ApiGetHyperflexCapabilityInfoByMoidRequest{
@@ -14134,7 +14179,8 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexCapabilityInfo
+//
+//	@return HyperflexCapabilityInfo
 func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoidExecute(r ApiGetHyperflexCapabilityInfoByMoidRequest) (*HyperflexCapabilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14350,8 +14396,8 @@ func (r ApiGetHyperflexCapabilityInfoListRequest) Execute() (*HyperflexCapabilit
 /*
 GetHyperflexCapabilityInfoList Read a 'hyperflex.CapabilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexCapabilityInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexCapabilityInfoListRequest
 */
 func (a *HyperflexApiService) GetHyperflexCapabilityInfoList(ctx context.Context) ApiGetHyperflexCapabilityInfoListRequest {
 	return ApiGetHyperflexCapabilityInfoListRequest{
@@ -14361,7 +14407,8 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexCapabilityInfoResponse
+//
+//	@return HyperflexCapabilityInfoResponse
 func (a *HyperflexApiService) GetHyperflexCapabilityInfoListExecute(r ApiGetHyperflexCapabilityInfoListRequest) (*HyperflexCapabilityInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14548,9 +14595,9 @@ func (r ApiGetHyperflexClusterBackupPolicyByMoidRequest) Execute() (*HyperflexCl
 /*
 GetHyperflexClusterBackupPolicyByMoid Read a 'hyperflex.ClusterBackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterBackupPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterBackupPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterBackupPolicyByMoidRequest {
 	return ApiGetHyperflexClusterBackupPolicyByMoidRequest{
@@ -14561,7 +14608,8 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicy
+//
+//	@return HyperflexClusterBackupPolicy
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoidExecute(r ApiGetHyperflexClusterBackupPolicyByMoidRequest) (*HyperflexClusterBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14701,9 +14749,9 @@ func (r ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest) Execute() (*H
 /*
 GetHyperflexClusterBackupPolicyDeploymentByMoid Read a 'hyperflex.ClusterBackupPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest {
 	return ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest{
@@ -14714,7 +14762,8 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoid(ct
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyDeployment
+//
+//	@return HyperflexClusterBackupPolicyDeployment
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoidExecute(r ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest) (*HyperflexClusterBackupPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14930,8 +14979,8 @@ func (r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) Execute() (*Hyp
 /*
 GetHyperflexClusterBackupPolicyDeploymentList Read a 'hyperflex.ClusterBackupPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterBackupPolicyDeploymentListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterBackupPolicyDeploymentListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentList(ctx context.Context) ApiGetHyperflexClusterBackupPolicyDeploymentListRequest {
 	return ApiGetHyperflexClusterBackupPolicyDeploymentListRequest{
@@ -14941,7 +14990,8 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentList(ctx 
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyDeploymentResponse
+//
+//	@return HyperflexClusterBackupPolicyDeploymentResponse
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentListExecute(r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) (*HyperflexClusterBackupPolicyDeploymentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15128,9 +15178,9 @@ func (r ApiGetHyperflexClusterBackupPolicyInventoryByMoidRequest) Execute() (*Hy
 /*
 GetHyperflexClusterBackupPolicyInventoryByMoid Read a 'hyperflex.ClusterBackupPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterBackupPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterBackupPolicyInventoryByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterBackupPolicyInventoryByMoidRequest {
 	return ApiGetHyperflexClusterBackupPolicyInventoryByMoidRequest{
@@ -15141,7 +15191,8 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyInventoryByMoid(ctx
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyInventory
+//
+//	@return HyperflexClusterBackupPolicyInventory
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyInventoryByMoidExecute(r ApiGetHyperflexClusterBackupPolicyInventoryByMoidRequest) (*HyperflexClusterBackupPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15357,8 +15408,8 @@ func (r ApiGetHyperflexClusterBackupPolicyInventoryListRequest) Execute() (*Hype
 /*
 GetHyperflexClusterBackupPolicyInventoryList Read a 'hyperflex.ClusterBackupPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterBackupPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterBackupPolicyInventoryListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyInventoryList(ctx context.Context) ApiGetHyperflexClusterBackupPolicyInventoryListRequest {
 	return ApiGetHyperflexClusterBackupPolicyInventoryListRequest{
@@ -15368,7 +15419,8 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyInventoryList(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyInventoryResponse
+//
+//	@return HyperflexClusterBackupPolicyInventoryResponse
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyInventoryListExecute(r ApiGetHyperflexClusterBackupPolicyInventoryListRequest) (*HyperflexClusterBackupPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15631,8 +15683,8 @@ func (r ApiGetHyperflexClusterBackupPolicyListRequest) Execute() (*HyperflexClus
 /*
 GetHyperflexClusterBackupPolicyList Read a 'hyperflex.ClusterBackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterBackupPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterBackupPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyList(ctx context.Context) ApiGetHyperflexClusterBackupPolicyListRequest {
 	return ApiGetHyperflexClusterBackupPolicyListRequest{
@@ -15642,7 +15694,8 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyResponse
+//
+//	@return HyperflexClusterBackupPolicyResponse
 func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyListExecute(r ApiGetHyperflexClusterBackupPolicyListRequest) (*HyperflexClusterBackupPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15829,9 +15882,9 @@ func (r ApiGetHyperflexClusterByMoidRequest) Execute() (*HyperflexCluster, *http
 /*
 GetHyperflexClusterByMoid Read a 'hyperflex.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterByMoidRequest {
 	return ApiGetHyperflexClusterByMoidRequest{
@@ -15842,7 +15895,8 @@ func (a *HyperflexApiService) GetHyperflexClusterByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HyperflexCluster
+//
+//	@return HyperflexCluster
 func (a *HyperflexApiService) GetHyperflexClusterByMoidExecute(r ApiGetHyperflexClusterByMoidRequest) (*HyperflexCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15982,9 +16036,9 @@ func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest) Execute
 /*
 GetHyperflexClusterHealthCheckExecutionSnapshotByMoid Read a 'hyperflex.ClusterHealthCheckExecutionSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest {
 	return ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest{
@@ -15995,7 +16049,8 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByM
 }
 
 // Execute executes the request
-//  @return HyperflexClusterHealthCheckExecutionSnapshot
+//
+//	@return HyperflexClusterHealthCheckExecutionSnapshot
 func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByMoidExecute(r ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest) (*HyperflexClusterHealthCheckExecutionSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16211,8 +16266,8 @@ func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) Execute()
 /*
 GetHyperflexClusterHealthCheckExecutionSnapshotList Read a 'hyperflex.ClusterHealthCheckExecutionSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotList(ctx context.Context) ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest {
 	return ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest{
@@ -16222,7 +16277,8 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotLis
 }
 
 // Execute executes the request
-//  @return HyperflexClusterHealthCheckExecutionSnapshotResponse
+//
+//	@return HyperflexClusterHealthCheckExecutionSnapshotResponse
 func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotListExecute(r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) (*HyperflexClusterHealthCheckExecutionSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16485,8 +16541,8 @@ func (r ApiGetHyperflexClusterListRequest) Execute() (*HyperflexClusterResponse,
 /*
 GetHyperflexClusterList Read a 'hyperflex.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterList(ctx context.Context) ApiGetHyperflexClusterListRequest {
 	return ApiGetHyperflexClusterListRequest{
@@ -16496,7 +16552,8 @@ func (a *HyperflexApiService) GetHyperflexClusterList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return HyperflexClusterResponse
+//
+//	@return HyperflexClusterResponse
 func (a *HyperflexApiService) GetHyperflexClusterListExecute(r ApiGetHyperflexClusterListRequest) (*HyperflexClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16683,9 +16740,9 @@ func (r ApiGetHyperflexClusterNetworkPolicyByMoidRequest) Execute() (*HyperflexC
 /*
 GetHyperflexClusterNetworkPolicyByMoid Read a 'hyperflex.ClusterNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterNetworkPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterNetworkPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterNetworkPolicyByMoidRequest {
 	return ApiGetHyperflexClusterNetworkPolicyByMoidRequest{
@@ -16696,7 +16753,8 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexClusterNetworkPolicy
+//
+//	@return HyperflexClusterNetworkPolicy
 func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoidExecute(r ApiGetHyperflexClusterNetworkPolicyByMoidRequest) (*HyperflexClusterNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16912,8 +16970,8 @@ func (r ApiGetHyperflexClusterNetworkPolicyListRequest) Execute() (*HyperflexClu
 /*
 GetHyperflexClusterNetworkPolicyList Read a 'hyperflex.ClusterNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterNetworkPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterNetworkPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyList(ctx context.Context) ApiGetHyperflexClusterNetworkPolicyListRequest {
 	return ApiGetHyperflexClusterNetworkPolicyListRequest{
@@ -16923,7 +16981,8 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyList(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexClusterNetworkPolicyResponse
+//
+//	@return HyperflexClusterNetworkPolicyResponse
 func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyListExecute(r ApiGetHyperflexClusterNetworkPolicyListRequest) (*HyperflexClusterNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17110,9 +17169,9 @@ func (r ApiGetHyperflexClusterProfileByMoidRequest) Execute() (*HyperflexCluster
 /*
 GetHyperflexClusterProfileByMoid Read a 'hyperflex.ClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterProfileByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterProfileByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterProfileByMoidRequest {
 	return ApiGetHyperflexClusterProfileByMoidRequest{
@@ -17123,7 +17182,8 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexClusterProfile
+//
+//	@return HyperflexClusterProfile
 func (a *HyperflexApiService) GetHyperflexClusterProfileByMoidExecute(r ApiGetHyperflexClusterProfileByMoidRequest) (*HyperflexClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17339,8 +17399,8 @@ func (r ApiGetHyperflexClusterProfileListRequest) Execute() (*HyperflexClusterPr
 /*
 GetHyperflexClusterProfileList Read a 'hyperflex.ClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterProfileListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterProfileList(ctx context.Context) ApiGetHyperflexClusterProfileListRequest {
 	return ApiGetHyperflexClusterProfileListRequest{
@@ -17350,7 +17410,8 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexClusterProfileResponse
+//
+//	@return HyperflexClusterProfileResponse
 func (a *HyperflexApiService) GetHyperflexClusterProfileListExecute(r ApiGetHyperflexClusterProfileListRequest) (*HyperflexClusterProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17537,9 +17598,9 @@ func (r ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest) Execute() (
 /*
 GetHyperflexClusterReplicationNetworkPolicyByMoid Read a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest {
 	return ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest{
@@ -17550,7 +17611,8 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoid(
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicy
+//
+//	@return HyperflexClusterReplicationNetworkPolicy
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoidExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest) (*HyperflexClusterReplicationNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17690,9 +17752,9 @@ func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest) E
 /*
 GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid Read a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest {
 	return ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest{
@@ -17703,7 +17765,8 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicyDeployment
+//
+//	@return HyperflexClusterReplicationNetworkPolicyDeployment
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest) (*HyperflexClusterReplicationNetworkPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17919,8 +17982,8 @@ func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) Exe
 /*
 GetHyperflexClusterReplicationNetworkPolicyDeploymentList Read a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentList(ctx context.Context) ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest {
 	return ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest{
@@ -17930,7 +17993,8 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicyDeploymentResponse
+//
+//	@return HyperflexClusterReplicationNetworkPolicyDeploymentResponse
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentListExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) (*HyperflexClusterReplicationNetworkPolicyDeploymentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18193,8 +18257,8 @@ func (r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) Execute() (*H
 /*
 GetHyperflexClusterReplicationNetworkPolicyList Read a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterReplicationNetworkPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterReplicationNetworkPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyList(ctx context.Context) ApiGetHyperflexClusterReplicationNetworkPolicyListRequest {
 	return ApiGetHyperflexClusterReplicationNetworkPolicyListRequest{
@@ -18204,7 +18268,8 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyList(ct
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicyResponse
+//
+//	@return HyperflexClusterReplicationNetworkPolicyResponse
 func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyListExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) (*HyperflexClusterReplicationNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18391,9 +18456,9 @@ func (r ApiGetHyperflexClusterStoragePolicyByMoidRequest) Execute() (*HyperflexC
 /*
 GetHyperflexClusterStoragePolicyByMoid Read a 'hyperflex.ClusterStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexClusterStoragePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexClusterStoragePolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexClusterStoragePolicyByMoidRequest {
 	return ApiGetHyperflexClusterStoragePolicyByMoidRequest{
@@ -18404,7 +18469,8 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexClusterStoragePolicy
+//
+//	@return HyperflexClusterStoragePolicy
 func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoidExecute(r ApiGetHyperflexClusterStoragePolicyByMoidRequest) (*HyperflexClusterStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18620,8 +18686,8 @@ func (r ApiGetHyperflexClusterStoragePolicyListRequest) Execute() (*HyperflexClu
 /*
 GetHyperflexClusterStoragePolicyList Read a 'hyperflex.ClusterStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexClusterStoragePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexClusterStoragePolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyList(ctx context.Context) ApiGetHyperflexClusterStoragePolicyListRequest {
 	return ApiGetHyperflexClusterStoragePolicyListRequest{
@@ -18631,7 +18697,8 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyList(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexClusterStoragePolicyResponse
+//
+//	@return HyperflexClusterStoragePolicyResponse
 func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyListExecute(r ApiGetHyperflexClusterStoragePolicyListRequest) (*HyperflexClusterStoragePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18818,9 +18885,9 @@ func (r ApiGetHyperflexConfigResultByMoidRequest) Execute() (*HyperflexConfigRes
 /*
 GetHyperflexConfigResultByMoid Read a 'hyperflex.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexConfigResultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexConfigResultByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexConfigResultByMoid(ctx context.Context, moid string) ApiGetHyperflexConfigResultByMoidRequest {
 	return ApiGetHyperflexConfigResultByMoidRequest{
@@ -18831,7 +18898,8 @@ func (a *HyperflexApiService) GetHyperflexConfigResultByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexConfigResult
+//
+//	@return HyperflexConfigResult
 func (a *HyperflexApiService) GetHyperflexConfigResultByMoidExecute(r ApiGetHyperflexConfigResultByMoidRequest) (*HyperflexConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18971,9 +19039,9 @@ func (r ApiGetHyperflexConfigResultEntryByMoidRequest) Execute() (*HyperflexConf
 /*
 GetHyperflexConfigResultEntryByMoid Read a 'hyperflex.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexConfigResultEntryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexConfigResultEntryByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetHyperflexConfigResultEntryByMoidRequest {
 	return ApiGetHyperflexConfigResultEntryByMoidRequest{
@@ -18984,7 +19052,8 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexConfigResultEntry
+//
+//	@return HyperflexConfigResultEntry
 func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoidExecute(r ApiGetHyperflexConfigResultEntryByMoidRequest) (*HyperflexConfigResultEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19200,8 +19269,8 @@ func (r ApiGetHyperflexConfigResultEntryListRequest) Execute() (*HyperflexConfig
 /*
 GetHyperflexConfigResultEntryList Read a 'hyperflex.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexConfigResultEntryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexConfigResultEntryListRequest
 */
 func (a *HyperflexApiService) GetHyperflexConfigResultEntryList(ctx context.Context) ApiGetHyperflexConfigResultEntryListRequest {
 	return ApiGetHyperflexConfigResultEntryListRequest{
@@ -19211,7 +19280,8 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexConfigResultEntryResponse
+//
+//	@return HyperflexConfigResultEntryResponse
 func (a *HyperflexApiService) GetHyperflexConfigResultEntryListExecute(r ApiGetHyperflexConfigResultEntryListRequest) (*HyperflexConfigResultEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19474,8 +19544,8 @@ func (r ApiGetHyperflexConfigResultListRequest) Execute() (*HyperflexConfigResul
 /*
 GetHyperflexConfigResultList Read a 'hyperflex.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexConfigResultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexConfigResultListRequest
 */
 func (a *HyperflexApiService) GetHyperflexConfigResultList(ctx context.Context) ApiGetHyperflexConfigResultListRequest {
 	return ApiGetHyperflexConfigResultListRequest{
@@ -19485,7 +19555,8 @@ func (a *HyperflexApiService) GetHyperflexConfigResultList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return HyperflexConfigResultResponse
+//
+//	@return HyperflexConfigResultResponse
 func (a *HyperflexApiService) GetHyperflexConfigResultListExecute(r ApiGetHyperflexConfigResultListRequest) (*HyperflexConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19672,9 +19743,9 @@ func (r ApiGetHyperflexDataProtectionPeerByMoidRequest) Execute() (*HyperflexDat
 /*
 GetHyperflexDataProtectionPeerByMoid Read a 'hyperflex.DataProtectionPeer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexDataProtectionPeerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexDataProtectionPeerByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexDataProtectionPeerByMoid(ctx context.Context, moid string) ApiGetHyperflexDataProtectionPeerByMoidRequest {
 	return ApiGetHyperflexDataProtectionPeerByMoidRequest{
@@ -19685,7 +19756,8 @@ func (a *HyperflexApiService) GetHyperflexDataProtectionPeerByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexDataProtectionPeer
+//
+//	@return HyperflexDataProtectionPeer
 func (a *HyperflexApiService) GetHyperflexDataProtectionPeerByMoidExecute(r ApiGetHyperflexDataProtectionPeerByMoidRequest) (*HyperflexDataProtectionPeer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19901,8 +19973,8 @@ func (r ApiGetHyperflexDataProtectionPeerListRequest) Execute() (*HyperflexDataP
 /*
 GetHyperflexDataProtectionPeerList Read a 'hyperflex.DataProtectionPeer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexDataProtectionPeerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexDataProtectionPeerListRequest
 */
 func (a *HyperflexApiService) GetHyperflexDataProtectionPeerList(ctx context.Context) ApiGetHyperflexDataProtectionPeerListRequest {
 	return ApiGetHyperflexDataProtectionPeerListRequest{
@@ -19912,7 +19984,8 @@ func (a *HyperflexApiService) GetHyperflexDataProtectionPeerList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexDataProtectionPeerResponse
+//
+//	@return HyperflexDataProtectionPeerResponse
 func (a *HyperflexApiService) GetHyperflexDataProtectionPeerListExecute(r ApiGetHyperflexDataProtectionPeerListRequest) (*HyperflexDataProtectionPeerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20099,9 +20172,9 @@ func (r ApiGetHyperflexDatastoreStatisticByMoidRequest) Execute() (*HyperflexDat
 /*
 GetHyperflexDatastoreStatisticByMoid Read a 'hyperflex.DatastoreStatistic' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexDatastoreStatisticByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexDatastoreStatisticByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexDatastoreStatisticByMoid(ctx context.Context, moid string) ApiGetHyperflexDatastoreStatisticByMoidRequest {
 	return ApiGetHyperflexDatastoreStatisticByMoidRequest{
@@ -20112,7 +20185,8 @@ func (a *HyperflexApiService) GetHyperflexDatastoreStatisticByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexDatastoreStatistic
+//
+//	@return HyperflexDatastoreStatistic
 func (a *HyperflexApiService) GetHyperflexDatastoreStatisticByMoidExecute(r ApiGetHyperflexDatastoreStatisticByMoidRequest) (*HyperflexDatastoreStatistic, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20328,8 +20402,8 @@ func (r ApiGetHyperflexDatastoreStatisticListRequest) Execute() (*HyperflexDatas
 /*
 GetHyperflexDatastoreStatisticList Read a 'hyperflex.DatastoreStatistic' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexDatastoreStatisticListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexDatastoreStatisticListRequest
 */
 func (a *HyperflexApiService) GetHyperflexDatastoreStatisticList(ctx context.Context) ApiGetHyperflexDatastoreStatisticListRequest {
 	return ApiGetHyperflexDatastoreStatisticListRequest{
@@ -20339,7 +20413,8 @@ func (a *HyperflexApiService) GetHyperflexDatastoreStatisticList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexDatastoreStatisticResponse
+//
+//	@return HyperflexDatastoreStatisticResponse
 func (a *HyperflexApiService) GetHyperflexDatastoreStatisticListExecute(r ApiGetHyperflexDatastoreStatisticListRequest) (*HyperflexDatastoreStatisticResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20526,9 +20601,9 @@ func (r ApiGetHyperflexDevicePackageDownloadStateByMoidRequest) Execute() (*Hype
 /*
 GetHyperflexDevicePackageDownloadStateByMoid Read a 'hyperflex.DevicePackageDownloadState' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexDevicePackageDownloadStateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexDevicePackageDownloadStateByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoid(ctx context.Context, moid string) ApiGetHyperflexDevicePackageDownloadStateByMoidRequest {
 	return ApiGetHyperflexDevicePackageDownloadStateByMoidRequest{
@@ -20539,7 +20614,8 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexDevicePackageDownloadState
+//
+//	@return HyperflexDevicePackageDownloadState
 func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoidExecute(r ApiGetHyperflexDevicePackageDownloadStateByMoidRequest) (*HyperflexDevicePackageDownloadState, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20755,8 +20831,8 @@ func (r ApiGetHyperflexDevicePackageDownloadStateListRequest) Execute() (*Hyperf
 /*
 GetHyperflexDevicePackageDownloadStateList Read a 'hyperflex.DevicePackageDownloadState' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexDevicePackageDownloadStateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexDevicePackageDownloadStateListRequest
 */
 func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateList(ctx context.Context) ApiGetHyperflexDevicePackageDownloadStateListRequest {
 	return ApiGetHyperflexDevicePackageDownloadStateListRequest{
@@ -20766,7 +20842,8 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateList(ctx con
 }
 
 // Execute executes the request
-//  @return HyperflexDevicePackageDownloadStateResponse
+//
+//	@return HyperflexDevicePackageDownloadStateResponse
 func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateListExecute(r ApiGetHyperflexDevicePackageDownloadStateListRequest) (*HyperflexDevicePackageDownloadStateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20953,9 +21030,9 @@ func (r ApiGetHyperflexDriveByMoidRequest) Execute() (*HyperflexDrive, *http.Res
 /*
 GetHyperflexDriveByMoid Read a 'hyperflex.Drive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexDriveByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexDriveByMoid(ctx context.Context, moid string) ApiGetHyperflexDriveByMoidRequest {
 	return ApiGetHyperflexDriveByMoidRequest{
@@ -20966,7 +21043,8 @@ func (a *HyperflexApiService) GetHyperflexDriveByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return HyperflexDrive
+//
+//	@return HyperflexDrive
 func (a *HyperflexApiService) GetHyperflexDriveByMoidExecute(r ApiGetHyperflexDriveByMoidRequest) (*HyperflexDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21182,8 +21260,8 @@ func (r ApiGetHyperflexDriveListRequest) Execute() (*HyperflexDriveResponse, *ht
 /*
 GetHyperflexDriveList Read a 'hyperflex.Drive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexDriveListRequest
 */
 func (a *HyperflexApiService) GetHyperflexDriveList(ctx context.Context) ApiGetHyperflexDriveListRequest {
 	return ApiGetHyperflexDriveListRequest{
@@ -21193,7 +21271,8 @@ func (a *HyperflexApiService) GetHyperflexDriveList(ctx context.Context) ApiGetH
 }
 
 // Execute executes the request
-//  @return HyperflexDriveResponse
+//
+//	@return HyperflexDriveResponse
 func (a *HyperflexApiService) GetHyperflexDriveListExecute(r ApiGetHyperflexDriveListRequest) (*HyperflexDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21380,9 +21459,9 @@ func (r ApiGetHyperflexEncryptionByMoidRequest) Execute() (*HyperflexEncryption,
 /*
 GetHyperflexEncryptionByMoid Read a 'hyperflex.Encryption' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexEncryptionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexEncryptionByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexEncryptionByMoid(ctx context.Context, moid string) ApiGetHyperflexEncryptionByMoidRequest {
 	return ApiGetHyperflexEncryptionByMoidRequest{
@@ -21393,7 +21472,8 @@ func (a *HyperflexApiService) GetHyperflexEncryptionByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return HyperflexEncryption
+//
+//	@return HyperflexEncryption
 func (a *HyperflexApiService) GetHyperflexEncryptionByMoidExecute(r ApiGetHyperflexEncryptionByMoidRequest) (*HyperflexEncryption, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21609,8 +21689,8 @@ func (r ApiGetHyperflexEncryptionListRequest) Execute() (*HyperflexEncryptionRes
 /*
 GetHyperflexEncryptionList Read a 'hyperflex.Encryption' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexEncryptionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexEncryptionListRequest
 */
 func (a *HyperflexApiService) GetHyperflexEncryptionList(ctx context.Context) ApiGetHyperflexEncryptionListRequest {
 	return ApiGetHyperflexEncryptionListRequest{
@@ -21620,7 +21700,8 @@ func (a *HyperflexApiService) GetHyperflexEncryptionList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return HyperflexEncryptionResponse
+//
+//	@return HyperflexEncryptionResponse
 func (a *HyperflexApiService) GetHyperflexEncryptionListExecute(r ApiGetHyperflexEncryptionListRequest) (*HyperflexEncryptionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21807,9 +21888,9 @@ func (r ApiGetHyperflexExtFcStoragePolicyByMoidRequest) Execute() (*HyperflexExt
 /*
 GetHyperflexExtFcStoragePolicyByMoid Read a 'hyperflex.ExtFcStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexExtFcStoragePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexExtFcStoragePolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexExtFcStoragePolicyByMoidRequest {
 	return ApiGetHyperflexExtFcStoragePolicyByMoidRequest{
@@ -21820,7 +21901,8 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexExtFcStoragePolicy
+//
+//	@return HyperflexExtFcStoragePolicy
 func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoidExecute(r ApiGetHyperflexExtFcStoragePolicyByMoidRequest) (*HyperflexExtFcStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22036,8 +22118,8 @@ func (r ApiGetHyperflexExtFcStoragePolicyListRequest) Execute() (*HyperflexExtFc
 /*
 GetHyperflexExtFcStoragePolicyList Read a 'hyperflex.ExtFcStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexExtFcStoragePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexExtFcStoragePolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyList(ctx context.Context) ApiGetHyperflexExtFcStoragePolicyListRequest {
 	return ApiGetHyperflexExtFcStoragePolicyListRequest{
@@ -22047,7 +22129,8 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexExtFcStoragePolicyResponse
+//
+//	@return HyperflexExtFcStoragePolicyResponse
 func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyListExecute(r ApiGetHyperflexExtFcStoragePolicyListRequest) (*HyperflexExtFcStoragePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22234,9 +22317,9 @@ func (r ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest) Execute() (*Hyperflex
 /*
 GetHyperflexExtIscsiStoragePolicyByMoid Read a 'hyperflex.ExtIscsiStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest {
 	return ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest{
@@ -22247,7 +22330,8 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexExtIscsiStoragePolicy
+//
+//	@return HyperflexExtIscsiStoragePolicy
 func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoidExecute(r ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest) (*HyperflexExtIscsiStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22463,8 +22547,8 @@ func (r ApiGetHyperflexExtIscsiStoragePolicyListRequest) Execute() (*HyperflexEx
 /*
 GetHyperflexExtIscsiStoragePolicyList Read a 'hyperflex.ExtIscsiStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexExtIscsiStoragePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexExtIscsiStoragePolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyList(ctx context.Context) ApiGetHyperflexExtIscsiStoragePolicyListRequest {
 	return ApiGetHyperflexExtIscsiStoragePolicyListRequest{
@@ -22474,7 +22558,8 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyList(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexExtIscsiStoragePolicyResponse
+//
+//	@return HyperflexExtIscsiStoragePolicyResponse
 func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyListExecute(r ApiGetHyperflexExtIscsiStoragePolicyListRequest) (*HyperflexExtIscsiStoragePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22661,9 +22746,9 @@ func (r ApiGetHyperflexFeatureLimitExternalByMoidRequest) Execute() (*HyperflexF
 /*
 GetHyperflexFeatureLimitExternalByMoid Read a 'hyperflex.FeatureLimitExternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexFeatureLimitExternalByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexFeatureLimitExternalByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoid(ctx context.Context, moid string) ApiGetHyperflexFeatureLimitExternalByMoidRequest {
 	return ApiGetHyperflexFeatureLimitExternalByMoidRequest{
@@ -22674,7 +22759,8 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitExternal
+//
+//	@return HyperflexFeatureLimitExternal
 func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoidExecute(r ApiGetHyperflexFeatureLimitExternalByMoidRequest) (*HyperflexFeatureLimitExternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22890,8 +22976,8 @@ func (r ApiGetHyperflexFeatureLimitExternalListRequest) Execute() (*HyperflexFea
 /*
 GetHyperflexFeatureLimitExternalList Read a 'hyperflex.FeatureLimitExternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexFeatureLimitExternalListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexFeatureLimitExternalListRequest
 */
 func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalList(ctx context.Context) ApiGetHyperflexFeatureLimitExternalListRequest {
 	return ApiGetHyperflexFeatureLimitExternalListRequest{
@@ -22901,7 +22987,8 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalList(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitExternalResponse
+//
+//	@return HyperflexFeatureLimitExternalResponse
 func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalListExecute(r ApiGetHyperflexFeatureLimitExternalListRequest) (*HyperflexFeatureLimitExternalResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23088,9 +23175,9 @@ func (r ApiGetHyperflexFeatureLimitInternalByMoidRequest) Execute() (*HyperflexF
 /*
 GetHyperflexFeatureLimitInternalByMoid Read a 'hyperflex.FeatureLimitInternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexFeatureLimitInternalByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexFeatureLimitInternalByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoid(ctx context.Context, moid string) ApiGetHyperflexFeatureLimitInternalByMoidRequest {
 	return ApiGetHyperflexFeatureLimitInternalByMoidRequest{
@@ -23101,7 +23188,8 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitInternal
+//
+//	@return HyperflexFeatureLimitInternal
 func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoidExecute(r ApiGetHyperflexFeatureLimitInternalByMoidRequest) (*HyperflexFeatureLimitInternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23317,8 +23405,8 @@ func (r ApiGetHyperflexFeatureLimitInternalListRequest) Execute() (*HyperflexFea
 /*
 GetHyperflexFeatureLimitInternalList Read a 'hyperflex.FeatureLimitInternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexFeatureLimitInternalListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexFeatureLimitInternalListRequest
 */
 func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalList(ctx context.Context) ApiGetHyperflexFeatureLimitInternalListRequest {
 	return ApiGetHyperflexFeatureLimitInternalListRequest{
@@ -23328,7 +23416,8 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalList(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitInternalResponse
+//
+//	@return HyperflexFeatureLimitInternalResponse
 func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalListExecute(r ApiGetHyperflexFeatureLimitInternalListRequest) (*HyperflexFeatureLimitInternalResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23515,9 +23604,9 @@ func (r ApiGetHyperflexHealthByMoidRequest) Execute() (*HyperflexHealth, *http.R
 /*
 GetHyperflexHealthByMoid Read a 'hyperflex.Health' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHealthByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHealthByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthByMoid(ctx context.Context, moid string) ApiGetHyperflexHealthByMoidRequest {
 	return ApiGetHyperflexHealthByMoidRequest{
@@ -23528,7 +23617,8 @@ func (a *HyperflexApiService) GetHyperflexHealthByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return HyperflexHealth
+//
+//	@return HyperflexHealth
 func (a *HyperflexApiService) GetHyperflexHealthByMoidExecute(r ApiGetHyperflexHealthByMoidRequest) (*HyperflexHealth, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23668,9 +23758,9 @@ func (r ApiGetHyperflexHealthCheckDefinitionByMoidRequest) Execute() (*Hyperflex
 /*
 GetHyperflexHealthCheckDefinitionByMoid Read a 'hyperflex.HealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHealthCheckDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHealthCheckDefinitionByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoid(ctx context.Context, moid string) ApiGetHyperflexHealthCheckDefinitionByMoidRequest {
 	return ApiGetHyperflexHealthCheckDefinitionByMoidRequest{
@@ -23681,7 +23771,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckDefinition
+//
+//	@return HyperflexHealthCheckDefinition
 func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoidExecute(r ApiGetHyperflexHealthCheckDefinitionByMoidRequest) (*HyperflexHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23897,8 +23988,8 @@ func (r ApiGetHyperflexHealthCheckDefinitionListRequest) Execute() (*HyperflexHe
 /*
 GetHyperflexHealthCheckDefinitionList Read a 'hyperflex.HealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHealthCheckDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHealthCheckDefinitionListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionList(ctx context.Context) ApiGetHyperflexHealthCheckDefinitionListRequest {
 	return ApiGetHyperflexHealthCheckDefinitionListRequest{
@@ -23908,7 +23999,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionList(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckDefinitionResponse
+//
+//	@return HyperflexHealthCheckDefinitionResponse
 func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionListExecute(r ApiGetHyperflexHealthCheckDefinitionListRequest) (*HyperflexHealthCheckDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24095,9 +24187,9 @@ func (r ApiGetHyperflexHealthCheckExecutionByMoidRequest) Execute() (*HyperflexH
 /*
 GetHyperflexHealthCheckExecutionByMoid Read a 'hyperflex.HealthCheckExecution' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHealthCheckExecutionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHealthCheckExecutionByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoid(ctx context.Context, moid string) ApiGetHyperflexHealthCheckExecutionByMoidRequest {
 	return ApiGetHyperflexHealthCheckExecutionByMoidRequest{
@@ -24108,7 +24200,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckExecution
+//
+//	@return HyperflexHealthCheckExecution
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoidExecute(r ApiGetHyperflexHealthCheckExecutionByMoidRequest) (*HyperflexHealthCheckExecution, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24324,8 +24417,8 @@ func (r ApiGetHyperflexHealthCheckExecutionListRequest) Execute() (*HyperflexHea
 /*
 GetHyperflexHealthCheckExecutionList Read a 'hyperflex.HealthCheckExecution' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHealthCheckExecutionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHealthCheckExecutionListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionList(ctx context.Context) ApiGetHyperflexHealthCheckExecutionListRequest {
 	return ApiGetHyperflexHealthCheckExecutionListRequest{
@@ -24335,7 +24428,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionList(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckExecutionResponse
+//
+//	@return HyperflexHealthCheckExecutionResponse
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionListExecute(r ApiGetHyperflexHealthCheckExecutionListRequest) (*HyperflexHealthCheckExecutionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24522,9 +24616,9 @@ func (r ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest) Execute() (*Hy
 /*
 GetHyperflexHealthCheckExecutionSnapshotByMoid Read a 'hyperflex.HealthCheckExecutionSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoid(ctx context.Context, moid string) ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest {
 	return ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest{
@@ -24535,7 +24629,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoid(ctx
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckExecutionSnapshot
+//
+//	@return HyperflexHealthCheckExecutionSnapshot
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoidExecute(r ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest) (*HyperflexHealthCheckExecutionSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24751,8 +24846,8 @@ func (r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) Execute() (*Hype
 /*
 GetHyperflexHealthCheckExecutionSnapshotList Read a 'hyperflex.HealthCheckExecutionSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHealthCheckExecutionSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHealthCheckExecutionSnapshotListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotList(ctx context.Context) ApiGetHyperflexHealthCheckExecutionSnapshotListRequest {
 	return ApiGetHyperflexHealthCheckExecutionSnapshotListRequest{
@@ -24762,7 +24857,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotList(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckExecutionSnapshotResponse
+//
+//	@return HyperflexHealthCheckExecutionSnapshotResponse
 func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotListExecute(r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) (*HyperflexHealthCheckExecutionSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24949,9 +25045,9 @@ func (r ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest) Execute() (*Hype
 /*
 GetHyperflexHealthCheckPackageChecksumByMoid Read a 'hyperflex.HealthCheckPackageChecksum' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoid(ctx context.Context, moid string) ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest {
 	return ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest{
@@ -24962,7 +25058,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckPackageChecksum
+//
+//	@return HyperflexHealthCheckPackageChecksum
 func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoidExecute(r ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest) (*HyperflexHealthCheckPackageChecksum, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25178,8 +25275,8 @@ func (r ApiGetHyperflexHealthCheckPackageChecksumListRequest) Execute() (*Hyperf
 /*
 GetHyperflexHealthCheckPackageChecksumList Read a 'hyperflex.HealthCheckPackageChecksum' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHealthCheckPackageChecksumListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHealthCheckPackageChecksumListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumList(ctx context.Context) ApiGetHyperflexHealthCheckPackageChecksumListRequest {
 	return ApiGetHyperflexHealthCheckPackageChecksumListRequest{
@@ -25189,7 +25286,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumList(ctx con
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckPackageChecksumResponse
+//
+//	@return HyperflexHealthCheckPackageChecksumResponse
 func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumListExecute(r ApiGetHyperflexHealthCheckPackageChecksumListRequest) (*HyperflexHealthCheckPackageChecksumResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25376,9 +25474,9 @@ func (r ApiGetHyperflexHealthCheckSchedulePolicyByMoidRequest) Execute() (*Hyper
 /*
 GetHyperflexHealthCheckSchedulePolicyByMoid Read a 'hyperflex.HealthCheckSchedulePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHealthCheckSchedulePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHealthCheckSchedulePolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckSchedulePolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexHealthCheckSchedulePolicyByMoidRequest {
 	return ApiGetHyperflexHealthCheckSchedulePolicyByMoidRequest{
@@ -25389,7 +25487,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckSchedulePolicyByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckSchedulePolicy
+//
+//	@return HyperflexHealthCheckSchedulePolicy
 func (a *HyperflexApiService) GetHyperflexHealthCheckSchedulePolicyByMoidExecute(r ApiGetHyperflexHealthCheckSchedulePolicyByMoidRequest) (*HyperflexHealthCheckSchedulePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25605,8 +25704,8 @@ func (r ApiGetHyperflexHealthCheckSchedulePolicyListRequest) Execute() (*Hyperfl
 /*
 GetHyperflexHealthCheckSchedulePolicyList Read a 'hyperflex.HealthCheckSchedulePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHealthCheckSchedulePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHealthCheckSchedulePolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthCheckSchedulePolicyList(ctx context.Context) ApiGetHyperflexHealthCheckSchedulePolicyListRequest {
 	return ApiGetHyperflexHealthCheckSchedulePolicyListRequest{
@@ -25616,7 +25715,8 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckSchedulePolicyList(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckSchedulePolicyResponse
+//
+//	@return HyperflexHealthCheckSchedulePolicyResponse
 func (a *HyperflexApiService) GetHyperflexHealthCheckSchedulePolicyListExecute(r ApiGetHyperflexHealthCheckSchedulePolicyListRequest) (*HyperflexHealthCheckSchedulePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25879,8 +25979,8 @@ func (r ApiGetHyperflexHealthListRequest) Execute() (*HyperflexHealthResponse, *
 /*
 GetHyperflexHealthList Read a 'hyperflex.Health' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHealthListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHealthListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHealthList(ctx context.Context) ApiGetHyperflexHealthListRequest {
 	return ApiGetHyperflexHealthListRequest{
@@ -25890,7 +25990,8 @@ func (a *HyperflexApiService) GetHyperflexHealthList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return HyperflexHealthResponse
+//
+//	@return HyperflexHealthResponse
 func (a *HyperflexApiService) GetHyperflexHealthListExecute(r ApiGetHyperflexHealthListRequest) (*HyperflexHealthResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26077,9 +26178,9 @@ func (r ApiGetHyperflexHwCatalogByMoidRequest) Execute() (*HyperflexHwCatalog, *
 /*
 GetHyperflexHwCatalogByMoid Read a 'hyperflex.HwCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHwCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHwCatalogByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHwCatalogByMoid(ctx context.Context, moid string) ApiGetHyperflexHwCatalogByMoidRequest {
 	return ApiGetHyperflexHwCatalogByMoidRequest{
@@ -26090,7 +26191,8 @@ func (a *HyperflexApiService) GetHyperflexHwCatalogByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return HyperflexHwCatalog
+//
+//	@return HyperflexHwCatalog
 func (a *HyperflexApiService) GetHyperflexHwCatalogByMoidExecute(r ApiGetHyperflexHwCatalogByMoidRequest) (*HyperflexHwCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26306,8 +26408,8 @@ func (r ApiGetHyperflexHwCatalogListRequest) Execute() (*HyperflexHwCatalogRespo
 /*
 GetHyperflexHwCatalogList Read a 'hyperflex.HwCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHwCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHwCatalogListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHwCatalogList(ctx context.Context) ApiGetHyperflexHwCatalogListRequest {
 	return ApiGetHyperflexHwCatalogListRequest{
@@ -26317,7 +26419,8 @@ func (a *HyperflexApiService) GetHyperflexHwCatalogList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return HyperflexHwCatalogResponse
+//
+//	@return HyperflexHwCatalogResponse
 func (a *HyperflexApiService) GetHyperflexHwCatalogListExecute(r ApiGetHyperflexHwCatalogListRequest) (*HyperflexHwCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26504,9 +26607,9 @@ func (r ApiGetHyperflexHxdpVersionByMoidRequest) Execute() (*HyperflexHxdpVersio
 /*
 GetHyperflexHxdpVersionByMoid Read a 'hyperflex.HxdpVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHxdpVersionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHxdpVersionByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoid(ctx context.Context, moid string) ApiGetHyperflexHxdpVersionByMoidRequest {
 	return ApiGetHyperflexHxdpVersionByMoidRequest{
@@ -26517,7 +26620,8 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexHxdpVersion
+//
+//	@return HyperflexHxdpVersion
 func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoidExecute(r ApiGetHyperflexHxdpVersionByMoidRequest) (*HyperflexHxdpVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26733,8 +26837,8 @@ func (r ApiGetHyperflexHxdpVersionListRequest) Execute() (*HyperflexHxdpVersionR
 /*
 GetHyperflexHxdpVersionList Read a 'hyperflex.HxdpVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHxdpVersionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHxdpVersionListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHxdpVersionList(ctx context.Context) ApiGetHyperflexHxdpVersionListRequest {
 	return ApiGetHyperflexHxdpVersionListRequest{
@@ -26744,7 +26848,8 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return HyperflexHxdpVersionResponse
+//
+//	@return HyperflexHxdpVersionResponse
 func (a *HyperflexApiService) GetHyperflexHxdpVersionListExecute(r ApiGetHyperflexHxdpVersionListRequest) (*HyperflexHxdpVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26931,9 +27036,9 @@ func (r ApiGetHyperflexHypervisorHostByMoidRequest) Execute() (*HyperflexHypervi
 /*
 GetHyperflexHypervisorHostByMoid Read a 'hyperflex.HypervisorHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHypervisorHostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHypervisorHostByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHypervisorHostByMoid(ctx context.Context, moid string) ApiGetHyperflexHypervisorHostByMoidRequest {
 	return ApiGetHyperflexHypervisorHostByMoidRequest{
@@ -26944,7 +27049,8 @@ func (a *HyperflexApiService) GetHyperflexHypervisorHostByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorHost
+//
+//	@return HyperflexHypervisorHost
 func (a *HyperflexApiService) GetHyperflexHypervisorHostByMoidExecute(r ApiGetHyperflexHypervisorHostByMoidRequest) (*HyperflexHypervisorHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27160,8 +27266,8 @@ func (r ApiGetHyperflexHypervisorHostListRequest) Execute() (*HyperflexHyperviso
 /*
 GetHyperflexHypervisorHostList Read a 'hyperflex.HypervisorHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHypervisorHostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHypervisorHostListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHypervisorHostList(ctx context.Context) ApiGetHyperflexHypervisorHostListRequest {
 	return ApiGetHyperflexHypervisorHostListRequest{
@@ -27171,7 +27277,8 @@ func (a *HyperflexApiService) GetHyperflexHypervisorHostList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorHostResponse
+//
+//	@return HyperflexHypervisorHostResponse
 func (a *HyperflexApiService) GetHyperflexHypervisorHostListExecute(r ApiGetHyperflexHypervisorHostListRequest) (*HyperflexHypervisorHostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27358,9 +27465,9 @@ func (r ApiGetHyperflexHypervisorVirtualMachineByMoidRequest) Execute() (*Hyperf
 /*
 GetHyperflexHypervisorVirtualMachineByMoid Read a 'hyperflex.HypervisorVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexHypervisorVirtualMachineByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexHypervisorVirtualMachineByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexHypervisorVirtualMachineByMoid(ctx context.Context, moid string) ApiGetHyperflexHypervisorVirtualMachineByMoidRequest {
 	return ApiGetHyperflexHypervisorVirtualMachineByMoidRequest{
@@ -27371,7 +27478,8 @@ func (a *HyperflexApiService) GetHyperflexHypervisorVirtualMachineByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorVirtualMachine
+//
+//	@return HyperflexHypervisorVirtualMachine
 func (a *HyperflexApiService) GetHyperflexHypervisorVirtualMachineByMoidExecute(r ApiGetHyperflexHypervisorVirtualMachineByMoidRequest) (*HyperflexHypervisorVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27587,8 +27695,8 @@ func (r ApiGetHyperflexHypervisorVirtualMachineListRequest) Execute() (*Hyperfle
 /*
 GetHyperflexHypervisorVirtualMachineList Read a 'hyperflex.HypervisorVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexHypervisorVirtualMachineListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexHypervisorVirtualMachineListRequest
 */
 func (a *HyperflexApiService) GetHyperflexHypervisorVirtualMachineList(ctx context.Context) ApiGetHyperflexHypervisorVirtualMachineListRequest {
 	return ApiGetHyperflexHypervisorVirtualMachineListRequest{
@@ -27598,7 +27706,8 @@ func (a *HyperflexApiService) GetHyperflexHypervisorVirtualMachineList(ctx conte
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorVirtualMachineResponse
+//
+//	@return HyperflexHypervisorVirtualMachineResponse
 func (a *HyperflexApiService) GetHyperflexHypervisorVirtualMachineListExecute(r ApiGetHyperflexHypervisorVirtualMachineListRequest) (*HyperflexHypervisorVirtualMachineResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27785,9 +27894,9 @@ func (r ApiGetHyperflexInitiatorGroupByMoidRequest) Execute() (*HyperflexInitiat
 /*
 GetHyperflexInitiatorGroupByMoid Read a 'hyperflex.InitiatorGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexInitiatorGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexInitiatorGroupByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexInitiatorGroupByMoid(ctx context.Context, moid string) ApiGetHyperflexInitiatorGroupByMoidRequest {
 	return ApiGetHyperflexInitiatorGroupByMoidRequest{
@@ -27798,7 +27907,8 @@ func (a *HyperflexApiService) GetHyperflexInitiatorGroupByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexInitiatorGroup
+//
+//	@return HyperflexInitiatorGroup
 func (a *HyperflexApiService) GetHyperflexInitiatorGroupByMoidExecute(r ApiGetHyperflexInitiatorGroupByMoidRequest) (*HyperflexInitiatorGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28014,8 +28124,8 @@ func (r ApiGetHyperflexInitiatorGroupListRequest) Execute() (*HyperflexInitiator
 /*
 GetHyperflexInitiatorGroupList Read a 'hyperflex.InitiatorGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexInitiatorGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexInitiatorGroupListRequest
 */
 func (a *HyperflexApiService) GetHyperflexInitiatorGroupList(ctx context.Context) ApiGetHyperflexInitiatorGroupListRequest {
 	return ApiGetHyperflexInitiatorGroupListRequest{
@@ -28025,7 +28135,8 @@ func (a *HyperflexApiService) GetHyperflexInitiatorGroupList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexInitiatorGroupResponse
+//
+//	@return HyperflexInitiatorGroupResponse
 func (a *HyperflexApiService) GetHyperflexInitiatorGroupListExecute(r ApiGetHyperflexInitiatorGroupListRequest) (*HyperflexInitiatorGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28212,9 +28323,9 @@ func (r ApiGetHyperflexIscsiNetworkByMoidRequest) Execute() (*HyperflexIscsiNetw
 /*
 GetHyperflexIscsiNetworkByMoid Read a 'hyperflex.IscsiNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexIscsiNetworkByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexIscsiNetworkByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexIscsiNetworkByMoid(ctx context.Context, moid string) ApiGetHyperflexIscsiNetworkByMoidRequest {
 	return ApiGetHyperflexIscsiNetworkByMoidRequest{
@@ -28225,7 +28336,8 @@ func (a *HyperflexApiService) GetHyperflexIscsiNetworkByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexIscsiNetwork
+//
+//	@return HyperflexIscsiNetwork
 func (a *HyperflexApiService) GetHyperflexIscsiNetworkByMoidExecute(r ApiGetHyperflexIscsiNetworkByMoidRequest) (*HyperflexIscsiNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28441,8 +28553,8 @@ func (r ApiGetHyperflexIscsiNetworkListRequest) Execute() (*HyperflexIscsiNetwor
 /*
 GetHyperflexIscsiNetworkList Read a 'hyperflex.IscsiNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexIscsiNetworkListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexIscsiNetworkListRequest
 */
 func (a *HyperflexApiService) GetHyperflexIscsiNetworkList(ctx context.Context) ApiGetHyperflexIscsiNetworkListRequest {
 	return ApiGetHyperflexIscsiNetworkListRequest{
@@ -28452,7 +28564,8 @@ func (a *HyperflexApiService) GetHyperflexIscsiNetworkList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return HyperflexIscsiNetworkResponse
+//
+//	@return HyperflexIscsiNetworkResponse
 func (a *HyperflexApiService) GetHyperflexIscsiNetworkListExecute(r ApiGetHyperflexIscsiNetworkListRequest) (*HyperflexIscsiNetworkResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28639,9 +28752,9 @@ func (r ApiGetHyperflexKeyEncryptionKeyByMoidRequest) Execute() (*HyperflexKeyEn
 /*
 GetHyperflexKeyEncryptionKeyByMoid Read a 'hyperflex.KeyEncryptionKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexKeyEncryptionKeyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexKeyEncryptionKeyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexKeyEncryptionKeyByMoid(ctx context.Context, moid string) ApiGetHyperflexKeyEncryptionKeyByMoidRequest {
 	return ApiGetHyperflexKeyEncryptionKeyByMoidRequest{
@@ -28652,7 +28765,8 @@ func (a *HyperflexApiService) GetHyperflexKeyEncryptionKeyByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexKeyEncryptionKey
+//
+//	@return HyperflexKeyEncryptionKey
 func (a *HyperflexApiService) GetHyperflexKeyEncryptionKeyByMoidExecute(r ApiGetHyperflexKeyEncryptionKeyByMoidRequest) (*HyperflexKeyEncryptionKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28868,8 +28982,8 @@ func (r ApiGetHyperflexKeyEncryptionKeyListRequest) Execute() (*HyperflexKeyEncr
 /*
 GetHyperflexKeyEncryptionKeyList Read a 'hyperflex.KeyEncryptionKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexKeyEncryptionKeyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexKeyEncryptionKeyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexKeyEncryptionKeyList(ctx context.Context) ApiGetHyperflexKeyEncryptionKeyListRequest {
 	return ApiGetHyperflexKeyEncryptionKeyListRequest{
@@ -28879,7 +28993,8 @@ func (a *HyperflexApiService) GetHyperflexKeyEncryptionKeyList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexKeyEncryptionKeyResponse
+//
+//	@return HyperflexKeyEncryptionKeyResponse
 func (a *HyperflexApiService) GetHyperflexKeyEncryptionKeyListExecute(r ApiGetHyperflexKeyEncryptionKeyListRequest) (*HyperflexKeyEncryptionKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29066,9 +29181,9 @@ func (r ApiGetHyperflexLicenseByMoidRequest) Execute() (*HyperflexLicense, *http
 /*
 GetHyperflexLicenseByMoid Read a 'hyperflex.License' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexLicenseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexLicenseByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexLicenseByMoid(ctx context.Context, moid string) ApiGetHyperflexLicenseByMoidRequest {
 	return ApiGetHyperflexLicenseByMoidRequest{
@@ -29079,7 +29194,8 @@ func (a *HyperflexApiService) GetHyperflexLicenseByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HyperflexLicense
+//
+//	@return HyperflexLicense
 func (a *HyperflexApiService) GetHyperflexLicenseByMoidExecute(r ApiGetHyperflexLicenseByMoidRequest) (*HyperflexLicense, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29295,8 +29411,8 @@ func (r ApiGetHyperflexLicenseListRequest) Execute() (*HyperflexLicenseResponse,
 /*
 GetHyperflexLicenseList Read a 'hyperflex.License' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexLicenseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexLicenseListRequest
 */
 func (a *HyperflexApiService) GetHyperflexLicenseList(ctx context.Context) ApiGetHyperflexLicenseListRequest {
 	return ApiGetHyperflexLicenseListRequest{
@@ -29306,7 +29422,8 @@ func (a *HyperflexApiService) GetHyperflexLicenseList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return HyperflexLicenseResponse
+//
+//	@return HyperflexLicenseResponse
 func (a *HyperflexApiService) GetHyperflexLicenseListExecute(r ApiGetHyperflexLicenseListRequest) (*HyperflexLicenseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29493,9 +29610,9 @@ func (r ApiGetHyperflexLocalCredentialPolicyByMoidRequest) Execute() (*Hyperflex
 /*
 GetHyperflexLocalCredentialPolicyByMoid Read a 'hyperflex.LocalCredentialPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexLocalCredentialPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexLocalCredentialPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexLocalCredentialPolicyByMoidRequest {
 	return ApiGetHyperflexLocalCredentialPolicyByMoidRequest{
@@ -29506,7 +29623,8 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexLocalCredentialPolicy
+//
+//	@return HyperflexLocalCredentialPolicy
 func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoidExecute(r ApiGetHyperflexLocalCredentialPolicyByMoidRequest) (*HyperflexLocalCredentialPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29722,8 +29840,8 @@ func (r ApiGetHyperflexLocalCredentialPolicyListRequest) Execute() (*HyperflexLo
 /*
 GetHyperflexLocalCredentialPolicyList Read a 'hyperflex.LocalCredentialPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexLocalCredentialPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexLocalCredentialPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyList(ctx context.Context) ApiGetHyperflexLocalCredentialPolicyListRequest {
 	return ApiGetHyperflexLocalCredentialPolicyListRequest{
@@ -29733,7 +29851,8 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyList(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexLocalCredentialPolicyResponse
+//
+//	@return HyperflexLocalCredentialPolicyResponse
 func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyListExecute(r ApiGetHyperflexLocalCredentialPolicyListRequest) (*HyperflexLocalCredentialPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29920,9 +30039,9 @@ func (r ApiGetHyperflexLunByMoidRequest) Execute() (*HyperflexLun, *http.Respons
 /*
 GetHyperflexLunByMoid Read a 'hyperflex.Lun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexLunByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexLunByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexLunByMoid(ctx context.Context, moid string) ApiGetHyperflexLunByMoidRequest {
 	return ApiGetHyperflexLunByMoidRequest{
@@ -29933,7 +30052,8 @@ func (a *HyperflexApiService) GetHyperflexLunByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return HyperflexLun
+//
+//	@return HyperflexLun
 func (a *HyperflexApiService) GetHyperflexLunByMoidExecute(r ApiGetHyperflexLunByMoidRequest) (*HyperflexLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30149,8 +30269,8 @@ func (r ApiGetHyperflexLunListRequest) Execute() (*HyperflexLunResponse, *http.R
 /*
 GetHyperflexLunList Read a 'hyperflex.Lun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexLunListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexLunListRequest
 */
 func (a *HyperflexApiService) GetHyperflexLunList(ctx context.Context) ApiGetHyperflexLunListRequest {
 	return ApiGetHyperflexLunListRequest{
@@ -30160,7 +30280,8 @@ func (a *HyperflexApiService) GetHyperflexLunList(ctx context.Context) ApiGetHyp
 }
 
 // Execute executes the request
-//  @return HyperflexLunResponse
+//
+//	@return HyperflexLunResponse
 func (a *HyperflexApiService) GetHyperflexLunListExecute(r ApiGetHyperflexLunListRequest) (*HyperflexLunResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30347,9 +30468,9 @@ func (r ApiGetHyperflexNodeByMoidRequest) Execute() (*HyperflexNode, *http.Respo
 /*
 GetHyperflexNodeByMoid Read a 'hyperflex.Node' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexNodeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexNodeByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexNodeByMoid(ctx context.Context, moid string) ApiGetHyperflexNodeByMoidRequest {
 	return ApiGetHyperflexNodeByMoidRequest{
@@ -30360,7 +30481,8 @@ func (a *HyperflexApiService) GetHyperflexNodeByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return HyperflexNode
+//
+//	@return HyperflexNode
 func (a *HyperflexApiService) GetHyperflexNodeByMoidExecute(r ApiGetHyperflexNodeByMoidRequest) (*HyperflexNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30500,9 +30622,9 @@ func (r ApiGetHyperflexNodeConfigPolicyByMoidRequest) Execute() (*HyperflexNodeC
 /*
 GetHyperflexNodeConfigPolicyByMoid Read a 'hyperflex.NodeConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexNodeConfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexNodeConfigPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexNodeConfigPolicyByMoidRequest {
 	return ApiGetHyperflexNodeConfigPolicyByMoidRequest{
@@ -30513,7 +30635,8 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexNodeConfigPolicy
+//
+//	@return HyperflexNodeConfigPolicy
 func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoidExecute(r ApiGetHyperflexNodeConfigPolicyByMoidRequest) (*HyperflexNodeConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30729,8 +30852,8 @@ func (r ApiGetHyperflexNodeConfigPolicyListRequest) Execute() (*HyperflexNodeCon
 /*
 GetHyperflexNodeConfigPolicyList Read a 'hyperflex.NodeConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexNodeConfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexNodeConfigPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyList(ctx context.Context) ApiGetHyperflexNodeConfigPolicyListRequest {
 	return ApiGetHyperflexNodeConfigPolicyListRequest{
@@ -30740,7 +30863,8 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexNodeConfigPolicyResponse
+//
+//	@return HyperflexNodeConfigPolicyResponse
 func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyListExecute(r ApiGetHyperflexNodeConfigPolicyListRequest) (*HyperflexNodeConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31003,8 +31127,8 @@ func (r ApiGetHyperflexNodeListRequest) Execute() (*HyperflexNodeResponse, *http
 /*
 GetHyperflexNodeList Read a 'hyperflex.Node' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexNodeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexNodeListRequest
 */
 func (a *HyperflexApiService) GetHyperflexNodeList(ctx context.Context) ApiGetHyperflexNodeListRequest {
 	return ApiGetHyperflexNodeListRequest{
@@ -31014,7 +31138,8 @@ func (a *HyperflexApiService) GetHyperflexNodeList(ctx context.Context) ApiGetHy
 }
 
 // Execute executes the request
-//  @return HyperflexNodeResponse
+//
+//	@return HyperflexNodeResponse
 func (a *HyperflexApiService) GetHyperflexNodeListExecute(r ApiGetHyperflexNodeListRequest) (*HyperflexNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31201,9 +31326,9 @@ func (r ApiGetHyperflexNodeProfileByMoidRequest) Execute() (*HyperflexNodeProfil
 /*
 GetHyperflexNodeProfileByMoid Read a 'hyperflex.NodeProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexNodeProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexNodeProfileByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexNodeProfileByMoid(ctx context.Context, moid string) ApiGetHyperflexNodeProfileByMoidRequest {
 	return ApiGetHyperflexNodeProfileByMoidRequest{
@@ -31214,7 +31339,8 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexNodeProfile
+//
+//	@return HyperflexNodeProfile
 func (a *HyperflexApiService) GetHyperflexNodeProfileByMoidExecute(r ApiGetHyperflexNodeProfileByMoidRequest) (*HyperflexNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31430,8 +31556,8 @@ func (r ApiGetHyperflexNodeProfileListRequest) Execute() (*HyperflexNodeProfileR
 /*
 GetHyperflexNodeProfileList Read a 'hyperflex.NodeProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexNodeProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexNodeProfileListRequest
 */
 func (a *HyperflexApiService) GetHyperflexNodeProfileList(ctx context.Context) ApiGetHyperflexNodeProfileListRequest {
 	return ApiGetHyperflexNodeProfileListRequest{
@@ -31441,7 +31567,8 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return HyperflexNodeProfileResponse
+//
+//	@return HyperflexNodeProfileResponse
 func (a *HyperflexApiService) GetHyperflexNodeProfileListExecute(r ApiGetHyperflexNodeProfileListRequest) (*HyperflexNodeProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31628,9 +31755,9 @@ func (r ApiGetHyperflexProtectedClusterByMoidRequest) Execute() (*HyperflexProte
 /*
 GetHyperflexProtectedClusterByMoid Read a 'hyperflex.ProtectedCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexProtectedClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexProtectedClusterByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexProtectedClusterByMoid(ctx context.Context, moid string) ApiGetHyperflexProtectedClusterByMoidRequest {
 	return ApiGetHyperflexProtectedClusterByMoidRequest{
@@ -31641,7 +31768,8 @@ func (a *HyperflexApiService) GetHyperflexProtectedClusterByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexProtectedCluster
+//
+//	@return HyperflexProtectedCluster
 func (a *HyperflexApiService) GetHyperflexProtectedClusterByMoidExecute(r ApiGetHyperflexProtectedClusterByMoidRequest) (*HyperflexProtectedCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31857,8 +31985,8 @@ func (r ApiGetHyperflexProtectedClusterListRequest) Execute() (*HyperflexProtect
 /*
 GetHyperflexProtectedClusterList Read a 'hyperflex.ProtectedCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexProtectedClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexProtectedClusterListRequest
 */
 func (a *HyperflexApiService) GetHyperflexProtectedClusterList(ctx context.Context) ApiGetHyperflexProtectedClusterListRequest {
 	return ApiGetHyperflexProtectedClusterListRequest{
@@ -31868,7 +31996,8 @@ func (a *HyperflexApiService) GetHyperflexProtectedClusterList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexProtectedClusterResponse
+//
+//	@return HyperflexProtectedClusterResponse
 func (a *HyperflexApiService) GetHyperflexProtectedClusterListExecute(r ApiGetHyperflexProtectedClusterListRequest) (*HyperflexProtectedClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32055,9 +32184,9 @@ func (r ApiGetHyperflexProxySettingPolicyByMoidRequest) Execute() (*HyperflexPro
 /*
 GetHyperflexProxySettingPolicyByMoid Read a 'hyperflex.ProxySettingPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexProxySettingPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexProxySettingPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexProxySettingPolicyByMoidRequest {
 	return ApiGetHyperflexProxySettingPolicyByMoidRequest{
@@ -32068,7 +32197,8 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexProxySettingPolicy
+//
+//	@return HyperflexProxySettingPolicy
 func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoidExecute(r ApiGetHyperflexProxySettingPolicyByMoidRequest) (*HyperflexProxySettingPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32284,8 +32414,8 @@ func (r ApiGetHyperflexProxySettingPolicyListRequest) Execute() (*HyperflexProxy
 /*
 GetHyperflexProxySettingPolicyList Read a 'hyperflex.ProxySettingPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexProxySettingPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexProxySettingPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexProxySettingPolicyList(ctx context.Context) ApiGetHyperflexProxySettingPolicyListRequest {
 	return ApiGetHyperflexProxySettingPolicyListRequest{
@@ -32295,7 +32425,8 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexProxySettingPolicyResponse
+//
+//	@return HyperflexProxySettingPolicyResponse
 func (a *HyperflexApiService) GetHyperflexProxySettingPolicyListExecute(r ApiGetHyperflexProxySettingPolicyListRequest) (*HyperflexProxySettingPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32482,9 +32613,9 @@ func (r ApiGetHyperflexReduceReSyncByMoidRequest) Execute() (*HyperflexReduceReS
 /*
 GetHyperflexReduceReSyncByMoid Read a 'hyperflex.ReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexReduceReSyncByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexReduceReSyncByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexReduceReSyncByMoid(ctx context.Context, moid string) ApiGetHyperflexReduceReSyncByMoidRequest {
 	return ApiGetHyperflexReduceReSyncByMoidRequest{
@@ -32495,7 +32626,8 @@ func (a *HyperflexApiService) GetHyperflexReduceReSyncByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexReduceReSync
+//
+//	@return HyperflexReduceReSync
 func (a *HyperflexApiService) GetHyperflexReduceReSyncByMoidExecute(r ApiGetHyperflexReduceReSyncByMoidRequest) (*HyperflexReduceReSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32711,8 +32843,8 @@ func (r ApiGetHyperflexReduceReSyncListRequest) Execute() (*HyperflexReduceReSyn
 /*
 GetHyperflexReduceReSyncList Read a 'hyperflex.ReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexReduceReSyncListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexReduceReSyncListRequest
 */
 func (a *HyperflexApiService) GetHyperflexReduceReSyncList(ctx context.Context) ApiGetHyperflexReduceReSyncListRequest {
 	return ApiGetHyperflexReduceReSyncListRequest{
@@ -32722,7 +32854,8 @@ func (a *HyperflexApiService) GetHyperflexReduceReSyncList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return HyperflexReduceReSyncResponse
+//
+//	@return HyperflexReduceReSyncResponse
 func (a *HyperflexApiService) GetHyperflexReduceReSyncListExecute(r ApiGetHyperflexReduceReSyncListRequest) (*HyperflexReduceReSyncResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32909,9 +33042,9 @@ func (r ApiGetHyperflexServerFirmwareVersionByMoidRequest) Execute() (*Hyperflex
 /*
 GetHyperflexServerFirmwareVersionByMoid Read a 'hyperflex.ServerFirmwareVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexServerFirmwareVersionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexServerFirmwareVersionByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoid(ctx context.Context, moid string) ApiGetHyperflexServerFirmwareVersionByMoidRequest {
 	return ApiGetHyperflexServerFirmwareVersionByMoidRequest{
@@ -32922,7 +33055,8 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersion
+//
+//	@return HyperflexServerFirmwareVersion
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoidExecute(r ApiGetHyperflexServerFirmwareVersionByMoidRequest) (*HyperflexServerFirmwareVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33062,9 +33196,9 @@ func (r ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest) Execute() (*Hype
 /*
 GetHyperflexServerFirmwareVersionEntryByMoid Read a 'hyperflex.ServerFirmwareVersionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoid(ctx context.Context, moid string) ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest {
 	return ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest{
@@ -33075,7 +33209,8 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersionEntry
+//
+//	@return HyperflexServerFirmwareVersionEntry
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoidExecute(r ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest) (*HyperflexServerFirmwareVersionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33291,8 +33426,8 @@ func (r ApiGetHyperflexServerFirmwareVersionEntryListRequest) Execute() (*Hyperf
 /*
 GetHyperflexServerFirmwareVersionEntryList Read a 'hyperflex.ServerFirmwareVersionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexServerFirmwareVersionEntryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexServerFirmwareVersionEntryListRequest
 */
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryList(ctx context.Context) ApiGetHyperflexServerFirmwareVersionEntryListRequest {
 	return ApiGetHyperflexServerFirmwareVersionEntryListRequest{
@@ -33302,7 +33437,8 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryList(ctx con
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersionEntryResponse
+//
+//	@return HyperflexServerFirmwareVersionEntryResponse
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryListExecute(r ApiGetHyperflexServerFirmwareVersionEntryListRequest) (*HyperflexServerFirmwareVersionEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33565,8 +33701,8 @@ func (r ApiGetHyperflexServerFirmwareVersionListRequest) Execute() (*HyperflexSe
 /*
 GetHyperflexServerFirmwareVersionList Read a 'hyperflex.ServerFirmwareVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexServerFirmwareVersionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexServerFirmwareVersionListRequest
 */
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionList(ctx context.Context) ApiGetHyperflexServerFirmwareVersionListRequest {
 	return ApiGetHyperflexServerFirmwareVersionListRequest{
@@ -33576,7 +33712,8 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionList(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersionResponse
+//
+//	@return HyperflexServerFirmwareVersionResponse
 func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionListExecute(r ApiGetHyperflexServerFirmwareVersionListRequest) (*HyperflexServerFirmwareVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33763,9 +33900,9 @@ func (r ApiGetHyperflexServerModelByMoidRequest) Execute() (*HyperflexServerMode
 /*
 GetHyperflexServerModelByMoid Read a 'hyperflex.ServerModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexServerModelByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexServerModelByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexServerModelByMoid(ctx context.Context, moid string) ApiGetHyperflexServerModelByMoidRequest {
 	return ApiGetHyperflexServerModelByMoidRequest{
@@ -33776,7 +33913,8 @@ func (a *HyperflexApiService) GetHyperflexServerModelByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexServerModel
+//
+//	@return HyperflexServerModel
 func (a *HyperflexApiService) GetHyperflexServerModelByMoidExecute(r ApiGetHyperflexServerModelByMoidRequest) (*HyperflexServerModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33992,8 +34130,8 @@ func (r ApiGetHyperflexServerModelListRequest) Execute() (*HyperflexServerModelR
 /*
 GetHyperflexServerModelList Read a 'hyperflex.ServerModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexServerModelListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexServerModelListRequest
 */
 func (a *HyperflexApiService) GetHyperflexServerModelList(ctx context.Context) ApiGetHyperflexServerModelListRequest {
 	return ApiGetHyperflexServerModelListRequest{
@@ -34003,7 +34141,8 @@ func (a *HyperflexApiService) GetHyperflexServerModelList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return HyperflexServerModelResponse
+//
+//	@return HyperflexServerModelResponse
 func (a *HyperflexApiService) GetHyperflexServerModelListExecute(r ApiGetHyperflexServerModelListRequest) (*HyperflexServerModelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34190,9 +34329,9 @@ func (r ApiGetHyperflexServiceAuthTokenByMoidRequest) Execute() (*HyperflexServi
 /*
 GetHyperflexServiceAuthTokenByMoid Read a 'hyperflex.ServiceAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexServiceAuthTokenByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexServiceAuthTokenByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexServiceAuthTokenByMoid(ctx context.Context, moid string) ApiGetHyperflexServiceAuthTokenByMoidRequest {
 	return ApiGetHyperflexServiceAuthTokenByMoidRequest{
@@ -34203,7 +34342,8 @@ func (a *HyperflexApiService) GetHyperflexServiceAuthTokenByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexServiceAuthToken
+//
+//	@return HyperflexServiceAuthToken
 func (a *HyperflexApiService) GetHyperflexServiceAuthTokenByMoidExecute(r ApiGetHyperflexServiceAuthTokenByMoidRequest) (*HyperflexServiceAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34419,8 +34559,8 @@ func (r ApiGetHyperflexServiceAuthTokenListRequest) Execute() (*HyperflexService
 /*
 GetHyperflexServiceAuthTokenList Read a 'hyperflex.ServiceAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexServiceAuthTokenListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexServiceAuthTokenListRequest
 */
 func (a *HyperflexApiService) GetHyperflexServiceAuthTokenList(ctx context.Context) ApiGetHyperflexServiceAuthTokenListRequest {
 	return ApiGetHyperflexServiceAuthTokenListRequest{
@@ -34430,7 +34570,8 @@ func (a *HyperflexApiService) GetHyperflexServiceAuthTokenList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexServiceAuthTokenResponse
+//
+//	@return HyperflexServiceAuthTokenResponse
 func (a *HyperflexApiService) GetHyperflexServiceAuthTokenListExecute(r ApiGetHyperflexServiceAuthTokenListRequest) (*HyperflexServiceAuthTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34617,9 +34758,9 @@ func (r ApiGetHyperflexSoftwareDistributionComponentByMoidRequest) Execute() (*H
 /*
 GetHyperflexSoftwareDistributionComponentByMoid Read a 'hyperflex.SoftwareDistributionComponent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexSoftwareDistributionComponentByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexSoftwareDistributionComponentByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionComponentByMoid(ctx context.Context, moid string) ApiGetHyperflexSoftwareDistributionComponentByMoidRequest {
 	return ApiGetHyperflexSoftwareDistributionComponentByMoidRequest{
@@ -34630,7 +34771,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareDistributionComponentByMoid(ct
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionComponent
+//
+//	@return HyperflexSoftwareDistributionComponent
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionComponentByMoidExecute(r ApiGetHyperflexSoftwareDistributionComponentByMoidRequest) (*HyperflexSoftwareDistributionComponent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34846,8 +34988,8 @@ func (r ApiGetHyperflexSoftwareDistributionComponentListRequest) Execute() (*Hyp
 /*
 GetHyperflexSoftwareDistributionComponentList Read a 'hyperflex.SoftwareDistributionComponent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexSoftwareDistributionComponentListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexSoftwareDistributionComponentListRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionComponentList(ctx context.Context) ApiGetHyperflexSoftwareDistributionComponentListRequest {
 	return ApiGetHyperflexSoftwareDistributionComponentListRequest{
@@ -34857,7 +34999,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareDistributionComponentList(ctx 
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionComponentResponse
+//
+//	@return HyperflexSoftwareDistributionComponentResponse
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionComponentListExecute(r ApiGetHyperflexSoftwareDistributionComponentListRequest) (*HyperflexSoftwareDistributionComponentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35044,9 +35187,9 @@ func (r ApiGetHyperflexSoftwareDistributionEntryByMoidRequest) Execute() (*Hyper
 /*
 GetHyperflexSoftwareDistributionEntryByMoid Read a 'hyperflex.SoftwareDistributionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexSoftwareDistributionEntryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexSoftwareDistributionEntryByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionEntryByMoid(ctx context.Context, moid string) ApiGetHyperflexSoftwareDistributionEntryByMoidRequest {
 	return ApiGetHyperflexSoftwareDistributionEntryByMoidRequest{
@@ -35057,7 +35200,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareDistributionEntryByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionEntry
+//
+//	@return HyperflexSoftwareDistributionEntry
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionEntryByMoidExecute(r ApiGetHyperflexSoftwareDistributionEntryByMoidRequest) (*HyperflexSoftwareDistributionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35273,8 +35417,8 @@ func (r ApiGetHyperflexSoftwareDistributionEntryListRequest) Execute() (*Hyperfl
 /*
 GetHyperflexSoftwareDistributionEntryList Read a 'hyperflex.SoftwareDistributionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexSoftwareDistributionEntryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexSoftwareDistributionEntryListRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionEntryList(ctx context.Context) ApiGetHyperflexSoftwareDistributionEntryListRequest {
 	return ApiGetHyperflexSoftwareDistributionEntryListRequest{
@@ -35284,7 +35428,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareDistributionEntryList(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionEntryResponse
+//
+//	@return HyperflexSoftwareDistributionEntryResponse
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionEntryListExecute(r ApiGetHyperflexSoftwareDistributionEntryListRequest) (*HyperflexSoftwareDistributionEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35471,9 +35616,9 @@ func (r ApiGetHyperflexSoftwareDistributionVersionByMoidRequest) Execute() (*Hyp
 /*
 GetHyperflexSoftwareDistributionVersionByMoid Read a 'hyperflex.SoftwareDistributionVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexSoftwareDistributionVersionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexSoftwareDistributionVersionByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionVersionByMoid(ctx context.Context, moid string) ApiGetHyperflexSoftwareDistributionVersionByMoidRequest {
 	return ApiGetHyperflexSoftwareDistributionVersionByMoidRequest{
@@ -35484,7 +35629,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareDistributionVersionByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionVersion
+//
+//	@return HyperflexSoftwareDistributionVersion
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionVersionByMoidExecute(r ApiGetHyperflexSoftwareDistributionVersionByMoidRequest) (*HyperflexSoftwareDistributionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35700,8 +35846,8 @@ func (r ApiGetHyperflexSoftwareDistributionVersionListRequest) Execute() (*Hyper
 /*
 GetHyperflexSoftwareDistributionVersionList Read a 'hyperflex.SoftwareDistributionVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexSoftwareDistributionVersionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexSoftwareDistributionVersionListRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionVersionList(ctx context.Context) ApiGetHyperflexSoftwareDistributionVersionListRequest {
 	return ApiGetHyperflexSoftwareDistributionVersionListRequest{
@@ -35711,7 +35857,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareDistributionVersionList(ctx co
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionVersionResponse
+//
+//	@return HyperflexSoftwareDistributionVersionResponse
 func (a *HyperflexApiService) GetHyperflexSoftwareDistributionVersionListExecute(r ApiGetHyperflexSoftwareDistributionVersionListRequest) (*HyperflexSoftwareDistributionVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35898,9 +36045,9 @@ func (r ApiGetHyperflexSoftwareVersionPolicyByMoidRequest) Execute() (*Hyperflex
 /*
 GetHyperflexSoftwareVersionPolicyByMoid Read a 'hyperflex.SoftwareVersionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexSoftwareVersionPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexSoftwareVersionPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexSoftwareVersionPolicyByMoidRequest {
 	return ApiGetHyperflexSoftwareVersionPolicyByMoidRequest{
@@ -35911,7 +36058,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareVersionPolicy
+//
+//	@return HyperflexSoftwareVersionPolicy
 func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoidExecute(r ApiGetHyperflexSoftwareVersionPolicyByMoidRequest) (*HyperflexSoftwareVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36127,8 +36275,8 @@ func (r ApiGetHyperflexSoftwareVersionPolicyListRequest) Execute() (*HyperflexSo
 /*
 GetHyperflexSoftwareVersionPolicyList Read a 'hyperflex.SoftwareVersionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexSoftwareVersionPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexSoftwareVersionPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyList(ctx context.Context) ApiGetHyperflexSoftwareVersionPolicyListRequest {
 	return ApiGetHyperflexSoftwareVersionPolicyListRequest{
@@ -36138,7 +36286,8 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyList(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareVersionPolicyResponse
+//
+//	@return HyperflexSoftwareVersionPolicyResponse
 func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyListExecute(r ApiGetHyperflexSoftwareVersionPolicyListRequest) (*HyperflexSoftwareVersionPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36325,9 +36474,9 @@ func (r ApiGetHyperflexStartReduceReSyncByMoidRequest) Execute() (*HyperflexStar
 /*
 GetHyperflexStartReduceReSyncByMoid Read a 'hyperflex.StartReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexStartReduceReSyncByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexStartReduceReSyncByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexStartReduceReSyncByMoid(ctx context.Context, moid string) ApiGetHyperflexStartReduceReSyncByMoidRequest {
 	return ApiGetHyperflexStartReduceReSyncByMoidRequest{
@@ -36338,7 +36487,8 @@ func (a *HyperflexApiService) GetHyperflexStartReduceReSyncByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexStartReduceReSync
+//
+//	@return HyperflexStartReduceReSync
 func (a *HyperflexApiService) GetHyperflexStartReduceReSyncByMoidExecute(r ApiGetHyperflexStartReduceReSyncByMoidRequest) (*HyperflexStartReduceReSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36554,8 +36704,8 @@ func (r ApiGetHyperflexStartReduceReSyncListRequest) Execute() (*HyperflexStartR
 /*
 GetHyperflexStartReduceReSyncList Read a 'hyperflex.StartReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexStartReduceReSyncListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexStartReduceReSyncListRequest
 */
 func (a *HyperflexApiService) GetHyperflexStartReduceReSyncList(ctx context.Context) ApiGetHyperflexStartReduceReSyncListRequest {
 	return ApiGetHyperflexStartReduceReSyncListRequest{
@@ -36565,7 +36715,8 @@ func (a *HyperflexApiService) GetHyperflexStartReduceReSyncList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexStartReduceReSyncResponse
+//
+//	@return HyperflexStartReduceReSyncResponse
 func (a *HyperflexApiService) GetHyperflexStartReduceReSyncListExecute(r ApiGetHyperflexStartReduceReSyncListRequest) (*HyperflexStartReduceReSyncResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36752,9 +36903,9 @@ func (r ApiGetHyperflexStorageContainerByMoidRequest) Execute() (*HyperflexStora
 /*
 GetHyperflexStorageContainerByMoid Read a 'hyperflex.StorageContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexStorageContainerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexStorageContainerByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexStorageContainerByMoid(ctx context.Context, moid string) ApiGetHyperflexStorageContainerByMoidRequest {
 	return ApiGetHyperflexStorageContainerByMoidRequest{
@@ -36765,7 +36916,8 @@ func (a *HyperflexApiService) GetHyperflexStorageContainerByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexStorageContainer
+//
+//	@return HyperflexStorageContainer
 func (a *HyperflexApiService) GetHyperflexStorageContainerByMoidExecute(r ApiGetHyperflexStorageContainerByMoidRequest) (*HyperflexStorageContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36981,8 +37133,8 @@ func (r ApiGetHyperflexStorageContainerListRequest) Execute() (*HyperflexStorage
 /*
 GetHyperflexStorageContainerList Read a 'hyperflex.StorageContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexStorageContainerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexStorageContainerListRequest
 */
 func (a *HyperflexApiService) GetHyperflexStorageContainerList(ctx context.Context) ApiGetHyperflexStorageContainerListRequest {
 	return ApiGetHyperflexStorageContainerListRequest{
@@ -36992,7 +37144,8 @@ func (a *HyperflexApiService) GetHyperflexStorageContainerList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexStorageContainerResponse
+//
+//	@return HyperflexStorageContainerResponse
 func (a *HyperflexApiService) GetHyperflexStorageContainerListExecute(r ApiGetHyperflexStorageContainerListRequest) (*HyperflexStorageContainerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37179,9 +37332,9 @@ func (r ApiGetHyperflexSysConfigPolicyByMoidRequest) Execute() (*HyperflexSysCon
 /*
 GetHyperflexSysConfigPolicyByMoid Read a 'hyperflex.SysConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexSysConfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexSysConfigPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexSysConfigPolicyByMoidRequest {
 	return ApiGetHyperflexSysConfigPolicyByMoidRequest{
@@ -37192,7 +37345,8 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexSysConfigPolicy
+//
+//	@return HyperflexSysConfigPolicy
 func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoidExecute(r ApiGetHyperflexSysConfigPolicyByMoidRequest) (*HyperflexSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37408,8 +37562,8 @@ func (r ApiGetHyperflexSysConfigPolicyListRequest) Execute() (*HyperflexSysConfi
 /*
 GetHyperflexSysConfigPolicyList Read a 'hyperflex.SysConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexSysConfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexSysConfigPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexSysConfigPolicyList(ctx context.Context) ApiGetHyperflexSysConfigPolicyListRequest {
 	return ApiGetHyperflexSysConfigPolicyListRequest{
@@ -37419,7 +37573,8 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexSysConfigPolicyResponse
+//
+//	@return HyperflexSysConfigPolicyResponse
 func (a *HyperflexApiService) GetHyperflexSysConfigPolicyListExecute(r ApiGetHyperflexSysConfigPolicyListRequest) (*HyperflexSysConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37606,9 +37761,9 @@ func (r ApiGetHyperflexTargetByMoidRequest) Execute() (*HyperflexTarget, *http.R
 /*
 GetHyperflexTargetByMoid Read a 'hyperflex.Target' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexTargetByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexTargetByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexTargetByMoid(ctx context.Context, moid string) ApiGetHyperflexTargetByMoidRequest {
 	return ApiGetHyperflexTargetByMoidRequest{
@@ -37619,7 +37774,8 @@ func (a *HyperflexApiService) GetHyperflexTargetByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return HyperflexTarget
+//
+//	@return HyperflexTarget
 func (a *HyperflexApiService) GetHyperflexTargetByMoidExecute(r ApiGetHyperflexTargetByMoidRequest) (*HyperflexTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37835,8 +37991,8 @@ func (r ApiGetHyperflexTargetListRequest) Execute() (*HyperflexTargetResponse, *
 /*
 GetHyperflexTargetList Read a 'hyperflex.Target' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexTargetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexTargetListRequest
 */
 func (a *HyperflexApiService) GetHyperflexTargetList(ctx context.Context) ApiGetHyperflexTargetListRequest {
 	return ApiGetHyperflexTargetListRequest{
@@ -37846,7 +38002,8 @@ func (a *HyperflexApiService) GetHyperflexTargetList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return HyperflexTargetResponse
+//
+//	@return HyperflexTargetResponse
 func (a *HyperflexApiService) GetHyperflexTargetListExecute(r ApiGetHyperflexTargetListRequest) (*HyperflexTargetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38033,9 +38190,9 @@ func (r ApiGetHyperflexUcsmConfigPolicyByMoidRequest) Execute() (*HyperflexUcsmC
 /*
 GetHyperflexUcsmConfigPolicyByMoid Read a 'hyperflex.UcsmConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexUcsmConfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexUcsmConfigPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexUcsmConfigPolicyByMoidRequest {
 	return ApiGetHyperflexUcsmConfigPolicyByMoidRequest{
@@ -38046,7 +38203,8 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexUcsmConfigPolicy
+//
+//	@return HyperflexUcsmConfigPolicy
 func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoidExecute(r ApiGetHyperflexUcsmConfigPolicyByMoidRequest) (*HyperflexUcsmConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38262,8 +38420,8 @@ func (r ApiGetHyperflexUcsmConfigPolicyListRequest) Execute() (*HyperflexUcsmCon
 /*
 GetHyperflexUcsmConfigPolicyList Read a 'hyperflex.UcsmConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexUcsmConfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexUcsmConfigPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyList(ctx context.Context) ApiGetHyperflexUcsmConfigPolicyListRequest {
 	return ApiGetHyperflexUcsmConfigPolicyListRequest{
@@ -38273,7 +38431,8 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexUcsmConfigPolicyResponse
+//
+//	@return HyperflexUcsmConfigPolicyResponse
 func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyListExecute(r ApiGetHyperflexUcsmConfigPolicyListRequest) (*HyperflexUcsmConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38460,9 +38619,9 @@ func (r ApiGetHyperflexVcenterConfigPolicyByMoidRequest) Execute() (*HyperflexVc
 /*
 GetHyperflexVcenterConfigPolicyByMoid Read a 'hyperflex.VcenterConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexVcenterConfigPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexVcenterConfigPolicyByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoid(ctx context.Context, moid string) ApiGetHyperflexVcenterConfigPolicyByMoidRequest {
 	return ApiGetHyperflexVcenterConfigPolicyByMoidRequest{
@@ -38473,7 +38632,8 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return HyperflexVcenterConfigPolicy
+//
+//	@return HyperflexVcenterConfigPolicy
 func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoidExecute(r ApiGetHyperflexVcenterConfigPolicyByMoidRequest) (*HyperflexVcenterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38689,8 +38849,8 @@ func (r ApiGetHyperflexVcenterConfigPolicyListRequest) Execute() (*HyperflexVcen
 /*
 GetHyperflexVcenterConfigPolicyList Read a 'hyperflex.VcenterConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexVcenterConfigPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexVcenterConfigPolicyListRequest
 */
 func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyList(ctx context.Context) ApiGetHyperflexVcenterConfigPolicyListRequest {
 	return ApiGetHyperflexVcenterConfigPolicyListRequest{
@@ -38700,7 +38860,8 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexVcenterConfigPolicyResponse
+//
+//	@return HyperflexVcenterConfigPolicyResponse
 func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyListExecute(r ApiGetHyperflexVcenterConfigPolicyListRequest) (*HyperflexVcenterConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38887,9 +39048,9 @@ func (r ApiGetHyperflexVmBackupInfoByMoidRequest) Execute() (*HyperflexVmBackupI
 /*
 GetHyperflexVmBackupInfoByMoid Read a 'hyperflex.VmBackupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexVmBackupInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexVmBackupInfoByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoid(ctx context.Context, moid string) ApiGetHyperflexVmBackupInfoByMoidRequest {
 	return ApiGetHyperflexVmBackupInfoByMoidRequest{
@@ -38900,7 +39061,8 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexVmBackupInfo
+//
+//	@return HyperflexVmBackupInfo
 func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoidExecute(r ApiGetHyperflexVmBackupInfoByMoidRequest) (*HyperflexVmBackupInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39116,8 +39278,8 @@ func (r ApiGetHyperflexVmBackupInfoListRequest) Execute() (*HyperflexVmBackupInf
 /*
 GetHyperflexVmBackupInfoList Read a 'hyperflex.VmBackupInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexVmBackupInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexVmBackupInfoListRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmBackupInfoList(ctx context.Context) ApiGetHyperflexVmBackupInfoListRequest {
 	return ApiGetHyperflexVmBackupInfoListRequest{
@@ -39127,7 +39289,8 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return HyperflexVmBackupInfoResponse
+//
+//	@return HyperflexVmBackupInfoResponse
 func (a *HyperflexApiService) GetHyperflexVmBackupInfoListExecute(r ApiGetHyperflexVmBackupInfoListRequest) (*HyperflexVmBackupInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39314,9 +39477,9 @@ func (r ApiGetHyperflexVmImportOperationByMoidRequest) Execute() (*HyperflexVmIm
 /*
 GetHyperflexVmImportOperationByMoid Read a 'hyperflex.VmImportOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexVmImportOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexVmImportOperationByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmImportOperationByMoid(ctx context.Context, moid string) ApiGetHyperflexVmImportOperationByMoidRequest {
 	return ApiGetHyperflexVmImportOperationByMoidRequest{
@@ -39327,7 +39490,8 @@ func (a *HyperflexApiService) GetHyperflexVmImportOperationByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexVmImportOperation
+//
+//	@return HyperflexVmImportOperation
 func (a *HyperflexApiService) GetHyperflexVmImportOperationByMoidExecute(r ApiGetHyperflexVmImportOperationByMoidRequest) (*HyperflexVmImportOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39543,8 +39707,8 @@ func (r ApiGetHyperflexVmImportOperationListRequest) Execute() (*HyperflexVmImpo
 /*
 GetHyperflexVmImportOperationList Read a 'hyperflex.VmImportOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexVmImportOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexVmImportOperationListRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmImportOperationList(ctx context.Context) ApiGetHyperflexVmImportOperationListRequest {
 	return ApiGetHyperflexVmImportOperationListRequest{
@@ -39554,7 +39718,8 @@ func (a *HyperflexApiService) GetHyperflexVmImportOperationList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexVmImportOperationResponse
+//
+//	@return HyperflexVmImportOperationResponse
 func (a *HyperflexApiService) GetHyperflexVmImportOperationListExecute(r ApiGetHyperflexVmImportOperationListRequest) (*HyperflexVmImportOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39741,9 +39906,9 @@ func (r ApiGetHyperflexVmRestoreOperationByMoidRequest) Execute() (*HyperflexVmR
 /*
 GetHyperflexVmRestoreOperationByMoid Read a 'hyperflex.VmRestoreOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexVmRestoreOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexVmRestoreOperationByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoid(ctx context.Context, moid string) ApiGetHyperflexVmRestoreOperationByMoidRequest {
 	return ApiGetHyperflexVmRestoreOperationByMoidRequest{
@@ -39754,7 +39919,8 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexVmRestoreOperation
+//
+//	@return HyperflexVmRestoreOperation
 func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoidExecute(r ApiGetHyperflexVmRestoreOperationByMoidRequest) (*HyperflexVmRestoreOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39970,8 +40136,8 @@ func (r ApiGetHyperflexVmRestoreOperationListRequest) Execute() (*HyperflexVmRes
 /*
 GetHyperflexVmRestoreOperationList Read a 'hyperflex.VmRestoreOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexVmRestoreOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexVmRestoreOperationListRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmRestoreOperationList(ctx context.Context) ApiGetHyperflexVmRestoreOperationListRequest {
 	return ApiGetHyperflexVmRestoreOperationListRequest{
@@ -39981,7 +40147,8 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexVmRestoreOperationResponse
+//
+//	@return HyperflexVmRestoreOperationResponse
 func (a *HyperflexApiService) GetHyperflexVmRestoreOperationListExecute(r ApiGetHyperflexVmRestoreOperationListRequest) (*HyperflexVmRestoreOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40168,9 +40335,9 @@ func (r ApiGetHyperflexVmSnapshotInfoByMoidRequest) Execute() (*HyperflexVmSnaps
 /*
 GetHyperflexVmSnapshotInfoByMoid Read a 'hyperflex.VmSnapshotInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexVmSnapshotInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexVmSnapshotInfoByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoid(ctx context.Context, moid string) ApiGetHyperflexVmSnapshotInfoByMoidRequest {
 	return ApiGetHyperflexVmSnapshotInfoByMoidRequest{
@@ -40181,7 +40348,8 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexVmSnapshotInfo
+//
+//	@return HyperflexVmSnapshotInfo
 func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoidExecute(r ApiGetHyperflexVmSnapshotInfoByMoidRequest) (*HyperflexVmSnapshotInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40397,8 +40565,8 @@ func (r ApiGetHyperflexVmSnapshotInfoListRequest) Execute() (*HyperflexVmSnapsho
 /*
 GetHyperflexVmSnapshotInfoList Read a 'hyperflex.VmSnapshotInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexVmSnapshotInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexVmSnapshotInfoListRequest
 */
 func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoList(ctx context.Context) ApiGetHyperflexVmSnapshotInfoListRequest {
 	return ApiGetHyperflexVmSnapshotInfoListRequest{
@@ -40408,7 +40576,8 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexVmSnapshotInfoResponse
+//
+//	@return HyperflexVmSnapshotInfoResponse
 func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoListExecute(r ApiGetHyperflexVmSnapshotInfoListRequest) (*HyperflexVmSnapshotInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40595,9 +40764,9 @@ func (r ApiGetHyperflexVolumeByMoidRequest) Execute() (*HyperflexVolume, *http.R
 /*
 GetHyperflexVolumeByMoid Read a 'hyperflex.Volume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexVolumeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexVolumeByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexVolumeByMoid(ctx context.Context, moid string) ApiGetHyperflexVolumeByMoidRequest {
 	return ApiGetHyperflexVolumeByMoidRequest{
@@ -40608,7 +40777,8 @@ func (a *HyperflexApiService) GetHyperflexVolumeByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return HyperflexVolume
+//
+//	@return HyperflexVolume
 func (a *HyperflexApiService) GetHyperflexVolumeByMoidExecute(r ApiGetHyperflexVolumeByMoidRequest) (*HyperflexVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40824,8 +40994,8 @@ func (r ApiGetHyperflexVolumeListRequest) Execute() (*HyperflexVolumeResponse, *
 /*
 GetHyperflexVolumeList Read a 'hyperflex.Volume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexVolumeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexVolumeListRequest
 */
 func (a *HyperflexApiService) GetHyperflexVolumeList(ctx context.Context) ApiGetHyperflexVolumeListRequest {
 	return ApiGetHyperflexVolumeListRequest{
@@ -40835,7 +41005,8 @@ func (a *HyperflexApiService) GetHyperflexVolumeList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return HyperflexVolumeResponse
+//
+//	@return HyperflexVolumeResponse
 func (a *HyperflexApiService) GetHyperflexVolumeListExecute(r ApiGetHyperflexVolumeListRequest) (*HyperflexVolumeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41022,9 +41193,9 @@ func (r ApiGetHyperflexWitnessConfigurationByMoidRequest) Execute() (*HyperflexW
 /*
 GetHyperflexWitnessConfigurationByMoid Read a 'hyperflex.WitnessConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHyperflexWitnessConfigurationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHyperflexWitnessConfigurationByMoidRequest
 */
 func (a *HyperflexApiService) GetHyperflexWitnessConfigurationByMoid(ctx context.Context, moid string) ApiGetHyperflexWitnessConfigurationByMoidRequest {
 	return ApiGetHyperflexWitnessConfigurationByMoidRequest{
@@ -41035,7 +41206,8 @@ func (a *HyperflexApiService) GetHyperflexWitnessConfigurationByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexWitnessConfiguration
+//
+//	@return HyperflexWitnessConfiguration
 func (a *HyperflexApiService) GetHyperflexWitnessConfigurationByMoidExecute(r ApiGetHyperflexWitnessConfigurationByMoidRequest) (*HyperflexWitnessConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41251,8 +41423,8 @@ func (r ApiGetHyperflexWitnessConfigurationListRequest) Execute() (*HyperflexWit
 /*
 GetHyperflexWitnessConfigurationList Read a 'hyperflex.WitnessConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHyperflexWitnessConfigurationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHyperflexWitnessConfigurationListRequest
 */
 func (a *HyperflexApiService) GetHyperflexWitnessConfigurationList(ctx context.Context) ApiGetHyperflexWitnessConfigurationListRequest {
 	return ApiGetHyperflexWitnessConfigurationListRequest{
@@ -41262,7 +41434,8 @@ func (a *HyperflexApiService) GetHyperflexWitnessConfigurationList(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexWitnessConfigurationResponse
+//
+//	@return HyperflexWitnessConfigurationResponse
 func (a *HyperflexApiService) GetHyperflexWitnessConfigurationListExecute(r ApiGetHyperflexWitnessConfigurationListRequest) (*HyperflexWitnessConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41463,9 +41636,9 @@ func (r ApiPatchHyperflexAppCatalogRequest) Execute() (*HyperflexAppCatalog, *ht
 /*
 PatchHyperflexAppCatalog Update a 'hyperflex.AppCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexAppCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexAppCatalogRequest
 */
 func (a *HyperflexApiService) PatchHyperflexAppCatalog(ctx context.Context, moid string) ApiPatchHyperflexAppCatalogRequest {
 	return ApiPatchHyperflexAppCatalogRequest{
@@ -41476,7 +41649,8 @@ func (a *HyperflexApiService) PatchHyperflexAppCatalog(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return HyperflexAppCatalog
+//
+//	@return HyperflexAppCatalog
 func (a *HyperflexApiService) PatchHyperflexAppCatalogExecute(r ApiPatchHyperflexAppCatalogRequest) (*HyperflexAppCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -41638,9 +41812,9 @@ func (r ApiPatchHyperflexAutoSupportPolicyRequest) Execute() (*HyperflexAutoSupp
 /*
 PatchHyperflexAutoSupportPolicy Update a 'hyperflex.AutoSupportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexAutoSupportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexAutoSupportPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicy(ctx context.Context, moid string) ApiPatchHyperflexAutoSupportPolicyRequest {
 	return ApiPatchHyperflexAutoSupportPolicyRequest{
@@ -41651,7 +41825,8 @@ func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexAutoSupportPolicy
+//
+//	@return HyperflexAutoSupportPolicy
 func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicyExecute(r ApiPatchHyperflexAutoSupportPolicyRequest) (*HyperflexAutoSupportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -41813,9 +41988,9 @@ func (r ApiPatchHyperflexCapabilityInfoRequest) Execute() (*HyperflexCapabilityI
 /*
 PatchHyperflexCapabilityInfo Update a 'hyperflex.CapabilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexCapabilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexCapabilityInfoRequest
 */
 func (a *HyperflexApiService) PatchHyperflexCapabilityInfo(ctx context.Context, moid string) ApiPatchHyperflexCapabilityInfoRequest {
 	return ApiPatchHyperflexCapabilityInfoRequest{
@@ -41826,7 +42001,8 @@ func (a *HyperflexApiService) PatchHyperflexCapabilityInfo(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return HyperflexCapabilityInfo
+//
+//	@return HyperflexCapabilityInfo
 func (a *HyperflexApiService) PatchHyperflexCapabilityInfoExecute(r ApiPatchHyperflexCapabilityInfoRequest) (*HyperflexCapabilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -41988,9 +42164,9 @@ func (r ApiPatchHyperflexClusterRequest) Execute() (*HyperflexCluster, *http.Res
 /*
 PatchHyperflexCluster Update a 'hyperflex.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterRequest
 */
 func (a *HyperflexApiService) PatchHyperflexCluster(ctx context.Context, moid string) ApiPatchHyperflexClusterRequest {
 	return ApiPatchHyperflexClusterRequest{
@@ -42001,7 +42177,8 @@ func (a *HyperflexApiService) PatchHyperflexCluster(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return HyperflexCluster
+//
+//	@return HyperflexCluster
 func (a *HyperflexApiService) PatchHyperflexClusterExecute(r ApiPatchHyperflexClusterRequest) (*HyperflexCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -42163,9 +42340,9 @@ func (r ApiPatchHyperflexClusterBackupPolicyRequest) Execute() (*HyperflexCluste
 /*
 PatchHyperflexClusterBackupPolicy Update a 'hyperflex.ClusterBackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterBackupPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicy(ctx context.Context, moid string) ApiPatchHyperflexClusterBackupPolicyRequest {
 	return ApiPatchHyperflexClusterBackupPolicyRequest{
@@ -42176,7 +42353,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicy
+//
+//	@return HyperflexClusterBackupPolicy
 func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyExecute(r ApiPatchHyperflexClusterBackupPolicyRequest) (*HyperflexClusterBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -42338,9 +42516,9 @@ func (r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) Execute() (*Hyper
 /*
 PatchHyperflexClusterBackupPolicyDeployment Update a 'hyperflex.ClusterBackupPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterBackupPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterBackupPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeployment(ctx context.Context, moid string) ApiPatchHyperflexClusterBackupPolicyDeploymentRequest {
 	return ApiPatchHyperflexClusterBackupPolicyDeploymentRequest{
@@ -42351,7 +42529,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeployment(ctx co
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyDeployment
+//
+//	@return HyperflexClusterBackupPolicyDeployment
 func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeploymentExecute(r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) (*HyperflexClusterBackupPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -42513,9 +42692,9 @@ func (r ApiPatchHyperflexClusterNetworkPolicyRequest) Execute() (*HyperflexClust
 /*
 PatchHyperflexClusterNetworkPolicy Update a 'hyperflex.ClusterNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterNetworkPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicy(ctx context.Context, moid string) ApiPatchHyperflexClusterNetworkPolicyRequest {
 	return ApiPatchHyperflexClusterNetworkPolicyRequest{
@@ -42526,7 +42705,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexClusterNetworkPolicy
+//
+//	@return HyperflexClusterNetworkPolicy
 func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicyExecute(r ApiPatchHyperflexClusterNetworkPolicyRequest) (*HyperflexClusterNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -42688,9 +42868,9 @@ func (r ApiPatchHyperflexClusterProfileRequest) Execute() (*HyperflexClusterProf
 /*
 PatchHyperflexClusterProfile Update a 'hyperflex.ClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterProfileRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterProfile(ctx context.Context, moid string) ApiPatchHyperflexClusterProfileRequest {
 	return ApiPatchHyperflexClusterProfileRequest{
@@ -42701,7 +42881,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterProfile(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return HyperflexClusterProfile
+//
+//	@return HyperflexClusterProfile
 func (a *HyperflexApiService) PatchHyperflexClusterProfileExecute(r ApiPatchHyperflexClusterProfileRequest) (*HyperflexClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -42863,9 +43044,9 @@ func (r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) Execute() (*Hyp
 /*
 PatchHyperflexClusterReplicationNetworkPolicy Update a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterReplicationNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterReplicationNetworkPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicy(ctx context.Context, moid string) ApiPatchHyperflexClusterReplicationNetworkPolicyRequest {
 	return ApiPatchHyperflexClusterReplicationNetworkPolicyRequest{
@@ -42876,7 +43057,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicy(ctx 
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicy
+//
+//	@return HyperflexClusterReplicationNetworkPolicy
 func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyExecute(r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) (*HyperflexClusterReplicationNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -43038,9 +43220,9 @@ func (r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execu
 /*
 PatchHyperflexClusterReplicationNetworkPolicyDeployment Update a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeployment(ctx context.Context, moid string) ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest {
 	return ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest{
@@ -43051,7 +43233,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeplo
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicyDeployment
+//
+//	@return HyperflexClusterReplicationNetworkPolicyDeployment
 func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (*HyperflexClusterReplicationNetworkPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -43213,9 +43396,9 @@ func (r ApiPatchHyperflexClusterStoragePolicyRequest) Execute() (*HyperflexClust
 /*
 PatchHyperflexClusterStoragePolicy Update a 'hyperflex.ClusterStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexClusterStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexClusterStoragePolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicy(ctx context.Context, moid string) ApiPatchHyperflexClusterStoragePolicyRequest {
 	return ApiPatchHyperflexClusterStoragePolicyRequest{
@@ -43226,7 +43409,8 @@ func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexClusterStoragePolicy
+//
+//	@return HyperflexClusterStoragePolicy
 func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicyExecute(r ApiPatchHyperflexClusterStoragePolicyRequest) (*HyperflexClusterStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -43388,9 +43572,9 @@ func (r ApiPatchHyperflexDriveRequest) Execute() (*HyperflexDrive, *http.Respons
 /*
 PatchHyperflexDrive Update a 'hyperflex.Drive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexDriveRequest
 */
 func (a *HyperflexApiService) PatchHyperflexDrive(ctx context.Context, moid string) ApiPatchHyperflexDriveRequest {
 	return ApiPatchHyperflexDriveRequest{
@@ -43401,7 +43585,8 @@ func (a *HyperflexApiService) PatchHyperflexDrive(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return HyperflexDrive
+//
+//	@return HyperflexDrive
 func (a *HyperflexApiService) PatchHyperflexDriveExecute(r ApiPatchHyperflexDriveRequest) (*HyperflexDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -43563,9 +43748,9 @@ func (r ApiPatchHyperflexExtFcStoragePolicyRequest) Execute() (*HyperflexExtFcSt
 /*
 PatchHyperflexExtFcStoragePolicy Update a 'hyperflex.ExtFcStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexExtFcStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexExtFcStoragePolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicy(ctx context.Context, moid string) ApiPatchHyperflexExtFcStoragePolicyRequest {
 	return ApiPatchHyperflexExtFcStoragePolicyRequest{
@@ -43576,7 +43761,8 @@ func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexExtFcStoragePolicy
+//
+//	@return HyperflexExtFcStoragePolicy
 func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicyExecute(r ApiPatchHyperflexExtFcStoragePolicyRequest) (*HyperflexExtFcStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -43738,9 +43924,9 @@ func (r ApiPatchHyperflexExtIscsiStoragePolicyRequest) Execute() (*HyperflexExtI
 /*
 PatchHyperflexExtIscsiStoragePolicy Update a 'hyperflex.ExtIscsiStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexExtIscsiStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexExtIscsiStoragePolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicy(ctx context.Context, moid string) ApiPatchHyperflexExtIscsiStoragePolicyRequest {
 	return ApiPatchHyperflexExtIscsiStoragePolicyRequest{
@@ -43751,7 +43937,8 @@ func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexExtIscsiStoragePolicy
+//
+//	@return HyperflexExtIscsiStoragePolicy
 func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicyExecute(r ApiPatchHyperflexExtIscsiStoragePolicyRequest) (*HyperflexExtIscsiStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -43913,9 +44100,9 @@ func (r ApiPatchHyperflexFeatureLimitExternalRequest) Execute() (*HyperflexFeatu
 /*
 PatchHyperflexFeatureLimitExternal Update a 'hyperflex.FeatureLimitExternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexFeatureLimitExternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexFeatureLimitExternalRequest
 */
 func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternal(ctx context.Context, moid string) ApiPatchHyperflexFeatureLimitExternalRequest {
 	return ApiPatchHyperflexFeatureLimitExternalRequest{
@@ -43926,7 +44113,8 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternal(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitExternal
+//
+//	@return HyperflexFeatureLimitExternal
 func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternalExecute(r ApiPatchHyperflexFeatureLimitExternalRequest) (*HyperflexFeatureLimitExternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -44088,9 +44276,9 @@ func (r ApiPatchHyperflexFeatureLimitInternalRequest) Execute() (*HyperflexFeatu
 /*
 PatchHyperflexFeatureLimitInternal Update a 'hyperflex.FeatureLimitInternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexFeatureLimitInternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexFeatureLimitInternalRequest
 */
 func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternal(ctx context.Context, moid string) ApiPatchHyperflexFeatureLimitInternalRequest {
 	return ApiPatchHyperflexFeatureLimitInternalRequest{
@@ -44101,7 +44289,8 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternal(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitInternal
+//
+//	@return HyperflexFeatureLimitInternal
 func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternalExecute(r ApiPatchHyperflexFeatureLimitInternalRequest) (*HyperflexFeatureLimitInternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -44263,9 +44452,9 @@ func (r ApiPatchHyperflexHealthCheckDefinitionRequest) Execute() (*HyperflexHeal
 /*
 PatchHyperflexHealthCheckDefinition Update a 'hyperflex.HealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexHealthCheckDefinitionRequest
 */
 func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinition(ctx context.Context, moid string) ApiPatchHyperflexHealthCheckDefinitionRequest {
 	return ApiPatchHyperflexHealthCheckDefinitionRequest{
@@ -44276,7 +44465,8 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinition(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckDefinition
+//
+//	@return HyperflexHealthCheckDefinition
 func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinitionExecute(r ApiPatchHyperflexHealthCheckDefinitionRequest) (*HyperflexHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -44438,9 +44628,9 @@ func (r ApiPatchHyperflexHealthCheckPackageChecksumRequest) Execute() (*Hyperfle
 /*
 PatchHyperflexHealthCheckPackageChecksum Update a 'hyperflex.HealthCheckPackageChecksum' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexHealthCheckPackageChecksumRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexHealthCheckPackageChecksumRequest
 */
 func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksum(ctx context.Context, moid string) ApiPatchHyperflexHealthCheckPackageChecksumRequest {
 	return ApiPatchHyperflexHealthCheckPackageChecksumRequest{
@@ -44451,7 +44641,8 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksum(ctx conte
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckPackageChecksum
+//
+//	@return HyperflexHealthCheckPackageChecksum
 func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksumExecute(r ApiPatchHyperflexHealthCheckPackageChecksumRequest) (*HyperflexHealthCheckPackageChecksum, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -44613,9 +44804,9 @@ func (r ApiPatchHyperflexHxdpVersionRequest) Execute() (*HyperflexHxdpVersion, *
 /*
 PatchHyperflexHxdpVersion Update a 'hyperflex.HxdpVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexHxdpVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexHxdpVersionRequest
 */
 func (a *HyperflexApiService) PatchHyperflexHxdpVersion(ctx context.Context, moid string) ApiPatchHyperflexHxdpVersionRequest {
 	return ApiPatchHyperflexHxdpVersionRequest{
@@ -44626,7 +44817,8 @@ func (a *HyperflexApiService) PatchHyperflexHxdpVersion(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HyperflexHxdpVersion
+//
+//	@return HyperflexHxdpVersion
 func (a *HyperflexApiService) PatchHyperflexHxdpVersionExecute(r ApiPatchHyperflexHxdpVersionRequest) (*HyperflexHxdpVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -44788,9 +44980,9 @@ func (r ApiPatchHyperflexHypervisorHostRequest) Execute() (*HyperflexHypervisorH
 /*
 PatchHyperflexHypervisorHost Update a 'hyperflex.HypervisorHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexHypervisorHostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexHypervisorHostRequest
 */
 func (a *HyperflexApiService) PatchHyperflexHypervisorHost(ctx context.Context, moid string) ApiPatchHyperflexHypervisorHostRequest {
 	return ApiPatchHyperflexHypervisorHostRequest{
@@ -44801,7 +44993,8 @@ func (a *HyperflexApiService) PatchHyperflexHypervisorHost(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorHost
+//
+//	@return HyperflexHypervisorHost
 func (a *HyperflexApiService) PatchHyperflexHypervisorHostExecute(r ApiPatchHyperflexHypervisorHostRequest) (*HyperflexHypervisorHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -44963,9 +45156,9 @@ func (r ApiPatchHyperflexHypervisorVirtualMachineRequest) Execute() (*HyperflexH
 /*
 PatchHyperflexHypervisorVirtualMachine Update a 'hyperflex.HypervisorVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexHypervisorVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexHypervisorVirtualMachineRequest
 */
 func (a *HyperflexApiService) PatchHyperflexHypervisorVirtualMachine(ctx context.Context, moid string) ApiPatchHyperflexHypervisorVirtualMachineRequest {
 	return ApiPatchHyperflexHypervisorVirtualMachineRequest{
@@ -44976,7 +45169,8 @@ func (a *HyperflexApiService) PatchHyperflexHypervisorVirtualMachine(ctx context
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorVirtualMachine
+//
+//	@return HyperflexHypervisorVirtualMachine
 func (a *HyperflexApiService) PatchHyperflexHypervisorVirtualMachineExecute(r ApiPatchHyperflexHypervisorVirtualMachineRequest) (*HyperflexHypervisorVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -45138,9 +45332,9 @@ func (r ApiPatchHyperflexInitiatorGroupRequest) Execute() (*HyperflexInitiatorGr
 /*
 PatchHyperflexInitiatorGroup Update a 'hyperflex.InitiatorGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexInitiatorGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexInitiatorGroupRequest
 */
 func (a *HyperflexApiService) PatchHyperflexInitiatorGroup(ctx context.Context, moid string) ApiPatchHyperflexInitiatorGroupRequest {
 	return ApiPatchHyperflexInitiatorGroupRequest{
@@ -45151,7 +45345,8 @@ func (a *HyperflexApiService) PatchHyperflexInitiatorGroup(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return HyperflexInitiatorGroup
+//
+//	@return HyperflexInitiatorGroup
 func (a *HyperflexApiService) PatchHyperflexInitiatorGroupExecute(r ApiPatchHyperflexInitiatorGroupRequest) (*HyperflexInitiatorGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -45313,9 +45508,9 @@ func (r ApiPatchHyperflexIscsiNetworkRequest) Execute() (*HyperflexIscsiNetwork,
 /*
 PatchHyperflexIscsiNetwork Update a 'hyperflex.IscsiNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexIscsiNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexIscsiNetworkRequest
 */
 func (a *HyperflexApiService) PatchHyperflexIscsiNetwork(ctx context.Context, moid string) ApiPatchHyperflexIscsiNetworkRequest {
 	return ApiPatchHyperflexIscsiNetworkRequest{
@@ -45326,7 +45521,8 @@ func (a *HyperflexApiService) PatchHyperflexIscsiNetwork(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return HyperflexIscsiNetwork
+//
+//	@return HyperflexIscsiNetwork
 func (a *HyperflexApiService) PatchHyperflexIscsiNetworkExecute(r ApiPatchHyperflexIscsiNetworkRequest) (*HyperflexIscsiNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -45488,9 +45684,9 @@ func (r ApiPatchHyperflexKeyEncryptionKeyRequest) Execute() (*HyperflexKeyEncryp
 /*
 PatchHyperflexKeyEncryptionKey Update a 'hyperflex.KeyEncryptionKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexKeyEncryptionKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexKeyEncryptionKeyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexKeyEncryptionKey(ctx context.Context, moid string) ApiPatchHyperflexKeyEncryptionKeyRequest {
 	return ApiPatchHyperflexKeyEncryptionKeyRequest{
@@ -45501,7 +45697,8 @@ func (a *HyperflexApiService) PatchHyperflexKeyEncryptionKey(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexKeyEncryptionKey
+//
+//	@return HyperflexKeyEncryptionKey
 func (a *HyperflexApiService) PatchHyperflexKeyEncryptionKeyExecute(r ApiPatchHyperflexKeyEncryptionKeyRequest) (*HyperflexKeyEncryptionKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -45663,9 +45860,9 @@ func (r ApiPatchHyperflexLocalCredentialPolicyRequest) Execute() (*HyperflexLoca
 /*
 PatchHyperflexLocalCredentialPolicy Update a 'hyperflex.LocalCredentialPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexLocalCredentialPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexLocalCredentialPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicy(ctx context.Context, moid string) ApiPatchHyperflexLocalCredentialPolicyRequest {
 	return ApiPatchHyperflexLocalCredentialPolicyRequest{
@@ -45676,7 +45873,8 @@ func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexLocalCredentialPolicy
+//
+//	@return HyperflexLocalCredentialPolicy
 func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicyExecute(r ApiPatchHyperflexLocalCredentialPolicyRequest) (*HyperflexLocalCredentialPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -45838,9 +46036,9 @@ func (r ApiPatchHyperflexLunRequest) Execute() (*HyperflexLun, *http.Response, e
 /*
 PatchHyperflexLun Update a 'hyperflex.Lun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexLunRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexLunRequest
 */
 func (a *HyperflexApiService) PatchHyperflexLun(ctx context.Context, moid string) ApiPatchHyperflexLunRequest {
 	return ApiPatchHyperflexLunRequest{
@@ -45851,7 +46049,8 @@ func (a *HyperflexApiService) PatchHyperflexLun(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return HyperflexLun
+//
+//	@return HyperflexLun
 func (a *HyperflexApiService) PatchHyperflexLunExecute(r ApiPatchHyperflexLunRequest) (*HyperflexLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -46013,9 +46212,9 @@ func (r ApiPatchHyperflexNodeConfigPolicyRequest) Execute() (*HyperflexNodeConfi
 /*
 PatchHyperflexNodeConfigPolicy Update a 'hyperflex.NodeConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexNodeConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexNodeConfigPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicy(ctx context.Context, moid string) ApiPatchHyperflexNodeConfigPolicyRequest {
 	return ApiPatchHyperflexNodeConfigPolicyRequest{
@@ -46026,7 +46225,8 @@ func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexNodeConfigPolicy
+//
+//	@return HyperflexNodeConfigPolicy
 func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicyExecute(r ApiPatchHyperflexNodeConfigPolicyRequest) (*HyperflexNodeConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -46188,9 +46388,9 @@ func (r ApiPatchHyperflexNodeProfileRequest) Execute() (*HyperflexNodeProfile, *
 /*
 PatchHyperflexNodeProfile Update a 'hyperflex.NodeProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexNodeProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexNodeProfileRequest
 */
 func (a *HyperflexApiService) PatchHyperflexNodeProfile(ctx context.Context, moid string) ApiPatchHyperflexNodeProfileRequest {
 	return ApiPatchHyperflexNodeProfileRequest{
@@ -46201,7 +46401,8 @@ func (a *HyperflexApiService) PatchHyperflexNodeProfile(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HyperflexNodeProfile
+//
+//	@return HyperflexNodeProfile
 func (a *HyperflexApiService) PatchHyperflexNodeProfileExecute(r ApiPatchHyperflexNodeProfileRequest) (*HyperflexNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -46363,9 +46564,9 @@ func (r ApiPatchHyperflexProxySettingPolicyRequest) Execute() (*HyperflexProxySe
 /*
 PatchHyperflexProxySettingPolicy Update a 'hyperflex.ProxySettingPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexProxySettingPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexProxySettingPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexProxySettingPolicy(ctx context.Context, moid string) ApiPatchHyperflexProxySettingPolicyRequest {
 	return ApiPatchHyperflexProxySettingPolicyRequest{
@@ -46376,7 +46577,8 @@ func (a *HyperflexApiService) PatchHyperflexProxySettingPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexProxySettingPolicy
+//
+//	@return HyperflexProxySettingPolicy
 func (a *HyperflexApiService) PatchHyperflexProxySettingPolicyExecute(r ApiPatchHyperflexProxySettingPolicyRequest) (*HyperflexProxySettingPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -46538,9 +46740,9 @@ func (r ApiPatchHyperflexReduceReSyncRequest) Execute() (*HyperflexReduceReSync,
 /*
 PatchHyperflexReduceReSync Update a 'hyperflex.ReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexReduceReSyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexReduceReSyncRequest
 */
 func (a *HyperflexApiService) PatchHyperflexReduceReSync(ctx context.Context, moid string) ApiPatchHyperflexReduceReSyncRequest {
 	return ApiPatchHyperflexReduceReSyncRequest{
@@ -46551,7 +46753,8 @@ func (a *HyperflexApiService) PatchHyperflexReduceReSync(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return HyperflexReduceReSync
+//
+//	@return HyperflexReduceReSync
 func (a *HyperflexApiService) PatchHyperflexReduceReSyncExecute(r ApiPatchHyperflexReduceReSyncRequest) (*HyperflexReduceReSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -46713,9 +46916,9 @@ func (r ApiPatchHyperflexServerFirmwareVersionRequest) Execute() (*HyperflexServ
 /*
 PatchHyperflexServerFirmwareVersion Update a 'hyperflex.ServerFirmwareVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexServerFirmwareVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexServerFirmwareVersionRequest
 */
 func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersion(ctx context.Context, moid string) ApiPatchHyperflexServerFirmwareVersionRequest {
 	return ApiPatchHyperflexServerFirmwareVersionRequest{
@@ -46726,7 +46929,8 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersion(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersion
+//
+//	@return HyperflexServerFirmwareVersion
 func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionExecute(r ApiPatchHyperflexServerFirmwareVersionRequest) (*HyperflexServerFirmwareVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -46888,9 +47092,9 @@ func (r ApiPatchHyperflexServerFirmwareVersionEntryRequest) Execute() (*Hyperfle
 /*
 PatchHyperflexServerFirmwareVersionEntry Update a 'hyperflex.ServerFirmwareVersionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexServerFirmwareVersionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexServerFirmwareVersionEntryRequest
 */
 func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntry(ctx context.Context, moid string) ApiPatchHyperflexServerFirmwareVersionEntryRequest {
 	return ApiPatchHyperflexServerFirmwareVersionEntryRequest{
@@ -46901,7 +47105,8 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntry(ctx conte
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersionEntry
+//
+//	@return HyperflexServerFirmwareVersionEntry
 func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntryExecute(r ApiPatchHyperflexServerFirmwareVersionEntryRequest) (*HyperflexServerFirmwareVersionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -47063,9 +47268,9 @@ func (r ApiPatchHyperflexServerModelRequest) Execute() (*HyperflexServerModel, *
 /*
 PatchHyperflexServerModel Update a 'hyperflex.ServerModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexServerModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexServerModelRequest
 */
 func (a *HyperflexApiService) PatchHyperflexServerModel(ctx context.Context, moid string) ApiPatchHyperflexServerModelRequest {
 	return ApiPatchHyperflexServerModelRequest{
@@ -47076,7 +47281,8 @@ func (a *HyperflexApiService) PatchHyperflexServerModel(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HyperflexServerModel
+//
+//	@return HyperflexServerModel
 func (a *HyperflexApiService) PatchHyperflexServerModelExecute(r ApiPatchHyperflexServerModelRequest) (*HyperflexServerModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -47238,9 +47444,9 @@ func (r ApiPatchHyperflexServiceAuthTokenRequest) Execute() (*HyperflexServiceAu
 /*
 PatchHyperflexServiceAuthToken Update a 'hyperflex.ServiceAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexServiceAuthTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexServiceAuthTokenRequest
 */
 func (a *HyperflexApiService) PatchHyperflexServiceAuthToken(ctx context.Context, moid string) ApiPatchHyperflexServiceAuthTokenRequest {
 	return ApiPatchHyperflexServiceAuthTokenRequest{
@@ -47251,7 +47457,8 @@ func (a *HyperflexApiService) PatchHyperflexServiceAuthToken(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexServiceAuthToken
+//
+//	@return HyperflexServiceAuthToken
 func (a *HyperflexApiService) PatchHyperflexServiceAuthTokenExecute(r ApiPatchHyperflexServiceAuthTokenRequest) (*HyperflexServiceAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -47413,9 +47620,9 @@ func (r ApiPatchHyperflexSoftwareDistributionComponentRequest) Execute() (*Hyper
 /*
 PatchHyperflexSoftwareDistributionComponent Update a 'hyperflex.SoftwareDistributionComponent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexSoftwareDistributionComponentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexSoftwareDistributionComponentRequest
 */
 func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionComponent(ctx context.Context, moid string) ApiPatchHyperflexSoftwareDistributionComponentRequest {
 	return ApiPatchHyperflexSoftwareDistributionComponentRequest{
@@ -47426,7 +47633,8 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionComponent(ctx co
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionComponent
+//
+//	@return HyperflexSoftwareDistributionComponent
 func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionComponentExecute(r ApiPatchHyperflexSoftwareDistributionComponentRequest) (*HyperflexSoftwareDistributionComponent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -47588,9 +47796,9 @@ func (r ApiPatchHyperflexSoftwareDistributionEntryRequest) Execute() (*Hyperflex
 /*
 PatchHyperflexSoftwareDistributionEntry Update a 'hyperflex.SoftwareDistributionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexSoftwareDistributionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexSoftwareDistributionEntryRequest
 */
 func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionEntry(ctx context.Context, moid string) ApiPatchHyperflexSoftwareDistributionEntryRequest {
 	return ApiPatchHyperflexSoftwareDistributionEntryRequest{
@@ -47601,7 +47809,8 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionEntry(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionEntry
+//
+//	@return HyperflexSoftwareDistributionEntry
 func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionEntryExecute(r ApiPatchHyperflexSoftwareDistributionEntryRequest) (*HyperflexSoftwareDistributionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -47763,9 +47972,9 @@ func (r ApiPatchHyperflexSoftwareDistributionVersionRequest) Execute() (*Hyperfl
 /*
 PatchHyperflexSoftwareDistributionVersion Update a 'hyperflex.SoftwareDistributionVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexSoftwareDistributionVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexSoftwareDistributionVersionRequest
 */
 func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionVersion(ctx context.Context, moid string) ApiPatchHyperflexSoftwareDistributionVersionRequest {
 	return ApiPatchHyperflexSoftwareDistributionVersionRequest{
@@ -47776,7 +47985,8 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionVersion(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionVersion
+//
+//	@return HyperflexSoftwareDistributionVersion
 func (a *HyperflexApiService) PatchHyperflexSoftwareDistributionVersionExecute(r ApiPatchHyperflexSoftwareDistributionVersionRequest) (*HyperflexSoftwareDistributionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -47938,9 +48148,9 @@ func (r ApiPatchHyperflexSoftwareVersionPolicyRequest) Execute() (*HyperflexSoft
 /*
 PatchHyperflexSoftwareVersionPolicy Update a 'hyperflex.SoftwareVersionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexSoftwareVersionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexSoftwareVersionPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicy(ctx context.Context, moid string) ApiPatchHyperflexSoftwareVersionPolicyRequest {
 	return ApiPatchHyperflexSoftwareVersionPolicyRequest{
@@ -47951,7 +48161,8 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareVersionPolicy
+//
+//	@return HyperflexSoftwareVersionPolicy
 func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicyExecute(r ApiPatchHyperflexSoftwareVersionPolicyRequest) (*HyperflexSoftwareVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -48113,9 +48324,9 @@ func (r ApiPatchHyperflexStorageContainerRequest) Execute() (*HyperflexStorageCo
 /*
 PatchHyperflexStorageContainer Update a 'hyperflex.StorageContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexStorageContainerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexStorageContainerRequest
 */
 func (a *HyperflexApiService) PatchHyperflexStorageContainer(ctx context.Context, moid string) ApiPatchHyperflexStorageContainerRequest {
 	return ApiPatchHyperflexStorageContainerRequest{
@@ -48126,7 +48337,8 @@ func (a *HyperflexApiService) PatchHyperflexStorageContainer(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexStorageContainer
+//
+//	@return HyperflexStorageContainer
 func (a *HyperflexApiService) PatchHyperflexStorageContainerExecute(r ApiPatchHyperflexStorageContainerRequest) (*HyperflexStorageContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -48288,9 +48500,9 @@ func (r ApiPatchHyperflexSysConfigPolicyRequest) Execute() (*HyperflexSysConfigP
 /*
 PatchHyperflexSysConfigPolicy Update a 'hyperflex.SysConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexSysConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexSysConfigPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexSysConfigPolicy(ctx context.Context, moid string) ApiPatchHyperflexSysConfigPolicyRequest {
 	return ApiPatchHyperflexSysConfigPolicyRequest{
@@ -48301,7 +48513,8 @@ func (a *HyperflexApiService) PatchHyperflexSysConfigPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexSysConfigPolicy
+//
+//	@return HyperflexSysConfigPolicy
 func (a *HyperflexApiService) PatchHyperflexSysConfigPolicyExecute(r ApiPatchHyperflexSysConfigPolicyRequest) (*HyperflexSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -48463,9 +48676,9 @@ func (r ApiPatchHyperflexTargetRequest) Execute() (*HyperflexTarget, *http.Respo
 /*
 PatchHyperflexTarget Update a 'hyperflex.Target' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexTargetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexTargetRequest
 */
 func (a *HyperflexApiService) PatchHyperflexTarget(ctx context.Context, moid string) ApiPatchHyperflexTargetRequest {
 	return ApiPatchHyperflexTargetRequest{
@@ -48476,7 +48689,8 @@ func (a *HyperflexApiService) PatchHyperflexTarget(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return HyperflexTarget
+//
+//	@return HyperflexTarget
 func (a *HyperflexApiService) PatchHyperflexTargetExecute(r ApiPatchHyperflexTargetRequest) (*HyperflexTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -48638,9 +48852,9 @@ func (r ApiPatchHyperflexUcsmConfigPolicyRequest) Execute() (*HyperflexUcsmConfi
 /*
 PatchHyperflexUcsmConfigPolicy Update a 'hyperflex.UcsmConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexUcsmConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexUcsmConfigPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicy(ctx context.Context, moid string) ApiPatchHyperflexUcsmConfigPolicyRequest {
 	return ApiPatchHyperflexUcsmConfigPolicyRequest{
@@ -48651,7 +48865,8 @@ func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexUcsmConfigPolicy
+//
+//	@return HyperflexUcsmConfigPolicy
 func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicyExecute(r ApiPatchHyperflexUcsmConfigPolicyRequest) (*HyperflexUcsmConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -48813,9 +49028,9 @@ func (r ApiPatchHyperflexVcenterConfigPolicyRequest) Execute() (*HyperflexVcente
 /*
 PatchHyperflexVcenterConfigPolicy Update a 'hyperflex.VcenterConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexVcenterConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexVcenterConfigPolicyRequest
 */
 func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicy(ctx context.Context, moid string) ApiPatchHyperflexVcenterConfigPolicyRequest {
 	return ApiPatchHyperflexVcenterConfigPolicyRequest{
@@ -48826,7 +49041,8 @@ func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexVcenterConfigPolicy
+//
+//	@return HyperflexVcenterConfigPolicy
 func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicyExecute(r ApiPatchHyperflexVcenterConfigPolicyRequest) (*HyperflexVcenterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -48988,9 +49204,9 @@ func (r ApiPatchHyperflexVolumeRequest) Execute() (*HyperflexVolume, *http.Respo
 /*
 PatchHyperflexVolume Update a 'hyperflex.Volume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHyperflexVolumeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHyperflexVolumeRequest
 */
 func (a *HyperflexApiService) PatchHyperflexVolume(ctx context.Context, moid string) ApiPatchHyperflexVolumeRequest {
 	return ApiPatchHyperflexVolumeRequest{
@@ -49001,7 +49217,8 @@ func (a *HyperflexApiService) PatchHyperflexVolume(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return HyperflexVolume
+//
+//	@return HyperflexVolume
 func (a *HyperflexApiService) PatchHyperflexVolumeExecute(r ApiPatchHyperflexVolumeRequest) (*HyperflexVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -49163,9 +49380,9 @@ func (r ApiUpdateHyperflexAppCatalogRequest) Execute() (*HyperflexAppCatalog, *h
 /*
 UpdateHyperflexAppCatalog Update a 'hyperflex.AppCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexAppCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexAppCatalogRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexAppCatalog(ctx context.Context, moid string) ApiUpdateHyperflexAppCatalogRequest {
 	return ApiUpdateHyperflexAppCatalogRequest{
@@ -49176,7 +49393,8 @@ func (a *HyperflexApiService) UpdateHyperflexAppCatalog(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HyperflexAppCatalog
+//
+//	@return HyperflexAppCatalog
 func (a *HyperflexApiService) UpdateHyperflexAppCatalogExecute(r ApiUpdateHyperflexAppCatalogRequest) (*HyperflexAppCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -49338,9 +49556,9 @@ func (r ApiUpdateHyperflexAutoSupportPolicyRequest) Execute() (*HyperflexAutoSup
 /*
 UpdateHyperflexAutoSupportPolicy Update a 'hyperflex.AutoSupportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexAutoSupportPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexAutoSupportPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicy(ctx context.Context, moid string) ApiUpdateHyperflexAutoSupportPolicyRequest {
 	return ApiUpdateHyperflexAutoSupportPolicyRequest{
@@ -49351,7 +49569,8 @@ func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return HyperflexAutoSupportPolicy
+//
+//	@return HyperflexAutoSupportPolicy
 func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicyExecute(r ApiUpdateHyperflexAutoSupportPolicyRequest) (*HyperflexAutoSupportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -49513,9 +49732,9 @@ func (r ApiUpdateHyperflexCapabilityInfoRequest) Execute() (*HyperflexCapability
 /*
 UpdateHyperflexCapabilityInfo Update a 'hyperflex.CapabilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexCapabilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexCapabilityInfoRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexCapabilityInfo(ctx context.Context, moid string) ApiUpdateHyperflexCapabilityInfoRequest {
 	return ApiUpdateHyperflexCapabilityInfoRequest{
@@ -49526,7 +49745,8 @@ func (a *HyperflexApiService) UpdateHyperflexCapabilityInfo(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexCapabilityInfo
+//
+//	@return HyperflexCapabilityInfo
 func (a *HyperflexApiService) UpdateHyperflexCapabilityInfoExecute(r ApiUpdateHyperflexCapabilityInfoRequest) (*HyperflexCapabilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -49688,9 +49908,9 @@ func (r ApiUpdateHyperflexClusterRequest) Execute() (*HyperflexCluster, *http.Re
 /*
 UpdateHyperflexCluster Update a 'hyperflex.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexCluster(ctx context.Context, moid string) ApiUpdateHyperflexClusterRequest {
 	return ApiUpdateHyperflexClusterRequest{
@@ -49701,7 +49921,8 @@ func (a *HyperflexApiService) UpdateHyperflexCluster(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return HyperflexCluster
+//
+//	@return HyperflexCluster
 func (a *HyperflexApiService) UpdateHyperflexClusterExecute(r ApiUpdateHyperflexClusterRequest) (*HyperflexCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -49863,9 +50084,9 @@ func (r ApiUpdateHyperflexClusterBackupPolicyRequest) Execute() (*HyperflexClust
 /*
 UpdateHyperflexClusterBackupPolicy Update a 'hyperflex.ClusterBackupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterBackupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterBackupPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicy(ctx context.Context, moid string) ApiUpdateHyperflexClusterBackupPolicyRequest {
 	return ApiUpdateHyperflexClusterBackupPolicyRequest{
@@ -49876,7 +50097,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicy
+//
+//	@return HyperflexClusterBackupPolicy
 func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyExecute(r ApiUpdateHyperflexClusterBackupPolicyRequest) (*HyperflexClusterBackupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -50038,9 +50260,9 @@ func (r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) Execute() (*Hype
 /*
 UpdateHyperflexClusterBackupPolicyDeployment Update a 'hyperflex.ClusterBackupPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeployment(ctx context.Context, moid string) ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest {
 	return ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest{
@@ -50051,7 +50273,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeployment(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexClusterBackupPolicyDeployment
+//
+//	@return HyperflexClusterBackupPolicyDeployment
 func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeploymentExecute(r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) (*HyperflexClusterBackupPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -50213,9 +50436,9 @@ func (r ApiUpdateHyperflexClusterNetworkPolicyRequest) Execute() (*HyperflexClus
 /*
 UpdateHyperflexClusterNetworkPolicy Update a 'hyperflex.ClusterNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterNetworkPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicy(ctx context.Context, moid string) ApiUpdateHyperflexClusterNetworkPolicyRequest {
 	return ApiUpdateHyperflexClusterNetworkPolicyRequest{
@@ -50226,7 +50449,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexClusterNetworkPolicy
+//
+//	@return HyperflexClusterNetworkPolicy
 func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicyExecute(r ApiUpdateHyperflexClusterNetworkPolicyRequest) (*HyperflexClusterNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -50388,9 +50612,9 @@ func (r ApiUpdateHyperflexClusterProfileRequest) Execute() (*HyperflexClusterPro
 /*
 UpdateHyperflexClusterProfile Update a 'hyperflex.ClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterProfileRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterProfile(ctx context.Context, moid string) ApiUpdateHyperflexClusterProfileRequest {
 	return ApiUpdateHyperflexClusterProfileRequest{
@@ -50401,7 +50625,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterProfile(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexClusterProfile
+//
+//	@return HyperflexClusterProfile
 func (a *HyperflexApiService) UpdateHyperflexClusterProfileExecute(r ApiUpdateHyperflexClusterProfileRequest) (*HyperflexClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -50563,9 +50788,9 @@ func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) Execute() (*Hy
 /*
 UpdateHyperflexClusterReplicationNetworkPolicy Update a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicy(ctx context.Context, moid string) ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest {
 	return ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest{
@@ -50576,7 +50801,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicy(ctx
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicy
+//
+//	@return HyperflexClusterReplicationNetworkPolicy
 func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyExecute(r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) (*HyperflexClusterReplicationNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -50738,9 +50964,9 @@ func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Exec
 /*
 UpdateHyperflexClusterReplicationNetworkPolicyDeployment Update a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDeployment(ctx context.Context, moid string) ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest {
 	return ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest{
@@ -50751,7 +50977,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDepl
 }
 
 // Execute executes the request
-//  @return HyperflexClusterReplicationNetworkPolicyDeployment
+//
+//	@return HyperflexClusterReplicationNetworkPolicyDeployment
 func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (*HyperflexClusterReplicationNetworkPolicyDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -50913,9 +51140,9 @@ func (r ApiUpdateHyperflexClusterStoragePolicyRequest) Execute() (*HyperflexClus
 /*
 UpdateHyperflexClusterStoragePolicy Update a 'hyperflex.ClusterStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexClusterStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexClusterStoragePolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicy(ctx context.Context, moid string) ApiUpdateHyperflexClusterStoragePolicyRequest {
 	return ApiUpdateHyperflexClusterStoragePolicyRequest{
@@ -50926,7 +51153,8 @@ func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicy(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexClusterStoragePolicy
+//
+//	@return HyperflexClusterStoragePolicy
 func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicyExecute(r ApiUpdateHyperflexClusterStoragePolicyRequest) (*HyperflexClusterStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -51088,9 +51316,9 @@ func (r ApiUpdateHyperflexDriveRequest) Execute() (*HyperflexDrive, *http.Respon
 /*
 UpdateHyperflexDrive Update a 'hyperflex.Drive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexDriveRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexDrive(ctx context.Context, moid string) ApiUpdateHyperflexDriveRequest {
 	return ApiUpdateHyperflexDriveRequest{
@@ -51101,7 +51329,8 @@ func (a *HyperflexApiService) UpdateHyperflexDrive(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return HyperflexDrive
+//
+//	@return HyperflexDrive
 func (a *HyperflexApiService) UpdateHyperflexDriveExecute(r ApiUpdateHyperflexDriveRequest) (*HyperflexDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -51263,9 +51492,9 @@ func (r ApiUpdateHyperflexExtFcStoragePolicyRequest) Execute() (*HyperflexExtFcS
 /*
 UpdateHyperflexExtFcStoragePolicy Update a 'hyperflex.ExtFcStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexExtFcStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexExtFcStoragePolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicy(ctx context.Context, moid string) ApiUpdateHyperflexExtFcStoragePolicyRequest {
 	return ApiUpdateHyperflexExtFcStoragePolicyRequest{
@@ -51276,7 +51505,8 @@ func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexExtFcStoragePolicy
+//
+//	@return HyperflexExtFcStoragePolicy
 func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicyExecute(r ApiUpdateHyperflexExtFcStoragePolicyRequest) (*HyperflexExtFcStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -51438,9 +51668,9 @@ func (r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) Execute() (*HyperflexExt
 /*
 UpdateHyperflexExtIscsiStoragePolicy Update a 'hyperflex.ExtIscsiStoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexExtIscsiStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexExtIscsiStoragePolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicy(ctx context.Context, moid string) ApiUpdateHyperflexExtIscsiStoragePolicyRequest {
 	return ApiUpdateHyperflexExtIscsiStoragePolicyRequest{
@@ -51451,7 +51681,8 @@ func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicy(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexExtIscsiStoragePolicy
+//
+//	@return HyperflexExtIscsiStoragePolicy
 func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicyExecute(r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) (*HyperflexExtIscsiStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -51613,9 +51844,9 @@ func (r ApiUpdateHyperflexFeatureLimitExternalRequest) Execute() (*HyperflexFeat
 /*
 UpdateHyperflexFeatureLimitExternal Update a 'hyperflex.FeatureLimitExternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexFeatureLimitExternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexFeatureLimitExternalRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternal(ctx context.Context, moid string) ApiUpdateHyperflexFeatureLimitExternalRequest {
 	return ApiUpdateHyperflexFeatureLimitExternalRequest{
@@ -51626,7 +51857,8 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternal(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitExternal
+//
+//	@return HyperflexFeatureLimitExternal
 func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternalExecute(r ApiUpdateHyperflexFeatureLimitExternalRequest) (*HyperflexFeatureLimitExternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -51788,9 +52020,9 @@ func (r ApiUpdateHyperflexFeatureLimitInternalRequest) Execute() (*HyperflexFeat
 /*
 UpdateHyperflexFeatureLimitInternal Update a 'hyperflex.FeatureLimitInternal' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexFeatureLimitInternalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexFeatureLimitInternalRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternal(ctx context.Context, moid string) ApiUpdateHyperflexFeatureLimitInternalRequest {
 	return ApiUpdateHyperflexFeatureLimitInternalRequest{
@@ -51801,7 +52033,8 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternal(ctx context.Co
 }
 
 // Execute executes the request
-//  @return HyperflexFeatureLimitInternal
+//
+//	@return HyperflexFeatureLimitInternal
 func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternalExecute(r ApiUpdateHyperflexFeatureLimitInternalRequest) (*HyperflexFeatureLimitInternal, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -51963,9 +52196,9 @@ func (r ApiUpdateHyperflexHealthCheckDefinitionRequest) Execute() (*HyperflexHea
 /*
 UpdateHyperflexHealthCheckDefinition Update a 'hyperflex.HealthCheckDefinition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexHealthCheckDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexHealthCheckDefinitionRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinition(ctx context.Context, moid string) ApiUpdateHyperflexHealthCheckDefinitionRequest {
 	return ApiUpdateHyperflexHealthCheckDefinitionRequest{
@@ -51976,7 +52209,8 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinition(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckDefinition
+//
+//	@return HyperflexHealthCheckDefinition
 func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinitionExecute(r ApiUpdateHyperflexHealthCheckDefinitionRequest) (*HyperflexHealthCheckDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -52138,9 +52372,9 @@ func (r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) Execute() (*Hyperfl
 /*
 UpdateHyperflexHealthCheckPackageChecksum Update a 'hyperflex.HealthCheckPackageChecksum' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexHealthCheckPackageChecksumRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexHealthCheckPackageChecksumRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksum(ctx context.Context, moid string) ApiUpdateHyperflexHealthCheckPackageChecksumRequest {
 	return ApiUpdateHyperflexHealthCheckPackageChecksumRequest{
@@ -52151,7 +52385,8 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksum(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexHealthCheckPackageChecksum
+//
+//	@return HyperflexHealthCheckPackageChecksum
 func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksumExecute(r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) (*HyperflexHealthCheckPackageChecksum, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -52313,9 +52548,9 @@ func (r ApiUpdateHyperflexHxdpVersionRequest) Execute() (*HyperflexHxdpVersion, 
 /*
 UpdateHyperflexHxdpVersion Update a 'hyperflex.HxdpVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexHxdpVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexHxdpVersionRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexHxdpVersion(ctx context.Context, moid string) ApiUpdateHyperflexHxdpVersionRequest {
 	return ApiUpdateHyperflexHxdpVersionRequest{
@@ -52326,7 +52561,8 @@ func (a *HyperflexApiService) UpdateHyperflexHxdpVersion(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return HyperflexHxdpVersion
+//
+//	@return HyperflexHxdpVersion
 func (a *HyperflexApiService) UpdateHyperflexHxdpVersionExecute(r ApiUpdateHyperflexHxdpVersionRequest) (*HyperflexHxdpVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -52488,9 +52724,9 @@ func (r ApiUpdateHyperflexHypervisorHostRequest) Execute() (*HyperflexHypervisor
 /*
 UpdateHyperflexHypervisorHost Update a 'hyperflex.HypervisorHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexHypervisorHostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexHypervisorHostRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexHypervisorHost(ctx context.Context, moid string) ApiUpdateHyperflexHypervisorHostRequest {
 	return ApiUpdateHyperflexHypervisorHostRequest{
@@ -52501,7 +52737,8 @@ func (a *HyperflexApiService) UpdateHyperflexHypervisorHost(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorHost
+//
+//	@return HyperflexHypervisorHost
 func (a *HyperflexApiService) UpdateHyperflexHypervisorHostExecute(r ApiUpdateHyperflexHypervisorHostRequest) (*HyperflexHypervisorHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -52663,9 +52900,9 @@ func (r ApiUpdateHyperflexHypervisorVirtualMachineRequest) Execute() (*Hyperflex
 /*
 UpdateHyperflexHypervisorVirtualMachine Update a 'hyperflex.HypervisorVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexHypervisorVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexHypervisorVirtualMachineRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexHypervisorVirtualMachine(ctx context.Context, moid string) ApiUpdateHyperflexHypervisorVirtualMachineRequest {
 	return ApiUpdateHyperflexHypervisorVirtualMachineRequest{
@@ -52676,7 +52913,8 @@ func (a *HyperflexApiService) UpdateHyperflexHypervisorVirtualMachine(ctx contex
 }
 
 // Execute executes the request
-//  @return HyperflexHypervisorVirtualMachine
+//
+//	@return HyperflexHypervisorVirtualMachine
 func (a *HyperflexApiService) UpdateHyperflexHypervisorVirtualMachineExecute(r ApiUpdateHyperflexHypervisorVirtualMachineRequest) (*HyperflexHypervisorVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -52838,9 +53076,9 @@ func (r ApiUpdateHyperflexInitiatorGroupRequest) Execute() (*HyperflexInitiatorG
 /*
 UpdateHyperflexInitiatorGroup Update a 'hyperflex.InitiatorGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexInitiatorGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexInitiatorGroupRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexInitiatorGroup(ctx context.Context, moid string) ApiUpdateHyperflexInitiatorGroupRequest {
 	return ApiUpdateHyperflexInitiatorGroupRequest{
@@ -52851,7 +53089,8 @@ func (a *HyperflexApiService) UpdateHyperflexInitiatorGroup(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return HyperflexInitiatorGroup
+//
+//	@return HyperflexInitiatorGroup
 func (a *HyperflexApiService) UpdateHyperflexInitiatorGroupExecute(r ApiUpdateHyperflexInitiatorGroupRequest) (*HyperflexInitiatorGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -53013,9 +53252,9 @@ func (r ApiUpdateHyperflexIscsiNetworkRequest) Execute() (*HyperflexIscsiNetwork
 /*
 UpdateHyperflexIscsiNetwork Update a 'hyperflex.IscsiNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexIscsiNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexIscsiNetworkRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexIscsiNetwork(ctx context.Context, moid string) ApiUpdateHyperflexIscsiNetworkRequest {
 	return ApiUpdateHyperflexIscsiNetworkRequest{
@@ -53026,7 +53265,8 @@ func (a *HyperflexApiService) UpdateHyperflexIscsiNetwork(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return HyperflexIscsiNetwork
+//
+//	@return HyperflexIscsiNetwork
 func (a *HyperflexApiService) UpdateHyperflexIscsiNetworkExecute(r ApiUpdateHyperflexIscsiNetworkRequest) (*HyperflexIscsiNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -53188,9 +53428,9 @@ func (r ApiUpdateHyperflexKeyEncryptionKeyRequest) Execute() (*HyperflexKeyEncry
 /*
 UpdateHyperflexKeyEncryptionKey Update a 'hyperflex.KeyEncryptionKey' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexKeyEncryptionKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexKeyEncryptionKeyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexKeyEncryptionKey(ctx context.Context, moid string) ApiUpdateHyperflexKeyEncryptionKeyRequest {
 	return ApiUpdateHyperflexKeyEncryptionKeyRequest{
@@ -53201,7 +53441,8 @@ func (a *HyperflexApiService) UpdateHyperflexKeyEncryptionKey(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexKeyEncryptionKey
+//
+//	@return HyperflexKeyEncryptionKey
 func (a *HyperflexApiService) UpdateHyperflexKeyEncryptionKeyExecute(r ApiUpdateHyperflexKeyEncryptionKeyRequest) (*HyperflexKeyEncryptionKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -53363,9 +53604,9 @@ func (r ApiUpdateHyperflexLocalCredentialPolicyRequest) Execute() (*HyperflexLoc
 /*
 UpdateHyperflexLocalCredentialPolicy Update a 'hyperflex.LocalCredentialPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexLocalCredentialPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexLocalCredentialPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicy(ctx context.Context, moid string) ApiUpdateHyperflexLocalCredentialPolicyRequest {
 	return ApiUpdateHyperflexLocalCredentialPolicyRequest{
@@ -53376,7 +53617,8 @@ func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicy(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexLocalCredentialPolicy
+//
+//	@return HyperflexLocalCredentialPolicy
 func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicyExecute(r ApiUpdateHyperflexLocalCredentialPolicyRequest) (*HyperflexLocalCredentialPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -53538,9 +53780,9 @@ func (r ApiUpdateHyperflexLunRequest) Execute() (*HyperflexLun, *http.Response, 
 /*
 UpdateHyperflexLun Update a 'hyperflex.Lun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexLunRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexLunRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexLun(ctx context.Context, moid string) ApiUpdateHyperflexLunRequest {
 	return ApiUpdateHyperflexLunRequest{
@@ -53551,7 +53793,8 @@ func (a *HyperflexApiService) UpdateHyperflexLun(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return HyperflexLun
+//
+//	@return HyperflexLun
 func (a *HyperflexApiService) UpdateHyperflexLunExecute(r ApiUpdateHyperflexLunRequest) (*HyperflexLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -53713,9 +53956,9 @@ func (r ApiUpdateHyperflexNodeConfigPolicyRequest) Execute() (*HyperflexNodeConf
 /*
 UpdateHyperflexNodeConfigPolicy Update a 'hyperflex.NodeConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexNodeConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexNodeConfigPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicy(ctx context.Context, moid string) ApiUpdateHyperflexNodeConfigPolicyRequest {
 	return ApiUpdateHyperflexNodeConfigPolicyRequest{
@@ -53726,7 +53969,8 @@ func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexNodeConfigPolicy
+//
+//	@return HyperflexNodeConfigPolicy
 func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicyExecute(r ApiUpdateHyperflexNodeConfigPolicyRequest) (*HyperflexNodeConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -53888,9 +54132,9 @@ func (r ApiUpdateHyperflexNodeProfileRequest) Execute() (*HyperflexNodeProfile, 
 /*
 UpdateHyperflexNodeProfile Update a 'hyperflex.NodeProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexNodeProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexNodeProfileRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexNodeProfile(ctx context.Context, moid string) ApiUpdateHyperflexNodeProfileRequest {
 	return ApiUpdateHyperflexNodeProfileRequest{
@@ -53901,7 +54145,8 @@ func (a *HyperflexApiService) UpdateHyperflexNodeProfile(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return HyperflexNodeProfile
+//
+//	@return HyperflexNodeProfile
 func (a *HyperflexApiService) UpdateHyperflexNodeProfileExecute(r ApiUpdateHyperflexNodeProfileRequest) (*HyperflexNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -54063,9 +54308,9 @@ func (r ApiUpdateHyperflexProxySettingPolicyRequest) Execute() (*HyperflexProxyS
 /*
 UpdateHyperflexProxySettingPolicy Update a 'hyperflex.ProxySettingPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexProxySettingPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexProxySettingPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicy(ctx context.Context, moid string) ApiUpdateHyperflexProxySettingPolicyRequest {
 	return ApiUpdateHyperflexProxySettingPolicyRequest{
@@ -54076,7 +54321,8 @@ func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicy(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return HyperflexProxySettingPolicy
+//
+//	@return HyperflexProxySettingPolicy
 func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicyExecute(r ApiUpdateHyperflexProxySettingPolicyRequest) (*HyperflexProxySettingPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -54238,9 +54484,9 @@ func (r ApiUpdateHyperflexReduceReSyncRequest) Execute() (*HyperflexReduceReSync
 /*
 UpdateHyperflexReduceReSync Update a 'hyperflex.ReduceReSync' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexReduceReSyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexReduceReSyncRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexReduceReSync(ctx context.Context, moid string) ApiUpdateHyperflexReduceReSyncRequest {
 	return ApiUpdateHyperflexReduceReSyncRequest{
@@ -54251,7 +54497,8 @@ func (a *HyperflexApiService) UpdateHyperflexReduceReSync(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return HyperflexReduceReSync
+//
+//	@return HyperflexReduceReSync
 func (a *HyperflexApiService) UpdateHyperflexReduceReSyncExecute(r ApiUpdateHyperflexReduceReSyncRequest) (*HyperflexReduceReSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -54413,9 +54660,9 @@ func (r ApiUpdateHyperflexServerFirmwareVersionRequest) Execute() (*HyperflexSer
 /*
 UpdateHyperflexServerFirmwareVersion Update a 'hyperflex.ServerFirmwareVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexServerFirmwareVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexServerFirmwareVersionRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersion(ctx context.Context, moid string) ApiUpdateHyperflexServerFirmwareVersionRequest {
 	return ApiUpdateHyperflexServerFirmwareVersionRequest{
@@ -54426,7 +54673,8 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersion(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersion
+//
+//	@return HyperflexServerFirmwareVersion
 func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionExecute(r ApiUpdateHyperflexServerFirmwareVersionRequest) (*HyperflexServerFirmwareVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -54588,9 +54836,9 @@ func (r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) Execute() (*Hyperfl
 /*
 UpdateHyperflexServerFirmwareVersionEntry Update a 'hyperflex.ServerFirmwareVersionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexServerFirmwareVersionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexServerFirmwareVersionEntryRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntry(ctx context.Context, moid string) ApiUpdateHyperflexServerFirmwareVersionEntryRequest {
 	return ApiUpdateHyperflexServerFirmwareVersionEntryRequest{
@@ -54601,7 +54849,8 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntry(ctx cont
 }
 
 // Execute executes the request
-//  @return HyperflexServerFirmwareVersionEntry
+//
+//	@return HyperflexServerFirmwareVersionEntry
 func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntryExecute(r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) (*HyperflexServerFirmwareVersionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -54763,9 +55012,9 @@ func (r ApiUpdateHyperflexServerModelRequest) Execute() (*HyperflexServerModel, 
 /*
 UpdateHyperflexServerModel Update a 'hyperflex.ServerModel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexServerModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexServerModelRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexServerModel(ctx context.Context, moid string) ApiUpdateHyperflexServerModelRequest {
 	return ApiUpdateHyperflexServerModelRequest{
@@ -54776,7 +55025,8 @@ func (a *HyperflexApiService) UpdateHyperflexServerModel(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return HyperflexServerModel
+//
+//	@return HyperflexServerModel
 func (a *HyperflexApiService) UpdateHyperflexServerModelExecute(r ApiUpdateHyperflexServerModelRequest) (*HyperflexServerModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -54938,9 +55188,9 @@ func (r ApiUpdateHyperflexServiceAuthTokenRequest) Execute() (*HyperflexServiceA
 /*
 UpdateHyperflexServiceAuthToken Update a 'hyperflex.ServiceAuthToken' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexServiceAuthTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexServiceAuthTokenRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexServiceAuthToken(ctx context.Context, moid string) ApiUpdateHyperflexServiceAuthTokenRequest {
 	return ApiUpdateHyperflexServiceAuthTokenRequest{
@@ -54951,7 +55201,8 @@ func (a *HyperflexApiService) UpdateHyperflexServiceAuthToken(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexServiceAuthToken
+//
+//	@return HyperflexServiceAuthToken
 func (a *HyperflexApiService) UpdateHyperflexServiceAuthTokenExecute(r ApiUpdateHyperflexServiceAuthTokenRequest) (*HyperflexServiceAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -55113,9 +55364,9 @@ func (r ApiUpdateHyperflexSoftwareDistributionComponentRequest) Execute() (*Hype
 /*
 UpdateHyperflexSoftwareDistributionComponent Update a 'hyperflex.SoftwareDistributionComponent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexSoftwareDistributionComponentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexSoftwareDistributionComponentRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionComponent(ctx context.Context, moid string) ApiUpdateHyperflexSoftwareDistributionComponentRequest {
 	return ApiUpdateHyperflexSoftwareDistributionComponentRequest{
@@ -55126,7 +55377,8 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionComponent(ctx c
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionComponent
+//
+//	@return HyperflexSoftwareDistributionComponent
 func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionComponentExecute(r ApiUpdateHyperflexSoftwareDistributionComponentRequest) (*HyperflexSoftwareDistributionComponent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -55288,9 +55540,9 @@ func (r ApiUpdateHyperflexSoftwareDistributionEntryRequest) Execute() (*Hyperfle
 /*
 UpdateHyperflexSoftwareDistributionEntry Update a 'hyperflex.SoftwareDistributionEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexSoftwareDistributionEntryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexSoftwareDistributionEntryRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionEntry(ctx context.Context, moid string) ApiUpdateHyperflexSoftwareDistributionEntryRequest {
 	return ApiUpdateHyperflexSoftwareDistributionEntryRequest{
@@ -55301,7 +55553,8 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionEntry(ctx conte
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionEntry
+//
+//	@return HyperflexSoftwareDistributionEntry
 func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionEntryExecute(r ApiUpdateHyperflexSoftwareDistributionEntryRequest) (*HyperflexSoftwareDistributionEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -55463,9 +55716,9 @@ func (r ApiUpdateHyperflexSoftwareDistributionVersionRequest) Execute() (*Hyperf
 /*
 UpdateHyperflexSoftwareDistributionVersion Update a 'hyperflex.SoftwareDistributionVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexSoftwareDistributionVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexSoftwareDistributionVersionRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionVersion(ctx context.Context, moid string) ApiUpdateHyperflexSoftwareDistributionVersionRequest {
 	return ApiUpdateHyperflexSoftwareDistributionVersionRequest{
@@ -55476,7 +55729,8 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionVersion(ctx con
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareDistributionVersion
+//
+//	@return HyperflexSoftwareDistributionVersion
 func (a *HyperflexApiService) UpdateHyperflexSoftwareDistributionVersionExecute(r ApiUpdateHyperflexSoftwareDistributionVersionRequest) (*HyperflexSoftwareDistributionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -55638,9 +55892,9 @@ func (r ApiUpdateHyperflexSoftwareVersionPolicyRequest) Execute() (*HyperflexSof
 /*
 UpdateHyperflexSoftwareVersionPolicy Update a 'hyperflex.SoftwareVersionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexSoftwareVersionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexSoftwareVersionPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicy(ctx context.Context, moid string) ApiUpdateHyperflexSoftwareVersionPolicyRequest {
 	return ApiUpdateHyperflexSoftwareVersionPolicyRequest{
@@ -55651,7 +55905,8 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicy(ctx context.C
 }
 
 // Execute executes the request
-//  @return HyperflexSoftwareVersionPolicy
+//
+//	@return HyperflexSoftwareVersionPolicy
 func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicyExecute(r ApiUpdateHyperflexSoftwareVersionPolicyRequest) (*HyperflexSoftwareVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -55813,9 +56068,9 @@ func (r ApiUpdateHyperflexStorageContainerRequest) Execute() (*HyperflexStorageC
 /*
 UpdateHyperflexStorageContainer Update a 'hyperflex.StorageContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexStorageContainerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexStorageContainerRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexStorageContainer(ctx context.Context, moid string) ApiUpdateHyperflexStorageContainerRequest {
 	return ApiUpdateHyperflexStorageContainerRequest{
@@ -55826,7 +56081,8 @@ func (a *HyperflexApiService) UpdateHyperflexStorageContainer(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexStorageContainer
+//
+//	@return HyperflexStorageContainer
 func (a *HyperflexApiService) UpdateHyperflexStorageContainerExecute(r ApiUpdateHyperflexStorageContainerRequest) (*HyperflexStorageContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -55988,9 +56244,9 @@ func (r ApiUpdateHyperflexSysConfigPolicyRequest) Execute() (*HyperflexSysConfig
 /*
 UpdateHyperflexSysConfigPolicy Update a 'hyperflex.SysConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexSysConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexSysConfigPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicy(ctx context.Context, moid string) ApiUpdateHyperflexSysConfigPolicyRequest {
 	return ApiUpdateHyperflexSysConfigPolicyRequest{
@@ -56001,7 +56257,8 @@ func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return HyperflexSysConfigPolicy
+//
+//	@return HyperflexSysConfigPolicy
 func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicyExecute(r ApiUpdateHyperflexSysConfigPolicyRequest) (*HyperflexSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -56163,9 +56420,9 @@ func (r ApiUpdateHyperflexTargetRequest) Execute() (*HyperflexTarget, *http.Resp
 /*
 UpdateHyperflexTarget Update a 'hyperflex.Target' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexTargetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexTargetRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexTarget(ctx context.Context, moid string) ApiUpdateHyperflexTargetRequest {
 	return ApiUpdateHyperflexTargetRequest{
@@ -56176,7 +56433,8 @@ func (a *HyperflexApiService) UpdateHyperflexTarget(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return HyperflexTarget
+//
+//	@return HyperflexTarget
 func (a *HyperflexApiService) UpdateHyperflexTargetExecute(r ApiUpdateHyperflexTargetRequest) (*HyperflexTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -56338,9 +56596,9 @@ func (r ApiUpdateHyperflexUcsmConfigPolicyRequest) Execute() (*HyperflexUcsmConf
 /*
 UpdateHyperflexUcsmConfigPolicy Update a 'hyperflex.UcsmConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexUcsmConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexUcsmConfigPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicy(ctx context.Context, moid string) ApiUpdateHyperflexUcsmConfigPolicyRequest {
 	return ApiUpdateHyperflexUcsmConfigPolicyRequest{
@@ -56351,7 +56609,8 @@ func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return HyperflexUcsmConfigPolicy
+//
+//	@return HyperflexUcsmConfigPolicy
 func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicyExecute(r ApiUpdateHyperflexUcsmConfigPolicyRequest) (*HyperflexUcsmConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -56513,9 +56772,9 @@ func (r ApiUpdateHyperflexVcenterConfigPolicyRequest) Execute() (*HyperflexVcent
 /*
 UpdateHyperflexVcenterConfigPolicy Update a 'hyperflex.VcenterConfigPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexVcenterConfigPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexVcenterConfigPolicyRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicy(ctx context.Context, moid string) ApiUpdateHyperflexVcenterConfigPolicyRequest {
 	return ApiUpdateHyperflexVcenterConfigPolicyRequest{
@@ -56526,7 +56785,8 @@ func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicy(ctx context.Con
 }
 
 // Execute executes the request
-//  @return HyperflexVcenterConfigPolicy
+//
+//	@return HyperflexVcenterConfigPolicy
 func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicyExecute(r ApiUpdateHyperflexVcenterConfigPolicyRequest) (*HyperflexVcenterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -56688,9 +56948,9 @@ func (r ApiUpdateHyperflexVolumeRequest) Execute() (*HyperflexVolume, *http.Resp
 /*
 UpdateHyperflexVolume Update a 'hyperflex.Volume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHyperflexVolumeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHyperflexVolumeRequest
 */
 func (a *HyperflexApiService) UpdateHyperflexVolume(ctx context.Context, moid string) ApiUpdateHyperflexVolumeRequest {
 	return ApiUpdateHyperflexVolumeRequest{
@@ -56701,7 +56961,8 @@ func (a *HyperflexApiService) UpdateHyperflexVolume(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return HyperflexVolume
+//
+//	@return HyperflexVolume
 func (a *HyperflexApiService) UpdateHyperflexVolumeExecute(r ApiUpdateHyperflexVolumeRequest) (*HyperflexVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

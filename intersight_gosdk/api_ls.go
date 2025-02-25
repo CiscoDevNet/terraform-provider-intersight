@@ -36,9 +36,9 @@ func (r ApiGetLsServiceProfileByMoidRequest) Execute() (*LsServiceProfile, *http
 /*
 GetLsServiceProfileByMoid Read a 'ls.ServiceProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetLsServiceProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetLsServiceProfileByMoidRequest
 */
 func (a *LsApiService) GetLsServiceProfileByMoid(ctx context.Context, moid string) ApiGetLsServiceProfileByMoidRequest {
 	return ApiGetLsServiceProfileByMoidRequest{
@@ -49,7 +49,8 @@ func (a *LsApiService) GetLsServiceProfileByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return LsServiceProfile
+//
+//	@return LsServiceProfile
 func (a *LsApiService) GetLsServiceProfileByMoidExecute(r ApiGetLsServiceProfileByMoidRequest) (*LsServiceProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetLsServiceProfileListRequest) Execute() (*LsServiceProfileResponse,
 /*
 GetLsServiceProfileList Read a 'ls.ServiceProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetLsServiceProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLsServiceProfileListRequest
 */
 func (a *LsApiService) GetLsServiceProfileList(ctx context.Context) ApiGetLsServiceProfileListRequest {
 	return ApiGetLsServiceProfileListRequest{
@@ -276,7 +277,8 @@ func (a *LsApiService) GetLsServiceProfileList(ctx context.Context) ApiGetLsServ
 }
 
 // Execute executes the request
-//  @return LsServiceProfileResponse
+//
+//	@return LsServiceProfileResponse
 func (a *LsApiService) GetLsServiceProfileListExecute(r ApiGetLsServiceProfileListRequest) (*LsServiceProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -477,9 +479,9 @@ func (r ApiPatchLsServiceProfileRequest) Execute() (*LsServiceProfile, *http.Res
 /*
 PatchLsServiceProfile Update a 'ls.ServiceProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchLsServiceProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchLsServiceProfileRequest
 */
 func (a *LsApiService) PatchLsServiceProfile(ctx context.Context, moid string) ApiPatchLsServiceProfileRequest {
 	return ApiPatchLsServiceProfileRequest{
@@ -490,7 +492,8 @@ func (a *LsApiService) PatchLsServiceProfile(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return LsServiceProfile
+//
+//	@return LsServiceProfile
 func (a *LsApiService) PatchLsServiceProfileExecute(r ApiPatchLsServiceProfileRequest) (*LsServiceProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -652,9 +655,9 @@ func (r ApiUpdateLsServiceProfileRequest) Execute() (*LsServiceProfile, *http.Re
 /*
 UpdateLsServiceProfile Update a 'ls.ServiceProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateLsServiceProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateLsServiceProfileRequest
 */
 func (a *LsApiService) UpdateLsServiceProfile(ctx context.Context, moid string) ApiUpdateLsServiceProfileRequest {
 	return ApiUpdateLsServiceProfileRequest{
@@ -665,7 +668,8 @@ func (a *LsApiService) UpdateLsServiceProfile(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return LsServiceProfile
+//
+//	@return LsServiceProfile
 func (a *LsApiService) UpdateLsServiceProfileExecute(r ApiUpdateLsServiceProfileRequest) (*LsServiceProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

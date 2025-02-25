@@ -56,8 +56,8 @@ func (r ApiCreateThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response
 /*
 CreateThermalPolicy Create a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateThermalPolicyRequest
 */
 func (a *ThermalApiService) CreateThermalPolicy(ctx context.Context) ApiCreateThermalPolicyRequest {
 	return ApiCreateThermalPolicyRequest{
@@ -67,7 +67,8 @@ func (a *ThermalApiService) CreateThermalPolicy(ctx context.Context) ApiCreateTh
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteThermalPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteThermalPolicy Delete a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteThermalPolicyRequest
 */
 func (a *ThermalApiService) DeleteThermalPolicy(ctx context.Context, moid string) ApiDeleteThermalPolicyRequest {
 	return ApiDeleteThermalPolicyRequest{
@@ -359,9 +360,9 @@ func (r ApiGetThermalPolicyByMoidRequest) Execute() (*ThermalPolicy, *http.Respo
 /*
 GetThermalPolicyByMoid Read a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetThermalPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetThermalPolicyByMoidRequest
 */
 func (a *ThermalApiService) GetThermalPolicyByMoid(ctx context.Context, moid string) ApiGetThermalPolicyByMoidRequest {
 	return ApiGetThermalPolicyByMoidRequest{
@@ -372,7 +373,8 @@ func (a *ThermalApiService) GetThermalPolicyByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyByMoidRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -512,9 +514,9 @@ func (r ApiGetThermalPolicyInventoryByMoidRequest) Execute() (*ThermalPolicyInve
 /*
 GetThermalPolicyInventoryByMoid Read a 'thermal.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetThermalPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetThermalPolicyInventoryByMoidRequest
 */
 func (a *ThermalApiService) GetThermalPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetThermalPolicyInventoryByMoidRequest {
 	return ApiGetThermalPolicyInventoryByMoidRequest{
@@ -525,7 +527,8 @@ func (a *ThermalApiService) GetThermalPolicyInventoryByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ThermalPolicyInventory
+//
+//	@return ThermalPolicyInventory
 func (a *ThermalApiService) GetThermalPolicyInventoryByMoidExecute(r ApiGetThermalPolicyInventoryByMoidRequest) (*ThermalPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -741,8 +744,8 @@ func (r ApiGetThermalPolicyInventoryListRequest) Execute() (*ThermalPolicyInvent
 /*
 GetThermalPolicyInventoryList Read a 'thermal.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetThermalPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetThermalPolicyInventoryListRequest
 */
 func (a *ThermalApiService) GetThermalPolicyInventoryList(ctx context.Context) ApiGetThermalPolicyInventoryListRequest {
 	return ApiGetThermalPolicyInventoryListRequest{
@@ -752,7 +755,8 @@ func (a *ThermalApiService) GetThermalPolicyInventoryList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ThermalPolicyInventoryResponse
+//
+//	@return ThermalPolicyInventoryResponse
 func (a *ThermalApiService) GetThermalPolicyInventoryListExecute(r ApiGetThermalPolicyInventoryListRequest) (*ThermalPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1015,8 +1019,8 @@ func (r ApiGetThermalPolicyListRequest) Execute() (*ThermalPolicyResponse, *http
 /*
 GetThermalPolicyList Read a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetThermalPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetThermalPolicyListRequest
 */
 func (a *ThermalApiService) GetThermalPolicyList(ctx context.Context) ApiGetThermalPolicyListRequest {
 	return ApiGetThermalPolicyListRequest{
@@ -1026,7 +1030,8 @@ func (a *ThermalApiService) GetThermalPolicyList(ctx context.Context) ApiGetTher
 }
 
 // Execute executes the request
-//  @return ThermalPolicyResponse
+//
+//	@return ThermalPolicyResponse
 func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyListRequest) (*ThermalPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1227,9 +1232,9 @@ func (r ApiPatchThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response,
 /*
 PatchThermalPolicy Update a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchThermalPolicyRequest
 */
 func (a *ThermalApiService) PatchThermalPolicy(ctx context.Context, moid string) ApiPatchThermalPolicyRequest {
 	return ApiPatchThermalPolicyRequest{
@@ -1240,7 +1245,8 @@ func (a *ThermalApiService) PatchThermalPolicy(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1402,9 +1408,9 @@ func (r ApiUpdateThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response
 /*
 UpdateThermalPolicy Update a 'thermal.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateThermalPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateThermalPolicyRequest
 */
 func (a *ThermalApiService) UpdateThermalPolicy(ctx context.Context, moid string) ApiUpdateThermalPolicyRequest {
 	return ApiUpdateThermalPolicyRequest{
@@ -1415,7 +1421,8 @@ func (a *ThermalApiService) UpdateThermalPolicy(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return ThermalPolicy
+//
+//	@return ThermalPolicy
 func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

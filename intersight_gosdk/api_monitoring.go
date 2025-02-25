@@ -36,9 +36,9 @@ func (r ApiGetMonitoringHealthStatusByMoidRequest) Execute() (*MonitoringHealthS
 /*
 GetMonitoringHealthStatusByMoid Read a 'monitoring.HealthStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMonitoringHealthStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMonitoringHealthStatusByMoidRequest
 */
 func (a *MonitoringApiService) GetMonitoringHealthStatusByMoid(ctx context.Context, moid string) ApiGetMonitoringHealthStatusByMoidRequest {
 	return ApiGetMonitoringHealthStatusByMoidRequest{
@@ -49,7 +49,8 @@ func (a *MonitoringApiService) GetMonitoringHealthStatusByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return MonitoringHealthStatus
+//
+//	@return MonitoringHealthStatus
 func (a *MonitoringApiService) GetMonitoringHealthStatusByMoidExecute(r ApiGetMonitoringHealthStatusByMoidRequest) (*MonitoringHealthStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetMonitoringHealthStatusListRequest) Execute() (*MonitoringHealthSta
 /*
 GetMonitoringHealthStatusList Read a 'monitoring.HealthStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMonitoringHealthStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMonitoringHealthStatusListRequest
 */
 func (a *MonitoringApiService) GetMonitoringHealthStatusList(ctx context.Context) ApiGetMonitoringHealthStatusListRequest {
 	return ApiGetMonitoringHealthStatusListRequest{
@@ -276,7 +277,8 @@ func (a *MonitoringApiService) GetMonitoringHealthStatusList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return MonitoringHealthStatusResponse
+//
+//	@return MonitoringHealthStatusResponse
 func (a *MonitoringApiService) GetMonitoringHealthStatusListExecute(r ApiGetMonitoringHealthStatusListRequest) (*MonitoringHealthStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

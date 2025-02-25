@@ -55,8 +55,8 @@ func (r ApiCreateRproxyReverseProxyRequest) Execute() (*RproxyReverseProxy, *htt
 /*
 CreateRproxyReverseProxy Create a 'rproxy.ReverseProxy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateRproxyReverseProxyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateRproxyReverseProxyRequest
 */
 func (a *RproxyApiService) CreateRproxyReverseProxy(ctx context.Context) ApiCreateRproxyReverseProxyRequest {
 	return ApiCreateRproxyReverseProxyRequest{
@@ -66,7 +66,8 @@ func (a *RproxyApiService) CreateRproxyReverseProxy(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return RproxyReverseProxy
+//
+//	@return RproxyReverseProxy
 func (a *RproxyApiService) CreateRproxyReverseProxyExecute(r ApiCreateRproxyReverseProxyRequest) (*RproxyReverseProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

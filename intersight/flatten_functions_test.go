@@ -46,7 +46,7 @@ func compareMaps(expected, ffOutput map[string]interface{}, t *testing.T) error 
 	return nil
 }
 
-//CheckError Panics when error occurs
+// CheckError Panics when error occurs
 func CheckError(t *testing.T, e error) {
 	if e != nil {
 		t.Errorf("Error while testing flatten function: %+v", e)

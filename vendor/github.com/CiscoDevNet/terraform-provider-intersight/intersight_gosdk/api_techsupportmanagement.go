@@ -56,8 +56,8 @@ func (r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) Execute() 
 /*
 CreateTechsupportmanagementCollectionControlPolicy Create a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTechsupportmanagementCollectionControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTechsupportmanagementCollectionControlPolicyRequest
 */
 func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionControlPolicy(ctx context.Context) ApiCreateTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiCreateTechsupportmanagementCollectionControlPolicyRequest{
@@ -67,7 +67,8 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionC
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementCollectionControlPolicy
+//
+//	@return TechsupportmanagementCollectionControlPolicy
 func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionControlPolicyExecute(r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateTechsupportmanagementTechSupportBundleRequest) Execute() (*Tech
 /*
 CreateTechsupportmanagementTechSupportBundle Create a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTechsupportmanagementTechSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTechsupportmanagementTechSupportBundleRequest
 */
 func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupportBundle(ctx context.Context) ApiCreateTechsupportmanagementTechSupportBundleRequest {
 	return ApiCreateTechsupportmanagementTechSupportBundleRequest{
@@ -248,7 +249,8 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupport
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementTechSupportBundle
+//
+//	@return TechsupportmanagementTechSupportBundle
 func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupportBundleExecute(r ApiCreateTechsupportmanagementTechSupportBundleRequest) (*TechsupportmanagementTechSupportBundle, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteTechsupportmanagementCollectionControlPolicyRequest) Execute() 
 /*
 DeleteTechsupportmanagementCollectionControlPolicy Delete a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteTechsupportmanagementCollectionControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteTechsupportmanagementCollectionControlPolicyRequest
 */
 func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionControlPolicy(ctx context.Context, moid string) ApiDeleteTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiDeleteTechsupportmanagementCollectionControlPolicyRequest{
@@ -540,9 +542,9 @@ func (r ApiDeleteTechsupportmanagementTechSupportBundleRequest) Execute() (*http
 /*
 DeleteTechsupportmanagementTechSupportBundle Delete a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteTechsupportmanagementTechSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteTechsupportmanagementTechSupportBundleRequest
 */
 func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupportBundle(ctx context.Context, moid string) ApiDeleteTechsupportmanagementTechSupportBundleRequest {
 	return ApiDeleteTechsupportmanagementTechSupportBundleRequest{
@@ -682,9 +684,9 @@ func (r ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest) Execute
 /*
 GetTechsupportmanagementCollectionControlPolicyByMoid Read a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest {
 	return ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest{
@@ -695,7 +697,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementCollectionControlPolicy
+//
+//	@return TechsupportmanagementCollectionControlPolicy
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyByMoidExecute(r ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -911,8 +914,8 @@ func (r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) Execute()
 /*
 GetTechsupportmanagementCollectionControlPolicyList Read a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTechsupportmanagementCollectionControlPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTechsupportmanagementCollectionControlPolicyListRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyList(ctx context.Context) ApiGetTechsupportmanagementCollectionControlPolicyListRequest {
 	return ApiGetTechsupportmanagementCollectionControlPolicyListRequest{
@@ -922,7 +925,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementCollectionControlPolicyResponse
+//
+//	@return TechsupportmanagementCollectionControlPolicyResponse
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyListExecute(r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) (*TechsupportmanagementCollectionControlPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1109,9 +1113,9 @@ func (r ApiGetTechsupportmanagementDownloadByMoidRequest) Execute() (*Techsuppor
 /*
 GetTechsupportmanagementDownloadByMoid Read a 'techsupportmanagement.Download' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTechsupportmanagementDownloadByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTechsupportmanagementDownloadByMoidRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementDownloadByMoidRequest {
 	return ApiGetTechsupportmanagementDownloadByMoidRequest{
@@ -1122,7 +1126,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementDownload
+//
+//	@return TechsupportmanagementDownload
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoidExecute(r ApiGetTechsupportmanagementDownloadByMoidRequest) (*TechsupportmanagementDownload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1338,8 +1343,8 @@ func (r ApiGetTechsupportmanagementDownloadListRequest) Execute() (*Techsupportm
 /*
 GetTechsupportmanagementDownloadList Read a 'techsupportmanagement.Download' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTechsupportmanagementDownloadListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTechsupportmanagementDownloadListRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadList(ctx context.Context) ApiGetTechsupportmanagementDownloadListRequest {
 	return ApiGetTechsupportmanagementDownloadListRequest{
@@ -1349,7 +1354,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadList(c
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementDownloadResponse
+//
+//	@return TechsupportmanagementDownloadResponse
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListExecute(r ApiGetTechsupportmanagementDownloadListRequest) (*TechsupportmanagementDownloadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1536,9 +1542,9 @@ func (r ApiGetTechsupportmanagementEndPointByMoidRequest) Execute() (*Techsuppor
 /*
 GetTechsupportmanagementEndPointByMoid Read a 'techsupportmanagement.EndPoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTechsupportmanagementEndPointByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTechsupportmanagementEndPointByMoidRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementEndPointByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementEndPointByMoidRequest {
 	return ApiGetTechsupportmanagementEndPointByMoidRequest{
@@ -1549,7 +1555,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementEndPointByMoid
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementEndPoint
+//
+//	@return TechsupportmanagementEndPoint
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementEndPointByMoidExecute(r ApiGetTechsupportmanagementEndPointByMoidRequest) (*TechsupportmanagementEndPoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1765,8 +1772,8 @@ func (r ApiGetTechsupportmanagementEndPointListRequest) Execute() (*Techsupportm
 /*
 GetTechsupportmanagementEndPointList Read a 'techsupportmanagement.EndPoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTechsupportmanagementEndPointListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTechsupportmanagementEndPointListRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementEndPointList(ctx context.Context) ApiGetTechsupportmanagementEndPointListRequest {
 	return ApiGetTechsupportmanagementEndPointListRequest{
@@ -1776,7 +1783,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementEndPointList(c
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementEndPointResponse
+//
+//	@return TechsupportmanagementEndPointResponse
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementEndPointListExecute(r ApiGetTechsupportmanagementEndPointListRequest) (*TechsupportmanagementEndPointResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1963,9 +1971,9 @@ func (r ApiGetTechsupportmanagementTechSupportBundleByMoidRequest) Execute() (*T
 /*
 GetTechsupportmanagementTechSupportBundleByMoid Read a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTechsupportmanagementTechSupportBundleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTechsupportmanagementTechSupportBundleByMoidRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementTechSupportBundleByMoidRequest {
 	return ApiGetTechsupportmanagementTechSupportBundleByMoidRequest{
@@ -1976,7 +1984,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementTechSupportBundle
+//
+//	@return TechsupportmanagementTechSupportBundle
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleByMoidExecute(r ApiGetTechsupportmanagementTechSupportBundleByMoidRequest) (*TechsupportmanagementTechSupportBundle, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2192,8 +2201,8 @@ func (r ApiGetTechsupportmanagementTechSupportBundleListRequest) Execute() (*Tec
 /*
 GetTechsupportmanagementTechSupportBundleList Read a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTechsupportmanagementTechSupportBundleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTechsupportmanagementTechSupportBundleListRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleList(ctx context.Context) ApiGetTechsupportmanagementTechSupportBundleListRequest {
 	return ApiGetTechsupportmanagementTechSupportBundleListRequest{
@@ -2203,7 +2212,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementTechSupportBundleResponse
+//
+//	@return TechsupportmanagementTechSupportBundleResponse
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleListExecute(r ApiGetTechsupportmanagementTechSupportBundleListRequest) (*TechsupportmanagementTechSupportBundleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2390,9 +2400,9 @@ func (r ApiGetTechsupportmanagementTechSupportStatusByMoidRequest) Execute() (*T
 /*
 GetTechsupportmanagementTechSupportStatusByMoid Read a 'techsupportmanagement.TechSupportStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTechsupportmanagementTechSupportStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTechsupportmanagementTechSupportStatusByMoidRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementTechSupportStatusByMoidRequest {
 	return ApiGetTechsupportmanagementTechSupportStatusByMoidRequest{
@@ -2403,7 +2413,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementTechSupportStatus
+//
+//	@return TechsupportmanagementTechSupportStatus
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusByMoidExecute(r ApiGetTechsupportmanagementTechSupportStatusByMoidRequest) (*TechsupportmanagementTechSupportStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2619,8 +2630,8 @@ func (r ApiGetTechsupportmanagementTechSupportStatusListRequest) Execute() (*Tec
 /*
 GetTechsupportmanagementTechSupportStatusList Read a 'techsupportmanagement.TechSupportStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTechsupportmanagementTechSupportStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTechsupportmanagementTechSupportStatusListRequest
 */
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusList(ctx context.Context) ApiGetTechsupportmanagementTechSupportStatusListRequest {
 	return ApiGetTechsupportmanagementTechSupportStatusListRequest{
@@ -2630,7 +2641,8 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementTechSupportStatusResponse
+//
+//	@return TechsupportmanagementTechSupportStatusResponse
 func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusListExecute(r ApiGetTechsupportmanagementTechSupportStatusListRequest) (*TechsupportmanagementTechSupportStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2831,9 +2843,9 @@ func (r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) Execute() (
 /*
 PatchTechsupportmanagementCollectionControlPolicy Update a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchTechsupportmanagementCollectionControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchTechsupportmanagementCollectionControlPolicyRequest
 */
 func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionControlPolicy(ctx context.Context, moid string) ApiPatchTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiPatchTechsupportmanagementCollectionControlPolicyRequest{
@@ -2844,7 +2856,8 @@ func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionCo
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementCollectionControlPolicy
+//
+//	@return TechsupportmanagementCollectionControlPolicy
 func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionControlPolicyExecute(r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3006,9 +3019,9 @@ func (r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) Execute() 
 /*
 UpdateTechsupportmanagementCollectionControlPolicy Update a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateTechsupportmanagementCollectionControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateTechsupportmanagementCollectionControlPolicyRequest
 */
 func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionControlPolicy(ctx context.Context, moid string) ApiUpdateTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiUpdateTechsupportmanagementCollectionControlPolicyRequest{
@@ -3019,7 +3032,8 @@ func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionC
 }
 
 // Execute executes the request
-//  @return TechsupportmanagementCollectionControlPolicy
+//
+//	@return TechsupportmanagementCollectionControlPolicy
 func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionControlPolicyExecute(r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

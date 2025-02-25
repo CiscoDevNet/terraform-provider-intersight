@@ -36,9 +36,9 @@ func (r ApiGetForecastCatalogByMoidRequest) Execute() (*ForecastCatalog, *http.R
 /*
 GetForecastCatalogByMoid Read a 'forecast.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetForecastCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetForecastCatalogByMoidRequest
 */
 func (a *ForecastApiService) GetForecastCatalogByMoid(ctx context.Context, moid string) ApiGetForecastCatalogByMoidRequest {
 	return ApiGetForecastCatalogByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ForecastApiService) GetForecastCatalogByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return ForecastCatalog
+//
+//	@return ForecastCatalog
 func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCatalogByMoidRequest) (*ForecastCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetForecastCatalogListRequest) Execute() (*ForecastCatalogResponse, *
 /*
 GetForecastCatalogList Read a 'forecast.Catalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetForecastCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetForecastCatalogListRequest
 */
 func (a *ForecastApiService) GetForecastCatalogList(ctx context.Context) ApiGetForecastCatalogListRequest {
 	return ApiGetForecastCatalogListRequest{
@@ -276,7 +277,8 @@ func (a *ForecastApiService) GetForecastCatalogList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//  @return ForecastCatalogResponse
+//
+//	@return ForecastCatalogResponse
 func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatalogListRequest) (*ForecastCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetForecastDefinitionByMoidRequest) Execute() (*ForecastDefinition, *
 /*
 GetForecastDefinitionByMoid Read a 'forecast.Definition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetForecastDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetForecastDefinitionByMoidRequest
 */
 func (a *ForecastApiService) GetForecastDefinitionByMoid(ctx context.Context, moid string) ApiGetForecastDefinitionByMoidRequest {
 	return ApiGetForecastDefinitionByMoidRequest{
@@ -476,7 +478,8 @@ func (a *ForecastApiService) GetForecastDefinitionByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ForecastDefinition
+//
+//	@return ForecastDefinition
 func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecastDefinitionByMoidRequest) (*ForecastDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetForecastDefinitionListRequest) Execute() (*ForecastDefinitionRespo
 /*
 GetForecastDefinitionList Read a 'forecast.Definition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetForecastDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetForecastDefinitionListRequest
 */
 func (a *ForecastApiService) GetForecastDefinitionList(ctx context.Context) ApiGetForecastDefinitionListRequest {
 	return ApiGetForecastDefinitionListRequest{
@@ -703,7 +706,8 @@ func (a *ForecastApiService) GetForecastDefinitionList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return ForecastDefinitionResponse
+//
+//	@return ForecastDefinitionResponse
 func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDefinitionListRequest) (*ForecastDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetForecastInstanceByMoidRequest) Execute() (*ForecastInstance, *http
 /*
 GetForecastInstanceByMoid Read a 'forecast.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetForecastInstanceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetForecastInstanceByMoidRequest
 */
 func (a *ForecastApiService) GetForecastInstanceByMoid(ctx context.Context, moid string) ApiGetForecastInstanceByMoidRequest {
 	return ApiGetForecastInstanceByMoidRequest{
@@ -903,7 +907,8 @@ func (a *ForecastApiService) GetForecastInstanceByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return ForecastInstance
+//
+//	@return ForecastInstance
 func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastInstanceByMoidRequest) (*ForecastInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetForecastInstanceListRequest) Execute() (*ForecastInstanceResponse,
 /*
 GetForecastInstanceList Read a 'forecast.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetForecastInstanceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetForecastInstanceListRequest
 */
 func (a *ForecastApiService) GetForecastInstanceList(ctx context.Context) ApiGetForecastInstanceListRequest {
 	return ApiGetForecastInstanceListRequest{
@@ -1130,7 +1135,8 @@ func (a *ForecastApiService) GetForecastInstanceList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return ForecastInstanceResponse
+//
+//	@return ForecastInstanceResponse
 func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInstanceListRequest) (*ForecastInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1331,9 +1337,9 @@ func (r ApiPatchForecastInstanceRequest) Execute() (*ForecastInstance, *http.Res
 /*
 PatchForecastInstance Update a 'forecast.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchForecastInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchForecastInstanceRequest
 */
 func (a *ForecastApiService) PatchForecastInstance(ctx context.Context, moid string) ApiPatchForecastInstanceRequest {
 	return ApiPatchForecastInstanceRequest{
@@ -1344,7 +1350,8 @@ func (a *ForecastApiService) PatchForecastInstance(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ForecastInstance
+//
+//	@return ForecastInstance
 func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInstanceRequest) (*ForecastInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1506,9 +1513,9 @@ func (r ApiUpdateForecastInstanceRequest) Execute() (*ForecastInstance, *http.Re
 /*
 UpdateForecastInstance Update a 'forecast.Instance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateForecastInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateForecastInstanceRequest
 */
 func (a *ForecastApiService) UpdateForecastInstance(ctx context.Context, moid string) ApiUpdateForecastInstanceRequest {
 	return ApiUpdateForecastInstanceRequest{
@@ -1519,7 +1526,8 @@ func (a *ForecastApiService) UpdateForecastInstance(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return ForecastInstance
+//
+//	@return ForecastInstance
 func (a *ForecastApiService) UpdateForecastInstanceExecute(r ApiUpdateForecastInstanceRequest) (*ForecastInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

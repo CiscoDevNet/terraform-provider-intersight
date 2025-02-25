@@ -36,9 +36,9 @@ func (r ApiGetEtherHostPortByMoidRequest) Execute() (*EtherHostPort, *http.Respo
 /*
 GetEtherHostPortByMoid Read a 'ether.HostPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEtherHostPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEtherHostPortByMoidRequest
 */
 func (a *EtherApiService) GetEtherHostPortByMoid(ctx context.Context, moid string) ApiGetEtherHostPortByMoidRequest {
 	return ApiGetEtherHostPortByMoidRequest{
@@ -49,7 +49,8 @@ func (a *EtherApiService) GetEtherHostPortByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EtherHostPort
+//
+//	@return EtherHostPort
 func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByMoidRequest) (*EtherHostPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetEtherHostPortListRequest) Execute() (*EtherHostPortResponse, *http
 /*
 GetEtherHostPortList Read a 'ether.HostPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEtherHostPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEtherHostPortListRequest
 */
 func (a *EtherApiService) GetEtherHostPortList(ctx context.Context) ApiGetEtherHostPortListRequest {
 	return ApiGetEtherHostPortListRequest{
@@ -276,7 +277,8 @@ func (a *EtherApiService) GetEtherHostPortList(ctx context.Context) ApiGetEtherH
 }
 
 // Execute executes the request
-//  @return EtherHostPortResponse
+//
+//	@return EtherHostPortResponse
 func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListRequest) (*EtherHostPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetEtherNetworkPortByMoidRequest) Execute() (*EtherNetworkPort, *http
 /*
 GetEtherNetworkPortByMoid Read a 'ether.NetworkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEtherNetworkPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEtherNetworkPortByMoidRequest
 */
 func (a *EtherApiService) GetEtherNetworkPortByMoid(ctx context.Context, moid string) ApiGetEtherNetworkPortByMoidRequest {
 	return ApiGetEtherNetworkPortByMoidRequest{
@@ -476,7 +478,8 @@ func (a *EtherApiService) GetEtherNetworkPortByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EtherNetworkPort
+//
+//	@return EtherNetworkPort
 func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkPortByMoidRequest) (*EtherNetworkPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetEtherNetworkPortListRequest) Execute() (*EtherNetworkPortResponse,
 /*
 GetEtherNetworkPortList Read a 'ether.NetworkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEtherNetworkPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEtherNetworkPortListRequest
 */
 func (a *EtherApiService) GetEtherNetworkPortList(ctx context.Context) ApiGetEtherNetworkPortListRequest {
 	return ApiGetEtherNetworkPortListRequest{
@@ -703,7 +706,8 @@ func (a *EtherApiService) GetEtherNetworkPortList(ctx context.Context) ApiGetEth
 }
 
 // Execute executes the request
-//  @return EtherNetworkPortResponse
+//
+//	@return EtherNetworkPortResponse
 func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPortListRequest) (*EtherNetworkPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetEtherPhysicalPortByMoidRequest) Execute() (*EtherPhysicalPort, *ht
 /*
 GetEtherPhysicalPortByMoid Read a 'ether.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEtherPhysicalPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEtherPhysicalPortByMoidRequest
 */
 func (a *EtherApiService) GetEtherPhysicalPortByMoid(ctx context.Context, moid string) ApiGetEtherPhysicalPortByMoidRequest {
 	return ApiGetEtherPhysicalPortByMoidRequest{
@@ -903,7 +907,8 @@ func (a *EtherApiService) GetEtherPhysicalPortByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return EtherPhysicalPort
+//
+//	@return EtherPhysicalPort
 func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysicalPortByMoidRequest) (*EtherPhysicalPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetEtherPhysicalPortListRequest) Execute() (*EtherPhysicalPortRespons
 /*
 GetEtherPhysicalPortList Read a 'ether.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEtherPhysicalPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEtherPhysicalPortListRequest
 */
 func (a *EtherApiService) GetEtherPhysicalPortList(ctx context.Context) ApiGetEtherPhysicalPortListRequest {
 	return ApiGetEtherPhysicalPortListRequest{
@@ -1130,7 +1135,8 @@ func (a *EtherApiService) GetEtherPhysicalPortList(ctx context.Context) ApiGetEt
 }
 
 // Execute executes the request
-//  @return EtherPhysicalPortResponse
+//
+//	@return EtherPhysicalPortResponse
 func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalPortListRequest) (*EtherPhysicalPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1317,9 +1323,9 @@ func (r ApiGetEtherPortChannelByMoidRequest) Execute() (*EtherPortChannel, *http
 /*
 GetEtherPortChannelByMoid Read a 'ether.PortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetEtherPortChannelByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetEtherPortChannelByMoidRequest
 */
 func (a *EtherApiService) GetEtherPortChannelByMoid(ctx context.Context, moid string) ApiGetEtherPortChannelByMoidRequest {
 	return ApiGetEtherPortChannelByMoidRequest{
@@ -1330,7 +1336,8 @@ func (a *EtherApiService) GetEtherPortChannelByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return EtherPortChannel
+//
+//	@return EtherPortChannel
 func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChannelByMoidRequest) (*EtherPortChannel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1546,8 +1553,8 @@ func (r ApiGetEtherPortChannelListRequest) Execute() (*EtherPortChannelResponse,
 /*
 GetEtherPortChannelList Read a 'ether.PortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetEtherPortChannelListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetEtherPortChannelListRequest
 */
 func (a *EtherApiService) GetEtherPortChannelList(ctx context.Context) ApiGetEtherPortChannelListRequest {
 	return ApiGetEtherPortChannelListRequest{
@@ -1557,7 +1564,8 @@ func (a *EtherApiService) GetEtherPortChannelList(ctx context.Context) ApiGetEth
 }
 
 // Execute executes the request
-//  @return EtherPortChannelResponse
+//
+//	@return EtherPortChannelResponse
 func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChannelListRequest) (*EtherPortChannelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1758,9 +1766,9 @@ func (r ApiPatchEtherHostPortRequest) Execute() (*EtherHostPort, *http.Response,
 /*
 PatchEtherHostPort Update a 'ether.HostPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEtherHostPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEtherHostPortRequest
 */
 func (a *EtherApiService) PatchEtherHostPort(ctx context.Context, moid string) ApiPatchEtherHostPortRequest {
 	return ApiPatchEtherHostPortRequest{
@@ -1771,7 +1779,8 @@ func (a *EtherApiService) PatchEtherHostPort(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return EtherHostPort
+//
+//	@return EtherHostPort
 func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortRequest) (*EtherHostPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1933,9 +1942,9 @@ func (r ApiPatchEtherNetworkPortRequest) Execute() (*EtherNetworkPort, *http.Res
 /*
 PatchEtherNetworkPort Update a 'ether.NetworkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEtherNetworkPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEtherNetworkPortRequest
 */
 func (a *EtherApiService) PatchEtherNetworkPort(ctx context.Context, moid string) ApiPatchEtherNetworkPortRequest {
 	return ApiPatchEtherNetworkPortRequest{
@@ -1946,7 +1955,8 @@ func (a *EtherApiService) PatchEtherNetworkPort(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return EtherNetworkPort
+//
+//	@return EtherNetworkPort
 func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPortRequest) (*EtherNetworkPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2108,9 +2118,9 @@ func (r ApiPatchEtherPhysicalPortRequest) Execute() (*EtherPhysicalPort, *http.R
 /*
 PatchEtherPhysicalPort Update a 'ether.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchEtherPhysicalPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchEtherPhysicalPortRequest
 */
 func (a *EtherApiService) PatchEtherPhysicalPort(ctx context.Context, moid string) ApiPatchEtherPhysicalPortRequest {
 	return ApiPatchEtherPhysicalPortRequest{
@@ -2121,7 +2131,8 @@ func (a *EtherApiService) PatchEtherPhysicalPort(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EtherPhysicalPort
+//
+//	@return EtherPhysicalPort
 func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalPortRequest) (*EtherPhysicalPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2283,9 +2294,9 @@ func (r ApiUpdateEtherHostPortRequest) Execute() (*EtherHostPort, *http.Response
 /*
 UpdateEtherHostPort Update a 'ether.HostPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEtherHostPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEtherHostPortRequest
 */
 func (a *EtherApiService) UpdateEtherHostPort(ctx context.Context, moid string) ApiUpdateEtherHostPortRequest {
 	return ApiUpdateEtherHostPortRequest{
@@ -2296,7 +2307,8 @@ func (a *EtherApiService) UpdateEtherHostPort(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return EtherHostPort
+//
+//	@return EtherHostPort
 func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortRequest) (*EtherHostPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2458,9 +2470,9 @@ func (r ApiUpdateEtherNetworkPortRequest) Execute() (*EtherNetworkPort, *http.Re
 /*
 UpdateEtherNetworkPort Update a 'ether.NetworkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEtherNetworkPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEtherNetworkPortRequest
 */
 func (a *EtherApiService) UpdateEtherNetworkPort(ctx context.Context, moid string) ApiUpdateEtherNetworkPortRequest {
 	return ApiUpdateEtherNetworkPortRequest{
@@ -2471,7 +2483,8 @@ func (a *EtherApiService) UpdateEtherNetworkPort(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return EtherNetworkPort
+//
+//	@return EtherNetworkPort
 func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkPortRequest) (*EtherNetworkPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2633,9 +2646,9 @@ func (r ApiUpdateEtherPhysicalPortRequest) Execute() (*EtherPhysicalPort, *http.
 /*
 UpdateEtherPhysicalPort Update a 'ether.PhysicalPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateEtherPhysicalPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateEtherPhysicalPortRequest
 */
 func (a *EtherApiService) UpdateEtherPhysicalPort(ctx context.Context, moid string) ApiUpdateEtherPhysicalPortRequest {
 	return ApiUpdateEtherPhysicalPortRequest{
@@ -2646,7 +2659,8 @@ func (a *EtherApiService) UpdateEtherPhysicalPort(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return EtherPhysicalPort
+//
+//	@return EtherPhysicalPort
 func (a *EtherApiService) UpdateEtherPhysicalPortExecute(r ApiUpdateEtherPhysicalPortRequest) (*EtherPhysicalPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

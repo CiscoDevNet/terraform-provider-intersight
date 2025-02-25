@@ -36,9 +36,9 @@ func (r ApiDeleteMetaDefinitionRequest) Execute() (*http.Response, error) {
 /*
 DeleteMetaDefinition Delete a 'meta.Definition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteMetaDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteMetaDefinitionRequest
 */
 func (a *MetaApiService) DeleteMetaDefinition(ctx context.Context, moid string) ApiDeleteMetaDefinitionRequest {
 	return ApiDeleteMetaDefinitionRequest{
@@ -178,9 +178,9 @@ func (r ApiGetMetaDefinitionByMoidRequest) Execute() (*MetaDefinition, *http.Res
 /*
 GetMetaDefinitionByMoid Read a 'meta.Definition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMetaDefinitionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMetaDefinitionByMoidRequest
 */
 func (a *MetaApiService) GetMetaDefinitionByMoid(ctx context.Context, moid string) ApiGetMetaDefinitionByMoidRequest {
 	return ApiGetMetaDefinitionByMoidRequest{
@@ -191,7 +191,8 @@ func (a *MetaApiService) GetMetaDefinitionByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return MetaDefinition
+//
+//	@return MetaDefinition
 func (a *MetaApiService) GetMetaDefinitionByMoidExecute(r ApiGetMetaDefinitionByMoidRequest) (*MetaDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -407,8 +408,8 @@ func (r ApiGetMetaDefinitionListRequest) Execute() (*MetaDefinitionResponse, *ht
 /*
 GetMetaDefinitionList Read a 'meta.Definition' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMetaDefinitionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMetaDefinitionListRequest
 */
 func (a *MetaApiService) GetMetaDefinitionList(ctx context.Context) ApiGetMetaDefinitionListRequest {
 	return ApiGetMetaDefinitionListRequest{
@@ -418,7 +419,8 @@ func (a *MetaApiService) GetMetaDefinitionList(ctx context.Context) ApiGetMetaDe
 }
 
 // Execute executes the request
-//  @return MetaDefinitionResponse
+//
+//	@return MetaDefinitionResponse
 func (a *MetaApiService) GetMetaDefinitionListExecute(r ApiGetMetaDefinitionListRequest) (*MetaDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

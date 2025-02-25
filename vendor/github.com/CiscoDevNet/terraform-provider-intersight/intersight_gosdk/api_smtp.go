@@ -56,8 +56,8 @@ func (r ApiCreateSmtpPolicyRequest) Execute() (*SmtpPolicy, *http.Response, erro
 /*
 CreateSmtpPolicy Create a 'smtp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSmtpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSmtpPolicyRequest
 */
 func (a *SmtpApiService) CreateSmtpPolicy(ctx context.Context) ApiCreateSmtpPolicyRequest {
 	return ApiCreateSmtpPolicyRequest{
@@ -67,7 +67,8 @@ func (a *SmtpApiService) CreateSmtpPolicy(ctx context.Context) ApiCreateSmtpPoli
 }
 
 // Execute executes the request
-//  @return SmtpPolicy
+//
+//	@return SmtpPolicy
 func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateSmtpPolicyTestRequest) Execute() (*SmtpPolicyTest, *http.Respon
 /*
 CreateSmtpPolicyTest Create a 'smtp.PolicyTest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSmtpPolicyTestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSmtpPolicyTestRequest
 */
 func (a *SmtpApiService) CreateSmtpPolicyTest(ctx context.Context) ApiCreateSmtpPolicyTestRequest {
 	return ApiCreateSmtpPolicyTestRequest{
@@ -248,7 +249,8 @@ func (a *SmtpApiService) CreateSmtpPolicyTest(ctx context.Context) ApiCreateSmtp
 }
 
 // Execute executes the request
-//  @return SmtpPolicyTest
+//
+//	@return SmtpPolicyTest
 func (a *SmtpApiService) CreateSmtpPolicyTestExecute(r ApiCreateSmtpPolicyTestRequest) (*SmtpPolicyTest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteSmtpPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteSmtpPolicy Delete a 'smtp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSmtpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSmtpPolicyRequest
 */
 func (a *SmtpApiService) DeleteSmtpPolicy(ctx context.Context, moid string) ApiDeleteSmtpPolicyRequest {
 	return ApiDeleteSmtpPolicyRequest{
@@ -540,9 +542,9 @@ func (r ApiDeleteSmtpPolicyTestRequest) Execute() (*http.Response, error) {
 /*
 DeleteSmtpPolicyTest Delete a 'smtp.PolicyTest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSmtpPolicyTestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSmtpPolicyTestRequest
 */
 func (a *SmtpApiService) DeleteSmtpPolicyTest(ctx context.Context, moid string) ApiDeleteSmtpPolicyTestRequest {
 	return ApiDeleteSmtpPolicyTestRequest{
@@ -682,9 +684,9 @@ func (r ApiGetSmtpPolicyByMoidRequest) Execute() (*SmtpPolicy, *http.Response, e
 /*
 GetSmtpPolicyByMoid Read a 'smtp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSmtpPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSmtpPolicyByMoidRequest
 */
 func (a *SmtpApiService) GetSmtpPolicyByMoid(ctx context.Context, moid string) ApiGetSmtpPolicyByMoidRequest {
 	return ApiGetSmtpPolicyByMoidRequest{
@@ -695,7 +697,8 @@ func (a *SmtpApiService) GetSmtpPolicyByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return SmtpPolicy
+//
+//	@return SmtpPolicy
 func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -911,8 +914,8 @@ func (r ApiGetSmtpPolicyListRequest) Execute() (*SmtpPolicyResponse, *http.Respo
 /*
 GetSmtpPolicyList Read a 'smtp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSmtpPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSmtpPolicyListRequest
 */
 func (a *SmtpApiService) GetSmtpPolicyList(ctx context.Context) ApiGetSmtpPolicyListRequest {
 	return ApiGetSmtpPolicyListRequest{
@@ -922,7 +925,8 @@ func (a *SmtpApiService) GetSmtpPolicyList(ctx context.Context) ApiGetSmtpPolicy
 }
 
 // Execute executes the request
-//  @return SmtpPolicyResponse
+//
+//	@return SmtpPolicyResponse
 func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest) (*SmtpPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1109,9 +1113,9 @@ func (r ApiGetSmtpPolicyTestByMoidRequest) Execute() (*SmtpPolicyTest, *http.Res
 /*
 GetSmtpPolicyTestByMoid Read a 'smtp.PolicyTest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSmtpPolicyTestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSmtpPolicyTestByMoidRequest
 */
 func (a *SmtpApiService) GetSmtpPolicyTestByMoid(ctx context.Context, moid string) ApiGetSmtpPolicyTestByMoidRequest {
 	return ApiGetSmtpPolicyTestByMoidRequest{
@@ -1122,7 +1126,8 @@ func (a *SmtpApiService) GetSmtpPolicyTestByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return SmtpPolicyTest
+//
+//	@return SmtpPolicyTest
 func (a *SmtpApiService) GetSmtpPolicyTestByMoidExecute(r ApiGetSmtpPolicyTestByMoidRequest) (*SmtpPolicyTest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1338,8 +1343,8 @@ func (r ApiGetSmtpPolicyTestListRequest) Execute() (*SmtpPolicyTestResponse, *ht
 /*
 GetSmtpPolicyTestList Read a 'smtp.PolicyTest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSmtpPolicyTestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSmtpPolicyTestListRequest
 */
 func (a *SmtpApiService) GetSmtpPolicyTestList(ctx context.Context) ApiGetSmtpPolicyTestListRequest {
 	return ApiGetSmtpPolicyTestListRequest{
@@ -1349,7 +1354,8 @@ func (a *SmtpApiService) GetSmtpPolicyTestList(ctx context.Context) ApiGetSmtpPo
 }
 
 // Execute executes the request
-//  @return SmtpPolicyTestResponse
+//
+//	@return SmtpPolicyTestResponse
 func (a *SmtpApiService) GetSmtpPolicyTestListExecute(r ApiGetSmtpPolicyTestListRequest) (*SmtpPolicyTestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1550,9 +1556,9 @@ func (r ApiPatchSmtpPolicyRequest) Execute() (*SmtpPolicy, *http.Response, error
 /*
 PatchSmtpPolicy Update a 'smtp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSmtpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSmtpPolicyRequest
 */
 func (a *SmtpApiService) PatchSmtpPolicy(ctx context.Context, moid string) ApiPatchSmtpPolicyRequest {
 	return ApiPatchSmtpPolicyRequest{
@@ -1563,7 +1569,8 @@ func (a *SmtpApiService) PatchSmtpPolicy(ctx context.Context, moid string) ApiPa
 }
 
 // Execute executes the request
-//  @return SmtpPolicy
+//
+//	@return SmtpPolicy
 func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1725,9 +1732,9 @@ func (r ApiPatchSmtpPolicyTestRequest) Execute() (*SmtpPolicyTest, *http.Respons
 /*
 PatchSmtpPolicyTest Update a 'smtp.PolicyTest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSmtpPolicyTestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSmtpPolicyTestRequest
 */
 func (a *SmtpApiService) PatchSmtpPolicyTest(ctx context.Context, moid string) ApiPatchSmtpPolicyTestRequest {
 	return ApiPatchSmtpPolicyTestRequest{
@@ -1738,7 +1745,8 @@ func (a *SmtpApiService) PatchSmtpPolicyTest(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return SmtpPolicyTest
+//
+//	@return SmtpPolicyTest
 func (a *SmtpApiService) PatchSmtpPolicyTestExecute(r ApiPatchSmtpPolicyTestRequest) (*SmtpPolicyTest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1900,9 +1908,9 @@ func (r ApiUpdateSmtpPolicyRequest) Execute() (*SmtpPolicy, *http.Response, erro
 /*
 UpdateSmtpPolicy Update a 'smtp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSmtpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSmtpPolicyRequest
 */
 func (a *SmtpApiService) UpdateSmtpPolicy(ctx context.Context, moid string) ApiUpdateSmtpPolicyRequest {
 	return ApiUpdateSmtpPolicyRequest{
@@ -1913,7 +1921,8 @@ func (a *SmtpApiService) UpdateSmtpPolicy(ctx context.Context, moid string) ApiU
 }
 
 // Execute executes the request
-//  @return SmtpPolicy
+//
+//	@return SmtpPolicy
 func (a *SmtpApiService) UpdateSmtpPolicyExecute(r ApiUpdateSmtpPolicyRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2075,9 +2084,9 @@ func (r ApiUpdateSmtpPolicyTestRequest) Execute() (*SmtpPolicyTest, *http.Respon
 /*
 UpdateSmtpPolicyTest Update a 'smtp.PolicyTest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSmtpPolicyTestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSmtpPolicyTestRequest
 */
 func (a *SmtpApiService) UpdateSmtpPolicyTest(ctx context.Context, moid string) ApiUpdateSmtpPolicyTestRequest {
 	return ApiUpdateSmtpPolicyTestRequest{
@@ -2088,7 +2097,8 @@ func (a *SmtpApiService) UpdateSmtpPolicyTest(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return SmtpPolicyTest
+//
+//	@return SmtpPolicyTest
 func (a *SmtpApiService) UpdateSmtpPolicyTestExecute(r ApiUpdateSmtpPolicyTestRequest) (*SmtpPolicyTest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

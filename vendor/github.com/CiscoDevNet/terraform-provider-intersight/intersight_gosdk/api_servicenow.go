@@ -36,9 +36,9 @@ func (r ApiGetServicenowChangeRequestByMoidRequest) Execute() (*ServicenowChange
 /*
 GetServicenowChangeRequestByMoid Read a 'servicenow.ChangeRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServicenowChangeRequestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServicenowChangeRequestByMoidRequest
 */
 func (a *ServicenowApiService) GetServicenowChangeRequestByMoid(ctx context.Context, moid string) ApiGetServicenowChangeRequestByMoidRequest {
 	return ApiGetServicenowChangeRequestByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ServicenowApiService) GetServicenowChangeRequestByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ServicenowChangeRequest
+//
+//	@return ServicenowChangeRequest
 func (a *ServicenowApiService) GetServicenowChangeRequestByMoidExecute(r ApiGetServicenowChangeRequestByMoidRequest) (*ServicenowChangeRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -189,9 +190,9 @@ func (r ApiGetServicenowChangeRequestDocByMoidRequest) Execute() (*ServicenowCha
 /*
 GetServicenowChangeRequestDocByMoid Read a 'servicenow.ChangeRequestDoc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServicenowChangeRequestDocByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServicenowChangeRequestDocByMoidRequest
 */
 func (a *ServicenowApiService) GetServicenowChangeRequestDocByMoid(ctx context.Context, moid string) ApiGetServicenowChangeRequestDocByMoidRequest {
 	return ApiGetServicenowChangeRequestDocByMoidRequest{
@@ -202,7 +203,8 @@ func (a *ServicenowApiService) GetServicenowChangeRequestDocByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return ServicenowChangeRequestDoc
+//
+//	@return ServicenowChangeRequestDoc
 func (a *ServicenowApiService) GetServicenowChangeRequestDocByMoidExecute(r ApiGetServicenowChangeRequestDocByMoidRequest) (*ServicenowChangeRequestDoc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -418,8 +420,8 @@ func (r ApiGetServicenowChangeRequestDocListRequest) Execute() (*ServicenowChang
 /*
 GetServicenowChangeRequestDocList Read a 'servicenow.ChangeRequestDoc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServicenowChangeRequestDocListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServicenowChangeRequestDocListRequest
 */
 func (a *ServicenowApiService) GetServicenowChangeRequestDocList(ctx context.Context) ApiGetServicenowChangeRequestDocListRequest {
 	return ApiGetServicenowChangeRequestDocListRequest{
@@ -429,7 +431,8 @@ func (a *ServicenowApiService) GetServicenowChangeRequestDocList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ServicenowChangeRequestDocResponse
+//
+//	@return ServicenowChangeRequestDocResponse
 func (a *ServicenowApiService) GetServicenowChangeRequestDocListExecute(r ApiGetServicenowChangeRequestDocListRequest) (*ServicenowChangeRequestDocResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetServicenowChangeRequestListRequest) Execute() (*ServicenowChangeRe
 /*
 GetServicenowChangeRequestList Read a 'servicenow.ChangeRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServicenowChangeRequestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServicenowChangeRequestListRequest
 */
 func (a *ServicenowApiService) GetServicenowChangeRequestList(ctx context.Context) ApiGetServicenowChangeRequestListRequest {
 	return ApiGetServicenowChangeRequestListRequest{
@@ -703,7 +706,8 @@ func (a *ServicenowApiService) GetServicenowChangeRequestList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ServicenowChangeRequestResponse
+//
+//	@return ServicenowChangeRequestResponse
 func (a *ServicenowApiService) GetServicenowChangeRequestListExecute(r ApiGetServicenowChangeRequestListRequest) (*ServicenowChangeRequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetServicenowIncidentByMoidRequest) Execute() (*ServicenowIncident, *
 /*
 GetServicenowIncidentByMoid Read a 'servicenow.Incident' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServicenowIncidentByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServicenowIncidentByMoidRequest
 */
 func (a *ServicenowApiService) GetServicenowIncidentByMoid(ctx context.Context, moid string) ApiGetServicenowIncidentByMoidRequest {
 	return ApiGetServicenowIncidentByMoidRequest{
@@ -903,7 +907,8 @@ func (a *ServicenowApiService) GetServicenowIncidentByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return ServicenowIncident
+//
+//	@return ServicenowIncident
 func (a *ServicenowApiService) GetServicenowIncidentByMoidExecute(r ApiGetServicenowIncidentByMoidRequest) (*ServicenowIncident, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1043,9 +1048,9 @@ func (r ApiGetServicenowIncidentDocByMoidRequest) Execute() (*ServicenowIncident
 /*
 GetServicenowIncidentDocByMoid Read a 'servicenow.IncidentDoc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetServicenowIncidentDocByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetServicenowIncidentDocByMoidRequest
 */
 func (a *ServicenowApiService) GetServicenowIncidentDocByMoid(ctx context.Context, moid string) ApiGetServicenowIncidentDocByMoidRequest {
 	return ApiGetServicenowIncidentDocByMoidRequest{
@@ -1056,7 +1061,8 @@ func (a *ServicenowApiService) GetServicenowIncidentDocByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ServicenowIncidentDoc
+//
+//	@return ServicenowIncidentDoc
 func (a *ServicenowApiService) GetServicenowIncidentDocByMoidExecute(r ApiGetServicenowIncidentDocByMoidRequest) (*ServicenowIncidentDoc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1272,8 +1278,8 @@ func (r ApiGetServicenowIncidentDocListRequest) Execute() (*ServicenowIncidentDo
 /*
 GetServicenowIncidentDocList Read a 'servicenow.IncidentDoc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServicenowIncidentDocListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServicenowIncidentDocListRequest
 */
 func (a *ServicenowApiService) GetServicenowIncidentDocList(ctx context.Context) ApiGetServicenowIncidentDocListRequest {
 	return ApiGetServicenowIncidentDocListRequest{
@@ -1283,7 +1289,8 @@ func (a *ServicenowApiService) GetServicenowIncidentDocList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ServicenowIncidentDocResponse
+//
+//	@return ServicenowIncidentDocResponse
 func (a *ServicenowApiService) GetServicenowIncidentDocListExecute(r ApiGetServicenowIncidentDocListRequest) (*ServicenowIncidentDocResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1546,8 +1553,8 @@ func (r ApiGetServicenowIncidentListRequest) Execute() (*ServicenowIncidentRespo
 /*
 GetServicenowIncidentList Read a 'servicenow.Incident' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetServicenowIncidentListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServicenowIncidentListRequest
 */
 func (a *ServicenowApiService) GetServicenowIncidentList(ctx context.Context) ApiGetServicenowIncidentListRequest {
 	return ApiGetServicenowIncidentListRequest{
@@ -1557,7 +1564,8 @@ func (a *ServicenowApiService) GetServicenowIncidentList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return ServicenowIncidentResponse
+//
+//	@return ServicenowIncidentResponse
 func (a *ServicenowApiService) GetServicenowIncidentListExecute(r ApiGetServicenowIncidentListRequest) (*ServicenowIncidentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

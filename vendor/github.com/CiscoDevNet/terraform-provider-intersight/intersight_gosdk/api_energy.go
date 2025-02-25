@@ -55,8 +55,8 @@ func (r ApiCreateEnergyMetricsRequest) Execute() (*EnergyMetrics, *http.Response
 /*
 CreateEnergyMetrics Create a 'energy.Metrics' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateEnergyMetricsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateEnergyMetricsRequest
 */
 func (a *EnergyApiService) CreateEnergyMetrics(ctx context.Context) ApiCreateEnergyMetricsRequest {
 	return ApiCreateEnergyMetricsRequest{
@@ -66,7 +66,8 @@ func (a *EnergyApiService) CreateEnergyMetrics(ctx context.Context) ApiCreateEne
 }
 
 // Execute executes the request
-//  @return EnergyMetrics
+//
+//	@return EnergyMetrics
 func (a *EnergyApiService) CreateEnergyMetricsExecute(r ApiCreateEnergyMetricsRequest) (*EnergyMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

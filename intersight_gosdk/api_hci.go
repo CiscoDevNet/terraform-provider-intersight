@@ -36,9 +36,9 @@ func (r ApiGetHciAlarmByMoidRequest) Execute() (*HciAlarm, *http.Response, error
 /*
 GetHciAlarmByMoid Read a 'hci.Alarm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciAlarmByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciAlarmByMoidRequest
 */
 func (a *HciApiService) GetHciAlarmByMoid(ctx context.Context, moid string) ApiGetHciAlarmByMoidRequest {
 	return ApiGetHciAlarmByMoidRequest{
@@ -49,7 +49,8 @@ func (a *HciApiService) GetHciAlarmByMoid(ctx context.Context, moid string) ApiG
 }
 
 // Execute executes the request
-//  @return HciAlarm
+//
+//	@return HciAlarm
 func (a *HciApiService) GetHciAlarmByMoidExecute(r ApiGetHciAlarmByMoidRequest) (*HciAlarm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetHciAlarmListRequest) Execute() (*HciAlarmResponse, *http.Response,
 /*
 GetHciAlarmList Read a 'hci.Alarm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciAlarmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciAlarmListRequest
 */
 func (a *HciApiService) GetHciAlarmList(ctx context.Context) ApiGetHciAlarmListRequest {
 	return ApiGetHciAlarmListRequest{
@@ -276,7 +277,8 @@ func (a *HciApiService) GetHciAlarmList(ctx context.Context) ApiGetHciAlarmListR
 }
 
 // Execute executes the request
-//  @return HciAlarmResponse
+//
+//	@return HciAlarmResponse
 func (a *HciApiService) GetHciAlarmListExecute(r ApiGetHciAlarmListRequest) (*HciAlarmResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetHciClusterByMoidRequest) Execute() (*HciCluster, *http.Response, e
 /*
 GetHciClusterByMoid Read a 'hci.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciClusterByMoidRequest
 */
 func (a *HciApiService) GetHciClusterByMoid(ctx context.Context, moid string) ApiGetHciClusterByMoidRequest {
 	return ApiGetHciClusterByMoidRequest{
@@ -476,7 +478,8 @@ func (a *HciApiService) GetHciClusterByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return HciCluster
+//
+//	@return HciCluster
 func (a *HciApiService) GetHciClusterByMoidExecute(r ApiGetHciClusterByMoidRequest) (*HciCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetHciClusterListRequest) Execute() (*HciClusterResponse, *http.Respo
 /*
 GetHciClusterList Read a 'hci.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciClusterListRequest
 */
 func (a *HciApiService) GetHciClusterList(ctx context.Context) ApiGetHciClusterListRequest {
 	return ApiGetHciClusterListRequest{
@@ -703,7 +706,8 @@ func (a *HciApiService) GetHciClusterList(ctx context.Context) ApiGetHciClusterL
 }
 
 // Execute executes the request
-//  @return HciClusterResponse
+//
+//	@return HciClusterResponse
 func (a *HciApiService) GetHciClusterListExecute(r ApiGetHciClusterListRequest) (*HciClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetHciComplianceByMoidRequest) Execute() (*HciCompliance, *http.Respo
 /*
 GetHciComplianceByMoid Read a 'hci.Compliance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciComplianceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciComplianceByMoidRequest
 */
 func (a *HciApiService) GetHciComplianceByMoid(ctx context.Context, moid string) ApiGetHciComplianceByMoidRequest {
 	return ApiGetHciComplianceByMoidRequest{
@@ -903,7 +907,8 @@ func (a *HciApiService) GetHciComplianceByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return HciCompliance
+//
+//	@return HciCompliance
 func (a *HciApiService) GetHciComplianceByMoidExecute(r ApiGetHciComplianceByMoidRequest) (*HciCompliance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetHciComplianceListRequest) Execute() (*HciComplianceResponse, *http
 /*
 GetHciComplianceList Read a 'hci.Compliance' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciComplianceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciComplianceListRequest
 */
 func (a *HciApiService) GetHciComplianceList(ctx context.Context) ApiGetHciComplianceListRequest {
 	return ApiGetHciComplianceListRequest{
@@ -1130,7 +1135,8 @@ func (a *HciApiService) GetHciComplianceList(ctx context.Context) ApiGetHciCompl
 }
 
 // Execute executes the request
-//  @return HciComplianceResponse
+//
+//	@return HciComplianceResponse
 func (a *HciApiService) GetHciComplianceListExecute(r ApiGetHciComplianceListRequest) (*HciComplianceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1317,9 +1323,9 @@ func (r ApiGetHciDiskByMoidRequest) Execute() (*HciDisk, *http.Response, error) 
 /*
 GetHciDiskByMoid Read a 'hci.Disk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciDiskByMoidRequest
 */
 func (a *HciApiService) GetHciDiskByMoid(ctx context.Context, moid string) ApiGetHciDiskByMoidRequest {
 	return ApiGetHciDiskByMoidRequest{
@@ -1330,7 +1336,8 @@ func (a *HciApiService) GetHciDiskByMoid(ctx context.Context, moid string) ApiGe
 }
 
 // Execute executes the request
-//  @return HciDisk
+//
+//	@return HciDisk
 func (a *HciApiService) GetHciDiskByMoidExecute(r ApiGetHciDiskByMoidRequest) (*HciDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1546,8 +1553,8 @@ func (r ApiGetHciDiskListRequest) Execute() (*HciDiskResponse, *http.Response, e
 /*
 GetHciDiskList Read a 'hci.Disk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciDiskListRequest
 */
 func (a *HciApiService) GetHciDiskList(ctx context.Context) ApiGetHciDiskListRequest {
 	return ApiGetHciDiskListRequest{
@@ -1557,7 +1564,8 @@ func (a *HciApiService) GetHciDiskList(ctx context.Context) ApiGetHciDiskListReq
 }
 
 // Execute executes the request
-//  @return HciDiskResponse
+//
+//	@return HciDiskResponse
 func (a *HciApiService) GetHciDiskListExecute(r ApiGetHciDiskListRequest) (*HciDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1744,9 +1752,9 @@ func (r ApiGetHciDomainManagerByMoidRequest) Execute() (*HciDomainManager, *http
 /*
 GetHciDomainManagerByMoid Read a 'hci.DomainManager' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciDomainManagerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciDomainManagerByMoidRequest
 */
 func (a *HciApiService) GetHciDomainManagerByMoid(ctx context.Context, moid string) ApiGetHciDomainManagerByMoidRequest {
 	return ApiGetHciDomainManagerByMoidRequest{
@@ -1757,7 +1765,8 @@ func (a *HciApiService) GetHciDomainManagerByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return HciDomainManager
+//
+//	@return HciDomainManager
 func (a *HciApiService) GetHciDomainManagerByMoidExecute(r ApiGetHciDomainManagerByMoidRequest) (*HciDomainManager, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1973,8 +1982,8 @@ func (r ApiGetHciDomainManagerListRequest) Execute() (*HciDomainManagerResponse,
 /*
 GetHciDomainManagerList Read a 'hci.DomainManager' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciDomainManagerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciDomainManagerListRequest
 */
 func (a *HciApiService) GetHciDomainManagerList(ctx context.Context) ApiGetHciDomainManagerListRequest {
 	return ApiGetHciDomainManagerListRequest{
@@ -1984,7 +1993,8 @@ func (a *HciApiService) GetHciDomainManagerList(ctx context.Context) ApiGetHciDo
 }
 
 // Execute executes the request
-//  @return HciDomainManagerResponse
+//
+//	@return HciDomainManagerResponse
 func (a *HciApiService) GetHciDomainManagerListExecute(r ApiGetHciDomainManagerListRequest) (*HciDomainManagerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2171,9 +2181,9 @@ func (r ApiGetHciEntitlementByMoidRequest) Execute() (*HciEntitlement, *http.Res
 /*
 GetHciEntitlementByMoid Read a 'hci.Entitlement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciEntitlementByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciEntitlementByMoidRequest
 */
 func (a *HciApiService) GetHciEntitlementByMoid(ctx context.Context, moid string) ApiGetHciEntitlementByMoidRequest {
 	return ApiGetHciEntitlementByMoidRequest{
@@ -2184,7 +2194,8 @@ func (a *HciApiService) GetHciEntitlementByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return HciEntitlement
+//
+//	@return HciEntitlement
 func (a *HciApiService) GetHciEntitlementByMoidExecute(r ApiGetHciEntitlementByMoidRequest) (*HciEntitlement, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2400,8 +2411,8 @@ func (r ApiGetHciEntitlementListRequest) Execute() (*HciEntitlementResponse, *ht
 /*
 GetHciEntitlementList Read a 'hci.Entitlement' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciEntitlementListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciEntitlementListRequest
 */
 func (a *HciApiService) GetHciEntitlementList(ctx context.Context) ApiGetHciEntitlementListRequest {
 	return ApiGetHciEntitlementListRequest{
@@ -2411,7 +2422,8 @@ func (a *HciApiService) GetHciEntitlementList(ctx context.Context) ApiGetHciEnti
 }
 
 // Execute executes the request
-//  @return HciEntitlementResponse
+//
+//	@return HciEntitlementResponse
 func (a *HciApiService) GetHciEntitlementListExecute(r ApiGetHciEntitlementListRequest) (*HciEntitlementResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2598,9 +2610,9 @@ func (r ApiGetHciGpuByMoidRequest) Execute() (*HciGpu, *http.Response, error) {
 /*
 GetHciGpuByMoid Read a 'hci.Gpu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciGpuByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciGpuByMoidRequest
 */
 func (a *HciApiService) GetHciGpuByMoid(ctx context.Context, moid string) ApiGetHciGpuByMoidRequest {
 	return ApiGetHciGpuByMoidRequest{
@@ -2611,7 +2623,8 @@ func (a *HciApiService) GetHciGpuByMoid(ctx context.Context, moid string) ApiGet
 }
 
 // Execute executes the request
-//  @return HciGpu
+//
+//	@return HciGpu
 func (a *HciApiService) GetHciGpuByMoidExecute(r ApiGetHciGpuByMoidRequest) (*HciGpu, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2827,8 +2840,8 @@ func (r ApiGetHciGpuListRequest) Execute() (*HciGpuResponse, *http.Response, err
 /*
 GetHciGpuList Read a 'hci.Gpu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciGpuListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciGpuListRequest
 */
 func (a *HciApiService) GetHciGpuList(ctx context.Context) ApiGetHciGpuListRequest {
 	return ApiGetHciGpuListRequest{
@@ -2838,7 +2851,8 @@ func (a *HciApiService) GetHciGpuList(ctx context.Context) ApiGetHciGpuListReque
 }
 
 // Execute executes the request
-//  @return HciGpuResponse
+//
+//	@return HciGpuResponse
 func (a *HciApiService) GetHciGpuListExecute(r ApiGetHciGpuListRequest) (*HciGpuResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3025,9 +3039,9 @@ func (r ApiGetHciLicenseByMoidRequest) Execute() (*HciLicense, *http.Response, e
 /*
 GetHciLicenseByMoid Read a 'hci.License' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciLicenseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciLicenseByMoidRequest
 */
 func (a *HciApiService) GetHciLicenseByMoid(ctx context.Context, moid string) ApiGetHciLicenseByMoidRequest {
 	return ApiGetHciLicenseByMoidRequest{
@@ -3038,7 +3052,8 @@ func (a *HciApiService) GetHciLicenseByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return HciLicense
+//
+//	@return HciLicense
 func (a *HciApiService) GetHciLicenseByMoidExecute(r ApiGetHciLicenseByMoidRequest) (*HciLicense, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3254,8 +3269,8 @@ func (r ApiGetHciLicenseListRequest) Execute() (*HciLicenseResponse, *http.Respo
 /*
 GetHciLicenseList Read a 'hci.License' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciLicenseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciLicenseListRequest
 */
 func (a *HciApiService) GetHciLicenseList(ctx context.Context) ApiGetHciLicenseListRequest {
 	return ApiGetHciLicenseListRequest{
@@ -3265,7 +3280,8 @@ func (a *HciApiService) GetHciLicenseList(ctx context.Context) ApiGetHciLicenseL
 }
 
 // Execute executes the request
-//  @return HciLicenseResponse
+//
+//	@return HciLicenseResponse
 func (a *HciApiService) GetHciLicenseListExecute(r ApiGetHciLicenseListRequest) (*HciLicenseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3452,9 +3468,9 @@ func (r ApiGetHciNodeByMoidRequest) Execute() (*HciNode, *http.Response, error) 
 /*
 GetHciNodeByMoid Read a 'hci.Node' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciNodeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciNodeByMoidRequest
 */
 func (a *HciApiService) GetHciNodeByMoid(ctx context.Context, moid string) ApiGetHciNodeByMoidRequest {
 	return ApiGetHciNodeByMoidRequest{
@@ -3465,7 +3481,8 @@ func (a *HciApiService) GetHciNodeByMoid(ctx context.Context, moid string) ApiGe
 }
 
 // Execute executes the request
-//  @return HciNode
+//
+//	@return HciNode
 func (a *HciApiService) GetHciNodeByMoidExecute(r ApiGetHciNodeByMoidRequest) (*HciNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3681,8 +3698,8 @@ func (r ApiGetHciNodeListRequest) Execute() (*HciNodeResponse, *http.Response, e
 /*
 GetHciNodeList Read a 'hci.Node' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciNodeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciNodeListRequest
 */
 func (a *HciApiService) GetHciNodeList(ctx context.Context) ApiGetHciNodeListRequest {
 	return ApiGetHciNodeListRequest{
@@ -3692,7 +3709,8 @@ func (a *HciApiService) GetHciNodeList(ctx context.Context) ApiGetHciNodeListReq
 }
 
 // Execute executes the request
-//  @return HciNodeResponse
+//
+//	@return HciNodeResponse
 func (a *HciApiService) GetHciNodeListExecute(r ApiGetHciNodeListRequest) (*HciNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3879,9 +3897,9 @@ func (r ApiGetHciViolationByMoidRequest) Execute() (*HciViolation, *http.Respons
 /*
 GetHciViolationByMoid Read a 'hci.Violation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHciViolationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHciViolationByMoidRequest
 */
 func (a *HciApiService) GetHciViolationByMoid(ctx context.Context, moid string) ApiGetHciViolationByMoidRequest {
 	return ApiGetHciViolationByMoidRequest{
@@ -3892,7 +3910,8 @@ func (a *HciApiService) GetHciViolationByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return HciViolation
+//
+//	@return HciViolation
 func (a *HciApiService) GetHciViolationByMoidExecute(r ApiGetHciViolationByMoidRequest) (*HciViolation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4108,8 +4127,8 @@ func (r ApiGetHciViolationListRequest) Execute() (*HciViolationResponse, *http.R
 /*
 GetHciViolationList Read a 'hci.Violation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHciViolationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHciViolationListRequest
 */
 func (a *HciApiService) GetHciViolationList(ctx context.Context) ApiGetHciViolationListRequest {
 	return ApiGetHciViolationListRequest{
@@ -4119,7 +4138,8 @@ func (a *HciApiService) GetHciViolationList(ctx context.Context) ApiGetHciViolat
 }
 
 // Execute executes the request
-//  @return HciViolationResponse
+//
+//	@return HciViolationResponse
 func (a *HciApiService) GetHciViolationListExecute(r ApiGetHciViolationListRequest) (*HciViolationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4320,9 +4340,9 @@ func (r ApiPatchHciClusterRequest) Execute() (*HciCluster, *http.Response, error
 /*
 PatchHciCluster Update a 'hci.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHciClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHciClusterRequest
 */
 func (a *HciApiService) PatchHciCluster(ctx context.Context, moid string) ApiPatchHciClusterRequest {
 	return ApiPatchHciClusterRequest{
@@ -4333,7 +4353,8 @@ func (a *HciApiService) PatchHciCluster(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//  @return HciCluster
+//
+//	@return HciCluster
 func (a *HciApiService) PatchHciClusterExecute(r ApiPatchHciClusterRequest) (*HciCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4495,9 +4516,9 @@ func (r ApiPatchHciNodeRequest) Execute() (*HciNode, *http.Response, error) {
 /*
 PatchHciNode Update a 'hci.Node' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHciNodeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHciNodeRequest
 */
 func (a *HciApiService) PatchHciNode(ctx context.Context, moid string) ApiPatchHciNodeRequest {
 	return ApiPatchHciNodeRequest{
@@ -4508,7 +4529,8 @@ func (a *HciApiService) PatchHciNode(ctx context.Context, moid string) ApiPatchH
 }
 
 // Execute executes the request
-//  @return HciNode
+//
+//	@return HciNode
 func (a *HciApiService) PatchHciNodeExecute(r ApiPatchHciNodeRequest) (*HciNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4670,9 +4692,9 @@ func (r ApiUpdateHciClusterRequest) Execute() (*HciCluster, *http.Response, erro
 /*
 UpdateHciCluster Update a 'hci.Cluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHciClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHciClusterRequest
 */
 func (a *HciApiService) UpdateHciCluster(ctx context.Context, moid string) ApiUpdateHciClusterRequest {
 	return ApiUpdateHciClusterRequest{
@@ -4683,7 +4705,8 @@ func (a *HciApiService) UpdateHciCluster(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//  @return HciCluster
+//
+//	@return HciCluster
 func (a *HciApiService) UpdateHciClusterExecute(r ApiUpdateHciClusterRequest) (*HciCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4845,9 +4868,9 @@ func (r ApiUpdateHciNodeRequest) Execute() (*HciNode, *http.Response, error) {
 /*
 UpdateHciNode Update a 'hci.Node' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHciNodeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHciNodeRequest
 */
 func (a *HciApiService) UpdateHciNode(ctx context.Context, moid string) ApiUpdateHciNodeRequest {
 	return ApiUpdateHciNodeRequest{
@@ -4858,7 +4881,8 @@ func (a *HciApiService) UpdateHciNode(ctx context.Context, moid string) ApiUpdat
 }
 
 // Execute executes the request
-//  @return HciNode
+//
+//	@return HciNode
 func (a *HciApiService) UpdateHciNodeExecute(r ApiUpdateHciNodeRequest) (*HciNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

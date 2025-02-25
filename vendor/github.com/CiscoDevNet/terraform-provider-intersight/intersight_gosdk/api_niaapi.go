@@ -36,9 +36,9 @@ func (r ApiGetNiaapiApicCcoPostByMoidRequest) Execute() (*NiaapiApicCcoPost, *ht
 /*
 GetNiaapiApicCcoPostByMoid Read a 'niaapi.ApicCcoPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiApicCcoPostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiApicCcoPostByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoid(ctx context.Context, moid string) ApiGetNiaapiApicCcoPostByMoidRequest {
 	return ApiGetNiaapiApicCcoPostByMoidRequest{
@@ -49,7 +49,8 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return NiaapiApicCcoPost
+//
+//	@return NiaapiApicCcoPost
 func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicCcoPostByMoidRequest) (*NiaapiApicCcoPost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetNiaapiApicCcoPostListRequest) Execute() (*NiaapiApicCcoPostRespons
 /*
 GetNiaapiApicCcoPostList Read a 'niaapi.ApicCcoPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiApicCcoPostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiApicCcoPostListRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicCcoPostList(ctx context.Context) ApiGetNiaapiApicCcoPostListRequest {
 	return ApiGetNiaapiApicCcoPostListRequest{
@@ -276,7 +277,8 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostList(ctx context.Context) ApiGetN
 }
 
 // Execute executes the request
-//  @return NiaapiApicCcoPostResponse
+//
+//	@return NiaapiApicCcoPostResponse
 func (a *NiaapiApiService) GetNiaapiApicCcoPostListExecute(r ApiGetNiaapiApicCcoPostListRequest) (*NiaapiApicCcoPostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetNiaapiApicFieldNoticeByMoidRequest) Execute() (*NiaapiApicFieldNot
 /*
 GetNiaapiApicFieldNoticeByMoid Read a 'niaapi.ApicFieldNotice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiApicFieldNoticeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiApicFieldNoticeByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoid(ctx context.Context, moid string) ApiGetNiaapiApicFieldNoticeByMoidRequest {
 	return ApiGetNiaapiApicFieldNoticeByMoidRequest{
@@ -476,7 +478,8 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return NiaapiApicFieldNotice
+//
+//	@return NiaapiApicFieldNotice
 func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiApicFieldNoticeByMoidRequest) (*NiaapiApicFieldNotice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetNiaapiApicFieldNoticeListRequest) Execute() (*NiaapiApicFieldNotic
 /*
 GetNiaapiApicFieldNoticeList Read a 'niaapi.ApicFieldNotice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiApicFieldNoticeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiApicFieldNoticeListRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicFieldNoticeList(ctx context.Context) ApiGetNiaapiApicFieldNoticeListRequest {
 	return ApiGetNiaapiApicFieldNoticeListRequest{
@@ -703,7 +706,8 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return NiaapiApicFieldNoticeResponse
+//
+//	@return NiaapiApicFieldNoticeResponse
 func (a *NiaapiApiService) GetNiaapiApicFieldNoticeListExecute(r ApiGetNiaapiApicFieldNoticeListRequest) (*NiaapiApicFieldNoticeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetNiaapiApicHweolByMoidRequest) Execute() (*NiaapiApicHweol, *http.R
 /*
 GetNiaapiApicHweolByMoid Read a 'niaapi.ApicHweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiApicHweolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiApicHweolByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicHweolByMoid(ctx context.Context, moid string) ApiGetNiaapiApicHweolByMoidRequest {
 	return ApiGetNiaapiApicHweolByMoidRequest{
@@ -903,7 +907,8 @@ func (a *NiaapiApiService) GetNiaapiApicHweolByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return NiaapiApicHweol
+//
+//	@return NiaapiApicHweol
 func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHweolByMoidRequest) (*NiaapiApicHweol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetNiaapiApicHweolListRequest) Execute() (*NiaapiApicHweolResponse, *
 /*
 GetNiaapiApicHweolList Read a 'niaapi.ApicHweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiApicHweolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiApicHweolListRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicHweolList(ctx context.Context) ApiGetNiaapiApicHweolListRequest {
 	return ApiGetNiaapiApicHweolListRequest{
@@ -1130,7 +1135,8 @@ func (a *NiaapiApiService) GetNiaapiApicHweolList(ctx context.Context) ApiGetNia
 }
 
 // Execute executes the request
-//  @return NiaapiApicHweolResponse
+//
+//	@return NiaapiApicHweolResponse
 func (a *NiaapiApiService) GetNiaapiApicHweolListExecute(r ApiGetNiaapiApicHweolListRequest) (*NiaapiApicHweolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1317,9 +1323,9 @@ func (r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) Execute() (*Niaapi
 /*
 GetNiaapiApicLatestMaintainedReleaseByMoid Read a 'niaapi.ApicLatestMaintainedRelease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoid(ctx context.Context, moid string) ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest {
 	return ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest{
@@ -1330,7 +1336,8 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiaapiApicLatestMaintainedRelease
+//
+//	@return NiaapiApicLatestMaintainedRelease
 func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) (*NiaapiApicLatestMaintainedRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1546,8 +1553,8 @@ func (r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) Execute() (*NiaapiAp
 /*
 GetNiaapiApicLatestMaintainedReleaseList Read a 'niaapi.ApicLatestMaintainedRelease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiApicLatestMaintainedReleaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiApicLatestMaintainedReleaseListRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseList(ctx context.Context) ApiGetNiaapiApicLatestMaintainedReleaseListRequest {
 	return ApiGetNiaapiApicLatestMaintainedReleaseListRequest{
@@ -1557,7 +1564,8 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiaapiApicLatestMaintainedReleaseResponse
+//
+//	@return NiaapiApicLatestMaintainedReleaseResponse
 func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseListExecute(r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) (*NiaapiApicLatestMaintainedReleaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1744,9 +1752,9 @@ func (r ApiGetNiaapiApicReleaseRecommendByMoidRequest) Execute() (*NiaapiApicRel
 /*
 GetNiaapiApicReleaseRecommendByMoid Read a 'niaapi.ApicReleaseRecommend' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiApicReleaseRecommendByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiApicReleaseRecommendByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoid(ctx context.Context, moid string) ApiGetNiaapiApicReleaseRecommendByMoidRequest {
 	return ApiGetNiaapiApicReleaseRecommendByMoidRequest{
@@ -1757,7 +1765,8 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return NiaapiApicReleaseRecommend
+//
+//	@return NiaapiApicReleaseRecommend
 func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNiaapiApicReleaseRecommendByMoidRequest) (*NiaapiApicReleaseRecommend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1973,8 +1982,8 @@ func (r ApiGetNiaapiApicReleaseRecommendListRequest) Execute() (*NiaapiApicRelea
 /*
 GetNiaapiApicReleaseRecommendList Read a 'niaapi.ApicReleaseRecommend' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiApicReleaseRecommendListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiApicReleaseRecommendListRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendList(ctx context.Context) ApiGetNiaapiApicReleaseRecommendListRequest {
 	return ApiGetNiaapiApicReleaseRecommendListRequest{
@@ -1984,7 +1993,8 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return NiaapiApicReleaseRecommendResponse
+//
+//	@return NiaapiApicReleaseRecommendResponse
 func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendListExecute(r ApiGetNiaapiApicReleaseRecommendListRequest) (*NiaapiApicReleaseRecommendResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2171,9 +2181,9 @@ func (r ApiGetNiaapiApicSweolByMoidRequest) Execute() (*NiaapiApicSweol, *http.R
 /*
 GetNiaapiApicSweolByMoid Read a 'niaapi.ApicSweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiApicSweolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiApicSweolByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicSweolByMoid(ctx context.Context, moid string) ApiGetNiaapiApicSweolByMoidRequest {
 	return ApiGetNiaapiApicSweolByMoidRequest{
@@ -2184,7 +2194,8 @@ func (a *NiaapiApiService) GetNiaapiApicSweolByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return NiaapiApicSweol
+//
+//	@return NiaapiApicSweol
 func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSweolByMoidRequest) (*NiaapiApicSweol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2400,8 +2411,8 @@ func (r ApiGetNiaapiApicSweolListRequest) Execute() (*NiaapiApicSweolResponse, *
 /*
 GetNiaapiApicSweolList Read a 'niaapi.ApicSweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiApicSweolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiApicSweolListRequest
 */
 func (a *NiaapiApiService) GetNiaapiApicSweolList(ctx context.Context) ApiGetNiaapiApicSweolListRequest {
 	return ApiGetNiaapiApicSweolListRequest{
@@ -2411,7 +2422,8 @@ func (a *NiaapiApiService) GetNiaapiApicSweolList(ctx context.Context) ApiGetNia
 }
 
 // Execute executes the request
-//  @return NiaapiApicSweolResponse
+//
+//	@return NiaapiApicSweolResponse
 func (a *NiaapiApiService) GetNiaapiApicSweolListExecute(r ApiGetNiaapiApicSweolListRequest) (*NiaapiApicSweolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2598,9 +2610,9 @@ func (r ApiGetNiaapiDcnmCcoPostByMoidRequest) Execute() (*NiaapiDcnmCcoPost, *ht
 /*
 GetNiaapiDcnmCcoPostByMoid Read a 'niaapi.DcnmCcoPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiDcnmCcoPostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiDcnmCcoPostByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoid(ctx context.Context, moid string) ApiGetNiaapiDcnmCcoPostByMoidRequest {
 	return ApiGetNiaapiDcnmCcoPostByMoidRequest{
@@ -2611,7 +2623,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmCcoPost
+//
+//	@return NiaapiDcnmCcoPost
 func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmCcoPostByMoidRequest) (*NiaapiDcnmCcoPost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2827,8 +2840,8 @@ func (r ApiGetNiaapiDcnmCcoPostListRequest) Execute() (*NiaapiDcnmCcoPostRespons
 /*
 GetNiaapiDcnmCcoPostList Read a 'niaapi.DcnmCcoPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiDcnmCcoPostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiDcnmCcoPostListRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmCcoPostList(ctx context.Context) ApiGetNiaapiDcnmCcoPostListRequest {
 	return ApiGetNiaapiDcnmCcoPostListRequest{
@@ -2838,7 +2851,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostList(ctx context.Context) ApiGetN
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmCcoPostResponse
+//
+//	@return NiaapiDcnmCcoPostResponse
 func (a *NiaapiApiService) GetNiaapiDcnmCcoPostListExecute(r ApiGetNiaapiDcnmCcoPostListRequest) (*NiaapiDcnmCcoPostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3025,9 +3039,9 @@ func (r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) Execute() (*NiaapiDcnmFieldNot
 /*
 GetNiaapiDcnmFieldNoticeByMoid Read a 'niaapi.DcnmFieldNotice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiDcnmFieldNoticeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiDcnmFieldNoticeByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoid(ctx context.Context, moid string) ApiGetNiaapiDcnmFieldNoticeByMoidRequest {
 	return ApiGetNiaapiDcnmFieldNoticeByMoidRequest{
@@ -3038,7 +3052,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmFieldNotice
+//
+//	@return NiaapiDcnmFieldNotice
 func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) (*NiaapiDcnmFieldNotice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3254,8 +3269,8 @@ func (r ApiGetNiaapiDcnmFieldNoticeListRequest) Execute() (*NiaapiDcnmFieldNotic
 /*
 GetNiaapiDcnmFieldNoticeList Read a 'niaapi.DcnmFieldNotice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiDcnmFieldNoticeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiDcnmFieldNoticeListRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeList(ctx context.Context) ApiGetNiaapiDcnmFieldNoticeListRequest {
 	return ApiGetNiaapiDcnmFieldNoticeListRequest{
@@ -3265,7 +3280,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmFieldNoticeResponse
+//
+//	@return NiaapiDcnmFieldNoticeResponse
 func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeListExecute(r ApiGetNiaapiDcnmFieldNoticeListRequest) (*NiaapiDcnmFieldNoticeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3452,9 +3468,9 @@ func (r ApiGetNiaapiDcnmHweolByMoidRequest) Execute() (*NiaapiDcnmHweol, *http.R
 /*
 GetNiaapiDcnmHweolByMoid Read a 'niaapi.DcnmHweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiDcnmHweolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiDcnmHweolByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoid(ctx context.Context, moid string) ApiGetNiaapiDcnmHweolByMoidRequest {
 	return ApiGetNiaapiDcnmHweolByMoidRequest{
@@ -3465,7 +3481,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmHweol
+//
+//	@return NiaapiDcnmHweol
 func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHweolByMoidRequest) (*NiaapiDcnmHweol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3681,8 +3698,8 @@ func (r ApiGetNiaapiDcnmHweolListRequest) Execute() (*NiaapiDcnmHweolResponse, *
 /*
 GetNiaapiDcnmHweolList Read a 'niaapi.DcnmHweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiDcnmHweolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiDcnmHweolListRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmHweolList(ctx context.Context) ApiGetNiaapiDcnmHweolListRequest {
 	return ApiGetNiaapiDcnmHweolListRequest{
@@ -3692,7 +3709,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolList(ctx context.Context) ApiGetNia
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmHweolResponse
+//
+//	@return NiaapiDcnmHweolResponse
 func (a *NiaapiApiService) GetNiaapiDcnmHweolListExecute(r ApiGetNiaapiDcnmHweolListRequest) (*NiaapiDcnmHweolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3879,9 +3897,9 @@ func (r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) Execute() (*Niaapi
 /*
 GetNiaapiDcnmLatestMaintainedReleaseByMoid Read a 'niaapi.DcnmLatestMaintainedRelease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx context.Context, moid string) ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest {
 	return ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest{
@@ -3892,7 +3910,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmLatestMaintainedRelease
+//
+//	@return NiaapiDcnmLatestMaintainedRelease
 func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) (*NiaapiDcnmLatestMaintainedRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4108,8 +4127,8 @@ func (r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) Execute() (*NiaapiDc
 /*
 GetNiaapiDcnmLatestMaintainedReleaseList Read a 'niaapi.DcnmLatestMaintainedRelease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseList(ctx context.Context) ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest {
 	return ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest{
@@ -4119,7 +4138,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseList(ctx context.
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmLatestMaintainedReleaseResponse
+//
+//	@return NiaapiDcnmLatestMaintainedReleaseResponse
 func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseListExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) (*NiaapiDcnmLatestMaintainedReleaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4306,9 +4326,9 @@ func (r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) Execute() (*NiaapiDcnmRel
 /*
 GetNiaapiDcnmReleaseRecommendByMoid Read a 'niaapi.DcnmReleaseRecommend' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiDcnmReleaseRecommendByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiDcnmReleaseRecommendByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoid(ctx context.Context, moid string) ApiGetNiaapiDcnmReleaseRecommendByMoidRequest {
 	return ApiGetNiaapiDcnmReleaseRecommendByMoidRequest{
@@ -4319,7 +4339,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmReleaseRecommend
+//
+//	@return NiaapiDcnmReleaseRecommend
 func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) (*NiaapiDcnmReleaseRecommend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4535,8 +4556,8 @@ func (r ApiGetNiaapiDcnmReleaseRecommendListRequest) Execute() (*NiaapiDcnmRelea
 /*
 GetNiaapiDcnmReleaseRecommendList Read a 'niaapi.DcnmReleaseRecommend' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiDcnmReleaseRecommendListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiDcnmReleaseRecommendListRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendList(ctx context.Context) ApiGetNiaapiDcnmReleaseRecommendListRequest {
 	return ApiGetNiaapiDcnmReleaseRecommendListRequest{
@@ -4546,7 +4567,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmReleaseRecommendResponse
+//
+//	@return NiaapiDcnmReleaseRecommendResponse
 func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendListExecute(r ApiGetNiaapiDcnmReleaseRecommendListRequest) (*NiaapiDcnmReleaseRecommendResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4733,9 +4755,9 @@ func (r ApiGetNiaapiDcnmSweolByMoidRequest) Execute() (*NiaapiDcnmSweol, *http.R
 /*
 GetNiaapiDcnmSweolByMoid Read a 'niaapi.DcnmSweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiDcnmSweolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiDcnmSweolByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoid(ctx context.Context, moid string) ApiGetNiaapiDcnmSweolByMoidRequest {
 	return ApiGetNiaapiDcnmSweolByMoidRequest{
@@ -4746,7 +4768,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmSweol
+//
+//	@return NiaapiDcnmSweol
 func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSweolByMoidRequest) (*NiaapiDcnmSweol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4962,8 +4985,8 @@ func (r ApiGetNiaapiDcnmSweolListRequest) Execute() (*NiaapiDcnmSweolResponse, *
 /*
 GetNiaapiDcnmSweolList Read a 'niaapi.DcnmSweol' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiDcnmSweolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiDcnmSweolListRequest
 */
 func (a *NiaapiApiService) GetNiaapiDcnmSweolList(ctx context.Context) ApiGetNiaapiDcnmSweolListRequest {
 	return ApiGetNiaapiDcnmSweolListRequest{
@@ -4973,7 +4996,8 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolList(ctx context.Context) ApiGetNia
 }
 
 // Execute executes the request
-//  @return NiaapiDcnmSweolResponse
+//
+//	@return NiaapiDcnmSweolResponse
 func (a *NiaapiApiService) GetNiaapiDcnmSweolListExecute(r ApiGetNiaapiDcnmSweolListRequest) (*NiaapiDcnmSweolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5160,9 +5184,9 @@ func (r ApiGetNiaapiFileDownloaderByMoidRequest) Execute() (*NiaapiFileDownloade
 /*
 GetNiaapiFileDownloaderByMoid Read a 'niaapi.FileDownloader' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiFileDownloaderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiFileDownloaderByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoid(ctx context.Context, moid string) ApiGetNiaapiFileDownloaderByMoidRequest {
 	return ApiGetNiaapiFileDownloaderByMoidRequest{
@@ -5173,7 +5197,8 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return NiaapiFileDownloader
+//
+//	@return NiaapiFileDownloader
 func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoidExecute(r ApiGetNiaapiFileDownloaderByMoidRequest) (*NiaapiFileDownloader, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5389,8 +5414,8 @@ func (r ApiGetNiaapiFileDownloaderListRequest) Execute() (*NiaapiFileDownloaderR
 /*
 GetNiaapiFileDownloaderList Read a 'niaapi.FileDownloader' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiFileDownloaderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiFileDownloaderListRequest
 */
 func (a *NiaapiApiService) GetNiaapiFileDownloaderList(ctx context.Context) ApiGetNiaapiFileDownloaderListRequest {
 	return ApiGetNiaapiFileDownloaderListRequest{
@@ -5400,7 +5425,8 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return NiaapiFileDownloaderResponse
+//
+//	@return NiaapiFileDownloaderResponse
 func (a *NiaapiApiService) GetNiaapiFileDownloaderListExecute(r ApiGetNiaapiFileDownloaderListRequest) (*NiaapiFileDownloaderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5587,9 +5613,9 @@ func (r ApiGetNiaapiNiaMetadataByMoidRequest) Execute() (*NiaapiNiaMetadata, *ht
 /*
 GetNiaapiNiaMetadataByMoid Read a 'niaapi.NiaMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiNiaMetadataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiNiaMetadataByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoid(ctx context.Context, moid string) ApiGetNiaapiNiaMetadataByMoidRequest {
 	return ApiGetNiaapiNiaMetadataByMoidRequest{
@@ -5600,7 +5626,8 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return NiaapiNiaMetadata
+//
+//	@return NiaapiNiaMetadata
 func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoidExecute(r ApiGetNiaapiNiaMetadataByMoidRequest) (*NiaapiNiaMetadata, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5816,8 +5843,8 @@ func (r ApiGetNiaapiNiaMetadataListRequest) Execute() (*NiaapiNiaMetadataRespons
 /*
 GetNiaapiNiaMetadataList Read a 'niaapi.NiaMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiNiaMetadataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiNiaMetadataListRequest
 */
 func (a *NiaapiApiService) GetNiaapiNiaMetadataList(ctx context.Context) ApiGetNiaapiNiaMetadataListRequest {
 	return ApiGetNiaapiNiaMetadataListRequest{
@@ -5827,7 +5854,8 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataList(ctx context.Context) ApiGetN
 }
 
 // Execute executes the request
-//  @return NiaapiNiaMetadataResponse
+//
+//	@return NiaapiNiaMetadataResponse
 func (a *NiaapiApiService) GetNiaapiNiaMetadataListExecute(r ApiGetNiaapiNiaMetadataListRequest) (*NiaapiNiaMetadataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6014,9 +6042,9 @@ func (r ApiGetNiaapiNibFileDownloaderByMoidRequest) Execute() (*NiaapiNibFileDow
 /*
 GetNiaapiNibFileDownloaderByMoid Read a 'niaapi.NibFileDownloader' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiNibFileDownloaderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiNibFileDownloaderByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoid(ctx context.Context, moid string) ApiGetNiaapiNibFileDownloaderByMoidRequest {
 	return ApiGetNiaapiNibFileDownloaderByMoidRequest{
@@ -6027,7 +6055,8 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return NiaapiNibFileDownloader
+//
+//	@return NiaapiNibFileDownloader
 func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoidExecute(r ApiGetNiaapiNibFileDownloaderByMoidRequest) (*NiaapiNibFileDownloader, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6243,8 +6272,8 @@ func (r ApiGetNiaapiNibFileDownloaderListRequest) Execute() (*NiaapiNibFileDownl
 /*
 GetNiaapiNibFileDownloaderList Read a 'niaapi.NibFileDownloader' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiNibFileDownloaderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiNibFileDownloaderListRequest
 */
 func (a *NiaapiApiService) GetNiaapiNibFileDownloaderList(ctx context.Context) ApiGetNiaapiNibFileDownloaderListRequest {
 	return ApiGetNiaapiNibFileDownloaderListRequest{
@@ -6254,7 +6283,8 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return NiaapiNibFileDownloaderResponse
+//
+//	@return NiaapiNibFileDownloaderResponse
 func (a *NiaapiApiService) GetNiaapiNibFileDownloaderListExecute(r ApiGetNiaapiNibFileDownloaderListRequest) (*NiaapiNibFileDownloaderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6441,9 +6471,9 @@ func (r ApiGetNiaapiNibMetadataByMoidRequest) Execute() (*NiaapiNibMetadata, *ht
 /*
 GetNiaapiNibMetadataByMoid Read a 'niaapi.NibMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiNibMetadataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiNibMetadataByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiNibMetadataByMoid(ctx context.Context, moid string) ApiGetNiaapiNibMetadataByMoidRequest {
 	return ApiGetNiaapiNibMetadataByMoidRequest{
@@ -6454,7 +6484,8 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return NiaapiNibMetadata
+//
+//	@return NiaapiNibMetadata
 func (a *NiaapiApiService) GetNiaapiNibMetadataByMoidExecute(r ApiGetNiaapiNibMetadataByMoidRequest) (*NiaapiNibMetadata, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6670,8 +6701,8 @@ func (r ApiGetNiaapiNibMetadataListRequest) Execute() (*NiaapiNibMetadataRespons
 /*
 GetNiaapiNibMetadataList Read a 'niaapi.NibMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiNibMetadataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiNibMetadataListRequest
 */
 func (a *NiaapiApiService) GetNiaapiNibMetadataList(ctx context.Context) ApiGetNiaapiNibMetadataListRequest {
 	return ApiGetNiaapiNibMetadataListRequest{
@@ -6681,7 +6712,8 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataList(ctx context.Context) ApiGetN
 }
 
 // Execute executes the request
-//  @return NiaapiNibMetadataResponse
+//
+//	@return NiaapiNibMetadataResponse
 func (a *NiaapiApiService) GetNiaapiNibMetadataListExecute(r ApiGetNiaapiNibMetadataListRequest) (*NiaapiNibMetadataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6868,9 +6900,9 @@ func (r ApiGetNiaapiPuvScriptDownloaderByMoidRequest) Execute() (*NiaapiPuvScrip
 /*
 GetNiaapiPuvScriptDownloaderByMoid Read a 'niaapi.PuvScriptDownloader' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiPuvScriptDownloaderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiPuvScriptDownloaderByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiPuvScriptDownloaderByMoid(ctx context.Context, moid string) ApiGetNiaapiPuvScriptDownloaderByMoidRequest {
 	return ApiGetNiaapiPuvScriptDownloaderByMoidRequest{
@@ -6881,7 +6913,8 @@ func (a *NiaapiApiService) GetNiaapiPuvScriptDownloaderByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return NiaapiPuvScriptDownloader
+//
+//	@return NiaapiPuvScriptDownloader
 func (a *NiaapiApiService) GetNiaapiPuvScriptDownloaderByMoidExecute(r ApiGetNiaapiPuvScriptDownloaderByMoidRequest) (*NiaapiPuvScriptDownloader, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7097,8 +7130,8 @@ func (r ApiGetNiaapiPuvScriptDownloaderListRequest) Execute() (*NiaapiPuvScriptD
 /*
 GetNiaapiPuvScriptDownloaderList Read a 'niaapi.PuvScriptDownloader' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiPuvScriptDownloaderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiPuvScriptDownloaderListRequest
 */
 func (a *NiaapiApiService) GetNiaapiPuvScriptDownloaderList(ctx context.Context) ApiGetNiaapiPuvScriptDownloaderListRequest {
 	return ApiGetNiaapiPuvScriptDownloaderListRequest{
@@ -7108,7 +7141,8 @@ func (a *NiaapiApiService) GetNiaapiPuvScriptDownloaderList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return NiaapiPuvScriptDownloaderResponse
+//
+//	@return NiaapiPuvScriptDownloaderResponse
 func (a *NiaapiApiService) GetNiaapiPuvScriptDownloaderListExecute(r ApiGetNiaapiPuvScriptDownloaderListRequest) (*NiaapiPuvScriptDownloaderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7295,9 +7329,9 @@ func (r ApiGetNiaapiSnValidatorMetadataByMoidRequest) Execute() (*NiaapiSnValida
 /*
 GetNiaapiSnValidatorMetadataByMoid Read a 'niaapi.SnValidatorMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiSnValidatorMetadataByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiSnValidatorMetadataByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiSnValidatorMetadataByMoid(ctx context.Context, moid string) ApiGetNiaapiSnValidatorMetadataByMoidRequest {
 	return ApiGetNiaapiSnValidatorMetadataByMoidRequest{
@@ -7308,7 +7342,8 @@ func (a *NiaapiApiService) GetNiaapiSnValidatorMetadataByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return NiaapiSnValidatorMetadata
+//
+//	@return NiaapiSnValidatorMetadata
 func (a *NiaapiApiService) GetNiaapiSnValidatorMetadataByMoidExecute(r ApiGetNiaapiSnValidatorMetadataByMoidRequest) (*NiaapiSnValidatorMetadata, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7524,8 +7559,8 @@ func (r ApiGetNiaapiSnValidatorMetadataListRequest) Execute() (*NiaapiSnValidato
 /*
 GetNiaapiSnValidatorMetadataList Read a 'niaapi.SnValidatorMetadata' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiSnValidatorMetadataListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiSnValidatorMetadataListRequest
 */
 func (a *NiaapiApiService) GetNiaapiSnValidatorMetadataList(ctx context.Context) ApiGetNiaapiSnValidatorMetadataListRequest {
 	return ApiGetNiaapiSnValidatorMetadataListRequest{
@@ -7535,7 +7570,8 @@ func (a *NiaapiApiService) GetNiaapiSnValidatorMetadataList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return NiaapiSnValidatorMetadataResponse
+//
+//	@return NiaapiSnValidatorMetadataResponse
 func (a *NiaapiApiService) GetNiaapiSnValidatorMetadataListExecute(r ApiGetNiaapiSnValidatorMetadataListRequest) (*NiaapiSnValidatorMetadataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7722,9 +7758,9 @@ func (r ApiGetNiaapiUpgradeAssistFileByMoidRequest) Execute() (*NiaapiUpgradeAss
 /*
 GetNiaapiUpgradeAssistFileByMoid Read a 'niaapi.UpgradeAssistFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiUpgradeAssistFileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiUpgradeAssistFileByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiUpgradeAssistFileByMoid(ctx context.Context, moid string) ApiGetNiaapiUpgradeAssistFileByMoidRequest {
 	return ApiGetNiaapiUpgradeAssistFileByMoidRequest{
@@ -7735,7 +7771,8 @@ func (a *NiaapiApiService) GetNiaapiUpgradeAssistFileByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return NiaapiUpgradeAssistFile
+//
+//	@return NiaapiUpgradeAssistFile
 func (a *NiaapiApiService) GetNiaapiUpgradeAssistFileByMoidExecute(r ApiGetNiaapiUpgradeAssistFileByMoidRequest) (*NiaapiUpgradeAssistFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7951,8 +7988,8 @@ func (r ApiGetNiaapiUpgradeAssistFileListRequest) Execute() (*NiaapiUpgradeAssis
 /*
 GetNiaapiUpgradeAssistFileList Read a 'niaapi.UpgradeAssistFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiUpgradeAssistFileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiUpgradeAssistFileListRequest
 */
 func (a *NiaapiApiService) GetNiaapiUpgradeAssistFileList(ctx context.Context) ApiGetNiaapiUpgradeAssistFileListRequest {
 	return ApiGetNiaapiUpgradeAssistFileListRequest{
@@ -7962,7 +7999,8 @@ func (a *NiaapiApiService) GetNiaapiUpgradeAssistFileList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return NiaapiUpgradeAssistFileResponse
+//
+//	@return NiaapiUpgradeAssistFileResponse
 func (a *NiaapiApiService) GetNiaapiUpgradeAssistFileListExecute(r ApiGetNiaapiUpgradeAssistFileListRequest) (*NiaapiUpgradeAssistFileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8149,9 +8187,9 @@ func (r ApiGetNiaapiVersionRegexByMoidRequest) Execute() (*NiaapiVersionRegex, *
 /*
 GetNiaapiVersionRegexByMoid Read a 'niaapi.VersionRegex' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetNiaapiVersionRegexByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetNiaapiVersionRegexByMoidRequest
 */
 func (a *NiaapiApiService) GetNiaapiVersionRegexByMoid(ctx context.Context, moid string) ApiGetNiaapiVersionRegexByMoidRequest {
 	return ApiGetNiaapiVersionRegexByMoidRequest{
@@ -8162,7 +8200,8 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return NiaapiVersionRegex
+//
+//	@return NiaapiVersionRegex
 func (a *NiaapiApiService) GetNiaapiVersionRegexByMoidExecute(r ApiGetNiaapiVersionRegexByMoidRequest) (*NiaapiVersionRegex, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8378,8 +8417,8 @@ func (r ApiGetNiaapiVersionRegexListRequest) Execute() (*NiaapiVersionRegexRespo
 /*
 GetNiaapiVersionRegexList Read a 'niaapi.VersionRegex' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetNiaapiVersionRegexListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNiaapiVersionRegexListRequest
 */
 func (a *NiaapiApiService) GetNiaapiVersionRegexList(ctx context.Context) ApiGetNiaapiVersionRegexListRequest {
 	return ApiGetNiaapiVersionRegexListRequest{
@@ -8389,7 +8428,8 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return NiaapiVersionRegexResponse
+//
+//	@return NiaapiVersionRegexResponse
 func (a *NiaapiApiService) GetNiaapiVersionRegexListExecute(r ApiGetNiaapiVersionRegexListRequest) (*NiaapiVersionRegexResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

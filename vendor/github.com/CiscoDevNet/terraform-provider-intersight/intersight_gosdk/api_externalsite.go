@@ -56,8 +56,8 @@ func (r ApiCreateExternalsiteAuthorizationRequest) Execute() (*ExternalsiteAutho
 /*
 CreateExternalsiteAuthorization Create a 'externalsite.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateExternalsiteAuthorizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateExternalsiteAuthorizationRequest
 */
 func (a *ExternalsiteApiService) CreateExternalsiteAuthorization(ctx context.Context) ApiCreateExternalsiteAuthorizationRequest {
 	return ApiCreateExternalsiteAuthorizationRequest{
@@ -67,7 +67,8 @@ func (a *ExternalsiteApiService) CreateExternalsiteAuthorization(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ExternalsiteAuthorization
+//
+//	@return ExternalsiteAuthorization
 func (a *ExternalsiteApiService) CreateExternalsiteAuthorizationExecute(r ApiCreateExternalsiteAuthorizationRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiGetExternalsiteAuthorizationByMoidRequest) Execute() (*ExternalsiteAu
 /*
 GetExternalsiteAuthorizationByMoid Read a 'externalsite.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetExternalsiteAuthorizationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetExternalsiteAuthorizationByMoidRequest
 */
 func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoid(ctx context.Context, moid string) ApiGetExternalsiteAuthorizationByMoidRequest {
 	return ApiGetExternalsiteAuthorizationByMoidRequest{
@@ -230,7 +231,8 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return ExternalsiteAuthorization
+//
+//	@return ExternalsiteAuthorization
 func (a *ExternalsiteApiService) GetExternalsiteAuthorizationByMoidExecute(r ApiGetExternalsiteAuthorizationByMoidRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -446,8 +448,8 @@ func (r ApiGetExternalsiteAuthorizationListRequest) Execute() (*ExternalsiteAuth
 /*
 GetExternalsiteAuthorizationList Read a 'externalsite.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetExternalsiteAuthorizationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetExternalsiteAuthorizationListRequest
 */
 func (a *ExternalsiteApiService) GetExternalsiteAuthorizationList(ctx context.Context) ApiGetExternalsiteAuthorizationListRequest {
 	return ApiGetExternalsiteAuthorizationListRequest{
@@ -457,7 +459,8 @@ func (a *ExternalsiteApiService) GetExternalsiteAuthorizationList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return ExternalsiteAuthorizationResponse
+//
+//	@return ExternalsiteAuthorizationResponse
 func (a *ExternalsiteApiService) GetExternalsiteAuthorizationListExecute(r ApiGetExternalsiteAuthorizationListRequest) (*ExternalsiteAuthorizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -658,9 +661,9 @@ func (r ApiPatchExternalsiteAuthorizationRequest) Execute() (*ExternalsiteAuthor
 /*
 PatchExternalsiteAuthorization Update a 'externalsite.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchExternalsiteAuthorizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchExternalsiteAuthorizationRequest
 */
 func (a *ExternalsiteApiService) PatchExternalsiteAuthorization(ctx context.Context, moid string) ApiPatchExternalsiteAuthorizationRequest {
 	return ApiPatchExternalsiteAuthorizationRequest{
@@ -671,7 +674,8 @@ func (a *ExternalsiteApiService) PatchExternalsiteAuthorization(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ExternalsiteAuthorization
+//
+//	@return ExternalsiteAuthorization
 func (a *ExternalsiteApiService) PatchExternalsiteAuthorizationExecute(r ApiPatchExternalsiteAuthorizationRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -833,9 +837,9 @@ func (r ApiUpdateExternalsiteAuthorizationRequest) Execute() (*ExternalsiteAutho
 /*
 UpdateExternalsiteAuthorization Update a 'externalsite.Authorization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateExternalsiteAuthorizationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateExternalsiteAuthorizationRequest
 */
 func (a *ExternalsiteApiService) UpdateExternalsiteAuthorization(ctx context.Context, moid string) ApiUpdateExternalsiteAuthorizationRequest {
 	return ApiUpdateExternalsiteAuthorizationRequest{
@@ -846,7 +850,8 @@ func (a *ExternalsiteApiService) UpdateExternalsiteAuthorization(ctx context.Con
 }
 
 // Execute executes the request
-//  @return ExternalsiteAuthorization
+//
+//	@return ExternalsiteAuthorization
 func (a *ExternalsiteApiService) UpdateExternalsiteAuthorizationExecute(r ApiUpdateExternalsiteAuthorizationRequest) (*ExternalsiteAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

@@ -56,8 +56,8 @@ func (r ApiCreateVmediaPolicyRequest) Execute() (*VmediaPolicy, *http.Response, 
 /*
 CreateVmediaPolicy Create a 'vmedia.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVmediaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVmediaPolicyRequest
 */
 func (a *VmediaApiService) CreateVmediaPolicy(ctx context.Context) ApiCreateVmediaPolicyRequest {
 	return ApiCreateVmediaPolicyRequest{
@@ -67,7 +67,8 @@ func (a *VmediaApiService) CreateVmediaPolicy(ctx context.Context) ApiCreateVmed
 }
 
 // Execute executes the request
-//  @return VmediaPolicy
+//
+//	@return VmediaPolicy
 func (a *VmediaApiService) CreateVmediaPolicyExecute(r ApiCreateVmediaPolicyRequest) (*VmediaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteVmediaPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteVmediaPolicy Delete a 'vmedia.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVmediaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVmediaPolicyRequest
 */
 func (a *VmediaApiService) DeleteVmediaPolicy(ctx context.Context, moid string) ApiDeleteVmediaPolicyRequest {
 	return ApiDeleteVmediaPolicyRequest{
@@ -359,9 +360,9 @@ func (r ApiGetVmediaPolicyByMoidRequest) Execute() (*VmediaPolicy, *http.Respons
 /*
 GetVmediaPolicyByMoid Read a 'vmedia.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVmediaPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVmediaPolicyByMoidRequest
 */
 func (a *VmediaApiService) GetVmediaPolicyByMoid(ctx context.Context, moid string) ApiGetVmediaPolicyByMoidRequest {
 	return ApiGetVmediaPolicyByMoidRequest{
@@ -372,7 +373,8 @@ func (a *VmediaApiService) GetVmediaPolicyByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return VmediaPolicy
+//
+//	@return VmediaPolicy
 func (a *VmediaApiService) GetVmediaPolicyByMoidExecute(r ApiGetVmediaPolicyByMoidRequest) (*VmediaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -512,9 +514,9 @@ func (r ApiGetVmediaPolicyInventoryByMoidRequest) Execute() (*VmediaPolicyInvent
 /*
 GetVmediaPolicyInventoryByMoid Read a 'vmedia.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVmediaPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVmediaPolicyInventoryByMoidRequest
 */
 func (a *VmediaApiService) GetVmediaPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVmediaPolicyInventoryByMoidRequest {
 	return ApiGetVmediaPolicyInventoryByMoidRequest{
@@ -525,7 +527,8 @@ func (a *VmediaApiService) GetVmediaPolicyInventoryByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return VmediaPolicyInventory
+//
+//	@return VmediaPolicyInventory
 func (a *VmediaApiService) GetVmediaPolicyInventoryByMoidExecute(r ApiGetVmediaPolicyInventoryByMoidRequest) (*VmediaPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -741,8 +744,8 @@ func (r ApiGetVmediaPolicyInventoryListRequest) Execute() (*VmediaPolicyInventor
 /*
 GetVmediaPolicyInventoryList Read a 'vmedia.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVmediaPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVmediaPolicyInventoryListRequest
 */
 func (a *VmediaApiService) GetVmediaPolicyInventoryList(ctx context.Context) ApiGetVmediaPolicyInventoryListRequest {
 	return ApiGetVmediaPolicyInventoryListRequest{
@@ -752,7 +755,8 @@ func (a *VmediaApiService) GetVmediaPolicyInventoryList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return VmediaPolicyInventoryResponse
+//
+//	@return VmediaPolicyInventoryResponse
 func (a *VmediaApiService) GetVmediaPolicyInventoryListExecute(r ApiGetVmediaPolicyInventoryListRequest) (*VmediaPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1015,8 +1019,8 @@ func (r ApiGetVmediaPolicyListRequest) Execute() (*VmediaPolicyResponse, *http.R
 /*
 GetVmediaPolicyList Read a 'vmedia.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVmediaPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVmediaPolicyListRequest
 */
 func (a *VmediaApiService) GetVmediaPolicyList(ctx context.Context) ApiGetVmediaPolicyListRequest {
 	return ApiGetVmediaPolicyListRequest{
@@ -1026,7 +1030,8 @@ func (a *VmediaApiService) GetVmediaPolicyList(ctx context.Context) ApiGetVmedia
 }
 
 // Execute executes the request
-//  @return VmediaPolicyResponse
+//
+//	@return VmediaPolicyResponse
 func (a *VmediaApiService) GetVmediaPolicyListExecute(r ApiGetVmediaPolicyListRequest) (*VmediaPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1227,9 +1232,9 @@ func (r ApiPatchVmediaPolicyRequest) Execute() (*VmediaPolicy, *http.Response, e
 /*
 PatchVmediaPolicy Update a 'vmedia.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVmediaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVmediaPolicyRequest
 */
 func (a *VmediaApiService) PatchVmediaPolicy(ctx context.Context, moid string) ApiPatchVmediaPolicyRequest {
 	return ApiPatchVmediaPolicyRequest{
@@ -1240,7 +1245,8 @@ func (a *VmediaApiService) PatchVmediaPolicy(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return VmediaPolicy
+//
+//	@return VmediaPolicy
 func (a *VmediaApiService) PatchVmediaPolicyExecute(r ApiPatchVmediaPolicyRequest) (*VmediaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1402,9 +1408,9 @@ func (r ApiUpdateVmediaPolicyRequest) Execute() (*VmediaPolicy, *http.Response, 
 /*
 UpdateVmediaPolicy Update a 'vmedia.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVmediaPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVmediaPolicyRequest
 */
 func (a *VmediaApiService) UpdateVmediaPolicy(ctx context.Context, moid string) ApiUpdateVmediaPolicyRequest {
 	return ApiUpdateVmediaPolicyRequest{
@@ -1415,7 +1421,8 @@ func (a *VmediaApiService) UpdateVmediaPolicy(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return VmediaPolicy
+//
+//	@return VmediaPolicy
 func (a *VmediaApiService) UpdateVmediaPolicyExecute(r ApiUpdateVmediaPolicyRequest) (*VmediaPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

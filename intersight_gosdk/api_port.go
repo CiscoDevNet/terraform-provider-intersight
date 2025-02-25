@@ -36,9 +36,9 @@ func (r ApiGetPortGroupByMoidRequest) Execute() (*PortGroup, *http.Response, err
 /*
 GetPortGroupByMoid Read a 'port.Group' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetPortGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetPortGroupByMoidRequest
 */
 func (a *PortApiService) GetPortGroupByMoid(ctx context.Context, moid string) ApiGetPortGroupByMoidRequest {
 	return ApiGetPortGroupByMoidRequest{
@@ -49,7 +49,8 @@ func (a *PortApiService) GetPortGroupByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return PortGroup
+//
+//	@return PortGroup
 func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidRequest) (*PortGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetPortGroupListRequest) Execute() (*PortGroupResponse, *http.Respons
 /*
 GetPortGroupList Read a 'port.Group' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPortGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetPortGroupListRequest
 */
 func (a *PortApiService) GetPortGroupList(ctx context.Context) ApiGetPortGroupListRequest {
 	return ApiGetPortGroupListRequest{
@@ -276,7 +277,8 @@ func (a *PortApiService) GetPortGroupList(ctx context.Context) ApiGetPortGroupLi
 }
 
 // Execute executes the request
-//  @return PortGroupResponse
+//
+//	@return PortGroupResponse
 func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (*PortGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetPortMacBindingByMoidRequest) Execute() (*PortMacBinding, *http.Res
 /*
 GetPortMacBindingByMoid Read a 'port.MacBinding' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetPortMacBindingByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetPortMacBindingByMoidRequest
 */
 func (a *PortApiService) GetPortMacBindingByMoid(ctx context.Context, moid string) ApiGetPortMacBindingByMoidRequest {
 	return ApiGetPortMacBindingByMoidRequest{
@@ -476,7 +478,8 @@ func (a *PortApiService) GetPortMacBindingByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return PortMacBinding
+//
+//	@return PortMacBinding
 func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingByMoidRequest) (*PortMacBinding, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetPortMacBindingListRequest) Execute() (*PortMacBindingResponse, *ht
 /*
 GetPortMacBindingList Read a 'port.MacBinding' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPortMacBindingListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetPortMacBindingListRequest
 */
 func (a *PortApiService) GetPortMacBindingList(ctx context.Context) ApiGetPortMacBindingListRequest {
 	return ApiGetPortMacBindingListRequest{
@@ -703,7 +706,8 @@ func (a *PortApiService) GetPortMacBindingList(ctx context.Context) ApiGetPortMa
 }
 
 // Execute executes the request
-//  @return PortMacBindingResponse
+//
+//	@return PortMacBindingResponse
 func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingListRequest) (*PortMacBindingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetPortSubGroupByMoidRequest) Execute() (*PortSubGroup, *http.Respons
 /*
 GetPortSubGroupByMoid Read a 'port.SubGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetPortSubGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetPortSubGroupByMoidRequest
 */
 func (a *PortApiService) GetPortSubGroupByMoid(ctx context.Context, moid string) ApiGetPortSubGroupByMoidRequest {
 	return ApiGetPortSubGroupByMoidRequest{
@@ -903,7 +907,8 @@ func (a *PortApiService) GetPortSubGroupByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return PortSubGroup
+//
+//	@return PortSubGroup
 func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoidRequest) (*PortSubGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetPortSubGroupListRequest) Execute() (*PortSubGroupResponse, *http.R
 /*
 GetPortSubGroupList Read a 'port.SubGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPortSubGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetPortSubGroupListRequest
 */
 func (a *PortApiService) GetPortSubGroupList(ctx context.Context) ApiGetPortSubGroupListRequest {
 	return ApiGetPortSubGroupListRequest{
@@ -1130,7 +1135,8 @@ func (a *PortApiService) GetPortSubGroupList(ctx context.Context) ApiGetPortSubG
 }
 
 // Execute executes the request
-//  @return PortSubGroupResponse
+//
+//	@return PortSubGroupResponse
 func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequest) (*PortSubGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1331,9 +1337,9 @@ func (r ApiPatchPortGroupRequest) Execute() (*PortGroup, *http.Response, error) 
 /*
 PatchPortGroup Update a 'port.Group' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchPortGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchPortGroupRequest
 */
 func (a *PortApiService) PatchPortGroup(ctx context.Context, moid string) ApiPatchPortGroupRequest {
 	return ApiPatchPortGroupRequest{
@@ -1344,7 +1350,8 @@ func (a *PortApiService) PatchPortGroup(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//  @return PortGroup
+//
+//	@return PortGroup
 func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (*PortGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1506,9 +1513,9 @@ func (r ApiPatchPortMacBindingRequest) Execute() (*PortMacBinding, *http.Respons
 /*
 PatchPortMacBinding Update a 'port.MacBinding' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchPortMacBindingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchPortMacBindingRequest
 */
 func (a *PortApiService) PatchPortMacBinding(ctx context.Context, moid string) ApiPatchPortMacBindingRequest {
 	return ApiPatchPortMacBindingRequest{
@@ -1519,7 +1526,8 @@ func (a *PortApiService) PatchPortMacBinding(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return PortMacBinding
+//
+//	@return PortMacBinding
 func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequest) (*PortMacBinding, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1681,9 +1689,9 @@ func (r ApiPatchPortSubGroupRequest) Execute() (*PortSubGroup, *http.Response, e
 /*
 PatchPortSubGroup Update a 'port.SubGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchPortSubGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchPortSubGroupRequest
 */
 func (a *PortApiService) PatchPortSubGroup(ctx context.Context, moid string) ApiPatchPortSubGroupRequest {
 	return ApiPatchPortSubGroupRequest{
@@ -1694,7 +1702,8 @@ func (a *PortApiService) PatchPortSubGroup(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return PortSubGroup
+//
+//	@return PortSubGroup
 func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest) (*PortSubGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1856,9 +1865,9 @@ func (r ApiUpdatePortGroupRequest) Execute() (*PortGroup, *http.Response, error)
 /*
 UpdatePortGroup Update a 'port.Group' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdatePortGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdatePortGroupRequest
 */
 func (a *PortApiService) UpdatePortGroup(ctx context.Context, moid string) ApiUpdatePortGroupRequest {
 	return ApiUpdatePortGroupRequest{
@@ -1869,7 +1878,8 @@ func (a *PortApiService) UpdatePortGroup(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//  @return PortGroup
+//
+//	@return PortGroup
 func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (*PortGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2031,9 +2041,9 @@ func (r ApiUpdatePortMacBindingRequest) Execute() (*PortMacBinding, *http.Respon
 /*
 UpdatePortMacBinding Update a 'port.MacBinding' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdatePortMacBindingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdatePortMacBindingRequest
 */
 func (a *PortApiService) UpdatePortMacBinding(ctx context.Context, moid string) ApiUpdatePortMacBindingRequest {
 	return ApiUpdatePortMacBindingRequest{
@@ -2044,7 +2054,8 @@ func (a *PortApiService) UpdatePortMacBinding(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return PortMacBinding
+//
+//	@return PortMacBinding
 func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRequest) (*PortMacBinding, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2206,9 +2217,9 @@ func (r ApiUpdatePortSubGroupRequest) Execute() (*PortSubGroup, *http.Response, 
 /*
 UpdatePortSubGroup Update a 'port.SubGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdatePortSubGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdatePortSubGroupRequest
 */
 func (a *PortApiService) UpdatePortSubGroup(ctx context.Context, moid string) ApiUpdatePortSubGroupRequest {
 	return ApiUpdatePortSubGroupRequest{
@@ -2219,7 +2230,8 @@ func (a *PortApiService) UpdatePortSubGroup(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return PortSubGroup
+//
+//	@return PortSubGroup
 func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupRequest) (*PortSubGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

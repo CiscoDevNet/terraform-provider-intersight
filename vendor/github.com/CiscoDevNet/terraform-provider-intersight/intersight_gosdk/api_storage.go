@@ -56,8 +56,8 @@ func (r ApiCreateStorageDriveGroupRequest) Execute() (*StorageDriveGroup, *http.
 /*
 CreateStorageDriveGroup Create a 'storage.DriveGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateStorageDriveGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateStorageDriveGroupRequest
 */
 func (a *StorageApiService) CreateStorageDriveGroup(ctx context.Context) ApiCreateStorageDriveGroupRequest {
 	return ApiCreateStorageDriveGroupRequest{
@@ -67,7 +67,8 @@ func (a *StorageApiService) CreateStorageDriveGroup(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return StorageDriveGroup
+//
+//	@return StorageDriveGroup
 func (a *StorageApiService) CreateStorageDriveGroupExecute(r ApiCreateStorageDriveGroupRequest) (*StorageDriveGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateStorageDriveSecurityPolicyRequest) Execute() (*StorageDriveSecu
 /*
 CreateStorageDriveSecurityPolicy Create a 'storage.DriveSecurityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateStorageDriveSecurityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateStorageDriveSecurityPolicyRequest
 */
 func (a *StorageApiService) CreateStorageDriveSecurityPolicy(ctx context.Context) ApiCreateStorageDriveSecurityPolicyRequest {
 	return ApiCreateStorageDriveSecurityPolicyRequest{
@@ -248,7 +249,8 @@ func (a *StorageApiService) CreateStorageDriveSecurityPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageDriveSecurityPolicy
+//
+//	@return StorageDriveSecurityPolicy
 func (a *StorageApiService) CreateStorageDriveSecurityPolicyExecute(r ApiCreateStorageDriveSecurityPolicyRequest) (*StorageDriveSecurityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -418,8 +420,8 @@ func (r ApiCreateStorageNetAppVolumeSnapshotRequest) Execute() (*StorageNetAppVo
 /*
 CreateStorageNetAppVolumeSnapshot Create a 'storage.NetAppVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateStorageNetAppVolumeSnapshotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateStorageNetAppVolumeSnapshotRequest
 */
 func (a *StorageApiService) CreateStorageNetAppVolumeSnapshot(ctx context.Context) ApiCreateStorageNetAppVolumeSnapshotRequest {
 	return ApiCreateStorageNetAppVolumeSnapshotRequest{
@@ -429,7 +431,8 @@ func (a *StorageApiService) CreateStorageNetAppVolumeSnapshot(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeSnapshot
+//
+//	@return StorageNetAppVolumeSnapshot
 func (a *StorageApiService) CreateStorageNetAppVolumeSnapshotExecute(r ApiCreateStorageNetAppVolumeSnapshotRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -599,8 +602,8 @@ func (r ApiCreateStorageStoragePolicyRequest) Execute() (*StorageStoragePolicy, 
 /*
 CreateStorageStoragePolicy Create a 'storage.StoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateStorageStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateStorageStoragePolicyRequest
 */
 func (a *StorageApiService) CreateStorageStoragePolicy(ctx context.Context) ApiCreateStorageStoragePolicyRequest {
 	return ApiCreateStorageStoragePolicyRequest{
@@ -610,7 +613,8 @@ func (a *StorageApiService) CreateStorageStoragePolicy(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return StorageStoragePolicy
+//
+//	@return StorageStoragePolicy
 func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorageStoragePolicyRequest) (*StorageStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -760,9 +764,9 @@ func (r ApiDeleteStorageDriveGroupRequest) Execute() (*http.Response, error) {
 /*
 DeleteStorageDriveGroup Delete a 'storage.DriveGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteStorageDriveGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteStorageDriveGroupRequest
 */
 func (a *StorageApiService) DeleteStorageDriveGroup(ctx context.Context, moid string) ApiDeleteStorageDriveGroupRequest {
 	return ApiDeleteStorageDriveGroupRequest{
@@ -902,9 +906,9 @@ func (r ApiDeleteStorageDriveSecurityPolicyRequest) Execute() (*http.Response, e
 /*
 DeleteStorageDriveSecurityPolicy Delete a 'storage.DriveSecurityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteStorageDriveSecurityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteStorageDriveSecurityPolicyRequest
 */
 func (a *StorageApiService) DeleteStorageDriveSecurityPolicy(ctx context.Context, moid string) ApiDeleteStorageDriveSecurityPolicyRequest {
 	return ApiDeleteStorageDriveSecurityPolicyRequest{
@@ -1044,9 +1048,9 @@ func (r ApiDeleteStorageNetAppVolumeSnapshotRequest) Execute() (*http.Response, 
 /*
 DeleteStorageNetAppVolumeSnapshot Delete a 'storage.NetAppVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteStorageNetAppVolumeSnapshotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteStorageNetAppVolumeSnapshotRequest
 */
 func (a *StorageApiService) DeleteStorageNetAppVolumeSnapshot(ctx context.Context, moid string) ApiDeleteStorageNetAppVolumeSnapshotRequest {
 	return ApiDeleteStorageNetAppVolumeSnapshotRequest{
@@ -1186,9 +1190,9 @@ func (r ApiDeleteStorageStoragePolicyRequest) Execute() (*http.Response, error) 
 /*
 DeleteStorageStoragePolicy Delete a 'storage.StoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteStorageStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteStorageStoragePolicyRequest
 */
 func (a *StorageApiService) DeleteStorageStoragePolicy(ctx context.Context, moid string) ApiDeleteStorageStoragePolicyRequest {
 	return ApiDeleteStorageStoragePolicyRequest{
@@ -1328,9 +1332,9 @@ func (r ApiGetStorageBatteryBackupUnitByMoidRequest) Execute() (*StorageBatteryB
 /*
 GetStorageBatteryBackupUnitByMoid Read a 'storage.BatteryBackupUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageBatteryBackupUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageBatteryBackupUnitByMoidRequest
 */
 func (a *StorageApiService) GetStorageBatteryBackupUnitByMoid(ctx context.Context, moid string) ApiGetStorageBatteryBackupUnitByMoidRequest {
 	return ApiGetStorageBatteryBackupUnitByMoidRequest{
@@ -1341,7 +1345,8 @@ func (a *StorageApiService) GetStorageBatteryBackupUnitByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageBatteryBackupUnit
+//
+//	@return StorageBatteryBackupUnit
 func (a *StorageApiService) GetStorageBatteryBackupUnitByMoidExecute(r ApiGetStorageBatteryBackupUnitByMoidRequest) (*StorageBatteryBackupUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1557,8 +1562,8 @@ func (r ApiGetStorageBatteryBackupUnitListRequest) Execute() (*StorageBatteryBac
 /*
 GetStorageBatteryBackupUnitList Read a 'storage.BatteryBackupUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageBatteryBackupUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageBatteryBackupUnitListRequest
 */
 func (a *StorageApiService) GetStorageBatteryBackupUnitList(ctx context.Context) ApiGetStorageBatteryBackupUnitListRequest {
 	return ApiGetStorageBatteryBackupUnitListRequest{
@@ -1568,7 +1573,8 @@ func (a *StorageApiService) GetStorageBatteryBackupUnitList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageBatteryBackupUnitResponse
+//
+//	@return StorageBatteryBackupUnitResponse
 func (a *StorageApiService) GetStorageBatteryBackupUnitListExecute(r ApiGetStorageBatteryBackupUnitListRequest) (*StorageBatteryBackupUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1755,9 +1761,9 @@ func (r ApiGetStorageControllerByMoidRequest) Execute() (*StorageController, *ht
 /*
 GetStorageControllerByMoid Read a 'storage.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageControllerByMoidRequest
 */
 func (a *StorageApiService) GetStorageControllerByMoid(ctx context.Context, moid string) ApiGetStorageControllerByMoidRequest {
 	return ApiGetStorageControllerByMoidRequest{
@@ -1768,7 +1774,8 @@ func (a *StorageApiService) GetStorageControllerByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageController
+//
+//	@return StorageController
 func (a *StorageApiService) GetStorageControllerByMoidExecute(r ApiGetStorageControllerByMoidRequest) (*StorageController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1908,9 +1915,9 @@ func (r ApiGetStorageControllerDriveByMoidRequest) Execute() (*StorageController
 /*
 GetStorageControllerDriveByMoid Read a 'storage.ControllerDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageControllerDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageControllerDriveByMoidRequest
 */
 func (a *StorageApiService) GetStorageControllerDriveByMoid(ctx context.Context, moid string) ApiGetStorageControllerDriveByMoidRequest {
 	return ApiGetStorageControllerDriveByMoidRequest{
@@ -1921,7 +1928,8 @@ func (a *StorageApiService) GetStorageControllerDriveByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageControllerDrive
+//
+//	@return StorageControllerDrive
 func (a *StorageApiService) GetStorageControllerDriveByMoidExecute(r ApiGetStorageControllerDriveByMoidRequest) (*StorageControllerDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2137,8 +2145,8 @@ func (r ApiGetStorageControllerDriveListRequest) Execute() (*StorageControllerDr
 /*
 GetStorageControllerDriveList Read a 'storage.ControllerDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageControllerDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageControllerDriveListRequest
 */
 func (a *StorageApiService) GetStorageControllerDriveList(ctx context.Context) ApiGetStorageControllerDriveListRequest {
 	return ApiGetStorageControllerDriveListRequest{
@@ -2148,7 +2156,8 @@ func (a *StorageApiService) GetStorageControllerDriveList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageControllerDriveResponse
+//
+//	@return StorageControllerDriveResponse
 func (a *StorageApiService) GetStorageControllerDriveListExecute(r ApiGetStorageControllerDriveListRequest) (*StorageControllerDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2411,8 +2420,8 @@ func (r ApiGetStorageControllerListRequest) Execute() (*StorageControllerRespons
 /*
 GetStorageControllerList Read a 'storage.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageControllerListRequest
 */
 func (a *StorageApiService) GetStorageControllerList(ctx context.Context) ApiGetStorageControllerListRequest {
 	return ApiGetStorageControllerListRequest{
@@ -2422,7 +2431,8 @@ func (a *StorageApiService) GetStorageControllerList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return StorageControllerResponse
+//
+//	@return StorageControllerResponse
 func (a *StorageApiService) GetStorageControllerListExecute(r ApiGetStorageControllerListRequest) (*StorageControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2609,9 +2619,9 @@ func (r ApiGetStorageDiskGroupByMoidRequest) Execute() (*StorageDiskGroup, *http
 /*
 GetStorageDiskGroupByMoid Read a 'storage.DiskGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageDiskGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageDiskGroupByMoidRequest
 */
 func (a *StorageApiService) GetStorageDiskGroupByMoid(ctx context.Context, moid string) ApiGetStorageDiskGroupByMoidRequest {
 	return ApiGetStorageDiskGroupByMoidRequest{
@@ -2622,7 +2632,8 @@ func (a *StorageApiService) GetStorageDiskGroupByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageDiskGroup
+//
+//	@return StorageDiskGroup
 func (a *StorageApiService) GetStorageDiskGroupByMoidExecute(r ApiGetStorageDiskGroupByMoidRequest) (*StorageDiskGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2838,8 +2849,8 @@ func (r ApiGetStorageDiskGroupListRequest) Execute() (*StorageDiskGroupResponse,
 /*
 GetStorageDiskGroupList Read a 'storage.DiskGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageDiskGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageDiskGroupListRequest
 */
 func (a *StorageApiService) GetStorageDiskGroupList(ctx context.Context) ApiGetStorageDiskGroupListRequest {
 	return ApiGetStorageDiskGroupListRequest{
@@ -2849,7 +2860,8 @@ func (a *StorageApiService) GetStorageDiskGroupList(ctx context.Context) ApiGetS
 }
 
 // Execute executes the request
-//  @return StorageDiskGroupResponse
+//
+//	@return StorageDiskGroupResponse
 func (a *StorageApiService) GetStorageDiskGroupListExecute(r ApiGetStorageDiskGroupListRequest) (*StorageDiskGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3036,9 +3048,9 @@ func (r ApiGetStorageDiskSlotByMoidRequest) Execute() (*StorageDiskSlot, *http.R
 /*
 GetStorageDiskSlotByMoid Read a 'storage.DiskSlot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageDiskSlotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageDiskSlotByMoidRequest
 */
 func (a *StorageApiService) GetStorageDiskSlotByMoid(ctx context.Context, moid string) ApiGetStorageDiskSlotByMoidRequest {
 	return ApiGetStorageDiskSlotByMoidRequest{
@@ -3049,7 +3061,8 @@ func (a *StorageApiService) GetStorageDiskSlotByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StorageDiskSlot
+//
+//	@return StorageDiskSlot
 func (a *StorageApiService) GetStorageDiskSlotByMoidExecute(r ApiGetStorageDiskSlotByMoidRequest) (*StorageDiskSlot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3265,8 +3278,8 @@ func (r ApiGetStorageDiskSlotListRequest) Execute() (*StorageDiskSlotResponse, *
 /*
 GetStorageDiskSlotList Read a 'storage.DiskSlot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageDiskSlotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageDiskSlotListRequest
 */
 func (a *StorageApiService) GetStorageDiskSlotList(ctx context.Context) ApiGetStorageDiskSlotListRequest {
 	return ApiGetStorageDiskSlotListRequest{
@@ -3276,7 +3289,8 @@ func (a *StorageApiService) GetStorageDiskSlotList(ctx context.Context) ApiGetSt
 }
 
 // Execute executes the request
-//  @return StorageDiskSlotResponse
+//
+//	@return StorageDiskSlotResponse
 func (a *StorageApiService) GetStorageDiskSlotListExecute(r ApiGetStorageDiskSlotListRequest) (*StorageDiskSlotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3463,9 +3477,9 @@ func (r ApiGetStorageDriveGroupByMoidRequest) Execute() (*StorageDriveGroup, *ht
 /*
 GetStorageDriveGroupByMoid Read a 'storage.DriveGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageDriveGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageDriveGroupByMoidRequest
 */
 func (a *StorageApiService) GetStorageDriveGroupByMoid(ctx context.Context, moid string) ApiGetStorageDriveGroupByMoidRequest {
 	return ApiGetStorageDriveGroupByMoidRequest{
@@ -3476,7 +3490,8 @@ func (a *StorageApiService) GetStorageDriveGroupByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageDriveGroup
+//
+//	@return StorageDriveGroup
 func (a *StorageApiService) GetStorageDriveGroupByMoidExecute(r ApiGetStorageDriveGroupByMoidRequest) (*StorageDriveGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3692,8 +3707,8 @@ func (r ApiGetStorageDriveGroupListRequest) Execute() (*StorageDriveGroupRespons
 /*
 GetStorageDriveGroupList Read a 'storage.DriveGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageDriveGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageDriveGroupListRequest
 */
 func (a *StorageApiService) GetStorageDriveGroupList(ctx context.Context) ApiGetStorageDriveGroupListRequest {
 	return ApiGetStorageDriveGroupListRequest{
@@ -3703,7 +3718,8 @@ func (a *StorageApiService) GetStorageDriveGroupList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return StorageDriveGroupResponse
+//
+//	@return StorageDriveGroupResponse
 func (a *StorageApiService) GetStorageDriveGroupListExecute(r ApiGetStorageDriveGroupListRequest) (*StorageDriveGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3890,9 +3906,9 @@ func (r ApiGetStorageDriveSecurityPolicyByMoidRequest) Execute() (*StorageDriveS
 /*
 GetStorageDriveSecurityPolicyByMoid Read a 'storage.DriveSecurityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageDriveSecurityPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageDriveSecurityPolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageDriveSecurityPolicyByMoid(ctx context.Context, moid string) ApiGetStorageDriveSecurityPolicyByMoidRequest {
 	return ApiGetStorageDriveSecurityPolicyByMoidRequest{
@@ -3903,7 +3919,8 @@ func (a *StorageApiService) GetStorageDriveSecurityPolicyByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageDriveSecurityPolicy
+//
+//	@return StorageDriveSecurityPolicy
 func (a *StorageApiService) GetStorageDriveSecurityPolicyByMoidExecute(r ApiGetStorageDriveSecurityPolicyByMoidRequest) (*StorageDriveSecurityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4119,8 +4136,8 @@ func (r ApiGetStorageDriveSecurityPolicyListRequest) Execute() (*StorageDriveSec
 /*
 GetStorageDriveSecurityPolicyList Read a 'storage.DriveSecurityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageDriveSecurityPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageDriveSecurityPolicyListRequest
 */
 func (a *StorageApiService) GetStorageDriveSecurityPolicyList(ctx context.Context) ApiGetStorageDriveSecurityPolicyListRequest {
 	return ApiGetStorageDriveSecurityPolicyListRequest{
@@ -4130,7 +4147,8 @@ func (a *StorageApiService) GetStorageDriveSecurityPolicyList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageDriveSecurityPolicyResponse
+//
+//	@return StorageDriveSecurityPolicyResponse
 func (a *StorageApiService) GetStorageDriveSecurityPolicyListExecute(r ApiGetStorageDriveSecurityPolicyListRequest) (*StorageDriveSecurityPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4317,9 +4335,9 @@ func (r ApiGetStorageEnclosureByMoidRequest) Execute() (*StorageEnclosure, *http
 /*
 GetStorageEnclosureByMoid Read a 'storage.Enclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageEnclosureByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageEnclosureByMoidRequest
 */
 func (a *StorageApiService) GetStorageEnclosureByMoid(ctx context.Context, moid string) ApiGetStorageEnclosureByMoidRequest {
 	return ApiGetStorageEnclosureByMoidRequest{
@@ -4330,7 +4348,8 @@ func (a *StorageApiService) GetStorageEnclosureByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageEnclosure
+//
+//	@return StorageEnclosure
 func (a *StorageApiService) GetStorageEnclosureByMoidExecute(r ApiGetStorageEnclosureByMoidRequest) (*StorageEnclosure, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4470,9 +4489,9 @@ func (r ApiGetStorageEnclosureDiskByMoidRequest) Execute() (*StorageEnclosureDis
 /*
 GetStorageEnclosureDiskByMoid Read a 'storage.EnclosureDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageEnclosureDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageEnclosureDiskByMoidRequest
 */
 func (a *StorageApiService) GetStorageEnclosureDiskByMoid(ctx context.Context, moid string) ApiGetStorageEnclosureDiskByMoidRequest {
 	return ApiGetStorageEnclosureDiskByMoidRequest{
@@ -4483,7 +4502,8 @@ func (a *StorageApiService) GetStorageEnclosureDiskByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDisk
+//
+//	@return StorageEnclosureDisk
 func (a *StorageApiService) GetStorageEnclosureDiskByMoidExecute(r ApiGetStorageEnclosureDiskByMoidRequest) (*StorageEnclosureDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4699,8 +4719,8 @@ func (r ApiGetStorageEnclosureDiskListRequest) Execute() (*StorageEnclosureDiskR
 /*
 GetStorageEnclosureDiskList Read a 'storage.EnclosureDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageEnclosureDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageEnclosureDiskListRequest
 */
 func (a *StorageApiService) GetStorageEnclosureDiskList(ctx context.Context) ApiGetStorageEnclosureDiskListRequest {
 	return ApiGetStorageEnclosureDiskListRequest{
@@ -4710,7 +4730,8 @@ func (a *StorageApiService) GetStorageEnclosureDiskList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDiskResponse
+//
+//	@return StorageEnclosureDiskResponse
 func (a *StorageApiService) GetStorageEnclosureDiskListExecute(r ApiGetStorageEnclosureDiskListRequest) (*StorageEnclosureDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4897,9 +4918,9 @@ func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) Execute() (*StorageEnclos
 /*
 GetStorageEnclosureDiskSlotEpByMoid Read a 'storage.EnclosureDiskSlotEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageEnclosureDiskSlotEpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageEnclosureDiskSlotEpByMoidRequest
 */
 func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoid(ctx context.Context, moid string) ApiGetStorageEnclosureDiskSlotEpByMoidRequest {
 	return ApiGetStorageEnclosureDiskSlotEpByMoidRequest{
@@ -4910,7 +4931,8 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDiskSlotEp
+//
+//	@return StorageEnclosureDiskSlotEp
 func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoidExecute(r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) (*StorageEnclosureDiskSlotEp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5126,8 +5148,8 @@ func (r ApiGetStorageEnclosureDiskSlotEpListRequest) Execute() (*StorageEnclosur
 /*
 GetStorageEnclosureDiskSlotEpList Read a 'storage.EnclosureDiskSlotEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageEnclosureDiskSlotEpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageEnclosureDiskSlotEpListRequest
 */
 func (a *StorageApiService) GetStorageEnclosureDiskSlotEpList(ctx context.Context) ApiGetStorageEnclosureDiskSlotEpListRequest {
 	return ApiGetStorageEnclosureDiskSlotEpListRequest{
@@ -5137,7 +5159,8 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDiskSlotEpResponse
+//
+//	@return StorageEnclosureDiskSlotEpResponse
 func (a *StorageApiService) GetStorageEnclosureDiskSlotEpListExecute(r ApiGetStorageEnclosureDiskSlotEpListRequest) (*StorageEnclosureDiskSlotEpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5400,8 +5423,8 @@ func (r ApiGetStorageEnclosureListRequest) Execute() (*StorageEnclosureResponse,
 /*
 GetStorageEnclosureList Read a 'storage.Enclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageEnclosureListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageEnclosureListRequest
 */
 func (a *StorageApiService) GetStorageEnclosureList(ctx context.Context) ApiGetStorageEnclosureListRequest {
 	return ApiGetStorageEnclosureListRequest{
@@ -5411,7 +5434,8 @@ func (a *StorageApiService) GetStorageEnclosureList(ctx context.Context) ApiGetS
 }
 
 // Execute executes the request
-//  @return StorageEnclosureResponse
+//
+//	@return StorageEnclosureResponse
 func (a *StorageApiService) GetStorageEnclosureListExecute(r ApiGetStorageEnclosureListRequest) (*StorageEnclosureResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5598,9 +5622,9 @@ func (r ApiGetStorageFileItemByMoidRequest) Execute() (*StorageFileItem, *http.R
 /*
 GetStorageFileItemByMoid Read a 'storage.FileItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFileItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFileItemByMoidRequest
 */
 func (a *StorageApiService) GetStorageFileItemByMoid(ctx context.Context, moid string) ApiGetStorageFileItemByMoidRequest {
 	return ApiGetStorageFileItemByMoidRequest{
@@ -5611,7 +5635,8 @@ func (a *StorageApiService) GetStorageFileItemByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StorageFileItem
+//
+//	@return StorageFileItem
 func (a *StorageApiService) GetStorageFileItemByMoidExecute(r ApiGetStorageFileItemByMoidRequest) (*StorageFileItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5827,8 +5852,8 @@ func (r ApiGetStorageFileItemListRequest) Execute() (*StorageFileItemResponse, *
 /*
 GetStorageFileItemList Read a 'storage.FileItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFileItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFileItemListRequest
 */
 func (a *StorageApiService) GetStorageFileItemList(ctx context.Context) ApiGetStorageFileItemListRequest {
 	return ApiGetStorageFileItemListRequest{
@@ -5838,7 +5863,8 @@ func (a *StorageApiService) GetStorageFileItemList(ctx context.Context) ApiGetSt
 }
 
 // Execute executes the request
-//  @return StorageFileItemResponse
+//
+//	@return StorageFileItemResponse
 func (a *StorageApiService) GetStorageFileItemListExecute(r ApiGetStorageFileItemListRequest) (*StorageFileItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6025,9 +6051,9 @@ func (r ApiGetStorageFlexFlashControllerByMoidRequest) Execute() (*StorageFlexFl
 /*
 GetStorageFlexFlashControllerByMoid Read a 'storage.FlexFlashController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexFlashControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexFlashControllerByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashControllerByMoid(ctx context.Context, moid string) ApiGetStorageFlexFlashControllerByMoidRequest {
 	return ApiGetStorageFlexFlashControllerByMoidRequest{
@@ -6038,7 +6064,8 @@ func (a *StorageApiService) GetStorageFlexFlashControllerByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashController
+//
+//	@return StorageFlexFlashController
 func (a *StorageApiService) GetStorageFlexFlashControllerByMoidExecute(r ApiGetStorageFlexFlashControllerByMoidRequest) (*StorageFlexFlashController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6254,8 +6281,8 @@ func (r ApiGetStorageFlexFlashControllerListRequest) Execute() (*StorageFlexFlas
 /*
 GetStorageFlexFlashControllerList Read a 'storage.FlexFlashController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexFlashControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexFlashControllerListRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashControllerList(ctx context.Context) ApiGetStorageFlexFlashControllerListRequest {
 	return ApiGetStorageFlexFlashControllerListRequest{
@@ -6265,7 +6292,8 @@ func (a *StorageApiService) GetStorageFlexFlashControllerList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashControllerResponse
+//
+//	@return StorageFlexFlashControllerResponse
 func (a *StorageApiService) GetStorageFlexFlashControllerListExecute(r ApiGetStorageFlexFlashControllerListRequest) (*StorageFlexFlashControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6452,9 +6480,9 @@ func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) Execute() (*StorageF
 /*
 GetStorageFlexFlashControllerPropsByMoid Read a 'storage.FlexFlashControllerProps' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexFlashControllerPropsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexFlashControllerPropsByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoid(ctx context.Context, moid string) ApiGetStorageFlexFlashControllerPropsByMoidRequest {
 	return ApiGetStorageFlexFlashControllerPropsByMoidRequest{
@@ -6465,7 +6493,8 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashControllerProps
+//
+//	@return StorageFlexFlashControllerProps
 func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoidExecute(r ApiGetStorageFlexFlashControllerPropsByMoidRequest) (*StorageFlexFlashControllerProps, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6681,8 +6710,8 @@ func (r ApiGetStorageFlexFlashControllerPropsListRequest) Execute() (*StorageFle
 /*
 GetStorageFlexFlashControllerPropsList Read a 'storage.FlexFlashControllerProps' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexFlashControllerPropsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexFlashControllerPropsListRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashControllerPropsList(ctx context.Context) ApiGetStorageFlexFlashControllerPropsListRequest {
 	return ApiGetStorageFlexFlashControllerPropsListRequest{
@@ -6692,7 +6721,8 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsList(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashControllerPropsResponse
+//
+//	@return StorageFlexFlashControllerPropsResponse
 func (a *StorageApiService) GetStorageFlexFlashControllerPropsListExecute(r ApiGetStorageFlexFlashControllerPropsListRequest) (*StorageFlexFlashControllerPropsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6879,9 +6909,9 @@ func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) Execute() (*StorageFle
 /*
 GetStorageFlexFlashPhysicalDriveByMoid Read a 'storage.FlexFlashPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexFlashPhysicalDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexFlashPhysicalDriveByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoid(ctx context.Context, moid string) ApiGetStorageFlexFlashPhysicalDriveByMoidRequest {
 	return ApiGetStorageFlexFlashPhysicalDriveByMoidRequest{
@@ -6892,7 +6922,8 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashPhysicalDrive
+//
+//	@return StorageFlexFlashPhysicalDrive
 func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoidExecute(r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) (*StorageFlexFlashPhysicalDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7108,8 +7139,8 @@ func (r ApiGetStorageFlexFlashPhysicalDriveListRequest) Execute() (*StorageFlexF
 /*
 GetStorageFlexFlashPhysicalDriveList Read a 'storage.FlexFlashPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexFlashPhysicalDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexFlashPhysicalDriveListRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveList(ctx context.Context) ApiGetStorageFlexFlashPhysicalDriveListRequest {
 	return ApiGetStorageFlexFlashPhysicalDriveListRequest{
@@ -7119,7 +7150,8 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashPhysicalDriveResponse
+//
+//	@return StorageFlexFlashPhysicalDriveResponse
 func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveListExecute(r ApiGetStorageFlexFlashPhysicalDriveListRequest) (*StorageFlexFlashPhysicalDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7306,9 +7338,9 @@ func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) Execute() (*StorageFlex
 /*
 GetStorageFlexFlashVirtualDriveByMoid Read a 'storage.FlexFlashVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexFlashVirtualDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexFlashVirtualDriveByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoid(ctx context.Context, moid string) ApiGetStorageFlexFlashVirtualDriveByMoidRequest {
 	return ApiGetStorageFlexFlashVirtualDriveByMoidRequest{
@@ -7319,7 +7351,8 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashVirtualDrive
+//
+//	@return StorageFlexFlashVirtualDrive
 func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoidExecute(r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) (*StorageFlexFlashVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7535,8 +7568,8 @@ func (r ApiGetStorageFlexFlashVirtualDriveListRequest) Execute() (*StorageFlexFl
 /*
 GetStorageFlexFlashVirtualDriveList Read a 'storage.FlexFlashVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexFlashVirtualDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexFlashVirtualDriveListRequest
 */
 func (a *StorageApiService) GetStorageFlexFlashVirtualDriveList(ctx context.Context) ApiGetStorageFlexFlashVirtualDriveListRequest {
 	return ApiGetStorageFlexFlashVirtualDriveListRequest{
@@ -7546,7 +7579,8 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashVirtualDriveResponse
+//
+//	@return StorageFlexFlashVirtualDriveResponse
 func (a *StorageApiService) GetStorageFlexFlashVirtualDriveListExecute(r ApiGetStorageFlexFlashVirtualDriveListRequest) (*StorageFlexFlashVirtualDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7733,9 +7767,9 @@ func (r ApiGetStorageFlexUtilControllerByMoidRequest) Execute() (*StorageFlexUti
 /*
 GetStorageFlexUtilControllerByMoid Read a 'storage.FlexUtilController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexUtilControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexUtilControllerByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexUtilControllerByMoid(ctx context.Context, moid string) ApiGetStorageFlexUtilControllerByMoidRequest {
 	return ApiGetStorageFlexUtilControllerByMoidRequest{
@@ -7746,7 +7780,8 @@ func (a *StorageApiService) GetStorageFlexUtilControllerByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilController
+//
+//	@return StorageFlexUtilController
 func (a *StorageApiService) GetStorageFlexUtilControllerByMoidExecute(r ApiGetStorageFlexUtilControllerByMoidRequest) (*StorageFlexUtilController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7962,8 +7997,8 @@ func (r ApiGetStorageFlexUtilControllerListRequest) Execute() (*StorageFlexUtilC
 /*
 GetStorageFlexUtilControllerList Read a 'storage.FlexUtilController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexUtilControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexUtilControllerListRequest
 */
 func (a *StorageApiService) GetStorageFlexUtilControllerList(ctx context.Context) ApiGetStorageFlexUtilControllerListRequest {
 	return ApiGetStorageFlexUtilControllerListRequest{
@@ -7973,7 +8008,8 @@ func (a *StorageApiService) GetStorageFlexUtilControllerList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilControllerResponse
+//
+//	@return StorageFlexUtilControllerResponse
 func (a *StorageApiService) GetStorageFlexUtilControllerListExecute(r ApiGetStorageFlexUtilControllerListRequest) (*StorageFlexUtilControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8160,9 +8196,9 @@ func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) Execute() (*StorageFlex
 /*
 GetStorageFlexUtilPhysicalDriveByMoid Read a 'storage.FlexUtilPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexUtilPhysicalDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexUtilPhysicalDriveByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoid(ctx context.Context, moid string) ApiGetStorageFlexUtilPhysicalDriveByMoidRequest {
 	return ApiGetStorageFlexUtilPhysicalDriveByMoidRequest{
@@ -8173,7 +8209,8 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilPhysicalDrive
+//
+//	@return StorageFlexUtilPhysicalDrive
 func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoidExecute(r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) (*StorageFlexUtilPhysicalDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8389,8 +8426,8 @@ func (r ApiGetStorageFlexUtilPhysicalDriveListRequest) Execute() (*StorageFlexUt
 /*
 GetStorageFlexUtilPhysicalDriveList Read a 'storage.FlexUtilPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexUtilPhysicalDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexUtilPhysicalDriveListRequest
 */
 func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveList(ctx context.Context) ApiGetStorageFlexUtilPhysicalDriveListRequest {
 	return ApiGetStorageFlexUtilPhysicalDriveListRequest{
@@ -8400,7 +8437,8 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilPhysicalDriveResponse
+//
+//	@return StorageFlexUtilPhysicalDriveResponse
 func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveListExecute(r ApiGetStorageFlexUtilPhysicalDriveListRequest) (*StorageFlexUtilPhysicalDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8587,9 +8625,9 @@ func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) Execute() (*StorageFlexU
 /*
 GetStorageFlexUtilVirtualDriveByMoid Read a 'storage.FlexUtilVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageFlexUtilVirtualDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageFlexUtilVirtualDriveByMoidRequest
 */
 func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoid(ctx context.Context, moid string) ApiGetStorageFlexUtilVirtualDriveByMoidRequest {
 	return ApiGetStorageFlexUtilVirtualDriveByMoidRequest{
@@ -8600,7 +8638,8 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilVirtualDrive
+//
+//	@return StorageFlexUtilVirtualDrive
 func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoidExecute(r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) (*StorageFlexUtilVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8816,8 +8855,8 @@ func (r ApiGetStorageFlexUtilVirtualDriveListRequest) Execute() (*StorageFlexUti
 /*
 GetStorageFlexUtilVirtualDriveList Read a 'storage.FlexUtilVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageFlexUtilVirtualDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageFlexUtilVirtualDriveListRequest
 */
 func (a *StorageApiService) GetStorageFlexUtilVirtualDriveList(ctx context.Context) ApiGetStorageFlexUtilVirtualDriveListRequest {
 	return ApiGetStorageFlexUtilVirtualDriveListRequest{
@@ -8827,7 +8866,8 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilVirtualDriveResponse
+//
+//	@return StorageFlexUtilVirtualDriveResponse
 func (a *StorageApiService) GetStorageFlexUtilVirtualDriveListExecute(r ApiGetStorageFlexUtilVirtualDriveListRequest) (*StorageFlexUtilVirtualDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9014,9 +9054,9 @@ func (r ApiGetStorageHitachiArrayByMoidRequest) Execute() (*StorageHitachiArray,
 /*
 GetStorageHitachiArrayByMoid Read a 'storage.HitachiArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiArrayByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiArrayByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiArrayByMoid(ctx context.Context, moid string) ApiGetStorageHitachiArrayByMoidRequest {
 	return ApiGetStorageHitachiArrayByMoidRequest{
@@ -9027,7 +9067,8 @@ func (a *StorageApiService) GetStorageHitachiArrayByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StorageHitachiArray
+//
+//	@return StorageHitachiArray
 func (a *StorageApiService) GetStorageHitachiArrayByMoidExecute(r ApiGetStorageHitachiArrayByMoidRequest) (*StorageHitachiArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9243,8 +9284,8 @@ func (r ApiGetStorageHitachiArrayListRequest) Execute() (*StorageHitachiArrayRes
 /*
 GetStorageHitachiArrayList Read a 'storage.HitachiArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiArrayListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiArrayListRequest
 */
 func (a *StorageApiService) GetStorageHitachiArrayList(ctx context.Context) ApiGetStorageHitachiArrayListRequest {
 	return ApiGetStorageHitachiArrayListRequest{
@@ -9254,7 +9295,8 @@ func (a *StorageApiService) GetStorageHitachiArrayList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StorageHitachiArrayResponse
+//
+//	@return StorageHitachiArrayResponse
 func (a *StorageApiService) GetStorageHitachiArrayListExecute(r ApiGetStorageHitachiArrayListRequest) (*StorageHitachiArrayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9441,9 +9483,9 @@ func (r ApiGetStorageHitachiControllerByMoidRequest) Execute() (*StorageHitachiC
 /*
 GetStorageHitachiControllerByMoid Read a 'storage.HitachiController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiControllerByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiControllerByMoid(ctx context.Context, moid string) ApiGetStorageHitachiControllerByMoidRequest {
 	return ApiGetStorageHitachiControllerByMoidRequest{
@@ -9454,7 +9496,8 @@ func (a *StorageApiService) GetStorageHitachiControllerByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageHitachiController
+//
+//	@return StorageHitachiController
 func (a *StorageApiService) GetStorageHitachiControllerByMoidExecute(r ApiGetStorageHitachiControllerByMoidRequest) (*StorageHitachiController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9670,8 +9713,8 @@ func (r ApiGetStorageHitachiControllerListRequest) Execute() (*StorageHitachiCon
 /*
 GetStorageHitachiControllerList Read a 'storage.HitachiController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiControllerListRequest
 */
 func (a *StorageApiService) GetStorageHitachiControllerList(ctx context.Context) ApiGetStorageHitachiControllerListRequest {
 	return ApiGetStorageHitachiControllerListRequest{
@@ -9681,7 +9724,8 @@ func (a *StorageApiService) GetStorageHitachiControllerList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageHitachiControllerResponse
+//
+//	@return StorageHitachiControllerResponse
 func (a *StorageApiService) GetStorageHitachiControllerListExecute(r ApiGetStorageHitachiControllerListRequest) (*StorageHitachiControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9868,9 +9912,9 @@ func (r ApiGetStorageHitachiDiskByMoidRequest) Execute() (*StorageHitachiDisk, *
 /*
 GetStorageHitachiDiskByMoid Read a 'storage.HitachiDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiDiskByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiDiskByMoid(ctx context.Context, moid string) ApiGetStorageHitachiDiskByMoidRequest {
 	return ApiGetStorageHitachiDiskByMoidRequest{
@@ -9881,7 +9925,8 @@ func (a *StorageApiService) GetStorageHitachiDiskByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StorageHitachiDisk
+//
+//	@return StorageHitachiDisk
 func (a *StorageApiService) GetStorageHitachiDiskByMoidExecute(r ApiGetStorageHitachiDiskByMoidRequest) (*StorageHitachiDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10097,8 +10142,8 @@ func (r ApiGetStorageHitachiDiskListRequest) Execute() (*StorageHitachiDiskRespo
 /*
 GetStorageHitachiDiskList Read a 'storage.HitachiDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiDiskListRequest
 */
 func (a *StorageApiService) GetStorageHitachiDiskList(ctx context.Context) ApiGetStorageHitachiDiskListRequest {
 	return ApiGetStorageHitachiDiskListRequest{
@@ -10108,7 +10153,8 @@ func (a *StorageApiService) GetStorageHitachiDiskList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StorageHitachiDiskResponse
+//
+//	@return StorageHitachiDiskResponse
 func (a *StorageApiService) GetStorageHitachiDiskListExecute(r ApiGetStorageHitachiDiskListRequest) (*StorageHitachiDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10295,9 +10341,9 @@ func (r ApiGetStorageHitachiExternalParityGroupByMoidRequest) Execute() (*Storag
 /*
 GetStorageHitachiExternalParityGroupByMoid Read a 'storage.HitachiExternalParityGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiExternalParityGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiExternalParityGroupByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalParityGroupByMoid(ctx context.Context, moid string) ApiGetStorageHitachiExternalParityGroupByMoidRequest {
 	return ApiGetStorageHitachiExternalParityGroupByMoidRequest{
@@ -10308,7 +10354,8 @@ func (a *StorageApiService) GetStorageHitachiExternalParityGroupByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalParityGroup
+//
+//	@return StorageHitachiExternalParityGroup
 func (a *StorageApiService) GetStorageHitachiExternalParityGroupByMoidExecute(r ApiGetStorageHitachiExternalParityGroupByMoidRequest) (*StorageHitachiExternalParityGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10524,8 +10571,8 @@ func (r ApiGetStorageHitachiExternalParityGroupListRequest) Execute() (*StorageH
 /*
 GetStorageHitachiExternalParityGroupList Read a 'storage.HitachiExternalParityGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiExternalParityGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiExternalParityGroupListRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalParityGroupList(ctx context.Context) ApiGetStorageHitachiExternalParityGroupListRequest {
 	return ApiGetStorageHitachiExternalParityGroupListRequest{
@@ -10535,7 +10582,8 @@ func (a *StorageApiService) GetStorageHitachiExternalParityGroupList(ctx context
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalParityGroupResponse
+//
+//	@return StorageHitachiExternalParityGroupResponse
 func (a *StorageApiService) GetStorageHitachiExternalParityGroupListExecute(r ApiGetStorageHitachiExternalParityGroupListRequest) (*StorageHitachiExternalParityGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10722,9 +10770,9 @@ func (r ApiGetStorageHitachiExternalPathGroupByMoidRequest) Execute() (*StorageH
 /*
 GetStorageHitachiExternalPathGroupByMoid Read a 'storage.HitachiExternalPathGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiExternalPathGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiExternalPathGroupByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalPathGroupByMoid(ctx context.Context, moid string) ApiGetStorageHitachiExternalPathGroupByMoidRequest {
 	return ApiGetStorageHitachiExternalPathGroupByMoidRequest{
@@ -10735,7 +10783,8 @@ func (a *StorageApiService) GetStorageHitachiExternalPathGroupByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalPathGroup
+//
+//	@return StorageHitachiExternalPathGroup
 func (a *StorageApiService) GetStorageHitachiExternalPathGroupByMoidExecute(r ApiGetStorageHitachiExternalPathGroupByMoidRequest) (*StorageHitachiExternalPathGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10951,8 +11000,8 @@ func (r ApiGetStorageHitachiExternalPathGroupListRequest) Execute() (*StorageHit
 /*
 GetStorageHitachiExternalPathGroupList Read a 'storage.HitachiExternalPathGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiExternalPathGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiExternalPathGroupListRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalPathGroupList(ctx context.Context) ApiGetStorageHitachiExternalPathGroupListRequest {
 	return ApiGetStorageHitachiExternalPathGroupListRequest{
@@ -10962,7 +11011,8 @@ func (a *StorageApiService) GetStorageHitachiExternalPathGroupList(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalPathGroupResponse
+//
+//	@return StorageHitachiExternalPathGroupResponse
 func (a *StorageApiService) GetStorageHitachiExternalPathGroupListExecute(r ApiGetStorageHitachiExternalPathGroupListRequest) (*StorageHitachiExternalPathGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11149,9 +11199,9 @@ func (r ApiGetStorageHitachiExternalStorageLunByMoidRequest) Execute() (*Storage
 /*
 GetStorageHitachiExternalStorageLunByMoid Read a 'storage.HitachiExternalStorageLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiExternalStorageLunByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiExternalStorageLunByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalStorageLunByMoid(ctx context.Context, moid string) ApiGetStorageHitachiExternalStorageLunByMoidRequest {
 	return ApiGetStorageHitachiExternalStorageLunByMoidRequest{
@@ -11162,7 +11212,8 @@ func (a *StorageApiService) GetStorageHitachiExternalStorageLunByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalStorageLun
+//
+//	@return StorageHitachiExternalStorageLun
 func (a *StorageApiService) GetStorageHitachiExternalStorageLunByMoidExecute(r ApiGetStorageHitachiExternalStorageLunByMoidRequest) (*StorageHitachiExternalStorageLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11378,8 +11429,8 @@ func (r ApiGetStorageHitachiExternalStorageLunListRequest) Execute() (*StorageHi
 /*
 GetStorageHitachiExternalStorageLunList Read a 'storage.HitachiExternalStorageLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiExternalStorageLunListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiExternalStorageLunListRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalStorageLunList(ctx context.Context) ApiGetStorageHitachiExternalStorageLunListRequest {
 	return ApiGetStorageHitachiExternalStorageLunListRequest{
@@ -11389,7 +11440,8 @@ func (a *StorageApiService) GetStorageHitachiExternalStorageLunList(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalStorageLunResponse
+//
+//	@return StorageHitachiExternalStorageLunResponse
 func (a *StorageApiService) GetStorageHitachiExternalStorageLunListExecute(r ApiGetStorageHitachiExternalStorageLunListRequest) (*StorageHitachiExternalStorageLunResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11576,9 +11628,9 @@ func (r ApiGetStorageHitachiExternalStoragePortByMoidRequest) Execute() (*Storag
 /*
 GetStorageHitachiExternalStoragePortByMoid Read a 'storage.HitachiExternalStoragePort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiExternalStoragePortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiExternalStoragePortByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalStoragePortByMoid(ctx context.Context, moid string) ApiGetStorageHitachiExternalStoragePortByMoidRequest {
 	return ApiGetStorageHitachiExternalStoragePortByMoidRequest{
@@ -11589,7 +11641,8 @@ func (a *StorageApiService) GetStorageHitachiExternalStoragePortByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalStoragePort
+//
+//	@return StorageHitachiExternalStoragePort
 func (a *StorageApiService) GetStorageHitachiExternalStoragePortByMoidExecute(r ApiGetStorageHitachiExternalStoragePortByMoidRequest) (*StorageHitachiExternalStoragePort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11805,8 +11858,8 @@ func (r ApiGetStorageHitachiExternalStoragePortListRequest) Execute() (*StorageH
 /*
 GetStorageHitachiExternalStoragePortList Read a 'storage.HitachiExternalStoragePort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiExternalStoragePortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiExternalStoragePortListRequest
 */
 func (a *StorageApiService) GetStorageHitachiExternalStoragePortList(ctx context.Context) ApiGetStorageHitachiExternalStoragePortListRequest {
 	return ApiGetStorageHitachiExternalStoragePortListRequest{
@@ -11816,7 +11869,8 @@ func (a *StorageApiService) GetStorageHitachiExternalStoragePortList(ctx context
 }
 
 // Execute executes the request
-//  @return StorageHitachiExternalStoragePortResponse
+//
+//	@return StorageHitachiExternalStoragePortResponse
 func (a *StorageApiService) GetStorageHitachiExternalStoragePortListExecute(r ApiGetStorageHitachiExternalStoragePortListRequest) (*StorageHitachiExternalStoragePortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12003,9 +12057,9 @@ func (r ApiGetStorageHitachiHostByMoidRequest) Execute() (*StorageHitachiHost, *
 /*
 GetStorageHitachiHostByMoid Read a 'storage.HitachiHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiHostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiHostByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiHostByMoid(ctx context.Context, moid string) ApiGetStorageHitachiHostByMoidRequest {
 	return ApiGetStorageHitachiHostByMoidRequest{
@@ -12016,7 +12070,8 @@ func (a *StorageApiService) GetStorageHitachiHostByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StorageHitachiHost
+//
+//	@return StorageHitachiHost
 func (a *StorageApiService) GetStorageHitachiHostByMoidExecute(r ApiGetStorageHitachiHostByMoidRequest) (*StorageHitachiHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12232,8 +12287,8 @@ func (r ApiGetStorageHitachiHostListRequest) Execute() (*StorageHitachiHostRespo
 /*
 GetStorageHitachiHostList Read a 'storage.HitachiHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiHostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiHostListRequest
 */
 func (a *StorageApiService) GetStorageHitachiHostList(ctx context.Context) ApiGetStorageHitachiHostListRequest {
 	return ApiGetStorageHitachiHostListRequest{
@@ -12243,7 +12298,8 @@ func (a *StorageApiService) GetStorageHitachiHostList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StorageHitachiHostResponse
+//
+//	@return StorageHitachiHostResponse
 func (a *StorageApiService) GetStorageHitachiHostListExecute(r ApiGetStorageHitachiHostListRequest) (*StorageHitachiHostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12430,9 +12486,9 @@ func (r ApiGetStorageHitachiHostLunByMoidRequest) Execute() (*StorageHitachiHost
 /*
 GetStorageHitachiHostLunByMoid Read a 'storage.HitachiHostLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiHostLunByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiHostLunByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiHostLunByMoid(ctx context.Context, moid string) ApiGetStorageHitachiHostLunByMoidRequest {
 	return ApiGetStorageHitachiHostLunByMoidRequest{
@@ -12443,7 +12499,8 @@ func (a *StorageApiService) GetStorageHitachiHostLunByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageHitachiHostLun
+//
+//	@return StorageHitachiHostLun
 func (a *StorageApiService) GetStorageHitachiHostLunByMoidExecute(r ApiGetStorageHitachiHostLunByMoidRequest) (*StorageHitachiHostLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12659,8 +12716,8 @@ func (r ApiGetStorageHitachiHostLunListRequest) Execute() (*StorageHitachiHostLu
 /*
 GetStorageHitachiHostLunList Read a 'storage.HitachiHostLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiHostLunListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiHostLunListRequest
 */
 func (a *StorageApiService) GetStorageHitachiHostLunList(ctx context.Context) ApiGetStorageHitachiHostLunListRequest {
 	return ApiGetStorageHitachiHostLunListRequest{
@@ -12670,7 +12727,8 @@ func (a *StorageApiService) GetStorageHitachiHostLunList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return StorageHitachiHostLunResponse
+//
+//	@return StorageHitachiHostLunResponse
 func (a *StorageApiService) GetStorageHitachiHostLunListExecute(r ApiGetStorageHitachiHostLunListRequest) (*StorageHitachiHostLunResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12857,9 +12915,9 @@ func (r ApiGetStorageHitachiNvmSubsystemByMoidRequest) Execute() (*StorageHitach
 /*
 GetStorageHitachiNvmSubsystemByMoid Read a 'storage.HitachiNvmSubsystem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiNvmSubsystemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiNvmSubsystemByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiNvmSubsystemByMoid(ctx context.Context, moid string) ApiGetStorageHitachiNvmSubsystemByMoidRequest {
 	return ApiGetStorageHitachiNvmSubsystemByMoidRequest{
@@ -12870,7 +12928,8 @@ func (a *StorageApiService) GetStorageHitachiNvmSubsystemByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageHitachiNvmSubsystem
+//
+//	@return StorageHitachiNvmSubsystem
 func (a *StorageApiService) GetStorageHitachiNvmSubsystemByMoidExecute(r ApiGetStorageHitachiNvmSubsystemByMoidRequest) (*StorageHitachiNvmSubsystem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13086,8 +13145,8 @@ func (r ApiGetStorageHitachiNvmSubsystemListRequest) Execute() (*StorageHitachiN
 /*
 GetStorageHitachiNvmSubsystemList Read a 'storage.HitachiNvmSubsystem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiNvmSubsystemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiNvmSubsystemListRequest
 */
 func (a *StorageApiService) GetStorageHitachiNvmSubsystemList(ctx context.Context) ApiGetStorageHitachiNvmSubsystemListRequest {
 	return ApiGetStorageHitachiNvmSubsystemListRequest{
@@ -13097,7 +13156,8 @@ func (a *StorageApiService) GetStorageHitachiNvmSubsystemList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageHitachiNvmSubsystemResponse
+//
+//	@return StorageHitachiNvmSubsystemResponse
 func (a *StorageApiService) GetStorageHitachiNvmSubsystemListExecute(r ApiGetStorageHitachiNvmSubsystemListRequest) (*StorageHitachiNvmSubsystemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13284,9 +13344,9 @@ func (r ApiGetStorageHitachiParityGroupByMoidRequest) Execute() (*StorageHitachi
 /*
 GetStorageHitachiParityGroupByMoid Read a 'storage.HitachiParityGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiParityGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiParityGroupByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiParityGroupByMoid(ctx context.Context, moid string) ApiGetStorageHitachiParityGroupByMoidRequest {
 	return ApiGetStorageHitachiParityGroupByMoidRequest{
@@ -13297,7 +13357,8 @@ func (a *StorageApiService) GetStorageHitachiParityGroupByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageHitachiParityGroup
+//
+//	@return StorageHitachiParityGroup
 func (a *StorageApiService) GetStorageHitachiParityGroupByMoidExecute(r ApiGetStorageHitachiParityGroupByMoidRequest) (*StorageHitachiParityGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13513,8 +13574,8 @@ func (r ApiGetStorageHitachiParityGroupListRequest) Execute() (*StorageHitachiPa
 /*
 GetStorageHitachiParityGroupList Read a 'storage.HitachiParityGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiParityGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiParityGroupListRequest
 */
 func (a *StorageApiService) GetStorageHitachiParityGroupList(ctx context.Context) ApiGetStorageHitachiParityGroupListRequest {
 	return ApiGetStorageHitachiParityGroupListRequest{
@@ -13524,7 +13585,8 @@ func (a *StorageApiService) GetStorageHitachiParityGroupList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageHitachiParityGroupResponse
+//
+//	@return StorageHitachiParityGroupResponse
 func (a *StorageApiService) GetStorageHitachiParityGroupListExecute(r ApiGetStorageHitachiParityGroupListRequest) (*StorageHitachiParityGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13711,9 +13773,9 @@ func (r ApiGetStorageHitachiPoolByMoidRequest) Execute() (*StorageHitachiPool, *
 /*
 GetStorageHitachiPoolByMoid Read a 'storage.HitachiPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiPoolByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiPoolByMoid(ctx context.Context, moid string) ApiGetStorageHitachiPoolByMoidRequest {
 	return ApiGetStorageHitachiPoolByMoidRequest{
@@ -13724,7 +13786,8 @@ func (a *StorageApiService) GetStorageHitachiPoolByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StorageHitachiPool
+//
+//	@return StorageHitachiPool
 func (a *StorageApiService) GetStorageHitachiPoolByMoidExecute(r ApiGetStorageHitachiPoolByMoidRequest) (*StorageHitachiPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13940,8 +14003,8 @@ func (r ApiGetStorageHitachiPoolListRequest) Execute() (*StorageHitachiPoolRespo
 /*
 GetStorageHitachiPoolList Read a 'storage.HitachiPool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiPoolListRequest
 */
 func (a *StorageApiService) GetStorageHitachiPoolList(ctx context.Context) ApiGetStorageHitachiPoolListRequest {
 	return ApiGetStorageHitachiPoolListRequest{
@@ -13951,7 +14014,8 @@ func (a *StorageApiService) GetStorageHitachiPoolList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StorageHitachiPoolResponse
+//
+//	@return StorageHitachiPoolResponse
 func (a *StorageApiService) GetStorageHitachiPoolListExecute(r ApiGetStorageHitachiPoolListRequest) (*StorageHitachiPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14138,9 +14202,9 @@ func (r ApiGetStorageHitachiPortByMoidRequest) Execute() (*StorageHitachiPort, *
 /*
 GetStorageHitachiPortByMoid Read a 'storage.HitachiPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiPortByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiPortByMoid(ctx context.Context, moid string) ApiGetStorageHitachiPortByMoidRequest {
 	return ApiGetStorageHitachiPortByMoidRequest{
@@ -14151,7 +14215,8 @@ func (a *StorageApiService) GetStorageHitachiPortByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StorageHitachiPort
+//
+//	@return StorageHitachiPort
 func (a *StorageApiService) GetStorageHitachiPortByMoidExecute(r ApiGetStorageHitachiPortByMoidRequest) (*StorageHitachiPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14367,8 +14432,8 @@ func (r ApiGetStorageHitachiPortListRequest) Execute() (*StorageHitachiPortRespo
 /*
 GetStorageHitachiPortList Read a 'storage.HitachiPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiPortListRequest
 */
 func (a *StorageApiService) GetStorageHitachiPortList(ctx context.Context) ApiGetStorageHitachiPortListRequest {
 	return ApiGetStorageHitachiPortListRequest{
@@ -14378,7 +14443,8 @@ func (a *StorageApiService) GetStorageHitachiPortList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StorageHitachiPortResponse
+//
+//	@return StorageHitachiPortResponse
 func (a *StorageApiService) GetStorageHitachiPortListExecute(r ApiGetStorageHitachiPortListRequest) (*StorageHitachiPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14565,9 +14631,9 @@ func (r ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest) Execute() (*StorageH
 /*
 GetStorageHitachiRemoteCopyPairGadByMoid Read a 'storage.HitachiRemoteCopyPairGad' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadByMoid(ctx context.Context, moid string) ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest {
 	return ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest{
@@ -14578,7 +14644,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteCopyPairGad
+//
+//	@return StorageHitachiRemoteCopyPairGad
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadByMoidExecute(r ApiGetStorageHitachiRemoteCopyPairGadByMoidRequest) (*StorageHitachiRemoteCopyPairGad, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14794,8 +14861,8 @@ func (r ApiGetStorageHitachiRemoteCopyPairGadListRequest) Execute() (*StorageHit
 /*
 GetStorageHitachiRemoteCopyPairGadList Read a 'storage.HitachiRemoteCopyPairGad' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiRemoteCopyPairGadListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiRemoteCopyPairGadListRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadList(ctx context.Context) ApiGetStorageHitachiRemoteCopyPairGadListRequest {
 	return ApiGetStorageHitachiRemoteCopyPairGadListRequest{
@@ -14805,7 +14872,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadList(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteCopyPairGadResponse
+//
+//	@return StorageHitachiRemoteCopyPairGadResponse
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairGadListExecute(r ApiGetStorageHitachiRemoteCopyPairGadListRequest) (*StorageHitachiRemoteCopyPairGadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14992,9 +15060,9 @@ func (r ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest) Execute() (*StorageHi
 /*
 GetStorageHitachiRemoteCopyPairTcByMoid Read a 'storage.HitachiRemoteCopyPairTc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcByMoid(ctx context.Context, moid string) ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest {
 	return ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest{
@@ -15005,7 +15073,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteCopyPairTc
+//
+//	@return StorageHitachiRemoteCopyPairTc
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcByMoidExecute(r ApiGetStorageHitachiRemoteCopyPairTcByMoidRequest) (*StorageHitachiRemoteCopyPairTc, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15221,8 +15290,8 @@ func (r ApiGetStorageHitachiRemoteCopyPairTcListRequest) Execute() (*StorageHita
 /*
 GetStorageHitachiRemoteCopyPairTcList Read a 'storage.HitachiRemoteCopyPairTc' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiRemoteCopyPairTcListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiRemoteCopyPairTcListRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcList(ctx context.Context) ApiGetStorageHitachiRemoteCopyPairTcListRequest {
 	return ApiGetStorageHitachiRemoteCopyPairTcListRequest{
@@ -15232,7 +15301,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteCopyPairTcResponse
+//
+//	@return StorageHitachiRemoteCopyPairTcResponse
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairTcListExecute(r ApiGetStorageHitachiRemoteCopyPairTcListRequest) (*StorageHitachiRemoteCopyPairTcResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15419,9 +15489,9 @@ func (r ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest) Execute() (*StorageHi
 /*
 GetStorageHitachiRemoteCopyPairUrByMoid Read a 'storage.HitachiRemoteCopyPairUr' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrByMoid(ctx context.Context, moid string) ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest {
 	return ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest{
@@ -15432,7 +15502,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteCopyPairUr
+//
+//	@return StorageHitachiRemoteCopyPairUr
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrByMoidExecute(r ApiGetStorageHitachiRemoteCopyPairUrByMoidRequest) (*StorageHitachiRemoteCopyPairUr, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15648,8 +15719,8 @@ func (r ApiGetStorageHitachiRemoteCopyPairUrListRequest) Execute() (*StorageHita
 /*
 GetStorageHitachiRemoteCopyPairUrList Read a 'storage.HitachiRemoteCopyPairUr' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiRemoteCopyPairUrListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiRemoteCopyPairUrListRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrList(ctx context.Context) ApiGetStorageHitachiRemoteCopyPairUrListRequest {
 	return ApiGetStorageHitachiRemoteCopyPairUrListRequest{
@@ -15659,7 +15730,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteCopyPairUrResponse
+//
+//	@return StorageHitachiRemoteCopyPairUrResponse
 func (a *StorageApiService) GetStorageHitachiRemoteCopyPairUrListExecute(r ApiGetStorageHitachiRemoteCopyPairUrListRequest) (*StorageHitachiRemoteCopyPairUrResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15846,9 +15918,9 @@ func (r ApiGetStorageHitachiRemoteReplicationByMoidRequest) Execute() (*StorageH
 /*
 GetStorageHitachiRemoteReplicationByMoid Read a 'storage.HitachiRemoteReplication' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiRemoteReplicationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiRemoteReplicationByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteReplicationByMoid(ctx context.Context, moid string) ApiGetStorageHitachiRemoteReplicationByMoidRequest {
 	return ApiGetStorageHitachiRemoteReplicationByMoidRequest{
@@ -15859,7 +15931,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteReplicationByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteReplication
+//
+//	@return StorageHitachiRemoteReplication
 func (a *StorageApiService) GetStorageHitachiRemoteReplicationByMoidExecute(r ApiGetStorageHitachiRemoteReplicationByMoidRequest) (*StorageHitachiRemoteReplication, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16075,8 +16148,8 @@ func (r ApiGetStorageHitachiRemoteReplicationListRequest) Execute() (*StorageHit
 /*
 GetStorageHitachiRemoteReplicationList Read a 'storage.HitachiRemoteReplication' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiRemoteReplicationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiRemoteReplicationListRequest
 */
 func (a *StorageApiService) GetStorageHitachiRemoteReplicationList(ctx context.Context) ApiGetStorageHitachiRemoteReplicationListRequest {
 	return ApiGetStorageHitachiRemoteReplicationListRequest{
@@ -16086,7 +16159,8 @@ func (a *StorageApiService) GetStorageHitachiRemoteReplicationList(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageHitachiRemoteReplicationResponse
+//
+//	@return StorageHitachiRemoteReplicationResponse
 func (a *StorageApiService) GetStorageHitachiRemoteReplicationListExecute(r ApiGetStorageHitachiRemoteReplicationListRequest) (*StorageHitachiRemoteReplicationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16273,9 +16347,9 @@ func (r ApiGetStorageHitachiSnapshotByMoidRequest) Execute() (*StorageHitachiSna
 /*
 GetStorageHitachiSnapshotByMoid Read a 'storage.HitachiSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiSnapshotByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiSnapshotByMoid(ctx context.Context, moid string) ApiGetStorageHitachiSnapshotByMoidRequest {
 	return ApiGetStorageHitachiSnapshotByMoidRequest{
@@ -16286,7 +16360,8 @@ func (a *StorageApiService) GetStorageHitachiSnapshotByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageHitachiSnapshot
+//
+//	@return StorageHitachiSnapshot
 func (a *StorageApiService) GetStorageHitachiSnapshotByMoidExecute(r ApiGetStorageHitachiSnapshotByMoidRequest) (*StorageHitachiSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16502,8 +16577,8 @@ func (r ApiGetStorageHitachiSnapshotListRequest) Execute() (*StorageHitachiSnaps
 /*
 GetStorageHitachiSnapshotList Read a 'storage.HitachiSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiSnapshotListRequest
 */
 func (a *StorageApiService) GetStorageHitachiSnapshotList(ctx context.Context) ApiGetStorageHitachiSnapshotListRequest {
 	return ApiGetStorageHitachiSnapshotListRequest{
@@ -16513,7 +16588,8 @@ func (a *StorageApiService) GetStorageHitachiSnapshotList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageHitachiSnapshotResponse
+//
+//	@return StorageHitachiSnapshotResponse
 func (a *StorageApiService) GetStorageHitachiSnapshotListExecute(r ApiGetStorageHitachiSnapshotListRequest) (*StorageHitachiSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16700,9 +16776,9 @@ func (r ApiGetStorageHitachiVolumeByMoidRequest) Execute() (*StorageHitachiVolum
 /*
 GetStorageHitachiVolumeByMoid Read a 'storage.HitachiVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiVolumeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiVolumeByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiVolumeByMoid(ctx context.Context, moid string) ApiGetStorageHitachiVolumeByMoidRequest {
 	return ApiGetStorageHitachiVolumeByMoidRequest{
@@ -16713,7 +16789,8 @@ func (a *StorageApiService) GetStorageHitachiVolumeByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StorageHitachiVolume
+//
+//	@return StorageHitachiVolume
 func (a *StorageApiService) GetStorageHitachiVolumeByMoidExecute(r ApiGetStorageHitachiVolumeByMoidRequest) (*StorageHitachiVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16929,8 +17006,8 @@ func (r ApiGetStorageHitachiVolumeListRequest) Execute() (*StorageHitachiVolumeR
 /*
 GetStorageHitachiVolumeList Read a 'storage.HitachiVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiVolumeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiVolumeListRequest
 */
 func (a *StorageApiService) GetStorageHitachiVolumeList(ctx context.Context) ApiGetStorageHitachiVolumeListRequest {
 	return ApiGetStorageHitachiVolumeListRequest{
@@ -16940,7 +17017,8 @@ func (a *StorageApiService) GetStorageHitachiVolumeList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return StorageHitachiVolumeResponse
+//
+//	@return StorageHitachiVolumeResponse
 func (a *StorageApiService) GetStorageHitachiVolumeListExecute(r ApiGetStorageHitachiVolumeListRequest) (*StorageHitachiVolumeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17127,9 +17205,9 @@ func (r ApiGetStorageHitachiVolumeMigrationPairByMoidRequest) Execute() (*Storag
 /*
 GetStorageHitachiVolumeMigrationPairByMoid Read a 'storage.HitachiVolumeMigrationPair' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHitachiVolumeMigrationPairByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHitachiVolumeMigrationPairByMoidRequest
 */
 func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairByMoid(ctx context.Context, moid string) ApiGetStorageHitachiVolumeMigrationPairByMoidRequest {
 	return ApiGetStorageHitachiVolumeMigrationPairByMoidRequest{
@@ -17140,7 +17218,8 @@ func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return StorageHitachiVolumeMigrationPair
+//
+//	@return StorageHitachiVolumeMigrationPair
 func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairByMoidExecute(r ApiGetStorageHitachiVolumeMigrationPairByMoidRequest) (*StorageHitachiVolumeMigrationPair, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17356,8 +17435,8 @@ func (r ApiGetStorageHitachiVolumeMigrationPairListRequest) Execute() (*StorageH
 /*
 GetStorageHitachiVolumeMigrationPairList Read a 'storage.HitachiVolumeMigrationPair' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHitachiVolumeMigrationPairListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHitachiVolumeMigrationPairListRequest
 */
 func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairList(ctx context.Context) ApiGetStorageHitachiVolumeMigrationPairListRequest {
 	return ApiGetStorageHitachiVolumeMigrationPairListRequest{
@@ -17367,7 +17446,8 @@ func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairList(ctx context
 }
 
 // Execute executes the request
-//  @return StorageHitachiVolumeMigrationPairResponse
+//
+//	@return StorageHitachiVolumeMigrationPairResponse
 func (a *StorageApiService) GetStorageHitachiVolumeMigrationPairListExecute(r ApiGetStorageHitachiVolumeMigrationPairListRequest) (*StorageHitachiVolumeMigrationPairResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17554,9 +17634,9 @@ func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) Execute() (*Storage
 /*
 GetStorageHyperFlexStorageContainerByMoid Read a 'storage.HyperFlexStorageContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHyperFlexStorageContainerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHyperFlexStorageContainerByMoidRequest
 */
 func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoid(ctx context.Context, moid string) ApiGetStorageHyperFlexStorageContainerByMoidRequest {
 	return ApiGetStorageHyperFlexStorageContainerByMoidRequest{
@@ -17567,7 +17647,8 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return StorageHyperFlexStorageContainer
+//
+//	@return StorageHyperFlexStorageContainer
 func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoidExecute(r ApiGetStorageHyperFlexStorageContainerByMoidRequest) (*StorageHyperFlexStorageContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17783,8 +17864,8 @@ func (r ApiGetStorageHyperFlexStorageContainerListRequest) Execute() (*StorageHy
 /*
 GetStorageHyperFlexStorageContainerList Read a 'storage.HyperFlexStorageContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHyperFlexStorageContainerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHyperFlexStorageContainerListRequest
 */
 func (a *StorageApiService) GetStorageHyperFlexStorageContainerList(ctx context.Context) ApiGetStorageHyperFlexStorageContainerListRequest {
 	return ApiGetStorageHyperFlexStorageContainerListRequest{
@@ -17794,7 +17875,8 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerList(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageHyperFlexStorageContainerResponse
+//
+//	@return StorageHyperFlexStorageContainerResponse
 func (a *StorageApiService) GetStorageHyperFlexStorageContainerListExecute(r ApiGetStorageHyperFlexStorageContainerListRequest) (*StorageHyperFlexStorageContainerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17981,9 +18063,9 @@ func (r ApiGetStorageHyperFlexVolumeByMoidRequest) Execute() (*StorageHyperFlexV
 /*
 GetStorageHyperFlexVolumeByMoid Read a 'storage.HyperFlexVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageHyperFlexVolumeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageHyperFlexVolumeByMoidRequest
 */
 func (a *StorageApiService) GetStorageHyperFlexVolumeByMoid(ctx context.Context, moid string) ApiGetStorageHyperFlexVolumeByMoidRequest {
 	return ApiGetStorageHyperFlexVolumeByMoidRequest{
@@ -17994,7 +18076,8 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageHyperFlexVolume
+//
+//	@return StorageHyperFlexVolume
 func (a *StorageApiService) GetStorageHyperFlexVolumeByMoidExecute(r ApiGetStorageHyperFlexVolumeByMoidRequest) (*StorageHyperFlexVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18210,8 +18293,8 @@ func (r ApiGetStorageHyperFlexVolumeListRequest) Execute() (*StorageHyperFlexVol
 /*
 GetStorageHyperFlexVolumeList Read a 'storage.HyperFlexVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageHyperFlexVolumeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageHyperFlexVolumeListRequest
 */
 func (a *StorageApiService) GetStorageHyperFlexVolumeList(ctx context.Context) ApiGetStorageHyperFlexVolumeListRequest {
 	return ApiGetStorageHyperFlexVolumeListRequest{
@@ -18221,7 +18304,8 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageHyperFlexVolumeResponse
+//
+//	@return StorageHyperFlexVolumeResponse
 func (a *StorageApiService) GetStorageHyperFlexVolumeListExecute(r ApiGetStorageHyperFlexVolumeListRequest) (*StorageHyperFlexVolumeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18408,9 +18492,9 @@ func (r ApiGetStorageItemByMoidRequest) Execute() (*StorageItem, *http.Response,
 /*
 GetStorageItemByMoid Read a 'storage.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageItemByMoidRequest
 */
 func (a *StorageApiService) GetStorageItemByMoid(ctx context.Context, moid string) ApiGetStorageItemByMoidRequest {
 	return ApiGetStorageItemByMoidRequest{
@@ -18421,7 +18505,8 @@ func (a *StorageApiService) GetStorageItemByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return StorageItem
+//
+//	@return StorageItem
 func (a *StorageApiService) GetStorageItemByMoidExecute(r ApiGetStorageItemByMoidRequest) (*StorageItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18637,8 +18722,8 @@ func (r ApiGetStorageItemListRequest) Execute() (*StorageItemResponse, *http.Res
 /*
 GetStorageItemList Read a 'storage.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageItemListRequest
 */
 func (a *StorageApiService) GetStorageItemList(ctx context.Context) ApiGetStorageItemListRequest {
 	return ApiGetStorageItemListRequest{
@@ -18648,7 +18733,8 @@ func (a *StorageApiService) GetStorageItemList(ctx context.Context) ApiGetStorag
 }
 
 // Execute executes the request
-//  @return StorageItemResponse
+//
+//	@return StorageItemResponse
 func (a *StorageApiService) GetStorageItemListExecute(r ApiGetStorageItemListRequest) (*StorageItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18835,9 +18921,9 @@ func (r ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest) Execute() (*Stor
 /*
 GetStorageKnoxSecureDriveConfigurationByMoid Read a 'storage.KnoxSecureDriveConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest
 */
 func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationByMoid(ctx context.Context, moid string) ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest {
 	return ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest{
@@ -18848,7 +18934,8 @@ func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return StorageKnoxSecureDriveConfiguration
+//
+//	@return StorageKnoxSecureDriveConfiguration
 func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationByMoidExecute(r ApiGetStorageKnoxSecureDriveConfigurationByMoidRequest) (*StorageKnoxSecureDriveConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19064,8 +19151,8 @@ func (r ApiGetStorageKnoxSecureDriveConfigurationListRequest) Execute() (*Storag
 /*
 GetStorageKnoxSecureDriveConfigurationList Read a 'storage.KnoxSecureDriveConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageKnoxSecureDriveConfigurationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageKnoxSecureDriveConfigurationListRequest
 */
 func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationList(ctx context.Context) ApiGetStorageKnoxSecureDriveConfigurationListRequest {
 	return ApiGetStorageKnoxSecureDriveConfigurationListRequest{
@@ -19075,7 +19162,8 @@ func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationList(ctx conte
 }
 
 // Execute executes the request
-//  @return StorageKnoxSecureDriveConfigurationResponse
+//
+//	@return StorageKnoxSecureDriveConfigurationResponse
 func (a *StorageApiService) GetStorageKnoxSecureDriveConfigurationListExecute(r ApiGetStorageKnoxSecureDriveConfigurationListRequest) (*StorageKnoxSecureDriveConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19262,9 +19350,9 @@ func (r ApiGetStorageNetAppAggregateByMoidRequest) Execute() (*StorageNetAppAggr
 /*
 GetStorageNetAppAggregateByMoid Read a 'storage.NetAppAggregate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppAggregateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppAggregateByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppAggregateByMoid(ctx context.Context, moid string) ApiGetStorageNetAppAggregateByMoidRequest {
 	return ApiGetStorageNetAppAggregateByMoidRequest{
@@ -19275,7 +19363,8 @@ func (a *StorageApiService) GetStorageNetAppAggregateByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppAggregate
+//
+//	@return StorageNetAppAggregate
 func (a *StorageApiService) GetStorageNetAppAggregateByMoidExecute(r ApiGetStorageNetAppAggregateByMoidRequest) (*StorageNetAppAggregate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19415,9 +19504,9 @@ func (r ApiGetStorageNetAppAggregateEventByMoidRequest) Execute() (*StorageNetAp
 /*
 GetStorageNetAppAggregateEventByMoid Read a 'storage.NetAppAggregateEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppAggregateEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppAggregateEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppAggregateEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppAggregateEventByMoidRequest {
 	return ApiGetStorageNetAppAggregateEventByMoidRequest{
@@ -19428,7 +19517,8 @@ func (a *StorageApiService) GetStorageNetAppAggregateEventByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageNetAppAggregateEvent
+//
+//	@return StorageNetAppAggregateEvent
 func (a *StorageApiService) GetStorageNetAppAggregateEventByMoidExecute(r ApiGetStorageNetAppAggregateEventByMoidRequest) (*StorageNetAppAggregateEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19644,8 +19734,8 @@ func (r ApiGetStorageNetAppAggregateEventListRequest) Execute() (*StorageNetAppA
 /*
 GetStorageNetAppAggregateEventList Read a 'storage.NetAppAggregateEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppAggregateEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppAggregateEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppAggregateEventList(ctx context.Context) ApiGetStorageNetAppAggregateEventListRequest {
 	return ApiGetStorageNetAppAggregateEventListRequest{
@@ -19655,7 +19745,8 @@ func (a *StorageApiService) GetStorageNetAppAggregateEventList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppAggregateEventResponse
+//
+//	@return StorageNetAppAggregateEventResponse
 func (a *StorageApiService) GetStorageNetAppAggregateEventListExecute(r ApiGetStorageNetAppAggregateEventListRequest) (*StorageNetAppAggregateEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19918,8 +20009,8 @@ func (r ApiGetStorageNetAppAggregateListRequest) Execute() (*StorageNetAppAggreg
 /*
 GetStorageNetAppAggregateList Read a 'storage.NetAppAggregate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppAggregateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppAggregateListRequest
 */
 func (a *StorageApiService) GetStorageNetAppAggregateList(ctx context.Context) ApiGetStorageNetAppAggregateListRequest {
 	return ApiGetStorageNetAppAggregateListRequest{
@@ -19929,7 +20020,8 @@ func (a *StorageApiService) GetStorageNetAppAggregateList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppAggregateResponse
+//
+//	@return StorageNetAppAggregateResponse
 func (a *StorageApiService) GetStorageNetAppAggregateListExecute(r ApiGetStorageNetAppAggregateListRequest) (*StorageNetAppAggregateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20116,9 +20208,9 @@ func (r ApiGetStorageNetAppBaseDiskByMoidRequest) Execute() (*StorageNetAppBaseD
 /*
 GetStorageNetAppBaseDiskByMoid Read a 'storage.NetAppBaseDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppBaseDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppBaseDiskByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppBaseDiskByMoid(ctx context.Context, moid string) ApiGetStorageNetAppBaseDiskByMoidRequest {
 	return ApiGetStorageNetAppBaseDiskByMoidRequest{
@@ -20129,7 +20221,8 @@ func (a *StorageApiService) GetStorageNetAppBaseDiskByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageNetAppBaseDisk
+//
+//	@return StorageNetAppBaseDisk
 func (a *StorageApiService) GetStorageNetAppBaseDiskByMoidExecute(r ApiGetStorageNetAppBaseDiskByMoidRequest) (*StorageNetAppBaseDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20345,8 +20438,8 @@ func (r ApiGetStorageNetAppBaseDiskListRequest) Execute() (*StorageNetAppBaseDis
 /*
 GetStorageNetAppBaseDiskList Read a 'storage.NetAppBaseDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppBaseDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppBaseDiskListRequest
 */
 func (a *StorageApiService) GetStorageNetAppBaseDiskList(ctx context.Context) ApiGetStorageNetAppBaseDiskListRequest {
 	return ApiGetStorageNetAppBaseDiskListRequest{
@@ -20356,7 +20449,8 @@ func (a *StorageApiService) GetStorageNetAppBaseDiskList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return StorageNetAppBaseDiskResponse
+//
+//	@return StorageNetAppBaseDiskResponse
 func (a *StorageApiService) GetStorageNetAppBaseDiskListExecute(r ApiGetStorageNetAppBaseDiskListRequest) (*StorageNetAppBaseDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20543,9 +20637,9 @@ func (r ApiGetStorageNetAppCifsServiceByMoidRequest) Execute() (*StorageNetAppCi
 /*
 GetStorageNetAppCifsServiceByMoid Read a 'storage.NetAppCifsService' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppCifsServiceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppCifsServiceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppCifsServiceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppCifsServiceByMoidRequest {
 	return ApiGetStorageNetAppCifsServiceByMoidRequest{
@@ -20556,7 +20650,8 @@ func (a *StorageApiService) GetStorageNetAppCifsServiceByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppCifsService
+//
+//	@return StorageNetAppCifsService
 func (a *StorageApiService) GetStorageNetAppCifsServiceByMoidExecute(r ApiGetStorageNetAppCifsServiceByMoidRequest) (*StorageNetAppCifsService, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20772,8 +20867,8 @@ func (r ApiGetStorageNetAppCifsServiceListRequest) Execute() (*StorageNetAppCifs
 /*
 GetStorageNetAppCifsServiceList Read a 'storage.NetAppCifsService' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppCifsServiceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppCifsServiceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppCifsServiceList(ctx context.Context) ApiGetStorageNetAppCifsServiceListRequest {
 	return ApiGetStorageNetAppCifsServiceListRequest{
@@ -20783,7 +20878,8 @@ func (a *StorageApiService) GetStorageNetAppCifsServiceList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageNetAppCifsServiceResponse
+//
+//	@return StorageNetAppCifsServiceResponse
 func (a *StorageApiService) GetStorageNetAppCifsServiceListExecute(r ApiGetStorageNetAppCifsServiceListRequest) (*StorageNetAppCifsServiceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20970,9 +21066,9 @@ func (r ApiGetStorageNetAppCifsShareByMoidRequest) Execute() (*StorageNetAppCifs
 /*
 GetStorageNetAppCifsShareByMoid Read a 'storage.NetAppCifsShare' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppCifsShareByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppCifsShareByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppCifsShareByMoid(ctx context.Context, moid string) ApiGetStorageNetAppCifsShareByMoidRequest {
 	return ApiGetStorageNetAppCifsShareByMoidRequest{
@@ -20983,7 +21079,8 @@ func (a *StorageApiService) GetStorageNetAppCifsShareByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppCifsShare
+//
+//	@return StorageNetAppCifsShare
 func (a *StorageApiService) GetStorageNetAppCifsShareByMoidExecute(r ApiGetStorageNetAppCifsShareByMoidRequest) (*StorageNetAppCifsShare, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21199,8 +21296,8 @@ func (r ApiGetStorageNetAppCifsShareListRequest) Execute() (*StorageNetAppCifsSh
 /*
 GetStorageNetAppCifsShareList Read a 'storage.NetAppCifsShare' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppCifsShareListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppCifsShareListRequest
 */
 func (a *StorageApiService) GetStorageNetAppCifsShareList(ctx context.Context) ApiGetStorageNetAppCifsShareListRequest {
 	return ApiGetStorageNetAppCifsShareListRequest{
@@ -21210,7 +21307,8 @@ func (a *StorageApiService) GetStorageNetAppCifsShareList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppCifsShareResponse
+//
+//	@return StorageNetAppCifsShareResponse
 func (a *StorageApiService) GetStorageNetAppCifsShareListExecute(r ApiGetStorageNetAppCifsShareListRequest) (*StorageNetAppCifsShareResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21397,9 +21495,9 @@ func (r ApiGetStorageNetAppCloudTargetByMoidRequest) Execute() (*StorageNetAppCl
 /*
 GetStorageNetAppCloudTargetByMoid Read a 'storage.NetAppCloudTarget' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppCloudTargetByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppCloudTargetByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppCloudTargetByMoid(ctx context.Context, moid string) ApiGetStorageNetAppCloudTargetByMoidRequest {
 	return ApiGetStorageNetAppCloudTargetByMoidRequest{
@@ -21410,7 +21508,8 @@ func (a *StorageApiService) GetStorageNetAppCloudTargetByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppCloudTarget
+//
+//	@return StorageNetAppCloudTarget
 func (a *StorageApiService) GetStorageNetAppCloudTargetByMoidExecute(r ApiGetStorageNetAppCloudTargetByMoidRequest) (*StorageNetAppCloudTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21626,8 +21725,8 @@ func (r ApiGetStorageNetAppCloudTargetListRequest) Execute() (*StorageNetAppClou
 /*
 GetStorageNetAppCloudTargetList Read a 'storage.NetAppCloudTarget' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppCloudTargetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppCloudTargetListRequest
 */
 func (a *StorageApiService) GetStorageNetAppCloudTargetList(ctx context.Context) ApiGetStorageNetAppCloudTargetListRequest {
 	return ApiGetStorageNetAppCloudTargetListRequest{
@@ -21637,7 +21736,8 @@ func (a *StorageApiService) GetStorageNetAppCloudTargetList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageNetAppCloudTargetResponse
+//
+//	@return StorageNetAppCloudTargetResponse
 func (a *StorageApiService) GetStorageNetAppCloudTargetListExecute(r ApiGetStorageNetAppCloudTargetListRequest) (*StorageNetAppCloudTargetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21824,9 +21924,9 @@ func (r ApiGetStorageNetAppClusterByMoidRequest) Execute() (*StorageNetAppCluste
 /*
 GetStorageNetAppClusterByMoid Read a 'storage.NetAppCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppClusterByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterByMoid(ctx context.Context, moid string) ApiGetStorageNetAppClusterByMoidRequest {
 	return ApiGetStorageNetAppClusterByMoidRequest{
@@ -21837,7 +21937,8 @@ func (a *StorageApiService) GetStorageNetAppClusterByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StorageNetAppCluster
+//
+//	@return StorageNetAppCluster
 func (a *StorageApiService) GetStorageNetAppClusterByMoidExecute(r ApiGetStorageNetAppClusterByMoidRequest) (*StorageNetAppCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21977,9 +22078,9 @@ func (r ApiGetStorageNetAppClusterEventByMoidRequest) Execute() (*StorageNetAppC
 /*
 GetStorageNetAppClusterEventByMoid Read a 'storage.NetAppClusterEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppClusterEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppClusterEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppClusterEventByMoidRequest {
 	return ApiGetStorageNetAppClusterEventByMoidRequest{
@@ -21990,7 +22091,8 @@ func (a *StorageApiService) GetStorageNetAppClusterEventByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterEvent
+//
+//	@return StorageNetAppClusterEvent
 func (a *StorageApiService) GetStorageNetAppClusterEventByMoidExecute(r ApiGetStorageNetAppClusterEventByMoidRequest) (*StorageNetAppClusterEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22206,8 +22308,8 @@ func (r ApiGetStorageNetAppClusterEventListRequest) Execute() (*StorageNetAppClu
 /*
 GetStorageNetAppClusterEventList Read a 'storage.NetAppClusterEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppClusterEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppClusterEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterEventList(ctx context.Context) ApiGetStorageNetAppClusterEventListRequest {
 	return ApiGetStorageNetAppClusterEventListRequest{
@@ -22217,7 +22319,8 @@ func (a *StorageApiService) GetStorageNetAppClusterEventList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterEventResponse
+//
+//	@return StorageNetAppClusterEventResponse
 func (a *StorageApiService) GetStorageNetAppClusterEventListExecute(r ApiGetStorageNetAppClusterEventListRequest) (*StorageNetAppClusterEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22480,8 +22583,8 @@ func (r ApiGetStorageNetAppClusterListRequest) Execute() (*StorageNetAppClusterR
 /*
 GetStorageNetAppClusterList Read a 'storage.NetAppCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppClusterListRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterList(ctx context.Context) ApiGetStorageNetAppClusterListRequest {
 	return ApiGetStorageNetAppClusterListRequest{
@@ -22491,7 +22594,8 @@ func (a *StorageApiService) GetStorageNetAppClusterList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterResponse
+//
+//	@return StorageNetAppClusterResponse
 func (a *StorageApiService) GetStorageNetAppClusterListExecute(r ApiGetStorageNetAppClusterListRequest) (*StorageNetAppClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22678,9 +22782,9 @@ func (r ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest) Execute() (*Sto
 /*
 GetStorageNetAppClusterSnapMirrorPolicyByMoid Read a 'storage.NetAppClusterSnapMirrorPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyByMoid(ctx context.Context, moid string) ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest {
 	return ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest{
@@ -22691,7 +22795,8 @@ func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterSnapMirrorPolicy
+//
+//	@return StorageNetAppClusterSnapMirrorPolicy
 func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyByMoidExecute(r ApiGetStorageNetAppClusterSnapMirrorPolicyByMoidRequest) (*StorageNetAppClusterSnapMirrorPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22907,8 +23012,8 @@ func (r ApiGetStorageNetAppClusterSnapMirrorPolicyListRequest) Execute() (*Stora
 /*
 GetStorageNetAppClusterSnapMirrorPolicyList Read a 'storage.NetAppClusterSnapMirrorPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppClusterSnapMirrorPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppClusterSnapMirrorPolicyListRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyList(ctx context.Context) ApiGetStorageNetAppClusterSnapMirrorPolicyListRequest {
 	return ApiGetStorageNetAppClusterSnapMirrorPolicyListRequest{
@@ -22918,7 +23023,8 @@ func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyList(ctx cont
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterSnapMirrorPolicyResponse
+//
+//	@return StorageNetAppClusterSnapMirrorPolicyResponse
 func (a *StorageApiService) GetStorageNetAppClusterSnapMirrorPolicyListExecute(r ApiGetStorageNetAppClusterSnapMirrorPolicyListRequest) (*StorageNetAppClusterSnapMirrorPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23105,9 +23211,9 @@ func (r ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest) Execute() (*Stora
 /*
 GetStorageNetAppClusterSnapshotPolicyByMoid Read a 'storage.NetAppClusterSnapshotPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyByMoid(ctx context.Context, moid string) ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest {
 	return ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest{
@@ -23118,7 +23224,8 @@ func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterSnapshotPolicy
+//
+//	@return StorageNetAppClusterSnapshotPolicy
 func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyByMoidExecute(r ApiGetStorageNetAppClusterSnapshotPolicyByMoidRequest) (*StorageNetAppClusterSnapshotPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23334,8 +23441,8 @@ func (r ApiGetStorageNetAppClusterSnapshotPolicyListRequest) Execute() (*Storage
 /*
 GetStorageNetAppClusterSnapshotPolicyList Read a 'storage.NetAppClusterSnapshotPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppClusterSnapshotPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppClusterSnapshotPolicyListRequest
 */
 func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyList(ctx context.Context) ApiGetStorageNetAppClusterSnapshotPolicyListRequest {
 	return ApiGetStorageNetAppClusterSnapshotPolicyListRequest{
@@ -23345,7 +23452,8 @@ func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyList(ctx contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppClusterSnapshotPolicyResponse
+//
+//	@return StorageNetAppClusterSnapshotPolicyResponse
 func (a *StorageApiService) GetStorageNetAppClusterSnapshotPolicyListExecute(r ApiGetStorageNetAppClusterSnapshotPolicyListRequest) (*StorageNetAppClusterSnapshotPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23532,9 +23640,9 @@ func (r ApiGetStorageNetAppDataIpInterfaceByMoidRequest) Execute() (*StorageNetA
 /*
 GetStorageNetAppDataIpInterfaceByMoid Read a 'storage.NetAppDataIpInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppDataIpInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppDataIpInterfaceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppDataIpInterfaceByMoidRequest {
 	return ApiGetStorageNetAppDataIpInterfaceByMoidRequest{
@@ -23545,7 +23653,8 @@ func (a *StorageApiService) GetStorageNetAppDataIpInterfaceByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageNetAppDataIpInterface
+//
+//	@return StorageNetAppDataIpInterface
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceByMoidExecute(r ApiGetStorageNetAppDataIpInterfaceByMoidRequest) (*StorageNetAppDataIpInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23685,9 +23794,9 @@ func (r ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest) Execute() (*Storag
 /*
 GetStorageNetAppDataIpInterfaceEventByMoid Read a 'storage.NetAppDataIpInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest {
 	return ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest{
@@ -23698,7 +23807,8 @@ func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppDataIpInterfaceEvent
+//
+//	@return StorageNetAppDataIpInterfaceEvent
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventByMoidExecute(r ApiGetStorageNetAppDataIpInterfaceEventByMoidRequest) (*StorageNetAppDataIpInterfaceEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23914,8 +24024,8 @@ func (r ApiGetStorageNetAppDataIpInterfaceEventListRequest) Execute() (*StorageN
 /*
 GetStorageNetAppDataIpInterfaceEventList Read a 'storage.NetAppDataIpInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppDataIpInterfaceEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppDataIpInterfaceEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventList(ctx context.Context) ApiGetStorageNetAppDataIpInterfaceEventListRequest {
 	return ApiGetStorageNetAppDataIpInterfaceEventListRequest{
@@ -23925,7 +24035,8 @@ func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventList(ctx context
 }
 
 // Execute executes the request
-//  @return StorageNetAppDataIpInterfaceEventResponse
+//
+//	@return StorageNetAppDataIpInterfaceEventResponse
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceEventListExecute(r ApiGetStorageNetAppDataIpInterfaceEventListRequest) (*StorageNetAppDataIpInterfaceEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24188,8 +24299,8 @@ func (r ApiGetStorageNetAppDataIpInterfaceListRequest) Execute() (*StorageNetApp
 /*
 GetStorageNetAppDataIpInterfaceList Read a 'storage.NetAppDataIpInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppDataIpInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppDataIpInterfaceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceList(ctx context.Context) ApiGetStorageNetAppDataIpInterfaceListRequest {
 	return ApiGetStorageNetAppDataIpInterfaceListRequest{
@@ -24199,7 +24310,8 @@ func (a *StorageApiService) GetStorageNetAppDataIpInterfaceList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageNetAppDataIpInterfaceResponse
+//
+//	@return StorageNetAppDataIpInterfaceResponse
 func (a *StorageApiService) GetStorageNetAppDataIpInterfaceListExecute(r ApiGetStorageNetAppDataIpInterfaceListRequest) (*StorageNetAppDataIpInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24386,9 +24498,9 @@ func (r ApiGetStorageNetAppDiskEventByMoidRequest) Execute() (*StorageNetAppDisk
 /*
 GetStorageNetAppDiskEventByMoid Read a 'storage.NetAppDiskEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppDiskEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppDiskEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppDiskEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppDiskEventByMoidRequest {
 	return ApiGetStorageNetAppDiskEventByMoidRequest{
@@ -24399,7 +24511,8 @@ func (a *StorageApiService) GetStorageNetAppDiskEventByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppDiskEvent
+//
+//	@return StorageNetAppDiskEvent
 func (a *StorageApiService) GetStorageNetAppDiskEventByMoidExecute(r ApiGetStorageNetAppDiskEventByMoidRequest) (*StorageNetAppDiskEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24615,8 +24728,8 @@ func (r ApiGetStorageNetAppDiskEventListRequest) Execute() (*StorageNetAppDiskEv
 /*
 GetStorageNetAppDiskEventList Read a 'storage.NetAppDiskEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppDiskEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppDiskEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppDiskEventList(ctx context.Context) ApiGetStorageNetAppDiskEventListRequest {
 	return ApiGetStorageNetAppDiskEventListRequest{
@@ -24626,7 +24739,8 @@ func (a *StorageApiService) GetStorageNetAppDiskEventList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppDiskEventResponse
+//
+//	@return StorageNetAppDiskEventResponse
 func (a *StorageApiService) GetStorageNetAppDiskEventListExecute(r ApiGetStorageNetAppDiskEventListRequest) (*StorageNetAppDiskEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24813,9 +24927,9 @@ func (r ApiGetStorageNetAppEthernetPortByMoidRequest) Execute() (*StorageNetAppE
 /*
 GetStorageNetAppEthernetPortByMoid Read a 'storage.NetAppEthernetPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppEthernetPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppEthernetPortByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppEthernetPortByMoid(ctx context.Context, moid string) ApiGetStorageNetAppEthernetPortByMoidRequest {
 	return ApiGetStorageNetAppEthernetPortByMoidRequest{
@@ -24826,7 +24940,8 @@ func (a *StorageApiService) GetStorageNetAppEthernetPortByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppEthernetPort
+//
+//	@return StorageNetAppEthernetPort
 func (a *StorageApiService) GetStorageNetAppEthernetPortByMoidExecute(r ApiGetStorageNetAppEthernetPortByMoidRequest) (*StorageNetAppEthernetPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24966,9 +25081,9 @@ func (r ApiGetStorageNetAppEthernetPortEventByMoidRequest) Execute() (*StorageNe
 /*
 GetStorageNetAppEthernetPortEventByMoid Read a 'storage.NetAppEthernetPortEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppEthernetPortEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppEthernetPortEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppEthernetPortEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppEthernetPortEventByMoidRequest {
 	return ApiGetStorageNetAppEthernetPortEventByMoidRequest{
@@ -24979,7 +25094,8 @@ func (a *StorageApiService) GetStorageNetAppEthernetPortEventByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageNetAppEthernetPortEvent
+//
+//	@return StorageNetAppEthernetPortEvent
 func (a *StorageApiService) GetStorageNetAppEthernetPortEventByMoidExecute(r ApiGetStorageNetAppEthernetPortEventByMoidRequest) (*StorageNetAppEthernetPortEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25195,8 +25311,8 @@ func (r ApiGetStorageNetAppEthernetPortEventListRequest) Execute() (*StorageNetA
 /*
 GetStorageNetAppEthernetPortEventList Read a 'storage.NetAppEthernetPortEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppEthernetPortEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppEthernetPortEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppEthernetPortEventList(ctx context.Context) ApiGetStorageNetAppEthernetPortEventListRequest {
 	return ApiGetStorageNetAppEthernetPortEventListRequest{
@@ -25206,7 +25322,8 @@ func (a *StorageApiService) GetStorageNetAppEthernetPortEventList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageNetAppEthernetPortEventResponse
+//
+//	@return StorageNetAppEthernetPortEventResponse
 func (a *StorageApiService) GetStorageNetAppEthernetPortEventListExecute(r ApiGetStorageNetAppEthernetPortEventListRequest) (*StorageNetAppEthernetPortEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25469,8 +25586,8 @@ func (r ApiGetStorageNetAppEthernetPortListRequest) Execute() (*StorageNetAppEth
 /*
 GetStorageNetAppEthernetPortList Read a 'storage.NetAppEthernetPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppEthernetPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppEthernetPortListRequest
 */
 func (a *StorageApiService) GetStorageNetAppEthernetPortList(ctx context.Context) ApiGetStorageNetAppEthernetPortListRequest {
 	return ApiGetStorageNetAppEthernetPortListRequest{
@@ -25480,7 +25597,8 @@ func (a *StorageApiService) GetStorageNetAppEthernetPortList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageNetAppEthernetPortResponse
+//
+//	@return StorageNetAppEthernetPortResponse
 func (a *StorageApiService) GetStorageNetAppEthernetPortListExecute(r ApiGetStorageNetAppEthernetPortListRequest) (*StorageNetAppEthernetPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25667,9 +25785,9 @@ func (r ApiGetStorageNetAppExportPolicyByMoidRequest) Execute() (*StorageNetAppE
 /*
 GetStorageNetAppExportPolicyByMoid Read a 'storage.NetAppExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppExportPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppExportPolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppExportPolicyByMoid(ctx context.Context, moid string) ApiGetStorageNetAppExportPolicyByMoidRequest {
 	return ApiGetStorageNetAppExportPolicyByMoidRequest{
@@ -25680,7 +25798,8 @@ func (a *StorageApiService) GetStorageNetAppExportPolicyByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppExportPolicy
+//
+//	@return StorageNetAppExportPolicy
 func (a *StorageApiService) GetStorageNetAppExportPolicyByMoidExecute(r ApiGetStorageNetAppExportPolicyByMoidRequest) (*StorageNetAppExportPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25896,8 +26015,8 @@ func (r ApiGetStorageNetAppExportPolicyListRequest) Execute() (*StorageNetAppExp
 /*
 GetStorageNetAppExportPolicyList Read a 'storage.NetAppExportPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppExportPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppExportPolicyListRequest
 */
 func (a *StorageApiService) GetStorageNetAppExportPolicyList(ctx context.Context) ApiGetStorageNetAppExportPolicyListRequest {
 	return ApiGetStorageNetAppExportPolicyListRequest{
@@ -25907,7 +26026,8 @@ func (a *StorageApiService) GetStorageNetAppExportPolicyList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageNetAppExportPolicyResponse
+//
+//	@return StorageNetAppExportPolicyResponse
 func (a *StorageApiService) GetStorageNetAppExportPolicyListExecute(r ApiGetStorageNetAppExportPolicyListRequest) (*StorageNetAppExportPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26094,9 +26214,9 @@ func (r ApiGetStorageNetAppFcInterfaceByMoidRequest) Execute() (*StorageNetAppFc
 /*
 GetStorageNetAppFcInterfaceByMoid Read a 'storage.NetAppFcInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppFcInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppFcInterfaceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcInterfaceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppFcInterfaceByMoidRequest {
 	return ApiGetStorageNetAppFcInterfaceByMoidRequest{
@@ -26107,7 +26227,8 @@ func (a *StorageApiService) GetStorageNetAppFcInterfaceByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcInterface
+//
+//	@return StorageNetAppFcInterface
 func (a *StorageApiService) GetStorageNetAppFcInterfaceByMoidExecute(r ApiGetStorageNetAppFcInterfaceByMoidRequest) (*StorageNetAppFcInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26247,9 +26368,9 @@ func (r ApiGetStorageNetAppFcInterfaceEventByMoidRequest) Execute() (*StorageNet
 /*
 GetStorageNetAppFcInterfaceEventByMoid Read a 'storage.NetAppFcInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppFcInterfaceEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppFcInterfaceEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcInterfaceEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppFcInterfaceEventByMoidRequest {
 	return ApiGetStorageNetAppFcInterfaceEventByMoidRequest{
@@ -26260,7 +26381,8 @@ func (a *StorageApiService) GetStorageNetAppFcInterfaceEventByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcInterfaceEvent
+//
+//	@return StorageNetAppFcInterfaceEvent
 func (a *StorageApiService) GetStorageNetAppFcInterfaceEventByMoidExecute(r ApiGetStorageNetAppFcInterfaceEventByMoidRequest) (*StorageNetAppFcInterfaceEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26476,8 +26598,8 @@ func (r ApiGetStorageNetAppFcInterfaceEventListRequest) Execute() (*StorageNetAp
 /*
 GetStorageNetAppFcInterfaceEventList Read a 'storage.NetAppFcInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppFcInterfaceEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppFcInterfaceEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcInterfaceEventList(ctx context.Context) ApiGetStorageNetAppFcInterfaceEventListRequest {
 	return ApiGetStorageNetAppFcInterfaceEventListRequest{
@@ -26487,7 +26609,8 @@ func (a *StorageApiService) GetStorageNetAppFcInterfaceEventList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcInterfaceEventResponse
+//
+//	@return StorageNetAppFcInterfaceEventResponse
 func (a *StorageApiService) GetStorageNetAppFcInterfaceEventListExecute(r ApiGetStorageNetAppFcInterfaceEventListRequest) (*StorageNetAppFcInterfaceEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26750,8 +26873,8 @@ func (r ApiGetStorageNetAppFcInterfaceListRequest) Execute() (*StorageNetAppFcIn
 /*
 GetStorageNetAppFcInterfaceList Read a 'storage.NetAppFcInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppFcInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppFcInterfaceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcInterfaceList(ctx context.Context) ApiGetStorageNetAppFcInterfaceListRequest {
 	return ApiGetStorageNetAppFcInterfaceListRequest{
@@ -26761,7 +26884,8 @@ func (a *StorageApiService) GetStorageNetAppFcInterfaceList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcInterfaceResponse
+//
+//	@return StorageNetAppFcInterfaceResponse
 func (a *StorageApiService) GetStorageNetAppFcInterfaceListExecute(r ApiGetStorageNetAppFcInterfaceListRequest) (*StorageNetAppFcInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26948,9 +27072,9 @@ func (r ApiGetStorageNetAppFcPortByMoidRequest) Execute() (*StorageNetAppFcPort,
 /*
 GetStorageNetAppFcPortByMoid Read a 'storage.NetAppFcPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppFcPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppFcPortByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcPortByMoid(ctx context.Context, moid string) ApiGetStorageNetAppFcPortByMoidRequest {
 	return ApiGetStorageNetAppFcPortByMoidRequest{
@@ -26961,7 +27085,8 @@ func (a *StorageApiService) GetStorageNetAppFcPortByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcPort
+//
+//	@return StorageNetAppFcPort
 func (a *StorageApiService) GetStorageNetAppFcPortByMoidExecute(r ApiGetStorageNetAppFcPortByMoidRequest) (*StorageNetAppFcPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27101,9 +27226,9 @@ func (r ApiGetStorageNetAppFcPortEventByMoidRequest) Execute() (*StorageNetAppFc
 /*
 GetStorageNetAppFcPortEventByMoid Read a 'storage.NetAppFcPortEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppFcPortEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppFcPortEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcPortEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppFcPortEventByMoidRequest {
 	return ApiGetStorageNetAppFcPortEventByMoidRequest{
@@ -27114,7 +27239,8 @@ func (a *StorageApiService) GetStorageNetAppFcPortEventByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcPortEvent
+//
+//	@return StorageNetAppFcPortEvent
 func (a *StorageApiService) GetStorageNetAppFcPortEventByMoidExecute(r ApiGetStorageNetAppFcPortEventByMoidRequest) (*StorageNetAppFcPortEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27330,8 +27456,8 @@ func (r ApiGetStorageNetAppFcPortEventListRequest) Execute() (*StorageNetAppFcPo
 /*
 GetStorageNetAppFcPortEventList Read a 'storage.NetAppFcPortEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppFcPortEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppFcPortEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcPortEventList(ctx context.Context) ApiGetStorageNetAppFcPortEventListRequest {
 	return ApiGetStorageNetAppFcPortEventListRequest{
@@ -27341,7 +27467,8 @@ func (a *StorageApiService) GetStorageNetAppFcPortEventList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcPortEventResponse
+//
+//	@return StorageNetAppFcPortEventResponse
 func (a *StorageApiService) GetStorageNetAppFcPortEventListExecute(r ApiGetStorageNetAppFcPortEventListRequest) (*StorageNetAppFcPortEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27604,8 +27731,8 @@ func (r ApiGetStorageNetAppFcPortListRequest) Execute() (*StorageNetAppFcPortRes
 /*
 GetStorageNetAppFcPortList Read a 'storage.NetAppFcPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppFcPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppFcPortListRequest
 */
 func (a *StorageApiService) GetStorageNetAppFcPortList(ctx context.Context) ApiGetStorageNetAppFcPortListRequest {
 	return ApiGetStorageNetAppFcPortListRequest{
@@ -27615,7 +27742,8 @@ func (a *StorageApiService) GetStorageNetAppFcPortList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StorageNetAppFcPortResponse
+//
+//	@return StorageNetAppFcPortResponse
 func (a *StorageApiService) GetStorageNetAppFcPortListExecute(r ApiGetStorageNetAppFcPortListRequest) (*StorageNetAppFcPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27802,9 +27930,9 @@ func (r ApiGetStorageNetAppInitiatorGroupByMoidRequest) Execute() (*StorageNetAp
 /*
 GetStorageNetAppInitiatorGroupByMoid Read a 'storage.NetAppInitiatorGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppInitiatorGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppInitiatorGroupByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppInitiatorGroupByMoid(ctx context.Context, moid string) ApiGetStorageNetAppInitiatorGroupByMoidRequest {
 	return ApiGetStorageNetAppInitiatorGroupByMoidRequest{
@@ -27815,7 +27943,8 @@ func (a *StorageApiService) GetStorageNetAppInitiatorGroupByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageNetAppInitiatorGroup
+//
+//	@return StorageNetAppInitiatorGroup
 func (a *StorageApiService) GetStorageNetAppInitiatorGroupByMoidExecute(r ApiGetStorageNetAppInitiatorGroupByMoidRequest) (*StorageNetAppInitiatorGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28031,8 +28160,8 @@ func (r ApiGetStorageNetAppInitiatorGroupListRequest) Execute() (*StorageNetAppI
 /*
 GetStorageNetAppInitiatorGroupList Read a 'storage.NetAppInitiatorGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppInitiatorGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppInitiatorGroupListRequest
 */
 func (a *StorageApiService) GetStorageNetAppInitiatorGroupList(ctx context.Context) ApiGetStorageNetAppInitiatorGroupListRequest {
 	return ApiGetStorageNetAppInitiatorGroupListRequest{
@@ -28042,7 +28171,8 @@ func (a *StorageApiService) GetStorageNetAppInitiatorGroupList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppInitiatorGroupResponse
+//
+//	@return StorageNetAppInitiatorGroupResponse
 func (a *StorageApiService) GetStorageNetAppInitiatorGroupListExecute(r ApiGetStorageNetAppInitiatorGroupListRequest) (*StorageNetAppInitiatorGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28229,9 +28359,9 @@ func (r ApiGetStorageNetAppIpInterfaceByMoidRequest) Execute() (*StorageNetAppIp
 /*
 GetStorageNetAppIpInterfaceByMoid Read a 'storage.NetAppIpInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppIpInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppIpInterfaceByMoidRequest
 
 Deprecated
 */
@@ -28244,7 +28374,9 @@ func (a *StorageApiService) GetStorageNetAppIpInterfaceByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppIpInterface
+//
+//	@return StorageNetAppIpInterface
+//
 // Deprecated
 func (a *StorageApiService) GetStorageNetAppIpInterfaceByMoidExecute(r ApiGetStorageNetAppIpInterfaceByMoidRequest) (*StorageNetAppIpInterface, *http.Response, error) {
 	var (
@@ -28385,9 +28517,9 @@ func (r ApiGetStorageNetAppIpInterfaceEventByMoidRequest) Execute() (*StorageNet
 /*
 GetStorageNetAppIpInterfaceEventByMoid Read a 'storage.NetAppIpInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppIpInterfaceEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppIpInterfaceEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppIpInterfaceEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppIpInterfaceEventByMoidRequest {
 	return ApiGetStorageNetAppIpInterfaceEventByMoidRequest{
@@ -28398,7 +28530,8 @@ func (a *StorageApiService) GetStorageNetAppIpInterfaceEventByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageNetAppIpInterfaceEvent
+//
+//	@return StorageNetAppIpInterfaceEvent
 func (a *StorageApiService) GetStorageNetAppIpInterfaceEventByMoidExecute(r ApiGetStorageNetAppIpInterfaceEventByMoidRequest) (*StorageNetAppIpInterfaceEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28614,8 +28747,8 @@ func (r ApiGetStorageNetAppIpInterfaceEventListRequest) Execute() (*StorageNetAp
 /*
 GetStorageNetAppIpInterfaceEventList Read a 'storage.NetAppIpInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppIpInterfaceEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppIpInterfaceEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppIpInterfaceEventList(ctx context.Context) ApiGetStorageNetAppIpInterfaceEventListRequest {
 	return ApiGetStorageNetAppIpInterfaceEventListRequest{
@@ -28625,7 +28758,8 @@ func (a *StorageApiService) GetStorageNetAppIpInterfaceEventList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageNetAppIpInterfaceEventResponse
+//
+//	@return StorageNetAppIpInterfaceEventResponse
 func (a *StorageApiService) GetStorageNetAppIpInterfaceEventListExecute(r ApiGetStorageNetAppIpInterfaceEventListRequest) (*StorageNetAppIpInterfaceEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28888,8 +29022,8 @@ func (r ApiGetStorageNetAppIpInterfaceListRequest) Execute() (*StorageNetAppIpIn
 /*
 GetStorageNetAppIpInterfaceList Read a 'storage.NetAppIpInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppIpInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppIpInterfaceListRequest
 
 Deprecated
 */
@@ -28901,7 +29035,9 @@ func (a *StorageApiService) GetStorageNetAppIpInterfaceList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageNetAppIpInterfaceResponse
+//
+//	@return StorageNetAppIpInterfaceResponse
+//
 // Deprecated
 func (a *StorageApiService) GetStorageNetAppIpInterfaceListExecute(r ApiGetStorageNetAppIpInterfaceListRequest) (*StorageNetAppIpInterfaceResponse, *http.Response, error) {
 	var (
@@ -29089,9 +29225,9 @@ func (r ApiGetStorageNetAppIscsiServiceByMoidRequest) Execute() (*StorageNetAppI
 /*
 GetStorageNetAppIscsiServiceByMoid Read a 'storage.NetAppIscsiService' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppIscsiServiceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppIscsiServiceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppIscsiServiceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppIscsiServiceByMoidRequest {
 	return ApiGetStorageNetAppIscsiServiceByMoidRequest{
@@ -29102,7 +29238,8 @@ func (a *StorageApiService) GetStorageNetAppIscsiServiceByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppIscsiService
+//
+//	@return StorageNetAppIscsiService
 func (a *StorageApiService) GetStorageNetAppIscsiServiceByMoidExecute(r ApiGetStorageNetAppIscsiServiceByMoidRequest) (*StorageNetAppIscsiService, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29318,8 +29455,8 @@ func (r ApiGetStorageNetAppIscsiServiceListRequest) Execute() (*StorageNetAppIsc
 /*
 GetStorageNetAppIscsiServiceList Read a 'storage.NetAppIscsiService' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppIscsiServiceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppIscsiServiceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppIscsiServiceList(ctx context.Context) ApiGetStorageNetAppIscsiServiceListRequest {
 	return ApiGetStorageNetAppIscsiServiceListRequest{
@@ -29329,7 +29466,8 @@ func (a *StorageApiService) GetStorageNetAppIscsiServiceList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageNetAppIscsiServiceResponse
+//
+//	@return StorageNetAppIscsiServiceResponse
 func (a *StorageApiService) GetStorageNetAppIscsiServiceListExecute(r ApiGetStorageNetAppIscsiServiceListRequest) (*StorageNetAppIscsiServiceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29516,9 +29654,9 @@ func (r ApiGetStorageNetAppLicenseByMoidRequest) Execute() (*StorageNetAppLicens
 /*
 GetStorageNetAppLicenseByMoid Read a 'storage.NetAppLicense' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppLicenseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppLicenseByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppLicenseByMoid(ctx context.Context, moid string) ApiGetStorageNetAppLicenseByMoidRequest {
 	return ApiGetStorageNetAppLicenseByMoidRequest{
@@ -29529,7 +29667,8 @@ func (a *StorageApiService) GetStorageNetAppLicenseByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StorageNetAppLicense
+//
+//	@return StorageNetAppLicense
 func (a *StorageApiService) GetStorageNetAppLicenseByMoidExecute(r ApiGetStorageNetAppLicenseByMoidRequest) (*StorageNetAppLicense, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29745,8 +29884,8 @@ func (r ApiGetStorageNetAppLicenseListRequest) Execute() (*StorageNetAppLicenseR
 /*
 GetStorageNetAppLicenseList Read a 'storage.NetAppLicense' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppLicenseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppLicenseListRequest
 */
 func (a *StorageApiService) GetStorageNetAppLicenseList(ctx context.Context) ApiGetStorageNetAppLicenseListRequest {
 	return ApiGetStorageNetAppLicenseListRequest{
@@ -29756,7 +29895,8 @@ func (a *StorageApiService) GetStorageNetAppLicenseList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return StorageNetAppLicenseResponse
+//
+//	@return StorageNetAppLicenseResponse
 func (a *StorageApiService) GetStorageNetAppLicenseListExecute(r ApiGetStorageNetAppLicenseListRequest) (*StorageNetAppLicenseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29943,9 +30083,9 @@ func (r ApiGetStorageNetAppLunByMoidRequest) Execute() (*StorageNetAppLun, *http
 /*
 GetStorageNetAppLunByMoid Read a 'storage.NetAppLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppLunByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppLunByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppLunByMoid(ctx context.Context, moid string) ApiGetStorageNetAppLunByMoidRequest {
 	return ApiGetStorageNetAppLunByMoidRequest{
@@ -29956,7 +30096,8 @@ func (a *StorageApiService) GetStorageNetAppLunByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageNetAppLun
+//
+//	@return StorageNetAppLun
 func (a *StorageApiService) GetStorageNetAppLunByMoidExecute(r ApiGetStorageNetAppLunByMoidRequest) (*StorageNetAppLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30096,9 +30237,9 @@ func (r ApiGetStorageNetAppLunEventByMoidRequest) Execute() (*StorageNetAppLunEv
 /*
 GetStorageNetAppLunEventByMoid Read a 'storage.NetAppLunEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppLunEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppLunEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppLunEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppLunEventByMoidRequest {
 	return ApiGetStorageNetAppLunEventByMoidRequest{
@@ -30109,7 +30250,8 @@ func (a *StorageApiService) GetStorageNetAppLunEventByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageNetAppLunEvent
+//
+//	@return StorageNetAppLunEvent
 func (a *StorageApiService) GetStorageNetAppLunEventByMoidExecute(r ApiGetStorageNetAppLunEventByMoidRequest) (*StorageNetAppLunEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30325,8 +30467,8 @@ func (r ApiGetStorageNetAppLunEventListRequest) Execute() (*StorageNetAppLunEven
 /*
 GetStorageNetAppLunEventList Read a 'storage.NetAppLunEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppLunEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppLunEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppLunEventList(ctx context.Context) ApiGetStorageNetAppLunEventListRequest {
 	return ApiGetStorageNetAppLunEventListRequest{
@@ -30336,7 +30478,8 @@ func (a *StorageApiService) GetStorageNetAppLunEventList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return StorageNetAppLunEventResponse
+//
+//	@return StorageNetAppLunEventResponse
 func (a *StorageApiService) GetStorageNetAppLunEventListExecute(r ApiGetStorageNetAppLunEventListRequest) (*StorageNetAppLunEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30599,8 +30742,8 @@ func (r ApiGetStorageNetAppLunListRequest) Execute() (*StorageNetAppLunResponse,
 /*
 GetStorageNetAppLunList Read a 'storage.NetAppLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppLunListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppLunListRequest
 */
 func (a *StorageApiService) GetStorageNetAppLunList(ctx context.Context) ApiGetStorageNetAppLunListRequest {
 	return ApiGetStorageNetAppLunListRequest{
@@ -30610,7 +30753,8 @@ func (a *StorageApiService) GetStorageNetAppLunList(ctx context.Context) ApiGetS
 }
 
 // Execute executes the request
-//  @return StorageNetAppLunResponse
+//
+//	@return StorageNetAppLunResponse
 func (a *StorageApiService) GetStorageNetAppLunListExecute(r ApiGetStorageNetAppLunListRequest) (*StorageNetAppLunResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30797,9 +30941,9 @@ func (r ApiGetStorageNetAppLunMapByMoidRequest) Execute() (*StorageNetAppLunMap,
 /*
 GetStorageNetAppLunMapByMoid Read a 'storage.NetAppLunMap' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppLunMapByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppLunMapByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppLunMapByMoid(ctx context.Context, moid string) ApiGetStorageNetAppLunMapByMoidRequest {
 	return ApiGetStorageNetAppLunMapByMoidRequest{
@@ -30810,7 +30954,8 @@ func (a *StorageApiService) GetStorageNetAppLunMapByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StorageNetAppLunMap
+//
+//	@return StorageNetAppLunMap
 func (a *StorageApiService) GetStorageNetAppLunMapByMoidExecute(r ApiGetStorageNetAppLunMapByMoidRequest) (*StorageNetAppLunMap, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31026,8 +31171,8 @@ func (r ApiGetStorageNetAppLunMapListRequest) Execute() (*StorageNetAppLunMapRes
 /*
 GetStorageNetAppLunMapList Read a 'storage.NetAppLunMap' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppLunMapListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppLunMapListRequest
 */
 func (a *StorageApiService) GetStorageNetAppLunMapList(ctx context.Context) ApiGetStorageNetAppLunMapListRequest {
 	return ApiGetStorageNetAppLunMapListRequest{
@@ -31037,7 +31182,8 @@ func (a *StorageApiService) GetStorageNetAppLunMapList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StorageNetAppLunMapResponse
+//
+//	@return StorageNetAppLunMapResponse
 func (a *StorageApiService) GetStorageNetAppLunMapListExecute(r ApiGetStorageNetAppLunMapListRequest) (*StorageNetAppLunMapResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31224,9 +31370,9 @@ func (r ApiGetStorageNetAppNamespaceByMoidRequest) Execute() (*StorageNetAppName
 /*
 GetStorageNetAppNamespaceByMoid Read a 'storage.NetAppNamespace' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNamespaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNamespaceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNamespaceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNamespaceByMoidRequest {
 	return ApiGetStorageNetAppNamespaceByMoidRequest{
@@ -31237,7 +31383,8 @@ func (a *StorageApiService) GetStorageNetAppNamespaceByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppNamespace
+//
+//	@return StorageNetAppNamespace
 func (a *StorageApiService) GetStorageNetAppNamespaceByMoidExecute(r ApiGetStorageNetAppNamespaceByMoidRequest) (*StorageNetAppNamespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31453,8 +31600,8 @@ func (r ApiGetStorageNetAppNamespaceListRequest) Execute() (*StorageNetAppNamesp
 /*
 GetStorageNetAppNamespaceList Read a 'storage.NetAppNamespace' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNamespaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNamespaceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNamespaceList(ctx context.Context) ApiGetStorageNetAppNamespaceListRequest {
 	return ApiGetStorageNetAppNamespaceListRequest{
@@ -31464,7 +31611,8 @@ func (a *StorageApiService) GetStorageNetAppNamespaceList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppNamespaceResponse
+//
+//	@return StorageNetAppNamespaceResponse
 func (a *StorageApiService) GetStorageNetAppNamespaceListExecute(r ApiGetStorageNetAppNamespaceListRequest) (*StorageNetAppNamespaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31651,9 +31799,9 @@ func (r ApiGetStorageNetAppNfsClientByMoidRequest) Execute() (*StorageNetAppNfsC
 /*
 GetStorageNetAppNfsClientByMoid Read a 'storage.NetAppNfsClient' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNfsClientByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNfsClientByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNfsClientByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNfsClientByMoidRequest {
 	return ApiGetStorageNetAppNfsClientByMoidRequest{
@@ -31664,7 +31812,8 @@ func (a *StorageApiService) GetStorageNetAppNfsClientByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppNfsClient
+//
+//	@return StorageNetAppNfsClient
 func (a *StorageApiService) GetStorageNetAppNfsClientByMoidExecute(r ApiGetStorageNetAppNfsClientByMoidRequest) (*StorageNetAppNfsClient, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31880,8 +32029,8 @@ func (r ApiGetStorageNetAppNfsClientListRequest) Execute() (*StorageNetAppNfsCli
 /*
 GetStorageNetAppNfsClientList Read a 'storage.NetAppNfsClient' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNfsClientListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNfsClientListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNfsClientList(ctx context.Context) ApiGetStorageNetAppNfsClientListRequest {
 	return ApiGetStorageNetAppNfsClientListRequest{
@@ -31891,7 +32040,8 @@ func (a *StorageApiService) GetStorageNetAppNfsClientList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppNfsClientResponse
+//
+//	@return StorageNetAppNfsClientResponse
 func (a *StorageApiService) GetStorageNetAppNfsClientListExecute(r ApiGetStorageNetAppNfsClientListRequest) (*StorageNetAppNfsClientResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32078,9 +32228,9 @@ func (r ApiGetStorageNetAppNfsServiceByMoidRequest) Execute() (*StorageNetAppNfs
 /*
 GetStorageNetAppNfsServiceByMoid Read a 'storage.NetAppNfsService' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNfsServiceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNfsServiceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNfsServiceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNfsServiceByMoidRequest {
 	return ApiGetStorageNetAppNfsServiceByMoidRequest{
@@ -32091,7 +32241,8 @@ func (a *StorageApiService) GetStorageNetAppNfsServiceByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageNetAppNfsService
+//
+//	@return StorageNetAppNfsService
 func (a *StorageApiService) GetStorageNetAppNfsServiceByMoidExecute(r ApiGetStorageNetAppNfsServiceByMoidRequest) (*StorageNetAppNfsService, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32307,8 +32458,8 @@ func (r ApiGetStorageNetAppNfsServiceListRequest) Execute() (*StorageNetAppNfsSe
 /*
 GetStorageNetAppNfsServiceList Read a 'storage.NetAppNfsService' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNfsServiceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNfsServiceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNfsServiceList(ctx context.Context) ApiGetStorageNetAppNfsServiceListRequest {
 	return ApiGetStorageNetAppNfsServiceListRequest{
@@ -32318,7 +32469,8 @@ func (a *StorageApiService) GetStorageNetAppNfsServiceList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return StorageNetAppNfsServiceResponse
+//
+//	@return StorageNetAppNfsServiceResponse
 func (a *StorageApiService) GetStorageNetAppNfsServiceListExecute(r ApiGetStorageNetAppNfsServiceListRequest) (*StorageNetAppNfsServiceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32505,9 +32657,9 @@ func (r ApiGetStorageNetAppNodeByMoidRequest) Execute() (*StorageNetAppNode, *ht
 /*
 GetStorageNetAppNodeByMoid Read a 'storage.NetAppNode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNodeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNodeByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNodeByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNodeByMoidRequest {
 	return ApiGetStorageNetAppNodeByMoidRequest{
@@ -32518,7 +32670,8 @@ func (a *StorageApiService) GetStorageNetAppNodeByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageNetAppNode
+//
+//	@return StorageNetAppNode
 func (a *StorageApiService) GetStorageNetAppNodeByMoidExecute(r ApiGetStorageNetAppNodeByMoidRequest) (*StorageNetAppNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32658,9 +32811,9 @@ func (r ApiGetStorageNetAppNodeCdpNeighborByMoidRequest) Execute() (*StorageNetA
 /*
 GetStorageNetAppNodeCdpNeighborByMoid Read a 'storage.NetAppNodeCdpNeighbor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNodeCdpNeighborByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNodeCdpNeighborByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNodeCdpNeighborByMoidRequest {
 	return ApiGetStorageNetAppNodeCdpNeighborByMoidRequest{
@@ -32671,7 +32824,8 @@ func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageNetAppNodeCdpNeighbor
+//
+//	@return StorageNetAppNodeCdpNeighbor
 func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborByMoidExecute(r ApiGetStorageNetAppNodeCdpNeighborByMoidRequest) (*StorageNetAppNodeCdpNeighbor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32887,8 +33041,8 @@ func (r ApiGetStorageNetAppNodeCdpNeighborListRequest) Execute() (*StorageNetApp
 /*
 GetStorageNetAppNodeCdpNeighborList Read a 'storage.NetAppNodeCdpNeighbor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNodeCdpNeighborListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNodeCdpNeighborListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborList(ctx context.Context) ApiGetStorageNetAppNodeCdpNeighborListRequest {
 	return ApiGetStorageNetAppNodeCdpNeighborListRequest{
@@ -32898,7 +33052,8 @@ func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageNetAppNodeCdpNeighborResponse
+//
+//	@return StorageNetAppNodeCdpNeighborResponse
 func (a *StorageApiService) GetStorageNetAppNodeCdpNeighborListExecute(r ApiGetStorageNetAppNodeCdpNeighborListRequest) (*StorageNetAppNodeCdpNeighborResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33085,9 +33240,9 @@ func (r ApiGetStorageNetAppNodeEventByMoidRequest) Execute() (*StorageNetAppNode
 /*
 GetStorageNetAppNodeEventByMoid Read a 'storage.NetAppNodeEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNodeEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNodeEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNodeEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNodeEventByMoidRequest {
 	return ApiGetStorageNetAppNodeEventByMoidRequest{
@@ -33098,7 +33253,8 @@ func (a *StorageApiService) GetStorageNetAppNodeEventByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppNodeEvent
+//
+//	@return StorageNetAppNodeEvent
 func (a *StorageApiService) GetStorageNetAppNodeEventByMoidExecute(r ApiGetStorageNetAppNodeEventByMoidRequest) (*StorageNetAppNodeEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33314,8 +33470,8 @@ func (r ApiGetStorageNetAppNodeEventListRequest) Execute() (*StorageNetAppNodeEv
 /*
 GetStorageNetAppNodeEventList Read a 'storage.NetAppNodeEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNodeEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNodeEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNodeEventList(ctx context.Context) ApiGetStorageNetAppNodeEventListRequest {
 	return ApiGetStorageNetAppNodeEventListRequest{
@@ -33325,7 +33481,8 @@ func (a *StorageApiService) GetStorageNetAppNodeEventList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppNodeEventResponse
+//
+//	@return StorageNetAppNodeEventResponse
 func (a *StorageApiService) GetStorageNetAppNodeEventListExecute(r ApiGetStorageNetAppNodeEventListRequest) (*StorageNetAppNodeEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33588,8 +33745,8 @@ func (r ApiGetStorageNetAppNodeListRequest) Execute() (*StorageNetAppNodeRespons
 /*
 GetStorageNetAppNodeList Read a 'storage.NetAppNode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNodeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNodeListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNodeList(ctx context.Context) ApiGetStorageNetAppNodeListRequest {
 	return ApiGetStorageNetAppNodeListRequest{
@@ -33599,7 +33756,8 @@ func (a *StorageApiService) GetStorageNetAppNodeList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return StorageNetAppNodeResponse
+//
+//	@return StorageNetAppNodeResponse
 func (a *StorageApiService) GetStorageNetAppNodeListExecute(r ApiGetStorageNetAppNodeListRequest) (*StorageNetAppNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33786,9 +33944,9 @@ func (r ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest) Execute() (*StorageN
 /*
 GetStorageNetAppNonDataIpInterfaceByMoid Read a 'storage.NetAppNonDataIpInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest {
 	return ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest{
@@ -33799,7 +33957,8 @@ func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return StorageNetAppNonDataIpInterface
+//
+//	@return StorageNetAppNonDataIpInterface
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceByMoidExecute(r ApiGetStorageNetAppNonDataIpInterfaceByMoidRequest) (*StorageNetAppNonDataIpInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33939,9 +34098,9 @@ func (r ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest) Execute() (*Sto
 /*
 GetStorageNetAppNonDataIpInterfaceEventByMoid Read a 'storage.NetAppNonDataIpInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest {
 	return ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest{
@@ -33952,7 +34111,8 @@ func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return StorageNetAppNonDataIpInterfaceEvent
+//
+//	@return StorageNetAppNonDataIpInterfaceEvent
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventByMoidExecute(r ApiGetStorageNetAppNonDataIpInterfaceEventByMoidRequest) (*StorageNetAppNonDataIpInterfaceEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34168,8 +34328,8 @@ func (r ApiGetStorageNetAppNonDataIpInterfaceEventListRequest) Execute() (*Stora
 /*
 GetStorageNetAppNonDataIpInterfaceEventList Read a 'storage.NetAppNonDataIpInterfaceEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNonDataIpInterfaceEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNonDataIpInterfaceEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventList(ctx context.Context) ApiGetStorageNetAppNonDataIpInterfaceEventListRequest {
 	return ApiGetStorageNetAppNonDataIpInterfaceEventListRequest{
@@ -34179,7 +34339,8 @@ func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventList(ctx cont
 }
 
 // Execute executes the request
-//  @return StorageNetAppNonDataIpInterfaceEventResponse
+//
+//	@return StorageNetAppNonDataIpInterfaceEventResponse
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceEventListExecute(r ApiGetStorageNetAppNonDataIpInterfaceEventListRequest) (*StorageNetAppNonDataIpInterfaceEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34442,8 +34603,8 @@ func (r ApiGetStorageNetAppNonDataIpInterfaceListRequest) Execute() (*StorageNet
 /*
 GetStorageNetAppNonDataIpInterfaceList Read a 'storage.NetAppNonDataIpInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNonDataIpInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNonDataIpInterfaceListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceList(ctx context.Context) ApiGetStorageNetAppNonDataIpInterfaceListRequest {
 	return ApiGetStorageNetAppNonDataIpInterfaceListRequest{
@@ -34453,7 +34614,8 @@ func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceList(ctx context.C
 }
 
 // Execute executes the request
-//  @return StorageNetAppNonDataIpInterfaceResponse
+//
+//	@return StorageNetAppNonDataIpInterfaceResponse
 func (a *StorageApiService) GetStorageNetAppNonDataIpInterfaceListExecute(r ApiGetStorageNetAppNonDataIpInterfaceListRequest) (*StorageNetAppNonDataIpInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34640,9 +34802,9 @@ func (r ApiGetStorageNetAppNtpServerByMoidRequest) Execute() (*StorageNetAppNtpS
 /*
 GetStorageNetAppNtpServerByMoid Read a 'storage.NetAppNtpServer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppNtpServerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppNtpServerByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppNtpServerByMoid(ctx context.Context, moid string) ApiGetStorageNetAppNtpServerByMoidRequest {
 	return ApiGetStorageNetAppNtpServerByMoidRequest{
@@ -34653,7 +34815,8 @@ func (a *StorageApiService) GetStorageNetAppNtpServerByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppNtpServer
+//
+//	@return StorageNetAppNtpServer
 func (a *StorageApiService) GetStorageNetAppNtpServerByMoidExecute(r ApiGetStorageNetAppNtpServerByMoidRequest) (*StorageNetAppNtpServer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -34869,8 +35032,8 @@ func (r ApiGetStorageNetAppNtpServerListRequest) Execute() (*StorageNetAppNtpSer
 /*
 GetStorageNetAppNtpServerList Read a 'storage.NetAppNtpServer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppNtpServerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppNtpServerListRequest
 */
 func (a *StorageApiService) GetStorageNetAppNtpServerList(ctx context.Context) ApiGetStorageNetAppNtpServerListRequest {
 	return ApiGetStorageNetAppNtpServerListRequest{
@@ -34880,7 +35043,8 @@ func (a *StorageApiService) GetStorageNetAppNtpServerList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppNtpServerResponse
+//
+//	@return StorageNetAppNtpServerResponse
 func (a *StorageApiService) GetStorageNetAppNtpServerListExecute(r ApiGetStorageNetAppNtpServerListRequest) (*StorageNetAppNtpServerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35067,9 +35231,9 @@ func (r ApiGetStorageNetAppQtreeByMoidRequest) Execute() (*StorageNetAppQtree, *
 /*
 GetStorageNetAppQtreeByMoid Read a 'storage.NetAppQtree' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppQtreeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppQtreeByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppQtreeByMoid(ctx context.Context, moid string) ApiGetStorageNetAppQtreeByMoidRequest {
 	return ApiGetStorageNetAppQtreeByMoidRequest{
@@ -35080,7 +35244,8 @@ func (a *StorageApiService) GetStorageNetAppQtreeByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StorageNetAppQtree
+//
+//	@return StorageNetAppQtree
 func (a *StorageApiService) GetStorageNetAppQtreeByMoidExecute(r ApiGetStorageNetAppQtreeByMoidRequest) (*StorageNetAppQtree, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35296,8 +35461,8 @@ func (r ApiGetStorageNetAppQtreeListRequest) Execute() (*StorageNetAppQtreeRespo
 /*
 GetStorageNetAppQtreeList Read a 'storage.NetAppQtree' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppQtreeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppQtreeListRequest
 */
 func (a *StorageApiService) GetStorageNetAppQtreeList(ctx context.Context) ApiGetStorageNetAppQtreeListRequest {
 	return ApiGetStorageNetAppQtreeListRequest{
@@ -35307,7 +35472,8 @@ func (a *StorageApiService) GetStorageNetAppQtreeList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StorageNetAppQtreeResponse
+//
+//	@return StorageNetAppQtreeResponse
 func (a *StorageApiService) GetStorageNetAppQtreeListExecute(r ApiGetStorageNetAppQtreeListRequest) (*StorageNetAppQtreeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35494,9 +35660,9 @@ func (r ApiGetStorageNetAppScheduleByMoidRequest) Execute() (*StorageNetAppSched
 /*
 GetStorageNetAppScheduleByMoid Read a 'storage.NetAppSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppScheduleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppScheduleByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppScheduleByMoid(ctx context.Context, moid string) ApiGetStorageNetAppScheduleByMoidRequest {
 	return ApiGetStorageNetAppScheduleByMoidRequest{
@@ -35507,7 +35673,8 @@ func (a *StorageApiService) GetStorageNetAppScheduleByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageNetAppSchedule
+//
+//	@return StorageNetAppSchedule
 func (a *StorageApiService) GetStorageNetAppScheduleByMoidExecute(r ApiGetStorageNetAppScheduleByMoidRequest) (*StorageNetAppSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35723,8 +35890,8 @@ func (r ApiGetStorageNetAppScheduleListRequest) Execute() (*StorageNetAppSchedul
 /*
 GetStorageNetAppScheduleList Read a 'storage.NetAppSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppScheduleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppScheduleListRequest
 */
 func (a *StorageApiService) GetStorageNetAppScheduleList(ctx context.Context) ApiGetStorageNetAppScheduleListRequest {
 	return ApiGetStorageNetAppScheduleListRequest{
@@ -35734,7 +35901,8 @@ func (a *StorageApiService) GetStorageNetAppScheduleList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return StorageNetAppScheduleResponse
+//
+//	@return StorageNetAppScheduleResponse
 func (a *StorageApiService) GetStorageNetAppScheduleListExecute(r ApiGetStorageNetAppScheduleListRequest) (*StorageNetAppScheduleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -35921,9 +36089,9 @@ func (r ApiGetStorageNetAppSensorByMoidRequest) Execute() (*StorageNetAppSensor,
 /*
 GetStorageNetAppSensorByMoid Read a 'storage.NetAppSensor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppSensorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppSensorByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppSensorByMoid(ctx context.Context, moid string) ApiGetStorageNetAppSensorByMoidRequest {
 	return ApiGetStorageNetAppSensorByMoidRequest{
@@ -35934,7 +36102,8 @@ func (a *StorageApiService) GetStorageNetAppSensorByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StorageNetAppSensor
+//
+//	@return StorageNetAppSensor
 func (a *StorageApiService) GetStorageNetAppSensorByMoidExecute(r ApiGetStorageNetAppSensorByMoidRequest) (*StorageNetAppSensor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36150,8 +36319,8 @@ func (r ApiGetStorageNetAppSensorListRequest) Execute() (*StorageNetAppSensorRes
 /*
 GetStorageNetAppSensorList Read a 'storage.NetAppSensor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppSensorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppSensorListRequest
 */
 func (a *StorageApiService) GetStorageNetAppSensorList(ctx context.Context) ApiGetStorageNetAppSensorListRequest {
 	return ApiGetStorageNetAppSensorListRequest{
@@ -36161,7 +36330,8 @@ func (a *StorageApiService) GetStorageNetAppSensorList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StorageNetAppSensorResponse
+//
+//	@return StorageNetAppSensorResponse
 func (a *StorageApiService) GetStorageNetAppSensorListExecute(r ApiGetStorageNetAppSensorListRequest) (*StorageNetAppSensorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36348,9 +36518,9 @@ func (r ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest) Execute() (*Stor
 /*
 GetStorageNetAppSnapMirrorRelationshipByMoid Read a 'storage.NetAppSnapMirrorRelationship' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipByMoid(ctx context.Context, moid string) ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest {
 	return ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest{
@@ -36361,7 +36531,8 @@ func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return StorageNetAppSnapMirrorRelationship
+//
+//	@return StorageNetAppSnapMirrorRelationship
 func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipByMoidExecute(r ApiGetStorageNetAppSnapMirrorRelationshipByMoidRequest) (*StorageNetAppSnapMirrorRelationship, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36577,8 +36748,8 @@ func (r ApiGetStorageNetAppSnapMirrorRelationshipListRequest) Execute() (*Storag
 /*
 GetStorageNetAppSnapMirrorRelationshipList Read a 'storage.NetAppSnapMirrorRelationship' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppSnapMirrorRelationshipListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppSnapMirrorRelationshipListRequest
 */
 func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipList(ctx context.Context) ApiGetStorageNetAppSnapMirrorRelationshipListRequest {
 	return ApiGetStorageNetAppSnapMirrorRelationshipListRequest{
@@ -36588,7 +36759,8 @@ func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipList(ctx conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppSnapMirrorRelationshipResponse
+//
+//	@return StorageNetAppSnapMirrorRelationshipResponse
 func (a *StorageApiService) GetStorageNetAppSnapMirrorRelationshipListExecute(r ApiGetStorageNetAppSnapMirrorRelationshipListRequest) (*StorageNetAppSnapMirrorRelationshipResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -36775,9 +36947,9 @@ func (r ApiGetStorageNetAppStorageVmByMoidRequest) Execute() (*StorageNetAppStor
 /*
 GetStorageNetAppStorageVmByMoid Read a 'storage.NetAppStorageVm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppStorageVmByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppStorageVmByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppStorageVmByMoid(ctx context.Context, moid string) ApiGetStorageNetAppStorageVmByMoidRequest {
 	return ApiGetStorageNetAppStorageVmByMoidRequest{
@@ -36788,7 +36960,8 @@ func (a *StorageApiService) GetStorageNetAppStorageVmByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageNetAppStorageVm
+//
+//	@return StorageNetAppStorageVm
 func (a *StorageApiService) GetStorageNetAppStorageVmByMoidExecute(r ApiGetStorageNetAppStorageVmByMoidRequest) (*StorageNetAppStorageVm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37004,8 +37177,8 @@ func (r ApiGetStorageNetAppStorageVmListRequest) Execute() (*StorageNetAppStorag
 /*
 GetStorageNetAppStorageVmList Read a 'storage.NetAppStorageVm' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppStorageVmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppStorageVmListRequest
 */
 func (a *StorageApiService) GetStorageNetAppStorageVmList(ctx context.Context) ApiGetStorageNetAppStorageVmListRequest {
 	return ApiGetStorageNetAppStorageVmListRequest{
@@ -37015,7 +37188,8 @@ func (a *StorageApiService) GetStorageNetAppStorageVmList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StorageNetAppStorageVmResponse
+//
+//	@return StorageNetAppStorageVmResponse
 func (a *StorageApiService) GetStorageNetAppStorageVmListExecute(r ApiGetStorageNetAppStorageVmListRequest) (*StorageNetAppStorageVmResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37202,9 +37376,9 @@ func (r ApiGetStorageNetAppSvmEventByMoidRequest) Execute() (*StorageNetAppSvmEv
 /*
 GetStorageNetAppSvmEventByMoid Read a 'storage.NetAppSvmEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppSvmEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppSvmEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppSvmEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppSvmEventByMoidRequest {
 	return ApiGetStorageNetAppSvmEventByMoidRequest{
@@ -37215,7 +37389,8 @@ func (a *StorageApiService) GetStorageNetAppSvmEventByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageNetAppSvmEvent
+//
+//	@return StorageNetAppSvmEvent
 func (a *StorageApiService) GetStorageNetAppSvmEventByMoidExecute(r ApiGetStorageNetAppSvmEventByMoidRequest) (*StorageNetAppSvmEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37431,8 +37606,8 @@ func (r ApiGetStorageNetAppSvmEventListRequest) Execute() (*StorageNetAppSvmEven
 /*
 GetStorageNetAppSvmEventList Read a 'storage.NetAppSvmEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppSvmEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppSvmEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppSvmEventList(ctx context.Context) ApiGetStorageNetAppSvmEventListRequest {
 	return ApiGetStorageNetAppSvmEventListRequest{
@@ -37442,7 +37617,8 @@ func (a *StorageApiService) GetStorageNetAppSvmEventList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return StorageNetAppSvmEventResponse
+//
+//	@return StorageNetAppSvmEventResponse
 func (a *StorageApiService) GetStorageNetAppSvmEventListExecute(r ApiGetStorageNetAppSvmEventListRequest) (*StorageNetAppSvmEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37629,9 +37805,9 @@ func (r ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest) Execute() (*Storage
 /*
 GetStorageNetAppSvmSnapMirrorPolicyByMoid Read a 'storage.NetAppSvmSnapMirrorPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyByMoid(ctx context.Context, moid string) ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest {
 	return ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest{
@@ -37642,7 +37818,8 @@ func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppSvmSnapMirrorPolicy
+//
+//	@return StorageNetAppSvmSnapMirrorPolicy
 func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyByMoidExecute(r ApiGetStorageNetAppSvmSnapMirrorPolicyByMoidRequest) (*StorageNetAppSvmSnapMirrorPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -37858,8 +38035,8 @@ func (r ApiGetStorageNetAppSvmSnapMirrorPolicyListRequest) Execute() (*StorageNe
 /*
 GetStorageNetAppSvmSnapMirrorPolicyList Read a 'storage.NetAppSvmSnapMirrorPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppSvmSnapMirrorPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppSvmSnapMirrorPolicyListRequest
 */
 func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyList(ctx context.Context) ApiGetStorageNetAppSvmSnapMirrorPolicyListRequest {
 	return ApiGetStorageNetAppSvmSnapMirrorPolicyListRequest{
@@ -37869,7 +38046,8 @@ func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyList(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageNetAppSvmSnapMirrorPolicyResponse
+//
+//	@return StorageNetAppSvmSnapMirrorPolicyResponse
 func (a *StorageApiService) GetStorageNetAppSvmSnapMirrorPolicyListExecute(r ApiGetStorageNetAppSvmSnapMirrorPolicyListRequest) (*StorageNetAppSvmSnapMirrorPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38056,9 +38234,9 @@ func (r ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest) Execute() (*StorageNe
 /*
 GetStorageNetAppSvmSnapshotPolicyByMoid Read a 'storage.NetAppSvmSnapshotPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyByMoid(ctx context.Context, moid string) ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest {
 	return ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest{
@@ -38069,7 +38247,8 @@ func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return StorageNetAppSvmSnapshotPolicy
+//
+//	@return StorageNetAppSvmSnapshotPolicy
 func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyByMoidExecute(r ApiGetStorageNetAppSvmSnapshotPolicyByMoidRequest) (*StorageNetAppSvmSnapshotPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38285,8 +38464,8 @@ func (r ApiGetStorageNetAppSvmSnapshotPolicyListRequest) Execute() (*StorageNetA
 /*
 GetStorageNetAppSvmSnapshotPolicyList Read a 'storage.NetAppSvmSnapshotPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppSvmSnapshotPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppSvmSnapshotPolicyListRequest
 */
 func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyList(ctx context.Context) ApiGetStorageNetAppSvmSnapshotPolicyListRequest {
 	return ApiGetStorageNetAppSvmSnapshotPolicyListRequest{
@@ -38296,7 +38475,8 @@ func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageNetAppSvmSnapshotPolicyResponse
+//
+//	@return StorageNetAppSvmSnapshotPolicyResponse
 func (a *StorageApiService) GetStorageNetAppSvmSnapshotPolicyListExecute(r ApiGetStorageNetAppSvmSnapshotPolicyListRequest) (*StorageNetAppSvmSnapshotPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38483,9 +38663,9 @@ func (r ApiGetStorageNetAppVolumeByMoidRequest) Execute() (*StorageNetAppVolume,
 /*
 GetStorageNetAppVolumeByMoid Read a 'storage.NetAppVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppVolumeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppVolumeByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppVolumeByMoid(ctx context.Context, moid string) ApiGetStorageNetAppVolumeByMoidRequest {
 	return ApiGetStorageNetAppVolumeByMoidRequest{
@@ -38496,7 +38676,8 @@ func (a *StorageApiService) GetStorageNetAppVolumeByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolume
+//
+//	@return StorageNetAppVolume
 func (a *StorageApiService) GetStorageNetAppVolumeByMoidExecute(r ApiGetStorageNetAppVolumeByMoidRequest) (*StorageNetAppVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38636,9 +38817,9 @@ func (r ApiGetStorageNetAppVolumeEventByMoidRequest) Execute() (*StorageNetAppVo
 /*
 GetStorageNetAppVolumeEventByMoid Read a 'storage.NetAppVolumeEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppVolumeEventByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppVolumeEventByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppVolumeEventByMoid(ctx context.Context, moid string) ApiGetStorageNetAppVolumeEventByMoidRequest {
 	return ApiGetStorageNetAppVolumeEventByMoidRequest{
@@ -38649,7 +38830,8 @@ func (a *StorageApiService) GetStorageNetAppVolumeEventByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeEvent
+//
+//	@return StorageNetAppVolumeEvent
 func (a *StorageApiService) GetStorageNetAppVolumeEventByMoidExecute(r ApiGetStorageNetAppVolumeEventByMoidRequest) (*StorageNetAppVolumeEvent, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -38865,8 +39047,8 @@ func (r ApiGetStorageNetAppVolumeEventListRequest) Execute() (*StorageNetAppVolu
 /*
 GetStorageNetAppVolumeEventList Read a 'storage.NetAppVolumeEvent' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppVolumeEventListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppVolumeEventListRequest
 */
 func (a *StorageApiService) GetStorageNetAppVolumeEventList(ctx context.Context) ApiGetStorageNetAppVolumeEventListRequest {
 	return ApiGetStorageNetAppVolumeEventListRequest{
@@ -38876,7 +39058,8 @@ func (a *StorageApiService) GetStorageNetAppVolumeEventList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeEventResponse
+//
+//	@return StorageNetAppVolumeEventResponse
 func (a *StorageApiService) GetStorageNetAppVolumeEventListExecute(r ApiGetStorageNetAppVolumeEventListRequest) (*StorageNetAppVolumeEventResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39139,8 +39322,8 @@ func (r ApiGetStorageNetAppVolumeListRequest) Execute() (*StorageNetAppVolumeRes
 /*
 GetStorageNetAppVolumeList Read a 'storage.NetAppVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppVolumeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppVolumeListRequest
 */
 func (a *StorageApiService) GetStorageNetAppVolumeList(ctx context.Context) ApiGetStorageNetAppVolumeListRequest {
 	return ApiGetStorageNetAppVolumeListRequest{
@@ -39150,7 +39333,8 @@ func (a *StorageApiService) GetStorageNetAppVolumeList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeResponse
+//
+//	@return StorageNetAppVolumeResponse
 func (a *StorageApiService) GetStorageNetAppVolumeListExecute(r ApiGetStorageNetAppVolumeListRequest) (*StorageNetAppVolumeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39337,9 +39521,9 @@ func (r ApiGetStorageNetAppVolumeSnapshotByMoidRequest) Execute() (*StorageNetAp
 /*
 GetStorageNetAppVolumeSnapshotByMoid Read a 'storage.NetAppVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNetAppVolumeSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNetAppVolumeSnapshotByMoidRequest
 */
 func (a *StorageApiService) GetStorageNetAppVolumeSnapshotByMoid(ctx context.Context, moid string) ApiGetStorageNetAppVolumeSnapshotByMoidRequest {
 	return ApiGetStorageNetAppVolumeSnapshotByMoidRequest{
@@ -39350,7 +39534,8 @@ func (a *StorageApiService) GetStorageNetAppVolumeSnapshotByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeSnapshot
+//
+//	@return StorageNetAppVolumeSnapshot
 func (a *StorageApiService) GetStorageNetAppVolumeSnapshotByMoidExecute(r ApiGetStorageNetAppVolumeSnapshotByMoidRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39566,8 +39751,8 @@ func (r ApiGetStorageNetAppVolumeSnapshotListRequest) Execute() (*StorageNetAppV
 /*
 GetStorageNetAppVolumeSnapshotList Read a 'storage.NetAppVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNetAppVolumeSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNetAppVolumeSnapshotListRequest
 */
 func (a *StorageApiService) GetStorageNetAppVolumeSnapshotList(ctx context.Context) ApiGetStorageNetAppVolumeSnapshotListRequest {
 	return ApiGetStorageNetAppVolumeSnapshotListRequest{
@@ -39577,7 +39762,8 @@ func (a *StorageApiService) GetStorageNetAppVolumeSnapshotList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeSnapshotResponse
+//
+//	@return StorageNetAppVolumeSnapshotResponse
 func (a *StorageApiService) GetStorageNetAppVolumeSnapshotListExecute(r ApiGetStorageNetAppVolumeSnapshotListRequest) (*StorageNetAppVolumeSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39764,9 +39950,9 @@ func (r ApiGetStorageNvmeRaidConfigurationByMoidRequest) Execute() (*StorageNvme
 /*
 GetStorageNvmeRaidConfigurationByMoid Read a 'storage.NvmeRaidConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageNvmeRaidConfigurationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageNvmeRaidConfigurationByMoidRequest
 */
 func (a *StorageApiService) GetStorageNvmeRaidConfigurationByMoid(ctx context.Context, moid string) ApiGetStorageNvmeRaidConfigurationByMoidRequest {
 	return ApiGetStorageNvmeRaidConfigurationByMoidRequest{
@@ -39777,7 +39963,8 @@ func (a *StorageApiService) GetStorageNvmeRaidConfigurationByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageNvmeRaidConfiguration
+//
+//	@return StorageNvmeRaidConfiguration
 func (a *StorageApiService) GetStorageNvmeRaidConfigurationByMoidExecute(r ApiGetStorageNvmeRaidConfigurationByMoidRequest) (*StorageNvmeRaidConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -39993,8 +40180,8 @@ func (r ApiGetStorageNvmeRaidConfigurationListRequest) Execute() (*StorageNvmeRa
 /*
 GetStorageNvmeRaidConfigurationList Read a 'storage.NvmeRaidConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageNvmeRaidConfigurationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageNvmeRaidConfigurationListRequest
 */
 func (a *StorageApiService) GetStorageNvmeRaidConfigurationList(ctx context.Context) ApiGetStorageNvmeRaidConfigurationListRequest {
 	return ApiGetStorageNvmeRaidConfigurationListRequest{
@@ -40004,7 +40191,8 @@ func (a *StorageApiService) GetStorageNvmeRaidConfigurationList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageNvmeRaidConfigurationResponse
+//
+//	@return StorageNvmeRaidConfigurationResponse
 func (a *StorageApiService) GetStorageNvmeRaidConfigurationListExecute(r ApiGetStorageNvmeRaidConfigurationListRequest) (*StorageNvmeRaidConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40191,9 +40379,9 @@ func (r ApiGetStoragePhysicalDiskByMoidRequest) Execute() (*StoragePhysicalDisk,
 /*
 GetStoragePhysicalDiskByMoid Read a 'storage.PhysicalDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePhysicalDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePhysicalDiskByMoidRequest
 */
 func (a *StorageApiService) GetStoragePhysicalDiskByMoid(ctx context.Context, moid string) ApiGetStoragePhysicalDiskByMoidRequest {
 	return ApiGetStoragePhysicalDiskByMoidRequest{
@@ -40204,7 +40392,8 @@ func (a *StorageApiService) GetStoragePhysicalDiskByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDisk
+//
+//	@return StoragePhysicalDisk
 func (a *StorageApiService) GetStoragePhysicalDiskByMoidExecute(r ApiGetStoragePhysicalDiskByMoidRequest) (*StoragePhysicalDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40344,9 +40533,9 @@ func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) Execute() (*StoragePhys
 /*
 GetStoragePhysicalDiskExtensionByMoid Read a 'storage.PhysicalDiskExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePhysicalDiskExtensionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePhysicalDiskExtensionByMoidRequest
 */
 func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoid(ctx context.Context, moid string) ApiGetStoragePhysicalDiskExtensionByMoidRequest {
 	return ApiGetStoragePhysicalDiskExtensionByMoidRequest{
@@ -40357,7 +40546,8 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskExtension
+//
+//	@return StoragePhysicalDiskExtension
 func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoidExecute(r ApiGetStoragePhysicalDiskExtensionByMoidRequest) (*StoragePhysicalDiskExtension, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40573,8 +40763,8 @@ func (r ApiGetStoragePhysicalDiskExtensionListRequest) Execute() (*StoragePhysic
 /*
 GetStoragePhysicalDiskExtensionList Read a 'storage.PhysicalDiskExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePhysicalDiskExtensionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePhysicalDiskExtensionListRequest
 */
 func (a *StorageApiService) GetStoragePhysicalDiskExtensionList(ctx context.Context) ApiGetStoragePhysicalDiskExtensionListRequest {
 	return ApiGetStoragePhysicalDiskExtensionListRequest{
@@ -40584,7 +40774,8 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskExtensionResponse
+//
+//	@return StoragePhysicalDiskExtensionResponse
 func (a *StorageApiService) GetStoragePhysicalDiskExtensionListExecute(r ApiGetStoragePhysicalDiskExtensionListRequest) (*StoragePhysicalDiskExtensionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -40847,8 +41038,8 @@ func (r ApiGetStoragePhysicalDiskListRequest) Execute() (*StoragePhysicalDiskRes
 /*
 GetStoragePhysicalDiskList Read a 'storage.PhysicalDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePhysicalDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePhysicalDiskListRequest
 */
 func (a *StorageApiService) GetStoragePhysicalDiskList(ctx context.Context) ApiGetStoragePhysicalDiskListRequest {
 	return ApiGetStoragePhysicalDiskListRequest{
@@ -40858,7 +41049,8 @@ func (a *StorageApiService) GetStoragePhysicalDiskList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskResponse
+//
+//	@return StoragePhysicalDiskResponse
 func (a *StorageApiService) GetStoragePhysicalDiskListExecute(r ApiGetStoragePhysicalDiskListRequest) (*StoragePhysicalDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41045,9 +41237,9 @@ func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) Execute() (*StoragePhysical
 /*
 GetStoragePhysicalDiskUsageByMoid Read a 'storage.PhysicalDiskUsage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePhysicalDiskUsageByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePhysicalDiskUsageByMoidRequest
 */
 func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoid(ctx context.Context, moid string) ApiGetStoragePhysicalDiskUsageByMoidRequest {
 	return ApiGetStoragePhysicalDiskUsageByMoidRequest{
@@ -41058,7 +41250,8 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskUsage
+//
+//	@return StoragePhysicalDiskUsage
 func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoidExecute(r ApiGetStoragePhysicalDiskUsageByMoidRequest) (*StoragePhysicalDiskUsage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41274,8 +41467,8 @@ func (r ApiGetStoragePhysicalDiskUsageListRequest) Execute() (*StoragePhysicalDi
 /*
 GetStoragePhysicalDiskUsageList Read a 'storage.PhysicalDiskUsage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePhysicalDiskUsageListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePhysicalDiskUsageListRequest
 */
 func (a *StorageApiService) GetStoragePhysicalDiskUsageList(ctx context.Context) ApiGetStoragePhysicalDiskUsageListRequest {
 	return ApiGetStoragePhysicalDiskUsageListRequest{
@@ -41285,7 +41478,8 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskUsageResponse
+//
+//	@return StoragePhysicalDiskUsageResponse
 func (a *StorageApiService) GetStoragePhysicalDiskUsageListExecute(r ApiGetStoragePhysicalDiskUsageListRequest) (*StoragePhysicalDiskUsageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41472,9 +41666,9 @@ func (r ApiGetStoragePureArrayAlertsByMoidRequest) Execute() (*StoragePureArrayA
 /*
 GetStoragePureArrayAlertsByMoid Read a 'storage.PureArrayAlerts' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureArrayAlertsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureArrayAlertsByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureArrayAlertsByMoid(ctx context.Context, moid string) ApiGetStoragePureArrayAlertsByMoidRequest {
 	return ApiGetStoragePureArrayAlertsByMoidRequest{
@@ -41485,7 +41679,8 @@ func (a *StorageApiService) GetStoragePureArrayAlertsByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StoragePureArrayAlerts
+//
+//	@return StoragePureArrayAlerts
 func (a *StorageApiService) GetStoragePureArrayAlertsByMoidExecute(r ApiGetStoragePureArrayAlertsByMoidRequest) (*StoragePureArrayAlerts, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41701,8 +41896,8 @@ func (r ApiGetStoragePureArrayAlertsListRequest) Execute() (*StoragePureArrayAle
 /*
 GetStoragePureArrayAlertsList Read a 'storage.PureArrayAlerts' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureArrayAlertsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureArrayAlertsListRequest
 */
 func (a *StorageApiService) GetStoragePureArrayAlertsList(ctx context.Context) ApiGetStoragePureArrayAlertsListRequest {
 	return ApiGetStoragePureArrayAlertsListRequest{
@@ -41712,7 +41907,8 @@ func (a *StorageApiService) GetStoragePureArrayAlertsList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StoragePureArrayAlertsResponse
+//
+//	@return StoragePureArrayAlertsResponse
 func (a *StorageApiService) GetStoragePureArrayAlertsListExecute(r ApiGetStoragePureArrayAlertsListRequest) (*StoragePureArrayAlertsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -41899,9 +42095,9 @@ func (r ApiGetStoragePureArrayByMoidRequest) Execute() (*StoragePureArray, *http
 /*
 GetStoragePureArrayByMoid Read a 'storage.PureArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureArrayByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureArrayByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureArrayByMoid(ctx context.Context, moid string) ApiGetStoragePureArrayByMoidRequest {
 	return ApiGetStoragePureArrayByMoidRequest{
@@ -41912,7 +42108,8 @@ func (a *StorageApiService) GetStoragePureArrayByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StoragePureArray
+//
+//	@return StoragePureArray
 func (a *StorageApiService) GetStoragePureArrayByMoidExecute(r ApiGetStoragePureArrayByMoidRequest) (*StoragePureArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -42128,8 +42325,8 @@ func (r ApiGetStoragePureArrayListRequest) Execute() (*StoragePureArrayResponse,
 /*
 GetStoragePureArrayList Read a 'storage.PureArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureArrayListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureArrayListRequest
 */
 func (a *StorageApiService) GetStoragePureArrayList(ctx context.Context) ApiGetStoragePureArrayListRequest {
 	return ApiGetStoragePureArrayListRequest{
@@ -42139,7 +42336,8 @@ func (a *StorageApiService) GetStoragePureArrayList(ctx context.Context) ApiGetS
 }
 
 // Execute executes the request
-//  @return StoragePureArrayResponse
+//
+//	@return StoragePureArrayResponse
 func (a *StorageApiService) GetStoragePureArrayListExecute(r ApiGetStoragePureArrayListRequest) (*StoragePureArrayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -42326,9 +42524,9 @@ func (r ApiGetStoragePureControllerByMoidRequest) Execute() (*StoragePureControl
 /*
 GetStoragePureControllerByMoid Read a 'storage.PureController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureControllerByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureControllerByMoid(ctx context.Context, moid string) ApiGetStoragePureControllerByMoidRequest {
 	return ApiGetStoragePureControllerByMoidRequest{
@@ -42339,7 +42537,8 @@ func (a *StorageApiService) GetStoragePureControllerByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StoragePureController
+//
+//	@return StoragePureController
 func (a *StorageApiService) GetStoragePureControllerByMoidExecute(r ApiGetStoragePureControllerByMoidRequest) (*StoragePureController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -42555,8 +42754,8 @@ func (r ApiGetStoragePureControllerListRequest) Execute() (*StoragePureControlle
 /*
 GetStoragePureControllerList Read a 'storage.PureController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureControllerListRequest
 */
 func (a *StorageApiService) GetStoragePureControllerList(ctx context.Context) ApiGetStoragePureControllerListRequest {
 	return ApiGetStoragePureControllerListRequest{
@@ -42566,7 +42765,8 @@ func (a *StorageApiService) GetStoragePureControllerList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return StoragePureControllerResponse
+//
+//	@return StoragePureControllerResponse
 func (a *StorageApiService) GetStoragePureControllerListExecute(r ApiGetStoragePureControllerListRequest) (*StoragePureControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -42753,9 +42953,9 @@ func (r ApiGetStoragePureDiskByMoidRequest) Execute() (*StoragePureDisk, *http.R
 /*
 GetStoragePureDiskByMoid Read a 'storage.PureDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureDiskByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureDiskByMoid(ctx context.Context, moid string) ApiGetStoragePureDiskByMoidRequest {
 	return ApiGetStoragePureDiskByMoidRequest{
@@ -42766,7 +42966,8 @@ func (a *StorageApiService) GetStoragePureDiskByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StoragePureDisk
+//
+//	@return StoragePureDisk
 func (a *StorageApiService) GetStoragePureDiskByMoidExecute(r ApiGetStoragePureDiskByMoidRequest) (*StoragePureDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -42982,8 +43183,8 @@ func (r ApiGetStoragePureDiskListRequest) Execute() (*StoragePureDiskResponse, *
 /*
 GetStoragePureDiskList Read a 'storage.PureDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureDiskListRequest
 */
 func (a *StorageApiService) GetStoragePureDiskList(ctx context.Context) ApiGetStoragePureDiskListRequest {
 	return ApiGetStoragePureDiskListRequest{
@@ -42993,7 +43194,8 @@ func (a *StorageApiService) GetStoragePureDiskList(ctx context.Context) ApiGetSt
 }
 
 // Execute executes the request
-//  @return StoragePureDiskResponse
+//
+//	@return StoragePureDiskResponse
 func (a *StorageApiService) GetStoragePureDiskListExecute(r ApiGetStoragePureDiskListRequest) (*StoragePureDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -43180,9 +43382,9 @@ func (r ApiGetStoragePureHostByMoidRequest) Execute() (*StoragePureHost, *http.R
 /*
 GetStoragePureHostByMoid Read a 'storage.PureHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureHostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureHostByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureHostByMoid(ctx context.Context, moid string) ApiGetStoragePureHostByMoidRequest {
 	return ApiGetStoragePureHostByMoidRequest{
@@ -43193,7 +43395,8 @@ func (a *StorageApiService) GetStoragePureHostByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StoragePureHost
+//
+//	@return StoragePureHost
 func (a *StorageApiService) GetStoragePureHostByMoidExecute(r ApiGetStoragePureHostByMoidRequest) (*StoragePureHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -43333,9 +43536,9 @@ func (r ApiGetStoragePureHostGroupByMoidRequest) Execute() (*StoragePureHostGrou
 /*
 GetStoragePureHostGroupByMoid Read a 'storage.PureHostGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureHostGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureHostGroupByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureHostGroupByMoid(ctx context.Context, moid string) ApiGetStoragePureHostGroupByMoidRequest {
 	return ApiGetStoragePureHostGroupByMoidRequest{
@@ -43346,7 +43549,8 @@ func (a *StorageApiService) GetStoragePureHostGroupByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StoragePureHostGroup
+//
+//	@return StoragePureHostGroup
 func (a *StorageApiService) GetStoragePureHostGroupByMoidExecute(r ApiGetStoragePureHostGroupByMoidRequest) (*StoragePureHostGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -43562,8 +43766,8 @@ func (r ApiGetStoragePureHostGroupListRequest) Execute() (*StoragePureHostGroupR
 /*
 GetStoragePureHostGroupList Read a 'storage.PureHostGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureHostGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureHostGroupListRequest
 */
 func (a *StorageApiService) GetStoragePureHostGroupList(ctx context.Context) ApiGetStoragePureHostGroupListRequest {
 	return ApiGetStoragePureHostGroupListRequest{
@@ -43573,7 +43777,8 @@ func (a *StorageApiService) GetStoragePureHostGroupList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return StoragePureHostGroupResponse
+//
+//	@return StoragePureHostGroupResponse
 func (a *StorageApiService) GetStoragePureHostGroupListExecute(r ApiGetStoragePureHostGroupListRequest) (*StoragePureHostGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -43836,8 +44041,8 @@ func (r ApiGetStoragePureHostListRequest) Execute() (*StoragePureHostResponse, *
 /*
 GetStoragePureHostList Read a 'storage.PureHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureHostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureHostListRequest
 */
 func (a *StorageApiService) GetStoragePureHostList(ctx context.Context) ApiGetStoragePureHostListRequest {
 	return ApiGetStoragePureHostListRequest{
@@ -43847,7 +44052,8 @@ func (a *StorageApiService) GetStoragePureHostList(ctx context.Context) ApiGetSt
 }
 
 // Execute executes the request
-//  @return StoragePureHostResponse
+//
+//	@return StoragePureHostResponse
 func (a *StorageApiService) GetStoragePureHostListExecute(r ApiGetStoragePureHostListRequest) (*StoragePureHostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -44034,9 +44240,9 @@ func (r ApiGetStoragePureHostLunByMoidRequest) Execute() (*StoragePureHostLun, *
 /*
 GetStoragePureHostLunByMoid Read a 'storage.PureHostLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureHostLunByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureHostLunByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureHostLunByMoid(ctx context.Context, moid string) ApiGetStoragePureHostLunByMoidRequest {
 	return ApiGetStoragePureHostLunByMoidRequest{
@@ -44047,7 +44253,8 @@ func (a *StorageApiService) GetStoragePureHostLunByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StoragePureHostLun
+//
+//	@return StoragePureHostLun
 func (a *StorageApiService) GetStoragePureHostLunByMoidExecute(r ApiGetStoragePureHostLunByMoidRequest) (*StoragePureHostLun, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -44263,8 +44470,8 @@ func (r ApiGetStoragePureHostLunListRequest) Execute() (*StoragePureHostLunRespo
 /*
 GetStoragePureHostLunList Read a 'storage.PureHostLun' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureHostLunListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureHostLunListRequest
 */
 func (a *StorageApiService) GetStoragePureHostLunList(ctx context.Context) ApiGetStoragePureHostLunListRequest {
 	return ApiGetStoragePureHostLunListRequest{
@@ -44274,7 +44481,8 @@ func (a *StorageApiService) GetStoragePureHostLunList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StoragePureHostLunResponse
+//
+//	@return StoragePureHostLunResponse
 func (a *StorageApiService) GetStoragePureHostLunListExecute(r ApiGetStoragePureHostLunListRequest) (*StoragePureHostLunResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -44461,9 +44669,9 @@ func (r ApiGetStoragePurePortByMoidRequest) Execute() (*StoragePurePort, *http.R
 /*
 GetStoragePurePortByMoid Read a 'storage.PurePort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePurePortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePurePortByMoidRequest
 */
 func (a *StorageApiService) GetStoragePurePortByMoid(ctx context.Context, moid string) ApiGetStoragePurePortByMoidRequest {
 	return ApiGetStoragePurePortByMoidRequest{
@@ -44474,7 +44682,8 @@ func (a *StorageApiService) GetStoragePurePortByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StoragePurePort
+//
+//	@return StoragePurePort
 func (a *StorageApiService) GetStoragePurePortByMoidExecute(r ApiGetStoragePurePortByMoidRequest) (*StoragePurePort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -44690,8 +44899,8 @@ func (r ApiGetStoragePurePortListRequest) Execute() (*StoragePurePortResponse, *
 /*
 GetStoragePurePortList Read a 'storage.PurePort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePurePortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePurePortListRequest
 */
 func (a *StorageApiService) GetStoragePurePortList(ctx context.Context) ApiGetStoragePurePortListRequest {
 	return ApiGetStoragePurePortListRequest{
@@ -44701,7 +44910,8 @@ func (a *StorageApiService) GetStoragePurePortList(ctx context.Context) ApiGetSt
 }
 
 // Execute executes the request
-//  @return StoragePurePortResponse
+//
+//	@return StoragePurePortResponse
 func (a *StorageApiService) GetStoragePurePortListExecute(r ApiGetStoragePurePortListRequest) (*StoragePurePortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -44888,9 +45098,9 @@ func (r ApiGetStoragePureProtectionGroupByMoidRequest) Execute() (*StoragePurePr
 /*
 GetStoragePureProtectionGroupByMoid Read a 'storage.PureProtectionGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureProtectionGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureProtectionGroupByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureProtectionGroupByMoid(ctx context.Context, moid string) ApiGetStoragePureProtectionGroupByMoidRequest {
 	return ApiGetStoragePureProtectionGroupByMoidRequest{
@@ -44901,7 +45111,8 @@ func (a *StorageApiService) GetStoragePureProtectionGroupByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StoragePureProtectionGroup
+//
+//	@return StoragePureProtectionGroup
 func (a *StorageApiService) GetStoragePureProtectionGroupByMoidExecute(r ApiGetStoragePureProtectionGroupByMoidRequest) (*StoragePureProtectionGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -45117,8 +45328,8 @@ func (r ApiGetStoragePureProtectionGroupListRequest) Execute() (*StoragePureProt
 /*
 GetStoragePureProtectionGroupList Read a 'storage.PureProtectionGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureProtectionGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureProtectionGroupListRequest
 */
 func (a *StorageApiService) GetStoragePureProtectionGroupList(ctx context.Context) ApiGetStoragePureProtectionGroupListRequest {
 	return ApiGetStoragePureProtectionGroupListRequest{
@@ -45128,7 +45339,8 @@ func (a *StorageApiService) GetStoragePureProtectionGroupList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StoragePureProtectionGroupResponse
+//
+//	@return StoragePureProtectionGroupResponse
 func (a *StorageApiService) GetStoragePureProtectionGroupListExecute(r ApiGetStoragePureProtectionGroupListRequest) (*StoragePureProtectionGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -45315,9 +45527,9 @@ func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) Execute() (*Stora
 /*
 GetStoragePureProtectionGroupSnapshotByMoid Read a 'storage.PureProtectionGroupSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureProtectionGroupSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureProtectionGroupSnapshotByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoid(ctx context.Context, moid string) ApiGetStoragePureProtectionGroupSnapshotByMoidRequest {
 	return ApiGetStoragePureProtectionGroupSnapshotByMoidRequest{
@@ -45328,7 +45540,8 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return StoragePureProtectionGroupSnapshot
+//
+//	@return StoragePureProtectionGroupSnapshot
 func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoidExecute(r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) (*StoragePureProtectionGroupSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -45544,8 +45757,8 @@ func (r ApiGetStoragePureProtectionGroupSnapshotListRequest) Execute() (*Storage
 /*
 GetStoragePureProtectionGroupSnapshotList Read a 'storage.PureProtectionGroupSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureProtectionGroupSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureProtectionGroupSnapshotListRequest
 */
 func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotList(ctx context.Context) ApiGetStoragePureProtectionGroupSnapshotListRequest {
 	return ApiGetStoragePureProtectionGroupSnapshotListRequest{
@@ -45555,7 +45768,8 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotList(ctx contex
 }
 
 // Execute executes the request
-//  @return StoragePureProtectionGroupSnapshotResponse
+//
+//	@return StoragePureProtectionGroupSnapshotResponse
 func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotListExecute(r ApiGetStoragePureProtectionGroupSnapshotListRequest) (*StoragePureProtectionGroupSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -45742,9 +45956,9 @@ func (r ApiGetStoragePureReplicationScheduleByMoidRequest) Execute() (*StoragePu
 /*
 GetStoragePureReplicationScheduleByMoid Read a 'storage.PureReplicationSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureReplicationScheduleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureReplicationScheduleByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureReplicationScheduleByMoid(ctx context.Context, moid string) ApiGetStoragePureReplicationScheduleByMoidRequest {
 	return ApiGetStoragePureReplicationScheduleByMoidRequest{
@@ -45755,7 +45969,8 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleByMoid(ctx context.
 }
 
 // Execute executes the request
-//  @return StoragePureReplicationSchedule
+//
+//	@return StoragePureReplicationSchedule
 func (a *StorageApiService) GetStoragePureReplicationScheduleByMoidExecute(r ApiGetStoragePureReplicationScheduleByMoidRequest) (*StoragePureReplicationSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -45971,8 +46186,8 @@ func (r ApiGetStoragePureReplicationScheduleListRequest) Execute() (*StoragePure
 /*
 GetStoragePureReplicationScheduleList Read a 'storage.PureReplicationSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureReplicationScheduleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureReplicationScheduleListRequest
 */
 func (a *StorageApiService) GetStoragePureReplicationScheduleList(ctx context.Context) ApiGetStoragePureReplicationScheduleListRequest {
 	return ApiGetStoragePureReplicationScheduleListRequest{
@@ -45982,7 +46197,8 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleList(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StoragePureReplicationScheduleResponse
+//
+//	@return StoragePureReplicationScheduleResponse
 func (a *StorageApiService) GetStoragePureReplicationScheduleListExecute(r ApiGetStoragePureReplicationScheduleListRequest) (*StoragePureReplicationScheduleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -46169,9 +46385,9 @@ func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) Execute() (*StoragePureS
 /*
 GetStoragePureSnapshotScheduleByMoid Read a 'storage.PureSnapshotSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureSnapshotScheduleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureSnapshotScheduleByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoid(ctx context.Context, moid string) ApiGetStoragePureSnapshotScheduleByMoidRequest {
 	return ApiGetStoragePureSnapshotScheduleByMoidRequest{
@@ -46182,7 +46398,8 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StoragePureSnapshotSchedule
+//
+//	@return StoragePureSnapshotSchedule
 func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoidExecute(r ApiGetStoragePureSnapshotScheduleByMoidRequest) (*StoragePureSnapshotSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -46398,8 +46615,8 @@ func (r ApiGetStoragePureSnapshotScheduleListRequest) Execute() (*StoragePureSna
 /*
 GetStoragePureSnapshotScheduleList Read a 'storage.PureSnapshotSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureSnapshotScheduleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureSnapshotScheduleListRequest
 */
 func (a *StorageApiService) GetStoragePureSnapshotScheduleList(ctx context.Context) ApiGetStoragePureSnapshotScheduleListRequest {
 	return ApiGetStoragePureSnapshotScheduleListRequest{
@@ -46409,7 +46626,8 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StoragePureSnapshotScheduleResponse
+//
+//	@return StoragePureSnapshotScheduleResponse
 func (a *StorageApiService) GetStoragePureSnapshotScheduleListExecute(r ApiGetStoragePureSnapshotScheduleListRequest) (*StoragePureSnapshotScheduleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -46596,9 +46814,9 @@ func (r ApiGetStoragePureTargetArrayByMoidRequest) Execute() (*StoragePureTarget
 /*
 GetStoragePureTargetArrayByMoid Read a 'storage.PureTargetArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureTargetArrayByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureTargetArrayByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureTargetArrayByMoid(ctx context.Context, moid string) ApiGetStoragePureTargetArrayByMoidRequest {
 	return ApiGetStoragePureTargetArrayByMoidRequest{
@@ -46609,7 +46827,8 @@ func (a *StorageApiService) GetStoragePureTargetArrayByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StoragePureTargetArray
+//
+//	@return StoragePureTargetArray
 func (a *StorageApiService) GetStoragePureTargetArrayByMoidExecute(r ApiGetStoragePureTargetArrayByMoidRequest) (*StoragePureTargetArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -46825,8 +47044,8 @@ func (r ApiGetStoragePureTargetArrayListRequest) Execute() (*StoragePureTargetAr
 /*
 GetStoragePureTargetArrayList Read a 'storage.PureTargetArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureTargetArrayListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureTargetArrayListRequest
 */
 func (a *StorageApiService) GetStoragePureTargetArrayList(ctx context.Context) ApiGetStoragePureTargetArrayListRequest {
 	return ApiGetStoragePureTargetArrayListRequest{
@@ -46836,7 +47055,8 @@ func (a *StorageApiService) GetStoragePureTargetArrayList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return StoragePureTargetArrayResponse
+//
+//	@return StoragePureTargetArrayResponse
 func (a *StorageApiService) GetStoragePureTargetArrayListExecute(r ApiGetStoragePureTargetArrayListRequest) (*StoragePureTargetArrayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -47023,9 +47243,9 @@ func (r ApiGetStoragePureVolumeByMoidRequest) Execute() (*StoragePureVolume, *ht
 /*
 GetStoragePureVolumeByMoid Read a 'storage.PureVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureVolumeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureVolumeByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureVolumeByMoid(ctx context.Context, moid string) ApiGetStoragePureVolumeByMoidRequest {
 	return ApiGetStoragePureVolumeByMoidRequest{
@@ -47036,7 +47256,8 @@ func (a *StorageApiService) GetStoragePureVolumeByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StoragePureVolume
+//
+//	@return StoragePureVolume
 func (a *StorageApiService) GetStoragePureVolumeByMoidExecute(r ApiGetStoragePureVolumeByMoidRequest) (*StoragePureVolume, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -47252,8 +47473,8 @@ func (r ApiGetStoragePureVolumeListRequest) Execute() (*StoragePureVolumeRespons
 /*
 GetStoragePureVolumeList Read a 'storage.PureVolume' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureVolumeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureVolumeListRequest
 */
 func (a *StorageApiService) GetStoragePureVolumeList(ctx context.Context) ApiGetStoragePureVolumeListRequest {
 	return ApiGetStoragePureVolumeListRequest{
@@ -47263,7 +47484,8 @@ func (a *StorageApiService) GetStoragePureVolumeList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return StoragePureVolumeResponse
+//
+//	@return StoragePureVolumeResponse
 func (a *StorageApiService) GetStoragePureVolumeListExecute(r ApiGetStoragePureVolumeListRequest) (*StoragePureVolumeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -47450,9 +47672,9 @@ func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) Execute() (*StoragePureVol
 /*
 GetStoragePureVolumeSnapshotByMoid Read a 'storage.PureVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStoragePureVolumeSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStoragePureVolumeSnapshotByMoidRequest
 */
 func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoid(ctx context.Context, moid string) ApiGetStoragePureVolumeSnapshotByMoidRequest {
 	return ApiGetStoragePureVolumeSnapshotByMoidRequest{
@@ -47463,7 +47685,8 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StoragePureVolumeSnapshot
+//
+//	@return StoragePureVolumeSnapshot
 func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoidExecute(r ApiGetStoragePureVolumeSnapshotByMoidRequest) (*StoragePureVolumeSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -47679,8 +47902,8 @@ func (r ApiGetStoragePureVolumeSnapshotListRequest) Execute() (*StoragePureVolum
 /*
 GetStoragePureVolumeSnapshotList Read a 'storage.PureVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStoragePureVolumeSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStoragePureVolumeSnapshotListRequest
 */
 func (a *StorageApiService) GetStoragePureVolumeSnapshotList(ctx context.Context) ApiGetStoragePureVolumeSnapshotListRequest {
 	return ApiGetStoragePureVolumeSnapshotListRequest{
@@ -47690,7 +47913,8 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StoragePureVolumeSnapshotResponse
+//
+//	@return StoragePureVolumeSnapshotResponse
 func (a *StorageApiService) GetStoragePureVolumeSnapshotListExecute(r ApiGetStoragePureVolumeSnapshotListRequest) (*StoragePureVolumeSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -47877,9 +48101,9 @@ func (r ApiGetStorageSasExpanderByMoidRequest) Execute() (*StorageSasExpander, *
 /*
 GetStorageSasExpanderByMoid Read a 'storage.SasExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageSasExpanderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageSasExpanderByMoidRequest
 */
 func (a *StorageApiService) GetStorageSasExpanderByMoid(ctx context.Context, moid string) ApiGetStorageSasExpanderByMoidRequest {
 	return ApiGetStorageSasExpanderByMoidRequest{
@@ -47890,7 +48114,8 @@ func (a *StorageApiService) GetStorageSasExpanderByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return StorageSasExpander
+//
+//	@return StorageSasExpander
 func (a *StorageApiService) GetStorageSasExpanderByMoidExecute(r ApiGetStorageSasExpanderByMoidRequest) (*StorageSasExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -48106,8 +48331,8 @@ func (r ApiGetStorageSasExpanderListRequest) Execute() (*StorageSasExpanderRespo
 /*
 GetStorageSasExpanderList Read a 'storage.SasExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageSasExpanderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageSasExpanderListRequest
 */
 func (a *StorageApiService) GetStorageSasExpanderList(ctx context.Context) ApiGetStorageSasExpanderListRequest {
 	return ApiGetStorageSasExpanderListRequest{
@@ -48117,7 +48342,8 @@ func (a *StorageApiService) GetStorageSasExpanderList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return StorageSasExpanderResponse
+//
+//	@return StorageSasExpanderResponse
 func (a *StorageApiService) GetStorageSasExpanderListExecute(r ApiGetStorageSasExpanderListRequest) (*StorageSasExpanderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -48304,9 +48530,9 @@ func (r ApiGetStorageSasPortByMoidRequest) Execute() (*StorageSasPort, *http.Res
 /*
 GetStorageSasPortByMoid Read a 'storage.SasPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageSasPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageSasPortByMoidRequest
 */
 func (a *StorageApiService) GetStorageSasPortByMoid(ctx context.Context, moid string) ApiGetStorageSasPortByMoidRequest {
 	return ApiGetStorageSasPortByMoidRequest{
@@ -48317,7 +48543,8 @@ func (a *StorageApiService) GetStorageSasPortByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return StorageSasPort
+//
+//	@return StorageSasPort
 func (a *StorageApiService) GetStorageSasPortByMoidExecute(r ApiGetStorageSasPortByMoidRequest) (*StorageSasPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -48533,8 +48760,8 @@ func (r ApiGetStorageSasPortListRequest) Execute() (*StorageSasPortResponse, *ht
 /*
 GetStorageSasPortList Read a 'storage.SasPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageSasPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageSasPortListRequest
 */
 func (a *StorageApiService) GetStorageSasPortList(ctx context.Context) ApiGetStorageSasPortListRequest {
 	return ApiGetStorageSasPortListRequest{
@@ -48544,7 +48771,8 @@ func (a *StorageApiService) GetStorageSasPortList(ctx context.Context) ApiGetSto
 }
 
 // Execute executes the request
-//  @return StorageSasPortResponse
+//
+//	@return StorageSasPortResponse
 func (a *StorageApiService) GetStorageSasPortListExecute(r ApiGetStorageSasPortListRequest) (*StorageSasPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -48731,9 +48959,9 @@ func (r ApiGetStorageSpanByMoidRequest) Execute() (*StorageSpan, *http.Response,
 /*
 GetStorageSpanByMoid Read a 'storage.Span' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageSpanByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageSpanByMoidRequest
 */
 func (a *StorageApiService) GetStorageSpanByMoid(ctx context.Context, moid string) ApiGetStorageSpanByMoidRequest {
 	return ApiGetStorageSpanByMoidRequest{
@@ -48744,7 +48972,8 @@ func (a *StorageApiService) GetStorageSpanByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return StorageSpan
+//
+//	@return StorageSpan
 func (a *StorageApiService) GetStorageSpanByMoidExecute(r ApiGetStorageSpanByMoidRequest) (*StorageSpan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -48960,8 +49189,8 @@ func (r ApiGetStorageSpanListRequest) Execute() (*StorageSpanResponse, *http.Res
 /*
 GetStorageSpanList Read a 'storage.Span' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageSpanListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageSpanListRequest
 */
 func (a *StorageApiService) GetStorageSpanList(ctx context.Context) ApiGetStorageSpanListRequest {
 	return ApiGetStorageSpanListRequest{
@@ -48971,7 +49200,8 @@ func (a *StorageApiService) GetStorageSpanList(ctx context.Context) ApiGetStorag
 }
 
 // Execute executes the request
-//  @return StorageSpanResponse
+//
+//	@return StorageSpanResponse
 func (a *StorageApiService) GetStorageSpanListExecute(r ApiGetStorageSpanListRequest) (*StorageSpanResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -49158,9 +49388,9 @@ func (r ApiGetStorageStoragePolicyByMoidRequest) Execute() (*StorageStoragePolic
 /*
 GetStorageStoragePolicyByMoid Read a 'storage.StoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageStoragePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageStoragePolicyByMoidRequest
 */
 func (a *StorageApiService) GetStorageStoragePolicyByMoid(ctx context.Context, moid string) ApiGetStorageStoragePolicyByMoidRequest {
 	return ApiGetStorageStoragePolicyByMoidRequest{
@@ -49171,7 +49401,8 @@ func (a *StorageApiService) GetStorageStoragePolicyByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StorageStoragePolicy
+//
+//	@return StorageStoragePolicy
 func (a *StorageApiService) GetStorageStoragePolicyByMoidExecute(r ApiGetStorageStoragePolicyByMoidRequest) (*StorageStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -49387,8 +49618,8 @@ func (r ApiGetStorageStoragePolicyListRequest) Execute() (*StorageStoragePolicyR
 /*
 GetStorageStoragePolicyList Read a 'storage.StoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageStoragePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageStoragePolicyListRequest
 */
 func (a *StorageApiService) GetStorageStoragePolicyList(ctx context.Context) ApiGetStorageStoragePolicyListRequest {
 	return ApiGetStorageStoragePolicyListRequest{
@@ -49398,7 +49629,8 @@ func (a *StorageApiService) GetStorageStoragePolicyList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return StorageStoragePolicyResponse
+//
+//	@return StorageStoragePolicyResponse
 func (a *StorageApiService) GetStorageStoragePolicyListExecute(r ApiGetStorageStoragePolicyListRequest) (*StorageStoragePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -49585,9 +49817,9 @@ func (r ApiGetStorageVdMemberEpByMoidRequest) Execute() (*StorageVdMemberEp, *ht
 /*
 GetStorageVdMemberEpByMoid Read a 'storage.VdMemberEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageVdMemberEpByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageVdMemberEpByMoidRequest
 */
 func (a *StorageApiService) GetStorageVdMemberEpByMoid(ctx context.Context, moid string) ApiGetStorageVdMemberEpByMoidRequest {
 	return ApiGetStorageVdMemberEpByMoidRequest{
@@ -49598,7 +49830,8 @@ func (a *StorageApiService) GetStorageVdMemberEpByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageVdMemberEp
+//
+//	@return StorageVdMemberEp
 func (a *StorageApiService) GetStorageVdMemberEpByMoidExecute(r ApiGetStorageVdMemberEpByMoidRequest) (*StorageVdMemberEp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -49814,8 +50047,8 @@ func (r ApiGetStorageVdMemberEpListRequest) Execute() (*StorageVdMemberEpRespons
 /*
 GetStorageVdMemberEpList Read a 'storage.VdMemberEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageVdMemberEpListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageVdMemberEpListRequest
 */
 func (a *StorageApiService) GetStorageVdMemberEpList(ctx context.Context) ApiGetStorageVdMemberEpListRequest {
 	return ApiGetStorageVdMemberEpListRequest{
@@ -49825,7 +50058,8 @@ func (a *StorageApiService) GetStorageVdMemberEpList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return StorageVdMemberEpResponse
+//
+//	@return StorageVdMemberEpResponse
 func (a *StorageApiService) GetStorageVdMemberEpListExecute(r ApiGetStorageVdMemberEpListRequest) (*StorageVdMemberEpResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -50012,9 +50246,9 @@ func (r ApiGetStorageVirtualDriveByMoidRequest) Execute() (*StorageVirtualDrive,
 /*
 GetStorageVirtualDriveByMoid Read a 'storage.VirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageVirtualDriveByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageVirtualDriveByMoidRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveByMoid(ctx context.Context, moid string) ApiGetStorageVirtualDriveByMoidRequest {
 	return ApiGetStorageVirtualDriveByMoidRequest{
@@ -50025,7 +50259,8 @@ func (a *StorageApiService) GetStorageVirtualDriveByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return StorageVirtualDrive
+//
+//	@return StorageVirtualDrive
 func (a *StorageApiService) GetStorageVirtualDriveByMoidExecute(r ApiGetStorageVirtualDriveByMoidRequest) (*StorageVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -50165,9 +50400,9 @@ func (r ApiGetStorageVirtualDriveContainerByMoidRequest) Execute() (*StorageVirt
 /*
 GetStorageVirtualDriveContainerByMoid Read a 'storage.VirtualDriveContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageVirtualDriveContainerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageVirtualDriveContainerByMoidRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveContainerByMoid(ctx context.Context, moid string) ApiGetStorageVirtualDriveContainerByMoidRequest {
 	return ApiGetStorageVirtualDriveContainerByMoidRequest{
@@ -50178,7 +50413,8 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveContainer
+//
+//	@return StorageVirtualDriveContainer
 func (a *StorageApiService) GetStorageVirtualDriveContainerByMoidExecute(r ApiGetStorageVirtualDriveContainerByMoidRequest) (*StorageVirtualDriveContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -50394,8 +50630,8 @@ func (r ApiGetStorageVirtualDriveContainerListRequest) Execute() (*StorageVirtua
 /*
 GetStorageVirtualDriveContainerList Read a 'storage.VirtualDriveContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageVirtualDriveContainerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageVirtualDriveContainerListRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveContainerList(ctx context.Context) ApiGetStorageVirtualDriveContainerListRequest {
 	return ApiGetStorageVirtualDriveContainerListRequest{
@@ -50405,7 +50641,8 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveContainerResponse
+//
+//	@return StorageVirtualDriveContainerResponse
 func (a *StorageApiService) GetStorageVirtualDriveContainerListExecute(r ApiGetStorageVirtualDriveContainerListRequest) (*StorageVirtualDriveContainerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -50592,9 +50829,9 @@ func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) Execute() (*StorageVirt
 /*
 GetStorageVirtualDriveExtensionByMoid Read a 'storage.VirtualDriveExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageVirtualDriveExtensionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageVirtualDriveExtensionByMoidRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoid(ctx context.Context, moid string) ApiGetStorageVirtualDriveExtensionByMoidRequest {
 	return ApiGetStorageVirtualDriveExtensionByMoidRequest{
@@ -50605,7 +50842,8 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveExtension
+//
+//	@return StorageVirtualDriveExtension
 func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoidExecute(r ApiGetStorageVirtualDriveExtensionByMoidRequest) (*StorageVirtualDriveExtension, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -50821,8 +51059,8 @@ func (r ApiGetStorageVirtualDriveExtensionListRequest) Execute() (*StorageVirtua
 /*
 GetStorageVirtualDriveExtensionList Read a 'storage.VirtualDriveExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageVirtualDriveExtensionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageVirtualDriveExtensionListRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveExtensionList(ctx context.Context) ApiGetStorageVirtualDriveExtensionListRequest {
 	return ApiGetStorageVirtualDriveExtensionListRequest{
@@ -50832,7 +51070,8 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveExtensionResponse
+//
+//	@return StorageVirtualDriveExtensionResponse
 func (a *StorageApiService) GetStorageVirtualDriveExtensionListExecute(r ApiGetStorageVirtualDriveExtensionListRequest) (*StorageVirtualDriveExtensionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -51019,9 +51258,9 @@ func (r ApiGetStorageVirtualDriveIdentityByMoidRequest) Execute() (*StorageVirtu
 /*
 GetStorageVirtualDriveIdentityByMoid Read a 'storage.VirtualDriveIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetStorageVirtualDriveIdentityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetStorageVirtualDriveIdentityByMoidRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveIdentityByMoid(ctx context.Context, moid string) ApiGetStorageVirtualDriveIdentityByMoidRequest {
 	return ApiGetStorageVirtualDriveIdentityByMoidRequest{
@@ -51032,7 +51271,8 @@ func (a *StorageApiService) GetStorageVirtualDriveIdentityByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveIdentity
+//
+//	@return StorageVirtualDriveIdentity
 func (a *StorageApiService) GetStorageVirtualDriveIdentityByMoidExecute(r ApiGetStorageVirtualDriveIdentityByMoidRequest) (*StorageVirtualDriveIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -51248,8 +51488,8 @@ func (r ApiGetStorageVirtualDriveIdentityListRequest) Execute() (*StorageVirtual
 /*
 GetStorageVirtualDriveIdentityList Read a 'storage.VirtualDriveIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageVirtualDriveIdentityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageVirtualDriveIdentityListRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveIdentityList(ctx context.Context) ApiGetStorageVirtualDriveIdentityListRequest {
 	return ApiGetStorageVirtualDriveIdentityListRequest{
@@ -51259,7 +51499,8 @@ func (a *StorageApiService) GetStorageVirtualDriveIdentityList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveIdentityResponse
+//
+//	@return StorageVirtualDriveIdentityResponse
 func (a *StorageApiService) GetStorageVirtualDriveIdentityListExecute(r ApiGetStorageVirtualDriveIdentityListRequest) (*StorageVirtualDriveIdentityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -51522,8 +51763,8 @@ func (r ApiGetStorageVirtualDriveListRequest) Execute() (*StorageVirtualDriveRes
 /*
 GetStorageVirtualDriveList Read a 'storage.VirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetStorageVirtualDriveListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStorageVirtualDriveListRequest
 */
 func (a *StorageApiService) GetStorageVirtualDriveList(ctx context.Context) ApiGetStorageVirtualDriveListRequest {
 	return ApiGetStorageVirtualDriveListRequest{
@@ -51533,7 +51774,8 @@ func (a *StorageApiService) GetStorageVirtualDriveList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveResponse
+//
+//	@return StorageVirtualDriveResponse
 func (a *StorageApiService) GetStorageVirtualDriveListExecute(r ApiGetStorageVirtualDriveListRequest) (*StorageVirtualDriveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -51734,9 +51976,9 @@ func (r ApiPatchStorageBatteryBackupUnitRequest) Execute() (*StorageBatteryBacku
 /*
 PatchStorageBatteryBackupUnit Update a 'storage.BatteryBackupUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageBatteryBackupUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageBatteryBackupUnitRequest
 */
 func (a *StorageApiService) PatchStorageBatteryBackupUnit(ctx context.Context, moid string) ApiPatchStorageBatteryBackupUnitRequest {
 	return ApiPatchStorageBatteryBackupUnitRequest{
@@ -51747,7 +51989,8 @@ func (a *StorageApiService) PatchStorageBatteryBackupUnit(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StorageBatteryBackupUnit
+//
+//	@return StorageBatteryBackupUnit
 func (a *StorageApiService) PatchStorageBatteryBackupUnitExecute(r ApiPatchStorageBatteryBackupUnitRequest) (*StorageBatteryBackupUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -51909,9 +52152,9 @@ func (r ApiPatchStorageControllerRequest) Execute() (*StorageController, *http.R
 /*
 PatchStorageController Update a 'storage.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageControllerRequest
 */
 func (a *StorageApiService) PatchStorageController(ctx context.Context, moid string) ApiPatchStorageControllerRequest {
 	return ApiPatchStorageControllerRequest{
@@ -51922,7 +52165,8 @@ func (a *StorageApiService) PatchStorageController(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return StorageController
+//
+//	@return StorageController
 func (a *StorageApiService) PatchStorageControllerExecute(r ApiPatchStorageControllerRequest) (*StorageController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -52084,9 +52328,9 @@ func (r ApiPatchStorageDiskGroupRequest) Execute() (*StorageDiskGroup, *http.Res
 /*
 PatchStorageDiskGroup Update a 'storage.DiskGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageDiskGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageDiskGroupRequest
 */
 func (a *StorageApiService) PatchStorageDiskGroup(ctx context.Context, moid string) ApiPatchStorageDiskGroupRequest {
 	return ApiPatchStorageDiskGroupRequest{
@@ -52097,7 +52341,8 @@ func (a *StorageApiService) PatchStorageDiskGroup(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return StorageDiskGroup
+//
+//	@return StorageDiskGroup
 func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGroupRequest) (*StorageDiskGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -52259,9 +52504,9 @@ func (r ApiPatchStorageDriveGroupRequest) Execute() (*StorageDriveGroup, *http.R
 /*
 PatchStorageDriveGroup Update a 'storage.DriveGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageDriveGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageDriveGroupRequest
 */
 func (a *StorageApiService) PatchStorageDriveGroup(ctx context.Context, moid string) ApiPatchStorageDriveGroupRequest {
 	return ApiPatchStorageDriveGroupRequest{
@@ -52272,7 +52517,8 @@ func (a *StorageApiService) PatchStorageDriveGroup(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return StorageDriveGroup
+//
+//	@return StorageDriveGroup
 func (a *StorageApiService) PatchStorageDriveGroupExecute(r ApiPatchStorageDriveGroupRequest) (*StorageDriveGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -52434,9 +52680,9 @@ func (r ApiPatchStorageDriveSecurityPolicyRequest) Execute() (*StorageDriveSecur
 /*
 PatchStorageDriveSecurityPolicy Update a 'storage.DriveSecurityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageDriveSecurityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageDriveSecurityPolicyRequest
 */
 func (a *StorageApiService) PatchStorageDriveSecurityPolicy(ctx context.Context, moid string) ApiPatchStorageDriveSecurityPolicyRequest {
 	return ApiPatchStorageDriveSecurityPolicyRequest{
@@ -52447,7 +52693,8 @@ func (a *StorageApiService) PatchStorageDriveSecurityPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageDriveSecurityPolicy
+//
+//	@return StorageDriveSecurityPolicy
 func (a *StorageApiService) PatchStorageDriveSecurityPolicyExecute(r ApiPatchStorageDriveSecurityPolicyRequest) (*StorageDriveSecurityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -52609,9 +52856,9 @@ func (r ApiPatchStorageEnclosureRequest) Execute() (*StorageEnclosure, *http.Res
 /*
 PatchStorageEnclosure Update a 'storage.Enclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageEnclosureRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageEnclosureRequest
 */
 func (a *StorageApiService) PatchStorageEnclosure(ctx context.Context, moid string) ApiPatchStorageEnclosureRequest {
 	return ApiPatchStorageEnclosureRequest{
@@ -52622,7 +52869,8 @@ func (a *StorageApiService) PatchStorageEnclosure(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return StorageEnclosure
+//
+//	@return StorageEnclosure
 func (a *StorageApiService) PatchStorageEnclosureExecute(r ApiPatchStorageEnclosureRequest) (*StorageEnclosure, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -52784,9 +53032,9 @@ func (r ApiPatchStorageEnclosureDiskRequest) Execute() (*StorageEnclosureDisk, *
 /*
 PatchStorageEnclosureDisk Update a 'storage.EnclosureDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageEnclosureDiskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageEnclosureDiskRequest
 */
 func (a *StorageApiService) PatchStorageEnclosureDisk(ctx context.Context, moid string) ApiPatchStorageEnclosureDiskRequest {
 	return ApiPatchStorageEnclosureDiskRequest{
@@ -52797,7 +53045,8 @@ func (a *StorageApiService) PatchStorageEnclosureDisk(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDisk
+//
+//	@return StorageEnclosureDisk
 func (a *StorageApiService) PatchStorageEnclosureDiskExecute(r ApiPatchStorageEnclosureDiskRequest) (*StorageEnclosureDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -52959,9 +53208,9 @@ func (r ApiPatchStorageEnclosureDiskSlotEpRequest) Execute() (*StorageEnclosureD
 /*
 PatchStorageEnclosureDiskSlotEp Update a 'storage.EnclosureDiskSlotEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageEnclosureDiskSlotEpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageEnclosureDiskSlotEpRequest
 */
 func (a *StorageApiService) PatchStorageEnclosureDiskSlotEp(ctx context.Context, moid string) ApiPatchStorageEnclosureDiskSlotEpRequest {
 	return ApiPatchStorageEnclosureDiskSlotEpRequest{
@@ -52972,7 +53221,8 @@ func (a *StorageApiService) PatchStorageEnclosureDiskSlotEp(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDiskSlotEp
+//
+//	@return StorageEnclosureDiskSlotEp
 func (a *StorageApiService) PatchStorageEnclosureDiskSlotEpExecute(r ApiPatchStorageEnclosureDiskSlotEpRequest) (*StorageEnclosureDiskSlotEp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -53134,9 +53384,9 @@ func (r ApiPatchStorageFlexFlashControllerRequest) Execute() (*StorageFlexFlashC
 /*
 PatchStorageFlexFlashController Update a 'storage.FlexFlashController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexFlashControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexFlashControllerRequest
 */
 func (a *StorageApiService) PatchStorageFlexFlashController(ctx context.Context, moid string) ApiPatchStorageFlexFlashControllerRequest {
 	return ApiPatchStorageFlexFlashControllerRequest{
@@ -53147,7 +53397,8 @@ func (a *StorageApiService) PatchStorageFlexFlashController(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashController
+//
+//	@return StorageFlexFlashController
 func (a *StorageApiService) PatchStorageFlexFlashControllerExecute(r ApiPatchStorageFlexFlashControllerRequest) (*StorageFlexFlashController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -53309,9 +53560,9 @@ func (r ApiPatchStorageFlexFlashControllerPropsRequest) Execute() (*StorageFlexF
 /*
 PatchStorageFlexFlashControllerProps Update a 'storage.FlexFlashControllerProps' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexFlashControllerPropsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexFlashControllerPropsRequest
 */
 func (a *StorageApiService) PatchStorageFlexFlashControllerProps(ctx context.Context, moid string) ApiPatchStorageFlexFlashControllerPropsRequest {
 	return ApiPatchStorageFlexFlashControllerPropsRequest{
@@ -53322,7 +53573,8 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerProps(ctx context.Con
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashControllerProps
+//
+//	@return StorageFlexFlashControllerProps
 func (a *StorageApiService) PatchStorageFlexFlashControllerPropsExecute(r ApiPatchStorageFlexFlashControllerPropsRequest) (*StorageFlexFlashControllerProps, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -53484,9 +53736,9 @@ func (r ApiPatchStorageFlexFlashPhysicalDriveRequest) Execute() (*StorageFlexFla
 /*
 PatchStorageFlexFlashPhysicalDrive Update a 'storage.FlexFlashPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexFlashPhysicalDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexFlashPhysicalDriveRequest
 */
 func (a *StorageApiService) PatchStorageFlexFlashPhysicalDrive(ctx context.Context, moid string) ApiPatchStorageFlexFlashPhysicalDriveRequest {
 	return ApiPatchStorageFlexFlashPhysicalDriveRequest{
@@ -53497,7 +53749,8 @@ func (a *StorageApiService) PatchStorageFlexFlashPhysicalDrive(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashPhysicalDrive
+//
+//	@return StorageFlexFlashPhysicalDrive
 func (a *StorageApiService) PatchStorageFlexFlashPhysicalDriveExecute(r ApiPatchStorageFlexFlashPhysicalDriveRequest) (*StorageFlexFlashPhysicalDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -53659,9 +53912,9 @@ func (r ApiPatchStorageFlexFlashVirtualDriveRequest) Execute() (*StorageFlexFlas
 /*
 PatchStorageFlexFlashVirtualDrive Update a 'storage.FlexFlashVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexFlashVirtualDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexFlashVirtualDriveRequest
 */
 func (a *StorageApiService) PatchStorageFlexFlashVirtualDrive(ctx context.Context, moid string) ApiPatchStorageFlexFlashVirtualDriveRequest {
 	return ApiPatchStorageFlexFlashVirtualDriveRequest{
@@ -53672,7 +53925,8 @@ func (a *StorageApiService) PatchStorageFlexFlashVirtualDrive(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashVirtualDrive
+//
+//	@return StorageFlexFlashVirtualDrive
 func (a *StorageApiService) PatchStorageFlexFlashVirtualDriveExecute(r ApiPatchStorageFlexFlashVirtualDriveRequest) (*StorageFlexFlashVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -53834,9 +54088,9 @@ func (r ApiPatchStorageFlexUtilControllerRequest) Execute() (*StorageFlexUtilCon
 /*
 PatchStorageFlexUtilController Update a 'storage.FlexUtilController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexUtilControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexUtilControllerRequest
 */
 func (a *StorageApiService) PatchStorageFlexUtilController(ctx context.Context, moid string) ApiPatchStorageFlexUtilControllerRequest {
 	return ApiPatchStorageFlexUtilControllerRequest{
@@ -53847,7 +54101,8 @@ func (a *StorageApiService) PatchStorageFlexUtilController(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilController
+//
+//	@return StorageFlexUtilController
 func (a *StorageApiService) PatchStorageFlexUtilControllerExecute(r ApiPatchStorageFlexUtilControllerRequest) (*StorageFlexUtilController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -54009,9 +54264,9 @@ func (r ApiPatchStorageFlexUtilPhysicalDriveRequest) Execute() (*StorageFlexUtil
 /*
 PatchStorageFlexUtilPhysicalDrive Update a 'storage.FlexUtilPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexUtilPhysicalDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexUtilPhysicalDriveRequest
 */
 func (a *StorageApiService) PatchStorageFlexUtilPhysicalDrive(ctx context.Context, moid string) ApiPatchStorageFlexUtilPhysicalDriveRequest {
 	return ApiPatchStorageFlexUtilPhysicalDriveRequest{
@@ -54022,7 +54277,8 @@ func (a *StorageApiService) PatchStorageFlexUtilPhysicalDrive(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilPhysicalDrive
+//
+//	@return StorageFlexUtilPhysicalDrive
 func (a *StorageApiService) PatchStorageFlexUtilPhysicalDriveExecute(r ApiPatchStorageFlexUtilPhysicalDriveRequest) (*StorageFlexUtilPhysicalDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -54184,9 +54440,9 @@ func (r ApiPatchStorageFlexUtilVirtualDriveRequest) Execute() (*StorageFlexUtilV
 /*
 PatchStorageFlexUtilVirtualDrive Update a 'storage.FlexUtilVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageFlexUtilVirtualDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageFlexUtilVirtualDriveRequest
 */
 func (a *StorageApiService) PatchStorageFlexUtilVirtualDrive(ctx context.Context, moid string) ApiPatchStorageFlexUtilVirtualDriveRequest {
 	return ApiPatchStorageFlexUtilVirtualDriveRequest{
@@ -54197,7 +54453,8 @@ func (a *StorageApiService) PatchStorageFlexUtilVirtualDrive(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilVirtualDrive
+//
+//	@return StorageFlexUtilVirtualDrive
 func (a *StorageApiService) PatchStorageFlexUtilVirtualDriveExecute(r ApiPatchStorageFlexUtilVirtualDriveRequest) (*StorageFlexUtilVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -54359,9 +54616,9 @@ func (r ApiPatchStorageHitachiArrayRequest) Execute() (*StorageHitachiArray, *ht
 /*
 PatchStorageHitachiArray Update a 'storage.HitachiArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageHitachiArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageHitachiArrayRequest
 */
 func (a *StorageApiService) PatchStorageHitachiArray(ctx context.Context, moid string) ApiPatchStorageHitachiArrayRequest {
 	return ApiPatchStorageHitachiArrayRequest{
@@ -54372,7 +54629,8 @@ func (a *StorageApiService) PatchStorageHitachiArray(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StorageHitachiArray
+//
+//	@return StorageHitachiArray
 func (a *StorageApiService) PatchStorageHitachiArrayExecute(r ApiPatchStorageHitachiArrayRequest) (*StorageHitachiArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -54534,9 +54792,9 @@ func (r ApiPatchStorageNetAppClusterRequest) Execute() (*StorageNetAppCluster, *
 /*
 PatchStorageNetAppCluster Update a 'storage.NetAppCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageNetAppClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageNetAppClusterRequest
 */
 func (a *StorageApiService) PatchStorageNetAppCluster(ctx context.Context, moid string) ApiPatchStorageNetAppClusterRequest {
 	return ApiPatchStorageNetAppClusterRequest{
@@ -54547,7 +54805,8 @@ func (a *StorageApiService) PatchStorageNetAppCluster(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageNetAppCluster
+//
+//	@return StorageNetAppCluster
 func (a *StorageApiService) PatchStorageNetAppClusterExecute(r ApiPatchStorageNetAppClusterRequest) (*StorageNetAppCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -54709,9 +54968,9 @@ func (r ApiPatchStorageNetAppVolumeSnapshotRequest) Execute() (*StorageNetAppVol
 /*
 PatchStorageNetAppVolumeSnapshot Update a 'storage.NetAppVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageNetAppVolumeSnapshotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageNetAppVolumeSnapshotRequest
 */
 func (a *StorageApiService) PatchStorageNetAppVolumeSnapshot(ctx context.Context, moid string) ApiPatchStorageNetAppVolumeSnapshotRequest {
 	return ApiPatchStorageNetAppVolumeSnapshotRequest{
@@ -54722,7 +54981,8 @@ func (a *StorageApiService) PatchStorageNetAppVolumeSnapshot(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeSnapshot
+//
+//	@return StorageNetAppVolumeSnapshot
 func (a *StorageApiService) PatchStorageNetAppVolumeSnapshotExecute(r ApiPatchStorageNetAppVolumeSnapshotRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -54884,9 +55144,9 @@ func (r ApiPatchStoragePhysicalDiskRequest) Execute() (*StoragePhysicalDisk, *ht
 /*
 PatchStoragePhysicalDisk Update a 'storage.PhysicalDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStoragePhysicalDiskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStoragePhysicalDiskRequest
 */
 func (a *StorageApiService) PatchStoragePhysicalDisk(ctx context.Context, moid string) ApiPatchStoragePhysicalDiskRequest {
 	return ApiPatchStoragePhysicalDiskRequest{
@@ -54897,7 +55157,8 @@ func (a *StorageApiService) PatchStoragePhysicalDisk(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDisk
+//
+//	@return StoragePhysicalDisk
 func (a *StorageApiService) PatchStoragePhysicalDiskExecute(r ApiPatchStoragePhysicalDiskRequest) (*StoragePhysicalDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -55059,9 +55320,9 @@ func (r ApiPatchStoragePhysicalDiskExtensionRequest) Execute() (*StoragePhysical
 /*
 PatchStoragePhysicalDiskExtension Update a 'storage.PhysicalDiskExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStoragePhysicalDiskExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStoragePhysicalDiskExtensionRequest
 */
 func (a *StorageApiService) PatchStoragePhysicalDiskExtension(ctx context.Context, moid string) ApiPatchStoragePhysicalDiskExtensionRequest {
 	return ApiPatchStoragePhysicalDiskExtensionRequest{
@@ -55072,7 +55333,8 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExtension(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskExtension
+//
+//	@return StoragePhysicalDiskExtension
 func (a *StorageApiService) PatchStoragePhysicalDiskExtensionExecute(r ApiPatchStoragePhysicalDiskExtensionRequest) (*StoragePhysicalDiskExtension, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -55234,9 +55496,9 @@ func (r ApiPatchStoragePhysicalDiskUsageRequest) Execute() (*StoragePhysicalDisk
 /*
 PatchStoragePhysicalDiskUsage Update a 'storage.PhysicalDiskUsage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStoragePhysicalDiskUsageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStoragePhysicalDiskUsageRequest
 */
 func (a *StorageApiService) PatchStoragePhysicalDiskUsage(ctx context.Context, moid string) ApiPatchStoragePhysicalDiskUsageRequest {
 	return ApiPatchStoragePhysicalDiskUsageRequest{
@@ -55247,7 +55509,8 @@ func (a *StorageApiService) PatchStoragePhysicalDiskUsage(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskUsage
+//
+//	@return StoragePhysicalDiskUsage
 func (a *StorageApiService) PatchStoragePhysicalDiskUsageExecute(r ApiPatchStoragePhysicalDiskUsageRequest) (*StoragePhysicalDiskUsage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -55409,9 +55672,9 @@ func (r ApiPatchStoragePureArrayRequest) Execute() (*StoragePureArray, *http.Res
 /*
 PatchStoragePureArray Update a 'storage.PureArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStoragePureArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStoragePureArrayRequest
 */
 func (a *StorageApiService) PatchStoragePureArray(ctx context.Context, moid string) ApiPatchStoragePureArrayRequest {
 	return ApiPatchStoragePureArrayRequest{
@@ -55422,7 +55685,8 @@ func (a *StorageApiService) PatchStoragePureArray(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return StoragePureArray
+//
+//	@return StoragePureArray
 func (a *StorageApiService) PatchStoragePureArrayExecute(r ApiPatchStoragePureArrayRequest) (*StoragePureArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -55584,9 +55848,9 @@ func (r ApiPatchStorageSasExpanderRequest) Execute() (*StorageSasExpander, *http
 /*
 PatchStorageSasExpander Update a 'storage.SasExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageSasExpanderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageSasExpanderRequest
 */
 func (a *StorageApiService) PatchStorageSasExpander(ctx context.Context, moid string) ApiPatchStorageSasExpanderRequest {
 	return ApiPatchStorageSasExpanderRequest{
@@ -55597,7 +55861,8 @@ func (a *StorageApiService) PatchStorageSasExpander(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return StorageSasExpander
+//
+//	@return StorageSasExpander
 func (a *StorageApiService) PatchStorageSasExpanderExecute(r ApiPatchStorageSasExpanderRequest) (*StorageSasExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -55759,9 +56024,9 @@ func (r ApiPatchStorageSasPortRequest) Execute() (*StorageSasPort, *http.Respons
 /*
 PatchStorageSasPort Update a 'storage.SasPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageSasPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageSasPortRequest
 */
 func (a *StorageApiService) PatchStorageSasPort(ctx context.Context, moid string) ApiPatchStorageSasPortRequest {
 	return ApiPatchStorageSasPortRequest{
@@ -55772,7 +56037,8 @@ func (a *StorageApiService) PatchStorageSasPort(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return StorageSasPort
+//
+//	@return StorageSasPort
 func (a *StorageApiService) PatchStorageSasPortExecute(r ApiPatchStorageSasPortRequest) (*StorageSasPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -55934,9 +56200,9 @@ func (r ApiPatchStorageSpanRequest) Execute() (*StorageSpan, *http.Response, err
 /*
 PatchStorageSpan Update a 'storage.Span' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageSpanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageSpanRequest
 */
 func (a *StorageApiService) PatchStorageSpan(ctx context.Context, moid string) ApiPatchStorageSpanRequest {
 	return ApiPatchStorageSpanRequest{
@@ -55947,7 +56213,8 @@ func (a *StorageApiService) PatchStorageSpan(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return StorageSpan
+//
+//	@return StorageSpan
 func (a *StorageApiService) PatchStorageSpanExecute(r ApiPatchStorageSpanRequest) (*StorageSpan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -56109,9 +56376,9 @@ func (r ApiPatchStorageStoragePolicyRequest) Execute() (*StorageStoragePolicy, *
 /*
 PatchStorageStoragePolicy Update a 'storage.StoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageStoragePolicyRequest
 */
 func (a *StorageApiService) PatchStorageStoragePolicy(ctx context.Context, moid string) ApiPatchStorageStoragePolicyRequest {
 	return ApiPatchStorageStoragePolicyRequest{
@@ -56122,7 +56389,8 @@ func (a *StorageApiService) PatchStorageStoragePolicy(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageStoragePolicy
+//
+//	@return StorageStoragePolicy
 func (a *StorageApiService) PatchStorageStoragePolicyExecute(r ApiPatchStorageStoragePolicyRequest) (*StorageStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -56284,9 +56552,9 @@ func (r ApiPatchStorageVdMemberEpRequest) Execute() (*StorageVdMemberEp, *http.R
 /*
 PatchStorageVdMemberEp Update a 'storage.VdMemberEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageVdMemberEpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageVdMemberEpRequest
 */
 func (a *StorageApiService) PatchStorageVdMemberEp(ctx context.Context, moid string) ApiPatchStorageVdMemberEpRequest {
 	return ApiPatchStorageVdMemberEpRequest{
@@ -56297,7 +56565,8 @@ func (a *StorageApiService) PatchStorageVdMemberEp(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return StorageVdMemberEp
+//
+//	@return StorageVdMemberEp
 func (a *StorageApiService) PatchStorageVdMemberEpExecute(r ApiPatchStorageVdMemberEpRequest) (*StorageVdMemberEp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -56459,9 +56728,9 @@ func (r ApiPatchStorageVirtualDriveRequest) Execute() (*StorageVirtualDrive, *ht
 /*
 PatchStorageVirtualDrive Update a 'storage.VirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageVirtualDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageVirtualDriveRequest
 */
 func (a *StorageApiService) PatchStorageVirtualDrive(ctx context.Context, moid string) ApiPatchStorageVirtualDriveRequest {
 	return ApiPatchStorageVirtualDriveRequest{
@@ -56472,7 +56741,8 @@ func (a *StorageApiService) PatchStorageVirtualDrive(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StorageVirtualDrive
+//
+//	@return StorageVirtualDrive
 func (a *StorageApiService) PatchStorageVirtualDriveExecute(r ApiPatchStorageVirtualDriveRequest) (*StorageVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -56634,9 +56904,9 @@ func (r ApiPatchStorageVirtualDriveContainerRequest) Execute() (*StorageVirtualD
 /*
 PatchStorageVirtualDriveContainer Update a 'storage.VirtualDriveContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageVirtualDriveContainerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageVirtualDriveContainerRequest
 */
 func (a *StorageApiService) PatchStorageVirtualDriveContainer(ctx context.Context, moid string) ApiPatchStorageVirtualDriveContainerRequest {
 	return ApiPatchStorageVirtualDriveContainerRequest{
@@ -56647,7 +56917,8 @@ func (a *StorageApiService) PatchStorageVirtualDriveContainer(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveContainer
+//
+//	@return StorageVirtualDriveContainer
 func (a *StorageApiService) PatchStorageVirtualDriveContainerExecute(r ApiPatchStorageVirtualDriveContainerRequest) (*StorageVirtualDriveContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -56809,9 +57080,9 @@ func (r ApiPatchStorageVirtualDriveExtensionRequest) Execute() (*StorageVirtualD
 /*
 PatchStorageVirtualDriveExtension Update a 'storage.VirtualDriveExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchStorageVirtualDriveExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchStorageVirtualDriveExtensionRequest
 */
 func (a *StorageApiService) PatchStorageVirtualDriveExtension(ctx context.Context, moid string) ApiPatchStorageVirtualDriveExtensionRequest {
 	return ApiPatchStorageVirtualDriveExtensionRequest{
@@ -56822,7 +57093,8 @@ func (a *StorageApiService) PatchStorageVirtualDriveExtension(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveExtension
+//
+//	@return StorageVirtualDriveExtension
 func (a *StorageApiService) PatchStorageVirtualDriveExtensionExecute(r ApiPatchStorageVirtualDriveExtensionRequest) (*StorageVirtualDriveExtension, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -56984,9 +57256,9 @@ func (r ApiUpdateStorageBatteryBackupUnitRequest) Execute() (*StorageBatteryBack
 /*
 UpdateStorageBatteryBackupUnit Update a 'storage.BatteryBackupUnit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageBatteryBackupUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageBatteryBackupUnitRequest
 */
 func (a *StorageApiService) UpdateStorageBatteryBackupUnit(ctx context.Context, moid string) ApiUpdateStorageBatteryBackupUnitRequest {
 	return ApiUpdateStorageBatteryBackupUnitRequest{
@@ -56997,7 +57269,8 @@ func (a *StorageApiService) UpdateStorageBatteryBackupUnit(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StorageBatteryBackupUnit
+//
+//	@return StorageBatteryBackupUnit
 func (a *StorageApiService) UpdateStorageBatteryBackupUnitExecute(r ApiUpdateStorageBatteryBackupUnitRequest) (*StorageBatteryBackupUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -57159,9 +57432,9 @@ func (r ApiUpdateStorageControllerRequest) Execute() (*StorageController, *http.
 /*
 UpdateStorageController Update a 'storage.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageControllerRequest
 */
 func (a *StorageApiService) UpdateStorageController(ctx context.Context, moid string) ApiUpdateStorageControllerRequest {
 	return ApiUpdateStorageControllerRequest{
@@ -57172,7 +57445,8 @@ func (a *StorageApiService) UpdateStorageController(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return StorageController
+//
+//	@return StorageController
 func (a *StorageApiService) UpdateStorageControllerExecute(r ApiUpdateStorageControllerRequest) (*StorageController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -57334,9 +57608,9 @@ func (r ApiUpdateStorageDiskGroupRequest) Execute() (*StorageDiskGroup, *http.Re
 /*
 UpdateStorageDiskGroup Update a 'storage.DiskGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageDiskGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageDiskGroupRequest
 */
 func (a *StorageApiService) UpdateStorageDiskGroup(ctx context.Context, moid string) ApiUpdateStorageDiskGroupRequest {
 	return ApiUpdateStorageDiskGroupRequest{
@@ -57347,7 +57621,8 @@ func (a *StorageApiService) UpdateStorageDiskGroup(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return StorageDiskGroup
+//
+//	@return StorageDiskGroup
 func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDiskGroupRequest) (*StorageDiskGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -57509,9 +57784,9 @@ func (r ApiUpdateStorageDriveGroupRequest) Execute() (*StorageDriveGroup, *http.
 /*
 UpdateStorageDriveGroup Update a 'storage.DriveGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageDriveGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageDriveGroupRequest
 */
 func (a *StorageApiService) UpdateStorageDriveGroup(ctx context.Context, moid string) ApiUpdateStorageDriveGroupRequest {
 	return ApiUpdateStorageDriveGroupRequest{
@@ -57522,7 +57797,8 @@ func (a *StorageApiService) UpdateStorageDriveGroup(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return StorageDriveGroup
+//
+//	@return StorageDriveGroup
 func (a *StorageApiService) UpdateStorageDriveGroupExecute(r ApiUpdateStorageDriveGroupRequest) (*StorageDriveGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -57684,9 +57960,9 @@ func (r ApiUpdateStorageDriveSecurityPolicyRequest) Execute() (*StorageDriveSecu
 /*
 UpdateStorageDriveSecurityPolicy Update a 'storage.DriveSecurityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageDriveSecurityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageDriveSecurityPolicyRequest
 */
 func (a *StorageApiService) UpdateStorageDriveSecurityPolicy(ctx context.Context, moid string) ApiUpdateStorageDriveSecurityPolicyRequest {
 	return ApiUpdateStorageDriveSecurityPolicyRequest{
@@ -57697,7 +57973,8 @@ func (a *StorageApiService) UpdateStorageDriveSecurityPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageDriveSecurityPolicy
+//
+//	@return StorageDriveSecurityPolicy
 func (a *StorageApiService) UpdateStorageDriveSecurityPolicyExecute(r ApiUpdateStorageDriveSecurityPolicyRequest) (*StorageDriveSecurityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -57859,9 +58136,9 @@ func (r ApiUpdateStorageEnclosureRequest) Execute() (*StorageEnclosure, *http.Re
 /*
 UpdateStorageEnclosure Update a 'storage.Enclosure' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageEnclosureRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageEnclosureRequest
 */
 func (a *StorageApiService) UpdateStorageEnclosure(ctx context.Context, moid string) ApiUpdateStorageEnclosureRequest {
 	return ApiUpdateStorageEnclosureRequest{
@@ -57872,7 +58149,8 @@ func (a *StorageApiService) UpdateStorageEnclosure(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return StorageEnclosure
+//
+//	@return StorageEnclosure
 func (a *StorageApiService) UpdateStorageEnclosureExecute(r ApiUpdateStorageEnclosureRequest) (*StorageEnclosure, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -58034,9 +58312,9 @@ func (r ApiUpdateStorageEnclosureDiskRequest) Execute() (*StorageEnclosureDisk, 
 /*
 UpdateStorageEnclosureDisk Update a 'storage.EnclosureDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageEnclosureDiskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageEnclosureDiskRequest
 */
 func (a *StorageApiService) UpdateStorageEnclosureDisk(ctx context.Context, moid string) ApiUpdateStorageEnclosureDiskRequest {
 	return ApiUpdateStorageEnclosureDiskRequest{
@@ -58047,7 +58325,8 @@ func (a *StorageApiService) UpdateStorageEnclosureDisk(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDisk
+//
+//	@return StorageEnclosureDisk
 func (a *StorageApiService) UpdateStorageEnclosureDiskExecute(r ApiUpdateStorageEnclosureDiskRequest) (*StorageEnclosureDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -58209,9 +58488,9 @@ func (r ApiUpdateStorageEnclosureDiskSlotEpRequest) Execute() (*StorageEnclosure
 /*
 UpdateStorageEnclosureDiskSlotEp Update a 'storage.EnclosureDiskSlotEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageEnclosureDiskSlotEpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageEnclosureDiskSlotEpRequest
 */
 func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEp(ctx context.Context, moid string) ApiUpdateStorageEnclosureDiskSlotEpRequest {
 	return ApiUpdateStorageEnclosureDiskSlotEpRequest{
@@ -58222,7 +58501,8 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEp(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageEnclosureDiskSlotEp
+//
+//	@return StorageEnclosureDiskSlotEp
 func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEpExecute(r ApiUpdateStorageEnclosureDiskSlotEpRequest) (*StorageEnclosureDiskSlotEp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -58384,9 +58664,9 @@ func (r ApiUpdateStorageFlexFlashControllerRequest) Execute() (*StorageFlexFlash
 /*
 UpdateStorageFlexFlashController Update a 'storage.FlexFlashController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexFlashControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexFlashControllerRequest
 */
 func (a *StorageApiService) UpdateStorageFlexFlashController(ctx context.Context, moid string) ApiUpdateStorageFlexFlashControllerRequest {
 	return ApiUpdateStorageFlexFlashControllerRequest{
@@ -58397,7 +58677,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashController(ctx context.Context
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashController
+//
+//	@return StorageFlexFlashController
 func (a *StorageApiService) UpdateStorageFlexFlashControllerExecute(r ApiUpdateStorageFlexFlashControllerRequest) (*StorageFlexFlashController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -58559,9 +58840,9 @@ func (r ApiUpdateStorageFlexFlashControllerPropsRequest) Execute() (*StorageFlex
 /*
 UpdateStorageFlexFlashControllerProps Update a 'storage.FlexFlashControllerProps' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexFlashControllerPropsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexFlashControllerPropsRequest
 */
 func (a *StorageApiService) UpdateStorageFlexFlashControllerProps(ctx context.Context, moid string) ApiUpdateStorageFlexFlashControllerPropsRequest {
 	return ApiUpdateStorageFlexFlashControllerPropsRequest{
@@ -58572,7 +58853,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerProps(ctx context.Co
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashControllerProps
+//
+//	@return StorageFlexFlashControllerProps
 func (a *StorageApiService) UpdateStorageFlexFlashControllerPropsExecute(r ApiUpdateStorageFlexFlashControllerPropsRequest) (*StorageFlexFlashControllerProps, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -58734,9 +59016,9 @@ func (r ApiUpdateStorageFlexFlashPhysicalDriveRequest) Execute() (*StorageFlexFl
 /*
 UpdateStorageFlexFlashPhysicalDrive Update a 'storage.FlexFlashPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexFlashPhysicalDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexFlashPhysicalDriveRequest
 */
 func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDrive(ctx context.Context, moid string) ApiUpdateStorageFlexFlashPhysicalDriveRequest {
 	return ApiUpdateStorageFlexFlashPhysicalDriveRequest{
@@ -58747,7 +59029,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDrive(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashPhysicalDrive
+//
+//	@return StorageFlexFlashPhysicalDrive
 func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDriveExecute(r ApiUpdateStorageFlexFlashPhysicalDriveRequest) (*StorageFlexFlashPhysicalDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -58909,9 +59192,9 @@ func (r ApiUpdateStorageFlexFlashVirtualDriveRequest) Execute() (*StorageFlexFla
 /*
 UpdateStorageFlexFlashVirtualDrive Update a 'storage.FlexFlashVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexFlashVirtualDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexFlashVirtualDriveRequest
 */
 func (a *StorageApiService) UpdateStorageFlexFlashVirtualDrive(ctx context.Context, moid string) ApiUpdateStorageFlexFlashVirtualDriveRequest {
 	return ApiUpdateStorageFlexFlashVirtualDriveRequest{
@@ -58922,7 +59205,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashVirtualDrive(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageFlexFlashVirtualDrive
+//
+//	@return StorageFlexFlashVirtualDrive
 func (a *StorageApiService) UpdateStorageFlexFlashVirtualDriveExecute(r ApiUpdateStorageFlexFlashVirtualDriveRequest) (*StorageFlexFlashVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -59084,9 +59368,9 @@ func (r ApiUpdateStorageFlexUtilControllerRequest) Execute() (*StorageFlexUtilCo
 /*
 UpdateStorageFlexUtilController Update a 'storage.FlexUtilController' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexUtilControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexUtilControllerRequest
 */
 func (a *StorageApiService) UpdateStorageFlexUtilController(ctx context.Context, moid string) ApiUpdateStorageFlexUtilControllerRequest {
 	return ApiUpdateStorageFlexUtilControllerRequest{
@@ -59097,7 +59381,8 @@ func (a *StorageApiService) UpdateStorageFlexUtilController(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilController
+//
+//	@return StorageFlexUtilController
 func (a *StorageApiService) UpdateStorageFlexUtilControllerExecute(r ApiUpdateStorageFlexUtilControllerRequest) (*StorageFlexUtilController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -59259,9 +59544,9 @@ func (r ApiUpdateStorageFlexUtilPhysicalDriveRequest) Execute() (*StorageFlexUti
 /*
 UpdateStorageFlexUtilPhysicalDrive Update a 'storage.FlexUtilPhysicalDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexUtilPhysicalDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexUtilPhysicalDriveRequest
 */
 func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDrive(ctx context.Context, moid string) ApiUpdateStorageFlexUtilPhysicalDriveRequest {
 	return ApiUpdateStorageFlexUtilPhysicalDriveRequest{
@@ -59272,7 +59557,8 @@ func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDrive(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilPhysicalDrive
+//
+//	@return StorageFlexUtilPhysicalDrive
 func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDriveExecute(r ApiUpdateStorageFlexUtilPhysicalDriveRequest) (*StorageFlexUtilPhysicalDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -59434,9 +59720,9 @@ func (r ApiUpdateStorageFlexUtilVirtualDriveRequest) Execute() (*StorageFlexUtil
 /*
 UpdateStorageFlexUtilVirtualDrive Update a 'storage.FlexUtilVirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageFlexUtilVirtualDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageFlexUtilVirtualDriveRequest
 */
 func (a *StorageApiService) UpdateStorageFlexUtilVirtualDrive(ctx context.Context, moid string) ApiUpdateStorageFlexUtilVirtualDriveRequest {
 	return ApiUpdateStorageFlexUtilVirtualDriveRequest{
@@ -59447,7 +59733,8 @@ func (a *StorageApiService) UpdateStorageFlexUtilVirtualDrive(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageFlexUtilVirtualDrive
+//
+//	@return StorageFlexUtilVirtualDrive
 func (a *StorageApiService) UpdateStorageFlexUtilVirtualDriveExecute(r ApiUpdateStorageFlexUtilVirtualDriveRequest) (*StorageFlexUtilVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -59609,9 +59896,9 @@ func (r ApiUpdateStorageHitachiArrayRequest) Execute() (*StorageHitachiArray, *h
 /*
 UpdateStorageHitachiArray Update a 'storage.HitachiArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageHitachiArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageHitachiArrayRequest
 */
 func (a *StorageApiService) UpdateStorageHitachiArray(ctx context.Context, moid string) ApiUpdateStorageHitachiArrayRequest {
 	return ApiUpdateStorageHitachiArrayRequest{
@@ -59622,7 +59909,8 @@ func (a *StorageApiService) UpdateStorageHitachiArray(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageHitachiArray
+//
+//	@return StorageHitachiArray
 func (a *StorageApiService) UpdateStorageHitachiArrayExecute(r ApiUpdateStorageHitachiArrayRequest) (*StorageHitachiArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -59784,9 +60072,9 @@ func (r ApiUpdateStorageNetAppClusterRequest) Execute() (*StorageNetAppCluster, 
 /*
 UpdateStorageNetAppCluster Update a 'storage.NetAppCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageNetAppClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageNetAppClusterRequest
 */
 func (a *StorageApiService) UpdateStorageNetAppCluster(ctx context.Context, moid string) ApiUpdateStorageNetAppClusterRequest {
 	return ApiUpdateStorageNetAppClusterRequest{
@@ -59797,7 +60085,8 @@ func (a *StorageApiService) UpdateStorageNetAppCluster(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageNetAppCluster
+//
+//	@return StorageNetAppCluster
 func (a *StorageApiService) UpdateStorageNetAppClusterExecute(r ApiUpdateStorageNetAppClusterRequest) (*StorageNetAppCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -59959,9 +60248,9 @@ func (r ApiUpdateStorageNetAppVolumeSnapshotRequest) Execute() (*StorageNetAppVo
 /*
 UpdateStorageNetAppVolumeSnapshot Update a 'storage.NetAppVolumeSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageNetAppVolumeSnapshotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageNetAppVolumeSnapshotRequest
 */
 func (a *StorageApiService) UpdateStorageNetAppVolumeSnapshot(ctx context.Context, moid string) ApiUpdateStorageNetAppVolumeSnapshotRequest {
 	return ApiUpdateStorageNetAppVolumeSnapshotRequest{
@@ -59972,7 +60261,8 @@ func (a *StorageApiService) UpdateStorageNetAppVolumeSnapshot(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return StorageNetAppVolumeSnapshot
+//
+//	@return StorageNetAppVolumeSnapshot
 func (a *StorageApiService) UpdateStorageNetAppVolumeSnapshotExecute(r ApiUpdateStorageNetAppVolumeSnapshotRequest) (*StorageNetAppVolumeSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -60134,9 +60424,9 @@ func (r ApiUpdateStoragePhysicalDiskRequest) Execute() (*StoragePhysicalDisk, *h
 /*
 UpdateStoragePhysicalDisk Update a 'storage.PhysicalDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStoragePhysicalDiskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStoragePhysicalDiskRequest
 */
 func (a *StorageApiService) UpdateStoragePhysicalDisk(ctx context.Context, moid string) ApiUpdateStoragePhysicalDiskRequest {
 	return ApiUpdateStoragePhysicalDiskRequest{
@@ -60147,7 +60437,8 @@ func (a *StorageApiService) UpdateStoragePhysicalDisk(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDisk
+//
+//	@return StoragePhysicalDisk
 func (a *StorageApiService) UpdateStoragePhysicalDiskExecute(r ApiUpdateStoragePhysicalDiskRequest) (*StoragePhysicalDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -60309,9 +60600,9 @@ func (r ApiUpdateStoragePhysicalDiskExtensionRequest) Execute() (*StoragePhysica
 /*
 UpdateStoragePhysicalDiskExtension Update a 'storage.PhysicalDiskExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStoragePhysicalDiskExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStoragePhysicalDiskExtensionRequest
 */
 func (a *StorageApiService) UpdateStoragePhysicalDiskExtension(ctx context.Context, moid string) ApiUpdateStoragePhysicalDiskExtensionRequest {
 	return ApiUpdateStoragePhysicalDiskExtensionRequest{
@@ -60322,7 +60613,8 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExtension(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskExtension
+//
+//	@return StoragePhysicalDiskExtension
 func (a *StorageApiService) UpdateStoragePhysicalDiskExtensionExecute(r ApiUpdateStoragePhysicalDiskExtensionRequest) (*StoragePhysicalDiskExtension, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -60484,9 +60776,9 @@ func (r ApiUpdateStoragePhysicalDiskUsageRequest) Execute() (*StoragePhysicalDis
 /*
 UpdateStoragePhysicalDiskUsage Update a 'storage.PhysicalDiskUsage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStoragePhysicalDiskUsageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStoragePhysicalDiskUsageRequest
 */
 func (a *StorageApiService) UpdateStoragePhysicalDiskUsage(ctx context.Context, moid string) ApiUpdateStoragePhysicalDiskUsageRequest {
 	return ApiUpdateStoragePhysicalDiskUsageRequest{
@@ -60497,7 +60789,8 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskUsage(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return StoragePhysicalDiskUsage
+//
+//	@return StoragePhysicalDiskUsage
 func (a *StorageApiService) UpdateStoragePhysicalDiskUsageExecute(r ApiUpdateStoragePhysicalDiskUsageRequest) (*StoragePhysicalDiskUsage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -60659,9 +60952,9 @@ func (r ApiUpdateStoragePureArrayRequest) Execute() (*StoragePureArray, *http.Re
 /*
 UpdateStoragePureArray Update a 'storage.PureArray' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStoragePureArrayRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStoragePureArrayRequest
 */
 func (a *StorageApiService) UpdateStoragePureArray(ctx context.Context, moid string) ApiUpdateStoragePureArrayRequest {
 	return ApiUpdateStoragePureArrayRequest{
@@ -60672,7 +60965,8 @@ func (a *StorageApiService) UpdateStoragePureArray(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return StoragePureArray
+//
+//	@return StoragePureArray
 func (a *StorageApiService) UpdateStoragePureArrayExecute(r ApiUpdateStoragePureArrayRequest) (*StoragePureArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -60834,9 +61128,9 @@ func (r ApiUpdateStorageSasExpanderRequest) Execute() (*StorageSasExpander, *htt
 /*
 UpdateStorageSasExpander Update a 'storage.SasExpander' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageSasExpanderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageSasExpanderRequest
 */
 func (a *StorageApiService) UpdateStorageSasExpander(ctx context.Context, moid string) ApiUpdateStorageSasExpanderRequest {
 	return ApiUpdateStorageSasExpanderRequest{
@@ -60847,7 +61141,8 @@ func (a *StorageApiService) UpdateStorageSasExpander(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return StorageSasExpander
+//
+//	@return StorageSasExpander
 func (a *StorageApiService) UpdateStorageSasExpanderExecute(r ApiUpdateStorageSasExpanderRequest) (*StorageSasExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -61009,9 +61304,9 @@ func (r ApiUpdateStorageSasPortRequest) Execute() (*StorageSasPort, *http.Respon
 /*
 UpdateStorageSasPort Update a 'storage.SasPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageSasPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageSasPortRequest
 */
 func (a *StorageApiService) UpdateStorageSasPort(ctx context.Context, moid string) ApiUpdateStorageSasPortRequest {
 	return ApiUpdateStorageSasPortRequest{
@@ -61022,7 +61317,8 @@ func (a *StorageApiService) UpdateStorageSasPort(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return StorageSasPort
+//
+//	@return StorageSasPort
 func (a *StorageApiService) UpdateStorageSasPortExecute(r ApiUpdateStorageSasPortRequest) (*StorageSasPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -61184,9 +61480,9 @@ func (r ApiUpdateStorageSpanRequest) Execute() (*StorageSpan, *http.Response, er
 /*
 UpdateStorageSpan Update a 'storage.Span' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageSpanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageSpanRequest
 */
 func (a *StorageApiService) UpdateStorageSpan(ctx context.Context, moid string) ApiUpdateStorageSpanRequest {
 	return ApiUpdateStorageSpanRequest{
@@ -61197,7 +61493,8 @@ func (a *StorageApiService) UpdateStorageSpan(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return StorageSpan
+//
+//	@return StorageSpan
 func (a *StorageApiService) UpdateStorageSpanExecute(r ApiUpdateStorageSpanRequest) (*StorageSpan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -61359,9 +61656,9 @@ func (r ApiUpdateStorageStoragePolicyRequest) Execute() (*StorageStoragePolicy, 
 /*
 UpdateStorageStoragePolicy Update a 'storage.StoragePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageStoragePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageStoragePolicyRequest
 */
 func (a *StorageApiService) UpdateStorageStoragePolicy(ctx context.Context, moid string) ApiUpdateStorageStoragePolicyRequest {
 	return ApiUpdateStorageStoragePolicyRequest{
@@ -61372,7 +61669,8 @@ func (a *StorageApiService) UpdateStorageStoragePolicy(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return StorageStoragePolicy
+//
+//	@return StorageStoragePolicy
 func (a *StorageApiService) UpdateStorageStoragePolicyExecute(r ApiUpdateStorageStoragePolicyRequest) (*StorageStoragePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -61534,9 +61832,9 @@ func (r ApiUpdateStorageVdMemberEpRequest) Execute() (*StorageVdMemberEp, *http.
 /*
 UpdateStorageVdMemberEp Update a 'storage.VdMemberEp' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageVdMemberEpRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageVdMemberEpRequest
 */
 func (a *StorageApiService) UpdateStorageVdMemberEp(ctx context.Context, moid string) ApiUpdateStorageVdMemberEpRequest {
 	return ApiUpdateStorageVdMemberEpRequest{
@@ -61547,7 +61845,8 @@ func (a *StorageApiService) UpdateStorageVdMemberEp(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return StorageVdMemberEp
+//
+//	@return StorageVdMemberEp
 func (a *StorageApiService) UpdateStorageVdMemberEpExecute(r ApiUpdateStorageVdMemberEpRequest) (*StorageVdMemberEp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -61709,9 +62008,9 @@ func (r ApiUpdateStorageVirtualDriveRequest) Execute() (*StorageVirtualDrive, *h
 /*
 UpdateStorageVirtualDrive Update a 'storage.VirtualDrive' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageVirtualDriveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageVirtualDriveRequest
 */
 func (a *StorageApiService) UpdateStorageVirtualDrive(ctx context.Context, moid string) ApiUpdateStorageVirtualDriveRequest {
 	return ApiUpdateStorageVirtualDriveRequest{
@@ -61722,7 +62021,8 @@ func (a *StorageApiService) UpdateStorageVirtualDrive(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return StorageVirtualDrive
+//
+//	@return StorageVirtualDrive
 func (a *StorageApiService) UpdateStorageVirtualDriveExecute(r ApiUpdateStorageVirtualDriveRequest) (*StorageVirtualDrive, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -61884,9 +62184,9 @@ func (r ApiUpdateStorageVirtualDriveContainerRequest) Execute() (*StorageVirtual
 /*
 UpdateStorageVirtualDriveContainer Update a 'storage.VirtualDriveContainer' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageVirtualDriveContainerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageVirtualDriveContainerRequest
 */
 func (a *StorageApiService) UpdateStorageVirtualDriveContainer(ctx context.Context, moid string) ApiUpdateStorageVirtualDriveContainerRequest {
 	return ApiUpdateStorageVirtualDriveContainerRequest{
@@ -61897,7 +62197,8 @@ func (a *StorageApiService) UpdateStorageVirtualDriveContainer(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveContainer
+//
+//	@return StorageVirtualDriveContainer
 func (a *StorageApiService) UpdateStorageVirtualDriveContainerExecute(r ApiUpdateStorageVirtualDriveContainerRequest) (*StorageVirtualDriveContainer, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -62059,9 +62360,9 @@ func (r ApiUpdateStorageVirtualDriveExtensionRequest) Execute() (*StorageVirtual
 /*
 UpdateStorageVirtualDriveExtension Update a 'storage.VirtualDriveExtension' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateStorageVirtualDriveExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateStorageVirtualDriveExtensionRequest
 */
 func (a *StorageApiService) UpdateStorageVirtualDriveExtension(ctx context.Context, moid string) ApiUpdateStorageVirtualDriveExtensionRequest {
 	return ApiUpdateStorageVirtualDriveExtensionRequest{
@@ -62072,7 +62373,8 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExtension(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return StorageVirtualDriveExtension
+//
+//	@return StorageVirtualDriveExtension
 func (a *StorageApiService) UpdateStorageVirtualDriveExtensionExecute(r ApiUpdateStorageVirtualDriveExtensionRequest) (*StorageVirtualDriveExtension, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

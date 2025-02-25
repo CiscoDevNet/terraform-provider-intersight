@@ -56,8 +56,8 @@ func (r ApiCreateMetricsMetricsExplorationRequest) Execute() (*MetricsMetricsExp
 /*
 CreateMetricsMetricsExploration Create a 'metrics.MetricsExploration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateMetricsMetricsExplorationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateMetricsMetricsExplorationRequest
 */
 func (a *MetricsApiService) CreateMetricsMetricsExploration(ctx context.Context) ApiCreateMetricsMetricsExplorationRequest {
 	return ApiCreateMetricsMetricsExplorationRequest{
@@ -67,7 +67,8 @@ func (a *MetricsApiService) CreateMetricsMetricsExploration(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return MetricsMetricsExploration
+//
+//	@return MetricsMetricsExploration
 func (a *MetricsApiService) CreateMetricsMetricsExplorationExecute(r ApiCreateMetricsMetricsExplorationRequest) (*MetricsMetricsExploration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateMetricsResourceConfigurationRequest) Execute() (*MetricsResourc
 /*
 CreateMetricsResourceConfiguration Create a 'metrics.ResourceConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateMetricsResourceConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateMetricsResourceConfigurationRequest
 */
 func (a *MetricsApiService) CreateMetricsResourceConfiguration(ctx context.Context) ApiCreateMetricsResourceConfigurationRequest {
 	return ApiCreateMetricsResourceConfigurationRequest{
@@ -248,7 +249,8 @@ func (a *MetricsApiService) CreateMetricsResourceConfiguration(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return MetricsResourceConfiguration
+//
+//	@return MetricsResourceConfiguration
 func (a *MetricsApiService) CreateMetricsResourceConfigurationExecute(r ApiCreateMetricsResourceConfigurationRequest) (*MetricsResourceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteMetricsMetricsExplorationRequest) Execute() (*http.Response, er
 /*
 DeleteMetricsMetricsExploration Delete a 'metrics.MetricsExploration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteMetricsMetricsExplorationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteMetricsMetricsExplorationRequest
 */
 func (a *MetricsApiService) DeleteMetricsMetricsExploration(ctx context.Context, moid string) ApiDeleteMetricsMetricsExplorationRequest {
 	return ApiDeleteMetricsMetricsExplorationRequest{
@@ -540,9 +542,9 @@ func (r ApiGetMetricsConfigurationByMoidRequest) Execute() (*MetricsConfiguratio
 /*
 GetMetricsConfigurationByMoid Read a 'metrics.Configuration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMetricsConfigurationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMetricsConfigurationByMoidRequest
 */
 func (a *MetricsApiService) GetMetricsConfigurationByMoid(ctx context.Context, moid string) ApiGetMetricsConfigurationByMoidRequest {
 	return ApiGetMetricsConfigurationByMoidRequest{
@@ -553,7 +555,8 @@ func (a *MetricsApiService) GetMetricsConfigurationByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return MetricsConfiguration
+//
+//	@return MetricsConfiguration
 func (a *MetricsApiService) GetMetricsConfigurationByMoidExecute(r ApiGetMetricsConfigurationByMoidRequest) (*MetricsConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -769,8 +772,8 @@ func (r ApiGetMetricsConfigurationListRequest) Execute() (*MetricsConfigurationR
 /*
 GetMetricsConfigurationList Read a 'metrics.Configuration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMetricsConfigurationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMetricsConfigurationListRequest
 */
 func (a *MetricsApiService) GetMetricsConfigurationList(ctx context.Context) ApiGetMetricsConfigurationListRequest {
 	return ApiGetMetricsConfigurationListRequest{
@@ -780,7 +783,8 @@ func (a *MetricsApiService) GetMetricsConfigurationList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return MetricsConfigurationResponse
+//
+//	@return MetricsConfigurationResponse
 func (a *MetricsApiService) GetMetricsConfigurationListExecute(r ApiGetMetricsConfigurationListRequest) (*MetricsConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -967,9 +971,9 @@ func (r ApiGetMetricsMetricsExplorationByMoidRequest) Execute() (*MetricsMetrics
 /*
 GetMetricsMetricsExplorationByMoid Read a 'metrics.MetricsExploration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMetricsMetricsExplorationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMetricsMetricsExplorationByMoidRequest
 */
 func (a *MetricsApiService) GetMetricsMetricsExplorationByMoid(ctx context.Context, moid string) ApiGetMetricsMetricsExplorationByMoidRequest {
 	return ApiGetMetricsMetricsExplorationByMoidRequest{
@@ -980,7 +984,8 @@ func (a *MetricsApiService) GetMetricsMetricsExplorationByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return MetricsMetricsExploration
+//
+//	@return MetricsMetricsExploration
 func (a *MetricsApiService) GetMetricsMetricsExplorationByMoidExecute(r ApiGetMetricsMetricsExplorationByMoidRequest) (*MetricsMetricsExploration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1196,8 +1201,8 @@ func (r ApiGetMetricsMetricsExplorationListRequest) Execute() (*MetricsMetricsEx
 /*
 GetMetricsMetricsExplorationList Read a 'metrics.MetricsExploration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMetricsMetricsExplorationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMetricsMetricsExplorationListRequest
 */
 func (a *MetricsApiService) GetMetricsMetricsExplorationList(ctx context.Context) ApiGetMetricsMetricsExplorationListRequest {
 	return ApiGetMetricsMetricsExplorationListRequest{
@@ -1207,7 +1212,8 @@ func (a *MetricsApiService) GetMetricsMetricsExplorationList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return MetricsMetricsExplorationResponse
+//
+//	@return MetricsMetricsExplorationResponse
 func (a *MetricsApiService) GetMetricsMetricsExplorationListExecute(r ApiGetMetricsMetricsExplorationListRequest) (*MetricsMetricsExplorationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1394,9 +1400,9 @@ func (r ApiGetMetricsResourceConfigurationByMoidRequest) Execute() (*MetricsReso
 /*
 GetMetricsResourceConfigurationByMoid Read a 'metrics.ResourceConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMetricsResourceConfigurationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMetricsResourceConfigurationByMoidRequest
 */
 func (a *MetricsApiService) GetMetricsResourceConfigurationByMoid(ctx context.Context, moid string) ApiGetMetricsResourceConfigurationByMoidRequest {
 	return ApiGetMetricsResourceConfigurationByMoidRequest{
@@ -1407,7 +1413,8 @@ func (a *MetricsApiService) GetMetricsResourceConfigurationByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return MetricsResourceConfiguration
+//
+//	@return MetricsResourceConfiguration
 func (a *MetricsApiService) GetMetricsResourceConfigurationByMoidExecute(r ApiGetMetricsResourceConfigurationByMoidRequest) (*MetricsResourceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1623,8 +1630,8 @@ func (r ApiGetMetricsResourceConfigurationListRequest) Execute() (*MetricsResour
 /*
 GetMetricsResourceConfigurationList Read a 'metrics.ResourceConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMetricsResourceConfigurationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMetricsResourceConfigurationListRequest
 */
 func (a *MetricsApiService) GetMetricsResourceConfigurationList(ctx context.Context) ApiGetMetricsResourceConfigurationListRequest {
 	return ApiGetMetricsResourceConfigurationListRequest{
@@ -1634,7 +1641,8 @@ func (a *MetricsApiService) GetMetricsResourceConfigurationList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return MetricsResourceConfigurationResponse
+//
+//	@return MetricsResourceConfigurationResponse
 func (a *MetricsApiService) GetMetricsResourceConfigurationListExecute(r ApiGetMetricsResourceConfigurationListRequest) (*MetricsResourceConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1835,9 +1843,9 @@ func (r ApiPatchMetricsConfigurationRequest) Execute() (*MetricsConfiguration, *
 /*
 PatchMetricsConfiguration Update a 'metrics.Configuration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchMetricsConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchMetricsConfigurationRequest
 */
 func (a *MetricsApiService) PatchMetricsConfiguration(ctx context.Context, moid string) ApiPatchMetricsConfigurationRequest {
 	return ApiPatchMetricsConfigurationRequest{
@@ -1848,7 +1856,8 @@ func (a *MetricsApiService) PatchMetricsConfiguration(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return MetricsConfiguration
+//
+//	@return MetricsConfiguration
 func (a *MetricsApiService) PatchMetricsConfigurationExecute(r ApiPatchMetricsConfigurationRequest) (*MetricsConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2010,9 +2019,9 @@ func (r ApiPatchMetricsMetricsExplorationRequest) Execute() (*MetricsMetricsExpl
 /*
 PatchMetricsMetricsExploration Update a 'metrics.MetricsExploration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchMetricsMetricsExplorationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchMetricsMetricsExplorationRequest
 */
 func (a *MetricsApiService) PatchMetricsMetricsExploration(ctx context.Context, moid string) ApiPatchMetricsMetricsExplorationRequest {
 	return ApiPatchMetricsMetricsExplorationRequest{
@@ -2023,7 +2032,8 @@ func (a *MetricsApiService) PatchMetricsMetricsExploration(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return MetricsMetricsExploration
+//
+//	@return MetricsMetricsExploration
 func (a *MetricsApiService) PatchMetricsMetricsExplorationExecute(r ApiPatchMetricsMetricsExplorationRequest) (*MetricsMetricsExploration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2185,9 +2195,9 @@ func (r ApiPatchMetricsResourceConfigurationRequest) Execute() (*MetricsResource
 /*
 PatchMetricsResourceConfiguration Update a 'metrics.ResourceConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchMetricsResourceConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchMetricsResourceConfigurationRequest
 */
 func (a *MetricsApiService) PatchMetricsResourceConfiguration(ctx context.Context, moid string) ApiPatchMetricsResourceConfigurationRequest {
 	return ApiPatchMetricsResourceConfigurationRequest{
@@ -2198,7 +2208,8 @@ func (a *MetricsApiService) PatchMetricsResourceConfiguration(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return MetricsResourceConfiguration
+//
+//	@return MetricsResourceConfiguration
 func (a *MetricsApiService) PatchMetricsResourceConfigurationExecute(r ApiPatchMetricsResourceConfigurationRequest) (*MetricsResourceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2360,9 +2371,9 @@ func (r ApiUpdateMetricsConfigurationRequest) Execute() (*MetricsConfiguration, 
 /*
 UpdateMetricsConfiguration Update a 'metrics.Configuration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateMetricsConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateMetricsConfigurationRequest
 */
 func (a *MetricsApiService) UpdateMetricsConfiguration(ctx context.Context, moid string) ApiUpdateMetricsConfigurationRequest {
 	return ApiUpdateMetricsConfigurationRequest{
@@ -2373,7 +2384,8 @@ func (a *MetricsApiService) UpdateMetricsConfiguration(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return MetricsConfiguration
+//
+//	@return MetricsConfiguration
 func (a *MetricsApiService) UpdateMetricsConfigurationExecute(r ApiUpdateMetricsConfigurationRequest) (*MetricsConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2535,9 +2547,9 @@ func (r ApiUpdateMetricsMetricsExplorationRequest) Execute() (*MetricsMetricsExp
 /*
 UpdateMetricsMetricsExploration Update a 'metrics.MetricsExploration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateMetricsMetricsExplorationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateMetricsMetricsExplorationRequest
 */
 func (a *MetricsApiService) UpdateMetricsMetricsExploration(ctx context.Context, moid string) ApiUpdateMetricsMetricsExplorationRequest {
 	return ApiUpdateMetricsMetricsExplorationRequest{
@@ -2548,7 +2560,8 @@ func (a *MetricsApiService) UpdateMetricsMetricsExploration(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return MetricsMetricsExploration
+//
+//	@return MetricsMetricsExploration
 func (a *MetricsApiService) UpdateMetricsMetricsExplorationExecute(r ApiUpdateMetricsMetricsExplorationRequest) (*MetricsMetricsExploration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2710,9 +2723,9 @@ func (r ApiUpdateMetricsResourceConfigurationRequest) Execute() (*MetricsResourc
 /*
 UpdateMetricsResourceConfiguration Update a 'metrics.ResourceConfiguration' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateMetricsResourceConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateMetricsResourceConfigurationRequest
 */
 func (a *MetricsApiService) UpdateMetricsResourceConfiguration(ctx context.Context, moid string) ApiUpdateMetricsResourceConfigurationRequest {
 	return ApiUpdateMetricsResourceConfigurationRequest{
@@ -2723,7 +2736,8 @@ func (a *MetricsApiService) UpdateMetricsResourceConfiguration(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return MetricsResourceConfiguration
+//
+//	@return MetricsResourceConfiguration
 func (a *MetricsApiService) UpdateMetricsResourceConfigurationExecute(r ApiUpdateMetricsResourceConfigurationRequest) (*MetricsResourceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

@@ -56,8 +56,8 @@ func (r ApiCreateFabricAppliancePcRoleRequest) Execute() (*FabricAppliancePcRole
 /*
 CreateFabricAppliancePcRole Create a 'fabric.AppliancePcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricAppliancePcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricAppliancePcRoleRequest
 */
 func (a *FabricApiService) CreateFabricAppliancePcRole(ctx context.Context) ApiCreateFabricAppliancePcRoleRequest {
 	return ApiCreateFabricAppliancePcRoleRequest{
@@ -67,7 +67,8 @@ func (a *FabricApiService) CreateFabricAppliancePcRole(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return FabricAppliancePcRole
+//
+//	@return FabricAppliancePcRole
 func (a *FabricApiService) CreateFabricAppliancePcRoleExecute(r ApiCreateFabricAppliancePcRoleRequest) (*FabricAppliancePcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateFabricApplianceRoleRequest) Execute() (*FabricApplianceRole, *h
 /*
 CreateFabricApplianceRole Create a 'fabric.ApplianceRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricApplianceRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricApplianceRoleRequest
 */
 func (a *FabricApiService) CreateFabricApplianceRole(ctx context.Context) ApiCreateFabricApplianceRoleRequest {
 	return ApiCreateFabricApplianceRoleRequest{
@@ -248,7 +249,8 @@ func (a *FabricApiService) CreateFabricApplianceRole(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return FabricApplianceRole
+//
+//	@return FabricApplianceRole
 func (a *FabricApiService) CreateFabricApplianceRoleExecute(r ApiCreateFabricApplianceRoleRequest) (*FabricApplianceRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -418,8 +420,8 @@ func (r ApiCreateFabricEstimateImpactRequest) Execute() (*FabricEstimateImpact, 
 /*
 CreateFabricEstimateImpact Create a 'fabric.EstimateImpact' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricEstimateImpactRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricEstimateImpactRequest
 */
 func (a *FabricApiService) CreateFabricEstimateImpact(ctx context.Context) ApiCreateFabricEstimateImpactRequest {
 	return ApiCreateFabricEstimateImpactRequest{
@@ -429,7 +431,8 @@ func (a *FabricApiService) CreateFabricEstimateImpact(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return FabricEstimateImpact
+//
+//	@return FabricEstimateImpact
 func (a *FabricApiService) CreateFabricEstimateImpactExecute(r ApiCreateFabricEstimateImpactRequest) (*FabricEstimateImpact, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -599,8 +602,8 @@ func (r ApiCreateFabricEthNetworkControlPolicyRequest) Execute() (*FabricEthNetw
 /*
 CreateFabricEthNetworkControlPolicy Create a 'fabric.EthNetworkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricEthNetworkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricEthNetworkControlPolicyRequest
 */
 func (a *FabricApiService) CreateFabricEthNetworkControlPolicy(ctx context.Context) ApiCreateFabricEthNetworkControlPolicyRequest {
 	return ApiCreateFabricEthNetworkControlPolicyRequest{
@@ -610,7 +613,8 @@ func (a *FabricApiService) CreateFabricEthNetworkControlPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicy
+//
+//	@return FabricEthNetworkControlPolicy
 func (a *FabricApiService) CreateFabricEthNetworkControlPolicyExecute(r ApiCreateFabricEthNetworkControlPolicyRequest) (*FabricEthNetworkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -780,8 +784,8 @@ func (r ApiCreateFabricEthNetworkGroupPolicyRequest) Execute() (*FabricEthNetwor
 /*
 CreateFabricEthNetworkGroupPolicy Create a 'fabric.EthNetworkGroupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricEthNetworkGroupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricEthNetworkGroupPolicyRequest
 */
 func (a *FabricApiService) CreateFabricEthNetworkGroupPolicy(ctx context.Context) ApiCreateFabricEthNetworkGroupPolicyRequest {
 	return ApiCreateFabricEthNetworkGroupPolicyRequest{
@@ -791,7 +795,8 @@ func (a *FabricApiService) CreateFabricEthNetworkGroupPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicy
+//
+//	@return FabricEthNetworkGroupPolicy
 func (a *FabricApiService) CreateFabricEthNetworkGroupPolicyExecute(r ApiCreateFabricEthNetworkGroupPolicyRequest) (*FabricEthNetworkGroupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -961,8 +966,8 @@ func (r ApiCreateFabricEthNetworkPolicyRequest) Execute() (*FabricEthNetworkPoli
 /*
 CreateFabricEthNetworkPolicy Create a 'fabric.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricEthNetworkPolicyRequest
 */
 func (a *FabricApiService) CreateFabricEthNetworkPolicy(ctx context.Context) ApiCreateFabricEthNetworkPolicyRequest {
 	return ApiCreateFabricEthNetworkPolicyRequest{
@@ -972,7 +977,8 @@ func (a *FabricApiService) CreateFabricEthNetworkPolicy(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkPolicy
+//
+//	@return FabricEthNetworkPolicy
 func (a *FabricApiService) CreateFabricEthNetworkPolicyExecute(r ApiCreateFabricEthNetworkPolicyRequest) (*FabricEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1142,8 +1148,8 @@ func (r ApiCreateFabricFcNetworkPolicyRequest) Execute() (*FabricFcNetworkPolicy
 /*
 CreateFabricFcNetworkPolicy Create a 'fabric.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcNetworkPolicyRequest
 */
 func (a *FabricApiService) CreateFabricFcNetworkPolicy(ctx context.Context) ApiCreateFabricFcNetworkPolicyRequest {
 	return ApiCreateFabricFcNetworkPolicyRequest{
@@ -1153,7 +1159,8 @@ func (a *FabricApiService) CreateFabricFcNetworkPolicy(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return FabricFcNetworkPolicy
+//
+//	@return FabricFcNetworkPolicy
 func (a *FabricApiService) CreateFabricFcNetworkPolicyExecute(r ApiCreateFabricFcNetworkPolicyRequest) (*FabricFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1323,8 +1330,8 @@ func (r ApiCreateFabricFcStorageRoleRequest) Execute() (*FabricFcStorageRole, *h
 /*
 CreateFabricFcStorageRole Create a 'fabric.FcStorageRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcStorageRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcStorageRoleRequest
 */
 func (a *FabricApiService) CreateFabricFcStorageRole(ctx context.Context) ApiCreateFabricFcStorageRoleRequest {
 	return ApiCreateFabricFcStorageRoleRequest{
@@ -1334,7 +1341,8 @@ func (a *FabricApiService) CreateFabricFcStorageRole(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return FabricFcStorageRole
+//
+//	@return FabricFcStorageRole
 func (a *FabricApiService) CreateFabricFcStorageRoleExecute(r ApiCreateFabricFcStorageRoleRequest) (*FabricFcStorageRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1504,8 +1512,8 @@ func (r ApiCreateFabricFcUplinkPcRoleRequest) Execute() (*FabricFcUplinkPcRole, 
 /*
 CreateFabricFcUplinkPcRole Create a 'fabric.FcUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcUplinkPcRoleRequest
 */
 func (a *FabricApiService) CreateFabricFcUplinkPcRole(ctx context.Context) ApiCreateFabricFcUplinkPcRoleRequest {
 	return ApiCreateFabricFcUplinkPcRoleRequest{
@@ -1515,7 +1523,8 @@ func (a *FabricApiService) CreateFabricFcUplinkPcRole(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkPcRole
+//
+//	@return FabricFcUplinkPcRole
 func (a *FabricApiService) CreateFabricFcUplinkPcRoleExecute(r ApiCreateFabricFcUplinkPcRoleRequest) (*FabricFcUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1685,8 +1694,8 @@ func (r ApiCreateFabricFcUplinkRoleRequest) Execute() (*FabricFcUplinkRole, *htt
 /*
 CreateFabricFcUplinkRole Create a 'fabric.FcUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcUplinkRoleRequest
 */
 func (a *FabricApiService) CreateFabricFcUplinkRole(ctx context.Context) ApiCreateFabricFcUplinkRoleRequest {
 	return ApiCreateFabricFcUplinkRoleRequest{
@@ -1696,7 +1705,8 @@ func (a *FabricApiService) CreateFabricFcUplinkRole(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkRole
+//
+//	@return FabricFcUplinkRole
 func (a *FabricApiService) CreateFabricFcUplinkRoleExecute(r ApiCreateFabricFcUplinkRoleRequest) (*FabricFcUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1866,8 +1876,8 @@ func (r ApiCreateFabricFcZonePolicyRequest) Execute() (*FabricFcZonePolicy, *htt
 /*
 CreateFabricFcZonePolicy Create a 'fabric.FcZonePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcZonePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcZonePolicyRequest
 */
 func (a *FabricApiService) CreateFabricFcZonePolicy(ctx context.Context) ApiCreateFabricFcZonePolicyRequest {
 	return ApiCreateFabricFcZonePolicyRequest{
@@ -1877,7 +1887,8 @@ func (a *FabricApiService) CreateFabricFcZonePolicy(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return FabricFcZonePolicy
+//
+//	@return FabricFcZonePolicy
 func (a *FabricApiService) CreateFabricFcZonePolicyExecute(r ApiCreateFabricFcZonePolicyRequest) (*FabricFcZonePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2047,8 +2058,8 @@ func (r ApiCreateFabricFcoeUplinkPcRoleRequest) Execute() (*FabricFcoeUplinkPcRo
 /*
 CreateFabricFcoeUplinkPcRole Create a 'fabric.FcoeUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcoeUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcoeUplinkPcRoleRequest
 */
 func (a *FabricApiService) CreateFabricFcoeUplinkPcRole(ctx context.Context) ApiCreateFabricFcoeUplinkPcRoleRequest {
 	return ApiCreateFabricFcoeUplinkPcRoleRequest{
@@ -2058,7 +2069,8 @@ func (a *FabricApiService) CreateFabricFcoeUplinkPcRole(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkPcRole
+//
+//	@return FabricFcoeUplinkPcRole
 func (a *FabricApiService) CreateFabricFcoeUplinkPcRoleExecute(r ApiCreateFabricFcoeUplinkPcRoleRequest) (*FabricFcoeUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2228,8 +2240,8 @@ func (r ApiCreateFabricFcoeUplinkRoleRequest) Execute() (*FabricFcoeUplinkRole, 
 /*
 CreateFabricFcoeUplinkRole Create a 'fabric.FcoeUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFcoeUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFcoeUplinkRoleRequest
 */
 func (a *FabricApiService) CreateFabricFcoeUplinkRole(ctx context.Context) ApiCreateFabricFcoeUplinkRoleRequest {
 	return ApiCreateFabricFcoeUplinkRoleRequest{
@@ -2239,7 +2251,8 @@ func (a *FabricApiService) CreateFabricFcoeUplinkRole(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkRole
+//
+//	@return FabricFcoeUplinkRole
 func (a *FabricApiService) CreateFabricFcoeUplinkRoleExecute(r ApiCreateFabricFcoeUplinkRoleRequest) (*FabricFcoeUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2409,8 +2422,8 @@ func (r ApiCreateFabricFlowControlPolicyRequest) Execute() (*FabricFlowControlPo
 /*
 CreateFabricFlowControlPolicy Create a 'fabric.FlowControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricFlowControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricFlowControlPolicyRequest
 */
 func (a *FabricApiService) CreateFabricFlowControlPolicy(ctx context.Context) ApiCreateFabricFlowControlPolicyRequest {
 	return ApiCreateFabricFlowControlPolicyRequest{
@@ -2420,7 +2433,8 @@ func (a *FabricApiService) CreateFabricFlowControlPolicy(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return FabricFlowControlPolicy
+//
+//	@return FabricFlowControlPolicy
 func (a *FabricApiService) CreateFabricFlowControlPolicyExecute(r ApiCreateFabricFlowControlPolicyRequest) (*FabricFlowControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2590,8 +2604,8 @@ func (r ApiCreateFabricLanPinGroupRequest) Execute() (*FabricLanPinGroup, *http.
 /*
 CreateFabricLanPinGroup Create a 'fabric.LanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricLanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricLanPinGroupRequest
 */
 func (a *FabricApiService) CreateFabricLanPinGroup(ctx context.Context) ApiCreateFabricLanPinGroupRequest {
 	return ApiCreateFabricLanPinGroupRequest{
@@ -2601,7 +2615,8 @@ func (a *FabricApiService) CreateFabricLanPinGroup(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return FabricLanPinGroup
+//
+//	@return FabricLanPinGroup
 func (a *FabricApiService) CreateFabricLanPinGroupExecute(r ApiCreateFabricLanPinGroupRequest) (*FabricLanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2771,8 +2786,8 @@ func (r ApiCreateFabricLinkAggregationPolicyRequest) Execute() (*FabricLinkAggre
 /*
 CreateFabricLinkAggregationPolicy Create a 'fabric.LinkAggregationPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricLinkAggregationPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricLinkAggregationPolicyRequest
 */
 func (a *FabricApiService) CreateFabricLinkAggregationPolicy(ctx context.Context) ApiCreateFabricLinkAggregationPolicyRequest {
 	return ApiCreateFabricLinkAggregationPolicyRequest{
@@ -2782,7 +2797,8 @@ func (a *FabricApiService) CreateFabricLinkAggregationPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricLinkAggregationPolicy
+//
+//	@return FabricLinkAggregationPolicy
 func (a *FabricApiService) CreateFabricLinkAggregationPolicyExecute(r ApiCreateFabricLinkAggregationPolicyRequest) (*FabricLinkAggregationPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2952,8 +2968,8 @@ func (r ApiCreateFabricLinkControlPolicyRequest) Execute() (*FabricLinkControlPo
 /*
 CreateFabricLinkControlPolicy Create a 'fabric.LinkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricLinkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricLinkControlPolicyRequest
 */
 func (a *FabricApiService) CreateFabricLinkControlPolicy(ctx context.Context) ApiCreateFabricLinkControlPolicyRequest {
 	return ApiCreateFabricLinkControlPolicyRequest{
@@ -2963,7 +2979,8 @@ func (a *FabricApiService) CreateFabricLinkControlPolicy(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return FabricLinkControlPolicy
+//
+//	@return FabricLinkControlPolicy
 func (a *FabricApiService) CreateFabricLinkControlPolicyExecute(r ApiCreateFabricLinkControlPolicyRequest) (*FabricLinkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3133,8 +3150,8 @@ func (r ApiCreateFabricMulticastPolicyRequest) Execute() (*FabricMulticastPolicy
 /*
 CreateFabricMulticastPolicy Create a 'fabric.MulticastPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricMulticastPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricMulticastPolicyRequest
 */
 func (a *FabricApiService) CreateFabricMulticastPolicy(ctx context.Context) ApiCreateFabricMulticastPolicyRequest {
 	return ApiCreateFabricMulticastPolicyRequest{
@@ -3144,7 +3161,8 @@ func (a *FabricApiService) CreateFabricMulticastPolicy(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return FabricMulticastPolicy
+//
+//	@return FabricMulticastPolicy
 func (a *FabricApiService) CreateFabricMulticastPolicyExecute(r ApiCreateFabricMulticastPolicyRequest) (*FabricMulticastPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3314,8 +3332,8 @@ func (r ApiCreateFabricPcOperationRequest) Execute() (*FabricPcOperation, *http.
 /*
 CreateFabricPcOperation Create a 'fabric.PcOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricPcOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricPcOperationRequest
 */
 func (a *FabricApiService) CreateFabricPcOperation(ctx context.Context) ApiCreateFabricPcOperationRequest {
 	return ApiCreateFabricPcOperationRequest{
@@ -3325,7 +3343,8 @@ func (a *FabricApiService) CreateFabricPcOperation(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return FabricPcOperation
+//
+//	@return FabricPcOperation
 func (a *FabricApiService) CreateFabricPcOperationExecute(r ApiCreateFabricPcOperationRequest) (*FabricPcOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3495,8 +3514,8 @@ func (r ApiCreateFabricPortModeRequest) Execute() (*FabricPortMode, *http.Respon
 /*
 CreateFabricPortMode Create a 'fabric.PortMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricPortModeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricPortModeRequest
 */
 func (a *FabricApiService) CreateFabricPortMode(ctx context.Context) ApiCreateFabricPortModeRequest {
 	return ApiCreateFabricPortModeRequest{
@@ -3506,7 +3525,8 @@ func (a *FabricApiService) CreateFabricPortMode(ctx context.Context) ApiCreateFa
 }
 
 // Execute executes the request
-//  @return FabricPortMode
+//
+//	@return FabricPortMode
 func (a *FabricApiService) CreateFabricPortModeExecute(r ApiCreateFabricPortModeRequest) (*FabricPortMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3676,8 +3696,8 @@ func (r ApiCreateFabricPortOperationRequest) Execute() (*FabricPortOperation, *h
 /*
 CreateFabricPortOperation Create a 'fabric.PortOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricPortOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricPortOperationRequest
 */
 func (a *FabricApiService) CreateFabricPortOperation(ctx context.Context) ApiCreateFabricPortOperationRequest {
 	return ApiCreateFabricPortOperationRequest{
@@ -3687,7 +3707,8 @@ func (a *FabricApiService) CreateFabricPortOperation(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return FabricPortOperation
+//
+//	@return FabricPortOperation
 func (a *FabricApiService) CreateFabricPortOperationExecute(r ApiCreateFabricPortOperationRequest) (*FabricPortOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3857,8 +3878,8 @@ func (r ApiCreateFabricPortPolicyRequest) Execute() (*FabricPortPolicy, *http.Re
 /*
 CreateFabricPortPolicy Create a 'fabric.PortPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricPortPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricPortPolicyRequest
 */
 func (a *FabricApiService) CreateFabricPortPolicy(ctx context.Context) ApiCreateFabricPortPolicyRequest {
 	return ApiCreateFabricPortPolicyRequest{
@@ -3868,7 +3889,8 @@ func (a *FabricApiService) CreateFabricPortPolicy(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return FabricPortPolicy
+//
+//	@return FabricPortPolicy
 func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPolicyRequest) (*FabricPortPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4038,8 +4060,8 @@ func (r ApiCreateFabricSanPinGroupRequest) Execute() (*FabricSanPinGroup, *http.
 /*
 CreateFabricSanPinGroup Create a 'fabric.SanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSanPinGroupRequest
 */
 func (a *FabricApiService) CreateFabricSanPinGroup(ctx context.Context) ApiCreateFabricSanPinGroupRequest {
 	return ApiCreateFabricSanPinGroupRequest{
@@ -4049,7 +4071,8 @@ func (a *FabricApiService) CreateFabricSanPinGroup(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return FabricSanPinGroup
+//
+//	@return FabricSanPinGroup
 func (a *FabricApiService) CreateFabricSanPinGroupExecute(r ApiCreateFabricSanPinGroupRequest) (*FabricSanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4219,8 +4242,8 @@ func (r ApiCreateFabricServerRoleRequest) Execute() (*FabricServerRole, *http.Re
 /*
 CreateFabricServerRole Create a 'fabric.ServerRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricServerRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricServerRoleRequest
 */
 func (a *FabricApiService) CreateFabricServerRole(ctx context.Context) ApiCreateFabricServerRoleRequest {
 	return ApiCreateFabricServerRoleRequest{
@@ -4230,7 +4253,8 @@ func (a *FabricApiService) CreateFabricServerRole(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return FabricServerRole
+//
+//	@return FabricServerRole
 func (a *FabricApiService) CreateFabricServerRoleExecute(r ApiCreateFabricServerRoleRequest) (*FabricServerRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4400,8 +4424,8 @@ func (r ApiCreateFabricSpanDestEthPortRequest) Execute() (*FabricSpanDestEthPort
 /*
 CreateFabricSpanDestEthPort Create a 'fabric.SpanDestEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSpanDestEthPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSpanDestEthPortRequest
 */
 func (a *FabricApiService) CreateFabricSpanDestEthPort(ctx context.Context) ApiCreateFabricSpanDestEthPortRequest {
 	return ApiCreateFabricSpanDestEthPortRequest{
@@ -4411,7 +4435,8 @@ func (a *FabricApiService) CreateFabricSpanDestEthPort(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return FabricSpanDestEthPort
+//
+//	@return FabricSpanDestEthPort
 func (a *FabricApiService) CreateFabricSpanDestEthPortExecute(r ApiCreateFabricSpanDestEthPortRequest) (*FabricSpanDestEthPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4581,8 +4606,8 @@ func (r ApiCreateFabricSpanSessionRequest) Execute() (*FabricSpanSession, *http.
 /*
 CreateFabricSpanSession Create a 'fabric.SpanSession' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSpanSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSpanSessionRequest
 */
 func (a *FabricApiService) CreateFabricSpanSession(ctx context.Context) ApiCreateFabricSpanSessionRequest {
 	return ApiCreateFabricSpanSessionRequest{
@@ -4592,7 +4617,8 @@ func (a *FabricApiService) CreateFabricSpanSession(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return FabricSpanSession
+//
+//	@return FabricSpanSession
 func (a *FabricApiService) CreateFabricSpanSessionExecute(r ApiCreateFabricSpanSessionRequest) (*FabricSpanSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4762,8 +4788,8 @@ func (r ApiCreateFabricSpanSourceEthPortRequest) Execute() (*FabricSpanSourceEth
 /*
 CreateFabricSpanSourceEthPort Create a 'fabric.SpanSourceEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSpanSourceEthPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSpanSourceEthPortRequest
 */
 func (a *FabricApiService) CreateFabricSpanSourceEthPort(ctx context.Context) ApiCreateFabricSpanSourceEthPortRequest {
 	return ApiCreateFabricSpanSourceEthPortRequest{
@@ -4773,7 +4799,8 @@ func (a *FabricApiService) CreateFabricSpanSourceEthPort(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceEthPort
+//
+//	@return FabricSpanSourceEthPort
 func (a *FabricApiService) CreateFabricSpanSourceEthPortExecute(r ApiCreateFabricSpanSourceEthPortRequest) (*FabricSpanSourceEthPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4943,8 +4970,8 @@ func (r ApiCreateFabricSpanSourceEthPortChannelRequest) Execute() (*FabricSpanSo
 /*
 CreateFabricSpanSourceEthPortChannel Create a 'fabric.SpanSourceEthPortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSpanSourceEthPortChannelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSpanSourceEthPortChannelRequest
 */
 func (a *FabricApiService) CreateFabricSpanSourceEthPortChannel(ctx context.Context) ApiCreateFabricSpanSourceEthPortChannelRequest {
 	return ApiCreateFabricSpanSourceEthPortChannelRequest{
@@ -4954,7 +4981,8 @@ func (a *FabricApiService) CreateFabricSpanSourceEthPortChannel(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceEthPortChannel
+//
+//	@return FabricSpanSourceEthPortChannel
 func (a *FabricApiService) CreateFabricSpanSourceEthPortChannelExecute(r ApiCreateFabricSpanSourceEthPortChannelRequest) (*FabricSpanSourceEthPortChannel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5124,8 +5152,8 @@ func (r ApiCreateFabricSpanSourceVlanRequest) Execute() (*FabricSpanSourceVlan, 
 /*
 CreateFabricSpanSourceVlan Create a 'fabric.SpanSourceVlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSpanSourceVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSpanSourceVlanRequest
 */
 func (a *FabricApiService) CreateFabricSpanSourceVlan(ctx context.Context) ApiCreateFabricSpanSourceVlanRequest {
 	return ApiCreateFabricSpanSourceVlanRequest{
@@ -5135,7 +5163,8 @@ func (a *FabricApiService) CreateFabricSpanSourceVlan(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceVlan
+//
+//	@return FabricSpanSourceVlan
 func (a *FabricApiService) CreateFabricSpanSourceVlanExecute(r ApiCreateFabricSpanSourceVlanRequest) (*FabricSpanSourceVlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5305,8 +5334,8 @@ func (r ApiCreateFabricSpanSourceVnicEthIfRequest) Execute() (*FabricSpanSourceV
 /*
 CreateFabricSpanSourceVnicEthIf Create a 'fabric.SpanSourceVnicEthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSpanSourceVnicEthIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSpanSourceVnicEthIfRequest
 */
 func (a *FabricApiService) CreateFabricSpanSourceVnicEthIf(ctx context.Context) ApiCreateFabricSpanSourceVnicEthIfRequest {
 	return ApiCreateFabricSpanSourceVnicEthIfRequest{
@@ -5316,7 +5345,8 @@ func (a *FabricApiService) CreateFabricSpanSourceVnicEthIf(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceVnicEthIf
+//
+//	@return FabricSpanSourceVnicEthIf
 func (a *FabricApiService) CreateFabricSpanSourceVnicEthIfExecute(r ApiCreateFabricSpanSourceVnicEthIfRequest) (*FabricSpanSourceVnicEthIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5486,8 +5516,8 @@ func (r ApiCreateFabricSwitchClusterProfileRequest) Execute() (*FabricSwitchClus
 /*
 CreateFabricSwitchClusterProfile Create a 'fabric.SwitchClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSwitchClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSwitchClusterProfileRequest
 */
 func (a *FabricApiService) CreateFabricSwitchClusterProfile(ctx context.Context) ApiCreateFabricSwitchClusterProfileRequest {
 	return ApiCreateFabricSwitchClusterProfileRequest{
@@ -5497,7 +5527,8 @@ func (a *FabricApiService) CreateFabricSwitchClusterProfile(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfile
+//
+//	@return FabricSwitchClusterProfile
 func (a *FabricApiService) CreateFabricSwitchClusterProfileExecute(r ApiCreateFabricSwitchClusterProfileRequest) (*FabricSwitchClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5667,8 +5698,8 @@ func (r ApiCreateFabricSwitchClusterProfileTemplateRequest) Execute() (*FabricSw
 /*
 CreateFabricSwitchClusterProfileTemplate Create a 'fabric.SwitchClusterProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSwitchClusterProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSwitchClusterProfileTemplateRequest
 */
 func (a *FabricApiService) CreateFabricSwitchClusterProfileTemplate(ctx context.Context) ApiCreateFabricSwitchClusterProfileTemplateRequest {
 	return ApiCreateFabricSwitchClusterProfileTemplateRequest{
@@ -5678,7 +5709,8 @@ func (a *FabricApiService) CreateFabricSwitchClusterProfileTemplate(ctx context.
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfileTemplate
+//
+//	@return FabricSwitchClusterProfileTemplate
 func (a *FabricApiService) CreateFabricSwitchClusterProfileTemplateExecute(r ApiCreateFabricSwitchClusterProfileTemplateRequest) (*FabricSwitchClusterProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5848,8 +5880,8 @@ func (r ApiCreateFabricSwitchControlPolicyRequest) Execute() (*FabricSwitchContr
 /*
 CreateFabricSwitchControlPolicy Create a 'fabric.SwitchControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSwitchControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSwitchControlPolicyRequest
 */
 func (a *FabricApiService) CreateFabricSwitchControlPolicy(ctx context.Context) ApiCreateFabricSwitchControlPolicyRequest {
 	return ApiCreateFabricSwitchControlPolicyRequest{
@@ -5859,7 +5891,8 @@ func (a *FabricApiService) CreateFabricSwitchControlPolicy(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return FabricSwitchControlPolicy
+//
+//	@return FabricSwitchControlPolicy
 func (a *FabricApiService) CreateFabricSwitchControlPolicyExecute(r ApiCreateFabricSwitchControlPolicyRequest) (*FabricSwitchControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6029,8 +6062,8 @@ func (r ApiCreateFabricSwitchProfileRequest) Execute() (*FabricSwitchProfile, *h
 /*
 CreateFabricSwitchProfile Create a 'fabric.SwitchProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSwitchProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSwitchProfileRequest
 */
 func (a *FabricApiService) CreateFabricSwitchProfile(ctx context.Context) ApiCreateFabricSwitchProfileRequest {
 	return ApiCreateFabricSwitchProfileRequest{
@@ -6040,7 +6073,8 @@ func (a *FabricApiService) CreateFabricSwitchProfile(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfile
+//
+//	@return FabricSwitchProfile
 func (a *FabricApiService) CreateFabricSwitchProfileExecute(r ApiCreateFabricSwitchProfileRequest) (*FabricSwitchProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6210,8 +6244,8 @@ func (r ApiCreateFabricSwitchProfileTemplateRequest) Execute() (*FabricSwitchPro
 /*
 CreateFabricSwitchProfileTemplate Create a 'fabric.SwitchProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSwitchProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSwitchProfileTemplateRequest
 */
 func (a *FabricApiService) CreateFabricSwitchProfileTemplate(ctx context.Context) ApiCreateFabricSwitchProfileTemplateRequest {
 	return ApiCreateFabricSwitchProfileTemplateRequest{
@@ -6221,7 +6255,8 @@ func (a *FabricApiService) CreateFabricSwitchProfileTemplate(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfileTemplate
+//
+//	@return FabricSwitchProfileTemplate
 func (a *FabricApiService) CreateFabricSwitchProfileTemplateExecute(r ApiCreateFabricSwitchProfileTemplateRequest) (*FabricSwitchProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6391,8 +6426,8 @@ func (r ApiCreateFabricSystemQosPolicyRequest) Execute() (*FabricSystemQosPolicy
 /*
 CreateFabricSystemQosPolicy Create a 'fabric.SystemQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricSystemQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricSystemQosPolicyRequest
 */
 func (a *FabricApiService) CreateFabricSystemQosPolicy(ctx context.Context) ApiCreateFabricSystemQosPolicyRequest {
 	return ApiCreateFabricSystemQosPolicyRequest{
@@ -6402,7 +6437,8 @@ func (a *FabricApiService) CreateFabricSystemQosPolicy(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return FabricSystemQosPolicy
+//
+//	@return FabricSystemQosPolicy
 func (a *FabricApiService) CreateFabricSystemQosPolicyExecute(r ApiCreateFabricSystemQosPolicyRequest) (*FabricSystemQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6572,8 +6608,8 @@ func (r ApiCreateFabricUplinkPcRoleRequest) Execute() (*FabricUplinkPcRole, *htt
 /*
 CreateFabricUplinkPcRole Create a 'fabric.UplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricUplinkPcRoleRequest
 */
 func (a *FabricApiService) CreateFabricUplinkPcRole(ctx context.Context) ApiCreateFabricUplinkPcRoleRequest {
 	return ApiCreateFabricUplinkPcRoleRequest{
@@ -6583,7 +6619,8 @@ func (a *FabricApiService) CreateFabricUplinkPcRole(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return FabricUplinkPcRole
+//
+//	@return FabricUplinkPcRole
 func (a *FabricApiService) CreateFabricUplinkPcRoleExecute(r ApiCreateFabricUplinkPcRoleRequest) (*FabricUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6753,8 +6790,8 @@ func (r ApiCreateFabricUplinkRoleRequest) Execute() (*FabricUplinkRole, *http.Re
 /*
 CreateFabricUplinkRole Create a 'fabric.UplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricUplinkRoleRequest
 */
 func (a *FabricApiService) CreateFabricUplinkRole(ctx context.Context) ApiCreateFabricUplinkRoleRequest {
 	return ApiCreateFabricUplinkRoleRequest{
@@ -6764,7 +6801,8 @@ func (a *FabricApiService) CreateFabricUplinkRole(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return FabricUplinkRole
+//
+//	@return FabricUplinkRole
 func (a *FabricApiService) CreateFabricUplinkRoleExecute(r ApiCreateFabricUplinkRoleRequest) (*FabricUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6934,8 +6972,8 @@ func (r ApiCreateFabricVlanRequest) Execute() (*FabricVlan, *http.Response, erro
 /*
 CreateFabricVlan Create a 'fabric.Vlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricVlanRequest
 */
 func (a *FabricApiService) CreateFabricVlan(ctx context.Context) ApiCreateFabricVlanRequest {
 	return ApiCreateFabricVlanRequest{
@@ -6945,7 +6983,8 @@ func (a *FabricApiService) CreateFabricVlan(ctx context.Context) ApiCreateFabric
 }
 
 // Execute executes the request
-//  @return FabricVlan
+//
+//	@return FabricVlan
 func (a *FabricApiService) CreateFabricVlanExecute(r ApiCreateFabricVlanRequest) (*FabricVlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7115,8 +7154,8 @@ func (r ApiCreateFabricVsanRequest) Execute() (*FabricVsan, *http.Response, erro
 /*
 CreateFabricVsan Create a 'fabric.Vsan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFabricVsanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFabricVsanRequest
 */
 func (a *FabricApiService) CreateFabricVsan(ctx context.Context) ApiCreateFabricVsanRequest {
 	return ApiCreateFabricVsanRequest{
@@ -7126,7 +7165,8 @@ func (a *FabricApiService) CreateFabricVsan(ctx context.Context) ApiCreateFabric
 }
 
 // Execute executes the request
-//  @return FabricVsan
+//
+//	@return FabricVsan
 func (a *FabricApiService) CreateFabricVsanExecute(r ApiCreateFabricVsanRequest) (*FabricVsan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7276,9 +7316,9 @@ func (r ApiDeleteFabricAppliancePcRoleRequest) Execute() (*http.Response, error)
 /*
 DeleteFabricAppliancePcRole Delete a 'fabric.AppliancePcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricAppliancePcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricAppliancePcRoleRequest
 */
 func (a *FabricApiService) DeleteFabricAppliancePcRole(ctx context.Context, moid string) ApiDeleteFabricAppliancePcRoleRequest {
 	return ApiDeleteFabricAppliancePcRoleRequest{
@@ -7418,9 +7458,9 @@ func (r ApiDeleteFabricApplianceRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricApplianceRole Delete a 'fabric.ApplianceRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricApplianceRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricApplianceRoleRequest
 */
 func (a *FabricApiService) DeleteFabricApplianceRole(ctx context.Context, moid string) ApiDeleteFabricApplianceRoleRequest {
 	return ApiDeleteFabricApplianceRoleRequest{
@@ -7560,9 +7600,9 @@ func (r ApiDeleteFabricEthNetworkControlPolicyRequest) Execute() (*http.Response
 /*
 DeleteFabricEthNetworkControlPolicy Delete a 'fabric.EthNetworkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricEthNetworkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricEthNetworkControlPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricEthNetworkControlPolicy(ctx context.Context, moid string) ApiDeleteFabricEthNetworkControlPolicyRequest {
 	return ApiDeleteFabricEthNetworkControlPolicyRequest{
@@ -7702,9 +7742,9 @@ func (r ApiDeleteFabricEthNetworkGroupPolicyRequest) Execute() (*http.Response, 
 /*
 DeleteFabricEthNetworkGroupPolicy Delete a 'fabric.EthNetworkGroupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricEthNetworkGroupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricEthNetworkGroupPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricEthNetworkGroupPolicy(ctx context.Context, moid string) ApiDeleteFabricEthNetworkGroupPolicyRequest {
 	return ApiDeleteFabricEthNetworkGroupPolicyRequest{
@@ -7844,9 +7884,9 @@ func (r ApiDeleteFabricEthNetworkPolicyRequest) Execute() (*http.Response, error
 /*
 DeleteFabricEthNetworkPolicy Delete a 'fabric.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricEthNetworkPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricEthNetworkPolicy(ctx context.Context, moid string) ApiDeleteFabricEthNetworkPolicyRequest {
 	return ApiDeleteFabricEthNetworkPolicyRequest{
@@ -7986,9 +8026,9 @@ func (r ApiDeleteFabricFcNetworkPolicyRequest) Execute() (*http.Response, error)
 /*
 DeleteFabricFcNetworkPolicy Delete a 'fabric.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcNetworkPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricFcNetworkPolicy(ctx context.Context, moid string) ApiDeleteFabricFcNetworkPolicyRequest {
 	return ApiDeleteFabricFcNetworkPolicyRequest{
@@ -8128,9 +8168,9 @@ func (r ApiDeleteFabricFcStorageRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricFcStorageRole Delete a 'fabric.FcStorageRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcStorageRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcStorageRoleRequest
 */
 func (a *FabricApiService) DeleteFabricFcStorageRole(ctx context.Context, moid string) ApiDeleteFabricFcStorageRoleRequest {
 	return ApiDeleteFabricFcStorageRoleRequest{
@@ -8270,9 +8310,9 @@ func (r ApiDeleteFabricFcUplinkPcRoleRequest) Execute() (*http.Response, error) 
 /*
 DeleteFabricFcUplinkPcRole Delete a 'fabric.FcUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcUplinkPcRoleRequest
 */
 func (a *FabricApiService) DeleteFabricFcUplinkPcRole(ctx context.Context, moid string) ApiDeleteFabricFcUplinkPcRoleRequest {
 	return ApiDeleteFabricFcUplinkPcRoleRequest{
@@ -8412,9 +8452,9 @@ func (r ApiDeleteFabricFcUplinkRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricFcUplinkRole Delete a 'fabric.FcUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcUplinkRoleRequest
 */
 func (a *FabricApiService) DeleteFabricFcUplinkRole(ctx context.Context, moid string) ApiDeleteFabricFcUplinkRoleRequest {
 	return ApiDeleteFabricFcUplinkRoleRequest{
@@ -8554,9 +8594,9 @@ func (r ApiDeleteFabricFcZonePolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricFcZonePolicy Delete a 'fabric.FcZonePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcZonePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcZonePolicyRequest
 */
 func (a *FabricApiService) DeleteFabricFcZonePolicy(ctx context.Context, moid string) ApiDeleteFabricFcZonePolicyRequest {
 	return ApiDeleteFabricFcZonePolicyRequest{
@@ -8696,9 +8736,9 @@ func (r ApiDeleteFabricFcoeUplinkPcRoleRequest) Execute() (*http.Response, error
 /*
 DeleteFabricFcoeUplinkPcRole Delete a 'fabric.FcoeUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcoeUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcoeUplinkPcRoleRequest
 */
 func (a *FabricApiService) DeleteFabricFcoeUplinkPcRole(ctx context.Context, moid string) ApiDeleteFabricFcoeUplinkPcRoleRequest {
 	return ApiDeleteFabricFcoeUplinkPcRoleRequest{
@@ -8838,9 +8878,9 @@ func (r ApiDeleteFabricFcoeUplinkRoleRequest) Execute() (*http.Response, error) 
 /*
 DeleteFabricFcoeUplinkRole Delete a 'fabric.FcoeUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFcoeUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFcoeUplinkRoleRequest
 */
 func (a *FabricApiService) DeleteFabricFcoeUplinkRole(ctx context.Context, moid string) ApiDeleteFabricFcoeUplinkRoleRequest {
 	return ApiDeleteFabricFcoeUplinkRoleRequest{
@@ -8980,9 +9020,9 @@ func (r ApiDeleteFabricFlowControlPolicyRequest) Execute() (*http.Response, erro
 /*
 DeleteFabricFlowControlPolicy Delete a 'fabric.FlowControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricFlowControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricFlowControlPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricFlowControlPolicy(ctx context.Context, moid string) ApiDeleteFabricFlowControlPolicyRequest {
 	return ApiDeleteFabricFlowControlPolicyRequest{
@@ -9122,9 +9162,9 @@ func (r ApiDeleteFabricLanPinGroupRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricLanPinGroup Delete a 'fabric.LanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricLanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricLanPinGroupRequest
 */
 func (a *FabricApiService) DeleteFabricLanPinGroup(ctx context.Context, moid string) ApiDeleteFabricLanPinGroupRequest {
 	return ApiDeleteFabricLanPinGroupRequest{
@@ -9264,9 +9304,9 @@ func (r ApiDeleteFabricLinkAggregationPolicyRequest) Execute() (*http.Response, 
 /*
 DeleteFabricLinkAggregationPolicy Delete a 'fabric.LinkAggregationPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricLinkAggregationPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricLinkAggregationPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricLinkAggregationPolicy(ctx context.Context, moid string) ApiDeleteFabricLinkAggregationPolicyRequest {
 	return ApiDeleteFabricLinkAggregationPolicyRequest{
@@ -9406,9 +9446,9 @@ func (r ApiDeleteFabricLinkControlPolicyRequest) Execute() (*http.Response, erro
 /*
 DeleteFabricLinkControlPolicy Delete a 'fabric.LinkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricLinkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricLinkControlPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricLinkControlPolicy(ctx context.Context, moid string) ApiDeleteFabricLinkControlPolicyRequest {
 	return ApiDeleteFabricLinkControlPolicyRequest{
@@ -9548,9 +9588,9 @@ func (r ApiDeleteFabricMulticastPolicyRequest) Execute() (*http.Response, error)
 /*
 DeleteFabricMulticastPolicy Delete a 'fabric.MulticastPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricMulticastPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricMulticastPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricMulticastPolicy(ctx context.Context, moid string) ApiDeleteFabricMulticastPolicyRequest {
 	return ApiDeleteFabricMulticastPolicyRequest{
@@ -9690,9 +9730,9 @@ func (r ApiDeleteFabricPcOperationRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricPcOperation Delete a 'fabric.PcOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricPcOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricPcOperationRequest
 */
 func (a *FabricApiService) DeleteFabricPcOperation(ctx context.Context, moid string) ApiDeleteFabricPcOperationRequest {
 	return ApiDeleteFabricPcOperationRequest{
@@ -9832,9 +9872,9 @@ func (r ApiDeleteFabricPortModeRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricPortMode Delete a 'fabric.PortMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricPortModeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricPortModeRequest
 */
 func (a *FabricApiService) DeleteFabricPortMode(ctx context.Context, moid string) ApiDeleteFabricPortModeRequest {
 	return ApiDeleteFabricPortModeRequest{
@@ -9974,9 +10014,9 @@ func (r ApiDeleteFabricPortOperationRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricPortOperation Delete a 'fabric.PortOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricPortOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricPortOperationRequest
 */
 func (a *FabricApiService) DeleteFabricPortOperation(ctx context.Context, moid string) ApiDeleteFabricPortOperationRequest {
 	return ApiDeleteFabricPortOperationRequest{
@@ -10116,9 +10156,9 @@ func (r ApiDeleteFabricPortPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricPortPolicy Delete a 'fabric.PortPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricPortPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricPortPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricPortPolicy(ctx context.Context, moid string) ApiDeleteFabricPortPolicyRequest {
 	return ApiDeleteFabricPortPolicyRequest{
@@ -10258,9 +10298,9 @@ func (r ApiDeleteFabricSanPinGroupRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricSanPinGroup Delete a 'fabric.SanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSanPinGroupRequest
 */
 func (a *FabricApiService) DeleteFabricSanPinGroup(ctx context.Context, moid string) ApiDeleteFabricSanPinGroupRequest {
 	return ApiDeleteFabricSanPinGroupRequest{
@@ -10400,9 +10440,9 @@ func (r ApiDeleteFabricServerRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricServerRole Delete a 'fabric.ServerRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricServerRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricServerRoleRequest
 */
 func (a *FabricApiService) DeleteFabricServerRole(ctx context.Context, moid string) ApiDeleteFabricServerRoleRequest {
 	return ApiDeleteFabricServerRoleRequest{
@@ -10542,9 +10582,9 @@ func (r ApiDeleteFabricSpanDestEthPortRequest) Execute() (*http.Response, error)
 /*
 DeleteFabricSpanDestEthPort Delete a 'fabric.SpanDestEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSpanDestEthPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSpanDestEthPortRequest
 */
 func (a *FabricApiService) DeleteFabricSpanDestEthPort(ctx context.Context, moid string) ApiDeleteFabricSpanDestEthPortRequest {
 	return ApiDeleteFabricSpanDestEthPortRequest{
@@ -10684,9 +10724,9 @@ func (r ApiDeleteFabricSpanSessionRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricSpanSession Delete a 'fabric.SpanSession' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSpanSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSpanSessionRequest
 */
 func (a *FabricApiService) DeleteFabricSpanSession(ctx context.Context, moid string) ApiDeleteFabricSpanSessionRequest {
 	return ApiDeleteFabricSpanSessionRequest{
@@ -10826,9 +10866,9 @@ func (r ApiDeleteFabricSpanSourceEthPortRequest) Execute() (*http.Response, erro
 /*
 DeleteFabricSpanSourceEthPort Delete a 'fabric.SpanSourceEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSpanSourceEthPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSpanSourceEthPortRequest
 */
 func (a *FabricApiService) DeleteFabricSpanSourceEthPort(ctx context.Context, moid string) ApiDeleteFabricSpanSourceEthPortRequest {
 	return ApiDeleteFabricSpanSourceEthPortRequest{
@@ -10968,9 +11008,9 @@ func (r ApiDeleteFabricSpanSourceEthPortChannelRequest) Execute() (*http.Respons
 /*
 DeleteFabricSpanSourceEthPortChannel Delete a 'fabric.SpanSourceEthPortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSpanSourceEthPortChannelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSpanSourceEthPortChannelRequest
 */
 func (a *FabricApiService) DeleteFabricSpanSourceEthPortChannel(ctx context.Context, moid string) ApiDeleteFabricSpanSourceEthPortChannelRequest {
 	return ApiDeleteFabricSpanSourceEthPortChannelRequest{
@@ -11110,9 +11150,9 @@ func (r ApiDeleteFabricSpanSourceVlanRequest) Execute() (*http.Response, error) 
 /*
 DeleteFabricSpanSourceVlan Delete a 'fabric.SpanSourceVlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSpanSourceVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSpanSourceVlanRequest
 */
 func (a *FabricApiService) DeleteFabricSpanSourceVlan(ctx context.Context, moid string) ApiDeleteFabricSpanSourceVlanRequest {
 	return ApiDeleteFabricSpanSourceVlanRequest{
@@ -11252,9 +11292,9 @@ func (r ApiDeleteFabricSpanSourceVnicEthIfRequest) Execute() (*http.Response, er
 /*
 DeleteFabricSpanSourceVnicEthIf Delete a 'fabric.SpanSourceVnicEthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSpanSourceVnicEthIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSpanSourceVnicEthIfRequest
 */
 func (a *FabricApiService) DeleteFabricSpanSourceVnicEthIf(ctx context.Context, moid string) ApiDeleteFabricSpanSourceVnicEthIfRequest {
 	return ApiDeleteFabricSpanSourceVnicEthIfRequest{
@@ -11394,9 +11434,9 @@ func (r ApiDeleteFabricSwitchClusterProfileRequest) Execute() (*http.Response, e
 /*
 DeleteFabricSwitchClusterProfile Delete a 'fabric.SwitchClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSwitchClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSwitchClusterProfileRequest
 */
 func (a *FabricApiService) DeleteFabricSwitchClusterProfile(ctx context.Context, moid string) ApiDeleteFabricSwitchClusterProfileRequest {
 	return ApiDeleteFabricSwitchClusterProfileRequest{
@@ -11536,9 +11576,9 @@ func (r ApiDeleteFabricSwitchClusterProfileTemplateRequest) Execute() (*http.Res
 /*
 DeleteFabricSwitchClusterProfileTemplate Delete a 'fabric.SwitchClusterProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSwitchClusterProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSwitchClusterProfileTemplateRequest
 */
 func (a *FabricApiService) DeleteFabricSwitchClusterProfileTemplate(ctx context.Context, moid string) ApiDeleteFabricSwitchClusterProfileTemplateRequest {
 	return ApiDeleteFabricSwitchClusterProfileTemplateRequest{
@@ -11678,9 +11718,9 @@ func (r ApiDeleteFabricSwitchControlPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteFabricSwitchControlPolicy Delete a 'fabric.SwitchControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSwitchControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSwitchControlPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricSwitchControlPolicy(ctx context.Context, moid string) ApiDeleteFabricSwitchControlPolicyRequest {
 	return ApiDeleteFabricSwitchControlPolicyRequest{
@@ -11820,9 +11860,9 @@ func (r ApiDeleteFabricSwitchProfileRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricSwitchProfile Delete a 'fabric.SwitchProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSwitchProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSwitchProfileRequest
 */
 func (a *FabricApiService) DeleteFabricSwitchProfile(ctx context.Context, moid string) ApiDeleteFabricSwitchProfileRequest {
 	return ApiDeleteFabricSwitchProfileRequest{
@@ -11962,9 +12002,9 @@ func (r ApiDeleteFabricSwitchProfileTemplateRequest) Execute() (*http.Response, 
 /*
 DeleteFabricSwitchProfileTemplate Delete a 'fabric.SwitchProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSwitchProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSwitchProfileTemplateRequest
 */
 func (a *FabricApiService) DeleteFabricSwitchProfileTemplate(ctx context.Context, moid string) ApiDeleteFabricSwitchProfileTemplateRequest {
 	return ApiDeleteFabricSwitchProfileTemplateRequest{
@@ -12104,9 +12144,9 @@ func (r ApiDeleteFabricSystemQosPolicyRequest) Execute() (*http.Response, error)
 /*
 DeleteFabricSystemQosPolicy Delete a 'fabric.SystemQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricSystemQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricSystemQosPolicyRequest
 */
 func (a *FabricApiService) DeleteFabricSystemQosPolicy(ctx context.Context, moid string) ApiDeleteFabricSystemQosPolicyRequest {
 	return ApiDeleteFabricSystemQosPolicyRequest{
@@ -12246,9 +12286,9 @@ func (r ApiDeleteFabricUplinkPcRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricUplinkPcRole Delete a 'fabric.UplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricUplinkPcRoleRequest
 */
 func (a *FabricApiService) DeleteFabricUplinkPcRole(ctx context.Context, moid string) ApiDeleteFabricUplinkPcRoleRequest {
 	return ApiDeleteFabricUplinkPcRoleRequest{
@@ -12388,9 +12428,9 @@ func (r ApiDeleteFabricUplinkRoleRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricUplinkRole Delete a 'fabric.UplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricUplinkRoleRequest
 */
 func (a *FabricApiService) DeleteFabricUplinkRole(ctx context.Context, moid string) ApiDeleteFabricUplinkRoleRequest {
 	return ApiDeleteFabricUplinkRoleRequest{
@@ -12530,9 +12570,9 @@ func (r ApiDeleteFabricVlanRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricVlan Delete a 'fabric.Vlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricVlanRequest
 */
 func (a *FabricApiService) DeleteFabricVlan(ctx context.Context, moid string) ApiDeleteFabricVlanRequest {
 	return ApiDeleteFabricVlanRequest{
@@ -12672,9 +12712,9 @@ func (r ApiDeleteFabricVsanRequest) Execute() (*http.Response, error) {
 /*
 DeleteFabricVsan Delete a 'fabric.Vsan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteFabricVsanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteFabricVsanRequest
 */
 func (a *FabricApiService) DeleteFabricVsan(ctx context.Context, moid string) ApiDeleteFabricVsanRequest {
 	return ApiDeleteFabricVsanRequest{
@@ -12814,9 +12854,9 @@ func (r ApiGetFabricAppliancePcRoleByMoidRequest) Execute() (*FabricAppliancePcR
 /*
 GetFabricAppliancePcRoleByMoid Read a 'fabric.AppliancePcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricAppliancePcRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricAppliancePcRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricAppliancePcRoleByMoid(ctx context.Context, moid string) ApiGetFabricAppliancePcRoleByMoidRequest {
 	return ApiGetFabricAppliancePcRoleByMoidRequest{
@@ -12827,7 +12867,8 @@ func (a *FabricApiService) GetFabricAppliancePcRoleByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricAppliancePcRole
+//
+//	@return FabricAppliancePcRole
 func (a *FabricApiService) GetFabricAppliancePcRoleByMoidExecute(r ApiGetFabricAppliancePcRoleByMoidRequest) (*FabricAppliancePcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13043,8 +13084,8 @@ func (r ApiGetFabricAppliancePcRoleListRequest) Execute() (*FabricAppliancePcRol
 /*
 GetFabricAppliancePcRoleList Read a 'fabric.AppliancePcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricAppliancePcRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricAppliancePcRoleListRequest
 */
 func (a *FabricApiService) GetFabricAppliancePcRoleList(ctx context.Context) ApiGetFabricAppliancePcRoleListRequest {
 	return ApiGetFabricAppliancePcRoleListRequest{
@@ -13054,7 +13095,8 @@ func (a *FabricApiService) GetFabricAppliancePcRoleList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricAppliancePcRoleResponse
+//
+//	@return FabricAppliancePcRoleResponse
 func (a *FabricApiService) GetFabricAppliancePcRoleListExecute(r ApiGetFabricAppliancePcRoleListRequest) (*FabricAppliancePcRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13241,9 +13283,9 @@ func (r ApiGetFabricApplianceRoleByMoidRequest) Execute() (*FabricApplianceRole,
 /*
 GetFabricApplianceRoleByMoid Read a 'fabric.ApplianceRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricApplianceRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricApplianceRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricApplianceRoleByMoid(ctx context.Context, moid string) ApiGetFabricApplianceRoleByMoidRequest {
 	return ApiGetFabricApplianceRoleByMoidRequest{
@@ -13254,7 +13296,8 @@ func (a *FabricApiService) GetFabricApplianceRoleByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricApplianceRole
+//
+//	@return FabricApplianceRole
 func (a *FabricApiService) GetFabricApplianceRoleByMoidExecute(r ApiGetFabricApplianceRoleByMoidRequest) (*FabricApplianceRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13470,8 +13513,8 @@ func (r ApiGetFabricApplianceRoleListRequest) Execute() (*FabricApplianceRoleRes
 /*
 GetFabricApplianceRoleList Read a 'fabric.ApplianceRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricApplianceRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricApplianceRoleListRequest
 */
 func (a *FabricApiService) GetFabricApplianceRoleList(ctx context.Context) ApiGetFabricApplianceRoleListRequest {
 	return ApiGetFabricApplianceRoleListRequest{
@@ -13481,7 +13524,8 @@ func (a *FabricApiService) GetFabricApplianceRoleList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return FabricApplianceRoleResponse
+//
+//	@return FabricApplianceRoleResponse
 func (a *FabricApiService) GetFabricApplianceRoleListExecute(r ApiGetFabricApplianceRoleListRequest) (*FabricApplianceRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13668,9 +13712,9 @@ func (r ApiGetFabricConfigChangeDetailByMoidRequest) Execute() (*FabricConfigCha
 /*
 GetFabricConfigChangeDetailByMoid Read a 'fabric.ConfigChangeDetail' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricConfigChangeDetailByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricConfigChangeDetailByMoidRequest
 */
 func (a *FabricApiService) GetFabricConfigChangeDetailByMoid(ctx context.Context, moid string) ApiGetFabricConfigChangeDetailByMoidRequest {
 	return ApiGetFabricConfigChangeDetailByMoidRequest{
@@ -13681,7 +13725,8 @@ func (a *FabricApiService) GetFabricConfigChangeDetailByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricConfigChangeDetail
+//
+//	@return FabricConfigChangeDetail
 func (a *FabricApiService) GetFabricConfigChangeDetailByMoidExecute(r ApiGetFabricConfigChangeDetailByMoidRequest) (*FabricConfigChangeDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13897,8 +13942,8 @@ func (r ApiGetFabricConfigChangeDetailListRequest) Execute() (*FabricConfigChang
 /*
 GetFabricConfigChangeDetailList Read a 'fabric.ConfigChangeDetail' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricConfigChangeDetailListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricConfigChangeDetailListRequest
 */
 func (a *FabricApiService) GetFabricConfigChangeDetailList(ctx context.Context) ApiGetFabricConfigChangeDetailListRequest {
 	return ApiGetFabricConfigChangeDetailListRequest{
@@ -13908,7 +13953,8 @@ func (a *FabricApiService) GetFabricConfigChangeDetailList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return FabricConfigChangeDetailResponse
+//
+//	@return FabricConfigChangeDetailResponse
 func (a *FabricApiService) GetFabricConfigChangeDetailListExecute(r ApiGetFabricConfigChangeDetailListRequest) (*FabricConfigChangeDetailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14095,9 +14141,9 @@ func (r ApiGetFabricConfigResultByMoidRequest) Execute() (*FabricConfigResult, *
 /*
 GetFabricConfigResultByMoid Read a 'fabric.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricConfigResultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricConfigResultByMoidRequest
 */
 func (a *FabricApiService) GetFabricConfigResultByMoid(ctx context.Context, moid string) ApiGetFabricConfigResultByMoidRequest {
 	return ApiGetFabricConfigResultByMoidRequest{
@@ -14108,7 +14154,8 @@ func (a *FabricApiService) GetFabricConfigResultByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricConfigResult
+//
+//	@return FabricConfigResult
 func (a *FabricApiService) GetFabricConfigResultByMoidExecute(r ApiGetFabricConfigResultByMoidRequest) (*FabricConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14248,9 +14295,9 @@ func (r ApiGetFabricConfigResultEntryByMoidRequest) Execute() (*FabricConfigResu
 /*
 GetFabricConfigResultEntryByMoid Read a 'fabric.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricConfigResultEntryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricConfigResultEntryByMoidRequest
 */
 func (a *FabricApiService) GetFabricConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetFabricConfigResultEntryByMoidRequest {
 	return ApiGetFabricConfigResultEntryByMoidRequest{
@@ -14261,7 +14308,8 @@ func (a *FabricApiService) GetFabricConfigResultEntryByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricConfigResultEntry
+//
+//	@return FabricConfigResultEntry
 func (a *FabricApiService) GetFabricConfigResultEntryByMoidExecute(r ApiGetFabricConfigResultEntryByMoidRequest) (*FabricConfigResultEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14477,8 +14525,8 @@ func (r ApiGetFabricConfigResultEntryListRequest) Execute() (*FabricConfigResult
 /*
 GetFabricConfigResultEntryList Read a 'fabric.ConfigResultEntry' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricConfigResultEntryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricConfigResultEntryListRequest
 */
 func (a *FabricApiService) GetFabricConfigResultEntryList(ctx context.Context) ApiGetFabricConfigResultEntryListRequest {
 	return ApiGetFabricConfigResultEntryListRequest{
@@ -14488,7 +14536,8 @@ func (a *FabricApiService) GetFabricConfigResultEntryList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return FabricConfigResultEntryResponse
+//
+//	@return FabricConfigResultEntryResponse
 func (a *FabricApiService) GetFabricConfigResultEntryListExecute(r ApiGetFabricConfigResultEntryListRequest) (*FabricConfigResultEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14751,8 +14800,8 @@ func (r ApiGetFabricConfigResultListRequest) Execute() (*FabricConfigResultRespo
 /*
 GetFabricConfigResultList Read a 'fabric.ConfigResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricConfigResultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricConfigResultListRequest
 */
 func (a *FabricApiService) GetFabricConfigResultList(ctx context.Context) ApiGetFabricConfigResultListRequest {
 	return ApiGetFabricConfigResultListRequest{
@@ -14762,7 +14811,8 @@ func (a *FabricApiService) GetFabricConfigResultList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return FabricConfigResultResponse
+//
+//	@return FabricConfigResultResponse
 func (a *FabricApiService) GetFabricConfigResultListExecute(r ApiGetFabricConfigResultListRequest) (*FabricConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14949,9 +14999,9 @@ func (r ApiGetFabricElementIdentityByMoidRequest) Execute() (*FabricElementIdent
 /*
 GetFabricElementIdentityByMoid Read a 'fabric.ElementIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricElementIdentityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricElementIdentityByMoidRequest
 */
 func (a *FabricApiService) GetFabricElementIdentityByMoid(ctx context.Context, moid string) ApiGetFabricElementIdentityByMoidRequest {
 	return ApiGetFabricElementIdentityByMoidRequest{
@@ -14962,7 +15012,8 @@ func (a *FabricApiService) GetFabricElementIdentityByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricElementIdentity
+//
+//	@return FabricElementIdentity
 func (a *FabricApiService) GetFabricElementIdentityByMoidExecute(r ApiGetFabricElementIdentityByMoidRequest) (*FabricElementIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15178,8 +15229,8 @@ func (r ApiGetFabricElementIdentityListRequest) Execute() (*FabricElementIdentit
 /*
 GetFabricElementIdentityList Read a 'fabric.ElementIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricElementIdentityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricElementIdentityListRequest
 */
 func (a *FabricApiService) GetFabricElementIdentityList(ctx context.Context) ApiGetFabricElementIdentityListRequest {
 	return ApiGetFabricElementIdentityListRequest{
@@ -15189,7 +15240,8 @@ func (a *FabricApiService) GetFabricElementIdentityList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricElementIdentityResponse
+//
+//	@return FabricElementIdentityResponse
 func (a *FabricApiService) GetFabricElementIdentityListExecute(r ApiGetFabricElementIdentityListRequest) (*FabricElementIdentityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15376,9 +15428,9 @@ func (r ApiGetFabricEthNetworkControlPolicyByMoidRequest) Execute() (*FabricEthN
 /*
 GetFabricEthNetworkControlPolicyByMoid Read a 'fabric.EthNetworkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricEthNetworkControlPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricEthNetworkControlPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoid(ctx context.Context, moid string) ApiGetFabricEthNetworkControlPolicyByMoidRequest {
 	return ApiGetFabricEthNetworkControlPolicyByMoidRequest{
@@ -15389,7 +15441,8 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicy
+//
+//	@return FabricEthNetworkControlPolicy
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoidExecute(r ApiGetFabricEthNetworkControlPolicyByMoidRequest) (*FabricEthNetworkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15529,9 +15582,9 @@ func (r ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest) Execute() (*F
 /*
 GetFabricEthNetworkControlPolicyInventoryByMoid Read a 'fabric.EthNetworkControlPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest {
 	return ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest{
@@ -15542,7 +15595,8 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicyInventory
+//
+//	@return FabricEthNetworkControlPolicyInventory
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryByMoidExecute(r ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest) (*FabricEthNetworkControlPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15758,8 +15812,8 @@ func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Execute() (*Fab
 /*
 GetFabricEthNetworkControlPolicyInventoryList Read a 'fabric.EthNetworkControlPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricEthNetworkControlPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricEthNetworkControlPolicyInventoryListRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryList(ctx context.Context) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
 	return ApiGetFabricEthNetworkControlPolicyInventoryListRequest{
@@ -15769,7 +15823,8 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryList(ctx con
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicyInventoryResponse
+//
+//	@return FabricEthNetworkControlPolicyInventoryResponse
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryListExecute(r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) (*FabricEthNetworkControlPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16032,8 +16087,8 @@ func (r ApiGetFabricEthNetworkControlPolicyListRequest) Execute() (*FabricEthNet
 /*
 GetFabricEthNetworkControlPolicyList Read a 'fabric.EthNetworkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricEthNetworkControlPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricEthNetworkControlPolicyListRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyList(ctx context.Context) ApiGetFabricEthNetworkControlPolicyListRequest {
 	return ApiGetFabricEthNetworkControlPolicyListRequest{
@@ -16043,7 +16098,8 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicyResponse
+//
+//	@return FabricEthNetworkControlPolicyResponse
 func (a *FabricApiService) GetFabricEthNetworkControlPolicyListExecute(r ApiGetFabricEthNetworkControlPolicyListRequest) (*FabricEthNetworkControlPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16230,9 +16286,9 @@ func (r ApiGetFabricEthNetworkGroupPolicyByMoidRequest) Execute() (*FabricEthNet
 /*
 GetFabricEthNetworkGroupPolicyByMoid Read a 'fabric.EthNetworkGroupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricEthNetworkGroupPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricEthNetworkGroupPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoid(ctx context.Context, moid string) ApiGetFabricEthNetworkGroupPolicyByMoidRequest {
 	return ApiGetFabricEthNetworkGroupPolicyByMoidRequest{
@@ -16243,7 +16299,8 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicy
+//
+//	@return FabricEthNetworkGroupPolicy
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoidExecute(r ApiGetFabricEthNetworkGroupPolicyByMoidRequest) (*FabricEthNetworkGroupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16383,9 +16440,9 @@ func (r ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest) Execute() (*Fab
 /*
 GetFabricEthNetworkGroupPolicyInventoryByMoid Read a 'fabric.EthNetworkGroupPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest {
 	return ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest{
@@ -16396,7 +16453,8 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicyInventory
+//
+//	@return FabricEthNetworkGroupPolicyInventory
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryByMoidExecute(r ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest) (*FabricEthNetworkGroupPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16612,8 +16670,8 @@ func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Execute() (*Fabri
 /*
 GetFabricEthNetworkGroupPolicyInventoryList Read a 'fabric.EthNetworkGroupPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricEthNetworkGroupPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricEthNetworkGroupPolicyInventoryListRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryList(ctx context.Context) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
 	return ApiGetFabricEthNetworkGroupPolicyInventoryListRequest{
@@ -16623,7 +16681,8 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryList(ctx conte
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicyInventoryResponse
+//
+//	@return FabricEthNetworkGroupPolicyInventoryResponse
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryListExecute(r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) (*FabricEthNetworkGroupPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16886,8 +16945,8 @@ func (r ApiGetFabricEthNetworkGroupPolicyListRequest) Execute() (*FabricEthNetwo
 /*
 GetFabricEthNetworkGroupPolicyList Read a 'fabric.EthNetworkGroupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricEthNetworkGroupPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricEthNetworkGroupPolicyListRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyList(ctx context.Context) ApiGetFabricEthNetworkGroupPolicyListRequest {
 	return ApiGetFabricEthNetworkGroupPolicyListRequest{
@@ -16897,7 +16956,8 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicyResponse
+//
+//	@return FabricEthNetworkGroupPolicyResponse
 func (a *FabricApiService) GetFabricEthNetworkGroupPolicyListExecute(r ApiGetFabricEthNetworkGroupPolicyListRequest) (*FabricEthNetworkGroupPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17084,9 +17144,9 @@ func (r ApiGetFabricEthNetworkPolicyByMoidRequest) Execute() (*FabricEthNetworkP
 /*
 GetFabricEthNetworkPolicyByMoid Read a 'fabric.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricEthNetworkPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricEthNetworkPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetFabricEthNetworkPolicyByMoidRequest {
 	return ApiGetFabricEthNetworkPolicyByMoidRequest{
@@ -17097,7 +17157,8 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkPolicy
+//
+//	@return FabricEthNetworkPolicy
 func (a *FabricApiService) GetFabricEthNetworkPolicyByMoidExecute(r ApiGetFabricEthNetworkPolicyByMoidRequest) (*FabricEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17313,8 +17374,8 @@ func (r ApiGetFabricEthNetworkPolicyListRequest) Execute() (*FabricEthNetworkPol
 /*
 GetFabricEthNetworkPolicyList Read a 'fabric.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricEthNetworkPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricEthNetworkPolicyListRequest
 */
 func (a *FabricApiService) GetFabricEthNetworkPolicyList(ctx context.Context) ApiGetFabricEthNetworkPolicyListRequest {
 	return ApiGetFabricEthNetworkPolicyListRequest{
@@ -17324,7 +17385,8 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkPolicyResponse
+//
+//	@return FabricEthNetworkPolicyResponse
 func (a *FabricApiService) GetFabricEthNetworkPolicyListExecute(r ApiGetFabricEthNetworkPolicyListRequest) (*FabricEthNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17511,9 +17573,9 @@ func (r ApiGetFabricFcNetworkPolicyByMoidRequest) Execute() (*FabricFcNetworkPol
 /*
 GetFabricFcNetworkPolicyByMoid Read a 'fabric.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcNetworkPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcNetworkPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetFabricFcNetworkPolicyByMoidRequest {
 	return ApiGetFabricFcNetworkPolicyByMoidRequest{
@@ -17524,7 +17586,8 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricFcNetworkPolicy
+//
+//	@return FabricFcNetworkPolicy
 func (a *FabricApiService) GetFabricFcNetworkPolicyByMoidExecute(r ApiGetFabricFcNetworkPolicyByMoidRequest) (*FabricFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17740,8 +17803,8 @@ func (r ApiGetFabricFcNetworkPolicyListRequest) Execute() (*FabricFcNetworkPolic
 /*
 GetFabricFcNetworkPolicyList Read a 'fabric.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcNetworkPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcNetworkPolicyListRequest
 */
 func (a *FabricApiService) GetFabricFcNetworkPolicyList(ctx context.Context) ApiGetFabricFcNetworkPolicyListRequest {
 	return ApiGetFabricFcNetworkPolicyListRequest{
@@ -17751,7 +17814,8 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricFcNetworkPolicyResponse
+//
+//	@return FabricFcNetworkPolicyResponse
 func (a *FabricApiService) GetFabricFcNetworkPolicyListExecute(r ApiGetFabricFcNetworkPolicyListRequest) (*FabricFcNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17938,9 +18002,9 @@ func (r ApiGetFabricFcStorageRoleByMoidRequest) Execute() (*FabricFcStorageRole,
 /*
 GetFabricFcStorageRoleByMoid Read a 'fabric.FcStorageRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcStorageRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcStorageRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcStorageRoleByMoid(ctx context.Context, moid string) ApiGetFabricFcStorageRoleByMoidRequest {
 	return ApiGetFabricFcStorageRoleByMoidRequest{
@@ -17951,7 +18015,8 @@ func (a *FabricApiService) GetFabricFcStorageRoleByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricFcStorageRole
+//
+//	@return FabricFcStorageRole
 func (a *FabricApiService) GetFabricFcStorageRoleByMoidExecute(r ApiGetFabricFcStorageRoleByMoidRequest) (*FabricFcStorageRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18167,8 +18232,8 @@ func (r ApiGetFabricFcStorageRoleListRequest) Execute() (*FabricFcStorageRoleRes
 /*
 GetFabricFcStorageRoleList Read a 'fabric.FcStorageRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcStorageRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcStorageRoleListRequest
 */
 func (a *FabricApiService) GetFabricFcStorageRoleList(ctx context.Context) ApiGetFabricFcStorageRoleListRequest {
 	return ApiGetFabricFcStorageRoleListRequest{
@@ -18178,7 +18243,8 @@ func (a *FabricApiService) GetFabricFcStorageRoleList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return FabricFcStorageRoleResponse
+//
+//	@return FabricFcStorageRoleResponse
 func (a *FabricApiService) GetFabricFcStorageRoleListExecute(r ApiGetFabricFcStorageRoleListRequest) (*FabricFcStorageRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18365,9 +18431,9 @@ func (r ApiGetFabricFcUplinkPcRoleByMoidRequest) Execute() (*FabricFcUplinkPcRol
 /*
 GetFabricFcUplinkPcRoleByMoid Read a 'fabric.FcUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcUplinkPcRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcUplinkPcRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoid(ctx context.Context, moid string) ApiGetFabricFcUplinkPcRoleByMoidRequest {
 	return ApiGetFabricFcUplinkPcRoleByMoidRequest{
@@ -18378,7 +18444,8 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkPcRole
+//
+//	@return FabricFcUplinkPcRole
 func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoidExecute(r ApiGetFabricFcUplinkPcRoleByMoidRequest) (*FabricFcUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18594,8 +18661,8 @@ func (r ApiGetFabricFcUplinkPcRoleListRequest) Execute() (*FabricFcUplinkPcRoleR
 /*
 GetFabricFcUplinkPcRoleList Read a 'fabric.FcUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcUplinkPcRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcUplinkPcRoleListRequest
 */
 func (a *FabricApiService) GetFabricFcUplinkPcRoleList(ctx context.Context) ApiGetFabricFcUplinkPcRoleListRequest {
 	return ApiGetFabricFcUplinkPcRoleListRequest{
@@ -18605,7 +18672,8 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkPcRoleResponse
+//
+//	@return FabricFcUplinkPcRoleResponse
 func (a *FabricApiService) GetFabricFcUplinkPcRoleListExecute(r ApiGetFabricFcUplinkPcRoleListRequest) (*FabricFcUplinkPcRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18792,9 +18860,9 @@ func (r ApiGetFabricFcUplinkRoleByMoidRequest) Execute() (*FabricFcUplinkRole, *
 /*
 GetFabricFcUplinkRoleByMoid Read a 'fabric.FcUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcUplinkRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcUplinkRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcUplinkRoleByMoid(ctx context.Context, moid string) ApiGetFabricFcUplinkRoleByMoidRequest {
 	return ApiGetFabricFcUplinkRoleByMoidRequest{
@@ -18805,7 +18873,8 @@ func (a *FabricApiService) GetFabricFcUplinkRoleByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkRole
+//
+//	@return FabricFcUplinkRole
 func (a *FabricApiService) GetFabricFcUplinkRoleByMoidExecute(r ApiGetFabricFcUplinkRoleByMoidRequest) (*FabricFcUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19021,8 +19090,8 @@ func (r ApiGetFabricFcUplinkRoleListRequest) Execute() (*FabricFcUplinkRoleRespo
 /*
 GetFabricFcUplinkRoleList Read a 'fabric.FcUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcUplinkRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcUplinkRoleListRequest
 */
 func (a *FabricApiService) GetFabricFcUplinkRoleList(ctx context.Context) ApiGetFabricFcUplinkRoleListRequest {
 	return ApiGetFabricFcUplinkRoleListRequest{
@@ -19032,7 +19101,8 @@ func (a *FabricApiService) GetFabricFcUplinkRoleList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkRoleResponse
+//
+//	@return FabricFcUplinkRoleResponse
 func (a *FabricApiService) GetFabricFcUplinkRoleListExecute(r ApiGetFabricFcUplinkRoleListRequest) (*FabricFcUplinkRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19219,9 +19289,9 @@ func (r ApiGetFabricFcZonePolicyByMoidRequest) Execute() (*FabricFcZonePolicy, *
 /*
 GetFabricFcZonePolicyByMoid Read a 'fabric.FcZonePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcZonePolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcZonePolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcZonePolicyByMoid(ctx context.Context, moid string) ApiGetFabricFcZonePolicyByMoidRequest {
 	return ApiGetFabricFcZonePolicyByMoidRequest{
@@ -19232,7 +19302,8 @@ func (a *FabricApiService) GetFabricFcZonePolicyByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricFcZonePolicy
+//
+//	@return FabricFcZonePolicy
 func (a *FabricApiService) GetFabricFcZonePolicyByMoidExecute(r ApiGetFabricFcZonePolicyByMoidRequest) (*FabricFcZonePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19448,8 +19519,8 @@ func (r ApiGetFabricFcZonePolicyListRequest) Execute() (*FabricFcZonePolicyRespo
 /*
 GetFabricFcZonePolicyList Read a 'fabric.FcZonePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcZonePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcZonePolicyListRequest
 */
 func (a *FabricApiService) GetFabricFcZonePolicyList(ctx context.Context) ApiGetFabricFcZonePolicyListRequest {
 	return ApiGetFabricFcZonePolicyListRequest{
@@ -19459,7 +19530,8 @@ func (a *FabricApiService) GetFabricFcZonePolicyList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return FabricFcZonePolicyResponse
+//
+//	@return FabricFcZonePolicyResponse
 func (a *FabricApiService) GetFabricFcZonePolicyListExecute(r ApiGetFabricFcZonePolicyListRequest) (*FabricFcZonePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19646,9 +19718,9 @@ func (r ApiGetFabricFcoeUplinkPcRoleByMoidRequest) Execute() (*FabricFcoeUplinkP
 /*
 GetFabricFcoeUplinkPcRoleByMoid Read a 'fabric.FcoeUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcoeUplinkPcRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcoeUplinkPcRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoid(ctx context.Context, moid string) ApiGetFabricFcoeUplinkPcRoleByMoidRequest {
 	return ApiGetFabricFcoeUplinkPcRoleByMoidRequest{
@@ -19659,7 +19731,8 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkPcRole
+//
+//	@return FabricFcoeUplinkPcRole
 func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoidExecute(r ApiGetFabricFcoeUplinkPcRoleByMoidRequest) (*FabricFcoeUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19875,8 +19948,8 @@ func (r ApiGetFabricFcoeUplinkPcRoleListRequest) Execute() (*FabricFcoeUplinkPcR
 /*
 GetFabricFcoeUplinkPcRoleList Read a 'fabric.FcoeUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcoeUplinkPcRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcoeUplinkPcRoleListRequest
 */
 func (a *FabricApiService) GetFabricFcoeUplinkPcRoleList(ctx context.Context) ApiGetFabricFcoeUplinkPcRoleListRequest {
 	return ApiGetFabricFcoeUplinkPcRoleListRequest{
@@ -19886,7 +19959,8 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkPcRoleResponse
+//
+//	@return FabricFcoeUplinkPcRoleResponse
 func (a *FabricApiService) GetFabricFcoeUplinkPcRoleListExecute(r ApiGetFabricFcoeUplinkPcRoleListRequest) (*FabricFcoeUplinkPcRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20073,9 +20147,9 @@ func (r ApiGetFabricFcoeUplinkRoleByMoidRequest) Execute() (*FabricFcoeUplinkRol
 /*
 GetFabricFcoeUplinkRoleByMoid Read a 'fabric.FcoeUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFcoeUplinkRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFcoeUplinkRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoid(ctx context.Context, moid string) ApiGetFabricFcoeUplinkRoleByMoidRequest {
 	return ApiGetFabricFcoeUplinkRoleByMoidRequest{
@@ -20086,7 +20160,8 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkRole
+//
+//	@return FabricFcoeUplinkRole
 func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoidExecute(r ApiGetFabricFcoeUplinkRoleByMoidRequest) (*FabricFcoeUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20302,8 +20377,8 @@ func (r ApiGetFabricFcoeUplinkRoleListRequest) Execute() (*FabricFcoeUplinkRoleR
 /*
 GetFabricFcoeUplinkRoleList Read a 'fabric.FcoeUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFcoeUplinkRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFcoeUplinkRoleListRequest
 */
 func (a *FabricApiService) GetFabricFcoeUplinkRoleList(ctx context.Context) ApiGetFabricFcoeUplinkRoleListRequest {
 	return ApiGetFabricFcoeUplinkRoleListRequest{
@@ -20313,7 +20388,8 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkRoleResponse
+//
+//	@return FabricFcoeUplinkRoleResponse
 func (a *FabricApiService) GetFabricFcoeUplinkRoleListExecute(r ApiGetFabricFcoeUplinkRoleListRequest) (*FabricFcoeUplinkRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20500,9 +20576,9 @@ func (r ApiGetFabricFlowControlPolicyByMoidRequest) Execute() (*FabricFlowContro
 /*
 GetFabricFlowControlPolicyByMoid Read a 'fabric.FlowControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricFlowControlPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricFlowControlPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricFlowControlPolicyByMoid(ctx context.Context, moid string) ApiGetFabricFlowControlPolicyByMoidRequest {
 	return ApiGetFabricFlowControlPolicyByMoidRequest{
@@ -20513,7 +20589,8 @@ func (a *FabricApiService) GetFabricFlowControlPolicyByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricFlowControlPolicy
+//
+//	@return FabricFlowControlPolicy
 func (a *FabricApiService) GetFabricFlowControlPolicyByMoidExecute(r ApiGetFabricFlowControlPolicyByMoidRequest) (*FabricFlowControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20729,8 +20806,8 @@ func (r ApiGetFabricFlowControlPolicyListRequest) Execute() (*FabricFlowControlP
 /*
 GetFabricFlowControlPolicyList Read a 'fabric.FlowControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricFlowControlPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricFlowControlPolicyListRequest
 */
 func (a *FabricApiService) GetFabricFlowControlPolicyList(ctx context.Context) ApiGetFabricFlowControlPolicyListRequest {
 	return ApiGetFabricFlowControlPolicyListRequest{
@@ -20740,7 +20817,8 @@ func (a *FabricApiService) GetFabricFlowControlPolicyList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return FabricFlowControlPolicyResponse
+//
+//	@return FabricFlowControlPolicyResponse
 func (a *FabricApiService) GetFabricFlowControlPolicyListExecute(r ApiGetFabricFlowControlPolicyListRequest) (*FabricFlowControlPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20927,9 +21005,9 @@ func (r ApiGetFabricLanPinGroupByMoidRequest) Execute() (*FabricLanPinGroup, *ht
 /*
 GetFabricLanPinGroupByMoid Read a 'fabric.LanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricLanPinGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricLanPinGroupByMoidRequest
 */
 func (a *FabricApiService) GetFabricLanPinGroupByMoid(ctx context.Context, moid string) ApiGetFabricLanPinGroupByMoidRequest {
 	return ApiGetFabricLanPinGroupByMoidRequest{
@@ -20940,7 +21018,8 @@ func (a *FabricApiService) GetFabricLanPinGroupByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricLanPinGroup
+//
+//	@return FabricLanPinGroup
 func (a *FabricApiService) GetFabricLanPinGroupByMoidExecute(r ApiGetFabricLanPinGroupByMoidRequest) (*FabricLanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21156,8 +21235,8 @@ func (r ApiGetFabricLanPinGroupListRequest) Execute() (*FabricLanPinGroupRespons
 /*
 GetFabricLanPinGroupList Read a 'fabric.LanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricLanPinGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricLanPinGroupListRequest
 */
 func (a *FabricApiService) GetFabricLanPinGroupList(ctx context.Context) ApiGetFabricLanPinGroupListRequest {
 	return ApiGetFabricLanPinGroupListRequest{
@@ -21167,7 +21246,8 @@ func (a *FabricApiService) GetFabricLanPinGroupList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//  @return FabricLanPinGroupResponse
+//
+//	@return FabricLanPinGroupResponse
 func (a *FabricApiService) GetFabricLanPinGroupListExecute(r ApiGetFabricLanPinGroupListRequest) (*FabricLanPinGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21354,9 +21434,9 @@ func (r ApiGetFabricLinkAggregationPolicyByMoidRequest) Execute() (*FabricLinkAg
 /*
 GetFabricLinkAggregationPolicyByMoid Read a 'fabric.LinkAggregationPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricLinkAggregationPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricLinkAggregationPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricLinkAggregationPolicyByMoid(ctx context.Context, moid string) ApiGetFabricLinkAggregationPolicyByMoidRequest {
 	return ApiGetFabricLinkAggregationPolicyByMoidRequest{
@@ -21367,7 +21447,8 @@ func (a *FabricApiService) GetFabricLinkAggregationPolicyByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return FabricLinkAggregationPolicy
+//
+//	@return FabricLinkAggregationPolicy
 func (a *FabricApiService) GetFabricLinkAggregationPolicyByMoidExecute(r ApiGetFabricLinkAggregationPolicyByMoidRequest) (*FabricLinkAggregationPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21583,8 +21664,8 @@ func (r ApiGetFabricLinkAggregationPolicyListRequest) Execute() (*FabricLinkAggr
 /*
 GetFabricLinkAggregationPolicyList Read a 'fabric.LinkAggregationPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricLinkAggregationPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricLinkAggregationPolicyListRequest
 */
 func (a *FabricApiService) GetFabricLinkAggregationPolicyList(ctx context.Context) ApiGetFabricLinkAggregationPolicyListRequest {
 	return ApiGetFabricLinkAggregationPolicyListRequest{
@@ -21594,7 +21675,8 @@ func (a *FabricApiService) GetFabricLinkAggregationPolicyList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return FabricLinkAggregationPolicyResponse
+//
+//	@return FabricLinkAggregationPolicyResponse
 func (a *FabricApiService) GetFabricLinkAggregationPolicyListExecute(r ApiGetFabricLinkAggregationPolicyListRequest) (*FabricLinkAggregationPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21781,9 +21863,9 @@ func (r ApiGetFabricLinkControlPolicyByMoidRequest) Execute() (*FabricLinkContro
 /*
 GetFabricLinkControlPolicyByMoid Read a 'fabric.LinkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricLinkControlPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricLinkControlPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricLinkControlPolicyByMoid(ctx context.Context, moid string) ApiGetFabricLinkControlPolicyByMoidRequest {
 	return ApiGetFabricLinkControlPolicyByMoidRequest{
@@ -21794,7 +21876,8 @@ func (a *FabricApiService) GetFabricLinkControlPolicyByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricLinkControlPolicy
+//
+//	@return FabricLinkControlPolicy
 func (a *FabricApiService) GetFabricLinkControlPolicyByMoidExecute(r ApiGetFabricLinkControlPolicyByMoidRequest) (*FabricLinkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22010,8 +22093,8 @@ func (r ApiGetFabricLinkControlPolicyListRequest) Execute() (*FabricLinkControlP
 /*
 GetFabricLinkControlPolicyList Read a 'fabric.LinkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricLinkControlPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricLinkControlPolicyListRequest
 */
 func (a *FabricApiService) GetFabricLinkControlPolicyList(ctx context.Context) ApiGetFabricLinkControlPolicyListRequest {
 	return ApiGetFabricLinkControlPolicyListRequest{
@@ -22021,7 +22104,8 @@ func (a *FabricApiService) GetFabricLinkControlPolicyList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return FabricLinkControlPolicyResponse
+//
+//	@return FabricLinkControlPolicyResponse
 func (a *FabricApiService) GetFabricLinkControlPolicyListExecute(r ApiGetFabricLinkControlPolicyListRequest) (*FabricLinkControlPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22208,9 +22292,9 @@ func (r ApiGetFabricMulticastPolicyByMoidRequest) Execute() (*FabricMulticastPol
 /*
 GetFabricMulticastPolicyByMoid Read a 'fabric.MulticastPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricMulticastPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricMulticastPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricMulticastPolicyByMoid(ctx context.Context, moid string) ApiGetFabricMulticastPolicyByMoidRequest {
 	return ApiGetFabricMulticastPolicyByMoidRequest{
@@ -22221,7 +22305,8 @@ func (a *FabricApiService) GetFabricMulticastPolicyByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricMulticastPolicy
+//
+//	@return FabricMulticastPolicy
 func (a *FabricApiService) GetFabricMulticastPolicyByMoidExecute(r ApiGetFabricMulticastPolicyByMoidRequest) (*FabricMulticastPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22437,8 +22522,8 @@ func (r ApiGetFabricMulticastPolicyListRequest) Execute() (*FabricMulticastPolic
 /*
 GetFabricMulticastPolicyList Read a 'fabric.MulticastPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricMulticastPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricMulticastPolicyListRequest
 */
 func (a *FabricApiService) GetFabricMulticastPolicyList(ctx context.Context) ApiGetFabricMulticastPolicyListRequest {
 	return ApiGetFabricMulticastPolicyListRequest{
@@ -22448,7 +22533,8 @@ func (a *FabricApiService) GetFabricMulticastPolicyList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricMulticastPolicyResponse
+//
+//	@return FabricMulticastPolicyResponse
 func (a *FabricApiService) GetFabricMulticastPolicyListExecute(r ApiGetFabricMulticastPolicyListRequest) (*FabricMulticastPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22635,9 +22721,9 @@ func (r ApiGetFabricPcMemberByMoidRequest) Execute() (*FabricPcMember, *http.Res
 /*
 GetFabricPcMemberByMoid Read a 'fabric.PcMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricPcMemberByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricPcMemberByMoidRequest
 */
 func (a *FabricApiService) GetFabricPcMemberByMoid(ctx context.Context, moid string) ApiGetFabricPcMemberByMoidRequest {
 	return ApiGetFabricPcMemberByMoidRequest{
@@ -22648,7 +22734,8 @@ func (a *FabricApiService) GetFabricPcMemberByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricPcMember
+//
+//	@return FabricPcMember
 func (a *FabricApiService) GetFabricPcMemberByMoidExecute(r ApiGetFabricPcMemberByMoidRequest) (*FabricPcMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22864,8 +22951,8 @@ func (r ApiGetFabricPcMemberListRequest) Execute() (*FabricPcMemberResponse, *ht
 /*
 GetFabricPcMemberList Read a 'fabric.PcMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricPcMemberListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricPcMemberListRequest
 */
 func (a *FabricApiService) GetFabricPcMemberList(ctx context.Context) ApiGetFabricPcMemberListRequest {
 	return ApiGetFabricPcMemberListRequest{
@@ -22875,7 +22962,8 @@ func (a *FabricApiService) GetFabricPcMemberList(ctx context.Context) ApiGetFabr
 }
 
 // Execute executes the request
-//  @return FabricPcMemberResponse
+//
+//	@return FabricPcMemberResponse
 func (a *FabricApiService) GetFabricPcMemberListExecute(r ApiGetFabricPcMemberListRequest) (*FabricPcMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23062,9 +23150,9 @@ func (r ApiGetFabricPcOperationByMoidRequest) Execute() (*FabricPcOperation, *ht
 /*
 GetFabricPcOperationByMoid Read a 'fabric.PcOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricPcOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricPcOperationByMoidRequest
 */
 func (a *FabricApiService) GetFabricPcOperationByMoid(ctx context.Context, moid string) ApiGetFabricPcOperationByMoidRequest {
 	return ApiGetFabricPcOperationByMoidRequest{
@@ -23075,7 +23163,8 @@ func (a *FabricApiService) GetFabricPcOperationByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricPcOperation
+//
+//	@return FabricPcOperation
 func (a *FabricApiService) GetFabricPcOperationByMoidExecute(r ApiGetFabricPcOperationByMoidRequest) (*FabricPcOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23291,8 +23380,8 @@ func (r ApiGetFabricPcOperationListRequest) Execute() (*FabricPcOperationRespons
 /*
 GetFabricPcOperationList Read a 'fabric.PcOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricPcOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricPcOperationListRequest
 */
 func (a *FabricApiService) GetFabricPcOperationList(ctx context.Context) ApiGetFabricPcOperationListRequest {
 	return ApiGetFabricPcOperationListRequest{
@@ -23302,7 +23391,8 @@ func (a *FabricApiService) GetFabricPcOperationList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//  @return FabricPcOperationResponse
+//
+//	@return FabricPcOperationResponse
 func (a *FabricApiService) GetFabricPcOperationListExecute(r ApiGetFabricPcOperationListRequest) (*FabricPcOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23489,9 +23579,9 @@ func (r ApiGetFabricPortModeByMoidRequest) Execute() (*FabricPortMode, *http.Res
 /*
 GetFabricPortModeByMoid Read a 'fabric.PortMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricPortModeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricPortModeByMoidRequest
 */
 func (a *FabricApiService) GetFabricPortModeByMoid(ctx context.Context, moid string) ApiGetFabricPortModeByMoidRequest {
 	return ApiGetFabricPortModeByMoidRequest{
@@ -23502,7 +23592,8 @@ func (a *FabricApiService) GetFabricPortModeByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricPortMode
+//
+//	@return FabricPortMode
 func (a *FabricApiService) GetFabricPortModeByMoidExecute(r ApiGetFabricPortModeByMoidRequest) (*FabricPortMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23718,8 +23809,8 @@ func (r ApiGetFabricPortModeListRequest) Execute() (*FabricPortModeResponse, *ht
 /*
 GetFabricPortModeList Read a 'fabric.PortMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricPortModeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricPortModeListRequest
 */
 func (a *FabricApiService) GetFabricPortModeList(ctx context.Context) ApiGetFabricPortModeListRequest {
 	return ApiGetFabricPortModeListRequest{
@@ -23729,7 +23820,8 @@ func (a *FabricApiService) GetFabricPortModeList(ctx context.Context) ApiGetFabr
 }
 
 // Execute executes the request
-//  @return FabricPortModeResponse
+//
+//	@return FabricPortModeResponse
 func (a *FabricApiService) GetFabricPortModeListExecute(r ApiGetFabricPortModeListRequest) (*FabricPortModeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -23916,9 +24008,9 @@ func (r ApiGetFabricPortOperationByMoidRequest) Execute() (*FabricPortOperation,
 /*
 GetFabricPortOperationByMoid Read a 'fabric.PortOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricPortOperationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricPortOperationByMoidRequest
 */
 func (a *FabricApiService) GetFabricPortOperationByMoid(ctx context.Context, moid string) ApiGetFabricPortOperationByMoidRequest {
 	return ApiGetFabricPortOperationByMoidRequest{
@@ -23929,7 +24021,8 @@ func (a *FabricApiService) GetFabricPortOperationByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricPortOperation
+//
+//	@return FabricPortOperation
 func (a *FabricApiService) GetFabricPortOperationByMoidExecute(r ApiGetFabricPortOperationByMoidRequest) (*FabricPortOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24145,8 +24238,8 @@ func (r ApiGetFabricPortOperationListRequest) Execute() (*FabricPortOperationRes
 /*
 GetFabricPortOperationList Read a 'fabric.PortOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricPortOperationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricPortOperationListRequest
 */
 func (a *FabricApiService) GetFabricPortOperationList(ctx context.Context) ApiGetFabricPortOperationListRequest {
 	return ApiGetFabricPortOperationListRequest{
@@ -24156,7 +24249,8 @@ func (a *FabricApiService) GetFabricPortOperationList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return FabricPortOperationResponse
+//
+//	@return FabricPortOperationResponse
 func (a *FabricApiService) GetFabricPortOperationListExecute(r ApiGetFabricPortOperationListRequest) (*FabricPortOperationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24343,9 +24437,9 @@ func (r ApiGetFabricPortPolicyByMoidRequest) Execute() (*FabricPortPolicy, *http
 /*
 GetFabricPortPolicyByMoid Read a 'fabric.PortPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricPortPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricPortPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricPortPolicyByMoid(ctx context.Context, moid string) ApiGetFabricPortPolicyByMoidRequest {
 	return ApiGetFabricPortPolicyByMoidRequest{
@@ -24356,7 +24450,8 @@ func (a *FabricApiService) GetFabricPortPolicyByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricPortPolicy
+//
+//	@return FabricPortPolicy
 func (a *FabricApiService) GetFabricPortPolicyByMoidExecute(r ApiGetFabricPortPolicyByMoidRequest) (*FabricPortPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24572,8 +24667,8 @@ func (r ApiGetFabricPortPolicyListRequest) Execute() (*FabricPortPolicyResponse,
 /*
 GetFabricPortPolicyList Read a 'fabric.PortPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricPortPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricPortPolicyListRequest
 */
 func (a *FabricApiService) GetFabricPortPolicyList(ctx context.Context) ApiGetFabricPortPolicyListRequest {
 	return ApiGetFabricPortPolicyListRequest{
@@ -24583,7 +24678,8 @@ func (a *FabricApiService) GetFabricPortPolicyList(ctx context.Context) ApiGetFa
 }
 
 // Execute executes the request
-//  @return FabricPortPolicyResponse
+//
+//	@return FabricPortPolicyResponse
 func (a *FabricApiService) GetFabricPortPolicyListExecute(r ApiGetFabricPortPolicyListRequest) (*FabricPortPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24770,9 +24866,9 @@ func (r ApiGetFabricSanPinGroupByMoidRequest) Execute() (*FabricSanPinGroup, *ht
 /*
 GetFabricSanPinGroupByMoid Read a 'fabric.SanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSanPinGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSanPinGroupByMoidRequest
 */
 func (a *FabricApiService) GetFabricSanPinGroupByMoid(ctx context.Context, moid string) ApiGetFabricSanPinGroupByMoidRequest {
 	return ApiGetFabricSanPinGroupByMoidRequest{
@@ -24783,7 +24879,8 @@ func (a *FabricApiService) GetFabricSanPinGroupByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricSanPinGroup
+//
+//	@return FabricSanPinGroup
 func (a *FabricApiService) GetFabricSanPinGroupByMoidExecute(r ApiGetFabricSanPinGroupByMoidRequest) (*FabricSanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -24999,8 +25096,8 @@ func (r ApiGetFabricSanPinGroupListRequest) Execute() (*FabricSanPinGroupRespons
 /*
 GetFabricSanPinGroupList Read a 'fabric.SanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSanPinGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSanPinGroupListRequest
 */
 func (a *FabricApiService) GetFabricSanPinGroupList(ctx context.Context) ApiGetFabricSanPinGroupListRequest {
 	return ApiGetFabricSanPinGroupListRequest{
@@ -25010,7 +25107,8 @@ func (a *FabricApiService) GetFabricSanPinGroupList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//  @return FabricSanPinGroupResponse
+//
+//	@return FabricSanPinGroupResponse
 func (a *FabricApiService) GetFabricSanPinGroupListExecute(r ApiGetFabricSanPinGroupListRequest) (*FabricSanPinGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25197,9 +25295,9 @@ func (r ApiGetFabricServerRoleByMoidRequest) Execute() (*FabricServerRole, *http
 /*
 GetFabricServerRoleByMoid Read a 'fabric.ServerRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricServerRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricServerRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricServerRoleByMoid(ctx context.Context, moid string) ApiGetFabricServerRoleByMoidRequest {
 	return ApiGetFabricServerRoleByMoidRequest{
@@ -25210,7 +25308,8 @@ func (a *FabricApiService) GetFabricServerRoleByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricServerRole
+//
+//	@return FabricServerRole
 func (a *FabricApiService) GetFabricServerRoleByMoidExecute(r ApiGetFabricServerRoleByMoidRequest) (*FabricServerRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25426,8 +25525,8 @@ func (r ApiGetFabricServerRoleListRequest) Execute() (*FabricServerRoleResponse,
 /*
 GetFabricServerRoleList Read a 'fabric.ServerRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricServerRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricServerRoleListRequest
 */
 func (a *FabricApiService) GetFabricServerRoleList(ctx context.Context) ApiGetFabricServerRoleListRequest {
 	return ApiGetFabricServerRoleListRequest{
@@ -25437,7 +25536,8 @@ func (a *FabricApiService) GetFabricServerRoleList(ctx context.Context) ApiGetFa
 }
 
 // Execute executes the request
-//  @return FabricServerRoleResponse
+//
+//	@return FabricServerRoleResponse
 func (a *FabricApiService) GetFabricServerRoleListExecute(r ApiGetFabricServerRoleListRequest) (*FabricServerRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25624,9 +25724,9 @@ func (r ApiGetFabricSpanDestEthPortByMoidRequest) Execute() (*FabricSpanDestEthP
 /*
 GetFabricSpanDestEthPortByMoid Read a 'fabric.SpanDestEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSpanDestEthPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSpanDestEthPortByMoidRequest
 */
 func (a *FabricApiService) GetFabricSpanDestEthPortByMoid(ctx context.Context, moid string) ApiGetFabricSpanDestEthPortByMoidRequest {
 	return ApiGetFabricSpanDestEthPortByMoidRequest{
@@ -25637,7 +25737,8 @@ func (a *FabricApiService) GetFabricSpanDestEthPortByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricSpanDestEthPort
+//
+//	@return FabricSpanDestEthPort
 func (a *FabricApiService) GetFabricSpanDestEthPortByMoidExecute(r ApiGetFabricSpanDestEthPortByMoidRequest) (*FabricSpanDestEthPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -25853,8 +25954,8 @@ func (r ApiGetFabricSpanDestEthPortListRequest) Execute() (*FabricSpanDestEthPor
 /*
 GetFabricSpanDestEthPortList Read a 'fabric.SpanDestEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSpanDestEthPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSpanDestEthPortListRequest
 */
 func (a *FabricApiService) GetFabricSpanDestEthPortList(ctx context.Context) ApiGetFabricSpanDestEthPortListRequest {
 	return ApiGetFabricSpanDestEthPortListRequest{
@@ -25864,7 +25965,8 @@ func (a *FabricApiService) GetFabricSpanDestEthPortList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricSpanDestEthPortResponse
+//
+//	@return FabricSpanDestEthPortResponse
 func (a *FabricApiService) GetFabricSpanDestEthPortListExecute(r ApiGetFabricSpanDestEthPortListRequest) (*FabricSpanDestEthPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26051,9 +26153,9 @@ func (r ApiGetFabricSpanSessionByMoidRequest) Execute() (*FabricSpanSession, *ht
 /*
 GetFabricSpanSessionByMoid Read a 'fabric.SpanSession' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSpanSessionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSpanSessionByMoidRequest
 */
 func (a *FabricApiService) GetFabricSpanSessionByMoid(ctx context.Context, moid string) ApiGetFabricSpanSessionByMoidRequest {
 	return ApiGetFabricSpanSessionByMoidRequest{
@@ -26064,7 +26166,8 @@ func (a *FabricApiService) GetFabricSpanSessionByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricSpanSession
+//
+//	@return FabricSpanSession
 func (a *FabricApiService) GetFabricSpanSessionByMoidExecute(r ApiGetFabricSpanSessionByMoidRequest) (*FabricSpanSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26280,8 +26383,8 @@ func (r ApiGetFabricSpanSessionListRequest) Execute() (*FabricSpanSessionRespons
 /*
 GetFabricSpanSessionList Read a 'fabric.SpanSession' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSpanSessionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSpanSessionListRequest
 */
 func (a *FabricApiService) GetFabricSpanSessionList(ctx context.Context) ApiGetFabricSpanSessionListRequest {
 	return ApiGetFabricSpanSessionListRequest{
@@ -26291,7 +26394,8 @@ func (a *FabricApiService) GetFabricSpanSessionList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//  @return FabricSpanSessionResponse
+//
+//	@return FabricSpanSessionResponse
 func (a *FabricApiService) GetFabricSpanSessionListExecute(r ApiGetFabricSpanSessionListRequest) (*FabricSpanSessionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26478,9 +26582,9 @@ func (r ApiGetFabricSpanSourceEthPortByMoidRequest) Execute() (*FabricSpanSource
 /*
 GetFabricSpanSourceEthPortByMoid Read a 'fabric.SpanSourceEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSpanSourceEthPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSpanSourceEthPortByMoidRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceEthPortByMoid(ctx context.Context, moid string) ApiGetFabricSpanSourceEthPortByMoidRequest {
 	return ApiGetFabricSpanSourceEthPortByMoidRequest{
@@ -26491,7 +26595,8 @@ func (a *FabricApiService) GetFabricSpanSourceEthPortByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceEthPort
+//
+//	@return FabricSpanSourceEthPort
 func (a *FabricApiService) GetFabricSpanSourceEthPortByMoidExecute(r ApiGetFabricSpanSourceEthPortByMoidRequest) (*FabricSpanSourceEthPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26631,9 +26736,9 @@ func (r ApiGetFabricSpanSourceEthPortChannelByMoidRequest) Execute() (*FabricSpa
 /*
 GetFabricSpanSourceEthPortChannelByMoid Read a 'fabric.SpanSourceEthPortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSpanSourceEthPortChannelByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSpanSourceEthPortChannelByMoidRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceEthPortChannelByMoid(ctx context.Context, moid string) ApiGetFabricSpanSourceEthPortChannelByMoidRequest {
 	return ApiGetFabricSpanSourceEthPortChannelByMoidRequest{
@@ -26644,7 +26749,8 @@ func (a *FabricApiService) GetFabricSpanSourceEthPortChannelByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceEthPortChannel
+//
+//	@return FabricSpanSourceEthPortChannel
 func (a *FabricApiService) GetFabricSpanSourceEthPortChannelByMoidExecute(r ApiGetFabricSpanSourceEthPortChannelByMoidRequest) (*FabricSpanSourceEthPortChannel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -26860,8 +26966,8 @@ func (r ApiGetFabricSpanSourceEthPortChannelListRequest) Execute() (*FabricSpanS
 /*
 GetFabricSpanSourceEthPortChannelList Read a 'fabric.SpanSourceEthPortChannel' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSpanSourceEthPortChannelListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSpanSourceEthPortChannelListRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceEthPortChannelList(ctx context.Context) ApiGetFabricSpanSourceEthPortChannelListRequest {
 	return ApiGetFabricSpanSourceEthPortChannelListRequest{
@@ -26871,7 +26977,8 @@ func (a *FabricApiService) GetFabricSpanSourceEthPortChannelList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceEthPortChannelResponse
+//
+//	@return FabricSpanSourceEthPortChannelResponse
 func (a *FabricApiService) GetFabricSpanSourceEthPortChannelListExecute(r ApiGetFabricSpanSourceEthPortChannelListRequest) (*FabricSpanSourceEthPortChannelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27134,8 +27241,8 @@ func (r ApiGetFabricSpanSourceEthPortListRequest) Execute() (*FabricSpanSourceEt
 /*
 GetFabricSpanSourceEthPortList Read a 'fabric.SpanSourceEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSpanSourceEthPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSpanSourceEthPortListRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceEthPortList(ctx context.Context) ApiGetFabricSpanSourceEthPortListRequest {
 	return ApiGetFabricSpanSourceEthPortListRequest{
@@ -27145,7 +27252,8 @@ func (a *FabricApiService) GetFabricSpanSourceEthPortList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceEthPortResponse
+//
+//	@return FabricSpanSourceEthPortResponse
 func (a *FabricApiService) GetFabricSpanSourceEthPortListExecute(r ApiGetFabricSpanSourceEthPortListRequest) (*FabricSpanSourceEthPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27332,9 +27440,9 @@ func (r ApiGetFabricSpanSourceVlanByMoidRequest) Execute() (*FabricSpanSourceVla
 /*
 GetFabricSpanSourceVlanByMoid Read a 'fabric.SpanSourceVlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSpanSourceVlanByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSpanSourceVlanByMoidRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceVlanByMoid(ctx context.Context, moid string) ApiGetFabricSpanSourceVlanByMoidRequest {
 	return ApiGetFabricSpanSourceVlanByMoidRequest{
@@ -27345,7 +27453,8 @@ func (a *FabricApiService) GetFabricSpanSourceVlanByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceVlan
+//
+//	@return FabricSpanSourceVlan
 func (a *FabricApiService) GetFabricSpanSourceVlanByMoidExecute(r ApiGetFabricSpanSourceVlanByMoidRequest) (*FabricSpanSourceVlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27561,8 +27670,8 @@ func (r ApiGetFabricSpanSourceVlanListRequest) Execute() (*FabricSpanSourceVlanR
 /*
 GetFabricSpanSourceVlanList Read a 'fabric.SpanSourceVlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSpanSourceVlanListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSpanSourceVlanListRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceVlanList(ctx context.Context) ApiGetFabricSpanSourceVlanListRequest {
 	return ApiGetFabricSpanSourceVlanListRequest{
@@ -27572,7 +27681,8 @@ func (a *FabricApiService) GetFabricSpanSourceVlanList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceVlanResponse
+//
+//	@return FabricSpanSourceVlanResponse
 func (a *FabricApiService) GetFabricSpanSourceVlanListExecute(r ApiGetFabricSpanSourceVlanListRequest) (*FabricSpanSourceVlanResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27759,9 +27869,9 @@ func (r ApiGetFabricSpanSourceVnicEthIfByMoidRequest) Execute() (*FabricSpanSour
 /*
 GetFabricSpanSourceVnicEthIfByMoid Read a 'fabric.SpanSourceVnicEthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSpanSourceVnicEthIfByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSpanSourceVnicEthIfByMoidRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceVnicEthIfByMoid(ctx context.Context, moid string) ApiGetFabricSpanSourceVnicEthIfByMoidRequest {
 	return ApiGetFabricSpanSourceVnicEthIfByMoidRequest{
@@ -27772,7 +27882,8 @@ func (a *FabricApiService) GetFabricSpanSourceVnicEthIfByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceVnicEthIf
+//
+//	@return FabricSpanSourceVnicEthIf
 func (a *FabricApiService) GetFabricSpanSourceVnicEthIfByMoidExecute(r ApiGetFabricSpanSourceVnicEthIfByMoidRequest) (*FabricSpanSourceVnicEthIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -27988,8 +28099,8 @@ func (r ApiGetFabricSpanSourceVnicEthIfListRequest) Execute() (*FabricSpanSource
 /*
 GetFabricSpanSourceVnicEthIfList Read a 'fabric.SpanSourceVnicEthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSpanSourceVnicEthIfListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSpanSourceVnicEthIfListRequest
 */
 func (a *FabricApiService) GetFabricSpanSourceVnicEthIfList(ctx context.Context) ApiGetFabricSpanSourceVnicEthIfListRequest {
 	return ApiGetFabricSpanSourceVnicEthIfListRequest{
@@ -27999,7 +28110,8 @@ func (a *FabricApiService) GetFabricSpanSourceVnicEthIfList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return FabricSpanSourceVnicEthIfResponse
+//
+//	@return FabricSpanSourceVnicEthIfResponse
 func (a *FabricApiService) GetFabricSpanSourceVnicEthIfListExecute(r ApiGetFabricSpanSourceVnicEthIfListRequest) (*FabricSpanSourceVnicEthIfResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28186,9 +28298,9 @@ func (r ApiGetFabricSwitchClusterProfileByMoidRequest) Execute() (*FabricSwitchC
 /*
 GetFabricSwitchClusterProfileByMoid Read a 'fabric.SwitchClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSwitchClusterProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSwitchClusterProfileByMoidRequest
 */
 func (a *FabricApiService) GetFabricSwitchClusterProfileByMoid(ctx context.Context, moid string) ApiGetFabricSwitchClusterProfileByMoidRequest {
 	return ApiGetFabricSwitchClusterProfileByMoidRequest{
@@ -28199,7 +28311,8 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfile
+//
+//	@return FabricSwitchClusterProfile
 func (a *FabricApiService) GetFabricSwitchClusterProfileByMoidExecute(r ApiGetFabricSwitchClusterProfileByMoidRequest) (*FabricSwitchClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28415,8 +28528,8 @@ func (r ApiGetFabricSwitchClusterProfileListRequest) Execute() (*FabricSwitchClu
 /*
 GetFabricSwitchClusterProfileList Read a 'fabric.SwitchClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSwitchClusterProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSwitchClusterProfileListRequest
 */
 func (a *FabricApiService) GetFabricSwitchClusterProfileList(ctx context.Context) ApiGetFabricSwitchClusterProfileListRequest {
 	return ApiGetFabricSwitchClusterProfileListRequest{
@@ -28426,7 +28539,8 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfileResponse
+//
+//	@return FabricSwitchClusterProfileResponse
 func (a *FabricApiService) GetFabricSwitchClusterProfileListExecute(r ApiGetFabricSwitchClusterProfileListRequest) (*FabricSwitchClusterProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28613,9 +28727,9 @@ func (r ApiGetFabricSwitchClusterProfileTemplateByMoidRequest) Execute() (*Fabri
 /*
 GetFabricSwitchClusterProfileTemplateByMoid Read a 'fabric.SwitchClusterProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSwitchClusterProfileTemplateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSwitchClusterProfileTemplateByMoidRequest
 */
 func (a *FabricApiService) GetFabricSwitchClusterProfileTemplateByMoid(ctx context.Context, moid string) ApiGetFabricSwitchClusterProfileTemplateByMoidRequest {
 	return ApiGetFabricSwitchClusterProfileTemplateByMoidRequest{
@@ -28626,7 +28740,8 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileTemplateByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfileTemplate
+//
+//	@return FabricSwitchClusterProfileTemplate
 func (a *FabricApiService) GetFabricSwitchClusterProfileTemplateByMoidExecute(r ApiGetFabricSwitchClusterProfileTemplateByMoidRequest) (*FabricSwitchClusterProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -28842,8 +28957,8 @@ func (r ApiGetFabricSwitchClusterProfileTemplateListRequest) Execute() (*FabricS
 /*
 GetFabricSwitchClusterProfileTemplateList Read a 'fabric.SwitchClusterProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSwitchClusterProfileTemplateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSwitchClusterProfileTemplateListRequest
 */
 func (a *FabricApiService) GetFabricSwitchClusterProfileTemplateList(ctx context.Context) ApiGetFabricSwitchClusterProfileTemplateListRequest {
 	return ApiGetFabricSwitchClusterProfileTemplateListRequest{
@@ -28853,7 +28968,8 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileTemplateList(ctx context
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfileTemplateResponse
+//
+//	@return FabricSwitchClusterProfileTemplateResponse
 func (a *FabricApiService) GetFabricSwitchClusterProfileTemplateListExecute(r ApiGetFabricSwitchClusterProfileTemplateListRequest) (*FabricSwitchClusterProfileTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29040,9 +29156,9 @@ func (r ApiGetFabricSwitchControlPolicyByMoidRequest) Execute() (*FabricSwitchCo
 /*
 GetFabricSwitchControlPolicyByMoid Read a 'fabric.SwitchControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSwitchControlPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSwitchControlPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricSwitchControlPolicyByMoid(ctx context.Context, moid string) ApiGetFabricSwitchControlPolicyByMoidRequest {
 	return ApiGetFabricSwitchControlPolicyByMoidRequest{
@@ -29053,7 +29169,8 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return FabricSwitchControlPolicy
+//
+//	@return FabricSwitchControlPolicy
 func (a *FabricApiService) GetFabricSwitchControlPolicyByMoidExecute(r ApiGetFabricSwitchControlPolicyByMoidRequest) (*FabricSwitchControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29269,8 +29386,8 @@ func (r ApiGetFabricSwitchControlPolicyListRequest) Execute() (*FabricSwitchCont
 /*
 GetFabricSwitchControlPolicyList Read a 'fabric.SwitchControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSwitchControlPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSwitchControlPolicyListRequest
 */
 func (a *FabricApiService) GetFabricSwitchControlPolicyList(ctx context.Context) ApiGetFabricSwitchControlPolicyListRequest {
 	return ApiGetFabricSwitchControlPolicyListRequest{
@@ -29280,7 +29397,8 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return FabricSwitchControlPolicyResponse
+//
+//	@return FabricSwitchControlPolicyResponse
 func (a *FabricApiService) GetFabricSwitchControlPolicyListExecute(r ApiGetFabricSwitchControlPolicyListRequest) (*FabricSwitchControlPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29467,9 +29585,9 @@ func (r ApiGetFabricSwitchProfileByMoidRequest) Execute() (*FabricSwitchProfile,
 /*
 GetFabricSwitchProfileByMoid Read a 'fabric.SwitchProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSwitchProfileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSwitchProfileByMoidRequest
 */
 func (a *FabricApiService) GetFabricSwitchProfileByMoid(ctx context.Context, moid string) ApiGetFabricSwitchProfileByMoidRequest {
 	return ApiGetFabricSwitchProfileByMoidRequest{
@@ -29480,7 +29598,8 @@ func (a *FabricApiService) GetFabricSwitchProfileByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfile
+//
+//	@return FabricSwitchProfile
 func (a *FabricApiService) GetFabricSwitchProfileByMoidExecute(r ApiGetFabricSwitchProfileByMoidRequest) (*FabricSwitchProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29696,8 +29815,8 @@ func (r ApiGetFabricSwitchProfileListRequest) Execute() (*FabricSwitchProfileRes
 /*
 GetFabricSwitchProfileList Read a 'fabric.SwitchProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSwitchProfileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSwitchProfileListRequest
 */
 func (a *FabricApiService) GetFabricSwitchProfileList(ctx context.Context) ApiGetFabricSwitchProfileListRequest {
 	return ApiGetFabricSwitchProfileListRequest{
@@ -29707,7 +29826,8 @@ func (a *FabricApiService) GetFabricSwitchProfileList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfileResponse
+//
+//	@return FabricSwitchProfileResponse
 func (a *FabricApiService) GetFabricSwitchProfileListExecute(r ApiGetFabricSwitchProfileListRequest) (*FabricSwitchProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -29894,9 +30014,9 @@ func (r ApiGetFabricSwitchProfileTemplateByMoidRequest) Execute() (*FabricSwitch
 /*
 GetFabricSwitchProfileTemplateByMoid Read a 'fabric.SwitchProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSwitchProfileTemplateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSwitchProfileTemplateByMoidRequest
 */
 func (a *FabricApiService) GetFabricSwitchProfileTemplateByMoid(ctx context.Context, moid string) ApiGetFabricSwitchProfileTemplateByMoidRequest {
 	return ApiGetFabricSwitchProfileTemplateByMoidRequest{
@@ -29907,7 +30027,8 @@ func (a *FabricApiService) GetFabricSwitchProfileTemplateByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfileTemplate
+//
+//	@return FabricSwitchProfileTemplate
 func (a *FabricApiService) GetFabricSwitchProfileTemplateByMoidExecute(r ApiGetFabricSwitchProfileTemplateByMoidRequest) (*FabricSwitchProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30123,8 +30244,8 @@ func (r ApiGetFabricSwitchProfileTemplateListRequest) Execute() (*FabricSwitchPr
 /*
 GetFabricSwitchProfileTemplateList Read a 'fabric.SwitchProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSwitchProfileTemplateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSwitchProfileTemplateListRequest
 */
 func (a *FabricApiService) GetFabricSwitchProfileTemplateList(ctx context.Context) ApiGetFabricSwitchProfileTemplateListRequest {
 	return ApiGetFabricSwitchProfileTemplateListRequest{
@@ -30134,7 +30255,8 @@ func (a *FabricApiService) GetFabricSwitchProfileTemplateList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfileTemplateResponse
+//
+//	@return FabricSwitchProfileTemplateResponse
 func (a *FabricApiService) GetFabricSwitchProfileTemplateListExecute(r ApiGetFabricSwitchProfileTemplateListRequest) (*FabricSwitchProfileTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30321,9 +30443,9 @@ func (r ApiGetFabricSystemQosPolicyByMoidRequest) Execute() (*FabricSystemQosPol
 /*
 GetFabricSystemQosPolicyByMoid Read a 'fabric.SystemQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricSystemQosPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricSystemQosPolicyByMoidRequest
 */
 func (a *FabricApiService) GetFabricSystemQosPolicyByMoid(ctx context.Context, moid string) ApiGetFabricSystemQosPolicyByMoidRequest {
 	return ApiGetFabricSystemQosPolicyByMoidRequest{
@@ -30334,7 +30456,8 @@ func (a *FabricApiService) GetFabricSystemQosPolicyByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricSystemQosPolicy
+//
+//	@return FabricSystemQosPolicy
 func (a *FabricApiService) GetFabricSystemQosPolicyByMoidExecute(r ApiGetFabricSystemQosPolicyByMoidRequest) (*FabricSystemQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30550,8 +30673,8 @@ func (r ApiGetFabricSystemQosPolicyListRequest) Execute() (*FabricSystemQosPolic
 /*
 GetFabricSystemQosPolicyList Read a 'fabric.SystemQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricSystemQosPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricSystemQosPolicyListRequest
 */
 func (a *FabricApiService) GetFabricSystemQosPolicyList(ctx context.Context) ApiGetFabricSystemQosPolicyListRequest {
 	return ApiGetFabricSystemQosPolicyListRequest{
@@ -30561,7 +30684,8 @@ func (a *FabricApiService) GetFabricSystemQosPolicyList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FabricSystemQosPolicyResponse
+//
+//	@return FabricSystemQosPolicyResponse
 func (a *FabricApiService) GetFabricSystemQosPolicyListExecute(r ApiGetFabricSystemQosPolicyListRequest) (*FabricSystemQosPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30748,9 +30872,9 @@ func (r ApiGetFabricUplinkPcRoleByMoidRequest) Execute() (*FabricUplinkPcRole, *
 /*
 GetFabricUplinkPcRoleByMoid Read a 'fabric.UplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricUplinkPcRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricUplinkPcRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricUplinkPcRoleByMoid(ctx context.Context, moid string) ApiGetFabricUplinkPcRoleByMoidRequest {
 	return ApiGetFabricUplinkPcRoleByMoidRequest{
@@ -30761,7 +30885,8 @@ func (a *FabricApiService) GetFabricUplinkPcRoleByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricUplinkPcRole
+//
+//	@return FabricUplinkPcRole
 func (a *FabricApiService) GetFabricUplinkPcRoleByMoidExecute(r ApiGetFabricUplinkPcRoleByMoidRequest) (*FabricUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -30977,8 +31102,8 @@ func (r ApiGetFabricUplinkPcRoleListRequest) Execute() (*FabricUplinkPcRoleRespo
 /*
 GetFabricUplinkPcRoleList Read a 'fabric.UplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricUplinkPcRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricUplinkPcRoleListRequest
 */
 func (a *FabricApiService) GetFabricUplinkPcRoleList(ctx context.Context) ApiGetFabricUplinkPcRoleListRequest {
 	return ApiGetFabricUplinkPcRoleListRequest{
@@ -30988,7 +31113,8 @@ func (a *FabricApiService) GetFabricUplinkPcRoleList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return FabricUplinkPcRoleResponse
+//
+//	@return FabricUplinkPcRoleResponse
 func (a *FabricApiService) GetFabricUplinkPcRoleListExecute(r ApiGetFabricUplinkPcRoleListRequest) (*FabricUplinkPcRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31175,9 +31301,9 @@ func (r ApiGetFabricUplinkRoleByMoidRequest) Execute() (*FabricUplinkRole, *http
 /*
 GetFabricUplinkRoleByMoid Read a 'fabric.UplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricUplinkRoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricUplinkRoleByMoidRequest
 */
 func (a *FabricApiService) GetFabricUplinkRoleByMoid(ctx context.Context, moid string) ApiGetFabricUplinkRoleByMoidRequest {
 	return ApiGetFabricUplinkRoleByMoidRequest{
@@ -31188,7 +31314,8 @@ func (a *FabricApiService) GetFabricUplinkRoleByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricUplinkRole
+//
+//	@return FabricUplinkRole
 func (a *FabricApiService) GetFabricUplinkRoleByMoidExecute(r ApiGetFabricUplinkRoleByMoidRequest) (*FabricUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31404,8 +31531,8 @@ func (r ApiGetFabricUplinkRoleListRequest) Execute() (*FabricUplinkRoleResponse,
 /*
 GetFabricUplinkRoleList Read a 'fabric.UplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricUplinkRoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricUplinkRoleListRequest
 */
 func (a *FabricApiService) GetFabricUplinkRoleList(ctx context.Context) ApiGetFabricUplinkRoleListRequest {
 	return ApiGetFabricUplinkRoleListRequest{
@@ -31415,7 +31542,8 @@ func (a *FabricApiService) GetFabricUplinkRoleList(ctx context.Context) ApiGetFa
 }
 
 // Execute executes the request
-//  @return FabricUplinkRoleResponse
+//
+//	@return FabricUplinkRoleResponse
 func (a *FabricApiService) GetFabricUplinkRoleListExecute(r ApiGetFabricUplinkRoleListRequest) (*FabricUplinkRoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31602,9 +31730,9 @@ func (r ApiGetFabricVlanByMoidRequest) Execute() (*FabricVlan, *http.Response, e
 /*
 GetFabricVlanByMoid Read a 'fabric.Vlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricVlanByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricVlanByMoidRequest
 */
 func (a *FabricApiService) GetFabricVlanByMoid(ctx context.Context, moid string) ApiGetFabricVlanByMoidRequest {
 	return ApiGetFabricVlanByMoidRequest{
@@ -31615,7 +31743,8 @@ func (a *FabricApiService) GetFabricVlanByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return FabricVlan
+//
+//	@return FabricVlan
 func (a *FabricApiService) GetFabricVlanByMoidExecute(r ApiGetFabricVlanByMoidRequest) (*FabricVlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31755,9 +31884,9 @@ func (r ApiGetFabricVlanInventoryByMoidRequest) Execute() (*FabricVlanInventory,
 /*
 GetFabricVlanInventoryByMoid Read a 'fabric.VlanInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricVlanInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricVlanInventoryByMoidRequest
 */
 func (a *FabricApiService) GetFabricVlanInventoryByMoid(ctx context.Context, moid string) ApiGetFabricVlanInventoryByMoidRequest {
 	return ApiGetFabricVlanInventoryByMoidRequest{
@@ -31768,7 +31897,8 @@ func (a *FabricApiService) GetFabricVlanInventoryByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricVlanInventory
+//
+//	@return FabricVlanInventory
 func (a *FabricApiService) GetFabricVlanInventoryByMoidExecute(r ApiGetFabricVlanInventoryByMoidRequest) (*FabricVlanInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -31984,8 +32114,8 @@ func (r ApiGetFabricVlanInventoryListRequest) Execute() (*FabricVlanInventoryRes
 /*
 GetFabricVlanInventoryList Read a 'fabric.VlanInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricVlanInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricVlanInventoryListRequest
 */
 func (a *FabricApiService) GetFabricVlanInventoryList(ctx context.Context) ApiGetFabricVlanInventoryListRequest {
 	return ApiGetFabricVlanInventoryListRequest{
@@ -31995,7 +32125,8 @@ func (a *FabricApiService) GetFabricVlanInventoryList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return FabricVlanInventoryResponse
+//
+//	@return FabricVlanInventoryResponse
 func (a *FabricApiService) GetFabricVlanInventoryListExecute(r ApiGetFabricVlanInventoryListRequest) (*FabricVlanInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32258,8 +32389,8 @@ func (r ApiGetFabricVlanListRequest) Execute() (*FabricVlanResponse, *http.Respo
 /*
 GetFabricVlanList Read a 'fabric.Vlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricVlanListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricVlanListRequest
 */
 func (a *FabricApiService) GetFabricVlanList(ctx context.Context) ApiGetFabricVlanListRequest {
 	return ApiGetFabricVlanListRequest{
@@ -32269,7 +32400,8 @@ func (a *FabricApiService) GetFabricVlanList(ctx context.Context) ApiGetFabricVl
 }
 
 // Execute executes the request
-//  @return FabricVlanResponse
+//
+//	@return FabricVlanResponse
 func (a *FabricApiService) GetFabricVlanListExecute(r ApiGetFabricVlanListRequest) (*FabricVlanResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32456,9 +32588,9 @@ func (r ApiGetFabricVlanSetByMoidRequest) Execute() (*FabricVlanSet, *http.Respo
 /*
 GetFabricVlanSetByMoid Read a 'fabric.VlanSet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricVlanSetByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricVlanSetByMoidRequest
 */
 func (a *FabricApiService) GetFabricVlanSetByMoid(ctx context.Context, moid string) ApiGetFabricVlanSetByMoidRequest {
 	return ApiGetFabricVlanSetByMoidRequest{
@@ -32469,7 +32601,8 @@ func (a *FabricApiService) GetFabricVlanSetByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricVlanSet
+//
+//	@return FabricVlanSet
 func (a *FabricApiService) GetFabricVlanSetByMoidExecute(r ApiGetFabricVlanSetByMoidRequest) (*FabricVlanSet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32685,8 +32818,8 @@ func (r ApiGetFabricVlanSetListRequest) Execute() (*FabricVlanSetResponse, *http
 /*
 GetFabricVlanSetList Read a 'fabric.VlanSet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricVlanSetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricVlanSetListRequest
 */
 func (a *FabricApiService) GetFabricVlanSetList(ctx context.Context) ApiGetFabricVlanSetListRequest {
 	return ApiGetFabricVlanSetListRequest{
@@ -32696,7 +32829,8 @@ func (a *FabricApiService) GetFabricVlanSetList(ctx context.Context) ApiGetFabri
 }
 
 // Execute executes the request
-//  @return FabricVlanSetResponse
+//
+//	@return FabricVlanSetResponse
 func (a *FabricApiService) GetFabricVlanSetListExecute(r ApiGetFabricVlanSetListRequest) (*FabricVlanSetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -32883,9 +33017,9 @@ func (r ApiGetFabricVsanByMoidRequest) Execute() (*FabricVsan, *http.Response, e
 /*
 GetFabricVsanByMoid Read a 'fabric.Vsan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricVsanByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricVsanByMoidRequest
 */
 func (a *FabricApiService) GetFabricVsanByMoid(ctx context.Context, moid string) ApiGetFabricVsanByMoidRequest {
 	return ApiGetFabricVsanByMoidRequest{
@@ -32896,7 +33030,8 @@ func (a *FabricApiService) GetFabricVsanByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return FabricVsan
+//
+//	@return FabricVsan
 func (a *FabricApiService) GetFabricVsanByMoidExecute(r ApiGetFabricVsanByMoidRequest) (*FabricVsan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33036,9 +33171,9 @@ func (r ApiGetFabricVsanInventoryByMoidRequest) Execute() (*FabricVsanInventory,
 /*
 GetFabricVsanInventoryByMoid Read a 'fabric.VsanInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetFabricVsanInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetFabricVsanInventoryByMoidRequest
 */
 func (a *FabricApiService) GetFabricVsanInventoryByMoid(ctx context.Context, moid string) ApiGetFabricVsanInventoryByMoidRequest {
 	return ApiGetFabricVsanInventoryByMoidRequest{
@@ -33049,7 +33184,8 @@ func (a *FabricApiService) GetFabricVsanInventoryByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricVsanInventory
+//
+//	@return FabricVsanInventory
 func (a *FabricApiService) GetFabricVsanInventoryByMoidExecute(r ApiGetFabricVsanInventoryByMoidRequest) (*FabricVsanInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33265,8 +33401,8 @@ func (r ApiGetFabricVsanInventoryListRequest) Execute() (*FabricVsanInventoryRes
 /*
 GetFabricVsanInventoryList Read a 'fabric.VsanInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricVsanInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricVsanInventoryListRequest
 */
 func (a *FabricApiService) GetFabricVsanInventoryList(ctx context.Context) ApiGetFabricVsanInventoryListRequest {
 	return ApiGetFabricVsanInventoryListRequest{
@@ -33276,7 +33412,8 @@ func (a *FabricApiService) GetFabricVsanInventoryList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return FabricVsanInventoryResponse
+//
+//	@return FabricVsanInventoryResponse
 func (a *FabricApiService) GetFabricVsanInventoryListExecute(r ApiGetFabricVsanInventoryListRequest) (*FabricVsanInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33539,8 +33676,8 @@ func (r ApiGetFabricVsanListRequest) Execute() (*FabricVsanResponse, *http.Respo
 /*
 GetFabricVsanList Read a 'fabric.Vsan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFabricVsanListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFabricVsanListRequest
 */
 func (a *FabricApiService) GetFabricVsanList(ctx context.Context) ApiGetFabricVsanListRequest {
 	return ApiGetFabricVsanListRequest{
@@ -33550,7 +33687,8 @@ func (a *FabricApiService) GetFabricVsanList(ctx context.Context) ApiGetFabricVs
 }
 
 // Execute executes the request
-//  @return FabricVsanResponse
+//
+//	@return FabricVsanResponse
 func (a *FabricApiService) GetFabricVsanListExecute(r ApiGetFabricVsanListRequest) (*FabricVsanResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -33751,9 +33889,9 @@ func (r ApiPatchFabricAppliancePcRoleRequest) Execute() (*FabricAppliancePcRole,
 /*
 PatchFabricAppliancePcRole Update a 'fabric.AppliancePcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricAppliancePcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricAppliancePcRoleRequest
 */
 func (a *FabricApiService) PatchFabricAppliancePcRole(ctx context.Context, moid string) ApiPatchFabricAppliancePcRoleRequest {
 	return ApiPatchFabricAppliancePcRoleRequest{
@@ -33764,7 +33902,8 @@ func (a *FabricApiService) PatchFabricAppliancePcRole(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricAppliancePcRole
+//
+//	@return FabricAppliancePcRole
 func (a *FabricApiService) PatchFabricAppliancePcRoleExecute(r ApiPatchFabricAppliancePcRoleRequest) (*FabricAppliancePcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -33926,9 +34065,9 @@ func (r ApiPatchFabricApplianceRoleRequest) Execute() (*FabricApplianceRole, *ht
 /*
 PatchFabricApplianceRole Update a 'fabric.ApplianceRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricApplianceRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricApplianceRoleRequest
 */
 func (a *FabricApiService) PatchFabricApplianceRole(ctx context.Context, moid string) ApiPatchFabricApplianceRoleRequest {
 	return ApiPatchFabricApplianceRoleRequest{
@@ -33939,7 +34078,8 @@ func (a *FabricApiService) PatchFabricApplianceRole(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricApplianceRole
+//
+//	@return FabricApplianceRole
 func (a *FabricApiService) PatchFabricApplianceRoleExecute(r ApiPatchFabricApplianceRoleRequest) (*FabricApplianceRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -34101,9 +34241,9 @@ func (r ApiPatchFabricElementIdentityRequest) Execute() (*FabricElementIdentity,
 /*
 PatchFabricElementIdentity Update a 'fabric.ElementIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricElementIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricElementIdentityRequest
 */
 func (a *FabricApiService) PatchFabricElementIdentity(ctx context.Context, moid string) ApiPatchFabricElementIdentityRequest {
 	return ApiPatchFabricElementIdentityRequest{
@@ -34114,7 +34254,8 @@ func (a *FabricApiService) PatchFabricElementIdentity(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricElementIdentity
+//
+//	@return FabricElementIdentity
 func (a *FabricApiService) PatchFabricElementIdentityExecute(r ApiPatchFabricElementIdentityRequest) (*FabricElementIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -34276,9 +34417,9 @@ func (r ApiPatchFabricEthNetworkControlPolicyRequest) Execute() (*FabricEthNetwo
 /*
 PatchFabricEthNetworkControlPolicy Update a 'fabric.EthNetworkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricEthNetworkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricEthNetworkControlPolicyRequest
 */
 func (a *FabricApiService) PatchFabricEthNetworkControlPolicy(ctx context.Context, moid string) ApiPatchFabricEthNetworkControlPolicyRequest {
 	return ApiPatchFabricEthNetworkControlPolicyRequest{
@@ -34289,7 +34430,8 @@ func (a *FabricApiService) PatchFabricEthNetworkControlPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicy
+//
+//	@return FabricEthNetworkControlPolicy
 func (a *FabricApiService) PatchFabricEthNetworkControlPolicyExecute(r ApiPatchFabricEthNetworkControlPolicyRequest) (*FabricEthNetworkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -34451,9 +34593,9 @@ func (r ApiPatchFabricEthNetworkGroupPolicyRequest) Execute() (*FabricEthNetwork
 /*
 PatchFabricEthNetworkGroupPolicy Update a 'fabric.EthNetworkGroupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricEthNetworkGroupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricEthNetworkGroupPolicyRequest
 */
 func (a *FabricApiService) PatchFabricEthNetworkGroupPolicy(ctx context.Context, moid string) ApiPatchFabricEthNetworkGroupPolicyRequest {
 	return ApiPatchFabricEthNetworkGroupPolicyRequest{
@@ -34464,7 +34606,8 @@ func (a *FabricApiService) PatchFabricEthNetworkGroupPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicy
+//
+//	@return FabricEthNetworkGroupPolicy
 func (a *FabricApiService) PatchFabricEthNetworkGroupPolicyExecute(r ApiPatchFabricEthNetworkGroupPolicyRequest) (*FabricEthNetworkGroupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -34626,9 +34769,9 @@ func (r ApiPatchFabricEthNetworkPolicyRequest) Execute() (*FabricEthNetworkPolic
 /*
 PatchFabricEthNetworkPolicy Update a 'fabric.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricEthNetworkPolicyRequest
 */
 func (a *FabricApiService) PatchFabricEthNetworkPolicy(ctx context.Context, moid string) ApiPatchFabricEthNetworkPolicyRequest {
 	return ApiPatchFabricEthNetworkPolicyRequest{
@@ -34639,7 +34782,8 @@ func (a *FabricApiService) PatchFabricEthNetworkPolicy(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkPolicy
+//
+//	@return FabricEthNetworkPolicy
 func (a *FabricApiService) PatchFabricEthNetworkPolicyExecute(r ApiPatchFabricEthNetworkPolicyRequest) (*FabricEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -34801,9 +34945,9 @@ func (r ApiPatchFabricFcNetworkPolicyRequest) Execute() (*FabricFcNetworkPolicy,
 /*
 PatchFabricFcNetworkPolicy Update a 'fabric.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcNetworkPolicyRequest
 */
 func (a *FabricApiService) PatchFabricFcNetworkPolicy(ctx context.Context, moid string) ApiPatchFabricFcNetworkPolicyRequest {
 	return ApiPatchFabricFcNetworkPolicyRequest{
@@ -34814,7 +34958,8 @@ func (a *FabricApiService) PatchFabricFcNetworkPolicy(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricFcNetworkPolicy
+//
+//	@return FabricFcNetworkPolicy
 func (a *FabricApiService) PatchFabricFcNetworkPolicyExecute(r ApiPatchFabricFcNetworkPolicyRequest) (*FabricFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -34976,9 +35121,9 @@ func (r ApiPatchFabricFcStorageRoleRequest) Execute() (*FabricFcStorageRole, *ht
 /*
 PatchFabricFcStorageRole Update a 'fabric.FcStorageRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcStorageRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcStorageRoleRequest
 */
 func (a *FabricApiService) PatchFabricFcStorageRole(ctx context.Context, moid string) ApiPatchFabricFcStorageRoleRequest {
 	return ApiPatchFabricFcStorageRoleRequest{
@@ -34989,7 +35134,8 @@ func (a *FabricApiService) PatchFabricFcStorageRole(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricFcStorageRole
+//
+//	@return FabricFcStorageRole
 func (a *FabricApiService) PatchFabricFcStorageRoleExecute(r ApiPatchFabricFcStorageRoleRequest) (*FabricFcStorageRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -35151,9 +35297,9 @@ func (r ApiPatchFabricFcUplinkPcRoleRequest) Execute() (*FabricFcUplinkPcRole, *
 /*
 PatchFabricFcUplinkPcRole Update a 'fabric.FcUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcUplinkPcRoleRequest
 */
 func (a *FabricApiService) PatchFabricFcUplinkPcRole(ctx context.Context, moid string) ApiPatchFabricFcUplinkPcRoleRequest {
 	return ApiPatchFabricFcUplinkPcRoleRequest{
@@ -35164,7 +35310,8 @@ func (a *FabricApiService) PatchFabricFcUplinkPcRole(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkPcRole
+//
+//	@return FabricFcUplinkPcRole
 func (a *FabricApiService) PatchFabricFcUplinkPcRoleExecute(r ApiPatchFabricFcUplinkPcRoleRequest) (*FabricFcUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -35326,9 +35473,9 @@ func (r ApiPatchFabricFcUplinkRoleRequest) Execute() (*FabricFcUplinkRole, *http
 /*
 PatchFabricFcUplinkRole Update a 'fabric.FcUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcUplinkRoleRequest
 */
 func (a *FabricApiService) PatchFabricFcUplinkRole(ctx context.Context, moid string) ApiPatchFabricFcUplinkRoleRequest {
 	return ApiPatchFabricFcUplinkRoleRequest{
@@ -35339,7 +35486,8 @@ func (a *FabricApiService) PatchFabricFcUplinkRole(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkRole
+//
+//	@return FabricFcUplinkRole
 func (a *FabricApiService) PatchFabricFcUplinkRoleExecute(r ApiPatchFabricFcUplinkRoleRequest) (*FabricFcUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -35501,9 +35649,9 @@ func (r ApiPatchFabricFcZonePolicyRequest) Execute() (*FabricFcZonePolicy, *http
 /*
 PatchFabricFcZonePolicy Update a 'fabric.FcZonePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcZonePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcZonePolicyRequest
 */
 func (a *FabricApiService) PatchFabricFcZonePolicy(ctx context.Context, moid string) ApiPatchFabricFcZonePolicyRequest {
 	return ApiPatchFabricFcZonePolicyRequest{
@@ -35514,7 +35662,8 @@ func (a *FabricApiService) PatchFabricFcZonePolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricFcZonePolicy
+//
+//	@return FabricFcZonePolicy
 func (a *FabricApiService) PatchFabricFcZonePolicyExecute(r ApiPatchFabricFcZonePolicyRequest) (*FabricFcZonePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -35676,9 +35825,9 @@ func (r ApiPatchFabricFcoeUplinkPcRoleRequest) Execute() (*FabricFcoeUplinkPcRol
 /*
 PatchFabricFcoeUplinkPcRole Update a 'fabric.FcoeUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcoeUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcoeUplinkPcRoleRequest
 */
 func (a *FabricApiService) PatchFabricFcoeUplinkPcRole(ctx context.Context, moid string) ApiPatchFabricFcoeUplinkPcRoleRequest {
 	return ApiPatchFabricFcoeUplinkPcRoleRequest{
@@ -35689,7 +35838,8 @@ func (a *FabricApiService) PatchFabricFcoeUplinkPcRole(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkPcRole
+//
+//	@return FabricFcoeUplinkPcRole
 func (a *FabricApiService) PatchFabricFcoeUplinkPcRoleExecute(r ApiPatchFabricFcoeUplinkPcRoleRequest) (*FabricFcoeUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -35851,9 +36001,9 @@ func (r ApiPatchFabricFcoeUplinkRoleRequest) Execute() (*FabricFcoeUplinkRole, *
 /*
 PatchFabricFcoeUplinkRole Update a 'fabric.FcoeUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFcoeUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFcoeUplinkRoleRequest
 */
 func (a *FabricApiService) PatchFabricFcoeUplinkRole(ctx context.Context, moid string) ApiPatchFabricFcoeUplinkRoleRequest {
 	return ApiPatchFabricFcoeUplinkRoleRequest{
@@ -35864,7 +36014,8 @@ func (a *FabricApiService) PatchFabricFcoeUplinkRole(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkRole
+//
+//	@return FabricFcoeUplinkRole
 func (a *FabricApiService) PatchFabricFcoeUplinkRoleExecute(r ApiPatchFabricFcoeUplinkRoleRequest) (*FabricFcoeUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -36026,9 +36177,9 @@ func (r ApiPatchFabricFlowControlPolicyRequest) Execute() (*FabricFlowControlPol
 /*
 PatchFabricFlowControlPolicy Update a 'fabric.FlowControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricFlowControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricFlowControlPolicyRequest
 */
 func (a *FabricApiService) PatchFabricFlowControlPolicy(ctx context.Context, moid string) ApiPatchFabricFlowControlPolicyRequest {
 	return ApiPatchFabricFlowControlPolicyRequest{
@@ -36039,7 +36190,8 @@ func (a *FabricApiService) PatchFabricFlowControlPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricFlowControlPolicy
+//
+//	@return FabricFlowControlPolicy
 func (a *FabricApiService) PatchFabricFlowControlPolicyExecute(r ApiPatchFabricFlowControlPolicyRequest) (*FabricFlowControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -36201,9 +36353,9 @@ func (r ApiPatchFabricLanPinGroupRequest) Execute() (*FabricLanPinGroup, *http.R
 /*
 PatchFabricLanPinGroup Update a 'fabric.LanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricLanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricLanPinGroupRequest
 */
 func (a *FabricApiService) PatchFabricLanPinGroup(ctx context.Context, moid string) ApiPatchFabricLanPinGroupRequest {
 	return ApiPatchFabricLanPinGroupRequest{
@@ -36214,7 +36366,8 @@ func (a *FabricApiService) PatchFabricLanPinGroup(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricLanPinGroup
+//
+//	@return FabricLanPinGroup
 func (a *FabricApiService) PatchFabricLanPinGroupExecute(r ApiPatchFabricLanPinGroupRequest) (*FabricLanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -36376,9 +36529,9 @@ func (r ApiPatchFabricLinkAggregationPolicyRequest) Execute() (*FabricLinkAggreg
 /*
 PatchFabricLinkAggregationPolicy Update a 'fabric.LinkAggregationPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricLinkAggregationPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricLinkAggregationPolicyRequest
 */
 func (a *FabricApiService) PatchFabricLinkAggregationPolicy(ctx context.Context, moid string) ApiPatchFabricLinkAggregationPolicyRequest {
 	return ApiPatchFabricLinkAggregationPolicyRequest{
@@ -36389,7 +36542,8 @@ func (a *FabricApiService) PatchFabricLinkAggregationPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricLinkAggregationPolicy
+//
+//	@return FabricLinkAggregationPolicy
 func (a *FabricApiService) PatchFabricLinkAggregationPolicyExecute(r ApiPatchFabricLinkAggregationPolicyRequest) (*FabricLinkAggregationPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -36551,9 +36705,9 @@ func (r ApiPatchFabricLinkControlPolicyRequest) Execute() (*FabricLinkControlPol
 /*
 PatchFabricLinkControlPolicy Update a 'fabric.LinkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricLinkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricLinkControlPolicyRequest
 */
 func (a *FabricApiService) PatchFabricLinkControlPolicy(ctx context.Context, moid string) ApiPatchFabricLinkControlPolicyRequest {
 	return ApiPatchFabricLinkControlPolicyRequest{
@@ -36564,7 +36718,8 @@ func (a *FabricApiService) PatchFabricLinkControlPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricLinkControlPolicy
+//
+//	@return FabricLinkControlPolicy
 func (a *FabricApiService) PatchFabricLinkControlPolicyExecute(r ApiPatchFabricLinkControlPolicyRequest) (*FabricLinkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -36726,9 +36881,9 @@ func (r ApiPatchFabricMulticastPolicyRequest) Execute() (*FabricMulticastPolicy,
 /*
 PatchFabricMulticastPolicy Update a 'fabric.MulticastPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricMulticastPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricMulticastPolicyRequest
 */
 func (a *FabricApiService) PatchFabricMulticastPolicy(ctx context.Context, moid string) ApiPatchFabricMulticastPolicyRequest {
 	return ApiPatchFabricMulticastPolicyRequest{
@@ -36739,7 +36894,8 @@ func (a *FabricApiService) PatchFabricMulticastPolicy(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricMulticastPolicy
+//
+//	@return FabricMulticastPolicy
 func (a *FabricApiService) PatchFabricMulticastPolicyExecute(r ApiPatchFabricMulticastPolicyRequest) (*FabricMulticastPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -36901,9 +37057,9 @@ func (r ApiPatchFabricPcOperationRequest) Execute() (*FabricPcOperation, *http.R
 /*
 PatchFabricPcOperation Update a 'fabric.PcOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricPcOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricPcOperationRequest
 */
 func (a *FabricApiService) PatchFabricPcOperation(ctx context.Context, moid string) ApiPatchFabricPcOperationRequest {
 	return ApiPatchFabricPcOperationRequest{
@@ -36914,7 +37070,8 @@ func (a *FabricApiService) PatchFabricPcOperation(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricPcOperation
+//
+//	@return FabricPcOperation
 func (a *FabricApiService) PatchFabricPcOperationExecute(r ApiPatchFabricPcOperationRequest) (*FabricPcOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -37076,9 +37233,9 @@ func (r ApiPatchFabricPortModeRequest) Execute() (*FabricPortMode, *http.Respons
 /*
 PatchFabricPortMode Update a 'fabric.PortMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricPortModeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricPortModeRequest
 */
 func (a *FabricApiService) PatchFabricPortMode(ctx context.Context, moid string) ApiPatchFabricPortModeRequest {
 	return ApiPatchFabricPortModeRequest{
@@ -37089,7 +37246,8 @@ func (a *FabricApiService) PatchFabricPortMode(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return FabricPortMode
+//
+//	@return FabricPortMode
 func (a *FabricApiService) PatchFabricPortModeExecute(r ApiPatchFabricPortModeRequest) (*FabricPortMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -37251,9 +37409,9 @@ func (r ApiPatchFabricPortOperationRequest) Execute() (*FabricPortOperation, *ht
 /*
 PatchFabricPortOperation Update a 'fabric.PortOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricPortOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricPortOperationRequest
 */
 func (a *FabricApiService) PatchFabricPortOperation(ctx context.Context, moid string) ApiPatchFabricPortOperationRequest {
 	return ApiPatchFabricPortOperationRequest{
@@ -37264,7 +37422,8 @@ func (a *FabricApiService) PatchFabricPortOperation(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricPortOperation
+//
+//	@return FabricPortOperation
 func (a *FabricApiService) PatchFabricPortOperationExecute(r ApiPatchFabricPortOperationRequest) (*FabricPortOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -37426,9 +37585,9 @@ func (r ApiPatchFabricPortPolicyRequest) Execute() (*FabricPortPolicy, *http.Res
 /*
 PatchFabricPortPolicy Update a 'fabric.PortPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricPortPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricPortPolicyRequest
 */
 func (a *FabricApiService) PatchFabricPortPolicy(ctx context.Context, moid string) ApiPatchFabricPortPolicyRequest {
 	return ApiPatchFabricPortPolicyRequest{
@@ -37439,7 +37598,8 @@ func (a *FabricApiService) PatchFabricPortPolicy(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return FabricPortPolicy
+//
+//	@return FabricPortPolicy
 func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPolicyRequest) (*FabricPortPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -37601,9 +37761,9 @@ func (r ApiPatchFabricSanPinGroupRequest) Execute() (*FabricSanPinGroup, *http.R
 /*
 PatchFabricSanPinGroup Update a 'fabric.SanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSanPinGroupRequest
 */
 func (a *FabricApiService) PatchFabricSanPinGroup(ctx context.Context, moid string) ApiPatchFabricSanPinGroupRequest {
 	return ApiPatchFabricSanPinGroupRequest{
@@ -37614,7 +37774,8 @@ func (a *FabricApiService) PatchFabricSanPinGroup(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricSanPinGroup
+//
+//	@return FabricSanPinGroup
 func (a *FabricApiService) PatchFabricSanPinGroupExecute(r ApiPatchFabricSanPinGroupRequest) (*FabricSanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -37776,9 +37937,9 @@ func (r ApiPatchFabricServerRoleRequest) Execute() (*FabricServerRole, *http.Res
 /*
 PatchFabricServerRole Update a 'fabric.ServerRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricServerRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricServerRoleRequest
 */
 func (a *FabricApiService) PatchFabricServerRole(ctx context.Context, moid string) ApiPatchFabricServerRoleRequest {
 	return ApiPatchFabricServerRoleRequest{
@@ -37789,7 +37950,8 @@ func (a *FabricApiService) PatchFabricServerRole(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return FabricServerRole
+//
+//	@return FabricServerRole
 func (a *FabricApiService) PatchFabricServerRoleExecute(r ApiPatchFabricServerRoleRequest) (*FabricServerRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -37951,9 +38113,9 @@ func (r ApiPatchFabricSpanDestEthPortRequest) Execute() (*FabricSpanDestEthPort,
 /*
 PatchFabricSpanDestEthPort Update a 'fabric.SpanDestEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSpanDestEthPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSpanDestEthPortRequest
 */
 func (a *FabricApiService) PatchFabricSpanDestEthPort(ctx context.Context, moid string) ApiPatchFabricSpanDestEthPortRequest {
 	return ApiPatchFabricSpanDestEthPortRequest{
@@ -37964,7 +38126,8 @@ func (a *FabricApiService) PatchFabricSpanDestEthPort(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricSpanDestEthPort
+//
+//	@return FabricSpanDestEthPort
 func (a *FabricApiService) PatchFabricSpanDestEthPortExecute(r ApiPatchFabricSpanDestEthPortRequest) (*FabricSpanDestEthPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -38126,9 +38289,9 @@ func (r ApiPatchFabricSpanSessionRequest) Execute() (*FabricSpanSession, *http.R
 /*
 PatchFabricSpanSession Update a 'fabric.SpanSession' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSpanSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSpanSessionRequest
 */
 func (a *FabricApiService) PatchFabricSpanSession(ctx context.Context, moid string) ApiPatchFabricSpanSessionRequest {
 	return ApiPatchFabricSpanSessionRequest{
@@ -38139,7 +38302,8 @@ func (a *FabricApiService) PatchFabricSpanSession(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricSpanSession
+//
+//	@return FabricSpanSession
 func (a *FabricApiService) PatchFabricSpanSessionExecute(r ApiPatchFabricSpanSessionRequest) (*FabricSpanSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -38301,9 +38465,9 @@ func (r ApiPatchFabricSwitchClusterProfileRequest) Execute() (*FabricSwitchClust
 /*
 PatchFabricSwitchClusterProfile Update a 'fabric.SwitchClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSwitchClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSwitchClusterProfileRequest
 */
 func (a *FabricApiService) PatchFabricSwitchClusterProfile(ctx context.Context, moid string) ApiPatchFabricSwitchClusterProfileRequest {
 	return ApiPatchFabricSwitchClusterProfileRequest{
@@ -38314,7 +38478,8 @@ func (a *FabricApiService) PatchFabricSwitchClusterProfile(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfile
+//
+//	@return FabricSwitchClusterProfile
 func (a *FabricApiService) PatchFabricSwitchClusterProfileExecute(r ApiPatchFabricSwitchClusterProfileRequest) (*FabricSwitchClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -38476,9 +38641,9 @@ func (r ApiPatchFabricSwitchClusterProfileTemplateRequest) Execute() (*FabricSwi
 /*
 PatchFabricSwitchClusterProfileTemplate Update a 'fabric.SwitchClusterProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSwitchClusterProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSwitchClusterProfileTemplateRequest
 */
 func (a *FabricApiService) PatchFabricSwitchClusterProfileTemplate(ctx context.Context, moid string) ApiPatchFabricSwitchClusterProfileTemplateRequest {
 	return ApiPatchFabricSwitchClusterProfileTemplateRequest{
@@ -38489,7 +38654,8 @@ func (a *FabricApiService) PatchFabricSwitchClusterProfileTemplate(ctx context.C
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfileTemplate
+//
+//	@return FabricSwitchClusterProfileTemplate
 func (a *FabricApiService) PatchFabricSwitchClusterProfileTemplateExecute(r ApiPatchFabricSwitchClusterProfileTemplateRequest) (*FabricSwitchClusterProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -38651,9 +38817,9 @@ func (r ApiPatchFabricSwitchControlPolicyRequest) Execute() (*FabricSwitchContro
 /*
 PatchFabricSwitchControlPolicy Update a 'fabric.SwitchControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSwitchControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSwitchControlPolicyRequest
 */
 func (a *FabricApiService) PatchFabricSwitchControlPolicy(ctx context.Context, moid string) ApiPatchFabricSwitchControlPolicyRequest {
 	return ApiPatchFabricSwitchControlPolicyRequest{
@@ -38664,7 +38830,8 @@ func (a *FabricApiService) PatchFabricSwitchControlPolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return FabricSwitchControlPolicy
+//
+//	@return FabricSwitchControlPolicy
 func (a *FabricApiService) PatchFabricSwitchControlPolicyExecute(r ApiPatchFabricSwitchControlPolicyRequest) (*FabricSwitchControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -38826,9 +38993,9 @@ func (r ApiPatchFabricSwitchProfileRequest) Execute() (*FabricSwitchProfile, *ht
 /*
 PatchFabricSwitchProfile Update a 'fabric.SwitchProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSwitchProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSwitchProfileRequest
 */
 func (a *FabricApiService) PatchFabricSwitchProfile(ctx context.Context, moid string) ApiPatchFabricSwitchProfileRequest {
 	return ApiPatchFabricSwitchProfileRequest{
@@ -38839,7 +39006,8 @@ func (a *FabricApiService) PatchFabricSwitchProfile(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfile
+//
+//	@return FabricSwitchProfile
 func (a *FabricApiService) PatchFabricSwitchProfileExecute(r ApiPatchFabricSwitchProfileRequest) (*FabricSwitchProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -39001,9 +39169,9 @@ func (r ApiPatchFabricSwitchProfileTemplateRequest) Execute() (*FabricSwitchProf
 /*
 PatchFabricSwitchProfileTemplate Update a 'fabric.SwitchProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSwitchProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSwitchProfileTemplateRequest
 */
 func (a *FabricApiService) PatchFabricSwitchProfileTemplate(ctx context.Context, moid string) ApiPatchFabricSwitchProfileTemplateRequest {
 	return ApiPatchFabricSwitchProfileTemplateRequest{
@@ -39014,7 +39182,8 @@ func (a *FabricApiService) PatchFabricSwitchProfileTemplate(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfileTemplate
+//
+//	@return FabricSwitchProfileTemplate
 func (a *FabricApiService) PatchFabricSwitchProfileTemplateExecute(r ApiPatchFabricSwitchProfileTemplateRequest) (*FabricSwitchProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -39176,9 +39345,9 @@ func (r ApiPatchFabricSystemQosPolicyRequest) Execute() (*FabricSystemQosPolicy,
 /*
 PatchFabricSystemQosPolicy Update a 'fabric.SystemQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricSystemQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricSystemQosPolicyRequest
 */
 func (a *FabricApiService) PatchFabricSystemQosPolicy(ctx context.Context, moid string) ApiPatchFabricSystemQosPolicyRequest {
 	return ApiPatchFabricSystemQosPolicyRequest{
@@ -39189,7 +39358,8 @@ func (a *FabricApiService) PatchFabricSystemQosPolicy(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricSystemQosPolicy
+//
+//	@return FabricSystemQosPolicy
 func (a *FabricApiService) PatchFabricSystemQosPolicyExecute(r ApiPatchFabricSystemQosPolicyRequest) (*FabricSystemQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -39351,9 +39521,9 @@ func (r ApiPatchFabricUplinkPcRoleRequest) Execute() (*FabricUplinkPcRole, *http
 /*
 PatchFabricUplinkPcRole Update a 'fabric.UplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricUplinkPcRoleRequest
 */
 func (a *FabricApiService) PatchFabricUplinkPcRole(ctx context.Context, moid string) ApiPatchFabricUplinkPcRoleRequest {
 	return ApiPatchFabricUplinkPcRoleRequest{
@@ -39364,7 +39534,8 @@ func (a *FabricApiService) PatchFabricUplinkPcRole(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricUplinkPcRole
+//
+//	@return FabricUplinkPcRole
 func (a *FabricApiService) PatchFabricUplinkPcRoleExecute(r ApiPatchFabricUplinkPcRoleRequest) (*FabricUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -39526,9 +39697,9 @@ func (r ApiPatchFabricUplinkRoleRequest) Execute() (*FabricUplinkRole, *http.Res
 /*
 PatchFabricUplinkRole Update a 'fabric.UplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricUplinkRoleRequest
 */
 func (a *FabricApiService) PatchFabricUplinkRole(ctx context.Context, moid string) ApiPatchFabricUplinkRoleRequest {
 	return ApiPatchFabricUplinkRoleRequest{
@@ -39539,7 +39710,8 @@ func (a *FabricApiService) PatchFabricUplinkRole(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return FabricUplinkRole
+//
+//	@return FabricUplinkRole
 func (a *FabricApiService) PatchFabricUplinkRoleExecute(r ApiPatchFabricUplinkRoleRequest) (*FabricUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -39701,9 +39873,9 @@ func (r ApiPatchFabricVlanRequest) Execute() (*FabricVlan, *http.Response, error
 /*
 PatchFabricVlan Update a 'fabric.Vlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricVlanRequest
 */
 func (a *FabricApiService) PatchFabricVlan(ctx context.Context, moid string) ApiPatchFabricVlanRequest {
 	return ApiPatchFabricVlanRequest{
@@ -39714,7 +39886,8 @@ func (a *FabricApiService) PatchFabricVlan(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return FabricVlan
+//
+//	@return FabricVlan
 func (a *FabricApiService) PatchFabricVlanExecute(r ApiPatchFabricVlanRequest) (*FabricVlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -39876,9 +40049,9 @@ func (r ApiPatchFabricVsanRequest) Execute() (*FabricVsan, *http.Response, error
 /*
 PatchFabricVsan Update a 'fabric.Vsan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFabricVsanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFabricVsanRequest
 */
 func (a *FabricApiService) PatchFabricVsan(ctx context.Context, moid string) ApiPatchFabricVsanRequest {
 	return ApiPatchFabricVsanRequest{
@@ -39889,7 +40062,8 @@ func (a *FabricApiService) PatchFabricVsan(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return FabricVsan
+//
+//	@return FabricVsan
 func (a *FabricApiService) PatchFabricVsanExecute(r ApiPatchFabricVsanRequest) (*FabricVsan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -40051,9 +40225,9 @@ func (r ApiUpdateFabricAppliancePcRoleRequest) Execute() (*FabricAppliancePcRole
 /*
 UpdateFabricAppliancePcRole Update a 'fabric.AppliancePcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricAppliancePcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricAppliancePcRoleRequest
 */
 func (a *FabricApiService) UpdateFabricAppliancePcRole(ctx context.Context, moid string) ApiUpdateFabricAppliancePcRoleRequest {
 	return ApiUpdateFabricAppliancePcRoleRequest{
@@ -40064,7 +40238,8 @@ func (a *FabricApiService) UpdateFabricAppliancePcRole(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricAppliancePcRole
+//
+//	@return FabricAppliancePcRole
 func (a *FabricApiService) UpdateFabricAppliancePcRoleExecute(r ApiUpdateFabricAppliancePcRoleRequest) (*FabricAppliancePcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -40226,9 +40401,9 @@ func (r ApiUpdateFabricApplianceRoleRequest) Execute() (*FabricApplianceRole, *h
 /*
 UpdateFabricApplianceRole Update a 'fabric.ApplianceRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricApplianceRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricApplianceRoleRequest
 */
 func (a *FabricApiService) UpdateFabricApplianceRole(ctx context.Context, moid string) ApiUpdateFabricApplianceRoleRequest {
 	return ApiUpdateFabricApplianceRoleRequest{
@@ -40239,7 +40414,8 @@ func (a *FabricApiService) UpdateFabricApplianceRole(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricApplianceRole
+//
+//	@return FabricApplianceRole
 func (a *FabricApiService) UpdateFabricApplianceRoleExecute(r ApiUpdateFabricApplianceRoleRequest) (*FabricApplianceRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -40401,9 +40577,9 @@ func (r ApiUpdateFabricElementIdentityRequest) Execute() (*FabricElementIdentity
 /*
 UpdateFabricElementIdentity Update a 'fabric.ElementIdentity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricElementIdentityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricElementIdentityRequest
 */
 func (a *FabricApiService) UpdateFabricElementIdentity(ctx context.Context, moid string) ApiUpdateFabricElementIdentityRequest {
 	return ApiUpdateFabricElementIdentityRequest{
@@ -40414,7 +40590,8 @@ func (a *FabricApiService) UpdateFabricElementIdentity(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricElementIdentity
+//
+//	@return FabricElementIdentity
 func (a *FabricApiService) UpdateFabricElementIdentityExecute(r ApiUpdateFabricElementIdentityRequest) (*FabricElementIdentity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -40576,9 +40753,9 @@ func (r ApiUpdateFabricEthNetworkControlPolicyRequest) Execute() (*FabricEthNetw
 /*
 UpdateFabricEthNetworkControlPolicy Update a 'fabric.EthNetworkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricEthNetworkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricEthNetworkControlPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricEthNetworkControlPolicy(ctx context.Context, moid string) ApiUpdateFabricEthNetworkControlPolicyRequest {
 	return ApiUpdateFabricEthNetworkControlPolicyRequest{
@@ -40589,7 +40766,8 @@ func (a *FabricApiService) UpdateFabricEthNetworkControlPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkControlPolicy
+//
+//	@return FabricEthNetworkControlPolicy
 func (a *FabricApiService) UpdateFabricEthNetworkControlPolicyExecute(r ApiUpdateFabricEthNetworkControlPolicyRequest) (*FabricEthNetworkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -40751,9 +40929,9 @@ func (r ApiUpdateFabricEthNetworkGroupPolicyRequest) Execute() (*FabricEthNetwor
 /*
 UpdateFabricEthNetworkGroupPolicy Update a 'fabric.EthNetworkGroupPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricEthNetworkGroupPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricEthNetworkGroupPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicy(ctx context.Context, moid string) ApiUpdateFabricEthNetworkGroupPolicyRequest {
 	return ApiUpdateFabricEthNetworkGroupPolicyRequest{
@@ -40764,7 +40942,8 @@ func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkGroupPolicy
+//
+//	@return FabricEthNetworkGroupPolicy
 func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicyExecute(r ApiUpdateFabricEthNetworkGroupPolicyRequest) (*FabricEthNetworkGroupPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -40926,9 +41105,9 @@ func (r ApiUpdateFabricEthNetworkPolicyRequest) Execute() (*FabricEthNetworkPoli
 /*
 UpdateFabricEthNetworkPolicy Update a 'fabric.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricEthNetworkPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricEthNetworkPolicy(ctx context.Context, moid string) ApiUpdateFabricEthNetworkPolicyRequest {
 	return ApiUpdateFabricEthNetworkPolicyRequest{
@@ -40939,7 +41118,8 @@ func (a *FabricApiService) UpdateFabricEthNetworkPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricEthNetworkPolicy
+//
+//	@return FabricEthNetworkPolicy
 func (a *FabricApiService) UpdateFabricEthNetworkPolicyExecute(r ApiUpdateFabricEthNetworkPolicyRequest) (*FabricEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -41101,9 +41281,9 @@ func (r ApiUpdateFabricFcNetworkPolicyRequest) Execute() (*FabricFcNetworkPolicy
 /*
 UpdateFabricFcNetworkPolicy Update a 'fabric.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcNetworkPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricFcNetworkPolicy(ctx context.Context, moid string) ApiUpdateFabricFcNetworkPolicyRequest {
 	return ApiUpdateFabricFcNetworkPolicyRequest{
@@ -41114,7 +41294,8 @@ func (a *FabricApiService) UpdateFabricFcNetworkPolicy(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricFcNetworkPolicy
+//
+//	@return FabricFcNetworkPolicy
 func (a *FabricApiService) UpdateFabricFcNetworkPolicyExecute(r ApiUpdateFabricFcNetworkPolicyRequest) (*FabricFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -41276,9 +41457,9 @@ func (r ApiUpdateFabricFcStorageRoleRequest) Execute() (*FabricFcStorageRole, *h
 /*
 UpdateFabricFcStorageRole Update a 'fabric.FcStorageRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcStorageRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcStorageRoleRequest
 */
 func (a *FabricApiService) UpdateFabricFcStorageRole(ctx context.Context, moid string) ApiUpdateFabricFcStorageRoleRequest {
 	return ApiUpdateFabricFcStorageRoleRequest{
@@ -41289,7 +41470,8 @@ func (a *FabricApiService) UpdateFabricFcStorageRole(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricFcStorageRole
+//
+//	@return FabricFcStorageRole
 func (a *FabricApiService) UpdateFabricFcStorageRoleExecute(r ApiUpdateFabricFcStorageRoleRequest) (*FabricFcStorageRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -41451,9 +41633,9 @@ func (r ApiUpdateFabricFcUplinkPcRoleRequest) Execute() (*FabricFcUplinkPcRole, 
 /*
 UpdateFabricFcUplinkPcRole Update a 'fabric.FcUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcUplinkPcRoleRequest
 */
 func (a *FabricApiService) UpdateFabricFcUplinkPcRole(ctx context.Context, moid string) ApiUpdateFabricFcUplinkPcRoleRequest {
 	return ApiUpdateFabricFcUplinkPcRoleRequest{
@@ -41464,7 +41646,8 @@ func (a *FabricApiService) UpdateFabricFcUplinkPcRole(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkPcRole
+//
+//	@return FabricFcUplinkPcRole
 func (a *FabricApiService) UpdateFabricFcUplinkPcRoleExecute(r ApiUpdateFabricFcUplinkPcRoleRequest) (*FabricFcUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -41626,9 +41809,9 @@ func (r ApiUpdateFabricFcUplinkRoleRequest) Execute() (*FabricFcUplinkRole, *htt
 /*
 UpdateFabricFcUplinkRole Update a 'fabric.FcUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcUplinkRoleRequest
 */
 func (a *FabricApiService) UpdateFabricFcUplinkRole(ctx context.Context, moid string) ApiUpdateFabricFcUplinkRoleRequest {
 	return ApiUpdateFabricFcUplinkRoleRequest{
@@ -41639,7 +41822,8 @@ func (a *FabricApiService) UpdateFabricFcUplinkRole(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricFcUplinkRole
+//
+//	@return FabricFcUplinkRole
 func (a *FabricApiService) UpdateFabricFcUplinkRoleExecute(r ApiUpdateFabricFcUplinkRoleRequest) (*FabricFcUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -41801,9 +41985,9 @@ func (r ApiUpdateFabricFcZonePolicyRequest) Execute() (*FabricFcZonePolicy, *htt
 /*
 UpdateFabricFcZonePolicy Update a 'fabric.FcZonePolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcZonePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcZonePolicyRequest
 */
 func (a *FabricApiService) UpdateFabricFcZonePolicy(ctx context.Context, moid string) ApiUpdateFabricFcZonePolicyRequest {
 	return ApiUpdateFabricFcZonePolicyRequest{
@@ -41814,7 +41998,8 @@ func (a *FabricApiService) UpdateFabricFcZonePolicy(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricFcZonePolicy
+//
+//	@return FabricFcZonePolicy
 func (a *FabricApiService) UpdateFabricFcZonePolicyExecute(r ApiUpdateFabricFcZonePolicyRequest) (*FabricFcZonePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -41976,9 +42161,9 @@ func (r ApiUpdateFabricFcoeUplinkPcRoleRequest) Execute() (*FabricFcoeUplinkPcRo
 /*
 UpdateFabricFcoeUplinkPcRole Update a 'fabric.FcoeUplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcoeUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcoeUplinkPcRoleRequest
 */
 func (a *FabricApiService) UpdateFabricFcoeUplinkPcRole(ctx context.Context, moid string) ApiUpdateFabricFcoeUplinkPcRoleRequest {
 	return ApiUpdateFabricFcoeUplinkPcRoleRequest{
@@ -41989,7 +42174,8 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkPcRole(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkPcRole
+//
+//	@return FabricFcoeUplinkPcRole
 func (a *FabricApiService) UpdateFabricFcoeUplinkPcRoleExecute(r ApiUpdateFabricFcoeUplinkPcRoleRequest) (*FabricFcoeUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -42151,9 +42337,9 @@ func (r ApiUpdateFabricFcoeUplinkRoleRequest) Execute() (*FabricFcoeUplinkRole, 
 /*
 UpdateFabricFcoeUplinkRole Update a 'fabric.FcoeUplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFcoeUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFcoeUplinkRoleRequest
 */
 func (a *FabricApiService) UpdateFabricFcoeUplinkRole(ctx context.Context, moid string) ApiUpdateFabricFcoeUplinkRoleRequest {
 	return ApiUpdateFabricFcoeUplinkRoleRequest{
@@ -42164,7 +42350,8 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkRole(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return FabricFcoeUplinkRole
+//
+//	@return FabricFcoeUplinkRole
 func (a *FabricApiService) UpdateFabricFcoeUplinkRoleExecute(r ApiUpdateFabricFcoeUplinkRoleRequest) (*FabricFcoeUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -42326,9 +42513,9 @@ func (r ApiUpdateFabricFlowControlPolicyRequest) Execute() (*FabricFlowControlPo
 /*
 UpdateFabricFlowControlPolicy Update a 'fabric.FlowControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricFlowControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricFlowControlPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricFlowControlPolicy(ctx context.Context, moid string) ApiUpdateFabricFlowControlPolicyRequest {
 	return ApiUpdateFabricFlowControlPolicyRequest{
@@ -42339,7 +42526,8 @@ func (a *FabricApiService) UpdateFabricFlowControlPolicy(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return FabricFlowControlPolicy
+//
+//	@return FabricFlowControlPolicy
 func (a *FabricApiService) UpdateFabricFlowControlPolicyExecute(r ApiUpdateFabricFlowControlPolicyRequest) (*FabricFlowControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -42501,9 +42689,9 @@ func (r ApiUpdateFabricLanPinGroupRequest) Execute() (*FabricLanPinGroup, *http.
 /*
 UpdateFabricLanPinGroup Update a 'fabric.LanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricLanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricLanPinGroupRequest
 */
 func (a *FabricApiService) UpdateFabricLanPinGroup(ctx context.Context, moid string) ApiUpdateFabricLanPinGroupRequest {
 	return ApiUpdateFabricLanPinGroupRequest{
@@ -42514,7 +42702,8 @@ func (a *FabricApiService) UpdateFabricLanPinGroup(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricLanPinGroup
+//
+//	@return FabricLanPinGroup
 func (a *FabricApiService) UpdateFabricLanPinGroupExecute(r ApiUpdateFabricLanPinGroupRequest) (*FabricLanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -42676,9 +42865,9 @@ func (r ApiUpdateFabricLinkAggregationPolicyRequest) Execute() (*FabricLinkAggre
 /*
 UpdateFabricLinkAggregationPolicy Update a 'fabric.LinkAggregationPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricLinkAggregationPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricLinkAggregationPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricLinkAggregationPolicy(ctx context.Context, moid string) ApiUpdateFabricLinkAggregationPolicyRequest {
 	return ApiUpdateFabricLinkAggregationPolicyRequest{
@@ -42689,7 +42878,8 @@ func (a *FabricApiService) UpdateFabricLinkAggregationPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricLinkAggregationPolicy
+//
+//	@return FabricLinkAggregationPolicy
 func (a *FabricApiService) UpdateFabricLinkAggregationPolicyExecute(r ApiUpdateFabricLinkAggregationPolicyRequest) (*FabricLinkAggregationPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -42851,9 +43041,9 @@ func (r ApiUpdateFabricLinkControlPolicyRequest) Execute() (*FabricLinkControlPo
 /*
 UpdateFabricLinkControlPolicy Update a 'fabric.LinkControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricLinkControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricLinkControlPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricLinkControlPolicy(ctx context.Context, moid string) ApiUpdateFabricLinkControlPolicyRequest {
 	return ApiUpdateFabricLinkControlPolicyRequest{
@@ -42864,7 +43054,8 @@ func (a *FabricApiService) UpdateFabricLinkControlPolicy(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return FabricLinkControlPolicy
+//
+//	@return FabricLinkControlPolicy
 func (a *FabricApiService) UpdateFabricLinkControlPolicyExecute(r ApiUpdateFabricLinkControlPolicyRequest) (*FabricLinkControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -43026,9 +43217,9 @@ func (r ApiUpdateFabricMulticastPolicyRequest) Execute() (*FabricMulticastPolicy
 /*
 UpdateFabricMulticastPolicy Update a 'fabric.MulticastPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricMulticastPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricMulticastPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricMulticastPolicy(ctx context.Context, moid string) ApiUpdateFabricMulticastPolicyRequest {
 	return ApiUpdateFabricMulticastPolicyRequest{
@@ -43039,7 +43230,8 @@ func (a *FabricApiService) UpdateFabricMulticastPolicy(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricMulticastPolicy
+//
+//	@return FabricMulticastPolicy
 func (a *FabricApiService) UpdateFabricMulticastPolicyExecute(r ApiUpdateFabricMulticastPolicyRequest) (*FabricMulticastPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -43201,9 +43393,9 @@ func (r ApiUpdateFabricPcOperationRequest) Execute() (*FabricPcOperation, *http.
 /*
 UpdateFabricPcOperation Update a 'fabric.PcOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricPcOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricPcOperationRequest
 */
 func (a *FabricApiService) UpdateFabricPcOperation(ctx context.Context, moid string) ApiUpdateFabricPcOperationRequest {
 	return ApiUpdateFabricPcOperationRequest{
@@ -43214,7 +43406,8 @@ func (a *FabricApiService) UpdateFabricPcOperation(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricPcOperation
+//
+//	@return FabricPcOperation
 func (a *FabricApiService) UpdateFabricPcOperationExecute(r ApiUpdateFabricPcOperationRequest) (*FabricPcOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -43376,9 +43569,9 @@ func (r ApiUpdateFabricPortModeRequest) Execute() (*FabricPortMode, *http.Respon
 /*
 UpdateFabricPortMode Update a 'fabric.PortMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricPortModeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricPortModeRequest
 */
 func (a *FabricApiService) UpdateFabricPortMode(ctx context.Context, moid string) ApiUpdateFabricPortModeRequest {
 	return ApiUpdateFabricPortModeRequest{
@@ -43389,7 +43582,8 @@ func (a *FabricApiService) UpdateFabricPortMode(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return FabricPortMode
+//
+//	@return FabricPortMode
 func (a *FabricApiService) UpdateFabricPortModeExecute(r ApiUpdateFabricPortModeRequest) (*FabricPortMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -43551,9 +43745,9 @@ func (r ApiUpdateFabricPortOperationRequest) Execute() (*FabricPortOperation, *h
 /*
 UpdateFabricPortOperation Update a 'fabric.PortOperation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricPortOperationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricPortOperationRequest
 */
 func (a *FabricApiService) UpdateFabricPortOperation(ctx context.Context, moid string) ApiUpdateFabricPortOperationRequest {
 	return ApiUpdateFabricPortOperationRequest{
@@ -43564,7 +43758,8 @@ func (a *FabricApiService) UpdateFabricPortOperation(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricPortOperation
+//
+//	@return FabricPortOperation
 func (a *FabricApiService) UpdateFabricPortOperationExecute(r ApiUpdateFabricPortOperationRequest) (*FabricPortOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -43726,9 +43921,9 @@ func (r ApiUpdateFabricPortPolicyRequest) Execute() (*FabricPortPolicy, *http.Re
 /*
 UpdateFabricPortPolicy Update a 'fabric.PortPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricPortPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricPortPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricPortPolicy(ctx context.Context, moid string) ApiUpdateFabricPortPolicyRequest {
 	return ApiUpdateFabricPortPolicyRequest{
@@ -43739,7 +43934,8 @@ func (a *FabricApiService) UpdateFabricPortPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricPortPolicy
+//
+//	@return FabricPortPolicy
 func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPolicyRequest) (*FabricPortPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -43901,9 +44097,9 @@ func (r ApiUpdateFabricSanPinGroupRequest) Execute() (*FabricSanPinGroup, *http.
 /*
 UpdateFabricSanPinGroup Update a 'fabric.SanPinGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSanPinGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSanPinGroupRequest
 */
 func (a *FabricApiService) UpdateFabricSanPinGroup(ctx context.Context, moid string) ApiUpdateFabricSanPinGroupRequest {
 	return ApiUpdateFabricSanPinGroupRequest{
@@ -43914,7 +44110,8 @@ func (a *FabricApiService) UpdateFabricSanPinGroup(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricSanPinGroup
+//
+//	@return FabricSanPinGroup
 func (a *FabricApiService) UpdateFabricSanPinGroupExecute(r ApiUpdateFabricSanPinGroupRequest) (*FabricSanPinGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -44076,9 +44273,9 @@ func (r ApiUpdateFabricServerRoleRequest) Execute() (*FabricServerRole, *http.Re
 /*
 UpdateFabricServerRole Update a 'fabric.ServerRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricServerRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricServerRoleRequest
 */
 func (a *FabricApiService) UpdateFabricServerRole(ctx context.Context, moid string) ApiUpdateFabricServerRoleRequest {
 	return ApiUpdateFabricServerRoleRequest{
@@ -44089,7 +44286,8 @@ func (a *FabricApiService) UpdateFabricServerRole(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricServerRole
+//
+//	@return FabricServerRole
 func (a *FabricApiService) UpdateFabricServerRoleExecute(r ApiUpdateFabricServerRoleRequest) (*FabricServerRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -44251,9 +44449,9 @@ func (r ApiUpdateFabricSpanDestEthPortRequest) Execute() (*FabricSpanDestEthPort
 /*
 UpdateFabricSpanDestEthPort Update a 'fabric.SpanDestEthPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSpanDestEthPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSpanDestEthPortRequest
 */
 func (a *FabricApiService) UpdateFabricSpanDestEthPort(ctx context.Context, moid string) ApiUpdateFabricSpanDestEthPortRequest {
 	return ApiUpdateFabricSpanDestEthPortRequest{
@@ -44264,7 +44462,8 @@ func (a *FabricApiService) UpdateFabricSpanDestEthPort(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricSpanDestEthPort
+//
+//	@return FabricSpanDestEthPort
 func (a *FabricApiService) UpdateFabricSpanDestEthPortExecute(r ApiUpdateFabricSpanDestEthPortRequest) (*FabricSpanDestEthPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -44426,9 +44625,9 @@ func (r ApiUpdateFabricSpanSessionRequest) Execute() (*FabricSpanSession, *http.
 /*
 UpdateFabricSpanSession Update a 'fabric.SpanSession' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSpanSessionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSpanSessionRequest
 */
 func (a *FabricApiService) UpdateFabricSpanSession(ctx context.Context, moid string) ApiUpdateFabricSpanSessionRequest {
 	return ApiUpdateFabricSpanSessionRequest{
@@ -44439,7 +44638,8 @@ func (a *FabricApiService) UpdateFabricSpanSession(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return FabricSpanSession
+//
+//	@return FabricSpanSession
 func (a *FabricApiService) UpdateFabricSpanSessionExecute(r ApiUpdateFabricSpanSessionRequest) (*FabricSpanSession, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -44601,9 +44801,9 @@ func (r ApiUpdateFabricSwitchClusterProfileRequest) Execute() (*FabricSwitchClus
 /*
 UpdateFabricSwitchClusterProfile Update a 'fabric.SwitchClusterProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSwitchClusterProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSwitchClusterProfileRequest
 */
 func (a *FabricApiService) UpdateFabricSwitchClusterProfile(ctx context.Context, moid string) ApiUpdateFabricSwitchClusterProfileRequest {
 	return ApiUpdateFabricSwitchClusterProfileRequest{
@@ -44614,7 +44814,8 @@ func (a *FabricApiService) UpdateFabricSwitchClusterProfile(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfile
+//
+//	@return FabricSwitchClusterProfile
 func (a *FabricApiService) UpdateFabricSwitchClusterProfileExecute(r ApiUpdateFabricSwitchClusterProfileRequest) (*FabricSwitchClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -44776,9 +44977,9 @@ func (r ApiUpdateFabricSwitchClusterProfileTemplateRequest) Execute() (*FabricSw
 /*
 UpdateFabricSwitchClusterProfileTemplate Update a 'fabric.SwitchClusterProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSwitchClusterProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSwitchClusterProfileTemplateRequest
 */
 func (a *FabricApiService) UpdateFabricSwitchClusterProfileTemplate(ctx context.Context, moid string) ApiUpdateFabricSwitchClusterProfileTemplateRequest {
 	return ApiUpdateFabricSwitchClusterProfileTemplateRequest{
@@ -44789,7 +44990,8 @@ func (a *FabricApiService) UpdateFabricSwitchClusterProfileTemplate(ctx context.
 }
 
 // Execute executes the request
-//  @return FabricSwitchClusterProfileTemplate
+//
+//	@return FabricSwitchClusterProfileTemplate
 func (a *FabricApiService) UpdateFabricSwitchClusterProfileTemplateExecute(r ApiUpdateFabricSwitchClusterProfileTemplateRequest) (*FabricSwitchClusterProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -44951,9 +45153,9 @@ func (r ApiUpdateFabricSwitchControlPolicyRequest) Execute() (*FabricSwitchContr
 /*
 UpdateFabricSwitchControlPolicy Update a 'fabric.SwitchControlPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSwitchControlPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSwitchControlPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricSwitchControlPolicy(ctx context.Context, moid string) ApiUpdateFabricSwitchControlPolicyRequest {
 	return ApiUpdateFabricSwitchControlPolicyRequest{
@@ -44964,7 +45166,8 @@ func (a *FabricApiService) UpdateFabricSwitchControlPolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return FabricSwitchControlPolicy
+//
+//	@return FabricSwitchControlPolicy
 func (a *FabricApiService) UpdateFabricSwitchControlPolicyExecute(r ApiUpdateFabricSwitchControlPolicyRequest) (*FabricSwitchControlPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -45126,9 +45329,9 @@ func (r ApiUpdateFabricSwitchProfileRequest) Execute() (*FabricSwitchProfile, *h
 /*
 UpdateFabricSwitchProfile Update a 'fabric.SwitchProfile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSwitchProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSwitchProfileRequest
 */
 func (a *FabricApiService) UpdateFabricSwitchProfile(ctx context.Context, moid string) ApiUpdateFabricSwitchProfileRequest {
 	return ApiUpdateFabricSwitchProfileRequest{
@@ -45139,7 +45342,8 @@ func (a *FabricApiService) UpdateFabricSwitchProfile(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfile
+//
+//	@return FabricSwitchProfile
 func (a *FabricApiService) UpdateFabricSwitchProfileExecute(r ApiUpdateFabricSwitchProfileRequest) (*FabricSwitchProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -45301,9 +45505,9 @@ func (r ApiUpdateFabricSwitchProfileTemplateRequest) Execute() (*FabricSwitchPro
 /*
 UpdateFabricSwitchProfileTemplate Update a 'fabric.SwitchProfileTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSwitchProfileTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSwitchProfileTemplateRequest
 */
 func (a *FabricApiService) UpdateFabricSwitchProfileTemplate(ctx context.Context, moid string) ApiUpdateFabricSwitchProfileTemplateRequest {
 	return ApiUpdateFabricSwitchProfileTemplateRequest{
@@ -45314,7 +45518,8 @@ func (a *FabricApiService) UpdateFabricSwitchProfileTemplate(ctx context.Context
 }
 
 // Execute executes the request
-//  @return FabricSwitchProfileTemplate
+//
+//	@return FabricSwitchProfileTemplate
 func (a *FabricApiService) UpdateFabricSwitchProfileTemplateExecute(r ApiUpdateFabricSwitchProfileTemplateRequest) (*FabricSwitchProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -45476,9 +45681,9 @@ func (r ApiUpdateFabricSystemQosPolicyRequest) Execute() (*FabricSystemQosPolicy
 /*
 UpdateFabricSystemQosPolicy Update a 'fabric.SystemQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricSystemQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricSystemQosPolicyRequest
 */
 func (a *FabricApiService) UpdateFabricSystemQosPolicy(ctx context.Context, moid string) ApiUpdateFabricSystemQosPolicyRequest {
 	return ApiUpdateFabricSystemQosPolicyRequest{
@@ -45489,7 +45694,8 @@ func (a *FabricApiService) UpdateFabricSystemQosPolicy(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FabricSystemQosPolicy
+//
+//	@return FabricSystemQosPolicy
 func (a *FabricApiService) UpdateFabricSystemQosPolicyExecute(r ApiUpdateFabricSystemQosPolicyRequest) (*FabricSystemQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -45651,9 +45857,9 @@ func (r ApiUpdateFabricUplinkPcRoleRequest) Execute() (*FabricUplinkPcRole, *htt
 /*
 UpdateFabricUplinkPcRole Update a 'fabric.UplinkPcRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricUplinkPcRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricUplinkPcRoleRequest
 */
 func (a *FabricApiService) UpdateFabricUplinkPcRole(ctx context.Context, moid string) ApiUpdateFabricUplinkPcRoleRequest {
 	return ApiUpdateFabricUplinkPcRoleRequest{
@@ -45664,7 +45870,8 @@ func (a *FabricApiService) UpdateFabricUplinkPcRole(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return FabricUplinkPcRole
+//
+//	@return FabricUplinkPcRole
 func (a *FabricApiService) UpdateFabricUplinkPcRoleExecute(r ApiUpdateFabricUplinkPcRoleRequest) (*FabricUplinkPcRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -45826,9 +46033,9 @@ func (r ApiUpdateFabricUplinkRoleRequest) Execute() (*FabricUplinkRole, *http.Re
 /*
 UpdateFabricUplinkRole Update a 'fabric.UplinkRole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricUplinkRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricUplinkRoleRequest
 */
 func (a *FabricApiService) UpdateFabricUplinkRole(ctx context.Context, moid string) ApiUpdateFabricUplinkRoleRequest {
 	return ApiUpdateFabricUplinkRoleRequest{
@@ -45839,7 +46046,8 @@ func (a *FabricApiService) UpdateFabricUplinkRole(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return FabricUplinkRole
+//
+//	@return FabricUplinkRole
 func (a *FabricApiService) UpdateFabricUplinkRoleExecute(r ApiUpdateFabricUplinkRoleRequest) (*FabricUplinkRole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -46001,9 +46209,9 @@ func (r ApiUpdateFabricVlanRequest) Execute() (*FabricVlan, *http.Response, erro
 /*
 UpdateFabricVlan Update a 'fabric.Vlan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricVlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricVlanRequest
 */
 func (a *FabricApiService) UpdateFabricVlan(ctx context.Context, moid string) ApiUpdateFabricVlanRequest {
 	return ApiUpdateFabricVlanRequest{
@@ -46014,7 +46222,8 @@ func (a *FabricApiService) UpdateFabricVlan(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return FabricVlan
+//
+//	@return FabricVlan
 func (a *FabricApiService) UpdateFabricVlanExecute(r ApiUpdateFabricVlanRequest) (*FabricVlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -46176,9 +46385,9 @@ func (r ApiUpdateFabricVsanRequest) Execute() (*FabricVsan, *http.Response, erro
 /*
 UpdateFabricVsan Update a 'fabric.Vsan' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFabricVsanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFabricVsanRequest
 */
 func (a *FabricApiService) UpdateFabricVsan(ctx context.Context, moid string) ApiUpdateFabricVsanRequest {
 	return ApiUpdateFabricVsanRequest{
@@ -46189,7 +46398,8 @@ func (a *FabricApiService) UpdateFabricVsan(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return FabricVsan
+//
+//	@return FabricVsan
 func (a *FabricApiService) UpdateFabricVsanExecute(r ApiUpdateFabricVsanRequest) (*FabricVsan, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

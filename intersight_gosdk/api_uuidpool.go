@@ -56,8 +56,8 @@ func (r ApiCreateUuidpoolPoolRequest) Execute() (*UuidpoolPool, *http.Response, 
 /*
 CreateUuidpoolPool Create a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) CreateUuidpoolPool(ctx context.Context) ApiCreateUuidpoolPoolRequest {
 	return ApiCreateUuidpoolPoolRequest{
@@ -67,7 +67,8 @@ func (a *UuidpoolApiService) CreateUuidpoolPool(ctx context.Context) ApiCreateUu
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateUuidpoolReservationRequest) Execute() (*UuidpoolReservation, *h
 /*
 CreateUuidpoolReservation Create a 'uuidpool.Reservation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateUuidpoolReservationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateUuidpoolReservationRequest
 */
 func (a *UuidpoolApiService) CreateUuidpoolReservation(ctx context.Context) ApiCreateUuidpoolReservationRequest {
 	return ApiCreateUuidpoolReservationRequest{
@@ -248,7 +249,8 @@ func (a *UuidpoolApiService) CreateUuidpoolReservation(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return UuidpoolReservation
+//
+//	@return UuidpoolReservation
 func (a *UuidpoolApiService) CreateUuidpoolReservationExecute(r ApiCreateUuidpoolReservationRequest) (*UuidpoolReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteUuidpoolPoolRequest) Execute() (*http.Response, error) {
 /*
 DeleteUuidpoolPool Delete a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) DeleteUuidpoolPool(ctx context.Context, moid string) ApiDeleteUuidpoolPoolRequest {
 	return ApiDeleteUuidpoolPoolRequest{
@@ -540,9 +542,9 @@ func (r ApiDeleteUuidpoolReservationRequest) Execute() (*http.Response, error) {
 /*
 DeleteUuidpoolReservation Delete a 'uuidpool.Reservation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteUuidpoolReservationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUuidpoolReservationRequest
 */
 func (a *UuidpoolApiService) DeleteUuidpoolReservation(ctx context.Context, moid string) ApiDeleteUuidpoolReservationRequest {
 	return ApiDeleteUuidpoolReservationRequest{
@@ -682,9 +684,9 @@ func (r ApiDeleteUuidpoolUuidLeaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteUuidpoolUuidLease Delete a 'uuidpool.UuidLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteUuidpoolUuidLeaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteUuidpoolUuidLeaseRequest
 */
 func (a *UuidpoolApiService) DeleteUuidpoolUuidLease(ctx context.Context, moid string) ApiDeleteUuidpoolUuidLeaseRequest {
 	return ApiDeleteUuidpoolUuidLeaseRequest{
@@ -824,9 +826,9 @@ func (r ApiGetUuidpoolBlockByMoidRequest) Execute() (*UuidpoolBlock, *http.Respo
 /*
 GetUuidpoolBlockByMoid Read a 'uuidpool.Block' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolBlockByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolBlockByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolBlockByMoid(ctx context.Context, moid string) ApiGetUuidpoolBlockByMoidRequest {
 	return ApiGetUuidpoolBlockByMoidRequest{
@@ -837,7 +839,8 @@ func (a *UuidpoolApiService) GetUuidpoolBlockByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return UuidpoolBlock
+//
+//	@return UuidpoolBlock
 func (a *UuidpoolApiService) GetUuidpoolBlockByMoidExecute(r ApiGetUuidpoolBlockByMoidRequest) (*UuidpoolBlock, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1053,8 +1056,8 @@ func (r ApiGetUuidpoolBlockListRequest) Execute() (*UuidpoolBlockResponse, *http
 /*
 GetUuidpoolBlockList Read a 'uuidpool.Block' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolBlockListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolBlockListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolBlockList(ctx context.Context) ApiGetUuidpoolBlockListRequest {
 	return ApiGetUuidpoolBlockListRequest{
@@ -1064,7 +1067,8 @@ func (a *UuidpoolApiService) GetUuidpoolBlockList(ctx context.Context) ApiGetUui
 }
 
 // Execute executes the request
-//  @return UuidpoolBlockResponse
+//
+//	@return UuidpoolBlockResponse
 func (a *UuidpoolApiService) GetUuidpoolBlockListExecute(r ApiGetUuidpoolBlockListRequest) (*UuidpoolBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1251,9 +1255,9 @@ func (r ApiGetUuidpoolPoolByMoidRequest) Execute() (*UuidpoolPool, *http.Respons
 /*
 GetUuidpoolPoolByMoid Read a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolPoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolPoolByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolByMoid(ctx context.Context, moid string) ApiGetUuidpoolPoolByMoidRequest {
 	return ApiGetUuidpoolPoolByMoidRequest{
@@ -1264,7 +1268,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) GetUuidpoolPoolByMoidExecute(r ApiGetUuidpoolPoolByMoidRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1480,8 +1485,8 @@ func (r ApiGetUuidpoolPoolListRequest) Execute() (*UuidpoolPoolResponse, *http.R
 /*
 GetUuidpoolPoolList Read a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolPoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolPoolListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolList(ctx context.Context) ApiGetUuidpoolPoolListRequest {
 	return ApiGetUuidpoolPoolListRequest{
@@ -1491,7 +1496,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolList(ctx context.Context) ApiGetUuid
 }
 
 // Execute executes the request
-//  @return UuidpoolPoolResponse
+//
+//	@return UuidpoolPoolResponse
 func (a *UuidpoolApiService) GetUuidpoolPoolListExecute(r ApiGetUuidpoolPoolListRequest) (*UuidpoolPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1678,9 +1684,9 @@ func (r ApiGetUuidpoolPoolMemberByMoidRequest) Execute() (*UuidpoolPoolMember, *
 /*
 GetUuidpoolPoolMemberByMoid Read a 'uuidpool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolPoolMemberByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolPoolMemberByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetUuidpoolPoolMemberByMoidRequest {
 	return ApiGetUuidpoolPoolMemberByMoidRequest{
@@ -1691,7 +1697,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return UuidpoolPoolMember
+//
+//	@return UuidpoolPoolMember
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoidExecute(r ApiGetUuidpoolPoolMemberByMoidRequest) (*UuidpoolPoolMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1907,8 +1914,8 @@ func (r ApiGetUuidpoolPoolMemberListRequest) Execute() (*UuidpoolPoolMemberRespo
 /*
 GetUuidpoolPoolMemberList Read a 'uuidpool.PoolMember' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolPoolMemberListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolPoolMemberListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberList(ctx context.Context) ApiGetUuidpoolPoolMemberListRequest {
 	return ApiGetUuidpoolPoolMemberListRequest{
@@ -1918,7 +1925,8 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return UuidpoolPoolMemberResponse
+//
+//	@return UuidpoolPoolMemberResponse
 func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPoolMemberListRequest) (*UuidpoolPoolMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2105,9 +2113,9 @@ func (r ApiGetUuidpoolReservationByMoidRequest) Execute() (*UuidpoolReservation,
 /*
 GetUuidpoolReservationByMoid Read a 'uuidpool.Reservation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolReservationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolReservationByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolReservationByMoid(ctx context.Context, moid string) ApiGetUuidpoolReservationByMoidRequest {
 	return ApiGetUuidpoolReservationByMoidRequest{
@@ -2118,7 +2126,8 @@ func (a *UuidpoolApiService) GetUuidpoolReservationByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return UuidpoolReservation
+//
+//	@return UuidpoolReservation
 func (a *UuidpoolApiService) GetUuidpoolReservationByMoidExecute(r ApiGetUuidpoolReservationByMoidRequest) (*UuidpoolReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2334,8 +2343,8 @@ func (r ApiGetUuidpoolReservationListRequest) Execute() (*UuidpoolReservationRes
 /*
 GetUuidpoolReservationList Read a 'uuidpool.Reservation' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolReservationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolReservationListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolReservationList(ctx context.Context) ApiGetUuidpoolReservationListRequest {
 	return ApiGetUuidpoolReservationListRequest{
@@ -2345,7 +2354,8 @@ func (a *UuidpoolApiService) GetUuidpoolReservationList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return UuidpoolReservationResponse
+//
+//	@return UuidpoolReservationResponse
 func (a *UuidpoolApiService) GetUuidpoolReservationListExecute(r ApiGetUuidpoolReservationListRequest) (*UuidpoolReservationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2532,9 +2542,9 @@ func (r ApiGetUuidpoolUniverseByMoidRequest) Execute() (*UuidpoolUniverse, *http
 /*
 GetUuidpoolUniverseByMoid Read a 'uuidpool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolUniverseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolUniverseByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUniverseByMoid(ctx context.Context, moid string) ApiGetUuidpoolUniverseByMoidRequest {
 	return ApiGetUuidpoolUniverseByMoidRequest{
@@ -2545,7 +2555,8 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return UuidpoolUniverse
+//
+//	@return UuidpoolUniverse
 func (a *UuidpoolApiService) GetUuidpoolUniverseByMoidExecute(r ApiGetUuidpoolUniverseByMoidRequest) (*UuidpoolUniverse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2761,8 +2772,8 @@ func (r ApiGetUuidpoolUniverseListRequest) Execute() (*UuidpoolUniverseResponse,
 /*
 GetUuidpoolUniverseList Read a 'uuidpool.Universe' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolUniverseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolUniverseListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUniverseList(ctx context.Context) ApiGetUuidpoolUniverseListRequest {
 	return ApiGetUuidpoolUniverseListRequest{
@@ -2772,7 +2783,8 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return UuidpoolUniverseResponse
+//
+//	@return UuidpoolUniverseResponse
 func (a *UuidpoolApiService) GetUuidpoolUniverseListExecute(r ApiGetUuidpoolUniverseListRequest) (*UuidpoolUniverseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2959,9 +2971,9 @@ func (r ApiGetUuidpoolUuidLeaseByMoidRequest) Execute() (*UuidpoolUuidLease, *ht
 /*
 GetUuidpoolUuidLeaseByMoid Read a 'uuidpool.UuidLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetUuidpoolUuidLeaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetUuidpoolUuidLeaseByMoidRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoid(ctx context.Context, moid string) ApiGetUuidpoolUuidLeaseByMoidRequest {
 	return ApiGetUuidpoolUuidLeaseByMoidRequest{
@@ -2972,7 +2984,8 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return UuidpoolUuidLease
+//
+//	@return UuidpoolUuidLease
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoidExecute(r ApiGetUuidpoolUuidLeaseByMoidRequest) (*UuidpoolUuidLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3188,8 +3201,8 @@ func (r ApiGetUuidpoolUuidLeaseListRequest) Execute() (*UuidpoolUuidLeaseRespons
 /*
 GetUuidpoolUuidLeaseList Read a 'uuidpool.UuidLease' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetUuidpoolUuidLeaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetUuidpoolUuidLeaseListRequest
 */
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseList(ctx context.Context) ApiGetUuidpoolUuidLeaseListRequest {
 	return ApiGetUuidpoolUuidLeaseListRequest{
@@ -3199,7 +3212,8 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return UuidpoolUuidLeaseResponse
+//
+//	@return UuidpoolUuidLeaseResponse
 func (a *UuidpoolApiService) GetUuidpoolUuidLeaseListExecute(r ApiGetUuidpoolUuidLeaseListRequest) (*UuidpoolUuidLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3400,9 +3414,9 @@ func (r ApiPatchUuidpoolPoolRequest) Execute() (*UuidpoolPool, *http.Response, e
 /*
 PatchUuidpoolPool Update a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) PatchUuidpoolPool(ctx context.Context, moid string) ApiPatchUuidpoolPoolRequest {
 	return ApiPatchUuidpoolPoolRequest{
@@ -3413,7 +3427,8 @@ func (a *UuidpoolApiService) PatchUuidpoolPool(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3575,9 +3590,9 @@ func (r ApiUpdateUuidpoolPoolRequest) Execute() (*UuidpoolPool, *http.Response, 
 /*
 UpdateUuidpoolPool Update a 'uuidpool.Pool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateUuidpoolPoolRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateUuidpoolPoolRequest
 */
 func (a *UuidpoolApiService) UpdateUuidpoolPool(ctx context.Context, moid string) ApiUpdateUuidpoolPoolRequest {
 	return ApiUpdateUuidpoolPoolRequest{
@@ -3588,7 +3603,8 @@ func (a *UuidpoolApiService) UpdateUuidpoolPool(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return UuidpoolPool
+//
+//	@return UuidpoolPool
 func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRequest) (*UuidpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
