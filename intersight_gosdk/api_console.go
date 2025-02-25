@@ -36,9 +36,9 @@ func (r ApiGetConsoleConsoleConfigByMoidRequest) Execute() (*ConsoleConsoleConfi
 /*
 GetConsoleConsoleConfigByMoid Read a 'console.ConsoleConfig' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetConsoleConsoleConfigByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetConsoleConsoleConfigByMoidRequest
 */
 func (a *ConsoleApiService) GetConsoleConsoleConfigByMoid(ctx context.Context, moid string) ApiGetConsoleConsoleConfigByMoidRequest {
 	return ApiGetConsoleConsoleConfigByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ConsoleApiService) GetConsoleConsoleConfigByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ConsoleConsoleConfig
+//
+//	@return ConsoleConsoleConfig
 func (a *ConsoleApiService) GetConsoleConsoleConfigByMoidExecute(r ApiGetConsoleConsoleConfigByMoidRequest) (*ConsoleConsoleConfig, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetConsoleConsoleConfigListRequest) Execute() (*ConsoleConsoleConfigR
 /*
 GetConsoleConsoleConfigList Read a 'console.ConsoleConfig' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetConsoleConsoleConfigListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetConsoleConsoleConfigListRequest
 */
 func (a *ConsoleApiService) GetConsoleConsoleConfigList(ctx context.Context) ApiGetConsoleConsoleConfigListRequest {
 	return ApiGetConsoleConsoleConfigListRequest{
@@ -276,7 +277,8 @@ func (a *ConsoleApiService) GetConsoleConsoleConfigList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return ConsoleConsoleConfigResponse
+//
+//	@return ConsoleConsoleConfigResponse
 func (a *ConsoleApiService) GetConsoleConsoleConfigListExecute(r ApiGetConsoleConsoleConfigListRequest) (*ConsoleConsoleConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

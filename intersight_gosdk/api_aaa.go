@@ -56,8 +56,8 @@ func (r ApiCreateAaaRetentionPolicyRequest) Execute() (*AaaRetentionPolicy, *htt
 /*
 CreateAaaRetentionPolicy Create a 'aaa.RetentionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateAaaRetentionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAaaRetentionPolicyRequest
 */
 func (a *AaaApiService) CreateAaaRetentionPolicy(ctx context.Context) ApiCreateAaaRetentionPolicyRequest {
 	return ApiCreateAaaRetentionPolicyRequest{
@@ -67,7 +67,8 @@ func (a *AaaApiService) CreateAaaRetentionPolicy(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//  @return AaaRetentionPolicy
+//
+//	@return AaaRetentionPolicy
 func (a *AaaApiService) CreateAaaRetentionPolicyExecute(r ApiCreateAaaRetentionPolicyRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiGetAaaAuditRecordByMoidRequest) Execute() (*AaaAuditRecord, *http.Res
 /*
 GetAaaAuditRecordByMoid Read a 'aaa.AuditRecord' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetAaaAuditRecordByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetAaaAuditRecordByMoidRequest
 */
 func (a *AaaApiService) GetAaaAuditRecordByMoid(ctx context.Context, moid string) ApiGetAaaAuditRecordByMoidRequest {
 	return ApiGetAaaAuditRecordByMoidRequest{
@@ -230,7 +231,8 @@ func (a *AaaApiService) GetAaaAuditRecordByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return AaaAuditRecord
+//
+//	@return AaaAuditRecord
 func (a *AaaApiService) GetAaaAuditRecordByMoidExecute(r ApiGetAaaAuditRecordByMoidRequest) (*AaaAuditRecord, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -446,8 +448,8 @@ func (r ApiGetAaaAuditRecordListRequest) Execute() (*AaaAuditRecordResponse, *ht
 /*
 GetAaaAuditRecordList Read a 'aaa.AuditRecord' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAaaAuditRecordListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAaaAuditRecordListRequest
 */
 func (a *AaaApiService) GetAaaAuditRecordList(ctx context.Context) ApiGetAaaAuditRecordListRequest {
 	return ApiGetAaaAuditRecordListRequest{
@@ -457,7 +459,8 @@ func (a *AaaApiService) GetAaaAuditRecordList(ctx context.Context) ApiGetAaaAudi
 }
 
 // Execute executes the request
-//  @return AaaAuditRecordResponse
+//
+//	@return AaaAuditRecordResponse
 func (a *AaaApiService) GetAaaAuditRecordListExecute(r ApiGetAaaAuditRecordListRequest) (*AaaAuditRecordResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -644,9 +647,9 @@ func (r ApiGetAaaRetentionConfigByMoidRequest) Execute() (*AaaRetentionConfig, *
 /*
 GetAaaRetentionConfigByMoid Read a 'aaa.RetentionConfig' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetAaaRetentionConfigByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetAaaRetentionConfigByMoidRequest
 */
 func (a *AaaApiService) GetAaaRetentionConfigByMoid(ctx context.Context, moid string) ApiGetAaaRetentionConfigByMoidRequest {
 	return ApiGetAaaRetentionConfigByMoidRequest{
@@ -657,7 +660,8 @@ func (a *AaaApiService) GetAaaRetentionConfigByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return AaaRetentionConfig
+//
+//	@return AaaRetentionConfig
 func (a *AaaApiService) GetAaaRetentionConfigByMoidExecute(r ApiGetAaaRetentionConfigByMoidRequest) (*AaaRetentionConfig, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -873,8 +877,8 @@ func (r ApiGetAaaRetentionConfigListRequest) Execute() (*AaaRetentionConfigRespo
 /*
 GetAaaRetentionConfigList Read a 'aaa.RetentionConfig' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAaaRetentionConfigListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAaaRetentionConfigListRequest
 */
 func (a *AaaApiService) GetAaaRetentionConfigList(ctx context.Context) ApiGetAaaRetentionConfigListRequest {
 	return ApiGetAaaRetentionConfigListRequest{
@@ -884,7 +888,8 @@ func (a *AaaApiService) GetAaaRetentionConfigList(ctx context.Context) ApiGetAaa
 }
 
 // Execute executes the request
-//  @return AaaRetentionConfigResponse
+//
+//	@return AaaRetentionConfigResponse
 func (a *AaaApiService) GetAaaRetentionConfigListExecute(r ApiGetAaaRetentionConfigListRequest) (*AaaRetentionConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1071,9 +1076,9 @@ func (r ApiGetAaaRetentionPolicyByMoidRequest) Execute() (*AaaRetentionPolicy, *
 /*
 GetAaaRetentionPolicyByMoid Read a 'aaa.RetentionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetAaaRetentionPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetAaaRetentionPolicyByMoidRequest
 */
 func (a *AaaApiService) GetAaaRetentionPolicyByMoid(ctx context.Context, moid string) ApiGetAaaRetentionPolicyByMoidRequest {
 	return ApiGetAaaRetentionPolicyByMoidRequest{
@@ -1084,7 +1089,8 @@ func (a *AaaApiService) GetAaaRetentionPolicyByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return AaaRetentionPolicy
+//
+//	@return AaaRetentionPolicy
 func (a *AaaApiService) GetAaaRetentionPolicyByMoidExecute(r ApiGetAaaRetentionPolicyByMoidRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1300,8 +1306,8 @@ func (r ApiGetAaaRetentionPolicyListRequest) Execute() (*AaaRetentionPolicyRespo
 /*
 GetAaaRetentionPolicyList Read a 'aaa.RetentionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAaaRetentionPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAaaRetentionPolicyListRequest
 */
 func (a *AaaApiService) GetAaaRetentionPolicyList(ctx context.Context) ApiGetAaaRetentionPolicyListRequest {
 	return ApiGetAaaRetentionPolicyListRequest{
@@ -1311,7 +1317,8 @@ func (a *AaaApiService) GetAaaRetentionPolicyList(ctx context.Context) ApiGetAaa
 }
 
 // Execute executes the request
-//  @return AaaRetentionPolicyResponse
+//
+//	@return AaaRetentionPolicyResponse
 func (a *AaaApiService) GetAaaRetentionPolicyListExecute(r ApiGetAaaRetentionPolicyListRequest) (*AaaRetentionPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1512,9 +1519,9 @@ func (r ApiPatchAaaRetentionPolicyRequest) Execute() (*AaaRetentionPolicy, *http
 /*
 PatchAaaRetentionPolicy Update a 'aaa.RetentionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchAaaRetentionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchAaaRetentionPolicyRequest
 */
 func (a *AaaApiService) PatchAaaRetentionPolicy(ctx context.Context, moid string) ApiPatchAaaRetentionPolicyRequest {
 	return ApiPatchAaaRetentionPolicyRequest{
@@ -1525,7 +1532,8 @@ func (a *AaaApiService) PatchAaaRetentionPolicy(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return AaaRetentionPolicy
+//
+//	@return AaaRetentionPolicy
 func (a *AaaApiService) PatchAaaRetentionPolicyExecute(r ApiPatchAaaRetentionPolicyRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1687,9 +1695,9 @@ func (r ApiUpdateAaaRetentionPolicyRequest) Execute() (*AaaRetentionPolicy, *htt
 /*
 UpdateAaaRetentionPolicy Update a 'aaa.RetentionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateAaaRetentionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateAaaRetentionPolicyRequest
 */
 func (a *AaaApiService) UpdateAaaRetentionPolicy(ctx context.Context, moid string) ApiUpdateAaaRetentionPolicyRequest {
 	return ApiUpdateAaaRetentionPolicyRequest{
@@ -1700,7 +1708,8 @@ func (a *AaaApiService) UpdateAaaRetentionPolicy(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return AaaRetentionPolicy
+//
+//	@return AaaRetentionPolicy
 func (a *AaaApiService) UpdateAaaRetentionPolicyExecute(r ApiUpdateAaaRetentionPolicyRequest) (*AaaRetentionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

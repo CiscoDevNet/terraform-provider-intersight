@@ -56,8 +56,8 @@ func (r ApiCreateMarketplaceUseCaseRequest) Execute() (*MarketplaceUseCase, *htt
 /*
 CreateMarketplaceUseCase Create a 'marketplace.UseCase' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateMarketplaceUseCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateMarketplaceUseCaseRequest
 */
 func (a *MarketplaceApiService) CreateMarketplaceUseCase(ctx context.Context) ApiCreateMarketplaceUseCaseRequest {
 	return ApiCreateMarketplaceUseCaseRequest{
@@ -67,7 +67,8 @@ func (a *MarketplaceApiService) CreateMarketplaceUseCase(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCase
+//
+//	@return MarketplaceUseCase
 func (a *MarketplaceApiService) CreateMarketplaceUseCaseExecute(r ApiCreateMarketplaceUseCaseRequest) (*MarketplaceUseCase, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateMarketplaceUseCaseVersionRequest) Execute() (*MarketplaceUseCas
 /*
 CreateMarketplaceUseCaseVersion Create a 'marketplace.UseCaseVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateMarketplaceUseCaseVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateMarketplaceUseCaseVersionRequest
 */
 func (a *MarketplaceApiService) CreateMarketplaceUseCaseVersion(ctx context.Context) ApiCreateMarketplaceUseCaseVersionRequest {
 	return ApiCreateMarketplaceUseCaseVersionRequest{
@@ -248,7 +249,8 @@ func (a *MarketplaceApiService) CreateMarketplaceUseCaseVersion(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCaseVersion
+//
+//	@return MarketplaceUseCaseVersion
 func (a *MarketplaceApiService) CreateMarketplaceUseCaseVersionExecute(r ApiCreateMarketplaceUseCaseVersionRequest) (*MarketplaceUseCaseVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteMarketplaceUseCaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteMarketplaceUseCase Delete a 'marketplace.UseCase' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteMarketplaceUseCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteMarketplaceUseCaseRequest
 */
 func (a *MarketplaceApiService) DeleteMarketplaceUseCase(ctx context.Context, moid string) ApiDeleteMarketplaceUseCaseRequest {
 	return ApiDeleteMarketplaceUseCaseRequest{
@@ -540,9 +542,9 @@ func (r ApiDeleteMarketplaceUseCaseVersionRequest) Execute() (*http.Response, er
 /*
 DeleteMarketplaceUseCaseVersion Delete a 'marketplace.UseCaseVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteMarketplaceUseCaseVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteMarketplaceUseCaseVersionRequest
 */
 func (a *MarketplaceApiService) DeleteMarketplaceUseCaseVersion(ctx context.Context, moid string) ApiDeleteMarketplaceUseCaseVersionRequest {
 	return ApiDeleteMarketplaceUseCaseVersionRequest{
@@ -682,9 +684,9 @@ func (r ApiGetMarketplaceUseCaseByMoidRequest) Execute() (*MarketplaceUseCase, *
 /*
 GetMarketplaceUseCaseByMoid Read a 'marketplace.UseCase' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMarketplaceUseCaseByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMarketplaceUseCaseByMoidRequest
 */
 func (a *MarketplaceApiService) GetMarketplaceUseCaseByMoid(ctx context.Context, moid string) ApiGetMarketplaceUseCaseByMoidRequest {
 	return ApiGetMarketplaceUseCaseByMoidRequest{
@@ -695,7 +697,8 @@ func (a *MarketplaceApiService) GetMarketplaceUseCaseByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCase
+//
+//	@return MarketplaceUseCase
 func (a *MarketplaceApiService) GetMarketplaceUseCaseByMoidExecute(r ApiGetMarketplaceUseCaseByMoidRequest) (*MarketplaceUseCase, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -911,8 +914,8 @@ func (r ApiGetMarketplaceUseCaseListRequest) Execute() (*MarketplaceUseCaseRespo
 /*
 GetMarketplaceUseCaseList Read a 'marketplace.UseCase' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMarketplaceUseCaseListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMarketplaceUseCaseListRequest
 */
 func (a *MarketplaceApiService) GetMarketplaceUseCaseList(ctx context.Context) ApiGetMarketplaceUseCaseListRequest {
 	return ApiGetMarketplaceUseCaseListRequest{
@@ -922,7 +925,8 @@ func (a *MarketplaceApiService) GetMarketplaceUseCaseList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCaseResponse
+//
+//	@return MarketplaceUseCaseResponse
 func (a *MarketplaceApiService) GetMarketplaceUseCaseListExecute(r ApiGetMarketplaceUseCaseListRequest) (*MarketplaceUseCaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1109,9 +1113,9 @@ func (r ApiGetMarketplaceUseCaseVersionByMoidRequest) Execute() (*MarketplaceUse
 /*
 GetMarketplaceUseCaseVersionByMoid Read a 'marketplace.UseCaseVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetMarketplaceUseCaseVersionByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetMarketplaceUseCaseVersionByMoidRequest
 */
 func (a *MarketplaceApiService) GetMarketplaceUseCaseVersionByMoid(ctx context.Context, moid string) ApiGetMarketplaceUseCaseVersionByMoidRequest {
 	return ApiGetMarketplaceUseCaseVersionByMoidRequest{
@@ -1122,7 +1126,8 @@ func (a *MarketplaceApiService) GetMarketplaceUseCaseVersionByMoid(ctx context.C
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCaseVersion
+//
+//	@return MarketplaceUseCaseVersion
 func (a *MarketplaceApiService) GetMarketplaceUseCaseVersionByMoidExecute(r ApiGetMarketplaceUseCaseVersionByMoidRequest) (*MarketplaceUseCaseVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1338,8 +1343,8 @@ func (r ApiGetMarketplaceUseCaseVersionListRequest) Execute() (*MarketplaceUseCa
 /*
 GetMarketplaceUseCaseVersionList Read a 'marketplace.UseCaseVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetMarketplaceUseCaseVersionListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMarketplaceUseCaseVersionListRequest
 */
 func (a *MarketplaceApiService) GetMarketplaceUseCaseVersionList(ctx context.Context) ApiGetMarketplaceUseCaseVersionListRequest {
 	return ApiGetMarketplaceUseCaseVersionListRequest{
@@ -1349,7 +1354,8 @@ func (a *MarketplaceApiService) GetMarketplaceUseCaseVersionList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCaseVersionResponse
+//
+//	@return MarketplaceUseCaseVersionResponse
 func (a *MarketplaceApiService) GetMarketplaceUseCaseVersionListExecute(r ApiGetMarketplaceUseCaseVersionListRequest) (*MarketplaceUseCaseVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1550,9 +1556,9 @@ func (r ApiPatchMarketplaceUseCaseRequest) Execute() (*MarketplaceUseCase, *http
 /*
 PatchMarketplaceUseCase Update a 'marketplace.UseCase' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchMarketplaceUseCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchMarketplaceUseCaseRequest
 */
 func (a *MarketplaceApiService) PatchMarketplaceUseCase(ctx context.Context, moid string) ApiPatchMarketplaceUseCaseRequest {
 	return ApiPatchMarketplaceUseCaseRequest{
@@ -1563,7 +1569,8 @@ func (a *MarketplaceApiService) PatchMarketplaceUseCase(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCase
+//
+//	@return MarketplaceUseCase
 func (a *MarketplaceApiService) PatchMarketplaceUseCaseExecute(r ApiPatchMarketplaceUseCaseRequest) (*MarketplaceUseCase, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1725,9 +1732,9 @@ func (r ApiPatchMarketplaceUseCaseVersionRequest) Execute() (*MarketplaceUseCase
 /*
 PatchMarketplaceUseCaseVersion Update a 'marketplace.UseCaseVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchMarketplaceUseCaseVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchMarketplaceUseCaseVersionRequest
 */
 func (a *MarketplaceApiService) PatchMarketplaceUseCaseVersion(ctx context.Context, moid string) ApiPatchMarketplaceUseCaseVersionRequest {
 	return ApiPatchMarketplaceUseCaseVersionRequest{
@@ -1738,7 +1745,8 @@ func (a *MarketplaceApiService) PatchMarketplaceUseCaseVersion(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCaseVersion
+//
+//	@return MarketplaceUseCaseVersion
 func (a *MarketplaceApiService) PatchMarketplaceUseCaseVersionExecute(r ApiPatchMarketplaceUseCaseVersionRequest) (*MarketplaceUseCaseVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1900,9 +1908,9 @@ func (r ApiUpdateMarketplaceUseCaseRequest) Execute() (*MarketplaceUseCase, *htt
 /*
 UpdateMarketplaceUseCase Update a 'marketplace.UseCase' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateMarketplaceUseCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateMarketplaceUseCaseRequest
 */
 func (a *MarketplaceApiService) UpdateMarketplaceUseCase(ctx context.Context, moid string) ApiUpdateMarketplaceUseCaseRequest {
 	return ApiUpdateMarketplaceUseCaseRequest{
@@ -1913,7 +1921,8 @@ func (a *MarketplaceApiService) UpdateMarketplaceUseCase(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCase
+//
+//	@return MarketplaceUseCase
 func (a *MarketplaceApiService) UpdateMarketplaceUseCaseExecute(r ApiUpdateMarketplaceUseCaseRequest) (*MarketplaceUseCase, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2075,9 +2084,9 @@ func (r ApiUpdateMarketplaceUseCaseVersionRequest) Execute() (*MarketplaceUseCas
 /*
 UpdateMarketplaceUseCaseVersion Update a 'marketplace.UseCaseVersion' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateMarketplaceUseCaseVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateMarketplaceUseCaseVersionRequest
 */
 func (a *MarketplaceApiService) UpdateMarketplaceUseCaseVersion(ctx context.Context, moid string) ApiUpdateMarketplaceUseCaseVersionRequest {
 	return ApiUpdateMarketplaceUseCaseVersionRequest{
@@ -2088,7 +2097,8 @@ func (a *MarketplaceApiService) UpdateMarketplaceUseCaseVersion(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return MarketplaceUseCaseVersion
+//
+//	@return MarketplaceUseCaseVersion
 func (a *MarketplaceApiService) UpdateMarketplaceUseCaseVersionExecute(r ApiUpdateMarketplaceUseCaseVersionRequest) (*MarketplaceUseCaseVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

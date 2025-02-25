@@ -36,9 +36,9 @@ func (r ApiGetGraphicsCardByMoidRequest) Execute() (*GraphicsCard, *http.Respons
 /*
 GetGraphicsCardByMoid Read a 'graphics.Card' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetGraphicsCardByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetGraphicsCardByMoidRequest
 */
 func (a *GraphicsApiService) GetGraphicsCardByMoid(ctx context.Context, moid string) ApiGetGraphicsCardByMoidRequest {
 	return ApiGetGraphicsCardByMoidRequest{
@@ -49,7 +49,8 @@ func (a *GraphicsApiService) GetGraphicsCardByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return GraphicsCard
+//
+//	@return GraphicsCard
 func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardByMoidRequest) (*GraphicsCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetGraphicsCardListRequest) Execute() (*GraphicsCardResponse, *http.R
 /*
 GetGraphicsCardList Read a 'graphics.Card' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetGraphicsCardListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetGraphicsCardListRequest
 */
 func (a *GraphicsApiService) GetGraphicsCardList(ctx context.Context) ApiGetGraphicsCardListRequest {
 	return ApiGetGraphicsCardListRequest{
@@ -276,7 +277,8 @@ func (a *GraphicsApiService) GetGraphicsCardList(ctx context.Context) ApiGetGrap
 }
 
 // Execute executes the request
-//  @return GraphicsCardResponse
+//
+//	@return GraphicsCardResponse
 func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardListRequest) (*GraphicsCardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetGraphicsControllerByMoidRequest) Execute() (*GraphicsController, *
 /*
 GetGraphicsControllerByMoid Read a 'graphics.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetGraphicsControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetGraphicsControllerByMoidRequest
 */
 func (a *GraphicsApiService) GetGraphicsControllerByMoid(ctx context.Context, moid string) ApiGetGraphicsControllerByMoidRequest {
 	return ApiGetGraphicsControllerByMoidRequest{
@@ -476,7 +478,8 @@ func (a *GraphicsApiService) GetGraphicsControllerByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return GraphicsController
+//
+//	@return GraphicsController
 func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphicsControllerByMoidRequest) (*GraphicsController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetGraphicsControllerListRequest) Execute() (*GraphicsControllerRespo
 /*
 GetGraphicsControllerList Read a 'graphics.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetGraphicsControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetGraphicsControllerListRequest
 */
 func (a *GraphicsApiService) GetGraphicsControllerList(ctx context.Context) ApiGetGraphicsControllerListRequest {
 	return ApiGetGraphicsControllerListRequest{
@@ -703,7 +706,8 @@ func (a *GraphicsApiService) GetGraphicsControllerList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return GraphicsControllerResponse
+//
+//	@return GraphicsControllerResponse
 func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsControllerListRequest) (*GraphicsControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -904,9 +908,9 @@ func (r ApiPatchGraphicsCardRequest) Execute() (*GraphicsCard, *http.Response, e
 /*
 PatchGraphicsCard Update a 'graphics.Card' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchGraphicsCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchGraphicsCardRequest
 */
 func (a *GraphicsApiService) PatchGraphicsCard(ctx context.Context, moid string) ApiPatchGraphicsCardRequest {
 	return ApiPatchGraphicsCardRequest{
@@ -917,7 +921,8 @@ func (a *GraphicsApiService) PatchGraphicsCard(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return GraphicsCard
+//
+//	@return GraphicsCard
 func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequest) (*GraphicsCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1079,9 +1084,9 @@ func (r ApiPatchGraphicsControllerRequest) Execute() (*GraphicsController, *http
 /*
 PatchGraphicsController Update a 'graphics.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchGraphicsControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchGraphicsControllerRequest
 */
 func (a *GraphicsApiService) PatchGraphicsController(ctx context.Context, moid string) ApiPatchGraphicsControllerRequest {
 	return ApiPatchGraphicsControllerRequest{
@@ -1092,7 +1097,8 @@ func (a *GraphicsApiService) PatchGraphicsController(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return GraphicsController
+//
+//	@return GraphicsController
 func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsControllerRequest) (*GraphicsController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1254,9 +1260,9 @@ func (r ApiUpdateGraphicsCardRequest) Execute() (*GraphicsCard, *http.Response, 
 /*
 UpdateGraphicsCard Update a 'graphics.Card' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateGraphicsCardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateGraphicsCardRequest
 */
 func (a *GraphicsApiService) UpdateGraphicsCard(ctx context.Context, moid string) ApiUpdateGraphicsCardRequest {
 	return ApiUpdateGraphicsCardRequest{
@@ -1267,7 +1273,8 @@ func (a *GraphicsApiService) UpdateGraphicsCard(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return GraphicsCard
+//
+//	@return GraphicsCard
 func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRequest) (*GraphicsCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1429,9 +1436,9 @@ func (r ApiUpdateGraphicsControllerRequest) Execute() (*GraphicsController, *htt
 /*
 UpdateGraphicsController Update a 'graphics.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateGraphicsControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateGraphicsControllerRequest
 */
 func (a *GraphicsApiService) UpdateGraphicsController(ctx context.Context, moid string) ApiUpdateGraphicsControllerRequest {
 	return ApiUpdateGraphicsControllerRequest{
@@ -1442,7 +1449,8 @@ func (a *GraphicsApiService) UpdateGraphicsController(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return GraphicsController
+//
+//	@return GraphicsController
 func (a *GraphicsApiService) UpdateGraphicsControllerExecute(r ApiUpdateGraphicsControllerRequest) (*GraphicsController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

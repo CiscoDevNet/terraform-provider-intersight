@@ -56,8 +56,8 @@ func (r ApiCreateWorkspaceFolderRequest) Execute() (*WorkspaceFolder, *http.Resp
 /*
 CreateWorkspaceFolder Create a 'workspace.Folder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkspaceFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkspaceFolderRequest
 */
 func (a *WorkspaceApiService) CreateWorkspaceFolder(ctx context.Context) ApiCreateWorkspaceFolderRequest {
 	return ApiCreateWorkspaceFolderRequest{
@@ -67,7 +67,8 @@ func (a *WorkspaceApiService) CreateWorkspaceFolder(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return WorkspaceFolder
+//
+//	@return WorkspaceFolder
 func (a *WorkspaceApiService) CreateWorkspaceFolderExecute(r ApiCreateWorkspaceFolderRequest) (*WorkspaceFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteWorkspaceFolderRequest) Execute() (*http.Response, error) {
 /*
 DeleteWorkspaceFolder Delete a 'workspace.Folder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWorkspaceFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWorkspaceFolderRequest
 */
 func (a *WorkspaceApiService) DeleteWorkspaceFolder(ctx context.Context, moid string) ApiDeleteWorkspaceFolderRequest {
 	return ApiDeleteWorkspaceFolderRequest{
@@ -359,9 +360,9 @@ func (r ApiGetWorkspaceFolderByMoidRequest) Execute() (*WorkspaceFolder, *http.R
 /*
 GetWorkspaceFolderByMoid Read a 'workspace.Folder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWorkspaceFolderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWorkspaceFolderByMoidRequest
 */
 func (a *WorkspaceApiService) GetWorkspaceFolderByMoid(ctx context.Context, moid string) ApiGetWorkspaceFolderByMoidRequest {
 	return ApiGetWorkspaceFolderByMoidRequest{
@@ -372,7 +373,8 @@ func (a *WorkspaceApiService) GetWorkspaceFolderByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return WorkspaceFolder
+//
+//	@return WorkspaceFolder
 func (a *WorkspaceApiService) GetWorkspaceFolderByMoidExecute(r ApiGetWorkspaceFolderByMoidRequest) (*WorkspaceFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -588,8 +590,8 @@ func (r ApiGetWorkspaceFolderListRequest) Execute() (*WorkspaceFolderResponse, *
 /*
 GetWorkspaceFolderList Read a 'workspace.Folder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWorkspaceFolderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWorkspaceFolderListRequest
 */
 func (a *WorkspaceApiService) GetWorkspaceFolderList(ctx context.Context) ApiGetWorkspaceFolderListRequest {
 	return ApiGetWorkspaceFolderListRequest{
@@ -599,7 +601,8 @@ func (a *WorkspaceApiService) GetWorkspaceFolderList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return WorkspaceFolderResponse
+//
+//	@return WorkspaceFolderResponse
 func (a *WorkspaceApiService) GetWorkspaceFolderListExecute(r ApiGetWorkspaceFolderListRequest) (*WorkspaceFolderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -800,9 +803,9 @@ func (r ApiPatchWorkspaceFolderRequest) Execute() (*WorkspaceFolder, *http.Respo
 /*
 PatchWorkspaceFolder Update a 'workspace.Folder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWorkspaceFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWorkspaceFolderRequest
 */
 func (a *WorkspaceApiService) PatchWorkspaceFolder(ctx context.Context, moid string) ApiPatchWorkspaceFolderRequest {
 	return ApiPatchWorkspaceFolderRequest{
@@ -813,7 +816,8 @@ func (a *WorkspaceApiService) PatchWorkspaceFolder(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return WorkspaceFolder
+//
+//	@return WorkspaceFolder
 func (a *WorkspaceApiService) PatchWorkspaceFolderExecute(r ApiPatchWorkspaceFolderRequest) (*WorkspaceFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -975,9 +979,9 @@ func (r ApiUpdateWorkspaceFolderRequest) Execute() (*WorkspaceFolder, *http.Resp
 /*
 UpdateWorkspaceFolder Update a 'workspace.Folder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWorkspaceFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWorkspaceFolderRequest
 */
 func (a *WorkspaceApiService) UpdateWorkspaceFolder(ctx context.Context, moid string) ApiUpdateWorkspaceFolderRequest {
 	return ApiUpdateWorkspaceFolderRequest{
@@ -988,7 +992,8 @@ func (a *WorkspaceApiService) UpdateWorkspaceFolder(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return WorkspaceFolder
+//
+//	@return WorkspaceFolder
 func (a *WorkspaceApiService) UpdateWorkspaceFolderExecute(r ApiUpdateWorkspaceFolderRequest) (*WorkspaceFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

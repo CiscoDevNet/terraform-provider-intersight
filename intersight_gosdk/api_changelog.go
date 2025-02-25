@@ -56,8 +56,8 @@ func (r ApiCreateChangelogItemRequest) Execute() (*ChangelogItem, *http.Response
 /*
 CreateChangelogItem Create a 'changelog.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateChangelogItemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateChangelogItemRequest
 */
 func (a *ChangelogApiService) CreateChangelogItem(ctx context.Context) ApiCreateChangelogItemRequest {
 	return ApiCreateChangelogItemRequest{
@@ -67,7 +67,8 @@ func (a *ChangelogApiService) CreateChangelogItem(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return ChangelogItem
+//
+//	@return ChangelogItem
 func (a *ChangelogApiService) CreateChangelogItemExecute(r ApiCreateChangelogItemRequest) (*ChangelogItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteChangelogItemRequest) Execute() (*http.Response, error) {
 /*
 DeleteChangelogItem Delete a 'changelog.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteChangelogItemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteChangelogItemRequest
 */
 func (a *ChangelogApiService) DeleteChangelogItem(ctx context.Context, moid string) ApiDeleteChangelogItemRequest {
 	return ApiDeleteChangelogItemRequest{
@@ -359,9 +360,9 @@ func (r ApiGetChangelogItemByMoidRequest) Execute() (*ChangelogItem, *http.Respo
 /*
 GetChangelogItemByMoid Read a 'changelog.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetChangelogItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetChangelogItemByMoidRequest
 */
 func (a *ChangelogApiService) GetChangelogItemByMoid(ctx context.Context, moid string) ApiGetChangelogItemByMoidRequest {
 	return ApiGetChangelogItemByMoidRequest{
@@ -372,7 +373,8 @@ func (a *ChangelogApiService) GetChangelogItemByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ChangelogItem
+//
+//	@return ChangelogItem
 func (a *ChangelogApiService) GetChangelogItemByMoidExecute(r ApiGetChangelogItemByMoidRequest) (*ChangelogItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -588,8 +590,8 @@ func (r ApiGetChangelogItemListRequest) Execute() (*ChangelogItemResponse, *http
 /*
 GetChangelogItemList Read a 'changelog.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetChangelogItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetChangelogItemListRequest
 */
 func (a *ChangelogApiService) GetChangelogItemList(ctx context.Context) ApiGetChangelogItemListRequest {
 	return ApiGetChangelogItemListRequest{
@@ -599,7 +601,8 @@ func (a *ChangelogApiService) GetChangelogItemList(ctx context.Context) ApiGetCh
 }
 
 // Execute executes the request
-//  @return ChangelogItemResponse
+//
+//	@return ChangelogItemResponse
 func (a *ChangelogApiService) GetChangelogItemListExecute(r ApiGetChangelogItemListRequest) (*ChangelogItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -800,9 +803,9 @@ func (r ApiPatchChangelogItemRequest) Execute() (*ChangelogItem, *http.Response,
 /*
 PatchChangelogItem Update a 'changelog.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchChangelogItemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchChangelogItemRequest
 */
 func (a *ChangelogApiService) PatchChangelogItem(ctx context.Context, moid string) ApiPatchChangelogItemRequest {
 	return ApiPatchChangelogItemRequest{
@@ -813,7 +816,8 @@ func (a *ChangelogApiService) PatchChangelogItem(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return ChangelogItem
+//
+//	@return ChangelogItem
 func (a *ChangelogApiService) PatchChangelogItemExecute(r ApiPatchChangelogItemRequest) (*ChangelogItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -975,9 +979,9 @@ func (r ApiUpdateChangelogItemRequest) Execute() (*ChangelogItem, *http.Response
 /*
 UpdateChangelogItem Update a 'changelog.Item' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateChangelogItemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateChangelogItemRequest
 */
 func (a *ChangelogApiService) UpdateChangelogItem(ctx context.Context, moid string) ApiUpdateChangelogItemRequest {
 	return ApiUpdateChangelogItemRequest{
@@ -988,7 +992,8 @@ func (a *ChangelogApiService) UpdateChangelogItem(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ChangelogItem
+//
+//	@return ChangelogItem
 func (a *ChangelogApiService) UpdateChangelogItemExecute(r ApiUpdateChangelogItemRequest) (*ChangelogItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

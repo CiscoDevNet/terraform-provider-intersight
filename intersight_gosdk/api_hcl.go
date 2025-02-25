@@ -56,8 +56,8 @@ func (r ApiCreateHclCompatibilityStatusRequest) Execute() (*HclCompatibilityStat
 /*
 CreateHclCompatibilityStatus Create a 'hcl.CompatibilityStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHclCompatibilityStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHclCompatibilityStatusRequest
 */
 func (a *HclApiService) CreateHclCompatibilityStatus(ctx context.Context) ApiCreateHclCompatibilityStatusRequest {
 	return ApiCreateHclCompatibilityStatusRequest{
@@ -67,7 +67,8 @@ func (a *HclApiService) CreateHclCompatibilityStatus(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return HclCompatibilityStatus
+//
+//	@return HclCompatibilityStatus
 func (a *HclApiService) CreateHclCompatibilityStatusExecute(r ApiCreateHclCompatibilityStatusRequest) (*HclCompatibilityStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*HclHy
 /*
 CreateHclHyperflexSoftwareCompatibilityInfo Create a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest
 */
 func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfo(ctx context.Context) ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest{
@@ -248,7 +249,8 @@ func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfo(ctx context.
 }
 
 // Execute executes the request
-//  @return HclHyperflexSoftwareCompatibilityInfo
+//
+//	@return HclHyperflexSoftwareCompatibilityInfo
 func (a *HclApiService) CreateHclHyperflexSoftwareCompatibilityInfoExecute(r ApiCreateHclHyperflexSoftwareCompatibilityInfoRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -418,8 +420,8 @@ func (r ApiCreateHclSupportedDriverNameRequest) Execute() (*HclSupportedDriverNa
 /*
 CreateHclSupportedDriverName Create a 'hcl.SupportedDriverName' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateHclSupportedDriverNameRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateHclSupportedDriverNameRequest
 */
 func (a *HclApiService) CreateHclSupportedDriverName(ctx context.Context) ApiCreateHclSupportedDriverNameRequest {
 	return ApiCreateHclSupportedDriverNameRequest{
@@ -429,7 +431,8 @@ func (a *HclApiService) CreateHclSupportedDriverName(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return HclSupportedDriverName
+//
+//	@return HclSupportedDriverName
 func (a *HclApiService) CreateHclSupportedDriverNameExecute(r ApiCreateHclSupportedDriverNameRequest) (*HclSupportedDriverName, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -579,9 +582,9 @@ func (r ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*http.
 /*
 DeleteHclHyperflexSoftwareCompatibilityInfo Delete a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest
 */
 func (a *HclApiService) DeleteHclHyperflexSoftwareCompatibilityInfo(ctx context.Context, moid string) ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiDeleteHclHyperflexSoftwareCompatibilityInfoRequest{
@@ -721,9 +724,9 @@ func (r ApiGetHclDriverImageByMoidRequest) Execute() (*HclDriverImage, *http.Res
 /*
 GetHclDriverImageByMoid Read a 'hcl.DriverImage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclDriverImageByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclDriverImageByMoidRequest
 */
 func (a *HclApiService) GetHclDriverImageByMoid(ctx context.Context, moid string) ApiGetHclDriverImageByMoidRequest {
 	return ApiGetHclDriverImageByMoidRequest{
@@ -734,7 +737,8 @@ func (a *HclApiService) GetHclDriverImageByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return HclDriverImage
+//
+//	@return HclDriverImage
 func (a *HclApiService) GetHclDriverImageByMoidExecute(r ApiGetHclDriverImageByMoidRequest) (*HclDriverImage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -950,8 +954,8 @@ func (r ApiGetHclDriverImageListRequest) Execute() (*HclDriverImageResponse, *ht
 /*
 GetHclDriverImageList Read a 'hcl.DriverImage' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclDriverImageListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclDriverImageListRequest
 */
 func (a *HclApiService) GetHclDriverImageList(ctx context.Context) ApiGetHclDriverImageListRequest {
 	return ApiGetHclDriverImageListRequest{
@@ -961,7 +965,8 @@ func (a *HclApiService) GetHclDriverImageList(ctx context.Context) ApiGetHclDriv
 }
 
 // Execute executes the request
-//  @return HclDriverImageResponse
+//
+//	@return HclDriverImageResponse
 func (a *HclApiService) GetHclDriverImageListExecute(r ApiGetHclDriverImageListRequest) (*HclDriverImageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1148,9 +1153,9 @@ func (r ApiGetHclExemptedCatalogByMoidRequest) Execute() (*HclExemptedCatalog, *
 /*
 GetHclExemptedCatalogByMoid Read a 'hcl.ExemptedCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclExemptedCatalogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclExemptedCatalogByMoidRequest
 */
 func (a *HclApiService) GetHclExemptedCatalogByMoid(ctx context.Context, moid string) ApiGetHclExemptedCatalogByMoidRequest {
 	return ApiGetHclExemptedCatalogByMoidRequest{
@@ -1161,7 +1166,8 @@ func (a *HclApiService) GetHclExemptedCatalogByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return HclExemptedCatalog
+//
+//	@return HclExemptedCatalog
 func (a *HclApiService) GetHclExemptedCatalogByMoidExecute(r ApiGetHclExemptedCatalogByMoidRequest) (*HclExemptedCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1377,8 +1383,8 @@ func (r ApiGetHclExemptedCatalogListRequest) Execute() (*HclExemptedCatalogRespo
 /*
 GetHclExemptedCatalogList Read a 'hcl.ExemptedCatalog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclExemptedCatalogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclExemptedCatalogListRequest
 */
 func (a *HclApiService) GetHclExemptedCatalogList(ctx context.Context) ApiGetHclExemptedCatalogListRequest {
 	return ApiGetHclExemptedCatalogListRequest{
@@ -1388,7 +1394,8 @@ func (a *HclApiService) GetHclExemptedCatalogList(ctx context.Context) ApiGetHcl
 }
 
 // Execute executes the request
-//  @return HclExemptedCatalogResponse
+//
+//	@return HclExemptedCatalogResponse
 func (a *HclApiService) GetHclExemptedCatalogListExecute(r ApiGetHclExemptedCatalogListRequest) (*HclExemptedCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1575,9 +1582,9 @@ func (r ApiGetHclHwCatalogInfoByMoidRequest) Execute() (*HclHwCatalogInfo, *http
 /*
 GetHclHwCatalogInfoByMoid Read a 'hcl.HwCatalogInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclHwCatalogInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclHwCatalogInfoByMoidRequest
 */
 func (a *HclApiService) GetHclHwCatalogInfoByMoid(ctx context.Context, moid string) ApiGetHclHwCatalogInfoByMoidRequest {
 	return ApiGetHclHwCatalogInfoByMoidRequest{
@@ -1588,7 +1595,8 @@ func (a *HclApiService) GetHclHwCatalogInfoByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return HclHwCatalogInfo
+//
+//	@return HclHwCatalogInfo
 func (a *HclApiService) GetHclHwCatalogInfoByMoidExecute(r ApiGetHclHwCatalogInfoByMoidRequest) (*HclHwCatalogInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1804,8 +1812,8 @@ func (r ApiGetHclHwCatalogInfoListRequest) Execute() (*HclHwCatalogInfoResponse,
 /*
 GetHclHwCatalogInfoList Read a 'hcl.HwCatalogInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclHwCatalogInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclHwCatalogInfoListRequest
 */
 func (a *HclApiService) GetHclHwCatalogInfoList(ctx context.Context) ApiGetHclHwCatalogInfoListRequest {
 	return ApiGetHclHwCatalogInfoListRequest{
@@ -1815,7 +1823,8 @@ func (a *HclApiService) GetHclHwCatalogInfoList(ctx context.Context) ApiGetHclHw
 }
 
 // Execute executes the request
-//  @return HclHwCatalogInfoResponse
+//
+//	@return HclHwCatalogInfoResponse
 func (a *HclApiService) GetHclHwCatalogInfoListExecute(r ApiGetHclHwCatalogInfoListRequest) (*HclHwCatalogInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2002,9 +2011,9 @@ func (r ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest) Execute() (*Hc
 /*
 GetHclHyperflexSoftwareCompatibilityInfoByMoid Read a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest
 */
 func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx context.Context, moid string) ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest {
 	return ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest{
@@ -2015,7 +2024,8 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return HclHyperflexSoftwareCompatibilityInfo
+//
+//	@return HclHyperflexSoftwareCompatibilityInfo
 func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoByMoidExecute(r ApiGetHclHyperflexSoftwareCompatibilityInfoByMoidRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2231,8 +2241,8 @@ func (r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) Execute() (*HclH
 /*
 GetHclHyperflexSoftwareCompatibilityInfoList Read a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest
 */
 func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoList(ctx context.Context) ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest {
 	return ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest{
@@ -2242,7 +2252,8 @@ func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoList(ctx context
 }
 
 // Execute executes the request
-//  @return HclHyperflexSoftwareCompatibilityInfoResponse
+//
+//	@return HclHyperflexSoftwareCompatibilityInfoResponse
 func (a *HclApiService) GetHclHyperflexSoftwareCompatibilityInfoListExecute(r ApiGetHclHyperflexSoftwareCompatibilityInfoListRequest) (*HclHyperflexSoftwareCompatibilityInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2429,9 +2440,9 @@ func (r ApiGetHclOperatingSystemByMoidRequest) Execute() (*HclOperatingSystem, *
 /*
 GetHclOperatingSystemByMoid Read a 'hcl.OperatingSystem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclOperatingSystemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclOperatingSystemByMoidRequest
 */
 func (a *HclApiService) GetHclOperatingSystemByMoid(ctx context.Context, moid string) ApiGetHclOperatingSystemByMoidRequest {
 	return ApiGetHclOperatingSystemByMoidRequest{
@@ -2442,7 +2453,8 @@ func (a *HclApiService) GetHclOperatingSystemByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return HclOperatingSystem
+//
+//	@return HclOperatingSystem
 func (a *HclApiService) GetHclOperatingSystemByMoidExecute(r ApiGetHclOperatingSystemByMoidRequest) (*HclOperatingSystem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2658,8 +2670,8 @@ func (r ApiGetHclOperatingSystemListRequest) Execute() (*HclOperatingSystemRespo
 /*
 GetHclOperatingSystemList Read a 'hcl.OperatingSystem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclOperatingSystemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclOperatingSystemListRequest
 */
 func (a *HclApiService) GetHclOperatingSystemList(ctx context.Context) ApiGetHclOperatingSystemListRequest {
 	return ApiGetHclOperatingSystemListRequest{
@@ -2669,7 +2681,8 @@ func (a *HclApiService) GetHclOperatingSystemList(ctx context.Context) ApiGetHcl
 }
 
 // Execute executes the request
-//  @return HclOperatingSystemResponse
+//
+//	@return HclOperatingSystemResponse
 func (a *HclApiService) GetHclOperatingSystemListExecute(r ApiGetHclOperatingSystemListRequest) (*HclOperatingSystemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2856,9 +2869,9 @@ func (r ApiGetHclOperatingSystemVendorByMoidRequest) Execute() (*HclOperatingSys
 /*
 GetHclOperatingSystemVendorByMoid Read a 'hcl.OperatingSystemVendor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclOperatingSystemVendorByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclOperatingSystemVendorByMoidRequest
 */
 func (a *HclApiService) GetHclOperatingSystemVendorByMoid(ctx context.Context, moid string) ApiGetHclOperatingSystemVendorByMoidRequest {
 	return ApiGetHclOperatingSystemVendorByMoidRequest{
@@ -2869,7 +2882,8 @@ func (a *HclApiService) GetHclOperatingSystemVendorByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return HclOperatingSystemVendor
+//
+//	@return HclOperatingSystemVendor
 func (a *HclApiService) GetHclOperatingSystemVendorByMoidExecute(r ApiGetHclOperatingSystemVendorByMoidRequest) (*HclOperatingSystemVendor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3085,8 +3099,8 @@ func (r ApiGetHclOperatingSystemVendorListRequest) Execute() (*HclOperatingSyste
 /*
 GetHclOperatingSystemVendorList Read a 'hcl.OperatingSystemVendor' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclOperatingSystemVendorListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclOperatingSystemVendorListRequest
 */
 func (a *HclApiService) GetHclOperatingSystemVendorList(ctx context.Context) ApiGetHclOperatingSystemVendorListRequest {
 	return ApiGetHclOperatingSystemVendorListRequest{
@@ -3096,7 +3110,8 @@ func (a *HclApiService) GetHclOperatingSystemVendorList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return HclOperatingSystemVendorResponse
+//
+//	@return HclOperatingSystemVendorResponse
 func (a *HclApiService) GetHclOperatingSystemVendorListExecute(r ApiGetHclOperatingSystemVendorListRequest) (*HclOperatingSystemVendorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3283,9 +3298,9 @@ func (r ApiGetHclServerHwCatalogInfoByMoidRequest) Execute() (*HclServerHwCatalo
 /*
 GetHclServerHwCatalogInfoByMoid Read a 'hcl.ServerHwCatalogInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetHclServerHwCatalogInfoByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetHclServerHwCatalogInfoByMoidRequest
 */
 func (a *HclApiService) GetHclServerHwCatalogInfoByMoid(ctx context.Context, moid string) ApiGetHclServerHwCatalogInfoByMoidRequest {
 	return ApiGetHclServerHwCatalogInfoByMoidRequest{
@@ -3296,7 +3311,8 @@ func (a *HclApiService) GetHclServerHwCatalogInfoByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return HclServerHwCatalogInfo
+//
+//	@return HclServerHwCatalogInfo
 func (a *HclApiService) GetHclServerHwCatalogInfoByMoidExecute(r ApiGetHclServerHwCatalogInfoByMoidRequest) (*HclServerHwCatalogInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3512,8 +3528,8 @@ func (r ApiGetHclServerHwCatalogInfoListRequest) Execute() (*HclServerHwCatalogI
 /*
 GetHclServerHwCatalogInfoList Read a 'hcl.ServerHwCatalogInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetHclServerHwCatalogInfoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetHclServerHwCatalogInfoListRequest
 */
 func (a *HclApiService) GetHclServerHwCatalogInfoList(ctx context.Context) ApiGetHclServerHwCatalogInfoListRequest {
 	return ApiGetHclServerHwCatalogInfoListRequest{
@@ -3523,7 +3539,8 @@ func (a *HclApiService) GetHclServerHwCatalogInfoList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return HclServerHwCatalogInfoResponse
+//
+//	@return HclServerHwCatalogInfoResponse
 func (a *HclApiService) GetHclServerHwCatalogInfoListExecute(r ApiGetHclServerHwCatalogInfoListRequest) (*HclServerHwCatalogInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3724,9 +3741,9 @@ func (r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*HclHyp
 /*
 PatchHclHyperflexSoftwareCompatibilityInfo Update a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest
 */
 func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfo(ctx context.Context, moid string) ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest{
@@ -3737,7 +3754,8 @@ func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfo(ctx context.C
 }
 
 // Execute executes the request
-//  @return HclHyperflexSoftwareCompatibilityInfo
+//
+//	@return HclHyperflexSoftwareCompatibilityInfo
 func (a *HclApiService) PatchHclHyperflexSoftwareCompatibilityInfoExecute(r ApiPatchHclHyperflexSoftwareCompatibilityInfoRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3899,9 +3917,9 @@ func (r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) Execute() (*HclHy
 /*
 UpdateHclHyperflexSoftwareCompatibilityInfo Update a 'hcl.HyperflexSoftwareCompatibilityInfo' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest
 */
 func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfo(ctx context.Context, moid string) ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest {
 	return ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest{
@@ -3912,7 +3930,8 @@ func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfo(ctx context.
 }
 
 // Execute executes the request
-//  @return HclHyperflexSoftwareCompatibilityInfo
+//
+//	@return HclHyperflexSoftwareCompatibilityInfo
 func (a *HclApiService) UpdateHclHyperflexSoftwareCompatibilityInfoExecute(r ApiUpdateHclHyperflexSoftwareCompatibilityInfoRequest) (*HclHyperflexSoftwareCompatibilityInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

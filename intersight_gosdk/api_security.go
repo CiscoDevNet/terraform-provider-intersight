@@ -36,9 +36,9 @@ func (r ApiGetSecurityUnitByMoidRequest) Execute() (*SecurityUnit, *http.Respons
 /*
 GetSecurityUnitByMoid Read a 'security.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSecurityUnitByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSecurityUnitByMoidRequest
 */
 func (a *SecurityApiService) GetSecurityUnitByMoid(ctx context.Context, moid string) ApiGetSecurityUnitByMoidRequest {
 	return ApiGetSecurityUnitByMoidRequest{
@@ -49,7 +49,8 @@ func (a *SecurityApiService) GetSecurityUnitByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return SecurityUnit
+//
+//	@return SecurityUnit
 func (a *SecurityApiService) GetSecurityUnitByMoidExecute(r ApiGetSecurityUnitByMoidRequest) (*SecurityUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetSecurityUnitListRequest) Execute() (*SecurityUnitResponse, *http.R
 /*
 GetSecurityUnitList Read a 'security.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSecurityUnitListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSecurityUnitListRequest
 */
 func (a *SecurityApiService) GetSecurityUnitList(ctx context.Context) ApiGetSecurityUnitListRequest {
 	return ApiGetSecurityUnitListRequest{
@@ -276,7 +277,8 @@ func (a *SecurityApiService) GetSecurityUnitList(ctx context.Context) ApiGetSecu
 }
 
 // Execute executes the request
-//  @return SecurityUnitResponse
+//
+//	@return SecurityUnitResponse
 func (a *SecurityApiService) GetSecurityUnitListExecute(r ApiGetSecurityUnitListRequest) (*SecurityUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -477,9 +479,9 @@ func (r ApiPatchSecurityUnitRequest) Execute() (*SecurityUnit, *http.Response, e
 /*
 PatchSecurityUnit Update a 'security.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSecurityUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSecurityUnitRequest
 */
 func (a *SecurityApiService) PatchSecurityUnit(ctx context.Context, moid string) ApiPatchSecurityUnitRequest {
 	return ApiPatchSecurityUnitRequest{
@@ -490,7 +492,8 @@ func (a *SecurityApiService) PatchSecurityUnit(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return SecurityUnit
+//
+//	@return SecurityUnit
 func (a *SecurityApiService) PatchSecurityUnitExecute(r ApiPatchSecurityUnitRequest) (*SecurityUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -652,9 +655,9 @@ func (r ApiUpdateSecurityUnitRequest) Execute() (*SecurityUnit, *http.Response, 
 /*
 UpdateSecurityUnit Update a 'security.Unit' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSecurityUnitRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSecurityUnitRequest
 */
 func (a *SecurityApiService) UpdateSecurityUnit(ctx context.Context, moid string) ApiUpdateSecurityUnitRequest {
 	return ApiUpdateSecurityUnitRequest{
@@ -665,7 +668,8 @@ func (a *SecurityApiService) UpdateSecurityUnit(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return SecurityUnit
+//
+//	@return SecurityUnit
 func (a *SecurityApiService) UpdateSecurityUnitExecute(r ApiUpdateSecurityUnitRequest) (*SecurityUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

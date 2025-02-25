@@ -56,8 +56,8 @@ func (r ApiCreateWebhookEndpointRequest) Execute() (*WebhookEndpoint, *http.Resp
 /*
 CreateWebhookEndpoint Create a 'webhook.Endpoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWebhookEndpointRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWebhookEndpointRequest
 */
 func (a *WebhookApiService) CreateWebhookEndpoint(ctx context.Context) ApiCreateWebhookEndpointRequest {
 	return ApiCreateWebhookEndpointRequest{
@@ -67,7 +67,8 @@ func (a *WebhookApiService) CreateWebhookEndpoint(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//  @return WebhookEndpoint
+//
+//	@return WebhookEndpoint
 func (a *WebhookApiService) CreateWebhookEndpointExecute(r ApiCreateWebhookEndpointRequest) (*WebhookEndpoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateWebhookSchemaRequest) Execute() (*WebhookSchema, *http.Response
 /*
 CreateWebhookSchema Create a 'webhook.Schema' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWebhookSchemaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWebhookSchemaRequest
 */
 func (a *WebhookApiService) CreateWebhookSchema(ctx context.Context) ApiCreateWebhookSchemaRequest {
 	return ApiCreateWebhookSchemaRequest{
@@ -248,7 +249,8 @@ func (a *WebhookApiService) CreateWebhookSchema(ctx context.Context) ApiCreateWe
 }
 
 // Execute executes the request
-//  @return WebhookSchema
+//
+//	@return WebhookSchema
 func (a *WebhookApiService) CreateWebhookSchemaExecute(r ApiCreateWebhookSchemaRequest) (*WebhookSchema, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteWebhookEndpointRequest) Execute() (*http.Response, error) {
 /*
 DeleteWebhookEndpoint Delete a 'webhook.Endpoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWebhookEndpointRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWebhookEndpointRequest
 */
 func (a *WebhookApiService) DeleteWebhookEndpoint(ctx context.Context, moid string) ApiDeleteWebhookEndpointRequest {
 	return ApiDeleteWebhookEndpointRequest{
@@ -540,9 +542,9 @@ func (r ApiDeleteWebhookSchemaRequest) Execute() (*http.Response, error) {
 /*
 DeleteWebhookSchema Delete a 'webhook.Schema' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteWebhookSchemaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteWebhookSchemaRequest
 */
 func (a *WebhookApiService) DeleteWebhookSchema(ctx context.Context, moid string) ApiDeleteWebhookSchemaRequest {
 	return ApiDeleteWebhookSchemaRequest{
@@ -682,9 +684,9 @@ func (r ApiGetWebhookEndpointByMoidRequest) Execute() (*WebhookEndpoint, *http.R
 /*
 GetWebhookEndpointByMoid Read a 'webhook.Endpoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWebhookEndpointByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWebhookEndpointByMoidRequest
 */
 func (a *WebhookApiService) GetWebhookEndpointByMoid(ctx context.Context, moid string) ApiGetWebhookEndpointByMoidRequest {
 	return ApiGetWebhookEndpointByMoidRequest{
@@ -695,7 +697,8 @@ func (a *WebhookApiService) GetWebhookEndpointByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return WebhookEndpoint
+//
+//	@return WebhookEndpoint
 func (a *WebhookApiService) GetWebhookEndpointByMoidExecute(r ApiGetWebhookEndpointByMoidRequest) (*WebhookEndpoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -911,8 +914,8 @@ func (r ApiGetWebhookEndpointListRequest) Execute() (*WebhookEndpointResponse, *
 /*
 GetWebhookEndpointList Read a 'webhook.Endpoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWebhookEndpointListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWebhookEndpointListRequest
 */
 func (a *WebhookApiService) GetWebhookEndpointList(ctx context.Context) ApiGetWebhookEndpointListRequest {
 	return ApiGetWebhookEndpointListRequest{
@@ -922,7 +925,8 @@ func (a *WebhookApiService) GetWebhookEndpointList(ctx context.Context) ApiGetWe
 }
 
 // Execute executes the request
-//  @return WebhookEndpointResponse
+//
+//	@return WebhookEndpointResponse
 func (a *WebhookApiService) GetWebhookEndpointListExecute(r ApiGetWebhookEndpointListRequest) (*WebhookEndpointResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1109,9 +1113,9 @@ func (r ApiGetWebhookSchemaByMoidRequest) Execute() (*WebhookSchema, *http.Respo
 /*
 GetWebhookSchemaByMoid Read a 'webhook.Schema' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetWebhookSchemaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetWebhookSchemaByMoidRequest
 */
 func (a *WebhookApiService) GetWebhookSchemaByMoid(ctx context.Context, moid string) ApiGetWebhookSchemaByMoidRequest {
 	return ApiGetWebhookSchemaByMoidRequest{
@@ -1122,7 +1126,8 @@ func (a *WebhookApiService) GetWebhookSchemaByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return WebhookSchema
+//
+//	@return WebhookSchema
 func (a *WebhookApiService) GetWebhookSchemaByMoidExecute(r ApiGetWebhookSchemaByMoidRequest) (*WebhookSchema, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1338,8 +1343,8 @@ func (r ApiGetWebhookSchemaListRequest) Execute() (*WebhookSchemaResponse, *http
 /*
 GetWebhookSchemaList Read a 'webhook.Schema' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWebhookSchemaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWebhookSchemaListRequest
 */
 func (a *WebhookApiService) GetWebhookSchemaList(ctx context.Context) ApiGetWebhookSchemaListRequest {
 	return ApiGetWebhookSchemaListRequest{
@@ -1349,7 +1354,8 @@ func (a *WebhookApiService) GetWebhookSchemaList(ctx context.Context) ApiGetWebh
 }
 
 // Execute executes the request
-//  @return WebhookSchemaResponse
+//
+//	@return WebhookSchemaResponse
 func (a *WebhookApiService) GetWebhookSchemaListExecute(r ApiGetWebhookSchemaListRequest) (*WebhookSchemaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1550,9 +1556,9 @@ func (r ApiPatchWebhookEndpointRequest) Execute() (*WebhookEndpoint, *http.Respo
 /*
 PatchWebhookEndpoint Update a 'webhook.Endpoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWebhookEndpointRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWebhookEndpointRequest
 */
 func (a *WebhookApiService) PatchWebhookEndpoint(ctx context.Context, moid string) ApiPatchWebhookEndpointRequest {
 	return ApiPatchWebhookEndpointRequest{
@@ -1563,7 +1569,8 @@ func (a *WebhookApiService) PatchWebhookEndpoint(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return WebhookEndpoint
+//
+//	@return WebhookEndpoint
 func (a *WebhookApiService) PatchWebhookEndpointExecute(r ApiPatchWebhookEndpointRequest) (*WebhookEndpoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1725,9 +1732,9 @@ func (r ApiPatchWebhookSchemaRequest) Execute() (*WebhookSchema, *http.Response,
 /*
 PatchWebhookSchema Update a 'webhook.Schema' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchWebhookSchemaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchWebhookSchemaRequest
 */
 func (a *WebhookApiService) PatchWebhookSchema(ctx context.Context, moid string) ApiPatchWebhookSchemaRequest {
 	return ApiPatchWebhookSchemaRequest{
@@ -1738,7 +1745,8 @@ func (a *WebhookApiService) PatchWebhookSchema(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return WebhookSchema
+//
+//	@return WebhookSchema
 func (a *WebhookApiService) PatchWebhookSchemaExecute(r ApiPatchWebhookSchemaRequest) (*WebhookSchema, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1900,9 +1908,9 @@ func (r ApiUpdateWebhookEndpointRequest) Execute() (*WebhookEndpoint, *http.Resp
 /*
 UpdateWebhookEndpoint Update a 'webhook.Endpoint' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWebhookEndpointRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWebhookEndpointRequest
 */
 func (a *WebhookApiService) UpdateWebhookEndpoint(ctx context.Context, moid string) ApiUpdateWebhookEndpointRequest {
 	return ApiUpdateWebhookEndpointRequest{
@@ -1913,7 +1921,8 @@ func (a *WebhookApiService) UpdateWebhookEndpoint(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return WebhookEndpoint
+//
+//	@return WebhookEndpoint
 func (a *WebhookApiService) UpdateWebhookEndpointExecute(r ApiUpdateWebhookEndpointRequest) (*WebhookEndpoint, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2075,9 +2084,9 @@ func (r ApiUpdateWebhookSchemaRequest) Execute() (*WebhookSchema, *http.Response
 /*
 UpdateWebhookSchema Update a 'webhook.Schema' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateWebhookSchemaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateWebhookSchemaRequest
 */
 func (a *WebhookApiService) UpdateWebhookSchema(ctx context.Context, moid string) ApiUpdateWebhookSchemaRequest {
 	return ApiUpdateWebhookSchemaRequest{
@@ -2088,7 +2097,8 @@ func (a *WebhookApiService) UpdateWebhookSchema(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return WebhookSchema
+//
+//	@return WebhookSchema
 func (a *WebhookApiService) UpdateWebhookSchemaExecute(r ApiUpdateWebhookSchemaRequest) (*WebhookSchema, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

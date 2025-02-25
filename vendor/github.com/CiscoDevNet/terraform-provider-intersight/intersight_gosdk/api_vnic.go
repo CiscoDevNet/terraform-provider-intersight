@@ -56,8 +56,8 @@ func (r ApiCreateVnicEthAdapterPolicyRequest) Execute() (*VnicEthAdapterPolicy, 
 /*
 CreateVnicEthAdapterPolicy Create a 'vnic.EthAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicEthAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicEthAdapterPolicyRequest
 */
 func (a *VnicApiService) CreateVnicEthAdapterPolicy(ctx context.Context) ApiCreateVnicEthAdapterPolicyRequest {
 	return ApiCreateVnicEthAdapterPolicyRequest{
@@ -67,7 +67,8 @@ func (a *VnicApiService) CreateVnicEthAdapterPolicy(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicy
+//
+//	@return VnicEthAdapterPolicy
 func (a *VnicApiService) CreateVnicEthAdapterPolicyExecute(r ApiCreateVnicEthAdapterPolicyRequest) (*VnicEthAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateVnicEthIfRequest) Execute() (*VnicEthIf, *http.Response, error)
 /*
 CreateVnicEthIf Create a 'vnic.EthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicEthIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicEthIfRequest
 */
 func (a *VnicApiService) CreateVnicEthIf(ctx context.Context) ApiCreateVnicEthIfRequest {
 	return ApiCreateVnicEthIfRequest{
@@ -248,7 +249,8 @@ func (a *VnicApiService) CreateVnicEthIf(ctx context.Context) ApiCreateVnicEthIf
 }
 
 // Execute executes the request
-//  @return VnicEthIf
+//
+//	@return VnicEthIf
 func (a *VnicApiService) CreateVnicEthIfExecute(r ApiCreateVnicEthIfRequest) (*VnicEthIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -418,8 +420,8 @@ func (r ApiCreateVnicEthNetworkPolicyRequest) Execute() (*VnicEthNetworkPolicy, 
 /*
 CreateVnicEthNetworkPolicy Create a 'vnic.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicEthNetworkPolicyRequest
 */
 func (a *VnicApiService) CreateVnicEthNetworkPolicy(ctx context.Context) ApiCreateVnicEthNetworkPolicyRequest {
 	return ApiCreateVnicEthNetworkPolicyRequest{
@@ -429,7 +431,8 @@ func (a *VnicApiService) CreateVnicEthNetworkPolicy(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicy
+//
+//	@return VnicEthNetworkPolicy
 func (a *VnicApiService) CreateVnicEthNetworkPolicyExecute(r ApiCreateVnicEthNetworkPolicyRequest) (*VnicEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -599,8 +602,8 @@ func (r ApiCreateVnicEthQosPolicyRequest) Execute() (*VnicEthQosPolicy, *http.Re
 /*
 CreateVnicEthQosPolicy Create a 'vnic.EthQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicEthQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicEthQosPolicyRequest
 */
 func (a *VnicApiService) CreateVnicEthQosPolicy(ctx context.Context) ApiCreateVnicEthQosPolicyRequest {
 	return ApiCreateVnicEthQosPolicyRequest{
@@ -610,7 +613,8 @@ func (a *VnicApiService) CreateVnicEthQosPolicy(ctx context.Context) ApiCreateVn
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicy
+//
+//	@return VnicEthQosPolicy
 func (a *VnicApiService) CreateVnicEthQosPolicyExecute(r ApiCreateVnicEthQosPolicyRequest) (*VnicEthQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -780,8 +784,8 @@ func (r ApiCreateVnicFcAdapterPolicyRequest) Execute() (*VnicFcAdapterPolicy, *h
 /*
 CreateVnicFcAdapterPolicy Create a 'vnic.FcAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicFcAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicFcAdapterPolicyRequest
 */
 func (a *VnicApiService) CreateVnicFcAdapterPolicy(ctx context.Context) ApiCreateVnicFcAdapterPolicyRequest {
 	return ApiCreateVnicFcAdapterPolicyRequest{
@@ -791,7 +795,8 @@ func (a *VnicApiService) CreateVnicFcAdapterPolicy(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicy
+//
+//	@return VnicFcAdapterPolicy
 func (a *VnicApiService) CreateVnicFcAdapterPolicyExecute(r ApiCreateVnicFcAdapterPolicyRequest) (*VnicFcAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -961,8 +966,8 @@ func (r ApiCreateVnicFcIfRequest) Execute() (*VnicFcIf, *http.Response, error) {
 /*
 CreateVnicFcIf Create a 'vnic.FcIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicFcIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicFcIfRequest
 */
 func (a *VnicApiService) CreateVnicFcIf(ctx context.Context) ApiCreateVnicFcIfRequest {
 	return ApiCreateVnicFcIfRequest{
@@ -972,7 +977,8 @@ func (a *VnicApiService) CreateVnicFcIf(ctx context.Context) ApiCreateVnicFcIfRe
 }
 
 // Execute executes the request
-//  @return VnicFcIf
+//
+//	@return VnicFcIf
 func (a *VnicApiService) CreateVnicFcIfExecute(r ApiCreateVnicFcIfRequest) (*VnicFcIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1142,8 +1148,8 @@ func (r ApiCreateVnicFcNetworkPolicyRequest) Execute() (*VnicFcNetworkPolicy, *h
 /*
 CreateVnicFcNetworkPolicy Create a 'vnic.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicFcNetworkPolicyRequest
 */
 func (a *VnicApiService) CreateVnicFcNetworkPolicy(ctx context.Context) ApiCreateVnicFcNetworkPolicyRequest {
 	return ApiCreateVnicFcNetworkPolicyRequest{
@@ -1153,7 +1159,8 @@ func (a *VnicApiService) CreateVnicFcNetworkPolicy(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicy
+//
+//	@return VnicFcNetworkPolicy
 func (a *VnicApiService) CreateVnicFcNetworkPolicyExecute(r ApiCreateVnicFcNetworkPolicyRequest) (*VnicFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1323,8 +1330,8 @@ func (r ApiCreateVnicFcQosPolicyRequest) Execute() (*VnicFcQosPolicy, *http.Resp
 /*
 CreateVnicFcQosPolicy Create a 'vnic.FcQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicFcQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicFcQosPolicyRequest
 */
 func (a *VnicApiService) CreateVnicFcQosPolicy(ctx context.Context) ApiCreateVnicFcQosPolicyRequest {
 	return ApiCreateVnicFcQosPolicyRequest{
@@ -1334,7 +1341,8 @@ func (a *VnicApiService) CreateVnicFcQosPolicy(ctx context.Context) ApiCreateVni
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicy
+//
+//	@return VnicFcQosPolicy
 func (a *VnicApiService) CreateVnicFcQosPolicyExecute(r ApiCreateVnicFcQosPolicyRequest) (*VnicFcQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1504,8 +1512,8 @@ func (r ApiCreateVnicIscsiAdapterPolicyRequest) Execute() (*VnicIscsiAdapterPoli
 /*
 CreateVnicIscsiAdapterPolicy Create a 'vnic.IscsiAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicIscsiAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicIscsiAdapterPolicyRequest
 */
 func (a *VnicApiService) CreateVnicIscsiAdapterPolicy(ctx context.Context) ApiCreateVnicIscsiAdapterPolicyRequest {
 	return ApiCreateVnicIscsiAdapterPolicyRequest{
@@ -1515,7 +1523,8 @@ func (a *VnicApiService) CreateVnicIscsiAdapterPolicy(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicy
+//
+//	@return VnicIscsiAdapterPolicy
 func (a *VnicApiService) CreateVnicIscsiAdapterPolicyExecute(r ApiCreateVnicIscsiAdapterPolicyRequest) (*VnicIscsiAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1685,8 +1694,8 @@ func (r ApiCreateVnicIscsiBootPolicyRequest) Execute() (*VnicIscsiBootPolicy, *h
 /*
 CreateVnicIscsiBootPolicy Create a 'vnic.IscsiBootPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicIscsiBootPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicIscsiBootPolicyRequest
 */
 func (a *VnicApiService) CreateVnicIscsiBootPolicy(ctx context.Context) ApiCreateVnicIscsiBootPolicyRequest {
 	return ApiCreateVnicIscsiBootPolicyRequest{
@@ -1696,7 +1705,8 @@ func (a *VnicApiService) CreateVnicIscsiBootPolicy(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicy
+//
+//	@return VnicIscsiBootPolicy
 func (a *VnicApiService) CreateVnicIscsiBootPolicyExecute(r ApiCreateVnicIscsiBootPolicyRequest) (*VnicIscsiBootPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1866,8 +1876,8 @@ func (r ApiCreateVnicIscsiStaticTargetPolicyRequest) Execute() (*VnicIscsiStatic
 /*
 CreateVnicIscsiStaticTargetPolicy Create a 'vnic.IscsiStaticTargetPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicIscsiStaticTargetPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicIscsiStaticTargetPolicyRequest
 */
 func (a *VnicApiService) CreateVnicIscsiStaticTargetPolicy(ctx context.Context) ApiCreateVnicIscsiStaticTargetPolicyRequest {
 	return ApiCreateVnicIscsiStaticTargetPolicyRequest{
@@ -1877,7 +1887,8 @@ func (a *VnicApiService) CreateVnicIscsiStaticTargetPolicy(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicy
+//
+//	@return VnicIscsiStaticTargetPolicy
 func (a *VnicApiService) CreateVnicIscsiStaticTargetPolicyExecute(r ApiCreateVnicIscsiStaticTargetPolicyRequest) (*VnicIscsiStaticTargetPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2047,8 +2058,8 @@ func (r ApiCreateVnicLanConnectivityPolicyRequest) Execute() (*VnicLanConnectivi
 /*
 CreateVnicLanConnectivityPolicy Create a 'vnic.LanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicLanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicLanConnectivityPolicyRequest
 */
 func (a *VnicApiService) CreateVnicLanConnectivityPolicy(ctx context.Context) ApiCreateVnicLanConnectivityPolicyRequest {
 	return ApiCreateVnicLanConnectivityPolicyRequest{
@@ -2058,7 +2069,8 @@ func (a *VnicApiService) CreateVnicLanConnectivityPolicy(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicy
+//
+//	@return VnicLanConnectivityPolicy
 func (a *VnicApiService) CreateVnicLanConnectivityPolicyExecute(r ApiCreateVnicLanConnectivityPolicyRequest) (*VnicLanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2228,8 +2240,8 @@ func (r ApiCreateVnicSanConnectivityPolicyRequest) Execute() (*VnicSanConnectivi
 /*
 CreateVnicSanConnectivityPolicy Create a 'vnic.SanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicSanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicSanConnectivityPolicyRequest
 */
 func (a *VnicApiService) CreateVnicSanConnectivityPolicy(ctx context.Context) ApiCreateVnicSanConnectivityPolicyRequest {
 	return ApiCreateVnicSanConnectivityPolicyRequest{
@@ -2239,7 +2251,8 @@ func (a *VnicApiService) CreateVnicSanConnectivityPolicy(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicy
+//
+//	@return VnicSanConnectivityPolicy
 func (a *VnicApiService) CreateVnicSanConnectivityPolicyExecute(r ApiCreateVnicSanConnectivityPolicyRequest) (*VnicSanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2409,8 +2422,8 @@ func (r ApiCreateVnicVhbaTemplateRequest) Execute() (*VnicVhbaTemplate, *http.Re
 /*
 CreateVnicVhbaTemplate Create a 'vnic.VhbaTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicVhbaTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicVhbaTemplateRequest
 */
 func (a *VnicApiService) CreateVnicVhbaTemplate(ctx context.Context) ApiCreateVnicVhbaTemplateRequest {
 	return ApiCreateVnicVhbaTemplateRequest{
@@ -2420,7 +2433,8 @@ func (a *VnicApiService) CreateVnicVhbaTemplate(ctx context.Context) ApiCreateVn
 }
 
 // Execute executes the request
-//  @return VnicVhbaTemplate
+//
+//	@return VnicVhbaTemplate
 func (a *VnicApiService) CreateVnicVhbaTemplateExecute(r ApiCreateVnicVhbaTemplateRequest) (*VnicVhbaTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2590,8 +2604,8 @@ func (r ApiCreateVnicVnicTemplateRequest) Execute() (*VnicVnicTemplate, *http.Re
 /*
 CreateVnicVnicTemplate Create a 'vnic.VnicTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVnicVnicTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVnicVnicTemplateRequest
 */
 func (a *VnicApiService) CreateVnicVnicTemplate(ctx context.Context) ApiCreateVnicVnicTemplateRequest {
 	return ApiCreateVnicVnicTemplateRequest{
@@ -2601,7 +2615,8 @@ func (a *VnicApiService) CreateVnicVnicTemplate(ctx context.Context) ApiCreateVn
 }
 
 // Execute executes the request
-//  @return VnicVnicTemplate
+//
+//	@return VnicVnicTemplate
 func (a *VnicApiService) CreateVnicVnicTemplateExecute(r ApiCreateVnicVnicTemplateRequest) (*VnicVnicTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2751,9 +2766,9 @@ func (r ApiDeleteVnicEthAdapterPolicyRequest) Execute() (*http.Response, error) 
 /*
 DeleteVnicEthAdapterPolicy Delete a 'vnic.EthAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicEthAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicEthAdapterPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicEthAdapterPolicy(ctx context.Context, moid string) ApiDeleteVnicEthAdapterPolicyRequest {
 	return ApiDeleteVnicEthAdapterPolicyRequest{
@@ -2893,9 +2908,9 @@ func (r ApiDeleteVnicEthIfRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicEthIf Delete a 'vnic.EthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicEthIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicEthIfRequest
 */
 func (a *VnicApiService) DeleteVnicEthIf(ctx context.Context, moid string) ApiDeleteVnicEthIfRequest {
 	return ApiDeleteVnicEthIfRequest{
@@ -3035,9 +3050,9 @@ func (r ApiDeleteVnicEthNetworkPolicyRequest) Execute() (*http.Response, error) 
 /*
 DeleteVnicEthNetworkPolicy Delete a 'vnic.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicEthNetworkPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicEthNetworkPolicy(ctx context.Context, moid string) ApiDeleteVnicEthNetworkPolicyRequest {
 	return ApiDeleteVnicEthNetworkPolicyRequest{
@@ -3177,9 +3192,9 @@ func (r ApiDeleteVnicEthQosPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicEthQosPolicy Delete a 'vnic.EthQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicEthQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicEthQosPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicEthQosPolicy(ctx context.Context, moid string) ApiDeleteVnicEthQosPolicyRequest {
 	return ApiDeleteVnicEthQosPolicyRequest{
@@ -3319,9 +3334,9 @@ func (r ApiDeleteVnicFcAdapterPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicFcAdapterPolicy Delete a 'vnic.FcAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicFcAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicFcAdapterPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicFcAdapterPolicy(ctx context.Context, moid string) ApiDeleteVnicFcAdapterPolicyRequest {
 	return ApiDeleteVnicFcAdapterPolicyRequest{
@@ -3461,9 +3476,9 @@ func (r ApiDeleteVnicFcIfRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicFcIf Delete a 'vnic.FcIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicFcIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicFcIfRequest
 */
 func (a *VnicApiService) DeleteVnicFcIf(ctx context.Context, moid string) ApiDeleteVnicFcIfRequest {
 	return ApiDeleteVnicFcIfRequest{
@@ -3603,9 +3618,9 @@ func (r ApiDeleteVnicFcNetworkPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicFcNetworkPolicy Delete a 'vnic.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicFcNetworkPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicFcNetworkPolicy(ctx context.Context, moid string) ApiDeleteVnicFcNetworkPolicyRequest {
 	return ApiDeleteVnicFcNetworkPolicyRequest{
@@ -3745,9 +3760,9 @@ func (r ApiDeleteVnicFcQosPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicFcQosPolicy Delete a 'vnic.FcQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicFcQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicFcQosPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicFcQosPolicy(ctx context.Context, moid string) ApiDeleteVnicFcQosPolicyRequest {
 	return ApiDeleteVnicFcQosPolicyRequest{
@@ -3887,9 +3902,9 @@ func (r ApiDeleteVnicIscsiAdapterPolicyRequest) Execute() (*http.Response, error
 /*
 DeleteVnicIscsiAdapterPolicy Delete a 'vnic.IscsiAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicIscsiAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicIscsiAdapterPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicIscsiAdapterPolicy(ctx context.Context, moid string) ApiDeleteVnicIscsiAdapterPolicyRequest {
 	return ApiDeleteVnicIscsiAdapterPolicyRequest{
@@ -4029,9 +4044,9 @@ func (r ApiDeleteVnicIscsiBootPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicIscsiBootPolicy Delete a 'vnic.IscsiBootPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicIscsiBootPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicIscsiBootPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicIscsiBootPolicy(ctx context.Context, moid string) ApiDeleteVnicIscsiBootPolicyRequest {
 	return ApiDeleteVnicIscsiBootPolicyRequest{
@@ -4171,9 +4186,9 @@ func (r ApiDeleteVnicIscsiStaticTargetPolicyRequest) Execute() (*http.Response, 
 /*
 DeleteVnicIscsiStaticTargetPolicy Delete a 'vnic.IscsiStaticTargetPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicIscsiStaticTargetPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicIscsiStaticTargetPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicIscsiStaticTargetPolicy(ctx context.Context, moid string) ApiDeleteVnicIscsiStaticTargetPolicyRequest {
 	return ApiDeleteVnicIscsiStaticTargetPolicyRequest{
@@ -4313,9 +4328,9 @@ func (r ApiDeleteVnicLanConnectivityPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteVnicLanConnectivityPolicy Delete a 'vnic.LanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicLanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicLanConnectivityPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicLanConnectivityPolicy(ctx context.Context, moid string) ApiDeleteVnicLanConnectivityPolicyRequest {
 	return ApiDeleteVnicLanConnectivityPolicyRequest{
@@ -4455,9 +4470,9 @@ func (r ApiDeleteVnicSanConnectivityPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteVnicSanConnectivityPolicy Delete a 'vnic.SanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicSanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicSanConnectivityPolicyRequest
 */
 func (a *VnicApiService) DeleteVnicSanConnectivityPolicy(ctx context.Context, moid string) ApiDeleteVnicSanConnectivityPolicyRequest {
 	return ApiDeleteVnicSanConnectivityPolicyRequest{
@@ -4597,9 +4612,9 @@ func (r ApiDeleteVnicVhbaTemplateRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicVhbaTemplate Delete a 'vnic.VhbaTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicVhbaTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicVhbaTemplateRequest
 */
 func (a *VnicApiService) DeleteVnicVhbaTemplate(ctx context.Context, moid string) ApiDeleteVnicVhbaTemplateRequest {
 	return ApiDeleteVnicVhbaTemplateRequest{
@@ -4739,9 +4754,9 @@ func (r ApiDeleteVnicVnicTemplateRequest) Execute() (*http.Response, error) {
 /*
 DeleteVnicVnicTemplate Delete a 'vnic.VnicTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVnicVnicTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVnicVnicTemplateRequest
 */
 func (a *VnicApiService) DeleteVnicVnicTemplate(ctx context.Context, moid string) ApiDeleteVnicVnicTemplateRequest {
 	return ApiDeleteVnicVnicTemplateRequest{
@@ -4881,9 +4896,9 @@ func (r ApiGetVnicEthAdapterPolicyByMoidRequest) Execute() (*VnicEthAdapterPolic
 /*
 GetVnicEthAdapterPolicyByMoid Read a 'vnic.EthAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthAdapterPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthAdapterPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthAdapterPolicyByMoid(ctx context.Context, moid string) ApiGetVnicEthAdapterPolicyByMoidRequest {
 	return ApiGetVnicEthAdapterPolicyByMoidRequest{
@@ -4894,7 +4909,8 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicy
+//
+//	@return VnicEthAdapterPolicy
 func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAdapterPolicyByMoidRequest) (*VnicEthAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5034,9 +5050,9 @@ func (r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) Execute() (*VnicEthAda
 /*
 GetVnicEthAdapterPolicyInventoryByMoid Read a 'vnic.EthAdapterPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthAdapterPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthAdapterPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicEthAdapterPolicyInventoryByMoidRequest {
 	return ApiGetVnicEthAdapterPolicyInventoryByMoidRequest{
@@ -5047,7 +5063,8 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicyInventory
+//
+//	@return VnicEthAdapterPolicyInventory
 func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryByMoidExecute(r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) (*VnicEthAdapterPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5263,8 +5280,8 @@ func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Execute() (*VnicEthAdapt
 /*
 GetVnicEthAdapterPolicyInventoryList Read a 'vnic.EthAdapterPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthAdapterPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthAdapterPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryList(ctx context.Context) ApiGetVnicEthAdapterPolicyInventoryListRequest {
 	return ApiGetVnicEthAdapterPolicyInventoryListRequest{
@@ -5274,7 +5291,8 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicyInventoryResponse
+//
+//	@return VnicEthAdapterPolicyInventoryResponse
 func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryListExecute(r ApiGetVnicEthAdapterPolicyInventoryListRequest) (*VnicEthAdapterPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5537,8 +5555,8 @@ func (r ApiGetVnicEthAdapterPolicyListRequest) Execute() (*VnicEthAdapterPolicyR
 /*
 GetVnicEthAdapterPolicyList Read a 'vnic.EthAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthAdapterPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthAdapterPolicyListRequest
 */
 func (a *VnicApiService) GetVnicEthAdapterPolicyList(ctx context.Context) ApiGetVnicEthAdapterPolicyListRequest {
 	return ApiGetVnicEthAdapterPolicyListRequest{
@@ -5548,7 +5566,8 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicyResponse
+//
+//	@return VnicEthAdapterPolicyResponse
 func (a *VnicApiService) GetVnicEthAdapterPolicyListExecute(r ApiGetVnicEthAdapterPolicyListRequest) (*VnicEthAdapterPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5735,9 +5754,9 @@ func (r ApiGetVnicEthIfByMoidRequest) Execute() (*VnicEthIf, *http.Response, err
 /*
 GetVnicEthIfByMoid Read a 'vnic.EthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthIfByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthIfByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthIfByMoid(ctx context.Context, moid string) ApiGetVnicEthIfByMoidRequest {
 	return ApiGetVnicEthIfByMoidRequest{
@@ -5748,7 +5767,8 @@ func (a *VnicApiService) GetVnicEthIfByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return VnicEthIf
+//
+//	@return VnicEthIf
 func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidRequest) (*VnicEthIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5888,9 +5908,9 @@ func (r ApiGetVnicEthIfInventoryByMoidRequest) Execute() (*VnicEthIfInventory, *
 /*
 GetVnicEthIfInventoryByMoid Read a 'vnic.EthIfInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthIfInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthIfInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthIfInventoryByMoid(ctx context.Context, moid string) ApiGetVnicEthIfInventoryByMoidRequest {
 	return ApiGetVnicEthIfInventoryByMoidRequest{
@@ -5901,7 +5921,8 @@ func (a *VnicApiService) GetVnicEthIfInventoryByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return VnicEthIfInventory
+//
+//	@return VnicEthIfInventory
 func (a *VnicApiService) GetVnicEthIfInventoryByMoidExecute(r ApiGetVnicEthIfInventoryByMoidRequest) (*VnicEthIfInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6117,8 +6138,8 @@ func (r ApiGetVnicEthIfInventoryListRequest) Execute() (*VnicEthIfInventoryRespo
 /*
 GetVnicEthIfInventoryList Read a 'vnic.EthIfInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthIfInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthIfInventoryListRequest
 */
 func (a *VnicApiService) GetVnicEthIfInventoryList(ctx context.Context) ApiGetVnicEthIfInventoryListRequest {
 	return ApiGetVnicEthIfInventoryListRequest{
@@ -6128,7 +6149,8 @@ func (a *VnicApiService) GetVnicEthIfInventoryList(ctx context.Context) ApiGetVn
 }
 
 // Execute executes the request
-//  @return VnicEthIfInventoryResponse
+//
+//	@return VnicEthIfInventoryResponse
 func (a *VnicApiService) GetVnicEthIfInventoryListExecute(r ApiGetVnicEthIfInventoryListRequest) (*VnicEthIfInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6391,8 +6413,8 @@ func (r ApiGetVnicEthIfListRequest) Execute() (*VnicEthIfResponse, *http.Respons
 /*
 GetVnicEthIfList Read a 'vnic.EthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthIfListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthIfListRequest
 */
 func (a *VnicApiService) GetVnicEthIfList(ctx context.Context) ApiGetVnicEthIfListRequest {
 	return ApiGetVnicEthIfListRequest{
@@ -6402,7 +6424,8 @@ func (a *VnicApiService) GetVnicEthIfList(ctx context.Context) ApiGetVnicEthIfLi
 }
 
 // Execute executes the request
-//  @return VnicEthIfResponse
+//
+//	@return VnicEthIfResponse
 func (a *VnicApiService) GetVnicEthIfListExecute(r ApiGetVnicEthIfListRequest) (*VnicEthIfResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6589,9 +6612,9 @@ func (r ApiGetVnicEthNetworkPolicyByMoidRequest) Execute() (*VnicEthNetworkPolic
 /*
 GetVnicEthNetworkPolicyByMoid Read a 'vnic.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthNetworkPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthNetworkPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetVnicEthNetworkPolicyByMoidRequest {
 	return ApiGetVnicEthNetworkPolicyByMoidRequest{
@@ -6602,7 +6625,8 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicy
+//
+//	@return VnicEthNetworkPolicy
 func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNetworkPolicyByMoidRequest) (*VnicEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6742,9 +6766,9 @@ func (r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) Execute() (*VnicEthNet
 /*
 GetVnicEthNetworkPolicyInventoryByMoid Read a 'vnic.EthNetworkPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthNetworkPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthNetworkPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicEthNetworkPolicyInventoryByMoidRequest {
 	return ApiGetVnicEthNetworkPolicyInventoryByMoidRequest{
@@ -6755,7 +6779,8 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicyInventory
+//
+//	@return VnicEthNetworkPolicyInventory
 func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryByMoidExecute(r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) (*VnicEthNetworkPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6971,8 +6996,8 @@ func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Execute() (*VnicEthNetwo
 /*
 GetVnicEthNetworkPolicyInventoryList Read a 'vnic.EthNetworkPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthNetworkPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthNetworkPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryList(ctx context.Context) ApiGetVnicEthNetworkPolicyInventoryListRequest {
 	return ApiGetVnicEthNetworkPolicyInventoryListRequest{
@@ -6982,7 +7007,8 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicyInventoryResponse
+//
+//	@return VnicEthNetworkPolicyInventoryResponse
 func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryListExecute(r ApiGetVnicEthNetworkPolicyInventoryListRequest) (*VnicEthNetworkPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7245,8 +7271,8 @@ func (r ApiGetVnicEthNetworkPolicyListRequest) Execute() (*VnicEthNetworkPolicyR
 /*
 GetVnicEthNetworkPolicyList Read a 'vnic.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthNetworkPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthNetworkPolicyListRequest
 */
 func (a *VnicApiService) GetVnicEthNetworkPolicyList(ctx context.Context) ApiGetVnicEthNetworkPolicyListRequest {
 	return ApiGetVnicEthNetworkPolicyListRequest{
@@ -7256,7 +7282,8 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicyResponse
+//
+//	@return VnicEthNetworkPolicyResponse
 func (a *VnicApiService) GetVnicEthNetworkPolicyListExecute(r ApiGetVnicEthNetworkPolicyListRequest) (*VnicEthNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7443,9 +7470,9 @@ func (r ApiGetVnicEthQosPolicyByMoidRequest) Execute() (*VnicEthQosPolicy, *http
 /*
 GetVnicEthQosPolicyByMoid Read a 'vnic.EthQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthQosPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthQosPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthQosPolicyByMoid(ctx context.Context, moid string) ApiGetVnicEthQosPolicyByMoidRequest {
 	return ApiGetVnicEthQosPolicyByMoidRequest{
@@ -7456,7 +7483,8 @@ func (a *VnicApiService) GetVnicEthQosPolicyByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicy
+//
+//	@return VnicEthQosPolicy
 func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPolicyByMoidRequest) (*VnicEthQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7596,9 +7624,9 @@ func (r ApiGetVnicEthQosPolicyInventoryByMoidRequest) Execute() (*VnicEthQosPoli
 /*
 GetVnicEthQosPolicyInventoryByMoid Read a 'vnic.EthQosPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthQosPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthQosPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthQosPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicEthQosPolicyInventoryByMoidRequest {
 	return ApiGetVnicEthQosPolicyInventoryByMoidRequest{
@@ -7609,7 +7637,8 @@ func (a *VnicApiService) GetVnicEthQosPolicyInventoryByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicyInventory
+//
+//	@return VnicEthQosPolicyInventory
 func (a *VnicApiService) GetVnicEthQosPolicyInventoryByMoidExecute(r ApiGetVnicEthQosPolicyInventoryByMoidRequest) (*VnicEthQosPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7825,8 +7854,8 @@ func (r ApiGetVnicEthQosPolicyInventoryListRequest) Execute() (*VnicEthQosPolicy
 /*
 GetVnicEthQosPolicyInventoryList Read a 'vnic.EthQosPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthQosPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthQosPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicEthQosPolicyInventoryList(ctx context.Context) ApiGetVnicEthQosPolicyInventoryListRequest {
 	return ApiGetVnicEthQosPolicyInventoryListRequest{
@@ -7836,7 +7865,8 @@ func (a *VnicApiService) GetVnicEthQosPolicyInventoryList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicyInventoryResponse
+//
+//	@return VnicEthQosPolicyInventoryResponse
 func (a *VnicApiService) GetVnicEthQosPolicyInventoryListExecute(r ApiGetVnicEthQosPolicyInventoryListRequest) (*VnicEthQosPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8099,8 +8129,8 @@ func (r ApiGetVnicEthQosPolicyListRequest) Execute() (*VnicEthQosPolicyResponse,
 /*
 GetVnicEthQosPolicyList Read a 'vnic.EthQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthQosPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthQosPolicyListRequest
 */
 func (a *VnicApiService) GetVnicEthQosPolicyList(ctx context.Context) ApiGetVnicEthQosPolicyListRequest {
 	return ApiGetVnicEthQosPolicyListRequest{
@@ -8110,7 +8140,8 @@ func (a *VnicApiService) GetVnicEthQosPolicyList(ctx context.Context) ApiGetVnic
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicyResponse
+//
+//	@return VnicEthQosPolicyResponse
 func (a *VnicApiService) GetVnicEthQosPolicyListExecute(r ApiGetVnicEthQosPolicyListRequest) (*VnicEthQosPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8297,9 +8328,9 @@ func (r ApiGetVnicEthVethInventoryByMoidRequest) Execute() (*VnicEthVethInventor
 /*
 GetVnicEthVethInventoryByMoid Read a 'vnic.EthVethInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthVethInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthVethInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthVethInventoryByMoid(ctx context.Context, moid string) ApiGetVnicEthVethInventoryByMoidRequest {
 	return ApiGetVnicEthVethInventoryByMoidRequest{
@@ -8310,7 +8341,8 @@ func (a *VnicApiService) GetVnicEthVethInventoryByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return VnicEthVethInventory
+//
+//	@return VnicEthVethInventory
 func (a *VnicApiService) GetVnicEthVethInventoryByMoidExecute(r ApiGetVnicEthVethInventoryByMoidRequest) (*VnicEthVethInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8526,8 +8558,8 @@ func (r ApiGetVnicEthVethInventoryListRequest) Execute() (*VnicEthVethInventoryR
 /*
 GetVnicEthVethInventoryList Read a 'vnic.EthVethInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthVethInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthVethInventoryListRequest
 */
 func (a *VnicApiService) GetVnicEthVethInventoryList(ctx context.Context) ApiGetVnicEthVethInventoryListRequest {
 	return ApiGetVnicEthVethInventoryListRequest{
@@ -8537,7 +8569,8 @@ func (a *VnicApiService) GetVnicEthVethInventoryList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return VnicEthVethInventoryResponse
+//
+//	@return VnicEthVethInventoryResponse
 func (a *VnicApiService) GetVnicEthVethInventoryListExecute(r ApiGetVnicEthVethInventoryListRequest) (*VnicEthVethInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8724,9 +8757,9 @@ func (r ApiGetVnicEthVnicInventoryByMoidRequest) Execute() (*VnicEthVnicInventor
 /*
 GetVnicEthVnicInventoryByMoid Read a 'vnic.EthVnicInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicEthVnicInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicEthVnicInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicEthVnicInventoryByMoid(ctx context.Context, moid string) ApiGetVnicEthVnicInventoryByMoidRequest {
 	return ApiGetVnicEthVnicInventoryByMoidRequest{
@@ -8737,7 +8770,8 @@ func (a *VnicApiService) GetVnicEthVnicInventoryByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return VnicEthVnicInventory
+//
+//	@return VnicEthVnicInventory
 func (a *VnicApiService) GetVnicEthVnicInventoryByMoidExecute(r ApiGetVnicEthVnicInventoryByMoidRequest) (*VnicEthVnicInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8953,8 +8987,8 @@ func (r ApiGetVnicEthVnicInventoryListRequest) Execute() (*VnicEthVnicInventoryR
 /*
 GetVnicEthVnicInventoryList Read a 'vnic.EthVnicInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicEthVnicInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicEthVnicInventoryListRequest
 */
 func (a *VnicApiService) GetVnicEthVnicInventoryList(ctx context.Context) ApiGetVnicEthVnicInventoryListRequest {
 	return ApiGetVnicEthVnicInventoryListRequest{
@@ -8964,7 +8998,8 @@ func (a *VnicApiService) GetVnicEthVnicInventoryList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return VnicEthVnicInventoryResponse
+//
+//	@return VnicEthVnicInventoryResponse
 func (a *VnicApiService) GetVnicEthVnicInventoryListExecute(r ApiGetVnicEthVnicInventoryListRequest) (*VnicEthVnicInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9151,9 +9186,9 @@ func (r ApiGetVnicFcAdapterPolicyByMoidRequest) Execute() (*VnicFcAdapterPolicy,
 /*
 GetVnicFcAdapterPolicyByMoid Read a 'vnic.FcAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcAdapterPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcAdapterPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcAdapterPolicyByMoid(ctx context.Context, moid string) ApiGetVnicFcAdapterPolicyByMoidRequest {
 	return ApiGetVnicFcAdapterPolicyByMoidRequest{
@@ -9164,7 +9199,8 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicy
+//
+//	@return VnicFcAdapterPolicy
 func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapterPolicyByMoidRequest) (*VnicFcAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9304,9 +9340,9 @@ func (r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) Execute() (*VnicFcAdapt
 /*
 GetVnicFcAdapterPolicyInventoryByMoid Read a 'vnic.FcAdapterPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcAdapterPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcAdapterPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicFcAdapterPolicyInventoryByMoidRequest {
 	return ApiGetVnicFcAdapterPolicyInventoryByMoidRequest{
@@ -9317,7 +9353,8 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicyInventory
+//
+//	@return VnicFcAdapterPolicyInventory
 func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryByMoidExecute(r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) (*VnicFcAdapterPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9533,8 +9570,8 @@ func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Execute() (*VnicFcAdapter
 /*
 GetVnicFcAdapterPolicyInventoryList Read a 'vnic.FcAdapterPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcAdapterPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcAdapterPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryList(ctx context.Context) ApiGetVnicFcAdapterPolicyInventoryListRequest {
 	return ApiGetVnicFcAdapterPolicyInventoryListRequest{
@@ -9544,7 +9581,8 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicyInventoryResponse
+//
+//	@return VnicFcAdapterPolicyInventoryResponse
 func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryListExecute(r ApiGetVnicFcAdapterPolicyInventoryListRequest) (*VnicFcAdapterPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9807,8 +9845,8 @@ func (r ApiGetVnicFcAdapterPolicyListRequest) Execute() (*VnicFcAdapterPolicyRes
 /*
 GetVnicFcAdapterPolicyList Read a 'vnic.FcAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcAdapterPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcAdapterPolicyListRequest
 */
 func (a *VnicApiService) GetVnicFcAdapterPolicyList(ctx context.Context) ApiGetVnicFcAdapterPolicyListRequest {
 	return ApiGetVnicFcAdapterPolicyListRequest{
@@ -9818,7 +9856,8 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyList(ctx context.Context) ApiGetV
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicyResponse
+//
+//	@return VnicFcAdapterPolicyResponse
 func (a *VnicApiService) GetVnicFcAdapterPolicyListExecute(r ApiGetVnicFcAdapterPolicyListRequest) (*VnicFcAdapterPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10005,9 +10044,9 @@ func (r ApiGetVnicFcIfByMoidRequest) Execute() (*VnicFcIf, *http.Response, error
 /*
 GetVnicFcIfByMoid Read a 'vnic.FcIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcIfByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcIfByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcIfByMoid(ctx context.Context, moid string) ApiGetVnicFcIfByMoidRequest {
 	return ApiGetVnicFcIfByMoidRequest{
@@ -10018,7 +10057,8 @@ func (a *VnicApiService) GetVnicFcIfByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return VnicFcIf
+//
+//	@return VnicFcIf
 func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest) (*VnicFcIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10158,9 +10198,9 @@ func (r ApiGetVnicFcIfInventoryByMoidRequest) Execute() (*VnicFcIfInventory, *ht
 /*
 GetVnicFcIfInventoryByMoid Read a 'vnic.FcIfInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcIfInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcIfInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcIfInventoryByMoid(ctx context.Context, moid string) ApiGetVnicFcIfInventoryByMoidRequest {
 	return ApiGetVnicFcIfInventoryByMoidRequest{
@@ -10171,7 +10211,8 @@ func (a *VnicApiService) GetVnicFcIfInventoryByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return VnicFcIfInventory
+//
+//	@return VnicFcIfInventory
 func (a *VnicApiService) GetVnicFcIfInventoryByMoidExecute(r ApiGetVnicFcIfInventoryByMoidRequest) (*VnicFcIfInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10387,8 +10428,8 @@ func (r ApiGetVnicFcIfInventoryListRequest) Execute() (*VnicFcIfInventoryRespons
 /*
 GetVnicFcIfInventoryList Read a 'vnic.FcIfInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcIfInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcIfInventoryListRequest
 */
 func (a *VnicApiService) GetVnicFcIfInventoryList(ctx context.Context) ApiGetVnicFcIfInventoryListRequest {
 	return ApiGetVnicFcIfInventoryListRequest{
@@ -10398,7 +10439,8 @@ func (a *VnicApiService) GetVnicFcIfInventoryList(ctx context.Context) ApiGetVni
 }
 
 // Execute executes the request
-//  @return VnicFcIfInventoryResponse
+//
+//	@return VnicFcIfInventoryResponse
 func (a *VnicApiService) GetVnicFcIfInventoryListExecute(r ApiGetVnicFcIfInventoryListRequest) (*VnicFcIfInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10661,8 +10703,8 @@ func (r ApiGetVnicFcIfListRequest) Execute() (*VnicFcIfResponse, *http.Response,
 /*
 GetVnicFcIfList Read a 'vnic.FcIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcIfListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcIfListRequest
 */
 func (a *VnicApiService) GetVnicFcIfList(ctx context.Context) ApiGetVnicFcIfListRequest {
 	return ApiGetVnicFcIfListRequest{
@@ -10672,7 +10714,8 @@ func (a *VnicApiService) GetVnicFcIfList(ctx context.Context) ApiGetVnicFcIfList
 }
 
 // Execute executes the request
-//  @return VnicFcIfResponse
+//
+//	@return VnicFcIfResponse
 func (a *VnicApiService) GetVnicFcIfListExecute(r ApiGetVnicFcIfListRequest) (*VnicFcIfResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10859,9 +10902,9 @@ func (r ApiGetVnicFcNetworkPolicyByMoidRequest) Execute() (*VnicFcNetworkPolicy,
 /*
 GetVnicFcNetworkPolicyByMoid Read a 'vnic.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcNetworkPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcNetworkPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetVnicFcNetworkPolicyByMoidRequest {
 	return ApiGetVnicFcNetworkPolicyByMoidRequest{
@@ -10872,7 +10915,8 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicy
+//
+//	@return VnicFcNetworkPolicy
 func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetworkPolicyByMoidRequest) (*VnicFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11012,9 +11056,9 @@ func (r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) Execute() (*VnicFcNetwo
 /*
 GetVnicFcNetworkPolicyInventoryByMoid Read a 'vnic.FcNetworkPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcNetworkPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcNetworkPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicFcNetworkPolicyInventoryByMoidRequest {
 	return ApiGetVnicFcNetworkPolicyInventoryByMoidRequest{
@@ -11025,7 +11069,8 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicyInventory
+//
+//	@return VnicFcNetworkPolicyInventory
 func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryByMoidExecute(r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) (*VnicFcNetworkPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11241,8 +11286,8 @@ func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Execute() (*VnicFcNetwork
 /*
 GetVnicFcNetworkPolicyInventoryList Read a 'vnic.FcNetworkPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcNetworkPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcNetworkPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryList(ctx context.Context) ApiGetVnicFcNetworkPolicyInventoryListRequest {
 	return ApiGetVnicFcNetworkPolicyInventoryListRequest{
@@ -11252,7 +11297,8 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicyInventoryResponse
+//
+//	@return VnicFcNetworkPolicyInventoryResponse
 func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryListExecute(r ApiGetVnicFcNetworkPolicyInventoryListRequest) (*VnicFcNetworkPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11515,8 +11561,8 @@ func (r ApiGetVnicFcNetworkPolicyListRequest) Execute() (*VnicFcNetworkPolicyRes
 /*
 GetVnicFcNetworkPolicyList Read a 'vnic.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcNetworkPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcNetworkPolicyListRequest
 */
 func (a *VnicApiService) GetVnicFcNetworkPolicyList(ctx context.Context) ApiGetVnicFcNetworkPolicyListRequest {
 	return ApiGetVnicFcNetworkPolicyListRequest{
@@ -11526,7 +11572,8 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyList(ctx context.Context) ApiGetV
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicyResponse
+//
+//	@return VnicFcNetworkPolicyResponse
 func (a *VnicApiService) GetVnicFcNetworkPolicyListExecute(r ApiGetVnicFcNetworkPolicyListRequest) (*VnicFcNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11713,9 +11760,9 @@ func (r ApiGetVnicFcQosPolicyByMoidRequest) Execute() (*VnicFcQosPolicy, *http.R
 /*
 GetVnicFcQosPolicyByMoid Read a 'vnic.FcQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcQosPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcQosPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcQosPolicyByMoid(ctx context.Context, moid string) ApiGetVnicFcQosPolicyByMoidRequest {
 	return ApiGetVnicFcQosPolicyByMoidRequest{
@@ -11726,7 +11773,8 @@ func (a *VnicApiService) GetVnicFcQosPolicyByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicy
+//
+//	@return VnicFcQosPolicy
 func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicyByMoidRequest) (*VnicFcQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11866,9 +11914,9 @@ func (r ApiGetVnicFcQosPolicyInventoryByMoidRequest) Execute() (*VnicFcQosPolicy
 /*
 GetVnicFcQosPolicyInventoryByMoid Read a 'vnic.FcQosPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcQosPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcQosPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcQosPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicFcQosPolicyInventoryByMoidRequest {
 	return ApiGetVnicFcQosPolicyInventoryByMoidRequest{
@@ -11879,7 +11927,8 @@ func (a *VnicApiService) GetVnicFcQosPolicyInventoryByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicyInventory
+//
+//	@return VnicFcQosPolicyInventory
 func (a *VnicApiService) GetVnicFcQosPolicyInventoryByMoidExecute(r ApiGetVnicFcQosPolicyInventoryByMoidRequest) (*VnicFcQosPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12095,8 +12144,8 @@ func (r ApiGetVnicFcQosPolicyInventoryListRequest) Execute() (*VnicFcQosPolicyIn
 /*
 GetVnicFcQosPolicyInventoryList Read a 'vnic.FcQosPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcQosPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcQosPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicFcQosPolicyInventoryList(ctx context.Context) ApiGetVnicFcQosPolicyInventoryListRequest {
 	return ApiGetVnicFcQosPolicyInventoryListRequest{
@@ -12106,7 +12155,8 @@ func (a *VnicApiService) GetVnicFcQosPolicyInventoryList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicyInventoryResponse
+//
+//	@return VnicFcQosPolicyInventoryResponse
 func (a *VnicApiService) GetVnicFcQosPolicyInventoryListExecute(r ApiGetVnicFcQosPolicyInventoryListRequest) (*VnicFcQosPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12369,8 +12419,8 @@ func (r ApiGetVnicFcQosPolicyListRequest) Execute() (*VnicFcQosPolicyResponse, *
 /*
 GetVnicFcQosPolicyList Read a 'vnic.FcQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcQosPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcQosPolicyListRequest
 */
 func (a *VnicApiService) GetVnicFcQosPolicyList(ctx context.Context) ApiGetVnicFcQosPolicyListRequest {
 	return ApiGetVnicFcQosPolicyListRequest{
@@ -12380,7 +12430,8 @@ func (a *VnicApiService) GetVnicFcQosPolicyList(ctx context.Context) ApiGetVnicF
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicyResponse
+//
+//	@return VnicFcQosPolicyResponse
 func (a *VnicApiService) GetVnicFcQosPolicyListExecute(r ApiGetVnicFcQosPolicyListRequest) (*VnicFcQosPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12567,9 +12618,9 @@ func (r ApiGetVnicFcVethInventoryByMoidRequest) Execute() (*VnicFcVethInventory,
 /*
 GetVnicFcVethInventoryByMoid Read a 'vnic.FcVethInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcVethInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcVethInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcVethInventoryByMoid(ctx context.Context, moid string) ApiGetVnicFcVethInventoryByMoidRequest {
 	return ApiGetVnicFcVethInventoryByMoidRequest{
@@ -12580,7 +12631,8 @@ func (a *VnicApiService) GetVnicFcVethInventoryByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return VnicFcVethInventory
+//
+//	@return VnicFcVethInventory
 func (a *VnicApiService) GetVnicFcVethInventoryByMoidExecute(r ApiGetVnicFcVethInventoryByMoidRequest) (*VnicFcVethInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12796,8 +12848,8 @@ func (r ApiGetVnicFcVethInventoryListRequest) Execute() (*VnicFcVethInventoryRes
 /*
 GetVnicFcVethInventoryList Read a 'vnic.FcVethInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcVethInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcVethInventoryListRequest
 */
 func (a *VnicApiService) GetVnicFcVethInventoryList(ctx context.Context) ApiGetVnicFcVethInventoryListRequest {
 	return ApiGetVnicFcVethInventoryListRequest{
@@ -12807,7 +12859,8 @@ func (a *VnicApiService) GetVnicFcVethInventoryList(ctx context.Context) ApiGetV
 }
 
 // Execute executes the request
-//  @return VnicFcVethInventoryResponse
+//
+//	@return VnicFcVethInventoryResponse
 func (a *VnicApiService) GetVnicFcVethInventoryListExecute(r ApiGetVnicFcVethInventoryListRequest) (*VnicFcVethInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12994,9 +13047,9 @@ func (r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) Execute() (*VnicFcVhbaPoli
 /*
 GetVnicFcVhbaPolicyInventoryByMoid Read a 'vnic.FcVhbaPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicFcVhbaPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicFcVhbaPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicFcVhbaPolicyInventoryByMoidRequest {
 	return ApiGetVnicFcVhbaPolicyInventoryByMoidRequest{
@@ -13007,7 +13060,8 @@ func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return VnicFcVhbaPolicyInventory
+//
+//	@return VnicFcVhbaPolicyInventory
 func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryByMoidExecute(r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) (*VnicFcVhbaPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13223,8 +13277,8 @@ func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Execute() (*VnicFcVhbaPolicy
 /*
 GetVnicFcVhbaPolicyInventoryList Read a 'vnic.FcVhbaPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicFcVhbaPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicFcVhbaPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryList(ctx context.Context) ApiGetVnicFcVhbaPolicyInventoryListRequest {
 	return ApiGetVnicFcVhbaPolicyInventoryListRequest{
@@ -13234,7 +13288,8 @@ func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return VnicFcVhbaPolicyInventoryResponse
+//
+//	@return VnicFcVhbaPolicyInventoryResponse
 func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryListExecute(r ApiGetVnicFcVhbaPolicyInventoryListRequest) (*VnicFcVhbaPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13421,9 +13476,9 @@ func (r ApiGetVnicIscsiAdapterPolicyByMoidRequest) Execute() (*VnicIscsiAdapterP
 /*
 GetVnicIscsiAdapterPolicyByMoid Read a 'vnic.IscsiAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicIscsiAdapterPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicIscsiAdapterPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoid(ctx context.Context, moid string) ApiGetVnicIscsiAdapterPolicyByMoidRequest {
 	return ApiGetVnicIscsiAdapterPolicyByMoidRequest{
@@ -13434,7 +13489,8 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicy
+//
+//	@return VnicIscsiAdapterPolicy
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoidExecute(r ApiGetVnicIscsiAdapterPolicyByMoidRequest) (*VnicIscsiAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13574,9 +13630,9 @@ func (r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) Execute() (*VnicIscs
 /*
 GetVnicIscsiAdapterPolicyInventoryByMoid Read a 'vnic.IscsiAdapterPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest {
 	return ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest{
@@ -13587,7 +13643,8 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicyInventory
+//
+//	@return VnicIscsiAdapterPolicyInventory
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryByMoidExecute(r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) (*VnicIscsiAdapterPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13803,8 +13860,8 @@ func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Execute() (*VnicIscsiA
 /*
 GetVnicIscsiAdapterPolicyInventoryList Read a 'vnic.IscsiAdapterPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicIscsiAdapterPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicIscsiAdapterPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryList(ctx context.Context) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
 	return ApiGetVnicIscsiAdapterPolicyInventoryListRequest{
@@ -13814,7 +13871,8 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicyInventoryResponse
+//
+//	@return VnicIscsiAdapterPolicyInventoryResponse
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryListExecute(r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) (*VnicIscsiAdapterPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14077,8 +14135,8 @@ func (r ApiGetVnicIscsiAdapterPolicyListRequest) Execute() (*VnicIscsiAdapterPol
 /*
 GetVnicIscsiAdapterPolicyList Read a 'vnic.IscsiAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicIscsiAdapterPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicIscsiAdapterPolicyListRequest
 */
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyList(ctx context.Context) ApiGetVnicIscsiAdapterPolicyListRequest {
 	return ApiGetVnicIscsiAdapterPolicyListRequest{
@@ -14088,7 +14146,8 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicyResponse
+//
+//	@return VnicIscsiAdapterPolicyResponse
 func (a *VnicApiService) GetVnicIscsiAdapterPolicyListExecute(r ApiGetVnicIscsiAdapterPolicyListRequest) (*VnicIscsiAdapterPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14275,9 +14334,9 @@ func (r ApiGetVnicIscsiBootPolicyByMoidRequest) Execute() (*VnicIscsiBootPolicy,
 /*
 GetVnicIscsiBootPolicyByMoid Read a 'vnic.IscsiBootPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicIscsiBootPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicIscsiBootPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicIscsiBootPolicyByMoid(ctx context.Context, moid string) ApiGetVnicIscsiBootPolicyByMoidRequest {
 	return ApiGetVnicIscsiBootPolicyByMoidRequest{
@@ -14288,7 +14347,8 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicy
+//
+//	@return VnicIscsiBootPolicy
 func (a *VnicApiService) GetVnicIscsiBootPolicyByMoidExecute(r ApiGetVnicIscsiBootPolicyByMoidRequest) (*VnicIscsiBootPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14428,9 +14488,9 @@ func (r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) Execute() (*VnicIscsiBo
 /*
 GetVnicIscsiBootPolicyInventoryByMoid Read a 'vnic.IscsiBootPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicIscsiBootPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicIscsiBootPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicIscsiBootPolicyInventoryByMoidRequest {
 	return ApiGetVnicIscsiBootPolicyInventoryByMoidRequest{
@@ -14441,7 +14501,8 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicyInventory
+//
+//	@return VnicIscsiBootPolicyInventory
 func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryByMoidExecute(r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) (*VnicIscsiBootPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14657,8 +14718,8 @@ func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Execute() (*VnicIscsiBoot
 /*
 GetVnicIscsiBootPolicyInventoryList Read a 'vnic.IscsiBootPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicIscsiBootPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicIscsiBootPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryList(ctx context.Context) ApiGetVnicIscsiBootPolicyInventoryListRequest {
 	return ApiGetVnicIscsiBootPolicyInventoryListRequest{
@@ -14668,7 +14729,8 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicyInventoryResponse
+//
+//	@return VnicIscsiBootPolicyInventoryResponse
 func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryListExecute(r ApiGetVnicIscsiBootPolicyInventoryListRequest) (*VnicIscsiBootPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14931,8 +14993,8 @@ func (r ApiGetVnicIscsiBootPolicyListRequest) Execute() (*VnicIscsiBootPolicyRes
 /*
 GetVnicIscsiBootPolicyList Read a 'vnic.IscsiBootPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicIscsiBootPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicIscsiBootPolicyListRequest
 */
 func (a *VnicApiService) GetVnicIscsiBootPolicyList(ctx context.Context) ApiGetVnicIscsiBootPolicyListRequest {
 	return ApiGetVnicIscsiBootPolicyListRequest{
@@ -14942,7 +15004,8 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyList(ctx context.Context) ApiGetV
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicyResponse
+//
+//	@return VnicIscsiBootPolicyResponse
 func (a *VnicApiService) GetVnicIscsiBootPolicyListExecute(r ApiGetVnicIscsiBootPolicyListRequest) (*VnicIscsiBootPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15129,9 +15192,9 @@ func (r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) Execute() (*VnicIscsiSta
 /*
 GetVnicIscsiStaticTargetPolicyByMoid Read a 'vnic.IscsiStaticTargetPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicIscsiStaticTargetPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicIscsiStaticTargetPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoid(ctx context.Context, moid string) ApiGetVnicIscsiStaticTargetPolicyByMoidRequest {
 	return ApiGetVnicIscsiStaticTargetPolicyByMoidRequest{
@@ -15142,7 +15205,8 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicy
+//
+//	@return VnicIscsiStaticTargetPolicy
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoidExecute(r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) (*VnicIscsiStaticTargetPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15282,9 +15346,9 @@ func (r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) Execute() (*Vni
 /*
 GetVnicIscsiStaticTargetPolicyInventoryByMoid Read a 'vnic.IscsiStaticTargetPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest {
 	return ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest{
@@ -15295,7 +15359,8 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicyInventory
+//
+//	@return VnicIscsiStaticTargetPolicyInventory
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryByMoidExecute(r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) (*VnicIscsiStaticTargetPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15511,8 +15576,8 @@ func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Execute() (*VnicI
 /*
 GetVnicIscsiStaticTargetPolicyInventoryList Read a 'vnic.IscsiStaticTargetPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryList(ctx context.Context) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
 	return ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest{
@@ -15522,7 +15587,8 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryList(ctx context
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicyInventoryResponse
+//
+//	@return VnicIscsiStaticTargetPolicyInventoryResponse
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryListExecute(r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) (*VnicIscsiStaticTargetPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15785,8 +15851,8 @@ func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Execute() (*VnicIscsiStati
 /*
 GetVnicIscsiStaticTargetPolicyList Read a 'vnic.IscsiStaticTargetPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicIscsiStaticTargetPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicIscsiStaticTargetPolicyListRequest
 */
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyList(ctx context.Context) ApiGetVnicIscsiStaticTargetPolicyListRequest {
 	return ApiGetVnicIscsiStaticTargetPolicyListRequest{
@@ -15796,7 +15862,8 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicyResponse
+//
+//	@return VnicIscsiStaticTargetPolicyResponse
 func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyListExecute(r ApiGetVnicIscsiStaticTargetPolicyListRequest) (*VnicIscsiStaticTargetPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15983,9 +16050,9 @@ func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) Execute() (*VnicLanConnect
 /*
 GetVnicLanConnectivityPolicyByMoid Read a 'vnic.LanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicLanConnectivityPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicLanConnectivityPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoid(ctx context.Context, moid string) ApiGetVnicLanConnectivityPolicyByMoidRequest {
 	return ApiGetVnicLanConnectivityPolicyByMoidRequest{
@@ -15996,7 +16063,8 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicy
+//
+//	@return VnicLanConnectivityPolicy
 func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicLanConnectivityPolicyByMoidRequest) (*VnicLanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16136,9 +16204,9 @@ func (r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) Execute() (*VnicL
 /*
 GetVnicLanConnectivityPolicyInventoryByMoid Read a 'vnic.LanConnectivityPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest {
 	return ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest{
@@ -16149,7 +16217,8 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicyInventory
+//
+//	@return VnicLanConnectivityPolicyInventory
 func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryByMoidExecute(r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) (*VnicLanConnectivityPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16365,8 +16434,8 @@ func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Execute() (*VnicLan
 /*
 GetVnicLanConnectivityPolicyInventoryList Read a 'vnic.LanConnectivityPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicLanConnectivityPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicLanConnectivityPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryList(ctx context.Context) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
 	return ApiGetVnicLanConnectivityPolicyInventoryListRequest{
@@ -16376,7 +16445,8 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryList(ctx context.C
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicyInventoryResponse
+//
+//	@return VnicLanConnectivityPolicyInventoryResponse
 func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryListExecute(r ApiGetVnicLanConnectivityPolicyInventoryListRequest) (*VnicLanConnectivityPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16639,8 +16709,8 @@ func (r ApiGetVnicLanConnectivityPolicyListRequest) Execute() (*VnicLanConnectiv
 /*
 GetVnicLanConnectivityPolicyList Read a 'vnic.LanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicLanConnectivityPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicLanConnectivityPolicyListRequest
 */
 func (a *VnicApiService) GetVnicLanConnectivityPolicyList(ctx context.Context) ApiGetVnicLanConnectivityPolicyListRequest {
 	return ApiGetVnicLanConnectivityPolicyListRequest{
@@ -16650,7 +16720,8 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicyResponse
+//
+//	@return VnicLanConnectivityPolicyResponse
 func (a *VnicApiService) GetVnicLanConnectivityPolicyListExecute(r ApiGetVnicLanConnectivityPolicyListRequest) (*VnicLanConnectivityPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16837,9 +16908,9 @@ func (r ApiGetVnicLcpStatusByMoidRequest) Execute() (*VnicLcpStatus, *http.Respo
 /*
 GetVnicLcpStatusByMoid Read a 'vnic.LcpStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicLcpStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicLcpStatusByMoidRequest
 */
 func (a *VnicApiService) GetVnicLcpStatusByMoid(ctx context.Context, moid string) ApiGetVnicLcpStatusByMoidRequest {
 	return ApiGetVnicLcpStatusByMoidRequest{
@@ -16850,7 +16921,8 @@ func (a *VnicApiService) GetVnicLcpStatusByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return VnicLcpStatus
+//
+//	@return VnicLcpStatus
 func (a *VnicApiService) GetVnicLcpStatusByMoidExecute(r ApiGetVnicLcpStatusByMoidRequest) (*VnicLcpStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17066,8 +17138,8 @@ func (r ApiGetVnicLcpStatusListRequest) Execute() (*VnicLcpStatusResponse, *http
 /*
 GetVnicLcpStatusList Read a 'vnic.LcpStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicLcpStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicLcpStatusListRequest
 */
 func (a *VnicApiService) GetVnicLcpStatusList(ctx context.Context) ApiGetVnicLcpStatusListRequest {
 	return ApiGetVnicLcpStatusListRequest{
@@ -17077,7 +17149,8 @@ func (a *VnicApiService) GetVnicLcpStatusList(ctx context.Context) ApiGetVnicLcp
 }
 
 // Execute executes the request
-//  @return VnicLcpStatusResponse
+//
+//	@return VnicLcpStatusResponse
 func (a *VnicApiService) GetVnicLcpStatusListExecute(r ApiGetVnicLcpStatusListRequest) (*VnicLcpStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17264,9 +17337,9 @@ func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) Execute() (*VnicSanConnect
 /*
 GetVnicSanConnectivityPolicyByMoid Read a 'vnic.SanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicSanConnectivityPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicSanConnectivityPolicyByMoidRequest
 */
 func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoid(ctx context.Context, moid string) ApiGetVnicSanConnectivityPolicyByMoidRequest {
 	return ApiGetVnicSanConnectivityPolicyByMoidRequest{
@@ -17277,7 +17350,8 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicy
+//
+//	@return VnicSanConnectivityPolicy
 func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicSanConnectivityPolicyByMoidRequest) (*VnicSanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17417,9 +17491,9 @@ func (r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) Execute() (*VnicS
 /*
 GetVnicSanConnectivityPolicyInventoryByMoid Read a 'vnic.SanConnectivityPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest
 */
 func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest {
 	return ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest{
@@ -17430,7 +17504,8 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicyInventory
+//
+//	@return VnicSanConnectivityPolicyInventory
 func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryByMoidExecute(r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) (*VnicSanConnectivityPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17646,8 +17721,8 @@ func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Execute() (*VnicSan
 /*
 GetVnicSanConnectivityPolicyInventoryList Read a 'vnic.SanConnectivityPolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicSanConnectivityPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicSanConnectivityPolicyInventoryListRequest
 */
 func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryList(ctx context.Context) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
 	return ApiGetVnicSanConnectivityPolicyInventoryListRequest{
@@ -17657,7 +17732,8 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryList(ctx context.C
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicyInventoryResponse
+//
+//	@return VnicSanConnectivityPolicyInventoryResponse
 func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryListExecute(r ApiGetVnicSanConnectivityPolicyInventoryListRequest) (*VnicSanConnectivityPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17920,8 +17996,8 @@ func (r ApiGetVnicSanConnectivityPolicyListRequest) Execute() (*VnicSanConnectiv
 /*
 GetVnicSanConnectivityPolicyList Read a 'vnic.SanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicSanConnectivityPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicSanConnectivityPolicyListRequest
 */
 func (a *VnicApiService) GetVnicSanConnectivityPolicyList(ctx context.Context) ApiGetVnicSanConnectivityPolicyListRequest {
 	return ApiGetVnicSanConnectivityPolicyListRequest{
@@ -17931,7 +18007,8 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicyResponse
+//
+//	@return VnicSanConnectivityPolicyResponse
 func (a *VnicApiService) GetVnicSanConnectivityPolicyListExecute(r ApiGetVnicSanConnectivityPolicyListRequest) (*VnicSanConnectivityPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18118,9 +18195,9 @@ func (r ApiGetVnicScpStatusByMoidRequest) Execute() (*VnicScpStatus, *http.Respo
 /*
 GetVnicScpStatusByMoid Read a 'vnic.ScpStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicScpStatusByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicScpStatusByMoidRequest
 */
 func (a *VnicApiService) GetVnicScpStatusByMoid(ctx context.Context, moid string) ApiGetVnicScpStatusByMoidRequest {
 	return ApiGetVnicScpStatusByMoidRequest{
@@ -18131,7 +18208,8 @@ func (a *VnicApiService) GetVnicScpStatusByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return VnicScpStatus
+//
+//	@return VnicScpStatus
 func (a *VnicApiService) GetVnicScpStatusByMoidExecute(r ApiGetVnicScpStatusByMoidRequest) (*VnicScpStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18347,8 +18425,8 @@ func (r ApiGetVnicScpStatusListRequest) Execute() (*VnicScpStatusResponse, *http
 /*
 GetVnicScpStatusList Read a 'vnic.ScpStatus' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicScpStatusListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicScpStatusListRequest
 */
 func (a *VnicApiService) GetVnicScpStatusList(ctx context.Context) ApiGetVnicScpStatusListRequest {
 	return ApiGetVnicScpStatusListRequest{
@@ -18358,7 +18436,8 @@ func (a *VnicApiService) GetVnicScpStatusList(ctx context.Context) ApiGetVnicScp
 }
 
 // Execute executes the request
-//  @return VnicScpStatusResponse
+//
+//	@return VnicScpStatusResponse
 func (a *VnicApiService) GetVnicScpStatusListExecute(r ApiGetVnicScpStatusListRequest) (*VnicScpStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18545,9 +18624,9 @@ func (r ApiGetVnicVhbaTemplateByMoidRequest) Execute() (*VnicVhbaTemplate, *http
 /*
 GetVnicVhbaTemplateByMoid Read a 'vnic.VhbaTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicVhbaTemplateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicVhbaTemplateByMoidRequest
 */
 func (a *VnicApiService) GetVnicVhbaTemplateByMoid(ctx context.Context, moid string) ApiGetVnicVhbaTemplateByMoidRequest {
 	return ApiGetVnicVhbaTemplateByMoidRequest{
@@ -18558,7 +18637,8 @@ func (a *VnicApiService) GetVnicVhbaTemplateByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicVhbaTemplate
+//
+//	@return VnicVhbaTemplate
 func (a *VnicApiService) GetVnicVhbaTemplateByMoidExecute(r ApiGetVnicVhbaTemplateByMoidRequest) (*VnicVhbaTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18774,8 +18854,8 @@ func (r ApiGetVnicVhbaTemplateListRequest) Execute() (*VnicVhbaTemplateResponse,
 /*
 GetVnicVhbaTemplateList Read a 'vnic.VhbaTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicVhbaTemplateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicVhbaTemplateListRequest
 */
 func (a *VnicApiService) GetVnicVhbaTemplateList(ctx context.Context) ApiGetVnicVhbaTemplateListRequest {
 	return ApiGetVnicVhbaTemplateListRequest{
@@ -18785,7 +18865,8 @@ func (a *VnicApiService) GetVnicVhbaTemplateList(ctx context.Context) ApiGetVnic
 }
 
 // Execute executes the request
-//  @return VnicVhbaTemplateResponse
+//
+//	@return VnicVhbaTemplateResponse
 func (a *VnicApiService) GetVnicVhbaTemplateListExecute(r ApiGetVnicVhbaTemplateListRequest) (*VnicVhbaTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18972,9 +19053,9 @@ func (r ApiGetVnicVnicTemplateByMoidRequest) Execute() (*VnicVnicTemplate, *http
 /*
 GetVnicVnicTemplateByMoid Read a 'vnic.VnicTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVnicVnicTemplateByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVnicVnicTemplateByMoidRequest
 */
 func (a *VnicApiService) GetVnicVnicTemplateByMoid(ctx context.Context, moid string) ApiGetVnicVnicTemplateByMoidRequest {
 	return ApiGetVnicVnicTemplateByMoidRequest{
@@ -18985,7 +19066,8 @@ func (a *VnicApiService) GetVnicVnicTemplateByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicVnicTemplate
+//
+//	@return VnicVnicTemplate
 func (a *VnicApiService) GetVnicVnicTemplateByMoidExecute(r ApiGetVnicVnicTemplateByMoidRequest) (*VnicVnicTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19201,8 +19283,8 @@ func (r ApiGetVnicVnicTemplateListRequest) Execute() (*VnicVnicTemplateResponse,
 /*
 GetVnicVnicTemplateList Read a 'vnic.VnicTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVnicVnicTemplateListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVnicVnicTemplateListRequest
 */
 func (a *VnicApiService) GetVnicVnicTemplateList(ctx context.Context) ApiGetVnicVnicTemplateListRequest {
 	return ApiGetVnicVnicTemplateListRequest{
@@ -19212,7 +19294,8 @@ func (a *VnicApiService) GetVnicVnicTemplateList(ctx context.Context) ApiGetVnic
 }
 
 // Execute executes the request
-//  @return VnicVnicTemplateResponse
+//
+//	@return VnicVnicTemplateResponse
 func (a *VnicApiService) GetVnicVnicTemplateListExecute(r ApiGetVnicVnicTemplateListRequest) (*VnicVnicTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19413,9 +19496,9 @@ func (r ApiPatchVnicEthAdapterPolicyRequest) Execute() (*VnicEthAdapterPolicy, *
 /*
 PatchVnicEthAdapterPolicy Update a 'vnic.EthAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicEthAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicEthAdapterPolicyRequest
 */
 func (a *VnicApiService) PatchVnicEthAdapterPolicy(ctx context.Context, moid string) ApiPatchVnicEthAdapterPolicyRequest {
 	return ApiPatchVnicEthAdapterPolicyRequest{
@@ -19426,7 +19509,8 @@ func (a *VnicApiService) PatchVnicEthAdapterPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicy
+//
+//	@return VnicEthAdapterPolicy
 func (a *VnicApiService) PatchVnicEthAdapterPolicyExecute(r ApiPatchVnicEthAdapterPolicyRequest) (*VnicEthAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19588,9 +19672,9 @@ func (r ApiPatchVnicEthIfRequest) Execute() (*VnicEthIf, *http.Response, error) 
 /*
 PatchVnicEthIf Update a 'vnic.EthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicEthIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicEthIfRequest
 */
 func (a *VnicApiService) PatchVnicEthIf(ctx context.Context, moid string) ApiPatchVnicEthIfRequest {
 	return ApiPatchVnicEthIfRequest{
@@ -19601,7 +19685,8 @@ func (a *VnicApiService) PatchVnicEthIf(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//  @return VnicEthIf
+//
+//	@return VnicEthIf
 func (a *VnicApiService) PatchVnicEthIfExecute(r ApiPatchVnicEthIfRequest) (*VnicEthIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19763,9 +19848,9 @@ func (r ApiPatchVnicEthNetworkPolicyRequest) Execute() (*VnicEthNetworkPolicy, *
 /*
 PatchVnicEthNetworkPolicy Update a 'vnic.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicEthNetworkPolicyRequest
 */
 func (a *VnicApiService) PatchVnicEthNetworkPolicy(ctx context.Context, moid string) ApiPatchVnicEthNetworkPolicyRequest {
 	return ApiPatchVnicEthNetworkPolicyRequest{
@@ -19776,7 +19861,8 @@ func (a *VnicApiService) PatchVnicEthNetworkPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicy
+//
+//	@return VnicEthNetworkPolicy
 func (a *VnicApiService) PatchVnicEthNetworkPolicyExecute(r ApiPatchVnicEthNetworkPolicyRequest) (*VnicEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -19938,9 +20024,9 @@ func (r ApiPatchVnicEthQosPolicyRequest) Execute() (*VnicEthQosPolicy, *http.Res
 /*
 PatchVnicEthQosPolicy Update a 'vnic.EthQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicEthQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicEthQosPolicyRequest
 */
 func (a *VnicApiService) PatchVnicEthQosPolicy(ctx context.Context, moid string) ApiPatchVnicEthQosPolicyRequest {
 	return ApiPatchVnicEthQosPolicyRequest{
@@ -19951,7 +20037,8 @@ func (a *VnicApiService) PatchVnicEthQosPolicy(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicy
+//
+//	@return VnicEthQosPolicy
 func (a *VnicApiService) PatchVnicEthQosPolicyExecute(r ApiPatchVnicEthQosPolicyRequest) (*VnicEthQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20113,9 +20200,9 @@ func (r ApiPatchVnicFcAdapterPolicyRequest) Execute() (*VnicFcAdapterPolicy, *ht
 /*
 PatchVnicFcAdapterPolicy Update a 'vnic.FcAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicFcAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicFcAdapterPolicyRequest
 */
 func (a *VnicApiService) PatchVnicFcAdapterPolicy(ctx context.Context, moid string) ApiPatchVnicFcAdapterPolicyRequest {
 	return ApiPatchVnicFcAdapterPolicyRequest{
@@ -20126,7 +20213,8 @@ func (a *VnicApiService) PatchVnicFcAdapterPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicy
+//
+//	@return VnicFcAdapterPolicy
 func (a *VnicApiService) PatchVnicFcAdapterPolicyExecute(r ApiPatchVnicFcAdapterPolicyRequest) (*VnicFcAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20288,9 +20376,9 @@ func (r ApiPatchVnicFcIfRequest) Execute() (*VnicFcIf, *http.Response, error) {
 /*
 PatchVnicFcIf Update a 'vnic.FcIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicFcIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicFcIfRequest
 */
 func (a *VnicApiService) PatchVnicFcIf(ctx context.Context, moid string) ApiPatchVnicFcIfRequest {
 	return ApiPatchVnicFcIfRequest{
@@ -20301,7 +20389,8 @@ func (a *VnicApiService) PatchVnicFcIf(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//  @return VnicFcIf
+//
+//	@return VnicFcIf
 func (a *VnicApiService) PatchVnicFcIfExecute(r ApiPatchVnicFcIfRequest) (*VnicFcIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20463,9 +20552,9 @@ func (r ApiPatchVnicFcNetworkPolicyRequest) Execute() (*VnicFcNetworkPolicy, *ht
 /*
 PatchVnicFcNetworkPolicy Update a 'vnic.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicFcNetworkPolicyRequest
 */
 func (a *VnicApiService) PatchVnicFcNetworkPolicy(ctx context.Context, moid string) ApiPatchVnicFcNetworkPolicyRequest {
 	return ApiPatchVnicFcNetworkPolicyRequest{
@@ -20476,7 +20565,8 @@ func (a *VnicApiService) PatchVnicFcNetworkPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicy
+//
+//	@return VnicFcNetworkPolicy
 func (a *VnicApiService) PatchVnicFcNetworkPolicyExecute(r ApiPatchVnicFcNetworkPolicyRequest) (*VnicFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20638,9 +20728,9 @@ func (r ApiPatchVnicFcQosPolicyRequest) Execute() (*VnicFcQosPolicy, *http.Respo
 /*
 PatchVnicFcQosPolicy Update a 'vnic.FcQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicFcQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicFcQosPolicyRequest
 */
 func (a *VnicApiService) PatchVnicFcQosPolicy(ctx context.Context, moid string) ApiPatchVnicFcQosPolicyRequest {
 	return ApiPatchVnicFcQosPolicyRequest{
@@ -20651,7 +20741,8 @@ func (a *VnicApiService) PatchVnicFcQosPolicy(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicy
+//
+//	@return VnicFcQosPolicy
 func (a *VnicApiService) PatchVnicFcQosPolicyExecute(r ApiPatchVnicFcQosPolicyRequest) (*VnicFcQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20813,9 +20904,9 @@ func (r ApiPatchVnicIscsiAdapterPolicyRequest) Execute() (*VnicIscsiAdapterPolic
 /*
 PatchVnicIscsiAdapterPolicy Update a 'vnic.IscsiAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicIscsiAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicIscsiAdapterPolicyRequest
 */
 func (a *VnicApiService) PatchVnicIscsiAdapterPolicy(ctx context.Context, moid string) ApiPatchVnicIscsiAdapterPolicyRequest {
 	return ApiPatchVnicIscsiAdapterPolicyRequest{
@@ -20826,7 +20917,8 @@ func (a *VnicApiService) PatchVnicIscsiAdapterPolicy(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicy
+//
+//	@return VnicIscsiAdapterPolicy
 func (a *VnicApiService) PatchVnicIscsiAdapterPolicyExecute(r ApiPatchVnicIscsiAdapterPolicyRequest) (*VnicIscsiAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20988,9 +21080,9 @@ func (r ApiPatchVnicIscsiBootPolicyRequest) Execute() (*VnicIscsiBootPolicy, *ht
 /*
 PatchVnicIscsiBootPolicy Update a 'vnic.IscsiBootPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicIscsiBootPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicIscsiBootPolicyRequest
 */
 func (a *VnicApiService) PatchVnicIscsiBootPolicy(ctx context.Context, moid string) ApiPatchVnicIscsiBootPolicyRequest {
 	return ApiPatchVnicIscsiBootPolicyRequest{
@@ -21001,7 +21093,8 @@ func (a *VnicApiService) PatchVnicIscsiBootPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicy
+//
+//	@return VnicIscsiBootPolicy
 func (a *VnicApiService) PatchVnicIscsiBootPolicyExecute(r ApiPatchVnicIscsiBootPolicyRequest) (*VnicIscsiBootPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21163,9 +21256,9 @@ func (r ApiPatchVnicIscsiStaticTargetPolicyRequest) Execute() (*VnicIscsiStaticT
 /*
 PatchVnicIscsiStaticTargetPolicy Update a 'vnic.IscsiStaticTargetPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicIscsiStaticTargetPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicIscsiStaticTargetPolicyRequest
 */
 func (a *VnicApiService) PatchVnicIscsiStaticTargetPolicy(ctx context.Context, moid string) ApiPatchVnicIscsiStaticTargetPolicyRequest {
 	return ApiPatchVnicIscsiStaticTargetPolicyRequest{
@@ -21176,7 +21269,8 @@ func (a *VnicApiService) PatchVnicIscsiStaticTargetPolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicy
+//
+//	@return VnicIscsiStaticTargetPolicy
 func (a *VnicApiService) PatchVnicIscsiStaticTargetPolicyExecute(r ApiPatchVnicIscsiStaticTargetPolicyRequest) (*VnicIscsiStaticTargetPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21338,9 +21432,9 @@ func (r ApiPatchVnicLanConnectivityPolicyRequest) Execute() (*VnicLanConnectivit
 /*
 PatchVnicLanConnectivityPolicy Update a 'vnic.LanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicLanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicLanConnectivityPolicyRequest
 */
 func (a *VnicApiService) PatchVnicLanConnectivityPolicy(ctx context.Context, moid string) ApiPatchVnicLanConnectivityPolicyRequest {
 	return ApiPatchVnicLanConnectivityPolicyRequest{
@@ -21351,7 +21445,8 @@ func (a *VnicApiService) PatchVnicLanConnectivityPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicy
+//
+//	@return VnicLanConnectivityPolicy
 func (a *VnicApiService) PatchVnicLanConnectivityPolicyExecute(r ApiPatchVnicLanConnectivityPolicyRequest) (*VnicLanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21513,9 +21608,9 @@ func (r ApiPatchVnicSanConnectivityPolicyRequest) Execute() (*VnicSanConnectivit
 /*
 PatchVnicSanConnectivityPolicy Update a 'vnic.SanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicSanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicSanConnectivityPolicyRequest
 */
 func (a *VnicApiService) PatchVnicSanConnectivityPolicy(ctx context.Context, moid string) ApiPatchVnicSanConnectivityPolicyRequest {
 	return ApiPatchVnicSanConnectivityPolicyRequest{
@@ -21526,7 +21621,8 @@ func (a *VnicApiService) PatchVnicSanConnectivityPolicy(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicy
+//
+//	@return VnicSanConnectivityPolicy
 func (a *VnicApiService) PatchVnicSanConnectivityPolicyExecute(r ApiPatchVnicSanConnectivityPolicyRequest) (*VnicSanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21688,9 +21784,9 @@ func (r ApiPatchVnicVhbaTemplateRequest) Execute() (*VnicVhbaTemplate, *http.Res
 /*
 PatchVnicVhbaTemplate Update a 'vnic.VhbaTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicVhbaTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicVhbaTemplateRequest
 */
 func (a *VnicApiService) PatchVnicVhbaTemplate(ctx context.Context, moid string) ApiPatchVnicVhbaTemplateRequest {
 	return ApiPatchVnicVhbaTemplateRequest{
@@ -21701,7 +21797,8 @@ func (a *VnicApiService) PatchVnicVhbaTemplate(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return VnicVhbaTemplate
+//
+//	@return VnicVhbaTemplate
 func (a *VnicApiService) PatchVnicVhbaTemplateExecute(r ApiPatchVnicVhbaTemplateRequest) (*VnicVhbaTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -21863,9 +21960,9 @@ func (r ApiPatchVnicVnicTemplateRequest) Execute() (*VnicVnicTemplate, *http.Res
 /*
 PatchVnicVnicTemplate Update a 'vnic.VnicTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVnicVnicTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVnicVnicTemplateRequest
 */
 func (a *VnicApiService) PatchVnicVnicTemplate(ctx context.Context, moid string) ApiPatchVnicVnicTemplateRequest {
 	return ApiPatchVnicVnicTemplateRequest{
@@ -21876,7 +21973,8 @@ func (a *VnicApiService) PatchVnicVnicTemplate(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return VnicVnicTemplate
+//
+//	@return VnicVnicTemplate
 func (a *VnicApiService) PatchVnicVnicTemplateExecute(r ApiPatchVnicVnicTemplateRequest) (*VnicVnicTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22038,9 +22136,9 @@ func (r ApiUpdateVnicEthAdapterPolicyRequest) Execute() (*VnicEthAdapterPolicy, 
 /*
 UpdateVnicEthAdapterPolicy Update a 'vnic.EthAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicEthAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicEthAdapterPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicEthAdapterPolicy(ctx context.Context, moid string) ApiUpdateVnicEthAdapterPolicyRequest {
 	return ApiUpdateVnicEthAdapterPolicyRequest{
@@ -22051,7 +22149,8 @@ func (a *VnicApiService) UpdateVnicEthAdapterPolicy(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return VnicEthAdapterPolicy
+//
+//	@return VnicEthAdapterPolicy
 func (a *VnicApiService) UpdateVnicEthAdapterPolicyExecute(r ApiUpdateVnicEthAdapterPolicyRequest) (*VnicEthAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22213,9 +22312,9 @@ func (r ApiUpdateVnicEthIfRequest) Execute() (*VnicEthIf, *http.Response, error)
 /*
 UpdateVnicEthIf Update a 'vnic.EthIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicEthIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicEthIfRequest
 */
 func (a *VnicApiService) UpdateVnicEthIf(ctx context.Context, moid string) ApiUpdateVnicEthIfRequest {
 	return ApiUpdateVnicEthIfRequest{
@@ -22226,7 +22325,8 @@ func (a *VnicApiService) UpdateVnicEthIf(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//  @return VnicEthIf
+//
+//	@return VnicEthIf
 func (a *VnicApiService) UpdateVnicEthIfExecute(r ApiUpdateVnicEthIfRequest) (*VnicEthIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22388,9 +22488,9 @@ func (r ApiUpdateVnicEthNetworkPolicyRequest) Execute() (*VnicEthNetworkPolicy, 
 /*
 UpdateVnicEthNetworkPolicy Update a 'vnic.EthNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicEthNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicEthNetworkPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicEthNetworkPolicy(ctx context.Context, moid string) ApiUpdateVnicEthNetworkPolicyRequest {
 	return ApiUpdateVnicEthNetworkPolicyRequest{
@@ -22401,7 +22501,8 @@ func (a *VnicApiService) UpdateVnicEthNetworkPolicy(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return VnicEthNetworkPolicy
+//
+//	@return VnicEthNetworkPolicy
 func (a *VnicApiService) UpdateVnicEthNetworkPolicyExecute(r ApiUpdateVnicEthNetworkPolicyRequest) (*VnicEthNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22563,9 +22664,9 @@ func (r ApiUpdateVnicEthQosPolicyRequest) Execute() (*VnicEthQosPolicy, *http.Re
 /*
 UpdateVnicEthQosPolicy Update a 'vnic.EthQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicEthQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicEthQosPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicEthQosPolicy(ctx context.Context, moid string) ApiUpdateVnicEthQosPolicyRequest {
 	return ApiUpdateVnicEthQosPolicyRequest{
@@ -22576,7 +22677,8 @@ func (a *VnicApiService) UpdateVnicEthQosPolicy(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return VnicEthQosPolicy
+//
+//	@return VnicEthQosPolicy
 func (a *VnicApiService) UpdateVnicEthQosPolicyExecute(r ApiUpdateVnicEthQosPolicyRequest) (*VnicEthQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22738,9 +22840,9 @@ func (r ApiUpdateVnicFcAdapterPolicyRequest) Execute() (*VnicFcAdapterPolicy, *h
 /*
 UpdateVnicFcAdapterPolicy Update a 'vnic.FcAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicFcAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicFcAdapterPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicFcAdapterPolicy(ctx context.Context, moid string) ApiUpdateVnicFcAdapterPolicyRequest {
 	return ApiUpdateVnicFcAdapterPolicyRequest{
@@ -22751,7 +22853,8 @@ func (a *VnicApiService) UpdateVnicFcAdapterPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicFcAdapterPolicy
+//
+//	@return VnicFcAdapterPolicy
 func (a *VnicApiService) UpdateVnicFcAdapterPolicyExecute(r ApiUpdateVnicFcAdapterPolicyRequest) (*VnicFcAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -22913,9 +23016,9 @@ func (r ApiUpdateVnicFcIfRequest) Execute() (*VnicFcIf, *http.Response, error) {
 /*
 UpdateVnicFcIf Update a 'vnic.FcIf' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicFcIfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicFcIfRequest
 */
 func (a *VnicApiService) UpdateVnicFcIf(ctx context.Context, moid string) ApiUpdateVnicFcIfRequest {
 	return ApiUpdateVnicFcIfRequest{
@@ -22926,7 +23029,8 @@ func (a *VnicApiService) UpdateVnicFcIf(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//  @return VnicFcIf
+//
+//	@return VnicFcIf
 func (a *VnicApiService) UpdateVnicFcIfExecute(r ApiUpdateVnicFcIfRequest) (*VnicFcIf, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23088,9 +23192,9 @@ func (r ApiUpdateVnicFcNetworkPolicyRequest) Execute() (*VnicFcNetworkPolicy, *h
 /*
 UpdateVnicFcNetworkPolicy Update a 'vnic.FcNetworkPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicFcNetworkPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicFcNetworkPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicFcNetworkPolicy(ctx context.Context, moid string) ApiUpdateVnicFcNetworkPolicyRequest {
 	return ApiUpdateVnicFcNetworkPolicyRequest{
@@ -23101,7 +23205,8 @@ func (a *VnicApiService) UpdateVnicFcNetworkPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicFcNetworkPolicy
+//
+//	@return VnicFcNetworkPolicy
 func (a *VnicApiService) UpdateVnicFcNetworkPolicyExecute(r ApiUpdateVnicFcNetworkPolicyRequest) (*VnicFcNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23263,9 +23368,9 @@ func (r ApiUpdateVnicFcQosPolicyRequest) Execute() (*VnicFcQosPolicy, *http.Resp
 /*
 UpdateVnicFcQosPolicy Update a 'vnic.FcQosPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicFcQosPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicFcQosPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicFcQosPolicy(ctx context.Context, moid string) ApiUpdateVnicFcQosPolicyRequest {
 	return ApiUpdateVnicFcQosPolicyRequest{
@@ -23276,7 +23381,8 @@ func (a *VnicApiService) UpdateVnicFcQosPolicy(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return VnicFcQosPolicy
+//
+//	@return VnicFcQosPolicy
 func (a *VnicApiService) UpdateVnicFcQosPolicyExecute(r ApiUpdateVnicFcQosPolicyRequest) (*VnicFcQosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23438,9 +23544,9 @@ func (r ApiUpdateVnicIscsiAdapterPolicyRequest) Execute() (*VnicIscsiAdapterPoli
 /*
 UpdateVnicIscsiAdapterPolicy Update a 'vnic.IscsiAdapterPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicIscsiAdapterPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicIscsiAdapterPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicIscsiAdapterPolicy(ctx context.Context, moid string) ApiUpdateVnicIscsiAdapterPolicyRequest {
 	return ApiUpdateVnicIscsiAdapterPolicyRequest{
@@ -23451,7 +23557,8 @@ func (a *VnicApiService) UpdateVnicIscsiAdapterPolicy(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return VnicIscsiAdapterPolicy
+//
+//	@return VnicIscsiAdapterPolicy
 func (a *VnicApiService) UpdateVnicIscsiAdapterPolicyExecute(r ApiUpdateVnicIscsiAdapterPolicyRequest) (*VnicIscsiAdapterPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23613,9 +23720,9 @@ func (r ApiUpdateVnicIscsiBootPolicyRequest) Execute() (*VnicIscsiBootPolicy, *h
 /*
 UpdateVnicIscsiBootPolicy Update a 'vnic.IscsiBootPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicIscsiBootPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicIscsiBootPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicIscsiBootPolicy(ctx context.Context, moid string) ApiUpdateVnicIscsiBootPolicyRequest {
 	return ApiUpdateVnicIscsiBootPolicyRequest{
@@ -23626,7 +23733,8 @@ func (a *VnicApiService) UpdateVnicIscsiBootPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return VnicIscsiBootPolicy
+//
+//	@return VnicIscsiBootPolicy
 func (a *VnicApiService) UpdateVnicIscsiBootPolicyExecute(r ApiUpdateVnicIscsiBootPolicyRequest) (*VnicIscsiBootPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23788,9 +23896,9 @@ func (r ApiUpdateVnicIscsiStaticTargetPolicyRequest) Execute() (*VnicIscsiStatic
 /*
 UpdateVnicIscsiStaticTargetPolicy Update a 'vnic.IscsiStaticTargetPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicIscsiStaticTargetPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicIscsiStaticTargetPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicIscsiStaticTargetPolicy(ctx context.Context, moid string) ApiUpdateVnicIscsiStaticTargetPolicyRequest {
 	return ApiUpdateVnicIscsiStaticTargetPolicyRequest{
@@ -23801,7 +23909,8 @@ func (a *VnicApiService) UpdateVnicIscsiStaticTargetPolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return VnicIscsiStaticTargetPolicy
+//
+//	@return VnicIscsiStaticTargetPolicy
 func (a *VnicApiService) UpdateVnicIscsiStaticTargetPolicyExecute(r ApiUpdateVnicIscsiStaticTargetPolicyRequest) (*VnicIscsiStaticTargetPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -23963,9 +24072,9 @@ func (r ApiUpdateVnicLanConnectivityPolicyRequest) Execute() (*VnicLanConnectivi
 /*
 UpdateVnicLanConnectivityPolicy Update a 'vnic.LanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicLanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicLanConnectivityPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicLanConnectivityPolicy(ctx context.Context, moid string) ApiUpdateVnicLanConnectivityPolicyRequest {
 	return ApiUpdateVnicLanConnectivityPolicyRequest{
@@ -23976,7 +24085,8 @@ func (a *VnicApiService) UpdateVnicLanConnectivityPolicy(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return VnicLanConnectivityPolicy
+//
+//	@return VnicLanConnectivityPolicy
 func (a *VnicApiService) UpdateVnicLanConnectivityPolicyExecute(r ApiUpdateVnicLanConnectivityPolicyRequest) (*VnicLanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24138,9 +24248,9 @@ func (r ApiUpdateVnicSanConnectivityPolicyRequest) Execute() (*VnicSanConnectivi
 /*
 UpdateVnicSanConnectivityPolicy Update a 'vnic.SanConnectivityPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicSanConnectivityPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicSanConnectivityPolicyRequest
 */
 func (a *VnicApiService) UpdateVnicSanConnectivityPolicy(ctx context.Context, moid string) ApiUpdateVnicSanConnectivityPolicyRequest {
 	return ApiUpdateVnicSanConnectivityPolicyRequest{
@@ -24151,7 +24261,8 @@ func (a *VnicApiService) UpdateVnicSanConnectivityPolicy(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return VnicSanConnectivityPolicy
+//
+//	@return VnicSanConnectivityPolicy
 func (a *VnicApiService) UpdateVnicSanConnectivityPolicyExecute(r ApiUpdateVnicSanConnectivityPolicyRequest) (*VnicSanConnectivityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24313,9 +24424,9 @@ func (r ApiUpdateVnicVhbaTemplateRequest) Execute() (*VnicVhbaTemplate, *http.Re
 /*
 UpdateVnicVhbaTemplate Update a 'vnic.VhbaTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicVhbaTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicVhbaTemplateRequest
 */
 func (a *VnicApiService) UpdateVnicVhbaTemplate(ctx context.Context, moid string) ApiUpdateVnicVhbaTemplateRequest {
 	return ApiUpdateVnicVhbaTemplateRequest{
@@ -24326,7 +24437,8 @@ func (a *VnicApiService) UpdateVnicVhbaTemplate(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return VnicVhbaTemplate
+//
+//	@return VnicVhbaTemplate
 func (a *VnicApiService) UpdateVnicVhbaTemplateExecute(r ApiUpdateVnicVhbaTemplateRequest) (*VnicVhbaTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24488,9 +24600,9 @@ func (r ApiUpdateVnicVnicTemplateRequest) Execute() (*VnicVnicTemplate, *http.Re
 /*
 UpdateVnicVnicTemplate Update a 'vnic.VnicTemplate' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVnicVnicTemplateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVnicVnicTemplateRequest
 */
 func (a *VnicApiService) UpdateVnicVnicTemplate(ctx context.Context, moid string) ApiUpdateVnicVnicTemplateRequest {
 	return ApiUpdateVnicVnicTemplateRequest{
@@ -24501,7 +24613,8 @@ func (a *VnicApiService) UpdateVnicVnicTemplate(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return VnicVnicTemplate
+//
+//	@return VnicVnicTemplate
 func (a *VnicApiService) UpdateVnicVnicTemplateExecute(r ApiUpdateVnicVnicTemplateRequest) (*VnicVnicTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

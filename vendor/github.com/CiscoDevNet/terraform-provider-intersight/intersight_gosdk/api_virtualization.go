@@ -56,8 +56,8 @@ func (r ApiCreateVirtualizationEsxiConsoleRequest) Execute() (*VirtualizationEsx
 /*
 CreateVirtualizationEsxiConsole Create a 'virtualization.EsxiConsole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVirtualizationEsxiConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVirtualizationEsxiConsoleRequest
 */
 func (a *VirtualizationApiService) CreateVirtualizationEsxiConsole(ctx context.Context) ApiCreateVirtualizationEsxiConsoleRequest {
 	return ApiCreateVirtualizationEsxiConsoleRequest{
@@ -67,7 +67,8 @@ func (a *VirtualizationApiService) CreateVirtualizationEsxiConsole(ctx context.C
 }
 
 // Execute executes the request
-//  @return VirtualizationEsxiConsole
+//
+//	@return VirtualizationEsxiConsole
 func (a *VirtualizationApiService) CreateVirtualizationEsxiConsoleExecute(r ApiCreateVirtualizationEsxiConsoleRequest) (*VirtualizationEsxiConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateVirtualizationVirtualMachineRequest) Execute() (*Virtualization
 /*
 CreateVirtualizationVirtualMachine Create a 'virtualization.VirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateVirtualizationVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateVirtualizationVirtualMachineRequest
 */
 func (a *VirtualizationApiService) CreateVirtualizationVirtualMachine(ctx context.Context) ApiCreateVirtualizationVirtualMachineRequest {
 	return ApiCreateVirtualizationVirtualMachineRequest{
@@ -248,7 +249,8 @@ func (a *VirtualizationApiService) CreateVirtualizationVirtualMachine(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVirtualMachine
+//
+//	@return VirtualizationVirtualMachine
 func (a *VirtualizationApiService) CreateVirtualizationVirtualMachineExecute(r ApiCreateVirtualizationVirtualMachineRequest) (*VirtualizationVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -398,9 +400,9 @@ func (r ApiDeleteVirtualizationVirtualMachineRequest) Execute() (*http.Response,
 /*
 DeleteVirtualizationVirtualMachine Delete a 'virtualization.VirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteVirtualizationVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteVirtualizationVirtualMachineRequest
 */
 func (a *VirtualizationApiService) DeleteVirtualizationVirtualMachine(ctx context.Context, moid string) ApiDeleteVirtualizationVirtualMachineRequest {
 	return ApiDeleteVirtualizationVirtualMachineRequest{
@@ -540,9 +542,9 @@ func (r ApiGetVirtualizationEsxiConsoleByMoidRequest) Execute() (*Virtualization
 /*
 GetVirtualizationEsxiConsoleByMoid Read a 'virtualization.EsxiConsole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationEsxiConsoleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationEsxiConsoleByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleByMoid(ctx context.Context, moid string) ApiGetVirtualizationEsxiConsoleByMoidRequest {
 	return ApiGetVirtualizationEsxiConsoleByMoidRequest{
@@ -553,7 +555,8 @@ func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleByMoid(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationEsxiConsole
+//
+//	@return VirtualizationEsxiConsole
 func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleByMoidExecute(r ApiGetVirtualizationEsxiConsoleByMoidRequest) (*VirtualizationEsxiConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -769,8 +772,8 @@ func (r ApiGetVirtualizationEsxiConsoleListRequest) Execute() (*VirtualizationEs
 /*
 GetVirtualizationEsxiConsoleList Read a 'virtualization.EsxiConsole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationEsxiConsoleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationEsxiConsoleListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleList(ctx context.Context) ApiGetVirtualizationEsxiConsoleListRequest {
 	return ApiGetVirtualizationEsxiConsoleListRequest{
@@ -780,7 +783,8 @@ func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleList(ctx context.
 }
 
 // Execute executes the request
-//  @return VirtualizationEsxiConsoleResponse
+//
+//	@return VirtualizationEsxiConsoleResponse
 func (a *VirtualizationApiService) GetVirtualizationEsxiConsoleListExecute(r ApiGetVirtualizationEsxiConsoleListRequest) (*VirtualizationEsxiConsoleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -967,9 +971,9 @@ func (r ApiGetVirtualizationHostByMoidRequest) Execute() (*VirtualizationHost, *
 /*
 GetVirtualizationHostByMoid Read a 'virtualization.Host' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationHostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationHostByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationHostByMoid(ctx context.Context, moid string) ApiGetVirtualizationHostByMoidRequest {
 	return ApiGetVirtualizationHostByMoidRequest{
@@ -980,7 +984,8 @@ func (a *VirtualizationApiService) GetVirtualizationHostByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return VirtualizationHost
+//
+//	@return VirtualizationHost
 func (a *VirtualizationApiService) GetVirtualizationHostByMoidExecute(r ApiGetVirtualizationHostByMoidRequest) (*VirtualizationHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1196,8 +1201,8 @@ func (r ApiGetVirtualizationHostListRequest) Execute() (*VirtualizationHostRespo
 /*
 GetVirtualizationHostList Read a 'virtualization.Host' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationHostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationHostListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationHostList(ctx context.Context) ApiGetVirtualizationHostListRequest {
 	return ApiGetVirtualizationHostListRequest{
@@ -1207,7 +1212,8 @@ func (a *VirtualizationApiService) GetVirtualizationHostList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return VirtualizationHostResponse
+//
+//	@return VirtualizationHostResponse
 func (a *VirtualizationApiService) GetVirtualizationHostListExecute(r ApiGetVirtualizationHostListRequest) (*VirtualizationHostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1394,9 +1400,9 @@ func (r ApiGetVirtualizationVirtualMachineByMoidRequest) Execute() (*Virtualizat
 /*
 GetVirtualizationVirtualMachineByMoid Read a 'virtualization.VirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVirtualMachineByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVirtualMachineByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVirtualMachineByMoid(ctx context.Context, moid string) ApiGetVirtualizationVirtualMachineByMoidRequest {
 	return ApiGetVirtualizationVirtualMachineByMoidRequest{
@@ -1407,7 +1413,8 @@ func (a *VirtualizationApiService) GetVirtualizationVirtualMachineByMoid(ctx con
 }
 
 // Execute executes the request
-//  @return VirtualizationVirtualMachine
+//
+//	@return VirtualizationVirtualMachine
 func (a *VirtualizationApiService) GetVirtualizationVirtualMachineByMoidExecute(r ApiGetVirtualizationVirtualMachineByMoidRequest) (*VirtualizationVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1623,8 +1630,8 @@ func (r ApiGetVirtualizationVirtualMachineListRequest) Execute() (*Virtualizatio
 /*
 GetVirtualizationVirtualMachineList Read a 'virtualization.VirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVirtualMachineListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVirtualMachineListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVirtualMachineList(ctx context.Context) ApiGetVirtualizationVirtualMachineListRequest {
 	return ApiGetVirtualizationVirtualMachineListRequest{
@@ -1634,7 +1641,8 @@ func (a *VirtualizationApiService) GetVirtualizationVirtualMachineList(ctx conte
 }
 
 // Execute executes the request
-//  @return VirtualizationVirtualMachineResponse
+//
+//	@return VirtualizationVirtualMachineResponse
 func (a *VirtualizationApiService) GetVirtualizationVirtualMachineListExecute(r ApiGetVirtualizationVirtualMachineListRequest) (*VirtualizationVirtualMachineResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1821,9 +1829,9 @@ func (r ApiGetVirtualizationVmwareClusterByMoidRequest) Execute() (*Virtualizati
 /*
 GetVirtualizationVmwareClusterByMoid Read a 'virtualization.VmwareCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareClusterByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareClusterByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareClusterByMoidRequest {
 	return ApiGetVirtualizationVmwareClusterByMoidRequest{
@@ -1834,7 +1842,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareClusterByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareCluster
+//
+//	@return VirtualizationVmwareCluster
 func (a *VirtualizationApiService) GetVirtualizationVmwareClusterByMoidExecute(r ApiGetVirtualizationVmwareClusterByMoidRequest) (*VirtualizationVmwareCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2050,8 +2059,8 @@ func (r ApiGetVirtualizationVmwareClusterListRequest) Execute() (*Virtualization
 /*
 GetVirtualizationVmwareClusterList Read a 'virtualization.VmwareCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareClusterListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareClusterList(ctx context.Context) ApiGetVirtualizationVmwareClusterListRequest {
 	return ApiGetVirtualizationVmwareClusterListRequest{
@@ -2061,7 +2070,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareClusterList(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareClusterResponse
+//
+//	@return VirtualizationVmwareClusterResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareClusterListExecute(r ApiGetVirtualizationVmwareClusterListRequest) (*VirtualizationVmwareClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2248,9 +2258,9 @@ func (r ApiGetVirtualizationVmwareDatacenterByMoidRequest) Execute() (*Virtualiz
 /*
 GetVirtualizationVmwareDatacenterByMoid Read a 'virtualization.VmwareDatacenter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareDatacenterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareDatacenterByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareDatacenterByMoidRequest {
 	return ApiGetVirtualizationVmwareDatacenterByMoidRequest{
@@ -2261,7 +2271,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatacenter
+//
+//	@return VirtualizationVmwareDatacenter
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterByMoidExecute(r ApiGetVirtualizationVmwareDatacenterByMoidRequest) (*VirtualizationVmwareDatacenter, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2477,8 +2488,8 @@ func (r ApiGetVirtualizationVmwareDatacenterListRequest) Execute() (*Virtualizat
 /*
 GetVirtualizationVmwareDatacenterList Read a 'virtualization.VmwareDatacenter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareDatacenterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareDatacenterListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterList(ctx context.Context) ApiGetVirtualizationVmwareDatacenterListRequest {
 	return ApiGetVirtualizationVmwareDatacenterListRequest{
@@ -2488,7 +2499,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterList(ctx con
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatacenterResponse
+//
+//	@return VirtualizationVmwareDatacenterResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatacenterListExecute(r ApiGetVirtualizationVmwareDatacenterListRequest) (*VirtualizationVmwareDatacenterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2675,9 +2687,9 @@ func (r ApiGetVirtualizationVmwareDatastoreByMoidRequest) Execute() (*Virtualiza
 /*
 GetVirtualizationVmwareDatastoreByMoid Read a 'virtualization.VmwareDatastore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareDatastoreByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareDatastoreByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareDatastoreByMoidRequest {
 	return ApiGetVirtualizationVmwareDatastoreByMoidRequest{
@@ -2688,7 +2700,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreByMoid(ctx co
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastore
+//
+//	@return VirtualizationVmwareDatastore
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreByMoidExecute(r ApiGetVirtualizationVmwareDatastoreByMoidRequest) (*VirtualizationVmwareDatastore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2828,9 +2841,9 @@ func (r ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest) Execute() (*Vir
 /*
 GetVirtualizationVmwareDatastoreClusterByMoid Read a 'virtualization.VmwareDatastoreCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest {
 	return ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest{
@@ -2841,7 +2854,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterByMoid
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastoreCluster
+//
+//	@return VirtualizationVmwareDatastoreCluster
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterByMoidExecute(r ApiGetVirtualizationVmwareDatastoreClusterByMoidRequest) (*VirtualizationVmwareDatastoreCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3057,8 +3071,8 @@ func (r ApiGetVirtualizationVmwareDatastoreClusterListRequest) Execute() (*Virtu
 /*
 GetVirtualizationVmwareDatastoreClusterList Read a 'virtualization.VmwareDatastoreCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareDatastoreClusterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareDatastoreClusterListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterList(ctx context.Context) ApiGetVirtualizationVmwareDatastoreClusterListRequest {
 	return ApiGetVirtualizationVmwareDatastoreClusterListRequest{
@@ -3068,7 +3082,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterList(c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastoreClusterResponse
+//
+//	@return VirtualizationVmwareDatastoreClusterResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreClusterListExecute(r ApiGetVirtualizationVmwareDatastoreClusterListRequest) (*VirtualizationVmwareDatastoreClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3331,8 +3346,8 @@ func (r ApiGetVirtualizationVmwareDatastoreListRequest) Execute() (*Virtualizati
 /*
 GetVirtualizationVmwareDatastoreList Read a 'virtualization.VmwareDatastore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareDatastoreListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareDatastoreListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreList(ctx context.Context) ApiGetVirtualizationVmwareDatastoreListRequest {
 	return ApiGetVirtualizationVmwareDatastoreListRequest{
@@ -3342,7 +3357,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreList(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastoreResponse
+//
+//	@return VirtualizationVmwareDatastoreResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreListExecute(r ApiGetVirtualizationVmwareDatastoreListRequest) (*VirtualizationVmwareDatastoreResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3529,9 +3545,9 @@ func (r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) Execute() (*V
 /*
 GetVirtualizationVmwareDistributedNetworkByMoid Read a 'virtualization.VmwareDistributedNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest {
 	return ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest{
@@ -3542,7 +3558,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkByMo
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedNetwork
+//
+//	@return VirtualizationVmwareDistributedNetwork
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkByMoidExecute(r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) (*VirtualizationVmwareDistributedNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3758,8 +3775,8 @@ func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Execute() (*Vir
 /*
 GetVirtualizationVmwareDistributedNetworkList Read a 'virtualization.VmwareDistributedNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareDistributedNetworkListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareDistributedNetworkListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkList(ctx context.Context) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
 	return ApiGetVirtualizationVmwareDistributedNetworkListRequest{
@@ -3769,7 +3786,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkList
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedNetworkResponse
+//
+//	@return VirtualizationVmwareDistributedNetworkResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkListExecute(r ApiGetVirtualizationVmwareDistributedNetworkListRequest) (*VirtualizationVmwareDistributedNetworkResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3956,9 +3974,9 @@ func (r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) Execute() (*Vi
 /*
 GetVirtualizationVmwareDistributedSwitchByMoid Read a 'virtualization.VmwareDistributedSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest {
 	return ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest{
@@ -3969,7 +3987,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchByMoi
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedSwitch
+//
+//	@return VirtualizationVmwareDistributedSwitch
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchByMoidExecute(r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) (*VirtualizationVmwareDistributedSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4185,8 +4204,8 @@ func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Execute() (*Virt
 /*
 GetVirtualizationVmwareDistributedSwitchList Read a 'virtualization.VmwareDistributedSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareDistributedSwitchListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareDistributedSwitchListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchList(ctx context.Context) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
 	return ApiGetVirtualizationVmwareDistributedSwitchListRequest{
@@ -4196,7 +4215,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchList(
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedSwitchResponse
+//
+//	@return VirtualizationVmwareDistributedSwitchResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchListExecute(r ApiGetVirtualizationVmwareDistributedSwitchListRequest) (*VirtualizationVmwareDistributedSwitchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4383,9 +4403,9 @@ func (r ApiGetVirtualizationVmwareFolderByMoidRequest) Execute() (*Virtualizatio
 /*
 GetVirtualizationVmwareFolderByMoid Read a 'virtualization.VmwareFolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareFolderByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareFolderByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareFolderByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareFolderByMoidRequest {
 	return ApiGetVirtualizationVmwareFolderByMoidRequest{
@@ -4396,7 +4416,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareFolderByMoid(ctx conte
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareFolder
+//
+//	@return VirtualizationVmwareFolder
 func (a *VirtualizationApiService) GetVirtualizationVmwareFolderByMoidExecute(r ApiGetVirtualizationVmwareFolderByMoidRequest) (*VirtualizationVmwareFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4612,8 +4633,8 @@ func (r ApiGetVirtualizationVmwareFolderListRequest) Execute() (*VirtualizationV
 /*
 GetVirtualizationVmwareFolderList Read a 'virtualization.VmwareFolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareFolderListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareFolderListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareFolderList(ctx context.Context) ApiGetVirtualizationVmwareFolderListRequest {
 	return ApiGetVirtualizationVmwareFolderListRequest{
@@ -4623,7 +4644,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareFolderList(ctx context
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareFolderResponse
+//
+//	@return VirtualizationVmwareFolderResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareFolderListExecute(r ApiGetVirtualizationVmwareFolderListRequest) (*VirtualizationVmwareFolderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4810,9 +4832,9 @@ func (r ApiGetVirtualizationVmwareHostByMoidRequest) Execute() (*VirtualizationV
 /*
 GetVirtualizationVmwareHostByMoid Read a 'virtualization.VmwareHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareHostByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareHostByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareHostByMoidRequest {
 	return ApiGetVirtualizationVmwareHostByMoidRequest{
@@ -4823,7 +4845,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareHost
+//
+//	@return VirtualizationVmwareHost
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostByMoidExecute(r ApiGetVirtualizationVmwareHostByMoidRequest) (*VirtualizationVmwareHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4963,9 +4986,9 @@ func (r ApiGetVirtualizationVmwareHostGpuByMoidRequest) Execute() (*Virtualizati
 /*
 GetVirtualizationVmwareHostGpuByMoid Read a 'virtualization.VmwareHostGpu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareHostGpuByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareHostGpuByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareHostGpuByMoidRequest {
 	return ApiGetVirtualizationVmwareHostGpuByMoidRequest{
@@ -4976,7 +4999,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareHostGpu
+//
+//	@return VirtualizationVmwareHostGpu
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuByMoidExecute(r ApiGetVirtualizationVmwareHostGpuByMoidRequest) (*VirtualizationVmwareHostGpu, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5192,8 +5216,8 @@ func (r ApiGetVirtualizationVmwareHostGpuListRequest) Execute() (*Virtualization
 /*
 GetVirtualizationVmwareHostGpuList Read a 'virtualization.VmwareHostGpu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareHostGpuListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareHostGpuListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuList(ctx context.Context) ApiGetVirtualizationVmwareHostGpuListRequest {
 	return ApiGetVirtualizationVmwareHostGpuListRequest{
@@ -5203,7 +5227,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuList(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareHostGpuResponse
+//
+//	@return VirtualizationVmwareHostGpuResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostGpuListExecute(r ApiGetVirtualizationVmwareHostGpuListRequest) (*VirtualizationVmwareHostGpuResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5466,8 +5491,8 @@ func (r ApiGetVirtualizationVmwareHostListRequest) Execute() (*VirtualizationVmw
 /*
 GetVirtualizationVmwareHostList Read a 'virtualization.VmwareHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareHostListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareHostListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostList(ctx context.Context) ApiGetVirtualizationVmwareHostListRequest {
 	return ApiGetVirtualizationVmwareHostListRequest{
@@ -5477,7 +5502,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostList(ctx context.C
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareHostResponse
+//
+//	@return VirtualizationVmwareHostResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareHostListExecute(r ApiGetVirtualizationVmwareHostListRequest) (*VirtualizationVmwareHostResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5664,9 +5690,9 @@ func (r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) Execute() (*Virtua
 /*
 GetVirtualizationVmwareKernelNetworkByMoid Read a 'virtualization.VmwareKernelNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareKernelNetworkByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareKernelNetworkByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareKernelNetworkByMoidRequest {
 	return ApiGetVirtualizationVmwareKernelNetworkByMoidRequest{
@@ -5677,7 +5703,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkByMoid(ct
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareKernelNetwork
+//
+//	@return VirtualizationVmwareKernelNetwork
 func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkByMoidExecute(r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) (*VirtualizationVmwareKernelNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5893,8 +5920,8 @@ func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Execute() (*Virtuali
 /*
 GetVirtualizationVmwareKernelNetworkList Read a 'virtualization.VmwareKernelNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareKernelNetworkListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareKernelNetworkListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkList(ctx context.Context) ApiGetVirtualizationVmwareKernelNetworkListRequest {
 	return ApiGetVirtualizationVmwareKernelNetworkListRequest{
@@ -5904,7 +5931,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkList(ctx 
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareKernelNetworkResponse
+//
+//	@return VirtualizationVmwareKernelNetworkResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkListExecute(r ApiGetVirtualizationVmwareKernelNetworkListRequest) (*VirtualizationVmwareKernelNetworkResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6091,9 +6119,9 @@ func (r ApiGetVirtualizationVmwareNetworkByMoidRequest) Execute() (*Virtualizati
 /*
 GetVirtualizationVmwareNetworkByMoid Read a 'virtualization.VmwareNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareNetworkByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareNetworkByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareNetworkByMoidRequest {
 	return ApiGetVirtualizationVmwareNetworkByMoidRequest{
@@ -6104,7 +6132,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareNetwork
+//
+//	@return VirtualizationVmwareNetwork
 func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkByMoidExecute(r ApiGetVirtualizationVmwareNetworkByMoidRequest) (*VirtualizationVmwareNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6320,8 +6349,8 @@ func (r ApiGetVirtualizationVmwareNetworkListRequest) Execute() (*Virtualization
 /*
 GetVirtualizationVmwareNetworkList Read a 'virtualization.VmwareNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareNetworkListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareNetworkListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkList(ctx context.Context) ApiGetVirtualizationVmwareNetworkListRequest {
 	return ApiGetVirtualizationVmwareNetworkListRequest{
@@ -6331,7 +6360,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkList(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareNetworkResponse
+//
+//	@return VirtualizationVmwareNetworkResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkListExecute(r ApiGetVirtualizationVmwareNetworkListRequest) (*VirtualizationVmwareNetworkResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6518,9 +6548,9 @@ func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) Execute
 /*
 GetVirtualizationVmwarePhysicalNetworkInterfaceByMoid Read a 'virtualization.VmwarePhysicalNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest {
 	return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest{
@@ -6531,7 +6561,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfa
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwarePhysicalNetworkInterface
+//
+//	@return VirtualizationVmwarePhysicalNetworkInterface
 func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceByMoidExecute(r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) (*VirtualizationVmwarePhysicalNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6747,8 +6778,8 @@ func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Execute()
 /*
 GetVirtualizationVmwarePhysicalNetworkInterfaceList Read a 'virtualization.VmwarePhysicalNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceList(ctx context.Context) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
 	return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest{
@@ -6758,7 +6789,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfa
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwarePhysicalNetworkInterfaceResponse
+//
+//	@return VirtualizationVmwarePhysicalNetworkInterfaceResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceListExecute(r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) (*VirtualizationVmwarePhysicalNetworkInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6945,9 +6977,9 @@ func (r ApiGetVirtualizationVmwareProactiveHaByMoidRequest) Execute() (*Virtuali
 /*
 GetVirtualizationVmwareProactiveHaByMoid Read a 'virtualization.VmwareProactiveHa' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareProactiveHaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareProactiveHaByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareProactiveHaByMoidRequest {
 	return ApiGetVirtualizationVmwareProactiveHaByMoidRequest{
@@ -6958,7 +6990,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareProactiveHa
+//
+//	@return VirtualizationVmwareProactiveHa
 func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaByMoidExecute(r ApiGetVirtualizationVmwareProactiveHaByMoidRequest) (*VirtualizationVmwareProactiveHa, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7174,8 +7207,8 @@ func (r ApiGetVirtualizationVmwareProactiveHaListRequest) Execute() (*Virtualiza
 /*
 GetVirtualizationVmwareProactiveHaList Read a 'virtualization.VmwareProactiveHa' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareProactiveHaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareProactiveHaListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaList(ctx context.Context) ApiGetVirtualizationVmwareProactiveHaListRequest {
 	return ApiGetVirtualizationVmwareProactiveHaListRequest{
@@ -7185,7 +7218,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaList(ctx co
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareProactiveHaResponse
+//
+//	@return VirtualizationVmwareProactiveHaResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareProactiveHaListExecute(r ApiGetVirtualizationVmwareProactiveHaListRequest) (*VirtualizationVmwareProactiveHaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7372,9 +7406,9 @@ func (r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) Execute() (*Virtualiz
 /*
 GetVirtualizationVmwareUplinkPortByMoid Read a 'virtualization.VmwareUplinkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareUplinkPortByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareUplinkPortByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareUplinkPortByMoidRequest {
 	return ApiGetVirtualizationVmwareUplinkPortByMoidRequest{
@@ -7385,7 +7419,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortByMoid(ctx c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareUplinkPort
+//
+//	@return VirtualizationVmwareUplinkPort
 func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortByMoidExecute(r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) (*VirtualizationVmwareUplinkPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7601,8 +7636,8 @@ func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Execute() (*Virtualizat
 /*
 GetVirtualizationVmwareUplinkPortList Read a 'virtualization.VmwareUplinkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareUplinkPortListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareUplinkPortListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortList(ctx context.Context) ApiGetVirtualizationVmwareUplinkPortListRequest {
 	return ApiGetVirtualizationVmwareUplinkPortListRequest{
@@ -7612,7 +7647,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortList(ctx con
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareUplinkPortResponse
+//
+//	@return VirtualizationVmwareUplinkPortResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortListExecute(r ApiGetVirtualizationVmwareUplinkPortListRequest) (*VirtualizationVmwareUplinkPortResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7799,9 +7835,9 @@ func (r ApiGetVirtualizationVmwareVcenterByMoidRequest) Execute() (*Virtualizati
 /*
 GetVirtualizationVmwareVcenterByMoid Read a 'virtualization.VmwareVcenter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVcenterByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVcenterByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVcenterByMoidRequest {
 	return ApiGetVirtualizationVmwareVcenterByMoidRequest{
@@ -7812,7 +7848,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterByMoid(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVcenter
+//
+//	@return VirtualizationVmwareVcenter
 func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterByMoidExecute(r ApiGetVirtualizationVmwareVcenterByMoidRequest) (*VirtualizationVmwareVcenter, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8028,8 +8065,8 @@ func (r ApiGetVirtualizationVmwareVcenterListRequest) Execute() (*Virtualization
 /*
 GetVirtualizationVmwareVcenterList Read a 'virtualization.VmwareVcenter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVcenterListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVcenterListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterList(ctx context.Context) ApiGetVirtualizationVmwareVcenterListRequest {
 	return ApiGetVirtualizationVmwareVcenterListRequest{
@@ -8039,7 +8076,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterList(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVcenterResponse
+//
+//	@return VirtualizationVmwareVcenterResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVcenterListExecute(r ApiGetVirtualizationVmwareVcenterListRequest) (*VirtualizationVmwareVcenterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8226,9 +8264,9 @@ func (r ApiGetVirtualizationVmwareVirtualDiskByMoidRequest) Execute() (*Virtuali
 /*
 GetVirtualizationVmwareVirtualDiskByMoid Read a 'virtualization.VmwareVirtualDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVirtualDiskByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVirtualDiskByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVirtualDiskByMoidRequest {
 	return ApiGetVirtualizationVmwareVirtualDiskByMoidRequest{
@@ -8239,7 +8277,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskByMoid(ctx 
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualDisk
+//
+//	@return VirtualizationVmwareVirtualDisk
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskByMoidExecute(r ApiGetVirtualizationVmwareVirtualDiskByMoidRequest) (*VirtualizationVmwareVirtualDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8455,8 +8494,8 @@ func (r ApiGetVirtualizationVmwareVirtualDiskListRequest) Execute() (*Virtualiza
 /*
 GetVirtualizationVmwareVirtualDiskList Read a 'virtualization.VmwareVirtualDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVirtualDiskListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVirtualDiskListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskList(ctx context.Context) ApiGetVirtualizationVmwareVirtualDiskListRequest {
 	return ApiGetVirtualizationVmwareVirtualDiskListRequest{
@@ -8466,7 +8505,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskList(ctx co
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualDiskResponse
+//
+//	@return VirtualizationVmwareVirtualDiskResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualDiskListExecute(r ApiGetVirtualizationVmwareVirtualDiskListRequest) (*VirtualizationVmwareVirtualDiskResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8653,9 +8693,9 @@ func (r ApiGetVirtualizationVmwareVirtualMachineByMoidRequest) Execute() (*Virtu
 /*
 GetVirtualizationVmwareVirtualMachineByMoid Read a 'virtualization.VmwareVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVirtualMachineByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVirtualMachineByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVirtualMachineByMoidRequest {
 	return ApiGetVirtualizationVmwareVirtualMachineByMoidRequest{
@@ -8666,7 +8706,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineByMoid(c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachine
+//
+//	@return VirtualizationVmwareVirtualMachine
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineByMoidExecute(r ApiGetVirtualizationVmwareVirtualMachineByMoidRequest) (*VirtualizationVmwareVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8806,9 +8847,9 @@ func (r ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest) Execute() (*Vi
 /*
 GetVirtualizationVmwareVirtualMachineGpuByMoid Read a 'virtualization.VmwareVirtualMachineGpu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest {
 	return ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest{
@@ -8819,7 +8860,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuByMoi
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineGpu
+//
+//	@return VirtualizationVmwareVirtualMachineGpu
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuByMoidExecute(r ApiGetVirtualizationVmwareVirtualMachineGpuByMoidRequest) (*VirtualizationVmwareVirtualMachineGpu, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9035,8 +9077,8 @@ func (r ApiGetVirtualizationVmwareVirtualMachineGpuListRequest) Execute() (*Virt
 /*
 GetVirtualizationVmwareVirtualMachineGpuList Read a 'virtualization.VmwareVirtualMachineGpu' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVirtualMachineGpuListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVirtualMachineGpuListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuList(ctx context.Context) ApiGetVirtualizationVmwareVirtualMachineGpuListRequest {
 	return ApiGetVirtualizationVmwareVirtualMachineGpuListRequest{
@@ -9046,7 +9088,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuList(
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineGpuResponse
+//
+//	@return VirtualizationVmwareVirtualMachineGpuResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineGpuListExecute(r ApiGetVirtualizationVmwareVirtualMachineGpuListRequest) (*VirtualizationVmwareVirtualMachineGpuResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9309,8 +9352,8 @@ func (r ApiGetVirtualizationVmwareVirtualMachineListRequest) Execute() (*Virtual
 /*
 GetVirtualizationVmwareVirtualMachineList Read a 'virtualization.VmwareVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVirtualMachineListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVirtualMachineListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineList(ctx context.Context) ApiGetVirtualizationVmwareVirtualMachineListRequest {
 	return ApiGetVirtualizationVmwareVirtualMachineListRequest{
@@ -9320,7 +9363,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineList(ctx
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineResponse
+//
+//	@return VirtualizationVmwareVirtualMachineResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineListExecute(r ApiGetVirtualizationVmwareVirtualMachineListRequest) (*VirtualizationVmwareVirtualMachineResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9507,9 +9551,9 @@ func (r ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest) Execute()
 /*
 GetVirtualizationVmwareVirtualMachineSnapshotByMoid Read a 'virtualization.VmwareVirtualMachineSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshotByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest {
 	return ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest{
@@ -9520,7 +9564,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshot
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineSnapshot
+//
+//	@return VirtualizationVmwareVirtualMachineSnapshot
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshotByMoidExecute(r ApiGetVirtualizationVmwareVirtualMachineSnapshotByMoidRequest) (*VirtualizationVmwareVirtualMachineSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9736,8 +9781,8 @@ func (r ApiGetVirtualizationVmwareVirtualMachineSnapshotListRequest) Execute() (
 /*
 GetVirtualizationVmwareVirtualMachineSnapshotList Read a 'virtualization.VmwareVirtualMachineSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVirtualMachineSnapshotListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVirtualMachineSnapshotListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshotList(ctx context.Context) ApiGetVirtualizationVmwareVirtualMachineSnapshotListRequest {
 	return ApiGetVirtualizationVmwareVirtualMachineSnapshotListRequest{
@@ -9747,7 +9792,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshot
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineSnapshotResponse
+//
+//	@return VirtualizationVmwareVirtualMachineSnapshotResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineSnapshotListExecute(r ApiGetVirtualizationVmwareVirtualMachineSnapshotListRequest) (*VirtualizationVmwareVirtualMachineSnapshotResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9934,9 +9980,9 @@ func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) Execute(
 /*
 GetVirtualizationVmwareVirtualNetworkInterfaceByMoid Read a 'virtualization.VmwareVirtualNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest {
 	return ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest{
@@ -9947,7 +9993,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfac
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualNetworkInterface
+//
+//	@return VirtualizationVmwareVirtualNetworkInterface
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceByMoidExecute(r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) (*VirtualizationVmwareVirtualNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10163,8 +10210,8 @@ func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Execute() 
 /*
 GetVirtualizationVmwareVirtualNetworkInterfaceList Read a 'virtualization.VmwareVirtualNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceList(ctx context.Context) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
 	return ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest{
@@ -10174,7 +10221,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfac
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualNetworkInterfaceResponse
+//
+//	@return VirtualizationVmwareVirtualNetworkInterfaceResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceListExecute(r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) (*VirtualizationVmwareVirtualNetworkInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10361,9 +10409,9 @@ func (r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) Execute() (*Virtua
 /*
 GetVirtualizationVmwareVirtualSwitchByMoid Read a 'virtualization.VmwareVirtualSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchByMoid(ctx context.Context, moid string) ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest {
 	return ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest{
@@ -10374,7 +10422,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchByMoid(ct
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualSwitch
+//
+//	@return VirtualizationVmwareVirtualSwitch
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchByMoidExecute(r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) (*VirtualizationVmwareVirtualSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10590,8 +10639,8 @@ func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Execute() (*Virtuali
 /*
 GetVirtualizationVmwareVirtualSwitchList Read a 'virtualization.VmwareVirtualSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetVirtualizationVmwareVirtualSwitchListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetVirtualizationVmwareVirtualSwitchListRequest
 */
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchList(ctx context.Context) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
 	return ApiGetVirtualizationVmwareVirtualSwitchListRequest{
@@ -10601,7 +10650,8 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchList(ctx 
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualSwitchResponse
+//
+//	@return VirtualizationVmwareVirtualSwitchResponse
 func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchListExecute(r ApiGetVirtualizationVmwareVirtualSwitchListRequest) (*VirtualizationVmwareVirtualSwitchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10802,9 +10852,9 @@ func (r ApiPatchVirtualizationEsxiConsoleRequest) Execute() (*VirtualizationEsxi
 /*
 PatchVirtualizationEsxiConsole Update a 'virtualization.EsxiConsole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationEsxiConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationEsxiConsoleRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationEsxiConsole(ctx context.Context, moid string) ApiPatchVirtualizationEsxiConsoleRequest {
 	return ApiPatchVirtualizationEsxiConsoleRequest{
@@ -10815,7 +10865,8 @@ func (a *VirtualizationApiService) PatchVirtualizationEsxiConsole(ctx context.Co
 }
 
 // Execute executes the request
-//  @return VirtualizationEsxiConsole
+//
+//	@return VirtualizationEsxiConsole
 func (a *VirtualizationApiService) PatchVirtualizationEsxiConsoleExecute(r ApiPatchVirtualizationEsxiConsoleRequest) (*VirtualizationEsxiConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -10977,9 +11028,9 @@ func (r ApiPatchVirtualizationHostRequest) Execute() (*VirtualizationHost, *http
 /*
 PatchVirtualizationHost Update a 'virtualization.Host' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationHostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationHostRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationHost(ctx context.Context, moid string) ApiPatchVirtualizationHostRequest {
 	return ApiPatchVirtualizationHostRequest{
@@ -10990,7 +11041,8 @@ func (a *VirtualizationApiService) PatchVirtualizationHost(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return VirtualizationHost
+//
+//	@return VirtualizationHost
 func (a *VirtualizationApiService) PatchVirtualizationHostExecute(r ApiPatchVirtualizationHostRequest) (*VirtualizationHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11152,9 +11204,9 @@ func (r ApiPatchVirtualizationVirtualMachineRequest) Execute() (*VirtualizationV
 /*
 PatchVirtualizationVirtualMachine Update a 'virtualization.VirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVirtualMachineRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVirtualMachine(ctx context.Context, moid string) ApiPatchVirtualizationVirtualMachineRequest {
 	return ApiPatchVirtualizationVirtualMachineRequest{
@@ -11165,7 +11217,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVirtualMachine(ctx context
 }
 
 // Execute executes the request
-//  @return VirtualizationVirtualMachine
+//
+//	@return VirtualizationVirtualMachine
 func (a *VirtualizationApiService) PatchVirtualizationVirtualMachineExecute(r ApiPatchVirtualizationVirtualMachineRequest) (*VirtualizationVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11327,9 +11380,9 @@ func (r ApiPatchVirtualizationVmwareClusterRequest) Execute() (*VirtualizationVm
 /*
 PatchVirtualizationVmwareCluster Update a 'virtualization.VmwareCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareClusterRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareCluster(ctx context.Context, moid string) ApiPatchVirtualizationVmwareClusterRequest {
 	return ApiPatchVirtualizationVmwareClusterRequest{
@@ -11340,7 +11393,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareCluster(ctx context.
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareCluster
+//
+//	@return VirtualizationVmwareCluster
 func (a *VirtualizationApiService) PatchVirtualizationVmwareClusterExecute(r ApiPatchVirtualizationVmwareClusterRequest) (*VirtualizationVmwareCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11502,9 +11556,9 @@ func (r ApiPatchVirtualizationVmwareDatacenterRequest) Execute() (*Virtualizatio
 /*
 PatchVirtualizationVmwareDatacenter Update a 'virtualization.VmwareDatacenter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareDatacenterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareDatacenterRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDatacenter(ctx context.Context, moid string) ApiPatchVirtualizationVmwareDatacenterRequest {
 	return ApiPatchVirtualizationVmwareDatacenterRequest{
@@ -11515,7 +11569,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareDatacenter(ctx conte
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatacenter
+//
+//	@return VirtualizationVmwareDatacenter
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDatacenterExecute(r ApiPatchVirtualizationVmwareDatacenterRequest) (*VirtualizationVmwareDatacenter, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11677,9 +11732,9 @@ func (r ApiPatchVirtualizationVmwareDatastoreRequest) Execute() (*Virtualization
 /*
 PatchVirtualizationVmwareDatastore Update a 'virtualization.VmwareDatastore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareDatastoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareDatastoreRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastore(ctx context.Context, moid string) ApiPatchVirtualizationVmwareDatastoreRequest {
 	return ApiPatchVirtualizationVmwareDatastoreRequest{
@@ -11690,7 +11745,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastore(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastore
+//
+//	@return VirtualizationVmwareDatastore
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastoreExecute(r ApiPatchVirtualizationVmwareDatastoreRequest) (*VirtualizationVmwareDatastore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11852,9 +11908,9 @@ func (r ApiPatchVirtualizationVmwareDatastoreClusterRequest) Execute() (*Virtual
 /*
 PatchVirtualizationVmwareDatastoreCluster Update a 'virtualization.VmwareDatastoreCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareDatastoreClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareDatastoreClusterRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastoreCluster(ctx context.Context, moid string) ApiPatchVirtualizationVmwareDatastoreClusterRequest {
 	return ApiPatchVirtualizationVmwareDatastoreClusterRequest{
@@ -11865,7 +11921,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastoreCluster(ctx
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastoreCluster
+//
+//	@return VirtualizationVmwareDatastoreCluster
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastoreClusterExecute(r ApiPatchVirtualizationVmwareDatastoreClusterRequest) (*VirtualizationVmwareDatastoreCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12027,9 +12084,9 @@ func (r ApiPatchVirtualizationVmwareDistributedNetworkRequest) Execute() (*Virtu
 /*
 PatchVirtualizationVmwareDistributedNetwork Update a 'virtualization.VmwareDistributedNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareDistributedNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareDistributedNetworkRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedNetwork(ctx context.Context, moid string) ApiPatchVirtualizationVmwareDistributedNetworkRequest {
 	return ApiPatchVirtualizationVmwareDistributedNetworkRequest{
@@ -12040,7 +12097,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedNetwork(c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedNetwork
+//
+//	@return VirtualizationVmwareDistributedNetwork
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedNetworkExecute(r ApiPatchVirtualizationVmwareDistributedNetworkRequest) (*VirtualizationVmwareDistributedNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12202,9 +12260,9 @@ func (r ApiPatchVirtualizationVmwareDistributedSwitchRequest) Execute() (*Virtua
 /*
 PatchVirtualizationVmwareDistributedSwitch Update a 'virtualization.VmwareDistributedSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareDistributedSwitchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareDistributedSwitchRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedSwitch(ctx context.Context, moid string) ApiPatchVirtualizationVmwareDistributedSwitchRequest {
 	return ApiPatchVirtualizationVmwareDistributedSwitchRequest{
@@ -12215,7 +12273,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedSwitch(ct
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedSwitch
+//
+//	@return VirtualizationVmwareDistributedSwitch
 func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedSwitchExecute(r ApiPatchVirtualizationVmwareDistributedSwitchRequest) (*VirtualizationVmwareDistributedSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12377,9 +12436,9 @@ func (r ApiPatchVirtualizationVmwareFolderRequest) Execute() (*VirtualizationVmw
 /*
 PatchVirtualizationVmwareFolder Update a 'virtualization.VmwareFolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareFolderRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareFolder(ctx context.Context, moid string) ApiPatchVirtualizationVmwareFolderRequest {
 	return ApiPatchVirtualizationVmwareFolderRequest{
@@ -12390,7 +12449,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareFolder(ctx context.C
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareFolder
+//
+//	@return VirtualizationVmwareFolder
 func (a *VirtualizationApiService) PatchVirtualizationVmwareFolderExecute(r ApiPatchVirtualizationVmwareFolderRequest) (*VirtualizationVmwareFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12552,9 +12612,9 @@ func (r ApiPatchVirtualizationVmwareHostRequest) Execute() (*VirtualizationVmwar
 /*
 PatchVirtualizationVmwareHost Update a 'virtualization.VmwareHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareHostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareHostRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareHost(ctx context.Context, moid string) ApiPatchVirtualizationVmwareHostRequest {
 	return ApiPatchVirtualizationVmwareHostRequest{
@@ -12565,7 +12625,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareHost(ctx context.Con
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareHost
+//
+//	@return VirtualizationVmwareHost
 func (a *VirtualizationApiService) PatchVirtualizationVmwareHostExecute(r ApiPatchVirtualizationVmwareHostRequest) (*VirtualizationVmwareHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12727,9 +12788,9 @@ func (r ApiPatchVirtualizationVmwareKernelNetworkRequest) Execute() (*Virtualiza
 /*
 PatchVirtualizationVmwareKernelNetwork Update a 'virtualization.VmwareKernelNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareKernelNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareKernelNetworkRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareKernelNetwork(ctx context.Context, moid string) ApiPatchVirtualizationVmwareKernelNetworkRequest {
 	return ApiPatchVirtualizationVmwareKernelNetworkRequest{
@@ -12740,7 +12801,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareKernelNetwork(ctx co
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareKernelNetwork
+//
+//	@return VirtualizationVmwareKernelNetwork
 func (a *VirtualizationApiService) PatchVirtualizationVmwareKernelNetworkExecute(r ApiPatchVirtualizationVmwareKernelNetworkRequest) (*VirtualizationVmwareKernelNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12902,9 +12964,9 @@ func (r ApiPatchVirtualizationVmwareNetworkRequest) Execute() (*VirtualizationVm
 /*
 PatchVirtualizationVmwareNetwork Update a 'virtualization.VmwareNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareNetworkRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareNetwork(ctx context.Context, moid string) ApiPatchVirtualizationVmwareNetworkRequest {
 	return ApiPatchVirtualizationVmwareNetworkRequest{
@@ -12915,7 +12977,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareNetwork(ctx context.
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareNetwork
+//
+//	@return VirtualizationVmwareNetwork
 func (a *VirtualizationApiService) PatchVirtualizationVmwareNetworkExecute(r ApiPatchVirtualizationVmwareNetworkRequest) (*VirtualizationVmwareNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13077,9 +13140,9 @@ func (r ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest) Execute() (
 /*
 PatchVirtualizationVmwarePhysicalNetworkInterface Update a 'virtualization.VmwarePhysicalNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwarePhysicalNetworkInterface(ctx context.Context, moid string) ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest {
 	return ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest{
@@ -13090,7 +13153,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwarePhysicalNetworkInter
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwarePhysicalNetworkInterface
+//
+//	@return VirtualizationVmwarePhysicalNetworkInterface
 func (a *VirtualizationApiService) PatchVirtualizationVmwarePhysicalNetworkInterfaceExecute(r ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest) (*VirtualizationVmwarePhysicalNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13252,9 +13316,9 @@ func (r ApiPatchVirtualizationVmwareUplinkPortRequest) Execute() (*Virtualizatio
 /*
 PatchVirtualizationVmwareUplinkPort Update a 'virtualization.VmwareUplinkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareUplinkPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareUplinkPortRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareUplinkPort(ctx context.Context, moid string) ApiPatchVirtualizationVmwareUplinkPortRequest {
 	return ApiPatchVirtualizationVmwareUplinkPortRequest{
@@ -13265,7 +13329,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareUplinkPort(ctx conte
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareUplinkPort
+//
+//	@return VirtualizationVmwareUplinkPort
 func (a *VirtualizationApiService) PatchVirtualizationVmwareUplinkPortExecute(r ApiPatchVirtualizationVmwareUplinkPortRequest) (*VirtualizationVmwareUplinkPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13427,9 +13492,9 @@ func (r ApiPatchVirtualizationVmwareVirtualDiskRequest) Execute() (*Virtualizati
 /*
 PatchVirtualizationVmwareVirtualDisk Update a 'virtualization.VmwareVirtualDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareVirtualDiskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareVirtualDiskRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualDisk(ctx context.Context, moid string) ApiPatchVirtualizationVmwareVirtualDiskRequest {
 	return ApiPatchVirtualizationVmwareVirtualDiskRequest{
@@ -13440,7 +13505,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualDisk(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualDisk
+//
+//	@return VirtualizationVmwareVirtualDisk
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualDiskExecute(r ApiPatchVirtualizationVmwareVirtualDiskRequest) (*VirtualizationVmwareVirtualDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13602,9 +13668,9 @@ func (r ApiPatchVirtualizationVmwareVirtualMachineRequest) Execute() (*Virtualiz
 /*
 PatchVirtualizationVmwareVirtualMachine Update a 'virtualization.VmwareVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareVirtualMachineRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachine(ctx context.Context, moid string) ApiPatchVirtualizationVmwareVirtualMachineRequest {
 	return ApiPatchVirtualizationVmwareVirtualMachineRequest{
@@ -13615,7 +13681,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachine(ctx c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachine
+//
+//	@return VirtualizationVmwareVirtualMachine
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachineExecute(r ApiPatchVirtualizationVmwareVirtualMachineRequest) (*VirtualizationVmwareVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13777,9 +13844,9 @@ func (r ApiPatchVirtualizationVmwareVirtualMachineSnapshotRequest) Execute() (*V
 /*
 PatchVirtualizationVmwareVirtualMachineSnapshot Update a 'virtualization.VmwareVirtualMachineSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareVirtualMachineSnapshotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareVirtualMachineSnapshotRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachineSnapshot(ctx context.Context, moid string) ApiPatchVirtualizationVmwareVirtualMachineSnapshotRequest {
 	return ApiPatchVirtualizationVmwareVirtualMachineSnapshotRequest{
@@ -13790,7 +13857,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachineSnapsh
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineSnapshot
+//
+//	@return VirtualizationVmwareVirtualMachineSnapshot
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachineSnapshotExecute(r ApiPatchVirtualizationVmwareVirtualMachineSnapshotRequest) (*VirtualizationVmwareVirtualMachineSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13952,9 +14020,9 @@ func (r ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest) Execute() (*
 /*
 PatchVirtualizationVmwareVirtualNetworkInterface Update a 'virtualization.VmwareVirtualNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualNetworkInterface(ctx context.Context, moid string) ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest {
 	return ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest{
@@ -13965,7 +14033,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualNetworkInterf
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualNetworkInterface
+//
+//	@return VirtualizationVmwareVirtualNetworkInterface
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualNetworkInterfaceExecute(r ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest) (*VirtualizationVmwareVirtualNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14127,9 +14196,9 @@ func (r ApiPatchVirtualizationVmwareVirtualSwitchRequest) Execute() (*Virtualiza
 /*
 PatchVirtualizationVmwareVirtualSwitch Update a 'virtualization.VmwareVirtualSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchVirtualizationVmwareVirtualSwitchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchVirtualizationVmwareVirtualSwitchRequest
 */
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualSwitch(ctx context.Context, moid string) ApiPatchVirtualizationVmwareVirtualSwitchRequest {
 	return ApiPatchVirtualizationVmwareVirtualSwitchRequest{
@@ -14140,7 +14209,8 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualSwitch(ctx co
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualSwitch
+//
+//	@return VirtualizationVmwareVirtualSwitch
 func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualSwitchExecute(r ApiPatchVirtualizationVmwareVirtualSwitchRequest) (*VirtualizationVmwareVirtualSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14302,9 +14372,9 @@ func (r ApiUpdateVirtualizationEsxiConsoleRequest) Execute() (*VirtualizationEsx
 /*
 UpdateVirtualizationEsxiConsole Update a 'virtualization.EsxiConsole' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationEsxiConsoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationEsxiConsoleRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationEsxiConsole(ctx context.Context, moid string) ApiUpdateVirtualizationEsxiConsoleRequest {
 	return ApiUpdateVirtualizationEsxiConsoleRequest{
@@ -14315,7 +14385,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationEsxiConsole(ctx context.C
 }
 
 // Execute executes the request
-//  @return VirtualizationEsxiConsole
+//
+//	@return VirtualizationEsxiConsole
 func (a *VirtualizationApiService) UpdateVirtualizationEsxiConsoleExecute(r ApiUpdateVirtualizationEsxiConsoleRequest) (*VirtualizationEsxiConsole, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14477,9 +14548,9 @@ func (r ApiUpdateVirtualizationHostRequest) Execute() (*VirtualizationHost, *htt
 /*
 UpdateVirtualizationHost Update a 'virtualization.Host' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationHostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationHostRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationHost(ctx context.Context, moid string) ApiUpdateVirtualizationHostRequest {
 	return ApiUpdateVirtualizationHostRequest{
@@ -14490,7 +14561,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationHost(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return VirtualizationHost
+//
+//	@return VirtualizationHost
 func (a *VirtualizationApiService) UpdateVirtualizationHostExecute(r ApiUpdateVirtualizationHostRequest) (*VirtualizationHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14652,9 +14724,9 @@ func (r ApiUpdateVirtualizationVirtualMachineRequest) Execute() (*Virtualization
 /*
 UpdateVirtualizationVirtualMachine Update a 'virtualization.VirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVirtualMachineRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVirtualMachine(ctx context.Context, moid string) ApiUpdateVirtualizationVirtualMachineRequest {
 	return ApiUpdateVirtualizationVirtualMachineRequest{
@@ -14665,7 +14737,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVirtualMachine(ctx contex
 }
 
 // Execute executes the request
-//  @return VirtualizationVirtualMachine
+//
+//	@return VirtualizationVirtualMachine
 func (a *VirtualizationApiService) UpdateVirtualizationVirtualMachineExecute(r ApiUpdateVirtualizationVirtualMachineRequest) (*VirtualizationVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14827,9 +14900,9 @@ func (r ApiUpdateVirtualizationVmwareClusterRequest) Execute() (*VirtualizationV
 /*
 UpdateVirtualizationVmwareCluster Update a 'virtualization.VmwareCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareClusterRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareCluster(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareClusterRequest {
 	return ApiUpdateVirtualizationVmwareClusterRequest{
@@ -14840,7 +14913,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareCluster(ctx context
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareCluster
+//
+//	@return VirtualizationVmwareCluster
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareClusterExecute(r ApiUpdateVirtualizationVmwareClusterRequest) (*VirtualizationVmwareCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15002,9 +15076,9 @@ func (r ApiUpdateVirtualizationVmwareDatacenterRequest) Execute() (*Virtualizati
 /*
 UpdateVirtualizationVmwareDatacenter Update a 'virtualization.VmwareDatacenter' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareDatacenterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareDatacenterRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatacenter(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareDatacenterRequest {
 	return ApiUpdateVirtualizationVmwareDatacenterRequest{
@@ -15015,7 +15089,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatacenter(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatacenter
+//
+//	@return VirtualizationVmwareDatacenter
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatacenterExecute(r ApiUpdateVirtualizationVmwareDatacenterRequest) (*VirtualizationVmwareDatacenter, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15177,9 +15252,9 @@ func (r ApiUpdateVirtualizationVmwareDatastoreRequest) Execute() (*Virtualizatio
 /*
 UpdateVirtualizationVmwareDatastore Update a 'virtualization.VmwareDatastore' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareDatastoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareDatastoreRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastore(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareDatastoreRequest {
 	return ApiUpdateVirtualizationVmwareDatastoreRequest{
@@ -15190,7 +15265,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastore(ctx conte
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastore
+//
+//	@return VirtualizationVmwareDatastore
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastoreExecute(r ApiUpdateVirtualizationVmwareDatastoreRequest) (*VirtualizationVmwareDatastore, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15352,9 +15428,9 @@ func (r ApiUpdateVirtualizationVmwareDatastoreClusterRequest) Execute() (*Virtua
 /*
 UpdateVirtualizationVmwareDatastoreCluster Update a 'virtualization.VmwareDatastoreCluster' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareDatastoreClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareDatastoreClusterRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastoreCluster(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareDatastoreClusterRequest {
 	return ApiUpdateVirtualizationVmwareDatastoreClusterRequest{
@@ -15365,7 +15441,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastoreCluster(ct
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDatastoreCluster
+//
+//	@return VirtualizationVmwareDatastoreCluster
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastoreClusterExecute(r ApiUpdateVirtualizationVmwareDatastoreClusterRequest) (*VirtualizationVmwareDatastoreCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15527,9 +15604,9 @@ func (r ApiUpdateVirtualizationVmwareDistributedNetworkRequest) Execute() (*Virt
 /*
 UpdateVirtualizationVmwareDistributedNetwork Update a 'virtualization.VmwareDistributedNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareDistributedNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareDistributedNetworkRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedNetwork(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareDistributedNetworkRequest {
 	return ApiUpdateVirtualizationVmwareDistributedNetworkRequest{
@@ -15540,7 +15617,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedNetwork(
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedNetwork
+//
+//	@return VirtualizationVmwareDistributedNetwork
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedNetworkExecute(r ApiUpdateVirtualizationVmwareDistributedNetworkRequest) (*VirtualizationVmwareDistributedNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15702,9 +15780,9 @@ func (r ApiUpdateVirtualizationVmwareDistributedSwitchRequest) Execute() (*Virtu
 /*
 UpdateVirtualizationVmwareDistributedSwitch Update a 'virtualization.VmwareDistributedSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareDistributedSwitchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareDistributedSwitchRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedSwitch(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareDistributedSwitchRequest {
 	return ApiUpdateVirtualizationVmwareDistributedSwitchRequest{
@@ -15715,7 +15793,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedSwitch(c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareDistributedSwitch
+//
+//	@return VirtualizationVmwareDistributedSwitch
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedSwitchExecute(r ApiUpdateVirtualizationVmwareDistributedSwitchRequest) (*VirtualizationVmwareDistributedSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15877,9 +15956,9 @@ func (r ApiUpdateVirtualizationVmwareFolderRequest) Execute() (*VirtualizationVm
 /*
 UpdateVirtualizationVmwareFolder Update a 'virtualization.VmwareFolder' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareFolderRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareFolder(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareFolderRequest {
 	return ApiUpdateVirtualizationVmwareFolderRequest{
@@ -15890,7 +15969,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareFolder(ctx context.
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareFolder
+//
+//	@return VirtualizationVmwareFolder
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareFolderExecute(r ApiUpdateVirtualizationVmwareFolderRequest) (*VirtualizationVmwareFolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16052,9 +16132,9 @@ func (r ApiUpdateVirtualizationVmwareHostRequest) Execute() (*VirtualizationVmwa
 /*
 UpdateVirtualizationVmwareHost Update a 'virtualization.VmwareHost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareHostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareHostRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareHost(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareHostRequest {
 	return ApiUpdateVirtualizationVmwareHostRequest{
@@ -16065,7 +16145,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareHost(ctx context.Co
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareHost
+//
+//	@return VirtualizationVmwareHost
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareHostExecute(r ApiUpdateVirtualizationVmwareHostRequest) (*VirtualizationVmwareHost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16227,9 +16308,9 @@ func (r ApiUpdateVirtualizationVmwareKernelNetworkRequest) Execute() (*Virtualiz
 /*
 UpdateVirtualizationVmwareKernelNetwork Update a 'virtualization.VmwareKernelNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareKernelNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareKernelNetworkRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareKernelNetwork(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareKernelNetworkRequest {
 	return ApiUpdateVirtualizationVmwareKernelNetworkRequest{
@@ -16240,7 +16321,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareKernelNetwork(ctx c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareKernelNetwork
+//
+//	@return VirtualizationVmwareKernelNetwork
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareKernelNetworkExecute(r ApiUpdateVirtualizationVmwareKernelNetworkRequest) (*VirtualizationVmwareKernelNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16402,9 +16484,9 @@ func (r ApiUpdateVirtualizationVmwareNetworkRequest) Execute() (*VirtualizationV
 /*
 UpdateVirtualizationVmwareNetwork Update a 'virtualization.VmwareNetwork' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareNetworkRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareNetworkRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareNetwork(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareNetworkRequest {
 	return ApiUpdateVirtualizationVmwareNetworkRequest{
@@ -16415,7 +16497,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareNetwork(ctx context
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareNetwork
+//
+//	@return VirtualizationVmwareNetwork
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareNetworkExecute(r ApiUpdateVirtualizationVmwareNetworkRequest) (*VirtualizationVmwareNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16577,9 +16660,9 @@ func (r ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest) Execute() 
 /*
 UpdateVirtualizationVmwarePhysicalNetworkInterface Update a 'virtualization.VmwarePhysicalNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwarePhysicalNetworkInterface(ctx context.Context, moid string) ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest {
 	return ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest{
@@ -16590,7 +16673,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwarePhysicalNetworkInte
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwarePhysicalNetworkInterface
+//
+//	@return VirtualizationVmwarePhysicalNetworkInterface
 func (a *VirtualizationApiService) UpdateVirtualizationVmwarePhysicalNetworkInterfaceExecute(r ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest) (*VirtualizationVmwarePhysicalNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16752,9 +16836,9 @@ func (r ApiUpdateVirtualizationVmwareUplinkPortRequest) Execute() (*Virtualizati
 /*
 UpdateVirtualizationVmwareUplinkPort Update a 'virtualization.VmwareUplinkPort' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareUplinkPortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareUplinkPortRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareUplinkPort(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareUplinkPortRequest {
 	return ApiUpdateVirtualizationVmwareUplinkPortRequest{
@@ -16765,7 +16849,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareUplinkPort(ctx cont
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareUplinkPort
+//
+//	@return VirtualizationVmwareUplinkPort
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareUplinkPortExecute(r ApiUpdateVirtualizationVmwareUplinkPortRequest) (*VirtualizationVmwareUplinkPort, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16927,9 +17012,9 @@ func (r ApiUpdateVirtualizationVmwareVirtualDiskRequest) Execute() (*Virtualizat
 /*
 UpdateVirtualizationVmwareVirtualDisk Update a 'virtualization.VmwareVirtualDisk' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareVirtualDiskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareVirtualDiskRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualDisk(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualDiskRequest {
 	return ApiUpdateVirtualizationVmwareVirtualDiskRequest{
@@ -16940,7 +17025,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualDisk(ctx con
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualDisk
+//
+//	@return VirtualizationVmwareVirtualDisk
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualDiskExecute(r ApiUpdateVirtualizationVmwareVirtualDiskRequest) (*VirtualizationVmwareVirtualDisk, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17102,9 +17188,9 @@ func (r ApiUpdateVirtualizationVmwareVirtualMachineRequest) Execute() (*Virtuali
 /*
 UpdateVirtualizationVmwareVirtualMachine Update a 'virtualization.VmwareVirtualMachine' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareVirtualMachineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareVirtualMachineRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachine(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualMachineRequest {
 	return ApiUpdateVirtualizationVmwareVirtualMachineRequest{
@@ -17115,7 +17201,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachine(ctx 
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachine
+//
+//	@return VirtualizationVmwareVirtualMachine
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachineExecute(r ApiUpdateVirtualizationVmwareVirtualMachineRequest) (*VirtualizationVmwareVirtualMachine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17277,9 +17364,9 @@ func (r ApiUpdateVirtualizationVmwareVirtualMachineSnapshotRequest) Execute() (*
 /*
 UpdateVirtualizationVmwareVirtualMachineSnapshot Update a 'virtualization.VmwareVirtualMachineSnapshot' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareVirtualMachineSnapshotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareVirtualMachineSnapshotRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachineSnapshot(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualMachineSnapshotRequest {
 	return ApiUpdateVirtualizationVmwareVirtualMachineSnapshotRequest{
@@ -17290,7 +17377,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachineSnaps
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualMachineSnapshot
+//
+//	@return VirtualizationVmwareVirtualMachineSnapshot
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachineSnapshotExecute(r ApiUpdateVirtualizationVmwareVirtualMachineSnapshotRequest) (*VirtualizationVmwareVirtualMachineSnapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17452,9 +17540,9 @@ func (r ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest) Execute() (
 /*
 UpdateVirtualizationVmwareVirtualNetworkInterface Update a 'virtualization.VmwareVirtualNetworkInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualNetworkInterface(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest {
 	return ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest{
@@ -17465,7 +17553,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualNetworkInter
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualNetworkInterface
+//
+//	@return VirtualizationVmwareVirtualNetworkInterface
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualNetworkInterfaceExecute(r ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest) (*VirtualizationVmwareVirtualNetworkInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -17627,9 +17716,9 @@ func (r ApiUpdateVirtualizationVmwareVirtualSwitchRequest) Execute() (*Virtualiz
 /*
 UpdateVirtualizationVmwareVirtualSwitch Update a 'virtualization.VmwareVirtualSwitch' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateVirtualizationVmwareVirtualSwitchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateVirtualizationVmwareVirtualSwitchRequest
 */
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualSwitch(ctx context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualSwitchRequest {
 	return ApiUpdateVirtualizationVmwareVirtualSwitchRequest{
@@ -17640,7 +17729,8 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualSwitch(ctx c
 }
 
 // Execute executes the request
-//  @return VirtualizationVmwareVirtualSwitch
+//
+//	@return VirtualizationVmwareVirtualSwitch
 func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualSwitchExecute(r ApiUpdateVirtualizationVmwareVirtualSwitchRequest) (*VirtualizationVmwareVirtualSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

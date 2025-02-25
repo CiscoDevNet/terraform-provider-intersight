@@ -56,8 +56,8 @@ func (r ApiCreateSolPolicyRequest) Execute() (*SolPolicy, *http.Response, error)
 /*
 CreateSolPolicy Create a 'sol.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSolPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSolPolicyRequest
 */
 func (a *SolApiService) CreateSolPolicy(ctx context.Context) ApiCreateSolPolicyRequest {
 	return ApiCreateSolPolicyRequest{
@@ -67,7 +67,8 @@ func (a *SolApiService) CreateSolPolicy(ctx context.Context) ApiCreateSolPolicyR
 }
 
 // Execute executes the request
-//  @return SolPolicy
+//
+//	@return SolPolicy
 func (a *SolApiService) CreateSolPolicyExecute(r ApiCreateSolPolicyRequest) (*SolPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteSolPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteSolPolicy Delete a 'sol.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSolPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSolPolicyRequest
 */
 func (a *SolApiService) DeleteSolPolicy(ctx context.Context, moid string) ApiDeleteSolPolicyRequest {
 	return ApiDeleteSolPolicyRequest{
@@ -359,9 +360,9 @@ func (r ApiGetSolPolicyByMoidRequest) Execute() (*SolPolicy, *http.Response, err
 /*
 GetSolPolicyByMoid Read a 'sol.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSolPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSolPolicyByMoidRequest
 */
 func (a *SolApiService) GetSolPolicyByMoid(ctx context.Context, moid string) ApiGetSolPolicyByMoidRequest {
 	return ApiGetSolPolicyByMoidRequest{
@@ -372,7 +373,8 @@ func (a *SolApiService) GetSolPolicyByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return SolPolicy
+//
+//	@return SolPolicy
 func (a *SolApiService) GetSolPolicyByMoidExecute(r ApiGetSolPolicyByMoidRequest) (*SolPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -512,9 +514,9 @@ func (r ApiGetSolPolicyInventoryByMoidRequest) Execute() (*SolPolicyInventory, *
 /*
 GetSolPolicyInventoryByMoid Read a 'sol.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSolPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSolPolicyInventoryByMoidRequest
 */
 func (a *SolApiService) GetSolPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetSolPolicyInventoryByMoidRequest {
 	return ApiGetSolPolicyInventoryByMoidRequest{
@@ -525,7 +527,8 @@ func (a *SolApiService) GetSolPolicyInventoryByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return SolPolicyInventory
+//
+//	@return SolPolicyInventory
 func (a *SolApiService) GetSolPolicyInventoryByMoidExecute(r ApiGetSolPolicyInventoryByMoidRequest) (*SolPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -741,8 +744,8 @@ func (r ApiGetSolPolicyInventoryListRequest) Execute() (*SolPolicyInventoryRespo
 /*
 GetSolPolicyInventoryList Read a 'sol.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSolPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSolPolicyInventoryListRequest
 */
 func (a *SolApiService) GetSolPolicyInventoryList(ctx context.Context) ApiGetSolPolicyInventoryListRequest {
 	return ApiGetSolPolicyInventoryListRequest{
@@ -752,7 +755,8 @@ func (a *SolApiService) GetSolPolicyInventoryList(ctx context.Context) ApiGetSol
 }
 
 // Execute executes the request
-//  @return SolPolicyInventoryResponse
+//
+//	@return SolPolicyInventoryResponse
 func (a *SolApiService) GetSolPolicyInventoryListExecute(r ApiGetSolPolicyInventoryListRequest) (*SolPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1015,8 +1019,8 @@ func (r ApiGetSolPolicyListRequest) Execute() (*SolPolicyResponse, *http.Respons
 /*
 GetSolPolicyList Read a 'sol.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSolPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSolPolicyListRequest
 */
 func (a *SolApiService) GetSolPolicyList(ctx context.Context) ApiGetSolPolicyListRequest {
 	return ApiGetSolPolicyListRequest{
@@ -1026,7 +1030,8 @@ func (a *SolApiService) GetSolPolicyList(ctx context.Context) ApiGetSolPolicyLis
 }
 
 // Execute executes the request
-//  @return SolPolicyResponse
+//
+//	@return SolPolicyResponse
 func (a *SolApiService) GetSolPolicyListExecute(r ApiGetSolPolicyListRequest) (*SolPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1227,9 +1232,9 @@ func (r ApiPatchSolPolicyRequest) Execute() (*SolPolicy, *http.Response, error) 
 /*
 PatchSolPolicy Update a 'sol.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSolPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSolPolicyRequest
 */
 func (a *SolApiService) PatchSolPolicy(ctx context.Context, moid string) ApiPatchSolPolicyRequest {
 	return ApiPatchSolPolicyRequest{
@@ -1240,7 +1245,8 @@ func (a *SolApiService) PatchSolPolicy(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//  @return SolPolicy
+//
+//	@return SolPolicy
 func (a *SolApiService) PatchSolPolicyExecute(r ApiPatchSolPolicyRequest) (*SolPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1402,9 +1408,9 @@ func (r ApiUpdateSolPolicyRequest) Execute() (*SolPolicy, *http.Response, error)
 /*
 UpdateSolPolicy Update a 'sol.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSolPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSolPolicyRequest
 */
 func (a *SolApiService) UpdateSolPolicy(ctx context.Context, moid string) ApiUpdateSolPolicyRequest {
 	return ApiUpdateSolPolicyRequest{
@@ -1415,7 +1421,8 @@ func (a *SolApiService) UpdateSolPolicy(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//  @return SolPolicy
+//
+//	@return SolPolicy
 func (a *SolApiService) UpdateSolPolicyExecute(r ApiUpdateSolPolicyRequest) (*SolPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

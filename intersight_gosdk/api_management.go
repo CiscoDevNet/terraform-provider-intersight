@@ -36,9 +36,9 @@ func (r ApiGetManagementControllerByMoidRequest) Execute() (*ManagementControlle
 /*
 GetManagementControllerByMoid Read a 'management.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetManagementControllerByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetManagementControllerByMoidRequest
 */
 func (a *ManagementApiService) GetManagementControllerByMoid(ctx context.Context, moid string) ApiGetManagementControllerByMoidRequest {
 	return ApiGetManagementControllerByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ManagementApiService) GetManagementControllerByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ManagementController
+//
+//	@return ManagementController
 func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetManagementControllerByMoidRequest) (*ManagementController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetManagementControllerListRequest) Execute() (*ManagementControllerR
 /*
 GetManagementControllerList Read a 'management.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetManagementControllerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetManagementControllerListRequest
 */
 func (a *ManagementApiService) GetManagementControllerList(ctx context.Context) ApiGetManagementControllerListRequest {
 	return ApiGetManagementControllerListRequest{
@@ -276,7 +277,8 @@ func (a *ManagementApiService) GetManagementControllerList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return ManagementControllerResponse
+//
+//	@return ManagementControllerResponse
 func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManagementControllerListRequest) (*ManagementControllerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetManagementEntityByMoidRequest) Execute() (*ManagementEntity, *http
 /*
 GetManagementEntityByMoid Read a 'management.Entity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetManagementEntityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetManagementEntityByMoidRequest
 */
 func (a *ManagementApiService) GetManagementEntityByMoid(ctx context.Context, moid string) ApiGetManagementEntityByMoidRequest {
 	return ApiGetManagementEntityByMoidRequest{
@@ -476,7 +478,8 @@ func (a *ManagementApiService) GetManagementEntityByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ManagementEntity
+//
+//	@return ManagementEntity
 func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManagementEntityByMoidRequest) (*ManagementEntity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -692,8 +695,8 @@ func (r ApiGetManagementEntityListRequest) Execute() (*ManagementEntityResponse,
 /*
 GetManagementEntityList Read a 'management.Entity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetManagementEntityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetManagementEntityListRequest
 */
 func (a *ManagementApiService) GetManagementEntityList(ctx context.Context) ApiGetManagementEntityListRequest {
 	return ApiGetManagementEntityListRequest{
@@ -703,7 +706,8 @@ func (a *ManagementApiService) GetManagementEntityList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return ManagementEntityResponse
+//
+//	@return ManagementEntityResponse
 func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagementEntityListRequest) (*ManagementEntityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -890,9 +894,9 @@ func (r ApiGetManagementInterfaceByMoidRequest) Execute() (*ManagementInterface,
 /*
 GetManagementInterfaceByMoid Read a 'management.Interface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetManagementInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetManagementInterfaceByMoidRequest
 */
 func (a *ManagementApiService) GetManagementInterfaceByMoid(ctx context.Context, moid string) ApiGetManagementInterfaceByMoidRequest {
 	return ApiGetManagementInterfaceByMoidRequest{
@@ -903,7 +907,8 @@ func (a *ManagementApiService) GetManagementInterfaceByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ManagementInterface
+//
+//	@return ManagementInterface
 func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManagementInterfaceByMoidRequest) (*ManagementInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetManagementInterfaceListRequest) Execute() (*ManagementInterfaceRes
 /*
 GetManagementInterfaceList Read a 'management.Interface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetManagementInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetManagementInterfaceListRequest
 */
 func (a *ManagementApiService) GetManagementInterfaceList(ctx context.Context) ApiGetManagementInterfaceListRequest {
 	return ApiGetManagementInterfaceListRequest{
@@ -1130,7 +1135,8 @@ func (a *ManagementApiService) GetManagementInterfaceList(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return ManagementInterfaceResponse
+//
+//	@return ManagementInterfaceResponse
 func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagementInterfaceListRequest) (*ManagementInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1331,9 +1337,9 @@ func (r ApiPatchManagementControllerRequest) Execute() (*ManagementController, *
 /*
 PatchManagementController Update a 'management.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchManagementControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchManagementControllerRequest
 */
 func (a *ManagementApiService) PatchManagementController(ctx context.Context, moid string) ApiPatchManagementControllerRequest {
 	return ApiPatchManagementControllerRequest{
@@ -1344,7 +1350,8 @@ func (a *ManagementApiService) PatchManagementController(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ManagementController
+//
+//	@return ManagementController
 func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManagementControllerRequest) (*ManagementController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1506,9 +1513,9 @@ func (r ApiPatchManagementEntityRequest) Execute() (*ManagementEntity, *http.Res
 /*
 PatchManagementEntity Update a 'management.Entity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchManagementEntityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchManagementEntityRequest
 */
 func (a *ManagementApiService) PatchManagementEntity(ctx context.Context, moid string) ApiPatchManagementEntityRequest {
 	return ApiPatchManagementEntityRequest{
@@ -1519,7 +1526,8 @@ func (a *ManagementApiService) PatchManagementEntity(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ManagementEntity
+//
+//	@return ManagementEntity
 func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagementEntityRequest) (*ManagementEntity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1681,9 +1689,9 @@ func (r ApiPatchManagementInterfaceRequest) Execute() (*ManagementInterface, *ht
 /*
 PatchManagementInterface Update a 'management.Interface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchManagementInterfaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchManagementInterfaceRequest
 */
 func (a *ManagementApiService) PatchManagementInterface(ctx context.Context, moid string) ApiPatchManagementInterfaceRequest {
 	return ApiPatchManagementInterfaceRequest{
@@ -1694,7 +1702,8 @@ func (a *ManagementApiService) PatchManagementInterface(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return ManagementInterface
+//
+//	@return ManagementInterface
 func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagementInterfaceRequest) (*ManagementInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1856,9 +1865,9 @@ func (r ApiUpdateManagementControllerRequest) Execute() (*ManagementController, 
 /*
 UpdateManagementController Update a 'management.Controller' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateManagementControllerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateManagementControllerRequest
 */
 func (a *ManagementApiService) UpdateManagementController(ctx context.Context, moid string) ApiUpdateManagementControllerRequest {
 	return ApiUpdateManagementControllerRequest{
@@ -1869,7 +1878,8 @@ func (a *ManagementApiService) UpdateManagementController(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return ManagementController
+//
+//	@return ManagementController
 func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateManagementControllerRequest) (*ManagementController, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2031,9 +2041,9 @@ func (r ApiUpdateManagementEntityRequest) Execute() (*ManagementEntity, *http.Re
 /*
 UpdateManagementEntity Update a 'management.Entity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateManagementEntityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateManagementEntityRequest
 */
 func (a *ManagementApiService) UpdateManagementEntity(ctx context.Context, moid string) ApiUpdateManagementEntityRequest {
 	return ApiUpdateManagementEntityRequest{
@@ -2044,7 +2054,8 @@ func (a *ManagementApiService) UpdateManagementEntity(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return ManagementEntity
+//
+//	@return ManagementEntity
 func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManagementEntityRequest) (*ManagementEntity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2206,9 +2217,9 @@ func (r ApiUpdateManagementInterfaceRequest) Execute() (*ManagementInterface, *h
 /*
 UpdateManagementInterface Update a 'management.Interface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateManagementInterfaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateManagementInterfaceRequest
 */
 func (a *ManagementApiService) UpdateManagementInterface(ctx context.Context, moid string) ApiUpdateManagementInterfaceRequest {
 	return ApiUpdateManagementInterfaceRequest{
@@ -2219,7 +2230,8 @@ func (a *ManagementApiService) UpdateManagementInterface(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return ManagementInterface
+//
+//	@return ManagementInterface
 func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManagementInterfaceRequest) (*ManagementInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

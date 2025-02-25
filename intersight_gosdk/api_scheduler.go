@@ -56,8 +56,8 @@ func (r ApiCreateSchedulerTaskScheduleRequest) Execute() (*SchedulerTaskSchedule
 /*
 CreateSchedulerTaskSchedule Create a 'scheduler.TaskSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSchedulerTaskScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSchedulerTaskScheduleRequest
 */
 func (a *SchedulerApiService) CreateSchedulerTaskSchedule(ctx context.Context) ApiCreateSchedulerTaskScheduleRequest {
 	return ApiCreateSchedulerTaskScheduleRequest{
@@ -67,7 +67,8 @@ func (a *SchedulerApiService) CreateSchedulerTaskSchedule(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return SchedulerTaskSchedule
+//
+//	@return SchedulerTaskSchedule
 func (a *SchedulerApiService) CreateSchedulerTaskScheduleExecute(r ApiCreateSchedulerTaskScheduleRequest) (*SchedulerTaskSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteSchedulerTaskResultRequest) Execute() (*http.Response, error) {
 /*
 DeleteSchedulerTaskResult Delete a 'scheduler.TaskResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSchedulerTaskResultRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSchedulerTaskResultRequest
 */
 func (a *SchedulerApiService) DeleteSchedulerTaskResult(ctx context.Context, moid string) ApiDeleteSchedulerTaskResultRequest {
 	return ApiDeleteSchedulerTaskResultRequest{
@@ -359,9 +360,9 @@ func (r ApiDeleteSchedulerTaskScheduleRequest) Execute() (*http.Response, error)
 /*
 DeleteSchedulerTaskSchedule Delete a 'scheduler.TaskSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSchedulerTaskScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSchedulerTaskScheduleRequest
 */
 func (a *SchedulerApiService) DeleteSchedulerTaskSchedule(ctx context.Context, moid string) ApiDeleteSchedulerTaskScheduleRequest {
 	return ApiDeleteSchedulerTaskScheduleRequest{
@@ -501,9 +502,9 @@ func (r ApiGetSchedulerTaskResultByMoidRequest) Execute() (*SchedulerTaskResult,
 /*
 GetSchedulerTaskResultByMoid Read a 'scheduler.TaskResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSchedulerTaskResultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSchedulerTaskResultByMoidRequest
 */
 func (a *SchedulerApiService) GetSchedulerTaskResultByMoid(ctx context.Context, moid string) ApiGetSchedulerTaskResultByMoidRequest {
 	return ApiGetSchedulerTaskResultByMoidRequest{
@@ -514,7 +515,8 @@ func (a *SchedulerApiService) GetSchedulerTaskResultByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return SchedulerTaskResult
+//
+//	@return SchedulerTaskResult
 func (a *SchedulerApiService) GetSchedulerTaskResultByMoidExecute(r ApiGetSchedulerTaskResultByMoidRequest) (*SchedulerTaskResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -730,8 +732,8 @@ func (r ApiGetSchedulerTaskResultListRequest) Execute() (*SchedulerTaskResultRes
 /*
 GetSchedulerTaskResultList Read a 'scheduler.TaskResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSchedulerTaskResultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSchedulerTaskResultListRequest
 */
 func (a *SchedulerApiService) GetSchedulerTaskResultList(ctx context.Context) ApiGetSchedulerTaskResultListRequest {
 	return ApiGetSchedulerTaskResultListRequest{
@@ -741,7 +743,8 @@ func (a *SchedulerApiService) GetSchedulerTaskResultList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return SchedulerTaskResultResponse
+//
+//	@return SchedulerTaskResultResponse
 func (a *SchedulerApiService) GetSchedulerTaskResultListExecute(r ApiGetSchedulerTaskResultListRequest) (*SchedulerTaskResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -928,9 +931,9 @@ func (r ApiGetSchedulerTaskScheduleByMoidRequest) Execute() (*SchedulerTaskSched
 /*
 GetSchedulerTaskScheduleByMoid Read a 'scheduler.TaskSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSchedulerTaskScheduleByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSchedulerTaskScheduleByMoidRequest
 */
 func (a *SchedulerApiService) GetSchedulerTaskScheduleByMoid(ctx context.Context, moid string) ApiGetSchedulerTaskScheduleByMoidRequest {
 	return ApiGetSchedulerTaskScheduleByMoidRequest{
@@ -941,7 +944,8 @@ func (a *SchedulerApiService) GetSchedulerTaskScheduleByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//  @return SchedulerTaskSchedule
+//
+//	@return SchedulerTaskSchedule
 func (a *SchedulerApiService) GetSchedulerTaskScheduleByMoidExecute(r ApiGetSchedulerTaskScheduleByMoidRequest) (*SchedulerTaskSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1157,8 +1161,8 @@ func (r ApiGetSchedulerTaskScheduleListRequest) Execute() (*SchedulerTaskSchedul
 /*
 GetSchedulerTaskScheduleList Read a 'scheduler.TaskSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSchedulerTaskScheduleListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSchedulerTaskScheduleListRequest
 */
 func (a *SchedulerApiService) GetSchedulerTaskScheduleList(ctx context.Context) ApiGetSchedulerTaskScheduleListRequest {
 	return ApiGetSchedulerTaskScheduleListRequest{
@@ -1168,7 +1172,8 @@ func (a *SchedulerApiService) GetSchedulerTaskScheduleList(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return SchedulerTaskScheduleResponse
+//
+//	@return SchedulerTaskScheduleResponse
 func (a *SchedulerApiService) GetSchedulerTaskScheduleListExecute(r ApiGetSchedulerTaskScheduleListRequest) (*SchedulerTaskScheduleResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1369,9 +1374,9 @@ func (r ApiPatchSchedulerTaskScheduleRequest) Execute() (*SchedulerTaskSchedule,
 /*
 PatchSchedulerTaskSchedule Update a 'scheduler.TaskSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSchedulerTaskScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSchedulerTaskScheduleRequest
 */
 func (a *SchedulerApiService) PatchSchedulerTaskSchedule(ctx context.Context, moid string) ApiPatchSchedulerTaskScheduleRequest {
 	return ApiPatchSchedulerTaskScheduleRequest{
@@ -1382,7 +1387,8 @@ func (a *SchedulerApiService) PatchSchedulerTaskSchedule(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return SchedulerTaskSchedule
+//
+//	@return SchedulerTaskSchedule
 func (a *SchedulerApiService) PatchSchedulerTaskScheduleExecute(r ApiPatchSchedulerTaskScheduleRequest) (*SchedulerTaskSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1544,9 +1550,9 @@ func (r ApiUpdateSchedulerTaskScheduleRequest) Execute() (*SchedulerTaskSchedule
 /*
 UpdateSchedulerTaskSchedule Update a 'scheduler.TaskSchedule' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSchedulerTaskScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSchedulerTaskScheduleRequest
 */
 func (a *SchedulerApiService) UpdateSchedulerTaskSchedule(ctx context.Context, moid string) ApiUpdateSchedulerTaskScheduleRequest {
 	return ApiUpdateSchedulerTaskScheduleRequest{
@@ -1557,7 +1563,8 @@ func (a *SchedulerApiService) UpdateSchedulerTaskSchedule(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return SchedulerTaskSchedule
+//
+//	@return SchedulerTaskSchedule
 func (a *SchedulerApiService) UpdateSchedulerTaskScheduleExecute(r ApiUpdateSchedulerTaskScheduleRequest) (*SchedulerTaskSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

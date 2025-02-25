@@ -43,8 +43,8 @@ QueryTelemetryDatasourceMetadata Perform a Druid DatasourceMetadata request.
 
 Endpoint that exposes Druid DatasourceMetadata requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetryDatasourceMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetryDatasourceMetadataRequest
 */
 func (a *TelemetryApiService) QueryTelemetryDatasourceMetadata(ctx context.Context) ApiQueryTelemetryDatasourceMetadataRequest {
 	return ApiQueryTelemetryDatasourceMetadataRequest{
@@ -54,7 +54,8 @@ func (a *TelemetryApiService) QueryTelemetryDatasourceMetadata(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidDataSourceMetadataResult
+//
+//	@return []TelemetryDruidDataSourceMetadataResult
 func (a *TelemetryApiService) QueryTelemetryDatasourceMetadataExecute(r ApiQueryTelemetryDatasourceMetadataRequest) ([]TelemetryDruidDataSourceMetadataResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -162,8 +163,8 @@ QueryTelemetryGroupBy Perform a Druid GroupBy request.
 
 Endpoint that exposes Druid GroupBy requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetryGroupByRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetryGroupByRequest
 */
 func (a *TelemetryApiService) QueryTelemetryGroupBy(ctx context.Context) ApiQueryTelemetryGroupByRequest {
 	return ApiQueryTelemetryGroupByRequest{
@@ -173,7 +174,8 @@ func (a *TelemetryApiService) QueryTelemetryGroupBy(ctx context.Context) ApiQuer
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidGroupByResult
+//
+//	@return []TelemetryDruidGroupByResult
 func (a *TelemetryApiService) QueryTelemetryGroupByExecute(r ApiQueryTelemetryGroupByRequest) ([]TelemetryDruidGroupByResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -281,8 +283,8 @@ QueryTelemetryScan Perform a Druid Scan request.
 
 Endpoint that exposes Druid Scan requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetryScanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetryScanRequest
 */
 func (a *TelemetryApiService) QueryTelemetryScan(ctx context.Context) ApiQueryTelemetryScanRequest {
 	return ApiQueryTelemetryScanRequest{
@@ -292,7 +294,8 @@ func (a *TelemetryApiService) QueryTelemetryScan(ctx context.Context) ApiQueryTe
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidScanResult
+//
+//	@return []TelemetryDruidScanResult
 func (a *TelemetryApiService) QueryTelemetryScanExecute(r ApiQueryTelemetryScanRequest) ([]TelemetryDruidScanResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -400,8 +403,8 @@ QueryTelemetrySearch Perform a Druid Search request.
 
 Endpoint that exposes Druid Search requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetrySearchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetrySearchRequest
 */
 func (a *TelemetryApiService) QueryTelemetrySearch(ctx context.Context) ApiQueryTelemetrySearchRequest {
 	return ApiQueryTelemetrySearchRequest{
@@ -411,7 +414,8 @@ func (a *TelemetryApiService) QueryTelemetrySearch(ctx context.Context) ApiQuery
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidSearchResult
+//
+//	@return []TelemetryDruidSearchResult
 func (a *TelemetryApiService) QueryTelemetrySearchExecute(r ApiQueryTelemetrySearchRequest) ([]TelemetryDruidSearchResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -519,8 +523,8 @@ QueryTelemetrySegmentMetadata Perform a Druid SegmentMetadata request.
 
 Endpoint that exposes Druid SegmentMetadata requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetrySegmentMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetrySegmentMetadataRequest
 */
 func (a *TelemetryApiService) QueryTelemetrySegmentMetadata(ctx context.Context) ApiQueryTelemetrySegmentMetadataRequest {
 	return ApiQueryTelemetrySegmentMetadataRequest{
@@ -530,7 +534,8 @@ func (a *TelemetryApiService) QueryTelemetrySegmentMetadata(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidSegmentMetadataResult
+//
+//	@return []TelemetryDruidSegmentMetadataResult
 func (a *TelemetryApiService) QueryTelemetrySegmentMetadataExecute(r ApiQueryTelemetrySegmentMetadataRequest) ([]TelemetryDruidSegmentMetadataResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -638,8 +643,8 @@ QueryTelemetryTimeBoundary Perform a Druid TimeBoundary request.
 
 Endpoint that exposes Druid TimeBoundary requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetryTimeBoundaryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetryTimeBoundaryRequest
 */
 func (a *TelemetryApiService) QueryTelemetryTimeBoundary(ctx context.Context) ApiQueryTelemetryTimeBoundaryRequest {
 	return ApiQueryTelemetryTimeBoundaryRequest{
@@ -649,7 +654,8 @@ func (a *TelemetryApiService) QueryTelemetryTimeBoundary(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidTimeBoundaryResult
+//
+//	@return []TelemetryDruidTimeBoundaryResult
 func (a *TelemetryApiService) QueryTelemetryTimeBoundaryExecute(r ApiQueryTelemetryTimeBoundaryRequest) ([]TelemetryDruidTimeBoundaryResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -757,8 +763,8 @@ QueryTelemetryTimeSeries Perform a Druid TimeSeries request.
 
 Endpoint that exposes Druid requests for time series data. This endpoint exposes specifically TimeSeries requests and broker information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetryTimeSeriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetryTimeSeriesRequest
 */
 func (a *TelemetryApiService) QueryTelemetryTimeSeries(ctx context.Context) ApiQueryTelemetryTimeSeriesRequest {
 	return ApiQueryTelemetryTimeSeriesRequest{
@@ -768,7 +774,8 @@ func (a *TelemetryApiService) QueryTelemetryTimeSeries(ctx context.Context) ApiQ
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidIntervalResult
+//
+//	@return []TelemetryDruidIntervalResult
 func (a *TelemetryApiService) QueryTelemetryTimeSeriesExecute(r ApiQueryTelemetryTimeSeriesRequest) ([]TelemetryDruidIntervalResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -876,8 +883,8 @@ QueryTelemetryTopN Perform a Druid TopN request.
 
 Endpoint that exposes Druid TopN requests for time series data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiQueryTelemetryTopNRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiQueryTelemetryTopNRequest
 */
 func (a *TelemetryApiService) QueryTelemetryTopN(ctx context.Context) ApiQueryTelemetryTopNRequest {
 	return ApiQueryTelemetryTopNRequest{
@@ -887,7 +894,8 @@ func (a *TelemetryApiService) QueryTelemetryTopN(ctx context.Context) ApiQueryTe
 }
 
 // Execute executes the request
-//  @return []TelemetryDruidTopNResult
+//
+//	@return []TelemetryDruidTopNResult
 func (a *TelemetryApiService) QueryTelemetryTopNExecute(r ApiQueryTelemetryTopNRequest) ([]TelemetryDruidTopNResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

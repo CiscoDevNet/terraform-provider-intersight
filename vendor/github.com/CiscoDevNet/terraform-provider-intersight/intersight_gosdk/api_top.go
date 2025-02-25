@@ -36,9 +36,9 @@ func (r ApiGetTopSystemByMoidRequest) Execute() (*TopSystem, *http.Response, err
 /*
 GetTopSystemByMoid Read a 'top.System' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTopSystemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTopSystemByMoidRequest
 */
 func (a *TopApiService) GetTopSystemByMoid(ctx context.Context, moid string) ApiGetTopSystemByMoidRequest {
 	return ApiGetTopSystemByMoidRequest{
@@ -49,7 +49,8 @@ func (a *TopApiService) GetTopSystemByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return TopSystem
+//
+//	@return TopSystem
 func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest) (*TopSystem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetTopSystemListRequest) Execute() (*TopSystemResponse, *http.Respons
 /*
 GetTopSystemList Read a 'top.System' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTopSystemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTopSystemListRequest
 */
 func (a *TopApiService) GetTopSystemList(ctx context.Context) ApiGetTopSystemListRequest {
 	return ApiGetTopSystemListRequest{
@@ -276,7 +277,8 @@ func (a *TopApiService) GetTopSystemList(ctx context.Context) ApiGetTopSystemLis
 }
 
 // Execute executes the request
-//  @return TopSystemResponse
+//
+//	@return TopSystemResponse
 func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (*TopSystemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -477,9 +479,9 @@ func (r ApiPatchTopSystemRequest) Execute() (*TopSystem, *http.Response, error) 
 /*
 PatchTopSystem Update a 'top.System' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchTopSystemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchTopSystemRequest
 */
 func (a *TopApiService) PatchTopSystem(ctx context.Context, moid string) ApiPatchTopSystemRequest {
 	return ApiPatchTopSystemRequest{
@@ -490,7 +492,8 @@ func (a *TopApiService) PatchTopSystem(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//  @return TopSystem
+//
+//	@return TopSystem
 func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (*TopSystem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -652,9 +655,9 @@ func (r ApiUpdateTopSystemRequest) Execute() (*TopSystem, *http.Response, error)
 /*
 UpdateTopSystem Update a 'top.System' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateTopSystemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateTopSystemRequest
 */
 func (a *TopApiService) UpdateTopSystem(ctx context.Context, moid string) ApiUpdateTopSystemRequest {
 	return ApiUpdateTopSystemRequest{
@@ -665,7 +668,8 @@ func (a *TopApiService) UpdateTopSystem(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//  @return TopSystem
+//
+//	@return TopSystem
 func (a *TopApiService) UpdateTopSystemExecute(r ApiUpdateTopSystemRequest) (*TopSystem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

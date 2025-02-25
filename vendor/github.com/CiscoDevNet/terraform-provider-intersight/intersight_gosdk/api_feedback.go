@@ -56,8 +56,8 @@ func (r ApiCreateFeedbackFeedbackPostRequest) Execute() (*FeedbackFeedbackPost, 
 /*
 CreateFeedbackFeedbackPost Create a 'feedback.FeedbackPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFeedbackFeedbackPostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFeedbackFeedbackPostRequest
 */
 func (a *FeedbackApiService) CreateFeedbackFeedbackPost(ctx context.Context) ApiCreateFeedbackFeedbackPostRequest {
 	return ApiCreateFeedbackFeedbackPostRequest{
@@ -67,7 +67,8 @@ func (a *FeedbackApiService) CreateFeedbackFeedbackPost(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return FeedbackFeedbackPost
+//
+//	@return FeedbackFeedbackPost
 func (a *FeedbackApiService) CreateFeedbackFeedbackPostExecute(r ApiCreateFeedbackFeedbackPostRequest) (*FeedbackFeedbackPost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -231,9 +232,9 @@ func (r ApiPatchFeedbackFeedbackPostRequest) Execute() (*FeedbackFeedbackPost, *
 /*
 PatchFeedbackFeedbackPost Update a 'feedback.FeedbackPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchFeedbackFeedbackPostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchFeedbackFeedbackPostRequest
 */
 func (a *FeedbackApiService) PatchFeedbackFeedbackPost(ctx context.Context, moid string) ApiPatchFeedbackFeedbackPostRequest {
 	return ApiPatchFeedbackFeedbackPostRequest{
@@ -244,7 +245,8 @@ func (a *FeedbackApiService) PatchFeedbackFeedbackPost(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return FeedbackFeedbackPost
+//
+//	@return FeedbackFeedbackPost
 func (a *FeedbackApiService) PatchFeedbackFeedbackPostExecute(r ApiPatchFeedbackFeedbackPostRequest) (*FeedbackFeedbackPost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -406,9 +408,9 @@ func (r ApiUpdateFeedbackFeedbackPostRequest) Execute() (*FeedbackFeedbackPost, 
 /*
 UpdateFeedbackFeedbackPost Update a 'feedback.FeedbackPost' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateFeedbackFeedbackPostRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateFeedbackFeedbackPostRequest
 */
 func (a *FeedbackApiService) UpdateFeedbackFeedbackPost(ctx context.Context, moid string) ApiUpdateFeedbackFeedbackPostRequest {
 	return ApiUpdateFeedbackFeedbackPostRequest{
@@ -419,7 +421,8 @@ func (a *FeedbackApiService) UpdateFeedbackFeedbackPost(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return FeedbackFeedbackPost
+//
+//	@return FeedbackFeedbackPost
 func (a *FeedbackApiService) UpdateFeedbackFeedbackPostExecute(r ApiUpdateFeedbackFeedbackPostRequest) (*FeedbackFeedbackPost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

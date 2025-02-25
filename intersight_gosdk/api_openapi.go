@@ -56,8 +56,8 @@ func (r ApiCreateOpenapiOpenApiSpecificationRequest) Execute() (*OpenapiOpenApiS
 /*
 CreateOpenapiOpenApiSpecification Create a 'openapi.OpenApiSpecification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOpenapiOpenApiSpecificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOpenapiOpenApiSpecificationRequest
 */
 func (a *OpenapiApiService) CreateOpenapiOpenApiSpecification(ctx context.Context) ApiCreateOpenapiOpenApiSpecificationRequest {
 	return ApiCreateOpenapiOpenApiSpecificationRequest{
@@ -67,7 +67,8 @@ func (a *OpenapiApiService) CreateOpenapiOpenApiSpecification(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return OpenapiOpenApiSpecification
+//
+//	@return OpenapiOpenApiSpecification
 func (a *OpenapiApiService) CreateOpenapiOpenApiSpecificationExecute(r ApiCreateOpenapiOpenApiSpecificationRequest) (*OpenapiOpenApiSpecification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -237,8 +238,8 @@ func (r ApiCreateOpenapiProcessFileRequest) Execute() (*OpenapiProcessFile, *htt
 /*
 CreateOpenapiProcessFile Create a 'openapi.ProcessFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOpenapiProcessFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOpenapiProcessFileRequest
 */
 func (a *OpenapiApiService) CreateOpenapiProcessFile(ctx context.Context) ApiCreateOpenapiProcessFileRequest {
 	return ApiCreateOpenapiProcessFileRequest{
@@ -248,7 +249,8 @@ func (a *OpenapiApiService) CreateOpenapiProcessFile(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//  @return OpenapiProcessFile
+//
+//	@return OpenapiProcessFile
 func (a *OpenapiApiService) CreateOpenapiProcessFileExecute(r ApiCreateOpenapiProcessFileRequest) (*OpenapiProcessFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -418,8 +420,8 @@ func (r ApiCreateOpenapiTaskGenerationRequestRequest) Execute() (*OpenapiTaskGen
 /*
 CreateOpenapiTaskGenerationRequest Create a 'openapi.TaskGenerationRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOpenapiTaskGenerationRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOpenapiTaskGenerationRequestRequest
 */
 func (a *OpenapiApiService) CreateOpenapiTaskGenerationRequest(ctx context.Context) ApiCreateOpenapiTaskGenerationRequestRequest {
 	return ApiCreateOpenapiTaskGenerationRequestRequest{
@@ -429,7 +431,8 @@ func (a *OpenapiApiService) CreateOpenapiTaskGenerationRequest(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationRequest
+//
+//	@return OpenapiTaskGenerationRequest
 func (a *OpenapiApiService) CreateOpenapiTaskGenerationRequestExecute(r ApiCreateOpenapiTaskGenerationRequestRequest) (*OpenapiTaskGenerationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -579,9 +582,9 @@ func (r ApiDeleteOpenapiApiMethodMetaRequest) Execute() (*http.Response, error) 
 /*
 DeleteOpenapiApiMethodMeta Delete a 'openapi.ApiMethodMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOpenapiApiMethodMetaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOpenapiApiMethodMetaRequest
 */
 func (a *OpenapiApiService) DeleteOpenapiApiMethodMeta(ctx context.Context, moid string) ApiDeleteOpenapiApiMethodMetaRequest {
 	return ApiDeleteOpenapiApiMethodMetaRequest{
@@ -721,9 +724,9 @@ func (r ApiDeleteOpenapiOpenApiSpecificationRequest) Execute() (*http.Response, 
 /*
 DeleteOpenapiOpenApiSpecification Delete a 'openapi.OpenApiSpecification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOpenapiOpenApiSpecificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOpenapiOpenApiSpecificationRequest
 */
 func (a *OpenapiApiService) DeleteOpenapiOpenApiSpecification(ctx context.Context, moid string) ApiDeleteOpenapiOpenApiSpecificationRequest {
 	return ApiDeleteOpenapiOpenApiSpecificationRequest{
@@ -863,9 +866,9 @@ func (r ApiDeleteOpenapiProcessFileRequest) Execute() (*http.Response, error) {
 /*
 DeleteOpenapiProcessFile Delete a 'openapi.ProcessFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOpenapiProcessFileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOpenapiProcessFileRequest
 */
 func (a *OpenapiApiService) DeleteOpenapiProcessFile(ctx context.Context, moid string) ApiDeleteOpenapiProcessFileRequest {
 	return ApiDeleteOpenapiProcessFileRequest{
@@ -1005,9 +1008,9 @@ func (r ApiDeleteOpenapiTaskGenerationRequestRequest) Execute() (*http.Response,
 /*
 DeleteOpenapiTaskGenerationRequest Delete a 'openapi.TaskGenerationRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOpenapiTaskGenerationRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOpenapiTaskGenerationRequestRequest
 */
 func (a *OpenapiApiService) DeleteOpenapiTaskGenerationRequest(ctx context.Context, moid string) ApiDeleteOpenapiTaskGenerationRequestRequest {
 	return ApiDeleteOpenapiTaskGenerationRequestRequest{
@@ -1147,9 +1150,9 @@ func (r ApiDeleteOpenapiTaskGenerationResultRequest) Execute() (*http.Response, 
 /*
 DeleteOpenapiTaskGenerationResult Delete a 'openapi.TaskGenerationResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteOpenapiTaskGenerationResultRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteOpenapiTaskGenerationResultRequest
 */
 func (a *OpenapiApiService) DeleteOpenapiTaskGenerationResult(ctx context.Context, moid string) ApiDeleteOpenapiTaskGenerationResultRequest {
 	return ApiDeleteOpenapiTaskGenerationResultRequest{
@@ -1289,9 +1292,9 @@ func (r ApiGetOpenapiApiMethodMetaByMoidRequest) Execute() (*OpenapiApiMethodMet
 /*
 GetOpenapiApiMethodMetaByMoid Read a 'openapi.ApiMethodMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOpenapiApiMethodMetaByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOpenapiApiMethodMetaByMoidRequest
 */
 func (a *OpenapiApiService) GetOpenapiApiMethodMetaByMoid(ctx context.Context, moid string) ApiGetOpenapiApiMethodMetaByMoidRequest {
 	return ApiGetOpenapiApiMethodMetaByMoidRequest{
@@ -1302,7 +1305,8 @@ func (a *OpenapiApiService) GetOpenapiApiMethodMetaByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//  @return OpenapiApiMethodMeta
+//
+//	@return OpenapiApiMethodMeta
 func (a *OpenapiApiService) GetOpenapiApiMethodMetaByMoidExecute(r ApiGetOpenapiApiMethodMetaByMoidRequest) (*OpenapiApiMethodMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1518,8 +1522,8 @@ func (r ApiGetOpenapiApiMethodMetaListRequest) Execute() (*OpenapiApiMethodMetaR
 /*
 GetOpenapiApiMethodMetaList Read a 'openapi.ApiMethodMeta' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOpenapiApiMethodMetaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOpenapiApiMethodMetaListRequest
 */
 func (a *OpenapiApiService) GetOpenapiApiMethodMetaList(ctx context.Context) ApiGetOpenapiApiMethodMetaListRequest {
 	return ApiGetOpenapiApiMethodMetaListRequest{
@@ -1529,7 +1533,8 @@ func (a *OpenapiApiService) GetOpenapiApiMethodMetaList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//  @return OpenapiApiMethodMetaResponse
+//
+//	@return OpenapiApiMethodMetaResponse
 func (a *OpenapiApiService) GetOpenapiApiMethodMetaListExecute(r ApiGetOpenapiApiMethodMetaListRequest) (*OpenapiApiMethodMetaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1716,9 +1721,9 @@ func (r ApiGetOpenapiOpenApiSpecificationByMoidRequest) Execute() (*OpenapiOpenA
 /*
 GetOpenapiOpenApiSpecificationByMoid Read a 'openapi.OpenApiSpecification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOpenapiOpenApiSpecificationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOpenapiOpenApiSpecificationByMoidRequest
 */
 func (a *OpenapiApiService) GetOpenapiOpenApiSpecificationByMoid(ctx context.Context, moid string) ApiGetOpenapiOpenApiSpecificationByMoidRequest {
 	return ApiGetOpenapiOpenApiSpecificationByMoidRequest{
@@ -1729,7 +1734,8 @@ func (a *OpenapiApiService) GetOpenapiOpenApiSpecificationByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return OpenapiOpenApiSpecification
+//
+//	@return OpenapiOpenApiSpecification
 func (a *OpenapiApiService) GetOpenapiOpenApiSpecificationByMoidExecute(r ApiGetOpenapiOpenApiSpecificationByMoidRequest) (*OpenapiOpenApiSpecification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1945,8 +1951,8 @@ func (r ApiGetOpenapiOpenApiSpecificationListRequest) Execute() (*OpenapiOpenApi
 /*
 GetOpenapiOpenApiSpecificationList Read a 'openapi.OpenApiSpecification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOpenapiOpenApiSpecificationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOpenapiOpenApiSpecificationListRequest
 */
 func (a *OpenapiApiService) GetOpenapiOpenApiSpecificationList(ctx context.Context) ApiGetOpenapiOpenApiSpecificationListRequest {
 	return ApiGetOpenapiOpenApiSpecificationListRequest{
@@ -1956,7 +1962,8 @@ func (a *OpenapiApiService) GetOpenapiOpenApiSpecificationList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return OpenapiOpenApiSpecificationResponse
+//
+//	@return OpenapiOpenApiSpecificationResponse
 func (a *OpenapiApiService) GetOpenapiOpenApiSpecificationListExecute(r ApiGetOpenapiOpenApiSpecificationListRequest) (*OpenapiOpenApiSpecificationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2143,9 +2150,9 @@ func (r ApiGetOpenapiProcessFileByMoidRequest) Execute() (*OpenapiProcessFile, *
 /*
 GetOpenapiProcessFileByMoid Read a 'openapi.ProcessFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOpenapiProcessFileByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOpenapiProcessFileByMoidRequest
 */
 func (a *OpenapiApiService) GetOpenapiProcessFileByMoid(ctx context.Context, moid string) ApiGetOpenapiProcessFileByMoidRequest {
 	return ApiGetOpenapiProcessFileByMoidRequest{
@@ -2156,7 +2163,8 @@ func (a *OpenapiApiService) GetOpenapiProcessFileByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return OpenapiProcessFile
+//
+//	@return OpenapiProcessFile
 func (a *OpenapiApiService) GetOpenapiProcessFileByMoidExecute(r ApiGetOpenapiProcessFileByMoidRequest) (*OpenapiProcessFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2372,8 +2380,8 @@ func (r ApiGetOpenapiProcessFileListRequest) Execute() (*OpenapiProcessFileRespo
 /*
 GetOpenapiProcessFileList Read a 'openapi.ProcessFile' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOpenapiProcessFileListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOpenapiProcessFileListRequest
 */
 func (a *OpenapiApiService) GetOpenapiProcessFileList(ctx context.Context) ApiGetOpenapiProcessFileListRequest {
 	return ApiGetOpenapiProcessFileListRequest{
@@ -2383,7 +2391,8 @@ func (a *OpenapiApiService) GetOpenapiProcessFileList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return OpenapiProcessFileResponse
+//
+//	@return OpenapiProcessFileResponse
 func (a *OpenapiApiService) GetOpenapiProcessFileListExecute(r ApiGetOpenapiProcessFileListRequest) (*OpenapiProcessFileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2570,9 +2579,9 @@ func (r ApiGetOpenapiTaskGenerationRequestByMoidRequest) Execute() (*OpenapiTask
 /*
 GetOpenapiTaskGenerationRequestByMoid Read a 'openapi.TaskGenerationRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOpenapiTaskGenerationRequestByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOpenapiTaskGenerationRequestByMoidRequest
 */
 func (a *OpenapiApiService) GetOpenapiTaskGenerationRequestByMoid(ctx context.Context, moid string) ApiGetOpenapiTaskGenerationRequestByMoidRequest {
 	return ApiGetOpenapiTaskGenerationRequestByMoidRequest{
@@ -2583,7 +2592,8 @@ func (a *OpenapiApiService) GetOpenapiTaskGenerationRequestByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationRequest
+//
+//	@return OpenapiTaskGenerationRequest
 func (a *OpenapiApiService) GetOpenapiTaskGenerationRequestByMoidExecute(r ApiGetOpenapiTaskGenerationRequestByMoidRequest) (*OpenapiTaskGenerationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2799,8 +2809,8 @@ func (r ApiGetOpenapiTaskGenerationRequestListRequest) Execute() (*OpenapiTaskGe
 /*
 GetOpenapiTaskGenerationRequestList Read a 'openapi.TaskGenerationRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOpenapiTaskGenerationRequestListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOpenapiTaskGenerationRequestListRequest
 */
 func (a *OpenapiApiService) GetOpenapiTaskGenerationRequestList(ctx context.Context) ApiGetOpenapiTaskGenerationRequestListRequest {
 	return ApiGetOpenapiTaskGenerationRequestListRequest{
@@ -2810,7 +2820,8 @@ func (a *OpenapiApiService) GetOpenapiTaskGenerationRequestList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationRequestResponse
+//
+//	@return OpenapiTaskGenerationRequestResponse
 func (a *OpenapiApiService) GetOpenapiTaskGenerationRequestListExecute(r ApiGetOpenapiTaskGenerationRequestListRequest) (*OpenapiTaskGenerationRequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2997,9 +3008,9 @@ func (r ApiGetOpenapiTaskGenerationResultByMoidRequest) Execute() (*OpenapiTaskG
 /*
 GetOpenapiTaskGenerationResultByMoid Read a 'openapi.TaskGenerationResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetOpenapiTaskGenerationResultByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetOpenapiTaskGenerationResultByMoidRequest
 */
 func (a *OpenapiApiService) GetOpenapiTaskGenerationResultByMoid(ctx context.Context, moid string) ApiGetOpenapiTaskGenerationResultByMoidRequest {
 	return ApiGetOpenapiTaskGenerationResultByMoidRequest{
@@ -3010,7 +3021,8 @@ func (a *OpenapiApiService) GetOpenapiTaskGenerationResultByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationResult
+//
+//	@return OpenapiTaskGenerationResult
 func (a *OpenapiApiService) GetOpenapiTaskGenerationResultByMoidExecute(r ApiGetOpenapiTaskGenerationResultByMoidRequest) (*OpenapiTaskGenerationResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3226,8 +3238,8 @@ func (r ApiGetOpenapiTaskGenerationResultListRequest) Execute() (*OpenapiTaskGen
 /*
 GetOpenapiTaskGenerationResultList Read a 'openapi.TaskGenerationResult' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetOpenapiTaskGenerationResultListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOpenapiTaskGenerationResultListRequest
 */
 func (a *OpenapiApiService) GetOpenapiTaskGenerationResultList(ctx context.Context) ApiGetOpenapiTaskGenerationResultListRequest {
 	return ApiGetOpenapiTaskGenerationResultListRequest{
@@ -3237,7 +3249,8 @@ func (a *OpenapiApiService) GetOpenapiTaskGenerationResultList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationResultResponse
+//
+//	@return OpenapiTaskGenerationResultResponse
 func (a *OpenapiApiService) GetOpenapiTaskGenerationResultListExecute(r ApiGetOpenapiTaskGenerationResultListRequest) (*OpenapiTaskGenerationResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3438,9 +3451,9 @@ func (r ApiPatchOpenapiOpenApiSpecificationRequest) Execute() (*OpenapiOpenApiSp
 /*
 PatchOpenapiOpenApiSpecification Update a 'openapi.OpenApiSpecification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchOpenapiOpenApiSpecificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchOpenapiOpenApiSpecificationRequest
 */
 func (a *OpenapiApiService) PatchOpenapiOpenApiSpecification(ctx context.Context, moid string) ApiPatchOpenapiOpenApiSpecificationRequest {
 	return ApiPatchOpenapiOpenApiSpecificationRequest{
@@ -3451,7 +3464,8 @@ func (a *OpenapiApiService) PatchOpenapiOpenApiSpecification(ctx context.Context
 }
 
 // Execute executes the request
-//  @return OpenapiOpenApiSpecification
+//
+//	@return OpenapiOpenApiSpecification
 func (a *OpenapiApiService) PatchOpenapiOpenApiSpecificationExecute(r ApiPatchOpenapiOpenApiSpecificationRequest) (*OpenapiOpenApiSpecification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3613,9 +3627,9 @@ func (r ApiPatchOpenapiTaskGenerationRequestRequest) Execute() (*OpenapiTaskGene
 /*
 PatchOpenapiTaskGenerationRequest Update a 'openapi.TaskGenerationRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchOpenapiTaskGenerationRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchOpenapiTaskGenerationRequestRequest
 */
 func (a *OpenapiApiService) PatchOpenapiTaskGenerationRequest(ctx context.Context, moid string) ApiPatchOpenapiTaskGenerationRequestRequest {
 	return ApiPatchOpenapiTaskGenerationRequestRequest{
@@ -3626,7 +3640,8 @@ func (a *OpenapiApiService) PatchOpenapiTaskGenerationRequest(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationRequest
+//
+//	@return OpenapiTaskGenerationRequest
 func (a *OpenapiApiService) PatchOpenapiTaskGenerationRequestExecute(r ApiPatchOpenapiTaskGenerationRequestRequest) (*OpenapiTaskGenerationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3788,9 +3803,9 @@ func (r ApiUpdateOpenapiOpenApiSpecificationRequest) Execute() (*OpenapiOpenApiS
 /*
 UpdateOpenapiOpenApiSpecification Update a 'openapi.OpenApiSpecification' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateOpenapiOpenApiSpecificationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateOpenapiOpenApiSpecificationRequest
 */
 func (a *OpenapiApiService) UpdateOpenapiOpenApiSpecification(ctx context.Context, moid string) ApiUpdateOpenapiOpenApiSpecificationRequest {
 	return ApiUpdateOpenapiOpenApiSpecificationRequest{
@@ -3801,7 +3816,8 @@ func (a *OpenapiApiService) UpdateOpenapiOpenApiSpecification(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return OpenapiOpenApiSpecification
+//
+//	@return OpenapiOpenApiSpecification
 func (a *OpenapiApiService) UpdateOpenapiOpenApiSpecificationExecute(r ApiUpdateOpenapiOpenApiSpecificationRequest) (*OpenapiOpenApiSpecification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3963,9 +3979,9 @@ func (r ApiUpdateOpenapiTaskGenerationRequestRequest) Execute() (*OpenapiTaskGen
 /*
 UpdateOpenapiTaskGenerationRequest Update a 'openapi.TaskGenerationRequest' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateOpenapiTaskGenerationRequestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateOpenapiTaskGenerationRequestRequest
 */
 func (a *OpenapiApiService) UpdateOpenapiTaskGenerationRequest(ctx context.Context, moid string) ApiUpdateOpenapiTaskGenerationRequestRequest {
 	return ApiUpdateOpenapiTaskGenerationRequestRequest{
@@ -3976,7 +3992,8 @@ func (a *OpenapiApiService) UpdateOpenapiTaskGenerationRequest(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return OpenapiTaskGenerationRequest
+//
+//	@return OpenapiTaskGenerationRequest
 func (a *OpenapiApiService) UpdateOpenapiTaskGenerationRequestExecute(r ApiUpdateOpenapiTaskGenerationRequestRequest) (*OpenapiTaskGenerationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

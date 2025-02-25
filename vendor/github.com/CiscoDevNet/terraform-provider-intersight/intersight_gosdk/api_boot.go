@@ -56,8 +56,8 @@ func (r ApiCreateBootPrecisionPolicyRequest) Execute() (*BootPrecisionPolicy, *h
 /*
 CreateBootPrecisionPolicy Create a 'boot.PrecisionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBootPrecisionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBootPrecisionPolicyRequest
 */
 func (a *BootApiService) CreateBootPrecisionPolicy(ctx context.Context) ApiCreateBootPrecisionPolicyRequest {
 	return ApiCreateBootPrecisionPolicyRequest{
@@ -67,7 +67,8 @@ func (a *BootApiService) CreateBootPrecisionPolicy(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return BootPrecisionPolicy
+//
+//	@return BootPrecisionPolicy
 func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisionPolicyRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteBootPrecisionPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteBootPrecisionPolicy Delete a 'boot.PrecisionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteBootPrecisionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteBootPrecisionPolicyRequest
 */
 func (a *BootApiService) DeleteBootPrecisionPolicy(ctx context.Context, moid string) ApiDeleteBootPrecisionPolicyRequest {
 	return ApiDeleteBootPrecisionPolicyRequest{
@@ -359,9 +360,9 @@ func (r ApiGetBootCddDeviceByMoidRequest) Execute() (*BootCddDevice, *http.Respo
 /*
 GetBootCddDeviceByMoid Read a 'boot.CddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootCddDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootCddDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootCddDeviceByMoid(ctx context.Context, moid string) ApiGetBootCddDeviceByMoidRequest {
 	return ApiGetBootCddDeviceByMoidRequest{
@@ -372,7 +373,8 @@ func (a *BootApiService) GetBootCddDeviceByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return BootCddDevice
+//
+//	@return BootCddDevice
 func (a *BootApiService) GetBootCddDeviceByMoidExecute(r ApiGetBootCddDeviceByMoidRequest) (*BootCddDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -588,8 +590,8 @@ func (r ApiGetBootCddDeviceListRequest) Execute() (*BootCddDeviceResponse, *http
 /*
 GetBootCddDeviceList Read a 'boot.CddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootCddDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootCddDeviceListRequest
 */
 func (a *BootApiService) GetBootCddDeviceList(ctx context.Context) ApiGetBootCddDeviceListRequest {
 	return ApiGetBootCddDeviceListRequest{
@@ -599,7 +601,8 @@ func (a *BootApiService) GetBootCddDeviceList(ctx context.Context) ApiGetBootCdd
 }
 
 // Execute executes the request
-//  @return BootCddDeviceResponse
+//
+//	@return BootCddDeviceResponse
 func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRequest) (*BootCddDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -786,9 +789,9 @@ func (r ApiGetBootDeviceBootModeByMoidRequest) Execute() (*BootDeviceBootMode, *
 /*
 GetBootDeviceBootModeByMoid Read a 'boot.DeviceBootMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootDeviceBootModeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootDeviceBootModeByMoidRequest
 */
 func (a *BootApiService) GetBootDeviceBootModeByMoid(ctx context.Context, moid string) ApiGetBootDeviceBootModeByMoidRequest {
 	return ApiGetBootDeviceBootModeByMoidRequest{
@@ -799,7 +802,8 @@ func (a *BootApiService) GetBootDeviceBootModeByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return BootDeviceBootMode
+//
+//	@return BootDeviceBootMode
 func (a *BootApiService) GetBootDeviceBootModeByMoidExecute(r ApiGetBootDeviceBootModeByMoidRequest) (*BootDeviceBootMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1015,8 +1019,8 @@ func (r ApiGetBootDeviceBootModeListRequest) Execute() (*BootDeviceBootModeRespo
 /*
 GetBootDeviceBootModeList Read a 'boot.DeviceBootMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootDeviceBootModeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootDeviceBootModeListRequest
 */
 func (a *BootApiService) GetBootDeviceBootModeList(ctx context.Context) ApiGetBootDeviceBootModeListRequest {
 	return ApiGetBootDeviceBootModeListRequest{
@@ -1026,7 +1030,8 @@ func (a *BootApiService) GetBootDeviceBootModeList(ctx context.Context) ApiGetBo
 }
 
 // Execute executes the request
-//  @return BootDeviceBootModeResponse
+//
+//	@return BootDeviceBootModeResponse
 func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBootModeListRequest) (*BootDeviceBootModeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1213,9 +1218,9 @@ func (r ApiGetBootDeviceBootSecurityByMoidRequest) Execute() (*BootDeviceBootSec
 /*
 GetBootDeviceBootSecurityByMoid Read a 'boot.DeviceBootSecurity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootDeviceBootSecurityByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootDeviceBootSecurityByMoidRequest
 */
 func (a *BootApiService) GetBootDeviceBootSecurityByMoid(ctx context.Context, moid string) ApiGetBootDeviceBootSecurityByMoidRequest {
 	return ApiGetBootDeviceBootSecurityByMoidRequest{
@@ -1226,7 +1231,8 @@ func (a *BootApiService) GetBootDeviceBootSecurityByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//  @return BootDeviceBootSecurity
+//
+//	@return BootDeviceBootSecurity
 func (a *BootApiService) GetBootDeviceBootSecurityByMoidExecute(r ApiGetBootDeviceBootSecurityByMoidRequest) (*BootDeviceBootSecurity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1442,8 +1448,8 @@ func (r ApiGetBootDeviceBootSecurityListRequest) Execute() (*BootDeviceBootSecur
 /*
 GetBootDeviceBootSecurityList Read a 'boot.DeviceBootSecurity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootDeviceBootSecurityListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootDeviceBootSecurityListRequest
 */
 func (a *BootApiService) GetBootDeviceBootSecurityList(ctx context.Context) ApiGetBootDeviceBootSecurityListRequest {
 	return ApiGetBootDeviceBootSecurityListRequest{
@@ -1453,7 +1459,8 @@ func (a *BootApiService) GetBootDeviceBootSecurityList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//  @return BootDeviceBootSecurityResponse
+//
+//	@return BootDeviceBootSecurityResponse
 func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDeviceBootSecurityListRequest) (*BootDeviceBootSecurityResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1640,9 +1647,9 @@ func (r ApiGetBootHddDeviceByMoidRequest) Execute() (*BootHddDevice, *http.Respo
 /*
 GetBootHddDeviceByMoid Read a 'boot.HddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootHddDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootHddDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootHddDeviceByMoid(ctx context.Context, moid string) ApiGetBootHddDeviceByMoidRequest {
 	return ApiGetBootHddDeviceByMoidRequest{
@@ -1653,7 +1660,8 @@ func (a *BootApiService) GetBootHddDeviceByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return BootHddDevice
+//
+//	@return BootHddDevice
 func (a *BootApiService) GetBootHddDeviceByMoidExecute(r ApiGetBootHddDeviceByMoidRequest) (*BootHddDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1869,8 +1877,8 @@ func (r ApiGetBootHddDeviceListRequest) Execute() (*BootHddDeviceResponse, *http
 /*
 GetBootHddDeviceList Read a 'boot.HddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootHddDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootHddDeviceListRequest
 */
 func (a *BootApiService) GetBootHddDeviceList(ctx context.Context) ApiGetBootHddDeviceListRequest {
 	return ApiGetBootHddDeviceListRequest{
@@ -1880,7 +1888,8 @@ func (a *BootApiService) GetBootHddDeviceList(ctx context.Context) ApiGetBootHdd
 }
 
 // Execute executes the request
-//  @return BootHddDeviceResponse
+//
+//	@return BootHddDeviceResponse
 func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRequest) (*BootHddDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2067,9 +2076,9 @@ func (r ApiGetBootIscsiDeviceByMoidRequest) Execute() (*BootIscsiDevice, *http.R
 /*
 GetBootIscsiDeviceByMoid Read a 'boot.IscsiDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootIscsiDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootIscsiDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootIscsiDeviceByMoid(ctx context.Context, moid string) ApiGetBootIscsiDeviceByMoidRequest {
 	return ApiGetBootIscsiDeviceByMoidRequest{
@@ -2080,7 +2089,8 @@ func (a *BootApiService) GetBootIscsiDeviceByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return BootIscsiDevice
+//
+//	@return BootIscsiDevice
 func (a *BootApiService) GetBootIscsiDeviceByMoidExecute(r ApiGetBootIscsiDeviceByMoidRequest) (*BootIscsiDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2296,8 +2306,8 @@ func (r ApiGetBootIscsiDeviceListRequest) Execute() (*BootIscsiDeviceResponse, *
 /*
 GetBootIscsiDeviceList Read a 'boot.IscsiDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootIscsiDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootIscsiDeviceListRequest
 */
 func (a *BootApiService) GetBootIscsiDeviceList(ctx context.Context) ApiGetBootIscsiDeviceListRequest {
 	return ApiGetBootIscsiDeviceListRequest{
@@ -2307,7 +2317,8 @@ func (a *BootApiService) GetBootIscsiDeviceList(ctx context.Context) ApiGetBootI
 }
 
 // Execute executes the request
-//  @return BootIscsiDeviceResponse
+//
+//	@return BootIscsiDeviceResponse
 func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceListRequest) (*BootIscsiDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2494,9 +2505,9 @@ func (r ApiGetBootNvmeDeviceByMoidRequest) Execute() (*BootNvmeDevice, *http.Res
 /*
 GetBootNvmeDeviceByMoid Read a 'boot.NvmeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootNvmeDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootNvmeDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootNvmeDeviceByMoid(ctx context.Context, moid string) ApiGetBootNvmeDeviceByMoidRequest {
 	return ApiGetBootNvmeDeviceByMoidRequest{
@@ -2507,7 +2518,8 @@ func (a *BootApiService) GetBootNvmeDeviceByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return BootNvmeDevice
+//
+//	@return BootNvmeDevice
 func (a *BootApiService) GetBootNvmeDeviceByMoidExecute(r ApiGetBootNvmeDeviceByMoidRequest) (*BootNvmeDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2723,8 +2735,8 @@ func (r ApiGetBootNvmeDeviceListRequest) Execute() (*BootNvmeDeviceResponse, *ht
 /*
 GetBootNvmeDeviceList Read a 'boot.NvmeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootNvmeDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootNvmeDeviceListRequest
 */
 func (a *BootApiService) GetBootNvmeDeviceList(ctx context.Context) ApiGetBootNvmeDeviceListRequest {
 	return ApiGetBootNvmeDeviceListRequest{
@@ -2734,7 +2746,8 @@ func (a *BootApiService) GetBootNvmeDeviceList(ctx context.Context) ApiGetBootNv
 }
 
 // Execute executes the request
-//  @return BootNvmeDeviceResponse
+//
+//	@return BootNvmeDeviceResponse
 func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceListRequest) (*BootNvmeDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2921,9 +2934,9 @@ func (r ApiGetBootPchStorageDeviceByMoidRequest) Execute() (*BootPchStorageDevic
 /*
 GetBootPchStorageDeviceByMoid Read a 'boot.PchStorageDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootPchStorageDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootPchStorageDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootPchStorageDeviceByMoid(ctx context.Context, moid string) ApiGetBootPchStorageDeviceByMoidRequest {
 	return ApiGetBootPchStorageDeviceByMoidRequest{
@@ -2934,7 +2947,8 @@ func (a *BootApiService) GetBootPchStorageDeviceByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return BootPchStorageDevice
+//
+//	@return BootPchStorageDevice
 func (a *BootApiService) GetBootPchStorageDeviceByMoidExecute(r ApiGetBootPchStorageDeviceByMoidRequest) (*BootPchStorageDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3150,8 +3164,8 @@ func (r ApiGetBootPchStorageDeviceListRequest) Execute() (*BootPchStorageDeviceR
 /*
 GetBootPchStorageDeviceList Read a 'boot.PchStorageDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootPchStorageDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootPchStorageDeviceListRequest
 */
 func (a *BootApiService) GetBootPchStorageDeviceList(ctx context.Context) ApiGetBootPchStorageDeviceListRequest {
 	return ApiGetBootPchStorageDeviceListRequest{
@@ -3161,7 +3175,8 @@ func (a *BootApiService) GetBootPchStorageDeviceList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return BootPchStorageDeviceResponse
+//
+//	@return BootPchStorageDeviceResponse
 func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStorageDeviceListRequest) (*BootPchStorageDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3348,9 +3363,9 @@ func (r ApiGetBootPrecisionPolicyByMoidRequest) Execute() (*BootPrecisionPolicy,
 /*
 GetBootPrecisionPolicyByMoid Read a 'boot.PrecisionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootPrecisionPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootPrecisionPolicyByMoidRequest
 */
 func (a *BootApiService) GetBootPrecisionPolicyByMoid(ctx context.Context, moid string) ApiGetBootPrecisionPolicyByMoidRequest {
 	return ApiGetBootPrecisionPolicyByMoidRequest{
@@ -3361,7 +3376,8 @@ func (a *BootApiService) GetBootPrecisionPolicyByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return BootPrecisionPolicy
+//
+//	@return BootPrecisionPolicy
 func (a *BootApiService) GetBootPrecisionPolicyByMoidExecute(r ApiGetBootPrecisionPolicyByMoidRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3577,8 +3593,8 @@ func (r ApiGetBootPrecisionPolicyListRequest) Execute() (*BootPrecisionPolicyRes
 /*
 GetBootPrecisionPolicyList Read a 'boot.PrecisionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootPrecisionPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootPrecisionPolicyListRequest
 */
 func (a *BootApiService) GetBootPrecisionPolicyList(ctx context.Context) ApiGetBootPrecisionPolicyListRequest {
 	return ApiGetBootPrecisionPolicyListRequest{
@@ -3588,7 +3604,8 @@ func (a *BootApiService) GetBootPrecisionPolicyList(ctx context.Context) ApiGetB
 }
 
 // Execute executes the request
-//  @return BootPrecisionPolicyResponse
+//
+//	@return BootPrecisionPolicyResponse
 func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecisionPolicyListRequest) (*BootPrecisionPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3775,9 +3792,9 @@ func (r ApiGetBootPxeDeviceByMoidRequest) Execute() (*BootPxeDevice, *http.Respo
 /*
 GetBootPxeDeviceByMoid Read a 'boot.PxeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootPxeDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootPxeDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootPxeDeviceByMoid(ctx context.Context, moid string) ApiGetBootPxeDeviceByMoidRequest {
 	return ApiGetBootPxeDeviceByMoidRequest{
@@ -3788,7 +3805,8 @@ func (a *BootApiService) GetBootPxeDeviceByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return BootPxeDevice
+//
+//	@return BootPxeDevice
 func (a *BootApiService) GetBootPxeDeviceByMoidExecute(r ApiGetBootPxeDeviceByMoidRequest) (*BootPxeDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4004,8 +4022,8 @@ func (r ApiGetBootPxeDeviceListRequest) Execute() (*BootPxeDeviceResponse, *http
 /*
 GetBootPxeDeviceList Read a 'boot.PxeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootPxeDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootPxeDeviceListRequest
 */
 func (a *BootApiService) GetBootPxeDeviceList(ctx context.Context) ApiGetBootPxeDeviceListRequest {
 	return ApiGetBootPxeDeviceListRequest{
@@ -4015,7 +4033,8 @@ func (a *BootApiService) GetBootPxeDeviceList(ctx context.Context) ApiGetBootPxe
 }
 
 // Execute executes the request
-//  @return BootPxeDeviceResponse
+//
+//	@return BootPxeDeviceResponse
 func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRequest) (*BootPxeDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4202,9 +4221,9 @@ func (r ApiGetBootSanDeviceByMoidRequest) Execute() (*BootSanDevice, *http.Respo
 /*
 GetBootSanDeviceByMoid Read a 'boot.SanDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootSanDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootSanDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootSanDeviceByMoid(ctx context.Context, moid string) ApiGetBootSanDeviceByMoidRequest {
 	return ApiGetBootSanDeviceByMoidRequest{
@@ -4215,7 +4234,8 @@ func (a *BootApiService) GetBootSanDeviceByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return BootSanDevice
+//
+//	@return BootSanDevice
 func (a *BootApiService) GetBootSanDeviceByMoidExecute(r ApiGetBootSanDeviceByMoidRequest) (*BootSanDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4431,8 +4451,8 @@ func (r ApiGetBootSanDeviceListRequest) Execute() (*BootSanDeviceResponse, *http
 /*
 GetBootSanDeviceList Read a 'boot.SanDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootSanDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootSanDeviceListRequest
 */
 func (a *BootApiService) GetBootSanDeviceList(ctx context.Context) ApiGetBootSanDeviceListRequest {
 	return ApiGetBootSanDeviceListRequest{
@@ -4442,7 +4462,8 @@ func (a *BootApiService) GetBootSanDeviceList(ctx context.Context) ApiGetBootSan
 }
 
 // Execute executes the request
-//  @return BootSanDeviceResponse
+//
+//	@return BootSanDeviceResponse
 func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRequest) (*BootSanDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4629,9 +4650,9 @@ func (r ApiGetBootSdDeviceByMoidRequest) Execute() (*BootSdDevice, *http.Respons
 /*
 GetBootSdDeviceByMoid Read a 'boot.SdDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootSdDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootSdDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootSdDeviceByMoid(ctx context.Context, moid string) ApiGetBootSdDeviceByMoidRequest {
 	return ApiGetBootSdDeviceByMoidRequest{
@@ -4642,7 +4663,8 @@ func (a *BootApiService) GetBootSdDeviceByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return BootSdDevice
+//
+//	@return BootSdDevice
 func (a *BootApiService) GetBootSdDeviceByMoidExecute(r ApiGetBootSdDeviceByMoidRequest) (*BootSdDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4858,8 +4880,8 @@ func (r ApiGetBootSdDeviceListRequest) Execute() (*BootSdDeviceResponse, *http.R
 /*
 GetBootSdDeviceList Read a 'boot.SdDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootSdDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootSdDeviceListRequest
 */
 func (a *BootApiService) GetBootSdDeviceList(ctx context.Context) ApiGetBootSdDeviceListRequest {
 	return ApiGetBootSdDeviceListRequest{
@@ -4869,7 +4891,8 @@ func (a *BootApiService) GetBootSdDeviceList(ctx context.Context) ApiGetBootSdDe
 }
 
 // Execute executes the request
-//  @return BootSdDeviceResponse
+//
+//	@return BootSdDeviceResponse
 func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequest) (*BootSdDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5056,9 +5079,9 @@ func (r ApiGetBootUefiShellDeviceByMoidRequest) Execute() (*BootUefiShellDevice,
 /*
 GetBootUefiShellDeviceByMoid Read a 'boot.UefiShellDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootUefiShellDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootUefiShellDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootUefiShellDeviceByMoid(ctx context.Context, moid string) ApiGetBootUefiShellDeviceByMoidRequest {
 	return ApiGetBootUefiShellDeviceByMoidRequest{
@@ -5069,7 +5092,8 @@ func (a *BootApiService) GetBootUefiShellDeviceByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return BootUefiShellDevice
+//
+//	@return BootUefiShellDevice
 func (a *BootApiService) GetBootUefiShellDeviceByMoidExecute(r ApiGetBootUefiShellDeviceByMoidRequest) (*BootUefiShellDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5285,8 +5309,8 @@ func (r ApiGetBootUefiShellDeviceListRequest) Execute() (*BootUefiShellDeviceRes
 /*
 GetBootUefiShellDeviceList Read a 'boot.UefiShellDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootUefiShellDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootUefiShellDeviceListRequest
 */
 func (a *BootApiService) GetBootUefiShellDeviceList(ctx context.Context) ApiGetBootUefiShellDeviceListRequest {
 	return ApiGetBootUefiShellDeviceListRequest{
@@ -5296,7 +5320,8 @@ func (a *BootApiService) GetBootUefiShellDeviceList(ctx context.Context) ApiGetB
 }
 
 // Execute executes the request
-//  @return BootUefiShellDeviceResponse
+//
+//	@return BootUefiShellDeviceResponse
 func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShellDeviceListRequest) (*BootUefiShellDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5483,9 +5508,9 @@ func (r ApiGetBootUsbDeviceByMoidRequest) Execute() (*BootUsbDevice, *http.Respo
 /*
 GetBootUsbDeviceByMoid Read a 'boot.UsbDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootUsbDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootUsbDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootUsbDeviceByMoid(ctx context.Context, moid string) ApiGetBootUsbDeviceByMoidRequest {
 	return ApiGetBootUsbDeviceByMoidRequest{
@@ -5496,7 +5521,8 @@ func (a *BootApiService) GetBootUsbDeviceByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return BootUsbDevice
+//
+//	@return BootUsbDevice
 func (a *BootApiService) GetBootUsbDeviceByMoidExecute(r ApiGetBootUsbDeviceByMoidRequest) (*BootUsbDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5712,8 +5738,8 @@ func (r ApiGetBootUsbDeviceListRequest) Execute() (*BootUsbDeviceResponse, *http
 /*
 GetBootUsbDeviceList Read a 'boot.UsbDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootUsbDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootUsbDeviceListRequest
 */
 func (a *BootApiService) GetBootUsbDeviceList(ctx context.Context) ApiGetBootUsbDeviceListRequest {
 	return ApiGetBootUsbDeviceListRequest{
@@ -5723,7 +5749,8 @@ func (a *BootApiService) GetBootUsbDeviceList(ctx context.Context) ApiGetBootUsb
 }
 
 // Execute executes the request
-//  @return BootUsbDeviceResponse
+//
+//	@return BootUsbDeviceResponse
 func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRequest) (*BootUsbDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5910,9 +5937,9 @@ func (r ApiGetBootVmediaDeviceByMoidRequest) Execute() (*BootVmediaDevice, *http
 /*
 GetBootVmediaDeviceByMoid Read a 'boot.VmediaDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetBootVmediaDeviceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetBootVmediaDeviceByMoidRequest
 */
 func (a *BootApiService) GetBootVmediaDeviceByMoid(ctx context.Context, moid string) ApiGetBootVmediaDeviceByMoidRequest {
 	return ApiGetBootVmediaDeviceByMoidRequest{
@@ -5923,7 +5950,8 @@ func (a *BootApiService) GetBootVmediaDeviceByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return BootVmediaDevice
+//
+//	@return BootVmediaDevice
 func (a *BootApiService) GetBootVmediaDeviceByMoidExecute(r ApiGetBootVmediaDeviceByMoidRequest) (*BootVmediaDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6139,8 +6167,8 @@ func (r ApiGetBootVmediaDeviceListRequest) Execute() (*BootVmediaDeviceResponse,
 /*
 GetBootVmediaDeviceList Read a 'boot.VmediaDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetBootVmediaDeviceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetBootVmediaDeviceListRequest
 */
 func (a *BootApiService) GetBootVmediaDeviceList(ctx context.Context) ApiGetBootVmediaDeviceListRequest {
 	return ApiGetBootVmediaDeviceListRequest{
@@ -6150,7 +6178,8 @@ func (a *BootApiService) GetBootVmediaDeviceList(ctx context.Context) ApiGetBoot
 }
 
 // Execute executes the request
-//  @return BootVmediaDeviceResponse
+//
+//	@return BootVmediaDeviceResponse
 func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDeviceListRequest) (*BootVmediaDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6351,9 +6380,9 @@ func (r ApiPatchBootCddDeviceRequest) Execute() (*BootCddDevice, *http.Response,
 /*
 PatchBootCddDevice Update a 'boot.CddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootCddDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootCddDeviceRequest
 */
 func (a *BootApiService) PatchBootCddDevice(ctx context.Context, moid string) ApiPatchBootCddDeviceRequest {
 	return ApiPatchBootCddDeviceRequest{
@@ -6364,7 +6393,8 @@ func (a *BootApiService) PatchBootCddDevice(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return BootCddDevice
+//
+//	@return BootCddDevice
 func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceRequest) (*BootCddDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6526,9 +6556,9 @@ func (r ApiPatchBootDeviceBootModeRequest) Execute() (*BootDeviceBootMode, *http
 /*
 PatchBootDeviceBootMode Update a 'boot.DeviceBootMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootDeviceBootModeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootDeviceBootModeRequest
 */
 func (a *BootApiService) PatchBootDeviceBootMode(ctx context.Context, moid string) ApiPatchBootDeviceBootModeRequest {
 	return ApiPatchBootDeviceBootModeRequest{
@@ -6539,7 +6569,8 @@ func (a *BootApiService) PatchBootDeviceBootMode(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//  @return BootDeviceBootMode
+//
+//	@return BootDeviceBootMode
 func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBootModeRequest) (*BootDeviceBootMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6701,9 +6732,9 @@ func (r ApiPatchBootDeviceBootSecurityRequest) Execute() (*BootDeviceBootSecurit
 /*
 PatchBootDeviceBootSecurity Update a 'boot.DeviceBootSecurity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootDeviceBootSecurityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootDeviceBootSecurityRequest
 */
 func (a *BootApiService) PatchBootDeviceBootSecurity(ctx context.Context, moid string) ApiPatchBootDeviceBootSecurityRequest {
 	return ApiPatchBootDeviceBootSecurityRequest{
@@ -6714,7 +6745,8 @@ func (a *BootApiService) PatchBootDeviceBootSecurity(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return BootDeviceBootSecurity
+//
+//	@return BootDeviceBootSecurity
 func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDeviceBootSecurityRequest) (*BootDeviceBootSecurity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6876,9 +6908,9 @@ func (r ApiPatchBootHddDeviceRequest) Execute() (*BootHddDevice, *http.Response,
 /*
 PatchBootHddDevice Update a 'boot.HddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootHddDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootHddDeviceRequest
 */
 func (a *BootApiService) PatchBootHddDevice(ctx context.Context, moid string) ApiPatchBootHddDeviceRequest {
 	return ApiPatchBootHddDeviceRequest{
@@ -6889,7 +6921,8 @@ func (a *BootApiService) PatchBootHddDevice(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return BootHddDevice
+//
+//	@return BootHddDevice
 func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceRequest) (*BootHddDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7051,9 +7084,9 @@ func (r ApiPatchBootIscsiDeviceRequest) Execute() (*BootIscsiDevice, *http.Respo
 /*
 PatchBootIscsiDevice Update a 'boot.IscsiDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootIscsiDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootIscsiDeviceRequest
 */
 func (a *BootApiService) PatchBootIscsiDevice(ctx context.Context, moid string) ApiPatchBootIscsiDeviceRequest {
 	return ApiPatchBootIscsiDeviceRequest{
@@ -7064,7 +7097,8 @@ func (a *BootApiService) PatchBootIscsiDevice(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return BootIscsiDevice
+//
+//	@return BootIscsiDevice
 func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRequest) (*BootIscsiDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7226,9 +7260,9 @@ func (r ApiPatchBootNvmeDeviceRequest) Execute() (*BootNvmeDevice, *http.Respons
 /*
 PatchBootNvmeDevice Update a 'boot.NvmeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootNvmeDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootNvmeDeviceRequest
 */
 func (a *BootApiService) PatchBootNvmeDevice(ctx context.Context, moid string) ApiPatchBootNvmeDeviceRequest {
 	return ApiPatchBootNvmeDeviceRequest{
@@ -7239,7 +7273,8 @@ func (a *BootApiService) PatchBootNvmeDevice(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BootNvmeDevice
+//
+//	@return BootNvmeDevice
 func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequest) (*BootNvmeDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7401,9 +7436,9 @@ func (r ApiPatchBootPchStorageDeviceRequest) Execute() (*BootPchStorageDevice, *
 /*
 PatchBootPchStorageDevice Update a 'boot.PchStorageDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootPchStorageDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootPchStorageDeviceRequest
 */
 func (a *BootApiService) PatchBootPchStorageDevice(ctx context.Context, moid string) ApiPatchBootPchStorageDeviceRequest {
 	return ApiPatchBootPchStorageDeviceRequest{
@@ -7414,7 +7449,8 @@ func (a *BootApiService) PatchBootPchStorageDevice(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return BootPchStorageDevice
+//
+//	@return BootPchStorageDevice
 func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStorageDeviceRequest) (*BootPchStorageDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7576,9 +7612,9 @@ func (r ApiPatchBootPrecisionPolicyRequest) Execute() (*BootPrecisionPolicy, *ht
 /*
 PatchBootPrecisionPolicy Update a 'boot.PrecisionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootPrecisionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootPrecisionPolicyRequest
 */
 func (a *BootApiService) PatchBootPrecisionPolicy(ctx context.Context, moid string) ApiPatchBootPrecisionPolicyRequest {
 	return ApiPatchBootPrecisionPolicyRequest{
@@ -7589,7 +7625,8 @@ func (a *BootApiService) PatchBootPrecisionPolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return BootPrecisionPolicy
+//
+//	@return BootPrecisionPolicy
 func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecisionPolicyRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7751,9 +7788,9 @@ func (r ApiPatchBootPxeDeviceRequest) Execute() (*BootPxeDevice, *http.Response,
 /*
 PatchBootPxeDevice Update a 'boot.PxeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootPxeDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootPxeDeviceRequest
 */
 func (a *BootApiService) PatchBootPxeDevice(ctx context.Context, moid string) ApiPatchBootPxeDeviceRequest {
 	return ApiPatchBootPxeDeviceRequest{
@@ -7764,7 +7801,8 @@ func (a *BootApiService) PatchBootPxeDevice(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return BootPxeDevice
+//
+//	@return BootPxeDevice
 func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceRequest) (*BootPxeDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7926,9 +7964,9 @@ func (r ApiPatchBootSanDeviceRequest) Execute() (*BootSanDevice, *http.Response,
 /*
 PatchBootSanDevice Update a 'boot.SanDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootSanDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootSanDeviceRequest
 */
 func (a *BootApiService) PatchBootSanDevice(ctx context.Context, moid string) ApiPatchBootSanDeviceRequest {
 	return ApiPatchBootSanDeviceRequest{
@@ -7939,7 +7977,8 @@ func (a *BootApiService) PatchBootSanDevice(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return BootSanDevice
+//
+//	@return BootSanDevice
 func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceRequest) (*BootSanDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8101,9 +8140,9 @@ func (r ApiPatchBootSdDeviceRequest) Execute() (*BootSdDevice, *http.Response, e
 /*
 PatchBootSdDevice Update a 'boot.SdDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootSdDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootSdDeviceRequest
 */
 func (a *BootApiService) PatchBootSdDevice(ctx context.Context, moid string) ApiPatchBootSdDeviceRequest {
 	return ApiPatchBootSdDeviceRequest{
@@ -8114,7 +8153,8 @@ func (a *BootApiService) PatchBootSdDevice(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return BootSdDevice
+//
+//	@return BootSdDevice
 func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest) (*BootSdDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8276,9 +8316,9 @@ func (r ApiPatchBootUefiShellDeviceRequest) Execute() (*BootUefiShellDevice, *ht
 /*
 PatchBootUefiShellDevice Update a 'boot.UefiShellDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootUefiShellDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootUefiShellDeviceRequest
 */
 func (a *BootApiService) PatchBootUefiShellDevice(ctx context.Context, moid string) ApiPatchBootUefiShellDeviceRequest {
 	return ApiPatchBootUefiShellDeviceRequest{
@@ -8289,7 +8329,8 @@ func (a *BootApiService) PatchBootUefiShellDevice(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return BootUefiShellDevice
+//
+//	@return BootUefiShellDevice
 func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShellDeviceRequest) (*BootUefiShellDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8451,9 +8492,9 @@ func (r ApiPatchBootUsbDeviceRequest) Execute() (*BootUsbDevice, *http.Response,
 /*
 PatchBootUsbDevice Update a 'boot.UsbDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootUsbDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootUsbDeviceRequest
 */
 func (a *BootApiService) PatchBootUsbDevice(ctx context.Context, moid string) ApiPatchBootUsbDeviceRequest {
 	return ApiPatchBootUsbDeviceRequest{
@@ -8464,7 +8505,8 @@ func (a *BootApiService) PatchBootUsbDevice(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return BootUsbDevice
+//
+//	@return BootUsbDevice
 func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceRequest) (*BootUsbDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8626,9 +8668,9 @@ func (r ApiPatchBootVmediaDeviceRequest) Execute() (*BootVmediaDevice, *http.Res
 /*
 PatchBootVmediaDevice Update a 'boot.VmediaDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchBootVmediaDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchBootVmediaDeviceRequest
 */
 func (a *BootApiService) PatchBootVmediaDevice(ctx context.Context, moid string) ApiPatchBootVmediaDeviceRequest {
 	return ApiPatchBootVmediaDeviceRequest{
@@ -8639,7 +8681,8 @@ func (a *BootApiService) PatchBootVmediaDevice(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return BootVmediaDevice
+//
+//	@return BootVmediaDevice
 func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDeviceRequest) (*BootVmediaDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8801,9 +8844,9 @@ func (r ApiUpdateBootCddDeviceRequest) Execute() (*BootCddDevice, *http.Response
 /*
 UpdateBootCddDevice Update a 'boot.CddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootCddDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootCddDeviceRequest
 */
 func (a *BootApiService) UpdateBootCddDevice(ctx context.Context, moid string) ApiUpdateBootCddDeviceRequest {
 	return ApiUpdateBootCddDeviceRequest{
@@ -8814,7 +8857,8 @@ func (a *BootApiService) UpdateBootCddDevice(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BootCddDevice
+//
+//	@return BootCddDevice
 func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequest) (*BootCddDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8976,9 +9020,9 @@ func (r ApiUpdateBootDeviceBootModeRequest) Execute() (*BootDeviceBootMode, *htt
 /*
 UpdateBootDeviceBootMode Update a 'boot.DeviceBootMode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootDeviceBootModeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootDeviceBootModeRequest
 */
 func (a *BootApiService) UpdateBootDeviceBootMode(ctx context.Context, moid string) ApiUpdateBootDeviceBootModeRequest {
 	return ApiUpdateBootDeviceBootModeRequest{
@@ -8989,7 +9033,8 @@ func (a *BootApiService) UpdateBootDeviceBootMode(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return BootDeviceBootMode
+//
+//	@return BootDeviceBootMode
 func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBootModeRequest) (*BootDeviceBootMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9151,9 +9196,9 @@ func (r ApiUpdateBootDeviceBootSecurityRequest) Execute() (*BootDeviceBootSecuri
 /*
 UpdateBootDeviceBootSecurity Update a 'boot.DeviceBootSecurity' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootDeviceBootSecurityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootDeviceBootSecurityRequest
 */
 func (a *BootApiService) UpdateBootDeviceBootSecurity(ctx context.Context, moid string) ApiUpdateBootDeviceBootSecurityRequest {
 	return ApiUpdateBootDeviceBootSecurityRequest{
@@ -9164,7 +9209,8 @@ func (a *BootApiService) UpdateBootDeviceBootSecurity(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return BootDeviceBootSecurity
+//
+//	@return BootDeviceBootSecurity
 func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDeviceBootSecurityRequest) (*BootDeviceBootSecurity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9326,9 +9372,9 @@ func (r ApiUpdateBootHddDeviceRequest) Execute() (*BootHddDevice, *http.Response
 /*
 UpdateBootHddDevice Update a 'boot.HddDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootHddDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootHddDeviceRequest
 */
 func (a *BootApiService) UpdateBootHddDevice(ctx context.Context, moid string) ApiUpdateBootHddDeviceRequest {
 	return ApiUpdateBootHddDeviceRequest{
@@ -9339,7 +9385,8 @@ func (a *BootApiService) UpdateBootHddDevice(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BootHddDevice
+//
+//	@return BootHddDevice
 func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequest) (*BootHddDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9501,9 +9548,9 @@ func (r ApiUpdateBootIscsiDeviceRequest) Execute() (*BootIscsiDevice, *http.Resp
 /*
 UpdateBootIscsiDevice Update a 'boot.IscsiDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootIscsiDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootIscsiDeviceRequest
 */
 func (a *BootApiService) UpdateBootIscsiDevice(ctx context.Context, moid string) ApiUpdateBootIscsiDeviceRequest {
 	return ApiUpdateBootIscsiDeviceRequest{
@@ -9514,7 +9561,8 @@ func (a *BootApiService) UpdateBootIscsiDevice(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return BootIscsiDevice
+//
+//	@return BootIscsiDevice
 func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDeviceRequest) (*BootIscsiDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9676,9 +9724,9 @@ func (r ApiUpdateBootNvmeDeviceRequest) Execute() (*BootNvmeDevice, *http.Respon
 /*
 UpdateBootNvmeDevice Update a 'boot.NvmeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootNvmeDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootNvmeDeviceRequest
 */
 func (a *BootApiService) UpdateBootNvmeDevice(ctx context.Context, moid string) ApiUpdateBootNvmeDeviceRequest {
 	return ApiUpdateBootNvmeDeviceRequest{
@@ -9689,7 +9737,8 @@ func (a *BootApiService) UpdateBootNvmeDevice(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//  @return BootNvmeDevice
+//
+//	@return BootNvmeDevice
 func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRequest) (*BootNvmeDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9851,9 +9900,9 @@ func (r ApiUpdateBootPchStorageDeviceRequest) Execute() (*BootPchStorageDevice, 
 /*
 UpdateBootPchStorageDevice Update a 'boot.PchStorageDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootPchStorageDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootPchStorageDeviceRequest
 */
 func (a *BootApiService) UpdateBootPchStorageDevice(ctx context.Context, moid string) ApiUpdateBootPchStorageDeviceRequest {
 	return ApiUpdateBootPchStorageDeviceRequest{
@@ -9864,7 +9913,8 @@ func (a *BootApiService) UpdateBootPchStorageDevice(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//  @return BootPchStorageDevice
+//
+//	@return BootPchStorageDevice
 func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchStorageDeviceRequest) (*BootPchStorageDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10026,9 +10076,9 @@ func (r ApiUpdateBootPrecisionPolicyRequest) Execute() (*BootPrecisionPolicy, *h
 /*
 UpdateBootPrecisionPolicy Update a 'boot.PrecisionPolicy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootPrecisionPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootPrecisionPolicyRequest
 */
 func (a *BootApiService) UpdateBootPrecisionPolicy(ctx context.Context, moid string) ApiUpdateBootPrecisionPolicyRequest {
 	return ApiUpdateBootPrecisionPolicyRequest{
@@ -10039,7 +10089,8 @@ func (a *BootApiService) UpdateBootPrecisionPolicy(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return BootPrecisionPolicy
+//
+//	@return BootPrecisionPolicy
 func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisionPolicyRequest) (*BootPrecisionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10201,9 +10252,9 @@ func (r ApiUpdateBootPxeDeviceRequest) Execute() (*BootPxeDevice, *http.Response
 /*
 UpdateBootPxeDevice Update a 'boot.PxeDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootPxeDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootPxeDeviceRequest
 */
 func (a *BootApiService) UpdateBootPxeDevice(ctx context.Context, moid string) ApiUpdateBootPxeDeviceRequest {
 	return ApiUpdateBootPxeDeviceRequest{
@@ -10214,7 +10265,8 @@ func (a *BootApiService) UpdateBootPxeDevice(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BootPxeDevice
+//
+//	@return BootPxeDevice
 func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequest) (*BootPxeDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10376,9 +10428,9 @@ func (r ApiUpdateBootSanDeviceRequest) Execute() (*BootSanDevice, *http.Response
 /*
 UpdateBootSanDevice Update a 'boot.SanDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootSanDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootSanDeviceRequest
 */
 func (a *BootApiService) UpdateBootSanDevice(ctx context.Context, moid string) ApiUpdateBootSanDeviceRequest {
 	return ApiUpdateBootSanDeviceRequest{
@@ -10389,7 +10441,8 @@ func (a *BootApiService) UpdateBootSanDevice(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BootSanDevice
+//
+//	@return BootSanDevice
 func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequest) (*BootSanDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10551,9 +10604,9 @@ func (r ApiUpdateBootSdDeviceRequest) Execute() (*BootSdDevice, *http.Response, 
 /*
 UpdateBootSdDevice Update a 'boot.SdDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootSdDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootSdDeviceRequest
 */
 func (a *BootApiService) UpdateBootSdDevice(ctx context.Context, moid string) ApiUpdateBootSdDeviceRequest {
 	return ApiUpdateBootSdDeviceRequest{
@@ -10564,7 +10617,8 @@ func (a *BootApiService) UpdateBootSdDevice(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//  @return BootSdDevice
+//
+//	@return BootSdDevice
 func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceRequest) (*BootSdDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10726,9 +10780,9 @@ func (r ApiUpdateBootUefiShellDeviceRequest) Execute() (*BootUefiShellDevice, *h
 /*
 UpdateBootUefiShellDevice Update a 'boot.UefiShellDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootUefiShellDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootUefiShellDeviceRequest
 */
 func (a *BootApiService) UpdateBootUefiShellDevice(ctx context.Context, moid string) ApiUpdateBootUefiShellDeviceRequest {
 	return ApiUpdateBootUefiShellDeviceRequest{
@@ -10739,7 +10793,8 @@ func (a *BootApiService) UpdateBootUefiShellDevice(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return BootUefiShellDevice
+//
+//	@return BootUefiShellDevice
 func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShellDeviceRequest) (*BootUefiShellDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10901,9 +10956,9 @@ func (r ApiUpdateBootUsbDeviceRequest) Execute() (*BootUsbDevice, *http.Response
 /*
 UpdateBootUsbDevice Update a 'boot.UsbDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootUsbDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootUsbDeviceRequest
 */
 func (a *BootApiService) UpdateBootUsbDevice(ctx context.Context, moid string) ApiUpdateBootUsbDeviceRequest {
 	return ApiUpdateBootUsbDeviceRequest{
@@ -10914,7 +10969,8 @@ func (a *BootApiService) UpdateBootUsbDevice(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return BootUsbDevice
+//
+//	@return BootUsbDevice
 func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequest) (*BootUsbDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -11076,9 +11132,9 @@ func (r ApiUpdateBootVmediaDeviceRequest) Execute() (*BootVmediaDevice, *http.Re
 /*
 UpdateBootVmediaDevice Update a 'boot.VmediaDevice' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateBootVmediaDeviceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateBootVmediaDeviceRequest
 */
 func (a *BootApiService) UpdateBootVmediaDevice(ctx context.Context, moid string) ApiUpdateBootVmediaDeviceRequest {
 	return ApiUpdateBootVmediaDeviceRequest{
@@ -11089,7 +11145,8 @@ func (a *BootApiService) UpdateBootVmediaDevice(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//  @return BootVmediaDevice
+//
+//	@return BootVmediaDevice
 func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDeviceRequest) (*BootVmediaDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

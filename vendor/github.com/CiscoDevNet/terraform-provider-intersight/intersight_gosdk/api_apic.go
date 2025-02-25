@@ -36,9 +36,9 @@ func (r ApiGetApicAciPodByMoidRequest) Execute() (*ApicAciPod, *http.Response, e
 /*
 GetApicAciPodByMoid Read a 'apic.AciPod' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicAciPodByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicAciPodByMoidRequest
 */
 func (a *ApicApiService) GetApicAciPodByMoid(ctx context.Context, moid string) ApiGetApicAciPodByMoidRequest {
 	return ApiGetApicAciPodByMoidRequest{
@@ -49,7 +49,8 @@ func (a *ApicApiService) GetApicAciPodByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return ApicAciPod
+//
+//	@return ApicAciPod
 func (a *ApicApiService) GetApicAciPodByMoidExecute(r ApiGetApicAciPodByMoidRequest) (*ApicAciPod, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetApicAciPodListRequest) Execute() (*ApicAciPodResponse, *http.Respo
 /*
 GetApicAciPodList Read a 'apic.AciPod' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicAciPodListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicAciPodListRequest
 */
 func (a *ApicApiService) GetApicAciPodList(ctx context.Context) ApiGetApicAciPodListRequest {
 	return ApiGetApicAciPodListRequest{
@@ -276,7 +277,8 @@ func (a *ApicApiService) GetApicAciPodList(ctx context.Context) ApiGetApicAciPod
 }
 
 // Execute executes the request
-//  @return ApicAciPodResponse
+//
+//	@return ApicAciPodResponse
 func (a *ApicApiService) GetApicAciPodListExecute(r ApiGetApicAciPodListRequest) (*ApicAciPodResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -463,9 +465,9 @@ func (r ApiGetApicApplicationByMoidRequest) Execute() (*ApicApplication, *http.R
 /*
 GetApicApplicationByMoid Read a 'apic.Application' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicApplicationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicApplicationByMoidRequest
 */
 func (a *ApicApiService) GetApicApplicationByMoid(ctx context.Context, moid string) ApiGetApicApplicationByMoidRequest {
 	return ApiGetApicApplicationByMoidRequest{
@@ -476,7 +478,8 @@ func (a *ApicApiService) GetApicApplicationByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return ApicApplication
+//
+//	@return ApicApplication
 func (a *ApicApiService) GetApicApplicationByMoidExecute(r ApiGetApicApplicationByMoidRequest) (*ApicApplication, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -616,9 +619,9 @@ func (r ApiGetApicApplicationEndpointGroupByMoidRequest) Execute() (*ApicApplica
 /*
 GetApicApplicationEndpointGroupByMoid Read a 'apic.ApplicationEndpointGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicApplicationEndpointGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicApplicationEndpointGroupByMoidRequest
 */
 func (a *ApicApiService) GetApicApplicationEndpointGroupByMoid(ctx context.Context, moid string) ApiGetApicApplicationEndpointGroupByMoidRequest {
 	return ApiGetApicApplicationEndpointGroupByMoidRequest{
@@ -629,7 +632,8 @@ func (a *ApicApiService) GetApicApplicationEndpointGroupByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return ApicApplicationEndpointGroup
+//
+//	@return ApicApplicationEndpointGroup
 func (a *ApicApiService) GetApicApplicationEndpointGroupByMoidExecute(r ApiGetApicApplicationEndpointGroupByMoidRequest) (*ApicApplicationEndpointGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -845,8 +849,8 @@ func (r ApiGetApicApplicationEndpointGroupListRequest) Execute() (*ApicApplicati
 /*
 GetApicApplicationEndpointGroupList Read a 'apic.ApplicationEndpointGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicApplicationEndpointGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicApplicationEndpointGroupListRequest
 */
 func (a *ApicApiService) GetApicApplicationEndpointGroupList(ctx context.Context) ApiGetApicApplicationEndpointGroupListRequest {
 	return ApiGetApicApplicationEndpointGroupListRequest{
@@ -856,7 +860,8 @@ func (a *ApicApiService) GetApicApplicationEndpointGroupList(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ApicApplicationEndpointGroupResponse
+//
+//	@return ApicApplicationEndpointGroupResponse
 func (a *ApicApiService) GetApicApplicationEndpointGroupListExecute(r ApiGetApicApplicationEndpointGroupListRequest) (*ApicApplicationEndpointGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1119,8 +1124,8 @@ func (r ApiGetApicApplicationListRequest) Execute() (*ApicApplicationResponse, *
 /*
 GetApicApplicationList Read a 'apic.Application' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicApplicationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicApplicationListRequest
 */
 func (a *ApicApiService) GetApicApplicationList(ctx context.Context) ApiGetApicApplicationListRequest {
 	return ApiGetApicApplicationListRequest{
@@ -1130,7 +1135,8 @@ func (a *ApicApiService) GetApicApplicationList(ctx context.Context) ApiGetApicA
 }
 
 // Execute executes the request
-//  @return ApicApplicationResponse
+//
+//	@return ApicApplicationResponse
 func (a *ApicApiService) GetApicApplicationListExecute(r ApiGetApicApplicationListRequest) (*ApicApplicationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1317,9 +1323,9 @@ func (r ApiGetApicBridgeDomainByMoidRequest) Execute() (*ApicBridgeDomain, *http
 /*
 GetApicBridgeDomainByMoid Read a 'apic.BridgeDomain' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicBridgeDomainByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicBridgeDomainByMoidRequest
 */
 func (a *ApicApiService) GetApicBridgeDomainByMoid(ctx context.Context, moid string) ApiGetApicBridgeDomainByMoidRequest {
 	return ApiGetApicBridgeDomainByMoidRequest{
@@ -1330,7 +1336,8 @@ func (a *ApicApiService) GetApicBridgeDomainByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//  @return ApicBridgeDomain
+//
+//	@return ApicBridgeDomain
 func (a *ApicApiService) GetApicBridgeDomainByMoidExecute(r ApiGetApicBridgeDomainByMoidRequest) (*ApicBridgeDomain, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1546,8 +1553,8 @@ func (r ApiGetApicBridgeDomainListRequest) Execute() (*ApicBridgeDomainResponse,
 /*
 GetApicBridgeDomainList Read a 'apic.BridgeDomain' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicBridgeDomainListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicBridgeDomainListRequest
 */
 func (a *ApicApiService) GetApicBridgeDomainList(ctx context.Context) ApiGetApicBridgeDomainListRequest {
 	return ApiGetApicBridgeDomainListRequest{
@@ -1557,7 +1564,8 @@ func (a *ApicApiService) GetApicBridgeDomainList(ctx context.Context) ApiGetApic
 }
 
 // Execute executes the request
-//  @return ApicBridgeDomainResponse
+//
+//	@return ApicBridgeDomainResponse
 func (a *ApicApiService) GetApicBridgeDomainListExecute(r ApiGetApicBridgeDomainListRequest) (*ApicBridgeDomainResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1744,9 +1752,9 @@ func (r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) Execute() (*ApicE
 /*
 GetApicExternalRoutedLayerThreeDomainByMoid Read a 'apic.ExternalRoutedLayerThreeDomain' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest
 */
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoid(ctx context.Context, moid string) ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest {
 	return ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest{
@@ -1757,7 +1765,8 @@ func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoid(ctx context
 }
 
 // Execute executes the request
-//  @return ApicExternalRoutedLayerThreeDomain
+//
+//	@return ApicExternalRoutedLayerThreeDomain
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainByMoidExecute(r ApiGetApicExternalRoutedLayerThreeDomainByMoidRequest) (*ApicExternalRoutedLayerThreeDomain, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1973,8 +1982,8 @@ func (r ApiGetApicExternalRoutedLayerThreeDomainListRequest) Execute() (*ApicExt
 /*
 GetApicExternalRoutedLayerThreeDomainList Read a 'apic.ExternalRoutedLayerThreeDomain' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicExternalRoutedLayerThreeDomainListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicExternalRoutedLayerThreeDomainListRequest
 */
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainList(ctx context.Context) ApiGetApicExternalRoutedLayerThreeDomainListRequest {
 	return ApiGetApicExternalRoutedLayerThreeDomainListRequest{
@@ -1984,7 +1993,8 @@ func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainList(ctx context.C
 }
 
 // Execute executes the request
-//  @return ApicExternalRoutedLayerThreeDomainResponse
+//
+//	@return ApicExternalRoutedLayerThreeDomainResponse
 func (a *ApicApiService) GetApicExternalRoutedLayerThreeDomainListExecute(r ApiGetApicExternalRoutedLayerThreeDomainListRequest) (*ApicExternalRoutedLayerThreeDomainResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2171,9 +2181,9 @@ func (r ApiGetApicFabricLeafNodeByMoidRequest) Execute() (*ApicFabricLeafNode, *
 /*
 GetApicFabricLeafNodeByMoid Read a 'apic.FabricLeafNode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicFabricLeafNodeByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicFabricLeafNodeByMoidRequest
 */
 func (a *ApicApiService) GetApicFabricLeafNodeByMoid(ctx context.Context, moid string) ApiGetApicFabricLeafNodeByMoidRequest {
 	return ApiGetApicFabricLeafNodeByMoidRequest{
@@ -2184,7 +2194,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return ApicFabricLeafNode
+//
+//	@return ApicFabricLeafNode
 func (a *ApicApiService) GetApicFabricLeafNodeByMoidExecute(r ApiGetApicFabricLeafNodeByMoidRequest) (*ApicFabricLeafNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2324,9 +2335,9 @@ func (r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) Execute() (*ApicFabricLe
 /*
 GetApicFabricLeafNodeInterfaceByMoid Read a 'apic.FabricLeafNodeInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicFabricLeafNodeInterfaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicFabricLeafNodeInterfaceByMoidRequest
 */
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoid(ctx context.Context, moid string) ApiGetApicFabricLeafNodeInterfaceByMoidRequest {
 	return ApiGetApicFabricLeafNodeInterfaceByMoidRequest{
@@ -2337,7 +2348,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return ApicFabricLeafNodeInterface
+//
+//	@return ApicFabricLeafNodeInterface
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceByMoidExecute(r ApiGetApicFabricLeafNodeInterfaceByMoidRequest) (*ApicFabricLeafNodeInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2553,8 +2565,8 @@ func (r ApiGetApicFabricLeafNodeInterfaceListRequest) Execute() (*ApicFabricLeaf
 /*
 GetApicFabricLeafNodeInterfaceList Read a 'apic.FabricLeafNodeInterface' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicFabricLeafNodeInterfaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicFabricLeafNodeInterfaceListRequest
 */
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceList(ctx context.Context) ApiGetApicFabricLeafNodeInterfaceListRequest {
 	return ApiGetApicFabricLeafNodeInterfaceListRequest{
@@ -2564,7 +2576,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeInterfaceList(ctx context.Context)
 }
 
 // Execute executes the request
-//  @return ApicFabricLeafNodeInterfaceResponse
+//
+//	@return ApicFabricLeafNodeInterfaceResponse
 func (a *ApicApiService) GetApicFabricLeafNodeInterfaceListExecute(r ApiGetApicFabricLeafNodeInterfaceListRequest) (*ApicFabricLeafNodeInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2827,8 +2840,8 @@ func (r ApiGetApicFabricLeafNodeListRequest) Execute() (*ApicFabricLeafNodeRespo
 /*
 GetApicFabricLeafNodeList Read a 'apic.FabricLeafNode' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicFabricLeafNodeListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicFabricLeafNodeListRequest
 */
 func (a *ApicApiService) GetApicFabricLeafNodeList(ctx context.Context) ApiGetApicFabricLeafNodeListRequest {
 	return ApiGetApicFabricLeafNodeListRequest{
@@ -2838,7 +2851,8 @@ func (a *ApicApiService) GetApicFabricLeafNodeList(ctx context.Context) ApiGetAp
 }
 
 // Execute executes the request
-//  @return ApicFabricLeafNodeResponse
+//
+//	@return ApicFabricLeafNodeResponse
 func (a *ApicApiService) GetApicFabricLeafNodeListExecute(r ApiGetApicFabricLeafNodeListRequest) (*ApicFabricLeafNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3025,9 +3039,9 @@ func (r ApiGetApicOutByMoidRequest) Execute() (*ApicOut, *http.Response, error) 
 /*
 GetApicOutByMoid Read a 'apic.Out' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicOutByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicOutByMoidRequest
 */
 func (a *ApicApiService) GetApicOutByMoid(ctx context.Context, moid string) ApiGetApicOutByMoidRequest {
 	return ApiGetApicOutByMoidRequest{
@@ -3038,7 +3052,8 @@ func (a *ApicApiService) GetApicOutByMoid(ctx context.Context, moid string) ApiG
 }
 
 // Execute executes the request
-//  @return ApicOut
+//
+//	@return ApicOut
 func (a *ApicApiService) GetApicOutByMoidExecute(r ApiGetApicOutByMoidRequest) (*ApicOut, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3254,8 +3269,8 @@ func (r ApiGetApicOutListRequest) Execute() (*ApicOutResponse, *http.Response, e
 /*
 GetApicOutList Read a 'apic.Out' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicOutListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicOutListRequest
 */
 func (a *ApicApiService) GetApicOutList(ctx context.Context) ApiGetApicOutListRequest {
 	return ApiGetApicOutListRequest{
@@ -3265,7 +3280,8 @@ func (a *ApicApiService) GetApicOutList(ctx context.Context) ApiGetApicOutListRe
 }
 
 // Execute executes the request
-//  @return ApicOutResponse
+//
+//	@return ApicOutResponse
 func (a *ApicApiService) GetApicOutListExecute(r ApiGetApicOutListRequest) (*ApicOutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3452,9 +3468,9 @@ func (r ApiGetApicSubnetByMoidRequest) Execute() (*ApicSubnet, *http.Response, e
 /*
 GetApicSubnetByMoid Read a 'apic.Subnet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicSubnetByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicSubnetByMoidRequest
 */
 func (a *ApicApiService) GetApicSubnetByMoid(ctx context.Context, moid string) ApiGetApicSubnetByMoidRequest {
 	return ApiGetApicSubnetByMoidRequest{
@@ -3465,7 +3481,8 @@ func (a *ApicApiService) GetApicSubnetByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return ApicSubnet
+//
+//	@return ApicSubnet
 func (a *ApicApiService) GetApicSubnetByMoidExecute(r ApiGetApicSubnetByMoidRequest) (*ApicSubnet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3681,8 +3698,8 @@ func (r ApiGetApicSubnetListRequest) Execute() (*ApicSubnetResponse, *http.Respo
 /*
 GetApicSubnetList Read a 'apic.Subnet' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicSubnetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicSubnetListRequest
 */
 func (a *ApicApiService) GetApicSubnetList(ctx context.Context) ApiGetApicSubnetListRequest {
 	return ApiGetApicSubnetListRequest{
@@ -3692,7 +3709,8 @@ func (a *ApicApiService) GetApicSubnetList(ctx context.Context) ApiGetApicSubnet
 }
 
 // Execute executes the request
-//  @return ApicSubnetResponse
+//
+//	@return ApicSubnetResponse
 func (a *ApicApiService) GetApicSubnetListExecute(r ApiGetApicSubnetListRequest) (*ApicSubnetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3879,9 +3897,9 @@ func (r ApiGetApicTenantByMoidRequest) Execute() (*ApicTenant, *http.Response, e
 /*
 GetApicTenantByMoid Read a 'apic.Tenant' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicTenantByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicTenantByMoidRequest
 */
 func (a *ApicApiService) GetApicTenantByMoid(ctx context.Context, moid string) ApiGetApicTenantByMoidRequest {
 	return ApiGetApicTenantByMoidRequest{
@@ -3892,7 +3910,8 @@ func (a *ApicApiService) GetApicTenantByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return ApicTenant
+//
+//	@return ApicTenant
 func (a *ApicApiService) GetApicTenantByMoidExecute(r ApiGetApicTenantByMoidRequest) (*ApicTenant, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4108,8 +4127,8 @@ func (r ApiGetApicTenantListRequest) Execute() (*ApicTenantResponse, *http.Respo
 /*
 GetApicTenantList Read a 'apic.Tenant' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicTenantListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicTenantListRequest
 */
 func (a *ApicApiService) GetApicTenantList(ctx context.Context) ApiGetApicTenantListRequest {
 	return ApiGetApicTenantListRequest{
@@ -4119,7 +4138,8 @@ func (a *ApicApiService) GetApicTenantList(ctx context.Context) ApiGetApicTenant
 }
 
 // Execute executes the request
-//  @return ApicTenantResponse
+//
+//	@return ApicTenantResponse
 func (a *ApicApiService) GetApicTenantListExecute(r ApiGetApicTenantListRequest) (*ApicTenantResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4306,9 +4326,9 @@ func (r ApiGetApicVpcGroupByMoidRequest) Execute() (*ApicVpcGroup, *http.Respons
 /*
 GetApicVpcGroupByMoid Read a 'apic.VpcGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicVpcGroupByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicVpcGroupByMoidRequest
 */
 func (a *ApicApiService) GetApicVpcGroupByMoid(ctx context.Context, moid string) ApiGetApicVpcGroupByMoidRequest {
 	return ApiGetApicVpcGroupByMoidRequest{
@@ -4319,7 +4339,8 @@ func (a *ApicApiService) GetApicVpcGroupByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//  @return ApicVpcGroup
+//
+//	@return ApicVpcGroup
 func (a *ApicApiService) GetApicVpcGroupByMoidExecute(r ApiGetApicVpcGroupByMoidRequest) (*ApicVpcGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4535,8 +4556,8 @@ func (r ApiGetApicVpcGroupListRequest) Execute() (*ApicVpcGroupResponse, *http.R
 /*
 GetApicVpcGroupList Read a 'apic.VpcGroup' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicVpcGroupListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicVpcGroupListRequest
 */
 func (a *ApicApiService) GetApicVpcGroupList(ctx context.Context) ApiGetApicVpcGroupListRequest {
 	return ApiGetApicVpcGroupListRequest{
@@ -4546,7 +4567,8 @@ func (a *ApicApiService) GetApicVpcGroupList(ctx context.Context) ApiGetApicVpcG
 }
 
 // Execute executes the request
-//  @return ApicVpcGroupResponse
+//
+//	@return ApicVpcGroupResponse
 func (a *ApicApiService) GetApicVpcGroupListExecute(r ApiGetApicVpcGroupListRequest) (*ApicVpcGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4733,9 +4755,9 @@ func (r ApiGetApicVrfsByMoidRequest) Execute() (*ApicVrfs, *http.Response, error
 /*
 GetApicVrfsByMoid Read a 'apic.Vrfs' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetApicVrfsByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetApicVrfsByMoidRequest
 */
 func (a *ApicApiService) GetApicVrfsByMoid(ctx context.Context, moid string) ApiGetApicVrfsByMoidRequest {
 	return ApiGetApicVrfsByMoidRequest{
@@ -4746,7 +4768,8 @@ func (a *ApicApiService) GetApicVrfsByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//  @return ApicVrfs
+//
+//	@return ApicVrfs
 func (a *ApicApiService) GetApicVrfsByMoidExecute(r ApiGetApicVrfsByMoidRequest) (*ApicVrfs, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4962,8 +4985,8 @@ func (r ApiGetApicVrfsListRequest) Execute() (*ApicVrfsResponse, *http.Response,
 /*
 GetApicVrfsList Read a 'apic.Vrfs' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetApicVrfsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetApicVrfsListRequest
 */
 func (a *ApicApiService) GetApicVrfsList(ctx context.Context) ApiGetApicVrfsListRequest {
 	return ApiGetApicVrfsListRequest{
@@ -4973,7 +4996,8 @@ func (a *ApicApiService) GetApicVrfsList(ctx context.Context) ApiGetApicVrfsList
 }
 
 // Execute executes the request
-//  @return ApicVrfsResponse
+//
+//	@return ApicVrfsResponse
 func (a *ApicApiService) GetApicVrfsListExecute(r ApiGetApicVrfsListRequest) (*ApicVrfsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

@@ -36,9 +36,9 @@ func (r ApiGetTerminalAuditLogByMoidRequest) Execute() (*TerminalAuditLog, *http
 /*
 GetTerminalAuditLogByMoid Read a 'terminal.AuditLog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetTerminalAuditLogByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetTerminalAuditLogByMoidRequest
 */
 func (a *TerminalApiService) GetTerminalAuditLogByMoid(ctx context.Context, moid string) ApiGetTerminalAuditLogByMoidRequest {
 	return ApiGetTerminalAuditLogByMoidRequest{
@@ -49,7 +49,8 @@ func (a *TerminalApiService) GetTerminalAuditLogByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//  @return TerminalAuditLog
+//
+//	@return TerminalAuditLog
 func (a *TerminalApiService) GetTerminalAuditLogByMoidExecute(r ApiGetTerminalAuditLogByMoidRequest) (*TerminalAuditLog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -265,8 +266,8 @@ func (r ApiGetTerminalAuditLogListRequest) Execute() (*TerminalAuditLogResponse,
 /*
 GetTerminalAuditLogList Read a 'terminal.AuditLog' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTerminalAuditLogListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTerminalAuditLogListRequest
 */
 func (a *TerminalApiService) GetTerminalAuditLogList(ctx context.Context) ApiGetTerminalAuditLogListRequest {
 	return ApiGetTerminalAuditLogListRequest{
@@ -276,7 +277,8 @@ func (a *TerminalApiService) GetTerminalAuditLogList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//  @return TerminalAuditLogResponse
+//
+//	@return TerminalAuditLogResponse
 func (a *TerminalApiService) GetTerminalAuditLogListExecute(r ApiGetTerminalAuditLogListRequest) (*TerminalAuditLogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

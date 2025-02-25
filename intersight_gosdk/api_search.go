@@ -56,8 +56,8 @@ func (r ApiCreateSearchSuggestItemRequest) Execute() (*SearchSuggestItemResponse
 /*
 CreateSearchSuggestItem Create a 'search.SuggestItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSearchSuggestItemRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSearchSuggestItemRequest
 */
 func (a *SearchApiService) CreateSearchSuggestItem(ctx context.Context) ApiCreateSearchSuggestItemRequest {
 	return ApiCreateSearchSuggestItemRequest{
@@ -67,7 +67,8 @@ func (a *SearchApiService) CreateSearchSuggestItem(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//  @return SearchSuggestItemResponse
+//
+//	@return SearchSuggestItemResponse
 func (a *SearchApiService) CreateSearchSuggestItemExecute(r ApiCreateSearchSuggestItemRequest) (*SearchSuggestItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiGetSearchSearchItemByMoidRequest) Execute() (*SearchSearchItem, *http
 /*
 GetSearchSearchItemByMoid Read a 'search.SearchItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSearchSearchItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSearchSearchItemByMoidRequest
 */
 func (a *SearchApiService) GetSearchSearchItemByMoid(ctx context.Context, moid string) ApiGetSearchSearchItemByMoidRequest {
 	return ApiGetSearchSearchItemByMoidRequest{
@@ -230,7 +231,8 @@ func (a *SearchApiService) GetSearchSearchItemByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return SearchSearchItem
+//
+//	@return SearchSearchItem
 func (a *SearchApiService) GetSearchSearchItemByMoidExecute(r ApiGetSearchSearchItemByMoidRequest) (*SearchSearchItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -446,8 +448,8 @@ func (r ApiGetSearchSearchItemListRequest) Execute() (*SearchSearchItemResponse,
 /*
 GetSearchSearchItemList Read a 'search.SearchItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSearchSearchItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSearchSearchItemListRequest
 */
 func (a *SearchApiService) GetSearchSearchItemList(ctx context.Context) ApiGetSearchSearchItemListRequest {
 	return ApiGetSearchSearchItemListRequest{
@@ -457,7 +459,8 @@ func (a *SearchApiService) GetSearchSearchItemList(ctx context.Context) ApiGetSe
 }
 
 // Execute executes the request
-//  @return SearchSearchItemResponse
+//
+//	@return SearchSearchItemResponse
 func (a *SearchApiService) GetSearchSearchItemListExecute(r ApiGetSearchSearchItemListRequest) (*SearchSearchItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -644,9 +647,9 @@ func (r ApiGetSearchTagItemByMoidRequest) Execute() (*SearchTagItem, *http.Respo
 /*
 GetSearchTagItemByMoid Read a 'search.TagItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSearchTagItemByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSearchTagItemByMoidRequest
 */
 func (a *SearchApiService) GetSearchTagItemByMoid(ctx context.Context, moid string) ApiGetSearchTagItemByMoidRequest {
 	return ApiGetSearchTagItemByMoidRequest{
@@ -657,7 +660,8 @@ func (a *SearchApiService) GetSearchTagItemByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//  @return SearchTagItem
+//
+//	@return SearchTagItem
 func (a *SearchApiService) GetSearchTagItemByMoidExecute(r ApiGetSearchTagItemByMoidRequest) (*SearchTagItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -873,8 +877,8 @@ func (r ApiGetSearchTagItemListRequest) Execute() (*SearchTagItemResponse, *http
 /*
 GetSearchTagItemList Read a 'search.TagItem' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSearchTagItemListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSearchTagItemListRequest
 */
 func (a *SearchApiService) GetSearchTagItemList(ctx context.Context) ApiGetSearchTagItemListRequest {
 	return ApiGetSearchTagItemListRequest{
@@ -884,7 +888,8 @@ func (a *SearchApiService) GetSearchTagItemList(ctx context.Context) ApiGetSearc
 }
 
 // Execute executes the request
-//  @return SearchTagItemResponse
+//
+//	@return SearchTagItemResponse
 func (a *SearchApiService) GetSearchTagItemListExecute(r ApiGetSearchTagItemListRequest) (*SearchTagItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

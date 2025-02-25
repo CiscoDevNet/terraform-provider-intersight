@@ -56,8 +56,8 @@ func (r ApiCreateCloudCollectInventoryRequest) Execute() (*CloudCollectInventory
 /*
 CreateCloudCollectInventory Create a 'cloud.CollectInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateCloudCollectInventoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateCloudCollectInventoryRequest
 */
 func (a *CloudApiService) CreateCloudCollectInventory(ctx context.Context) ApiCreateCloudCollectInventoryRequest {
 	return ApiCreateCloudCollectInventoryRequest{
@@ -67,7 +67,8 @@ func (a *CloudApiService) CreateCloudCollectInventory(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//  @return CloudCollectInventory
+//
+//	@return CloudCollectInventory
 func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCollectInventoryRequest) (*CloudCollectInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiGetCloudTfcAgentpoolByMoidRequest) Execute() (*CloudTfcAgentpool, *ht
 /*
 GetCloudTfcAgentpoolByMoid Read a 'cloud.TfcAgentpool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudTfcAgentpoolByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudTfcAgentpoolByMoidRequest
 */
 func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx context.Context, moid string) ApiGetCloudTfcAgentpoolByMoidRequest {
 	return ApiGetCloudTfcAgentpoolByMoidRequest{
@@ -230,7 +231,8 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return CloudTfcAgentpool
+//
+//	@return CloudTfcAgentpool
 func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgentpoolByMoidRequest) (*CloudTfcAgentpool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -446,8 +448,8 @@ func (r ApiGetCloudTfcAgentpoolListRequest) Execute() (*CloudTfcAgentpoolRespons
 /*
 GetCloudTfcAgentpoolList Read a 'cloud.TfcAgentpool' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudTfcAgentpoolListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudTfcAgentpoolListRequest
 */
 func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx context.Context) ApiGetCloudTfcAgentpoolListRequest {
 	return ApiGetCloudTfcAgentpoolListRequest{
@@ -457,7 +459,8 @@ func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx context.Context) ApiGetCl
 }
 
 // Execute executes the request
-//  @return CloudTfcAgentpoolResponse
+//
+//	@return CloudTfcAgentpoolResponse
 func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentpoolListRequest) (*CloudTfcAgentpoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -644,9 +647,9 @@ func (r ApiGetCloudTfcOrganizationByMoidRequest) Execute() (*CloudTfcOrganizatio
 /*
 GetCloudTfcOrganizationByMoid Read a 'cloud.TfcOrganization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudTfcOrganizationByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudTfcOrganizationByMoidRequest
 */
 func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx context.Context, moid string) ApiGetCloudTfcOrganizationByMoidRequest {
 	return ApiGetCloudTfcOrganizationByMoidRequest{
@@ -657,7 +660,8 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//  @return CloudTfcOrganization
+//
+//	@return CloudTfcOrganization
 func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcOrganizationByMoidRequest) (*CloudTfcOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -873,8 +877,8 @@ func (r ApiGetCloudTfcOrganizationListRequest) Execute() (*CloudTfcOrganizationR
 /*
 GetCloudTfcOrganizationList Read a 'cloud.TfcOrganization' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudTfcOrganizationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudTfcOrganizationListRequest
 */
 func (a *CloudApiService) GetCloudTfcOrganizationList(ctx context.Context) ApiGetCloudTfcOrganizationListRequest {
 	return ApiGetCloudTfcOrganizationListRequest{
@@ -884,7 +888,8 @@ func (a *CloudApiService) GetCloudTfcOrganizationList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//  @return CloudTfcOrganizationResponse
+//
+//	@return CloudTfcOrganizationResponse
 func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrganizationListRequest) (*CloudTfcOrganizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1071,9 +1076,9 @@ func (r ApiGetCloudTfcWorkspaceByMoidRequest) Execute() (*CloudTfcWorkspace, *ht
 /*
 GetCloudTfcWorkspaceByMoid Read a 'cloud.TfcWorkspace' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetCloudTfcWorkspaceByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetCloudTfcWorkspaceByMoidRequest
 */
 func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx context.Context, moid string) ApiGetCloudTfcWorkspaceByMoidRequest {
 	return ApiGetCloudTfcWorkspaceByMoidRequest{
@@ -1084,7 +1089,8 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//  @return CloudTfcWorkspace
+//
+//	@return CloudTfcWorkspace
 func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWorkspaceByMoidRequest) (*CloudTfcWorkspace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1300,8 +1306,8 @@ func (r ApiGetCloudTfcWorkspaceListRequest) Execute() (*CloudTfcWorkspaceRespons
 /*
 GetCloudTfcWorkspaceList Read a 'cloud.TfcWorkspace' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCloudTfcWorkspaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCloudTfcWorkspaceListRequest
 */
 func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx context.Context) ApiGetCloudTfcWorkspaceListRequest {
 	return ApiGetCloudTfcWorkspaceListRequest{
@@ -1311,7 +1317,8 @@ func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx context.Context) ApiGetCl
 }
 
 // Execute executes the request
-//  @return CloudTfcWorkspaceResponse
+//
+//	@return CloudTfcWorkspaceResponse
 func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorkspaceListRequest) (*CloudTfcWorkspaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

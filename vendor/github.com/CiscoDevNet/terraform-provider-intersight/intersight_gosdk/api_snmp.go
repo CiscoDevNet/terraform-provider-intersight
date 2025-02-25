@@ -56,8 +56,8 @@ func (r ApiCreateSnmpPolicyRequest) Execute() (*SnmpPolicy, *http.Response, erro
 /*
 CreateSnmpPolicy Create a 'snmp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSnmpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSnmpPolicyRequest
 */
 func (a *SnmpApiService) CreateSnmpPolicy(ctx context.Context) ApiCreateSnmpPolicyRequest {
 	return ApiCreateSnmpPolicyRequest{
@@ -67,7 +67,8 @@ func (a *SnmpApiService) CreateSnmpPolicy(ctx context.Context) ApiCreateSnmpPoli
 }
 
 // Execute executes the request
-//  @return SnmpPolicy
+//
+//	@return SnmpPolicy
 func (a *SnmpApiService) CreateSnmpPolicyExecute(r ApiCreateSnmpPolicyRequest) (*SnmpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -217,9 +218,9 @@ func (r ApiDeleteSnmpPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteSnmpPolicy Delete a 'snmp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiDeleteSnmpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiDeleteSnmpPolicyRequest
 */
 func (a *SnmpApiService) DeleteSnmpPolicy(ctx context.Context, moid string) ApiDeleteSnmpPolicyRequest {
 	return ApiDeleteSnmpPolicyRequest{
@@ -359,9 +360,9 @@ func (r ApiGetSnmpPolicyByMoidRequest) Execute() (*SnmpPolicy, *http.Response, e
 /*
 GetSnmpPolicyByMoid Read a 'snmp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSnmpPolicyByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSnmpPolicyByMoidRequest
 */
 func (a *SnmpApiService) GetSnmpPolicyByMoid(ctx context.Context, moid string) ApiGetSnmpPolicyByMoidRequest {
 	return ApiGetSnmpPolicyByMoidRequest{
@@ -372,7 +373,8 @@ func (a *SnmpApiService) GetSnmpPolicyByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//  @return SnmpPolicy
+//
+//	@return SnmpPolicy
 func (a *SnmpApiService) GetSnmpPolicyByMoidExecute(r ApiGetSnmpPolicyByMoidRequest) (*SnmpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -512,9 +514,9 @@ func (r ApiGetSnmpPolicyInventoryByMoidRequest) Execute() (*SnmpPolicyInventory,
 /*
 GetSnmpPolicyInventoryByMoid Read a 'snmp.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiGetSnmpPolicyInventoryByMoidRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiGetSnmpPolicyInventoryByMoidRequest
 */
 func (a *SnmpApiService) GetSnmpPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetSnmpPolicyInventoryByMoidRequest {
 	return ApiGetSnmpPolicyInventoryByMoidRequest{
@@ -525,7 +527,8 @@ func (a *SnmpApiService) GetSnmpPolicyInventoryByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//  @return SnmpPolicyInventory
+//
+//	@return SnmpPolicyInventory
 func (a *SnmpApiService) GetSnmpPolicyInventoryByMoidExecute(r ApiGetSnmpPolicyInventoryByMoidRequest) (*SnmpPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -741,8 +744,8 @@ func (r ApiGetSnmpPolicyInventoryListRequest) Execute() (*SnmpPolicyInventoryRes
 /*
 GetSnmpPolicyInventoryList Read a 'snmp.PolicyInventory' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSnmpPolicyInventoryListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSnmpPolicyInventoryListRequest
 */
 func (a *SnmpApiService) GetSnmpPolicyInventoryList(ctx context.Context) ApiGetSnmpPolicyInventoryListRequest {
 	return ApiGetSnmpPolicyInventoryListRequest{
@@ -752,7 +755,8 @@ func (a *SnmpApiService) GetSnmpPolicyInventoryList(ctx context.Context) ApiGetS
 }
 
 // Execute executes the request
-//  @return SnmpPolicyInventoryResponse
+//
+//	@return SnmpPolicyInventoryResponse
 func (a *SnmpApiService) GetSnmpPolicyInventoryListExecute(r ApiGetSnmpPolicyInventoryListRequest) (*SnmpPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1015,8 +1019,8 @@ func (r ApiGetSnmpPolicyListRequest) Execute() (*SnmpPolicyResponse, *http.Respo
 /*
 GetSnmpPolicyList Read a 'snmp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSnmpPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSnmpPolicyListRequest
 */
 func (a *SnmpApiService) GetSnmpPolicyList(ctx context.Context) ApiGetSnmpPolicyListRequest {
 	return ApiGetSnmpPolicyListRequest{
@@ -1026,7 +1030,8 @@ func (a *SnmpApiService) GetSnmpPolicyList(ctx context.Context) ApiGetSnmpPolicy
 }
 
 // Execute executes the request
-//  @return SnmpPolicyResponse
+//
+//	@return SnmpPolicyResponse
 func (a *SnmpApiService) GetSnmpPolicyListExecute(r ApiGetSnmpPolicyListRequest) (*SnmpPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1227,9 +1232,9 @@ func (r ApiPatchSnmpPolicyRequest) Execute() (*SnmpPolicy, *http.Response, error
 /*
 PatchSnmpPolicy Update a 'snmp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiPatchSnmpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiPatchSnmpPolicyRequest
 */
 func (a *SnmpApiService) PatchSnmpPolicy(ctx context.Context, moid string) ApiPatchSnmpPolicyRequest {
 	return ApiPatchSnmpPolicyRequest{
@@ -1240,7 +1245,8 @@ func (a *SnmpApiService) PatchSnmpPolicy(ctx context.Context, moid string) ApiPa
 }
 
 // Execute executes the request
-//  @return SnmpPolicy
+//
+//	@return SnmpPolicy
 func (a *SnmpApiService) PatchSnmpPolicyExecute(r ApiPatchSnmpPolicyRequest) (*SnmpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1402,9 +1408,9 @@ func (r ApiUpdateSnmpPolicyRequest) Execute() (*SnmpPolicy, *http.Response, erro
 /*
 UpdateSnmpPolicy Update a 'snmp.Policy' resource.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param moid The unique Moid identifier of a resource instance.
- @return ApiUpdateSnmpPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param moid The unique Moid identifier of a resource instance.
+	@return ApiUpdateSnmpPolicyRequest
 */
 func (a *SnmpApiService) UpdateSnmpPolicy(ctx context.Context, moid string) ApiUpdateSnmpPolicyRequest {
 	return ApiUpdateSnmpPolicyRequest{
@@ -1415,7 +1421,8 @@ func (a *SnmpApiService) UpdateSnmpPolicy(ctx context.Context, moid string) ApiU
 }
 
 // Execute executes the request
-//  @return SnmpPolicy
+//
+//	@return SnmpPolicy
 func (a *SnmpApiService) UpdateSnmpPolicyExecute(r ApiUpdateSnmpPolicyRequest) (*SnmpPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
