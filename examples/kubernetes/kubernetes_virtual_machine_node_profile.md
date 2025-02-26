@@ -4,7 +4,7 @@
 resource "intersight_kubernetes_virtual_machine_node_profile" "kubernetes_virtual_machine_node_profile1" {
   description = "kubernetes virtual machine node profile"
   name        = "kubernetes_virtual_machine_node_profile1"
-  type        = "instance"
+  nr_type        = "instance"
   action      = "Deploy"
   config_context {
     control_action = "Deploy"
