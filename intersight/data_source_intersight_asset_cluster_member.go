@@ -80,6 +80,51 @@ func getAssetClusterMemberSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"connection_flap_status": {
+			Description: "Encapsulates key details used to identify devices experiencing connection flapping.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"flap_alert_time": {
+						Description: "Time when flapping was reported.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"flap_count": {
+						Description: "The number of times a device disconnected within a specified time window.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"flap_detected": {
+						Description: "Indicates if the device is flapping.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"window_size": {
+						Description: "The time window during which device disconnects are counted. E.g. values are PT30M or PT1H.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"connection_id": {
 			Description: "The unique identifier for the current connection. The identifier persists across network connectivity loss and is reset on device connector process restart or platform administrator toggle of the Intersight connectivity. The connectionId can be used by services that need to interact with stateful plugins running in the device connector process. For example if a service schedules an inventory in a devices job scheduler plugin at registration it is not necessary to reschedule the job if the device loses network connectivity due to an Intersight service upgrade or intermittent network issues in the devices datacenter.",
 			Type:        schema.TypeString,
@@ -721,6 +766,61 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 		o.SetConnectedHost(x)
 	}
 
+	if v, ok := d.GetOk("connection_flap_status"); ok {
+		p := make([]models.AssetConnectionFlapStatus, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.AssetConnectionFlapStatus{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("asset.ConnectionFlapStatus")
+			if v, ok := l["flap_alert_time"]; ok {
+				{
+					x, _ := time.Parse(time.RFC1123, v.(string))
+					o.SetFlapAlertTime(x)
+				}
+			}
+			if v, ok := l["flap_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetFlapCount(x)
+				}
+			}
+			if v, ok := l["flap_detected"]; ok {
+				{
+					x := (v.(bool))
+					o.SetFlapDetected(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["window_size"]; ok {
+				{
+					x := (v.(string))
+					o.SetWindowSize(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetConnectionFlapStatus(x)
+		}
+	}
+
 	if v, ok := d.GetOk("connection_id"); ok {
 		x := (v.(string))
 		o.SetConnectionId(x)
@@ -1124,6 +1224,8 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 				temp["app_partition_number"] = (s.GetAppPartitionNumber())
 				temp["class_id"] = (s.GetClassId())
 				temp["connected_host"] = (s.GetConnectedHost())
+
+				temp["connection_flap_status"] = flattenMapAssetConnectionFlapStatus(s.GetConnectionFlapStatus(), d)
 				temp["connection_id"] = (s.GetConnectionId())
 				temp["connection_reason"] = (s.GetConnectionReason())
 				temp["connection_status"] = (s.GetConnectionStatus())

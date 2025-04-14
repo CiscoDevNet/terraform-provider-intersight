@@ -41,9 +41,9 @@ func resourceFabricFcStorageRole() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_speed": {
-				Description:  "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
+				Description:  "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `64Gbps` - Admin configurable speed 64Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"16Gbps", "8Gbps", "32Gbps", "Auto"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"16Gbps", "8Gbps", "32Gbps", "64Gbps", "Auto"}, false),
 				Optional:     true,
 				Default:      "16Gbps",
 			},

@@ -458,7 +458,7 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			},
 		},
 		"pid": {
-			Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.\n* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.\n* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.\n* `unknown` - Unknown device type, usage is TBD.",
+			Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.\n* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.\n* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 36 ports.\n* `unknown` - Unknown device type, usage is TBD.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -635,6 +635,49 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			},
 		},
 		"ports_supporting40g_speed": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"end_port_id": {
+						Description: "Ending Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"end_slot_id": {
+						Description: "Ending Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"start_port_id": {
+						Description: "Starting Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"start_slot_id": {
+						Description: "Starting Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"ports_supporting_appliance_role": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem: &schema.Resource{
@@ -1962,6 +2005,58 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting40gSpeed(x)
 	}
 
+	if v, ok := d.GetOk("ports_supporting_appliance_role"); ok {
+		x := make([]models.CapabilityPortRange, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilityPortRange{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.PortRange")
+			if v, ok := l["end_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndPortId(x)
+				}
+			}
+			if v, ok := l["end_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndSlotId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartPortId(x)
+				}
+			}
+			if v, ok := l["start_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartSlotId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetPortsSupportingApplianceRole(x)
+	}
+
 	if v, ok := d.GetOk("ports_supporting_breakout"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
@@ -2602,6 +2697,8 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["ports_supporting25g_speed"] = flattenListCapabilityPortRange(s.GetPortsSupporting25gSpeed(), d)
 
 				temp["ports_supporting40g_speed"] = flattenListCapabilityPortRange(s.GetPortsSupporting40gSpeed(), d)
+
+				temp["ports_supporting_appliance_role"] = flattenListCapabilityPortRange(s.GetPortsSupportingApplianceRole(), d)
 
 				temp["ports_supporting_breakout"] = flattenListCapabilityPortRange(s.GetPortsSupportingBreakout(), d)
 

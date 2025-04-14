@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025020308
+API version: 1.0.11-2025030309
 Contact: intersight@cisco.com
 */
 
@@ -30,7 +30,7 @@ type FabricUplinkPcRole struct {
 	ObjectType string `json:"ObjectType"`
 	// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
 	AdminSpeed *string `json:"AdminSpeed,omitempty"`
-	// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'. * `rs-cons16` - Forward Error Correction option \"rs-cons16\". * `rs-ieee` - Forward Error Correction option \"rs-ieee\". * `Off` - Turn off Forward Error Correction.
+	// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
 	Fec *string `json:"Fec,omitempty"`
 	// An array of relationships to fabricEthNetworkGroupPolicy resources.
 	EthNetworkGroupPolicy []FabricEthNetworkGroupPolicyRelationship       `json:"EthNetworkGroupPolicy,omitempty"`
@@ -458,7 +458,7 @@ func (o *FabricUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
 		AdminSpeed *string `json:"AdminSpeed,omitempty"`
-		// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'. * `rs-cons16` - Forward Error Correction option \"rs-cons16\". * `rs-ieee` - Forward Error Correction option \"rs-ieee\". * `Off` - Turn off Forward Error Correction.
+		// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
 		Fec *string `json:"Fec,omitempty"`
 		// An array of relationships to fabricEthNetworkGroupPolicy resources.
 		EthNetworkGroupPolicy []FabricEthNetworkGroupPolicyRelationship       `json:"EthNetworkGroupPolicy,omitempty"`

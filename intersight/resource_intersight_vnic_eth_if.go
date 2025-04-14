@@ -1185,7 +1185,7 @@ func resourceVnicEthIf() *schema.Resource {
 										Default:     "motemplate.ActionParam",
 									},
 									"name": {
-										Description:  "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncAll, SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+										Description:  "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
 										Type:         schema.TypeString,
 										ValidateFunc: validation.StringInSlice([]string{"None", "SyncType", "SyncTimer", "OverriddenList"}, false),
 										Optional:     true,
@@ -1198,7 +1198,7 @@ func resourceVnicEthIf() *schema.Resource {
 										Default:     "motemplate.ActionParam",
 									},
 									"value": {
-										Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncAll, SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+										Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
 										Type:        schema.TypeString,
 										Optional:    true,
 									},

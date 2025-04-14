@@ -26,6 +26,7 @@ This complex property has following sub-properties:
 * `description`:(string) Detailed information about the endpoint. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `is_ncsi_enabled`:(bool) Indicates whether the CIMC to VIC side-band interface is enabled on the server. 
+* `is_ppl_enabled`:(bool) Indicates Processor Package Power Limit for the server. 
 * `mlom_adapter_pcie_slot_number`:(int) Indicates PCIe Slot numerical value for each Server model MLOM slot. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 

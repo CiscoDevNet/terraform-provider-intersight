@@ -389,6 +389,7 @@ docs/AssetClusterMemberList.md
 docs/AssetClusterMemberRelationship.md
 docs/AssetClusterMemberResponse.md
 docs/AssetConnection.md
+docs/AssetConnectionFlapStatus.md
 docs/AssetContractInformation.md
 docs/AssetCredential.md
 docs/AssetCustomerInformation.md
@@ -5091,6 +5092,7 @@ docs/WorkflowArrayItem.md
 docs/WorkflowAssociatedRoles.md
 docs/WorkflowBaseDataType.md
 docs/WorkflowBaseOperation.md
+docs/WorkflowBaseServiceItemActionProperty.md
 docs/WorkflowBatchApiExecutor.md
 docs/WorkflowBatchApiExecutorList.md
 docs/WorkflowBatchApiExecutorResponse.md
@@ -5145,6 +5147,8 @@ docs/WorkflowInternalProperties.md
 docs/WorkflowJoinTask.md
 docs/WorkflowLoopTask.md
 docs/WorkflowMessage.md
+docs/WorkflowMigrateServiceItemActionProperty.md
+docs/WorkflowMigrationHistory.md
 docs/WorkflowMoInventoryDataType.md
 docs/WorkflowMoInventoryProperty.md
 docs/WorkflowMoReferenceArrayItem.md
@@ -5551,6 +5555,7 @@ model_asset_cluster_member_list.go
 model_asset_cluster_member_relationship.go
 model_asset_cluster_member_response.go
 model_asset_connection.go
+model_asset_connection_flap_status.go
 model_asset_contract_information.go
 model_asset_credential.go
 model_asset_customer_information.go
@@ -10145,6 +10150,7 @@ model_workflow_array_item.go
 model_workflow_associated_roles.go
 model_workflow_base_data_type.go
 model_workflow_base_operation.go
+model_workflow_base_service_item_action_property.go
 model_workflow_batch_api_executor.go
 model_workflow_batch_api_executor_list.go
 model_workflow_batch_api_executor_response.go
@@ -10199,6 +10205,8 @@ model_workflow_internal_properties.go
 model_workflow_join_task.go
 model_workflow_loop_task.go
 model_workflow_message.go
+model_workflow_migrate_service_item_action_property.go
+model_workflow_migration_history.go
 model_workflow_mo_inventory_data_type.go
 model_workflow_mo_inventory_property.go
 model_workflow_mo_reference_array_item.go

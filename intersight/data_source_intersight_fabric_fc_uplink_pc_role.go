@@ -27,7 +27,7 @@ func getFabricFcUplinkPcRoleSchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_speed": {
-			Description: "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
+			Description: "Admin configured speed for the port.\n* `16Gbps` - Admin configurable speed 16Gbps.\n* `8Gbps` - Admin configurable speed 8Gbps.\n* `32Gbps` - Admin configurable speed 32Gbps.\n* `64Gbps` - Admin configurable speed 64Gbps.\n* `Auto` - Admin configurable speed AUTO ( default ).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -11621,6 +11621,30 @@ func TestFlattenListWorkflowMessage(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListWorkflowMigrationHistory(t *testing.T) {
+	p := []models.WorkflowMigrationHistory{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"workflow.MigrationHistory","ObjectType":"workflow.MigrationHistory"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListWorkflowMigrationHistory(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.WorkflowMigrationHistory{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListWorkflowMigrationHistory(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "workflow.MigrationHistory", "object_type": "workflow.MigrationHistory"}, {"class_id": "workflow.MigrationHistory", "object_type": "workflow.MigrationHistory"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListWorkflowParameterSet(t *testing.T) {
 	p := []models.WorkflowParameterSet{}
 	var d = &schema.ResourceData{}
@@ -12590,6 +12614,24 @@ func TestFlattenMapAssetClusterMemberRelationship(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapAssetClusterMemberRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapAssetConnectionFlapStatus(t *testing.T) {
+	p := models.AssetConnectionFlapStatus{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"asset.ConnectionFlapStatus","FlapCount":32,"FlapDetected":true,"ObjectType":"asset.ConnectionFlapStatus","WindowSize":"WindowSize %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapAssetConnectionFlapStatus(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapAssetConnectionFlapStatus(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "asset.ConnectionFlapStatus", "flap_count": 32, "flap_detected": true, "object_type": "asset.ConnectionFlapStatus", "window_size": "WindowSize 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

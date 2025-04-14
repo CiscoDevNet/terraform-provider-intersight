@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025020308
+API version: 1.0.11-2025030309
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,8 @@ type WorkflowServiceItemInstance struct {
 	// A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
 	Label *string `json:"Label,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,92}$"`
 	// Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
-	LastStatus *string `json:"LastStatus,omitempty"`
+	LastStatus       *string                    `json:"LastStatus,omitempty"`
+	MigrationHistory []WorkflowMigrationHistory `json:"MigrationHistory,omitempty"`
 	// A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,92}$"`
 	// Lifecycle state of service item instance. * `Creating` - The service item is not yet created and creation action is in progress. * `Created` - The service item is created. * `Decommissioning` - The service item is not yet decommissioned and decommission action is in progress. * `Decommissioned` - The service item is decommisioned. * `Deleting` - The service item is not yet deleted and deletion action is in progress. * `Deleted` - The service item is deleted. * `Failed` - The service item action is failed to perform the operation.
@@ -229,6 +230,39 @@ func (o *WorkflowServiceItemInstance) HasLastStatus() bool {
 // SetLastStatus gets a reference to the given string and assigns it to the LastStatus field.
 func (o *WorkflowServiceItemInstance) SetLastStatus(v string) {
 	o.LastStatus = &v
+}
+
+// GetMigrationHistory returns the MigrationHistory field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemInstance) GetMigrationHistory() []WorkflowMigrationHistory {
+	if o == nil {
+		var ret []WorkflowMigrationHistory
+		return ret
+	}
+	return o.MigrationHistory
+}
+
+// GetMigrationHistoryOk returns a tuple with the MigrationHistory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemInstance) GetMigrationHistoryOk() ([]WorkflowMigrationHistory, bool) {
+	if o == nil || IsNil(o.MigrationHistory) {
+		return nil, false
+	}
+	return o.MigrationHistory, true
+}
+
+// HasMigrationHistory returns a boolean if a field has been set.
+func (o *WorkflowServiceItemInstance) HasMigrationHistory() bool {
+	if o != nil && !IsNil(o.MigrationHistory) {
+		return true
+	}
+
+	return false
+}
+
+// SetMigrationHistory gets a reference to the given []WorkflowMigrationHistory and assigns it to the MigrationHistory field.
+func (o *WorkflowServiceItemInstance) SetMigrationHistory(v []WorkflowMigrationHistory) {
+	o.MigrationHistory = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -642,6 +676,9 @@ func (o WorkflowServiceItemInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastStatus) {
 		toSerialize["LastStatus"] = o.LastStatus
 	}
+	if o.MigrationHistory != nil {
+		toSerialize["MigrationHistory"] = o.MigrationHistory
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -732,7 +769,8 @@ func (o *WorkflowServiceItemInstance) UnmarshalJSON(data []byte) (err error) {
 		// A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
 		Label *string `json:"Label,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,92}$"`
 		// Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * `NotCreated` - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * `Okay` - The last action on the service item instance completed and the service item instance is in Okay state. * `Decommissioned` - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned.
-		LastStatus *string `json:"LastStatus,omitempty"`
+		LastStatus       *string                    `json:"LastStatus,omitempty"`
+		MigrationHistory []WorkflowMigrationHistory `json:"MigrationHistory,omitempty"`
 		// A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,92}$"`
 		// Lifecycle state of service item instance. * `Creating` - The service item is not yet created and creation action is in progress. * `Created` - The service item is created. * `Decommissioning` - The service item is not yet decommissioned and decommission action is in progress. * `Decommissioned` - The service item is decommisioned. * `Deleting` - The service item is not yet deleted and deletion action is in progress. * `Deleted` - The service item is deleted. * `Failed` - The service item action is failed to perform the operation.
@@ -760,6 +798,7 @@ func (o *WorkflowServiceItemInstance) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowServiceItemInstance.Description = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Description
 		varWorkflowServiceItemInstance.Label = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Label
 		varWorkflowServiceItemInstance.LastStatus = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.LastStatus
+		varWorkflowServiceItemInstance.MigrationHistory = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.MigrationHistory
 		varWorkflowServiceItemInstance.Name = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Name
 		varWorkflowServiceItemInstance.ResourcelifecycleStatus = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.ResourcelifecycleStatus
 		varWorkflowServiceItemInstance.Status = varWorkflowServiceItemInstanceWithoutEmbeddedStruct.Status
@@ -792,6 +831,7 @@ func (o *WorkflowServiceItemInstance) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "LastStatus")
+		delete(additionalProperties, "MigrationHistory")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "ResourcelifecycleStatus")
 		delete(additionalProperties, "Status")
