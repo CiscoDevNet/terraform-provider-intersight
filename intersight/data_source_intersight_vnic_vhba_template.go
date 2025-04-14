@@ -442,7 +442,7 @@ func getVnicVhbaTemplateSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"name": {
-									Description: "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncAll, SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+									Description: "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -452,7 +452,7 @@ func getVnicVhbaTemplateSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"value": {
-									Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncAll, SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+									Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -469,6 +469,11 @@ func getVnicVhbaTemplateSchema() map[string]*schema.Schema {
 		},
 		"type": {
 			Description: "VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters.\n* `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems.\n* `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems.\n* `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver.\n* `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"update_status": {
+			Description: "The template sync status with all derived objects.\n* `None` - The Enum value represents that the object is not attached to any template.\n* `OK` - The Enum value represents that the object values are in sync with attached template.\n* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.\n* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.\n* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1197,6 +1202,11 @@ func dataSourceVnicVhbaTemplateRead(c context.Context, d *schema.ResourceData, m
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("update_status"); ok {
+		x := (v.(string))
+		o.SetUpdateStatus(x)
+	}
+
 	if v, ok := d.GetOkExists("usage_count"); ok {
 		x := int64(v.(int))
 		o.SetUsageCount(x)
@@ -1395,6 +1405,7 @@ func dataSourceVnicVhbaTemplateRead(c context.Context, d *schema.ResourceData, m
 
 				temp["template_actions"] = flattenListMotemplateActionEntry(s.GetTemplateActions(), d)
 				temp["type"] = (s.GetType())
+				temp["update_status"] = (s.GetUpdateStatus())
 				temp["usage_count"] = (s.GetUsageCount())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

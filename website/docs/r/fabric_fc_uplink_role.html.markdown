@@ -24,7 +24,7 @@ resource "intersight_fabric_fc_uplink_role" "fabric_fc_uplink_role1" {
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `admin_speed`:(string) Admin configured speed for the port.* `16Gbps` - Admin configurable speed 16Gbps.* `8Gbps` - Admin configurable speed 8Gbps.* `32Gbps` - Admin configurable speed 32Gbps.* `Auto` - Admin configurable speed AUTO ( default ). 
+* `admin_speed`:(string) Admin configured speed for the port.* `16Gbps` - Admin configurable speed 16Gbps.* `8Gbps` - Admin configurable speed 8Gbps.* `32Gbps` - Admin configurable speed 32Gbps.* `64Gbps` - Admin configurable speed 64Gbps.* `Auto` - Admin configurable speed AUTO ( default ). 
 * `aggregate_port_id`:(int) Breakout port Identifier of the Switch Interface.When a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.When a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,e.g. the id of the port on the switch. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:

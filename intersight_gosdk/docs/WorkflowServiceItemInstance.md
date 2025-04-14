@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | The description for this service item instance. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the resource. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
 **LastStatus** | Pointer to **string** | Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
+**MigrationHistory** | Pointer to [**[]WorkflowMigrationHistory**](WorkflowMigrationHistory.md) |  | [optional] 
 **Name** | Pointer to **string** | A name of the service item instance. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **ResourcelifecycleStatus** | Pointer to **string** | Lifecycle state of service item instance. * &#x60;Creating&#x60; - The service item is not yet created and creation action is in progress. * &#x60;Created&#x60; - The service item is created. * &#x60;Decommissioning&#x60; - The service item is not yet decommissioned and decommission action is in progress. * &#x60;Decommissioned&#x60; - The service item is decommisioned. * &#x60;Deleting&#x60; - The service item is not yet deleted and deletion action is in progress. * &#x60;Deleted&#x60; - The service item is deleted. * &#x60;Failed&#x60; - The service item action is failed to perform the operation. | [optional] [readonly] [default to "Creating"]
 **Status** | Pointer to **string** | Status of the service item instance which controls the actions that can be performed on this instance. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
@@ -154,6 +155,41 @@ SetLastStatus sets LastStatus field to given value.
 
 HasLastStatus returns a boolean if a field has been set.
 
+### GetMigrationHistory
+
+`func (o *WorkflowServiceItemInstance) GetMigrationHistory() []WorkflowMigrationHistory`
+
+GetMigrationHistory returns the MigrationHistory field if non-nil, zero value otherwise.
+
+### GetMigrationHistoryOk
+
+`func (o *WorkflowServiceItemInstance) GetMigrationHistoryOk() (*[]WorkflowMigrationHistory, bool)`
+
+GetMigrationHistoryOk returns a tuple with the MigrationHistory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMigrationHistory
+
+`func (o *WorkflowServiceItemInstance) SetMigrationHistory(v []WorkflowMigrationHistory)`
+
+SetMigrationHistory sets MigrationHistory field to given value.
+
+### HasMigrationHistory
+
+`func (o *WorkflowServiceItemInstance) HasMigrationHistory() bool`
+
+HasMigrationHistory returns a boolean if a field has been set.
+
+### SetMigrationHistoryNil
+
+`func (o *WorkflowServiceItemInstance) SetMigrationHistoryNil(b bool)`
+
+ SetMigrationHistoryNil sets the value for MigrationHistory to be an explicit nil
+
+### UnsetMigrationHistory
+`func (o *WorkflowServiceItemInstance) UnsetMigrationHistory()`
+
+UnsetMigrationHistory ensures that no value is present for MigrationHistory, not even an explicit nil
 ### GetName
 
 `func (o *WorkflowServiceItemInstance) GetName() string`

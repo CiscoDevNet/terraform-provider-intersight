@@ -119,6 +119,11 @@ func getCapabilityServerDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_ppl_enabled": {
+			Description: "Indicates Processor Package Power Limit for the server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mlom_adapter_pcie_slot_number": {
 			Description: "Indicates PCIe Slot numerical value for each Server model MLOM slot.",
 			Type:        schema.TypeInt,
@@ -515,6 +520,11 @@ func dataSourceCapabilityServerDescriptorRead(c context.Context, d *schema.Resou
 		o.SetIsNcsiEnabled(x)
 	}
 
+	if v, ok := d.GetOkExists("is_ppl_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsPplEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("mlom_adapter_pcie_slot_number"); ok {
 		x := int64(v.(int))
 		o.SetMlomAdapterPcieSlotNumber(x)
@@ -808,6 +818,7 @@ func dataSourceCapabilityServerDescriptorRead(c context.Context, d *schema.Resou
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["is_ncsi_enabled"] = (s.GetIsNcsiEnabled())
+				temp["is_ppl_enabled"] = (s.GetIsPplEnabled())
 				temp["mlom_adapter_pcie_slot_number"] = (s.GetMlomAdapterPcieSlotNumber())
 
 				temp["mod_time"] = (s.GetModTime()).String()

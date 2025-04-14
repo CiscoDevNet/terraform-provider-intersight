@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **PeerVnicName** | Pointer to **string** | Name of the peer vNIC which belongs to the peer FI. | [optional] 
 **SwitchId** | Pointer to **string** | The fabric port to which the vNICs will be associated. * &#x60;None&#x60; - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value &#39;None&#39; should be used. * &#x60;A&#x60; - Fabric A of the FI cluster. * &#x60;B&#x60; - Fabric B of the FI cluster. | [optional] [default to "None"]
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
+**UpdateStatus** | Pointer to **string** | The template sync status with all derived objects. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **UsageCount** | Pointer to **int64** | The number of objects derived from a Template MO instance. | [optional] [readonly] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
@@ -260,6 +261,31 @@ HasTemplateActions returns a boolean if a field has been set.
 `func (o *VnicVnicTemplate) UnsetTemplateActions()`
 
 UnsetTemplateActions ensures that no value is present for TemplateActions, not even an explicit nil
+### GetUpdateStatus
+
+`func (o *VnicVnicTemplate) GetUpdateStatus() string`
+
+GetUpdateStatus returns the UpdateStatus field if non-nil, zero value otherwise.
+
+### GetUpdateStatusOk
+
+`func (o *VnicVnicTemplate) GetUpdateStatusOk() (*string, bool)`
+
+GetUpdateStatusOk returns a tuple with the UpdateStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateStatus
+
+`func (o *VnicVnicTemplate) SetUpdateStatus(v string)`
+
+SetUpdateStatus sets UpdateStatus field to given value.
+
+### HasUpdateStatus
+
+`func (o *VnicVnicTemplate) HasUpdateStatus() bool`
+
+HasUpdateStatus returns a boolean if a field has been set.
+
 ### GetUsageCount
 
 `func (o *VnicVnicTemplate) GetUsageCount() int64`

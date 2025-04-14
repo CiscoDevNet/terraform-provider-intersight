@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ServiceItemActionProperties"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemActionProperties"]
-**OperationType** | Pointer to **string** | Type of action operation to be executed on the service item. * &#x60;PostDeployment&#x60; - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item. * &#x60;Deployment&#x60; - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment. * &#x60;Decommission&#x60; - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item. * &#x60;Migration&#x60; - This represents the migration action, used to migrate service item instance from one service item definition version to another service item definition version. All valid service items can have up to one operation type marked as Migration. Once a migration action is running on a service item instance, no further operations are allowed on that service item instance during the migration process. | [optional] [default to "PostDeployment"]
-**Properties** | Pointer to **interface{}** | The properties of the action. The actual structure of properties can vary based on the operationType. | [optional] 
+**OperationType** | Pointer to **string** | Type of action operation to be executed on the service item. * &#x60;PostDeployment&#x60; - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item. * &#x60;Deployment&#x60; - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment. * &#x60;Decommission&#x60; - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item. * &#x60;Migration&#x60; - This represents the migration action, used to migrate service item instance from one service item definition version to another service item definition version. There can be more than one migration operations associated with a service item. Once a migration action is running on a service item instance, no further operations are allowed on that service item instance during the migration process. | [optional] [default to "PostDeployment"]
+**Properties** | Pointer to [**NullableWorkflowBaseServiceItemActionProperty**](WorkflowBaseServiceItemActionProperty.md) |  | [optional] 
 **StopOnFailure** | Pointer to **bool** | When true, the action on the service item will be stopped when it reaches a failure by either calling the configured stop workflow or by calling the rollback workflow. By default value is set to true. | [optional] [default to true]
 
 ## Methods
@@ -96,20 +96,20 @@ HasOperationType returns a boolean if a field has been set.
 
 ### GetProperties
 
-`func (o *WorkflowServiceItemActionProperties) GetProperties() interface{}`
+`func (o *WorkflowServiceItemActionProperties) GetProperties() WorkflowBaseServiceItemActionProperty`
 
 GetProperties returns the Properties field if non-nil, zero value otherwise.
 
 ### GetPropertiesOk
 
-`func (o *WorkflowServiceItemActionProperties) GetPropertiesOk() (*interface{}, bool)`
+`func (o *WorkflowServiceItemActionProperties) GetPropertiesOk() (*WorkflowBaseServiceItemActionProperty, bool)`
 
 GetPropertiesOk returns a tuple with the Properties field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProperties
 
-`func (o *WorkflowServiceItemActionProperties) SetProperties(v interface{})`
+`func (o *WorkflowServiceItemActionProperties) SetProperties(v WorkflowBaseServiceItemActionProperty)`
 
 SetProperties sets Properties field to given value.
 

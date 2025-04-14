@@ -550,7 +550,7 @@ func resourceVnicVhbaTemplate() *schema.Resource {
 										Default:     "motemplate.ActionParam",
 									},
 									"name": {
-										Description:  "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncAll, SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+										Description:  "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
 										Type:         schema.TypeString,
 										ValidateFunc: validation.StringInSlice([]string{"None", "SyncType", "SyncTimer", "OverriddenList"}, false),
 										Optional:     true,
@@ -563,7 +563,7 @@ func resourceVnicVhbaTemplate() *schema.Resource {
 										Default:     "motemplate.ActionParam",
 									},
 									"value": {
-										Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncAll, SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+										Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
 										Type:        schema.TypeString,
 										Optional:    true,
 									},
@@ -587,6 +587,17 @@ func resourceVnicVhbaTemplate() *schema.Resource {
 				Optional:     true,
 				Default:      "fc-initiator",
 			},
+			"update_status": {
+				Description: "The template sync status with all derived objects.\n* `None` - The Enum value represents that the object is not attached to any template.\n* `OK` - The Enum value represents that the object values are in sync with attached template.\n* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.\n* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.\n* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"usage_count": {
 				Description: "The number of objects derived from a Template MO instance.",
 				Type:        schema.TypeInt,
@@ -1388,6 +1399,10 @@ func resourceVnicVhbaTemplateRead(c context.Context, d *schema.ResourceData, met
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in VnicVhbaTemplate object: %s", err.Error())
+	}
+
+	if err := d.Set("update_status", (s.GetUpdateStatus())); err != nil {
+		return diag.Errorf("error occurred while setting property UpdateStatus in VnicVhbaTemplate object: %s", err.Error())
 	}
 
 	if err := d.Set("usage_count", (s.GetUsageCount())); err != nil {
