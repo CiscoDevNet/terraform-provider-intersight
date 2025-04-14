@@ -297,6 +297,11 @@ func resourceServerProfileTemplate() *schema.Resource {
 					}
 					return
 				}},
+			"enable_override": {
+				Description: "When enabled, the configuration of the derived instances may override the template configuration.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"management_mode": {
 				Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
 				Type:        schema.TypeString,
@@ -635,6 +640,79 @@ func resourceServerProfileTemplate() *schema.Resource {
 				Optional:     true,
 				Default:      "Standalone",
 			},
+			"template_actions": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "motemplate.ActionEntry",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "motemplate.ActionEntry",
+						},
+						"params": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "motemplate.ActionParam",
+									},
+									"name": {
+										Description:  "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.StringInSlice([]string{"None", "SyncType", "SyncTimer", "OverriddenList"}, false),
+										Optional:     true,
+										Default:      "None",
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "motemplate.ActionParam",
+									},
+									"value": {
+										Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"type": {
+							Description:  "The action type to be executed.\n* `Sync` - The action to merge values from the template to its derived objects.\n* `Deploy` - The action to execute deploy action on all the objects derived from the template that is mainly applicable for the various profile types.\n* `Detach` - The action to detach the current derived object from its attached template.\n* `Attach` - The action to attach the current object to the specified template.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Sync", "Deploy", "Detach", "Attach"}, false),
+							Optional:     true,
+							Default:      "Sync",
+						},
+					},
+				},
+			},
 			"type": {
 				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 				Type:         schema.TypeString,
@@ -642,8 +720,30 @@ func resourceServerProfileTemplate() *schema.Resource {
 				Optional:     true,
 				Default:      "instance",
 			},
+			"update_status": {
+				Description: "The template sync status with all derived objects.\n* `None` - The Enum value represents that the object is not attached to any template.\n* `OK` - The Enum value represents that the object values are in sync with attached template.\n* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.\n* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.\n* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"usage": {
 				Description: "The count of the server profiles derived from the template.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"usage_count": {
+				Description: "The number of objects derived from a Template MO instance.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -994,6 +1094,11 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_override"); ok {
+		x := (v.(bool))
+		o.SetEnableOverride(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -1229,6 +1334,85 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 		o.SetTargetPlatform(x)
 	}
 
+	if v, ok := d.GetOk("template_actions"); ok {
+		x := make([]models.MotemplateActionEntry, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMotemplateActionEntryWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("motemplate.ActionEntry")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["params"]; ok {
+				{
+					x := make([]models.MotemplateActionParam, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMotemplateActionParamWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("motemplate.ActionParam")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								x := (v.(string))
+								o.SetValue(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetParams(x)
+					}
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetTemplateActions(x)
+		}
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -1376,6 +1560,10 @@ func resourceServerProfileTemplateRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in ServerProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("enable_override", (s.GetEnableOverride())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableOverride in ServerProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("management_mode", (s.GetManagementMode())); err != nil {
 		return diag.Errorf("error occurred while setting property ManagementMode in ServerProfileTemplate object: %s", err.Error())
 	}
@@ -1440,12 +1628,24 @@ func resourceServerProfileTemplateRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property TargetPlatform in ServerProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("template_actions", flattenListMotemplateActionEntry(s.GetTemplateActions(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property TemplateActions in ServerProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in ServerProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("update_status", (s.GetUpdateStatus())); err != nil {
+		return diag.Errorf("error occurred while setting property UpdateStatus in ServerProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("usage", (s.GetUsage())); err != nil {
 		return diag.Errorf("error occurred while setting property Usage in ServerProfileTemplate object: %s", err.Error())
+	}
+
+	if err := d.Set("usage_count", (s.GetUsageCount())); err != nil {
+		return diag.Errorf("error occurred while setting property UsageCount in ServerProfileTemplate object: %s", err.Error())
 	}
 
 	if err := d.Set("uuid_address_type", (s.GetUuidAddressType())); err != nil {
@@ -1604,6 +1804,12 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("enable_override") {
+		v := d.Get("enable_override")
+		x := (v.(bool))
+		o.SetEnableOverride(x)
 	}
 
 	if d.HasChange("moid") {
@@ -1840,6 +2046,84 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("target_platform")
 		x := (v.(string))
 		o.SetTargetPlatform(x)
+	}
+
+	if d.HasChange("template_actions") {
+		v := d.Get("template_actions")
+		x := make([]models.MotemplateActionEntry, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MotemplateActionEntry{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("motemplate.ActionEntry")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["params"]; ok {
+				{
+					x := make([]models.MotemplateActionParam, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMotemplateActionParamWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("motemplate.ActionParam")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								x := (v.(string))
+								o.SetValue(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetParams(x)
+					}
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTemplateActions(x)
 	}
 
 	if d.HasChange("type") {

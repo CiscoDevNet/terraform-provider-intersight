@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025020308
+API version: 1.0.11-2025030309
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type CapabilityServerDescriptor struct {
 	ObjectType string `json:"ObjectType"`
 	// Indicates whether the CIMC to VIC side-band interface is enabled on the server.
 	IsNcsiEnabled *bool `json:"IsNcsiEnabled,omitempty"`
+	// Indicates Processor Package Power Limit for the server.
+	IsPplEnabled *bool `json:"IsPplEnabled,omitempty"`
 	// Indicates PCIe Slot numerical value for each Server model MLOM slot.
 	MlomAdapterPcieSlotNumber *int64 `json:"MlomAdapterPcieSlotNumber,omitempty"`
 	// The form factor (blade/rack/etc) of the server. * `unknown` - The form factor of the server is unknown. * `blade` - Blade server form factor. * `rack` - Rack unit server form factor.
@@ -47,6 +49,8 @@ func NewCapabilityServerDescriptor(classId string, objectType string) *Capabilit
 	this := CapabilityServerDescriptor{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var isPplEnabled bool = false
+	this.IsPplEnabled = &isPplEnabled
 	return &this
 }
 
@@ -59,6 +63,8 @@ func NewCapabilityServerDescriptorWithDefaults() *CapabilityServerDescriptor {
 	this.ClassId = classId
 	var objectType string = "capability.ServerDescriptor"
 	this.ObjectType = objectType
+	var isPplEnabled bool = false
+	this.IsPplEnabled = &isPplEnabled
 	return &this
 }
 
@@ -150,6 +156,38 @@ func (o *CapabilityServerDescriptor) HasIsNcsiEnabled() bool {
 // SetIsNcsiEnabled gets a reference to the given bool and assigns it to the IsNcsiEnabled field.
 func (o *CapabilityServerDescriptor) SetIsNcsiEnabled(v bool) {
 	o.IsNcsiEnabled = &v
+}
+
+// GetIsPplEnabled returns the IsPplEnabled field value if set, zero value otherwise.
+func (o *CapabilityServerDescriptor) GetIsPplEnabled() bool {
+	if o == nil || IsNil(o.IsPplEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPplEnabled
+}
+
+// GetIsPplEnabledOk returns a tuple with the IsPplEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityServerDescriptor) GetIsPplEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPplEnabled) {
+		return nil, false
+	}
+	return o.IsPplEnabled, true
+}
+
+// HasIsPplEnabled returns a boolean if a field has been set.
+func (o *CapabilityServerDescriptor) HasIsPplEnabled() bool {
+	if o != nil && !IsNil(o.IsPplEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPplEnabled gets a reference to the given bool and assigns it to the IsPplEnabled field.
+func (o *CapabilityServerDescriptor) SetIsPplEnabled(v bool) {
+	o.IsPplEnabled = &v
 }
 
 // GetMlomAdapterPcieSlotNumber returns the MlomAdapterPcieSlotNumber field value if set, zero value otherwise.
@@ -245,6 +283,9 @@ func (o CapabilityServerDescriptor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsNcsiEnabled) {
 		toSerialize["IsNcsiEnabled"] = o.IsNcsiEnabled
 	}
+	if !IsNil(o.IsPplEnabled) {
+		toSerialize["IsPplEnabled"] = o.IsPplEnabled
+	}
 	if !IsNil(o.MlomAdapterPcieSlotNumber) {
 		toSerialize["MlomAdapterPcieSlotNumber"] = o.MlomAdapterPcieSlotNumber
 	}
@@ -308,6 +349,8 @@ func (o *CapabilityServerDescriptor) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Indicates whether the CIMC to VIC side-band interface is enabled on the server.
 		IsNcsiEnabled *bool `json:"IsNcsiEnabled,omitempty"`
+		// Indicates Processor Package Power Limit for the server.
+		IsPplEnabled *bool `json:"IsPplEnabled,omitempty"`
 		// Indicates PCIe Slot numerical value for each Server model MLOM slot.
 		MlomAdapterPcieSlotNumber *int64 `json:"MlomAdapterPcieSlotNumber,omitempty"`
 		// The form factor (blade/rack/etc) of the server. * `unknown` - The form factor of the server is unknown. * `blade` - Blade server form factor. * `rack` - Rack unit server form factor.
@@ -322,6 +365,7 @@ func (o *CapabilityServerDescriptor) UnmarshalJSON(data []byte) (err error) {
 		varCapabilityServerDescriptor.ClassId = varCapabilityServerDescriptorWithoutEmbeddedStruct.ClassId
 		varCapabilityServerDescriptor.ObjectType = varCapabilityServerDescriptorWithoutEmbeddedStruct.ObjectType
 		varCapabilityServerDescriptor.IsNcsiEnabled = varCapabilityServerDescriptorWithoutEmbeddedStruct.IsNcsiEnabled
+		varCapabilityServerDescriptor.IsPplEnabled = varCapabilityServerDescriptorWithoutEmbeddedStruct.IsPplEnabled
 		varCapabilityServerDescriptor.MlomAdapterPcieSlotNumber = varCapabilityServerDescriptorWithoutEmbeddedStruct.MlomAdapterPcieSlotNumber
 		varCapabilityServerDescriptor.ServerFormFactor = varCapabilityServerDescriptorWithoutEmbeddedStruct.ServerFormFactor
 		*o = CapabilityServerDescriptor(varCapabilityServerDescriptor)
@@ -344,6 +388,7 @@ func (o *CapabilityServerDescriptor) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsNcsiEnabled")
+		delete(additionalProperties, "IsPplEnabled")
 		delete(additionalProperties, "MlomAdapterPcieSlotNumber")
 		delete(additionalProperties, "ServerFormFactor")
 

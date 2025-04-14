@@ -637,7 +637,7 @@ func getVnicVnicTemplateSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"name": {
-									Description: "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncAll, SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+									Description: "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -647,7 +647,7 @@ func getVnicVnicTemplateSchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"value": {
-									Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncAll, SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+									Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -661,6 +661,11 @@ func getVnicVnicTemplateSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"update_status": {
+			Description: "The template sync status with all derived objects.\n* `None` - The Enum value represents that the object is not attached to any template.\n* `OK` - The Enum value represents that the object values are in sync with attached template.\n* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.\n* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.\n* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"usage_count": {
 			Description: "The number of objects derived from a Template MO instance.",
@@ -1681,6 +1686,11 @@ func dataSourceVnicVnicTemplateRead(c context.Context, d *schema.ResourceData, m
 		o.SetTemplateActions(x)
 	}
 
+	if v, ok := d.GetOk("update_status"); ok {
+		x := (v.(string))
+		o.SetUpdateStatus(x)
+	}
+
 	if v, ok := d.GetOkExists("usage_count"); ok {
 		x := int64(v.(int))
 		o.SetUsageCount(x)
@@ -1961,6 +1971,7 @@ func dataSourceVnicVnicTemplateRead(c context.Context, d *schema.ResourceData, m
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["template_actions"] = flattenListMotemplateActionEntry(s.GetTemplateActions(), d)
+				temp["update_status"] = (s.GetUpdateStatus())
 				temp["usage_count"] = (s.GetUsageCount())
 
 				temp["usnic_settings"] = flattenMapVnicUsnicSettings(s.GetUsnicSettings(), d)

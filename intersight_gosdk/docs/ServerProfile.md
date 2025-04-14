@@ -12,12 +12,16 @@ Name | Type | Description | Notes
 **DeployedSwitches** | Pointer to **string** | The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins. * &#x60;None&#x60; - Server profile configuration not deployed on either of the fabric interconnects. * &#x60;AB&#x60; - Server profile configuration deployed on both fabric interconnects. * &#x60;A&#x60; - Server profile configuration deployed on fabric interconnect A only. * &#x60;B&#x60; - Server profile configuration deployed on fabric interconnect B only. | [optional] [readonly] [default to "None"]
 **InternalReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
+**OverriddenList** | Pointer to **[]string** |  | [optional] 
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
 **ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **ServerAssignmentMode** | Pointer to **string** | Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * &#x60;None&#x60; - No server is assigned to the server profile. * &#x60;Static&#x60; - Server is directly assigned to server profile using assign server. * &#x60;Pool&#x60; - Server is assigned from a resource pool. | [optional] [default to "None"]
 **ServerPreAssignBySerial** | Pointer to **string** | Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
 **ServerPreAssignBySlot** | Pointer to [**NullableServerServerAssignTypeSlot**](ServerServerAssignTypeSlot.md) |  | [optional] 
 **StaticUuidAddress** | Pointer to **string** | The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx. | [optional] 
+**TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
+**TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
+**TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **UserLabel** | Pointer to **string** | User label assigned to the server profile. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
 **AssignedServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -270,6 +274,41 @@ SetIsPmcDeployedSecurePassphraseSet sets IsPmcDeployedSecurePassphraseSet field 
 
 HasIsPmcDeployedSecurePassphraseSet returns a boolean if a field has been set.
 
+### GetOverriddenList
+
+`func (o *ServerProfile) GetOverriddenList() []string`
+
+GetOverriddenList returns the OverriddenList field if non-nil, zero value otherwise.
+
+### GetOverriddenListOk
+
+`func (o *ServerProfile) GetOverriddenListOk() (*[]string, bool)`
+
+GetOverriddenListOk returns a tuple with the OverriddenList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverriddenList
+
+`func (o *ServerProfile) SetOverriddenList(v []string)`
+
+SetOverriddenList sets OverriddenList field to given value.
+
+### HasOverriddenList
+
+`func (o *ServerProfile) HasOverriddenList() bool`
+
+HasOverriddenList returns a boolean if a field has been set.
+
+### SetOverriddenListNil
+
+`func (o *ServerProfile) SetOverriddenListNil(b bool)`
+
+ SetOverriddenListNil sets the value for OverriddenList to be an explicit nil
+
+### UnsetOverriddenList
+`func (o *ServerProfile) UnsetOverriddenList()`
+
+UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
 ### GetPmcDeployedSecurePassphrase
 
 `func (o *ServerProfile) GetPmcDeployedSecurePassphrase() string`
@@ -439,6 +478,101 @@ SetStaticUuidAddress sets StaticUuidAddress field to given value.
 `func (o *ServerProfile) HasStaticUuidAddress() bool`
 
 HasStaticUuidAddress returns a boolean if a field has been set.
+
+### GetTemplateActions
+
+`func (o *ServerProfile) GetTemplateActions() []MotemplateActionEntry`
+
+GetTemplateActions returns the TemplateActions field if non-nil, zero value otherwise.
+
+### GetTemplateActionsOk
+
+`func (o *ServerProfile) GetTemplateActionsOk() (*[]MotemplateActionEntry, bool)`
+
+GetTemplateActionsOk returns a tuple with the TemplateActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateActions
+
+`func (o *ServerProfile) SetTemplateActions(v []MotemplateActionEntry)`
+
+SetTemplateActions sets TemplateActions field to given value.
+
+### HasTemplateActions
+
+`func (o *ServerProfile) HasTemplateActions() bool`
+
+HasTemplateActions returns a boolean if a field has been set.
+
+### SetTemplateActionsNil
+
+`func (o *ServerProfile) SetTemplateActionsNil(b bool)`
+
+ SetTemplateActionsNil sets the value for TemplateActions to be an explicit nil
+
+### UnsetTemplateActions
+`func (o *ServerProfile) UnsetTemplateActions()`
+
+UnsetTemplateActions ensures that no value is present for TemplateActions, not even an explicit nil
+### GetTemplateSyncErrors
+
+`func (o *ServerProfile) GetTemplateSyncErrors() []MotemplateSyncError`
+
+GetTemplateSyncErrors returns the TemplateSyncErrors field if non-nil, zero value otherwise.
+
+### GetTemplateSyncErrorsOk
+
+`func (o *ServerProfile) GetTemplateSyncErrorsOk() (*[]MotemplateSyncError, bool)`
+
+GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncErrors
+
+`func (o *ServerProfile) SetTemplateSyncErrors(v []MotemplateSyncError)`
+
+SetTemplateSyncErrors sets TemplateSyncErrors field to given value.
+
+### HasTemplateSyncErrors
+
+`func (o *ServerProfile) HasTemplateSyncErrors() bool`
+
+HasTemplateSyncErrors returns a boolean if a field has been set.
+
+### SetTemplateSyncErrorsNil
+
+`func (o *ServerProfile) SetTemplateSyncErrorsNil(b bool)`
+
+ SetTemplateSyncErrorsNil sets the value for TemplateSyncErrors to be an explicit nil
+
+### UnsetTemplateSyncErrors
+`func (o *ServerProfile) UnsetTemplateSyncErrors()`
+
+UnsetTemplateSyncErrors ensures that no value is present for TemplateSyncErrors, not even an explicit nil
+### GetTemplateSyncStatus
+
+`func (o *ServerProfile) GetTemplateSyncStatus() string`
+
+GetTemplateSyncStatus returns the TemplateSyncStatus field if non-nil, zero value otherwise.
+
+### GetTemplateSyncStatusOk
+
+`func (o *ServerProfile) GetTemplateSyncStatusOk() (*string, bool)`
+
+GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncStatus
+
+`func (o *ServerProfile) SetTemplateSyncStatus(v string)`
+
+SetTemplateSyncStatus sets TemplateSyncStatus field to given value.
+
+### HasTemplateSyncStatus
+
+`func (o *ServerProfile) HasTemplateSyncStatus() bool`
+
+HasTemplateSyncStatus returns a boolean if a field has been set.
 
 ### GetUserLabel
 

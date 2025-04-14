@@ -100,8 +100,13 @@ func getChassisConfigResultSchema() map[string]*schema.Schema {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"sync_source": {
+									Description: "Sync operation for the sync source object has an error.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
 								"type": {
-									Description: "The error type indicating the point of failure like policy attach/detach, placement computation (LCP/SCP) or license validation (LCP/SCP Qos).\nValues  -- attachErr, detachErr, computationErr, licenseErr.\n* `none` - None is set as default value when there is no error and status is ok.\n* `attachErr` - The policy attach has failed.\n* `detachErr` - The policy detach has failed.\n* `computationErr` - The policy specific computation has failed. For example, vNIC placement on Network Adapter in LanConnectivityPolicy.\n* `licenseErr` - The policy specific license enforcement has failed. For example, Cos property in EthernetQoS policy which is a subpolicyof LanConnectivityPolicy requires Advantage License. But if the server attached to the Server Profile does not have anAdvantage License then the license enforcement check would fail during LanConnectivityPolicy validation.",
+									Description: "The error type indicating the point of failure like policy attach/detach, placement computation (LCP/SCP) or license validation (LCP/SCP Qos).\nValues  -- attachErr, detachErr, computationErr, licenseErr, configSyncErr.\n* `none` - None is set as default value when there is no error and status is ok.\n* `attachErr` - Policy attach to profile failed.\n* `detachErr` - Policy detach to profile failed.\n* `computationErr` - Policy specific computation failed. For example, vNIC placement on Network Adapter in LanConnectivityPolicy.\n* `licenseErr` - Policy specific license enforcement failed. For example, Cos property in EthernetQoS policy which is a subpolicyof LanConnectivityPolicy requires Advantage License. But if the server attached to the Server Profile does not have anAdvantage License then the license enforcement check would fail during LanConnectivityPolicy validation.\n* `configSyncErr` - Policy sync with the template failed. For example, it's possible that the vNIC macpool configuration assigned to the template does not have enough free addresses.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},

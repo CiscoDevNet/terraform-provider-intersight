@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.PolicyError"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.PolicyError"]
 **Message** | Pointer to **string** | Localized message based on the locale setting of the user&#39;s context giving the policy error description. | [optional] [readonly] 
-**Type** | Pointer to **string** | The error type indicating the point of failure like policy attach/detach, placement computation (LCP/SCP) or license validation (LCP/SCP Qos). Values  -- attachErr, detachErr, computationErr, licenseErr. * &#x60;none&#x60; - None is set as default value when there is no error and status is ok. * &#x60;attachErr&#x60; - The policy attach has failed. * &#x60;detachErr&#x60; - The policy detach has failed. * &#x60;computationErr&#x60; - The policy specific computation has failed. For example, vNIC placement on Network Adapter in LanConnectivityPolicy. * &#x60;licenseErr&#x60; - The policy specific license enforcement has failed. For example, Cos property in EthernetQoS policy which is a subpolicyof LanConnectivityPolicy requires Advantage License. But if the server attached to the Server Profile does not have anAdvantage License then the license enforcement check would fail during LanConnectivityPolicy validation. | [optional] [readonly] [default to "none"]
+**SyncSource** | Pointer to **string** | Sync operation for the sync source object has an error. | [optional] [readonly] 
+**Type** | Pointer to **string** | The error type indicating the point of failure like policy attach/detach, placement computation (LCP/SCP) or license validation (LCP/SCP Qos). Values  -- attachErr, detachErr, computationErr, licenseErr, configSyncErr. * &#x60;none&#x60; - None is set as default value when there is no error and status is ok. * &#x60;attachErr&#x60; - Policy attach to profile failed. * &#x60;detachErr&#x60; - Policy detach to profile failed. * &#x60;computationErr&#x60; - Policy specific computation failed. For example, vNIC placement on Network Adapter in LanConnectivityPolicy. * &#x60;licenseErr&#x60; - Policy specific license enforcement failed. For example, Cos property in EthernetQoS policy which is a subpolicyof LanConnectivityPolicy requires Advantage License. But if the server attached to the Server Profile does not have anAdvantage License then the license enforcement check would fail during LanConnectivityPolicy validation. * &#x60;configSyncErr&#x60; - Policy sync with the template failed. For example, it&#39;s possible that the vNIC macpool configuration assigned to the template does not have enough free addresses. | [optional] [readonly] [default to "none"]
 
 ## Methods
 
@@ -92,6 +93,31 @@ SetMessage sets Message field to given value.
 `func (o *PolicyPolicyError) HasMessage() bool`
 
 HasMessage returns a boolean if a field has been set.
+
+### GetSyncSource
+
+`func (o *PolicyPolicyError) GetSyncSource() string`
+
+GetSyncSource returns the SyncSource field if non-nil, zero value otherwise.
+
+### GetSyncSourceOk
+
+`func (o *PolicyPolicyError) GetSyncSourceOk() (*string, bool)`
+
+GetSyncSourceOk returns a tuple with the SyncSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSyncSource
+
+`func (o *PolicyPolicyError) SetSyncSource(v string)`
+
+SetSyncSource sets SyncSource field to given value.
+
+### HasSyncSource
+
+`func (o *PolicyPolicyError) HasSyncSource() bool`
+
+HasSyncSource returns a boolean if a field has been set.
 
 ### GetType
 

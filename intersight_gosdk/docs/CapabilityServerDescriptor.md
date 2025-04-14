@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.ServerDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.ServerDescriptor"]
 **IsNcsiEnabled** | Pointer to **bool** | Indicates whether the CIMC to VIC side-band interface is enabled on the server. | [optional] 
+**IsPplEnabled** | Pointer to **bool** | Indicates Processor Package Power Limit for the server. | [optional] [default to false]
 **MlomAdapterPcieSlotNumber** | Pointer to **int64** | Indicates PCIe Slot numerical value for each Server model MLOM slot. | [optional] 
 **ServerFormFactor** | Pointer to **string** | The form factor (blade/rack/etc) of the server. * &#x60;unknown&#x60; - The form factor of the server is unknown. * &#x60;blade&#x60; - Blade server form factor. * &#x60;rack&#x60; - Rack unit server form factor. | [optional] [readonly] [default to "unknown"]
 
@@ -93,6 +94,31 @@ SetIsNcsiEnabled sets IsNcsiEnabled field to given value.
 `func (o *CapabilityServerDescriptor) HasIsNcsiEnabled() bool`
 
 HasIsNcsiEnabled returns a boolean if a field has been set.
+
+### GetIsPplEnabled
+
+`func (o *CapabilityServerDescriptor) GetIsPplEnabled() bool`
+
+GetIsPplEnabled returns the IsPplEnabled field if non-nil, zero value otherwise.
+
+### GetIsPplEnabledOk
+
+`func (o *CapabilityServerDescriptor) GetIsPplEnabledOk() (*bool, bool)`
+
+GetIsPplEnabledOk returns a tuple with the IsPplEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPplEnabled
+
+`func (o *CapabilityServerDescriptor) SetIsPplEnabled(v bool)`
+
+SetIsPplEnabled sets IsPplEnabled field to given value.
+
+### HasIsPplEnabled
+
+`func (o *CapabilityServerDescriptor) HasIsPplEnabled() bool`
+
+HasIsPplEnabled returns a boolean if a field has been set.
 
 ### GetMlomAdapterPcieSlotNumber
 

@@ -156,6 +156,12 @@ func resourceCapabilityServerDescriptor() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
+			"is_ppl_enabled": {
+				Description: "Indicates Processor Package Power Limit for the server.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"mlom_adapter_pcie_slot_number": {
 				Description: "Indicates PCIe Slot numerical value for each Server model MLOM slot.",
 				Type:        schema.TypeInt,
@@ -560,6 +566,11 @@ func resourceCapabilityServerDescriptorCreate(c context.Context, d *schema.Resou
 		o.SetIsNcsiEnabled(x)
 	}
 
+	if v, ok := d.GetOkExists("is_ppl_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsPplEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("mlom_adapter_pcie_slot_number"); ok {
 		x := int64(v.(int))
 		o.SetMlomAdapterPcieSlotNumber(x)
@@ -704,6 +715,10 @@ func resourceCapabilityServerDescriptorRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property IsNcsiEnabled in CapabilityServerDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("is_ppl_enabled", (s.GetIsPplEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property IsPplEnabled in CapabilityServerDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("mlom_adapter_pcie_slot_number", (s.GetMlomAdapterPcieSlotNumber())); err != nil {
 		return diag.Errorf("error occurred while setting property MlomAdapterPcieSlotNumber in CapabilityServerDescriptor object: %s", err.Error())
 	}
@@ -834,6 +849,12 @@ func resourceCapabilityServerDescriptorUpdate(c context.Context, d *schema.Resou
 		v := d.Get("is_ncsi_enabled")
 		x := (v.(bool))
 		o.SetIsNcsiEnabled(x)
+	}
+
+	if d.HasChange("is_ppl_enabled") {
+		v := d.Get("is_ppl_enabled")
+		x := (v.(bool))
+		o.SetIsPplEnabled(x)
 	}
 
 	if d.HasChange("mlom_adapter_pcie_slot_number") {

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **PortsSupporting1gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting25gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting40gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
+**PortsSupportingApplianceRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingBreakout** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingFcoe** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingServerRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
@@ -646,6 +647,41 @@ HasPortsSupporting40gSpeed returns a boolean if a field has been set.
 `func (o *CapabilitySwitchCapability) UnsetPortsSupporting40gSpeed()`
 
 UnsetPortsSupporting40gSpeed ensures that no value is present for PortsSupporting40gSpeed, not even an explicit nil
+### GetPortsSupportingApplianceRole
+
+`func (o *CapabilitySwitchCapability) GetPortsSupportingApplianceRole() []CapabilityPortRange`
+
+GetPortsSupportingApplianceRole returns the PortsSupportingApplianceRole field if non-nil, zero value otherwise.
+
+### GetPortsSupportingApplianceRoleOk
+
+`func (o *CapabilitySwitchCapability) GetPortsSupportingApplianceRoleOk() (*[]CapabilityPortRange, bool)`
+
+GetPortsSupportingApplianceRoleOk returns a tuple with the PortsSupportingApplianceRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortsSupportingApplianceRole
+
+`func (o *CapabilitySwitchCapability) SetPortsSupportingApplianceRole(v []CapabilityPortRange)`
+
+SetPortsSupportingApplianceRole sets PortsSupportingApplianceRole field to given value.
+
+### HasPortsSupportingApplianceRole
+
+`func (o *CapabilitySwitchCapability) HasPortsSupportingApplianceRole() bool`
+
+HasPortsSupportingApplianceRole returns a boolean if a field has been set.
+
+### SetPortsSupportingApplianceRoleNil
+
+`func (o *CapabilitySwitchCapability) SetPortsSupportingApplianceRoleNil(b bool)`
+
+ SetPortsSupportingApplianceRoleNil sets the value for PortsSupportingApplianceRole to be an explicit nil
+
+### UnsetPortsSupportingApplianceRole
+`func (o *CapabilitySwitchCapability) UnsetPortsSupportingApplianceRole()`
+
+UnsetPortsSupportingApplianceRole ensures that no value is present for PortsSupportingApplianceRole, not even an explicit nil
 ### GetPortsSupportingBreakout
 
 `func (o *CapabilitySwitchCapability) GetPortsSupportingBreakout() []CapabilityPortRange`
