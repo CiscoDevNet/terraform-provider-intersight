@@ -25,6 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `module_id`:(int) This field acts as the identifier for this particular Module, within the Fabric Interconnect. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) The name of the pluggable FanModule. 
 * `oper_state`:(string) This field is used to indicate this fan module's operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Fan Module. 
 * `pid`:(string) This field identifies the Product ID for the fan module. 

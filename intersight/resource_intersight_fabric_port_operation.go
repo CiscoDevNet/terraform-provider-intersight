@@ -310,6 +310,17 @@ func resourceFabricPortOperation() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"switch_name": {
+				Description: "Name of the switch on which the port operation is performed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -757,6 +768,10 @@ func resourceFabricPortOperationRead(c context.Context, d *schema.ResourceData, 
 
 	if err := d.Set("slot_id", (s.GetSlotId())); err != nil {
 		return diag.Errorf("error occurred while setting property SlotId in FabricPortOperation object: %s", err.Error())
+	}
+
+	if err := d.Set("switch_name", (s.GetSwitchName())); err != nil {
+		return diag.Errorf("error occurred while setting property SwitchName in FabricPortOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

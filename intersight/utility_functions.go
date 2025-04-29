@@ -114,8 +114,15 @@ func getRequestParams(in []byte) string {
 	o = strings.TrimSuffix(o, " and ")
 	return o
 }
+func sortArray(arr []interface{}) []interface{} {
+	sort.SliceStable(arr, func(i, j int) bool {
+		return fmt.Sprintf("%v", arr[i]) < fmt.Sprintf("%v", arr[j])
+	})
+	return arr
+}
 
 func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) bool {
+	log.Printf("Checking key: %s, Value: %+v", k, v)
 	if k == "Password" || k == "Passphrase" {
 		return true
 	}
@@ -140,17 +147,61 @@ func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) b
 		} else {
 			oldMap := oldM[k].(map[string]interface{})
 			newMap := v.(map[string]interface{})
-			for k1, v1 := range newMap {
-				b = recursiveValueCheck(oldMap, k1, v1)
-				if b == false {
-					return b
+			return compareMapRecursively(oldMap, newMap)
+		}
+	} else if x == "[]string" {
+		oldStringArray, oldOk := oldM[k].([]string)
+		newStringArray, newOk := v.([]string)
+		if !oldOk || !newOk || len(oldStringArray) != len(newStringArray) {
+			return false
+		}
+		sort.Strings(oldStringArray)
+		sort.Strings(newStringArray)
+		for i := range oldStringArray {
+			if oldStringArray[i] != newStringArray[i] {
+				return false
+			}
+		}
+		return true
+	} else if x == "[]interface {}" {
+
+		oldArray, _ := oldM[k].([]interface{})
+		newArray, _ := v.([]interface{})
+
+		if len(oldArray) != len(newArray) {
+			return false
+		}
+		sortedOldArray := sortArray(oldArray)
+		sortedNewArray := sortArray(newArray)
+
+		for i := range sortedNewArray {
+			oldItem := sortedOldArray[i]
+			newItem := sortedNewArray[i]
+
+			oldMap, oldIsMap := oldItem.(map[string]interface{})
+			newMap, newIsMap := newItem.(map[string]interface{})
+
+			if oldIsMap && newIsMap {
+				if !compareMapRecursively(oldMap, newMap) {
+					return false
 				}
 			}
 		}
+		return true
 	} else {
 		log.Printf("Type did not match: %s", x)
 	}
 	return b
+}
+
+func compareMapRecursively(oldMap, newMap map[string]interface{}) bool {
+	for k1, v1 := range newMap {
+		b := recursiveValueCheck(oldMap, k1, v1)
+		if b == false {
+			return false
+		}
+	}
+	return true
 }
 
 func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship) (string, error) {

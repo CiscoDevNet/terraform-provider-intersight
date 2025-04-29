@@ -37,6 +37,7 @@ The following arguments can be used to get data of already created objects in In
 * `is_user_triggered`:(bool) Indicates if the upgrade is triggered by user or due to schedule. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `previous_install_attempts`:(int) The number of previous failed install attempts of the same upgrade version. 
 * `rollback_needed`:(bool) Track if rollback is needed. 
 * `rollback_status`:(string) Status of the Intersight Appliance's software rollback status. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 

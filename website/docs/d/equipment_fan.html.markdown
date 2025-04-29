@@ -27,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `module_id`:(int) Fan module Identifier for the fan. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) The name of the pluggable Fan. 
 * `oper_state`:(string) This field is used to indicate this fan unit's operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Fan Unit. 
 * `pid`:(string) This field identifies the Product ID for the fans. 

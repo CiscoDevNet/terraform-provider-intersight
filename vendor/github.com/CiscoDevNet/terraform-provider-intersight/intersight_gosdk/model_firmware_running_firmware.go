@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025030309
+API version: 1.0.11-2025040411
 Contact: intersight@cisco.com
 */
 
@@ -35,11 +35,12 @@ type FirmwareRunningFirmware struct {
 	// The type of the firmware.
 	Type *string `json:"Type,omitempty"`
 	// The version of the firmware.
-	Version              *string                                  `json:"Version,omitempty"`
-	BiosUnit             NullableBiosUnitRelationship             `json:"BiosUnit,omitempty"`
-	GraphicsCard         NullableGraphicsCardRelationship         `json:"GraphicsCard,omitempty"`
-	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
-	ManagementController NullableManagementControllerRelationship `json:"ManagementController,omitempty"`
+	Version                   *string                                       `json:"Version,omitempty"`
+	BiosUnit                  NullableBiosUnitRelationship                  `json:"BiosUnit,omitempty"`
+	EquipmentEnclosureElement NullableEquipmentEnclosureElementRelationship `json:"EquipmentEnclosureElement,omitempty"`
+	GraphicsCard              NullableGraphicsCardRelationship              `json:"GraphicsCard,omitempty"`
+	InventoryDeviceInfo       NullableInventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
+	ManagementController      NullableManagementControllerRelationship      `json:"ManagementController,omitempty"`
 	// An array of relationships to networkElement resources.
 	NetworkElements            []NetworkElementRelationship                   `json:"NetworkElements,omitempty"`
 	PciSwitch                  NullablePciSwitchRelationship                  `json:"PciSwitch,omitempty"`
@@ -302,6 +303,49 @@ func (o *FirmwareRunningFirmware) SetBiosUnitNil() {
 // UnsetBiosUnit ensures that no value is present for BiosUnit, not even an explicit nil
 func (o *FirmwareRunningFirmware) UnsetBiosUnit() {
 	o.BiosUnit.Unset()
+}
+
+// GetEquipmentEnclosureElement returns the EquipmentEnclosureElement field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FirmwareRunningFirmware) GetEquipmentEnclosureElement() EquipmentEnclosureElementRelationship {
+	if o == nil || IsNil(o.EquipmentEnclosureElement.Get()) {
+		var ret EquipmentEnclosureElementRelationship
+		return ret
+	}
+	return *o.EquipmentEnclosureElement.Get()
+}
+
+// GetEquipmentEnclosureElementOk returns a tuple with the EquipmentEnclosureElement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FirmwareRunningFirmware) GetEquipmentEnclosureElementOk() (*EquipmentEnclosureElementRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentEnclosureElement.Get(), o.EquipmentEnclosureElement.IsSet()
+}
+
+// HasEquipmentEnclosureElement returns a boolean if a field has been set.
+func (o *FirmwareRunningFirmware) HasEquipmentEnclosureElement() bool {
+	if o != nil && o.EquipmentEnclosureElement.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentEnclosureElement gets a reference to the given NullableEquipmentEnclosureElementRelationship and assigns it to the EquipmentEnclosureElement field.
+func (o *FirmwareRunningFirmware) SetEquipmentEnclosureElement(v EquipmentEnclosureElementRelationship) {
+	o.EquipmentEnclosureElement.Set(&v)
+}
+
+// SetEquipmentEnclosureElementNil sets the value for EquipmentEnclosureElement to be an explicit nil
+func (o *FirmwareRunningFirmware) SetEquipmentEnclosureElementNil() {
+	o.EquipmentEnclosureElement.Set(nil)
+}
+
+// UnsetEquipmentEnclosureElement ensures that no value is present for EquipmentEnclosureElement, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetEquipmentEnclosureElement() {
+	o.EquipmentEnclosureElement.Unset()
 }
 
 // GetGraphicsCard returns the GraphicsCard field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -722,6 +766,9 @@ func (o FirmwareRunningFirmware) ToMap() (map[string]interface{}, error) {
 	if o.BiosUnit.IsSet() {
 		toSerialize["BiosUnit"] = o.BiosUnit.Get()
 	}
+	if o.EquipmentEnclosureElement.IsSet() {
+		toSerialize["EquipmentEnclosureElement"] = o.EquipmentEnclosureElement.Get()
+	}
 	if o.GraphicsCard.IsSet() {
 		toSerialize["GraphicsCard"] = o.GraphicsCard.Get()
 	}
@@ -811,11 +858,12 @@ func (o *FirmwareRunningFirmware) UnmarshalJSON(data []byte) (err error) {
 		// The type of the firmware.
 		Type *string `json:"Type,omitempty"`
 		// The version of the firmware.
-		Version              *string                                  `json:"Version,omitempty"`
-		BiosUnit             NullableBiosUnitRelationship             `json:"BiosUnit,omitempty"`
-		GraphicsCard         NullableGraphicsCardRelationship         `json:"GraphicsCard,omitempty"`
-		InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
-		ManagementController NullableManagementControllerRelationship `json:"ManagementController,omitempty"`
+		Version                   *string                                       `json:"Version,omitempty"`
+		BiosUnit                  NullableBiosUnitRelationship                  `json:"BiosUnit,omitempty"`
+		EquipmentEnclosureElement NullableEquipmentEnclosureElementRelationship `json:"EquipmentEnclosureElement,omitempty"`
+		GraphicsCard              NullableGraphicsCardRelationship              `json:"GraphicsCard,omitempty"`
+		InventoryDeviceInfo       NullableInventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
+		ManagementController      NullableManagementControllerRelationship      `json:"ManagementController,omitempty"`
 		// An array of relationships to networkElement resources.
 		NetworkElements            []NetworkElementRelationship                   `json:"NetworkElements,omitempty"`
 		PciSwitch                  NullablePciSwitchRelationship                  `json:"PciSwitch,omitempty"`
@@ -837,6 +885,7 @@ func (o *FirmwareRunningFirmware) UnmarshalJSON(data []byte) (err error) {
 		varFirmwareRunningFirmware.Type = varFirmwareRunningFirmwareWithoutEmbeddedStruct.Type
 		varFirmwareRunningFirmware.Version = varFirmwareRunningFirmwareWithoutEmbeddedStruct.Version
 		varFirmwareRunningFirmware.BiosUnit = varFirmwareRunningFirmwareWithoutEmbeddedStruct.BiosUnit
+		varFirmwareRunningFirmware.EquipmentEnclosureElement = varFirmwareRunningFirmwareWithoutEmbeddedStruct.EquipmentEnclosureElement
 		varFirmwareRunningFirmware.GraphicsCard = varFirmwareRunningFirmwareWithoutEmbeddedStruct.GraphicsCard
 		varFirmwareRunningFirmware.InventoryDeviceInfo = varFirmwareRunningFirmwareWithoutEmbeddedStruct.InventoryDeviceInfo
 		varFirmwareRunningFirmware.ManagementController = varFirmwareRunningFirmwareWithoutEmbeddedStruct.ManagementController
@@ -870,6 +919,7 @@ func (o *FirmwareRunningFirmware) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "BiosUnit")
+		delete(additionalProperties, "EquipmentEnclosureElement")
 		delete(additionalProperties, "GraphicsCard")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "ManagementController")

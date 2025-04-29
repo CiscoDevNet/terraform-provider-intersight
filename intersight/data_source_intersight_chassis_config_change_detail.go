@@ -87,6 +87,11 @@ func getChassisConfigChangeDetailSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"dependent_policy_list": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"entity_data": {
 						Description: "The data of the object present in config result context.",
 						Type:        schema.TypeString,
@@ -114,6 +119,11 @@ func getChassisConfigChangeDetailSchema() map[string]*schema.Schema {
 					},
 					"parent_moid": {
 						Description: "The Moid of the parent object present in config result context.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"parent_policy_object_type": {
+						Description: "The type of the policy object associated with the profile.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -564,6 +574,20 @@ func dataSourceChassisConfigChangeDetailRead(c context.Context, d *schema.Resour
 				}
 			}
 			o.SetClassId("policy.ConfigResultContext")
+			if v, ok := l["dependent_policy_list"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetDependentPolicyList(x)
+					}
+				}
+			}
 			if v, ok := l["entity_moid"]; ok {
 				{
 					x := (v.(string))
@@ -592,6 +616,12 @@ func dataSourceChassisConfigChangeDetailRead(c context.Context, d *schema.Resour
 				{
 					x := (v.(string))
 					o.SetParentMoid(x)
+				}
+			}
+			if v, ok := l["parent_policy_object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetParentPolicyObjectType(x)
 				}
 			}
 			if v, ok := l["parent_type"]; ok {

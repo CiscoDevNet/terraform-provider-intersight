@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025030309
+API version: 1.0.11-2025040411
 Contact: intersight@cisco.com
 */
 
@@ -45,11 +45,15 @@ type AssetDeviceRegistration struct {
 	PlatformType *string `json:"PlatformType,omitempty"`
 	// The device connector's public key used by Intersight to authenticate a connection from the device connector. The public key is used to verify that the signature a device connector sends on connect has been signed by the connector's private key stored on the device's filesystem. Must be a PEM encoded RSA or Ed22519 public key string.
 	PublicAccessKey *string `json:"PublicAccessKey,omitempty"`
+	// The device connectors rotated public key. The device connector may rotate its key pair in conditions where it has been determined the key may have been compromised or if the key type is changing (e.g. moving from RSA to elliptical curve). The device connector will rotate its key in a two step process in order to ensure Intersight has received and committed the new key before invalidating the previous. Device connectors will first send the new public key on PublicAccessKeyRotated, the public key string will also be signed by the current private key. On receipt of a 200 response from Intersight the device connector commits the new key to its local database and will use it for all future authentication requests. Intersight will then allow both the previous and rotated key periods until the device connects with the rotated key, at which point the previous key is invalidated and removed.
+	PublicAccessKeyRotated *string `json:"PublicAccessKeyRotated,omitempty"`
 	// The device connector public key used by Intersight for encryption. The public key is used to encrypt ephemeral aes keys to be used for decrypting sensitive data from Intersight. Must be a PEM encoded RSA public key string.
 	PublicEncryptionKey *string `json:"PublicEncryptionKey,omitempty"`
 	// Flag reported by devices to indicate an administrator of the device has disabled management operations of the device connector and only monitoring is permitted.
-	ReadOnly *bool    `json:"ReadOnly,omitempty"`
-	Serial   []string `json:"Serial,omitempty"`
+	ReadOnly *bool `json:"ReadOnly,omitempty"`
+	// Request the device to rotate its key pair. SRE team may set this field to trigger the device to rotate its key pair in conditions where it has been identified that the device's key has been compromised. When RotateAccessKey is set to true the device will be forced to re-connect and rotate its key.
+	RotateAccessKey *bool    `json:"RotateAccessKey,omitempty"`
+	Serial          []string `json:"Serial,omitempty"`
 	// The vendor of the managed device.
 	Vendor        *string                        `json:"Vendor,omitempty"`
 	Account       NullableIamAccountRelationship `json:"Account,omitempty"`
@@ -491,6 +495,38 @@ func (o *AssetDeviceRegistration) SetPublicAccessKey(v string) {
 	o.PublicAccessKey = &v
 }
 
+// GetPublicAccessKeyRotated returns the PublicAccessKeyRotated field value if set, zero value otherwise.
+func (o *AssetDeviceRegistration) GetPublicAccessKeyRotated() string {
+	if o == nil || IsNil(o.PublicAccessKeyRotated) {
+		var ret string
+		return ret
+	}
+	return *o.PublicAccessKeyRotated
+}
+
+// GetPublicAccessKeyRotatedOk returns a tuple with the PublicAccessKeyRotated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceRegistration) GetPublicAccessKeyRotatedOk() (*string, bool) {
+	if o == nil || IsNil(o.PublicAccessKeyRotated) {
+		return nil, false
+	}
+	return o.PublicAccessKeyRotated, true
+}
+
+// HasPublicAccessKeyRotated returns a boolean if a field has been set.
+func (o *AssetDeviceRegistration) HasPublicAccessKeyRotated() bool {
+	if o != nil && !IsNil(o.PublicAccessKeyRotated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPublicAccessKeyRotated gets a reference to the given string and assigns it to the PublicAccessKeyRotated field.
+func (o *AssetDeviceRegistration) SetPublicAccessKeyRotated(v string) {
+	o.PublicAccessKeyRotated = &v
+}
+
 // GetPublicEncryptionKey returns the PublicEncryptionKey field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetPublicEncryptionKey() string {
 	if o == nil || IsNil(o.PublicEncryptionKey) {
@@ -553,6 +589,38 @@ func (o *AssetDeviceRegistration) HasReadOnly() bool {
 // SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
 func (o *AssetDeviceRegistration) SetReadOnly(v bool) {
 	o.ReadOnly = &v
+}
+
+// GetRotateAccessKey returns the RotateAccessKey field value if set, zero value otherwise.
+func (o *AssetDeviceRegistration) GetRotateAccessKey() bool {
+	if o == nil || IsNil(o.RotateAccessKey) {
+		var ret bool
+		return ret
+	}
+	return *o.RotateAccessKey
+}
+
+// GetRotateAccessKeyOk returns a tuple with the RotateAccessKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceRegistration) GetRotateAccessKeyOk() (*bool, bool) {
+	if o == nil || IsNil(o.RotateAccessKey) {
+		return nil, false
+	}
+	return o.RotateAccessKey, true
+}
+
+// HasRotateAccessKey returns a boolean if a field has been set.
+func (o *AssetDeviceRegistration) HasRotateAccessKey() bool {
+	if o != nil && !IsNil(o.RotateAccessKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetRotateAccessKey gets a reference to the given bool and assigns it to the RotateAccessKey field.
+func (o *AssetDeviceRegistration) SetRotateAccessKey(v bool) {
+	o.RotateAccessKey = &v
 }
 
 // GetSerial returns the Serial field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1043,11 +1111,17 @@ func (o AssetDeviceRegistration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PublicAccessKey) {
 		toSerialize["PublicAccessKey"] = o.PublicAccessKey
 	}
+	if !IsNil(o.PublicAccessKeyRotated) {
+		toSerialize["PublicAccessKeyRotated"] = o.PublicAccessKeyRotated
+	}
 	if !IsNil(o.PublicEncryptionKey) {
 		toSerialize["PublicEncryptionKey"] = o.PublicEncryptionKey
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["ReadOnly"] = o.ReadOnly
+	}
+	if !IsNil(o.RotateAccessKey) {
+		toSerialize["RotateAccessKey"] = o.RotateAccessKey
 	}
 	if o.Serial != nil {
 		toSerialize["Serial"] = o.Serial
@@ -1153,11 +1227,15 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(data []byte) (err error) {
 		PlatformType *string `json:"PlatformType,omitempty"`
 		// The device connector's public key used by Intersight to authenticate a connection from the device connector. The public key is used to verify that the signature a device connector sends on connect has been signed by the connector's private key stored on the device's filesystem. Must be a PEM encoded RSA or Ed22519 public key string.
 		PublicAccessKey *string `json:"PublicAccessKey,omitempty"`
+		// The device connectors rotated public key. The device connector may rotate its key pair in conditions where it has been determined the key may have been compromised or if the key type is changing (e.g. moving from RSA to elliptical curve). The device connector will rotate its key in a two step process in order to ensure Intersight has received and committed the new key before invalidating the previous. Device connectors will first send the new public key on PublicAccessKeyRotated, the public key string will also be signed by the current private key. On receipt of a 200 response from Intersight the device connector commits the new key to its local database and will use it for all future authentication requests. Intersight will then allow both the previous and rotated key periods until the device connects with the rotated key, at which point the previous key is invalidated and removed.
+		PublicAccessKeyRotated *string `json:"PublicAccessKeyRotated,omitempty"`
 		// The device connector public key used by Intersight for encryption. The public key is used to encrypt ephemeral aes keys to be used for decrypting sensitive data from Intersight. Must be a PEM encoded RSA public key string.
 		PublicEncryptionKey *string `json:"PublicEncryptionKey,omitempty"`
 		// Flag reported by devices to indicate an administrator of the device has disabled management operations of the device connector and only monitoring is permitted.
-		ReadOnly *bool    `json:"ReadOnly,omitempty"`
-		Serial   []string `json:"Serial,omitempty"`
+		ReadOnly *bool `json:"ReadOnly,omitempty"`
+		// Request the device to rotate its key pair. SRE team may set this field to trigger the device to rotate its key pair in conditions where it has been identified that the device's key has been compromised. When RotateAccessKey is set to true the device will be forced to re-connect and rotate its key.
+		RotateAccessKey *bool    `json:"RotateAccessKey,omitempty"`
+		Serial          []string `json:"Serial,omitempty"`
 		// The vendor of the managed device.
 		Vendor        *string                        `json:"Vendor,omitempty"`
 		Account       NullableIamAccountRelationship `json:"Account,omitempty"`
@@ -1190,8 +1268,10 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(data []byte) (err error) {
 		varAssetDeviceRegistration.Pid = varAssetDeviceRegistrationWithoutEmbeddedStruct.Pid
 		varAssetDeviceRegistration.PlatformType = varAssetDeviceRegistrationWithoutEmbeddedStruct.PlatformType
 		varAssetDeviceRegistration.PublicAccessKey = varAssetDeviceRegistrationWithoutEmbeddedStruct.PublicAccessKey
+		varAssetDeviceRegistration.PublicAccessKeyRotated = varAssetDeviceRegistrationWithoutEmbeddedStruct.PublicAccessKeyRotated
 		varAssetDeviceRegistration.PublicEncryptionKey = varAssetDeviceRegistrationWithoutEmbeddedStruct.PublicEncryptionKey
 		varAssetDeviceRegistration.ReadOnly = varAssetDeviceRegistrationWithoutEmbeddedStruct.ReadOnly
+		varAssetDeviceRegistration.RotateAccessKey = varAssetDeviceRegistrationWithoutEmbeddedStruct.RotateAccessKey
 		varAssetDeviceRegistration.Serial = varAssetDeviceRegistrationWithoutEmbeddedStruct.Serial
 		varAssetDeviceRegistration.Vendor = varAssetDeviceRegistrationWithoutEmbeddedStruct.Vendor
 		varAssetDeviceRegistration.Account = varAssetDeviceRegistrationWithoutEmbeddedStruct.Account
@@ -1232,8 +1312,10 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Pid")
 		delete(additionalProperties, "PlatformType")
 		delete(additionalProperties, "PublicAccessKey")
+		delete(additionalProperties, "PublicAccessKeyRotated")
 		delete(additionalProperties, "PublicEncryptionKey")
 		delete(additionalProperties, "ReadOnly")
+		delete(additionalProperties, "RotateAccessKey")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Account")

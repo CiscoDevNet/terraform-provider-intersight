@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **MemoryCorrectableErrors** | Pointer to **int64** | The number of memory correctable errors reported by the Storage Controller. | [optional] 
 **Name** | Pointer to **string** | Name of the Storage Controller. | [optional] 
 **OobInterfaceSupported** | Pointer to **string** | The CIMC support for out-of-band configuration of controller. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The current operational state of controller. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability state of the storage controller. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The current pci address of controller. | [optional] [readonly] 
@@ -457,6 +458,41 @@ SetOobInterfaceSupported sets OobInterfaceSupported field to given value.
 
 HasOobInterfaceSupported returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *StorageController) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *StorageController) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *StorageController) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *StorageController) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *StorageController) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *StorageController) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *StorageController) GetOperState() string`

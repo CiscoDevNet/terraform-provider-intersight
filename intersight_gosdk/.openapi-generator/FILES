@@ -1134,6 +1134,10 @@ docs/EquipmentDeviceLocation.md
 docs/EquipmentDeviceSummary.md
 docs/EquipmentDeviceSummaryList.md
 docs/EquipmentDeviceSummaryResponse.md
+docs/EquipmentEnclosureElement.md
+docs/EquipmentEnclosureElementList.md
+docs/EquipmentEnclosureElementRelationship.md
+docs/EquipmentEnclosureElementResponse.md
 docs/EquipmentEndPointLog.md
 docs/EquipmentEndPointLogList.md
 docs/EquipmentEndPointLogResponse.md
@@ -1246,6 +1250,7 @@ docs/EtherHostPort.md
 docs/EtherHostPortList.md
 docs/EtherHostPortRelationship.md
 docs/EtherHostPortResponse.md
+docs/EtherMacsecOperData.md
 docs/EtherNetworkPort.md
 docs/EtherNetworkPortList.md
 docs/EtherNetworkPortRelationship.md
@@ -1364,6 +1369,11 @@ docs/FabricLinkControlPolicyRelationship.md
 docs/FabricLinkControlPolicyResponse.md
 docs/FabricLldpSettings.md
 docs/FabricMacAgingSettings.md
+docs/FabricMacSecEaPol.md
+docs/FabricMacSecPolicy.md
+docs/FabricMacSecPolicyList.md
+docs/FabricMacSecPolicyRelationship.md
+docs/FabricMacSecPolicyResponse.md
 docs/FabricMulticastPolicy.md
 docs/FabricMulticastPolicyList.md
 docs/FabricMulticastPolicyRelationship.md
@@ -1393,6 +1403,8 @@ docs/FabricQosClass.md
 docs/FabricSanPinGroup.md
 docs/FabricSanPinGroupList.md
 docs/FabricSanPinGroupResponse.md
+docs/FabricSecKey.md
+docs/FabricSecKeyChain.md
 docs/FabricServerRole.md
 docs/FabricServerRoleList.md
 docs/FabricServerRoleResponse.md
@@ -2320,6 +2332,10 @@ docs/IamSystem.md
 docs/IamSystemList.md
 docs/IamSystemRelationship.md
 docs/IamSystemResponse.md
+docs/IamTestIdpConfiguration.md
+docs/IamTestIdpConfigurationList.md
+docs/IamTestIdpConfigurationRelationship.md
+docs/IamTestIdpConfigurationResponse.md
 docs/IamTrustPoint.md
 docs/IamTrustPointList.md
 docs/IamTrustPointRelationship.md
@@ -3326,6 +3342,7 @@ docs/NotificationAction.md
 docs/NotificationAggregationSettings.md
 docs/NotificationAlarmMoCondition.md
 docs/NotificationApi.md
+docs/NotificationApplianceUpgradeMoCondition.md
 docs/NotificationDistributableMoCondition.md
 docs/NotificationMoCondition.md
 docs/NotificationSendEmail.md
@@ -6280,6 +6297,10 @@ model_equipment_device_location.go
 model_equipment_device_summary.go
 model_equipment_device_summary_list.go
 model_equipment_device_summary_response.go
+model_equipment_enclosure_element.go
+model_equipment_enclosure_element_list.go
+model_equipment_enclosure_element_relationship.go
+model_equipment_enclosure_element_response.go
 model_equipment_end_point_log.go
 model_equipment_end_point_log_list.go
 model_equipment_end_point_log_response.go
@@ -6391,6 +6412,7 @@ model_ether_host_port.go
 model_ether_host_port_list.go
 model_ether_host_port_relationship.go
 model_ether_host_port_response.go
+model_ether_macsec_oper_data.go
 model_ether_network_port.go
 model_ether_network_port_list.go
 model_ether_network_port_relationship.go
@@ -6507,6 +6529,11 @@ model_fabric_link_control_policy_relationship.go
 model_fabric_link_control_policy_response.go
 model_fabric_lldp_settings.go
 model_fabric_mac_aging_settings.go
+model_fabric_mac_sec_ea_pol.go
+model_fabric_mac_sec_policy.go
+model_fabric_mac_sec_policy_list.go
+model_fabric_mac_sec_policy_relationship.go
+model_fabric_mac_sec_policy_response.go
 model_fabric_multicast_policy.go
 model_fabric_multicast_policy_list.go
 model_fabric_multicast_policy_relationship.go
@@ -6536,6 +6563,8 @@ model_fabric_qos_class.go
 model_fabric_san_pin_group.go
 model_fabric_san_pin_group_list.go
 model_fabric_san_pin_group_response.go
+model_fabric_sec_key.go
+model_fabric_sec_key_chain.go
 model_fabric_server_role.go
 model_fabric_server_role_list.go
 model_fabric_server_role_response.go
@@ -7449,6 +7478,10 @@ model_iam_system.go
 model_iam_system_list.go
 model_iam_system_relationship.go
 model_iam_system_response.go
+model_iam_test_idp_configuration.go
+model_iam_test_idp_configuration_list.go
+model_iam_test_idp_configuration_relationship.go
+model_iam_test_idp_configuration_response.go
 model_iam_trust_point.go
 model_iam_trust_point_list.go
 model_iam_trust_point_relationship.go
@@ -8433,6 +8466,7 @@ model_notification_account_subscription_response.go
 model_notification_action.go
 model_notification_aggregation_settings.go
 model_notification_alarm_mo_condition.go
+model_notification_appliance_upgrade_mo_condition.go
 model_notification_distributable_mo_condition.go
 model_notification_mo_condition.go
 model_notification_send_email.go
