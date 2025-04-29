@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025030309
+API version: 1.0.11-2025040411
 Contact: intersight@cisco.com
 */
 
@@ -37,7 +37,8 @@ type EtherPhysicalPort struct {
 	// The number of days this port's license has been in Grace Period for.
 	LicenseGrace *string `json:"LicenseGrace,omitempty"`
 	// The state of the port's licensing.
-	LicenseState *string `json:"LicenseState,omitempty"`
+	LicenseState   *string                     `json:"LicenseState,omitempty"`
+	MacsecOperData NullableEtherMacsecOperData `json:"MacsecOperData,omitempty"`
 	// Name of the Physical Port.
 	Name                 *string                                     `json:"Name,omitempty"`
 	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
@@ -290,6 +291,49 @@ func (o *EtherPhysicalPort) SetLicenseState(v string) {
 	o.LicenseState = &v
 }
 
+// GetMacsecOperData returns the MacsecOperData field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EtherPhysicalPort) GetMacsecOperData() EtherMacsecOperData {
+	if o == nil || IsNil(o.MacsecOperData.Get()) {
+		var ret EtherMacsecOperData
+		return ret
+	}
+	return *o.MacsecOperData.Get()
+}
+
+// GetMacsecOperDataOk returns a tuple with the MacsecOperData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EtherPhysicalPort) GetMacsecOperDataOk() (*EtherMacsecOperData, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MacsecOperData.Get(), o.MacsecOperData.IsSet()
+}
+
+// HasMacsecOperData returns a boolean if a field has been set.
+func (o *EtherPhysicalPort) HasMacsecOperData() bool {
+	if o != nil && o.MacsecOperData.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMacsecOperData gets a reference to the given NullableEtherMacsecOperData and assigns it to the MacsecOperData field.
+func (o *EtherPhysicalPort) SetMacsecOperData(v EtherMacsecOperData) {
+	o.MacsecOperData.Set(&v)
+}
+
+// SetMacsecOperDataNil sets the value for MacsecOperData to be an explicit nil
+func (o *EtherPhysicalPort) SetMacsecOperDataNil() {
+	o.MacsecOperData.Set(nil)
+}
+
+// UnsetMacsecOperData ensures that no value is present for MacsecOperData, not even an explicit nil
+func (o *EtherPhysicalPort) UnsetMacsecOperData() {
+	o.MacsecOperData.Unset()
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EtherPhysicalPort) GetName() string {
 	if o == nil || IsNil(o.Name) {
@@ -535,6 +579,9 @@ func (o EtherPhysicalPort) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LicenseState) {
 		toSerialize["LicenseState"] = o.LicenseState
 	}
+	if o.MacsecOperData.IsSet() {
+		toSerialize["MacsecOperData"] = o.MacsecOperData.Get()
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -614,7 +661,8 @@ func (o *EtherPhysicalPort) UnmarshalJSON(data []byte) (err error) {
 		// The number of days this port's license has been in Grace Period for.
 		LicenseGrace *string `json:"LicenseGrace,omitempty"`
 		// The state of the port's licensing.
-		LicenseState *string `json:"LicenseState,omitempty"`
+		LicenseState   *string                     `json:"LicenseState,omitempty"`
+		MacsecOperData NullableEtherMacsecOperData `json:"MacsecOperData,omitempty"`
 		// Name of the Physical Port.
 		Name                *string                                     `json:"Name,omitempty"`
 		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
@@ -635,6 +683,7 @@ func (o *EtherPhysicalPort) UnmarshalJSON(data []byte) (err error) {
 		varEtherPhysicalPort.AggregatePortId = varEtherPhysicalPortWithoutEmbeddedStruct.AggregatePortId
 		varEtherPhysicalPort.LicenseGrace = varEtherPhysicalPortWithoutEmbeddedStruct.LicenseGrace
 		varEtherPhysicalPort.LicenseState = varEtherPhysicalPortWithoutEmbeddedStruct.LicenseState
+		varEtherPhysicalPort.MacsecOperData = varEtherPhysicalPortWithoutEmbeddedStruct.MacsecOperData
 		varEtherPhysicalPort.Name = varEtherPhysicalPortWithoutEmbeddedStruct.Name
 		varEtherPhysicalPort.InventoryDeviceInfo = varEtherPhysicalPortWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEtherPhysicalPort.PortGroup = varEtherPhysicalPortWithoutEmbeddedStruct.PortGroup
@@ -664,6 +713,7 @@ func (o *EtherPhysicalPort) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "LicenseGrace")
 		delete(additionalProperties, "LicenseState")
+		delete(additionalProperties, "MacsecOperData")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "PortGroup")

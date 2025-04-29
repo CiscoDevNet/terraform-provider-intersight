@@ -41,6 +41,12 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"aes_primary_key": {
+				Description:  "Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[^\"\\s]{16,64}$"), ""),
+				Optional:     true,
+			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -135,6 +141,17 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "end-host",
 			},
+			"is_aes_primary_key_set": {
+				Description: "Indicates whether the value of the 'aesPrimaryKey' property has been set.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mac_aging_settings": {
 				Description: "This specifies the MAC aging option and time settings.",
 				Type:        schema.TypeList,
@@ -639,6 +656,11 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("aes_primary_key"); ok {
+		x := (v.(string))
+		o.SetAesPrimaryKey(x)
+	}
+
 	o.SetClassId("fabric.SwitchControlPolicy")
 
 	if v, ok := d.GetOk("description"); ok {
@@ -975,6 +997,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property FcSwitchingMode in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("is_aes_primary_key_set", (s.GetIsAesPrimaryKeySet())); err != nil {
+		return diag.Errorf("error occurred while setting property IsAesPrimaryKeySet in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("mac_aging_settings", flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property MacAgingSettings in FabricSwitchControlPolicy object: %s", err.Error())
 	}
@@ -1058,6 +1084,12 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if d.HasChange("aes_primary_key") {
+		v := d.Get("aes_primary_key")
+		x := (v.(string))
+		o.SetAesPrimaryKey(x)
 	}
 
 	o.SetClassId("fabric.SwitchControlPolicy")

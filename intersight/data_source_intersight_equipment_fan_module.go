@@ -359,6 +359,11 @@ func getEquipmentFanModuleSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "The name of the pluggable FanModule.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"network_element": {
 			Description: "A reference to a networkElement resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1178,6 +1183,11 @@ func dataSourceEquipmentFanModuleRead(c context.Context, d *schema.ResourceData,
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	if v, ok := d.GetOk("network_element"); ok {
 		p := make([]models.NetworkElementRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1655,6 +1665,7 @@ func dataSourceEquipmentFanModuleRead(c context.Context, d *schema.ResourceData,
 				temp["model"] = (s.GetModel())
 				temp["module_id"] = (s.GetModuleId())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["object_type"] = (s.GetObjectType())

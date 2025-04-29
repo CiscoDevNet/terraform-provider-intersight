@@ -239,6 +239,11 @@ func getFabricPortOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"switch_name": {
+			Description: "Name of the switch on which the port operation is performed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -658,6 +663,11 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 		o.SetSlotId(x)
 	}
 
+	if v, ok := d.GetOk("switch_name"); ok {
+		x := (v.(string))
+		o.SetSwitchName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -827,6 +837,7 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 				temp["port_id"] = (s.GetPortId())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
+				temp["switch_name"] = (s.GetSwitchName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

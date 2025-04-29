@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **FanId** | Pointer to **int64** | This field acts as the identifier for this particular Fan, within the Fabric Interconnect. | [optional] [readonly] 
 **FanModuleId** | Pointer to **int64** | This field is used to identify the Fan Module to which this Fan belongs. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Fan module Identifier for the fan. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name of the pluggable Fan. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field is used to indicate this fan unit&#39;s operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Fan Unit. | [optional] [readonly] 
@@ -180,6 +181,31 @@ SetModuleId sets ModuleId field to given value.
 `func (o *EquipmentFan) HasModuleId() bool`
 
 HasModuleId returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *EquipmentFan) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *EquipmentFan) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *EquipmentFan) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *EquipmentFan) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOperReason
 

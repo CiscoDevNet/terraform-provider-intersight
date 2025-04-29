@@ -66,7 +66,7 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"controller_attached_nvme_slots": {
-			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to controller attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges.",
+			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to controller attached mode. Allowed slots are 1-9, 21-24, 101-104. Allowed value is a comma or hyphen separated number ranges.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -86,7 +86,7 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"direct_attached_nvme_slots": {
-			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges.",
+			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-9, 21-24, 101-104. Allowed value is a comma or hyphen separated number ranges.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

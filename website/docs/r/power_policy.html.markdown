@@ -12,7 +12,7 @@ Power Management policy models a configuration that can be applied to Chassis or
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `allocated_budget`:(int) Sets the allocated power budget of the chassis (in Watts). 
+* `allocated_budget`:(int) Sets the limit for the maximum input power consumption by the chassis (in Watts). Set to 0 for no limit. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

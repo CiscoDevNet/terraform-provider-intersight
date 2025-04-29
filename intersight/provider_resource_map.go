@@ -95,6 +95,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_fabric_lan_pin_group":                                    resourceFabricLanPinGroup(),
 		"intersight_fabric_link_aggregation_policy":                          resourceFabricLinkAggregationPolicy(),
 		"intersight_fabric_link_control_policy":                              resourceFabricLinkControlPolicy(),
+		"intersight_fabric_mac_sec_policy":                                   resourceFabricMacSecPolicy(),
 		"intersight_fabric_multicast_policy":                                 resourceFabricMulticastPolicy(),
 		"intersight_fabric_pc_operation":                                     resourceFabricPcOperation(),
 		"intersight_fabric_port_mode":                                        resourceFabricPortMode(),

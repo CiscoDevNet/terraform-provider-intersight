@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**EquipmentEnclosureElement** | Pointer to [**NullableEquipmentEnclosureElementRelationship**](EquipmentEnclosureElementRelationship.md) |  | [optional] 
 **GraphicsControllers** | Pointer to [**[]GraphicsControllerRelationship**](GraphicsControllerRelationship.md) | An array of relationships to graphicsController resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PciDevice** | Pointer to [**NullablePciDeviceRelationship**](PciDeviceRelationship.md) |  | [optional] 
@@ -684,6 +685,41 @@ HasComputeRackUnit returns a boolean if a field has been set.
 `func (o *GraphicsCard) UnsetComputeRackUnit()`
 
 UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+### GetEquipmentEnclosureElement
+
+`func (o *GraphicsCard) GetEquipmentEnclosureElement() EquipmentEnclosureElementRelationship`
+
+GetEquipmentEnclosureElement returns the EquipmentEnclosureElement field if non-nil, zero value otherwise.
+
+### GetEquipmentEnclosureElementOk
+
+`func (o *GraphicsCard) GetEquipmentEnclosureElementOk() (*EquipmentEnclosureElementRelationship, bool)`
+
+GetEquipmentEnclosureElementOk returns a tuple with the EquipmentEnclosureElement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentEnclosureElement
+
+`func (o *GraphicsCard) SetEquipmentEnclosureElement(v EquipmentEnclosureElementRelationship)`
+
+SetEquipmentEnclosureElement sets EquipmentEnclosureElement field to given value.
+
+### HasEquipmentEnclosureElement
+
+`func (o *GraphicsCard) HasEquipmentEnclosureElement() bool`
+
+HasEquipmentEnclosureElement returns a boolean if a field has been set.
+
+### SetEquipmentEnclosureElementNil
+
+`func (o *GraphicsCard) SetEquipmentEnclosureElementNil(b bool)`
+
+ SetEquipmentEnclosureElementNil sets the value for EquipmentEnclosureElement to be an explicit nil
+
+### UnsetEquipmentEnclosureElement
+`func (o *GraphicsCard) UnsetEquipmentEnclosureElement()`
+
+UnsetEquipmentEnclosureElement ensures that no value is present for EquipmentEnclosureElement, not even an explicit nil
 ### GetGraphicsControllers
 
 `func (o *GraphicsCard) GetGraphicsControllers() []GraphicsControllerRelationship`

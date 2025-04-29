@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025030309
+API version: 1.0.11-2025040411
 Contact: intersight@cisco.com
 */
 
@@ -28,13 +28,17 @@ type FabricSwitchControlPolicy struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it.
+	AesPrimaryKey *string `json:"AesPrimaryKey,omitempty" validate:"regexp=^$|^[^\\"\\\\s]{16,64}$"`
 	// Enable or Disable Ethernet End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
 	// When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
 	FabricPcVhbaReset *string `json:"FabricPcVhbaReset,omitempty"`
 	// Enable or Disable FC End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
-	FcSwitchingMode  *string                        `json:"FcSwitchingMode,omitempty"`
-	MacAgingSettings NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
+	FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
+	// Indicates whether the value of the 'aesPrimaryKey' property has been set.
+	IsAesPrimaryKeySet *bool                          `json:"IsAesPrimaryKeySet,omitempty"`
+	MacAgingSettings   NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
 	// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.
 	ReservedVlanStartId *int64                           `json:"ReservedVlanStartId,omitempty"`
 	UdldSettings        NullableFabricUdldGlobalSettings `json:"UdldSettings,omitempty"`
@@ -149,6 +153,38 @@ func (o *FabricSwitchControlPolicy) GetDefaultObjectType() interface{} {
 	return "fabric.SwitchControlPolicy"
 }
 
+// GetAesPrimaryKey returns the AesPrimaryKey field value if set, zero value otherwise.
+func (o *FabricSwitchControlPolicy) GetAesPrimaryKey() string {
+	if o == nil || IsNil(o.AesPrimaryKey) {
+		var ret string
+		return ret
+	}
+	return *o.AesPrimaryKey
+}
+
+// GetAesPrimaryKeyOk returns a tuple with the AesPrimaryKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchControlPolicy) GetAesPrimaryKeyOk() (*string, bool) {
+	if o == nil || IsNil(o.AesPrimaryKey) {
+		return nil, false
+	}
+	return o.AesPrimaryKey, true
+}
+
+// HasAesPrimaryKey returns a boolean if a field has been set.
+func (o *FabricSwitchControlPolicy) HasAesPrimaryKey() bool {
+	if o != nil && !IsNil(o.AesPrimaryKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetAesPrimaryKey gets a reference to the given string and assigns it to the AesPrimaryKey field.
+func (o *FabricSwitchControlPolicy) SetAesPrimaryKey(v string) {
+	o.AesPrimaryKey = &v
+}
+
 // GetEthernetSwitchingMode returns the EthernetSwitchingMode field value if set, zero value otherwise.
 func (o *FabricSwitchControlPolicy) GetEthernetSwitchingMode() string {
 	if o == nil || IsNil(o.EthernetSwitchingMode) {
@@ -243,6 +279,38 @@ func (o *FabricSwitchControlPolicy) HasFcSwitchingMode() bool {
 // SetFcSwitchingMode gets a reference to the given string and assigns it to the FcSwitchingMode field.
 func (o *FabricSwitchControlPolicy) SetFcSwitchingMode(v string) {
 	o.FcSwitchingMode = &v
+}
+
+// GetIsAesPrimaryKeySet returns the IsAesPrimaryKeySet field value if set, zero value otherwise.
+func (o *FabricSwitchControlPolicy) GetIsAesPrimaryKeySet() bool {
+	if o == nil || IsNil(o.IsAesPrimaryKeySet) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAesPrimaryKeySet
+}
+
+// GetIsAesPrimaryKeySetOk returns a tuple with the IsAesPrimaryKeySet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchControlPolicy) GetIsAesPrimaryKeySetOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAesPrimaryKeySet) {
+		return nil, false
+	}
+	return o.IsAesPrimaryKeySet, true
+}
+
+// HasIsAesPrimaryKeySet returns a boolean if a field has been set.
+func (o *FabricSwitchControlPolicy) HasIsAesPrimaryKeySet() bool {
+	if o != nil && !IsNil(o.IsAesPrimaryKeySet) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAesPrimaryKeySet gets a reference to the given bool and assigns it to the IsAesPrimaryKeySet field.
+func (o *FabricSwitchControlPolicy) SetIsAesPrimaryKeySet(v bool) {
+	o.IsAesPrimaryKeySet = &v
 }
 
 // GetMacAgingSettings returns the MacAgingSettings field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -497,6 +565,9 @@ func (o FabricSwitchControlPolicy) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AesPrimaryKey) {
+		toSerialize["AesPrimaryKey"] = o.AesPrimaryKey
+	}
 	if !IsNil(o.EthernetSwitchingMode) {
 		toSerialize["EthernetSwitchingMode"] = o.EthernetSwitchingMode
 	}
@@ -505,6 +576,9 @@ func (o FabricSwitchControlPolicy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FcSwitchingMode) {
 		toSerialize["FcSwitchingMode"] = o.FcSwitchingMode
+	}
+	if !IsNil(o.IsAesPrimaryKeySet) {
+		toSerialize["IsAesPrimaryKeySet"] = o.IsAesPrimaryKeySet
 	}
 	if o.MacAgingSettings.IsSet() {
 		toSerialize["MacAgingSettings"] = o.MacAgingSettings.Get()
@@ -579,13 +653,17 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it.
+		AesPrimaryKey *string `json:"AesPrimaryKey,omitempty" validate:"regexp=^$|^[^\\"\\\\s]{16,64}$"`
 		// Enable or Disable Ethernet End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 		EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
 		// When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
 		FabricPcVhbaReset *string `json:"FabricPcVhbaReset,omitempty"`
 		// Enable or Disable FC End Host Switching Mode. * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
-		FcSwitchingMode  *string                        `json:"FcSwitchingMode,omitempty"`
-		MacAgingSettings NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
+		FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
+		// Indicates whether the value of the 'aesPrimaryKey' property has been set.
+		IsAesPrimaryKeySet *bool                          `json:"IsAesPrimaryKeySet,omitempty"`
+		MacAgingSettings   NullableFabricMacAgingSettings `json:"MacAgingSettings,omitempty"`
 		// The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of a contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in VLAN policy. If this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.
 		ReservedVlanStartId *int64                           `json:"ReservedVlanStartId,omitempty"`
 		UdldSettings        NullableFabricUdldGlobalSettings `json:"UdldSettings,omitempty"`
@@ -603,9 +681,11 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchControlPolicy := _FabricSwitchControlPolicy{}
 		varFabricSwitchControlPolicy.ClassId = varFabricSwitchControlPolicyWithoutEmbeddedStruct.ClassId
 		varFabricSwitchControlPolicy.ObjectType = varFabricSwitchControlPolicyWithoutEmbeddedStruct.ObjectType
+		varFabricSwitchControlPolicy.AesPrimaryKey = varFabricSwitchControlPolicyWithoutEmbeddedStruct.AesPrimaryKey
 		varFabricSwitchControlPolicy.EthernetSwitchingMode = varFabricSwitchControlPolicyWithoutEmbeddedStruct.EthernetSwitchingMode
 		varFabricSwitchControlPolicy.FabricPcVhbaReset = varFabricSwitchControlPolicyWithoutEmbeddedStruct.FabricPcVhbaReset
 		varFabricSwitchControlPolicy.FcSwitchingMode = varFabricSwitchControlPolicyWithoutEmbeddedStruct.FcSwitchingMode
+		varFabricSwitchControlPolicy.IsAesPrimaryKeySet = varFabricSwitchControlPolicyWithoutEmbeddedStruct.IsAesPrimaryKeySet
 		varFabricSwitchControlPolicy.MacAgingSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.MacAgingSettings
 		varFabricSwitchControlPolicy.ReservedVlanStartId = varFabricSwitchControlPolicyWithoutEmbeddedStruct.ReservedVlanStartId
 		varFabricSwitchControlPolicy.UdldSettings = varFabricSwitchControlPolicyWithoutEmbeddedStruct.UdldSettings
@@ -631,9 +711,11 @@ func (o *FabricSwitchControlPolicy) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AesPrimaryKey")
 		delete(additionalProperties, "EthernetSwitchingMode")
 		delete(additionalProperties, "FabricPcVhbaReset")
 		delete(additionalProperties, "FcSwitchingMode")
+		delete(additionalProperties, "IsAesPrimaryKeySet")
 		delete(additionalProperties, "MacAgingSettings")
 		delete(additionalProperties, "ReservedVlanStartId")
 		delete(additionalProperties, "UdldSettings")

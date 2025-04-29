@@ -15,7 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_power_policy_inventory.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `allocated_budget`:(int) Sets the allocated power budget of the chassis (in Watts). 
+* `allocated_budget`:(int) Sets the limit for the maximum input power consumption by the chassis (in Watts). Set to 0 for no limit. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `device_mo_id`:(string) Device ID of the entity from where inventory is reported. 

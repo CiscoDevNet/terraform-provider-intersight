@@ -36,6 +36,11 @@ func getEquipmentIoCardOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"affected_obj_name": {
+			Description: "Placeholder for affected object name which is a combination of chassis and IOM ID. Used to display affected object in audit log.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -474,6 +479,11 @@ func dataSourceEquipmentIoCardOperationRead(c context.Context, d *schema.Resourc
 		o.SetAdminPowerState(x)
 	}
 
+	if v, ok := d.GetOk("affected_obj_name"); ok {
+		x := (v.(string))
+		o.SetAffectedObjName(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -908,6 +918,7 @@ func dataSourceEquipmentIoCardOperationRead(c context.Context, d *schema.Resourc
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["admin_peer_power_state"] = (s.GetAdminPeerPowerState())
 				temp["admin_power_state"] = (s.GetAdminPowerState())
+				temp["affected_obj_name"] = (s.GetAffectedObjName())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())

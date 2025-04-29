@@ -26,6 +26,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aes_primary_key": {
+			Description: "Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -93,6 +98,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 		"fc_switching_mode": {
 			Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_aes_primary_key_set": {
+			Description: "Indicates whether the value of the 'aesPrimaryKey' property has been set.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"mac_aging_settings": {
@@ -515,6 +525,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("aes_primary_key"); ok {
+		x := (v.(string))
+		o.SetAesPrimaryKey(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -588,6 +603,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("fc_switching_mode"); ok {
 		x := (v.(string))
 		o.SetFcSwitchingMode(x)
+	}
+
+	if v, ok := d.GetOkExists("is_aes_primary_key_set"); ok {
+		x := (v.(bool))
+		o.SetIsAesPrimaryKeySet(x)
 	}
 
 	if v, ok := d.GetOk("mac_aging_settings"); ok {
@@ -1042,6 +1062,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["ethernet_switching_mode"] = (s.GetEthernetSwitchingMode())
 				temp["fabric_pc_vhba_reset"] = (s.GetFabricPcVhbaReset())
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
+				temp["is_aes_primary_key_set"] = (s.GetIsAesPrimaryKeySet())
 
 				temp["mac_aging_settings"] = flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)
 

@@ -500,6 +500,11 @@ func getApplianceUpgradeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"previous_install_attempts": {
+			Description: "The number of previous failed install attempts of the same upgrade version.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"requires": {
 			Description: "A reference to a applianceUpgrade resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1228,6 +1233,11 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOkExists("previous_install_attempts"); ok {
+		x := int64(v.(int))
+		o.SetPreviousInstallAttempts(x)
+	}
+
 	if v, ok := d.GetOk("requires"); ok {
 		p := make([]models.ApplianceUpgradeRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1542,6 +1552,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["previous_install_attempts"] = (s.GetPreviousInstallAttempts())
 
 				temp["requires"] = flattenMapApplianceUpgradeRelationship(s.GetRequires(), d)
 				temp["rollback_needed"] = (s.GetRollbackNeeded())

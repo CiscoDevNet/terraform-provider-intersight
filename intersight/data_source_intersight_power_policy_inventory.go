@@ -27,7 +27,7 @@ func getPowerPolicyInventorySchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"allocated_budget": {
-			Description: "Sets the allocated power budget of the chassis (in Watts).",
+			Description: "Sets the limit for the maximum input power consumption by the chassis (in Watts). Set to 0 for no limit.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

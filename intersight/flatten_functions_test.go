@@ -2045,6 +2045,30 @@ func TestFlattenListEquipmentChassisOperationStatus(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListEquipmentEnclosureElementRelationship(t *testing.T) {
+	p := []models.EquipmentEnclosureElementRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListEquipmentEnclosureElementRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.EquipmentEnclosureElementRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListEquipmentEnclosureElementRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListEquipmentExpanderModuleRelationship(t *testing.T) {
 	p := []models.EquipmentExpanderModuleRelationship{}
 	var d = &schema.ResourceData{}
@@ -14093,6 +14117,24 @@ func TestFlattenMapEquipmentDeviceLocation(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapEquipmentEnclosureElementRelationship(t *testing.T) {
+	p := models.EquipmentEnclosureElementRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapEquipmentEnclosureElementRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapEquipmentEnclosureElementRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapEquipmentExpanderModuleRelationship(t *testing.T) {
 	p := models.EquipmentExpanderModuleRelationship{}
 	var d = &schema.ResourceData{}
@@ -14399,6 +14441,24 @@ func TestFlattenMapEtherHostPortRelationship(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapEtherMacsecOperData(t *testing.T) {
+	p := models.EtherMacsecOperData{}
+	var d = &schema.ResourceData{}
+	c := `{"AuthMode":"AuthMode %d","CipherSuite":"CipherSuite %d","ClassId":"ether.MacsecOperData","ConfidentialityOffset":"ConfidentialityOffset %d","KeyServer":"KeyServer %d","ObjectType":"ether.MacsecOperData","SessionState":"SessionState %d","StateReason":"StateReason %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapEtherMacsecOperData(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapEtherMacsecOperData(p, d)[0]
+	expectedOp := map[string]interface{}{"auth_mode": "AuthMode 1", "cipher_suite": "CipherSuite 1", "class_id": "ether.MacsecOperData", "confidentiality_offset": "ConfidentialityOffset 1", "key_server": "KeyServer 1", "object_type": "ether.MacsecOperData", "session_state": "SessionState 1", "state_reason": "StateReason 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapEtherPhysicalPortRelationship(t *testing.T) {
 	p := models.EtherPhysicalPortRelationship{}
 	var d = &schema.ResourceData{}
@@ -14687,6 +14747,42 @@ func TestFlattenMapFabricMacAgingSettings(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapFabricMacSecEaPol(t *testing.T) {
+	p := models.FabricMacSecEaPol{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"fabric.MacSecEaPol","EaPolEthertype":"EaPolEthertype %d","EaPolMacAddress":"EaPolMacAddress %d","ObjectType":"fabric.MacSecEaPol"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapFabricMacSecEaPol(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapFabricMacSecEaPol(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "fabric.MacSecEaPol", "ea_pol_ethertype": "EaPolEthertype 1", "ea_pol_mac_address": "EaPolMacAddress 1", "object_type": "fabric.MacSecEaPol"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapFabricMacSecPolicyRelationship(t *testing.T) {
+	p := models.FabricMacSecPolicyRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapFabricMacSecPolicyRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapFabricMacSecPolicyRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapFabricMulticastPolicyRelationship(t *testing.T) {
 	p := models.FabricMulticastPolicyRelationship{}
 	var d = &schema.ResourceData{}
@@ -14720,6 +14816,24 @@ func TestFlattenMapFabricPortPolicyRelationship(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapFabricPortPolicyRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapFabricSecKeyChain(t *testing.T) {
+	p := models.FabricSecKeyChain{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"fabric.SecKeyChain","Name":"Name %d","ObjectType":"fabric.SecKeyChain"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapFabricSecKeyChain(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapFabricSecKeyChain(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "fabric.SecKeyChain", "name": "Name 1", "object_type": "fabric.SecKeyChain"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
@@ -17437,6 +17551,24 @@ func TestFlattenMapIamSystemRelationship(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapIamSystemRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapIamTestIdpConfigurationRelationship(t *testing.T) {
+	p := models.IamTestIdpConfigurationRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapIamTestIdpConfigurationRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapIamTestIdpConfigurationRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
@@ -20468,7 +20600,7 @@ func TestFlattenMapPolicyConfigContext(t *testing.T) {
 func TestFlattenMapPolicyConfigResultContext(t *testing.T) {
 	p := models.PolicyConfigResultContext{}
 	var d = &schema.ResourceData{}
-	c := `{"ClassId":"policy.ConfigResultContext","EntityMoid":"EntityMoid %d","EntityName":"EntityName %d","EntityType":"EntityType %d","ObjectType":"policy.ConfigResultContext","ParentMoid":"ParentMoid %d","ParentType":"ParentType %d"}`
+	c := `{"ClassId":"policy.ConfigResultContext","EntityMoid":"EntityMoid %d","EntityName":"EntityName %d","EntityType":"EntityType %d","ObjectType":"policy.ConfigResultContext","ParentMoid":"ParentMoid %d","ParentPolicyObjectType":"ParentPolicyObjectType %d","ParentType":"ParentType %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenMapPolicyConfigResultContext(p, d)
@@ -20479,7 +20611,7 @@ func TestFlattenMapPolicyConfigResultContext(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapPolicyConfigResultContext(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "policy.ConfigResultContext", "entity_moid": "EntityMoid 1", "entity_name": "EntityName 1", "entity_type": "EntityType 1", "object_type": "policy.ConfigResultContext", "parent_moid": "ParentMoid 1", "parent_type": "ParentType 1"}
+	expectedOp := map[string]interface{}{"class_id": "policy.ConfigResultContext", "entity_moid": "EntityMoid 1", "entity_name": "EntityName 1", "entity_type": "EntityType 1", "object_type": "policy.ConfigResultContext", "parent_moid": "ParentMoid 1", "parent_policy_object_type": "ParentPolicyObjectType 1", "parent_type": "ParentType 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

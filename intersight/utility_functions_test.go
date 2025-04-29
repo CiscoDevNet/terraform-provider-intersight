@@ -335,3 +335,173 @@ func TestReorderPolicyBucket(t *testing.T) {
 		})
 	}
 }
+
+func TestRecursiveValueCheck(t *testing.T) {
+	const (
+		oldM  = "oldM"
+		key   = "key"
+		value = "value"
+	)
+	tests := []struct {
+		name   string
+		input  map[string]interface{}
+		output bool
+	}{
+		{
+			name: "No change in simple values",
+			input: map[string]interface{}{
+				"oldM":  map[string]interface{}{"object_type": "snmp.User"},
+				"key":   "object_type",
+				"value": "snmp.User",
+			},
+			output: true,
+		},
+		{
+			name: "Different simple values",
+			input: map[string]interface{}{
+				"oldM":  map[string]interface{}{"object_type": "snmp.User"},
+				"key":   "object_type",
+				"value": "snmp.Trap",
+			},
+			output: false,
+		},
+		{
+			name: "Complex map comparison",
+			input: map[string]interface{}{
+				"oldM": map[string]interface{}{
+					"GpuControllersRange": map[string]interface{}{
+						"ConditionType": "RANGE",
+						"MaxValue":      0,
+						"MinValue":      0,
+						"ObjectType":    "GpuControllersRangeFilter",
+					}},
+				"key": "GpuControllersRange",
+				"value": map[string]interface{}{
+					"ConditionType": "RANGE",
+					"MaxValue":      0,
+					"MinValue":      0,
+					"ObjectType":    "GpuControllersRangeFilter",
+				},
+			},
+			output: true,
+		},
+		{
+			name: "List comparison",
+			input: map[string]interface{}{
+				"oldM": map[string]interface{}{
+					"ChassisAndSlotIdRange": []interface{}{
+						map[string]interface{}{
+							"ChassisIdRange": map[string]interface{}{
+								"ClassId":       "resource.ChassisIdRangeFilter",
+								"ConditionType": "RANGE",
+								"MaxValue":      5,
+								"MinValue":      1,
+								"ObjectType":    "resource.ChassisIdRangeFilter",
+							},
+							"ObjectType": "resource.ChassisAndSlotQualification",
+							"SlotIdRanges": []interface{}{
+								map[string]interface{}{
+									"ClassId":       "resource.SlotIdRangeFilter",
+									"ConditionType": "RANGE",
+									"MaxValue":      3,
+									"MinValue":      1,
+									"ObjectType":    "resource.SlotIdRangeFilter",
+								},
+								map[string]interface{}{
+									"ClassId":       "resource.SlotIdRangeFilter",
+									"ConditionType": "RANGE",
+									"MaxValue":      6,
+									"MinValue":      5,
+									"ObjectType":    "resource.SlotIdRangeFilter",
+								},
+							},
+						},
+					},
+				},
+				"key": "ChassisAndSlotIdRange",
+				"value": []interface{}{
+					map[string]interface{}{
+						"ChassisIdRange": map[string]interface{}{
+							"ClassId":       "resource.ChassisIdRangeFilter",
+							"ConditionType": "RANGE",
+							"MaxValue":      5,
+							"MinValue":      1,
+							"ObjectType":    "resource.ChassisIdRangeFilter",
+						},
+						"ObjectType": "resource.ChassisAndSlotQualification",
+						"SlotIdRanges": []interface{}{
+							map[string]interface{}{
+								"ClassId":       "resource.SlotIdRangeFilter",
+								"ConditionType": "RANGE",
+								"MaxValue":      3,
+								"MinValue":      1,
+								"ObjectType":    "resource.SlotIdRangeFilter",
+							},
+							map[string]interface{}{
+								"ClassId":       "resource.SlotIdRangeFilter",
+								"ConditionType": "RANGE",
+								"MaxValue":      6,
+								"MinValue":      5,
+								"ObjectType":    "resource.SlotIdRangeFilter",
+							},
+						},
+					},
+				},
+			},
+			output: true,
+		},
+		{
+			name: "List mismatch",
+			input: map[string]interface{}{
+				"oldM": map[string]interface{}{
+					"SlotIdRanges": []interface{}{
+						map[string]interface{}{
+							"ClassId":       "resource.SlotIdRangeFilter",
+							"ConditionType": "RANGE",
+							"MaxValue":      3,
+							"MinValue":      1,
+							"ObjectType":    "resource.SlotIdRangeFilter",
+						},
+						map[string]interface{}{
+							"ClassId":       "resource.SlotIdRangeFilter",
+							"ConditionType": "RANGE",
+							"MaxValue":      7,
+							"MinValue":      4,
+							"ObjectType":    "resource.SlotIdRangeFilter",
+						},
+					},
+				},
+				"key": "SlotIdRanges",
+				"value": []interface{}{
+					map[string]interface{}{
+						"ClassId":       "resource.SlotIdRangeFilter",
+						"ConditionType": "RANGE",
+						"MaxValue":      3,
+						"MinValue":      3,
+						"ObjectType":    "resource.SlotIdRangeFilter",
+					},
+					map[string]interface{}{
+						"ClassId":       "resource.SlotIdRangeFilter",
+						"ConditionType": "RANGE",
+						"MaxValue":      8,
+						"MinValue":      4,
+						"ObjectType":    "resource.SlotIdRangeFilter",
+					},
+				},
+			},
+			output: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := recursiveValueCheck(
+				tt.input["oldM"].(map[string]interface{}),
+				tt.input["key"].(string),
+				tt.input["value"])
+			if result != tt.output {
+				t.Errorf("Test %s failed: expected %v, got %v", tt.name, tt.output, result)
+			}
+		})
+	}
+}

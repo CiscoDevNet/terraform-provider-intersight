@@ -185,6 +185,61 @@ func getEtherPhysicalPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"macsec_oper_data": {
+			Description: "Configuration information for the MacSecPolicy configured on an Ethernet uplink port or uplink port channel.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"auth_mode": {
+						Description: "The authentication mode used for MACsec encryption.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cipher_suite": {
+						Description: "Cipher suite to be used for MACsec encryption.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"confidentiality_offset": {
+						Description: "The MACsec confidentiality offset specifies the number of bytes starting from the frame header. MACsec encrypts only the bytes after the offset in a frame.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"key_server": {
+						Description: "The value indicates that the device is acting as a key server, responsible for distributing encryption keys to other devices in the MACsec-enabled session.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"session_state": {
+						Description: "The state of the MACsec session.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"state_reason": {
+						Description: "The reason for the MACsec session state.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -842,6 +897,37 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 		o.SetMacAddress(x)
 	}
 
+	if v, ok := d.GetOk("macsec_oper_data"); ok {
+		p := make([]models.EtherMacsecOperData, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.EtherMacsecOperData{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ether.MacsecOperData")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMacsecOperData(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1360,6 +1446,8 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 				temp["license_grace"] = (s.GetLicenseGrace())
 				temp["license_state"] = (s.GetLicenseState())
 				temp["mac_address"] = (s.GetMacAddress())
+
+				temp["macsec_oper_data"] = flattenMapEtherMacsecOperData(s.GetMacsecOperData(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())

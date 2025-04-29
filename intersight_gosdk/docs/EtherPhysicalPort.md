@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
 **LicenseGrace** | Pointer to **string** | The number of days this port&#39;s license has been in Grace Period for. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The state of the port&#39;s licensing. | [optional] [readonly] 
+**MacsecOperData** | Pointer to [**NullableEtherMacsecOperData**](EtherMacsecOperData.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the Physical Port. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PortGroup** | Pointer to [**NullablePortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
@@ -201,6 +202,41 @@ SetLicenseState sets LicenseState field to given value.
 
 HasLicenseState returns a boolean if a field has been set.
 
+### GetMacsecOperData
+
+`func (o *EtherPhysicalPort) GetMacsecOperData() EtherMacsecOperData`
+
+GetMacsecOperData returns the MacsecOperData field if non-nil, zero value otherwise.
+
+### GetMacsecOperDataOk
+
+`func (o *EtherPhysicalPort) GetMacsecOperDataOk() (*EtherMacsecOperData, bool)`
+
+GetMacsecOperDataOk returns a tuple with the MacsecOperData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacsecOperData
+
+`func (o *EtherPhysicalPort) SetMacsecOperData(v EtherMacsecOperData)`
+
+SetMacsecOperData sets MacsecOperData field to given value.
+
+### HasMacsecOperData
+
+`func (o *EtherPhysicalPort) HasMacsecOperData() bool`
+
+HasMacsecOperData returns a boolean if a field has been set.
+
+### SetMacsecOperDataNil
+
+`func (o *EtherPhysicalPort) SetMacsecOperDataNil(b bool)`
+
+ SetMacsecOperDataNil sets the value for MacsecOperData to be an explicit nil
+
+### UnsetMacsecOperData
+`func (o *EtherPhysicalPort) UnsetMacsecOperData()`
+
+UnsetMacsecOperData ensures that no value is present for MacsecOperData, not even an explicit nil
 ### GetName
 
 `func (o *EtherPhysicalPort) GetName() string`

@@ -562,6 +562,11 @@ func getAssetDeviceRegistrationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"public_access_key_rotated": {
+			Description: "The device connectors rotated public key. The device connector may rotate its key pair in conditions where it has been determined the key may have been compromised or if the key type is changing (e.g. moving from RSA to elliptical curve). The device connector will rotate its key in a two step process in order to ensure Intersight has received and committed the new key before invalidating the previous. Device connectors will first send the new public key on PublicAccessKeyRotated, the public key string will also be signed by the current private key. On receipt of a 200 response from Intersight the device connector commits the new key to its local database and will use it for all future authentication requests. Intersight will then allow both the previous and rotated key periods until the device connects with the rotated key, at which point the previous key is invalidated and removed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"public_encryption_key": {
 			Description: "The device connector public key used by Intersight for encryption. The public key is used to encrypt ephemeral aes keys to be used for decrypting sensitive data from Intersight. Must be a PEM encoded RSA public key string.",
 			Type:        schema.TypeString,
@@ -569,6 +574,11 @@ func getAssetDeviceRegistrationSchema() map[string]*schema.Schema {
 		},
 		"read_only": {
 			Description: "Flag reported by devices to indicate an administrator of the device has disabled management operations of the device connector and only monitoring is permitted.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"rotate_access_key": {
+			Description: "Request the device to rotate its key pair. SRE team may set this field to trigger the device to rotate its key pair in conditions where it has been identified that the device's key has been compromised. When RotateAccessKey is set to true the device will be forced to re-connect and rotate its key.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -1435,6 +1445,11 @@ func dataSourceAssetDeviceRegistrationRead(c context.Context, d *schema.Resource
 		o.SetPublicAccessKey(x)
 	}
 
+	if v, ok := d.GetOk("public_access_key_rotated"); ok {
+		x := (v.(string))
+		o.SetPublicAccessKeyRotated(x)
+	}
+
 	if v, ok := d.GetOk("public_encryption_key"); ok {
 		x := (v.(string))
 		o.SetPublicEncryptionKey(x)
@@ -1443,6 +1458,11 @@ func dataSourceAssetDeviceRegistrationRead(c context.Context, d *schema.Resource
 	if v, ok := d.GetOkExists("read_only"); ok {
 		x := (v.(bool))
 		o.SetReadOnly(x)
+	}
+
+	if v, ok := d.GetOkExists("rotate_access_key"); ok {
+		x := (v.(bool))
+		o.SetRotateAccessKey(x)
 	}
 
 	if v, ok := d.GetOk("serial"); ok {
@@ -1706,8 +1726,10 @@ func dataSourceAssetDeviceRegistrationRead(c context.Context, d *schema.Resource
 				temp["platform_type"] = (s.GetPlatformType())
 				temp["proxy_app"] = (s.GetProxyApp())
 				temp["public_access_key"] = (s.GetPublicAccessKey())
+				temp["public_access_key_rotated"] = (s.GetPublicAccessKeyRotated())
 				temp["public_encryption_key"] = (s.GetPublicEncryptionKey())
 				temp["read_only"] = (s.GetReadOnly())
+				temp["rotate_access_key"] = (s.GetRotateAccessKey())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 

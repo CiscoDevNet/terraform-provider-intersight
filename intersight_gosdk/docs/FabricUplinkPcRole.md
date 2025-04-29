@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **FlowControlPolicy** | Pointer to [**NullableFabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
 **LinkAggregationPolicy** | Pointer to [**NullableFabricLinkAggregationPolicyRelationship**](FabricLinkAggregationPolicyRelationship.md) |  | [optional] 
 **LinkControlPolicy** | Pointer to [**NullableFabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
+**MacSecPolicy** | Pointer to [**NullableFabricMacSecPolicyRelationship**](FabricMacSecPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -262,6 +263,41 @@ HasLinkControlPolicy returns a boolean if a field has been set.
 `func (o *FabricUplinkPcRole) UnsetLinkControlPolicy()`
 
 UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
+### GetMacSecPolicy
+
+`func (o *FabricUplinkPcRole) GetMacSecPolicy() FabricMacSecPolicyRelationship`
+
+GetMacSecPolicy returns the MacSecPolicy field if non-nil, zero value otherwise.
+
+### GetMacSecPolicyOk
+
+`func (o *FabricUplinkPcRole) GetMacSecPolicyOk() (*FabricMacSecPolicyRelationship, bool)`
+
+GetMacSecPolicyOk returns a tuple with the MacSecPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacSecPolicy
+
+`func (o *FabricUplinkPcRole) SetMacSecPolicy(v FabricMacSecPolicyRelationship)`
+
+SetMacSecPolicy sets MacSecPolicy field to given value.
+
+### HasMacSecPolicy
+
+`func (o *FabricUplinkPcRole) HasMacSecPolicy() bool`
+
+HasMacSecPolicy returns a boolean if a field has been set.
+
+### SetMacSecPolicyNil
+
+`func (o *FabricUplinkPcRole) SetMacSecPolicyNil(b bool)`
+
+ SetMacSecPolicyNil sets the value for MacSecPolicy to be an explicit nil
+
+### UnsetMacSecPolicy
+`func (o *FabricUplinkPcRole) UnsetMacSecPolicy()`
+
+UnsetMacSecPolicy ensures that no value is present for MacSecPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

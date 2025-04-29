@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 **System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
+**TestIdp** | Pointer to [**NullableIamTestIdpConfigurationRelationship**](IamTestIdpConfigurationRelationship.md) |  | [optional] 
 **UserPreferences** | Pointer to [**[]IamUserPreferenceRelationship**](IamUserPreferenceRelationship.md) | An array of relationships to iamUserPreference resources. | [optional] [readonly] 
 **UserSettings** | Pointer to [**[]IamUserSettingRelationship**](IamUserSettingRelationship.md) | An array of relationships to iamUserSetting resources. | [optional] [readonly] 
 **Usergroups** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
@@ -396,6 +397,41 @@ HasSystem returns a boolean if a field has been set.
 `func (o *IamIdp) UnsetSystem()`
 
 UnsetSystem ensures that no value is present for System, not even an explicit nil
+### GetTestIdp
+
+`func (o *IamIdp) GetTestIdp() IamTestIdpConfigurationRelationship`
+
+GetTestIdp returns the TestIdp field if non-nil, zero value otherwise.
+
+### GetTestIdpOk
+
+`func (o *IamIdp) GetTestIdpOk() (*IamTestIdpConfigurationRelationship, bool)`
+
+GetTestIdpOk returns a tuple with the TestIdp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTestIdp
+
+`func (o *IamIdp) SetTestIdp(v IamTestIdpConfigurationRelationship)`
+
+SetTestIdp sets TestIdp field to given value.
+
+### HasTestIdp
+
+`func (o *IamIdp) HasTestIdp() bool`
+
+HasTestIdp returns a boolean if a field has been set.
+
+### SetTestIdpNil
+
+`func (o *IamIdp) SetTestIdpNil(b bool)`
+
+ SetTestIdpNil sets the value for TestIdp to be an explicit nil
+
+### UnsetTestIdp
+`func (o *IamIdp) UnsetTestIdp()`
+
+UnsetTestIdp ensures that no value is present for TestIdp, not even an explicit nil
 ### GetUserPreferences
 
 `func (o *IamIdp) GetUserPreferences() []IamUserPreferenceRelationship`

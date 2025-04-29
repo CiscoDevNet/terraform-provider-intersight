@@ -370,9 +370,10 @@ func resourceIamApiKey() *schema.Resource {
 				},
 			},
 			"purpose": {
-				Description: "The purpose of the API Key.",
-				Type:        schema.TypeString,
-				Optional:    true,
+				Description:  "The purpose of the API Key.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(1024),
+				Optional:     true,
 			},
 			"scope": {
 				Description: "Scope holds a collection of account Id, permission Id to which the current session is scoped to.",

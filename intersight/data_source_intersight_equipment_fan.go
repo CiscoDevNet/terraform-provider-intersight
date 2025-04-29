@@ -230,6 +230,11 @@ func getEquipmentFanSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "The name of the pluggable Fan.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -850,6 +855,11 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1273,6 +1283,7 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 				temp["model"] = (s.GetModel())
 				temp["module_id"] = (s.GetModuleId())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
