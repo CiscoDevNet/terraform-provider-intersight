@@ -361,8 +361,8 @@ func resourceVnicEthIf() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -1834,49 +1834,6 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetFailoverEnabled(x)
 	}
 
-	if v, ok := d.GetOk("ip_lease"); ok {
-		p := make([]models.IppoolIpLeaseRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsIppoolIpLeaseRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetIpLease(x)
-		}
-	}
-
 	if v, ok := d.GetOk("iscsi_boot_policy"); ok {
 		p := make([]models.VnicIscsiBootPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -3135,50 +3092,6 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 		v := d.Get("failover_enabled")
 		x := (v.(bool))
 		o.SetFailoverEnabled(x)
-	}
-
-	if d.HasChange("ip_lease") {
-		v := d.Get("ip_lease")
-		p := make([]models.IppoolIpLeaseRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsIppoolIpLeaseRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetIpLease(x)
-		}
 	}
 
 	if d.HasChange("iscsi_boot_policy") {

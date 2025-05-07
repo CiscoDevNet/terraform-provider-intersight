@@ -5044,6 +5044,9 @@ docs/VnicLanConnectivityPolicyInventoryResponse.md
 docs/VnicLanConnectivityPolicyList.md
 docs/VnicLanConnectivityPolicyRelationship.md
 docs/VnicLanConnectivityPolicyResponse.md
+docs/VnicLanSettings.md
+docs/VnicLanSettingsList.md
+docs/VnicLanSettingsResponse.md
 docs/VnicLcpStatus.md
 docs/VnicLcpStatusList.md
 docs/VnicLcpStatusResponse.md
@@ -5062,6 +5065,9 @@ docs/VnicSanConnectivityPolicyInventoryResponse.md
 docs/VnicSanConnectivityPolicyList.md
 docs/VnicSanConnectivityPolicyRelationship.md
 docs/VnicSanConnectivityPolicyResponse.md
+docs/VnicSanSettings.md
+docs/VnicSanSettingsList.md
+docs/VnicSanSettingsResponse.md
 docs/VnicScpStatus.md
 docs/VnicScpStatusList.md
 docs/VnicScpStatusResponse.md
@@ -10122,6 +10128,9 @@ model_vnic_lan_connectivity_policy_inventory_response.go
 model_vnic_lan_connectivity_policy_list.go
 model_vnic_lan_connectivity_policy_relationship.go
 model_vnic_lan_connectivity_policy_response.go
+model_vnic_lan_settings.go
+model_vnic_lan_settings_list.go
+model_vnic_lan_settings_response.go
 model_vnic_lcp_status.go
 model_vnic_lcp_status_list.go
 model_vnic_lcp_status_response.go
@@ -10140,6 +10149,9 @@ model_vnic_san_connectivity_policy_inventory_response.go
 model_vnic_san_connectivity_policy_list.go
 model_vnic_san_connectivity_policy_relationship.go
 model_vnic_san_connectivity_policy_response.go
+model_vnic_san_settings.go
+model_vnic_san_settings_list.go
+model_vnic_san_settings_response.go
 model_vnic_scp_status.go
 model_vnic_scp_status_list.go
 model_vnic_scp_status_response.go

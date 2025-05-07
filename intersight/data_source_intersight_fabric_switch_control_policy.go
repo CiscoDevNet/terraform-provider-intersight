@@ -485,7 +485,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"vlan_port_optimization_enabled": {
-			Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for Cisco UCS Fabric Interconnect 9108 100G.",
+			Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for\nCisco UCS Fabric Interconnect 9108 100G and also enabled on the IMM 6.x Bundle version and onwards.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

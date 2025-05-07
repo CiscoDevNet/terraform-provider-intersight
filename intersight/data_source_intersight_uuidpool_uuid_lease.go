@@ -120,6 +120,11 @@ func getUuidpoolUuidLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"migrate": {
+			Description: "The migration capability is applicable only for dynamic lease requests and it works in conjunction with  preferred ID. If there is an existing dynamic or static lease that matches the preferred ID, that existing  lease will be migrated to the current pool. That means the existing lease will be deleted and a new lease  will be created in the pool. If there is a reservation exists that matches with preferred ID, that  reservation will be kept as is and next available ID from the pool will be leased.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -634,6 +639,11 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 		o.SetHasDuplicate(x)
 	}
 
+	if v, ok := d.GetOkExists("migrate"); ok {
+		x := (v.(bool))
+		o.SetMigrate(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1073,6 +1083,7 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["has_duplicate"] = (s.GetHasDuplicate())
+				temp["migrate"] = (s.GetMigrate())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

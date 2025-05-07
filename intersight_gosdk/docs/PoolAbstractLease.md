@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AllocationType** | Pointer to **string** | Type of the lease allocation either static or dynamic (i.e via pool). * &#x60;dynamic&#x60; - Identifiers to be allocated by system. * &#x60;static&#x60; - Identifiers are assigned by the user. | [optional] [default to "dynamic"]
 **HasDuplicate** | Pointer to **bool** | HasDuplicate represents if there are other pools in which this id exists. | [optional] [default to false]
+**Migrate** | Pointer to **bool** | The migration capability is applicable only for dynamic lease requests and it works in conjunction with  preferred ID. If there is an existing dynamic or static lease that matches the preferred ID, that existing  lease will be migrated to the current pool. That means the existing lease will be deleted and a new lease  will be created in the pool. If there is a reservation exists that matches with preferred ID, that  reservation will be kept as is and next available ID from the pool will be leased. | [optional] [default to false]
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetHasDuplicate sets HasDuplicate field to given value.
 `func (o *PoolAbstractLease) HasHasDuplicate() bool`
 
 HasHasDuplicate returns a boolean if a field has been set.
+
+### GetMigrate
+
+`func (o *PoolAbstractLease) GetMigrate() bool`
+
+GetMigrate returns the Migrate field if non-nil, zero value otherwise.
+
+### GetMigrateOk
+
+`func (o *PoolAbstractLease) GetMigrateOk() (*bool, bool)`
+
+GetMigrateOk returns a tuple with the Migrate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMigrate
+
+`func (o *PoolAbstractLease) SetMigrate(v bool)`
+
+SetMigrate sets Migrate field to given value.
+
+### HasMigrate
+
+`func (o *PoolAbstractLease) HasMigrate() bool`
+
+HasMigrate returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
