@@ -120,6 +120,11 @@ func getFcpoolLeaseSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"migrate": {
+			Description: "The migration capability is applicable only for dynamic lease requests and it works in conjunction with  preferred ID. If there is an existing dynamic or static lease that matches the preferred ID, that existing  lease will be migrated to the current pool. That means the existing lease will be deleted and a new lease  will be created in the pool. If there is a reservation exists that matches with preferred ID, that  reservation will be kept as is and next available ID from the pool will be leased.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -281,6 +286,11 @@ func getFcpoolLeaseSchema() map[string]*schema.Schema {
 		},
 		"pool_purpose": {
 			Description: "Purpose of this WWN pool.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"preferred_wwn_id": {
+			Description: "The preferred WWN ID address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that WWN ID address if it is available in the pool. If the specified preferred WWN ID address  is not in the range of the pool or if it is already leased or reserved, then the next available WWN ID address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred WWN ID address property. When the preferred WWN ID address  property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -649,6 +659,11 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 		o.SetHasDuplicate(x)
 	}
 
+	if v, ok := d.GetOkExists("migrate"); ok {
+		x := (v.(bool))
+		o.SetMigrate(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -847,6 +862,11 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 	if v, ok := d.GetOk("pool_purpose"); ok {
 		x := (v.(string))
 		o.SetPoolPurpose(x)
+	}
+
+	if v, ok := d.GetOk("preferred_wwn_id"); ok {
+		x := (v.(string))
+		o.SetPreferredWwnId(x)
 	}
 
 	if v, ok := d.GetOk("reservation"); ok {
@@ -1105,6 +1125,7 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["has_duplicate"] = (s.GetHasDuplicate())
+				temp["migrate"] = (s.GetMigrate())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1119,6 +1140,7 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 
 				temp["pool_member"] = flattenMapFcpoolPoolMemberRelationship(s.GetPoolMember(), d)
 				temp["pool_purpose"] = (s.GetPoolPurpose())
+				temp["preferred_wwn_id"] = (s.GetPreferredWwnId())
 
 				temp["reservation"] = flattenMapFcpoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

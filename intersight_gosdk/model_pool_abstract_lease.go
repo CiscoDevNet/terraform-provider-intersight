@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025040411
+API version: 1.0.11-2025041004
 Contact: intersight@cisco.com
 */
 
@@ -31,7 +31,9 @@ type PoolAbstractLease struct {
 	// Type of the lease allocation either static or dynamic (i.e via pool). * `dynamic` - Identifiers to be allocated by system. * `static` - Identifiers are assigned by the user.
 	AllocationType *string `json:"AllocationType,omitempty"`
 	// HasDuplicate represents if there are other pools in which this id exists.
-	HasDuplicate         *bool `json:"HasDuplicate,omitempty"`
+	HasDuplicate *bool `json:"HasDuplicate,omitempty"`
+	// The migration capability is applicable only for dynamic lease requests and it works in conjunction with  preferred ID. If there is an existing dynamic or static lease that matches the preferred ID, that existing  lease will be migrated to the current pool. That means the existing lease will be deleted and a new lease  will be created in the pool. If there is a reservation exists that matches with preferred ID, that  reservation will be kept as is and next available ID from the pool will be leased.
+	Migrate              *bool `json:"Migrate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,6 +51,8 @@ func NewPoolAbstractLease(classId string, objectType string) *PoolAbstractLease 
 	this.AllocationType = &allocationType
 	var hasDuplicate bool = false
 	this.HasDuplicate = &hasDuplicate
+	var migrate bool = false
+	this.Migrate = &migrate
 	return &this
 }
 
@@ -61,6 +65,8 @@ func NewPoolAbstractLeaseWithDefaults() *PoolAbstractLease {
 	this.AllocationType = &allocationType
 	var hasDuplicate bool = false
 	this.HasDuplicate = &hasDuplicate
+	var migrate bool = false
+	this.Migrate = &migrate
 	return &this
 }
 
@@ -176,6 +182,38 @@ func (o *PoolAbstractLease) SetHasDuplicate(v bool) {
 	o.HasDuplicate = &v
 }
 
+// GetMigrate returns the Migrate field value if set, zero value otherwise.
+func (o *PoolAbstractLease) GetMigrate() bool {
+	if o == nil || IsNil(o.Migrate) {
+		var ret bool
+		return ret
+	}
+	return *o.Migrate
+}
+
+// GetMigrateOk returns a tuple with the Migrate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PoolAbstractLease) GetMigrateOk() (*bool, bool) {
+	if o == nil || IsNil(o.Migrate) {
+		return nil, false
+	}
+	return o.Migrate, true
+}
+
+// HasMigrate returns a boolean if a field has been set.
+func (o *PoolAbstractLease) HasMigrate() bool {
+	if o != nil && !IsNil(o.Migrate) {
+		return true
+	}
+
+	return false
+}
+
+// SetMigrate gets a reference to the given bool and assigns it to the Migrate field.
+func (o *PoolAbstractLease) SetMigrate(v bool) {
+	o.Migrate = &v
+}
+
 func (o PoolAbstractLease) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -201,6 +239,9 @@ func (o PoolAbstractLease) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HasDuplicate) {
 		toSerialize["HasDuplicate"] = o.HasDuplicate
+	}
+	if !IsNil(o.Migrate) {
+		toSerialize["Migrate"] = o.Migrate
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -258,6 +299,8 @@ func (o *PoolAbstractLease) UnmarshalJSON(data []byte) (err error) {
 		AllocationType *string `json:"AllocationType,omitempty"`
 		// HasDuplicate represents if there are other pools in which this id exists.
 		HasDuplicate *bool `json:"HasDuplicate,omitempty"`
+		// The migration capability is applicable only for dynamic lease requests and it works in conjunction with  preferred ID. If there is an existing dynamic or static lease that matches the preferred ID, that existing  lease will be migrated to the current pool. That means the existing lease will be deleted and a new lease  will be created in the pool. If there is a reservation exists that matches with preferred ID, that  reservation will be kept as is and next available ID from the pool will be leased.
+		Migrate *bool `json:"Migrate,omitempty"`
 	}
 
 	varPoolAbstractLeaseWithoutEmbeddedStruct := PoolAbstractLeaseWithoutEmbeddedStruct{}
@@ -269,6 +312,7 @@ func (o *PoolAbstractLease) UnmarshalJSON(data []byte) (err error) {
 		varPoolAbstractLease.ObjectType = varPoolAbstractLeaseWithoutEmbeddedStruct.ObjectType
 		varPoolAbstractLease.AllocationType = varPoolAbstractLeaseWithoutEmbeddedStruct.AllocationType
 		varPoolAbstractLease.HasDuplicate = varPoolAbstractLeaseWithoutEmbeddedStruct.HasDuplicate
+		varPoolAbstractLease.Migrate = varPoolAbstractLeaseWithoutEmbeddedStruct.Migrate
 		*o = PoolAbstractLease(varPoolAbstractLease)
 	} else {
 		return err
@@ -290,6 +334,7 @@ func (o *PoolAbstractLease) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocationType")
 		delete(additionalProperties, "HasDuplicate")
+		delete(additionalProperties, "Migrate")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

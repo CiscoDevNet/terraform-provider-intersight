@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fcpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.Lease"]
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
+**PreferredWwnId** | Pointer to **string** | The preferred WWN ID address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that WWN ID address if it is available in the pool. If the specified preferred WWN ID address  is not in the range of the pool or if it is already leased or reserved, then the next available WWN ID address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred WWN ID address property. When the preferred WWN ID address  property is specified in conjunction with &#39;migrate&#39; property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests. | [optional] 
 **Reservation** | Pointer to [**FcpoolReservationReference**](FcpoolReservationReference.md) |  | [optional] 
 **WwnId** | Pointer to **string** | WWN ID allocated for pool based allocation. | [optional] 
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -97,6 +98,31 @@ SetPoolPurpose sets PoolPurpose field to given value.
 `func (o *FcpoolLease) HasPoolPurpose() bool`
 
 HasPoolPurpose returns a boolean if a field has been set.
+
+### GetPreferredWwnId
+
+`func (o *FcpoolLease) GetPreferredWwnId() string`
+
+GetPreferredWwnId returns the PreferredWwnId field if non-nil, zero value otherwise.
+
+### GetPreferredWwnIdOk
+
+`func (o *FcpoolLease) GetPreferredWwnIdOk() (*string, bool)`
+
+GetPreferredWwnIdOk returns a tuple with the PreferredWwnId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredWwnId
+
+`func (o *FcpoolLease) SetPreferredWwnId(v string)`
+
+SetPreferredWwnId sets PreferredWwnId field to given value.
+
+### HasPreferredWwnId
+
+`func (o *FcpoolLease) HasPreferredWwnId() bool`
+
+HasPreferredWwnId returns a boolean if a field has been set.
 
 ### GetReservation
 

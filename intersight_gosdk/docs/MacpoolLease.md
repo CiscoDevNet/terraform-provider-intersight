@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.Lease"]
 **MacAddress** | Pointer to **string** | MAC address allocated for pool-based allocation. | [optional] 
+**PreferredMacAddress** | Pointer to **string** | The preferred MAC address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that MAC address if it is available in the pool. If the specified preferred MAC address  is not in the range of the pool or if it is already leased or reserved, then the next available MAC address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred MAC address property. When the preferred MAC address  property is specified in conjunction with &#39;migrate&#39; property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests. | [optional] 
 **Reservation** | Pointer to [**MacpoolReservationReference**](MacpoolReservationReference.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableMacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
@@ -96,6 +97,31 @@ SetMacAddress sets MacAddress field to given value.
 `func (o *MacpoolLease) HasMacAddress() bool`
 
 HasMacAddress returns a boolean if a field has been set.
+
+### GetPreferredMacAddress
+
+`func (o *MacpoolLease) GetPreferredMacAddress() string`
+
+GetPreferredMacAddress returns the PreferredMacAddress field if non-nil, zero value otherwise.
+
+### GetPreferredMacAddressOk
+
+`func (o *MacpoolLease) GetPreferredMacAddressOk() (*string, bool)`
+
+GetPreferredMacAddressOk returns a tuple with the PreferredMacAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreferredMacAddress
+
+`func (o *MacpoolLease) SetPreferredMacAddress(v string)`
+
+SetPreferredMacAddress sets PreferredMacAddress field to given value.
+
+### HasPreferredMacAddress
+
+`func (o *MacpoolLease) HasPreferredMacAddress() bool`
+
+HasPreferredMacAddress returns a boolean if a field has been set.
 
 ### GetReservation
 

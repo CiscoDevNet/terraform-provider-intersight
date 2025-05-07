@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `feature`:(string) Lease opertion applied for the feature. 
 * `has_duplicate`:(bool) HasDuplicate represents if there are other pools in which this id exists. 
 * `is_exclusive_at_assigned_entity`:(bool) Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later. 
+* `migrate`:(bool) The migration capability is applicable only for dynamic lease requests and it works in conjunction with  preferred ID. If there is an existing dynamic or static lease that matches the preferred ID, that existing  lease will be migrated to the current pool. That means the existing lease will be deleted and a new lease  will be created in the pool. If there is a reservation exists that matches with preferred ID, that  reservation will be kept as is and next available ID from the pool will be leased. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `resource_type`:(string) The type of resource present in the pool, such as 'server' can be a RackUnit or Blade.* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.* `None` - The resource cannot consider for Resource Pool. 
