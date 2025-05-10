@@ -1,5 +1,5 @@
 resource "intersight_storage_drive_group" "tf_drive_gp" {
-  type = 0
+  nr_type = 0
   name = "tf_drive_gp"
   raid_level = "Raid0"
   manual_drive_group {
