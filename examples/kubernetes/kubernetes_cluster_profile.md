@@ -4,7 +4,7 @@
 resource "intersight_kubernetes_cluster_profile" "kubernetes_cluster_profile1" {
   description = "kubernetes cluster profile"
   name        = "kubernetes_cluster_profile1"
-  type        = "instance"
+  nr_type        = "instance"
   action      = "Deploy"
   config_context {
     control_action = "Deploy"
