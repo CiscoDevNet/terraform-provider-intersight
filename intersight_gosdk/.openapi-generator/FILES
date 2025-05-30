@@ -24,6 +24,7 @@ api_cond.go
 api_connectorpack.go
 api_console.go
 api_convergedinfra.go
+api_coremanagement.go
 api_crd.go
 api_deviceconnector.go
 api_dnac.go
@@ -1068,6 +1069,14 @@ docs/ConvergedinfraSwitchComplianceDetails.md
 docs/ConvergedinfraSwitchComplianceDetailsList.md
 docs/ConvergedinfraSwitchComplianceDetailsRelationship.md
 docs/ConvergedinfraSwitchComplianceDetailsResponse.md
+docs/CoremanagementApi.md
+docs/CoremanagementCoreFile.md
+docs/CoremanagementCoreFileList.md
+docs/CoremanagementCoreFileRelationship.md
+docs/CoremanagementCoreFileResponse.md
+docs/CoremanagementDownload.md
+docs/CoremanagementDownloadList.md
+docs/CoremanagementDownloadResponse.md
 docs/CrdApi.md
 docs/CrdCustomResource.md
 docs/CrdCustomResourceConfigProperty.md
@@ -1110,6 +1119,7 @@ docs/DnacVirtualNetworkFabricSite.md
 docs/DnacVirtualNetworkFabricSiteList.md
 docs/DnacVirtualNetworkFabricSiteResponse.md
 docs/EnergyApi.md
+docs/EnergyDailyMetrics.md
 docs/EnergyMetrics.md
 docs/EquipmentAbstractDevice.md
 docs/EquipmentApi.md
@@ -2176,6 +2186,9 @@ docs/IamCertificateRequestRelationship.md
 docs/IamCertificateRequestResponse.md
 docs/IamCertificateResponse.md
 docs/IamClientMeta.md
+docs/IamDefaultAuthentication.md
+docs/IamDefaultAuthenticationList.md
+docs/IamDefaultAuthenticationResponse.md
 docs/IamDomainGroup.md
 docs/IamDomainGroupList.md
 docs/IamDomainGroupRelationship.md
@@ -2244,6 +2257,10 @@ docs/IamLdapGroup.md
 docs/IamLdapGroupList.md
 docs/IamLdapGroupRelationship.md
 docs/IamLdapGroupResponse.md
+docs/IamLdapMeta.md
+docs/IamLdapMetaList.md
+docs/IamLdapMetaRelationship.md
+docs/IamLdapMetaResponse.md
 docs/IamLdapPolicy.md
 docs/IamLdapPolicyList.md
 docs/IamLdapPolicyRelationship.md
@@ -6242,6 +6259,13 @@ model_convergedinfra_switch_compliance_details.go
 model_convergedinfra_switch_compliance_details_list.go
 model_convergedinfra_switch_compliance_details_relationship.go
 model_convergedinfra_switch_compliance_details_response.go
+model_coremanagement_core_file.go
+model_coremanagement_core_file_list.go
+model_coremanagement_core_file_relationship.go
+model_coremanagement_core_file_response.go
+model_coremanagement_download.go
+model_coremanagement_download_list.go
+model_coremanagement_download_response.go
 model_crd_custom_resource.go
 model_crd_custom_resource_config_property.go
 model_crd_custom_resource_list.go
@@ -6280,6 +6304,7 @@ model_dnac_transit_response.go
 model_dnac_virtual_network_fabric_site.go
 model_dnac_virtual_network_fabric_site_list.go
 model_dnac_virtual_network_fabric_site_response.go
+model_energy_daily_metrics.go
 model_energy_metrics.go
 model_equipment_abstract_device.go
 model_equipment_base.go
@@ -7328,6 +7353,9 @@ model_iam_certificate_request_relationship.go
 model_iam_certificate_request_response.go
 model_iam_certificate_response.go
 model_iam_client_meta.go
+model_iam_default_authentication.go
+model_iam_default_authentication_list.go
+model_iam_default_authentication_response.go
 model_iam_domain_group.go
 model_iam_domain_group_list.go
 model_iam_domain_group_relationship.go
@@ -7396,6 +7424,10 @@ model_iam_ldap_group.go
 model_iam_ldap_group_list.go
 model_iam_ldap_group_relationship.go
 model_iam_ldap_group_response.go
+model_iam_ldap_meta.go
+model_iam_ldap_meta_list.go
+model_iam_ldap_meta_relationship.go
+model_iam_ldap_meta_response.go
 model_iam_ldap_policy.go
 model_iam_ldap_policy_list.go
 model_iam_ldap_policy_relationship.go
@@ -10415,6 +10447,7 @@ test/api_cond_test.go
 test/api_connectorpack_test.go
 test/api_console_test.go
 test/api_convergedinfra_test.go
+test/api_coremanagement_test.go
 test/api_crd_test.go
 test/api_deviceconnector_test.go
 test/api_dnac_test.go

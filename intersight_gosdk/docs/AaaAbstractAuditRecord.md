@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "aaa.AuditRecord"]
 **Event** | Pointer to **string** | The operation that was performed on this Managed Object. The event is a compound string that includes the CRUD operation such as Create, Modify, Delete, and a string representing the Managed Object type. | [optional] [readonly] 
 **HttpOperation** | Pointer to **string** | The REST URL for the operation. | [optional] [readonly] 
+**HttpResponseCode** | Pointer to **int64** | The response code of the operation. | [optional] [readonly] 
+**HttpResponsePayload** | Pointer to **interface{}** | The response body of the operation, with JSON truncated to 2 nested levels when its size exceeds 10KB. | [optional] [readonly] 
 **MoDisplayNames** | Pointer to **interface{}** | The user-friendly names of the changed MO. | [optional] [readonly] 
 **MoType** | Pointer to **string** | The object type of the REST resource that was created, modified or deleted. | [optional] [readonly] 
 **ObjectMoid** | Pointer to **string** | The Moid of the REST resource that was created, modified or deleted. | [optional] [readonly] 
@@ -125,6 +127,66 @@ SetHttpOperation sets HttpOperation field to given value.
 
 HasHttpOperation returns a boolean if a field has been set.
 
+### GetHttpResponseCode
+
+`func (o *AaaAbstractAuditRecord) GetHttpResponseCode() int64`
+
+GetHttpResponseCode returns the HttpResponseCode field if non-nil, zero value otherwise.
+
+### GetHttpResponseCodeOk
+
+`func (o *AaaAbstractAuditRecord) GetHttpResponseCodeOk() (*int64, bool)`
+
+GetHttpResponseCodeOk returns a tuple with the HttpResponseCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpResponseCode
+
+`func (o *AaaAbstractAuditRecord) SetHttpResponseCode(v int64)`
+
+SetHttpResponseCode sets HttpResponseCode field to given value.
+
+### HasHttpResponseCode
+
+`func (o *AaaAbstractAuditRecord) HasHttpResponseCode() bool`
+
+HasHttpResponseCode returns a boolean if a field has been set.
+
+### GetHttpResponsePayload
+
+`func (o *AaaAbstractAuditRecord) GetHttpResponsePayload() interface{}`
+
+GetHttpResponsePayload returns the HttpResponsePayload field if non-nil, zero value otherwise.
+
+### GetHttpResponsePayloadOk
+
+`func (o *AaaAbstractAuditRecord) GetHttpResponsePayloadOk() (*interface{}, bool)`
+
+GetHttpResponsePayloadOk returns a tuple with the HttpResponsePayload field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpResponsePayload
+
+`func (o *AaaAbstractAuditRecord) SetHttpResponsePayload(v interface{})`
+
+SetHttpResponsePayload sets HttpResponsePayload field to given value.
+
+### HasHttpResponsePayload
+
+`func (o *AaaAbstractAuditRecord) HasHttpResponsePayload() bool`
+
+HasHttpResponsePayload returns a boolean if a field has been set.
+
+### SetHttpResponsePayloadNil
+
+`func (o *AaaAbstractAuditRecord) SetHttpResponsePayloadNil(b bool)`
+
+ SetHttpResponsePayloadNil sets the value for HttpResponsePayload to be an explicit nil
+
+### UnsetHttpResponsePayload
+`func (o *AaaAbstractAuditRecord) UnsetHttpResponsePayload()`
+
+UnsetHttpResponsePayload ensures that no value is present for HttpResponsePayload, not even an explicit nil
 ### GetMoDisplayNames
 
 `func (o *AaaAbstractAuditRecord) GetMoDisplayNames() interface{}`
