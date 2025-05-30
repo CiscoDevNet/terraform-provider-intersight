@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `email`:(string) The email of the associated user that made the change.  In case the user is later deleted, we still have some reference to the information. 
 * `event`:(string) The operation that was performed on this Managed Object.The event is a compound string that includes the CRUD operation such as Create, Modify, Delete, and a string representing the Managed Object type. 
 * `http_operation`:(string) The REST URL for the operation. 
+* `http_response_code`:(int) The response code of the operation. 
 * `inst_id`:(string) The instance id of AuditRecordLocal, which is used to identify if the comming AuditRecordLocal was already processed before. 
 * `mo_type`:(string) The object type of the REST resource that was created, modified or deleted. 
 * `mod_time`:(string) The time when this managed object was last modified. 

@@ -14063,6 +14063,24 @@ func TestFlattenMapConvergedinfraSwitchComplianceDetailsRelationship(t *testing.
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapCoremanagementCoreFileRelationship(t *testing.T) {
+	p := models.CoremanagementCoreFileRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapCoremanagementCoreFileRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapCoremanagementCoreFileRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapEquipmentBaseRelationship(t *testing.T) {
 	p := models.EquipmentBaseRelationship{}
 	var d = &schema.ResourceData{}
@@ -17318,6 +17336,24 @@ func TestFlattenMapIamLdapDnsParameters(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapIamLdapDnsParameters(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "iam.LdapDnsParameters", "object_type": "iam.LdapDnsParameters", "search_domain": "SearchDomain 1", "search_forest": "SearchForest 1", "nr_source": "Source 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapIamLdapMetaRelationship(t *testing.T) {
+	p := models.IamLdapMetaRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapIamLdapMetaRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapIamLdapMetaRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

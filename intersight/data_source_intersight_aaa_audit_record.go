@@ -130,6 +130,16 @@ func getAaaAuditRecordSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"http_response_code": {
+			Description: "The response code of the operation.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"http_response_payload": {
+			Description: "The response body of the operation, with JSON truncated to 2 nested levels when its size exceeds 10KB.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inst_id": {
 			Description: "The instance id of AuditRecordLocal, which is used to identify if the comming AuditRecordLocal was already processed before.",
 			Type:        schema.TypeString,
@@ -694,6 +704,21 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		o.SetHttpOperation(x)
 	}
 
+	if v, ok := d.GetOkExists("http_response_code"); ok {
+		x := int64(v.(int))
+		o.SetHttpResponseCode(x)
+	}
+
+	if v, ok := d.GetOk("http_response_payload"); ok {
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetHttpResponsePayload(x2)
+		}
+	}
+
 	if v, ok := d.GetOk("inst_id"); ok {
 		x := (v.(string))
 		o.SetInstId(x)
@@ -1146,6 +1171,8 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 				temp["email"] = (s.GetEmail())
 				temp["event"] = (s.GetEvent())
 				temp["http_operation"] = (s.GetHttpOperation())
+				temp["http_response_code"] = (s.GetHttpResponseCode())
+				temp["http_response_payload"] = flattenAdditionalProperties(s.GetHttpResponsePayload())
 				temp["inst_id"] = (s.GetInstId())
 				temp["mo_display_names"] = flattenAdditionalProperties(s.GetMoDisplayNames())
 				temp["mo_type"] = (s.GetMoType())

@@ -5733,7 +5733,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 		mobasemo := make(map[string]interface{})
 		mobasemo["account_moid"] = item.GetAccountMoid()
 		mobasemo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		targets_x, _ := d.GetOk("targets")
+		sources_x, _ := d.GetOk("sources")
 		mobasemo["ancestors"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -5745,7 +5745,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetAncestors(), targets_x)
+		})(item.GetAncestors(), sources_x)
 		mobasemo["class_id"] = item.GetClassId()
 		mobasemo["create_time"] = item.GetCreateTime().String()
 		mobasemo["domain_group_moid"] = item.GetDomainGroupMoid()
@@ -5770,7 +5770,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			return mobasemorelationships
-		})(item.GetParent(), targets_x)
+		})(item.GetParent(), sources_x)
 		mobasemo["permission_resources"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -5782,7 +5782,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetPermissionResources(), targets_x)
+		})(item.GetPermissionResources(), sources_x)
 		mobasemo["shared_scope"] = item.GetSharedScope()
 		mobasemo["tags"] = (func(p []models.MoTag, v interface{}) []map[string]interface{} {
 			var motags []map[string]interface{}
@@ -5797,7 +5797,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				motags = append(motags, motag)
 			}
 			return motags
-		})(item.GetTags(), targets_x)
+		})(item.GetTags(), sources_x)
 		mobasemo["version_context"] = (func(p models.MoVersionContext, v interface{}) []map[string]interface{} {
 			var moversioncontexts []map[string]interface{}
 			var ret models.MoVersionContext
@@ -5855,7 +5855,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			moversioncontexts = append(moversioncontexts, moversioncontext)
 			return moversioncontexts
-		})(item.GetVersionContext(), targets_x)
+		})(item.GetVersionContext(), sources_x)
 		mobasemos = append(mobasemos, mobasemo)
 	}
 	return mobasemos
@@ -9176,7 +9176,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		type_definition_x, _ := d.GetOk("type_definition")
+		input_definition_x, _ := d.GetOk("input_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -9194,7 +9194,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), type_definition_x)
+		})(item.GetDefault(), input_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -9212,7 +9212,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), type_definition_x)
+		})(item.GetDisplayMeta(), input_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -12336,6 +12336,24 @@ func flattenMapConvergedinfraSwitchComplianceDetailsRelationship(p models.Conver
 	convergedinfraswitchcompliancedetailsrelationships = append(convergedinfraswitchcompliancedetailsrelationships, convergedinfraswitchcompliancedetailsrelationship)
 	return convergedinfraswitchcompliancedetailsrelationships
 }
+func flattenMapCoremanagementCoreFileRelationship(p models.CoremanagementCoreFileRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var coremanagementcorefilerelationships []map[string]interface{}
+	var ret models.CoremanagementCoreFileRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	coremanagementcorefilerelationship := make(map[string]interface{})
+	coremanagementcorefilerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	coremanagementcorefilerelationship["class_id"] = item.GetClassId()
+	coremanagementcorefilerelationship["moid"] = item.GetMoid()
+	coremanagementcorefilerelationship["object_type"] = item.GetObjectType()
+	coremanagementcorefilerelationship["selector"] = item.GetSelector()
+
+	coremanagementcorefilerelationships = append(coremanagementcorefilerelationships, coremanagementcorefilerelationship)
+	return coremanagementcorefilerelationships
+}
 func flattenMapEquipmentBaseRelationship(p models.EquipmentBaseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentbaserelationships []map[string]interface{}
 	var ret models.EquipmentBaseRelationship
@@ -14921,7 +14939,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
+	data_ip_range_x, _ := d.GetOk("data_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -14937,7 +14955,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
+	})(item.GetIpAddrBlocks(), data_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -16224,6 +16242,24 @@ func flattenMapIamLdapDnsParameters(p models.IamLdapDnsParameters, d *schema.Res
 
 	iamldapdnsparameterss = append(iamldapdnsparameterss, iamldapdnsparameters)
 	return iamldapdnsparameterss
+}
+func flattenMapIamLdapMetaRelationship(p models.IamLdapMetaRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iamldapmetarelationships []map[string]interface{}
+	var ret models.IamLdapMetaRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	iamldapmetarelationship := make(map[string]interface{})
+	iamldapmetarelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamldapmetarelationship["class_id"] = item.GetClassId()
+	iamldapmetarelationship["moid"] = item.GetMoid()
+	iamldapmetarelationship["object_type"] = item.GetObjectType()
+	iamldapmetarelationship["selector"] = item.GetSelector()
+
+	iamldapmetarelationships = append(iamldapmetarelationships, iamldapmetarelationship)
+	return iamldapmetarelationships
 }
 func flattenMapIamLdapPolicyRelationship(p models.IamLdapPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamldappolicyrelationships []map[string]interface{}
@@ -25241,7 +25277,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 	x509certificate := make(map[string]interface{})
 	x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	x509certificate["class_id"] = item.GetClassId()
-	certificate_x, _ := d.GetOk("certificate")
+	ca_cert_x, _ := d.GetOk("ca_cert")
 	x509certificate["issuer"] = (func(p models.PkixDistinguishedName, v interface{}) []map[string]interface{} {
 		var pkixdistinguishednames []map[string]interface{}
 		var ret models.PkixDistinguishedName
@@ -25262,7 +25298,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetIssuer(), certificate_x)
+	})(item.GetIssuer(), ca_cert_x)
 	x509certificate["not_after"] = item.GetNotAfter().String()
 	x509certificate["not_before"] = item.GetNotBefore().String()
 	x509certificate["object_type"] = item.GetObjectType()
@@ -25289,7 +25325,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetSubject(), certificate_x)
+	})(item.GetSubject(), ca_cert_x)
 
 	x509certificates = append(x509certificates, x509certificate)
 	return x509certificates

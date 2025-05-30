@@ -854,6 +854,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService GetIamDefaultAuthenticationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamDefaultAuthenticationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamDefaultAuthenticationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamDefaultAuthenticationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService GetIamDomainGroupByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1263,6 +1289,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.IamApi.GetIamLdapGroupList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamLdapMetaByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapMetaByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamLdapMetaList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamLdapMetaList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -2044,6 +2096,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService PatchIamDefaultAuthentication", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.PatchIamDefaultAuthentication(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService PatchIamDomainNameInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2471,6 +2537,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IamApi.UpdateIamCertificateRequest(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService UpdateIamDefaultAuthentication", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.UpdateIamDefaultAuthentication(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
