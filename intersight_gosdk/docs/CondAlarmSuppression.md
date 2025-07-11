@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.AlarmSuppression"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmSuppression"]
 **Description** | Pointer to **string** | User given description on why the suppression is enabled at this entity. | [optional] 
+**Name** | Pointer to **string** | The name that identifies the alarm suppression. | [optional] 
 **Classifications** | Pointer to [**[]CondAlarmClassificationRelationship**](CondAlarmClassificationRelationship.md) | An array of relationships to condAlarmClassification resources. | [optional] 
 **Entity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
@@ -93,6 +94,31 @@ SetDescription sets Description field to given value.
 `func (o *CondAlarmSuppression) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *CondAlarmSuppression) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *CondAlarmSuppression) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *CondAlarmSuppression) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *CondAlarmSuppression) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetClassifications
 

@@ -500,8 +500,83 @@ func resourceVnicEthIf() *schema.Resource {
 					},
 				},
 			},
+			"iscsi_ip_v6_address_allocation_type": {
+				Description: "Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type.\n* `None` - Type indicates that there is no IP associated to an vnic.\n* `DHCP` - The IP address is assigned using DHCP, if available.\n* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.\n* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"iscsi_ip_v6_config": {
+				Description: "IPv6 configurations such as Prefix, Gateway and DNS for iSCSI vNIC.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "ippool.IpV6Config",
+						},
+						"gateway": {
+							Description:  "IP address of the default IPv6 gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "ippool.IpV6Config",
+						},
+						"prefix": {
+							Description:  "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 127),
+							Optional:     true,
+						},
+						"primary_dns": {
+							Description:  "IP Address of the primary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
+						},
+						"secondary_dns": {
+							Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
+						},
+					},
+				},
+			},
 			"iscsi_ipv4_address": {
 				Description: "IP address associated to the vNIC.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"iscsi_ipv6_address": {
+				Description: "IPv6 address associated to the iSCSI vNIC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -2672,8 +2747,20 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while setting property IscsiIpV4Config in VnicEthIf object: %s", err.Error())
 	}
 
+	if err := d.Set("iscsi_ip_v6_address_allocation_type", (s.GetIscsiIpV6AddressAllocationType())); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpV6AddressAllocationType in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_ip_v6_config", flattenMapIppoolIpV6Config(s.GetIscsiIpV6Config(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpV6Config in VnicEthIf object: %s", err.Error())
+	}
+
 	if err := d.Set("iscsi_ipv4_address", (s.GetIscsiIpv4Address())); err != nil {
 		return diag.Errorf("error occurred while setting property IscsiIpv4Address in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_ipv6_address", (s.GetIscsiIpv6Address())); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpv6Address in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("lan_connectivity_policy", flattenMapVnicLanConnectivityPolicyRelationship(s.GetLanConnectivityPolicy(), d)); err != nil {

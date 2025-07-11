@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareDatacenter"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareDatacenter"]
+**AttachedResourceTags** | Pointer to [**[]VirtualizationVmwareAttachedResourceTag**](VirtualizationVmwareAttachedResourceTag.md) |  | [optional] 
 **ClusterCount** | Pointer to **int64** | Count of all clusters associated with this DC. | [optional] [readonly] 
 **DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this DC. | [optional] [readonly] 
 **DistributedNetworkCount** | Pointer to **int64** | Count of all distributed networks associated with this datacenter (DC). | [optional] 
@@ -78,6 +79,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAttachedResourceTags
+
+`func (o *VirtualizationVmwareDatacenter) GetAttachedResourceTags() []VirtualizationVmwareAttachedResourceTag`
+
+GetAttachedResourceTags returns the AttachedResourceTags field if non-nil, zero value otherwise.
+
+### GetAttachedResourceTagsOk
+
+`func (o *VirtualizationVmwareDatacenter) GetAttachedResourceTagsOk() (*[]VirtualizationVmwareAttachedResourceTag, bool)`
+
+GetAttachedResourceTagsOk returns a tuple with the AttachedResourceTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttachedResourceTags
+
+`func (o *VirtualizationVmwareDatacenter) SetAttachedResourceTags(v []VirtualizationVmwareAttachedResourceTag)`
+
+SetAttachedResourceTags sets AttachedResourceTags field to given value.
+
+### HasAttachedResourceTags
+
+`func (o *VirtualizationVmwareDatacenter) HasAttachedResourceTags() bool`
+
+HasAttachedResourceTags returns a boolean if a field has been set.
+
+### SetAttachedResourceTagsNil
+
+`func (o *VirtualizationVmwareDatacenter) SetAttachedResourceTagsNil(b bool)`
+
+ SetAttachedResourceTagsNil sets the value for AttachedResourceTags to be an explicit nil
+
+### UnsetAttachedResourceTags
+`func (o *VirtualizationVmwareDatacenter) UnsetAttachedResourceTags()`
+
+UnsetAttachedResourceTags ensures that no value is present for AttachedResourceTags, not even an explicit nil
 ### GetClusterCount
 
 `func (o *VirtualizationVmwareDatacenter) GetClusterCount() int64`

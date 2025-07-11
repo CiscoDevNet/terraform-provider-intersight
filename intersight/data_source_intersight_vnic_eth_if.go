@@ -409,8 +409,63 @@ func getVnicEthIfSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"iscsi_ip_v6_address_allocation_type": {
+			Description: "Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type.\n* `None` - Type indicates that there is no IP associated to an vnic.\n* `DHCP` - The IP address is assigned using DHCP, if available.\n* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.\n* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iscsi_ip_v6_config": {
+			Description: "IPv6 configurations such as Prefix, Gateway and DNS for iSCSI vNIC.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"gateway": {
+						Description: "IP address of the default IPv6 gateway.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"prefix": {
+						Description: "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"primary_dns": {
+						Description: "IP Address of the primary Domain Name System (DNS) server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"secondary_dns": {
+						Description: "IP Address of the secondary Domain Name System (DNS) server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"iscsi_ipv4_address": {
 			Description: "IP address associated to the vNIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iscsi_ipv6_address": {
+			Description: "IPv6 address associated to the iSCSI vNIC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1739,9 +1794,74 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if v, ok := d.GetOk("iscsi_ip_v6_address_allocation_type"); ok {
+		x := (v.(string))
+		o.SetIscsiIpV6AddressAllocationType(x)
+	}
+
+	if v, ok := d.GetOk("iscsi_ip_v6_config"); ok {
+		p := make([]models.IppoolIpV6Config, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.IppoolIpV6Config{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ippool.IpV6Config")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["prefix"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetPrefix(x)
+				}
+			}
+			if v, ok := l["primary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetPrimaryDns(x)
+				}
+			}
+			if v, ok := l["secondary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetSecondaryDns(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIscsiIpV6Config(x)
+		}
+	}
+
 	if v, ok := d.GetOk("iscsi_ipv4_address"); ok {
 		x := (v.(string))
 		o.SetIscsiIpv4Address(x)
+	}
+
+	if v, ok := d.GetOk("iscsi_ipv6_address"); ok {
+		x := (v.(string))
+		o.SetIscsiIpv6Address(x)
 	}
 
 	if v, ok := d.GetOk("lan_connectivity_policy"); ok {
@@ -2743,7 +2863,11 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 				temp["iscsi_ip_v4_address_allocation_type"] = (s.GetIscsiIpV4AddressAllocationType())
 
 				temp["iscsi_ip_v4_config"] = flattenMapIppoolIpV4Config(s.GetIscsiIpV4Config(), d)
+				temp["iscsi_ip_v6_address_allocation_type"] = (s.GetIscsiIpV6AddressAllocationType())
+
+				temp["iscsi_ip_v6_config"] = flattenMapIppoolIpV6Config(s.GetIscsiIpV6Config(), d)
 				temp["iscsi_ipv4_address"] = (s.GetIscsiIpv4Address())
+				temp["iscsi_ipv6_address"] = (s.GetIscsiIpv6Address())
 
 				temp["lan_connectivity_policy"] = flattenMapVnicLanConnectivityPolicyRelationship(s.GetLanConnectivityPolicy(), d)
 

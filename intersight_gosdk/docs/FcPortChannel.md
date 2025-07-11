@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **PortChannelId** | Pointer to **int64** | Unique identifier for this port-channel on the FI. | [optional] [readonly] 
 **Role** | Pointer to **string** | This port-channel&#39;s configured role (fcUplink, fcStorage, etc.). | [optional] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
+**UserLabel** | Pointer to **string** | The user defined label assigned to the port. | [optional] [readonly] 
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port-channel. | [optional] [readonly] 
 **Wwn** | Pointer to **string** | World Wide Name of the port channel. | [optional] [readonly] 
 **EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
@@ -331,6 +332,31 @@ SetSwitchId sets SwitchId field to given value.
 `func (o *FcPortChannel) HasSwitchId() bool`
 
 HasSwitchId returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *FcPortChannel) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *FcPortChannel) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *FcPortChannel) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *FcPortChannel) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetVsan
 

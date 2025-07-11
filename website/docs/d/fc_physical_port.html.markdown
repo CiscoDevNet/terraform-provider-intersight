@@ -40,6 +40,7 @@ The following arguments can be used to get data of already created objects in In
 * `slot_id`:(int) Switch expansion slot module identifier. 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `transceiver_type`:(string) Transceiver type of a Fibre Channel port. 
+* `user_label`:(string) The user defined label assigned to the port. 
 * `vsan`:(int) Virtual San that is associated to the port. 
 * `wwn`:(string) World Wide Name of a Fibre Channel port. 
  

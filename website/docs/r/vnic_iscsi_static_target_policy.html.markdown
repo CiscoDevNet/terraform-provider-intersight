@@ -46,7 +46,8 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `ip_address`:(string) The IPv4 address assigned to the iSCSI target. 
+* `ip_address`:(string) The IP address assigned to the iSCSI target. 
+* `iscsi_ip_type`:(string) Type of the IP address requested for iSCSI vNIC - IPv4/IPv6.* `IPv4` - IP V4 address type requested.* `IPv6` - IP V6 address type requested. 
 * `lun`:(HashMap) - The LUN parameters associated with an iSCSI target. 
 This complex property has following sub-properties:
   + `bootable`:(bool) Specifies LUN is bootable. 

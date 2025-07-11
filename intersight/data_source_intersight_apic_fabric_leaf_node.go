@@ -27,7 +27,7 @@ func getApicFabricLeafNodeSchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"address": {
-			Description: "Address of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Object address in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -76,7 +76,7 @@ func getApicFabricLeafNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"dn": {
-			Description: "Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -86,7 +86,7 @@ func getApicFabricLeafNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"fabric_leaf_node_details": {
-			Description: "Represents Physical Interface Name.",
+			Description: "Physical interface name representation.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -103,12 +103,12 @@ func getApicFabricLeafNodeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"id": {
-						Description: "Id of an leaf node within the Cisco Application Policy Infrastructure Controller (APIC).",
+						Description: "Leaf node ID in Cisco Application Policy Infrastructure Controller (APIC).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of an leaf node within the Cisco Application Policy Infrastructure Controller (APIC).",
+						Description: "Leaf node name in Cisco Application Policy Infrastructure Controller (APIC).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -131,7 +131,7 @@ func getApicFabricLeafNodeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Object name in the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -215,7 +215,7 @@ func getApicFabricLeafNodeSchema() map[string]*schema.Schema {
 			},
 		},
 		"pod": {
-			Description: "Pod of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Object pod in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

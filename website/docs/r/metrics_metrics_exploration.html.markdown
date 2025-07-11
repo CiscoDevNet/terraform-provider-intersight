@@ -3,12 +3,12 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_metrics_exploration"
 description: |-
-        Contains info regarding metrics query and templating information.
+        Details of the metrics query and the templating information.
 
 ---
 
 # Resource: intersight_metrics_metrics_exploration
-Contains info regarding metrics query and templating information.
+Details of the metrics query and the templating information.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -18,29 +18,29 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
-* `description`:(string) User specified description of this MetricsExploration. 
+* `description`:(string) User specified description of the MetricsExploration. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `granularity`:(string) The time unit in which the metrics will be aggregated into. 
+* `granularity`:(string) Time unit for aggregating the metrics. 
 * `intervals`:
                 (Array of schema.TypeString) -
-* `is_widget`:(bool) True when this MetricsExploration is exposed as a Dashlet widget. 
+* `is_widget`:(bool) Set to true when the MetricsExploration is presented as a Dashlet widget. 
 * `metric_criteria`:(Array)
 This complex property has following sub-properties:
-  + `aggregation`:(string) Function name which used to combine the group buckets into a single timeseries. 
+  + `aggregation`:(string) Function name for combining group buckets into a single timeseries. 
   + `filters`:
                 (Array of schema.TypeString) -
   + `groups`:
                 (Array of schema.TypeString) -
-  + `instrument`:(string) Instrument name used to collect measurements for the query. 
-  + `is_enabled`:(bool) Indicates if this criterion should be used for the query. 
-  + `metric`:(string) Measurement name that is collected by the instrument for the query. 
-  + `metric_aggregation`:(string) Function name which used to combine the metrics into granularity buckets. 
+  + `instrument`:(string) Instrument name for measurement collection in the query. 
+  + `is_enabled`:(bool) Flag indicating if this criterion should be used for the query. 
+  + `metric`:(string) Measurement name for instrument collection in the query. 
+  + `metric_aggregation`:(string) Function name for combining metrics into granularity buckets. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `top_limit`:(int) The maximum number of result rows. 
-  + `top_sort`:(string) Method on how to sort the result rows. 
+  + `top_limit`:(int) Maximum number of rows in the result. 
+  + `top_sort`:(string) Method for sorting the result rows. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) User specified name of this MetricsExploration. 
+* `name`:(string) User specified name of the MetricsExploration. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

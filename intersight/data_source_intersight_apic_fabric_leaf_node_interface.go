@@ -71,7 +71,7 @@ func getApicFabricLeafNodeInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"dn": {
-			Description: "Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -116,12 +116,12 @@ func getApicFabricLeafNodeInterfaceSchema() map[string]*schema.Schema {
 			},
 		},
 		"fabric_leaf_node_dn": {
-			Description: "Fabric Leaf Node Distinguished Name.",
+			Description: "Fabric leaf node Distinguished Name (DN).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"fabric_leaf_node_id": {
-			Description: "Fabric Leaf Node Identification Number.",
+			Description: "Fabric leaf node identification number.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -136,7 +136,7 @@ func getApicFabricLeafNodeInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of an object within the Cisco Application Policy Infrastructure Controller.",
+			Description: "Object name in Cisco Application Policy Infrastructure Controller (APIC).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025051220
+API version: 1.0.11-2025062323
 Contact: intersight@cisco.com
 */
 
@@ -41,6 +41,8 @@ type ComputePhysicalSummary struct {
 	ChassisId *string `json:"ChassisId,omitempty"`
 	// Connectivity Status of RackUnit to Switch - A or B or AB.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
+	// Cooling mode representation of the server, supported modes include Air and Immersion. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
+	CoolingMode *string `json:"CoolingMode,omitempty"`
 	// Total processing capacity of the server.
 	CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 	// The MoId of the registered device that coresponds to the server.
@@ -462,6 +464,38 @@ func (o *ComputePhysicalSummary) HasConnectionStatus() bool {
 // SetConnectionStatus gets a reference to the given string and assigns it to the ConnectionStatus field.
 func (o *ComputePhysicalSummary) SetConnectionStatus(v string) {
 	o.ConnectionStatus = &v
+}
+
+// GetCoolingMode returns the CoolingMode field value if set, zero value otherwise.
+func (o *ComputePhysicalSummary) GetCoolingMode() string {
+	if o == nil || IsNil(o.CoolingMode) {
+		var ret string
+		return ret
+	}
+	return *o.CoolingMode
+}
+
+// GetCoolingModeOk returns a tuple with the CoolingMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummary) GetCoolingModeOk() (*string, bool) {
+	if o == nil || IsNil(o.CoolingMode) {
+		return nil, false
+	}
+	return o.CoolingMode, true
+}
+
+// HasCoolingMode returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasCoolingMode() bool {
+	if o != nil && !IsNil(o.CoolingMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoolingMode gets a reference to the given string and assigns it to the CoolingMode field.
+func (o *ComputePhysicalSummary) SetCoolingMode(v string) {
+	o.CoolingMode = &v
 }
 
 // GetCpuCapacity returns the CpuCapacity field value if set, zero value otherwise.
@@ -2222,6 +2256,9 @@ func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
+	if !IsNil(o.CoolingMode) {
+		toSerialize["CoolingMode"] = o.CoolingMode
+	}
 	if !IsNil(o.CpuCapacity) {
 		toSerialize["CpuCapacity"] = o.CpuCapacity
 	}
@@ -2446,6 +2483,8 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		ChassisId *string `json:"ChassisId,omitempty"`
 		// Connectivity Status of RackUnit to Switch - A or B or AB.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
+		// Cooling mode representation of the server, supported modes include Air and Immersion. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
+		CoolingMode *string `json:"CoolingMode,omitempty"`
 		// Total processing capacity of the server.
 		CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 		// The MoId of the registered device that coresponds to the server.
@@ -2560,6 +2599,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysicalSummary.BiosPostComplete = varComputePhysicalSummaryWithoutEmbeddedStruct.BiosPostComplete
 		varComputePhysicalSummary.ChassisId = varComputePhysicalSummaryWithoutEmbeddedStruct.ChassisId
 		varComputePhysicalSummary.ConnectionStatus = varComputePhysicalSummaryWithoutEmbeddedStruct.ConnectionStatus
+		varComputePhysicalSummary.CoolingMode = varComputePhysicalSummaryWithoutEmbeddedStruct.CoolingMode
 		varComputePhysicalSummary.CpuCapacity = varComputePhysicalSummaryWithoutEmbeddedStruct.CpuCapacity
 		varComputePhysicalSummary.DeviceMoId = varComputePhysicalSummaryWithoutEmbeddedStruct.DeviceMoId
 		varComputePhysicalSummary.Dn = varComputePhysicalSummaryWithoutEmbeddedStruct.Dn
@@ -2638,6 +2678,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "BiosPostComplete")
 		delete(additionalProperties, "ChassisId")
 		delete(additionalProperties, "ConnectionStatus")
+		delete(additionalProperties, "CoolingMode")
 		delete(additionalProperties, "CpuCapacity")
 		delete(additionalProperties, "DeviceMoId")
 		delete(additionalProperties, "Dn")

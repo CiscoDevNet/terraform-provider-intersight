@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fmc.Domain"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fmc.Domain"]
-**Name** | Pointer to **string** | A user provided name of the FMC Domain. | [optional] [readonly] 
-**Uuid** | Pointer to **string** | Unique Identifier of the Domain. | [optional] [readonly] 
+**Name** | Pointer to **string** | User assigned name for the FMC domain. | [optional] [readonly] 
+**Uuid** | Pointer to **string** | Unique identifier for the domain. | [optional] [readonly] 
 
 ## Methods
 

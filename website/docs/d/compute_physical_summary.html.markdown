@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `chassis_id`:(string) The id of the chassis that the blade is discovered in. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
+* `cooling_mode`:(string) Cooling mode representation of the server, supported modes include Air and Immersion.* `Air` - Cooling mode of the device is set to Air.* `Immersion` - Cooling mode of the device is set to Immersion. 
 * `cpu_capacity`:(float) Total processing capacity of the server. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The MoId of the registered device that coresponds to the server. 

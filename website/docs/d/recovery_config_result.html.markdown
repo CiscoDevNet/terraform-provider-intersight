@@ -3,12 +3,12 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_config_result"
 description: |-
-        Profile configuration (deploy, validation) results with the overall state and detailed result messages.
+        Profile configuration (deploy, validation) results with overall state and detailed message.
 
 ---
 
 # Data Source: intersight_recovery_config_result
-Profile configuration (deploy, validation) results with the overall state and detailed result messages.
+Profile configuration (deploy, validation) results with overall state and detailed message.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

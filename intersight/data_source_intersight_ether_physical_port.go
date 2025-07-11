@@ -567,6 +567,11 @@ func getEtherPhysicalPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"user_label": {
+			Description: "The user defined label assigned to the port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1317,6 +1322,11 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 		o.SetTransceiverType(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1482,6 +1492,7 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["transceiver_type"] = (s.GetTransceiverType())
+				temp["user_label"] = (s.GetUserLabel())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				etherPhysicalPortResults = append(etherPhysicalPortResults, temp)

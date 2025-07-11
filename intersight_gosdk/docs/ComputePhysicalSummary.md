@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] [readonly] 
 **ChassisId** | Pointer to **string** | The id of the chassis that the blade is discovered in. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of RackUnit to Switch - A or B or AB. | [optional] [readonly] 
+**CoolingMode** | Pointer to **string** | Cooling mode representation of the server, supported modes include Air and Immersion. * &#x60;Air&#x60; - Cooling mode of the device is set to Air. * &#x60;Immersion&#x60; - Cooling mode of the device is set to Immersion. | [optional] [readonly] [default to "Air"]
 **CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
 **DeviceMoId** | Pointer to **string** | The MoId of the registered device that coresponds to the server. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
@@ -309,6 +310,31 @@ SetConnectionStatus sets ConnectionStatus field to given value.
 `func (o *ComputePhysicalSummary) HasConnectionStatus() bool`
 
 HasConnectionStatus returns a boolean if a field has been set.
+
+### GetCoolingMode
+
+`func (o *ComputePhysicalSummary) GetCoolingMode() string`
+
+GetCoolingMode returns the CoolingMode field if non-nil, zero value otherwise.
+
+### GetCoolingModeOk
+
+`func (o *ComputePhysicalSummary) GetCoolingModeOk() (*string, bool)`
+
+GetCoolingModeOk returns a tuple with the CoolingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCoolingMode
+
+`func (o *ComputePhysicalSummary) SetCoolingMode(v string)`
+
+SetCoolingMode sets CoolingMode field to given value.
+
+### HasCoolingMode
+
+`func (o *ComputePhysicalSummary) HasCoolingMode() bool`
+
+HasCoolingMode returns a boolean if a field has been set.
 
 ### GetCpuCapacity
 

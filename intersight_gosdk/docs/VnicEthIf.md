@@ -8,7 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.EthIf"]
 **IscsiIpV4AddressAllocationType** | Pointer to **string** | Static/Pool/DHCP Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * &#x60;None&#x60; - Type indicates that there is no IP associated to an vnic. * &#x60;DHCP&#x60; - The IP address is assigned using DHCP, if available. * &#x60;Static&#x60; - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * &#x60;Pool&#x60; - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. | [optional] [readonly] [default to "None"]
 **IscsiIpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
+**IscsiIpV6AddressAllocationType** | Pointer to **string** | Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * &#x60;None&#x60; - Type indicates that there is no IP associated to an vnic. * &#x60;DHCP&#x60; - The IP address is assigned using DHCP, if available. * &#x60;Static&#x60; - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * &#x60;Pool&#x60; - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. | [optional] [readonly] [default to "None"]
+**IscsiIpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
 **IscsiIpv4Address** | Pointer to **string** | IP address associated to the vNIC. | [optional] [readonly] 
+**IscsiIpv6Address** | Pointer to **string** | IPv6 address associated to the iSCSI vNIC. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
@@ -148,6 +151,66 @@ HasIscsiIpV4Config returns a boolean if a field has been set.
 `func (o *VnicEthIf) UnsetIscsiIpV4Config()`
 
 UnsetIscsiIpV4Config ensures that no value is present for IscsiIpV4Config, not even an explicit nil
+### GetIscsiIpV6AddressAllocationType
+
+`func (o *VnicEthIf) GetIscsiIpV6AddressAllocationType() string`
+
+GetIscsiIpV6AddressAllocationType returns the IscsiIpV6AddressAllocationType field if non-nil, zero value otherwise.
+
+### GetIscsiIpV6AddressAllocationTypeOk
+
+`func (o *VnicEthIf) GetIscsiIpV6AddressAllocationTypeOk() (*string, bool)`
+
+GetIscsiIpV6AddressAllocationTypeOk returns a tuple with the IscsiIpV6AddressAllocationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpV6AddressAllocationType
+
+`func (o *VnicEthIf) SetIscsiIpV6AddressAllocationType(v string)`
+
+SetIscsiIpV6AddressAllocationType sets IscsiIpV6AddressAllocationType field to given value.
+
+### HasIscsiIpV6AddressAllocationType
+
+`func (o *VnicEthIf) HasIscsiIpV6AddressAllocationType() bool`
+
+HasIscsiIpV6AddressAllocationType returns a boolean if a field has been set.
+
+### GetIscsiIpV6Config
+
+`func (o *VnicEthIf) GetIscsiIpV6Config() IppoolIpV6Config`
+
+GetIscsiIpV6Config returns the IscsiIpV6Config field if non-nil, zero value otherwise.
+
+### GetIscsiIpV6ConfigOk
+
+`func (o *VnicEthIf) GetIscsiIpV6ConfigOk() (*IppoolIpV6Config, bool)`
+
+GetIscsiIpV6ConfigOk returns a tuple with the IscsiIpV6Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpV6Config
+
+`func (o *VnicEthIf) SetIscsiIpV6Config(v IppoolIpV6Config)`
+
+SetIscsiIpV6Config sets IscsiIpV6Config field to given value.
+
+### HasIscsiIpV6Config
+
+`func (o *VnicEthIf) HasIscsiIpV6Config() bool`
+
+HasIscsiIpV6Config returns a boolean if a field has been set.
+
+### SetIscsiIpV6ConfigNil
+
+`func (o *VnicEthIf) SetIscsiIpV6ConfigNil(b bool)`
+
+ SetIscsiIpV6ConfigNil sets the value for IscsiIpV6Config to be an explicit nil
+
+### UnsetIscsiIpV6Config
+`func (o *VnicEthIf) UnsetIscsiIpV6Config()`
+
+UnsetIscsiIpV6Config ensures that no value is present for IscsiIpV6Config, not even an explicit nil
 ### GetIscsiIpv4Address
 
 `func (o *VnicEthIf) GetIscsiIpv4Address() string`
@@ -172,6 +235,31 @@ SetIscsiIpv4Address sets IscsiIpv4Address field to given value.
 `func (o *VnicEthIf) HasIscsiIpv4Address() bool`
 
 HasIscsiIpv4Address returns a boolean if a field has been set.
+
+### GetIscsiIpv6Address
+
+`func (o *VnicEthIf) GetIscsiIpv6Address() string`
+
+GetIscsiIpv6Address returns the IscsiIpv6Address field if non-nil, zero value otherwise.
+
+### GetIscsiIpv6AddressOk
+
+`func (o *VnicEthIf) GetIscsiIpv6AddressOk() (*string, bool)`
+
+GetIscsiIpv6AddressOk returns a tuple with the IscsiIpv6Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpv6Address
+
+`func (o *VnicEthIf) SetIscsiIpv6Address(v string)`
+
+SetIscsiIpv6Address sets IscsiIpv6Address field to given value.
+
+### HasIscsiIpv6Address
+
+`func (o *VnicEthIf) HasIscsiIpv6Address() bool`
+
+HasIscsiIpv6Address returns a boolean if a field has been set.
 
 ### GetMacAddress
 

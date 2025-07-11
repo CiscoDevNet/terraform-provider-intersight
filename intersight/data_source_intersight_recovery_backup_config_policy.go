@@ -115,7 +115,7 @@ func getRecoveryBackupConfigPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"file_name_prefix": {
-			Description: "The file name for the backup image. This name is added as a prefix in the name for the backup image. A unique file name for the backup image is created along with a timestamp. For example: prefix-1572431305418.",
+			Description: "Backup image file name prefix with timestamp (e.g., prefix-1572431305418).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -125,7 +125,7 @@ func getRecoveryBackupConfigPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"location_type": {
-			Description: "Specifies whether the backup will be stored locally or remotely.\n* `Network Share` - The backup is stored remotely on a separate server.\n* `Local Storage` - The backup is stored locally on the endpoint.",
+			Description: "Backup storage location (local or remote).\n* `Network Share` - Backup is stored remotely on a separate server.\n* `Local Storage` - Backup is stored locally on endpoint.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -225,12 +225,12 @@ func getRecoveryBackupConfigPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"password": {
-			Description: "Password of Backup server.",
+			Description: "The backup server password.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"path": {
-			Description: "The file system path where the backup images must be stored. Include the IP address/hostname of the network share location and the complete file system path. For example: 172.29.109.234/var/backups/.",
+			Description: "File system path for storing backup images, including IP address/hostname (e.g., 172.29.109.234/var/backups/).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -269,12 +269,12 @@ func getRecoveryBackupConfigPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"protocol": {
-			Description: "Protocol for transferring the backup image to the network share location.\n* `SCP` - Secure Copy Protocol (SCP) to access the file server.\n* `SFTP` - SSH File Transfer Protocol (SFTP) to access file server.\n* `FTP` - File Transfer Protocol (FTP) to access file server.",
+			Description: "Protocol for backup transfer to network share.\n* `SCP` - Secure Copy Protocol (SCP) to access file server.\n* `SFTP` - SSH File Transfer Protocol (SFTP) to access file server.\n* `FTP` - File Transfer Protocol (FTP) to access file server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"retention_count": {
-			Description: "Number of backup copies maintained on the local or remote server. When the created backup files exceed this number, the initial backup files are overwritten in a sequential manner.",
+			Description: "Number of backup copies maintained on local or remote server (older backups overwritten).",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -307,7 +307,7 @@ func getRecoveryBackupConfigPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"user_name": {
-			Description: "Username for the backup server.",
+			Description: "The backup server username.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareHost"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareHost"]
+**AttachedResourceTags** | Pointer to [**[]VirtualizationVmwareAttachedResourceTag**](VirtualizationVmwareAttachedResourceTag.md) |  | [optional] 
 **BootTime** | Pointer to **time.Time** | The time when this host booted up. | [optional] 
 **ConnectionState** | Pointer to **string** | Indicates if the host is connected to the vCenter. Values are connected, not connected. | [optional] 
 **DcInvPath** | Pointer to **string** | This field stores the inventory path of a datacenter. Used in host maintenance action. | [optional] 
@@ -86,6 +87,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAttachedResourceTags
+
+`func (o *VirtualizationVmwareHost) GetAttachedResourceTags() []VirtualizationVmwareAttachedResourceTag`
+
+GetAttachedResourceTags returns the AttachedResourceTags field if non-nil, zero value otherwise.
+
+### GetAttachedResourceTagsOk
+
+`func (o *VirtualizationVmwareHost) GetAttachedResourceTagsOk() (*[]VirtualizationVmwareAttachedResourceTag, bool)`
+
+GetAttachedResourceTagsOk returns a tuple with the AttachedResourceTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttachedResourceTags
+
+`func (o *VirtualizationVmwareHost) SetAttachedResourceTags(v []VirtualizationVmwareAttachedResourceTag)`
+
+SetAttachedResourceTags sets AttachedResourceTags field to given value.
+
+### HasAttachedResourceTags
+
+`func (o *VirtualizationVmwareHost) HasAttachedResourceTags() bool`
+
+HasAttachedResourceTags returns a boolean if a field has been set.
+
+### SetAttachedResourceTagsNil
+
+`func (o *VirtualizationVmwareHost) SetAttachedResourceTagsNil(b bool)`
+
+ SetAttachedResourceTagsNil sets the value for AttachedResourceTags to be an explicit nil
+
+### UnsetAttachedResourceTags
+`func (o *VirtualizationVmwareHost) UnsetAttachedResourceTags()`
+
+UnsetAttachedResourceTags ensures that no value is present for AttachedResourceTags, not even an explicit nil
 ### GetBootTime
 
 `func (o *VirtualizationVmwareHost) GetBootTime() time.Time`

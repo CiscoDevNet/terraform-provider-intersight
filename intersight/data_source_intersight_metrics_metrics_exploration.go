@@ -71,7 +71,7 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"description": {
-			Description: "User specified description of this MetricsExploration.",
+			Description: "User specified description of the MetricsExploration.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -81,7 +81,7 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"granularity": {
-			Description: "The time unit in which the metrics will be aggregated into.",
+			Description: "Time unit for aggregating the metrics.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -91,7 +91,7 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
 		"is_widget": {
-			Description: "True when this MetricsExploration is exposed as a Dashlet widget.",
+			Description: "Set to true when the MetricsExploration is presented as a Dashlet widget.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -106,7 +106,7 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
 					"aggregation": {
-						Description: "Function name which used to combine the group buckets into a single timeseries.",
+						Description: "Function name for combining group buckets into a single timeseries.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -126,22 +126,22 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
 					"instrument": {
-						Description: "Instrument name used to collect measurements for the query.",
+						Description: "Instrument name for measurement collection in the query.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"is_enabled": {
-						Description: "Indicates if this criterion should be used for the query.",
+						Description: "Flag indicating if this criterion should be used for the query.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"metric": {
-						Description: "Measurement name that is collected by the instrument for the query.",
+						Description: "Measurement name for instrument collection in the query.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"metric_aggregation": {
-						Description: "Function name which used to combine the metrics into granularity buckets.",
+						Description: "Function name for combining metrics into granularity buckets.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -151,12 +151,12 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"top_limit": {
-						Description: "The maximum number of result rows.",
+						Description: "Maximum number of rows in the result.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"top_sort": {
-						Description: "Method on how to sort the result rows.",
+						Description: "Method for sorting the result rows.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -174,7 +174,7 @@ func getMetricsMetricsExplorationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "User specified name of this MetricsExploration.",
+			Description: "User specified name of the MetricsExploration.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

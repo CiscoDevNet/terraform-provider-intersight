@@ -115,10 +115,16 @@ func resourceVnicIscsiStaticTargetPolicy() *schema.Resource {
 					return
 				}},
 			"ip_address": {
-				Description:  "The IPv4 address assigned to the iSCSI target.",
+				Description: "The IP address assigned to the iSCSI target.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"iscsi_ip_type": {
+				Description:  "Type of the IP address requested for iSCSI vNIC - IPv4/IPv6.\n* `IPv4` - IP V4 address type requested.\n* `IPv6` - IP V6 address type requested.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"), ""),
+				ValidateFunc: validation.StringInSlice([]string{"IPv4", "IPv6"}, false),
 				Optional:     true,
+				Default:      "IPv4",
 			},
 			"lun": {
 				Description: "The LUN parameters associated with an iSCSI target.",
@@ -146,9 +152,10 @@ func resourceVnicIscsiStaticTargetPolicy() *schema.Resource {
 							Default:     "vnic.Lun",
 						},
 						"lun_id": {
-							Description: "The Identifier of the LUN.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Description:  "The Identifier of the LUN.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntAtLeast(0),
+							Optional:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -549,6 +556,11 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 		o.SetIpAddress(x)
 	}
 
+	if v, ok := d.GetOk("iscsi_ip_type"); ok {
+		x := (v.(string))
+		o.SetIscsiIpType(x)
+	}
+
 	if v, ok := d.GetOk("lun"); ok {
 		p := make([]models.VnicLun, 0, 1)
 		s := v.([]interface{})
@@ -770,6 +782,10 @@ func resourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while setting property IpAddress in VnicIscsiStaticTargetPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("iscsi_ip_type", (s.GetIscsiIpType())); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpType in VnicIscsiStaticTargetPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("lun", flattenMapVnicLun(s.GetLun(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Lun in VnicIscsiStaticTargetPolicy object: %s", err.Error())
 	}
@@ -859,6 +875,12 @@ func resourceVnicIscsiStaticTargetPolicyUpdate(c context.Context, d *schema.Reso
 		v := d.Get("ip_address")
 		x := (v.(string))
 		o.SetIpAddress(x)
+	}
+
+	if d.HasChange("iscsi_ip_type") {
+		v := d.Get("iscsi_ip_type")
+		x := (v.(string))
+		o.SetIscsiIpType(x)
 	}
 
 	if d.HasChange("lun") {

@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **NumberOfVirtualDisplayHeads** | Pointer to **int64** | The number of virtual display heads of the virtual GPU. | [optional] [readonly] 
 **Sbdf** | Pointer to **string** | The SBDF address of the virtual GPU. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type of the virtual GPU such as PASS_THROUGH_GRAPHICS, PASS_THROUGH_COMPUTE, VIRTUAL. | [optional] [readonly] 
-**VendorName** | Pointer to **string** | The vendor name of the virtual GPU. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | The vendor name of the virtual GPU. | [optional] [readonly] 
 
 ## Methods
 
@@ -441,30 +441,30 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
-### GetVendorName
+### GetVendor
 
-`func (o *HciVirtualGpuConfig) GetVendorName() string`
+`func (o *HciVirtualGpuConfig) GetVendor() string`
 
-GetVendorName returns the VendorName field if non-nil, zero value otherwise.
+GetVendor returns the Vendor field if non-nil, zero value otherwise.
 
-### GetVendorNameOk
+### GetVendorOk
 
-`func (o *HciVirtualGpuConfig) GetVendorNameOk() (*string, bool)`
+`func (o *HciVirtualGpuConfig) GetVendorOk() (*string, bool)`
 
-GetVendorNameOk returns a tuple with the VendorName field if it's non-nil, zero value otherwise
+GetVendorOk returns a tuple with the Vendor field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVendorName
+### SetVendor
 
-`func (o *HciVirtualGpuConfig) SetVendorName(v string)`
+`func (o *HciVirtualGpuConfig) SetVendor(v string)`
 
-SetVendorName sets VendorName field to given value.
+SetVendor sets Vendor field to given value.
 
-### HasVendorName
+### HasVendor
 
-`func (o *HciVirtualGpuConfig) HasVendorName() bool`
+`func (o *HciVirtualGpuConfig) HasVendor() bool`
 
-HasVendorName returns a boolean if a field has been set.
+HasVendor returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

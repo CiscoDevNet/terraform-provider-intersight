@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AssetTag** | Pointer to **string** | The user defined asset tag assigned to the server. | [optional] [readonly] 
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
+**CoolingMode** | Pointer to **string** | Cooling mode representation of the server. * &#x60;Air&#x60; - Cooling mode of the device is set to Air. * &#x60;Immersion&#x60; - Cooling mode of the device is set to Immersion. | [optional] [readonly] [default to "Air"]
 **CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
 **DimmBlocklisting** | Pointer to **string** | The DIMM Blocklisting setting configured on the server. * &#x60;Unknown&#x60; - The configured state is unknown. * &#x60;Enabled&#x60; - The configured state is enabled. * &#x60;Disabled&#x60; - The configured state is disabled. | [optional] [readonly] [default to "Unknown"]
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
@@ -249,6 +250,31 @@ SetBiosPostComplete sets BiosPostComplete field to given value.
 `func (o *ComputePhysical) HasBiosPostComplete() bool`
 
 HasBiosPostComplete returns a boolean if a field has been set.
+
+### GetCoolingMode
+
+`func (o *ComputePhysical) GetCoolingMode() string`
+
+GetCoolingMode returns the CoolingMode field if non-nil, zero value otherwise.
+
+### GetCoolingModeOk
+
+`func (o *ComputePhysical) GetCoolingModeOk() (*string, bool)`
+
+GetCoolingModeOk returns a tuple with the CoolingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCoolingMode
+
+`func (o *ComputePhysical) SetCoolingMode(v string)`
+
+SetCoolingMode sets CoolingMode field to given value.
+
+### HasCoolingMode
+
+`func (o *ComputePhysical) HasCoolingMode() bool`
+
+HasCoolingMode returns a boolean if a field has been set.
 
 ### GetCpuCapacity
 

@@ -60,6 +60,54 @@ func getHciDomainManagerSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"api_limits": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"actual_size": {
+						Description: "The actual number of records returned by the API.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"api_name": {
+						Description: "The name of the Nutanix API that has reach the limit.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"is_limit_reached": {
+						Description: "Indicates if the limit is reached.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"limit": {
+						Description: "The number of records the API is allowed to return.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"api_limits_string": {
+			Description: "The string representation of the API limits as a string. It can be used by Alarm.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -499,6 +547,39 @@ func dataSourceHciDomainManagerRead(c context.Context, d *schema.ResourceData, m
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("api_limits"); ok {
+		x := make([]models.HciApiLimit, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.HciApiLimit{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hci.ApiLimit")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetApiLimits(x)
+	}
+
+	if v, ok := d.GetOk("api_limits_string"); ok {
+		x := (v.(string))
+		o.SetApiLimitsString(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -912,6 +993,9 @@ func dataSourceHciDomainManagerRead(c context.Context, d *schema.ResourceData, m
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["api_limits"] = flattenListHciApiLimit(s.GetApiLimits(), d)
+				temp["api_limits_string"] = (s.GetApiLimitsString())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["clusters"] = flattenListHciClusterRelationship(s.GetClusters(), d)

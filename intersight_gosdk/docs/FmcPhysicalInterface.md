@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fmc.PhysicalInterface"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fmc.PhysicalInterface"]
-**DeviceId** | Pointer to **string** | Represents Device Id associated with Physical Interface. | [optional] [readonly] 
-**DomainId** | Pointer to **string** | Represents Domain Id associated with Physical Interface. | [optional] [readonly] 
-**Name** | Pointer to **string** | Represents Physical Interface Name. | [optional] [readonly] 
-**PhysicalInterfaceId** | Pointer to **string** | Represents Physical Interface Id. | [optional] [readonly] 
+**DeviceId** | Pointer to **string** | Physical interface device Id. | [optional] [readonly] 
+**DomainId** | Pointer to **string** | Physical interface domain Id. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name for the physical interface. | [optional] [readonly] 
+**PhysicalInterfaceId** | Pointer to **string** | The id for the physical interface. | [optional] [readonly] 
 
 ## Methods
 

@@ -160,6 +160,11 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cooling_mode": {
+			Description: "Cooling mode representation of the server, supported modes include Air and Immersion.\n* `Air` - Cooling mode of the device is set to Air.\n* `Immersion` - Cooling mode of the device is set to Immersion.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cpu_capacity": {
 			Description: "Total processing capacity of the server.",
 			Type:        schema.TypeFloat,
@@ -1024,6 +1029,11 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetConnectionStatus(x)
 	}
 
+	if v, ok := d.GetOk("cooling_mode"); ok {
+		x := (v.(string))
+		o.SetCoolingMode(x)
+	}
+
 	if v, ok := d.GetOk("cpu_capacity"); ok {
 		x := float32(v.(float64))
 		o.SetCpuCapacity(x)
@@ -1779,6 +1789,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["chassis_id"] = (s.GetChassisId())
 				temp["class_id"] = (s.GetClassId())
 				temp["connection_status"] = (s.GetConnectionStatus())
+				temp["cooling_mode"] = (s.GetCoolingMode())
 				temp["cpu_capacity"] = (s.GetCpuCapacity())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

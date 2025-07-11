@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **BootDeviceBootmode** | Pointer to [**NullableBootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
 **ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
 **EquipmentEnclosureElements** | Pointer to [**[]EquipmentEnclosureElementRelationship**](EquipmentEnclosureElementRelationship.md) | An array of relationships to equipmentEnclosureElement resources. | [optional] [readonly] 
+**EquipmentRisers** | Pointer to [**[]EquipmentRiserRelationship**](EquipmentRiserRelationship.md) | An array of relationships to equipmentRiser resources. | [optional] [readonly] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] 
@@ -521,6 +522,41 @@ HasEquipmentEnclosureElements returns a boolean if a field has been set.
 `func (o *ComputeRackUnit) UnsetEquipmentEnclosureElements()`
 
 UnsetEquipmentEnclosureElements ensures that no value is present for EquipmentEnclosureElements, not even an explicit nil
+### GetEquipmentRisers
+
+`func (o *ComputeRackUnit) GetEquipmentRisers() []EquipmentRiserRelationship`
+
+GetEquipmentRisers returns the EquipmentRisers field if non-nil, zero value otherwise.
+
+### GetEquipmentRisersOk
+
+`func (o *ComputeRackUnit) GetEquipmentRisersOk() (*[]EquipmentRiserRelationship, bool)`
+
+GetEquipmentRisersOk returns a tuple with the EquipmentRisers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentRisers
+
+`func (o *ComputeRackUnit) SetEquipmentRisers(v []EquipmentRiserRelationship)`
+
+SetEquipmentRisers sets EquipmentRisers field to given value.
+
+### HasEquipmentRisers
+
+`func (o *ComputeRackUnit) HasEquipmentRisers() bool`
+
+HasEquipmentRisers returns a boolean if a field has been set.
+
+### SetEquipmentRisersNil
+
+`func (o *ComputeRackUnit) SetEquipmentRisersNil(b bool)`
+
+ SetEquipmentRisersNil sets the value for EquipmentRisers to be an explicit nil
+
+### UnsetEquipmentRisers
+`func (o *ComputeRackUnit) UnsetEquipmentRisers()`
+
+UnsetEquipmentRisers ensures that no value is present for EquipmentRisers, not even an explicit nil
 ### GetFanmodules
 
 `func (o *ComputeRackUnit) GetFanmodules() []EquipmentFanModuleRelationship`

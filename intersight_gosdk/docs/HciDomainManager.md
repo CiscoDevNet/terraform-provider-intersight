@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hci.DomainManager"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hci.DomainManager"]
+**ApiLimits** | Pointer to [**[]HciApiLimit**](HciApiLimit.md) |  | [optional] 
+**ApiLimitsString** | Pointer to **string** | The string representation of the API limits as a string. It can be used by Alarm. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the domain manager. | [optional] [readonly] 
 **PcExtId** | Pointer to **string** | The unique identifier of the domain manager (Prism Central) instance. | [optional] [readonly] 
 **Size** | Pointer to **string** | The size of the domain manager such as STARTER, SMALL, LARGE, EXTRALARGE. It determines the resources used by the domain manager. | [optional] [readonly] 
@@ -71,6 +73,66 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetApiLimits
+
+`func (o *HciDomainManager) GetApiLimits() []HciApiLimit`
+
+GetApiLimits returns the ApiLimits field if non-nil, zero value otherwise.
+
+### GetApiLimitsOk
+
+`func (o *HciDomainManager) GetApiLimitsOk() (*[]HciApiLimit, bool)`
+
+GetApiLimitsOk returns a tuple with the ApiLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiLimits
+
+`func (o *HciDomainManager) SetApiLimits(v []HciApiLimit)`
+
+SetApiLimits sets ApiLimits field to given value.
+
+### HasApiLimits
+
+`func (o *HciDomainManager) HasApiLimits() bool`
+
+HasApiLimits returns a boolean if a field has been set.
+
+### SetApiLimitsNil
+
+`func (o *HciDomainManager) SetApiLimitsNil(b bool)`
+
+ SetApiLimitsNil sets the value for ApiLimits to be an explicit nil
+
+### UnsetApiLimits
+`func (o *HciDomainManager) UnsetApiLimits()`
+
+UnsetApiLimits ensures that no value is present for ApiLimits, not even an explicit nil
+### GetApiLimitsString
+
+`func (o *HciDomainManager) GetApiLimitsString() string`
+
+GetApiLimitsString returns the ApiLimitsString field if non-nil, zero value otherwise.
+
+### GetApiLimitsStringOk
+
+`func (o *HciDomainManager) GetApiLimitsStringOk() (*string, bool)`
+
+GetApiLimitsStringOk returns a tuple with the ApiLimitsString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiLimitsString
+
+`func (o *HciDomainManager) SetApiLimitsString(v string)`
+
+SetApiLimitsString sets ApiLimitsString field to given value.
+
+### HasApiLimitsString
+
+`func (o *HciDomainManager) HasApiLimitsString() bool`
+
+HasApiLimitsString returns a boolean if a field has been set.
 
 ### GetName
 

@@ -3,12 +3,12 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_key_encryption_key"
 description: |-
-        Specifies a key encryption Key and parameters for the associated resource.
+        Key Encryption Key and associated resource parameters specification.
 
 ---
 
 # Data Source: intersight_hyperflex_key_encryption_key
-Specifies a key encryption Key and parameters for the associated resource.
+Key Encryption Key and associated resource parameters specification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -17,17 +17,17 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `is_account_recovery`:(bool) This defines whether we need to operate in an account recovery scenario or not. If yes, then most of the parameters will be populated from an internal MO. So, some of the input parameters MAY be ignored, if this value is set to true. 
+* `is_account_recovery`:(bool) Account recovery scenario flag determining parameter population from internal MO, with possibility of ignoring of input parameters when this value is true. 
 * `is_kek_set`:(bool) Indicates whether the value of the 'kek' property has been set. 
 * `is_passphrase_set`:(bool) Indicates whether the value of the 'passphrase' property has been set. 
-* `iteration`:(int) Number of iterations we want the hash to be run. 
-* `kek`:(string) Key encryption key used to encrypt the DEK's on the HyperFlex cluster. 
-* `key_id`:(string) Resource id + time of creation used for retrieving the KEK. 
-* `key_state`:(string) Last known Key encryption key state for this Key.* `NEW` - Key Encryption key is newly created.* `ACTIVE` - Key Encryption key is deployed on active resource.* `INACTIVE` - Key Encryption key is inactive and not used.* `INPROGRESS` - Key Encryption key is in a state where it was used on Intersight but did not receive confirmation from platform of success/failure. 
+* `iteration`:(int) Number of hash iterations to run. 
+* `kek`:(string) Key Encryption Key used to encrypt the DEK's on the HyperFlex cluster. 
+* `key_id`:(string) Resource ID and time for Kek retrieval. 
+* `key_state`:(string) Last known state of the Key Encryption Key.* `NEW` - Newly created Key Encryption Key (KEK).* `ACTIVE` - Deployed Key Encryption Key on active resources.* `INACTIVE` - Inactive and unused Key Encryption Key.* `INPROGRESS` - Unconfirmed Key Encryption Key usage on Intersight platform. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `passphrase`:(string) Initial passphrase for the encryption policy, password must contain a minimum of 12 characters, with at least 1 lowercase, 1 uppercase, 1 numeric. 
-* `resource_type`:(string) Resource type on which this key will be applied.* `CLUSTER` - Encryption is per HyperFlex cluster.* `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster.* `DRIVE` - Encryption is per drive on the HyperFlex cluster. 
+* `passphrase`:(string) Initial passphrase for encryption policy, requiring a minimum of 12 characters, including 1 lowercase, 1 uppercase, and 1 numeric character. 
+* `resource_type`:(string) Resource type for key application.* `CLUSTER` - Cluster specific encryption per HyperFlex cluster.* `DATASTORE` - Data store encryption on the HyperFlex cluster.* `DRIVE` - Drive specific encryption on the HyperFlex cluster. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `transit_kek`:(string) Copy of Key encryption key, which is used for sending the key over to the remote device endpoint. It is not persisited anywhere. 
+* `transit_kek`:(string) Temporary copy of KEK used for transfer to remote device endpoint, not persisted anywhere. 
  

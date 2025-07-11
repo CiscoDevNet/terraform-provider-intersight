@@ -876,6 +876,11 @@ func getComputeBladeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"cooling_mode": {
+			Description: "Cooling mode representation of the server.\n* `Air` - Cooling mode of the device is set to Air.\n* `Immersion` - Cooling mode of the device is set to Immersion.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cpu_capacity": {
 			Description: "Total processing capacity of the server.",
 			Type:        schema.TypeFloat,
@@ -3012,6 +3017,11 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetComputePersonality(x)
 	}
 
+	if v, ok := d.GetOk("cooling_mode"); ok {
+		x := (v.(string))
+		o.SetCoolingMode(x)
+	}
+
 	if v, ok := d.GetOk("cpu_capacity"); ok {
 		x := float32(v.(float64))
 		o.SetCpuCapacity(x)
@@ -4310,6 +4320,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 				temp["class_id"] = (s.GetClassId())
 
 				temp["compute_personality"] = flattenListComputePersonalityRelationship(s.GetComputePersonality(), d)
+				temp["cooling_mode"] = (s.GetCoolingMode())
 				temp["cpu_capacity"] = (s.GetCpuCapacity())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

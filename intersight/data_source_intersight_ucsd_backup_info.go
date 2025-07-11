@@ -61,22 +61,22 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"backup_file_name": {
-			Description: "Auto generated backup File Name with combination of file prefix given an user input and the timestamp.",
+			Description: "Auto generated backup file name with user defined prefix and timestamp.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"backup_location": {
-			Description: "Backup location that contains the backup images for end device which can be used for restore operation.",
+			Description: "Backup location for restore operation.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"backup_server_ip": {
-			Description: "Backup server where backup images are maintained.",
+			Description: "Backup server for storing backup images.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"backup_size": {
-			Description: "Size of the backup image in bytes.",
+			Description: "Backup image size in bytes.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -101,7 +101,7 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"connector_feature": {
-						Description: "State of the connector pack whether it is enabled or disabled.",
+						Description: "State of connector pack (enabled/ disabled).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -111,12 +111,12 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
 					"downloaded_version": {
-						Description: "Version of the connector pack that is last downloaded successfully to UCS Director.",
+						Description: "Last successfully downloaded connector pack version successfully for UCS Director.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the connector pack running on the UCS Director.",
+						Description: "UCS Director connector pack name.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -131,12 +131,12 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
 					"state": {
-						Description: "State of the connector pack whether it is enabled or disabled.",
+						Description: "Connector pack state (enabled/disabled).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"nr_version": {
-						Description: "Version of the connector pack.",
+						Description: "The connector pack version.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -154,27 +154,27 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"duration": {
-			Description: "Time taken for the backup to be completed.",
+			Description: "Time taken to complete the backup.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"encryption_key": {
-			Description: "The key used for encrypting the backup file.",
+			Description: "Encryption key for backup file.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"failure_reason": {
-			Description: "Reason for backup failure.",
+			Description: "The cause of the backup failure.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"is_purged": {
-			Description: "Backup image got purged or not. The backup images get purged based on the retention count set by the user in the backup config policy.",
+			Description: "Backup image purge status based on retention policy.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"last_modified": {
-			Description: "Last modified time when this backup record got updated.",
+			Description: "Backup record last modified time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -234,7 +234,7 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"percentage_completion": {
-			Description: "Backup current precentage completion status information.",
+			Description: "Backup completion percentage status.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -273,12 +273,12 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"product_version": {
-			Description: "The end device product version when the backup image was taken.",
+			Description: "End device product version at the backup time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"protocol": {
-			Description: "Protocol used for the remote backup. possible values are FTP, SCP and SFTP. Not applicable for the localhost (127.0.0.1).",
+			Description: "Supported remote backup protocol (FTP, SCP and SFTP); not applicable for localhost (127.0.0.1).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -323,17 +323,17 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"stage_completion": {
-			Description: "Backup current status stage information.",
+			Description: "Backup status stage information.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"start_time": {
-			Description: "Start time of backup when it got initiated.",
+			Description: "Backup initiation start time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"status": {
-			Description: "Current status of Backup current.",
+			Description: "The current backup status.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

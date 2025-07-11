@@ -140,7 +140,7 @@ func resourceRecoveryRestore() *schema.Resource {
 				ForceNew:    true,
 			},
 			"config_params": {
-				Description: "Configuration parameters to be passed into the restore workflow.",
+				Description: "Resource workflow configuration parameters.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,

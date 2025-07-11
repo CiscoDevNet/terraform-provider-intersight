@@ -15,12 +15,14 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_vnic_iscsi_boot_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `auto_targetvendor_name`:(string) Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters. 
+* `auto_targetvendor_name`:(string) Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `initiator_ip_source`:(string) Source Type of Initiator IP Address - Auto/Static/Pool.* `DHCP` - The IP address is assigned using DHCP, if available.* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. 
-* `initiator_static_ip_v4_address`:(string) Static IP address provided for iSCSI Initiator. 
+* `initiator_static_ip_v4_address`:(string) Static IPv4 address provided for iSCSI Initiator. 
+* `initiator_static_ip_v6_address`:(string) Static IPv6 address provided for iSCSI Initiator. 
+* `iscsi_ip_type`:(string) Type of the IP address requested for iSCSI vNIC - IPv4/IPv6.* `IPv4` - IP V4 address type requested.* `IPv6` - IP V6 address type requested. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 

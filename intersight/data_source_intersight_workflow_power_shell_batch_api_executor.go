@@ -232,7 +232,7 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"constraints": {
-			Description: "Enter the constraints on when this task should match against the task definition.",
+			Description: "Constraints for matching this task against the task definition.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -267,7 +267,7 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"description": {
-			Description: "A detailed description about the batch APIs.",
+			Description: "Detailed description of the batch APIs.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -322,7 +322,7 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name for the batch API task.",
+			Description: "Name of the batch API task.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -332,12 +332,12 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"outcomes": {
-			Description: "All the possible outcomes of this task are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
+			Description: "Collection of possible task outcomes, represented as workflow.Outcome objects. Outcomes can be mapped to messages and are evaluated in the given order. \nA catch-all success or failure outcome with condition 'true' can be included at the end. Optional property; if not specified, the task defaults to success.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"output": {
-			Description: "Intersight Orchestrator allows the extraction of required values from API\nresponses using the API response grammar. These extracted values can be mapped\nto task output parameters defined in task definition.\nThe mapping of API output parameters to the task output parameters is provided\nas JSON in this property.",
+			Description: "JSON mapping of extracted API response values to task output parameters, using API response grammar defined in Intersight Orchestrator.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -416,7 +416,7 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			},
 		},
 		"retry_from_failed_api": {
-			Description: "When an execution of a nth API in the Batch fails,\nRetry from failed API flag indicates if the execution should start from the nth API or the first API during task retry.\nBy default the value is set to false.",
+			Description: "Flag indicating if the retry task should from the failed API or the first API in the batch execution; default value is false.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -426,7 +426,7 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"skip_on_condition": {
-			Description: "The skip expression, if provided, allows the batch API executor to skip the\ntask execution when the given expression evaluates to true.\nThe expression is given as such a golang template that has to be\nevaluated to a final content true/false. The expression is an optional and in\ncase not provided, the API will always be executed.",
+			Description: "Optional skip expression allowing the batch API executor to skip task execution when the provided Go template expression evaluates to true. \nIf not specified, the API will always be executed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -489,7 +489,7 @@ func getWorkflowPowerShellBatchApiExecutorSchema() map[string]*schema.Schema {
 			},
 		},
 		"ui_rendering_data": {
-			Description: "This will hold the data needed for task to be rendered in the user interface.",
+			Description: "Data required for rendering the task in the user interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -312,7 +312,7 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 				},
 			},
 			"schedule": {
-				Description: "Schedule to create a backup on the target device. Minimum is 4 hours and Max is 1440 hours (30 Days).",
+				Description: "Backup schedule for target device (4 to 1440 hours).",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -332,19 +332,19 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 							Default:     "recovery.BackupSchedule",
 						},
 						"execution_time": {
-							Description: "The time at which the backup is to be run on a given day. Applicable when the frequency unit is daily.",
+							Description: "The daily backup run time.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"frequency_unit": {
-							Description:  "The frequency at which the backup schedule must run.\n* `Daily` - Allows the user to run the backup daily at a given time.\n* `Periodic` - Allows the user to run the backup after a certain number of hours.",
+							Description:  "Backup schedule frequency.\n* `Daily` - Daily backup scheduling option.\n* `Periodic` - Hourly backup scheduling option.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"Daily", "Periodic"}, false),
 							Optional:     true,
 							Default:      "Daily",
 						},
 						"hours": {
-							Description:  "The frequency, in hours, at which the backup schedule runs.\n* `8` - The backup interval is 8 hours.\n* `4` - The backup interval is 4 hours.\n* `12` - The backup interval is 12 hours.\n* `16` - The backup interval is 16 hours.\n* `20` - The backup interval is 20 hours.",
+							Description:  "Back schedule frequency (in hours).\n* `8` - The backup interval is 8 hours.\n* `4` - The backup interval is 4 hours.\n* `12` - The backup interval is 12 hours.\n* `16` - The backup interval is 16 hours.\n* `20` - The backup interval is 20 hours.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntInSlice([]int{8, 4, 12, 16, 20}),
 							Optional:     true,

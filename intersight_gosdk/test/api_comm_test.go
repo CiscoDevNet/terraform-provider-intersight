@@ -35,6 +35,18 @@ func Test_intersight_CommApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CommApiService CreateCommTagDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CommApi.CreateCommTagDefinition(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CommApiService DeleteCommHttpProxyPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -42,6 +54,19 @@ func Test_intersight_CommApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.CommApi.DeleteCommHttpProxyPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CommApiService DeleteCommTagDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.CommApi.DeleteCommTagDefinition(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -74,6 +99,32 @@ func Test_intersight_CommApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CommApiService GetCommTagDefinitionByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CommApi.GetCommTagDefinitionByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CommApiService GetCommTagDefinitionList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CommApi.GetCommTagDefinitionList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CommApiService PatchCommHttpProxyPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -88,6 +139,20 @@ func Test_intersight_CommApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CommApiService PatchCommTagDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CommApi.PatchCommTagDefinition(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CommApiService UpdateCommHttpProxyPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -95,6 +160,20 @@ func Test_intersight_CommApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.CommApi.UpdateCommHttpProxyPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CommApiService UpdateCommTagDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CommApi.UpdateCommTagDefinition(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

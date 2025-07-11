@@ -86,7 +86,7 @@ func getFmcDomainSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "A user provided name of the FMC Domain.",
+			Description: "User assigned name for the FMC domain.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -233,7 +233,7 @@ func getFmcDomainSchema() map[string]*schema.Schema {
 			},
 		},
 		"uuid": {
-			Description: "Unique Identifier of the Domain.",
+			Description: "Unique identifier for the domain.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

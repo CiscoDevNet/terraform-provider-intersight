@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "oauth.AccessToken"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "oauth.AccessToken"]
-**ApiType** | Pointer to **string** | Type of OAuth Api. For example, Smart-licensing-API. * &#x60;Unknown&#x60; - Unknown is the default API type. * &#x60;SmartLicensing-API&#x60; - Smart licensing API type. * &#x60;CommerceEstimate-API&#x60; - Commerce Estimate API type. | [optional] [default to "Unknown"]
-**Expiry** | Pointer to **time.Time** | The date and time when the access token expires. | [optional] [readonly] 
-**Issuer** | Pointer to **string** | Issuer of OAuth access token. | [optional] [readonly] 
-**RefreshExpiry** | Pointer to **time.Time** | The date and time when the refresh token expires. | [optional] [readonly] 
-**TokenOwner** | Pointer to **string** | The moid of the owner of the access token. | [optional] [readonly] 
+**ApiType** | Pointer to **string** | OAuth API type (e.g., Smart licensing API). * &#x60;Unknown&#x60; - Unknown serves as the default API type. * &#x60;SmartLicensing-API&#x60; - Smart licensing API type. * &#x60;CommerceEstimate-API&#x60; - Commerce Estimate API type. | [optional] [default to "Unknown"]
+**Expiry** | Pointer to **time.Time** | Access token expiration date and time. | [optional] [readonly] 
+**Issuer** | Pointer to **string** | OAuth access token issuer. | [optional] [readonly] 
+**RefreshExpiry** | Pointer to **time.Time** | Refresh token expiration date and time. | [optional] [readonly] 
+**TokenOwner** | Pointer to **string** | MOID of the access token owner. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods

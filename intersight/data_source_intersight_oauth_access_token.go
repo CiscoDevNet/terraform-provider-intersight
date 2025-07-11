@@ -96,7 +96,7 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 			},
 		},
 		"api_type": {
-			Description: "Type of OAuth Api. For example, Smart-licensing-API.\n* `Unknown` - Unknown is the default API type.\n* `SmartLicensing-API` - Smart licensing API type.\n* `CommerceEstimate-API` - Commerce Estimate API type.",
+			Description: "OAuth API type (e.g., Smart licensing API).\n* `Unknown` - Unknown serves as the default API type.\n* `SmartLicensing-API` - Smart licensing API type.\n* `CommerceEstimate-API` - Commerce Estimate API type.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -116,12 +116,12 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"expiry": {
-			Description: "The date and time when the access token expires.",
+			Description: "Access token expiration date and time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"issuer": {
-			Description: "Issuer of OAuth access token.",
+			Description: "OAuth access token issuer.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -215,7 +215,7 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 			},
 		},
 		"refresh_expiry": {
-			Description: "The date and time when the refresh token expires.",
+			Description: "Refresh token expiration date and time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -248,7 +248,7 @@ func getOauthAccessTokenSchema() map[string]*schema.Schema {
 			},
 		},
 		"token_owner": {
-			Description: "The moid of the owner of the access token.",
+			Description: "MOID of the access token owner.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

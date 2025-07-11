@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025051220
+API version: 1.0.11-2025062323
 Contact: intersight@cisco.com
 */
 
@@ -28,15 +28,20 @@ type VnicIscsiBootPolicyInventory struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters.
+	// Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters.
 	AutoTargetvendorName *string                      `json:"AutoTargetvendorName,omitempty"`
 	Chap                 NullableVnicIscsiAuthProfile `json:"Chap,omitempty"`
 	// Source Type of Initiator IP Address - Auto/Static/Pool. * `DHCP` - The IP address is assigned using DHCP, if available. * `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.
 	InitiatorIpSource *string `json:"InitiatorIpSource,omitempty"`
-	// Static IP address provided for iSCSI Initiator.
-	InitiatorStaticIpV4Address *string                      `json:"InitiatorStaticIpV4Address,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
-	InitiatorStaticIpV4Config  NullableIppoolIpV4Config     `json:"InitiatorStaticIpV4Config,omitempty"`
-	MutualChap                 NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
+	// Static IPv4 address provided for iSCSI Initiator.
+	InitiatorStaticIpV4Address *string                  `json:"InitiatorStaticIpV4Address,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
+	InitiatorStaticIpV4Config  NullableIppoolIpV4Config `json:"InitiatorStaticIpV4Config,omitempty"`
+	// Static IPv6 address provided for iSCSI Initiator.
+	InitiatorStaticIpV6Address *string                  `json:"InitiatorStaticIpV6Address,omitempty" validate:"regexp=^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"`
+	InitiatorStaticIpV6Config  NullableIppoolIpV6Config `json:"InitiatorStaticIpV6Config,omitempty"`
+	// Type of the IP address requested for iSCSI vNIC - IPv4/IPv6. * `IPv4` - IP V4 address type requested. * `IPv6` - IP V6 address type requested.
+	IscsiIpType *string                      `json:"IscsiIpType,omitempty"`
+	MutualChap  NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
 	// Source Type of Targets - Auto/Static. * `Static` - Type indicates that static target interface is assigned to iSCSI boot. * `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.
 	TargetSourceType      *string                                                  `json:"TargetSourceType,omitempty"`
 	InitiatorIpPool       NullableIppoolPoolRelationship                           `json:"InitiatorIpPool,omitempty"`
@@ -310,6 +315,113 @@ func (o *VnicIscsiBootPolicyInventory) SetInitiatorStaticIpV4ConfigNil() {
 // UnsetInitiatorStaticIpV4Config ensures that no value is present for InitiatorStaticIpV4Config, not even an explicit nil
 func (o *VnicIscsiBootPolicyInventory) UnsetInitiatorStaticIpV4Config() {
 	o.InitiatorStaticIpV4Config.Unset()
+}
+
+// GetInitiatorStaticIpV6Address returns the InitiatorStaticIpV6Address field value if set, zero value otherwise.
+func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV6Address() string {
+	if o == nil || IsNil(o.InitiatorStaticIpV6Address) {
+		var ret string
+		return ret
+	}
+	return *o.InitiatorStaticIpV6Address
+}
+
+// GetInitiatorStaticIpV6AddressOk returns a tuple with the InitiatorStaticIpV6Address field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV6AddressOk() (*string, bool) {
+	if o == nil || IsNil(o.InitiatorStaticIpV6Address) {
+		return nil, false
+	}
+	return o.InitiatorStaticIpV6Address, true
+}
+
+// HasInitiatorStaticIpV6Address returns a boolean if a field has been set.
+func (o *VnicIscsiBootPolicyInventory) HasInitiatorStaticIpV6Address() bool {
+	if o != nil && !IsNil(o.InitiatorStaticIpV6Address) {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiatorStaticIpV6Address gets a reference to the given string and assigns it to the InitiatorStaticIpV6Address field.
+func (o *VnicIscsiBootPolicyInventory) SetInitiatorStaticIpV6Address(v string) {
+	o.InitiatorStaticIpV6Address = &v
+}
+
+// GetInitiatorStaticIpV6Config returns the InitiatorStaticIpV6Config field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV6Config() IppoolIpV6Config {
+	if o == nil || IsNil(o.InitiatorStaticIpV6Config.Get()) {
+		var ret IppoolIpV6Config
+		return ret
+	}
+	return *o.InitiatorStaticIpV6Config.Get()
+}
+
+// GetInitiatorStaticIpV6ConfigOk returns a tuple with the InitiatorStaticIpV6Config field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicIscsiBootPolicyInventory) GetInitiatorStaticIpV6ConfigOk() (*IppoolIpV6Config, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InitiatorStaticIpV6Config.Get(), o.InitiatorStaticIpV6Config.IsSet()
+}
+
+// HasInitiatorStaticIpV6Config returns a boolean if a field has been set.
+func (o *VnicIscsiBootPolicyInventory) HasInitiatorStaticIpV6Config() bool {
+	if o != nil && o.InitiatorStaticIpV6Config.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInitiatorStaticIpV6Config gets a reference to the given NullableIppoolIpV6Config and assigns it to the InitiatorStaticIpV6Config field.
+func (o *VnicIscsiBootPolicyInventory) SetInitiatorStaticIpV6Config(v IppoolIpV6Config) {
+	o.InitiatorStaticIpV6Config.Set(&v)
+}
+
+// SetInitiatorStaticIpV6ConfigNil sets the value for InitiatorStaticIpV6Config to be an explicit nil
+func (o *VnicIscsiBootPolicyInventory) SetInitiatorStaticIpV6ConfigNil() {
+	o.InitiatorStaticIpV6Config.Set(nil)
+}
+
+// UnsetInitiatorStaticIpV6Config ensures that no value is present for InitiatorStaticIpV6Config, not even an explicit nil
+func (o *VnicIscsiBootPolicyInventory) UnsetInitiatorStaticIpV6Config() {
+	o.InitiatorStaticIpV6Config.Unset()
+}
+
+// GetIscsiIpType returns the IscsiIpType field value if set, zero value otherwise.
+func (o *VnicIscsiBootPolicyInventory) GetIscsiIpType() string {
+	if o == nil || IsNil(o.IscsiIpType) {
+		var ret string
+		return ret
+	}
+	return *o.IscsiIpType
+}
+
+// GetIscsiIpTypeOk returns a tuple with the IscsiIpType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicIscsiBootPolicyInventory) GetIscsiIpTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.IscsiIpType) {
+		return nil, false
+	}
+	return o.IscsiIpType, true
+}
+
+// HasIscsiIpType returns a boolean if a field has been set.
+func (o *VnicIscsiBootPolicyInventory) HasIscsiIpType() bool {
+	if o != nil && !IsNil(o.IscsiIpType) {
+		return true
+	}
+
+	return false
+}
+
+// SetIscsiIpType gets a reference to the given string and assigns it to the IscsiIpType field.
+func (o *VnicIscsiBootPolicyInventory) SetIscsiIpType(v string) {
+	o.IscsiIpType = &v
 }
 
 // GetMutualChap returns the MutualChap field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -643,6 +755,15 @@ func (o VnicIscsiBootPolicyInventory) ToMap() (map[string]interface{}, error) {
 	if o.InitiatorStaticIpV4Config.IsSet() {
 		toSerialize["InitiatorStaticIpV4Config"] = o.InitiatorStaticIpV4Config.Get()
 	}
+	if !IsNil(o.InitiatorStaticIpV6Address) {
+		toSerialize["InitiatorStaticIpV6Address"] = o.InitiatorStaticIpV6Address
+	}
+	if o.InitiatorStaticIpV6Config.IsSet() {
+		toSerialize["InitiatorStaticIpV6Config"] = o.InitiatorStaticIpV6Config.Get()
+	}
+	if !IsNil(o.IscsiIpType) {
+		toSerialize["IscsiIpType"] = o.IscsiIpType
+	}
 	if o.MutualChap.IsSet() {
 		toSerialize["MutualChap"] = o.MutualChap.Get()
 	}
@@ -719,15 +840,20 @@ func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters.
+		// Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters.
 		AutoTargetvendorName *string                      `json:"AutoTargetvendorName,omitempty"`
 		Chap                 NullableVnicIscsiAuthProfile `json:"Chap,omitempty"`
 		// Source Type of Initiator IP Address - Auto/Static/Pool. * `DHCP` - The IP address is assigned using DHCP, if available. * `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.
 		InitiatorIpSource *string `json:"InitiatorIpSource,omitempty"`
-		// Static IP address provided for iSCSI Initiator.
-		InitiatorStaticIpV4Address *string                      `json:"InitiatorStaticIpV4Address,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
-		InitiatorStaticIpV4Config  NullableIppoolIpV4Config     `json:"InitiatorStaticIpV4Config,omitempty"`
-		MutualChap                 NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
+		// Static IPv4 address provided for iSCSI Initiator.
+		InitiatorStaticIpV4Address *string                  `json:"InitiatorStaticIpV4Address,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
+		InitiatorStaticIpV4Config  NullableIppoolIpV4Config `json:"InitiatorStaticIpV4Config,omitempty"`
+		// Static IPv6 address provided for iSCSI Initiator.
+		InitiatorStaticIpV6Address *string                  `json:"InitiatorStaticIpV6Address,omitempty" validate:"regexp=^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"`
+		InitiatorStaticIpV6Config  NullableIppoolIpV6Config `json:"InitiatorStaticIpV6Config,omitempty"`
+		// Type of the IP address requested for iSCSI vNIC - IPv4/IPv6. * `IPv4` - IP V4 address type requested. * `IPv6` - IP V6 address type requested.
+		IscsiIpType *string                      `json:"IscsiIpType,omitempty"`
+		MutualChap  NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
 		// Source Type of Targets - Auto/Static. * `Static` - Type indicates that static target interface is assigned to iSCSI boot. * `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.
 		TargetSourceType      *string                                                  `json:"TargetSourceType,omitempty"`
 		InitiatorIpPool       NullableIppoolPoolRelationship                           `json:"InitiatorIpPool,omitempty"`
@@ -749,6 +875,9 @@ func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(data []byte) (err error) {
 		varVnicIscsiBootPolicyInventory.InitiatorIpSource = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.InitiatorIpSource
 		varVnicIscsiBootPolicyInventory.InitiatorStaticIpV4Address = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.InitiatorStaticIpV4Address
 		varVnicIscsiBootPolicyInventory.InitiatorStaticIpV4Config = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.InitiatorStaticIpV4Config
+		varVnicIscsiBootPolicyInventory.InitiatorStaticIpV6Address = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.InitiatorStaticIpV6Address
+		varVnicIscsiBootPolicyInventory.InitiatorStaticIpV6Config = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.InitiatorStaticIpV6Config
+		varVnicIscsiBootPolicyInventory.IscsiIpType = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.IscsiIpType
 		varVnicIscsiBootPolicyInventory.MutualChap = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.MutualChap
 		varVnicIscsiBootPolicyInventory.TargetSourceType = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.TargetSourceType
 		varVnicIscsiBootPolicyInventory.InitiatorIpPool = varVnicIscsiBootPolicyInventoryWithoutEmbeddedStruct.InitiatorIpPool
@@ -780,6 +909,9 @@ func (o *VnicIscsiBootPolicyInventory) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "InitiatorIpSource")
 		delete(additionalProperties, "InitiatorStaticIpV4Address")
 		delete(additionalProperties, "InitiatorStaticIpV4Config")
+		delete(additionalProperties, "InitiatorStaticIpV6Address")
+		delete(additionalProperties, "InitiatorStaticIpV6Config")
+		delete(additionalProperties, "IscsiIpType")
 		delete(additionalProperties, "MutualChap")
 		delete(additionalProperties, "TargetSourceType")
 		delete(additionalProperties, "InitiatorIpPool")
