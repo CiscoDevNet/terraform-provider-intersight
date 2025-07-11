@@ -120,6 +120,39 @@ func getVirtualizationVmwareClusterSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"attached_resource_tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"category": {
+						Description: "The category of the tag assigned to the resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The name of the tag assigned to the resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -706,6 +739,34 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("attached_resource_tags"); ok {
+		x := make([]models.VirtualizationVmwareAttachedResourceTag, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.VirtualizationVmwareAttachedResourceTag{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("virtualization.VmwareAttachedResourceTag")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetAttachedResourceTags(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1257,6 +1318,8 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 				temp["alarm_summary"] = flattenMapCondAlarmSummary(s.GetAlarmSummary(), d)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["attached_resource_tags"] = flattenListVirtualizationVmwareAttachedResourceTag(s.GetAttachedResourceTags(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["cpu_over_commitment"] = (s.GetCpuOverCommitment())
 

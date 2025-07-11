@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareVirtualMachine"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareVirtualMachine"]
 **Annotation** | Pointer to **string** | List of annotations provided to this VM by user. Can be long. | [optional] 
+**AttachedResourceTags** | Pointer to [**[]VirtualizationVmwareAttachedResourceTag**](VirtualizationVmwareAttachedResourceTag.md) |  | [optional] 
 **ConfigName** | Pointer to **string** | The configuration name for this VM. This maybe the same as the guest hostname. | [optional] 
 **ConnectionState** | Pointer to **string** | Shows if virtual machine is connected to vCenter. Values are Connected, Disconnected, Orphaned, Inaccessible, and Invalid. | [optional] 
 **CpuHotAddEnabled** | Pointer to **bool** | Indicates if the capability to add CPUs to a running VM is enabled. | [optional] 
@@ -138,6 +139,41 @@ SetAnnotation sets Annotation field to given value.
 
 HasAnnotation returns a boolean if a field has been set.
 
+### GetAttachedResourceTags
+
+`func (o *VirtualizationVmwareVirtualMachine) GetAttachedResourceTags() []VirtualizationVmwareAttachedResourceTag`
+
+GetAttachedResourceTags returns the AttachedResourceTags field if non-nil, zero value otherwise.
+
+### GetAttachedResourceTagsOk
+
+`func (o *VirtualizationVmwareVirtualMachine) GetAttachedResourceTagsOk() (*[]VirtualizationVmwareAttachedResourceTag, bool)`
+
+GetAttachedResourceTagsOk returns a tuple with the AttachedResourceTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttachedResourceTags
+
+`func (o *VirtualizationVmwareVirtualMachine) SetAttachedResourceTags(v []VirtualizationVmwareAttachedResourceTag)`
+
+SetAttachedResourceTags sets AttachedResourceTags field to given value.
+
+### HasAttachedResourceTags
+
+`func (o *VirtualizationVmwareVirtualMachine) HasAttachedResourceTags() bool`
+
+HasAttachedResourceTags returns a boolean if a field has been set.
+
+### SetAttachedResourceTagsNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetAttachedResourceTagsNil(b bool)`
+
+ SetAttachedResourceTagsNil sets the value for AttachedResourceTags to be an explicit nil
+
+### UnsetAttachedResourceTags
+`func (o *VirtualizationVmwareVirtualMachine) UnsetAttachedResourceTags()`
+
+UnsetAttachedResourceTags ensures that no value is present for AttachedResourceTags, not even an explicit nil
 ### GetConfigName
 
 `func (o *VirtualizationVmwareVirtualMachine) GetConfigName() string`

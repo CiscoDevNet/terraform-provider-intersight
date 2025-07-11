@@ -497,7 +497,7 @@ func getHciGpuSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"vendor_name": {
+					"vendor": {
 						Description: "The vendor name of the virtual GPU.",
 						Type:        schema.TypeString,
 						Optional:    true,

@@ -3,12 +3,12 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_config_result_entry"
 description: |-
-        An entry that describes the result of a Backup Profile state on the end device.
+        Backup profile state result entry on end device.
 
 ---
 
 # Data Source: intersight_recovery_config_result_entry
-An entry that describes the result of a Backup Profile state on the end device.
+Backup profile state result entry on end device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

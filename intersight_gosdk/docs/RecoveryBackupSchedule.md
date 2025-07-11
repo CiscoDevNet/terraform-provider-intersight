@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.BackupSchedule"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.BackupSchedule"]
-**ExecutionTime** | Pointer to **time.Time** | The time at which the backup is to be run on a given day. Applicable when the frequency unit is daily. | [optional] 
-**FrequencyUnit** | Pointer to **string** | The frequency at which the backup schedule must run. * &#x60;Daily&#x60; - Allows the user to run the backup daily at a given time. * &#x60;Periodic&#x60; - Allows the user to run the backup after a certain number of hours. | [optional] [default to "Daily"]
-**Hours** | Pointer to **int32** | The frequency, in hours, at which the backup schedule runs. * &#x60;8&#x60; - The backup interval is 8 hours. * &#x60;4&#x60; - The backup interval is 4 hours. * &#x60;12&#x60; - The backup interval is 12 hours. * &#x60;16&#x60; - The backup interval is 16 hours. * &#x60;20&#x60; - The backup interval is 20 hours. | [optional] [default to 8]
+**ExecutionTime** | Pointer to **time.Time** | The daily backup run time. | [optional] 
+**FrequencyUnit** | Pointer to **string** | Backup schedule frequency. * &#x60;Daily&#x60; - Daily backup scheduling option. * &#x60;Periodic&#x60; - Hourly backup scheduling option. | [optional] [default to "Daily"]
+**Hours** | Pointer to **int32** | Back schedule frequency (in hours). * &#x60;8&#x60; - The backup interval is 8 hours. * &#x60;4&#x60; - The backup interval is 4 hours. * &#x60;12&#x60; - The backup interval is 12 hours. * &#x60;16&#x60; - The backup interval is 16 hours. * &#x60;20&#x60; - The backup interval is 20 hours. | [optional] [default to 8]
 
 ## Methods
 

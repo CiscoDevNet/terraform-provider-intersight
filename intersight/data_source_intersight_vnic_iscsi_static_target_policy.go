@@ -81,7 +81,12 @@ func getVnicIscsiStaticTargetPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"ip_address": {
-			Description: "The IPv4 address assigned to the iSCSI target.",
+			Description: "The IP address assigned to the iSCSI target.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"iscsi_ip_type": {
+			Description: "Type of the IP address requested for iSCSI vNIC - IPv4/IPv6.\n* `IPv4` - IP V4 address type requested.\n* `IPv6` - IP V6 address type requested.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -501,6 +506,11 @@ func dataSourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.Reso
 		o.SetIpAddress(x)
 	}
 
+	if v, ok := d.GetOk("iscsi_ip_type"); ok {
+		x := (v.(string))
+		o.SetIscsiIpType(x)
+	}
+
 	if v, ok := d.GetOk("lun"); ok {
 		p := make([]models.VnicLun, 0, 1)
 		s := v.([]interface{})
@@ -868,6 +878,7 @@ func dataSourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.Reso
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["ip_address"] = (s.GetIpAddress())
+				temp["iscsi_ip_type"] = (s.GetIscsiIpType())
 
 				temp["lun"] = flattenMapVnicLun(s.GetLun(), d)
 

@@ -160,7 +160,7 @@ func resourceOauthAuthorization() *schema.Resource {
 				},
 			},
 			"api_type": {
-				Description:  "Type of OAuth Api. For example, Smart-licensing-API.\n* `Unknown` - Unknown is the default API type.\n* `SmartLicensing-API` - Smart licensing API type.\n* `CommerceEstimate-API` - Commerce Estimate API type.",
+				Description:  "OAuth API type (e.g., Smart licensing API).\n* `Unknown` - Unknown serves as the default API type.\n* `SmartLicensing-API` - Smart licensing API type.\n* `CommerceEstimate-API` - Commerce Estimate API type.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"Unknown", "SmartLicensing-API", "CommerceEstimate-API"}, false),
 				Optional:     true,
@@ -289,7 +289,7 @@ func resourceOauthAuthorization() *schema.Resource {
 				},
 			},
 			"password": {
-				Description: "The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.",
+				Description: "Password used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -371,7 +371,7 @@ func resourceOauthAuthorization() *schema.Resource {
 				},
 			},
 			"user_id": {
-				Description: "The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.",
+				Description: "Username used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

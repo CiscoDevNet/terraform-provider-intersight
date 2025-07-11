@@ -81,7 +81,7 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 				},
 			},
 			"auto_targetvendor_name": {
-				Description: "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters.",
+				Description: "Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -219,7 +219,7 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 				Default:      "DHCP",
 			},
 			"initiator_static_ip_v4_address": {
-				Description:  "Static IP address provided for iSCSI Initiator.",
+				Description:  "Static IPv4 address provided for iSCSI Initiator.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
 				Optional:     true,
@@ -277,6 +277,65 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 					},
 				},
 			},
+			"initiator_static_ip_v6_address": {
+				Description:  "Static IPv6 address provided for iSCSI Initiator.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+				Optional:     true,
+			},
+			"initiator_static_ip_v6_config": {
+				Description: "IPv6 configurations such as Prefix, Gateway and DNS for iSCSI Initiator.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "ippool.IpV6Config",
+						},
+						"gateway": {
+							Description:  "IP address of the default IPv6 gateway.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "ippool.IpV6Config",
+						},
+						"prefix": {
+							Description:  "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+							Type:         schema.TypeInt,
+							ValidateFunc: validation.IntBetween(0, 127),
+							Optional:     true,
+						},
+						"primary_dns": {
+							Description:  "IP Address of the primary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
+						},
+						"secondary_dns": {
+							Description:  "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
+							Optional:     true,
+						},
+					},
+				},
+			},
 			"iscsi_adapter_policy": {
 				Description: "A reference to a vnicIscsiAdapterPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -316,6 +375,13 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 						},
 					},
 				},
+			},
+			"iscsi_ip_type": {
+				Description:  "Type of the IP address requested for iSCSI vNIC - IPv4/IPv6.\n* `IPv4` - IP V4 address type requested.\n* `IPv6` - IP V6 address type requested.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"IPv4", "IPv6"}, false),
+				Optional:     true,
+				Default:      "IPv4",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -985,6 +1051,66 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("initiator_static_ip_v6_address"); ok {
+		x := (v.(string))
+		o.SetInitiatorStaticIpV6Address(x)
+	}
+
+	if v, ok := d.GetOk("initiator_static_ip_v6_config"); ok {
+		p := make([]models.IppoolIpV6Config, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewIppoolIpV6ConfigWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ippool.IpV6Config")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["prefix"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetPrefix(x)
+				}
+			}
+			if v, ok := l["primary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetPrimaryDns(x)
+				}
+			}
+			if v, ok := l["secondary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetSecondaryDns(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetInitiatorStaticIpV6Config(x)
+		}
+	}
+
 	if v, ok := d.GetOk("iscsi_adapter_policy"); ok {
 		p := make([]models.VnicIscsiAdapterPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1026,6 +1152,11 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetIscsiAdapterPolicy(x)
 		}
+	}
+
+	if v, ok := d.GetOk("iscsi_ip_type"); ok {
+		x := (v.(string))
+		o.SetIscsiIpType(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1350,8 +1481,20 @@ func resourceVnicIscsiBootPolicyRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property InitiatorStaticIpV4Config in VnicIscsiBootPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("initiator_static_ip_v6_address", (s.GetInitiatorStaticIpV6Address())); err != nil {
+		return diag.Errorf("error occurred while setting property InitiatorStaticIpV6Address in VnicIscsiBootPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("initiator_static_ip_v6_config", flattenMapIppoolIpV6Config(s.GetInitiatorStaticIpV6Config(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property InitiatorStaticIpV6Config in VnicIscsiBootPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("iscsi_adapter_policy", flattenMapVnicIscsiAdapterPolicyRelationship(s.GetIscsiAdapterPolicy(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property IscsiAdapterPolicy in VnicIscsiBootPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_ip_type", (s.GetIscsiIpType())); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpType in VnicIscsiBootPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -1605,6 +1748,68 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if d.HasChange("initiator_static_ip_v6_address") {
+		v := d.Get("initiator_static_ip_v6_address")
+		x := (v.(string))
+		o.SetInitiatorStaticIpV6Address(x)
+	}
+
+	if d.HasChange("initiator_static_ip_v6_config") {
+		v := d.Get("initiator_static_ip_v6_config")
+		p := make([]models.IppoolIpV6Config, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.IppoolIpV6Config{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ippool.IpV6Config")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["prefix"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetPrefix(x)
+				}
+			}
+			if v, ok := l["primary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetPrimaryDns(x)
+				}
+			}
+			if v, ok := l["secondary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetSecondaryDns(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetInitiatorStaticIpV6Config(x)
+		}
+	}
+
 	if d.HasChange("iscsi_adapter_policy") {
 		v := d.Get("iscsi_adapter_policy")
 		p := make([]models.VnicIscsiAdapterPolicyRelationship, 0, 1)
@@ -1647,6 +1852,12 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetIscsiAdapterPolicy(x)
 		}
+	}
+
+	if d.HasChange("iscsi_ip_type") {
+		v := d.Get("iscsi_ip_type")
+		x := (v.(string))
+		o.SetIscsiIpType(x)
 	}
 
 	if d.HasChange("moid") {

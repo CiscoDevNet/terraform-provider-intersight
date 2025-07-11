@@ -3,12 +3,12 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_backup_profile"
 description: |-
-        Backup profile to initiate on-demand or scheduled backups at end points.
+        Backup profile for on-demand or scheduled backups at endpoints.
 
 ---
 
 # Data Source: intersight_recovery_backup_profile
-Backup profile to initiate on-demand or scheduled backups at end points.
+Backup profile for on-demand or scheduled backups at endpoints.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

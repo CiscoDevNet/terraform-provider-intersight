@@ -42,4 +42,5 @@ The following arguments can be used to get data of already created objects in In
 * `slot_id`:(int) Switch expansion slot module identifier. 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `transceiver_type`:(string) Transceiver model attached to a port in the Fabric Interconnect. 
+* `user_label`:(string) The user defined label assigned to the port. 
  

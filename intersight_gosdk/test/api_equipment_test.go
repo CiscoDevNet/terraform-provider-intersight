@@ -673,6 +673,32 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService GetEquipmentRiserByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentRiserByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentRiserList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentRiserList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService GetEquipmentSensorByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

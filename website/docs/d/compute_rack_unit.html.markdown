@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
+* `cooling_mode`:(string) Cooling mode representation of the server.* `Air` - Cooling mode of the device is set to Air.* `Immersion` - Cooling mode of the device is set to Immersion. 
 * `cpu_capacity`:(float) Total processing capacity of the server. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 

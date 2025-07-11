@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025051220
+API version: 1.0.11-2025062323
 Contact: intersight@cisco.com
 */
 
@@ -21,32 +21,32 @@ import (
 // checks if the HyperflexKeyEncryptionKey type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HyperflexKeyEncryptionKey{}
 
-// HyperflexKeyEncryptionKey Specifies a key encryption Key and parameters for the associated resource.
+// HyperflexKeyEncryptionKey Key Encryption Key and associated resource parameters specification.
 type HyperflexKeyEncryptionKey struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// This defines whether we need to operate in an account recovery scenario or not. If yes, then most of the parameters will be populated from an internal MO. So, some of the input parameters MAY be ignored, if this value is set to true.
+	// Account recovery scenario flag determining parameter population from internal MO, with possibility of ignoring of input parameters when this value is true.
 	IsAccountRecovery *bool `json:"IsAccountRecovery,omitempty"`
 	// Indicates whether the value of the 'kek' property has been set.
 	IsKekSet *bool `json:"IsKekSet,omitempty"`
 	// Indicates whether the value of the 'passphrase' property has been set.
 	IsPassphraseSet *bool `json:"IsPassphraseSet,omitempty"`
-	// Number of iterations we want the hash to be run.
+	// Number of hash iterations to run.
 	Iteration *int64 `json:"Iteration,omitempty"`
-	// Key encryption key used to encrypt the DEK's on the HyperFlex cluster.
+	// Key Encryption Key used to encrypt the DEK's on the HyperFlex cluster.
 	Kek *string `json:"Kek,omitempty"`
-	// Resource id + time of creation used for retrieving the KEK.
+	// Resource ID and time for Kek retrieval.
 	KeyId *string `json:"KeyId,omitempty"`
-	// Last known Key encryption key state for this Key. * `NEW` - Key Encryption key is newly created. * `ACTIVE` - Key Encryption key is deployed on active resource. * `INACTIVE` - Key Encryption key is inactive and not used. * `INPROGRESS` - Key Encryption key is in a state where it was used on Intersight but did not receive confirmation from platform of success/failure.
+	// Last known state of the Key Encryption Key. * `NEW` - Newly created Key Encryption Key (KEK). * `ACTIVE` - Deployed Key Encryption Key on active resources. * `INACTIVE` - Inactive and unused Key Encryption Key. * `INPROGRESS` - Unconfirmed Key Encryption Key usage on Intersight platform.
 	KeyState *string `json:"KeyState,omitempty"`
-	// Initial passphrase for the encryption policy, password must contain a minimum of 12 characters, with at least 1 lowercase, 1 uppercase, 1 numeric.
+	// Initial passphrase for encryption policy, requiring a minimum of 12 characters, including 1 lowercase, 1 uppercase, and 1 numeric character.
 	Passphrase *string `json:"Passphrase,omitempty"`
-	// Resource type on which this key will be applied. * `CLUSTER` - Encryption is per HyperFlex cluster. * `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster. * `DRIVE` - Encryption is per drive on the HyperFlex cluster.
+	// Resource type for key application. * `CLUSTER` - Cluster specific encryption per HyperFlex cluster. * `DATASTORE` - Data store encryption on the HyperFlex cluster. * `DRIVE` - Drive specific encryption on the HyperFlex cluster.
 	ResourceType *string `json:"ResourceType,omitempty"`
-	// Copy of Key encryption key, which is used for sending the key over to the remote device endpoint. It is not persisited anywhere.
+	// Temporary copy of KEK used for transfer to remote device endpoint, not persisted anywhere.
 	TransitKek           *string                                     `json:"TransitKek,omitempty"`
 	ClusterProfile       NullableHyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
 	ResourceMo           NullableMoBaseMoRelationship                `json:"ResourceMo,omitempty"`
@@ -671,25 +671,25 @@ func (o *HyperflexKeyEncryptionKey) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// This defines whether we need to operate in an account recovery scenario or not. If yes, then most of the parameters will be populated from an internal MO. So, some of the input parameters MAY be ignored, if this value is set to true.
+		// Account recovery scenario flag determining parameter population from internal MO, with possibility of ignoring of input parameters when this value is true.
 		IsAccountRecovery *bool `json:"IsAccountRecovery,omitempty"`
 		// Indicates whether the value of the 'kek' property has been set.
 		IsKekSet *bool `json:"IsKekSet,omitempty"`
 		// Indicates whether the value of the 'passphrase' property has been set.
 		IsPassphraseSet *bool `json:"IsPassphraseSet,omitempty"`
-		// Number of iterations we want the hash to be run.
+		// Number of hash iterations to run.
 		Iteration *int64 `json:"Iteration,omitempty"`
-		// Key encryption key used to encrypt the DEK's on the HyperFlex cluster.
+		// Key Encryption Key used to encrypt the DEK's on the HyperFlex cluster.
 		Kek *string `json:"Kek,omitempty"`
-		// Resource id + time of creation used for retrieving the KEK.
+		// Resource ID and time for Kek retrieval.
 		KeyId *string `json:"KeyId,omitempty"`
-		// Last known Key encryption key state for this Key. * `NEW` - Key Encryption key is newly created. * `ACTIVE` - Key Encryption key is deployed on active resource. * `INACTIVE` - Key Encryption key is inactive and not used. * `INPROGRESS` - Key Encryption key is in a state where it was used on Intersight but did not receive confirmation from platform of success/failure.
+		// Last known state of the Key Encryption Key. * `NEW` - Newly created Key Encryption Key (KEK). * `ACTIVE` - Deployed Key Encryption Key on active resources. * `INACTIVE` - Inactive and unused Key Encryption Key. * `INPROGRESS` - Unconfirmed Key Encryption Key usage on Intersight platform.
 		KeyState *string `json:"KeyState,omitempty"`
-		// Initial passphrase for the encryption policy, password must contain a minimum of 12 characters, with at least 1 lowercase, 1 uppercase, 1 numeric.
+		// Initial passphrase for encryption policy, requiring a minimum of 12 characters, including 1 lowercase, 1 uppercase, and 1 numeric character.
 		Passphrase *string `json:"Passphrase,omitempty"`
-		// Resource type on which this key will be applied. * `CLUSTER` - Encryption is per HyperFlex cluster. * `DATASTORE` - Encryption is per dataStore on the HyperFlex cluster. * `DRIVE` - Encryption is per drive on the HyperFlex cluster.
+		// Resource type for key application. * `CLUSTER` - Cluster specific encryption per HyperFlex cluster. * `DATASTORE` - Data store encryption on the HyperFlex cluster. * `DRIVE` - Drive specific encryption on the HyperFlex cluster.
 		ResourceType *string `json:"ResourceType,omitempty"`
-		// Copy of Key encryption key, which is used for sending the key over to the remote device endpoint. It is not persisited anywhere.
+		// Temporary copy of KEK used for transfer to remote device endpoint, not persisted anywhere.
 		TransitKek     *string                                     `json:"TransitKek,omitempty"`
 		ClusterProfile NullableHyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
 		ResourceMo     NullableMoBaseMoRelationship                `json:"ResourceMo,omitempty"`

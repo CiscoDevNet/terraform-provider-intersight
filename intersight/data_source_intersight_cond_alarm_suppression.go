@@ -159,6 +159,11 @@ func getCondAlarmSuppressionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "The name that identifies the alarm suppression.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -568,6 +573,11 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -830,6 +840,7 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

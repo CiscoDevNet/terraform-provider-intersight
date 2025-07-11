@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.IscsiStaticTargetPolicyInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.IscsiStaticTargetPolicyInventory"]
-**IpAddress** | Pointer to **string** | The IPv4 address assigned to the iSCSI target. | [optional] [readonly] 
+**IpAddress** | Pointer to **string** | The IP address assigned to the iSCSI target. | [optional] [readonly] 
+**IscsiIpType** | Pointer to **string** | Type of the IP address requested for iSCSI vNIC - IPv4/IPv6. * &#x60;IPv4&#x60; - IP V4 address type requested. * &#x60;IPv6&#x60; - IP V6 address type requested. | [optional] [readonly] [default to "IPv4"]
 **Lun** | Pointer to [**NullableVnicLun**](VnicLun.md) |  | [optional] 
 **Port** | Pointer to **int64** | The port associated with the iSCSI target. | [optional] [readonly] 
 **TargetName** | Pointer to **string** | Qualified Name (IQN) or Extended Unique Identifier (EUI) name of the iSCSI target. | [optional] [readonly] 
@@ -95,6 +96,31 @@ SetIpAddress sets IpAddress field to given value.
 `func (o *VnicIscsiStaticTargetPolicyInventory) HasIpAddress() bool`
 
 HasIpAddress returns a boolean if a field has been set.
+
+### GetIscsiIpType
+
+`func (o *VnicIscsiStaticTargetPolicyInventory) GetIscsiIpType() string`
+
+GetIscsiIpType returns the IscsiIpType field if non-nil, zero value otherwise.
+
+### GetIscsiIpTypeOk
+
+`func (o *VnicIscsiStaticTargetPolicyInventory) GetIscsiIpTypeOk() (*string, bool)`
+
+GetIscsiIpTypeOk returns a tuple with the IscsiIpType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpType
+
+`func (o *VnicIscsiStaticTargetPolicyInventory) SetIscsiIpType(v string)`
+
+SetIscsiIpType sets IscsiIpType field to given value.
+
+### HasIscsiIpType
+
+`func (o *VnicIscsiStaticTargetPolicyInventory) HasIscsiIpType() bool`
+
+HasIscsiIpType returns a boolean if a field has been set.
 
 ### GetLun
 

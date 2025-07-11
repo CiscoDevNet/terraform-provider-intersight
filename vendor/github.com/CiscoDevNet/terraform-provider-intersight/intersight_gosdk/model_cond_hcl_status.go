@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025051220
+API version: 1.0.11-2025062323
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type CondHclStatus struct {
 	ObjectType string `json:"ObjectType"`
 	// The overall status for the components found in the HCL. This will provide the HCL validation status for all the components. It can be one of the following. \"Validated\" - all the components hardware/software profiles are listed in the HCL. \"Not-Listed\" - one or more components hardware/software profiles are not listed in the HCL \"Incomplete\" - the components are not evaluated as the server's software/hardware profiles are not listed in the HCL. \"Not-Evaluated\" - The components are not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
 	ComponentStatus *string `json:"ComponentStatus,omitempty"`
+	// The generation of the server model.
+	Generation *string `json:"Generation,omitempty"`
 	// The server model, processor and firmware are considered as part of the hardware profile for the server. This will provide the HCL validation status for the hardware profile. For the failure reason see the serverReason property. The status can be one of the following \"Validated\" - The server model, processor and firmware combination is listed in the HCL \"Not-Listed\" - The server model, processor and firmware combination is not listed in the HCL. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
 	HardwareStatus *string `json:"HardwareStatus,omitempty"`
 	// The current CIMC version for the server normalized for querying HCL data. It is empty if we are missing this information.
@@ -57,8 +59,12 @@ type CondHclStatus struct {
 	InvProcessor *string `json:"InvProcessor,omitempty"`
 	// The management mode at which server is connected to intersight. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
+	// Unique identity of added software personality.
+	Personality *string `json:"Personality,omitempty"`
 	// The reason for the HCL status. It will be one of the following \"Missing-Os-Info\" - we are missing os information in the inventory from the device connector \"Incompatible-Components\" - we have 1 or more components with \"Not-Validated\" status \"Compatible\" - all the components have \"Validated\" status. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Missing-Os-Info` - This means the HclStatus for the sever failed HCL validation because we have missing os information. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Incompatible-Components` - This means the HclStatus for the sever failed HCL validation because one or more of its components failed validation. To see why components failed check the related HclStatusDetails. * `Compatible` - This means the HclStatus for the sever has passed HCL validation for all of its related components. * `Not-Evaluated` - This means the HclStatus for the sever has not been evaluated because it is exempted.
 	Reason *string `json:"Reason,omitempty"`
+	// The name of the Rack server or Blade as specified in compute.RackUnit or compute.Blade Mo.
+	ServerName *string `json:"ServerName,omitempty"`
 	// The reason generated by the server's HCL validation. For HCL the evaluation can be seen in three logical stages 1. Evaluate the server's hardware status 2. Evaluate the server's software status 3. Evaluate the server's components (each component has its own hardware/software evaluation) The evaluation does not proceed to the next stage until the previous stage is evaluated. Therefore there can be only one validation reason. \"Incompatible-Server\" - the server model is not listed in the HCL. \"Incompatible-Processor\" - the server model and processor combination is not listed in HCL. \"Incompatible-Firmware\" - the server model, processor and server firmware is not listed in HCL. \"Missing-Os-Info\" - the os vendor and version is not listed in HCL with the HW profile. \"Incompatible-Os-Info\" - the os vendor and version is not listed in HCL with the HW profile. \"Incompatible-Components\" - there is one or more components with \"Not-Validated\" status \"Service-Unavailable\" - HCL data service is unavailable at the moment (try again later). \"Compatible\" - the server and all its components are validated. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Missing-Os-Driver-Info` - The validation failed becaue the given server has no OS driver information available in the inventory. Either install UCS Tools VIB on the host ESXi or use OS Discovery Tool scripts to provide proper OS information. * `Incompatible-Server` - The validation failed for this server because the server's model was not listed in the HCL. * `Incompatible-Processor` - The validation failed because the given processor was not listed for the given server model. * `Incompatible-Os-Info` - The validation failed because the given OS vendor or version was not listed in HCL for the server PID and processor combination. * `Incompatible-Firmware` - The validation failed because the given server firmware was not listed in the HCL for the given server PID, processor, OS vendor and version. * `Service-Unavailable` - The validation has failed because HCL data service is temporarily not available. The server will be re-evaluated once HCL data service is back online or finished importing new HCL data. * `Service-Error` - The validation has failed because the HCL data service has returned a service error or unrecognized result. * `Not-Evaluated` - This means the HclStatus for the sever has not been evaluated because it is exempted. * `Incompatible-Components` - The validation has failed for this server because one or more components have \"Not-Listed\" status. * `Compatible` - The validation has passed for this server's model, processor, OS vendor and version.
 	ServerReason *string `json:"ServerReason,omitempty"`
 	// The OS vendor and version are considered part of the software profile for the server. This will provide the HCL validation status for the software profile. For the failure reason see the serverReason property. The status can be be one of the following \"Validated\" - The os vendor/version is listed in the HCL for the server model, processor and firmware \"Not-Listed\" - The os vendor/version is not listed in the HCL for the server model, processor and firmware \"Incomplete\" - The inventory is missing os vendor/version and HCL validation was not performed. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
@@ -185,6 +191,38 @@ func (o *CondHclStatus) HasComponentStatus() bool {
 // SetComponentStatus gets a reference to the given string and assigns it to the ComponentStatus field.
 func (o *CondHclStatus) SetComponentStatus(v string) {
 	o.ComponentStatus = &v
+}
+
+// GetGeneration returns the Generation field value if set, zero value otherwise.
+func (o *CondHclStatus) GetGeneration() string {
+	if o == nil || IsNil(o.Generation) {
+		var ret string
+		return ret
+	}
+	return *o.Generation
+}
+
+// GetGenerationOk returns a tuple with the Generation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondHclStatus) GetGenerationOk() (*string, bool) {
+	if o == nil || IsNil(o.Generation) {
+		return nil, false
+	}
+	return o.Generation, true
+}
+
+// HasGeneration returns a boolean if a field has been set.
+func (o *CondHclStatus) HasGeneration() bool {
+	if o != nil && !IsNil(o.Generation) {
+		return true
+	}
+
+	return false
+}
+
+// SetGeneration gets a reference to the given string and assigns it to the Generation field.
+func (o *CondHclStatus) SetGeneration(v string) {
+	o.Generation = &v
 }
 
 // GetHardwareStatus returns the HardwareStatus field value if set, zero value otherwise.
@@ -603,6 +641,38 @@ func (o *CondHclStatus) SetManagementMode(v string) {
 	o.ManagementMode = &v
 }
 
+// GetPersonality returns the Personality field value if set, zero value otherwise.
+func (o *CondHclStatus) GetPersonality() string {
+	if o == nil || IsNil(o.Personality) {
+		var ret string
+		return ret
+	}
+	return *o.Personality
+}
+
+// GetPersonalityOk returns a tuple with the Personality field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondHclStatus) GetPersonalityOk() (*string, bool) {
+	if o == nil || IsNil(o.Personality) {
+		return nil, false
+	}
+	return o.Personality, true
+}
+
+// HasPersonality returns a boolean if a field has been set.
+func (o *CondHclStatus) HasPersonality() bool {
+	if o != nil && !IsNil(o.Personality) {
+		return true
+	}
+
+	return false
+}
+
+// SetPersonality gets a reference to the given string and assigns it to the Personality field.
+func (o *CondHclStatus) SetPersonality(v string) {
+	o.Personality = &v
+}
+
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *CondHclStatus) GetReason() string {
 	if o == nil || IsNil(o.Reason) {
@@ -633,6 +703,38 @@ func (o *CondHclStatus) HasReason() bool {
 // SetReason gets a reference to the given string and assigns it to the Reason field.
 func (o *CondHclStatus) SetReason(v string) {
 	o.Reason = &v
+}
+
+// GetServerName returns the ServerName field value if set, zero value otherwise.
+func (o *CondHclStatus) GetServerName() string {
+	if o == nil || IsNil(o.ServerName) {
+		var ret string
+		return ret
+	}
+	return *o.ServerName
+}
+
+// GetServerNameOk returns a tuple with the ServerName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondHclStatus) GetServerNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ServerName) {
+		return nil, false
+	}
+	return o.ServerName, true
+}
+
+// HasServerName returns a boolean if a field has been set.
+func (o *CondHclStatus) HasServerName() bool {
+	if o != nil && !IsNil(o.ServerName) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerName gets a reference to the given string and assigns it to the ServerName field.
+func (o *CondHclStatus) SetServerName(v string) {
+	o.ServerName = &v
 }
 
 // GetServerReason returns the ServerReason field value if set, zero value otherwise.
@@ -879,6 +981,9 @@ func (o CondHclStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ComponentStatus) {
 		toSerialize["ComponentStatus"] = o.ComponentStatus
 	}
+	if !IsNil(o.Generation) {
+		toSerialize["Generation"] = o.Generation
+	}
 	if !IsNil(o.HardwareStatus) {
 		toSerialize["HardwareStatus"] = o.HardwareStatus
 	}
@@ -918,8 +1023,14 @@ func (o CondHclStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
+	if !IsNil(o.Personality) {
+		toSerialize["Personality"] = o.Personality
+	}
 	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
+	}
+	if !IsNil(o.ServerName) {
+		toSerialize["ServerName"] = o.ServerName
 	}
 	if !IsNil(o.ServerReason) {
 		toSerialize["ServerReason"] = o.ServerReason
@@ -996,6 +1107,8 @@ func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The overall status for the components found in the HCL. This will provide the HCL validation status for all the components. It can be one of the following. \"Validated\" - all the components hardware/software profiles are listed in the HCL. \"Not-Listed\" - one or more components hardware/software profiles are not listed in the HCL \"Incomplete\" - the components are not evaluated as the server's software/hardware profiles are not listed in the HCL. \"Not-Evaluated\" - The components are not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
 		ComponentStatus *string `json:"ComponentStatus,omitempty"`
+		// The generation of the server model.
+		Generation *string `json:"Generation,omitempty"`
 		// The server model, processor and firmware are considered as part of the hardware profile for the server. This will provide the HCL validation status for the hardware profile. For the failure reason see the serverReason property. The status can be one of the following \"Validated\" - The server model, processor and firmware combination is listed in the HCL \"Not-Listed\" - The server model, processor and firmware combination is not listed in the HCL. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
 		HardwareStatus *string `json:"HardwareStatus,omitempty"`
 		// The current CIMC version for the server normalized for querying HCL data. It is empty if we are missing this information.
@@ -1022,8 +1135,12 @@ func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
 		InvProcessor *string `json:"InvProcessor,omitempty"`
 		// The management mode at which server is connected to intersight. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
+		// Unique identity of added software personality.
+		Personality *string `json:"Personality,omitempty"`
 		// The reason for the HCL status. It will be one of the following \"Missing-Os-Info\" - we are missing os information in the inventory from the device connector \"Incompatible-Components\" - we have 1 or more components with \"Not-Validated\" status \"Compatible\" - all the components have \"Validated\" status. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Missing-Os-Info` - This means the HclStatus for the sever failed HCL validation because we have missing os information. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Incompatible-Components` - This means the HclStatus for the sever failed HCL validation because one or more of its components failed validation. To see why components failed check the related HclStatusDetails. * `Compatible` - This means the HclStatus for the sever has passed HCL validation for all of its related components. * `Not-Evaluated` - This means the HclStatus for the sever has not been evaluated because it is exempted.
 		Reason *string `json:"Reason,omitempty"`
+		// The name of the Rack server or Blade as specified in compute.RackUnit or compute.Blade Mo.
+		ServerName *string `json:"ServerName,omitempty"`
 		// The reason generated by the server's HCL validation. For HCL the evaluation can be seen in three logical stages 1. Evaluate the server's hardware status 2. Evaluate the server's software status 3. Evaluate the server's components (each component has its own hardware/software evaluation) The evaluation does not proceed to the next stage until the previous stage is evaluated. Therefore there can be only one validation reason. \"Incompatible-Server\" - the server model is not listed in the HCL. \"Incompatible-Processor\" - the server model and processor combination is not listed in HCL. \"Incompatible-Firmware\" - the server model, processor and server firmware is not listed in HCL. \"Missing-Os-Info\" - the os vendor and version is not listed in HCL with the HW profile. \"Incompatible-Os-Info\" - the os vendor and version is not listed in HCL with the HW profile. \"Incompatible-Components\" - there is one or more components with \"Not-Validated\" status \"Service-Unavailable\" - HCL data service is unavailable at the moment (try again later). \"Compatible\" - the server and all its components are validated. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Missing-Os-Driver-Info` - The validation failed becaue the given server has no OS driver information available in the inventory. Either install UCS Tools VIB on the host ESXi or use OS Discovery Tool scripts to provide proper OS information. * `Incompatible-Server` - The validation failed for this server because the server's model was not listed in the HCL. * `Incompatible-Processor` - The validation failed because the given processor was not listed for the given server model. * `Incompatible-Os-Info` - The validation failed because the given OS vendor or version was not listed in HCL for the server PID and processor combination. * `Incompatible-Firmware` - The validation failed because the given server firmware was not listed in the HCL for the given server PID, processor, OS vendor and version. * `Service-Unavailable` - The validation has failed because HCL data service is temporarily not available. The server will be re-evaluated once HCL data service is back online or finished importing new HCL data. * `Service-Error` - The validation has failed because the HCL data service has returned a service error or unrecognized result. * `Not-Evaluated` - This means the HclStatus for the sever has not been evaluated because it is exempted. * `Incompatible-Components` - The validation has failed for this server because one or more components have \"Not-Listed\" status. * `Compatible` - The validation has passed for this server's model, processor, OS vendor and version.
 		ServerReason *string `json:"ServerReason,omitempty"`
 		// The OS vendor and version are considered part of the software profile for the server. This will provide the HCL validation status for the software profile. For the failure reason see the serverReason property. The status can be be one of the following \"Validated\" - The os vendor/version is listed in the HCL for the server model, processor and firmware \"Not-Listed\" - The os vendor/version is not listed in the HCL for the server model, processor and firmware \"Incomplete\" - The inventory is missing os vendor/version and HCL validation was not performed. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
@@ -1044,6 +1161,7 @@ func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
 		varCondHclStatus.ClassId = varCondHclStatusWithoutEmbeddedStruct.ClassId
 		varCondHclStatus.ObjectType = varCondHclStatusWithoutEmbeddedStruct.ObjectType
 		varCondHclStatus.ComponentStatus = varCondHclStatusWithoutEmbeddedStruct.ComponentStatus
+		varCondHclStatus.Generation = varCondHclStatusWithoutEmbeddedStruct.Generation
 		varCondHclStatus.HardwareStatus = varCondHclStatusWithoutEmbeddedStruct.HardwareStatus
 		varCondHclStatus.HclFirmwareVersion = varCondHclStatusWithoutEmbeddedStruct.HclFirmwareVersion
 		varCondHclStatus.HclModel = varCondHclStatusWithoutEmbeddedStruct.HclModel
@@ -1057,7 +1175,9 @@ func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
 		varCondHclStatus.InvOsVersion = varCondHclStatusWithoutEmbeddedStruct.InvOsVersion
 		varCondHclStatus.InvProcessor = varCondHclStatusWithoutEmbeddedStruct.InvProcessor
 		varCondHclStatus.ManagementMode = varCondHclStatusWithoutEmbeddedStruct.ManagementMode
+		varCondHclStatus.Personality = varCondHclStatusWithoutEmbeddedStruct.Personality
 		varCondHclStatus.Reason = varCondHclStatusWithoutEmbeddedStruct.Reason
+		varCondHclStatus.ServerName = varCondHclStatusWithoutEmbeddedStruct.ServerName
 		varCondHclStatus.ServerReason = varCondHclStatusWithoutEmbeddedStruct.ServerReason
 		varCondHclStatus.SoftwareStatus = varCondHclStatusWithoutEmbeddedStruct.SoftwareStatus
 		varCondHclStatus.Status = varCondHclStatusWithoutEmbeddedStruct.Status
@@ -1084,6 +1204,7 @@ func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ComponentStatus")
+		delete(additionalProperties, "Generation")
 		delete(additionalProperties, "HardwareStatus")
 		delete(additionalProperties, "HclFirmwareVersion")
 		delete(additionalProperties, "HclModel")
@@ -1097,7 +1218,9 @@ func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "InvOsVersion")
 		delete(additionalProperties, "InvProcessor")
 		delete(additionalProperties, "ManagementMode")
+		delete(additionalProperties, "Personality")
 		delete(additionalProperties, "Reason")
+		delete(additionalProperties, "ServerName")
 		delete(additionalProperties, "ServerReason")
 		delete(additionalProperties, "SoftwareStatus")
 		delete(additionalProperties, "Status")

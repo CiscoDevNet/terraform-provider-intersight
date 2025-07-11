@@ -3,12 +3,12 @@ subcategory: "changelog"
 layout: "intersight"
 page_title: "Intersight: intersight_changelog_item"
 description: |-
-        An API contract changelog item. It represents an item of contract changes between the version indicated by the attribute semanticVersion and the previous version.
+        API contract changelog item, representing changes specified by the attribute semanticVersion and the previous version.
 
 ---
 
 # Resource: intersight_changelog_item
-An API contract changelog item. It represents an item of contract changes between the version indicated by the attribute semanticVersion and the previous version.
+API contract changelog item, representing changes specified by the attribute semanticVersion and the previous version.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -23,9 +23,9 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
-* `date_version`:(string) The date version for the API contract changelog item in the format rfc3339 with no fraction seconds set.  Note that there can be more than one item per DateVersion. Example: 2023-12-19T00:00:00Z . 
+* `date_version`:(string) Date version for the API contract changelog item in rfc3339 format, without fractional seconds. Note, multiple items can exist for a single DateVersion. Example: 2023-12-19T00:00:00Z . 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `entity`:(string) The operationId of the endpoint for which changelog item is being generated. 
+* `entity`:(string) Operation Id of the endpoint for which the changelog item is generated. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:
@@ -40,13 +40,13 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `semantic_version`:(string) The semantic version for the API contract changelog item. Note that there can be more than one item per SemanticVersion. 
+* `semantic_version`:(string) Semantic version for the API contract changelog item. Note, multiple items can exist for a single SemanticVersion. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `value`:(string) The value of the API contract changelog item. 
+* `value`:(string) The value associated with the API contract changelog item. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

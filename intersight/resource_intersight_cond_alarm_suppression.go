@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -210,6 +211,12 @@ func resourceCondAlarmSuppression() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 				ForceNew:    true,
+			},
+			"name": {
+				Description:  "The name that identifies the alarm suppression.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9][\\w\\s.-]{1,255}$"), ""),
+				Optional:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -609,6 +616,11 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	o.SetObjectType("cond.AlarmSuppression")
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -734,6 +746,10 @@ func resourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property Moid in CondAlarmSuppression object: %s", err.Error())
+	}
+
+	if err := d.Set("name", (s.GetName())); err != nil {
+		return diag.Errorf("error occurred while setting property Name in CondAlarmSuppression object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
@@ -882,6 +898,12 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("moid")
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if d.HasChange("name") {
+		v := d.Get("name")
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	o.SetObjectType("cond.AlarmSuppression")

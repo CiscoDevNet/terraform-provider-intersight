@@ -137,7 +137,7 @@ func resourceCrdCustomResource() *schema.Resource {
 					return
 				}},
 			"dc_launcher": {
-				Description: "Type of custom resource or 'kind' in K8s.",
+				Description: "The type of custom resource in Kubernetes.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -153,7 +153,7 @@ func resourceCrdCustomResource() *schema.Resource {
 					return
 				}},
 			"image": {
-				Description: "Docker image URL for public cloud DC.",
+				Description: "The docker image URL for the cloud DC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -176,12 +176,12 @@ func resourceCrdCustomResource() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "A string property called name which is used as part of a uniqueness constraint. See 'identity' specification in this MO definition.",
+				Description: "A string property called 'name', used as part of a uniqueness constraint. Refer to the 'identity' specification in this MO definition.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"namespace": {
-				Description: "Namespace to launch the deployment associated with the custom resource.",
+				Description: "Namespace for launching the deployment associated with the custom resource.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -279,7 +279,7 @@ func resourceCrdCustomResource() *schema.Resource {
 				},
 			},
 			"port": {
-				Description: "Port used for public cloud DC.",
+				Description: "Port used for the cloud DC.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -359,17 +359,17 @@ func resourceCrdCustomResource() *schema.Resource {
 				},
 			},
 			"target_id": {
-				Description: "Target ID for public cloud DC.",
+				Description: "Target Id for the cloud DC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"target_moid": {
-				Description: "Target Moid for public cloud DC.",
+				Description: "Target MOID for the cloud DC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"target_type": {
-				Description: "Target type for public cloud DC.",
+				Description: "Target type for the cloud DC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

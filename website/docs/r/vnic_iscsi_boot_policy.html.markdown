@@ -48,7 +48,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `auto_targetvendor_name`:(string) Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters. 
+* `auto_targetvendor_name`:(string) Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters. 
 * `chap`:(HashMap) - CHAP authentication parameters for iSCSI Target. 
 This complex property has following sub-properties:
   + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
@@ -64,7 +64,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `initiator_ip_source`:(string) Source Type of Initiator IP Address - Auto/Static/Pool.* `DHCP` - The IP address is assigned using DHCP, if available.* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. 
-* `initiator_static_ip_v4_address`:(string) Static IP address provided for iSCSI Initiator. 
+* `initiator_static_ip_v4_address`:(string) Static IPv4 address provided for iSCSI Initiator. 
 * `initiator_static_ip_v4_config`:(HashMap) - IPV4 configurations such as Netmask, Gateway and DNS for iSCSI Initiator. 
 This complex property has following sub-properties:
   + `gateway`:(string) IP address of the default IPv4 gateway. 
@@ -72,11 +72,20 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `primary_dns`:(string) IP Address of the primary Domain Name System (DNS) server. 
   + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
+* `initiator_static_ip_v6_address`:(string) Static IPv6 address provided for iSCSI Initiator. 
+* `initiator_static_ip_v6_config`:(HashMap) - IPv6 configurations such as Prefix, Gateway and DNS for iSCSI Initiator. 
+This complex property has following sub-properties:
+  + `gateway`:(string) IP address of the default IPv6 gateway. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `prefix`:(int) A prefix length which masks the  IP address and divides the IP address into network address and host address. 
+  + `primary_dns`:(string) IP Address of the primary Domain Name System (DNS) server. 
+  + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
 * `iscsi_adapter_policy`:(HashMap) - A reference to a vnicIscsiAdapterPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `iscsi_ip_type`:(string) Type of the IP address requested for iSCSI vNIC - IPv4/IPv6.* `IPv4` - IP V4 address type requested.* `IPv6` - IP V6 address type requested. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `mutual_chap`:(HashMap) - Mutual CHAP authentication parameters for iSCSI Initiator. Two-way CHAP mechanism. 

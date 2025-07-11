@@ -175,7 +175,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"account_name": {
-							Description: "Account name of the feedback sender. Copied in order to be persisted in case of account removal.",
+							Description: "Account name of the feedback sender, copied for persistence in case of account removal.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							ForceNew:    true,
@@ -205,7 +205,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"comment": {
-							Description:  "Text of the feedback as provided by the user, if it is a bug or a comment.",
+							Description:  "User feedback text (a bug or a suggestion).",
 							Type:         schema.TypeString,
 							ValidateFunc: StringLenMaximum(5000),
 							Optional:     true,
@@ -218,7 +218,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"evaluation": {
-							Description:  "Evalation rating as provided by the user to capture user sentiment regarding the issue.\n* `Excellent` - Option that specifies user's excelent evaluation.\n* `Poor` - Option that specifies user's poor evaluation.\n* `Fair` - Option that specifies user's fair evaluation.\n* `Good` - Option that specifies user's good evaluation.",
+							Description:  "Evaluation rating provided by the user to capture user sentiment regarding the issue.\n* `Excellent` - Option indicating user's excellent evaluation.\n* `Poor` - Option indicating user's poor evaluation.\n* `Fair` - Option indicating user's fair evaluation.\n* `Good` - Option indicating user's good evaluation.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"Excellent", "Poor", "Fair", "Good"}, false),
 							Optional:     true,
@@ -226,7 +226,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:     true,
 						},
 						"follow_up": {
-							Description: "If a user is open for follow-up or not.",
+							Description: "User's consent for follow-up communication.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							ForceNew:    true,
@@ -245,20 +245,20 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"product_satisfaction_scale": {
-							Description:  "User's overall satisfaction with the product on a 0-10 scale.",
+							Description:  "User's satisfaction with the product on a 0-10 scale.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(0, 10),
 							Optional:     true,
 							ForceNew:     true,
 						},
 						"survey_completed": {
-							Description: "Indicates if the user completed the survey. True if completed, false otherwise.",
+							Description: "Survey completion status (True if completed, False otherwise).",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							ForceNew:    true,
 						},
 						"trace_ids": {
-							Description: "Bunch of last traceId for reproducing user last activity.",
+							Description: "Collection of last traceId for replicating the user's last activity.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							ForceNew:    true,

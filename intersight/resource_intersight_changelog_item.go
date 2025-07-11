@@ -138,7 +138,7 @@ func resourceChangelogItem() *schema.Resource {
 					return
 				}},
 			"date_version": {
-				Description: "The date version for the API contract changelog item in the format rfc3339 with no fraction seconds set.  Note that there can be more than one item per DateVersion. Example: 2023-12-19T00:00:00Z .",
+				Description: "Date version for the API contract changelog item in rfc3339 format, without fractional seconds. Note, multiple items can exist for a single DateVersion. Example: 2023-12-19T00:00:00Z .",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -154,7 +154,7 @@ func resourceChangelogItem() *schema.Resource {
 					return
 				}},
 			"entity": {
-				Description:  "The operationId of the endpoint for which changelog item is being generated.",
+				Description:  "Operation Id of the endpoint for which the changelog item is generated.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringLenBetween(1, 521),
 				Optional:     true,
@@ -271,7 +271,7 @@ func resourceChangelogItem() *schema.Resource {
 				},
 			},
 			"semantic_version": {
-				Description:  "The semantic version for the API contract changelog item. Note that there can be more than one item per SemanticVersion.",
+				Description:  "Semantic version for the API contract changelog item. Note, multiple items can exist for a single SemanticVersion.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"), ""),
 				Optional:     true,
@@ -315,7 +315,7 @@ func resourceChangelogItem() *schema.Resource {
 				},
 			},
 			"value": {
-				Description:  "The value of the API contract changelog item.",
+				Description:  "The value associated with the API contract changelog item.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringLenBetween(1, 521),
 				Optional:     true,

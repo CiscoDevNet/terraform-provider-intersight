@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025051220
+API version: 1.0.11-2025062323
 Contact: intersight@cisco.com
 */
 
@@ -110,9 +110,15 @@ type HciCluster struct {
 	DomainManager NullableHciDomainManagerRelationship `json:"DomainManager,omitempty"`
 	Entitlement   NullableHciEntitlementRelationship   `json:"Entitlement,omitempty"`
 	// An array of relationships to hciNode resources.
-	Nodes                []HciNodeRelationship                       `json:"Nodes,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	Violation            NullableHciViolationRelationship            `json:"Violation,omitempty"`
+	Nodes []HciNodeRelationship `json:"Nodes,omitempty"`
+	// An array of relationships to hciPhysicalGpu resources.
+	PhysicalGpus     []HciPhysicalGpuRelationship                `json:"PhysicalGpus,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Violation        NullableHciViolationRelationship            `json:"Violation,omitempty"`
+	// An array of relationships to hciVirtualGpu resources.
+	VirtualGpus []HciVirtualGpuRelationship `json:"VirtualGpus,omitempty"`
+	// An array of relationships to hciBaseVm resources.
+	Vms                  []HciBaseVmRelationship `json:"Vms,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1927,6 +1933,39 @@ func (o *HciCluster) SetNodes(v []HciNodeRelationship) {
 	o.Nodes = v
 }
 
+// GetPhysicalGpus returns the PhysicalGpus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HciCluster) GetPhysicalGpus() []HciPhysicalGpuRelationship {
+	if o == nil {
+		var ret []HciPhysicalGpuRelationship
+		return ret
+	}
+	return o.PhysicalGpus
+}
+
+// GetPhysicalGpusOk returns a tuple with the PhysicalGpus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HciCluster) GetPhysicalGpusOk() ([]HciPhysicalGpuRelationship, bool) {
+	if o == nil || IsNil(o.PhysicalGpus) {
+		return nil, false
+	}
+	return o.PhysicalGpus, true
+}
+
+// HasPhysicalGpus returns a boolean if a field has been set.
+func (o *HciCluster) HasPhysicalGpus() bool {
+	if o != nil && !IsNil(o.PhysicalGpus) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhysicalGpus gets a reference to the given []HciPhysicalGpuRelationship and assigns it to the PhysicalGpus field.
+func (o *HciCluster) SetPhysicalGpus(v []HciPhysicalGpuRelationship) {
+	o.PhysicalGpus = v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HciCluster) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -2011,6 +2050,72 @@ func (o *HciCluster) SetViolationNil() {
 // UnsetViolation ensures that no value is present for Violation, not even an explicit nil
 func (o *HciCluster) UnsetViolation() {
 	o.Violation.Unset()
+}
+
+// GetVirtualGpus returns the VirtualGpus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HciCluster) GetVirtualGpus() []HciVirtualGpuRelationship {
+	if o == nil {
+		var ret []HciVirtualGpuRelationship
+		return ret
+	}
+	return o.VirtualGpus
+}
+
+// GetVirtualGpusOk returns a tuple with the VirtualGpus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HciCluster) GetVirtualGpusOk() ([]HciVirtualGpuRelationship, bool) {
+	if o == nil || IsNil(o.VirtualGpus) {
+		return nil, false
+	}
+	return o.VirtualGpus, true
+}
+
+// HasVirtualGpus returns a boolean if a field has been set.
+func (o *HciCluster) HasVirtualGpus() bool {
+	if o != nil && !IsNil(o.VirtualGpus) {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualGpus gets a reference to the given []HciVirtualGpuRelationship and assigns it to the VirtualGpus field.
+func (o *HciCluster) SetVirtualGpus(v []HciVirtualGpuRelationship) {
+	o.VirtualGpus = v
+}
+
+// GetVms returns the Vms field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HciCluster) GetVms() []HciBaseVmRelationship {
+	if o == nil {
+		var ret []HciBaseVmRelationship
+		return ret
+	}
+	return o.Vms
+}
+
+// GetVmsOk returns a tuple with the Vms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HciCluster) GetVmsOk() ([]HciBaseVmRelationship, bool) {
+	if o == nil || IsNil(o.Vms) {
+		return nil, false
+	}
+	return o.Vms, true
+}
+
+// HasVms returns a boolean if a field has been set.
+func (o *HciCluster) HasVms() bool {
+	if o != nil && !IsNil(o.Vms) {
+		return true
+	}
+
+	return false
+}
+
+// SetVms gets a reference to the given []HciBaseVmRelationship and assigns it to the Vms field.
+func (o *HciCluster) SetVms(v []HciBaseVmRelationship) {
+	o.Vms = v
 }
 
 func (o HciCluster) MarshalJSON() ([]byte, error) {
@@ -2189,11 +2294,20 @@ func (o HciCluster) ToMap() (map[string]interface{}, error) {
 	if o.Nodes != nil {
 		toSerialize["Nodes"] = o.Nodes
 	}
+	if o.PhysicalGpus != nil {
+		toSerialize["PhysicalGpus"] = o.PhysicalGpus
+	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.Violation.IsSet() {
 		toSerialize["Violation"] = o.Violation.Get()
+	}
+	if o.VirtualGpus != nil {
+		toSerialize["VirtualGpus"] = o.VirtualGpus
+	}
+	if o.Vms != nil {
+		toSerialize["Vms"] = o.Vms
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -2332,9 +2446,15 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		DomainManager NullableHciDomainManagerRelationship `json:"DomainManager,omitempty"`
 		Entitlement   NullableHciEntitlementRelationship   `json:"Entitlement,omitempty"`
 		// An array of relationships to hciNode resources.
-		Nodes            []HciNodeRelationship                       `json:"Nodes,omitempty"`
+		Nodes []HciNodeRelationship `json:"Nodes,omitempty"`
+		// An array of relationships to hciPhysicalGpu resources.
+		PhysicalGpus     []HciPhysicalGpuRelationship                `json:"PhysicalGpus,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		Violation        NullableHciViolationRelationship            `json:"Violation,omitempty"`
+		// An array of relationships to hciVirtualGpu resources.
+		VirtualGpus []HciVirtualGpuRelationship `json:"VirtualGpus,omitempty"`
+		// An array of relationships to hciBaseVm resources.
+		Vms []HciBaseVmRelationship `json:"Vms,omitempty"`
 	}
 
 	varHciClusterWithoutEmbeddedStruct := HciClusterWithoutEmbeddedStruct{}
@@ -2394,8 +2514,11 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		varHciCluster.DomainManager = varHciClusterWithoutEmbeddedStruct.DomainManager
 		varHciCluster.Entitlement = varHciClusterWithoutEmbeddedStruct.Entitlement
 		varHciCluster.Nodes = varHciClusterWithoutEmbeddedStruct.Nodes
+		varHciCluster.PhysicalGpus = varHciClusterWithoutEmbeddedStruct.PhysicalGpus
 		varHciCluster.RegisteredDevice = varHciClusterWithoutEmbeddedStruct.RegisteredDevice
 		varHciCluster.Violation = varHciClusterWithoutEmbeddedStruct.Violation
+		varHciCluster.VirtualGpus = varHciClusterWithoutEmbeddedStruct.VirtualGpus
+		varHciCluster.Vms = varHciClusterWithoutEmbeddedStruct.Vms
 		*o = HciCluster(varHciCluster)
 	} else {
 		return err
@@ -2465,8 +2588,11 @@ func (o *HciCluster) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "DomainManager")
 		delete(additionalProperties, "Entitlement")
 		delete(additionalProperties, "Nodes")
+		delete(additionalProperties, "PhysicalGpus")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "Violation")
+		delete(additionalProperties, "VirtualGpus")
+		delete(additionalProperties, "Vms")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

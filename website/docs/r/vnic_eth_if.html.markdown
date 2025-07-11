@@ -136,7 +136,16 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `primary_dns`:(string) IP Address of the primary Domain Name System (DNS) server. 
   + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
+* `iscsi_ip_v6_address_allocation_type`:(string)(ReadOnly) Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type.* `None` - Type indicates that there is no IP associated to an vnic.* `DHCP` - The IP address is assigned using DHCP, if available.* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. 
+* `iscsi_ip_v6_config`:(HashMap) -(ReadOnly) IPv6 configurations such as Prefix, Gateway and DNS for iSCSI vNIC. 
+This complex property has following sub-properties:
+  + `gateway`:(string) IP address of the default IPv6 gateway. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `prefix`:(int) A prefix length which masks the  IP address and divides the IP address into network address and host address. 
+  + `primary_dns`:(string) IP Address of the primary Domain Name System (DNS) server. 
+  + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
 * `iscsi_ipv4_address`:(string)(ReadOnly) IP address associated to the vNIC. 
+* `iscsi_ipv6_address`:(string)(ReadOnly) IPv6 address associated to the iSCSI vNIC. 
 * `lan_connectivity_policy`:(HashMap) - A reference to a vnicLanConnectivityPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

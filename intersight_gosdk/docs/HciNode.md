@@ -53,6 +53,7 @@ Name | Type | Description | Notes
 **MemorySizeBytes** | Pointer to **int64** | The memory size in bytes of the node. | [optional] [readonly] 
 **MemoryUsageBytes** | Pointer to **int64** | The memory usage in bytes of the node. | [optional] [readonly] 
 **NodeExtId** | Pointer to **string** | The unique identifier of the node. | [optional] [readonly] 
+**NodeSerial** | Pointer to **string** | The serial number of this node. | [optional] [readonly] 
 **NodeStatus** | Pointer to **string** | The status of the node such as NORMAL, TO_BE_REMOVED, OK_TO_BE_REMOVED, NEW_NODE, TO_BE_PREPROTECTED, PREPROTECTED. | [optional] [readonly] 
 **NumberOfCpuCores** | Pointer to **int64** | The number of CPU cores on the node. | [optional] [readonly] 
 **NumberOfCpuSockets** | Pointer to **int64** | The number of sockets on the node. | [optional] [readonly] 
@@ -65,6 +66,7 @@ Name | Type | Description | Notes
 **Gpus** | Pointer to [**[]HciGpuRelationship**](HciGpuRelationship.md) | An array of relationships to hciGpu resources. | [optional] [readonly] 
 **PhysicalServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Vms** | Pointer to [**[]HciBaseVmRelationship**](HciBaseVmRelationship.md) | An array of relationships to hciBaseVm resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -1370,6 +1372,31 @@ SetNodeExtId sets NodeExtId field to given value.
 
 HasNodeExtId returns a boolean if a field has been set.
 
+### GetNodeSerial
+
+`func (o *HciNode) GetNodeSerial() string`
+
+GetNodeSerial returns the NodeSerial field if non-nil, zero value otherwise.
+
+### GetNodeSerialOk
+
+`func (o *HciNode) GetNodeSerialOk() (*string, bool)`
+
+GetNodeSerialOk returns a tuple with the NodeSerial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeSerial
+
+`func (o *HciNode) SetNodeSerial(v string)`
+
+SetNodeSerial sets NodeSerial field to given value.
+
+### HasNodeSerial
+
+`func (o *HciNode) HasNodeSerial() bool`
+
+HasNodeSerial returns a boolean if a field has been set.
+
 ### GetNodeStatus
 
 `func (o *HciNode) GetNodeStatus() string`
@@ -1720,6 +1747,41 @@ HasRegisteredDevice returns a boolean if a field has been set.
 `func (o *HciNode) UnsetRegisteredDevice()`
 
 UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+### GetVms
+
+`func (o *HciNode) GetVms() []HciBaseVmRelationship`
+
+GetVms returns the Vms field if non-nil, zero value otherwise.
+
+### GetVmsOk
+
+`func (o *HciNode) GetVmsOk() (*[]HciBaseVmRelationship, bool)`
+
+GetVmsOk returns a tuple with the Vms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVms
+
+`func (o *HciNode) SetVms(v []HciBaseVmRelationship)`
+
+SetVms sets Vms field to given value.
+
+### HasVms
+
+`func (o *HciNode) HasVms() bool`
+
+HasVms returns a boolean if a field has been set.
+
+### SetVmsNil
+
+`func (o *HciNode) SetVmsNil(b bool)`
+
+ SetVmsNil sets the value for Vms to be an explicit nil
+
+### UnsetVms
+`func (o *HciNode) UnsetVms()`
+
+UnsetVms ensures that no value is present for Vms, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
