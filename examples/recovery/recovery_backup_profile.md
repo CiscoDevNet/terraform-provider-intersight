@@ -4,7 +4,7 @@
 resource "intersight_recovery_backup_profile" "recovery_backup_profile1" {
   name        = "recovery_backup_profile1"
   description = "recovery_backup_profile"
-  type        = "instance"
+  nr_type        = "instance"
   config_context {
     object_type    = "policy.ConfigContext"
     control_action = "deploy"

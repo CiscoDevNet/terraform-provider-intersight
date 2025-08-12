@@ -17,7 +17,7 @@ resource "intersight_iam_idp" "idp1" {
      moid        = var.iam_system
      object_type = "iam.System"
    }
-  type = "saml"
+  nr_type = "saml"
 }
 
 
