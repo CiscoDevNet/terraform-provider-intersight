@@ -27,7 +27,7 @@ func getFabricPortOperationSchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_action": {
-			Description: "An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.",
+			Description: "An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.\n* `SetUserLabel` - Admin triggered operation to set the user label on the port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -266,6 +266,11 @@ func getFabricPortOperationSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"user_label": {
+			Description: "The user defined label assigned to the a Port.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -701,6 +706,11 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -840,6 +850,7 @@ func dataSourceFabricPortOperationRead(c context.Context, d *schema.ResourceData
 				temp["switch_name"] = (s.GetSwitchName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_label"] = (s.GetUserLabel())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricPortOperationResults = append(fabricPortOperationResults, temp)

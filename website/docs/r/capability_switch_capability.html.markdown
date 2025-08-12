@@ -195,6 +195,8 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `un_supported_equipment_model`:
+                (Array of schema.TypeString) -
 * `unified_ports`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 

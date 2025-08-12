@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -441,6 +442,12 @@ func resourceFabricFcoeUplinkPcRole() *schema.Resource {
 					},
 				},
 			},
+			"user_label": {
+				Description:  "The user defined label assigned to the a Port.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 127)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -847,6 +854,11 @@ func resourceFabricFcoeUplinkPcRoleCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricFcoeUplinkPcRole(conn.ctx).FabricFcoeUplinkPcRole(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -975,6 +987,10 @@ func resourceFabricFcoeUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricFcoeUplinkPcRole object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in FabricFcoeUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1241,6 +1257,12 @@ func resourceFabricFcoeUplinkPcRoleUpdate(c context.Context, d *schema.ResourceD
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricFcoeUplinkPcRole(conn.ctx, d.Id()).FabricFcoeUplinkPcRole(*o)

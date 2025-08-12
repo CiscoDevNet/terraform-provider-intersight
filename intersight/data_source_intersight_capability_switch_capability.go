@@ -1058,6 +1058,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"un_supported_equipment_model": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"unified_ports": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -2474,6 +2479,17 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("un_supported_equipment_model"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnSupportedEquipmentModel(x)
+	}
+
 	if v, ok := d.GetOk("unified_ports"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
@@ -2719,6 +2735,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["system_limits"] = flattenMapCapabilitySwitchSystemLimits(s.GetSystemLimits(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["un_supported_equipment_model"] = (s.GetUnSupportedEquipmentModel())
 
 				temp["unified_ports"] = flattenListCapabilityPortRange(s.GetUnifiedPorts(), d)
 				temp["unified_rule"] = (s.GetUnifiedRule())

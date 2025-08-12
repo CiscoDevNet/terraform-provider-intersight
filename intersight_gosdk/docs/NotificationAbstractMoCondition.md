@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**Enabled** | Pointer to **bool** | The condition can be switched on/off with out necessity to change the subscription settings: actions, conditions, etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
+**Enabled** | Pointer to **bool** | The condition can be switched on/off with out necessity to change the subscription settings: actions, conditions, etc. Ex.: Subscription MO can be configured, but switched off. | [optional] [default to true]
 **MoType** | Pointer to **string** | MoType for which the condition is created. | [optional] 
 **Operations** | Pointer to **[]string** |  | [optional] 
 

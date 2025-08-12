@@ -549,6 +549,11 @@ func getEquipmentPsuSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"spare_status": {
+			Description: "This field identifies whether the power supply unit is spare or not.\n* `` - Spare status for power supply unit is not applicable or not available.\n* `Spare` - Power supply unit is spare.\n* `Not Spare` - Power supply unit is not spare.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1355,6 +1360,11 @@ func dataSourceEquipmentPsuRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetSku(x)
 	}
 
+	if v, ok := d.GetOk("spare_status"); ok {
+		x := (v.(string))
+		o.SetSpareStatus(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1566,6 +1576,7 @@ func dataSourceEquipmentPsuRead(c context.Context, d *schema.ResourceData, meta 
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["sku"] = (s.GetSku())
+				temp["spare_status"] = (s.GetSpareStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())

@@ -115,6 +115,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"eradication_config": {
+			Description: "The configuration of eradication feature.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -209,6 +214,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"pod": {
+			Description: "A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"protection_group": {
 			Description: "A reference to a storagePureProtectionGroup resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -289,6 +299,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"snapshot_size": {
+			Description: "The size of the snapshot created.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"nr_source": {
 			Description: "Source protection group name on which the snapshot is created.",
 			Type:        schema.TypeString,
@@ -316,6 +331,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"total_provisioned": {
+			Description: "The overall size of the snapshot allocated by the storage array.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -569,6 +589,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("eradication_config"); ok {
+		x := (v.(string))
+		o.SetEradicationConfig(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -683,6 +708,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("pod"); ok {
+		x := (v.(string))
+		o.SetPod(x)
+	}
+
 	if v, ok := d.GetOk("protection_group"); ok {
 		p := make([]models.StoragePureProtectionGroupRelationship, 0, 1)
 		s := v.([]interface{})
@@ -779,6 +809,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 		o.SetSize(x)
 	}
 
+	if v, ok := d.GetOkExists("snapshot_size"); ok {
+		x := int64(v.(int))
+		o.SetSnapshotSize(x)
+	}
+
 	if v, ok := d.GetOk("nr_source"); ok {
 		x := (v.(string))
 		o.SetSource(x)
@@ -815,6 +850,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOkExists("total_provisioned"); ok {
+		x := int64(v.(int))
+		o.SetTotalProvisioned(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -938,6 +978,7 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 
 				temp["created_time"] = (s.GetCreatedTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["eradication_config"] = (s.GetEradicationConfig())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -948,15 +989,18 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pod"] = (s.GetPod())
 
 				temp["protection_group"] = flattenMapStoragePureProtectionGroupRelationship(s.GetProtectionGroup(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
+				temp["snapshot_size"] = (s.GetSnapshotSize())
 				temp["nr_source"] = (s.GetSource())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_provisioned"] = (s.GetTotalProvisioned())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				storagePureProtectionGroupSnapshotResults = append(storagePureProtectionGroupSnapshotResults, temp)

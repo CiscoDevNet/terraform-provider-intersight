@@ -402,6 +402,11 @@ func getFabricApplianceRoleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"user_label": {
+			Description: "The user defined label assigned to a Port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1003,6 +1008,11 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1149,6 +1159,7 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 				temp["slot_id"] = (s.GetSlotId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_label"] = (s.GetUserLabel())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricApplianceRoleResults = append(fabricApplianceRoleResults, temp)

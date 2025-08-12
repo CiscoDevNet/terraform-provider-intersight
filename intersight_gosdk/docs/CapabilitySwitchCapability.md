@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **StorageLimits** | Pointer to [**NullableCapabilitySwitchStorageLimits**](CapabilitySwitchStorageLimits.md) |  | [optional] 
 **SwitchingModeCapabilities** | Pointer to [**[]CapabilitySwitchingModeCapability**](CapabilitySwitchingModeCapability.md) |  | [optional] 
 **SystemLimits** | Pointer to [**NullableCapabilitySwitchSystemLimits**](CapabilitySwitchSystemLimits.md) |  | [optional] 
+**UnSupportedEquipmentModel** | Pointer to **[]string** |  | [optional] 
 **UnifiedPorts** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **UnifiedRule** | Pointer to **string** | The Slider rule for Unified ports on this switch. | [optional] [readonly] 
 **UplinkAdminPortSpeedNegAuto25GbpsSupported** | Pointer to **bool** | &#39;Negotiate Auto 25000&#39; admin speed support on this switch for port or port-channel with Ethernet Uplink/Appliance/FCoE Uplink roles. | [optional] [readonly] 
@@ -987,6 +988,41 @@ HasSystemLimits returns a boolean if a field has been set.
 `func (o *CapabilitySwitchCapability) UnsetSystemLimits()`
 
 UnsetSystemLimits ensures that no value is present for SystemLimits, not even an explicit nil
+### GetUnSupportedEquipmentModel
+
+`func (o *CapabilitySwitchCapability) GetUnSupportedEquipmentModel() []string`
+
+GetUnSupportedEquipmentModel returns the UnSupportedEquipmentModel field if non-nil, zero value otherwise.
+
+### GetUnSupportedEquipmentModelOk
+
+`func (o *CapabilitySwitchCapability) GetUnSupportedEquipmentModelOk() (*[]string, bool)`
+
+GetUnSupportedEquipmentModelOk returns a tuple with the UnSupportedEquipmentModel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnSupportedEquipmentModel
+
+`func (o *CapabilitySwitchCapability) SetUnSupportedEquipmentModel(v []string)`
+
+SetUnSupportedEquipmentModel sets UnSupportedEquipmentModel field to given value.
+
+### HasUnSupportedEquipmentModel
+
+`func (o *CapabilitySwitchCapability) HasUnSupportedEquipmentModel() bool`
+
+HasUnSupportedEquipmentModel returns a boolean if a field has been set.
+
+### SetUnSupportedEquipmentModelNil
+
+`func (o *CapabilitySwitchCapability) SetUnSupportedEquipmentModelNil(b bool)`
+
+ SetUnSupportedEquipmentModelNil sets the value for UnSupportedEquipmentModel to be an explicit nil
+
+### UnsetUnSupportedEquipmentModel
+`func (o *CapabilitySwitchCapability) UnsetUnSupportedEquipmentModel()`
+
+UnsetUnSupportedEquipmentModel ensures that no value is present for UnSupportedEquipmentModel, not even an explicit nil
 ### GetUnifiedPorts
 
 `func (o *CapabilitySwitchCapability) GetUnifiedPorts() []CapabilityPortRange`

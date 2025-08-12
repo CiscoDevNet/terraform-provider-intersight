@@ -75,6 +75,11 @@ func getStorageNvmeRaidConfigurationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"controller_series": {
+			Description: "Describes series of the installed controller. This will be used in the activation step after reboot to calculate the different parameters w.r.t specific controller series.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -668,6 +673,11 @@ func dataSourceStorageNvmeRaidConfigurationRead(c context.Context, d *schema.Res
 		o.SetControllerMoid(x)
 	}
 
+	if v, ok := d.GetOk("controller_series"); ok {
+		x := (v.(string))
+		o.SetControllerSeries(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -1159,6 +1169,7 @@ func dataSourceStorageNvmeRaidConfigurationRead(c context.Context, d *schema.Res
 				temp["class_id"] = (s.GetClassId())
 				temp["controller_dn"] = (s.GetControllerDn())
 				temp["controller_moid"] = (s.GetControllerMoid())
+				temp["controller_series"] = (s.GetControllerSeries())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 

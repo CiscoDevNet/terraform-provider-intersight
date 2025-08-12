@@ -6,6 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureProtectionGroupSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureProtectionGroupSnapshot"]
+**EradicationConfig** | Pointer to **string** | The configuration of eradication feature. | [optional] [readonly] 
+**Pod** | Pointer to **string** | A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. | [optional] [readonly] 
+**SnapshotSize** | Pointer to **int64** | The size of the snapshot created. | [optional] [readonly] 
+**TotalProvisioned** | Pointer to **int64** | The overall size of the snapshot allocated by the storage array. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **ProtectionGroup** | Pointer to [**NullableStoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -68,6 +72,106 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEradicationConfig
+
+`func (o *StoragePureProtectionGroupSnapshot) GetEradicationConfig() string`
+
+GetEradicationConfig returns the EradicationConfig field if non-nil, zero value otherwise.
+
+### GetEradicationConfigOk
+
+`func (o *StoragePureProtectionGroupSnapshot) GetEradicationConfigOk() (*string, bool)`
+
+GetEradicationConfigOk returns a tuple with the EradicationConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEradicationConfig
+
+`func (o *StoragePureProtectionGroupSnapshot) SetEradicationConfig(v string)`
+
+SetEradicationConfig sets EradicationConfig field to given value.
+
+### HasEradicationConfig
+
+`func (o *StoragePureProtectionGroupSnapshot) HasEradicationConfig() bool`
+
+HasEradicationConfig returns a boolean if a field has been set.
+
+### GetPod
+
+`func (o *StoragePureProtectionGroupSnapshot) GetPod() string`
+
+GetPod returns the Pod field if non-nil, zero value otherwise.
+
+### GetPodOk
+
+`func (o *StoragePureProtectionGroupSnapshot) GetPodOk() (*string, bool)`
+
+GetPodOk returns a tuple with the Pod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPod
+
+`func (o *StoragePureProtectionGroupSnapshot) SetPod(v string)`
+
+SetPod sets Pod field to given value.
+
+### HasPod
+
+`func (o *StoragePureProtectionGroupSnapshot) HasPod() bool`
+
+HasPod returns a boolean if a field has been set.
+
+### GetSnapshotSize
+
+`func (o *StoragePureProtectionGroupSnapshot) GetSnapshotSize() int64`
+
+GetSnapshotSize returns the SnapshotSize field if non-nil, zero value otherwise.
+
+### GetSnapshotSizeOk
+
+`func (o *StoragePureProtectionGroupSnapshot) GetSnapshotSizeOk() (*int64, bool)`
+
+GetSnapshotSizeOk returns a tuple with the SnapshotSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotSize
+
+`func (o *StoragePureProtectionGroupSnapshot) SetSnapshotSize(v int64)`
+
+SetSnapshotSize sets SnapshotSize field to given value.
+
+### HasSnapshotSize
+
+`func (o *StoragePureProtectionGroupSnapshot) HasSnapshotSize() bool`
+
+HasSnapshotSize returns a boolean if a field has been set.
+
+### GetTotalProvisioned
+
+`func (o *StoragePureProtectionGroupSnapshot) GetTotalProvisioned() int64`
+
+GetTotalProvisioned returns the TotalProvisioned field if non-nil, zero value otherwise.
+
+### GetTotalProvisionedOk
+
+`func (o *StoragePureProtectionGroupSnapshot) GetTotalProvisionedOk() (*int64, bool)`
+
+GetTotalProvisionedOk returns a tuple with the TotalProvisioned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalProvisioned
+
+`func (o *StoragePureProtectionGroupSnapshot) SetTotalProvisioned(v int64)`
+
+SetTotalProvisioned sets TotalProvisioned field to given value.
+
+### HasTotalProvisioned
+
+`func (o *StoragePureProtectionGroupSnapshot) HasTotalProvisioned() bool`
+
+HasTotalProvisioned returns a boolean if a field has been set.
 
 ### GetArray
 

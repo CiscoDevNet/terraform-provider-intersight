@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -321,6 +322,12 @@ func resourceFabricFcStorageRole() *schema.Resource {
 					},
 				},
 			},
+			"user_label": {
+				Description:  "The user defined label assigned to a Port.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 127)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -604,6 +611,11 @@ func resourceFabricFcStorageRoleCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOkExists("vsan_id"); ok {
 		x := int64(v.(int))
 		o.SetVsanId(x)
@@ -729,6 +741,10 @@ func resourceFabricFcStorageRoleRead(c context.Context, d *schema.ResourceData, 
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricFcStorageRole object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in FabricFcStorageRole object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -870,6 +886,12 @@ func resourceFabricFcStorageRoleUpdate(c context.Context, d *schema.ResourceData
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	if d.HasChange("vsan_id") {

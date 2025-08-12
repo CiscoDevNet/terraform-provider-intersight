@@ -18,10 +18,14 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `created_time`:(string) Protection group snapshot creation time. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `eradication_config`:(string) The configuration of eradication feature. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Protection group snapshot name which represents point-in-time copy of all members in protection group. 
+* `pod`:(string) A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(int) Snapshot size represented in bytes. It is a cumulative size of all snapshots in a set. 
+* `snapshot_size`:(int) The size of the snapshot created. 
 * `nr_source`:(string) Source protection group name on which the snapshot is created. 
+* `total_provisioned`:(int) The overall size of the snapshot allocated by the storage array. 
  

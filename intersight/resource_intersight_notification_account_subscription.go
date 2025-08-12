@@ -153,6 +153,13 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 				Optional:    true,
 				Default:     "notification.AccountSubscription",
 			},
+			"condition_operator": {
+				Description:  "Operation that binds all the different conditions together.\n* `All` - All is an AND condition applied against the individual conditions.\n* `Any` - Any is an OR condition applied against the individual conditions.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"All", "Any"}, false),
+				Optional:     true,
+				Default:      "All",
+			},
 			"conditions": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -191,6 +198,12 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 					}
 					return
 				}},
+			"description": {
+				Description:  "The description for the subscription.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_.\\- ]{1,128}$"), ""),
+				Optional:     true,
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -579,6 +592,11 @@ func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.
 
 	o.SetClassId("notification.AccountSubscription")
 
+	if v, ok := d.GetOk("condition_operator"); ok {
+		x := (v.(string))
+		o.SetConditionOperator(x)
+	}
+
 	if v, ok := d.GetOk("conditions"); ok {
 		x := make([]models.NotificationAbstractCondition, 0)
 		s := v.([]interface{})
@@ -607,6 +625,11 @@ func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.
 		if len(x) > 0 {
 			o.SetConditions(x)
 		}
+	}
+
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
 	}
 
 	if v, ok := d.GetOkExists("enabled"); ok {
@@ -741,12 +764,20 @@ func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property ClassId in NotificationAccountSubscription object: %s", err.Error())
 	}
 
+	if err := d.Set("condition_operator", (s.GetConditionOperator())); err != nil {
+		return diag.Errorf("error occurred while setting property ConditionOperator in NotificationAccountSubscription object: %s", err.Error())
+	}
+
 	if err := d.Set("conditions", flattenListNotificationAbstractCondition(s.GetConditions(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Conditions in NotificationAccountSubscription object: %s", err.Error())
 	}
 
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in NotificationAccountSubscription object: %s", err.Error())
+	}
+
+	if err := d.Set("description", (s.GetDescription())); err != nil {
+		return diag.Errorf("error occurred while setting property Description in NotificationAccountSubscription object: %s", err.Error())
 	}
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
@@ -857,6 +888,12 @@ func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.
 
 	o.SetClassId("notification.AccountSubscription")
 
+	if d.HasChange("condition_operator") {
+		v := d.Get("condition_operator")
+		x := (v.(string))
+		o.SetConditionOperator(x)
+	}
+
 	if d.HasChange("conditions") {
 		v := d.Get("conditions")
 		x := make([]models.NotificationAbstractCondition, 0)
@@ -884,6 +921,12 @@ func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.
 			x = append(x, *o)
 		}
 		o.SetConditions(x)
+	}
+
+	if d.HasChange("description") {
+		v := d.Get("description")
+		x := (v.(string))
+		o.SetDescription(x)
 	}
 
 	if d.HasChange("enabled") {

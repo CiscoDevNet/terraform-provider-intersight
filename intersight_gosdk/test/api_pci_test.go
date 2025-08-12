@@ -127,6 +127,32 @@ func Test_intersight_PciApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PciApiService GetPciSlotByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PciApi.GetPciSlotByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PciApiService GetPciSlotList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.PciApi.GetPciSlotList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PciApiService GetPciSwitchByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

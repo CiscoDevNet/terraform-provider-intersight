@@ -576,7 +576,7 @@ func resourceSnmpPolicy() *schema.Resource {
 			"trap_community": {
 				Description:  "SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.",
 				Type:         schema.TypeString,
-				ValidateFunc: StringLenMaximum(18),
+				ValidateFunc: StringLenMaximum(32),
 				Optional:     true,
 			},
 			"v2_enabled": {

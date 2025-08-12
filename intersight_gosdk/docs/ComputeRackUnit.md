@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Board** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **BootDeviceBootmode** | Pointer to [**NullableBootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
 **ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
+**ComputeServerPowerParameters** | Pointer to [**NullableComputeServerPowerParametersRelationship**](ComputeServerPowerParametersRelationship.md) |  | [optional] 
 **EquipmentEnclosureElements** | Pointer to [**[]EquipmentEnclosureElementRelationship**](EquipmentEnclosureElementRelationship.md) | An array of relationships to equipmentEnclosureElement resources. | [optional] [readonly] 
 **EquipmentRisers** | Pointer to [**[]EquipmentRiserRelationship**](EquipmentRiserRelationship.md) | An array of relationships to equipmentRiser resources. | [optional] [readonly] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
@@ -28,6 +29,7 @@ Name | Type | Description | Notes
 **LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **MemoryArrays** | Pointer to [**[]MemoryArrayRelationship**](MemoryArrayRelationship.md) | An array of relationships to memoryArray resources. | [optional] 
 **PciDevices** | Pointer to [**[]PciDeviceRelationship**](PciDeviceRelationship.md) | An array of relationships to pciDevice resources. | [optional] [readonly] 
+**PciSlots** | Pointer to [**[]PciSlotRelationship**](PciSlotRelationship.md) | An array of relationships to pciSlot resources. | [optional] [readonly] 
 **Processors** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
 **RackEnclosureSlot** | Pointer to [**NullableEquipmentRackEnclosureSlotRelationship**](EquipmentRackEnclosureSlotRelationship.md) |  | [optional] 
@@ -487,6 +489,41 @@ HasComputePersonality returns a boolean if a field has been set.
 `func (o *ComputeRackUnit) UnsetComputePersonality()`
 
 UnsetComputePersonality ensures that no value is present for ComputePersonality, not even an explicit nil
+### GetComputeServerPowerParameters
+
+`func (o *ComputeRackUnit) GetComputeServerPowerParameters() ComputeServerPowerParametersRelationship`
+
+GetComputeServerPowerParameters returns the ComputeServerPowerParameters field if non-nil, zero value otherwise.
+
+### GetComputeServerPowerParametersOk
+
+`func (o *ComputeRackUnit) GetComputeServerPowerParametersOk() (*ComputeServerPowerParametersRelationship, bool)`
+
+GetComputeServerPowerParametersOk returns a tuple with the ComputeServerPowerParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeServerPowerParameters
+
+`func (o *ComputeRackUnit) SetComputeServerPowerParameters(v ComputeServerPowerParametersRelationship)`
+
+SetComputeServerPowerParameters sets ComputeServerPowerParameters field to given value.
+
+### HasComputeServerPowerParameters
+
+`func (o *ComputeRackUnit) HasComputeServerPowerParameters() bool`
+
+HasComputeServerPowerParameters returns a boolean if a field has been set.
+
+### SetComputeServerPowerParametersNil
+
+`func (o *ComputeRackUnit) SetComputeServerPowerParametersNil(b bool)`
+
+ SetComputeServerPowerParametersNil sets the value for ComputeServerPowerParameters to be an explicit nil
+
+### UnsetComputeServerPowerParameters
+`func (o *ComputeRackUnit) UnsetComputeServerPowerParameters()`
+
+UnsetComputeServerPowerParameters ensures that no value is present for ComputeServerPowerParameters, not even an explicit nil
 ### GetEquipmentEnclosureElements
 
 `func (o *ComputeRackUnit) GetEquipmentEnclosureElements() []EquipmentEnclosureElementRelationship`
@@ -837,6 +874,41 @@ HasPciDevices returns a boolean if a field has been set.
 `func (o *ComputeRackUnit) UnsetPciDevices()`
 
 UnsetPciDevices ensures that no value is present for PciDevices, not even an explicit nil
+### GetPciSlots
+
+`func (o *ComputeRackUnit) GetPciSlots() []PciSlotRelationship`
+
+GetPciSlots returns the PciSlots field if non-nil, zero value otherwise.
+
+### GetPciSlotsOk
+
+`func (o *ComputeRackUnit) GetPciSlotsOk() (*[]PciSlotRelationship, bool)`
+
+GetPciSlotsOk returns a tuple with the PciSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciSlots
+
+`func (o *ComputeRackUnit) SetPciSlots(v []PciSlotRelationship)`
+
+SetPciSlots sets PciSlots field to given value.
+
+### HasPciSlots
+
+`func (o *ComputeRackUnit) HasPciSlots() bool`
+
+HasPciSlots returns a boolean if a field has been set.
+
+### SetPciSlotsNil
+
+`func (o *ComputeRackUnit) SetPciSlotsNil(b bool)`
+
+ SetPciSlotsNil sets the value for PciSlots to be an explicit nil
+
+### UnsetPciSlots
+`func (o *ComputeRackUnit) UnsetPciSlots()`
+
+UnsetPciSlots ensures that no value is present for PciSlots, not even an explicit nil
 ### GetProcessors
 
 `func (o *ComputeRackUnit) GetProcessors() []ProcessorUnitRelationship`

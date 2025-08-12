@@ -447,6 +447,11 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"last_power_state_changed_time": {
+			Description: "The Last host power state changed time of the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_lifecycle": {
 			Description: "The lifecycle of the blade server.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.\n* `ScrubInProgress` - Scrub is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.\n* `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade.\n* `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade.\n* `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade.\n* `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.",
 			Type:        schema.TypeString,
@@ -1296,6 +1301,11 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetKvmVendor(x)
 	}
 
+	if v, ok := d.GetOk("last_power_state_changed_time"); ok {
+		x := (v.(string))
+		o.SetLastPowerStateChangedTime(x)
+	}
+
 	if v, ok := d.GetOk("nr_lifecycle"); ok {
 		x := (v.(string))
 		o.SetLifecycle(x)
@@ -1814,6 +1824,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["kvm_ip_addresses"] = flattenListComputeIpAddress(s.GetKvmIpAddresses(), d)
 				temp["kvm_server_state_enabled"] = (s.GetKvmServerStateEnabled())
 				temp["kvm_vendor"] = (s.GetKvmVendor())
+				temp["last_power_state_changed_time"] = (s.GetLastPowerStateChangedTime())
 				temp["nr_lifecycle"] = (s.GetLifecycle())
 				temp["management_mode"] = (s.GetManagementMode())
 				temp["memory_speed"] = (s.GetMemorySpeed())

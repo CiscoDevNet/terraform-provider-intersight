@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port Identifier of the Switch Interface. When a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused. When a port is configured as a breakout port, the &#39;aggregatePortId&#39; port number as labeled on the equipment, e.g. the id of the port on the switch. | [optional] 
 **PortId** | Pointer to **int64** | Port Identifier of the Switch/FEX/Chassis Interface. When a port is not configured as a breakout port, the portId is the port number as labeled on the equipment, e.g. the id of the port on the switch, FEX or chassis. When a port is configured as a breakout port, the &#39;portId&#39; represents the port id on the fanout side of the breakout cable. | [optional] 
 **SlotId** | Pointer to **int64** | Slot Identifier of the Switch/FEX/Chassis Interface. | [optional] 
+**UserLabel** | Pointer to **string** | The user defined label assigned to a Port. | [optional] 
 **PortPolicy** | Pointer to [**NullableFabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
 
 ## Methods
@@ -144,6 +145,31 @@ SetSlotId sets SlotId field to given value.
 `func (o *FabricPortRole) HasSlotId() bool`
 
 HasSlotId returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *FabricPortRole) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *FabricPortRole) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *FabricPortRole) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *FabricPortRole) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetPortPolicy
 

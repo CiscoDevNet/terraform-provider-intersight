@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025062323
+API version: 1.0.11-2025071017
 Contact: intersight@cisco.com
 */
 
@@ -29,8 +29,10 @@ type FabricPortChannelRole struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// Unique Identifier of the port-channel, local to this switch.
-	PcId                 *int64                               `json:"PcId,omitempty"`
-	Ports                []FabricPortIdentifier               `json:"Ports,omitempty"`
+	PcId  *int64                 `json:"PcId,omitempty"`
+	Ports []FabricPortIdentifier `json:"Ports,omitempty"`
+	// The user defined label assigned to the a Port.
+	UserLabel            *string                              `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%\\\\s+&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	PortPolicy           NullableFabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -169,6 +171,38 @@ func (o *FabricPortChannelRole) SetPorts(v []FabricPortIdentifier) {
 	o.Ports = v
 }
 
+// GetUserLabel returns the UserLabel field value if set, zero value otherwise.
+func (o *FabricPortChannelRole) GetUserLabel() string {
+	if o == nil || IsNil(o.UserLabel) {
+		var ret string
+		return ret
+	}
+	return *o.UserLabel
+}
+
+// GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricPortChannelRole) GetUserLabelOk() (*string, bool) {
+	if o == nil || IsNil(o.UserLabel) {
+		return nil, false
+	}
+	return o.UserLabel, true
+}
+
+// HasUserLabel returns a boolean if a field has been set.
+func (o *FabricPortChannelRole) HasUserLabel() bool {
+	if o != nil && !IsNil(o.UserLabel) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserLabel gets a reference to the given string and assigns it to the UserLabel field.
+func (o *FabricPortChannelRole) SetUserLabel(v string) {
+	o.UserLabel = &v
+}
+
 // GetPortPolicy returns the PortPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricPortChannelRole) GetPortPolicy() FabricPortPolicyRelationship {
 	if o == nil || IsNil(o.PortPolicy.Get()) {
@@ -238,6 +272,9 @@ func (o FabricPortChannelRole) ToMap() (map[string]interface{}, error) {
 	if o.Ports != nil {
 		toSerialize["Ports"] = o.Ports
 	}
+	if !IsNil(o.UserLabel) {
+		toSerialize["UserLabel"] = o.UserLabel
+	}
 	if o.PortPolicy.IsSet() {
 		toSerialize["PortPolicy"] = o.PortPolicy.Get()
 	}
@@ -294,8 +331,10 @@ func (o *FabricPortChannelRole) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
 		// Unique Identifier of the port-channel, local to this switch.
-		PcId       *int64                               `json:"PcId,omitempty"`
-		Ports      []FabricPortIdentifier               `json:"Ports,omitempty"`
+		PcId  *int64                 `json:"PcId,omitempty"`
+		Ports []FabricPortIdentifier `json:"Ports,omitempty"`
+		// The user defined label assigned to the a Port.
+		UserLabel  *string                              `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%\\\\s+&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		PortPolicy NullableFabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
 	}
 
@@ -308,6 +347,7 @@ func (o *FabricPortChannelRole) UnmarshalJSON(data []byte) (err error) {
 		varFabricPortChannelRole.ObjectType = varFabricPortChannelRoleWithoutEmbeddedStruct.ObjectType
 		varFabricPortChannelRole.PcId = varFabricPortChannelRoleWithoutEmbeddedStruct.PcId
 		varFabricPortChannelRole.Ports = varFabricPortChannelRoleWithoutEmbeddedStruct.Ports
+		varFabricPortChannelRole.UserLabel = varFabricPortChannelRoleWithoutEmbeddedStruct.UserLabel
 		varFabricPortChannelRole.PortPolicy = varFabricPortChannelRoleWithoutEmbeddedStruct.PortPolicy
 		*o = FabricPortChannelRole(varFabricPortChannelRole)
 	} else {
@@ -330,6 +370,7 @@ func (o *FabricPortChannelRole) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PcId")
 		delete(additionalProperties, "Ports")
+		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "PortPolicy")
 
 		// remove fields from embedded structs

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025062323
+API version: 1.0.11-2025071017
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,15 @@ type StoragePureProtectionGroupSnapshot struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                         `json:"ObjectType"`
+	ObjectType string `json:"ObjectType"`
+	// The configuration of eradication feature.
+	EradicationConfig *string `json:"EradicationConfig,omitempty"`
+	// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+	Pod *string `json:"Pod,omitempty"`
+	// The size of the snapshot created.
+	SnapshotSize *int64 `json:"SnapshotSize,omitempty"`
+	// The overall size of the snapshot allocated by the storage array.
+	TotalProvisioned     *int64                                         `json:"TotalProvisioned,omitempty"`
 	Array                NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
 	ProtectionGroup      NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
@@ -115,6 +123,134 @@ func (o *StoragePureProtectionGroupSnapshot) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "storage.PureProtectionGroupSnapshot" of the ObjectType field.
 func (o *StoragePureProtectionGroupSnapshot) GetDefaultObjectType() interface{} {
 	return "storage.PureProtectionGroupSnapshot"
+}
+
+// GetEradicationConfig returns the EradicationConfig field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroupSnapshot) GetEradicationConfig() string {
+	if o == nil || IsNil(o.EradicationConfig) {
+		var ret string
+		return ret
+	}
+	return *o.EradicationConfig
+}
+
+// GetEradicationConfigOk returns a tuple with the EradicationConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroupSnapshot) GetEradicationConfigOk() (*string, bool) {
+	if o == nil || IsNil(o.EradicationConfig) {
+		return nil, false
+	}
+	return o.EradicationConfig, true
+}
+
+// HasEradicationConfig returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroupSnapshot) HasEradicationConfig() bool {
+	if o != nil && !IsNil(o.EradicationConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetEradicationConfig gets a reference to the given string and assigns it to the EradicationConfig field.
+func (o *StoragePureProtectionGroupSnapshot) SetEradicationConfig(v string) {
+	o.EradicationConfig = &v
+}
+
+// GetPod returns the Pod field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroupSnapshot) GetPod() string {
+	if o == nil || IsNil(o.Pod) {
+		var ret string
+		return ret
+	}
+	return *o.Pod
+}
+
+// GetPodOk returns a tuple with the Pod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroupSnapshot) GetPodOk() (*string, bool) {
+	if o == nil || IsNil(o.Pod) {
+		return nil, false
+	}
+	return o.Pod, true
+}
+
+// HasPod returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroupSnapshot) HasPod() bool {
+	if o != nil && !IsNil(o.Pod) {
+		return true
+	}
+
+	return false
+}
+
+// SetPod gets a reference to the given string and assigns it to the Pod field.
+func (o *StoragePureProtectionGroupSnapshot) SetPod(v string) {
+	o.Pod = &v
+}
+
+// GetSnapshotSize returns the SnapshotSize field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroupSnapshot) GetSnapshotSize() int64 {
+	if o == nil || IsNil(o.SnapshotSize) {
+		var ret int64
+		return ret
+	}
+	return *o.SnapshotSize
+}
+
+// GetSnapshotSizeOk returns a tuple with the SnapshotSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroupSnapshot) GetSnapshotSizeOk() (*int64, bool) {
+	if o == nil || IsNil(o.SnapshotSize) {
+		return nil, false
+	}
+	return o.SnapshotSize, true
+}
+
+// HasSnapshotSize returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroupSnapshot) HasSnapshotSize() bool {
+	if o != nil && !IsNil(o.SnapshotSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnapshotSize gets a reference to the given int64 and assigns it to the SnapshotSize field.
+func (o *StoragePureProtectionGroupSnapshot) SetSnapshotSize(v int64) {
+	o.SnapshotSize = &v
+}
+
+// GetTotalProvisioned returns the TotalProvisioned field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroupSnapshot) GetTotalProvisioned() int64 {
+	if o == nil || IsNil(o.TotalProvisioned) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalProvisioned
+}
+
+// GetTotalProvisionedOk returns a tuple with the TotalProvisioned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroupSnapshot) GetTotalProvisionedOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalProvisioned) {
+		return nil, false
+	}
+	return o.TotalProvisioned, true
+}
+
+// HasTotalProvisioned returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroupSnapshot) HasTotalProvisioned() bool {
+	if o != nil && !IsNil(o.TotalProvisioned) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalProvisioned gets a reference to the given int64 and assigns it to the TotalProvisioned field.
+func (o *StoragePureProtectionGroupSnapshot) SetTotalProvisioned(v int64) {
+	o.TotalProvisioned = &v
 }
 
 // GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -272,6 +408,18 @@ func (o StoragePureProtectionGroupSnapshot) ToMap() (map[string]interface{}, err
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EradicationConfig) {
+		toSerialize["EradicationConfig"] = o.EradicationConfig
+	}
+	if !IsNil(o.Pod) {
+		toSerialize["Pod"] = o.Pod
+	}
+	if !IsNil(o.SnapshotSize) {
+		toSerialize["SnapshotSize"] = o.SnapshotSize
+	}
+	if !IsNil(o.TotalProvisioned) {
+		toSerialize["TotalProvisioned"] = o.TotalProvisioned
+	}
 	if o.Array.IsSet() {
 		toSerialize["Array"] = o.Array.Get()
 	}
@@ -335,7 +483,15 @@ func (o *StoragePureProtectionGroupSnapshot) UnmarshalJSON(data []byte) (err err
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType       string                                         `json:"ObjectType"`
+		ObjectType string `json:"ObjectType"`
+		// The configuration of eradication feature.
+		EradicationConfig *string `json:"EradicationConfig,omitempty"`
+		// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+		Pod *string `json:"Pod,omitempty"`
+		// The size of the snapshot created.
+		SnapshotSize *int64 `json:"SnapshotSize,omitempty"`
+		// The overall size of the snapshot allocated by the storage array.
+		TotalProvisioned *int64                                         `json:"TotalProvisioned,omitempty"`
 		Array            NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
 		ProtectionGroup  NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
@@ -348,6 +504,10 @@ func (o *StoragePureProtectionGroupSnapshot) UnmarshalJSON(data []byte) (err err
 		varStoragePureProtectionGroupSnapshot := _StoragePureProtectionGroupSnapshot{}
 		varStoragePureProtectionGroupSnapshot.ClassId = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.ClassId
 		varStoragePureProtectionGroupSnapshot.ObjectType = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.ObjectType
+		varStoragePureProtectionGroupSnapshot.EradicationConfig = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.EradicationConfig
+		varStoragePureProtectionGroupSnapshot.Pod = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.Pod
+		varStoragePureProtectionGroupSnapshot.SnapshotSize = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.SnapshotSize
+		varStoragePureProtectionGroupSnapshot.TotalProvisioned = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.TotalProvisioned
 		varStoragePureProtectionGroupSnapshot.Array = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.Array
 		varStoragePureProtectionGroupSnapshot.ProtectionGroup = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.ProtectionGroup
 		varStoragePureProtectionGroupSnapshot.RegisteredDevice = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.RegisteredDevice
@@ -370,6 +530,10 @@ func (o *StoragePureProtectionGroupSnapshot) UnmarshalJSON(data []byte) (err err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "EradicationConfig")
+		delete(additionalProperties, "Pod")
+		delete(additionalProperties, "SnapshotSize")
+		delete(additionalProperties, "TotalProvisioned")
 		delete(additionalProperties, "Array")
 		delete(additionalProperties, "ProtectionGroup")
 		delete(additionalProperties, "RegisteredDevice")

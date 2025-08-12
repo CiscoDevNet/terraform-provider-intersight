@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Board** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **BootDeviceBootmode** | Pointer to [**NullableBootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
 **ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
+**ComputeServerPowerParameters** | Pointer to [**NullableComputeServerPowerParametersRelationship**](ComputeServerPowerParametersRelationship.md) |  | [optional] 
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentIoExpanders** | Pointer to [**[]EquipmentIoExpanderRelationship**](EquipmentIoExpanderRelationship.md) | An array of relationships to equipmentIoExpander resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
@@ -483,6 +484,41 @@ HasComputePersonality returns a boolean if a field has been set.
 `func (o *ComputeBlade) UnsetComputePersonality()`
 
 UnsetComputePersonality ensures that no value is present for ComputePersonality, not even an explicit nil
+### GetComputeServerPowerParameters
+
+`func (o *ComputeBlade) GetComputeServerPowerParameters() ComputeServerPowerParametersRelationship`
+
+GetComputeServerPowerParameters returns the ComputeServerPowerParameters field if non-nil, zero value otherwise.
+
+### GetComputeServerPowerParametersOk
+
+`func (o *ComputeBlade) GetComputeServerPowerParametersOk() (*ComputeServerPowerParametersRelationship, bool)`
+
+GetComputeServerPowerParametersOk returns a tuple with the ComputeServerPowerParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeServerPowerParameters
+
+`func (o *ComputeBlade) SetComputeServerPowerParameters(v ComputeServerPowerParametersRelationship)`
+
+SetComputeServerPowerParameters sets ComputeServerPowerParameters field to given value.
+
+### HasComputeServerPowerParameters
+
+`func (o *ComputeBlade) HasComputeServerPowerParameters() bool`
+
+HasComputeServerPowerParameters returns a boolean if a field has been set.
+
+### SetComputeServerPowerParametersNil
+
+`func (o *ComputeBlade) SetComputeServerPowerParametersNil(b bool)`
+
+ SetComputeServerPowerParametersNil sets the value for ComputeServerPowerParameters to be an explicit nil
+
+### UnsetComputeServerPowerParameters
+`func (o *ComputeBlade) UnsetComputeServerPowerParameters()`
+
+UnsetComputeServerPowerParameters ensures that no value is present for ComputeServerPowerParameters, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *ComputeBlade) GetEquipmentChassis() EquipmentChassisRelationship`

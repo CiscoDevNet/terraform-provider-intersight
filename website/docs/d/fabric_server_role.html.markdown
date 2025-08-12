@@ -27,4 +27,5 @@ The following arguments can be used to get data of already created objects in In
 * `preferred_device_type`:(string) Device type for which preferred ID to be configured. If the actual connected device does not match the specified device type, the system ignores the 'PreferredDeviceId' property.* `Auto` - Preferred Id will be ignored if specified with this type.* `RackServer` - Connected device type is Rack Unit Server.* `Chassis` - Connected device type is Chassis. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `slot_id`:(int) Slot Identifier of the Switch/FEX/Chassis Interface. 
+* `user_label`:(string) The user defined label assigned to a Port. 
  
