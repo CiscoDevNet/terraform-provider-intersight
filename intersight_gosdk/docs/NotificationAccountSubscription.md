@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.AccountSubscription"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.AccountSubscription"]
+**Description** | Pointer to **string** | The description for the subscription. | [optional] 
 **Name** | Pointer to **string** | The name of the subscription. | [optional] 
 **Type** | Pointer to **string** | The chosen subscription type imposes it is own validation rules. When &#39;email&#39; type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the &#39;webhook&#39; type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. When the &#39;workflow&#39; type is chosen, the actions array can contain only one entry and it is entry should  be of type notification.TriggerWorkflow notification.TriggerWorkflow; conditions can contain up to a  limited amount of entries and all of them should be of type notification.WebhookEventMoCondition. * &#x60;email&#x60; - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * &#x60;webhook&#x60; - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. * &#x60;workflow&#x60; - Workflow type requires usage of notification.TriggerWorkflow complex types for actionsand notification.WebhookEventMoCondition complex types for conditions. | [optional] [default to "email"]
 **Verify** | Pointer to **string** | Used to verify the actions of the Subscription MO. For a &#39;webhook&#39; type Ping event is sent to verify that the webhook server is accessible. For an &#39;email&#39; type there will be a verification email sent. * &#x60;none&#x60; - No actions will be verified. Default value. * &#x60;all&#x60; - All actions will be re-verified. The previous state of the verification will be preserved. | [optional] [default to "none"]
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDescription
+
+`func (o *NotificationAccountSubscription) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *NotificationAccountSubscription) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *NotificationAccountSubscription) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *NotificationAccountSubscription) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetName
 

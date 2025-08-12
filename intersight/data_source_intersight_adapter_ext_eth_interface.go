@@ -225,6 +225,11 @@ func getAdapterExtEthInterfaceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"network_type": {
+			Description: "Type of network connection or configuration that adapter is using.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -820,6 +825,11 @@ func dataSourceAdapterExtEthInterfaceRead(c context.Context, d *schema.ResourceD
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("network_type"); ok {
+		x := (v.(string))
+		o.SetNetworkType(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1222,6 +1232,7 @@ func dataSourceAdapterExtEthInterfaceRead(c context.Context, d *schema.ResourceD
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["network_type"] = (s.GetNetworkType())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())

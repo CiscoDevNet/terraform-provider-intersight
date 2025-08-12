@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -39,6 +40,13 @@ func resourceFabricPcOperation() *schema.Resource {
 				Type:             schema.TypeString,
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
+			},
+			"admin_action": {
+				Description:  "An operation that has to be perfomed on the port channel. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `SetUserLabel` - Admin triggered operation to set the user label on the port channel.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "SetUserLabel"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"admin_state": {
 				Description:  "Admin configured state to disable the port channel.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
@@ -315,6 +323,12 @@ func resourceFabricPcOperation() *schema.Resource {
 					},
 				},
 			},
+			"user_label": {
+				Description:  "The user defined label assigned to the a Port.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 127)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -485,6 +499,11 @@ func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("admin_action"); ok {
+		x := (v.(string))
+		o.SetAdminAction(x)
+	}
+
 	if v, ok := d.GetOk("admin_state"); ok {
 		x := (v.(string))
 		o.SetAdminState(x)
@@ -587,6 +606,11 @@ func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricPcOperation(conn.ctx).FabricPcOperation(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -639,6 +663,10 @@ func resourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, me
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricPcOperation object: %s", err.Error())
+	}
+
+	if err := d.Set("admin_action", (s.GetAdminAction())); err != nil {
+		return diag.Errorf("error occurred while setting property AdminAction in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("admin_state", (s.GetAdminState())); err != nil {
@@ -705,6 +733,10 @@ func resourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property Tags in FabricPcOperation object: %s", err.Error())
 	}
 
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in FabricPcOperation object: %s", err.Error())
+	}
+
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in FabricPcOperation object: %s", err.Error())
 	}
@@ -728,6 +760,12 @@ func resourceFabricPcOperationUpdate(c context.Context, d *schema.ResourceData, 
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if d.HasChange("admin_action") {
+		v := d.Get("admin_action")
+		x := (v.(string))
+		o.SetAdminAction(x)
 	}
 
 	if d.HasChange("admin_state") {
@@ -834,6 +872,12 @@ func resourceFabricPcOperationUpdate(c context.Context, d *schema.ResourceData, 
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricPcOperation(conn.ctx, d.Id()).FabricPcOperation(*o)

@@ -10,9 +10,12 @@ Name | Type | Description | Notes
 **BlackoutDatesEnabled** | Pointer to **bool** | If enabled, allows the user to define a blackout period during which the appliance will not be upgraded. | [optional] 
 **BlackoutEndDate** | Pointer to **time.Time** | End date of the black out period. | [optional] 
 **BlackoutStartDate** | Pointer to **time.Time** | Start date of the black out period. The appliance will not be upgraded during this period. | [optional] 
+**DisruptiveGracePeriodWeek** | Pointer to **int64** | Updates requiring a reboot will start automatically once the grace period ends. | [optional] [default to 4]
 **EnableMetaDataSync** | Pointer to **bool** | Indicates if the updated metadata files should be synced immediately or at the next upgrade. | [optional] [default to true]
+**IsCustomGracePeriodEnabled** | Pointer to **bool** | Custom grace period for subsequent reboot and non-reboot updates. | [optional] 
 **IsSynced** | Pointer to **bool** | Flag to indicate software upgrade setting is synchronized with Intersight SaaS. | [optional] [readonly] 
 **ManualInstallationStartTime** | Pointer to **time.Time** | Intersight Appliance manual upgrade start time. | [optional] 
+**NondisruptiveGracePeriodWeek** | Pointer to **int64** | Updates not requiring a reboot will start automatically once the grace period ends. | [optional] [default to 4]
 **Schedule** | Pointer to [**NullableOnpremSchedule**](OnpremSchedule.md) |  | [optional] 
 **SoftwareDownloadType** | Pointer to **string** | SoftwareDownloadType is used to indicate the kind of software download. * &#x60;unknown&#x60; - Indicates user setting of upgrade service to unknown. * &#x60;connected&#x60; - Indicates if the upgrade service is set to upload software to latest version automatically. * &#x60;manual&#x60; - Indicates if the upgrade service is set to upload software to user picked verison manually. | [optional] [default to "unknown"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -176,6 +179,31 @@ SetBlackoutStartDate sets BlackoutStartDate field to given value.
 
 HasBlackoutStartDate returns a boolean if a field has been set.
 
+### GetDisruptiveGracePeriodWeek
+
+`func (o *ApplianceUpgradePolicy) GetDisruptiveGracePeriodWeek() int64`
+
+GetDisruptiveGracePeriodWeek returns the DisruptiveGracePeriodWeek field if non-nil, zero value otherwise.
+
+### GetDisruptiveGracePeriodWeekOk
+
+`func (o *ApplianceUpgradePolicy) GetDisruptiveGracePeriodWeekOk() (*int64, bool)`
+
+GetDisruptiveGracePeriodWeekOk returns a tuple with the DisruptiveGracePeriodWeek field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisruptiveGracePeriodWeek
+
+`func (o *ApplianceUpgradePolicy) SetDisruptiveGracePeriodWeek(v int64)`
+
+SetDisruptiveGracePeriodWeek sets DisruptiveGracePeriodWeek field to given value.
+
+### HasDisruptiveGracePeriodWeek
+
+`func (o *ApplianceUpgradePolicy) HasDisruptiveGracePeriodWeek() bool`
+
+HasDisruptiveGracePeriodWeek returns a boolean if a field has been set.
+
 ### GetEnableMetaDataSync
 
 `func (o *ApplianceUpgradePolicy) GetEnableMetaDataSync() bool`
@@ -200,6 +228,31 @@ SetEnableMetaDataSync sets EnableMetaDataSync field to given value.
 `func (o *ApplianceUpgradePolicy) HasEnableMetaDataSync() bool`
 
 HasEnableMetaDataSync returns a boolean if a field has been set.
+
+### GetIsCustomGracePeriodEnabled
+
+`func (o *ApplianceUpgradePolicy) GetIsCustomGracePeriodEnabled() bool`
+
+GetIsCustomGracePeriodEnabled returns the IsCustomGracePeriodEnabled field if non-nil, zero value otherwise.
+
+### GetIsCustomGracePeriodEnabledOk
+
+`func (o *ApplianceUpgradePolicy) GetIsCustomGracePeriodEnabledOk() (*bool, bool)`
+
+GetIsCustomGracePeriodEnabledOk returns a tuple with the IsCustomGracePeriodEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCustomGracePeriodEnabled
+
+`func (o *ApplianceUpgradePolicy) SetIsCustomGracePeriodEnabled(v bool)`
+
+SetIsCustomGracePeriodEnabled sets IsCustomGracePeriodEnabled field to given value.
+
+### HasIsCustomGracePeriodEnabled
+
+`func (o *ApplianceUpgradePolicy) HasIsCustomGracePeriodEnabled() bool`
+
+HasIsCustomGracePeriodEnabled returns a boolean if a field has been set.
 
 ### GetIsSynced
 
@@ -250,6 +303,31 @@ SetManualInstallationStartTime sets ManualInstallationStartTime field to given v
 `func (o *ApplianceUpgradePolicy) HasManualInstallationStartTime() bool`
 
 HasManualInstallationStartTime returns a boolean if a field has been set.
+
+### GetNondisruptiveGracePeriodWeek
+
+`func (o *ApplianceUpgradePolicy) GetNondisruptiveGracePeriodWeek() int64`
+
+GetNondisruptiveGracePeriodWeek returns the NondisruptiveGracePeriodWeek field if non-nil, zero value otherwise.
+
+### GetNondisruptiveGracePeriodWeekOk
+
+`func (o *ApplianceUpgradePolicy) GetNondisruptiveGracePeriodWeekOk() (*int64, bool)`
+
+GetNondisruptiveGracePeriodWeekOk returns a tuple with the NondisruptiveGracePeriodWeek field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNondisruptiveGracePeriodWeek
+
+`func (o *ApplianceUpgradePolicy) SetNondisruptiveGracePeriodWeek(v int64)`
+
+SetNondisruptiveGracePeriodWeek sets NondisruptiveGracePeriodWeek field to given value.
+
+### HasNondisruptiveGracePeriodWeek
+
+`func (o *ApplianceUpgradePolicy) HasNondisruptiveGracePeriodWeek() bool`
+
+HasNondisruptiveGracePeriodWeek returns a boolean if a field has been set.
 
 ### GetSchedule
 

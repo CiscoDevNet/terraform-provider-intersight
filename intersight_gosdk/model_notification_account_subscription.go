@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025062323
+API version: 1.0.11-2025071017
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,8 @@ type NotificationAccountSubscription struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The description for the subscription.
+	Description *string `json:"Description,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.\\\\- ]{1,128}$"`
 	// The name of the subscription.
 	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.-]{1,64}$"`
 	// The chosen subscription type imposes it is own validation rules. When 'email' type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. When the 'workflow' type is chosen, the actions array can contain only one entry and it is entry should  be of type notification.TriggerWorkflow notification.TriggerWorkflow; conditions can contain up to a  limited amount of entries and all of them should be of type notification.WebhookEventMoCondition. * `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. * `workflow` - Workflow type requires usage of notification.TriggerWorkflow complex types for actionsand notification.WebhookEventMoCondition complex types for conditions.
@@ -48,6 +50,8 @@ func NewNotificationAccountSubscription(classId string, objectType string) *Noti
 	this := NotificationAccountSubscription{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var conditionOperator string = "All"
+	this.ConditionOperator = &conditionOperator
 	var type_ string = "email"
 	this.Type = &type_
 	var verify string = "none"
@@ -127,6 +131,38 @@ func (o *NotificationAccountSubscription) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "notification.AccountSubscription" of the ObjectType field.
 func (o *NotificationAccountSubscription) GetDefaultObjectType() interface{} {
 	return "notification.AccountSubscription"
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *NotificationAccountSubscription) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationAccountSubscription) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *NotificationAccountSubscription) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *NotificationAccountSubscription) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -294,6 +330,9 @@ func (o NotificationAccountSubscription) ToMap() (map[string]interface{}, error)
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
+		toSerialize["Description"] = o.Description
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -361,6 +400,8 @@ func (o *NotificationAccountSubscription) UnmarshalJSON(data []byte) (err error)
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The description for the subscription.
+		Description *string `json:"Description,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.\\\\- ]{1,128}$"`
 		// The name of the subscription.
 		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.-]{1,64}$"`
 		// The chosen subscription type imposes it is own validation rules. When 'email' type is chosen, actions array can contain only one entry and it is entry should be of can be only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition types should be unique. When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can be only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them should be of type notification.MoCondition. When the 'workflow' type is chosen, the actions array can contain only one entry and it is entry should  be of type notification.TriggerWorkflow notification.TriggerWorkflow; conditions can contain up to a  limited amount of entries and all of them should be of type notification.WebhookEventMoCondition. * `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions. * `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. * `workflow` - Workflow type requires usage of notification.TriggerWorkflow complex types for actionsand notification.WebhookEventMoCondition complex types for conditions.
@@ -377,6 +418,7 @@ func (o *NotificationAccountSubscription) UnmarshalJSON(data []byte) (err error)
 		varNotificationAccountSubscription := _NotificationAccountSubscription{}
 		varNotificationAccountSubscription.ClassId = varNotificationAccountSubscriptionWithoutEmbeddedStruct.ClassId
 		varNotificationAccountSubscription.ObjectType = varNotificationAccountSubscriptionWithoutEmbeddedStruct.ObjectType
+		varNotificationAccountSubscription.Description = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Description
 		varNotificationAccountSubscription.Name = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Name
 		varNotificationAccountSubscription.Type = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Type
 		varNotificationAccountSubscription.Verify = varNotificationAccountSubscriptionWithoutEmbeddedStruct.Verify
@@ -400,6 +442,7 @@ func (o *NotificationAccountSubscription) UnmarshalJSON(data []byte) (err error)
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Verify")

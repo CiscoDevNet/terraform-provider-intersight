@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "notification.AccountSubscription"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "notification.AccountSubscription"]
 **Actions** | Pointer to [**[]NotificationAction**](NotificationAction.md) |  | [optional] 
+**ConditionOperator** | Pointer to **string** | Operation that binds all the different conditions together. * &#x60;All&#x60; - All is an AND condition applied against the individual conditions. * &#x60;Any&#x60; - Any is an OR condition applied against the individual conditions. | [optional] [default to "All"]
 **Conditions** | Pointer to [**[]NotificationAbstractCondition**](NotificationAbstractCondition.md) |  | [optional] 
 **Enabled** | Pointer to **bool** | Subscription can be switched on/off without necessity to change the subscription settings: notification methods, conditions, etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
 
@@ -104,6 +105,31 @@ HasActions returns a boolean if a field has been set.
 `func (o *NotificationSubscription) UnsetActions()`
 
 UnsetActions ensures that no value is present for Actions, not even an explicit nil
+### GetConditionOperator
+
+`func (o *NotificationSubscription) GetConditionOperator() string`
+
+GetConditionOperator returns the ConditionOperator field if non-nil, zero value otherwise.
+
+### GetConditionOperatorOk
+
+`func (o *NotificationSubscription) GetConditionOperatorOk() (*string, bool)`
+
+GetConditionOperatorOk returns a tuple with the ConditionOperator field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConditionOperator
+
+`func (o *NotificationSubscription) SetConditionOperator(v string)`
+
+SetConditionOperator sets ConditionOperator field to given value.
+
+### HasConditionOperator
+
+`func (o *NotificationSubscription) HasConditionOperator() bool`
+
+HasConditionOperator returns a boolean if a field has been set.
+
 ### GetConditions
 
 `func (o *NotificationSubscription) GetConditions() []NotificationAbstractCondition`

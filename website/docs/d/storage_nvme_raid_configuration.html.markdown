@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `controller_dn`:(string) The storage controller Dn Name for which Nvme RAID is created at endpoint. 
 * `controller_moid`:(string) The storage controller Moid for which Nvme RAID creation is supported. 
+* `controller_series`:(string) Describes series of the installed controller. This will be used in the activation step after reboot to calculate the different parameters w.r.t specific controller series. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 

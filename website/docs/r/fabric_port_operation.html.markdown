@@ -23,7 +23,7 @@ resource "intersight_fabric_port_operation" "fabric_port_operation1" {
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
-* `admin_action`:(string) An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.* `None` - No admin triggered action.* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration. 
+* `admin_action`:(string) An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.* `None` - No admin triggered action.* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.* `SetUserLabel` - Admin triggered operation to set the user label on the port. 
 * `admin_state`:(string) Admin configured state to disable the port.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
 * `aggregate_port_id`:(int) Breakout port Identifier of the Switch Interface.When a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.When a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,e.g. the id of the port on the switch. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
@@ -62,6 +62,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `user_label`:(string) The user defined label assigned to the a Port. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

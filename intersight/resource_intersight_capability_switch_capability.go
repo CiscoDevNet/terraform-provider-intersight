@@ -1292,6 +1292,14 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 					},
 				},
 			},
+			"un_supported_equipment_model": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"unified_ports": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -2244,6 +2252,19 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("un_supported_equipment_model"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetUnSupportedEquipmentModel(x)
+		}
+	}
+
 	if v, ok := d.GetOk("unified_ports"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
@@ -2527,6 +2548,10 @@ func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in CapabilitySwitchCapability object: %s", err.Error())
+	}
+
+	if err := d.Set("un_supported_equipment_model", (s.GetUnSupportedEquipmentModel())); err != nil {
+		return diag.Errorf("error occurred while setting property UnSupportedEquipmentModel in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("unified_ports", flattenListCapabilityPortRange(s.GetUnifiedPorts(), d)); err != nil {
@@ -3266,6 +3291,18 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("un_supported_equipment_model") {
+		v := d.Get("un_supported_equipment_model")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnSupportedEquipmentModel(x)
 	}
 
 	if d.HasChange("unified_ports") {

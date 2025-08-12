@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **PcId** | Pointer to **int64** | Unique Identifier of the port-channel, local to this switch. | [optional] 
 **Ports** | Pointer to [**[]FabricPortIdentifier**](FabricPortIdentifier.md) |  | [optional] 
+**UserLabel** | Pointer to **string** | The user defined label assigned to the a Port. | [optional] 
 **PortPolicy** | Pointer to [**NullableFabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
 
 ## Methods
@@ -129,6 +130,31 @@ HasPorts returns a boolean if a field has been set.
 `func (o *FabricPortChannelRole) UnsetPorts()`
 
 UnsetPorts ensures that no value is present for Ports, not even an explicit nil
+### GetUserLabel
+
+`func (o *FabricPortChannelRole) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *FabricPortChannelRole) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *FabricPortChannelRole) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *FabricPortChannelRole) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
+
 ### GetPortPolicy
 
 `func (o *FabricPortChannelRole) GetPortPolicy() FabricPortPolicyRelationship`

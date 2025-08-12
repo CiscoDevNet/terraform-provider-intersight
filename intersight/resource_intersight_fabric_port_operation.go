@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -41,9 +42,9 @@ func resourceFabricPortOperation() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_action": {
-				Description:  "An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.",
+				Description:  "An operation that has to be perfomed on the switch or IOM port. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `ResetServerPortConfiguration` - Admin triggered operation to reset the server port to its original configuration.\n* `SetUserLabel` - Admin triggered operation to set the user label on the port.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "ResetServerPortConfiguration"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"None", "ResetServerPortConfiguration", "SetUserLabel"}, false),
 				Optional:     true,
 				Default:      "None",
 			},
@@ -348,6 +349,12 @@ func resourceFabricPortOperation() *schema.Resource {
 					},
 				},
 			},
+			"user_label": {
+				Description:  "The user defined label assigned to the a Port.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 127)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -640,6 +647,11 @@ func resourceFabricPortOperationCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricPortOperation(conn.ctx).FabricPortOperation(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -776,6 +788,10 @@ func resourceFabricPortOperationRead(c context.Context, d *schema.ResourceData, 
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricPortOperation object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in FabricPortOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -931,6 +947,12 @@ func resourceFabricPortOperationUpdate(c context.Context, d *schema.ResourceData
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricPortOperation(conn.ctx, d.Id()).FabricPortOperation(*o)

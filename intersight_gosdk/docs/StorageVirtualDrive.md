@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **IoPolicy** | Pointer to **string** | The Input/Output Policy defined on the Virtual drive. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the Virtual drive. | [optional] [readonly] 
 **NumBlocks** | Pointer to **string** | Number of Blocks on the Physical Disk. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The current operational state of Virtual drive. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The current operability state of Virtual drive. | [optional] [readonly] 
 **PhysicalBlockSize** | Pointer to **string** | The block size of the the virtual drive. | [optional] [readonly] 
@@ -449,6 +450,41 @@ SetNumBlocks sets NumBlocks field to given value.
 
 HasNumBlocks returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *StorageVirtualDrive) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *StorageVirtualDrive) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *StorageVirtualDrive) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *StorageVirtualDrive) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *StorageVirtualDrive) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *StorageVirtualDrive) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *StorageVirtualDrive) GetOperState() string`

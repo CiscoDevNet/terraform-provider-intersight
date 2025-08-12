@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `mac_address`:(string) MAC address of an External Ethernet Interface. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `network_type`:(string) Type of network connection or configuration that adapter is using. 
 * `oper_state`:(string) Operational state of an Interface. 
 * `peer_aggr_port_id`:(int) Peer Aggregate Port Id attached to an External Ethernet Interface. 
 * `peer_dn`:(string) DN of peer end-point attached to an External Ethernet Interface. 

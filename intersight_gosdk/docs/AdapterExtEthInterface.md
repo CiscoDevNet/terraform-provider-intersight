@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ExtEthInterfaceId** | Pointer to **string** | Unique Identifier for an External Ethernet Interface within the adapter object. | [optional] [readonly] 
 **InterfaceType** | Pointer to **string** | Type of an External Ethernet Interface. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | MAC address of an External Ethernet Interface. | [optional] [readonly] 
+**NetworkType** | Pointer to **string** | Type of network connection or configuration that adapter is using. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **PeerAggrPortId** | Pointer to **int64** | Peer Aggregate Port Id attached to an External Ethernet Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | DN of peer end-point attached to an External Ethernet Interface. | [optional] [readonly] 
@@ -204,6 +205,31 @@ SetMacAddress sets MacAddress field to given value.
 `func (o *AdapterExtEthInterface) HasMacAddress() bool`
 
 HasMacAddress returns a boolean if a field has been set.
+
+### GetNetworkType
+
+`func (o *AdapterExtEthInterface) GetNetworkType() string`
+
+GetNetworkType returns the NetworkType field if non-nil, zero value otherwise.
+
+### GetNetworkTypeOk
+
+`func (o *AdapterExtEthInterface) GetNetworkTypeOk() (*string, bool)`
+
+GetNetworkTypeOk returns a tuple with the NetworkType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkType
+
+`func (o *AdapterExtEthInterface) SetNetworkType(v string)`
+
+SetNetworkType sets NetworkType field to given value.
+
+### HasNetworkType
+
+`func (o *AdapterExtEthInterface) HasNetworkType() bool`
+
+HasNetworkType returns a boolean if a field has been set.
 
 ### GetOperReason
 

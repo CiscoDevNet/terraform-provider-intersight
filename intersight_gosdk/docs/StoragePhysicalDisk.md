@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **NumBlocks** | Pointer to **string** | The number of blocks present on the physical disk. | [optional] [readonly] 
 **OperPowerState** | Pointer to **string** | Operational power of the physical disk. | [optional] [readonly] 
 **OperQualifierReason** | Pointer to **string** | For certain states, indicates the reason why the operState is in that state. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **Operability** | Pointer to **string** | This field identifies the disk operability of the disk. | [optional] [readonly] 
 **OperatingTemperature** | Pointer to **int64** | Operating temperature of drive in Celsius. | [optional] 
 **PartNumber** | Pointer to **string** | This field displays the part number of the physical disk. | [optional] [readonly] 
@@ -802,6 +803,41 @@ SetOperQualifierReason sets OperQualifierReason field to given value.
 
 HasOperQualifierReason returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *StoragePhysicalDisk) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *StoragePhysicalDisk) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *StoragePhysicalDisk) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *StoragePhysicalDisk) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *StoragePhysicalDisk) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *StoragePhysicalDisk) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperability
 
 `func (o *StoragePhysicalDisk) GetOperability() string`

@@ -25,4 +25,5 @@ The following arguments can be used to get data of already created objects in In
 * `pc_id`:(int) Unique Identifier of the port-channel, local to this switch. 
 * `priority`:(string) The 'name' of the System QoS Class.* `Best Effort` - QoS Priority for Best-effort traffic.* `FC` - QoS Priority for FC traffic.* `Platinum` - QoS Priority for Platinum traffic.* `Gold` - QoS Priority for Gold traffic.* `Silver` - QoS Priority for Silver traffic.* `Bronze` - QoS Priority for Bronze traffic. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `user_label`:(string) The user defined label assigned to the a Port. 
  

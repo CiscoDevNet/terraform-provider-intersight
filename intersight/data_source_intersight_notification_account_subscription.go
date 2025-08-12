@@ -123,6 +123,11 @@ func getNotificationAccountSubscriptionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"condition_operator": {
+			Description: "Operation that binds all the different conditions together.\n* `All` - All is an AND condition applied against the individual conditions.\n* `Any` - Any is an OR condition applied against the individual conditions.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"conditions": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -148,6 +153,11 @@ func getNotificationAccountSubscriptionSchema() map[string]*schema.Schema {
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"description": {
+			Description: "The description for the subscription.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -558,6 +568,11 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("condition_operator"); ok {
+		x := (v.(string))
+		o.SetConditionOperator(x)
+	}
+
 	if v, ok := d.GetOk("conditions"); ok {
 		x := make([]models.NotificationAbstractCondition, 0)
 		s := v.([]interface{})
@@ -589,6 +604,11 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -881,10 +901,12 @@ func dataSourceNotificationAccountSubscriptionRead(c context.Context, d *schema.
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["condition_operator"] = (s.GetConditionOperator())
 
 				temp["conditions"] = flattenListNotificationAbstractCondition(s.GetConditions(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["enabled"] = (s.GetEnabled())
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NvmeRaidConfiguration"]
 **ControllerDn** | Pointer to **string** | The storage controller Dn Name for which Nvme RAID is created at endpoint. | [optional] [readonly] 
 **ControllerMoid** | Pointer to **string** | The storage controller Moid for which Nvme RAID creation is supported. | [optional] [readonly] 
+**ControllerSeries** | Pointer to **string** | Describes series of the installed controller. This will be used in the activation step after reboot to calculate the different parameters w.r.t specific controller series. | [optional] [readonly] 
 **DiskStates** | Pointer to [**[]StorageNvmePhysicalDiskState**](StorageNvmePhysicalDiskState.md) |  | [optional] 
 **DriveGroups** | Pointer to [**[]StorageNvmeRaidDriveGroup**](StorageNvmeRaidDriveGroup.md) |  | [optional] 
 **ServerProfile** | Pointer to [**NullableServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
@@ -121,6 +122,31 @@ SetControllerMoid sets ControllerMoid field to given value.
 `func (o *StorageNvmeRaidConfiguration) HasControllerMoid() bool`
 
 HasControllerMoid returns a boolean if a field has been set.
+
+### GetControllerSeries
+
+`func (o *StorageNvmeRaidConfiguration) GetControllerSeries() string`
+
+GetControllerSeries returns the ControllerSeries field if non-nil, zero value otherwise.
+
+### GetControllerSeriesOk
+
+`func (o *StorageNvmeRaidConfiguration) GetControllerSeriesOk() (*string, bool)`
+
+GetControllerSeriesOk returns a tuple with the ControllerSeries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetControllerSeries
+
+`func (o *StorageNvmeRaidConfiguration) SetControllerSeries(v string)`
+
+SetControllerSeries sets ControllerSeries field to given value.
+
+### HasControllerSeries
+
+`func (o *StorageNvmeRaidConfiguration) HasControllerSeries() bool`
+
+HasControllerSeries returns a boolean if a field has been set.
 
 ### GetDiskStates
 

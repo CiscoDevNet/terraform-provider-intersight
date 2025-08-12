@@ -26,6 +26,11 @@ func getFabricPcOperationSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_action": {
+			Description: "An operation that has to be perfomed on the port channel. Default value is None which means there will be no implicit port operation triggered.\n* `None` - No admin triggered action.\n* `SetUserLabel` - Admin triggered operation to set the user label on the port channel.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"admin_state": {
 			Description: "Admin configured state to disable the port channel.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
 			Type:        schema.TypeString,
@@ -242,6 +247,11 @@ func getFabricPcOperationSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"user_label": {
+			Description: "The user defined label assigned to the a Port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -389,6 +399,11 @@ func dataSourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, 
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOk("admin_action"); ok {
+		x := (v.(string))
+		o.SetAdminAction(x)
 	}
 
 	if v, ok := d.GetOk("admin_state"); ok {
@@ -651,6 +666,11 @@ func dataSourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, 
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -762,6 +782,7 @@ func dataSourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, 
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_action"] = (s.GetAdminAction())
 				temp["admin_state"] = (s.GetAdminState())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -785,6 +806,7 @@ func dataSourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, 
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_label"] = (s.GetUserLabel())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricPcOperationResults = append(fabricPcOperationResults, temp)

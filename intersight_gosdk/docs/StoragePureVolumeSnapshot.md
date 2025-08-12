@@ -6,7 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureVolumeSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureVolumeSnapshot"]
+**Pod** | Pointer to **string** | A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Unique serial number of the snapshot allocated by the storage array. | [optional] [readonly] 
+**SnapshotSize** | Pointer to **int64** | The size of the snapshot created. | [optional] [readonly] 
+**TotalProvisioned** | Pointer to **int64** | The overall size of the snapshot allocated by the storage array. | [optional] [readonly] 
+**UsedProvisioned** | Pointer to **int64** | The used size of the snapshot allocated by the storage array. | [optional] [readonly] 
+**VolumeGroup** | Pointer to **string** | Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **ProtectionGroupSnapshot** | Pointer to [**NullableStoragePureProtectionGroupSnapshotRelationship**](StoragePureProtectionGroupSnapshotRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -71,6 +76,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetPod
+
+`func (o *StoragePureVolumeSnapshot) GetPod() string`
+
+GetPod returns the Pod field if non-nil, zero value otherwise.
+
+### GetPodOk
+
+`func (o *StoragePureVolumeSnapshot) GetPodOk() (*string, bool)`
+
+GetPodOk returns a tuple with the Pod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPod
+
+`func (o *StoragePureVolumeSnapshot) SetPod(v string)`
+
+SetPod sets Pod field to given value.
+
+### HasPod
+
+`func (o *StoragePureVolumeSnapshot) HasPod() bool`
+
+HasPod returns a boolean if a field has been set.
+
 ### GetSerial
 
 `func (o *StoragePureVolumeSnapshot) GetSerial() string`
@@ -95,6 +125,106 @@ SetSerial sets Serial field to given value.
 `func (o *StoragePureVolumeSnapshot) HasSerial() bool`
 
 HasSerial returns a boolean if a field has been set.
+
+### GetSnapshotSize
+
+`func (o *StoragePureVolumeSnapshot) GetSnapshotSize() int64`
+
+GetSnapshotSize returns the SnapshotSize field if non-nil, zero value otherwise.
+
+### GetSnapshotSizeOk
+
+`func (o *StoragePureVolumeSnapshot) GetSnapshotSizeOk() (*int64, bool)`
+
+GetSnapshotSizeOk returns a tuple with the SnapshotSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotSize
+
+`func (o *StoragePureVolumeSnapshot) SetSnapshotSize(v int64)`
+
+SetSnapshotSize sets SnapshotSize field to given value.
+
+### HasSnapshotSize
+
+`func (o *StoragePureVolumeSnapshot) HasSnapshotSize() bool`
+
+HasSnapshotSize returns a boolean if a field has been set.
+
+### GetTotalProvisioned
+
+`func (o *StoragePureVolumeSnapshot) GetTotalProvisioned() int64`
+
+GetTotalProvisioned returns the TotalProvisioned field if non-nil, zero value otherwise.
+
+### GetTotalProvisionedOk
+
+`func (o *StoragePureVolumeSnapshot) GetTotalProvisionedOk() (*int64, bool)`
+
+GetTotalProvisionedOk returns a tuple with the TotalProvisioned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalProvisioned
+
+`func (o *StoragePureVolumeSnapshot) SetTotalProvisioned(v int64)`
+
+SetTotalProvisioned sets TotalProvisioned field to given value.
+
+### HasTotalProvisioned
+
+`func (o *StoragePureVolumeSnapshot) HasTotalProvisioned() bool`
+
+HasTotalProvisioned returns a boolean if a field has been set.
+
+### GetUsedProvisioned
+
+`func (o *StoragePureVolumeSnapshot) GetUsedProvisioned() int64`
+
+GetUsedProvisioned returns the UsedProvisioned field if non-nil, zero value otherwise.
+
+### GetUsedProvisionedOk
+
+`func (o *StoragePureVolumeSnapshot) GetUsedProvisionedOk() (*int64, bool)`
+
+GetUsedProvisionedOk returns a tuple with the UsedProvisioned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedProvisioned
+
+`func (o *StoragePureVolumeSnapshot) SetUsedProvisioned(v int64)`
+
+SetUsedProvisioned sets UsedProvisioned field to given value.
+
+### HasUsedProvisioned
+
+`func (o *StoragePureVolumeSnapshot) HasUsedProvisioned() bool`
+
+HasUsedProvisioned returns a boolean if a field has been set.
+
+### GetVolumeGroup
+
+`func (o *StoragePureVolumeSnapshot) GetVolumeGroup() string`
+
+GetVolumeGroup returns the VolumeGroup field if non-nil, zero value otherwise.
+
+### GetVolumeGroupOk
+
+`func (o *StoragePureVolumeSnapshot) GetVolumeGroupOk() (*string, bool)`
+
+GetVolumeGroupOk returns a tuple with the VolumeGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeGroup
+
+`func (o *StoragePureVolumeSnapshot) SetVolumeGroup(v string)`
+
+SetVolumeGroup sets VolumeGroup field to given value.
+
+### HasVolumeGroup
+
+`func (o *StoragePureVolumeSnapshot) HasVolumeGroup() bool`
+
+HasVolumeGroup returns a boolean if a field has been set.
 
 ### GetArray
 

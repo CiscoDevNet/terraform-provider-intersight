@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **PsuType** | Pointer to **string** | This field identifies the type of the Power Supply. | [optional] [readonly] 
 **PsuWattage** | Pointer to **string** | This field identifies the Wattage of the Power Supply. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Power Supply. | [optional] [readonly] 
+**SpareStatus** | Pointer to **string** | This field identifies whether the power supply unit is spare or not. * &#x60;&#x60; - Spare status for power supply unit is not applicable or not available. * &#x60;Spare&#x60; - Power supply unit is spare. * &#x60;Not Spare&#x60; - Power supply unit is not spare. | [optional] [readonly] [default to ""]
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Power Supply Unit. | [optional] [readonly] 
 **Voltage** | Pointer to **string** | This field is used to indicate the voltage state for this Power Supply. | [optional] [readonly] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
@@ -396,6 +397,31 @@ SetSku sets Sku field to given value.
 `func (o *EquipmentPsu) HasSku() bool`
 
 HasSku returns a boolean if a field has been set.
+
+### GetSpareStatus
+
+`func (o *EquipmentPsu) GetSpareStatus() string`
+
+GetSpareStatus returns the SpareStatus field if non-nil, zero value otherwise.
+
+### GetSpareStatusOk
+
+`func (o *EquipmentPsu) GetSpareStatusOk() (*string, bool)`
+
+GetSpareStatusOk returns a tuple with the SpareStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpareStatus
+
+`func (o *EquipmentPsu) SetSpareStatus(v string)`
+
+SetSpareStatus sets SpareStatus field to given value.
+
+### HasSpareStatus
+
+`func (o *EquipmentPsu) HasSpareStatus() bool`
+
+HasSpareStatus returns a boolean if a field has been set.
 
 ### GetVid
 

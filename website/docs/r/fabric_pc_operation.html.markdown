@@ -22,6 +22,7 @@ resource "intersight_fabric_pc_operation" "fabric_pc_operation1" {
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `admin_action`:(string) An operation that has to be perfomed on the port channel. Default value is None which means there will be no implicit port operation triggered.* `None` - No admin triggered action.* `SetUserLabel` - Admin triggered operation to set the user label on the port channel. 
 * `admin_state`:(string) Admin configured state to disable the port channel.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
@@ -56,6 +57,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `user_label`:(string) The user defined label assigned to the a Port. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

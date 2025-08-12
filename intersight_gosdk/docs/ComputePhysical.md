@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AssetTag** | Pointer to **string** | The user defined asset tag assigned to the server. | [optional] [readonly] 
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
+**BmcInventoryReady** | Pointer to **bool** | The BMC inventory readiness status of the server. | [optional] 
 **CoolingMode** | Pointer to **string** | Cooling mode representation of the server. * &#x60;Air&#x60; - Cooling mode of the device is set to Air. * &#x60;Immersion&#x60; - Cooling mode of the device is set to Immersion. | [optional] [readonly] [default to "Air"]
 **CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
 **DimmBlocklisting** | Pointer to **string** | The DIMM Blocklisting setting configured on the server. * &#x60;Unknown&#x60; - The configured state is unknown. * &#x60;Enabled&#x60; - The configured state is enabled. * &#x60;Disabled&#x60; - The configured state is disabled. | [optional] [readonly] [default to "Unknown"]
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
 **KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
+**LastPowerStateChangedTime** | Pointer to **string** | The Last host power state changed time of the server. | [optional] [readonly] 
 **Lifecycle** | Pointer to **string** | The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. * &#x60;SecureEraseInProgress&#x60; - Secure Erase is in progress on given physical entity. * &#x60;ScrubInProgress&#x60; - Scrub is in progress on given physical entity. * &#x60;BladeMigrationInProgress&#x60; - Server slot migration is in progress on given physical entity. * &#x60;SlotMismatch&#x60; - The blade server is detected in a different chassis/slot than it was previously. * &#x60;Removed&#x60; - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * &#x60;Moved&#x60; - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * &#x60;Replaced&#x60; - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * &#x60;MovedAndReplaced&#x60; - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade. | [optional] [readonly] [default to "None"]
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
@@ -250,6 +252,31 @@ SetBiosPostComplete sets BiosPostComplete field to given value.
 `func (o *ComputePhysical) HasBiosPostComplete() bool`
 
 HasBiosPostComplete returns a boolean if a field has been set.
+
+### GetBmcInventoryReady
+
+`func (o *ComputePhysical) GetBmcInventoryReady() bool`
+
+GetBmcInventoryReady returns the BmcInventoryReady field if non-nil, zero value otherwise.
+
+### GetBmcInventoryReadyOk
+
+`func (o *ComputePhysical) GetBmcInventoryReadyOk() (*bool, bool)`
+
+GetBmcInventoryReadyOk returns a tuple with the BmcInventoryReady field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBmcInventoryReady
+
+`func (o *ComputePhysical) SetBmcInventoryReady(v bool)`
+
+SetBmcInventoryReady sets BmcInventoryReady field to given value.
+
+### HasBmcInventoryReady
+
+`func (o *ComputePhysical) HasBmcInventoryReady() bool`
+
+HasBmcInventoryReady returns a boolean if a field has been set.
 
 ### GetCoolingMode
 
@@ -485,6 +512,31 @@ SetKvmVendor sets KvmVendor field to given value.
 `func (o *ComputePhysical) HasKvmVendor() bool`
 
 HasKvmVendor returns a boolean if a field has been set.
+
+### GetLastPowerStateChangedTime
+
+`func (o *ComputePhysical) GetLastPowerStateChangedTime() string`
+
+GetLastPowerStateChangedTime returns the LastPowerStateChangedTime field if non-nil, zero value otherwise.
+
+### GetLastPowerStateChangedTimeOk
+
+`func (o *ComputePhysical) GetLastPowerStateChangedTimeOk() (*string, bool)`
+
+GetLastPowerStateChangedTimeOk returns a tuple with the LastPowerStateChangedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastPowerStateChangedTime
+
+`func (o *ComputePhysical) SetLastPowerStateChangedTime(v string)`
+
+SetLastPowerStateChangedTime sets LastPowerStateChangedTime field to given value.
+
+### HasLastPowerStateChangedTime
+
+`func (o *ComputePhysical) HasLastPowerStateChangedTime() bool`
+
+HasLastPowerStateChangedTime returns a boolean if a field has been set.
 
 ### GetLifecycle
 

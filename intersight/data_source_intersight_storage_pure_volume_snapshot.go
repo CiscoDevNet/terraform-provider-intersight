@@ -209,6 +209,11 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"pod": {
+			Description: "A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"protection_group_name": {
 			Description: "Name of the protection group to which the snapshot belongs. Value is empty, if the snapshot is created directly on volume.",
 			Type:        schema.TypeString,
@@ -299,6 +304,11 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"snapshot_size": {
+			Description: "The size of the snapshot created.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"nr_source": {
 			Description: "Source object on which the snapshot is created. It is the name of the originating volume.",
 			Type:        schema.TypeString,
@@ -326,6 +336,16 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"total_provisioned": {
+			Description: "The overall size of the snapshot allocated by the storage array.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"used_provisioned": {
+			Description: "The used size of the snapshot allocated by the storage array.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -474,6 +494,11 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"volume_group": {
+			Description: "Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	return schemaMap
@@ -728,6 +753,11 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("pod"); ok {
+		x := (v.(string))
+		o.SetPod(x)
+	}
+
 	if v, ok := d.GetOk("protection_group_name"); ok {
 		x := (v.(string))
 		o.SetProtectionGroupName(x)
@@ -834,6 +864,11 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetSize(x)
 	}
 
+	if v, ok := d.GetOkExists("snapshot_size"); ok {
+		x := int64(v.(int))
+		o.SetSnapshotSize(x)
+	}
+
 	if v, ok := d.GetOk("nr_source"); ok {
 		x := (v.(string))
 		o.SetSource(x)
@@ -870,6 +905,16 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOkExists("total_provisioned"); ok {
+		x := int64(v.(int))
+		o.SetTotalProvisioned(x)
+	}
+
+	if v, ok := d.GetOkExists("used_provisioned"); ok {
+		x := int64(v.(int))
+		o.SetUsedProvisioned(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -989,6 +1034,11 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("volume_group"); ok {
+		x := (v.(string))
+		o.SetVolumeGroup(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of StoragePureVolumeSnapshot object failed with error : %s", err.Error())
@@ -1046,6 +1096,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pod"] = (s.GetPod())
 				temp["protection_group_name"] = (s.GetProtectionGroupName())
 
 				temp["protection_group_snapshot"] = flattenMapStoragePureProtectionGroupSnapshotRelationship(s.GetProtectionGroupSnapshot(), d)
@@ -1054,13 +1105,17 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
+				temp["snapshot_size"] = (s.GetSnapshotSize())
 				temp["nr_source"] = (s.GetSource())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_provisioned"] = (s.GetTotalProvisioned())
+				temp["used_provisioned"] = (s.GetUsedProvisioned())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["volume"] = flattenMapStoragePureVolumeRelationship(s.GetVolume(), d)
+				temp["volume_group"] = (s.GetVolumeGroup())
 				storagePureVolumeSnapshotResults = append(storagePureVolumeSnapshotResults, temp)
 			}
 		}

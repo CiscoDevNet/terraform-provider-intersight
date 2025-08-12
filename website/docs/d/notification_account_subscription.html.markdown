@@ -17,7 +17,9 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_notification_account_subscription.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `condition_operator`:(string) Operation that binds all the different conditions together.* `All` - All is an AND condition applied against the individual conditions.* `Any` - Any is an OR condition applied against the individual conditions. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) The description for the subscription. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `enabled`:(bool) Subscription can be switched on/off without necessity to change the subscriptionsettings: notification methods, conditions, etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string) The time when this managed object was last modified. 

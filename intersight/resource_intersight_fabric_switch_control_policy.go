@@ -182,7 +182,7 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 						"mac_aging_time": {
 							Description:  "Define the MAC address aging time in seconds. This field is valid when the \"Custom\" MAC address aging option is selected.",
 							Type:         schema.TypeInt,
-							ValidateFunc: validation.IntBetween(1, 1000000),
+							ValidateFunc: validation.IntBetween(120, 918000),
 							Optional:     true,
 							Default:      14500,
 						},

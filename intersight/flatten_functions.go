@@ -7129,6 +7129,18 @@ func flattenListPciNodeRelationship(p []models.PciNodeRelationship, d *schema.Re
 	}
 	return pcinoderelationships
 }
+func flattenListPciSlotRelationship(p []models.PciSlotRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var pcislotrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		pcislotrelationship := flattenMoMoRef(item)
+		pcislotrelationships = append(pcislotrelationships, pcislotrelationship)
+	}
+	return pcislotrelationships
+}
 func flattenListPciSwitchRelationship(p []models.PciSwitchRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var pciswitchrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -8540,6 +8552,30 @@ func flattenListStoragePhysicalDiskUsageRelationship(p []models.StoragePhysicalD
 	}
 	return storagephysicaldiskusagerelationships
 }
+func flattenListStoragePureDirectoryExportRelationship(p []models.StoragePureDirectoryExportRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepuredirectoryexportrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepuredirectoryexportrelationship := flattenMoMoRef(item)
+		storagepuredirectoryexportrelationships = append(storagepuredirectoryexportrelationships, storagepuredirectoryexportrelationship)
+	}
+	return storagepuredirectoryexportrelationships
+}
+func flattenListStoragePureDirectoryQuotaRelationship(p []models.StoragePureDirectoryQuotaRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepuredirectoryquotarelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepuredirectoryquotarelationship := flattenMoMoRef(item)
+		storagepuredirectoryquotarelationships = append(storagepuredirectoryquotarelationships, storagepuredirectoryquotarelationship)
+	}
+	return storagepuredirectoryquotarelationships
+}
 func flattenListStoragePureHostRelationship(p []models.StoragePureHostRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagepurehostrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -8564,6 +8600,30 @@ func flattenListStoragePureHostGroupRelationship(p []models.StoragePureHostGroup
 	}
 	return storagepurehostgrouprelationships
 }
+func flattenListStoragePureNfsPolicyRuleRelationship(p []models.StoragePureNfsPolicyRuleRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurenfspolicyrulerelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepurenfspolicyrulerelationship := flattenMoMoRef(item)
+		storagepurenfspolicyrulerelationships = append(storagepurenfspolicyrulerelationships, storagepurenfspolicyrulerelationship)
+	}
+	return storagepurenfspolicyrulerelationships
+}
+func flattenListStoragePureQuotaPolicyRuleRelationship(p []models.StoragePureQuotaPolicyRuleRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurequotapolicyrulerelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepurequotapolicyrulerelationship := flattenMoMoRef(item)
+		storagepurequotapolicyrulerelationships = append(storagepurequotapolicyrulerelationships, storagepurequotapolicyrulerelationship)
+	}
+	return storagepurequotapolicyrulerelationships
+}
 func flattenListStoragePureReplicationBlackout(p []models.StoragePureReplicationBlackout, d *schema.ResourceData) []map[string]interface{} {
 	var storagepurereplicationblackouts []map[string]interface{}
 	if len(p) == 0 {
@@ -8579,6 +8639,18 @@ func flattenListStoragePureReplicationBlackout(p []models.StoragePureReplication
 		storagepurereplicationblackouts = append(storagepurereplicationblackouts, storagepurereplicationblackout)
 	}
 	return storagepurereplicationblackouts
+}
+func flattenListStoragePureSmbPolicyRuleRelationship(p []models.StoragePureSmbPolicyRuleRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepuresmbpolicyrulerelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepuresmbpolicyrulerelationship := flattenMoMoRef(item)
+		storagepuresmbpolicyrulerelationships = append(storagepuresmbpolicyrulerelationships, storagepuresmbpolicyrulerelationship)
+	}
+	return storagepuresmbpolicyrulerelationships
 }
 func flattenListStoragePureVolumeRelationship(p []models.StoragePureVolumeRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagepurevolumerelationships []map[string]interface{}
@@ -9320,7 +9392,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		input_definition_x, _ := d.GetOk("input_definition")
+		attribute_definition_x, _ := d.GetOk("attribute_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -9338,7 +9410,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), input_definition_x)
+		})(item.GetDefault(), attribute_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -9356,7 +9428,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), input_definition_x)
+		})(item.GetDisplayMeta(), attribute_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -12138,6 +12210,24 @@ func flattenMapComputeServerConfig(p models.ComputeServerConfig, d *schema.Resou
 
 	computeserverconfigs = append(computeserverconfigs, computeserverconfig)
 	return computeserverconfigs
+}
+func flattenMapComputeServerPowerParametersRelationship(p models.ComputeServerPowerParametersRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var computeserverpowerparametersrelationships []map[string]interface{}
+	var ret models.ComputeServerPowerParametersRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	computeserverpowerparametersrelationship := make(map[string]interface{})
+	computeserverpowerparametersrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computeserverpowerparametersrelationship["class_id"] = item.GetClassId()
+	computeserverpowerparametersrelationship["moid"] = item.GetMoid()
+	computeserverpowerparametersrelationship["object_type"] = item.GetObjectType()
+	computeserverpowerparametersrelationship["selector"] = item.GetSelector()
+
+	computeserverpowerparametersrelationships = append(computeserverpowerparametersrelationships, computeserverpowerparametersrelationship)
+	return computeserverpowerparametersrelationships
 }
 func flattenMapComputeStorageControllerOperation(p models.ComputeStorageControllerOperation, d *schema.ResourceData) []map[string]interface{} {
 	var computestoragecontrolleroperations []map[string]interface{}
@@ -15153,7 +15243,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	data_ip_range_x, _ := d.GetOk("data_ip_range")
+	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -15169,7 +15259,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), data_ip_range_x)
+	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -22467,6 +22557,60 @@ func flattenMapStoragePureControllerRelationship(p models.StoragePureControllerR
 
 	storagepurecontrollerrelationships = append(storagepurecontrollerrelationships, storagepurecontrollerrelationship)
 	return storagepurecontrollerrelationships
+}
+func flattenMapStoragePureDirectoryRelationship(p models.StoragePureDirectoryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepuredirectoryrelationships []map[string]interface{}
+	var ret models.StoragePureDirectoryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagepuredirectoryrelationship := make(map[string]interface{})
+	storagepuredirectoryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepuredirectoryrelationship["class_id"] = item.GetClassId()
+	storagepuredirectoryrelationship["moid"] = item.GetMoid()
+	storagepuredirectoryrelationship["object_type"] = item.GetObjectType()
+	storagepuredirectoryrelationship["selector"] = item.GetSelector()
+
+	storagepuredirectoryrelationships = append(storagepuredirectoryrelationships, storagepuredirectoryrelationship)
+	return storagepuredirectoryrelationships
+}
+func flattenMapStoragePureDirectoryPolicyRelationship(p models.StoragePureDirectoryPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepuredirectorypolicyrelationships []map[string]interface{}
+	var ret models.StoragePureDirectoryPolicyRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagepuredirectorypolicyrelationship := make(map[string]interface{})
+	storagepuredirectorypolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepuredirectorypolicyrelationship["class_id"] = item.GetClassId()
+	storagepuredirectorypolicyrelationship["moid"] = item.GetMoid()
+	storagepuredirectorypolicyrelationship["object_type"] = item.GetObjectType()
+	storagepuredirectorypolicyrelationship["selector"] = item.GetSelector()
+
+	storagepuredirectorypolicyrelationships = append(storagepuredirectorypolicyrelationships, storagepuredirectorypolicyrelationship)
+	return storagepuredirectorypolicyrelationships
+}
+func flattenMapStoragePureFileSystemsRelationship(p models.StoragePureFileSystemsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurefilesystemsrelationships []map[string]interface{}
+	var ret models.StoragePureFileSystemsRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagepurefilesystemsrelationship := make(map[string]interface{})
+	storagepurefilesystemsrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepurefilesystemsrelationship["class_id"] = item.GetClassId()
+	storagepurefilesystemsrelationship["moid"] = item.GetMoid()
+	storagepurefilesystemsrelationship["object_type"] = item.GetObjectType()
+	storagepurefilesystemsrelationship["selector"] = item.GetSelector()
+
+	storagepurefilesystemsrelationships = append(storagepurefilesystemsrelationships, storagepurefilesystemsrelationship)
+	return storagepurefilesystemsrelationships
 }
 func flattenMapStoragePureHostRelationship(p models.StoragePureHostRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagepurehostrelationships []map[string]interface{}

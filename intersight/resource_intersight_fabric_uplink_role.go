@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -487,6 +488,12 @@ func resourceFabricUplinkRole() *schema.Resource {
 					},
 				},
 			},
+			"user_label": {
+				Description:  "The user defined label assigned to a Port.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 127)),
+				Optional:     true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -940,6 +947,11 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricUplinkRole(conn.ctx).FabricUplinkRole(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1080,6 +1092,10 @@ func resourceFabricUplinkRoleRead(c context.Context, d *schema.ResourceData, met
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricUplinkRole object: %s", err.Error())
+	}
+
+	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
+		return diag.Errorf("error occurred while setting property UserLabel in FabricUplinkRole object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1396,6 +1412,12 @@ func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, m
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("user_label") {
+		v := d.Get("user_label")
+		x := (v.(string))
+		o.SetUserLabel(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricUplinkRole(conn.ctx, d.Id()).FabricUplinkRole(*o)

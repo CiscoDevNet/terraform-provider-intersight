@@ -315,6 +315,11 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_reason": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"operability": {
 			Description: "This field identifies the disk operability of the disk.",
 			Type:        schema.TypeString,
@@ -1274,6 +1279,17 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetOperQualifierReason(x)
 	}
 
+	if v, ok := d.GetOk("oper_reason"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetOperReason(x)
+	}
+
 	if v, ok := d.GetOk("operability"); ok {
 		x := (v.(string))
 		o.SetOperability(x)
@@ -2009,6 +2025,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_power_state"] = (s.GetOperPowerState())
 				temp["oper_qualifier_reason"] = (s.GetOperQualifierReason())
+				temp["oper_reason"] = (s.GetOperReason())
 				temp["operability"] = (s.GetOperability())
 				temp["operating_temperature"] = (s.GetOperatingTemperature())
 				temp["owners"] = (s.GetOwners())
