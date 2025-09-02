@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.SwitchDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.SwitchDescriptor"]
 **ExpectedMemory** | Pointer to **int64** | The total expected memory for this hardware. | [optional] 
+**IsAvatarEcmc** | Pointer to **bool** | Identifies whether Switch is part of Avatar series. | [optional] [default to false]
 **IsUcsxDirectSwitch** | Pointer to **bool** | Identifies whether Switch is part of UCSX Direct chassis. | [optional] [default to false]
 **Revision** | Pointer to **string** | Revision for the fabric interconnect. | [optional] 
 
@@ -93,6 +94,31 @@ SetExpectedMemory sets ExpectedMemory field to given value.
 `func (o *CapabilitySwitchDescriptor) HasExpectedMemory() bool`
 
 HasExpectedMemory returns a boolean if a field has been set.
+
+### GetIsAvatarEcmc
+
+`func (o *CapabilitySwitchDescriptor) GetIsAvatarEcmc() bool`
+
+GetIsAvatarEcmc returns the IsAvatarEcmc field if non-nil, zero value otherwise.
+
+### GetIsAvatarEcmcOk
+
+`func (o *CapabilitySwitchDescriptor) GetIsAvatarEcmcOk() (*bool, bool)`
+
+GetIsAvatarEcmcOk returns a tuple with the IsAvatarEcmc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAvatarEcmc
+
+`func (o *CapabilitySwitchDescriptor) SetIsAvatarEcmc(v bool)`
+
+SetIsAvatarEcmc sets IsAvatarEcmc field to given value.
+
+### HasIsAvatarEcmc
+
+`func (o *CapabilitySwitchDescriptor) HasIsAvatarEcmc() bool`
+
+HasIsAvatarEcmc returns a boolean if a field has been set.
 
 ### GetIsUcsxDirectSwitch
 

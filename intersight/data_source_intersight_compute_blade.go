@@ -565,6 +565,11 @@ func getComputeBladeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"boot_last_state": {
+			Description: "The boot progress state of a rack or blade server.\n* `None` - The server is powered off.\n* `OSBootStarted` - The operating system boot process has started.\n* `OSRunning` - The operating system boot process has started and running.\n* `OEM` - The server is in an OEM-defined startup state.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"boot_nvme_devices": {
 			Description: "An array of relationships to bootNvmeDevice resources.",
 			Type:        schema.TypeList,
@@ -598,6 +603,11 @@ func getComputeBladeSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"boot_oem_last_state": {
+			Description: "The last known OEM-defined startup state of a rack or blade server.\n* `None` - The server has not yet completed OEM initialization.\n* `PlatformInitializing` - The server is initializing after being powered on.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"boot_pch_storage_devices": {
 			Description: "An array of relationships to bootPchStorageDevice resources.",
@@ -2697,6 +2707,11 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootIscsiDevices(x)
 	}
 
+	if v, ok := d.GetOk("boot_last_state"); ok {
+		x := (v.(string))
+		o.SetBootLastState(x)
+	}
+
 	if v, ok := d.GetOk("boot_nvme_devices"); ok {
 		x := make([]models.BootNvmeDeviceRelationship, 0)
 		s := v.([]interface{})
@@ -2735,6 +2750,11 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 			x = append(x, models.MoMoRefAsBootNvmeDeviceRelationship(o))
 		}
 		o.SetBootNvmeDevices(x)
+	}
+
+	if v, ok := d.GetOk("boot_oem_last_state"); ok {
+		x := (v.(string))
+		o.SetBootOemLastState(x)
 	}
 
 	if v, ok := d.GetOk("boot_pch_storage_devices"); ok {
@@ -4399,8 +4419,10 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 				temp["boot_hdd_devices"] = flattenListBootHddDeviceRelationship(s.GetBootHddDevices(), d)
 
 				temp["boot_iscsi_devices"] = flattenListBootIscsiDeviceRelationship(s.GetBootIscsiDevices(), d)
+				temp["boot_last_state"] = (s.GetBootLastState())
 
 				temp["boot_nvme_devices"] = flattenListBootNvmeDeviceRelationship(s.GetBootNvmeDevices(), d)
+				temp["boot_oem_last_state"] = (s.GetBootOemLastState())
 
 				temp["boot_pch_storage_devices"] = flattenListBootPchStorageDeviceRelationship(s.GetBootPchStorageDevices(), d)
 

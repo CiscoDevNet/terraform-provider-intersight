@@ -334,6 +334,20 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 				Default:     true,
 				ForceNew:    true,
 			},
+			"enable_pdb_fpga_upgrade": {
+				Description: "The flag to enable or disable firmware upgrade functionality for the PDB FPGA.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				ForceNew:    true,
+			},
+			"enable_psu_upgrade": {
+				Description: "The flag to enable or disable firmware upgrade functionality for the Power Supply Unit (PSU).",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				ForceNew:    true,
+			},
 			"file_server": {
 				Description: "Location of the image in user software repository.",
 				Type:        schema.TypeList,
@@ -1369,6 +1383,16 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 		o.SetEnableFabricEvacuation(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_pdb_fpga_upgrade"); ok {
+		x := (v.(bool))
+		o.SetEnablePdbFpgaUpgrade(x)
+	}
+
+	if v, ok := d.GetOkExists("enable_psu_upgrade"); ok {
+		x := (v.(bool))
+		o.SetEnablePsuUpgrade(x)
+	}
+
 	if v, ok := d.GetOk("file_server"); ok {
 		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
@@ -1818,6 +1842,14 @@ func resourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("enable_fabric_evacuation", (s.GetEnableFabricEvacuation())); err != nil {
 		return diag.Errorf("error occurred while setting property EnableFabricEvacuation in FirmwareSwitchUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("enable_pdb_fpga_upgrade", (s.GetEnablePdbFpgaUpgrade())); err != nil {
+		return diag.Errorf("error occurred while setting property EnablePdbFpgaUpgrade in FirmwareSwitchUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("enable_psu_upgrade", (s.GetEnablePsuUpgrade())); err != nil {
+		return diag.Errorf("error occurred while setting property EnablePsuUpgrade in FirmwareSwitchUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("file_server", flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)); err != nil {

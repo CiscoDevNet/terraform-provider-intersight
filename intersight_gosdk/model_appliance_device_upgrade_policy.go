@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -37,9 +37,15 @@ type ApplianceDeviceUpgradePolicy struct {
 	BlackoutEndDate *time.Time `json:"BlackoutEndDate,omitempty"`
 	// Start date of the black out period. The appliance will not be upgraded during this period.
 	BlackoutStartDate *time.Time `json:"BlackoutStartDate,omitempty"`
+	// Updates requiring a reboot will start automatically once the grace period ends.
+	DisruptiveGracePeriodWeek *int64 `json:"DisruptiveGracePeriodWeek,omitempty"`
 	// Indicates if the updated metadata files should be synced immediately or at the next upgrade.
-	EnableMetaDataSync *bool                  `json:"EnableMetaDataSync,omitempty"`
-	Schedule           NullableOnpremSchedule `json:"Schedule,omitempty"`
+	EnableMetaDataSync *bool `json:"EnableMetaDataSync,omitempty"`
+	// Custom grace period for subsequent reboot and non-reboot updates.
+	IsCustomGracePeriodEnabled *bool `json:"IsCustomGracePeriodEnabled,omitempty"`
+	// Updates not requiring a reboot will start automatically once the grace period ends.
+	NondisruptiveGracePeriodWeek *int64                 `json:"NondisruptiveGracePeriodWeek,omitempty"`
+	Schedule                     NullableOnpremSchedule `json:"Schedule,omitempty"`
 	// SerialId of the Intersight Appliance. SerialId is generated when the Intersight Appliance is setup. It is a unique UUID string, and serialId will not change for the life time of the Intersight Appliance.
 	SerialId *string `json:"SerialId,omitempty"`
 	// UpgradeType is used to indicate the kink of software upload to upgrade. * `unknown` - Indicates user setting of upgrade service to unknown. * `connected` - Indicates if the upgrade service is set to upload software to latest version automatically. * `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually.
@@ -267,6 +273,38 @@ func (o *ApplianceDeviceUpgradePolicy) SetBlackoutStartDate(v time.Time) {
 	o.BlackoutStartDate = &v
 }
 
+// GetDisruptiveGracePeriodWeek returns the DisruptiveGracePeriodWeek field value if set, zero value otherwise.
+func (o *ApplianceDeviceUpgradePolicy) GetDisruptiveGracePeriodWeek() int64 {
+	if o == nil || IsNil(o.DisruptiveGracePeriodWeek) {
+		var ret int64
+		return ret
+	}
+	return *o.DisruptiveGracePeriodWeek
+}
+
+// GetDisruptiveGracePeriodWeekOk returns a tuple with the DisruptiveGracePeriodWeek field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceDeviceUpgradePolicy) GetDisruptiveGracePeriodWeekOk() (*int64, bool) {
+	if o == nil || IsNil(o.DisruptiveGracePeriodWeek) {
+		return nil, false
+	}
+	return o.DisruptiveGracePeriodWeek, true
+}
+
+// HasDisruptiveGracePeriodWeek returns a boolean if a field has been set.
+func (o *ApplianceDeviceUpgradePolicy) HasDisruptiveGracePeriodWeek() bool {
+	if o != nil && !IsNil(o.DisruptiveGracePeriodWeek) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisruptiveGracePeriodWeek gets a reference to the given int64 and assigns it to the DisruptiveGracePeriodWeek field.
+func (o *ApplianceDeviceUpgradePolicy) SetDisruptiveGracePeriodWeek(v int64) {
+	o.DisruptiveGracePeriodWeek = &v
+}
+
 // GetEnableMetaDataSync returns the EnableMetaDataSync field value if set, zero value otherwise.
 func (o *ApplianceDeviceUpgradePolicy) GetEnableMetaDataSync() bool {
 	if o == nil || IsNil(o.EnableMetaDataSync) {
@@ -297,6 +335,70 @@ func (o *ApplianceDeviceUpgradePolicy) HasEnableMetaDataSync() bool {
 // SetEnableMetaDataSync gets a reference to the given bool and assigns it to the EnableMetaDataSync field.
 func (o *ApplianceDeviceUpgradePolicy) SetEnableMetaDataSync(v bool) {
 	o.EnableMetaDataSync = &v
+}
+
+// GetIsCustomGracePeriodEnabled returns the IsCustomGracePeriodEnabled field value if set, zero value otherwise.
+func (o *ApplianceDeviceUpgradePolicy) GetIsCustomGracePeriodEnabled() bool {
+	if o == nil || IsNil(o.IsCustomGracePeriodEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsCustomGracePeriodEnabled
+}
+
+// GetIsCustomGracePeriodEnabledOk returns a tuple with the IsCustomGracePeriodEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceDeviceUpgradePolicy) GetIsCustomGracePeriodEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsCustomGracePeriodEnabled) {
+		return nil, false
+	}
+	return o.IsCustomGracePeriodEnabled, true
+}
+
+// HasIsCustomGracePeriodEnabled returns a boolean if a field has been set.
+func (o *ApplianceDeviceUpgradePolicy) HasIsCustomGracePeriodEnabled() bool {
+	if o != nil && !IsNil(o.IsCustomGracePeriodEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCustomGracePeriodEnabled gets a reference to the given bool and assigns it to the IsCustomGracePeriodEnabled field.
+func (o *ApplianceDeviceUpgradePolicy) SetIsCustomGracePeriodEnabled(v bool) {
+	o.IsCustomGracePeriodEnabled = &v
+}
+
+// GetNondisruptiveGracePeriodWeek returns the NondisruptiveGracePeriodWeek field value if set, zero value otherwise.
+func (o *ApplianceDeviceUpgradePolicy) GetNondisruptiveGracePeriodWeek() int64 {
+	if o == nil || IsNil(o.NondisruptiveGracePeriodWeek) {
+		var ret int64
+		return ret
+	}
+	return *o.NondisruptiveGracePeriodWeek
+}
+
+// GetNondisruptiveGracePeriodWeekOk returns a tuple with the NondisruptiveGracePeriodWeek field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceDeviceUpgradePolicy) GetNondisruptiveGracePeriodWeekOk() (*int64, bool) {
+	if o == nil || IsNil(o.NondisruptiveGracePeriodWeek) {
+		return nil, false
+	}
+	return o.NondisruptiveGracePeriodWeek, true
+}
+
+// HasNondisruptiveGracePeriodWeek returns a boolean if a field has been set.
+func (o *ApplianceDeviceUpgradePolicy) HasNondisruptiveGracePeriodWeek() bool {
+	if o != nil && !IsNil(o.NondisruptiveGracePeriodWeek) {
+		return true
+	}
+
+	return false
+}
+
+// SetNondisruptiveGracePeriodWeek gets a reference to the given int64 and assigns it to the NondisruptiveGracePeriodWeek field.
+func (o *ApplianceDeviceUpgradePolicy) SetNondisruptiveGracePeriodWeek(v int64) {
+	o.NondisruptiveGracePeriodWeek = &v
 }
 
 // GetSchedule returns the Schedule field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -487,8 +589,17 @@ func (o ApplianceDeviceUpgradePolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BlackoutStartDate) {
 		toSerialize["BlackoutStartDate"] = o.BlackoutStartDate
 	}
+	if !IsNil(o.DisruptiveGracePeriodWeek) {
+		toSerialize["DisruptiveGracePeriodWeek"] = o.DisruptiveGracePeriodWeek
+	}
 	if !IsNil(o.EnableMetaDataSync) {
 		toSerialize["EnableMetaDataSync"] = o.EnableMetaDataSync
+	}
+	if !IsNil(o.IsCustomGracePeriodEnabled) {
+		toSerialize["IsCustomGracePeriodEnabled"] = o.IsCustomGracePeriodEnabled
+	}
+	if !IsNil(o.NondisruptiveGracePeriodWeek) {
+		toSerialize["NondisruptiveGracePeriodWeek"] = o.NondisruptiveGracePeriodWeek
 	}
 	if o.Schedule.IsSet() {
 		toSerialize["Schedule"] = o.Schedule.Get()
@@ -565,9 +676,15 @@ func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(data []byte) (err error) {
 		BlackoutEndDate *time.Time `json:"BlackoutEndDate,omitempty"`
 		// Start date of the black out period. The appliance will not be upgraded during this period.
 		BlackoutStartDate *time.Time `json:"BlackoutStartDate,omitempty"`
+		// Updates requiring a reboot will start automatically once the grace period ends.
+		DisruptiveGracePeriodWeek *int64 `json:"DisruptiveGracePeriodWeek,omitempty"`
 		// Indicates if the updated metadata files should be synced immediately or at the next upgrade.
-		EnableMetaDataSync *bool                  `json:"EnableMetaDataSync,omitempty"`
-		Schedule           NullableOnpremSchedule `json:"Schedule,omitempty"`
+		EnableMetaDataSync *bool `json:"EnableMetaDataSync,omitempty"`
+		// Custom grace period for subsequent reboot and non-reboot updates.
+		IsCustomGracePeriodEnabled *bool `json:"IsCustomGracePeriodEnabled,omitempty"`
+		// Updates not requiring a reboot will start automatically once the grace period ends.
+		NondisruptiveGracePeriodWeek *int64                 `json:"NondisruptiveGracePeriodWeek,omitempty"`
+		Schedule                     NullableOnpremSchedule `json:"Schedule,omitempty"`
 		// SerialId of the Intersight Appliance. SerialId is generated when the Intersight Appliance is setup. It is a unique UUID string, and serialId will not change for the life time of the Intersight Appliance.
 		SerialId *string `json:"SerialId,omitempty"`
 		// UpgradeType is used to indicate the kink of software upload to upgrade. * `unknown` - Indicates user setting of upgrade service to unknown. * `connected` - Indicates if the upgrade service is set to upload software to latest version automatically. * `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually.
@@ -586,7 +703,10 @@ func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(data []byte) (err error) {
 		varApplianceDeviceUpgradePolicy.BlackoutDatesEnabled = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.BlackoutDatesEnabled
 		varApplianceDeviceUpgradePolicy.BlackoutEndDate = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.BlackoutEndDate
 		varApplianceDeviceUpgradePolicy.BlackoutStartDate = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.BlackoutStartDate
+		varApplianceDeviceUpgradePolicy.DisruptiveGracePeriodWeek = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.DisruptiveGracePeriodWeek
 		varApplianceDeviceUpgradePolicy.EnableMetaDataSync = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.EnableMetaDataSync
+		varApplianceDeviceUpgradePolicy.IsCustomGracePeriodEnabled = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.IsCustomGracePeriodEnabled
+		varApplianceDeviceUpgradePolicy.NondisruptiveGracePeriodWeek = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.NondisruptiveGracePeriodWeek
 		varApplianceDeviceUpgradePolicy.Schedule = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.Schedule
 		varApplianceDeviceUpgradePolicy.SerialId = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.SerialId
 		varApplianceDeviceUpgradePolicy.SoftwareDownloadType = varApplianceDeviceUpgradePolicyWithoutEmbeddedStruct.SoftwareDownloadType
@@ -614,7 +734,10 @@ func (o *ApplianceDeviceUpgradePolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "BlackoutDatesEnabled")
 		delete(additionalProperties, "BlackoutEndDate")
 		delete(additionalProperties, "BlackoutStartDate")
+		delete(additionalProperties, "DisruptiveGracePeriodWeek")
 		delete(additionalProperties, "EnableMetaDataSync")
+		delete(additionalProperties, "IsCustomGracePeriodEnabled")
+		delete(additionalProperties, "NondisruptiveGracePeriodWeek")
 		delete(additionalProperties, "Schedule")
 		delete(additionalProperties, "SerialId")
 		delete(additionalProperties, "SoftwareDownloadType")

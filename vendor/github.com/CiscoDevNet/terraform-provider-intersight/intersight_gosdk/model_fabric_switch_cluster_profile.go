@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,9 @@ type FabricSwitchClusterProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType         string                      `json:"ObjectType"`
+	ObjectType string `json:"ObjectType"`
+	// The support actions are -- Deploy, Unassign.
+	Action             *string                     `json:"Action,omitempty"`
 	ClusterAssignments []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
 	ConfigContext      NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 	// Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
@@ -35,8 +37,9 @@ type FabricSwitchClusterProfile struct {
 	// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
 	DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
 	// The user defined label assigned to the switch profile.
-	UserLabel    *string                                      `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
-	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	UserLabel      *string                                      `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
+	AssignedEntity NullableMoBaseMoRelationship                 `json:"AssignedEntity,omitempty"`
+	Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to fabricSwitchProfile resources.
 	SwitchProfiles       []FabricSwitchProfileRelationship `json:"SwitchProfiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -54,6 +57,10 @@ func NewFabricSwitchClusterProfile(classId string, objectType string) *FabricSwi
 	this.ObjectType = objectType
 	var type_ string = "instance"
 	this.Type = &type_
+	var targetPlatform string = "UCS Domain"
+	this.TargetPlatform = &targetPlatform
+	var action string = "No-op"
+	this.Action = &action
 	return &this
 }
 
@@ -66,6 +73,8 @@ func NewFabricSwitchClusterProfileWithDefaults() *FabricSwitchClusterProfile {
 	this.ClassId = classId
 	var objectType string = "fabric.SwitchClusterProfile"
 	this.ObjectType = objectType
+	var action string = "No-op"
+	this.Action = &action
 	return &this
 }
 
@@ -125,6 +134,38 @@ func (o *FabricSwitchClusterProfile) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "fabric.SwitchClusterProfile" of the ObjectType field.
 func (o *FabricSwitchClusterProfile) GetDefaultObjectType() interface{} {
 	return "fabric.SwitchClusterProfile"
+}
+
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *FabricSwitchClusterProfile) GetAction() string {
+	if o == nil || IsNil(o.Action) {
+		var ret string
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchClusterProfile) GetActionOk() (*string, bool) {
+	if o == nil || IsNil(o.Action) {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasAction() bool {
+	if o != nil && !IsNil(o.Action) {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given string and assigns it to the Action field.
+func (o *FabricSwitchClusterProfile) SetAction(v string) {
+	o.Action = &v
 }
 
 // GetClusterAssignments returns the ClusterAssignments field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -299,6 +340,49 @@ func (o *FabricSwitchClusterProfile) SetUserLabel(v string) {
 	o.UserLabel = &v
 }
 
+// GetAssignedEntity returns the AssignedEntity field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchClusterProfile) GetAssignedEntity() MoBaseMoRelationship {
+	if o == nil || IsNil(o.AssignedEntity.Get()) {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.AssignedEntity.Get()
+}
+
+// GetAssignedEntityOk returns a tuple with the AssignedEntity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchClusterProfile) GetAssignedEntityOk() (*MoBaseMoRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AssignedEntity.Get(), o.AssignedEntity.IsSet()
+}
+
+// HasAssignedEntity returns a boolean if a field has been set.
+func (o *FabricSwitchClusterProfile) HasAssignedEntity() bool {
+	if o != nil && o.AssignedEntity.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedEntity gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssignedEntity field.
+func (o *FabricSwitchClusterProfile) SetAssignedEntity(v MoBaseMoRelationship) {
+	o.AssignedEntity.Set(&v)
+}
+
+// SetAssignedEntityNil sets the value for AssignedEntity to be an explicit nil
+func (o *FabricSwitchClusterProfile) SetAssignedEntityNil() {
+	o.AssignedEntity.Set(nil)
+}
+
+// UnsetAssignedEntity ensures that no value is present for AssignedEntity, not even an explicit nil
+func (o *FabricSwitchClusterProfile) UnsetAssignedEntity() {
+	o.AssignedEntity.Unset()
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricSwitchClusterProfile) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || IsNil(o.Organization.Get()) {
@@ -401,6 +485,9 @@ func (o FabricSwitchClusterProfile) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
+		toSerialize["Action"] = o.Action
+	}
 	if o.ClusterAssignments != nil {
 		toSerialize["ClusterAssignments"] = o.ClusterAssignments
 	}
@@ -415,6 +502,9 @@ func (o FabricSwitchClusterProfile) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UserLabel) {
 		toSerialize["UserLabel"] = o.UserLabel
+	}
+	if o.AssignedEntity.IsSet() {
+		toSerialize["AssignedEntity"] = o.AssignedEntity.Get()
 	}
 	if o.Organization.IsSet() {
 		toSerialize["Organization"] = o.Organization.Get()
@@ -476,7 +566,9 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType         string                      `json:"ObjectType"`
+		ObjectType string `json:"ObjectType"`
+		// The support actions are -- Deploy, Unassign.
+		Action             *string                     `json:"Action,omitempty"`
 		ClusterAssignments []FabricClusterAssignment   `json:"ClusterAssignments,omitempty"`
 		ConfigContext      NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 		// Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * `None` - Switch profiles not deployed on either of the switches. * `Complete` - Both switch profiles of the cluster profile are deployed. * `Partial` - Only one of the switch profiles of the cluster profile is deployed.
@@ -484,8 +576,9 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 		// Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * `None` - Switch profiles not deployed on either of the fabric interconnects. * `A` - Switch profiles deployed only on fabric interconnect A. * `B` - Switch profiles deployed only on fabric interconnect B. * `AB` - Switch profiles deployed on both fabric interconnect A and B.
 		DeployedSwitches *string `json:"DeployedSwitches,omitempty"`
 		// The user defined label assigned to the switch profile.
-		UserLabel    *string                                      `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
-		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		UserLabel      *string                                      `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
+		AssignedEntity NullableMoBaseMoRelationship                 `json:"AssignedEntity,omitempty"`
+		Organization   NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to fabricSwitchProfile resources.
 		SwitchProfiles []FabricSwitchProfileRelationship `json:"SwitchProfiles,omitempty"`
 	}
@@ -497,11 +590,13 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchClusterProfile := _FabricSwitchClusterProfile{}
 		varFabricSwitchClusterProfile.ClassId = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClassId
 		varFabricSwitchClusterProfile.ObjectType = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ObjectType
+		varFabricSwitchClusterProfile.Action = varFabricSwitchClusterProfileWithoutEmbeddedStruct.Action
 		varFabricSwitchClusterProfile.ClusterAssignments = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ClusterAssignments
 		varFabricSwitchClusterProfile.ConfigContext = varFabricSwitchClusterProfileWithoutEmbeddedStruct.ConfigContext
 		varFabricSwitchClusterProfile.DeployStatus = varFabricSwitchClusterProfileWithoutEmbeddedStruct.DeployStatus
 		varFabricSwitchClusterProfile.DeployedSwitches = varFabricSwitchClusterProfileWithoutEmbeddedStruct.DeployedSwitches
 		varFabricSwitchClusterProfile.UserLabel = varFabricSwitchClusterProfileWithoutEmbeddedStruct.UserLabel
+		varFabricSwitchClusterProfile.AssignedEntity = varFabricSwitchClusterProfileWithoutEmbeddedStruct.AssignedEntity
 		varFabricSwitchClusterProfile.Organization = varFabricSwitchClusterProfileWithoutEmbeddedStruct.Organization
 		varFabricSwitchClusterProfile.SwitchProfiles = varFabricSwitchClusterProfileWithoutEmbeddedStruct.SwitchProfiles
 		*o = FabricSwitchClusterProfile(varFabricSwitchClusterProfile)
@@ -523,11 +618,13 @@ func (o *FabricSwitchClusterProfile) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Action")
 		delete(additionalProperties, "ClusterAssignments")
 		delete(additionalProperties, "ConfigContext")
 		delete(additionalProperties, "DeployStatus")
 		delete(additionalProperties, "DeployedSwitches")
 		delete(additionalProperties, "UserLabel")
+		delete(additionalProperties, "AssignedEntity")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "SwitchProfiles")
 

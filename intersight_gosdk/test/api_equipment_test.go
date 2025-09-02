@@ -37,6 +37,32 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService GetEquipmentChassisControllerByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentChassisControllerByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentChassisControllerList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentChassisControllerList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService GetEquipmentChassisIdPoolByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -895,6 +921,20 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService PatchEquipmentChassisController", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.PatchEquipmentChassisController(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService PatchEquipmentChassisIdentity", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1252,6 +1292,20 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.EquipmentApi.UpdateEquipmentChassis(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService UpdateEquipmentChassisController", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.UpdateEquipmentChassisController(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

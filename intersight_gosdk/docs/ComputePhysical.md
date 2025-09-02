@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
 **BmcInventoryReady** | Pointer to **bool** | The BMC inventory readiness status of the server. | [optional] 
+**BootLastState** | Pointer to **string** | The boot progress state of a rack or blade server. * &#x60;None&#x60; - The server is powered off. * &#x60;OSBootStarted&#x60; - The operating system boot process has started. * &#x60;OSRunning&#x60; - The operating system boot process has started and running. * &#x60;OEM&#x60; - The server is in an OEM-defined startup state. | [optional] [readonly] [default to "None"]
+**BootOemLastState** | Pointer to **string** | The last known OEM-defined startup state of a rack or blade server. * &#x60;None&#x60; - The server has not yet completed OEM initialization. * &#x60;PlatformInitializing&#x60; - The server is initializing after being powered on. | [optional] [readonly] [default to "None"]
 **CoolingMode** | Pointer to **string** | Cooling mode representation of the server. * &#x60;Air&#x60; - Cooling mode of the device is set to Air. * &#x60;Immersion&#x60; - Cooling mode of the device is set to Immersion. | [optional] [readonly] [default to "Air"]
 **CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
 **DimmBlocklisting** | Pointer to **string** | The DIMM Blocklisting setting configured on the server. * &#x60;Unknown&#x60; - The configured state is unknown. * &#x60;Enabled&#x60; - The configured state is enabled. * &#x60;Disabled&#x60; - The configured state is disabled. | [optional] [readonly] [default to "Unknown"]
@@ -277,6 +279,56 @@ SetBmcInventoryReady sets BmcInventoryReady field to given value.
 `func (o *ComputePhysical) HasBmcInventoryReady() bool`
 
 HasBmcInventoryReady returns a boolean if a field has been set.
+
+### GetBootLastState
+
+`func (o *ComputePhysical) GetBootLastState() string`
+
+GetBootLastState returns the BootLastState field if non-nil, zero value otherwise.
+
+### GetBootLastStateOk
+
+`func (o *ComputePhysical) GetBootLastStateOk() (*string, bool)`
+
+GetBootLastStateOk returns a tuple with the BootLastState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootLastState
+
+`func (o *ComputePhysical) SetBootLastState(v string)`
+
+SetBootLastState sets BootLastState field to given value.
+
+### HasBootLastState
+
+`func (o *ComputePhysical) HasBootLastState() bool`
+
+HasBootLastState returns a boolean if a field has been set.
+
+### GetBootOemLastState
+
+`func (o *ComputePhysical) GetBootOemLastState() string`
+
+GetBootOemLastState returns the BootOemLastState field if non-nil, zero value otherwise.
+
+### GetBootOemLastStateOk
+
+`func (o *ComputePhysical) GetBootOemLastStateOk() (*string, bool)`
+
+GetBootOemLastStateOk returns a tuple with the BootOemLastState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootOemLastState
+
+`func (o *ComputePhysical) SetBootOemLastState(v string)`
+
+SetBootOemLastState sets BootOemLastState field to given value.
+
+### HasBootOemLastState
+
+`func (o *ComputePhysical) HasBootOemLastState() bool`
+
+HasBootOemLastState returns a boolean if a field has been set.
 
 ### GetCoolingMode
 

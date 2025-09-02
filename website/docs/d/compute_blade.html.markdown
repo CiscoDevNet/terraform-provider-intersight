@@ -20,6 +20,8 @@ The following arguments can be used to get data of already created objects in In
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `bmc_inventory_ready`:(bool) The BMC inventory readiness status of the server. 
+* `boot_last_state`:(string) The boot progress state of a rack or blade server.* `None` - The server is powered off.* `OSBootStarted` - The operating system boot process has started.* `OSRunning` - The operating system boot process has started and running.* `OEM` - The server is in an OEM-defined startup state. 
+* `boot_oem_last_state`:(string) The last known OEM-defined startup state of a rack or blade server.* `None` - The server has not yet completed OEM initialization.* `PlatformInitializing` - The server is initializing after being powered on. 
 * `chassis_id`:(string) The id of the chassis that the blade is discovered in. 
 * `cooling_mode`:(string) Cooling mode representation of the server.* `Air` - Cooling mode of the device is set to Air.* `Immersion` - Cooling mode of the device is set to Immersion. 
 * `cpu_capacity`:(float) Total processing capacity of the server. 

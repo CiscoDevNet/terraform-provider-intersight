@@ -164,6 +164,11 @@ func getEquipmentChassisSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"chassis_profile": {
+			Description: "The distinguished name of the chassis profile to which the chassis is associated to. It is applicable only for chassis which are managed via UCSM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -480,6 +485,40 @@ func getEquipmentChassisSchema() map[string]*schema.Schema {
 			Description: "This field identifies the name for the chassis enclosure.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"network_elements": {
+			Description: "An array of relationships to networkElement resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1233,6 +1272,11 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 		o.SetChassisId(x)
 	}
 
+	if v, ok := d.GetOk("chassis_profile"); ok {
+		x := (v.(string))
+		o.SetChassisProfile(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1598,6 +1642,46 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("network_elements"); ok {
+		x := make([]models.NetworkElementRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkElementRelationship(o))
+		}
+		o.SetNetworkElements(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -2303,6 +2387,7 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 
 				temp["blades"] = flattenListComputeBladeRelationship(s.GetBlades(), d)
 				temp["chassis_id"] = (s.GetChassisId())
+				temp["chassis_profile"] = (s.GetChassisProfile())
 				temp["class_id"] = (s.GetClassId())
 				temp["connection_path"] = (s.GetConnectionPath())
 				temp["connection_status"] = (s.GetConnectionStatus())
@@ -2334,6 +2419,8 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+
+				temp["network_elements"] = flattenListNetworkElementRelationship(s.GetNetworkElements(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())

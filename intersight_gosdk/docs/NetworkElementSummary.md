@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **InterClusterLinkState** | Pointer to **string** | The intercluster link state of the switch. * &#x60;Unknown&#x60; - The operational state of the link is not known. * &#x60;Up&#x60; - The operational state of the link is up. * &#x60;Down&#x60; - The operational state of the link is down. * &#x60;Degraded&#x60; - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. | [optional] [readonly] [default to "Unknown"]
 **Ipv4Address** | Pointer to **string** | IP version 4 address is saved in this property. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
+**JumboFrameEnabled** | Pointer to **bool** | Jumbo Frame configuration for the switch. | [optional] [readonly] [default to true]
 **ManagementMode** | Pointer to **string** | The management mode of the fabric interconnect. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
 **Name** | Pointer to **string** | The admin configured name of the system. | [optional] [readonly] 
@@ -61,17 +62,19 @@ Name | Type | Description | Notes
 **Revision** | Pointer to **string** | The product revision of the switch. | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
+**SlotId** | Pointer to **int64** | The Slot Id of the network Element when embedded inside a chassis. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | Stores the source object type used to fill the properties of this object. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the switch. | [optional] 
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
 **SwitchProfileName** | Pointer to **string** | The name of switch profile associated with the switch. | [optional] [readonly] 
-**SwitchType** | Pointer to **string** | The Switch type that the network element is a part of. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. | [optional] [readonly] [default to "FabricInterconnect"]
+**SwitchType** | Pointer to **string** | The Switch type that the network element is a part of. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. * &#x60;EdgeChassisManagementController&#x60; - Switch type of Edge Chassis Management Controller. | [optional] [readonly] [default to "FabricInterconnect"]
 **SystemUpTime** | Pointer to **string** | System up time of the switch. | [optional] 
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [default to "unknown"]
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
 **Version** | Pointer to **string** | Firmware version of the switch. | [optional] [readonly] 
+**EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryParent** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -819,6 +822,31 @@ SetIsUpgraded sets IsUpgraded field to given value.
 
 HasIsUpgraded returns a boolean if a field has been set.
 
+### GetJumboFrameEnabled
+
+`func (o *NetworkElementSummary) GetJumboFrameEnabled() bool`
+
+GetJumboFrameEnabled returns the JumboFrameEnabled field if non-nil, zero value otherwise.
+
+### GetJumboFrameEnabledOk
+
+`func (o *NetworkElementSummary) GetJumboFrameEnabledOk() (*bool, bool)`
+
+GetJumboFrameEnabledOk returns a tuple with the JumboFrameEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJumboFrameEnabled
+
+`func (o *NetworkElementSummary) SetJumboFrameEnabled(v bool)`
+
+SetJumboFrameEnabled sets JumboFrameEnabled field to given value.
+
+### HasJumboFrameEnabled
+
+`func (o *NetworkElementSummary) HasJumboFrameEnabled() bool`
+
+HasJumboFrameEnabled returns a boolean if a field has been set.
+
 ### GetManagementMode
 
 `func (o *NetworkElementSummary) GetManagementMode() string`
@@ -1519,6 +1547,31 @@ SetSerial sets Serial field to given value.
 
 HasSerial returns a boolean if a field has been set.
 
+### GetSlotId
+
+`func (o *NetworkElementSummary) GetSlotId() int64`
+
+GetSlotId returns the SlotId field if non-nil, zero value otherwise.
+
+### GetSlotIdOk
+
+`func (o *NetworkElementSummary) GetSlotIdOk() (*int64, bool)`
+
+GetSlotIdOk returns a tuple with the SlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSlotId
+
+`func (o *NetworkElementSummary) SetSlotId(v int64)`
+
+SetSlotId sets SlotId field to given value.
+
+### HasSlotId
+
+`func (o *NetworkElementSummary) HasSlotId() bool`
+
+HasSlotId returns a boolean if a field has been set.
+
 ### GetSourceObjectType
 
 `func (o *NetworkElementSummary) GetSourceObjectType() string`
@@ -1794,6 +1847,41 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### GetEquipmentChassis
+
+`func (o *NetworkElementSummary) GetEquipmentChassis() EquipmentChassisRelationship`
+
+GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
+
+### GetEquipmentChassisOk
+
+`func (o *NetworkElementSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
+
+GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentChassis
+
+`func (o *NetworkElementSummary) SetEquipmentChassis(v EquipmentChassisRelationship)`
+
+SetEquipmentChassis sets EquipmentChassis field to given value.
+
+### HasEquipmentChassis
+
+`func (o *NetworkElementSummary) HasEquipmentChassis() bool`
+
+HasEquipmentChassis returns a boolean if a field has been set.
+
+### SetEquipmentChassisNil
+
+`func (o *NetworkElementSummary) SetEquipmentChassisNil(b bool)`
+
+ SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+
+### UnsetEquipmentChassis
+`func (o *NetworkElementSummary) UnsetEquipmentChassis()`
+
+UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
 ### GetInventoryParent
 
 `func (o *NetworkElementSummary) GetInventoryParent() MoBaseMoRelationship`

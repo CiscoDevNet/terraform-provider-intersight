@@ -334,6 +334,11 @@ func getFabricSystemQosPolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"target_platform": {
+			Description: "The target platform type of the system QoS policy.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -854,6 +859,11 @@ func dataSourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceDa
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -991,6 +1001,7 @@ func dataSourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceDa
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_platform"] = (s.GetTargetPlatform())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricSystemQosPolicyResults = append(fabricSystemQosPolicyResults, temp)

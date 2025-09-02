@@ -3,12 +3,12 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_control_policy"
 description: |-
-        A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range of the FI.
+        A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range, Jumbo frames.
 
 ---
 
 # Resource: intersight_fabric_switch_control_policy
-A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range of the FI.
+A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range, Jumbo frames.
 ## Usage Example
 ### Resource Creation
 
@@ -40,6 +40,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `enable_jumbo_frame`:(bool) To enable or disable Jumbo Frames on the switch. 
 * `ethernet_switching_mode`:(string) Enable or Disable Ethernet End Host Switching Mode.* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. 
 * `fabric_pc_vhba_reset`:(string) When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down.* `Disabled` - Admin configured Disabled State.* `Enabled` - Admin configured Enabled State. 
 * `fc_switching_mode`:(string) Enable or Disable FC End Host Switching Mode.* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. 
@@ -80,9 +81,10 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `target_platform`:(string) The target platform type of the Switch Control policy.* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge. 
 * `udld_settings`:(HashMap) - This specifies the UDLD Global configurations for this switch. 
 This complex property has following sub-properties:
-  + `message_interval`:(int) Configures the time between UDLD probe messages on ports that are in advertisement mode and arecurrently determined to be bidirectional.Valid values are from 7 to 90 seconds. 
+  + `message_interval`:(int) Configures the time between UDLD probe messages on ports that are in advertisement mode and arecurrently determined to be bidirectional.Valid values are from 1 to 90 seconds. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `recovery_action`:(string) UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset.* `none` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `reset` - The expanded 4th generation UCS Fabric Interconnect with 108 ports. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

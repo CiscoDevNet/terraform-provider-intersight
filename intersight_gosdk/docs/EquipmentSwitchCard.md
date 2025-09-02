@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **EthernetSwitchingMode** | Pointer to **string** | The user configured Ethernet switching mode for this switch (End-Host or Switch). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **FcSwitchingMode** | Pointer to **string** | The user configured FC switching mode for this switch (End-Host or Switch). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **HwVersion** | Pointer to **string** | The Hardware version of the switch hardware. | [optional] 
+**JumboFrameEnabled** | Pointer to **bool** | Jumbo Frame configuration for the switch. | [optional] [readonly] [default to true]
 **Name** | Pointer to **string** | The name of the switch card like Line Card-1. | [optional] 
 **NumPorts** | Pointer to **int64** | Number of ports present in this switch hardware. | [optional] [readonly] 
 **OutOfBandIpAddress** | Pointer to **string** | Field specifies this Switch&#39;s Out-of-band IP address. | [optional] [readonly] 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 **OutOfBandMac** | Pointer to **string** | The MAC address of the Switch&#39;s out-of-band management interface. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | The part number of the switch hardware. | [optional] 
 **PowerState** | Pointer to **string** | Power state of the switch hardware. * &#x60;unknown&#x60; - The power state of the switch hardware is unknown. * &#x60;off&#x60; - The power state of the switch hardware is off. * &#x60;on&#x60; - The power state of the switch hardware is on. * &#x60;deny&#x60; - The power state of the switch hardware is deny. * &#x60;multi-boot-fail&#x60; - The power state of the switch hardware is multi-boot-fail. | [optional] [default to "unknown"]
-**SlotId** | Pointer to **int64** | Slot identifier of the local Switch slot Interface. | [optional] [readonly] 
+**SlotId** | Pointer to **int64** | Slot identifier of the SwitchCard within the Switch. | [optional] [readonly] 
 **State** | Pointer to **string** | Operational state of the switch hardware. | [optional] [readonly] 
 **Status** | Pointer to **string** | The connection status of the switch hardware like up/down. * &#x60;Down&#x60; - Connection status of the switch card is down. * &#x60;Up&#x60; - Connection status of the switch card is up. | [optional] [default to "Down"]
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
@@ -28,6 +29,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc. | [optional] 
 **FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] 
 **FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] 
+**HostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **PortChannels** | Pointer to [**[]EtherPortChannelRelationship**](EtherPortChannelRelationship.md) | An array of relationships to etherPortChannel resources. | [optional] 
@@ -242,6 +244,31 @@ SetHwVersion sets HwVersion field to given value.
 `func (o *EquipmentSwitchCard) HasHwVersion() bool`
 
 HasHwVersion returns a boolean if a field has been set.
+
+### GetJumboFrameEnabled
+
+`func (o *EquipmentSwitchCard) GetJumboFrameEnabled() bool`
+
+GetJumboFrameEnabled returns the JumboFrameEnabled field if non-nil, zero value otherwise.
+
+### GetJumboFrameEnabledOk
+
+`func (o *EquipmentSwitchCard) GetJumboFrameEnabledOk() (*bool, bool)`
+
+GetJumboFrameEnabledOk returns a tuple with the JumboFrameEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJumboFrameEnabled
+
+`func (o *EquipmentSwitchCard) SetJumboFrameEnabled(v bool)`
+
+SetJumboFrameEnabled sets JumboFrameEnabled field to given value.
+
+### HasJumboFrameEnabled
+
+`func (o *EquipmentSwitchCard) HasJumboFrameEnabled() bool`
+
+HasJumboFrameEnabled returns a boolean if a field has been set.
 
 ### GetName
 
@@ -663,6 +690,41 @@ HasFcPorts returns a boolean if a field has been set.
 `func (o *EquipmentSwitchCard) UnsetFcPorts()`
 
 UnsetFcPorts ensures that no value is present for FcPorts, not even an explicit nil
+### GetHostPorts
+
+`func (o *EquipmentSwitchCard) GetHostPorts() []EtherHostPortRelationship`
+
+GetHostPorts returns the HostPorts field if non-nil, zero value otherwise.
+
+### GetHostPortsOk
+
+`func (o *EquipmentSwitchCard) GetHostPortsOk() (*[]EtherHostPortRelationship, bool)`
+
+GetHostPortsOk returns a tuple with the HostPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostPorts
+
+`func (o *EquipmentSwitchCard) SetHostPorts(v []EtherHostPortRelationship)`
+
+SetHostPorts sets HostPorts field to given value.
+
+### HasHostPorts
+
+`func (o *EquipmentSwitchCard) HasHostPorts() bool`
+
+HasHostPorts returns a boolean if a field has been set.
+
+### SetHostPortsNil
+
+`func (o *EquipmentSwitchCard) SetHostPortsNil(b bool)`
+
+ SetHostPortsNil sets the value for HostPorts to be an explicit nil
+
+### UnsetHostPorts
+`func (o *EquipmentSwitchCard) UnsetHostPorts()`
+
+UnsetHostPorts ensures that no value is present for HostPorts, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentSwitchCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

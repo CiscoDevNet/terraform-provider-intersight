@@ -25,6 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `fibre_channel_scsi_ioq_limit`:(int) The number of SCSI I/O Queue resources to allocate. 
 * `is_azure_qos_supported`:(bool) Indicates that the Azure Stack Host QoS feature is supported by this adapter. 
 * `is_geneve_supported`:(bool) Indicates that the GENEVE offload feature is supported by this adapter. 
+* `is_placement_applicable`:(bool) This field determines whether vNICs can be placed to the adapters. It is mandatory for all adapters. For third-party adapters, this field is set to 'false', meaning they will only be inventoried, and no LCP configuration will be applied. 
 * `is_secure_boot_supported`:(bool) Indicates support for secure boot. 
 * `max_eth_rx_ring_size`:(int) Maximum Ring Size value for vNIC Receive Queue. 
 * `max_eth_tx_ring_size`:(int) Maximum Ring Size value for vNIC Transmit Queue. 

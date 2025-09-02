@@ -228,6 +228,32 @@ func Test_intersight_HclApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test HclApiService GetHclServerCatalogByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.HclApi.GetHclServerCatalogByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test HclApiService GetHclServerCatalogList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.HclApi.GetHclServerCatalogList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test HclApiService GetHclServerHwCatalogInfoByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

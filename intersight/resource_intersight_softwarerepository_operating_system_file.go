@@ -79,6 +79,17 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 					},
 				},
 			},
+			"bundle_type": {
+				Description: "The bundle type of the image, as published on cisco.com.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"catalog": {
 				Description: "A reference to a softwarerepositoryCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -175,6 +186,22 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 					}
 					return
 				}},
+			"guid": {
+				Description: "The unique identifier for an image in a Cisco repository.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"image_type": {
+				Description: "The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, Unified Edge server. The field is used in private appliance mode, where image does not have description populated from CCO.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"import_action": {
 				Description:  "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
 				Type:         schema.TypeString,
@@ -226,6 +253,11 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 			},
+			"mdfid": {
+				Description: "The mdfid of the image provided by cisco.com.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -237,6 +269,11 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 					}
 					return
 				}},
+			"model": {
+				Description: "The endpoint model for which this firmware image is applicable.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -343,6 +380,62 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 					},
 				},
 			},
+			"platform_type": {
+				Description: "The platform type of the image.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"recommended_build": {
+				Description: "The build which is recommended by Cisco.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"release": {
+				Description: "A reference to a softwarerepositoryRelease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"release_date": {
 				Description: "The date on which the file was released or distributed by its vendor.",
 				Type:        schema.TypeString,
@@ -354,6 +447,11 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 					}
 					return
 				}},
+			"release_notes_url": {
+				Description: "The url for the release notes of this image.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"sha512sum": {
 				Description: "The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository.",
 				Type:        schema.TypeString,
@@ -381,6 +479,17 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"software_type_id": {
+				Description: "The software type id provided by cisco.com.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"nr_source": {
 				Description: "Location of the file in an external repository.",
 				Type:        schema.TypeList,
@@ -667,6 +776,11 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
+	}
+
 	if v, ok := d.GetOk("import_action"); ok {
 		x := (v.(string))
 		o.SetImportAction(x)
@@ -682,6 +796,16 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 		o.SetMd5sum(x)
 	}
 
+	if v, ok := d.GetOk("mdfid"); ok {
+		x := (v.(string))
+		o.SetMdfid(x)
+	}
+
+	if v, ok := d.GetOk("model"); ok {
+		x := (v.(string))
+		o.SetModel(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -693,6 +817,59 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 	}
 
 	o.SetObjectType("softwarerepository.OperatingSystemFile")
+
+	if v, ok := d.GetOk("recommended_build"); ok {
+		x := (v.(string))
+		o.SetRecommendedBuild(x)
+	}
+
+	if v, ok := d.GetOk("release"); ok {
+		p := make([]models.SoftwarerepositoryReleaseRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSoftwarerepositoryReleaseRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRelease(x)
+		}
+	}
+
+	if v, ok := d.GetOk("release_notes_url"); ok {
+		x := (v.(string))
+		o.SetReleaseNotesUrl(x)
+	}
 
 	if v, ok := d.GetOk("sha512sum"); ok {
 		x := (v.(string))
@@ -843,6 +1020,10 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property Ancestors in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
+	if err := d.Set("bundle_type", (s.GetBundleType())); err != nil {
+		return diag.Errorf("error occurred while setting property BundleType in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
 	if err := d.Set("catalog", flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Catalog in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
@@ -871,6 +1052,14 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property FeatureSource in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
+	if err := d.Set("guid", (s.GetGuid())); err != nil {
+		return diag.Errorf("error occurred while setting property Guid in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("image_type", (s.GetImageType())); err != nil {
+		return diag.Errorf("error occurred while setting property ImageType in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
 	if err := d.Set("import_action", (s.GetImportAction())); err != nil {
 		return diag.Errorf("error occurred while setting property ImportAction in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
@@ -895,8 +1084,16 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property Md5sum in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
+	if err := d.Set("mdfid", (s.GetMdfid())); err != nil {
+		return diag.Errorf("error occurred while setting property Mdfid in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("model", (s.GetModel())); err != nil {
+		return diag.Errorf("error occurred while setting property Model in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
@@ -923,8 +1120,24 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property PermissionResources in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
+	if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
+		return diag.Errorf("error occurred while setting property PlatformType in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("recommended_build", (s.GetRecommendedBuild())); err != nil {
+		return diag.Errorf("error occurred while setting property RecommendedBuild in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("release", flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Release in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
 	if err := d.Set("release_date", (s.GetReleaseDate()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ReleaseDate in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
+		return diag.Errorf("error occurred while setting property ReleaseNotesUrl in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
@@ -941,6 +1154,10 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 
 	if err := d.Set("software_advisory_url", (s.GetSoftwareAdvisoryUrl())); err != nil {
 		return diag.Errorf("error occurred while setting property SoftwareAdvisoryUrl in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("software_type_id", (s.GetSoftwareTypeId())); err != nil {
+		return diag.Errorf("error occurred while setting property SoftwareTypeId in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
@@ -1036,6 +1253,12 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 		o.SetDescription(x)
 	}
 
+	if d.HasChange("image_type") {
+		v := d.Get("image_type")
+		x := (v.(string))
+		o.SetImageType(x)
+	}
+
 	if d.HasChange("import_action") {
 		v := d.Get("import_action")
 		x := (v.(string))
@@ -1054,6 +1277,18 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 		o.SetMd5sum(x)
 	}
 
+	if d.HasChange("mdfid") {
+		v := d.Get("mdfid")
+		x := (v.(string))
+		o.SetMdfid(x)
+	}
+
+	if d.HasChange("model") {
+		v := d.Get("model")
+		x := (v.(string))
+		o.SetModel(x)
+	}
+
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -1067,6 +1302,62 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 	}
 
 	o.SetObjectType("softwarerepository.OperatingSystemFile")
+
+	if d.HasChange("recommended_build") {
+		v := d.Get("recommended_build")
+		x := (v.(string))
+		o.SetRecommendedBuild(x)
+	}
+
+	if d.HasChange("release") {
+		v := d.Get("release")
+		p := make([]models.SoftwarerepositoryReleaseRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSoftwarerepositoryReleaseRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRelease(x)
+		}
+	}
+
+	if d.HasChange("release_notes_url") {
+		v := d.Get("release_notes_url")
+		x := (v.(string))
+		o.SetReleaseNotesUrl(x)
+	}
 
 	if d.HasChange("sha512sum") {
 		v := d.Get("sha512sum")

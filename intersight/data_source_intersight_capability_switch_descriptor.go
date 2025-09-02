@@ -119,6 +119,11 @@ func getCapabilitySwitchDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"is_avatar_ecmc": {
+			Description: "Identifies whether Switch is part of Avatar series.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_ucsx_direct_switch": {
 			Description: "Identifies whether Switch is part of UCSX Direct chassis.",
 			Type:        schema.TypeBool,
@@ -515,6 +520,11 @@ func dataSourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resou
 		o.SetExpectedMemory(x)
 	}
 
+	if v, ok := d.GetOkExists("is_avatar_ecmc"); ok {
+		x := (v.(bool))
+		o.SetIsAvatarEcmc(x)
+	}
+
 	if v, ok := d.GetOkExists("is_ucsx_direct_switch"); ok {
 		x := (v.(bool))
 		o.SetIsUcsxDirectSwitch(x)
@@ -808,6 +818,7 @@ func dataSourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resou
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["expected_memory"] = (s.GetExpectedMemory())
+				temp["is_avatar_ecmc"] = (s.GetIsAvatarEcmc())
 				temp["is_ucsx_direct_switch"] = (s.GetIsUcsxDirectSwitch())
 
 				temp["mod_time"] = (s.GetModTime()).String()

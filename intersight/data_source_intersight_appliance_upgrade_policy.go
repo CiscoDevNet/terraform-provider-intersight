@@ -96,12 +96,12 @@ func getApplianceUpgradePolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"auto_upgrade": {
-			Description: "Indicates if the upgrade service is set to automatically start the software upgrade or not. If autoUpgrade is true, then the value of the schedule field is ignored.",
+			Description: "Updates are installed automatically 2 weeks after detection, or 4 weeks if an appliance reboot is required.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"blackout_dates_enabled": {
-			Description: "If enabled, allows the user to define a blackout period during which the appliance will not be upgraded.",
+			Description: "Appliance will not be updated during the blocked dates.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -126,7 +126,7 @@ func getApplianceUpgradePolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"disruptive_grace_period_week": {
-			Description: "Updates requiring a reboot will start automatically once the grace period ends.",
+			Description: "Updates that require an appliance reboot start automatically after the grace period ends.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -141,7 +141,7 @@ func getApplianceUpgradePolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"is_custom_grace_period_enabled": {
-			Description: "Custom grace period for subsequent reboot and non-reboot updates.",
+			Description: "Waiting period before major and patch updates are triggered automatically.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -166,7 +166,7 @@ func getApplianceUpgradePolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"nondisruptive_grace_period_week": {
-			Description: "Updates not requiring a reboot will start automatically once the grace period ends.",
+			Description: "Updates that do not require an appliance reboot start automatically after the grace period ends.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

@@ -235,6 +235,16 @@ func getFirmwareSwitchUpgradeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"enable_pdb_fpga_upgrade": {
+			Description: "The flag to enable or disable firmware upgrade functionality for the PDB FPGA.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"enable_psu_upgrade": {
+			Description: "The flag to enable or disable firmware upgrade functionality for the Power Supply Unit (PSU).",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"file_server": {
 			Description: "Location of the image in user software repository.",
 			Type:        schema.TypeList,
@@ -1115,6 +1125,16 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 		o.SetEnableFabricEvacuation(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_pdb_fpga_upgrade"); ok {
+		x := (v.(bool))
+		o.SetEnablePdbFpgaUpgrade(x)
+	}
+
+	if v, ok := d.GetOkExists("enable_psu_upgrade"); ok {
+		x := (v.(bool))
+		o.SetEnablePsuUpgrade(x)
+	}
+
 	if v, ok := d.GetOk("file_server"); ok {
 		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
@@ -1793,6 +1813,8 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 				temp["distributable"] = flattenMapFirmwareDistributableRelationship(s.GetDistributable(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["enable_fabric_evacuation"] = (s.GetEnableFabricEvacuation())
+				temp["enable_pdb_fpga_upgrade"] = (s.GetEnablePdbFpgaUpgrade())
+				temp["enable_psu_upgrade"] = (s.GetEnablePsuUpgrade())
 
 				temp["file_server"] = flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)
 

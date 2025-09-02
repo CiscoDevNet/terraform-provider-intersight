@@ -514,9 +514,9 @@ func resourceHclCompatibilityStatus() *schema.Resource {
 							ForceNew:    true,
 						},
 						"version_type": {
-							Description:  "Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release.\n* `UCSM` - The server is managed by UCS Manager.\n* `IMC` - The server is standalone managed by CIMC.",
+							Description:  "Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release.\n* `UCSM` - The server is managed by UCS Manager.\n* `IMC` - The server is standalone managed by CIMC.\n* `IMM` - The server is standalone managed by Intersight.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"UCSM", "IMC"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"UCSM", "IMC", "IMM"}, false),
 							Optional:     true,
 							Default:      "UCSM",
 							ForceNew:     true,

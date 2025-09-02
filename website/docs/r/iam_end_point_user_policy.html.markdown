@@ -71,7 +71,7 @@ This complex property has following sub-properties:
 * `password_properties`:(HashMap) - Set password properties for endpoint users. 
 This complex property has following sub-properties:
   + `enable_password_expiry`:(bool) Enables password expiry on the endpoint. 
-  + `enforce_strong_password`:(bool) Enables a strong password policy. Strong password requirements: A. The password must have a minimum of 8 and a maximum of 20 characters. B. The password must not contain the User's Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =). 
+  + `enforce_strong_password`:(bool) Enables a strong password policy. Strong password requirements: A. The password must have a minimum of 8 and a maximum of 127 characters. B. The password must not contain the User's Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =). 
   + `force_send_password`:(bool) User password will always be sent to endpoint device. If the option is not selected, then user password will be sent to endpoint device for new users and if user password is changed for existing users. 
   + `grace_period`:(int) Time period until when you can use the existing password, after it expires. 
   + `notification_period`:(int) The duration after which the password will expire. 

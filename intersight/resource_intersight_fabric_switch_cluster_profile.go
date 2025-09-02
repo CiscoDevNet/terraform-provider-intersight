@@ -36,6 +36,12 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 					}
 					return
 				}},
+			"action": {
+				Description: "The support actions are -- Deploy, Unassign.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "No-op",
+			},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -47,6 +53,46 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
+			"assigned_entity": {
+				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -586,6 +632,14 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 					},
 				},
 			},
+			"target_platform": {
+				Description:  "Type of the profile. 'UcsDomain' profile for network and management configuration on UCS Fabric Interconnect. 'UnifiedEdge' profile for network, management and chassis configuration on Unified Edge.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
+				Optional:     true,
+				Default:      "UCS Domain",
+				ForceNew:     true,
+			},
 			"type": {
 				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 				Type:         schema.TypeString,
@@ -760,12 +814,60 @@ func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.Resou
 	var de diag.Diagnostics
 	var o = models.NewFabricSwitchClusterProfileWithDefaults()
 
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if v, ok := d.GetOk("assigned_entity"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAssignedEntity(x)
 		}
 	}
 
@@ -1031,6 +1133,11 @@ func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -1091,12 +1198,20 @@ func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property AccountMoid in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("action", (s.GetAction())); err != nil {
+		return diag.Errorf("error occurred while setting property Action in FabricSwitchClusterProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("ancestors", flattenListMoBaseMoRelationship(s.GetAncestors(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Ancestors in FabricSwitchClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("assigned_entity", flattenMapMoBaseMoRelationship(s.GetAssignedEntity(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AssignedEntity in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
@@ -1183,6 +1298,10 @@ func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property Tags in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
+		return diag.Errorf("error occurred while setting property TargetPlatform in FabricSwitchClusterProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in FabricSwitchClusterProfile object: %s", err.Error())
 	}
@@ -1206,6 +1325,12 @@ func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.Resou
 	var de diag.Diagnostics
 	var o = &models.FabricSwitchClusterProfile{}
 
+	if d.HasChange("action") {
+		v := d.Get("action")
+		x := (v.(string))
+		o.SetAction(x)
+	}
+
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
 		x := []byte(v.(string))
@@ -1213,6 +1338,50 @@ func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.Resou
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("assigned_entity") {
+		v := d.Get("assigned_entity")
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAssignedEntity(x)
 		}
 	}
 
@@ -1478,6 +1647,12 @@ func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.Resou
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("target_platform") {
+		v := d.Get("target_platform")
+		x := (v.(string))
+		o.SetTargetPlatform(x)
 	}
 
 	if d.HasChange("type") {

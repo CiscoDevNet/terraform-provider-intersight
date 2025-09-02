@@ -43,6 +43,7 @@ The following arguments can be used to get data of already created objects in In
 * `inter_cluster_link_state`:(string) The intercluster link state of the switch.* `Unknown` - The operational state of the link is not known.* `Up` - The operational state of the link is up.* `Down` - The operational state of the link is down.* `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. 
 * `ipv4_address`:(string) IP version 4 address is saved in this property. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
+* `jumbo_frame_enabled`:(bool) Jumbo Frame configuration for the switch. 
 * `management_mode`:(string) The management mode of the fabric interconnect.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
@@ -74,11 +75,12 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `slot_id`:(int) The Slot Id of the network Element when embedded inside a chassis. 
 * `source_object_type`:(string) Stores the source object type used to fill the properties of this object. 
 * `status`:(string) The status of the switch. 
 * `switch_id`:(string) The Switch Id of the network Element. 
 * `switch_profile_name`:(string) The name of switch profile associated with the switch. 
-* `switch_type`:(string) The Switch type that the network element is a part of.* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.* `NexusDevice` - Switch type of Nexus devices.* `MDSDevice` - Switch type of Nexus MDS devices. 
+* `switch_type`:(string) The Switch type that the network element is a part of.* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.* `NexusDevice` - Switch type of Nexus devices.* `MDSDevice` - Switch type of Nexus MDS devices.* `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller. 
 * `system_up_time`:(string) System up time of the switch. 
 * `thermal`:(string) The Thermal status of the fabric interconnect.* `unknown` - The default state of the sensor (in case no data is received).* `ok` - State of the sensor indicating the sensor's temperature range is okay.* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.* `upper-critical` - State of the sensor indicating that the temperature is above normal range.* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.* `lower-critical` - State of the sensor indicating that the temperature is below normal range.* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range. 
 * `total_memory`:(int) Total available memory on this switch platform. 

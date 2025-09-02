@@ -60,6 +60,11 @@ func getFabricVlanSetSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"auto_allow_on_cluster_links": {
+			Description: "This setting determines whether the VLAN is automatically allowed on inter-cluster links within this domain.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"auto_allow_on_uplinks": {
 			Description: "Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI.",
 			Type:        schema.TypeBool,
@@ -481,6 +486,11 @@ func dataSourceFabricVlanSetRead(c context.Context, d *schema.ResourceData, meta
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOkExists("auto_allow_on_cluster_links"); ok {
+		x := (v.(bool))
+		o.SetAutoAllowOnClusterLinks(x)
+	}
+
 	if v, ok := d.GetOkExists("auto_allow_on_uplinks"); ok {
 		x := (v.(bool))
 		o.SetAutoAllowOnUplinks(x)
@@ -872,6 +882,7 @@ func dataSourceFabricVlanSetRead(c context.Context, d *schema.ResourceData, meta
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["auto_allow_on_cluster_links"] = (s.GetAutoAllowOnClusterLinks())
 				temp["auto_allow_on_uplinks"] = (s.GetAutoAllowOnUplinks())
 				temp["class_id"] = (s.GetClassId())
 

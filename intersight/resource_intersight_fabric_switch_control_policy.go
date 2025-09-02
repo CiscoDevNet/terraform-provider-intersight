@@ -120,6 +120,12 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"enable_jumbo_frame": {
+				Description: "To enable or disable Jumbo Frames on the switch.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
 			"ethernet_switching_mode": {
 				Description:  "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 				Type:         schema.TypeString,
@@ -182,7 +188,7 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 						"mac_aging_time": {
 							Description:  "Define the MAC address aging time in seconds. This field is valid when the \"Custom\" MAC address aging option is selected.",
 							Type:         schema.TypeInt,
-							ValidateFunc: validation.IntBetween(120, 918000),
+							ValidateFunc: validation.IntBetween(10, 918000),
 							Optional:     true,
 							Default:      14500,
 						},
@@ -437,6 +443,14 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 					},
 				},
 			},
+			"target_platform": {
+				Description:  "The target platform type of the Switch Control policy.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
+				Optional:     true,
+				Default:      "UCS Domain",
+				ForceNew:     true,
+			},
 			"udld_settings": {
 				Description: "This specifies the UDLD Global configurations for this switch.",
 				Type:        schema.TypeList,
@@ -458,9 +472,9 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 							Default:     "fabric.UdldGlobalSettings",
 						},
 						"message_interval": {
-							Description:  "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 7 to 90 seconds.",
+							Description:  "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 1 to 90 seconds.",
 							Type:         schema.TypeInt,
-							ValidateFunc: validation.IntBetween(7, 90),
+							ValidateFunc: validation.IntBetween(1, 90),
 							Optional:     true,
 							Default:      15,
 						},
@@ -668,6 +682,11 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_jumbo_frame"); ok {
+		x := (v.(bool))
+		o.SetEnableJumboFrame(x)
+	}
+
 	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
 		x := (v.(string))
 		o.SetEthernetSwitchingMode(x)
@@ -863,6 +882,11 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("udld_settings"); ok {
 		p := make([]models.FabricUdldGlobalSettings, 0, 1)
 		s := v.([]interface{})
@@ -985,6 +1009,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("enable_jumbo_frame", (s.GetEnableJumboFrame())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableJumboFrame in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("ethernet_switching_mode", (s.GetEthernetSwitchingMode())); err != nil {
 		return diag.Errorf("error occurred while setting property EthernetSwitchingMode in FabricSwitchControlPolicy object: %s", err.Error())
 	}
@@ -1053,6 +1081,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property Tags in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
+		return diag.Errorf("error occurred while setting property TargetPlatform in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("udld_settings", flattenMapFabricUdldGlobalSettings(s.GetUdldSettings(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property UdldSettings in FabricSwitchControlPolicy object: %s", err.Error())
 	}
@@ -1098,6 +1130,12 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("enable_jumbo_frame") {
+		v := d.Get("enable_jumbo_frame")
+		x := (v.(bool))
+		o.SetEnableJumboFrame(x)
 	}
 
 	if d.HasChange("ethernet_switching_mode") {
@@ -1299,6 +1337,12 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("target_platform") {
+		v := d.Get("target_platform")
+		x := (v.(string))
+		o.SetTargetPlatform(x)
 	}
 
 	if d.HasChange("udld_settings") {

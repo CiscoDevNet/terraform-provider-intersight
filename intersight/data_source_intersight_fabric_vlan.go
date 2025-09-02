@@ -60,8 +60,13 @@ func getFabricVlanSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"auto_allow_on_cluster_links": {
+			Description: "Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, 'Disable' must be specified together with 'AutoAllowOnUplinks.' Note that 'AutoAllowOnClusterLinks' cannot be enabled for the default VLAN 1 or the native VLAN.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"auto_allow_on_uplinks": {
-			Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.",
+			Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -516,6 +521,11 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOkExists("auto_allow_on_cluster_links"); ok {
+		x := (v.(bool))
+		o.SetAutoAllowOnClusterLinks(x)
+	}
+
 	if v, ok := d.GetOkExists("auto_allow_on_uplinks"); ok {
 		x := (v.(bool))
 		o.SetAutoAllowOnUplinks(x)
@@ -950,6 +960,7 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["auto_allow_on_cluster_links"] = (s.GetAutoAllowOnClusterLinks())
 				temp["auto_allow_on_uplinks"] = (s.GetAutoAllowOnUplinks())
 				temp["class_id"] = (s.GetClassId())
 

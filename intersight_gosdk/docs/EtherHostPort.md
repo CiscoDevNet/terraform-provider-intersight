@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ModuleId** | Pointer to **int64** | Fabric extender identifier for this port. | [optional] [readonly] 
 **Speed** | Pointer to **string** | Host Port Speed of IO card or fabric extender. | [optional] [readonly] 
 **EquipmentIoCardBase** | Pointer to [**NullableEquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
+**EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -207,6 +208,41 @@ HasEquipmentIoCardBase returns a boolean if a field has been set.
 `func (o *EtherHostPort) UnsetEquipmentIoCardBase()`
 
 UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
+### GetEquipmentSwitchCard
+
+`func (o *EtherHostPort) GetEquipmentSwitchCard() EquipmentSwitchCardRelationship`
+
+GetEquipmentSwitchCard returns the EquipmentSwitchCard field if non-nil, zero value otherwise.
+
+### GetEquipmentSwitchCardOk
+
+`func (o *EtherHostPort) GetEquipmentSwitchCardOk() (*EquipmentSwitchCardRelationship, bool)`
+
+GetEquipmentSwitchCardOk returns a tuple with the EquipmentSwitchCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentSwitchCard
+
+`func (o *EtherHostPort) SetEquipmentSwitchCard(v EquipmentSwitchCardRelationship)`
+
+SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
+
+### HasEquipmentSwitchCard
+
+`func (o *EtherHostPort) HasEquipmentSwitchCard() bool`
+
+HasEquipmentSwitchCard returns a boolean if a field has been set.
+
+### SetEquipmentSwitchCardNil
+
+`func (o *EtherHostPort) SetEquipmentSwitchCardNil(b bool)`
+
+ SetEquipmentSwitchCardNil sets the value for EquipmentSwitchCard to be an explicit nil
+
+### UnsetEquipmentSwitchCard
+`func (o *EtherHostPort) UnsetEquipmentSwitchCard()`
+
+UnsetEquipmentSwitchCard ensures that no value is present for EquipmentSwitchCard, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EtherHostPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
