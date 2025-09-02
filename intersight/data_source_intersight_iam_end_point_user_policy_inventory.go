@@ -202,7 +202,7 @@ func getIamEndPointUserPolicyInventorySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"enforce_strong_password": {
-						Description: "Enables a strong password policy. Strong password requirements: A. The password must have a minimum of 8 and a maximum of 20 characters. B. The password must not contain the User's Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).",
+						Description: "Enables a strong password policy. Strong password requirements: A. The password must have a minimum of 8 and a maximum of 127 characters. B. The password must not contain the User's Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},

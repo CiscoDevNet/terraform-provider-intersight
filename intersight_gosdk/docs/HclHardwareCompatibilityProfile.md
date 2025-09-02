@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **ServerModel** | Pointer to **string** | Model of the server as returned by UCSM/CIMC XML API. | [optional] 
 **ServerRevision** | Pointer to **string** | Revision of the server model. | [optional] 
 **UcsVersion** | Pointer to **string** | Version of the UCS software. | [optional] 
-**VersionType** | Pointer to **string** | Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release. * &#x60;UCSM&#x60; - The server is managed by UCS Manager. * &#x60;IMC&#x60; - The server is standalone managed by CIMC. | [optional] [default to "UCSM"]
+**VersionType** | Pointer to **string** | Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release. * &#x60;UCSM&#x60; - The server is managed by UCS Manager. * &#x60;IMC&#x60; - The server is standalone managed by CIMC. * &#x60;IMM&#x60; - The server is standalone managed by Intersight. | [optional] [default to "UCSM"]
 
 ## Methods
 

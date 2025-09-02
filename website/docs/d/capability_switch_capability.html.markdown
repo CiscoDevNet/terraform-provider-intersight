@@ -22,13 +22,14 @@ The following arguments can be used to get data of already created objects in In
 * `fan_modules_supported`:(bool) Fan Modules support on this switch. 
 * `fc_uplink_ports_auto_negotiation_supported`:(bool) Fc Uplink ports auto negotiation speed support on this switch. 
 * `imm_controls_vpcompression`:(bool) VlanPort Compression is controlled by IMM. 
+* `inter_cluster_link_vlan_supported`:(bool) Inter cluster link vlan support on this switch. 
 * `locator_beacon_supported`:(bool) Locator Beacon LED support on this switch. 
 * `max_ports`:(int) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int) Maximum allowed physical slots on this switch. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 
-* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.* `unknown` - Unknown device type, usage is TBD. 
+* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.* `UCS-FI-6652` - The standard 6th generation UCS Fabric Interconnect.* `UCSXE-ECMC-10G` - Cisco UCS XE ECMC 10G with 2 ports.* `UCSXE-ECMC-G1` - Cisco UCS XE ECMC G1 with 2 ports.* `unknown` - Unknown device type, usage is TBD. 
 * `sereno_netflow_supported`:(bool) Sereno Adaptor with Netflow support on this switch. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `sku`:(string) SKU information for Switch/Fabric-Interconnect. 

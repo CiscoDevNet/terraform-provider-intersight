@@ -146,7 +146,7 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 				Computed:   true,
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
+					ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "ESU", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
 				}, ForceNew: true,
 			},
 			"computation_state": {
@@ -279,7 +279,7 @@ func resourceFirmwareUpgradeImpact() *schema.Resource {
 				Computed:   true,
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
+					ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "ESU", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
 				}, ForceNew: true,
 			},
 			"impacts": {

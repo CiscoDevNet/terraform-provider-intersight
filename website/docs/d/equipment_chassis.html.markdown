@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_equipment
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `chassis_id`:(int) The assigned identifier for a chassis. 
+* `chassis_profile`:(string) The distinguished name of the chassis profile to which the chassis is associated to. It is applicable only for chassis which are managed via UCSM. 
 * `connection_path`:(string) This field identifies the connectivity path for the chassis enclosure. 
 * `connection_status`:(string) This field identifies the connectivity status for the chassis enclosure. 
 * `create_time`:(string) The time when this managed object was created. 

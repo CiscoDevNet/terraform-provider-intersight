@@ -47,6 +47,7 @@ This complex property has following sub-properties:
 * `description`:(string) Detailed information about the endpoint. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `expected_memory`:(int) The total expected memory for this hardware. 
+* `is_avatar_ecmc`:(bool) Identifies whether Switch is part of Avatar series. 
 * `is_ucsx_direct_switch`:(bool) Identifies whether Switch is part of UCSX Direct chassis. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,8 @@ type CapabilitySwitchCapability struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType             string                      `json:"ObjectType"`
+	AllowedUplinkPcIdRange NullableCapabilityPcIdRange `json:"AllowedUplinkPcIdRange,omitempty"`
 	// Default Fcoe VLAN associated with this switch.
 	DefaultFcoeVlan *int64 `json:"DefaultFcoeVlan,omitempty"`
 	// Dynamic VIFs support on this switch.
@@ -39,12 +40,16 @@ type CapabilitySwitchCapability struct {
 	FcUplinkPortsAutoNegotiationSupported *bool `json:"FcUplinkPortsAutoNegotiationSupported,omitempty"`
 	// VlanPort Compression is controlled by IMM.
 	ImmControlsVpcompression *bool `json:"ImmControlsVpcompression,omitempty"`
+	// Inter cluster link vlan support on this switch.
+	InterClusterLinkVlanSupported *bool `json:"InterClusterLinkVlanSupported,omitempty"`
 	// Locator Beacon LED support on this switch.
-	LocatorBeaconSupported *bool `json:"LocatorBeaconSupported,omitempty"`
+	LocatorBeaconSupported *bool                 `json:"LocatorBeaconSupported,omitempty"`
+	MacsecSupportedPorts   []CapabilityPortRange `json:"MacsecSupportedPorts,omitempty"`
 	// Maximum allowed physical ports on this switch.
 	MaxPorts *int64 `json:"MaxPorts,omitempty"`
 	// Maximum allowed physical slots on this switch.
 	MaxSlots                           *int64                                `json:"MaxSlots,omitempty"`
+	MinVersionMapForSwitchFeatures     []FirmwareFeatureVersionMap           `json:"MinVersionMapForSwitchFeatures,omitempty"`
 	MinVersionMapWithBreakoutSupport   NullableFirmwareVersionMap            `json:"MinVersionMapWithBreakoutSupport,omitempty"`
 	MinVersionMapWithLocatorLedSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithLocatorLedSupport,omitempty"`
 	MinVersionMapWithNegAuto25gSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithNegAuto25gSupport,omitempty"`
@@ -57,6 +62,7 @@ type CapabilitySwitchCapability struct {
 	PortsSupportingApplianceRole       []CapabilityPortRange                 `json:"PortsSupportingApplianceRole,omitempty"`
 	PortsSupportingBreakout            []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
 	PortsSupportingFcoe                []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+	PortsSupportingInterClusterLink    []CapabilityPortRange                 `json:"PortsSupportingInterClusterLink,omitempty"`
 	PortsSupportingServerRole          []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
 	ReservedVsans                      []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 	// Sereno Adaptor with Netflow support on this switch.
@@ -157,6 +163,49 @@ func (o *CapabilitySwitchCapability) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "capability.SwitchCapability" of the ObjectType field.
 func (o *CapabilitySwitchCapability) GetDefaultObjectType() interface{} {
 	return "capability.SwitchCapability"
+}
+
+// GetAllowedUplinkPcIdRange returns the AllowedUplinkPcIdRange field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetAllowedUplinkPcIdRange() CapabilityPcIdRange {
+	if o == nil || IsNil(o.AllowedUplinkPcIdRange.Get()) {
+		var ret CapabilityPcIdRange
+		return ret
+	}
+	return *o.AllowedUplinkPcIdRange.Get()
+}
+
+// GetAllowedUplinkPcIdRangeOk returns a tuple with the AllowedUplinkPcIdRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetAllowedUplinkPcIdRangeOk() (*CapabilityPcIdRange, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AllowedUplinkPcIdRange.Get(), o.AllowedUplinkPcIdRange.IsSet()
+}
+
+// HasAllowedUplinkPcIdRange returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasAllowedUplinkPcIdRange() bool {
+	if o != nil && o.AllowedUplinkPcIdRange.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedUplinkPcIdRange gets a reference to the given NullableCapabilityPcIdRange and assigns it to the AllowedUplinkPcIdRange field.
+func (o *CapabilitySwitchCapability) SetAllowedUplinkPcIdRange(v CapabilityPcIdRange) {
+	o.AllowedUplinkPcIdRange.Set(&v)
+}
+
+// SetAllowedUplinkPcIdRangeNil sets the value for AllowedUplinkPcIdRange to be an explicit nil
+func (o *CapabilitySwitchCapability) SetAllowedUplinkPcIdRangeNil() {
+	o.AllowedUplinkPcIdRange.Set(nil)
+}
+
+// UnsetAllowedUplinkPcIdRange ensures that no value is present for AllowedUplinkPcIdRange, not even an explicit nil
+func (o *CapabilitySwitchCapability) UnsetAllowedUplinkPcIdRange() {
+	o.AllowedUplinkPcIdRange.Unset()
 }
 
 // GetDefaultFcoeVlan returns the DefaultFcoeVlan field value if set, zero value otherwise.
@@ -352,6 +401,38 @@ func (o *CapabilitySwitchCapability) SetImmControlsVpcompression(v bool) {
 	o.ImmControlsVpcompression = &v
 }
 
+// GetInterClusterLinkVlanSupported returns the InterClusterLinkVlanSupported field value if set, zero value otherwise.
+func (o *CapabilitySwitchCapability) GetInterClusterLinkVlanSupported() bool {
+	if o == nil || IsNil(o.InterClusterLinkVlanSupported) {
+		var ret bool
+		return ret
+	}
+	return *o.InterClusterLinkVlanSupported
+}
+
+// GetInterClusterLinkVlanSupportedOk returns a tuple with the InterClusterLinkVlanSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchCapability) GetInterClusterLinkVlanSupportedOk() (*bool, bool) {
+	if o == nil || IsNil(o.InterClusterLinkVlanSupported) {
+		return nil, false
+	}
+	return o.InterClusterLinkVlanSupported, true
+}
+
+// HasInterClusterLinkVlanSupported returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasInterClusterLinkVlanSupported() bool {
+	if o != nil && !IsNil(o.InterClusterLinkVlanSupported) {
+		return true
+	}
+
+	return false
+}
+
+// SetInterClusterLinkVlanSupported gets a reference to the given bool and assigns it to the InterClusterLinkVlanSupported field.
+func (o *CapabilitySwitchCapability) SetInterClusterLinkVlanSupported(v bool) {
+	o.InterClusterLinkVlanSupported = &v
+}
+
 // GetLocatorBeaconSupported returns the LocatorBeaconSupported field value if set, zero value otherwise.
 func (o *CapabilitySwitchCapability) GetLocatorBeaconSupported() bool {
 	if o == nil || IsNil(o.LocatorBeaconSupported) {
@@ -382,6 +463,39 @@ func (o *CapabilitySwitchCapability) HasLocatorBeaconSupported() bool {
 // SetLocatorBeaconSupported gets a reference to the given bool and assigns it to the LocatorBeaconSupported field.
 func (o *CapabilitySwitchCapability) SetLocatorBeaconSupported(v bool) {
 	o.LocatorBeaconSupported = &v
+}
+
+// GetMacsecSupportedPorts returns the MacsecSupportedPorts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetMacsecSupportedPorts() []CapabilityPortRange {
+	if o == nil {
+		var ret []CapabilityPortRange
+		return ret
+	}
+	return o.MacsecSupportedPorts
+}
+
+// GetMacsecSupportedPortsOk returns a tuple with the MacsecSupportedPorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetMacsecSupportedPortsOk() ([]CapabilityPortRange, bool) {
+	if o == nil || IsNil(o.MacsecSupportedPorts) {
+		return nil, false
+	}
+	return o.MacsecSupportedPorts, true
+}
+
+// HasMacsecSupportedPorts returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMacsecSupportedPorts() bool {
+	if o != nil && !IsNil(o.MacsecSupportedPorts) {
+		return true
+	}
+
+	return false
+}
+
+// SetMacsecSupportedPorts gets a reference to the given []CapabilityPortRange and assigns it to the MacsecSupportedPorts field.
+func (o *CapabilitySwitchCapability) SetMacsecSupportedPorts(v []CapabilityPortRange) {
+	o.MacsecSupportedPorts = v
 }
 
 // GetMaxPorts returns the MaxPorts field value if set, zero value otherwise.
@@ -446,6 +560,39 @@ func (o *CapabilitySwitchCapability) HasMaxSlots() bool {
 // SetMaxSlots gets a reference to the given int64 and assigns it to the MaxSlots field.
 func (o *CapabilitySwitchCapability) SetMaxSlots(v int64) {
 	o.MaxSlots = &v
+}
+
+// GetMinVersionMapForSwitchFeatures returns the MinVersionMapForSwitchFeatures field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetMinVersionMapForSwitchFeatures() []FirmwareFeatureVersionMap {
+	if o == nil {
+		var ret []FirmwareFeatureVersionMap
+		return ret
+	}
+	return o.MinVersionMapForSwitchFeatures
+}
+
+// GetMinVersionMapForSwitchFeaturesOk returns a tuple with the MinVersionMapForSwitchFeatures field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetMinVersionMapForSwitchFeaturesOk() ([]FirmwareFeatureVersionMap, bool) {
+	if o == nil || IsNil(o.MinVersionMapForSwitchFeatures) {
+		return nil, false
+	}
+	return o.MinVersionMapForSwitchFeatures, true
+}
+
+// HasMinVersionMapForSwitchFeatures returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasMinVersionMapForSwitchFeatures() bool {
+	if o != nil && !IsNil(o.MinVersionMapForSwitchFeatures) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinVersionMapForSwitchFeatures gets a reference to the given []FirmwareFeatureVersionMap and assigns it to the MinVersionMapForSwitchFeatures field.
+func (o *CapabilitySwitchCapability) SetMinVersionMapForSwitchFeatures(v []FirmwareFeatureVersionMap) {
+	o.MinVersionMapForSwitchFeatures = v
 }
 
 // GetMinVersionMapWithBreakoutSupport returns the MinVersionMapWithBreakoutSupport field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -884,6 +1031,39 @@ func (o *CapabilitySwitchCapability) SetPortsSupportingFcoe(v []CapabilityPortRa
 	o.PortsSupportingFcoe = v
 }
 
+// GetPortsSupportingInterClusterLink returns the PortsSupportingInterClusterLink field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchCapability) GetPortsSupportingInterClusterLink() []CapabilityPortRange {
+	if o == nil {
+		var ret []CapabilityPortRange
+		return ret
+	}
+	return o.PortsSupportingInterClusterLink
+}
+
+// GetPortsSupportingInterClusterLinkOk returns a tuple with the PortsSupportingInterClusterLink field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchCapability) GetPortsSupportingInterClusterLinkOk() ([]CapabilityPortRange, bool) {
+	if o == nil || IsNil(o.PortsSupportingInterClusterLink) {
+		return nil, false
+	}
+	return o.PortsSupportingInterClusterLink, true
+}
+
+// HasPortsSupportingInterClusterLink returns a boolean if a field has been set.
+func (o *CapabilitySwitchCapability) HasPortsSupportingInterClusterLink() bool {
+	if o != nil && !IsNil(o.PortsSupportingInterClusterLink) {
+		return true
+	}
+
+	return false
+}
+
+// SetPortsSupportingInterClusterLink gets a reference to the given []CapabilityPortRange and assigns it to the PortsSupportingInterClusterLink field.
+func (o *CapabilitySwitchCapability) SetPortsSupportingInterClusterLink(v []CapabilityPortRange) {
+	o.PortsSupportingInterClusterLink = v
+}
+
 // GetPortsSupportingServerRole returns the PortsSupportingServerRole field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilitySwitchCapability) GetPortsSupportingServerRole() []CapabilityPortRange {
 	if o == nil {
@@ -1290,6 +1470,9 @@ func (o CapabilitySwitchCapability) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.AllowedUplinkPcIdRange.IsSet() {
+		toSerialize["AllowedUplinkPcIdRange"] = o.AllowedUplinkPcIdRange.Get()
+	}
 	if !IsNil(o.DefaultFcoeVlan) {
 		toSerialize["DefaultFcoeVlan"] = o.DefaultFcoeVlan
 	}
@@ -1308,14 +1491,23 @@ func (o CapabilitySwitchCapability) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ImmControlsVpcompression) {
 		toSerialize["ImmControlsVpcompression"] = o.ImmControlsVpcompression
 	}
+	if !IsNil(o.InterClusterLinkVlanSupported) {
+		toSerialize["InterClusterLinkVlanSupported"] = o.InterClusterLinkVlanSupported
+	}
 	if !IsNil(o.LocatorBeaconSupported) {
 		toSerialize["LocatorBeaconSupported"] = o.LocatorBeaconSupported
+	}
+	if o.MacsecSupportedPorts != nil {
+		toSerialize["MacsecSupportedPorts"] = o.MacsecSupportedPorts
 	}
 	if !IsNil(o.MaxPorts) {
 		toSerialize["MaxPorts"] = o.MaxPorts
 	}
 	if !IsNil(o.MaxSlots) {
 		toSerialize["MaxSlots"] = o.MaxSlots
+	}
+	if o.MinVersionMapForSwitchFeatures != nil {
+		toSerialize["MinVersionMapForSwitchFeatures"] = o.MinVersionMapForSwitchFeatures
 	}
 	if o.MinVersionMapWithBreakoutSupport.IsSet() {
 		toSerialize["MinVersionMapWithBreakoutSupport"] = o.MinVersionMapWithBreakoutSupport.Get()
@@ -1352,6 +1544,9 @@ func (o CapabilitySwitchCapability) ToMap() (map[string]interface{}, error) {
 	}
 	if o.PortsSupportingFcoe != nil {
 		toSerialize["PortsSupportingFcoe"] = o.PortsSupportingFcoe
+	}
+	if o.PortsSupportingInterClusterLink != nil {
+		toSerialize["PortsSupportingInterClusterLink"] = o.PortsSupportingInterClusterLink
 	}
 	if o.PortsSupportingServerRole != nil {
 		toSerialize["PortsSupportingServerRole"] = o.PortsSupportingServerRole
@@ -1440,7 +1635,8 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType             string                      `json:"ObjectType"`
+		AllowedUplinkPcIdRange NullableCapabilityPcIdRange `json:"AllowedUplinkPcIdRange,omitempty"`
 		// Default Fcoe VLAN associated with this switch.
 		DefaultFcoeVlan *int64 `json:"DefaultFcoeVlan,omitempty"`
 		// Dynamic VIFs support on this switch.
@@ -1452,12 +1648,16 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		FcUplinkPortsAutoNegotiationSupported *bool `json:"FcUplinkPortsAutoNegotiationSupported,omitempty"`
 		// VlanPort Compression is controlled by IMM.
 		ImmControlsVpcompression *bool `json:"ImmControlsVpcompression,omitempty"`
+		// Inter cluster link vlan support on this switch.
+		InterClusterLinkVlanSupported *bool `json:"InterClusterLinkVlanSupported,omitempty"`
 		// Locator Beacon LED support on this switch.
-		LocatorBeaconSupported *bool `json:"LocatorBeaconSupported,omitempty"`
+		LocatorBeaconSupported *bool                 `json:"LocatorBeaconSupported,omitempty"`
+		MacsecSupportedPorts   []CapabilityPortRange `json:"MacsecSupportedPorts,omitempty"`
 		// Maximum allowed physical ports on this switch.
 		MaxPorts *int64 `json:"MaxPorts,omitempty"`
 		// Maximum allowed physical slots on this switch.
 		MaxSlots                           *int64                                `json:"MaxSlots,omitempty"`
+		MinVersionMapForSwitchFeatures     []FirmwareFeatureVersionMap           `json:"MinVersionMapForSwitchFeatures,omitempty"`
 		MinVersionMapWithBreakoutSupport   NullableFirmwareVersionMap            `json:"MinVersionMapWithBreakoutSupport,omitempty"`
 		MinVersionMapWithLocatorLedSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithLocatorLedSupport,omitempty"`
 		MinVersionMapWithNegAuto25gSupport NullableFirmwareVersionMap            `json:"MinVersionMapWithNegAuto25gSupport,omitempty"`
@@ -1470,6 +1670,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		PortsSupportingApplianceRole       []CapabilityPortRange                 `json:"PortsSupportingApplianceRole,omitempty"`
 		PortsSupportingBreakout            []CapabilityPortRange                 `json:"PortsSupportingBreakout,omitempty"`
 		PortsSupportingFcoe                []CapabilityPortRange                 `json:"PortsSupportingFcoe,omitempty"`
+		PortsSupportingInterClusterLink    []CapabilityPortRange                 `json:"PortsSupportingInterClusterLink,omitempty"`
 		PortsSupportingServerRole          []CapabilityPortRange                 `json:"PortsSupportingServerRole,omitempty"`
 		ReservedVsans                      []CapabilityPortRange                 `json:"ReservedVsans,omitempty"`
 		// Sereno Adaptor with Netflow support on this switch.
@@ -1493,15 +1694,19 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		varCapabilitySwitchCapability := _CapabilitySwitchCapability{}
 		varCapabilitySwitchCapability.ClassId = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.ClassId
 		varCapabilitySwitchCapability.ObjectType = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.ObjectType
+		varCapabilitySwitchCapability.AllowedUplinkPcIdRange = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.AllowedUplinkPcIdRange
 		varCapabilitySwitchCapability.DefaultFcoeVlan = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.DefaultFcoeVlan
 		varCapabilitySwitchCapability.DynamicVifsSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.DynamicVifsSupported
 		varCapabilitySwitchCapability.FanModulesSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.FanModulesSupported
 		varCapabilitySwitchCapability.FcEndHostModeReservedVsans = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.FcEndHostModeReservedVsans
 		varCapabilitySwitchCapability.FcUplinkPortsAutoNegotiationSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.FcUplinkPortsAutoNegotiationSupported
 		varCapabilitySwitchCapability.ImmControlsVpcompression = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.ImmControlsVpcompression
+		varCapabilitySwitchCapability.InterClusterLinkVlanSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.InterClusterLinkVlanSupported
 		varCapabilitySwitchCapability.LocatorBeaconSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.LocatorBeaconSupported
+		varCapabilitySwitchCapability.MacsecSupportedPorts = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MacsecSupportedPorts
 		varCapabilitySwitchCapability.MaxPorts = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxPorts
 		varCapabilitySwitchCapability.MaxSlots = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MaxSlots
+		varCapabilitySwitchCapability.MinVersionMapForSwitchFeatures = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapForSwitchFeatures
 		varCapabilitySwitchCapability.MinVersionMapWithBreakoutSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapWithBreakoutSupport
 		varCapabilitySwitchCapability.MinVersionMapWithLocatorLedSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapWithLocatorLedSupport
 		varCapabilitySwitchCapability.MinVersionMapWithNegAuto25gSupport = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.MinVersionMapWithNegAuto25gSupport
@@ -1514,6 +1719,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		varCapabilitySwitchCapability.PortsSupportingApplianceRole = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupportingApplianceRole
 		varCapabilitySwitchCapability.PortsSupportingBreakout = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupportingBreakout
 		varCapabilitySwitchCapability.PortsSupportingFcoe = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupportingFcoe
+		varCapabilitySwitchCapability.PortsSupportingInterClusterLink = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupportingInterClusterLink
 		varCapabilitySwitchCapability.PortsSupportingServerRole = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.PortsSupportingServerRole
 		varCapabilitySwitchCapability.ReservedVsans = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.ReservedVsans
 		varCapabilitySwitchCapability.SerenoNetflowSupported = varCapabilitySwitchCapabilityWithoutEmbeddedStruct.SerenoNetflowSupported
@@ -1544,15 +1750,19 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AllowedUplinkPcIdRange")
 		delete(additionalProperties, "DefaultFcoeVlan")
 		delete(additionalProperties, "DynamicVifsSupported")
 		delete(additionalProperties, "FanModulesSupported")
 		delete(additionalProperties, "FcEndHostModeReservedVsans")
 		delete(additionalProperties, "FcUplinkPortsAutoNegotiationSupported")
 		delete(additionalProperties, "ImmControlsVpcompression")
+		delete(additionalProperties, "InterClusterLinkVlanSupported")
 		delete(additionalProperties, "LocatorBeaconSupported")
+		delete(additionalProperties, "MacsecSupportedPorts")
 		delete(additionalProperties, "MaxPorts")
 		delete(additionalProperties, "MaxSlots")
+		delete(additionalProperties, "MinVersionMapForSwitchFeatures")
 		delete(additionalProperties, "MinVersionMapWithBreakoutSupport")
 		delete(additionalProperties, "MinVersionMapWithLocatorLedSupport")
 		delete(additionalProperties, "MinVersionMapWithNegAuto25gSupport")
@@ -1565,6 +1775,7 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PortsSupportingApplianceRole")
 		delete(additionalProperties, "PortsSupportingBreakout")
 		delete(additionalProperties, "PortsSupportingFcoe")
+		delete(additionalProperties, "PortsSupportingInterClusterLink")
 		delete(additionalProperties, "PortsSupportingServerRole")
 		delete(additionalProperties, "ReservedVsans")
 		delete(additionalProperties, "SerenoNetflowSupported")

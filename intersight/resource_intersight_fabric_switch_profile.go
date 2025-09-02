@@ -1055,6 +1055,14 @@ func resourceFabricSwitchProfile() *schema.Resource {
 					},
 				},
 			},
+			"target_platform": {
+				Description:  "Type of the profile. 'UcsDomain' profile for network and management configuration on UCS Fabric Interconnect. 'UnifiedEdge' profile for network, management and chassis configuration on Unified Edge.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
+				Optional:     true,
+				Default:      "UCS Domain",
+				ForceNew:     true,
+			},
 			"type": {
 				Description:  "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 				Type:         schema.TypeString,
@@ -1671,6 +1679,11 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -1901,6 +1914,10 @@ func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, 
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricSwitchProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
+		return diag.Errorf("error occurred while setting property TargetPlatform in FabricSwitchProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
@@ -2367,6 +2384,12 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("target_platform") {
+		v := d.Get("target_platform")
+		x := (v.(string))
+		o.SetTargetPlatform(x)
 	}
 
 	if d.HasChange("type") {

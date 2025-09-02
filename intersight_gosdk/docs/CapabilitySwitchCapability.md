@@ -6,15 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.SwitchCapability"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.SwitchCapability"]
+**AllowedUplinkPcIdRange** | Pointer to [**NullableCapabilityPcIdRange**](CapabilityPcIdRange.md) |  | [optional] 
 **DefaultFcoeVlan** | Pointer to **int64** | Default Fcoe VLAN associated with this switch. | [optional] [readonly] 
 **DynamicVifsSupported** | Pointer to **bool** | Dynamic VIFs support on this switch. | [optional] [readonly] 
 **FanModulesSupported** | Pointer to **bool** | Fan Modules support on this switch. | [optional] [readonly] 
 **FcEndHostModeReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **FcUplinkPortsAutoNegotiationSupported** | Pointer to **bool** | Fc Uplink ports auto negotiation speed support on this switch. | [optional] [readonly] 
 **ImmControlsVpcompression** | Pointer to **bool** | VlanPort Compression is controlled by IMM. | [optional] [readonly] 
+**InterClusterLinkVlanSupported** | Pointer to **bool** | Inter cluster link vlan support on this switch. | [optional] [readonly] 
 **LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] [readonly] 
+**MacsecSupportedPorts** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] [readonly] 
 **MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] [readonly] 
+**MinVersionMapForSwitchFeatures** | Pointer to [**[]FirmwareFeatureVersionMap**](FirmwareFeatureVersionMap.md) |  | [optional] 
 **MinVersionMapWithBreakoutSupport** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
 **MinVersionMapWithLocatorLedSupport** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
 **MinVersionMapWithNegAuto25gSupport** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
@@ -27,6 +31,7 @@ Name | Type | Description | Notes
 **PortsSupportingApplianceRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingBreakout** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingFcoe** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
+**PortsSupportingInterClusterLink** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingServerRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **ReservedVsans** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **SerenoNetflowSupported** | Pointer to **bool** | Sereno Adaptor with Netflow support on this switch. | [optional] [readonly] 
@@ -98,6 +103,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAllowedUplinkPcIdRange
+
+`func (o *CapabilitySwitchCapability) GetAllowedUplinkPcIdRange() CapabilityPcIdRange`
+
+GetAllowedUplinkPcIdRange returns the AllowedUplinkPcIdRange field if non-nil, zero value otherwise.
+
+### GetAllowedUplinkPcIdRangeOk
+
+`func (o *CapabilitySwitchCapability) GetAllowedUplinkPcIdRangeOk() (*CapabilityPcIdRange, bool)`
+
+GetAllowedUplinkPcIdRangeOk returns a tuple with the AllowedUplinkPcIdRange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedUplinkPcIdRange
+
+`func (o *CapabilitySwitchCapability) SetAllowedUplinkPcIdRange(v CapabilityPcIdRange)`
+
+SetAllowedUplinkPcIdRange sets AllowedUplinkPcIdRange field to given value.
+
+### HasAllowedUplinkPcIdRange
+
+`func (o *CapabilitySwitchCapability) HasAllowedUplinkPcIdRange() bool`
+
+HasAllowedUplinkPcIdRange returns a boolean if a field has been set.
+
+### SetAllowedUplinkPcIdRangeNil
+
+`func (o *CapabilitySwitchCapability) SetAllowedUplinkPcIdRangeNil(b bool)`
+
+ SetAllowedUplinkPcIdRangeNil sets the value for AllowedUplinkPcIdRange to be an explicit nil
+
+### UnsetAllowedUplinkPcIdRange
+`func (o *CapabilitySwitchCapability) UnsetAllowedUplinkPcIdRange()`
+
+UnsetAllowedUplinkPcIdRange ensures that no value is present for AllowedUplinkPcIdRange, not even an explicit nil
 ### GetDefaultFcoeVlan
 
 `func (o *CapabilitySwitchCapability) GetDefaultFcoeVlan() int64`
@@ -258,6 +298,31 @@ SetImmControlsVpcompression sets ImmControlsVpcompression field to given value.
 
 HasImmControlsVpcompression returns a boolean if a field has been set.
 
+### GetInterClusterLinkVlanSupported
+
+`func (o *CapabilitySwitchCapability) GetInterClusterLinkVlanSupported() bool`
+
+GetInterClusterLinkVlanSupported returns the InterClusterLinkVlanSupported field if non-nil, zero value otherwise.
+
+### GetInterClusterLinkVlanSupportedOk
+
+`func (o *CapabilitySwitchCapability) GetInterClusterLinkVlanSupportedOk() (*bool, bool)`
+
+GetInterClusterLinkVlanSupportedOk returns a tuple with the InterClusterLinkVlanSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterClusterLinkVlanSupported
+
+`func (o *CapabilitySwitchCapability) SetInterClusterLinkVlanSupported(v bool)`
+
+SetInterClusterLinkVlanSupported sets InterClusterLinkVlanSupported field to given value.
+
+### HasInterClusterLinkVlanSupported
+
+`func (o *CapabilitySwitchCapability) HasInterClusterLinkVlanSupported() bool`
+
+HasInterClusterLinkVlanSupported returns a boolean if a field has been set.
+
 ### GetLocatorBeaconSupported
 
 `func (o *CapabilitySwitchCapability) GetLocatorBeaconSupported() bool`
@@ -283,6 +348,41 @@ SetLocatorBeaconSupported sets LocatorBeaconSupported field to given value.
 
 HasLocatorBeaconSupported returns a boolean if a field has been set.
 
+### GetMacsecSupportedPorts
+
+`func (o *CapabilitySwitchCapability) GetMacsecSupportedPorts() []CapabilityPortRange`
+
+GetMacsecSupportedPorts returns the MacsecSupportedPorts field if non-nil, zero value otherwise.
+
+### GetMacsecSupportedPortsOk
+
+`func (o *CapabilitySwitchCapability) GetMacsecSupportedPortsOk() (*[]CapabilityPortRange, bool)`
+
+GetMacsecSupportedPortsOk returns a tuple with the MacsecSupportedPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacsecSupportedPorts
+
+`func (o *CapabilitySwitchCapability) SetMacsecSupportedPorts(v []CapabilityPortRange)`
+
+SetMacsecSupportedPorts sets MacsecSupportedPorts field to given value.
+
+### HasMacsecSupportedPorts
+
+`func (o *CapabilitySwitchCapability) HasMacsecSupportedPorts() bool`
+
+HasMacsecSupportedPorts returns a boolean if a field has been set.
+
+### SetMacsecSupportedPortsNil
+
+`func (o *CapabilitySwitchCapability) SetMacsecSupportedPortsNil(b bool)`
+
+ SetMacsecSupportedPortsNil sets the value for MacsecSupportedPorts to be an explicit nil
+
+### UnsetMacsecSupportedPorts
+`func (o *CapabilitySwitchCapability) UnsetMacsecSupportedPorts()`
+
+UnsetMacsecSupportedPorts ensures that no value is present for MacsecSupportedPorts, not even an explicit nil
 ### GetMaxPorts
 
 `func (o *CapabilitySwitchCapability) GetMaxPorts() int64`
@@ -333,6 +433,41 @@ SetMaxSlots sets MaxSlots field to given value.
 
 HasMaxSlots returns a boolean if a field has been set.
 
+### GetMinVersionMapForSwitchFeatures
+
+`func (o *CapabilitySwitchCapability) GetMinVersionMapForSwitchFeatures() []FirmwareFeatureVersionMap`
+
+GetMinVersionMapForSwitchFeatures returns the MinVersionMapForSwitchFeatures field if non-nil, zero value otherwise.
+
+### GetMinVersionMapForSwitchFeaturesOk
+
+`func (o *CapabilitySwitchCapability) GetMinVersionMapForSwitchFeaturesOk() (*[]FirmwareFeatureVersionMap, bool)`
+
+GetMinVersionMapForSwitchFeaturesOk returns a tuple with the MinVersionMapForSwitchFeatures field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinVersionMapForSwitchFeatures
+
+`func (o *CapabilitySwitchCapability) SetMinVersionMapForSwitchFeatures(v []FirmwareFeatureVersionMap)`
+
+SetMinVersionMapForSwitchFeatures sets MinVersionMapForSwitchFeatures field to given value.
+
+### HasMinVersionMapForSwitchFeatures
+
+`func (o *CapabilitySwitchCapability) HasMinVersionMapForSwitchFeatures() bool`
+
+HasMinVersionMapForSwitchFeatures returns a boolean if a field has been set.
+
+### SetMinVersionMapForSwitchFeaturesNil
+
+`func (o *CapabilitySwitchCapability) SetMinVersionMapForSwitchFeaturesNil(b bool)`
+
+ SetMinVersionMapForSwitchFeaturesNil sets the value for MinVersionMapForSwitchFeatures to be an explicit nil
+
+### UnsetMinVersionMapForSwitchFeatures
+`func (o *CapabilitySwitchCapability) UnsetMinVersionMapForSwitchFeatures()`
+
+UnsetMinVersionMapForSwitchFeatures ensures that no value is present for MinVersionMapForSwitchFeatures, not even an explicit nil
 ### GetMinVersionMapWithBreakoutSupport
 
 `func (o *CapabilitySwitchCapability) GetMinVersionMapWithBreakoutSupport() FirmwareVersionMap`
@@ -753,6 +888,41 @@ HasPortsSupportingFcoe returns a boolean if a field has been set.
 `func (o *CapabilitySwitchCapability) UnsetPortsSupportingFcoe()`
 
 UnsetPortsSupportingFcoe ensures that no value is present for PortsSupportingFcoe, not even an explicit nil
+### GetPortsSupportingInterClusterLink
+
+`func (o *CapabilitySwitchCapability) GetPortsSupportingInterClusterLink() []CapabilityPortRange`
+
+GetPortsSupportingInterClusterLink returns the PortsSupportingInterClusterLink field if non-nil, zero value otherwise.
+
+### GetPortsSupportingInterClusterLinkOk
+
+`func (o *CapabilitySwitchCapability) GetPortsSupportingInterClusterLinkOk() (*[]CapabilityPortRange, bool)`
+
+GetPortsSupportingInterClusterLinkOk returns a tuple with the PortsSupportingInterClusterLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortsSupportingInterClusterLink
+
+`func (o *CapabilitySwitchCapability) SetPortsSupportingInterClusterLink(v []CapabilityPortRange)`
+
+SetPortsSupportingInterClusterLink sets PortsSupportingInterClusterLink field to given value.
+
+### HasPortsSupportingInterClusterLink
+
+`func (o *CapabilitySwitchCapability) HasPortsSupportingInterClusterLink() bool`
+
+HasPortsSupportingInterClusterLink returns a boolean if a field has been set.
+
+### SetPortsSupportingInterClusterLinkNil
+
+`func (o *CapabilitySwitchCapability) SetPortsSupportingInterClusterLinkNil(b bool)`
+
+ SetPortsSupportingInterClusterLinkNil sets the value for PortsSupportingInterClusterLink to be an explicit nil
+
+### UnsetPortsSupportingInterClusterLink
+`func (o *CapabilitySwitchCapability) UnsetPortsSupportingInterClusterLink()`
+
+UnsetPortsSupportingInterClusterLink ensures that no value is present for PortsSupportingInterClusterLink, not even an explicit nil
 ### GetPortsSupportingServerRole
 
 `func (o *CapabilitySwitchCapability) GetPortsSupportingServerRole() []CapabilityPortRange`

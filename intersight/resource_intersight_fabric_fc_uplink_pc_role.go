@@ -365,7 +365,7 @@ func resourceFabricFcUplinkPcRole() *schema.Resource {
 			"user_label": {
 				Description:  "The user defined label assigned to the a Port.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[ !#$%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 127)),
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[!#%\\s+&\\(\\)\\*\\+,\\-\\./:;\\?@\\[\\]_\\{\\|\\}~a-zA-Z0-9]*$"), ""), validation.StringLenBetween(0, 128)),
 				Optional:     true,
 			},
 			"version_context": {

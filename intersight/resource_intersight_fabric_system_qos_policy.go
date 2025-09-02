@@ -162,10 +162,9 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							Default:     true,
 						},
 						"weight": {
-							Description:  "The weight of the QoS Class controls the distribution of bandwidth between QoS Classes,\nwith the same priority after the Guarantees for the QoS Classes are reached.",
-							Type:         schema.TypeInt,
-							ValidateFunc: validation.IntBetween(0, 10),
-							Optional:     true,
+							Description: "The weight of the QoS Class controls the distribution of bandwidth between QoS Classes,\nwith the same priority after the Guarantees for the QoS Classes are reached.",
+							Type:        schema.TypeInt,
+							Optional:    true,
 						},
 					},
 				},
@@ -432,6 +431,14 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 						},
 					},
 				},
+			},
+			"target_platform": {
+				Description:  "The target platform type of the system QoS policy.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"UCS Domain", "Unified Edge"}, false),
+				Optional:     true,
+				Default:      "UCS Domain",
+				ForceNew:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -820,6 +827,11 @@ func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricSystemQosPolicy(conn.ctx).FabricSystemQosPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -940,6 +952,10 @@ func resourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in FabricSystemQosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
+		return diag.Errorf("error occurred while setting property TargetPlatform in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1183,6 +1199,12 @@ func resourceFabricSystemQosPolicyUpdate(c context.Context, d *schema.ResourceDa
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("target_platform") {
+		v := d.Get("target_platform")
+		x := (v.(string))
+		o.SetTargetPlatform(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricSystemQosPolicy(conn.ctx, d.Id()).FabricSystemQosPolicy(*o)

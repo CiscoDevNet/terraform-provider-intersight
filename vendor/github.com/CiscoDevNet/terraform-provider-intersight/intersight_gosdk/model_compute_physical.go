@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -39,6 +39,10 @@ type ComputePhysical struct {
 	BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
 	// The BMC inventory readiness status of the server.
 	BmcInventoryReady *bool `json:"BmcInventoryReady,omitempty"`
+	// The boot progress state of a rack or blade server. * `None` - The server is powered off. * `OSBootStarted` - The operating system boot process has started. * `OSRunning` - The operating system boot process has started and running. * `OEM` - The server is in an OEM-defined startup state.
+	BootLastState *string `json:"BootLastState,omitempty"`
+	// The last known OEM-defined startup state of a rack or blade server. * `None` - The server has not yet completed OEM initialization. * `PlatformInitializing` - The server is initializing after being powered on.
+	BootOemLastState *string `json:"BootOemLastState,omitempty"`
 	// Cooling mode representation of the server. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
 	CoolingMode *string `json:"CoolingMode,omitempty"`
 	// Total processing capacity of the server.
@@ -408,6 +412,70 @@ func (o *ComputePhysical) HasBmcInventoryReady() bool {
 // SetBmcInventoryReady gets a reference to the given bool and assigns it to the BmcInventoryReady field.
 func (o *ComputePhysical) SetBmcInventoryReady(v bool) {
 	o.BmcInventoryReady = &v
+}
+
+// GetBootLastState returns the BootLastState field value if set, zero value otherwise.
+func (o *ComputePhysical) GetBootLastState() string {
+	if o == nil || IsNil(o.BootLastState) {
+		var ret string
+		return ret
+	}
+	return *o.BootLastState
+}
+
+// GetBootLastStateOk returns a tuple with the BootLastState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetBootLastStateOk() (*string, bool) {
+	if o == nil || IsNil(o.BootLastState) {
+		return nil, false
+	}
+	return o.BootLastState, true
+}
+
+// HasBootLastState returns a boolean if a field has been set.
+func (o *ComputePhysical) HasBootLastState() bool {
+	if o != nil && !IsNil(o.BootLastState) {
+		return true
+	}
+
+	return false
+}
+
+// SetBootLastState gets a reference to the given string and assigns it to the BootLastState field.
+func (o *ComputePhysical) SetBootLastState(v string) {
+	o.BootLastState = &v
+}
+
+// GetBootOemLastState returns the BootOemLastState field value if set, zero value otherwise.
+func (o *ComputePhysical) GetBootOemLastState() string {
+	if o == nil || IsNil(o.BootOemLastState) {
+		var ret string
+		return ret
+	}
+	return *o.BootOemLastState
+}
+
+// GetBootOemLastStateOk returns a tuple with the BootOemLastState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetBootOemLastStateOk() (*string, bool) {
+	if o == nil || IsNil(o.BootOemLastState) {
+		return nil, false
+	}
+	return o.BootOemLastState, true
+}
+
+// HasBootOemLastState returns a boolean if a field has been set.
+func (o *ComputePhysical) HasBootOemLastState() bool {
+	if o != nil && !IsNil(o.BootOemLastState) {
+		return true
+	}
+
+	return false
+}
+
+// SetBootOemLastState gets a reference to the given string and assigns it to the BootOemLastState field.
+func (o *ComputePhysical) SetBootOemLastState(v string) {
+	o.BootOemLastState = &v
 }
 
 // GetCoolingMode returns the CoolingMode field value if set, zero value otherwise.
@@ -1969,6 +2037,12 @@ func (o ComputePhysical) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BmcInventoryReady) {
 		toSerialize["BmcInventoryReady"] = o.BmcInventoryReady
 	}
+	if !IsNil(o.BootLastState) {
+		toSerialize["BootLastState"] = o.BootLastState
+	}
+	if !IsNil(o.BootOemLastState) {
+		toSerialize["BootOemLastState"] = o.BootOemLastState
+	}
 	if !IsNil(o.CoolingMode) {
 		toSerialize["CoolingMode"] = o.CoolingMode
 	}
@@ -2170,6 +2244,10 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
 		// The BMC inventory readiness status of the server.
 		BmcInventoryReady *bool `json:"BmcInventoryReady,omitempty"`
+		// The boot progress state of a rack or blade server. * `None` - The server is powered off. * `OSBootStarted` - The operating system boot process has started. * `OSRunning` - The operating system boot process has started and running. * `OEM` - The server is in an OEM-defined startup state.
+		BootLastState *string `json:"BootLastState,omitempty"`
+		// The last known OEM-defined startup state of a rack or blade server. * `None` - The server has not yet completed OEM initialization. * `PlatformInitializing` - The server is initializing after being powered on.
+		BootOemLastState *string `json:"BootOemLastState,omitempty"`
 		// Cooling mode representation of the server. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
 		CoolingMode *string `json:"CoolingMode,omitempty"`
 		// Total processing capacity of the server.
@@ -2273,6 +2351,8 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysical.AvailableMemory = varComputePhysicalWithoutEmbeddedStruct.AvailableMemory
 		varComputePhysical.BiosPostComplete = varComputePhysicalWithoutEmbeddedStruct.BiosPostComplete
 		varComputePhysical.BmcInventoryReady = varComputePhysicalWithoutEmbeddedStruct.BmcInventoryReady
+		varComputePhysical.BootLastState = varComputePhysicalWithoutEmbeddedStruct.BootLastState
+		varComputePhysical.BootOemLastState = varComputePhysicalWithoutEmbeddedStruct.BootOemLastState
 		varComputePhysical.CoolingMode = varComputePhysicalWithoutEmbeddedStruct.CoolingMode
 		varComputePhysical.CpuCapacity = varComputePhysicalWithoutEmbeddedStruct.CpuCapacity
 		varComputePhysical.DimmBlocklisting = varComputePhysicalWithoutEmbeddedStruct.DimmBlocklisting
@@ -2344,6 +2424,8 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AvailableMemory")
 		delete(additionalProperties, "BiosPostComplete")
 		delete(additionalProperties, "BmcInventoryReady")
+		delete(additionalProperties, "BootLastState")
+		delete(additionalProperties, "BootOemLastState")
 		delete(additionalProperties, "CoolingMode")
 		delete(additionalProperties, "CpuCapacity")
 		delete(additionalProperties, "DimmBlocklisting")

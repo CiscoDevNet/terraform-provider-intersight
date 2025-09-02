@@ -21,6 +21,11 @@ func getFabricSwitchClusterProfileSchema() map[string]*schema.Schema {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"action": {
+			Description: "The support actions are -- Deploy, Unassign.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -29,6 +34,41 @@ func getFabricSwitchClusterProfileSchema() map[string]*schema.Schema {
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"assigned_entity": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -444,6 +484,11 @@ func getFabricSwitchClusterProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"target_platform": {
+			Description: "Type of the profile. 'UcsDomain' profile for network and management configuration on UCS Fabric Interconnect. 'UnifiedEdge' profile for network, management and chassis configuration on Unified Edge.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"type": {
 			Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 			Type:        schema.TypeString,
@@ -594,6 +639,11 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 		o.SetAccountMoid(x)
 	}
 
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -641,6 +691,49 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetAncestors(x)
+	}
+
+	if v, ok := d.GetOk("assigned_entity"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAssignedEntity(x)
+		}
 	}
 
 	if v, ok := d.GetOk("class_id"); ok {
@@ -1091,6 +1184,11 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -1211,9 +1309,12 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["assigned_entity"] = flattenMapMoBaseMoRelationship(s.GetAssignedEntity(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster_assignments"] = flattenListFabricClusterAssignment(s.GetClusterAssignments(), d)
@@ -1245,6 +1346,7 @@ func dataSourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resou
 				temp["switch_profiles_count"] = (s.GetSwitchProfilesCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_platform"] = (s.GetTargetPlatform())
 				temp["type"] = (s.GetType())
 				temp["user_label"] = (s.GetUserLabel())
 

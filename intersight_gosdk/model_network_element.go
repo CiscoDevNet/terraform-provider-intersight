@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -70,6 +70,8 @@ type NetworkElement struct {
 	InbandVlan *int64 `json:"InbandVlan,omitempty"`
 	// The intercluster link state of the switch. * `Unknown` - The operational state of the link is not known. * `Up` - The operational state of the link is up. * `Down` - The operational state of the link is down. * `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down.
 	InterClusterLinkState *string `json:"InterClusterLinkState,omitempty"`
+	// Jumbo Frame configuration for the switch.
+	JumboFrameEnabled *bool `json:"JumboFrameEnabled,omitempty"`
 	// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// Operational state of the Fabric Evacuation feature, for this switch. * `` - Evacuation state of the switch is unknown. * `enabled` - Evacuation state of the switch is enabled. * `disabled` - Evacuation state of the switch is disabled. * `applying` - Evacuation state of the switch when evacuation is in progress. * `on` - Evacuation state of the switch is enabled. * `off` - Evacuation state of the switch is disabled. * `N/A` - Evacuation state of the switch is not applicable.
@@ -102,13 +104,15 @@ type NetworkElement struct {
 	PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
 	// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 	ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
+	// The Slot Id of the network Element when embedded inside a chassis.
+	SlotId *int64 `json:"SlotId,omitempty"`
 	// The status of the switch.
 	Status *string `json:"Status,omitempty"`
 	// The Switch Id of the network Element.
 	SwitchId *string `json:"SwitchId,omitempty"`
 	// The name of switch profile associated with the switch.
 	SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
-	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
+	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices. * `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.
 	SwitchType *string `json:"SwitchType,omitempty"`
 	// System up time of the switch.
 	SystemUpTime *string `json:"SystemUpTime,omitempty"`
@@ -123,11 +127,13 @@ type NetworkElement struct {
 	// An array of relationships to equipmentSwitchCard resources.
 	Cards []EquipmentSwitchCardRelationship `json:"Cards,omitempty"`
 	// An array of relationships to networkDiscoveredNeighbor resources.
-	CdpNeighbor []NetworkDiscoveredNeighborRelationship `json:"CdpNeighbor,omitempty"`
+	CdpNeighbor       []NetworkDiscoveredNeighborRelationship        `json:"CdpNeighbor,omitempty"`
+	ChassisController NullableEquipmentChassisControllerRelationship `json:"ChassisController,omitempty"`
 	// An array of relationships to consoleConsoleConfig resources.
 	Console []ConsoleConsoleConfigRelationship `json:"Console,omitempty"`
 	// An array of relationships to networkDns resources.
-	Dns []NetworkDnsRelationship `json:"Dns,omitempty"`
+	Dns              []NetworkDnsRelationship             `json:"Dns,omitempty"`
+	EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to etherPortChannel resources.
 	EtherPortChannels []EtherPortChannelRelationship `json:"EtherPortChannels,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
@@ -930,6 +936,38 @@ func (o *NetworkElement) SetInterClusterLinkState(v string) {
 	o.InterClusterLinkState = &v
 }
 
+// GetJumboFrameEnabled returns the JumboFrameEnabled field value if set, zero value otherwise.
+func (o *NetworkElement) GetJumboFrameEnabled() bool {
+	if o == nil || IsNil(o.JumboFrameEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.JumboFrameEnabled
+}
+
+// GetJumboFrameEnabledOk returns a tuple with the JumboFrameEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetJumboFrameEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.JumboFrameEnabled) {
+		return nil, false
+	}
+	return o.JumboFrameEnabled, true
+}
+
+// HasJumboFrameEnabled returns a boolean if a field has been set.
+func (o *NetworkElement) HasJumboFrameEnabled() bool {
+	if o != nil && !IsNil(o.JumboFrameEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetJumboFrameEnabled gets a reference to the given bool and assigns it to the JumboFrameEnabled field.
+func (o *NetworkElement) SetJumboFrameEnabled(v bool) {
+	o.JumboFrameEnabled = &v
+}
+
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
 func (o *NetworkElement) GetManagementMode() string {
 	if o == nil || IsNil(o.ManagementMode) {
@@ -1442,6 +1480,38 @@ func (o *NetworkElement) SetReservedVlanStartId(v int64) {
 	o.ReservedVlanStartId = &v
 }
 
+// GetSlotId returns the SlotId field value if set, zero value otherwise.
+func (o *NetworkElement) GetSlotId() int64 {
+	if o == nil || IsNil(o.SlotId) {
+		var ret int64
+		return ret
+	}
+	return *o.SlotId
+}
+
+// GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetSlotIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SlotId) {
+		return nil, false
+	}
+	return o.SlotId, true
+}
+
+// HasSlotId returns a boolean if a field has been set.
+func (o *NetworkElement) HasSlotId() bool {
+	if o != nil && !IsNil(o.SlotId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotId gets a reference to the given int64 and assigns it to the SlotId field.
+func (o *NetworkElement) SetSlotId(v int64) {
+	o.SlotId = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *NetworkElement) GetStatus() string {
 	if o == nil || IsNil(o.Status) {
@@ -1796,6 +1866,49 @@ func (o *NetworkElement) SetCdpNeighbor(v []NetworkDiscoveredNeighborRelationshi
 	o.CdpNeighbor = v
 }
 
+// GetChassisController returns the ChassisController field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElement) GetChassisController() EquipmentChassisControllerRelationship {
+	if o == nil || IsNil(o.ChassisController.Get()) {
+		var ret EquipmentChassisControllerRelationship
+		return ret
+	}
+	return *o.ChassisController.Get()
+}
+
+// GetChassisControllerOk returns a tuple with the ChassisController field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElement) GetChassisControllerOk() (*EquipmentChassisControllerRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChassisController.Get(), o.ChassisController.IsSet()
+}
+
+// HasChassisController returns a boolean if a field has been set.
+func (o *NetworkElement) HasChassisController() bool {
+	if o != nil && o.ChassisController.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisController gets a reference to the given NullableEquipmentChassisControllerRelationship and assigns it to the ChassisController field.
+func (o *NetworkElement) SetChassisController(v EquipmentChassisControllerRelationship) {
+	o.ChassisController.Set(&v)
+}
+
+// SetChassisControllerNil sets the value for ChassisController to be an explicit nil
+func (o *NetworkElement) SetChassisControllerNil() {
+	o.ChassisController.Set(nil)
+}
+
+// UnsetChassisController ensures that no value is present for ChassisController, not even an explicit nil
+func (o *NetworkElement) UnsetChassisController() {
+	o.ChassisController.Unset()
+}
+
 // GetConsole returns the Console field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkElement) GetConsole() []ConsoleConsoleConfigRelationship {
 	if o == nil {
@@ -1860,6 +1973,49 @@ func (o *NetworkElement) HasDns() bool {
 // SetDns gets a reference to the given []NetworkDnsRelationship and assigns it to the Dns field.
 func (o *NetworkElement) SetDns(v []NetworkDnsRelationship) {
 	o.Dns = v
+}
+
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElement) GetEquipmentChassis() EquipmentChassisRelationship {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
+		var ret EquipmentChassisRelationship
+		return ret
+	}
+	return *o.EquipmentChassis.Get()
+}
+
+// GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElement) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
+}
+
+// HasEquipmentChassis returns a boolean if a field has been set.
+func (o *NetworkElement) HasEquipmentChassis() bool {
+	if o != nil && o.EquipmentChassis.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+func (o *NetworkElement) SetEquipmentChassis(v EquipmentChassisRelationship) {
+	o.EquipmentChassis.Set(&v)
+}
+
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *NetworkElement) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *NetworkElement) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
 }
 
 // GetEtherPortChannels returns the EtherPortChannels field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -3005,6 +3161,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InterClusterLinkState) {
 		toSerialize["InterClusterLinkState"] = o.InterClusterLinkState
 	}
+	if !IsNil(o.JumboFrameEnabled) {
+		toSerialize["JumboFrameEnabled"] = o.JumboFrameEnabled
+	}
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
@@ -3053,6 +3212,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReservedVlanStartId) {
 		toSerialize["ReservedVlanStartId"] = o.ReservedVlanStartId
 	}
+	if !IsNil(o.SlotId) {
+		toSerialize["SlotId"] = o.SlotId
+	}
 	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
@@ -3086,11 +3248,17 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if o.CdpNeighbor != nil {
 		toSerialize["CdpNeighbor"] = o.CdpNeighbor
 	}
+	if o.ChassisController.IsSet() {
+		toSerialize["ChassisController"] = o.ChassisController.Get()
+	}
 	if o.Console != nil {
 		toSerialize["Console"] = o.Console
 	}
 	if o.Dns != nil {
 		toSerialize["Dns"] = o.Dns
+	}
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
 	if o.EtherPortChannels != nil {
 		toSerialize["EtherPortChannels"] = o.EtherPortChannels
@@ -3276,6 +3444,8 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		InbandVlan *int64 `json:"InbandVlan,omitempty"`
 		// The intercluster link state of the switch. * `Unknown` - The operational state of the link is not known. * `Up` - The operational state of the link is up. * `Down` - The operational state of the link is down. * `Degraded` - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down.
 		InterClusterLinkState *string `json:"InterClusterLinkState,omitempty"`
+		// Jumbo Frame configuration for the switch.
+		JumboFrameEnabled *bool `json:"JumboFrameEnabled,omitempty"`
 		// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// Operational state of the Fabric Evacuation feature, for this switch. * `` - Evacuation state of the switch is unknown. * `enabled` - Evacuation state of the switch is enabled. * `disabled` - Evacuation state of the switch is disabled. * `applying` - Evacuation state of the switch when evacuation is in progress. * `on` - Evacuation state of the switch is enabled. * `off` - Evacuation state of the switch is disabled. * `N/A` - Evacuation state of the switch is not applicable.
@@ -3308,13 +3478,15 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
 		// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 		ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
+		// The Slot Id of the network Element when embedded inside a chassis.
+		SlotId *int64 `json:"SlotId,omitempty"`
 		// The status of the switch.
 		Status *string `json:"Status,omitempty"`
 		// The Switch Id of the network Element.
 		SwitchId *string `json:"SwitchId,omitempty"`
 		// The name of switch profile associated with the switch.
 		SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
-		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
+		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices. * `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.
 		SwitchType *string `json:"SwitchType,omitempty"`
 		// System up time of the switch.
 		SystemUpTime *string `json:"SystemUpTime,omitempty"`
@@ -3329,11 +3501,13 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		// An array of relationships to equipmentSwitchCard resources.
 		Cards []EquipmentSwitchCardRelationship `json:"Cards,omitempty"`
 		// An array of relationships to networkDiscoveredNeighbor resources.
-		CdpNeighbor []NetworkDiscoveredNeighborRelationship `json:"CdpNeighbor,omitempty"`
+		CdpNeighbor       []NetworkDiscoveredNeighborRelationship        `json:"CdpNeighbor,omitempty"`
+		ChassisController NullableEquipmentChassisControllerRelationship `json:"ChassisController,omitempty"`
 		// An array of relationships to consoleConsoleConfig resources.
 		Console []ConsoleConsoleConfigRelationship `json:"Console,omitempty"`
 		// An array of relationships to networkDns resources.
-		Dns []NetworkDnsRelationship `json:"Dns,omitempty"`
+		Dns              []NetworkDnsRelationship             `json:"Dns,omitempty"`
+		EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 		// An array of relationships to etherPortChannel resources.
 		EtherPortChannels []EtherPortChannelRelationship `json:"EtherPortChannels,omitempty"`
 		// An array of relationships to equipmentFanModule resources.
@@ -3411,6 +3585,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.InbandIpMask = varNetworkElementWithoutEmbeddedStruct.InbandIpMask
 		varNetworkElement.InbandVlan = varNetworkElementWithoutEmbeddedStruct.InbandVlan
 		varNetworkElement.InterClusterLinkState = varNetworkElementWithoutEmbeddedStruct.InterClusterLinkState
+		varNetworkElement.JumboFrameEnabled = varNetworkElementWithoutEmbeddedStruct.JumboFrameEnabled
 		varNetworkElement.ManagementMode = varNetworkElementWithoutEmbeddedStruct.ManagementMode
 		varNetworkElement.OperEvacState = varNetworkElementWithoutEmbeddedStruct.OperEvacState
 		varNetworkElement.Operability = varNetworkElementWithoutEmbeddedStruct.Operability
@@ -3427,6 +3602,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.PartNumber = varNetworkElementWithoutEmbeddedStruct.PartNumber
 		varNetworkElement.PeerFirmwareOutOfSync = varNetworkElementWithoutEmbeddedStruct.PeerFirmwareOutOfSync
 		varNetworkElement.ReservedVlanStartId = varNetworkElementWithoutEmbeddedStruct.ReservedVlanStartId
+		varNetworkElement.SlotId = varNetworkElementWithoutEmbeddedStruct.SlotId
 		varNetworkElement.Status = varNetworkElementWithoutEmbeddedStruct.Status
 		varNetworkElement.SwitchId = varNetworkElementWithoutEmbeddedStruct.SwitchId
 		varNetworkElement.SwitchProfileName = varNetworkElementWithoutEmbeddedStruct.SwitchProfileName
@@ -3438,8 +3614,10 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.Version = varNetworkElementWithoutEmbeddedStruct.Version
 		varNetworkElement.Cards = varNetworkElementWithoutEmbeddedStruct.Cards
 		varNetworkElement.CdpNeighbor = varNetworkElementWithoutEmbeddedStruct.CdpNeighbor
+		varNetworkElement.ChassisController = varNetworkElementWithoutEmbeddedStruct.ChassisController
 		varNetworkElement.Console = varNetworkElementWithoutEmbeddedStruct.Console
 		varNetworkElement.Dns = varNetworkElementWithoutEmbeddedStruct.Dns
+		varNetworkElement.EquipmentChassis = varNetworkElementWithoutEmbeddedStruct.EquipmentChassis
 		varNetworkElement.EtherPortChannels = varNetworkElementWithoutEmbeddedStruct.EtherPortChannels
 		varNetworkElement.Fanmodules = varNetworkElementWithoutEmbeddedStruct.Fanmodules
 		varNetworkElement.FcPortChannels = varNetworkElementWithoutEmbeddedStruct.FcPortChannels
@@ -3508,6 +3686,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "InbandIpMask")
 		delete(additionalProperties, "InbandVlan")
 		delete(additionalProperties, "InterClusterLinkState")
+		delete(additionalProperties, "JumboFrameEnabled")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "OperEvacState")
 		delete(additionalProperties, "Operability")
@@ -3524,6 +3703,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PartNumber")
 		delete(additionalProperties, "PeerFirmwareOutOfSync")
 		delete(additionalProperties, "ReservedVlanStartId")
+		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SwitchId")
 		delete(additionalProperties, "SwitchProfileName")
@@ -3535,8 +3715,10 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Cards")
 		delete(additionalProperties, "CdpNeighbor")
+		delete(additionalProperties, "ChassisController")
 		delete(additionalProperties, "Console")
 		delete(additionalProperties, "Dns")
+		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "EtherPortChannels")
 		delete(additionalProperties, "Fanmodules")
 		delete(additionalProperties, "FcPortChannels")

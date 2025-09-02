@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Policy"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **ModelBundleCombo** | Pointer to [**[]FirmwareModelBundleVersion**](FirmwareModelBundleVersion.md) |  | [optional] 
-**TargetPlatform** | Pointer to **string** | The target platform on which the policy to be applied. Either standalone or connected. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "Standalone"]
+**TargetPlatform** | Pointer to **string** | The target platform on which the policy to be applied. Either standalone or connected. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. * &#x60;UnifiedEdgeServer&#x60; - Unified Edge sleds that is managed by Intersight. | [optional] [default to "Standalone"]
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 

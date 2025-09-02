@@ -85,6 +85,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_jumbo_frame": {
+			Description: "To enable or disable Jumbo Frames on the switch.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"ethernet_switching_mode": {
 			Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
@@ -336,6 +341,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"target_platform": {
+			Description: "The target platform type of the Switch Control policy.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"udld_settings": {
 			Description: "This specifies the UDLD Global configurations for this switch.",
 			Type:        schema.TypeList,
@@ -354,7 +364,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"message_interval": {
-						Description: "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 7 to 90 seconds.",
+						Description: "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 1 to 90 seconds.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -588,6 +598,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("enable_jumbo_frame"); ok {
+		x := (v.(bool))
+		o.SetEnableJumboFrame(x)
 	}
 
 	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
@@ -893,6 +908,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("udld_settings"); ok {
 		p := make([]models.FabricUdldGlobalSettings, 0, 1)
 		s := v.([]interface{})
@@ -1059,6 +1079,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enable_jumbo_frame"] = (s.GetEnableJumboFrame())
 				temp["ethernet_switching_mode"] = (s.GetEthernetSwitchingMode())
 				temp["fabric_pc_vhba_reset"] = (s.GetFabricPcVhbaReset())
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
@@ -1083,6 +1104,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_platform"] = (s.GetTargetPlatform())
 
 				temp["udld_settings"] = flattenMapFabricUdldGlobalSettings(s.GetUdldSettings(), d)
 

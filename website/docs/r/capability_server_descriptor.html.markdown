@@ -49,6 +49,8 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `unsupported_policies`:
+                (Array of schema.TypeString) -
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

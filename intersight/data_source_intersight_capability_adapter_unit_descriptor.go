@@ -240,6 +240,11 @@ func getCapabilityAdapterUnitDescriptorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_placement_applicable": {
+			Description: "This field determines whether vNICs can be placed to the adapters. It is mandatory for all adapters. For third-party adapters, this field is set to 'false', meaning they will only be inventoried, and no LCP configuration will be applied.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_secure_boot_supported": {
 			Description: "Indicates support for secure boot.",
 			Type:        schema.TypeBool,
@@ -846,6 +851,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		o.SetIsGeneveSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("is_placement_applicable"); ok {
+		x := (v.(bool))
+		o.SetIsPlacementApplicable(x)
+	}
+
 	if v, ok := d.GetOkExists("is_secure_boot_supported"); ok {
 		x := (v.(bool))
 		o.SetIsSecureBootSupported(x)
@@ -1182,6 +1192,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["fibre_channel_scsi_ioq_limit"] = (s.GetFibreChannelScsiIoqLimit())
 				temp["is_azure_qos_supported"] = (s.GetIsAzureQosSupported())
 				temp["is_geneve_supported"] = (s.GetIsGeneveSupported())
+				temp["is_placement_applicable"] = (s.GetIsPlacementApplicable())
 				temp["is_secure_boot_supported"] = (s.GetIsSecureBootSupported())
 				temp["max_eth_rx_ring_size"] = (s.GetMaxEthRxRingSize())
 				temp["max_eth_tx_ring_size"] = (s.GetMaxEthTxRingSize())

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **FibreChannelScsiIoqLimit** | Pointer to **int64** | The number of SCSI I/O Queue resources to allocate. | [optional] 
 **IsAzureQosSupported** | Pointer to **bool** | Indicates that the Azure Stack Host QoS feature is supported by this adapter. | [optional] [default to true]
 **IsGeneveSupported** | Pointer to **bool** | Indicates that the GENEVE offload feature is supported by this adapter. | [optional] [default to true]
+**IsPlacementApplicable** | Pointer to **bool** | This field determines whether vNICs can be placed to the adapters. It is mandatory for all adapters. For third-party adapters, this field is set to &#39;false&#39;, meaning they will only be inventoried, and no LCP configuration will be applied. | [optional] [default to true]
 **IsSecureBootSupported** | Pointer to **bool** | Indicates support for secure boot. | [optional] [default to false]
 **MaxEthRxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Receive Queue. | [optional] [default to 4096]
 **MaxEthTxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Transmit Queue. | [optional] [default to 4096]
@@ -292,6 +293,31 @@ SetIsGeneveSupported sets IsGeneveSupported field to given value.
 `func (o *CapabilityAdapterUnitDescriptor) HasIsGeneveSupported() bool`
 
 HasIsGeneveSupported returns a boolean if a field has been set.
+
+### GetIsPlacementApplicable
+
+`func (o *CapabilityAdapterUnitDescriptor) GetIsPlacementApplicable() bool`
+
+GetIsPlacementApplicable returns the IsPlacementApplicable field if non-nil, zero value otherwise.
+
+### GetIsPlacementApplicableOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetIsPlacementApplicableOk() (*bool, bool)`
+
+GetIsPlacementApplicableOk returns a tuple with the IsPlacementApplicable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPlacementApplicable
+
+`func (o *CapabilityAdapterUnitDescriptor) SetIsPlacementApplicable(v bool)`
+
+SetIsPlacementApplicable sets IsPlacementApplicable field to given value.
+
+### HasIsPlacementApplicable
+
+`func (o *CapabilityAdapterUnitDescriptor) HasIsPlacementApplicable() bool`
+
+HasIsPlacementApplicable returns a boolean if a field has been set.
 
 ### GetIsSecureBootSupported
 

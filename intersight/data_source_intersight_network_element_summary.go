@@ -195,6 +195,41 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"equipment_chassis": {
+			Description: "A reference to a equipmentChassis resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ethernet_mode": {
 			Description: "The user configured Ethernet operational mode for this switch (End-Host or Switching).",
 			Type:        schema.TypeString,
@@ -302,6 +337,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"jumbo_frame_enabled": {
+			Description: "Jumbo Frame configuration for the switch.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -574,6 +614,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"slot_id": {
+			Description: "The Slot Id of the network Element when embedded inside a chassis.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"source_object_type": {
 			Description: "Stores the source object type used to fill the properties of this object.",
 			Type:        schema.TypeString,
@@ -595,7 +640,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"switch_type": {
-			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
+			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.\n* `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -942,6 +987,49 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("equipment_chassis"); ok {
+		p := make([]models.EquipmentChassisRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsEquipmentChassisRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetEquipmentChassis(x)
+		}
+	}
+
 	if v, ok := d.GetOk("ethernet_mode"); ok {
 		x := (v.(string))
 		o.SetEthernetMode(x)
@@ -1058,6 +1146,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
 		x := (v.(bool))
 		o.SetIsUpgraded(x)
+	}
+
+	if v, ok := d.GetOkExists("jumbo_frame_enabled"); ok {
+		x := (v.(bool))
+		o.SetJumboFrameEnabled(x)
 	}
 
 	if v, ok := d.GetOk("management_mode"); ok {
@@ -1357,6 +1450,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("slot_id"); ok {
+		x := int64(v.(int))
+		o.SetSlotId(x)
+	}
+
 	if v, ok := d.GetOk("source_object_type"); ok {
 		x := (v.(string))
 		o.SetSourceObjectType(x)
@@ -1575,6 +1673,8 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 				temp["ethernet_mode"] = (s.GetEthernetMode())
 				temp["ethernet_switching_mode"] = (s.GetEthernetSwitchingMode())
 				temp["fault_summary"] = (s.GetFaultSummary())
@@ -1592,6 +1692,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["inventory_parent"] = flattenMapMoBaseMoRelationship(s.GetInventoryParent(), d)
 				temp["ipv4_address"] = (s.GetIpv4Address())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
+				temp["jumbo_frame_enabled"] = (s.GetJumboFrameEnabled())
 				temp["management_mode"] = (s.GetManagementMode())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1632,6 +1733,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["rn"] = (s.GetRn())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["slot_id"] = (s.GetSlotId())
 				temp["source_object_type"] = (s.GetSourceObjectType())
 				temp["status"] = (s.GetStatus())
 				temp["switch_id"] = (s.GetSwitchId())

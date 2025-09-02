@@ -311,6 +311,11 @@ func getFabricSwitchClusterProfileTemplateSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"target_platform": {
+			Description: "Type of the profile. 'UcsDomain' profile for network and management configuration on UCS Fabric Interconnect. 'UnifiedEdge' profile for network, management and chassis configuration on Unified Edge.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"type": {
 			Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 			Type:        schema.TypeString,
@@ -813,6 +818,11 @@ func dataSourceFabricSwitchClusterProfileTemplateRead(c context.Context, d *sche
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -961,6 +971,7 @@ func dataSourceFabricSwitchClusterProfileTemplateRead(c context.Context, d *sche
 				temp["switch_profiles_count"] = (s.GetSwitchProfilesCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_platform"] = (s.GetTargetPlatform())
 				temp["type"] = (s.GetType())
 				temp["usage"] = (s.GetUsage())
 

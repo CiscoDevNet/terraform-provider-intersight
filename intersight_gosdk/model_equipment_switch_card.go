@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -40,6 +40,8 @@ type EquipmentSwitchCard struct {
 	FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
 	// The Hardware version of the switch hardware.
 	HwVersion *string `json:"HwVersion,omitempty"`
+	// Jumbo Frame configuration for the switch.
+	JumboFrameEnabled *bool `json:"JumboFrameEnabled,omitempty"`
 	// The name of the switch card like Line Card-1.
 	Name *string `json:"Name,omitempty"`
 	// Number of ports present in this switch hardware.
@@ -56,7 +58,7 @@ type EquipmentSwitchCard struct {
 	PartNumber *string `json:"PartNumber,omitempty"`
 	// Power state of the switch hardware. * `unknown` - The power state of the switch hardware is unknown. * `off` - The power state of the switch hardware is off. * `on` - The power state of the switch hardware is on. * `deny` - The power state of the switch hardware is deny. * `multi-boot-fail` - The power state of the switch hardware is multi-boot-fail.
 	PowerState *string `json:"PowerState,omitempty"`
-	// Slot identifier of the local Switch slot Interface.
+	// Slot identifier of the SwitchCard within the Switch.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// Operational state of the switch hardware.
 	State *string `json:"State,omitempty"`
@@ -71,7 +73,9 @@ type EquipmentSwitchCard struct {
 	// An array of relationships to fcPortChannel resources.
 	FcPortChannels []FcPortChannelRelationship `json:"FcPortChannels,omitempty"`
 	// An array of relationships to fcPhysicalPort resources.
-	FcPorts             []FcPhysicalPortRelationship            `json:"FcPorts,omitempty"`
+	FcPorts []FcPhysicalPortRelationship `json:"FcPorts,omitempty"`
+	// An array of relationships to etherHostPort resources.
+	HostPorts           []EtherHostPortRelationship             `json:"HostPorts,omitempty"`
 	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	NetworkElement      NullableNetworkElementRelationship      `json:"NetworkElement,omitempty"`
 	// An array of relationships to etherPortChannel resources.
@@ -367,6 +371,38 @@ func (o *EquipmentSwitchCard) HasHwVersion() bool {
 // SetHwVersion gets a reference to the given string and assigns it to the HwVersion field.
 func (o *EquipmentSwitchCard) SetHwVersion(v string) {
 	o.HwVersion = &v
+}
+
+// GetJumboFrameEnabled returns the JumboFrameEnabled field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetJumboFrameEnabled() bool {
+	if o == nil || IsNil(o.JumboFrameEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.JumboFrameEnabled
+}
+
+// GetJumboFrameEnabledOk returns a tuple with the JumboFrameEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetJumboFrameEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.JumboFrameEnabled) {
+		return nil, false
+	}
+	return o.JumboFrameEnabled, true
+}
+
+// HasJumboFrameEnabled returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasJumboFrameEnabled() bool {
+	if o != nil && !IsNil(o.JumboFrameEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetJumboFrameEnabled gets a reference to the given bool and assigns it to the JumboFrameEnabled field.
+func (o *EquipmentSwitchCard) SetJumboFrameEnabled(v bool) {
+	o.JumboFrameEnabled = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -883,6 +919,39 @@ func (o *EquipmentSwitchCard) SetFcPorts(v []FcPhysicalPortRelationship) {
 	o.FcPorts = v
 }
 
+// GetHostPorts returns the HostPorts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentSwitchCard) GetHostPorts() []EtherHostPortRelationship {
+	if o == nil {
+		var ret []EtherHostPortRelationship
+		return ret
+	}
+	return o.HostPorts
+}
+
+// GetHostPortsOk returns a tuple with the HostPorts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentSwitchCard) GetHostPortsOk() ([]EtherHostPortRelationship, bool) {
+	if o == nil || IsNil(o.HostPorts) {
+		return nil, false
+	}
+	return o.HostPorts, true
+}
+
+// HasHostPorts returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasHostPorts() bool {
+	if o != nil && !IsNil(o.HostPorts) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostPorts gets a reference to the given []EtherHostPortRelationship and assigns it to the HostPorts field.
+func (o *EquipmentSwitchCard) SetHostPorts(v []EtherHostPortRelationship) {
+	o.HostPorts = v
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentSwitchCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
@@ -1122,6 +1191,9 @@ func (o EquipmentSwitchCard) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HwVersion) {
 		toSerialize["HwVersion"] = o.HwVersion
 	}
+	if !IsNil(o.JumboFrameEnabled) {
+		toSerialize["JumboFrameEnabled"] = o.JumboFrameEnabled
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -1169,6 +1241,9 @@ func (o EquipmentSwitchCard) ToMap() (map[string]interface{}, error) {
 	}
 	if o.FcPorts != nil {
 		toSerialize["FcPorts"] = o.FcPorts
+	}
+	if o.HostPorts != nil {
+		toSerialize["HostPorts"] = o.HostPorts
 	}
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
@@ -1252,6 +1327,8 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
 		// The Hardware version of the switch hardware.
 		HwVersion *string `json:"HwVersion,omitempty"`
+		// Jumbo Frame configuration for the switch.
+		JumboFrameEnabled *bool `json:"JumboFrameEnabled,omitempty"`
 		// The name of the switch card like Line Card-1.
 		Name *string `json:"Name,omitempty"`
 		// Number of ports present in this switch hardware.
@@ -1268,7 +1345,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		PartNumber *string `json:"PartNumber,omitempty"`
 		// Power state of the switch hardware. * `unknown` - The power state of the switch hardware is unknown. * `off` - The power state of the switch hardware is off. * `on` - The power state of the switch hardware is on. * `deny` - The power state of the switch hardware is deny. * `multi-boot-fail` - The power state of the switch hardware is multi-boot-fail.
 		PowerState *string `json:"PowerState,omitempty"`
-		// Slot identifier of the local Switch slot Interface.
+		// Slot identifier of the SwitchCard within the Switch.
 		SlotId *int64 `json:"SlotId,omitempty"`
 		// Operational state of the switch hardware.
 		State *string `json:"State,omitempty"`
@@ -1283,7 +1360,9 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		// An array of relationships to fcPortChannel resources.
 		FcPortChannels []FcPortChannelRelationship `json:"FcPortChannels,omitempty"`
 		// An array of relationships to fcPhysicalPort resources.
-		FcPorts             []FcPhysicalPortRelationship            `json:"FcPorts,omitempty"`
+		FcPorts []FcPhysicalPortRelationship `json:"FcPorts,omitempty"`
+		// An array of relationships to etherHostPort resources.
+		HostPorts           []EtherHostPortRelationship             `json:"HostPorts,omitempty"`
 		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 		NetworkElement      NullableNetworkElementRelationship      `json:"NetworkElement,omitempty"`
 		// An array of relationships to etherPortChannel resources.
@@ -1306,6 +1385,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentSwitchCard.EthernetSwitchingMode = varEquipmentSwitchCardWithoutEmbeddedStruct.EthernetSwitchingMode
 		varEquipmentSwitchCard.FcSwitchingMode = varEquipmentSwitchCardWithoutEmbeddedStruct.FcSwitchingMode
 		varEquipmentSwitchCard.HwVersion = varEquipmentSwitchCardWithoutEmbeddedStruct.HwVersion
+		varEquipmentSwitchCard.JumboFrameEnabled = varEquipmentSwitchCardWithoutEmbeddedStruct.JumboFrameEnabled
 		varEquipmentSwitchCard.Name = varEquipmentSwitchCardWithoutEmbeddedStruct.Name
 		varEquipmentSwitchCard.NumPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.NumPorts
 		varEquipmentSwitchCard.OutOfBandIpAddress = varEquipmentSwitchCardWithoutEmbeddedStruct.OutOfBandIpAddress
@@ -1322,6 +1402,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentSwitchCard.Type = varEquipmentSwitchCardWithoutEmbeddedStruct.Type
 		varEquipmentSwitchCard.FcPortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPortChannels
 		varEquipmentSwitchCard.FcPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPorts
+		varEquipmentSwitchCard.HostPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.HostPorts
 		varEquipmentSwitchCard.InventoryDeviceInfo = varEquipmentSwitchCardWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEquipmentSwitchCard.NetworkElement = varEquipmentSwitchCardWithoutEmbeddedStruct.NetworkElement
 		varEquipmentSwitchCard.PortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.PortChannels
@@ -1352,6 +1433,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "EthernetSwitchingMode")
 		delete(additionalProperties, "FcSwitchingMode")
 		delete(additionalProperties, "HwVersion")
+		delete(additionalProperties, "JumboFrameEnabled")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "NumPorts")
 		delete(additionalProperties, "OutOfBandIpAddress")
@@ -1368,6 +1450,7 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "FcPortChannels")
 		delete(additionalProperties, "FcPorts")
+		delete(additionalProperties, "HostPorts")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "PortChannels")

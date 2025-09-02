@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -28,7 +28,9 @@ type FabricVlan struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.
+	// Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, 'Disable' must be specified together with 'AutoAllowOnUplinks.' Note that 'AutoAllowOnClusterLinks' cannot be enabled for the default VLAN 1 or the native VLAN.
+	AutoAllowOnClusterLinks *bool `json:"AutoAllowOnClusterLinks,omitempty"`
+	// Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN.
 	AutoAllowOnUplinks *bool `json:"AutoAllowOnUplinks,omitempty"`
 	// Used to define whether this VLAN is to be classified as 'native' for traffic in this FI.
 	IsNative *bool `json:"IsNative,omitempty"`
@@ -56,6 +58,8 @@ func NewFabricVlan(classId string, objectType string) *FabricVlan {
 	this := FabricVlan{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var autoAllowOnClusterLinks bool = false
+	this.AutoAllowOnClusterLinks = &autoAllowOnClusterLinks
 	var autoAllowOnUplinks bool = true
 	this.AutoAllowOnUplinks = &autoAllowOnUplinks
 	var primaryVlanId int64 = 0
@@ -74,6 +78,8 @@ func NewFabricVlanWithDefaults() *FabricVlan {
 	this.ClassId = classId
 	var objectType string = "fabric.Vlan"
 	this.ObjectType = objectType
+	var autoAllowOnClusterLinks bool = false
+	this.AutoAllowOnClusterLinks = &autoAllowOnClusterLinks
 	var autoAllowOnUplinks bool = true
 	this.AutoAllowOnUplinks = &autoAllowOnUplinks
 	var primaryVlanId int64 = 0
@@ -139,6 +145,38 @@ func (o *FabricVlan) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "fabric.Vlan" of the ObjectType field.
 func (o *FabricVlan) GetDefaultObjectType() interface{} {
 	return "fabric.Vlan"
+}
+
+// GetAutoAllowOnClusterLinks returns the AutoAllowOnClusterLinks field value if set, zero value otherwise.
+func (o *FabricVlan) GetAutoAllowOnClusterLinks() bool {
+	if o == nil || IsNil(o.AutoAllowOnClusterLinks) {
+		var ret bool
+		return ret
+	}
+	return *o.AutoAllowOnClusterLinks
+}
+
+// GetAutoAllowOnClusterLinksOk returns a tuple with the AutoAllowOnClusterLinks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricVlan) GetAutoAllowOnClusterLinksOk() (*bool, bool) {
+	if o == nil || IsNil(o.AutoAllowOnClusterLinks) {
+		return nil, false
+	}
+	return o.AutoAllowOnClusterLinks, true
+}
+
+// HasAutoAllowOnClusterLinks returns a boolean if a field has been set.
+func (o *FabricVlan) HasAutoAllowOnClusterLinks() bool {
+	if o != nil && !IsNil(o.AutoAllowOnClusterLinks) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoAllowOnClusterLinks gets a reference to the given bool and assigns it to the AutoAllowOnClusterLinks field.
+func (o *FabricVlan) SetAutoAllowOnClusterLinks(v bool) {
+	o.AutoAllowOnClusterLinks = &v
 }
 
 // GetAutoAllowOnUplinks returns the AutoAllowOnUplinks field value if set, zero value otherwise.
@@ -488,6 +526,9 @@ func (o FabricVlan) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoAllowOnClusterLinks) {
+		toSerialize["AutoAllowOnClusterLinks"] = o.AutoAllowOnClusterLinks
+	}
 	if !IsNil(o.AutoAllowOnUplinks) {
 		toSerialize["AutoAllowOnUplinks"] = o.AutoAllowOnUplinks
 	}
@@ -570,7 +611,9 @@ func (o *FabricVlan) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.
+		// Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, 'Disable' must be specified together with 'AutoAllowOnUplinks.' Note that 'AutoAllowOnClusterLinks' cannot be enabled for the default VLAN 1 or the native VLAN.
+		AutoAllowOnClusterLinks *bool `json:"AutoAllowOnClusterLinks,omitempty"`
+		// Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN.
 		AutoAllowOnUplinks *bool `json:"AutoAllowOnUplinks,omitempty"`
 		// Used to define whether this VLAN is to be classified as 'native' for traffic in this FI.
 		IsNative *bool `json:"IsNative,omitempty"`
@@ -594,6 +637,7 @@ func (o *FabricVlan) UnmarshalJSON(data []byte) (err error) {
 		varFabricVlan := _FabricVlan{}
 		varFabricVlan.ClassId = varFabricVlanWithoutEmbeddedStruct.ClassId
 		varFabricVlan.ObjectType = varFabricVlanWithoutEmbeddedStruct.ObjectType
+		varFabricVlan.AutoAllowOnClusterLinks = varFabricVlanWithoutEmbeddedStruct.AutoAllowOnClusterLinks
 		varFabricVlan.AutoAllowOnUplinks = varFabricVlanWithoutEmbeddedStruct.AutoAllowOnUplinks
 		varFabricVlan.IsNative = varFabricVlanWithoutEmbeddedStruct.IsNative
 		varFabricVlan.Name = varFabricVlanWithoutEmbeddedStruct.Name
@@ -622,6 +666,7 @@ func (o *FabricVlan) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AutoAllowOnClusterLinks")
 		delete(additionalProperties, "AutoAllowOnUplinks")
 		delete(additionalProperties, "IsNative")
 		delete(additionalProperties, "Name")

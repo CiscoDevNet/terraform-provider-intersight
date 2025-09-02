@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **SwitchProfilesCount** | Pointer to **int64** | Number of switch profiles that are part of this cluster profile. | [optional] [readonly] 
+**TargetPlatform** | Pointer to **string** | Type of the profile. &#39;UcsDomain&#39; profile for network and management configuration on UCS Fabric Interconnect. &#39;UnifiedEdge&#39; profile for network, management and chassis configuration on Unified Edge. * &#x60;UCS Domain&#x60; - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * &#x60;Unified Edge&#x60; - Profile/policy type for network, management and chassis configuration on Unified Edge. | [optional] [default to "UCS Domain"]
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetSwitchProfilesCount sets SwitchProfilesCount field to given value.
 `func (o *FabricBaseClusterProfile) HasSwitchProfilesCount() bool`
 
 HasSwitchProfilesCount returns a boolean if a field has been set.
+
+### GetTargetPlatform
+
+`func (o *FabricBaseClusterProfile) GetTargetPlatform() string`
+
+GetTargetPlatform returns the TargetPlatform field if non-nil, zero value otherwise.
+
+### GetTargetPlatformOk
+
+`func (o *FabricBaseClusterProfile) GetTargetPlatformOk() (*string, bool)`
+
+GetTargetPlatformOk returns a tuple with the TargetPlatform field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetPlatform
+
+`func (o *FabricBaseClusterProfile) SetTargetPlatform(v string)`
+
+SetTargetPlatform sets TargetPlatform field to given value.
+
+### HasTargetPlatform
+
+`func (o *FabricBaseClusterProfile) HasTargetPlatform() bool`
+
+HasTargetPlatform returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -2324,6 +2324,39 @@ func flattenListFirmwareDistributableMetaRelationship(p []models.FirmwareDistrib
 	}
 	return firmwaredistributablemetarelationships
 }
+func flattenListFirmwareFeatureVersionMap(p []models.FirmwareFeatureVersionMap, d *schema.ResourceData) []map[string]interface{} {
+	var firmwarefeatureversionmaps []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		firmwarefeatureversionmap := make(map[string]interface{})
+		firmwarefeatureversionmap["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		firmwarefeatureversionmap["class_id"] = item.GetClassId()
+		firmwarefeatureversionmap["feature_name"] = item.GetFeatureName()
+		firmwarefeatureversionmap["object_type"] = item.GetObjectType()
+		min_version_map_for_switch_features_x, _ := d.GetOk("min_version_map_for_switch_features")
+		firmwarefeatureversionmap["version_map"] = (func(p models.FirmwareVersionMap, v interface{}) []map[string]interface{} {
+			var firmwareversionmaps []map[string]interface{}
+			var ret models.FirmwareVersionMap
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			firmwareversionmap := make(map[string]interface{})
+			firmwareversionmap["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			firmwareversionmap["bundle_version"] = item.GetBundleVersion()
+			firmwareversionmap["class_id"] = item.GetClassId()
+			firmwareversionmap["device_firmware_version"] = item.GetDeviceFirmwareVersion()
+			firmwareversionmap["object_type"] = item.GetObjectType()
+
+			firmwareversionmaps = append(firmwareversionmaps, firmwareversionmap)
+			return firmwareversionmaps
+		})(item.GetVersionMap(), min_version_map_for_switch_features_x)
+		firmwarefeatureversionmaps = append(firmwarefeatureversionmaps, firmwarefeatureversionmap)
+	}
+	return firmwarefeatureversionmaps
+}
 func flattenListFirmwareFirmwareInventory(p []models.FirmwareFirmwareInventory, d *schema.ResourceData) []map[string]interface{} {
 	var firmwarefirmwareinventorys []map[string]interface{}
 	if len(p) == 0 {
@@ -9392,7 +9425,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		attribute_definition_x, _ := d.GetOk("attribute_definition")
+		input_definition_x, _ := d.GetOk("input_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -9410,7 +9443,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), attribute_definition_x)
+		})(item.GetDefault(), input_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -9428,7 +9461,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), attribute_definition_x)
+		})(item.GetDisplayMeta(), input_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -11542,6 +11575,23 @@ func flattenMapCapabilityLdapBasePropertyConstraints(p models.CapabilityLdapBase
 	capabilityldapbasepropertyconstraintss = append(capabilityldapbasepropertyconstraintss, capabilityldapbasepropertyconstraints)
 	return capabilityldapbasepropertyconstraintss
 }
+func flattenMapCapabilityPcIdRange(p models.CapabilityPcIdRange, d *schema.ResourceData) []map[string]interface{} {
+	var capabilitypcidranges []map[string]interface{}
+	var ret models.CapabilityPcIdRange
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	capabilitypcidrange := make(map[string]interface{})
+	capabilitypcidrange["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	capabilitypcidrange["class_id"] = item.GetClassId()
+	capabilitypcidrange["end_pc_id"] = item.GetEndPcId()
+	capabilitypcidrange["object_type"] = item.GetObjectType()
+	capabilitypcidrange["start_pc_id"] = item.GetStartPcId()
+
+	capabilitypcidranges = append(capabilitypcidranges, capabilitypcidrange)
+	return capabilitypcidranges
+}
 func flattenMapCapabilitySwitchNetworkLimits(p models.CapabilitySwitchNetworkLimits, d *schema.ResourceData) []map[string]interface{} {
 	var capabilityswitchnetworklimitss []map[string]interface{}
 	var ret models.CapabilitySwitchNetworkLimits
@@ -12641,6 +12691,24 @@ func flattenMapEquipmentChassisRelationship(p models.EquipmentChassisRelationshi
 
 	equipmentchassisrelationships = append(equipmentchassisrelationships, equipmentchassisrelationship)
 	return equipmentchassisrelationships
+}
+func flattenMapEquipmentChassisControllerRelationship(p models.EquipmentChassisControllerRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var equipmentchassiscontrollerrelationships []map[string]interface{}
+	var ret models.EquipmentChassisControllerRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	equipmentchassiscontrollerrelationship := make(map[string]interface{})
+	equipmentchassiscontrollerrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	equipmentchassiscontrollerrelationship["class_id"] = item.GetClassId()
+	equipmentchassiscontrollerrelationship["moid"] = item.GetMoid()
+	equipmentchassiscontrollerrelationship["object_type"] = item.GetObjectType()
+	equipmentchassiscontrollerrelationship["selector"] = item.GetSelector()
+
+	equipmentchassiscontrollerrelationships = append(equipmentchassiscontrollerrelationships, equipmentchassiscontrollerrelationship)
+	return equipmentchassiscontrollerrelationships
 }
 func flattenMapEquipmentDeviceLocation(p models.EquipmentDeviceLocation, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentdevicelocations []map[string]interface{}

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025071017
+API version: 1.0.11-2025081401
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,10 @@ type FirmwareSwitchUpgrade struct {
 	ObjectType string `json:"ObjectType"`
 	// The flag to enable or disable fabric evacuation during the switch firmware upgrade. In case of IMM, it is mandatory to have the Fabric Interconnects associated with domain profile for fabric evacuation to happen.
 	EnableFabricEvacuation *bool `json:"EnableFabricEvacuation,omitempty"`
+	// The flag to enable or disable firmware upgrade functionality for the PDB FPGA.
+	EnablePdbFpgaUpgrade *bool `json:"EnablePdbFpgaUpgrade,omitempty"`
+	// The flag to enable or disable firmware upgrade functionality for the Power Supply Unit (PSU).
+	EnablePsuUpgrade *bool `json:"EnablePsuUpgrade,omitempty"`
 	// The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade.
 	SkipWaitForIoPathConnectivity *bool                                       `json:"SkipWaitForIoPathConnectivity,omitempty"`
 	Device                        NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
@@ -54,6 +58,10 @@ func NewFirmwareSwitchUpgrade(classId string, objectType string) *FirmwareSwitch
 	this.UpgradeType = &upgradeType
 	var enableFabricEvacuation bool = true
 	this.EnableFabricEvacuation = &enableFabricEvacuation
+	var enablePdbFpgaUpgrade bool = false
+	this.EnablePdbFpgaUpgrade = &enablePdbFpgaUpgrade
+	var enablePsuUpgrade bool = false
+	this.EnablePsuUpgrade = &enablePsuUpgrade
 	var skipWaitForIoPathConnectivity bool = false
 	this.SkipWaitForIoPathConnectivity = &skipWaitForIoPathConnectivity
 	return &this
@@ -70,6 +78,10 @@ func NewFirmwareSwitchUpgradeWithDefaults() *FirmwareSwitchUpgrade {
 	this.ObjectType = objectType
 	var enableFabricEvacuation bool = true
 	this.EnableFabricEvacuation = &enableFabricEvacuation
+	var enablePdbFpgaUpgrade bool = false
+	this.EnablePdbFpgaUpgrade = &enablePdbFpgaUpgrade
+	var enablePsuUpgrade bool = false
+	this.EnablePsuUpgrade = &enablePsuUpgrade
 	var skipWaitForIoPathConnectivity bool = false
 	this.SkipWaitForIoPathConnectivity = &skipWaitForIoPathConnectivity
 	return &this
@@ -163,6 +175,70 @@ func (o *FirmwareSwitchUpgrade) HasEnableFabricEvacuation() bool {
 // SetEnableFabricEvacuation gets a reference to the given bool and assigns it to the EnableFabricEvacuation field.
 func (o *FirmwareSwitchUpgrade) SetEnableFabricEvacuation(v bool) {
 	o.EnableFabricEvacuation = &v
+}
+
+// GetEnablePdbFpgaUpgrade returns the EnablePdbFpgaUpgrade field value if set, zero value otherwise.
+func (o *FirmwareSwitchUpgrade) GetEnablePdbFpgaUpgrade() bool {
+	if o == nil || IsNil(o.EnablePdbFpgaUpgrade) {
+		var ret bool
+		return ret
+	}
+	return *o.EnablePdbFpgaUpgrade
+}
+
+// GetEnablePdbFpgaUpgradeOk returns a tuple with the EnablePdbFpgaUpgrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareSwitchUpgrade) GetEnablePdbFpgaUpgradeOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnablePdbFpgaUpgrade) {
+		return nil, false
+	}
+	return o.EnablePdbFpgaUpgrade, true
+}
+
+// HasEnablePdbFpgaUpgrade returns a boolean if a field has been set.
+func (o *FirmwareSwitchUpgrade) HasEnablePdbFpgaUpgrade() bool {
+	if o != nil && !IsNil(o.EnablePdbFpgaUpgrade) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnablePdbFpgaUpgrade gets a reference to the given bool and assigns it to the EnablePdbFpgaUpgrade field.
+func (o *FirmwareSwitchUpgrade) SetEnablePdbFpgaUpgrade(v bool) {
+	o.EnablePdbFpgaUpgrade = &v
+}
+
+// GetEnablePsuUpgrade returns the EnablePsuUpgrade field value if set, zero value otherwise.
+func (o *FirmwareSwitchUpgrade) GetEnablePsuUpgrade() bool {
+	if o == nil || IsNil(o.EnablePsuUpgrade) {
+		var ret bool
+		return ret
+	}
+	return *o.EnablePsuUpgrade
+}
+
+// GetEnablePsuUpgradeOk returns a tuple with the EnablePsuUpgrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareSwitchUpgrade) GetEnablePsuUpgradeOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnablePsuUpgrade) {
+		return nil, false
+	}
+	return o.EnablePsuUpgrade, true
+}
+
+// HasEnablePsuUpgrade returns a boolean if a field has been set.
+func (o *FirmwareSwitchUpgrade) HasEnablePsuUpgrade() bool {
+	if o != nil && !IsNil(o.EnablePsuUpgrade) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnablePsuUpgrade gets a reference to the given bool and assigns it to the EnablePsuUpgrade field.
+func (o *FirmwareSwitchUpgrade) SetEnablePsuUpgrade(v bool) {
+	o.EnablePsuUpgrade = &v
 }
 
 // GetSkipWaitForIoPathConnectivity returns the SkipWaitForIoPathConnectivity field value if set, zero value otherwise.
@@ -302,6 +378,12 @@ func (o FirmwareSwitchUpgrade) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EnableFabricEvacuation) {
 		toSerialize["EnableFabricEvacuation"] = o.EnableFabricEvacuation
 	}
+	if !IsNil(o.EnablePdbFpgaUpgrade) {
+		toSerialize["EnablePdbFpgaUpgrade"] = o.EnablePdbFpgaUpgrade
+	}
+	if !IsNil(o.EnablePsuUpgrade) {
+		toSerialize["EnablePsuUpgrade"] = o.EnablePsuUpgrade
+	}
 	if !IsNil(o.SkipWaitForIoPathConnectivity) {
 		toSerialize["SkipWaitForIoPathConnectivity"] = o.SkipWaitForIoPathConnectivity
 	}
@@ -368,6 +450,10 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The flag to enable or disable fabric evacuation during the switch firmware upgrade. In case of IMM, it is mandatory to have the Fabric Interconnects associated with domain profile for fabric evacuation to happen.
 		EnableFabricEvacuation *bool `json:"EnableFabricEvacuation,omitempty"`
+		// The flag to enable or disable firmware upgrade functionality for the PDB FPGA.
+		EnablePdbFpgaUpgrade *bool `json:"EnablePdbFpgaUpgrade,omitempty"`
+		// The flag to enable or disable firmware upgrade functionality for the Power Supply Unit (PSU).
+		EnablePsuUpgrade *bool `json:"EnablePsuUpgrade,omitempty"`
 		// The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade.
 		SkipWaitForIoPathConnectivity *bool                                       `json:"SkipWaitForIoPathConnectivity,omitempty"`
 		Device                        NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
@@ -383,6 +469,8 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
 		varFirmwareSwitchUpgrade.ClassId = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.ClassId
 		varFirmwareSwitchUpgrade.ObjectType = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.ObjectType
 		varFirmwareSwitchUpgrade.EnableFabricEvacuation = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.EnableFabricEvacuation
+		varFirmwareSwitchUpgrade.EnablePdbFpgaUpgrade = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.EnablePdbFpgaUpgrade
+		varFirmwareSwitchUpgrade.EnablePsuUpgrade = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.EnablePsuUpgrade
 		varFirmwareSwitchUpgrade.SkipWaitForIoPathConnectivity = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.SkipWaitForIoPathConnectivity
 		varFirmwareSwitchUpgrade.Device = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.Device
 		varFirmwareSwitchUpgrade.NetworkElements = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.NetworkElements
@@ -406,6 +494,8 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnableFabricEvacuation")
+		delete(additionalProperties, "EnablePdbFpgaUpgrade")
+		delete(additionalProperties, "EnablePsuUpgrade")
 		delete(additionalProperties, "SkipWaitForIoPathConnectivity")
 		delete(additionalProperties, "Device")
 		delete(additionalProperties, "NetworkElements")

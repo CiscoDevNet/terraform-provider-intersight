@@ -79,8 +79,14 @@ func resourceFabricVlan() *schema.Resource {
 					},
 				},
 			},
+			"auto_allow_on_cluster_links": {
+				Description: "Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, 'Disable' must be specified together with 'AutoAllowOnUplinks.' Note that 'AutoAllowOnClusterLinks' cannot be enabled for the default VLAN 1 or the native VLAN.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"auto_allow_on_uplinks": {
-				Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.",
+				Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     true,
@@ -582,6 +588,11 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
+	if v, ok := d.GetOkExists("auto_allow_on_cluster_links"); ok {
+		x := (v.(bool))
+		o.SetAutoAllowOnClusterLinks(x)
+	}
+
 	if v, ok := d.GetOkExists("auto_allow_on_uplinks"); ok {
 		x := (v.(bool))
 		o.SetAutoAllowOnUplinks(x)
@@ -843,6 +854,10 @@ func resourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property Ancestors in FabricVlan object: %s", err.Error())
 	}
 
+	if err := d.Set("auto_allow_on_cluster_links", (s.GetAutoAllowOnClusterLinks())); err != nil {
+		return diag.Errorf("error occurred while setting property AutoAllowOnClusterLinks in FabricVlan object: %s", err.Error())
+	}
+
 	if err := d.Set("auto_allow_on_uplinks", (s.GetAutoAllowOnUplinks())); err != nil {
 		return diag.Errorf("error occurred while setting property AutoAllowOnUplinks in FabricVlan object: %s", err.Error())
 	}
@@ -946,6 +961,12 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if d.HasChange("auto_allow_on_cluster_links") {
+		v := d.Get("auto_allow_on_cluster_links")
+		x := (v.(bool))
+		o.SetAutoAllowOnClusterLinks(x)
 	}
 
 	if d.HasChange("auto_allow_on_uplinks") {

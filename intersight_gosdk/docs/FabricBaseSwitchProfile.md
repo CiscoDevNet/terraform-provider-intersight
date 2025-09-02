@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **SwitchId** | Pointer to **string** | Value indicating the switch side on which the switch profile or template has to be deployed. * &#x60;None&#x60; - Switch side not defined for the policy configurations in the switch profile or template. * &#x60;A&#x60; - Policy configurations in the switch profile or template to be deployed on fabric interconnect A. * &#x60;B&#x60; - Policy configurations in the switch profile or template to be deployed on fabric interconnect B. | [optional] [default to "None"]
+**TargetPlatform** | Pointer to **string** | Type of the profile. &#39;UcsDomain&#39; profile for network and management configuration on UCS Fabric Interconnect. &#39;UnifiedEdge&#39; profile for network, management and chassis configuration on Unified Edge. * &#x60;UCS Domain&#x60; - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * &#x60;Unified Edge&#x60; - Profile/policy type for network, management and chassis configuration on Unified Edge. | [optional] [default to "UCS Domain"]
 **ConfigResult** | Pointer to [**NullableFabricConfigResultRelationship**](FabricConfigResultRelationship.md) |  | [optional] 
 
 ## Methods
@@ -92,6 +93,31 @@ SetSwitchId sets SwitchId field to given value.
 `func (o *FabricBaseSwitchProfile) HasSwitchId() bool`
 
 HasSwitchId returns a boolean if a field has been set.
+
+### GetTargetPlatform
+
+`func (o *FabricBaseSwitchProfile) GetTargetPlatform() string`
+
+GetTargetPlatform returns the TargetPlatform field if non-nil, zero value otherwise.
+
+### GetTargetPlatformOk
+
+`func (o *FabricBaseSwitchProfile) GetTargetPlatformOk() (*string, bool)`
+
+GetTargetPlatformOk returns a tuple with the TargetPlatform field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetPlatform
+
+`func (o *FabricBaseSwitchProfile) SetTargetPlatform(v string)`
+
+SetTargetPlatform sets TargetPlatform field to given value.
+
+### HasTargetPlatform
+
+`func (o *FabricBaseSwitchProfile) HasTargetPlatform() bool`
+
+HasTargetPlatform returns a boolean if a field has been set.
 
 ### GetConfigResult
 

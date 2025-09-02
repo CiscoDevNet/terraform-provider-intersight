@@ -310,6 +310,12 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Optional:    true,
 				Default:     true,
 			},
+			"is_placement_applicable": {
+				Description: "This field determines whether vNICs can be placed to the adapters. It is mandatory for all adapters. For third-party adapters, this field is set to 'false', meaning they will only be inventoried, and no LCP configuration will be applied.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
 			"is_secure_boot_supported": {
 				Description: "Indicates support for secure boot.",
 				Type:        schema.TypeBool,
@@ -926,6 +932,11 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetIsGeneveSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("is_placement_applicable"); ok {
+		x := (v.(bool))
+		o.SetIsPlacementApplicable(x)
+	}
+
 	if v, ok := d.GetOkExists("is_secure_boot_supported"); ok {
 		x := (v.(bool))
 		o.SetIsSecureBootSupported(x)
@@ -1136,6 +1147,10 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 
 	if err := d.Set("is_geneve_supported", (s.GetIsGeneveSupported())); err != nil {
 		return diag.Errorf("error occurred while setting property IsGeneveSupported in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("is_placement_applicable", (s.GetIsPlacementApplicable())); err != nil {
+		return diag.Errorf("error occurred while setting property IsPlacementApplicable in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("is_secure_boot_supported", (s.GetIsSecureBootSupported())); err != nil {
@@ -1478,6 +1493,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("is_geneve_supported")
 		x := (v.(bool))
 		o.SetIsGeneveSupported(x)
+	}
+
+	if d.HasChange("is_placement_applicable") {
+		v := d.Get("is_placement_applicable")
+		x := (v.(bool))
+		o.SetIsPlacementApplicable(x)
 	}
 
 	if d.HasChange("is_secure_boot_supported") {

@@ -3149,6 +3149,30 @@ func TestFlattenListFirmwareDistributableMetaRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListFirmwareFeatureVersionMap(t *testing.T) {
+	p := []models.FirmwareFeatureVersionMap{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"firmware.FeatureVersionMap","FeatureName":"FeatureName %d","ObjectType":"firmware.FeatureVersionMap"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListFirmwareFeatureVersionMap(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.FirmwareFeatureVersionMap{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListFirmwareFeatureVersionMap(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "firmware.FeatureVersionMap", "feature_name": "FeatureName 1", "object_type": "firmware.FeatureVersionMap"}, {"class_id": "firmware.FeatureVersionMap", "feature_name": "FeatureName 2", "object_type": "firmware.FeatureVersionMap"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListFirmwareFirmwareInventory(t *testing.T) {
 	p := []models.FirmwareFirmwareInventory{}
 	var d = &schema.ResourceData{}
@@ -13715,6 +13739,24 @@ func TestFlattenMapCapabilityLdapBasePropertyConstraints(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapCapabilityPcIdRange(t *testing.T) {
+	p := models.CapabilityPcIdRange{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"capability.PcIdRange","EndPcId":32,"ObjectType":"capability.PcIdRange","StartPcId":32}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapCapabilityPcIdRange(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapCapabilityPcIdRange(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "capability.PcIdRange", "end_pc_id": 32, "object_type": "capability.PcIdRange", "start_pc_id": 32}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapCapabilitySwitchNetworkLimits(t *testing.T) {
 	p := models.CapabilitySwitchNetworkLimits{}
 	var d = &schema.ResourceData{}
@@ -14557,6 +14599,24 @@ func TestFlattenMapEquipmentChassisRelationship(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapEquipmentChassisRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapEquipmentChassisControllerRelationship(t *testing.T) {
+	p := models.EquipmentChassisControllerRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapEquipmentChassisControllerRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapEquipmentChassisControllerRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)

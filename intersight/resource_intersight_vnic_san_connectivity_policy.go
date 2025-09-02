@@ -402,9 +402,9 @@ func resourceVnicSanConnectivityPolicy() *schema.Resource {
 				},
 			},
 			"target_platform": {
-				Description:  "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
+				Description:  "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.\n* `UnifiedEdgeServer` - Unified Edge sleds that is managed by Intersight.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Standalone", "FIAttached"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Standalone", "FIAttached", "UnifiedEdgeServer"}, false),
 				Optional:     true,
 				Default:      "Standalone",
 			},

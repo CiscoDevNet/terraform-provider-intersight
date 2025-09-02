@@ -90,6 +90,11 @@ func getApplianceDeviceUpgradePolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"disruptive_grace_period_week": {
+			Description: "Updates requiring a reboot will start automatically once the grace period ends.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -97,6 +102,11 @@ func getApplianceDeviceUpgradePolicySchema() map[string]*schema.Schema {
 		},
 		"enable_meta_data_sync": {
 			Description: "Indicates if the updated metadata files should be synced immediately or at the next upgrade.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_custom_grace_period_enabled": {
+			Description: "Custom grace period for subsequent reboot and non-reboot updates.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -108,6 +118,11 @@ func getApplianceDeviceUpgradePolicySchema() map[string]*schema.Schema {
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"nondisruptive_grace_period_week": {
+			Description: "Updates not requiring a reboot will start automatically once the grace period ends.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"object_type": {
@@ -541,6 +556,11 @@ func dataSourceApplianceDeviceUpgradePolicyRead(c context.Context, d *schema.Res
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOkExists("disruptive_grace_period_week"); ok {
+		x := int64(v.(int))
+		o.SetDisruptiveGracePeriodWeek(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -551,6 +571,11 @@ func dataSourceApplianceDeviceUpgradePolicyRead(c context.Context, d *schema.Res
 		o.SetEnableMetaDataSync(x)
 	}
 
+	if v, ok := d.GetOkExists("is_custom_grace_period_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsCustomGracePeriodEnabled(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -559,6 +584,11 @@ func dataSourceApplianceDeviceUpgradePolicyRead(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("nondisruptive_grace_period_week"); ok {
+		x := int64(v.(int))
+		o.SetNondisruptiveGracePeriodWeek(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -946,11 +976,14 @@ func dataSourceApplianceDeviceUpgradePolicyRead(c context.Context, d *schema.Res
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["disruptive_grace_period_week"] = (s.GetDisruptiveGracePeriodWeek())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["enable_meta_data_sync"] = (s.GetEnableMetaDataSync())
+				temp["is_custom_grace_period_enabled"] = (s.GetIsCustomGracePeriodEnabled())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["nondisruptive_grace_period_week"] = (s.GetNondisruptiveGracePeriodWeek())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -6,11 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchClusterProfile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchClusterProfile"]
+**Action** | Pointer to **string** | The support actions are -- Deploy, Unassign. | [optional] [default to "No-op"]
 **ClusterAssignments** | Pointer to [**[]FabricClusterAssignment**](FabricClusterAssignment.md) |  | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
 **DeployStatus** | Pointer to **string** | Deploy status of the switch cluster profile indicating if deployment has been initiated on all the members of the cluster profile. * &#x60;None&#x60; - Switch profiles not deployed on either of the switches. * &#x60;Complete&#x60; - Both switch profiles of the cluster profile are deployed. * &#x60;Partial&#x60; - Only one of the switch profiles of the cluster profile is deployed. | [optional] [readonly] [default to "None"]
 **DeployedSwitches** | Pointer to **string** | Values indicating the switches on which the cluster profile has been deployed. 0 indicates that the profile has not been deployed on any switch, 1 indicates that the profile has been deployed on A, 2 indicates that it is deployed on B and 3 indicates that it is deployed on both. * &#x60;None&#x60; - Switch profiles not deployed on either of the fabric interconnects. * &#x60;A&#x60; - Switch profiles deployed only on fabric interconnect A. * &#x60;B&#x60; - Switch profiles deployed only on fabric interconnect B. * &#x60;AB&#x60; - Switch profiles deployed on both fabric interconnect A and B. | [optional] [readonly] [default to "None"]
 **UserLabel** | Pointer to **string** | The user defined label assigned to the switch profile. | [optional] 
+**AssignedEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **SwitchProfiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
 
@@ -72,6 +74,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAction
+
+`func (o *FabricSwitchClusterProfile) GetAction() string`
+
+GetAction returns the Action field if non-nil, zero value otherwise.
+
+### GetActionOk
+
+`func (o *FabricSwitchClusterProfile) GetActionOk() (*string, bool)`
+
+GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAction
+
+`func (o *FabricSwitchClusterProfile) SetAction(v string)`
+
+SetAction sets Action field to given value.
+
+### HasAction
+
+`func (o *FabricSwitchClusterProfile) HasAction() bool`
+
+HasAction returns a boolean if a field has been set.
 
 ### GetClusterAssignments
 
@@ -218,6 +245,41 @@ SetUserLabel sets UserLabel field to given value.
 
 HasUserLabel returns a boolean if a field has been set.
 
+### GetAssignedEntity
+
+`func (o *FabricSwitchClusterProfile) GetAssignedEntity() MoBaseMoRelationship`
+
+GetAssignedEntity returns the AssignedEntity field if non-nil, zero value otherwise.
+
+### GetAssignedEntityOk
+
+`func (o *FabricSwitchClusterProfile) GetAssignedEntityOk() (*MoBaseMoRelationship, bool)`
+
+GetAssignedEntityOk returns a tuple with the AssignedEntity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedEntity
+
+`func (o *FabricSwitchClusterProfile) SetAssignedEntity(v MoBaseMoRelationship)`
+
+SetAssignedEntity sets AssignedEntity field to given value.
+
+### HasAssignedEntity
+
+`func (o *FabricSwitchClusterProfile) HasAssignedEntity() bool`
+
+HasAssignedEntity returns a boolean if a field has been set.
+
+### SetAssignedEntityNil
+
+`func (o *FabricSwitchClusterProfile) SetAssignedEntityNil(b bool)`
+
+ SetAssignedEntityNil sets the value for AssignedEntity to be an explicit nil
+
+### UnsetAssignedEntity
+`func (o *FabricSwitchClusterProfile) UnsetAssignedEntity()`
+
+UnsetAssignedEntity ensures that no value is present for AssignedEntity, not even an explicit nil
 ### GetOrganization
 
 `func (o *FabricSwitchClusterProfile) GetOrganization() OrganizationOrganizationRelationship`

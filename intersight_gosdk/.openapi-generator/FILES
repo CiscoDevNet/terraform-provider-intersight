@@ -732,6 +732,7 @@ docs/CapabilityIomUpgradeSupportMeta.md
 docs/CapabilityIomUpgradeSupportMetaList.md
 docs/CapabilityIomUpgradeSupportMetaResponse.md
 docs/CapabilityLdapBasePropertyConstraints.md
+docs/CapabilityPcIdRange.md
 docs/CapabilityPortGroupAggregationDef.md
 docs/CapabilityPortGroupAggregationDefList.md
 docs/CapabilityPortGroupAggregationDefResponse.md
@@ -770,6 +771,9 @@ docs/CapabilitySiocModuleDescriptorResponse.md
 docs/CapabilitySiocModuleManufacturingDef.md
 docs/CapabilitySiocModuleManufacturingDefList.md
 docs/CapabilitySiocModuleManufacturingDefResponse.md
+docs/CapabilityStandardRedfishSupportMeta.md
+docs/CapabilityStandardRedfishSupportMetaList.md
+docs/CapabilityStandardRedfishSupportMetaResponse.md
 docs/CapabilityStorageControllerUpdateConstraintMeta.md
 docs/CapabilityStorageControllerUpdateConstraintMetaList.md
 docs/CapabilityStorageControllerUpdateConstraintMetaResponse.md
@@ -1134,6 +1138,10 @@ docs/EquipmentBase.md
 docs/EquipmentBaseRelationship.md
 docs/EquipmentBaseSensor.md
 docs/EquipmentChassis.md
+docs/EquipmentChassisController.md
+docs/EquipmentChassisControllerList.md
+docs/EquipmentChassisControllerRelationship.md
+docs/EquipmentChassisControllerResponse.md
 docs/EquipmentChassisIdPool.md
 docs/EquipmentChassisIdPoolList.md
 docs/EquipmentChassisIdPoolResponse.md
@@ -1588,6 +1596,7 @@ docs/FirmwareEulaList.md
 docs/FirmwareEulaResponse.md
 docs/FirmwareExcludeComponentPidListType.md
 docs/FirmwareFabricUpgradeImpact.md
+docs/FirmwareFeatureVersionMap.md
 docs/FirmwareFirmwareInventory.md
 docs/FirmwareFirmwareSummary.md
 docs/FirmwareFirmwareSummaryList.md
@@ -1823,6 +1832,9 @@ docs/HclOperatingSystemVendorList.md
 docs/HclOperatingSystemVendorRelationship.md
 docs/HclOperatingSystemVendorResponse.md
 docs/HclProduct.md
+docs/HclServerCatalog.md
+docs/HclServerCatalogList.md
+docs/HclServerCatalogResponse.md
 docs/HclServerHwCatalogInfo.md
 docs/HclServerHwCatalogInfoList.md
 docs/HclServerHwCatalogInfoRelationship.md
@@ -3992,6 +4004,7 @@ docs/SoftwarerepositoryApplianceUpload.md
 docs/SoftwarerepositoryAuthorization.md
 docs/SoftwarerepositoryAuthorizationList.md
 docs/SoftwarerepositoryAuthorizationResponse.md
+docs/SoftwarerepositoryBaseDistributable.md
 docs/SoftwarerepositoryCachedImage.md
 docs/SoftwarerepositoryCachedImageList.md
 docs/SoftwarerepositoryCachedImageResponse.md
@@ -6012,6 +6025,7 @@ model_capability_iom_upgrade_support_meta.go
 model_capability_iom_upgrade_support_meta_list.go
 model_capability_iom_upgrade_support_meta_response.go
 model_capability_ldap_base_property_constraints.go
+model_capability_pc_id_range.go
 model_capability_port_group_aggregation_def.go
 model_capability_port_group_aggregation_def_list.go
 model_capability_port_group_aggregation_def_response.go
@@ -6050,6 +6064,9 @@ model_capability_sioc_module_descriptor_response.go
 model_capability_sioc_module_manufacturing_def.go
 model_capability_sioc_module_manufacturing_def_list.go
 model_capability_sioc_module_manufacturing_def_response.go
+model_capability_standard_redfish_support_meta.go
+model_capability_standard_redfish_support_meta_list.go
+model_capability_standard_redfish_support_meta_response.go
 model_capability_storage_controller_update_constraint_meta.go
 model_capability_storage_controller_update_constraint_meta_list.go
 model_capability_storage_controller_update_constraint_meta_response.go
@@ -6397,6 +6414,10 @@ model_equipment_base.go
 model_equipment_base_relationship.go
 model_equipment_base_sensor.go
 model_equipment_chassis.go
+model_equipment_chassis_controller.go
+model_equipment_chassis_controller_list.go
+model_equipment_chassis_controller_relationship.go
+model_equipment_chassis_controller_response.go
 model_equipment_chassis_id_pool.go
 model_equipment_chassis_id_pool_list.go
 model_equipment_chassis_id_pool_response.go
@@ -6843,6 +6864,7 @@ model_firmware_eula_list.go
 model_firmware_eula_response.go
 model_firmware_exclude_component_pid_list_type.go
 model_firmware_fabric_upgrade_impact.go
+model_firmware_feature_version_map.go
 model_firmware_firmware_inventory.go
 model_firmware_firmware_summary.go
 model_firmware_firmware_summary_list.go
@@ -7073,6 +7095,9 @@ model_hcl_operating_system_vendor_list.go
 model_hcl_operating_system_vendor_relationship.go
 model_hcl_operating_system_vendor_response.go
 model_hcl_product.go
+model_hcl_server_catalog.go
+model_hcl_server_catalog_list.go
+model_hcl_server_catalog_response.go
 model_hcl_server_hw_catalog_info.go
 model_hcl_server_hw_catalog_info_list.go
 model_hcl_server_hw_catalog_info_relationship.go
@@ -9189,6 +9214,7 @@ model_softwarerepository_appliance_upload.go
 model_softwarerepository_authorization.go
 model_softwarerepository_authorization_list.go
 model_softwarerepository_authorization_response.go
+model_softwarerepository_base_distributable.go
 model_softwarerepository_cached_image.go
 model_softwarerepository_cached_image_list.go
 model_softwarerepository_cached_image_response.go

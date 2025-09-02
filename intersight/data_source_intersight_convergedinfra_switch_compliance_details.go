@@ -322,7 +322,7 @@ func getConvergedinfraSwitchComplianceDetailsSchema() map[string]*schema.Schema 
 			},
 		},
 		"type": {
-			Description: "The type of switch component. It must be set to either Fabric Interconnect, Nexus or MDS.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
+			Description: "The type of switch component. It must be set to either Fabric Interconnect, Nexus or MDS.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.\n* `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
