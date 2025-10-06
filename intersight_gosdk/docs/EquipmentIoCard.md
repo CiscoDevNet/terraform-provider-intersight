@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConnectionPath** | Pointer to **string** | Switch Id to which the IOM is connected to. The value can be A or B. | [optional] [readonly] 
 **DcSupported** | Pointer to **bool** | IOM device connector support. | [optional] [readonly] 
 **InbandIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
+**OutOfBandIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **Side** | Pointer to **string** | Location of IOM within a chassis. The value can be left or right. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
@@ -161,6 +162,41 @@ HasInbandIpAddresses returns a boolean if a field has been set.
 `func (o *EquipmentIoCard) UnsetInbandIpAddresses()`
 
 UnsetInbandIpAddresses ensures that no value is present for InbandIpAddresses, not even an explicit nil
+### GetOutOfBandIpAddresses
+
+`func (o *EquipmentIoCard) GetOutOfBandIpAddresses() []ComputeIpAddress`
+
+GetOutOfBandIpAddresses returns the OutOfBandIpAddresses field if non-nil, zero value otherwise.
+
+### GetOutOfBandIpAddressesOk
+
+`func (o *EquipmentIoCard) GetOutOfBandIpAddressesOk() (*[]ComputeIpAddress, bool)`
+
+GetOutOfBandIpAddressesOk returns a tuple with the OutOfBandIpAddresses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandIpAddresses
+
+`func (o *EquipmentIoCard) SetOutOfBandIpAddresses(v []ComputeIpAddress)`
+
+SetOutOfBandIpAddresses sets OutOfBandIpAddresses field to given value.
+
+### HasOutOfBandIpAddresses
+
+`func (o *EquipmentIoCard) HasOutOfBandIpAddresses() bool`
+
+HasOutOfBandIpAddresses returns a boolean if a field has been set.
+
+### SetOutOfBandIpAddressesNil
+
+`func (o *EquipmentIoCard) SetOutOfBandIpAddressesNil(b bool)`
+
+ SetOutOfBandIpAddressesNil sets the value for OutOfBandIpAddresses to be an explicit nil
+
+### UnsetOutOfBandIpAddresses
+`func (o *EquipmentIoCard) UnsetOutOfBandIpAddresses()`
+
+UnsetOutOfBandIpAddresses ensures that no value is present for OutOfBandIpAddresses, not even an explicit nil
 ### GetSide
 
 `func (o *EquipmentIoCard) GetSide() string`

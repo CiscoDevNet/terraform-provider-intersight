@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.SupportedVersion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.SupportedVersion"]
+**FilterOptions** | Pointer to **string** | The OsInstall Supported Operating System Version Filter Option. * &#x60;None&#x60; - No filtering is applied, allowing all available OS versions. * &#x60;SupportedInBlueprint&#x60; - Restricts the OS version specific to blueprint. | [optional] [readonly] [default to "None"]
 **VersionName** | Pointer to **string** | The OsInstall Supported Operating System Version Name. | [optional] [readonly] 
 **Vendor** | Pointer to [**NullableHclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
 **Version** | Pointer to [**NullableHclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
@@ -68,6 +69,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetFilterOptions
+
+`func (o *OsSupportedVersion) GetFilterOptions() string`
+
+GetFilterOptions returns the FilterOptions field if non-nil, zero value otherwise.
+
+### GetFilterOptionsOk
+
+`func (o *OsSupportedVersion) GetFilterOptionsOk() (*string, bool)`
+
+GetFilterOptionsOk returns a tuple with the FilterOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterOptions
+
+`func (o *OsSupportedVersion) SetFilterOptions(v string)`
+
+SetFilterOptions sets FilterOptions field to given value.
+
+### HasFilterOptions
+
+`func (o *OsSupportedVersion) HasFilterOptions() bool`
+
+HasFilterOptions returns a boolean if a field has been set.
 
 ### GetVersionName
 
