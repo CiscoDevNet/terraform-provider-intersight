@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.Blade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.Blade"]
 **ChassisId** | Pointer to **string** | The id of the chassis that the blade is discovered in. | [optional] [readonly] 
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ScaledMode** | Pointer to **string** | The mode of the server that determines it is scaled. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | The slot number in the chassis that the blade is discovered in. | [optional] [readonly] 
 **Adapters** | Pointer to [**[]AdapterUnitRelationship**](AdapterUnitRelationship.md) | An array of relationships to adapterUnit resources. | [optional] [readonly] 
@@ -119,6 +120,41 @@ SetChassisId sets ChassisId field to given value.
 
 HasChassisId returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *ComputeBlade) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *ComputeBlade) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *ComputeBlade) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *ComputeBlade) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *ComputeBlade) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *ComputeBlade) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetScaledMode
 
 `func (o *ComputeBlade) GetScaledMode() string`

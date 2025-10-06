@@ -26,4 +26,5 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `suspend_end_time`:(string) Suspend a task until an end date. this applies only to the action suspendTill. 
 * `type`:(string) An Enum describing the type of scheduler to use.* `None` - No value was set for the schedule type (Enum value None).* `OneTime` - Define a one-time task execution time that will not automatically repeat.* `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, or every <interval> pattern. 
+* `use_policy`:(bool) Indicates if the schedule is policy based or not. 
  

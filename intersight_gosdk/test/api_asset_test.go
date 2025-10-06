@@ -47,6 +47,18 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test AssetApiService CreateAssetGeoLocation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.AssetApi.CreateAssetGeoLocation(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService CreateAssetTarget", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -131,6 +143,19 @@ func Test_intersight_AssetApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.AssetApi.DeleteAssetDeviceRegistration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AssetApiService DeleteAssetGeoLocation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.AssetApi.DeleteAssetGeoLocation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -358,6 +383,32 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test AssetApiService GetAssetGeoLocationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.AssetApi.GetAssetGeoLocationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AssetApiService GetAssetGeoLocationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.AssetApi.GetAssetGeoLocationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService GetAssetSubscriptionAccountByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -504,6 +555,20 @@ func Test_intersight_AssetApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test AssetApiService PatchAssetGeoLocation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.AssetApi.PatchAssetGeoLocation(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AssetApiService PatchAssetTarget", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -553,6 +618,20 @@ func Test_intersight_AssetApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.AssetApi.UpdateAssetDeviceRegistration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AssetApiService UpdateAssetGeoLocation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.AssetApi.UpdateAssetGeoLocation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -7,11 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.FcIfInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.FcIfInventory"]
 **Name** | Pointer to **string** | Name of the virtual fibre channel interface. | [optional] [readonly] 
+**OldInfo** | Pointer to [**NullableVnicFcIfOldInfo**](VnicFcIfOldInfo.md) |  | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] [readonly] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
 **PersistentBindings** | Pointer to **bool** | Enables retention of LUN ID associations in memory until they are manually cleared. | [optional] [readonly] 
 **PinGroupName** | Pointer to **string** | Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic. | [optional] [readonly] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
+**Stale** | Pointer to **bool** | An FcIf is marked stale if it was deployed to the endpoint and the San Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the San Connectivity Policy being removed from the server profile or a different San Connectivity Policy is attached which does not include any FcIf with the same name. | [optional] [readonly] 
 **StaticWwpnAddress** | Pointer to **string** | The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN&#39;s in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx. | [optional] [readonly] 
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
 **TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
@@ -115,6 +117,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetOldInfo
+
+`func (o *VnicFcIfInventory) GetOldInfo() VnicFcIfOldInfo`
+
+GetOldInfo returns the OldInfo field if non-nil, zero value otherwise.
+
+### GetOldInfoOk
+
+`func (o *VnicFcIfInventory) GetOldInfoOk() (*VnicFcIfOldInfo, bool)`
+
+GetOldInfoOk returns a tuple with the OldInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOldInfo
+
+`func (o *VnicFcIfInventory) SetOldInfo(v VnicFcIfOldInfo)`
+
+SetOldInfo sets OldInfo field to given value.
+
+### HasOldInfo
+
+`func (o *VnicFcIfInventory) HasOldInfo() bool`
+
+HasOldInfo returns a boolean if a field has been set.
+
+### SetOldInfoNil
+
+`func (o *VnicFcIfInventory) SetOldInfoNil(b bool)`
+
+ SetOldInfoNil sets the value for OldInfo to be an explicit nil
+
+### UnsetOldInfo
+`func (o *VnicFcIfInventory) UnsetOldInfo()`
+
+UnsetOldInfo ensures that no value is present for OldInfo, not even an explicit nil
 ### GetOrder
 
 `func (o *VnicFcIfInventory) GetOrder() int64`
@@ -260,6 +297,31 @@ HasPlacement returns a boolean if a field has been set.
 `func (o *VnicFcIfInventory) UnsetPlacement()`
 
 UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
+### GetStale
+
+`func (o *VnicFcIfInventory) GetStale() bool`
+
+GetStale returns the Stale field if non-nil, zero value otherwise.
+
+### GetStaleOk
+
+`func (o *VnicFcIfInventory) GetStaleOk() (*bool, bool)`
+
+GetStaleOk returns a tuple with the Stale field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStale
+
+`func (o *VnicFcIfInventory) SetStale(v bool)`
+
+SetStale sets Stale field to given value.
+
+### HasStale
+
+`func (o *VnicFcIfInventory) HasStale() bool`
+
+HasStale returns a boolean if a field has been set.
+
 ### GetStaticWwpnAddress
 
 `func (o *VnicFcIfInventory) GetStaticWwpnAddress() string`

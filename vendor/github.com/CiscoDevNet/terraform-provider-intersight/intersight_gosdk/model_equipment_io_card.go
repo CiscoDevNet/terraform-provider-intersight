@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025081401
+API version: 1.0.11-2025091920
 Contact: intersight@cisco.com
 */
 
@@ -31,8 +31,9 @@ type EquipmentIoCard struct {
 	// Switch Id to which the IOM is connected to. The value can be A or B.
 	ConnectionPath *string `json:"ConnectionPath,omitempty"`
 	// IOM device connector support.
-	DcSupported       *bool              `json:"DcSupported,omitempty"`
-	InbandIpAddresses []ComputeIpAddress `json:"InbandIpAddresses,omitempty"`
+	DcSupported          *bool              `json:"DcSupported,omitempty"`
+	InbandIpAddresses    []ComputeIpAddress `json:"InbandIpAddresses,omitempty"`
+	OutOfBandIpAddresses []ComputeIpAddress `json:"OutOfBandIpAddresses,omitempty"`
 	// Location of IOM within a chassis. The value can be left or right.
 	Side             *string                              `json:"Side,omitempty"`
 	EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
@@ -223,6 +224,39 @@ func (o *EquipmentIoCard) HasInbandIpAddresses() bool {
 // SetInbandIpAddresses gets a reference to the given []ComputeIpAddress and assigns it to the InbandIpAddresses field.
 func (o *EquipmentIoCard) SetInbandIpAddresses(v []ComputeIpAddress) {
 	o.InbandIpAddresses = v
+}
+
+// GetOutOfBandIpAddresses returns the OutOfBandIpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentIoCard) GetOutOfBandIpAddresses() []ComputeIpAddress {
+	if o == nil {
+		var ret []ComputeIpAddress
+		return ret
+	}
+	return o.OutOfBandIpAddresses
+}
+
+// GetOutOfBandIpAddressesOk returns a tuple with the OutOfBandIpAddresses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentIoCard) GetOutOfBandIpAddressesOk() ([]ComputeIpAddress, bool) {
+	if o == nil || IsNil(o.OutOfBandIpAddresses) {
+		return nil, false
+	}
+	return o.OutOfBandIpAddresses, true
+}
+
+// HasOutOfBandIpAddresses returns a boolean if a field has been set.
+func (o *EquipmentIoCard) HasOutOfBandIpAddresses() bool {
+	if o != nil && !IsNil(o.OutOfBandIpAddresses) {
+		return true
+	}
+
+	return false
+}
+
+// SetOutOfBandIpAddresses gets a reference to the given []ComputeIpAddress and assigns it to the OutOfBandIpAddresses field.
+func (o *EquipmentIoCard) SetOutOfBandIpAddresses(v []ComputeIpAddress) {
+	o.OutOfBandIpAddresses = v
 }
 
 // GetSide returns the Side field value if set, zero value otherwise.
@@ -540,6 +574,9 @@ func (o EquipmentIoCard) ToMap() (map[string]interface{}, error) {
 	if o.InbandIpAddresses != nil {
 		toSerialize["InbandIpAddresses"] = o.InbandIpAddresses
 	}
+	if o.OutOfBandIpAddresses != nil {
+		toSerialize["OutOfBandIpAddresses"] = o.OutOfBandIpAddresses
+	}
 	if !IsNil(o.Side) {
 		toSerialize["Side"] = o.Side
 	}
@@ -619,8 +656,9 @@ func (o *EquipmentIoCard) UnmarshalJSON(data []byte) (err error) {
 		// Switch Id to which the IOM is connected to. The value can be A or B.
 		ConnectionPath *string `json:"ConnectionPath,omitempty"`
 		// IOM device connector support.
-		DcSupported       *bool              `json:"DcSupported,omitempty"`
-		InbandIpAddresses []ComputeIpAddress `json:"InbandIpAddresses,omitempty"`
+		DcSupported          *bool              `json:"DcSupported,omitempty"`
+		InbandIpAddresses    []ComputeIpAddress `json:"InbandIpAddresses,omitempty"`
+		OutOfBandIpAddresses []ComputeIpAddress `json:"OutOfBandIpAddresses,omitempty"`
 		// Location of IOM within a chassis. The value can be left or right.
 		Side             *string                              `json:"Side,omitempty"`
 		EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
@@ -642,6 +680,7 @@ func (o *EquipmentIoCard) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentIoCard.ConnectionPath = varEquipmentIoCardWithoutEmbeddedStruct.ConnectionPath
 		varEquipmentIoCard.DcSupported = varEquipmentIoCardWithoutEmbeddedStruct.DcSupported
 		varEquipmentIoCard.InbandIpAddresses = varEquipmentIoCardWithoutEmbeddedStruct.InbandIpAddresses
+		varEquipmentIoCard.OutOfBandIpAddresses = varEquipmentIoCardWithoutEmbeddedStruct.OutOfBandIpAddresses
 		varEquipmentIoCard.Side = varEquipmentIoCardWithoutEmbeddedStruct.Side
 		varEquipmentIoCard.EquipmentChassis = varEquipmentIoCardWithoutEmbeddedStruct.EquipmentChassis
 		varEquipmentIoCard.EquipmentFex = varEquipmentIoCardWithoutEmbeddedStruct.EquipmentFex
@@ -671,6 +710,7 @@ func (o *EquipmentIoCard) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ConnectionPath")
 		delete(additionalProperties, "DcSupported")
 		delete(additionalProperties, "InbandIpAddresses")
+		delete(additionalProperties, "OutOfBandIpAddresses")
 		delete(additionalProperties, "Side")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "EquipmentFex")

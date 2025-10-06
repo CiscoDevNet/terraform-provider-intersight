@@ -589,6 +589,169 @@ func flattenListBiosUnitRelationship(p []models.BiosUnitRelationship, d *schema.
 	}
 	return biosunitrelationships
 }
+func flattenListBlueprintBlueprintDefinitionDependency(p []models.BlueprintBlueprintDefinitionDependency, d *schema.ResourceData) []map[string]interface{} {
+	var blueprintblueprintdefinitiondependencys []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		blueprintblueprintdefinitiondependency := make(map[string]interface{})
+		blueprintblueprintdefinitiondependency["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		blueprint_dependencies_x, _ := d.GetOk("blueprint_dependencies")
+		blueprintblueprintdefinitiondependency["blueprint_definition"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetBlueprintDefinition(), blueprint_dependencies_x)
+		blueprintblueprintdefinitiondependency["blueprint_name"] = item.GetBlueprintName()
+		blueprintblueprintdefinitiondependency["catalog_moid"] = item.GetCatalogMoid()
+		blueprintblueprintdefinitiondependency["class_id"] = item.GetClassId()
+		blueprintblueprintdefinitiondependency["description"] = item.GetDescription()
+		blueprintblueprintdefinitiondependency["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
+		blueprintblueprintdefinitiondependency["label"] = item.GetLabel()
+		blueprintblueprintdefinitiondependency["object_type"] = item.GetObjectType()
+		blueprintblueprintdefinitiondependency["nr_version"] = item.GetVersion()
+		blueprintblueprintdefinitiondependencys = append(blueprintblueprintdefinitiondependencys, blueprintblueprintdefinitiondependency)
+	}
+	return blueprintblueprintdefinitiondependencys
+}
+func flattenListBlueprintGeneratedObjectMetadata(p []models.BlueprintGeneratedObjectMetadata, d *schema.ResourceData) []map[string]interface{} {
+	var blueprintgeneratedobjectmetadatas []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		blueprintgeneratedobjectmetadata := make(map[string]interface{})
+		blueprintgeneratedobjectmetadata["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		blueprintgeneratedobjectmetadata["class_id"] = item.GetClassId()
+		blueprintgeneratedobjectmetadata["conditions"] = item.GetConditions()
+		blueprintgeneratedobjectmetadata["name"] = item.GetName()
+		blueprintgeneratedobjectmetadata["object_iteration"] = item.GetObjectIteration()
+		generated_object_definition_x, _ := d.GetOk("generated_object_definition")
+		blueprintgeneratedobjectmetadata["object_source"] = (func(p models.BlueprintBaseGeneratedObjectSourceMetadata, v interface{}) []map[string]interface{} {
+			var blueprintbasegeneratedobjectsourcemetadatas []map[string]interface{}
+			var ret models.BlueprintBaseGeneratedObjectSourceMetadata
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			blueprintbasegeneratedobjectsourcemetadata := make(map[string]interface{})
+			blueprintbasegeneratedobjectsourcemetadata["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			blueprintbasegeneratedobjectsourcemetadata["class_id"] = item.GetClassId()
+			blueprintbasegeneratedobjectsourcemetadata["object_type"] = item.GetObjectType()
+
+			blueprintbasegeneratedobjectsourcemetadatas = append(blueprintbasegeneratedobjectsourcemetadatas, blueprintbasegeneratedobjectsourcemetadata)
+			return blueprintbasegeneratedobjectsourcemetadatas
+		})(item.GetObjectSource(), generated_object_definition_x)
+		blueprintgeneratedobjectmetadata["object_type"] = item.GetObjectType()
+		blueprintgeneratedobjectmetadata["pre_generate_operations"] = (func(p []models.BlueprintPreGenerateOperation, v interface{}) []map[string]interface{} {
+			var blueprintpregenerateoperations []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				blueprintpregenerateoperation := make(map[string]interface{})
+				blueprintpregenerateoperation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				blueprintpregenerateoperation["class_id"] = item.GetClassId()
+
+				var pre_generate_operations_x interface{}
+				if isNonEmptySliceOfMaps(v) {
+					pre_generate_operations_x = v.([]interface{})[len(blueprintpregenerateoperations)].(map[string]interface{})["pre_generate_operations"]
+				}
+
+				blueprintpregenerateoperation["generated_objects"] = (func(p []models.BlueprintGeneratedObjectOperationTarget, v interface{}) []map[string]interface{} {
+					var blueprintgeneratedobjectoperationtargets []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						blueprintgeneratedobjectoperationtarget := make(map[string]interface{})
+						blueprintgeneratedobjectoperationtarget["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						blueprintgeneratedobjectoperationtarget["class_id"] = item.GetClassId()
+						blueprintgeneratedobjectoperationtarget["name"] = item.GetName()
+						blueprintgeneratedobjectoperationtarget["object_type"] = item.GetObjectType()
+						blueprintgeneratedobjectoperationtarget["property_parameters"] = flattenAdditionalProperties(item.PropertyParameters)
+						blueprintgeneratedobjectoperationtargets = append(blueprintgeneratedobjectoperationtargets, blueprintgeneratedobjectoperationtarget)
+					}
+					return blueprintgeneratedobjectoperationtargets
+				})(item.GetGeneratedObjects(), pre_generate_operations_x)
+				blueprintpregenerateoperation["object_type"] = item.GetObjectType()
+				blueprintpregenerateoperation["operation"] = item.GetOperation()
+				blueprintpregenerateoperations = append(blueprintpregenerateoperations, blueprintpregenerateoperation)
+			}
+			return blueprintpregenerateoperations
+		})(item.GetPreGenerateOperations(), generated_object_definition_x)
+		blueprintgeneratedobjectmetadata["property_iteration"] = (func(p []models.BlueprintPropertyIteration, v interface{}) []map[string]interface{} {
+			var blueprintpropertyiterations []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				blueprintpropertyiteration := make(map[string]interface{})
+				blueprintpropertyiteration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				blueprintpropertyiteration["class_id"] = item.GetClassId()
+				blueprintpropertyiteration["iteration"] = item.GetIteration()
+				blueprintpropertyiteration["name"] = item.GetName()
+				blueprintpropertyiteration["object_type"] = item.GetObjectType()
+				blueprintpropertyiterations = append(blueprintpropertyiterations, blueprintpropertyiteration)
+			}
+			return blueprintpropertyiterations
+		})(item.GetPropertyIteration(), generated_object_definition_x)
+		blueprintgeneratedobjectmetadata["property_parameters"] = flattenAdditionalProperties(item.PropertyParameters)
+		blueprintgeneratedobjectmetadata["required"] = item.GetRequired()
+		blueprintgeneratedobjectmetadatas = append(blueprintgeneratedobjectmetadatas, blueprintgeneratedobjectmetadata)
+	}
+	return blueprintgeneratedobjectmetadatas
+}
+func flattenListBlueprintInputOperationType(p []models.BlueprintInputOperationType, d *schema.ResourceData) []map[string]interface{} {
+	var blueprintinputoperationtypes []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		blueprintinputoperationtype := make(map[string]interface{})
+		blueprintinputoperationtype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		blueprintinputoperationtype["class_id"] = item.GetClassId()
+		blueprintinputoperationtype["impact_type"] = item.GetImpactType()
+		blueprintinputoperationtype["name"] = item.GetName()
+		blueprintinputoperationtype["object_type"] = item.GetObjectType()
+		blueprintinputoperationtype["operation_modes"] = item.GetOperationModes()
+		blueprintinputoperationtypes = append(blueprintinputoperationtypes, blueprintinputoperationtype)
+	}
+	return blueprintinputoperationtypes
+}
+func flattenListBlueprintServiceItemDefinition(p []models.BlueprintServiceItemDefinition, d *schema.ResourceData) []map[string]interface{} {
+	var blueprintserviceitemdefinitions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		blueprintserviceitemdefinition := make(map[string]interface{})
+		blueprintserviceitemdefinition["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		blueprintserviceitemdefinition["catalog_moid"] = item.GetCatalogMoid()
+		blueprintserviceitemdefinition["class_id"] = item.GetClassId()
+		blueprintserviceitemdefinition["description"] = item.GetDescription()
+		blueprintserviceitemdefinition["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
+		blueprintserviceitemdefinition["label"] = item.GetLabel()
+		blueprintserviceitemdefinition["object_type"] = item.GetObjectType()
+		blueprintserviceitemdefinition["service_item_definition_name"] = item.GetServiceItemDefinitionName()
+		blueprintserviceitemdefinition["nr_version"] = item.GetVersion()
+		blueprintserviceitemdefinitions = append(blueprintserviceitemdefinitions, blueprintserviceitemdefinition)
+	}
+	return blueprintserviceitemdefinitions
+}
 func flattenListBootCddDeviceRelationship(p []models.BootCddDeviceRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var bootcdddevicerelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -863,7 +1026,48 @@ func flattenListBulkRestResult(p []models.BulkRestResult, d *schema.ResourceData
 				for _, item := range p {
 					motag := make(map[string]interface{})
 					motag["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+
+					var tags_x interface{}
+					if isNonEmptySliceOfMaps(v) {
+						tags_x = v.([]interface{})[len(motags)].(map[string]interface{})["tags"]
+					}
+
+					motag["ancestor_definitions"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+						var momorefs []map[string]interface{}
+						if len(p) == 0 {
+							return nil
+						}
+						for _, item := range p {
+							momoref := make(map[string]interface{})
+							momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+							momoref["class_id"] = item.GetClassId()
+							momoref["moid"] = item.GetMoid()
+							momoref["object_type"] = item.GetObjectType()
+							momoref["selector"] = item.GetSelector()
+							momorefs = append(momorefs, momoref)
+						}
+						return momorefs
+					})(item.GetAncestorDefinitions(), tags_x)
+					motag["definition"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+						var momorefs []map[string]interface{}
+						var ret models.MoMoRef
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						momoref := make(map[string]interface{})
+						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						momoref["class_id"] = item.GetClassId()
+						momoref["moid"] = item.GetMoid()
+						momoref["object_type"] = item.GetObjectType()
+						momoref["selector"] = item.GetSelector()
+
+						momorefs = append(momorefs, momoref)
+						return momorefs
+					})(item.GetDefinition(), tags_x)
 					motag["key"] = item.GetKey()
+					motag["propagated"] = item.GetPropagated()
+					motag["type"] = item.GetType()
 					motag["value"] = item.GetValue()
 					motags = append(motags, motag)
 				}
@@ -4370,6 +4574,28 @@ func flattenListIamAccountPermissions(p []models.IamAccountPermissions, d *schem
 				iampermissionreference["object_type"] = item.GetObjectType()
 				iampermissionreference["permission_identifier"] = item.GetPermissionIdentifier()
 				iampermissionreference["permission_name"] = item.GetPermissionName()
+
+				var permissions_x interface{}
+				if isNonEmptySliceOfMaps(v) {
+					permissions_x = v.([]interface{})[len(iampermissionreferences)].(map[string]interface{})["permissions"]
+				}
+
+				iampermissionreference["user_group_mappings"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+					var momorefs []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						momoref := make(map[string]interface{})
+						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						momoref["class_id"] = item.GetClassId()
+						momoref["moid"] = item.GetMoid()
+						momoref["object_type"] = item.GetObjectType()
+						momoref["selector"] = item.GetSelector()
+						momorefs = append(momorefs, momoref)
+					}
+					return momorefs
+				})(item.GetUserGroupMappings(), permissions_x)
 				iampermissionreferences = append(iampermissionreferences, iampermissionreference)
 			}
 			return iampermissionreferences
@@ -4740,6 +4966,23 @@ func flattenListIamUserRelationship(p []models.IamUserRelationship, d *schema.Re
 		iamuserrelationships = append(iamuserrelationships, iamuserrelationship)
 	}
 	return iamuserrelationships
+}
+func flattenListIamUserDetails(p []models.IamUserDetails, d *schema.ResourceData) []map[string]interface{} {
+	var iamuserdetailss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		iamuserdetails := make(map[string]interface{})
+		iamuserdetails["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		iamuserdetails["class_id"] = item.GetClassId()
+		iamuserdetails["email_notification_status"] = item.GetEmailNotificationStatus()
+		iamuserdetails["object_type"] = item.GetObjectType()
+		iamuserdetails["user_email"] = item.GetUserEmail()
+		iamuserdetails["user_name"] = item.GetUserName()
+		iamuserdetailss = append(iamuserdetailss, iamuserdetails)
+	}
+	return iamuserdetailss
 }
 func flattenListIamUserGroupRelationship(p []models.IamUserGroupRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamusergrouprelationships []map[string]interface{}
@@ -5953,7 +6196,48 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 			for _, item := range p {
 				motag := make(map[string]interface{})
 				motag["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+
+				var tags_x interface{}
+				if isNonEmptySliceOfMaps(v) {
+					tags_x = v.([]interface{})[len(motags)].(map[string]interface{})["tags"]
+				}
+
+				motag["ancestor_definitions"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+					var momorefs []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						momoref := make(map[string]interface{})
+						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						momoref["class_id"] = item.GetClassId()
+						momoref["moid"] = item.GetMoid()
+						momoref["object_type"] = item.GetObjectType()
+						momoref["selector"] = item.GetSelector()
+						momorefs = append(momorefs, momoref)
+					}
+					return momorefs
+				})(item.GetAncestorDefinitions(), tags_x)
+				motag["definition"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+					var momorefs []map[string]interface{}
+					var ret models.MoMoRef
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					momoref := make(map[string]interface{})
+					momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					momoref["class_id"] = item.GetClassId()
+					momoref["moid"] = item.GetMoid()
+					momoref["object_type"] = item.GetObjectType()
+					momoref["selector"] = item.GetSelector()
+
+					momorefs = append(momorefs, momoref)
+					return momorefs
+				})(item.GetDefinition(), tags_x)
 				motag["key"] = item.GetKey()
+				motag["propagated"] = item.GetPropagated()
+				motag["type"] = item.GetType()
 				motag["value"] = item.GetValue()
 				motags = append(motags, motag)
 			}
@@ -6057,7 +6341,43 @@ func flattenListMoTag(p []models.MoTag, d *schema.ResourceData) []map[string]int
 	for _, item := range p {
 		motag := make(map[string]interface{})
 		motag["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		tags_x, _ := d.GetOk("tags")
+		motag["ancestor_definitions"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				momoref := make(map[string]interface{})
+				momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				momoref["class_id"] = item.GetClassId()
+				momoref["moid"] = item.GetMoid()
+				momoref["object_type"] = item.GetObjectType()
+				momoref["selector"] = item.GetSelector()
+				momorefs = append(momorefs, momoref)
+			}
+			return momorefs
+		})(item.GetAncestorDefinitions(), tags_x)
+		motag["definition"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetDefinition(), tags_x)
 		motag["key"] = item.GetKey()
+		motag["propagated"] = item.GetPropagated()
+		motag["type"] = item.GetType()
 		motag["value"] = item.GetValue()
 		motags = append(motags, motag)
 	}
@@ -7429,6 +7749,18 @@ func flattenListRecoveryConfigResultEntryRelationship(p []models.RecoveryConfigR
 	}
 	return recoveryconfigresultentryrelationships
 }
+func flattenListResourceAbstractResourceQualificationPolicyRelationship(p []models.ResourceAbstractResourceQualificationPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourceabstractresourcequalificationpolicyrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		resourceabstractresourcequalificationpolicyrelationship := flattenMoMoRef(item)
+		resourceabstractresourcequalificationpolicyrelationships = append(resourceabstractresourcequalificationpolicyrelationships, resourceabstractresourcequalificationpolicyrelationship)
+	}
+	return resourceabstractresourcequalificationpolicyrelationships
+}
 func flattenListResourceGroupRelationship(p []models.ResourceGroupRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var resourcegrouprelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -7487,6 +7819,70 @@ func flattenListResourceSelector(p []models.ResourceSelector, d *schema.Resource
 	}
 	return resourceselectors
 }
+func flattenListResourcepoolChildLeaseCondition(p []models.ResourcepoolChildLeaseCondition, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolchildleaseconditions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		resourcepoolchildleasecondition := make(map[string]interface{})
+		resourcepoolchildleasecondition["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		child_lease_condition_x, _ := d.GetOk("child_lease_condition")
+		resourcepoolchildleasecondition["assigned_to_entity"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetAssignedToEntity(), child_lease_condition_x)
+		resourcepoolchildleasecondition["class_id"] = item.GetClassId()
+		resourcepoolchildleasecondition["condition"] = (func(p []models.ResourceResourceQualifier, v interface{}) []map[string]interface{} {
+			var resourceresourcequalifiers []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				resourceresourcequalifier := make(map[string]interface{})
+				resourceresourcequalifier["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				resourceresourcequalifier["class_id"] = item.GetClassId()
+				resourceresourcequalifier["object_type"] = item.GetObjectType()
+				resourceresourcequalifiers = append(resourceresourcequalifiers, resourceresourcequalifier)
+			}
+			return resourceresourcequalifiers
+		})(item.GetCondition(), child_lease_condition_x)
+		resourcepoolchildleasecondition["feature"] = item.GetFeature()
+		resourcepoolchildleasecondition["lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetLease(), child_lease_condition_x)
+		resourcepoolchildleasecondition["object_type"] = item.GetObjectType()
+		resourcepoolchildleaseconditions = append(resourcepoolchildleaseconditions, resourcepoolchildleasecondition)
+	}
+	return resourcepoolchildleaseconditions
+}
 func flattenListResourcepoolPoolRelationship(p []models.ResourcepoolPoolRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var resourcepoolpoolrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -7499,17 +7895,82 @@ func flattenListResourcepoolPoolRelationship(p []models.ResourcepoolPoolRelation
 	}
 	return resourcepoolpoolrelationships
 }
-func flattenListResourcepoolQualificationPolicyRelationship(p []models.ResourcepoolQualificationPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolqualificationpolicyrelationships []map[string]interface{}
+func flattenListSchedulerBaseScheduleParams(p []models.SchedulerBaseScheduleParams, d *schema.ResourceData) []map[string]interface{} {
+	var schedulerbasescheduleparamss []map[string]interface{}
 	if len(p) == 0 {
 		return nil
 	}
 	for _, item := range p {
-		item := item.MoMoRef
-		resourcepoolqualificationpolicyrelationship := flattenMoMoRef(item)
-		resourcepoolqualificationpolicyrelationships = append(resourcepoolqualificationpolicyrelationships, resourcepoolqualificationpolicyrelationship)
+		schedulerbasescheduleparams := make(map[string]interface{})
+		schedulerbasescheduleparams["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		schedulerbasescheduleparams["class_id"] = item.GetClassId()
+		schedulerbasescheduleparams["duration"] = item.GetDuration()
+		schedulerbasescheduleparams["name"] = item.GetName()
+		schedulerbasescheduleparams["object_type"] = item.GetObjectType()
+		schedulerbasescheduleparams["start_time"] = item.GetStartTime().String()
+		schedulerbasescheduleparams["time_zone"] = item.GetTimeZone()
+		schedulerbasescheduleparamss = append(schedulerbasescheduleparamss, schedulerbasescheduleparams)
 	}
-	return resourcepoolqualificationpolicyrelationships
+	return schedulerbasescheduleparamss
+}
+func flattenListSchedulerBlockDate(p []models.SchedulerBlockDate, d *schema.ResourceData) []map[string]interface{} {
+	var schedulerblockdates []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		schedulerblockdate := make(map[string]interface{})
+		schedulerblockdate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		schedulerblockdate["class_id"] = item.GetClassId()
+		schedulerblockdate["end_time"] = item.GetEndTime().String()
+		schedulerblockdate["object_type"] = item.GetObjectType()
+		schedulerblockdate["start_time"] = item.GetStartTime().String()
+		schedulerblockdates = append(schedulerblockdates, schedulerblockdate)
+	}
+	return schedulerblockdates
+}
+func flattenListSchedulerTaskSchedulePolicyExecutionStatus(p []models.SchedulerTaskSchedulePolicyExecutionStatus, d *schema.ResourceData) []map[string]interface{} {
+	var schedulertaskschedulepolicyexecutionstatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		schedulertaskschedulepolicyexecutionstatus := make(map[string]interface{})
+		schedulertaskschedulepolicyexecutionstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		schedulertaskschedulepolicyexecutionstatus["class_id"] = item.GetClassId()
+		schedulertaskschedulepolicyexecutionstatus["name"] = item.GetName()
+		schedulertaskschedulepolicyexecutionstatus["object_type"] = item.GetObjectType()
+		execution_statuses_x, _ := d.GetOk("execution_statuses")
+		schedulertaskschedulepolicyexecutionstatus["status"] = (func(p models.SchedulerTaskScheduleStatus, v interface{}) []map[string]interface{} {
+			var schedulertaskschedulestatuss []map[string]interface{}
+			var ret models.SchedulerTaskScheduleStatus
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			schedulertaskschedulestatus := make(map[string]interface{})
+			schedulertaskschedulestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			schedulertaskschedulestatus["class_id"] = item.GetClassId()
+			schedulertaskschedulestatus["completed_count"] = item.GetCompletedCount()
+			schedulertaskschedulestatus["consecutive_failures"] = item.GetConsecutiveFailures()
+			schedulertaskschedulestatus["nr_count"] = item.GetCount()
+			schedulertaskschedulestatus["current_status"] = item.GetCurrentStatus()
+			schedulertaskschedulestatus["failed_count"] = item.GetFailedCount()
+			schedulertaskschedulestatus["is_system_suspended"] = item.GetIsSystemSuspended()
+			schedulertaskschedulestatus["last_run_status"] = item.GetLastRunStatus()
+			schedulertaskschedulestatus["next_run_start_time"] = item.GetNextRunStartTime().String()
+			schedulertaskschedulestatus["object_type"] = item.GetObjectType()
+			schedulertaskschedulestatus["prev_run_end_time"] = item.GetPrevRunEndTime().String()
+			schedulertaskschedulestatus["prev_run_start_time"] = item.GetPrevRunStartTime().String()
+			schedulertaskschedulestatus["reason"] = item.GetReason()
+			schedulertaskschedulestatus["skipped_count"] = item.GetSkippedCount()
+
+			schedulertaskschedulestatuss = append(schedulertaskschedulestatuss, schedulertaskschedulestatus)
+			return schedulertaskschedulestatuss
+		})(item.GetStatus(), execution_statuses_x)
+		schedulertaskschedulepolicyexecutionstatuss = append(schedulertaskschedulepolicyexecutionstatuss, schedulertaskschedulepolicyexecutionstatus)
+	}
+	return schedulertaskschedulepolicyexecutionstatuss
 }
 func flattenListSdcardPartition(p []models.SdcardPartition, d *schema.ResourceData) []map[string]interface{} {
 	var sdcardpartitions []map[string]interface{}
@@ -9955,6 +10416,361 @@ func flattenListWorkflowWorkflowTask(p []models.WorkflowWorkflowTask, d *schema.
 	}
 	return workflowworkflowtasks
 }
+func flattenListWorkloadAssignedResource(p []models.WorkloadAssignedResource, d *schema.ResourceData) []map[string]interface{} {
+	var workloadassignedresources []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		workloadassignedresource := make(map[string]interface{})
+		workloadassignedresource["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		assigned_resources_x, _ := d.GetOk("assigned_resources")
+		workloadassignedresource["blue_print"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetBluePrint(), assigned_resources_x)
+		workloadassignedresource["blue_print_ref_name"] = item.GetBluePrintRefName()
+		workloadassignedresource["class_id"] = item.GetClassId()
+		workloadassignedresource["lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetLease(), assigned_resources_x)
+		workloadassignedresource["object_type"] = item.GetObjectType()
+		workloadassignedresource["resource"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetResource(), assigned_resources_x)
+		workloadassignedresource["service_item_instance"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetServiceItemInstance(), assigned_resources_x)
+		workloadassignedresources = append(workloadassignedresources, workloadassignedresource)
+	}
+	return workloadassignedresources
+}
+func flattenListWorkloadBlueprintInputReference(p []models.WorkloadBlueprintInputReference, d *schema.ResourceData) []map[string]interface{} {
+	var workloadblueprintinputreferences []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		workloadblueprintinputreference := make(map[string]interface{})
+		workloadblueprintinputreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		blueprints_x, _ := d.GetOk("blueprints")
+		workloadblueprintinputreference["blueprint"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetBlueprint(), blueprints_x)
+		workloadblueprintinputreference["class_id"] = item.GetClassId()
+		workloadblueprintinputreference["input"] = flattenAdditionalProperties(item.Input)
+		workloadblueprintinputreference["name"] = item.GetName()
+		workloadblueprintinputreference["object_type"] = item.GetObjectType()
+		workloadblueprintinputreference["ref_name"] = item.GetRefName()
+		workloadblueprintinputreference["resource_constraint"] = (func(p models.WorkloadResourceConstraint, v interface{}) []map[string]interface{} {
+			var workloadresourceconstraints []map[string]interface{}
+			var ret models.WorkloadResourceConstraint
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			workloadresourceconstraint := make(map[string]interface{})
+			workloadresourceconstraint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			workloadresourceconstraint["class_id"] = item.GetClassId()
+			workloadresourceconstraint["input"] = flattenAdditionalProperties(item.Input)
+			workloadresourceconstraint["object_type"] = item.GetObjectType()
+
+			workloadresourceconstraints = append(workloadresourceconstraints, workloadresourceconstraint)
+			return workloadresourceconstraints
+		})(item.GetResourceConstraint(), blueprints_x)
+		workloadblueprintinputreferences = append(workloadblueprintinputreferences, workloadblueprintinputreference)
+	}
+	return workloadblueprintinputreferences
+}
+func flattenListWorkloadBlueprintReference(p []models.WorkloadBlueprintReference, d *schema.ResourceData) []map[string]interface{} {
+	var workloadblueprintreferences []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		workloadblueprintreference := make(map[string]interface{})
+		workloadblueprintreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		blueprints_x, _ := d.GetOk("blueprints")
+		workloadblueprintreference["blueprint"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetBlueprint(), blueprints_x)
+		workloadblueprintreference["class_id"] = item.GetClassId()
+		workloadblueprintreference["input"] = flattenAdditionalProperties(item.Input)
+		workloadblueprintreference["input_override"] = item.GetInputOverride()
+		workloadblueprintreference["name"] = item.GetName()
+		workloadblueprintreference["object_type"] = item.GetObjectType()
+		workloadblueprintreference["ref_name"] = item.GetRefName()
+		workloadblueprintreference["resource_constraint"] = (func(p models.WorkloadResourceConstraint, v interface{}) []map[string]interface{} {
+			var workloadresourceconstraints []map[string]interface{}
+			var ret models.WorkloadResourceConstraint
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			workloadresourceconstraint := make(map[string]interface{})
+			workloadresourceconstraint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			workloadresourceconstraint["class_id"] = item.GetClassId()
+			workloadresourceconstraint["input"] = flattenAdditionalProperties(item.Input)
+			workloadresourceconstraint["object_type"] = item.GetObjectType()
+
+			workloadresourceconstraints = append(workloadresourceconstraints, workloadresourceconstraint)
+			return workloadresourceconstraints
+		})(item.GetResourceConstraint(), blueprints_x)
+		workloadblueprintreferences = append(workloadblueprintreferences, workloadblueprintreference)
+	}
+	return workloadblueprintreferences
+}
+func flattenListWorkloadDeploymentBlueprintInputType(p []models.WorkloadDeploymentBlueprintInputType, d *schema.ResourceData) []map[string]interface{} {
+	var workloaddeploymentblueprintinputtypes []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		workloaddeploymentblueprintinputtype := make(map[string]interface{})
+		workloaddeploymentblueprintinputtype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		input_x, _ := d.GetOk("input")
+		workloaddeploymentblueprintinputtype["blueprint"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetBlueprint(), input_x)
+		workloaddeploymentblueprintinputtype["class_id"] = item.GetClassId()
+		workloaddeploymentblueprintinputtype["expunged_objects"] = (func(p []models.WorkloadGeneratedObject, v interface{}) []map[string]interface{} {
+			var workloadgeneratedobjects []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				workloadgeneratedobject := make(map[string]interface{})
+				workloadgeneratedobject["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				workloadgeneratedobject["class_id"] = item.GetClassId()
+				workloadgeneratedobject["name"] = item.GetName()
+				workloadgeneratedobject["object_type"] = item.GetObjectType()
+
+				var expunged_objects_x interface{}
+				if isNonEmptySliceOfMaps(v) {
+					expunged_objects_x = v.([]interface{})[len(workloadgeneratedobjects)].(map[string]interface{})["expunged_objects"]
+				}
+
+				workloadgeneratedobject["objects"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+					var momorefs []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						momoref := make(map[string]interface{})
+						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						momoref["class_id"] = item.GetClassId()
+						momoref["moid"] = item.GetMoid()
+						momoref["object_type"] = item.GetObjectType()
+						momoref["selector"] = item.GetSelector()
+						momorefs = append(momorefs, momoref)
+					}
+					return momorefs
+				})(item.GetObjects(), expunged_objects_x)
+				workloadgeneratedobjects = append(workloadgeneratedobjects, workloadgeneratedobject)
+			}
+			return workloadgeneratedobjects
+		})(item.GetExpungedObjects(), input_x)
+		workloaddeploymentblueprintinputtype["generated_objects"] = (func(p []models.WorkloadGeneratedObject, v interface{}) []map[string]interface{} {
+			var workloadgeneratedobjects []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				workloadgeneratedobject := make(map[string]interface{})
+				workloadgeneratedobject["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				workloadgeneratedobject["class_id"] = item.GetClassId()
+				workloadgeneratedobject["name"] = item.GetName()
+				workloadgeneratedobject["object_type"] = item.GetObjectType()
+
+				var generated_objects_x interface{}
+				if isNonEmptySliceOfMaps(v) {
+					generated_objects_x = v.([]interface{})[len(workloadgeneratedobjects)].(map[string]interface{})["generated_objects"]
+				}
+
+				workloadgeneratedobject["objects"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+					var momorefs []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						momoref := make(map[string]interface{})
+						momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						momoref["class_id"] = item.GetClassId()
+						momoref["moid"] = item.GetMoid()
+						momoref["object_type"] = item.GetObjectType()
+						momoref["selector"] = item.GetSelector()
+						momorefs = append(momorefs, momoref)
+					}
+					return momorefs
+				})(item.GetObjects(), generated_objects_x)
+				workloadgeneratedobjects = append(workloadgeneratedobjects, workloadgeneratedobject)
+			}
+			return workloadgeneratedobjects
+		})(item.GetGeneratedObjects(), input_x)
+		workloaddeploymentblueprintinputtype["input"] = flattenAdditionalProperties(item.Input)
+		workloaddeploymentblueprintinputtype["name"] = item.GetName()
+		workloaddeploymentblueprintinputtype["object_type"] = item.GetObjectType()
+		workloaddeploymentblueprintinputtype["ref_name"] = item.GetRefName()
+		workloaddeploymentblueprintinputtype["resource_constraint"] = (func(p models.WorkloadResourceConstraint, v interface{}) []map[string]interface{} {
+			var workloadresourceconstraints []map[string]interface{}
+			var ret models.WorkloadResourceConstraint
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			workloadresourceconstraint := make(map[string]interface{})
+			workloadresourceconstraint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			workloadresourceconstraint["class_id"] = item.GetClassId()
+			workloadresourceconstraint["input"] = flattenAdditionalProperties(item.Input)
+			workloadresourceconstraint["object_type"] = item.GetObjectType()
+
+			workloadresourceconstraints = append(workloadresourceconstraints, workloadresourceconstraint)
+			return workloadresourceconstraints
+		})(item.GetResourceConstraint(), input_x)
+		workloaddeploymentblueprintinputtypes = append(workloaddeploymentblueprintinputtypes, workloaddeploymentblueprintinputtype)
+	}
+	return workloaddeploymentblueprintinputtypes
+}
+func flattenListWorkloadDeploymentChangeDetail(p []models.WorkloadDeploymentChangeDetail, d *schema.ResourceData) []map[string]interface{} {
+	var workloaddeploymentchangedetails []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		workloaddeploymentchangedetail := make(map[string]interface{})
+		workloaddeploymentchangedetail["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		workloaddeploymentchangedetail["change_type"] = item.GetChangeType()
+		workloaddeploymentchangedetail["class_id"] = item.GetClassId()
+		workloaddeploymentchangedetail["object_type"] = item.GetObjectType()
+		workloaddeploymentchangedetails = append(workloaddeploymentchangedetails, workloaddeploymentchangedetail)
+	}
+	return workloaddeploymentchangedetails
+}
+func flattenListWorkloadDeploymentInputRelationship(p []models.WorkloadDeploymentInputRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var workloaddeploymentinputrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		workloaddeploymentinputrelationship := flattenMoMoRef(item)
+		workloaddeploymentinputrelationships = append(workloaddeploymentinputrelationships, workloaddeploymentinputrelationship)
+	}
+	return workloaddeploymentinputrelationships
+}
+func flattenListWorkloadStateAggregation(p []models.WorkloadStateAggregation, d *schema.ResourceData) []map[string]interface{} {
+	var workloadstateaggregations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		workloadstateaggregation := make(map[string]interface{})
+		workloadstateaggregation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		workloadstateaggregation["class_id"] = item.GetClassId()
+		workloadstateaggregation["nr_count"] = item.GetCount()
+		workloadstateaggregation["object_type"] = item.GetObjectType()
+		workloadstateaggregation["state"] = item.GetState()
+		workloadstateaggregations = append(workloadstateaggregations, workloadstateaggregation)
+	}
+	return workloadstateaggregations
+}
 func flattenListWorkspaceFolderRelationship(p []models.WorkspaceFolderRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var workspacefolderrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -11037,6 +11853,24 @@ func flattenMapAssetDeviceStatistics(p models.AssetDeviceStatistics, d *schema.R
 	assetdevicestatisticss = append(assetdevicestatisticss, assetdevicestatistics)
 	return assetdevicestatisticss
 }
+func flattenMapAssetGeoLocationRelationship(p models.AssetGeoLocationRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var assetgeolocationrelationships []map[string]interface{}
+	var ret models.AssetGeoLocationRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	assetgeolocationrelationship := make(map[string]interface{})
+	assetgeolocationrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	assetgeolocationrelationship["class_id"] = item.GetClassId()
+	assetgeolocationrelationship["moid"] = item.GetMoid()
+	assetgeolocationrelationship["object_type"] = item.GetObjectType()
+	assetgeolocationrelationship["selector"] = item.GetSelector()
+
+	assetgeolocationrelationships = append(assetgeolocationrelationships, assetgeolocationrelationship)
+	return assetgeolocationrelationships
+}
 func flattenMapAssetGlobalUltimate(p models.AssetGlobalUltimate, d *schema.ResourceData) []map[string]interface{} {
 	var assetglobalultimates []map[string]interface{}
 	var ret models.AssetGlobalUltimate
@@ -11360,6 +12194,82 @@ func flattenMapBiosVfSelectMemoryRasConfigurationRelationship(p models.BiosVfSel
 
 	biosvfselectmemoryrasconfigurationrelationships = append(biosvfselectmemoryrasconfigurationrelationships, biosvfselectmemoryrasconfigurationrelationship)
 	return biosvfselectmemoryrasconfigurationrelationships
+}
+func flattenMapBlueprintResourceConstraints(p models.BlueprintResourceConstraints, d *schema.ResourceData) []map[string]interface{} {
+	var blueprintresourceconstraintss []map[string]interface{}
+	var ret models.BlueprintResourceConstraints
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	blueprintresourceconstraints := make(map[string]interface{})
+	blueprintresourceconstraints["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	blueprintresourceconstraints["class_id"] = item.GetClassId()
+	resource_definition_x, _ := d.GetOk("resource_definition")
+	blueprintresourceconstraints["input_definition"] = (func(p []models.WorkflowBaseDataType, v interface{}) []map[string]interface{} {
+		var workflowbasedatatypes []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			workflowbasedatatype := make(map[string]interface{})
+			workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			workflowbasedatatype["class_id"] = item.GetClassId()
+
+			var input_definition_x interface{}
+			if isNonEmptySliceOfMaps(v) {
+				input_definition_x = v.([]interface{})[len(workflowbasedatatypes)].(map[string]interface{})["input_definition"]
+			}
+
+			workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
+				var workflowdefaultvalues []map[string]interface{}
+				var ret models.WorkflowDefaultValue
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				workflowdefaultvalue := make(map[string]interface{})
+				workflowdefaultvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				workflowdefaultvalue["class_id"] = item.GetClassId()
+				workflowdefaultvalue["is_value_set"] = item.GetIsValueSet()
+				workflowdefaultvalue["object_type"] = item.GetObjectType()
+				workflowdefaultvalue["override"] = item.GetOverride()
+				workflowdefaultvalue["value"] = flattenAdditionalProperties(item.Value)
+
+				workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
+				return workflowdefaultvalues
+			})(item.GetDefault(), input_definition_x)
+			workflowbasedatatype["description"] = item.GetDescription()
+			workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
+				var workflowdisplaymetas []map[string]interface{}
+				var ret models.WorkflowDisplayMeta
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				workflowdisplaymeta := make(map[string]interface{})
+				workflowdisplaymeta["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				workflowdisplaymeta["class_id"] = item.GetClassId()
+				workflowdisplaymeta["inventory_selector"] = item.GetInventorySelector()
+				workflowdisplaymeta["object_type"] = item.GetObjectType()
+				workflowdisplaymeta["widget_type"] = item.GetWidgetType()
+
+				workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
+				return workflowdisplaymetas
+			})(item.GetDisplayMeta(), input_definition_x)
+			workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
+			workflowbasedatatype["label"] = item.GetLabel()
+			workflowbasedatatype["name"] = item.GetName()
+			workflowbasedatatype["object_type"] = item.GetObjectType()
+			workflowbasedatatype["required"] = item.GetRequired()
+			workflowbasedatatypes = append(workflowbasedatatypes, workflowbasedatatype)
+		}
+		return workflowbasedatatypes
+	})(item.GetInputDefinition(), resource_definition_x)
+	blueprintresourceconstraints["object_type"] = item.GetObjectType()
+
+	blueprintresourceconstraintss = append(blueprintresourceconstraintss, blueprintresourceconstraints)
+	return blueprintresourceconstraintss
 }
 func flattenMapBootDeviceBootModeRelationship(p models.BootDeviceBootModeRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var bootdevicebootmoderelationships []map[string]interface{}
@@ -11928,6 +12838,78 @@ func flattenMapCloudTfcOrganizationRelationship(p models.CloudTfcOrganizationRel
 	cloudtfcorganizationrelationships = append(cloudtfcorganizationrelationships, cloudtfcorganizationrelationship)
 	return cloudtfcorganizationrelationships
 }
+func flattenMapCommGeoLocationDetails(p models.CommGeoLocationDetails, d *schema.ResourceData) []map[string]interface{} {
+	var commgeolocationdetailss []map[string]interface{}
+	var ret models.CommGeoLocationDetails
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	commgeolocationdetails := make(map[string]interface{})
+	commgeolocationdetails["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	location_details_x, _ := d.GetOk("location_details")
+	commgeolocationdetails["address"] = (func(p models.CommPhysicalAddress, v interface{}) []map[string]interface{} {
+		var commphysicaladdresss []map[string]interface{}
+		var ret models.CommPhysicalAddress
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		commphysicaladdress := make(map[string]interface{})
+		commphysicaladdress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		commphysicaladdress["address1"] = item.GetAddress1()
+		commphysicaladdress["address2"] = item.GetAddress2()
+		commphysicaladdress["city"] = item.GetCity()
+		commphysicaladdress["class_id"] = item.GetClassId()
+		commphysicaladdress["country"] = item.GetCountry()
+		commphysicaladdress["object_type"] = item.GetObjectType()
+		commphysicaladdress["postal_code"] = item.GetPostalCode()
+		commphysicaladdress["state_province"] = item.GetStateProvince()
+
+		commphysicaladdresss = append(commphysicaladdresss, commphysicaladdress)
+		return commphysicaladdresss
+	})(item.GetAddress(), location_details_x)
+	commgeolocationdetails["class_id"] = item.GetClassId()
+	commgeolocationdetails["coordinates"] = (func(p models.CommGeoPoint, v interface{}) []map[string]interface{} {
+		var commgeopoints []map[string]interface{}
+		var ret models.CommGeoPoint
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		commgeopoint := make(map[string]interface{})
+		commgeopoint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		commgeopoint["class_id"] = item.GetClassId()
+		commgeopoint["latitude"] = item.GetLatitude()
+		commgeopoint["longitude"] = item.GetLongitude()
+		commgeopoint["object_type"] = item.GetObjectType()
+
+		commgeopoints = append(commgeopoints, commgeopoint)
+		return commgeopoints
+	})(item.GetCoordinates(), location_details_x)
+	commgeolocationdetails["name"] = item.GetName()
+	commgeolocationdetails["object_type"] = item.GetObjectType()
+
+	commgeolocationdetailss = append(commgeolocationdetailss, commgeolocationdetails)
+	return commgeolocationdetailss
+}
+func flattenMapCommGeoPoint(p models.CommGeoPoint, d *schema.ResourceData) []map[string]interface{} {
+	var commgeopoints []map[string]interface{}
+	var ret models.CommGeoPoint
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	commgeopoint := make(map[string]interface{})
+	commgeopoint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	commgeopoint["class_id"] = item.GetClassId()
+	commgeopoint["latitude"] = item.GetLatitude()
+	commgeopoint["longitude"] = item.GetLongitude()
+	commgeopoint["object_type"] = item.GetObjectType()
+
+	commgeopoints = append(commgeopoints, commgeopoint)
+	return commgeopoints
+}
 func flattenMapCommHttpProxyPolicyRelationship(p models.CommHttpProxyPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var commhttpproxypolicyrelationships []map[string]interface{}
 	var ret models.CommHttpProxyPolicyRelationship
@@ -11982,6 +12964,27 @@ func flattenMapCommIpV6Interface(p models.CommIpV6Interface, d *schema.ResourceD
 	commipv6interfaces = append(commipv6interfaces, commipv6interface)
 	return commipv6interfaces
 }
+func flattenMapCommPhysicalAddress(p models.CommPhysicalAddress, d *schema.ResourceData) []map[string]interface{} {
+	var commphysicaladdresss []map[string]interface{}
+	var ret models.CommPhysicalAddress
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	commphysicaladdress := make(map[string]interface{})
+	commphysicaladdress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	commphysicaladdress["address1"] = item.GetAddress1()
+	commphysicaladdress["address2"] = item.GetAddress2()
+	commphysicaladdress["city"] = item.GetCity()
+	commphysicaladdress["class_id"] = item.GetClassId()
+	commphysicaladdress["country"] = item.GetCountry()
+	commphysicaladdress["object_type"] = item.GetObjectType()
+	commphysicaladdress["postal_code"] = item.GetPostalCode()
+	commphysicaladdress["state_province"] = item.GetStateProvince()
+
+	commphysicaladdresss = append(commphysicaladdresss, commphysicaladdress)
+	return commphysicaladdresss
+}
 func flattenMapCommTagDefinitionRelationship(p models.CommTagDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var commtagdefinitionrelationships []map[string]interface{}
 	var ret models.CommTagDefinitionRelationship
@@ -11999,6 +13002,23 @@ func flattenMapCommTagDefinitionRelationship(p models.CommTagDefinitionRelations
 
 	commtagdefinitionrelationships = append(commtagdefinitionrelationships, commtagdefinitionrelationship)
 	return commtagdefinitionrelationships
+}
+func flattenMapCommTagUsage(p models.CommTagUsage, d *schema.ResourceData) []map[string]interface{} {
+	var commtagusages []map[string]interface{}
+	var ret models.CommTagUsage
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	commtagusage := make(map[string]interface{})
+	commtagusage["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	commtagusage["class_id"] = item.GetClassId()
+	commtagusage["nr_count"] = item.GetCount()
+	commtagusage["object_type"] = item.GetObjectType()
+	commtagusage["tagged_object_types"] = item.GetTaggedObjectTypes()
+
+	commtagusages = append(commtagusages, commtagusage)
+	return commtagusages
 }
 func flattenMapComputeAlarmSummary(p models.ComputeAlarmSummary, d *schema.ResourceData) []map[string]interface{} {
 	var computealarmsummarys []map[string]interface{}
@@ -15311,7 +16331,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
+	data_ip_range_x, _ := d.GetOk("data_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -15327,7 +16347,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
+	})(item.GetIpAddrBlocks(), data_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -16276,6 +17296,24 @@ func flattenMapIamAbstractClientApplicationRelationship(p models.IamAbstractClie
 	iamabstractclientapplicationrelationships = append(iamabstractclientapplicationrelationships, iamabstractclientapplicationrelationship)
 	return iamabstractclientapplicationrelationships
 }
+func flattenMapIamAbstractQualifierRelationship(p models.IamAbstractQualifierRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var iamabstractqualifierrelationships []map[string]interface{}
+	var ret models.IamAbstractQualifierRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	iamabstractqualifierrelationship := make(map[string]interface{})
+	iamabstractqualifierrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamabstractqualifierrelationship["class_id"] = item.GetClassId()
+	iamabstractqualifierrelationship["moid"] = item.GetMoid()
+	iamabstractqualifierrelationship["object_type"] = item.GetObjectType()
+	iamabstractqualifierrelationship["selector"] = item.GetSelector()
+
+	iamabstractqualifierrelationships = append(iamabstractqualifierrelationships, iamabstractqualifierrelationship)
+	return iamabstractqualifierrelationships
+}
 func flattenMapIamAccountRelationship(p models.IamAccountRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamaccountrelationships []map[string]interface{}
 	var ret models.IamAccountRelationship
@@ -16704,24 +17742,6 @@ func flattenMapIamPrivateKeySpecRelationship(p models.IamPrivateKeySpecRelations
 
 	iamprivatekeyspecrelationships = append(iamprivatekeyspecrelationships, iamprivatekeyspecrelationship)
 	return iamprivatekeyspecrelationships
-}
-func flattenMapIamQualifierRelationship(p models.IamQualifierRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var iamqualifierrelationships []map[string]interface{}
-	var ret models.IamQualifierRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	iamqualifierrelationship := make(map[string]interface{})
-	iamqualifierrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	iamqualifierrelationship["class_id"] = item.GetClassId()
-	iamqualifierrelationship["moid"] = item.GetMoid()
-	iamqualifierrelationship["object_type"] = item.GetObjectType()
-	iamqualifierrelationship["selector"] = item.GetSelector()
-
-	iamqualifierrelationships = append(iamqualifierrelationships, iamqualifierrelationship)
-	return iamqualifierrelationships
 }
 func flattenMapIamResourceLimitsRelationship(p models.IamResourceLimitsRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamresourcelimitsrelationships []map[string]interface{}
@@ -17808,7 +18828,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 	kubernetesbasevirtualmachineinfraconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesbasevirtualmachineinfraconfig["class_id"] = item.GetClassId()
 	kubernetesbasevirtualmachineinfraconfig["interfaces"] = item.GetInterfaces()
-	vm_config_x, _ := d.GetOk("vm_config")
+	infra_config_x, _ := d.GetOk("infra_config")
 	kubernetesbasevirtualmachineinfraconfig["network_interfaces"] = (func(p []models.KubernetesNetworkInterfaceSpec, v interface{}) []map[string]interface{} {
 		var kubernetesnetworkinterfacespecs []map[string]interface{}
 		if len(p) == 0 {
@@ -17864,7 +18884,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 			kubernetesnetworkinterfacespecs = append(kubernetesnetworkinterfacespecs, kubernetesnetworkinterfacespec)
 		}
 		return kubernetesnetworkinterfacespecs
-	})(item.GetNetworkInterfaces(), vm_config_x)
+	})(item.GetNetworkInterfaces(), infra_config_x)
 	kubernetesbasevirtualmachineinfraconfig["object_type"] = item.GetObjectType()
 
 	kubernetesbasevirtualmachineinfraconfigs = append(kubernetesbasevirtualmachineinfraconfigs, kubernetesbasevirtualmachineinfraconfig)
@@ -19203,7 +20223,48 @@ func flattenMapMoBaseMo(p models.MoBaseMo, d *schema.ResourceData) []map[string]
 		for _, item := range p {
 			motag := make(map[string]interface{})
 			motag["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+
+			var tags_x interface{}
+			if isNonEmptySliceOfMaps(v) {
+				tags_x = v.([]interface{})[len(motags)].(map[string]interface{})["tags"]
+			}
+
+			motag["ancestor_definitions"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+				var momorefs []map[string]interface{}
+				if len(p) == 0 {
+					return nil
+				}
+				for _, item := range p {
+					momoref := make(map[string]interface{})
+					momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					momoref["class_id"] = item.GetClassId()
+					momoref["moid"] = item.GetMoid()
+					momoref["object_type"] = item.GetObjectType()
+					momoref["selector"] = item.GetSelector()
+					momorefs = append(momorefs, momoref)
+				}
+				return momorefs
+			})(item.GetAncestorDefinitions(), tags_x)
+			motag["definition"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+				var momorefs []map[string]interface{}
+				var ret models.MoMoRef
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				momoref := make(map[string]interface{})
+				momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				momoref["class_id"] = item.GetClassId()
+				momoref["moid"] = item.GetMoid()
+				momoref["object_type"] = item.GetObjectType()
+				momoref["selector"] = item.GetSelector()
+
+				momorefs = append(momorefs, momoref)
+				return momorefs
+			})(item.GetDefinition(), tags_x)
 			motag["key"] = item.GetKey()
+			motag["propagated"] = item.GetPropagated()
+			motag["type"] = item.GetType()
 			motag["value"] = item.GetValue()
 			motags = append(motags, motag)
 		}
@@ -21273,6 +22334,8 @@ func flattenMapSchedulerBaseScheduleParams(p models.SchedulerBaseScheduleParams,
 	schedulerbasescheduleparams := make(map[string]interface{})
 	schedulerbasescheduleparams["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	schedulerbasescheduleparams["class_id"] = item.GetClassId()
+	schedulerbasescheduleparams["duration"] = item.GetDuration()
+	schedulerbasescheduleparams["name"] = item.GetName()
 	schedulerbasescheduleparams["object_type"] = item.GetObjectType()
 	schedulerbasescheduleparams["start_time"] = item.GetStartTime().String()
 	schedulerbasescheduleparams["time_zone"] = item.GetTimeZone()
@@ -21301,6 +22364,24 @@ func flattenMapSchedulerRestStimTaskRequest(p models.SchedulerRestStimTaskReques
 
 	schedulerreststimtaskrequests = append(schedulerreststimtaskrequests, schedulerreststimtaskrequest)
 	return schedulerreststimtaskrequests
+}
+func flattenMapSchedulerSchedulePolicyRelationship(p models.SchedulerSchedulePolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var schedulerschedulepolicyrelationships []map[string]interface{}
+	var ret models.SchedulerSchedulePolicyRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	schedulerschedulepolicyrelationship := make(map[string]interface{})
+	schedulerschedulepolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	schedulerschedulepolicyrelationship["class_id"] = item.GetClassId()
+	schedulerschedulepolicyrelationship["moid"] = item.GetMoid()
+	schedulerschedulepolicyrelationship["object_type"] = item.GetObjectType()
+	schedulerschedulepolicyrelationship["selector"] = item.GetSelector()
+
+	schedulerschedulepolicyrelationships = append(schedulerschedulepolicyrelationships, schedulerschedulepolicyrelationship)
+	return schedulerschedulepolicyrelationships
 }
 func flattenMapSchedulerTaskResultStatus(p models.SchedulerTaskResultStatus, d *schema.ResourceData) []map[string]interface{} {
 	var schedulertaskresultstatuss []map[string]interface{}
@@ -23973,6 +25054,61 @@ func flattenMapVnicEthIfInventoryRelationship(p models.VnicEthIfInventoryRelatio
 	vnicethifinventoryrelationships = append(vnicethifinventoryrelationships, vnicethifinventoryrelationship)
 	return vnicethifinventoryrelationships
 }
+func flattenMapVnicEthIfOldInfo(p models.VnicEthIfOldInfo, d *schema.ResourceData) []map[string]interface{} {
+	var vnicethifoldinfos []map[string]interface{}
+	var ret models.VnicEthIfOldInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	vnicethifoldinfo := make(map[string]interface{})
+	vnicethifoldinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicethifoldinfo["class_id"] = item.GetClassId()
+	vnicethifoldinfo["mac_address"] = item.GetMacAddress()
+	vnicethifoldinfo["mac_address_type"] = item.GetMacAddressType()
+	old_info_x, _ := d.GetOk("old_info")
+	vnicethifoldinfo["mac_lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetMacLease(), old_info_x)
+	vnicethifoldinfo["mac_pool"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetMacPool(), old_info_x)
+	vnicethifoldinfo["object_type"] = item.GetObjectType()
+	vnicethifoldinfo["standby_vif_id"] = item.GetStandbyVifId()
+	vnicethifoldinfo["static_mac_address"] = item.GetStaticMacAddress()
+	vnicethifoldinfo["vif_id"] = item.GetVifId()
+
+	vnicethifoldinfos = append(vnicethifoldinfos, vnicethifoldinfo)
+	return vnicethifoldinfos
+}
 func flattenMapVnicEthInterruptSettings(p models.VnicEthInterruptSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicethinterruptsettingss []map[string]interface{}
 	var ret models.VnicEthInterruptSettings
@@ -24189,6 +25325,60 @@ func flattenMapVnicFcIfInventoryRelationship(p models.VnicFcIfInventoryRelations
 
 	vnicfcifinventoryrelationships = append(vnicfcifinventoryrelationships, vnicfcifinventoryrelationship)
 	return vnicfcifinventoryrelationships
+}
+func flattenMapVnicFcIfOldInfo(p models.VnicFcIfOldInfo, d *schema.ResourceData) []map[string]interface{} {
+	var vnicfcifoldinfos []map[string]interface{}
+	var ret models.VnicFcIfOldInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	vnicfcifoldinfo := make(map[string]interface{})
+	vnicfcifoldinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicfcifoldinfo["class_id"] = item.GetClassId()
+	vnicfcifoldinfo["object_type"] = item.GetObjectType()
+	vnicfcifoldinfo["static_wwpn_address"] = item.GetStaticWwpnAddress()
+	vnicfcifoldinfo["vif_id"] = item.GetVifId()
+	vnicfcifoldinfo["wwpn"] = item.GetWwpn()
+	vnicfcifoldinfo["wwpn_address_type"] = item.GetWwpnAddressType()
+	old_info_x, _ := d.GetOk("old_info")
+	vnicfcifoldinfo["wwpn_pool"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetWwpnPool(), old_info_x)
+	vnicfcifoldinfo["wwpnlease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetWwpnlease(), old_info_x)
+
+	vnicfcifoldinfos = append(vnicfcifoldinfos, vnicfcifoldinfo)
+	return vnicfcifoldinfos
 }
 func flattenMapVnicFcInterruptSettings(p models.VnicFcInterruptSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicfcinterruptsettingss []map[string]interface{}
@@ -24646,6 +25836,58 @@ func flattenMapVnicSanConnectivityPolicyInventoryRelationship(p models.VnicSanCo
 
 	vnicsanconnectivitypolicyinventoryrelationships = append(vnicsanconnectivitypolicyinventoryrelationships, vnicsanconnectivitypolicyinventoryrelationship)
 	return vnicsanconnectivitypolicyinventoryrelationships
+}
+func flattenMapVnicSanSettingsOldInfo(p models.VnicSanSettingsOldInfo, d *schema.ResourceData) []map[string]interface{} {
+	var vnicsansettingsoldinfos []map[string]interface{}
+	var ret models.VnicSanSettingsOldInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	vnicsansettingsoldinfo := make(map[string]interface{})
+	vnicsansettingsoldinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicsansettingsoldinfo["class_id"] = item.GetClassId()
+	vnicsansettingsoldinfo["object_type"] = item.GetObjectType()
+	vnicsansettingsoldinfo["wwnn"] = item.GetWwnn()
+	vnicsansettingsoldinfo["wwnn_address_type"] = item.GetWwnnAddressType()
+	old_info_x, _ := d.GetOk("old_info")
+	vnicsansettingsoldinfo["wwnn_lease"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetWwnnLease(), old_info_x)
+	vnicsansettingsoldinfo["wwnn_pool"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetWwnnPool(), old_info_x)
+
+	vnicsansettingsoldinfos = append(vnicsansettingsoldinfos, vnicsansettingsoldinfo)
+	return vnicsansettingsoldinfos
 }
 func flattenMapVnicScsiQueueSettings(p models.VnicScsiQueueSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicscsiqueuesettingss []map[string]interface{}
@@ -25674,6 +26916,112 @@ func flattenMapWorkflowWorkflowProperties(p models.WorkflowWorkflowProperties, d
 
 	workflowworkflowpropertiess = append(workflowworkflowpropertiess, workflowworkflowproperties)
 	return workflowworkflowpropertiess
+}
+func flattenMapWorkloadDefinitionMapper(p models.WorkloadDefinitionMapper, d *schema.ResourceData) []map[string]interface{} {
+	var workloaddefinitionmappers []map[string]interface{}
+	var ret models.WorkloadDefinitionMapper
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	workloaddefinitionmapper := make(map[string]interface{})
+	workloaddefinitionmapper["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workloaddefinitionmapper["class_id"] = item.GetClassId()
+	workloaddefinitionmapper["definition_name"] = item.GetDefinitionName()
+	workloaddefinitionmapper["object_type"] = item.GetObjectType()
+	workload_definition_reference_x, _ := d.GetOk("workload_definition_reference")
+	workloaddefinitionmapper["organization"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.GetClassId()
+		momoref["moid"] = item.GetMoid()
+		momoref["object_type"] = item.GetObjectType()
+		momoref["selector"] = item.GetSelector()
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetOrganization(), workload_definition_reference_x)
+	workloaddefinitionmapper["use_preferred_version"] = item.GetUsePreferredVersion()
+	workloaddefinitionmapper["nr_version"] = item.GetVersion()
+
+	workloaddefinitionmappers = append(workloaddefinitionmappers, workloaddefinitionmapper)
+	return workloaddefinitionmappers
+}
+func flattenMapWorkloadDeploymentInputRelationship(p models.WorkloadDeploymentInputRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var workloaddeploymentinputrelationships []map[string]interface{}
+	var ret models.WorkloadDeploymentInputRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	workloaddeploymentinputrelationship := make(map[string]interface{})
+	workloaddeploymentinputrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workloaddeploymentinputrelationship["class_id"] = item.GetClassId()
+	workloaddeploymentinputrelationship["moid"] = item.GetMoid()
+	workloaddeploymentinputrelationship["object_type"] = item.GetObjectType()
+	workloaddeploymentinputrelationship["selector"] = item.GetSelector()
+
+	workloaddeploymentinputrelationships = append(workloaddeploymentinputrelationships, workloaddeploymentinputrelationship)
+	return workloaddeploymentinputrelationships
+}
+func flattenMapWorkloadRolloutStrategy(p models.WorkloadRolloutStrategy, d *schema.ResourceData) []map[string]interface{} {
+	var workloadrolloutstrategys []map[string]interface{}
+	var ret models.WorkloadRolloutStrategy
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	workloadrolloutstrategy := make(map[string]interface{})
+	workloadrolloutstrategy["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workloadrolloutstrategy["class_id"] = item.GetClassId()
+	workloadrolloutstrategy["failure_threshold"] = item.GetFailureThreshold()
+	workloadrolloutstrategy["object_type"] = item.GetObjectType()
+
+	workloadrolloutstrategys = append(workloadrolloutstrategys, workloadrolloutstrategy)
+	return workloadrolloutstrategys
+}
+func flattenMapWorkloadWorkloadDefinitionRelationship(p models.WorkloadWorkloadDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var workloadworkloaddefinitionrelationships []map[string]interface{}
+	var ret models.WorkloadWorkloadDefinitionRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	workloadworkloaddefinitionrelationship := make(map[string]interface{})
+	workloadworkloaddefinitionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workloadworkloaddefinitionrelationship["class_id"] = item.GetClassId()
+	workloadworkloaddefinitionrelationship["moid"] = item.GetMoid()
+	workloadworkloaddefinitionrelationship["object_type"] = item.GetObjectType()
+	workloadworkloaddefinitionrelationship["selector"] = item.GetSelector()
+
+	workloadworkloaddefinitionrelationships = append(workloadworkloaddefinitionrelationships, workloadworkloaddefinitionrelationship)
+	return workloadworkloaddefinitionrelationships
+}
+func flattenMapWorkloadWorkloadDeploymentRelationship(p models.WorkloadWorkloadDeploymentRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var workloadworkloaddeploymentrelationships []map[string]interface{}
+	var ret models.WorkloadWorkloadDeploymentRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	workloadworkloaddeploymentrelationship := make(map[string]interface{})
+	workloadworkloaddeploymentrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workloadworkloaddeploymentrelationship["class_id"] = item.GetClassId()
+	workloadworkloaddeploymentrelationship["moid"] = item.GetMoid()
+	workloadworkloaddeploymentrelationship["object_type"] = item.GetObjectType()
+	workloadworkloaddeploymentrelationship["selector"] = item.GetSelector()
+
+	workloadworkloaddeploymentrelationships = append(workloadworkloaddeploymentrelationships, workloadworkloaddeploymentrelationship)
+	return workloadworkloaddeploymentrelationships
 }
 func flattenMapWorkspaceFolderRelationship(p models.WorkspaceFolderRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var workspacefolderrelationships []map[string]interface{}

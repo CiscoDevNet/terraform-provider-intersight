@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **Ipv4Address** | Pointer to **string** | IP version 4 address is saved in this property. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
 **JumboFrameEnabled** | Pointer to **bool** | Jumbo Frame configuration for the switch. | [optional] [readonly] [default to true]
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the fabric interconnect. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
 **Name** | Pointer to **string** | The admin configured name of the system. | [optional] [readonly] 
@@ -847,6 +848,41 @@ SetJumboFrameEnabled sets JumboFrameEnabled field to given value.
 
 HasJumboFrameEnabled returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *NetworkElementSummary) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *NetworkElementSummary) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *NetworkElementSummary) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *NetworkElementSummary) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *NetworkElementSummary) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *NetworkElementSummary) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetManagementMode
 
 `func (o *NetworkElementSummary) GetManagementMode() string`

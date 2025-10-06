@@ -8,13 +8,22 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "network.DiscoveredNeighbor"]
 **DeviceId** | Pointer to **string** | Device identifier of the switch. | [optional] [readonly] 
 **ManagementAddress** | Pointer to **string** | The management address of the switch. | [optional] [readonly] 
+**NeighborCapability** | Pointer to **string** | System capabilities of the neighboring device. | [optional] [readonly] 
+**NeighborDescription** | Pointer to **string** | The software description of the neighboring device. | [optional] [readonly] 
 **NeighborDeviceCapability** | Pointer to **[]string** |  | [optional] 
 **NeighborDeviceId** | Pointer to **string** | Device identifier of the neighboring device. | [optional] [readonly] 
 **NeighborInterface** | Pointer to **string** | Neighboring device interface. | [optional] [readonly] 
+**NeighborModel** | Pointer to **string** | Model of the neighbor device. | [optional] [readonly] 
+**NeighborNativeVlan** | Pointer to **string** | Native VLAN of the neighbor device. | [optional] [readonly] 
 **NeighborPortId** | Pointer to **string** | PortID of the neighbor device configured. | [optional] [readonly] 
+**NeighborSerial** | Pointer to **string** | Serial number of the neighbor device. | [optional] [readonly] 
+**NeighborType** | Pointer to **string** | Type of the neighbor device. | [optional] [readonly] 
+**NeighborVendor** | Pointer to **string** | Vendor of the neighbor device. | [optional] [readonly] 
+**NeighborVersion** | Pointer to **string** | Version of the neighbor device. | [optional] [readonly] 
 **SwitchPortId** | Pointer to **string** | Name of the local interface. | [optional] [readonly] 
 **CdpNeighbor** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **LldpNeighbor** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**PhysicalPort** | Pointer to [**NullableEtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -125,6 +134,56 @@ SetManagementAddress sets ManagementAddress field to given value.
 
 HasManagementAddress returns a boolean if a field has been set.
 
+### GetNeighborCapability
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborCapability() string`
+
+GetNeighborCapability returns the NeighborCapability field if non-nil, zero value otherwise.
+
+### GetNeighborCapabilityOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborCapabilityOk() (*string, bool)`
+
+GetNeighborCapabilityOk returns a tuple with the NeighborCapability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborCapability
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborCapability(v string)`
+
+SetNeighborCapability sets NeighborCapability field to given value.
+
+### HasNeighborCapability
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborCapability() bool`
+
+HasNeighborCapability returns a boolean if a field has been set.
+
+### GetNeighborDescription
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborDescription() string`
+
+GetNeighborDescription returns the NeighborDescription field if non-nil, zero value otherwise.
+
+### GetNeighborDescriptionOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborDescriptionOk() (*string, bool)`
+
+GetNeighborDescriptionOk returns a tuple with the NeighborDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborDescription
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborDescription(v string)`
+
+SetNeighborDescription sets NeighborDescription field to given value.
+
+### HasNeighborDescription
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborDescription() bool`
+
+HasNeighborDescription returns a boolean if a field has been set.
+
 ### GetNeighborDeviceCapability
 
 `func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceCapability() []string`
@@ -210,6 +269,56 @@ SetNeighborInterface sets NeighborInterface field to given value.
 
 HasNeighborInterface returns a boolean if a field has been set.
 
+### GetNeighborModel
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborModel() string`
+
+GetNeighborModel returns the NeighborModel field if non-nil, zero value otherwise.
+
+### GetNeighborModelOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborModelOk() (*string, bool)`
+
+GetNeighborModelOk returns a tuple with the NeighborModel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborModel
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborModel(v string)`
+
+SetNeighborModel sets NeighborModel field to given value.
+
+### HasNeighborModel
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborModel() bool`
+
+HasNeighborModel returns a boolean if a field has been set.
+
+### GetNeighborNativeVlan
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborNativeVlan() string`
+
+GetNeighborNativeVlan returns the NeighborNativeVlan field if non-nil, zero value otherwise.
+
+### GetNeighborNativeVlanOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborNativeVlanOk() (*string, bool)`
+
+GetNeighborNativeVlanOk returns a tuple with the NeighborNativeVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborNativeVlan
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborNativeVlan(v string)`
+
+SetNeighborNativeVlan sets NeighborNativeVlan field to given value.
+
+### HasNeighborNativeVlan
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborNativeVlan() bool`
+
+HasNeighborNativeVlan returns a boolean if a field has been set.
+
 ### GetNeighborPortId
 
 `func (o *NetworkDiscoveredNeighbor) GetNeighborPortId() string`
@@ -234,6 +343,106 @@ SetNeighborPortId sets NeighborPortId field to given value.
 `func (o *NetworkDiscoveredNeighbor) HasNeighborPortId() bool`
 
 HasNeighborPortId returns a boolean if a field has been set.
+
+### GetNeighborSerial
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborSerial() string`
+
+GetNeighborSerial returns the NeighborSerial field if non-nil, zero value otherwise.
+
+### GetNeighborSerialOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborSerialOk() (*string, bool)`
+
+GetNeighborSerialOk returns a tuple with the NeighborSerial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborSerial
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborSerial(v string)`
+
+SetNeighborSerial sets NeighborSerial field to given value.
+
+### HasNeighborSerial
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborSerial() bool`
+
+HasNeighborSerial returns a boolean if a field has been set.
+
+### GetNeighborType
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborType() string`
+
+GetNeighborType returns the NeighborType field if non-nil, zero value otherwise.
+
+### GetNeighborTypeOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborTypeOk() (*string, bool)`
+
+GetNeighborTypeOk returns a tuple with the NeighborType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborType
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborType(v string)`
+
+SetNeighborType sets NeighborType field to given value.
+
+### HasNeighborType
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborType() bool`
+
+HasNeighborType returns a boolean if a field has been set.
+
+### GetNeighborVendor
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborVendor() string`
+
+GetNeighborVendor returns the NeighborVendor field if non-nil, zero value otherwise.
+
+### GetNeighborVendorOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborVendorOk() (*string, bool)`
+
+GetNeighborVendorOk returns a tuple with the NeighborVendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborVendor
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborVendor(v string)`
+
+SetNeighborVendor sets NeighborVendor field to given value.
+
+### HasNeighborVendor
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborVendor() bool`
+
+HasNeighborVendor returns a boolean if a field has been set.
+
+### GetNeighborVersion
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborVersion() string`
+
+GetNeighborVersion returns the NeighborVersion field if non-nil, zero value otherwise.
+
+### GetNeighborVersionOk
+
+`func (o *NetworkDiscoveredNeighbor) GetNeighborVersionOk() (*string, bool)`
+
+GetNeighborVersionOk returns a tuple with the NeighborVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNeighborVersion
+
+`func (o *NetworkDiscoveredNeighbor) SetNeighborVersion(v string)`
+
+SetNeighborVersion sets NeighborVersion field to given value.
+
+### HasNeighborVersion
+
+`func (o *NetworkDiscoveredNeighbor) HasNeighborVersion() bool`
+
+HasNeighborVersion returns a boolean if a field has been set.
 
 ### GetSwitchPortId
 
@@ -330,6 +539,41 @@ HasLldpNeighbor returns a boolean if a field has been set.
 `func (o *NetworkDiscoveredNeighbor) UnsetLldpNeighbor()`
 
 UnsetLldpNeighbor ensures that no value is present for LldpNeighbor, not even an explicit nil
+### GetPhysicalPort
+
+`func (o *NetworkDiscoveredNeighbor) GetPhysicalPort() EtherPhysicalPortRelationship`
+
+GetPhysicalPort returns the PhysicalPort field if non-nil, zero value otherwise.
+
+### GetPhysicalPortOk
+
+`func (o *NetworkDiscoveredNeighbor) GetPhysicalPortOk() (*EtherPhysicalPortRelationship, bool)`
+
+GetPhysicalPortOk returns a tuple with the PhysicalPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalPort
+
+`func (o *NetworkDiscoveredNeighbor) SetPhysicalPort(v EtherPhysicalPortRelationship)`
+
+SetPhysicalPort sets PhysicalPort field to given value.
+
+### HasPhysicalPort
+
+`func (o *NetworkDiscoveredNeighbor) HasPhysicalPort() bool`
+
+HasPhysicalPort returns a boolean if a field has been set.
+
+### SetPhysicalPortNil
+
+`func (o *NetworkDiscoveredNeighbor) SetPhysicalPortNil(b bool)`
+
+ SetPhysicalPortNil sets the value for PhysicalPort to be an explicit nil
+
+### UnsetPhysicalPort
+`func (o *NetworkDiscoveredNeighbor) UnsetPhysicalPort()`
+
+UnsetPhysicalPort ensures that no value is present for PhysicalPort, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,6 +23,18 @@ func Test_intersight_SchedulerApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test SchedulerApiService CreateSchedulerSchedulePolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.SchedulerApi.CreateSchedulerSchedulePolicy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SchedulerApiService CreateSchedulerTaskSchedule", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -31,6 +43,19 @@ func Test_intersight_SchedulerApiService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SchedulerApiService DeleteSchedulerSchedulePolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.SchedulerApi.DeleteSchedulerSchedulePolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -57,6 +82,32 @@ func Test_intersight_SchedulerApiService(t *testing.T) {
 		httpRes, err := apiClient.SchedulerApi.DeleteSchedulerTaskSchedule(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SchedulerApiService GetSchedulerSchedulePolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SchedulerApi.GetSchedulerSchedulePolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SchedulerApiService GetSchedulerSchedulePolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.SchedulerApi.GetSchedulerSchedulePolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -113,6 +164,20 @@ func Test_intersight_SchedulerApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test SchedulerApiService PatchSchedulerSchedulePolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SchedulerApi.PatchSchedulerSchedulePolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SchedulerApiService PatchSchedulerTaskSchedule", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -120,6 +185,20 @@ func Test_intersight_SchedulerApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.SchedulerApi.PatchSchedulerTaskSchedule(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SchedulerApiService UpdateSchedulerSchedulePolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SchedulerApi.UpdateSchedulerSchedulePolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

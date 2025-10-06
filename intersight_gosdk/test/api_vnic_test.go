@@ -1308,6 +1308,32 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test VnicApiService GetVnicVifIdPoolByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.VnicApi.GetVnicVifIdPoolByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VnicApiService GetVnicVifIdPoolList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.VnicApi.GetVnicVifIdPoolList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test VnicApiService GetVnicVnicTemplateByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1530,6 +1556,20 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test VnicApiService PatchVnicVifIdPool", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.VnicApi.PatchVnicVifIdPool(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test VnicApiService PatchVnicVnicTemplate", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1733,6 +1773,20 @@ func Test_intersight_VnicApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.VnicApi.UpdateVnicVhbaTemplate(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VnicApiService UpdateVnicVifIdPool", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.VnicApi.UpdateVnicVifIdPool(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

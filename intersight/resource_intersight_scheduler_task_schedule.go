@@ -159,6 +159,205 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 					}
 					return
 				}},
+			"execution_statuses": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "scheduler.TaskSchedulePolicyExecutionStatus",
+						},
+						"name": {
+							Description: "Name of the schedule defined in SchedulePolicy.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "scheduler.TaskSchedulePolicyExecutionStatus",
+						},
+						"status": {
+							Description: "The status of the scheduled task.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "scheduler.TaskScheduleStatus",
+									},
+									"completed_count": {
+										Description: "The count of tasks that ran to successful completion.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"consecutive_failures": {
+										Description: "The number of consecutive times the task has failed.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"nr_count": {
+										Description: "The task completion count, which includes both successful executions and any failures.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"current_status": {
+										Description: "The status of the current task.\n* `None` - No status is set (default).\n* `Scheduled` - The status is set when a task is scheduled.\n* `Running` - The status is set when a task is running.\n* `Completed` - The status is set when a task is complete.\n* `Failed` - The status is set when a task fails.\n* `Suspended` - The status is set when a task is suspended.\n* `Skipped` - The status is set when a task is skipped because the previous task is still running.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"failed_count": {
+										Description: "The count of tasks that failed.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"is_system_suspended": {
+										Description: "The flag if set to true means it was suspended by the system.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"last_run_status": {
+										Description: "The last task completion status, which includes both successful executions and any failures.\n* `None` - No status is set (default).\n* `Scheduled` - The status is set when a task is scheduled.\n* `Running` - The status is set when a task is running.\n* `Completed` - The status is set when a task is complete.\n* `Failed` - The status is set when a task fails.\n* `Suspended` - The status is set when a task is suspended.\n* `Skipped` - The status is set when a task is skipped because the previous task is still running.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"next_run_start_time": {
+										Description: "The next run time for a recurrently scheduled the task.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "scheduler.TaskScheduleStatus",
+									},
+									"prev_run_end_time": {
+										Description: "The time when the last occurrence of scheduled task completed.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"prev_run_start_time": {
+										Description: "The previous time the scheduled task was run.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"reason": {
+										Description: "The reason why the task failed or suspended.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"skipped_count": {
+										Description: "The count of tasks that were skipped.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+								},
+							},
+						},
+					},
+				},
+			},
 			"last_action": {
 				Description: "The last action for the scheduled task is saved in this field. Set to none if there was no action.\n* `None` - No action is set (default).\n* `Suspend` - Suspend a scheduled task indefinitely.\n* `Resume` - Resume a suspended scheduled task.\n* `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.",
 				Type:        schema.TypeString,
@@ -286,6 +485,47 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 					},
 				},
 			},
+			"policy": {
+				Description: "A reference to a schedulerSchedulePolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+				ForceNew: true,
+			},
 			"schedule_params": {
 				Description: "According to the schedule type this property is evaluated. If the property Type is set to OneTime, then the ObjectType must be scheduler.OneTimeScheduleParams. If the Type is Recurring, then the ObjectType must be scheduler.RecurringScheduleParams.",
 				Type:        schema.TypeList,
@@ -305,6 +545,16 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
+						},
+						"duration": {
+							Description: "The duration of the schedule. Its syntax is specified at https://www.w3.org/TR/xmlschema11-2/#nt-durationRep For example, P20DT10H5M2.3S is for 20 days, 10 hours, 5 minutes and 2.3 seconds. It is a mandatory input property for Policy based schedules.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"name": {
+							Description: "The name of the schedule. It is a mandatory input property for Policy based schedules.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -516,12 +766,112 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
+						"ancestor_definitions": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"definition": {
+							Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 128),
+							ValidateFunc: validation.StringLenBetween(1, 256),
 							Optional:     true,
 						},
+						"propagated": {
+							Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"type": {
+							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -601,6 +951,13 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 				ValidateFunc: validation.StringInSlice([]string{"None", "OneTime", "Recurring"}, false),
 				Optional:     true,
 				Default:      "None",
+			},
+			"use_policy": {
+				Description: "Indicates if the schedule is policy based or not.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				ForceNew:    true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -824,6 +1181,36 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("execution_statuses"); ok {
+		x := make([]models.SchedulerTaskSchedulePolicyExecutionStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewSchedulerTaskSchedulePolicyExecutionStatusWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("scheduler.TaskSchedulePolicyExecutionStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetExecutionStatuses(x)
+		}
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -835,6 +1222,49 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 	}
 
 	o.SetObjectType("scheduler.TaskSchedule")
+
+	if v, ok := d.GetOk("policy"); ok {
+		p := make([]models.SchedulerSchedulePolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSchedulerSchedulePolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPolicy(x)
+		}
+	}
 
 	if v, ok := d.GetOk("schedule_params"); ok {
 		p := make([]models.SchedulerBaseScheduleParams, 0, 1)
@@ -853,6 +1283,18 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 				}
 			}
 			o.SetClassId("scheduler.BaseScheduleParams")
+			if v, ok := l["duration"]; ok {
+				{
+					x := (v.(string))
+					o.SetDuration(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -897,6 +1339,49 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}
@@ -1012,6 +1497,11 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOkExists("use_policy"); ok {
+		x := (v.(bool))
+		o.SetUsePolicy(x)
+	}
+
 	r := conn.ApiClient.SchedulerApi.CreateSchedulerTaskSchedule(conn.ctx).SchedulerTaskSchedule(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1094,6 +1584,10 @@ func resourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in SchedulerTaskSchedule object: %s", err.Error())
 	}
 
+	if err := d.Set("execution_statuses", flattenListSchedulerTaskSchedulePolicyExecutionStatus(s.GetExecutionStatuses(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ExecutionStatuses in SchedulerTaskSchedule object: %s", err.Error())
+	}
+
 	if err := d.Set("last_action", (s.GetLastAction())); err != nil {
 		return diag.Errorf("error occurred while setting property LastAction in SchedulerTaskSchedule object: %s", err.Error())
 	}
@@ -1126,6 +1620,10 @@ func resourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property PermissionResources in SchedulerTaskSchedule object: %s", err.Error())
 	}
 
+	if err := d.Set("policy", flattenMapSchedulerSchedulePolicyRelationship(s.GetPolicy(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Policy in SchedulerTaskSchedule object: %s", err.Error())
+	}
+
 	if err := d.Set("schedule_params", flattenMapSchedulerBaseScheduleParams(s.GetScheduleParams(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ScheduleParams in SchedulerTaskSchedule object: %s", err.Error())
 	}
@@ -1152,6 +1650,10 @@ func resourceSchedulerTaskScheduleRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in SchedulerTaskSchedule object: %s", err.Error())
+	}
+
+	if err := d.Set("use_policy", (s.GetUsePolicy())); err != nil {
+		return diag.Errorf("error occurred while setting property UsePolicy in SchedulerTaskSchedule object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1197,6 +1699,35 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 		o.SetDescription(x)
 	}
 
+	if d.HasChange("execution_statuses") {
+		v := d.Get("execution_statuses")
+		x := make([]models.SchedulerTaskSchedulePolicyExecutionStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.SchedulerTaskSchedulePolicyExecutionStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("scheduler.TaskSchedulePolicyExecutionStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetExecutionStatuses(x)
+	}
+
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -1210,6 +1741,50 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 	}
 
 	o.SetObjectType("scheduler.TaskSchedule")
+
+	if d.HasChange("policy") {
+		v := d.Get("policy")
+		p := make([]models.SchedulerSchedulePolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSchedulerSchedulePolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPolicy(x)
+		}
+	}
 
 	if d.HasChange("schedule_params") {
 		v := d.Get("schedule_params")
@@ -1229,6 +1804,18 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 				}
 			}
 			o.SetClassId("scheduler.BaseScheduleParams")
+			if v, ok := l["duration"]; ok {
+				{
+					x := (v.(string))
+					o.SetDuration(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1275,6 +1862,49 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}
@@ -1388,6 +2018,12 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("type")
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if d.HasChange("use_policy") {
+		v := d.Get("use_policy")
+		x := (v.(bool))
+		o.SetUsePolicy(x)
 	}
 
 	r := conn.ApiClient.SchedulerApi.UpdateSchedulerTaskSchedule(conn.ctx, d.Id()).SchedulerTaskSchedule(*o)

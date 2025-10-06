@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025081401
+API version: 1.0.11-2025091920
 Contact: intersight@cisco.com
 */
 
@@ -31,18 +31,35 @@ type NetworkDiscoveredNeighbor struct {
 	// Device identifier of the switch.
 	DeviceId *string `json:"DeviceId,omitempty"`
 	// The management address of the switch.
-	ManagementAddress        *string  `json:"ManagementAddress,omitempty"`
+	ManagementAddress *string `json:"ManagementAddress,omitempty"`
+	// System capabilities of the neighboring device.
+	NeighborCapability *string `json:"NeighborCapability,omitempty"`
+	// The software description of the neighboring device.
+	NeighborDescription      *string  `json:"NeighborDescription,omitempty"`
 	NeighborDeviceCapability []string `json:"NeighborDeviceCapability,omitempty"`
 	// Device identifier of the neighboring device.
 	NeighborDeviceId *string `json:"NeighborDeviceId,omitempty"`
 	// Neighboring device interface.
 	NeighborInterface *string `json:"NeighborInterface,omitempty"`
+	// Model of the neighbor device.
+	NeighborModel *string `json:"NeighborModel,omitempty"`
+	// Native VLAN of the neighbor device.
+	NeighborNativeVlan *string `json:"NeighborNativeVlan,omitempty"`
 	// PortID of the neighbor device configured.
 	NeighborPortId *string `json:"NeighborPortId,omitempty"`
+	// Serial number of the neighbor device.
+	NeighborSerial *string `json:"NeighborSerial,omitempty"`
+	// Type of the neighbor device.
+	NeighborType *string `json:"NeighborType,omitempty"`
+	// Vendor of the neighbor device.
+	NeighborVendor *string `json:"NeighborVendor,omitempty"`
+	// Version of the neighbor device.
+	NeighborVersion *string `json:"NeighborVersion,omitempty"`
 	// Name of the local interface.
-	SwitchPortId         *string                            `json:"SwitchPortId,omitempty"`
-	CdpNeighbor          NullableNetworkElementRelationship `json:"CdpNeighbor,omitempty"`
-	LldpNeighbor         NullableNetworkElementRelationship `json:"LldpNeighbor,omitempty"`
+	SwitchPortId         *string                               `json:"SwitchPortId,omitempty"`
+	CdpNeighbor          NullableNetworkElementRelationship    `json:"CdpNeighbor,omitempty"`
+	LldpNeighbor         NullableNetworkElementRelationship    `json:"LldpNeighbor,omitempty"`
+	PhysicalPort         NullableEtherPhysicalPortRelationship `json:"PhysicalPort,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -193,6 +210,70 @@ func (o *NetworkDiscoveredNeighbor) SetManagementAddress(v string) {
 	o.ManagementAddress = &v
 }
 
+// GetNeighborCapability returns the NeighborCapability field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborCapability() string {
+	if o == nil || IsNil(o.NeighborCapability) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborCapability
+}
+
+// GetNeighborCapabilityOk returns a tuple with the NeighborCapability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborCapabilityOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborCapability) {
+		return nil, false
+	}
+	return o.NeighborCapability, true
+}
+
+// HasNeighborCapability returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborCapability() bool {
+	if o != nil && !IsNil(o.NeighborCapability) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborCapability gets a reference to the given string and assigns it to the NeighborCapability field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborCapability(v string) {
+	o.NeighborCapability = &v
+}
+
+// GetNeighborDescription returns the NeighborDescription field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborDescription() string {
+	if o == nil || IsNil(o.NeighborDescription) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborDescription
+}
+
+// GetNeighborDescriptionOk returns a tuple with the NeighborDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborDescription) {
+		return nil, false
+	}
+	return o.NeighborDescription, true
+}
+
+// HasNeighborDescription returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborDescription() bool {
+	if o != nil && !IsNil(o.NeighborDescription) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborDescription gets a reference to the given string and assigns it to the NeighborDescription field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborDescription(v string) {
+	o.NeighborDescription = &v
+}
+
 // GetNeighborDeviceCapability returns the NeighborDeviceCapability field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkDiscoveredNeighbor) GetNeighborDeviceCapability() []string {
 	if o == nil {
@@ -290,6 +371,70 @@ func (o *NetworkDiscoveredNeighbor) SetNeighborInterface(v string) {
 	o.NeighborInterface = &v
 }
 
+// GetNeighborModel returns the NeighborModel field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborModel() string {
+	if o == nil || IsNil(o.NeighborModel) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborModel
+}
+
+// GetNeighborModelOk returns a tuple with the NeighborModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborModelOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborModel) {
+		return nil, false
+	}
+	return o.NeighborModel, true
+}
+
+// HasNeighborModel returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborModel() bool {
+	if o != nil && !IsNil(o.NeighborModel) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborModel gets a reference to the given string and assigns it to the NeighborModel field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborModel(v string) {
+	o.NeighborModel = &v
+}
+
+// GetNeighborNativeVlan returns the NeighborNativeVlan field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborNativeVlan() string {
+	if o == nil || IsNil(o.NeighborNativeVlan) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborNativeVlan
+}
+
+// GetNeighborNativeVlanOk returns a tuple with the NeighborNativeVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborNativeVlanOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborNativeVlan) {
+		return nil, false
+	}
+	return o.NeighborNativeVlan, true
+}
+
+// HasNeighborNativeVlan returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborNativeVlan() bool {
+	if o != nil && !IsNil(o.NeighborNativeVlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborNativeVlan gets a reference to the given string and assigns it to the NeighborNativeVlan field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborNativeVlan(v string) {
+	o.NeighborNativeVlan = &v
+}
+
 // GetNeighborPortId returns the NeighborPortId field value if set, zero value otherwise.
 func (o *NetworkDiscoveredNeighbor) GetNeighborPortId() string {
 	if o == nil || IsNil(o.NeighborPortId) {
@@ -320,6 +465,134 @@ func (o *NetworkDiscoveredNeighbor) HasNeighborPortId() bool {
 // SetNeighborPortId gets a reference to the given string and assigns it to the NeighborPortId field.
 func (o *NetworkDiscoveredNeighbor) SetNeighborPortId(v string) {
 	o.NeighborPortId = &v
+}
+
+// GetNeighborSerial returns the NeighborSerial field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborSerial() string {
+	if o == nil || IsNil(o.NeighborSerial) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborSerial
+}
+
+// GetNeighborSerialOk returns a tuple with the NeighborSerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborSerialOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborSerial) {
+		return nil, false
+	}
+	return o.NeighborSerial, true
+}
+
+// HasNeighborSerial returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborSerial() bool {
+	if o != nil && !IsNil(o.NeighborSerial) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborSerial gets a reference to the given string and assigns it to the NeighborSerial field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborSerial(v string) {
+	o.NeighborSerial = &v
+}
+
+// GetNeighborType returns the NeighborType field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborType() string {
+	if o == nil || IsNil(o.NeighborType) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborType
+}
+
+// GetNeighborTypeOk returns a tuple with the NeighborType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborType) {
+		return nil, false
+	}
+	return o.NeighborType, true
+}
+
+// HasNeighborType returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborType() bool {
+	if o != nil && !IsNil(o.NeighborType) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborType gets a reference to the given string and assigns it to the NeighborType field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborType(v string) {
+	o.NeighborType = &v
+}
+
+// GetNeighborVendor returns the NeighborVendor field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborVendor() string {
+	if o == nil || IsNil(o.NeighborVendor) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborVendor
+}
+
+// GetNeighborVendorOk returns a tuple with the NeighborVendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborVendorOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborVendor) {
+		return nil, false
+	}
+	return o.NeighborVendor, true
+}
+
+// HasNeighborVendor returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborVendor() bool {
+	if o != nil && !IsNil(o.NeighborVendor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborVendor gets a reference to the given string and assigns it to the NeighborVendor field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborVendor(v string) {
+	o.NeighborVendor = &v
+}
+
+// GetNeighborVersion returns the NeighborVersion field value if set, zero value otherwise.
+func (o *NetworkDiscoveredNeighbor) GetNeighborVersion() string {
+	if o == nil || IsNil(o.NeighborVersion) {
+		var ret string
+		return ret
+	}
+	return *o.NeighborVersion
+}
+
+// GetNeighborVersionOk returns a tuple with the NeighborVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkDiscoveredNeighbor) GetNeighborVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.NeighborVersion) {
+		return nil, false
+	}
+	return o.NeighborVersion, true
+}
+
+// HasNeighborVersion returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasNeighborVersion() bool {
+	if o != nil && !IsNil(o.NeighborVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeighborVersion gets a reference to the given string and assigns it to the NeighborVersion field.
+func (o *NetworkDiscoveredNeighbor) SetNeighborVersion(v string) {
+	o.NeighborVersion = &v
 }
 
 // GetSwitchPortId returns the SwitchPortId field value if set, zero value otherwise.
@@ -440,6 +713,49 @@ func (o *NetworkDiscoveredNeighbor) UnsetLldpNeighbor() {
 	o.LldpNeighbor.Unset()
 }
 
+// GetPhysicalPort returns the PhysicalPort field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkDiscoveredNeighbor) GetPhysicalPort() EtherPhysicalPortRelationship {
+	if o == nil || IsNil(o.PhysicalPort.Get()) {
+		var ret EtherPhysicalPortRelationship
+		return ret
+	}
+	return *o.PhysicalPort.Get()
+}
+
+// GetPhysicalPortOk returns a tuple with the PhysicalPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkDiscoveredNeighbor) GetPhysicalPortOk() (*EtherPhysicalPortRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PhysicalPort.Get(), o.PhysicalPort.IsSet()
+}
+
+// HasPhysicalPort returns a boolean if a field has been set.
+func (o *NetworkDiscoveredNeighbor) HasPhysicalPort() bool {
+	if o != nil && o.PhysicalPort.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPhysicalPort gets a reference to the given NullableEtherPhysicalPortRelationship and assigns it to the PhysicalPort field.
+func (o *NetworkDiscoveredNeighbor) SetPhysicalPort(v EtherPhysicalPortRelationship) {
+	o.PhysicalPort.Set(&v)
+}
+
+// SetPhysicalPortNil sets the value for PhysicalPort to be an explicit nil
+func (o *NetworkDiscoveredNeighbor) SetPhysicalPortNil() {
+	o.PhysicalPort.Set(nil)
+}
+
+// UnsetPhysicalPort ensures that no value is present for PhysicalPort, not even an explicit nil
+func (o *NetworkDiscoveredNeighbor) UnsetPhysicalPort() {
+	o.PhysicalPort.Unset()
+}
+
 func (o NetworkDiscoveredNeighbor) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -472,6 +788,12 @@ func (o NetworkDiscoveredNeighbor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ManagementAddress) {
 		toSerialize["ManagementAddress"] = o.ManagementAddress
 	}
+	if !IsNil(o.NeighborCapability) {
+		toSerialize["NeighborCapability"] = o.NeighborCapability
+	}
+	if !IsNil(o.NeighborDescription) {
+		toSerialize["NeighborDescription"] = o.NeighborDescription
+	}
 	if o.NeighborDeviceCapability != nil {
 		toSerialize["NeighborDeviceCapability"] = o.NeighborDeviceCapability
 	}
@@ -481,8 +803,26 @@ func (o NetworkDiscoveredNeighbor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NeighborInterface) {
 		toSerialize["NeighborInterface"] = o.NeighborInterface
 	}
+	if !IsNil(o.NeighborModel) {
+		toSerialize["NeighborModel"] = o.NeighborModel
+	}
+	if !IsNil(o.NeighborNativeVlan) {
+		toSerialize["NeighborNativeVlan"] = o.NeighborNativeVlan
+	}
 	if !IsNil(o.NeighborPortId) {
 		toSerialize["NeighborPortId"] = o.NeighborPortId
+	}
+	if !IsNil(o.NeighborSerial) {
+		toSerialize["NeighborSerial"] = o.NeighborSerial
+	}
+	if !IsNil(o.NeighborType) {
+		toSerialize["NeighborType"] = o.NeighborType
+	}
+	if !IsNil(o.NeighborVendor) {
+		toSerialize["NeighborVendor"] = o.NeighborVendor
+	}
+	if !IsNil(o.NeighborVersion) {
+		toSerialize["NeighborVersion"] = o.NeighborVersion
 	}
 	if !IsNil(o.SwitchPortId) {
 		toSerialize["SwitchPortId"] = o.SwitchPortId
@@ -492,6 +832,9 @@ func (o NetworkDiscoveredNeighbor) ToMap() (map[string]interface{}, error) {
 	}
 	if o.LldpNeighbor.IsSet() {
 		toSerialize["LldpNeighbor"] = o.LldpNeighbor.Get()
+	}
+	if o.PhysicalPort.IsSet() {
+		toSerialize["PhysicalPort"] = o.PhysicalPort.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -551,18 +894,35 @@ func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(data []byte) (err error) {
 		// Device identifier of the switch.
 		DeviceId *string `json:"DeviceId,omitempty"`
 		// The management address of the switch.
-		ManagementAddress        *string  `json:"ManagementAddress,omitempty"`
+		ManagementAddress *string `json:"ManagementAddress,omitempty"`
+		// System capabilities of the neighboring device.
+		NeighborCapability *string `json:"NeighborCapability,omitempty"`
+		// The software description of the neighboring device.
+		NeighborDescription      *string  `json:"NeighborDescription,omitempty"`
 		NeighborDeviceCapability []string `json:"NeighborDeviceCapability,omitempty"`
 		// Device identifier of the neighboring device.
 		NeighborDeviceId *string `json:"NeighborDeviceId,omitempty"`
 		// Neighboring device interface.
 		NeighborInterface *string `json:"NeighborInterface,omitempty"`
+		// Model of the neighbor device.
+		NeighborModel *string `json:"NeighborModel,omitempty"`
+		// Native VLAN of the neighbor device.
+		NeighborNativeVlan *string `json:"NeighborNativeVlan,omitempty"`
 		// PortID of the neighbor device configured.
 		NeighborPortId *string `json:"NeighborPortId,omitempty"`
+		// Serial number of the neighbor device.
+		NeighborSerial *string `json:"NeighborSerial,omitempty"`
+		// Type of the neighbor device.
+		NeighborType *string `json:"NeighborType,omitempty"`
+		// Vendor of the neighbor device.
+		NeighborVendor *string `json:"NeighborVendor,omitempty"`
+		// Version of the neighbor device.
+		NeighborVersion *string `json:"NeighborVersion,omitempty"`
 		// Name of the local interface.
-		SwitchPortId *string                            `json:"SwitchPortId,omitempty"`
-		CdpNeighbor  NullableNetworkElementRelationship `json:"CdpNeighbor,omitempty"`
-		LldpNeighbor NullableNetworkElementRelationship `json:"LldpNeighbor,omitempty"`
+		SwitchPortId *string                               `json:"SwitchPortId,omitempty"`
+		CdpNeighbor  NullableNetworkElementRelationship    `json:"CdpNeighbor,omitempty"`
+		LldpNeighbor NullableNetworkElementRelationship    `json:"LldpNeighbor,omitempty"`
+		PhysicalPort NullableEtherPhysicalPortRelationship `json:"PhysicalPort,omitempty"`
 	}
 
 	varNetworkDiscoveredNeighborWithoutEmbeddedStruct := NetworkDiscoveredNeighborWithoutEmbeddedStruct{}
@@ -574,13 +934,22 @@ func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(data []byte) (err error) {
 		varNetworkDiscoveredNeighbor.ObjectType = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.ObjectType
 		varNetworkDiscoveredNeighbor.DeviceId = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.DeviceId
 		varNetworkDiscoveredNeighbor.ManagementAddress = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.ManagementAddress
+		varNetworkDiscoveredNeighbor.NeighborCapability = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborCapability
+		varNetworkDiscoveredNeighbor.NeighborDescription = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborDescription
 		varNetworkDiscoveredNeighbor.NeighborDeviceCapability = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborDeviceCapability
 		varNetworkDiscoveredNeighbor.NeighborDeviceId = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborDeviceId
 		varNetworkDiscoveredNeighbor.NeighborInterface = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborInterface
+		varNetworkDiscoveredNeighbor.NeighborModel = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborModel
+		varNetworkDiscoveredNeighbor.NeighborNativeVlan = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborNativeVlan
 		varNetworkDiscoveredNeighbor.NeighborPortId = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborPortId
+		varNetworkDiscoveredNeighbor.NeighborSerial = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborSerial
+		varNetworkDiscoveredNeighbor.NeighborType = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborType
+		varNetworkDiscoveredNeighbor.NeighborVendor = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborVendor
+		varNetworkDiscoveredNeighbor.NeighborVersion = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.NeighborVersion
 		varNetworkDiscoveredNeighbor.SwitchPortId = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.SwitchPortId
 		varNetworkDiscoveredNeighbor.CdpNeighbor = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.CdpNeighbor
 		varNetworkDiscoveredNeighbor.LldpNeighbor = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.LldpNeighbor
+		varNetworkDiscoveredNeighbor.PhysicalPort = varNetworkDiscoveredNeighborWithoutEmbeddedStruct.PhysicalPort
 		*o = NetworkDiscoveredNeighbor(varNetworkDiscoveredNeighbor)
 	} else {
 		return err
@@ -602,13 +971,22 @@ func (o *NetworkDiscoveredNeighbor) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "ManagementAddress")
+		delete(additionalProperties, "NeighborCapability")
+		delete(additionalProperties, "NeighborDescription")
 		delete(additionalProperties, "NeighborDeviceCapability")
 		delete(additionalProperties, "NeighborDeviceId")
 		delete(additionalProperties, "NeighborInterface")
+		delete(additionalProperties, "NeighborModel")
+		delete(additionalProperties, "NeighborNativeVlan")
 		delete(additionalProperties, "NeighborPortId")
+		delete(additionalProperties, "NeighborSerial")
+		delete(additionalProperties, "NeighborType")
+		delete(additionalProperties, "NeighborVendor")
+		delete(additionalProperties, "NeighborVersion")
 		delete(additionalProperties, "SwitchPortId")
 		delete(additionalProperties, "CdpNeighbor")
 		delete(additionalProperties, "LldpNeighbor")
+		delete(additionalProperties, "PhysicalPort")
 
 		// remove fields from embedded structs
 		reflectInventoryBase := reflect.ValueOf(o.InventoryBase)

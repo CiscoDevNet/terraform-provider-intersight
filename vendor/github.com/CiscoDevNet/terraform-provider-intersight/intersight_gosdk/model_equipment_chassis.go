@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025081401
+API version: 1.0.11-2025091920
 Contact: intersight@cisco.com
 */
 
@@ -41,7 +41,8 @@ type EquipmentChassis struct {
 	Description *string `json:"Description,omitempty"`
 	// This field summarizes the faults on the chassis enclosure.
 	// Deprecated
-	FaultSummary *int64 `json:"FaultSummary,omitempty"`
+	FaultSummary    *int64                         `json:"FaultSummary,omitempty"`
+	LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// The management mode of the blade server chassis. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// This field identifies the name for the chassis enclosure.
@@ -62,7 +63,8 @@ type EquipmentChassis struct {
 	// The user defined label assigned to the chassis.
 	UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	// This field identifies the Vendor ID for the chassis enclosure.
-	Vid *string `json:"Vid,omitempty"`
+	Vid              *string                              `json:"Vid,omitempty"`
+	AssignedLocation NullableAssetGeoLocationRelationship `json:"AssignedLocation,omitempty"`
 	// An array of relationships to computeBlade resources.
 	Blades []ComputeBladeRelationship `json:"Blades,omitempty"`
 	// An array of relationships to equipmentExpanderModule resources.
@@ -412,6 +414,49 @@ func (o *EquipmentChassis) HasFaultSummary() bool {
 // Deprecated
 func (o *EquipmentChassis) SetFaultSummary(v int64) {
 	o.FaultSummary = &v
+}
+
+// GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentChassis) GetLocationDetails() CommGeoLocationDetails {
+	if o == nil || IsNil(o.LocationDetails.Get()) {
+		var ret CommGeoLocationDetails
+		return ret
+	}
+	return *o.LocationDetails.Get()
+}
+
+// GetLocationDetailsOk returns a tuple with the LocationDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentChassis) GetLocationDetailsOk() (*CommGeoLocationDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationDetails.Get(), o.LocationDetails.IsSet()
+}
+
+// HasLocationDetails returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasLocationDetails() bool {
+	if o != nil && o.LocationDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationDetails gets a reference to the given NullableCommGeoLocationDetails and assigns it to the LocationDetails field.
+func (o *EquipmentChassis) SetLocationDetails(v CommGeoLocationDetails) {
+	o.LocationDetails.Set(&v)
+}
+
+// SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+func (o *EquipmentChassis) SetLocationDetailsNil() {
+	o.LocationDetails.Set(nil)
+}
+
+// UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
+func (o *EquipmentChassis) UnsetLocationDetails() {
+	o.LocationDetails.Unset()
 }
 
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
@@ -765,6 +810,49 @@ func (o *EquipmentChassis) HasVid() bool {
 // SetVid gets a reference to the given string and assigns it to the Vid field.
 func (o *EquipmentChassis) SetVid(v string) {
 	o.Vid = &v
+}
+
+// GetAssignedLocation returns the AssignedLocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentChassis) GetAssignedLocation() AssetGeoLocationRelationship {
+	if o == nil || IsNil(o.AssignedLocation.Get()) {
+		var ret AssetGeoLocationRelationship
+		return ret
+	}
+	return *o.AssignedLocation.Get()
+}
+
+// GetAssignedLocationOk returns a tuple with the AssignedLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentChassis) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AssignedLocation.Get(), o.AssignedLocation.IsSet()
+}
+
+// HasAssignedLocation returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasAssignedLocation() bool {
+	if o != nil && o.AssignedLocation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedLocation gets a reference to the given NullableAssetGeoLocationRelationship and assigns it to the AssignedLocation field.
+func (o *EquipmentChassis) SetAssignedLocation(v AssetGeoLocationRelationship) {
+	o.AssignedLocation.Set(&v)
+}
+
+// SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+func (o *EquipmentChassis) SetAssignedLocationNil() {
+	o.AssignedLocation.Set(nil)
+}
+
+// UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
+func (o *EquipmentChassis) UnsetAssignedLocation() {
+	o.AssignedLocation.Unset()
 }
 
 // GetBlades returns the Blades field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1445,6 +1533,9 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FaultSummary) {
 		toSerialize["FaultSummary"] = o.FaultSummary
 	}
+	if o.LocationDetails.IsSet() {
+		toSerialize["LocationDetails"] = o.LocationDetails.Get()
+	}
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
@@ -1477,6 +1568,9 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
+	}
+	if o.AssignedLocation.IsSet() {
+		toSerialize["AssignedLocation"] = o.AssignedLocation.Get()
 	}
 	if o.Blades != nil {
 		toSerialize["Blades"] = o.Blades
@@ -1597,7 +1691,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		Description *string `json:"Description,omitempty"`
 		// This field summarizes the faults on the chassis enclosure.
 		// Deprecated
-		FaultSummary *int64 `json:"FaultSummary,omitempty"`
+		FaultSummary    *int64                         `json:"FaultSummary,omitempty"`
+		LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// The management mode of the blade server chassis. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// This field identifies the name for the chassis enclosure.
@@ -1618,7 +1713,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		// The user defined label assigned to the chassis.
 		UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		// This field identifies the Vendor ID for the chassis enclosure.
-		Vid *string `json:"Vid,omitempty"`
+		Vid              *string                              `json:"Vid,omitempty"`
+		AssignedLocation NullableAssetGeoLocationRelationship `json:"AssignedLocation,omitempty"`
 		// An array of relationships to computeBlade resources.
 		Blades []ComputeBladeRelationship `json:"Blades,omitempty"`
 		// An array of relationships to equipmentExpanderModule resources.
@@ -1662,6 +1758,7 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentChassis.ConnectionStatus = varEquipmentChassisWithoutEmbeddedStruct.ConnectionStatus
 		varEquipmentChassis.Description = varEquipmentChassisWithoutEmbeddedStruct.Description
 		varEquipmentChassis.FaultSummary = varEquipmentChassisWithoutEmbeddedStruct.FaultSummary
+		varEquipmentChassis.LocationDetails = varEquipmentChassisWithoutEmbeddedStruct.LocationDetails
 		varEquipmentChassis.ManagementMode = varEquipmentChassisWithoutEmbeddedStruct.ManagementMode
 		varEquipmentChassis.Name = varEquipmentChassisWithoutEmbeddedStruct.Name
 		varEquipmentChassis.OperReason = varEquipmentChassisWithoutEmbeddedStruct.OperReason
@@ -1673,6 +1770,7 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentChassis.Sku = varEquipmentChassisWithoutEmbeddedStruct.Sku
 		varEquipmentChassis.UserLabel = varEquipmentChassisWithoutEmbeddedStruct.UserLabel
 		varEquipmentChassis.Vid = varEquipmentChassisWithoutEmbeddedStruct.Vid
+		varEquipmentChassis.AssignedLocation = varEquipmentChassisWithoutEmbeddedStruct.AssignedLocation
 		varEquipmentChassis.Blades = varEquipmentChassisWithoutEmbeddedStruct.Blades
 		varEquipmentChassis.ExpanderModules = varEquipmentChassisWithoutEmbeddedStruct.ExpanderModules
 		varEquipmentChassis.FanControl = varEquipmentChassisWithoutEmbeddedStruct.FanControl
@@ -1716,6 +1814,7 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ConnectionStatus")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "FaultSummary")
+		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OperReason")
@@ -1727,6 +1826,7 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Sku")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Vid")
+		delete(additionalProperties, "AssignedLocation")
 		delete(additionalProperties, "Blades")
 		delete(additionalProperties, "ExpanderModules")
 		delete(additionalProperties, "FanControl")

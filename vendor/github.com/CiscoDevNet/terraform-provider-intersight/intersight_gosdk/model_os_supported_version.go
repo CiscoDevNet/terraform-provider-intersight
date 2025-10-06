@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025081401
+API version: 1.0.11-2025091920
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,8 @@ type OsSupportedVersion struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The OsInstall Supported Operating System Version Filter Option. * `None` - No filtering is applied, allowing all available OS versions. * `SupportedInBlueprint` - Restricts the OS version specific to blueprint.
+	FilterOptions *string `json:"FilterOptions,omitempty"`
 	// The OsInstall Supported Operating System Version Name.
 	VersionName          *string                                      `json:"VersionName,omitempty"`
 	Vendor               NullableHclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
@@ -116,6 +118,38 @@ func (o *OsSupportedVersion) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "os.SupportedVersion" of the ObjectType field.
 func (o *OsSupportedVersion) GetDefaultObjectType() interface{} {
 	return "os.SupportedVersion"
+}
+
+// GetFilterOptions returns the FilterOptions field value if set, zero value otherwise.
+func (o *OsSupportedVersion) GetFilterOptions() string {
+	if o == nil || IsNil(o.FilterOptions) {
+		var ret string
+		return ret
+	}
+	return *o.FilterOptions
+}
+
+// GetFilterOptionsOk returns a tuple with the FilterOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsSupportedVersion) GetFilterOptionsOk() (*string, bool) {
+	if o == nil || IsNil(o.FilterOptions) {
+		return nil, false
+	}
+	return o.FilterOptions, true
+}
+
+// HasFilterOptions returns a boolean if a field has been set.
+func (o *OsSupportedVersion) HasFilterOptions() bool {
+	if o != nil && !IsNil(o.FilterOptions) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterOptions gets a reference to the given string and assigns it to the FilterOptions field.
+func (o *OsSupportedVersion) SetFilterOptions(v string) {
+	o.FilterOptions = &v
 }
 
 // GetVersionName returns the VersionName field value if set, zero value otherwise.
@@ -262,6 +296,9 @@ func (o OsSupportedVersion) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FilterOptions) {
+		toSerialize["FilterOptions"] = o.FilterOptions
+	}
 	if !IsNil(o.VersionName) {
 		toSerialize["VersionName"] = o.VersionName
 	}
@@ -326,6 +363,8 @@ func (o *OsSupportedVersion) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The OsInstall Supported Operating System Version Filter Option. * `None` - No filtering is applied, allowing all available OS versions. * `SupportedInBlueprint` - Restricts the OS version specific to blueprint.
+		FilterOptions *string `json:"FilterOptions,omitempty"`
 		// The OsInstall Supported Operating System Version Name.
 		VersionName *string                                      `json:"VersionName,omitempty"`
 		Vendor      NullableHclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
@@ -339,6 +378,7 @@ func (o *OsSupportedVersion) UnmarshalJSON(data []byte) (err error) {
 		varOsSupportedVersion := _OsSupportedVersion{}
 		varOsSupportedVersion.ClassId = varOsSupportedVersionWithoutEmbeddedStruct.ClassId
 		varOsSupportedVersion.ObjectType = varOsSupportedVersionWithoutEmbeddedStruct.ObjectType
+		varOsSupportedVersion.FilterOptions = varOsSupportedVersionWithoutEmbeddedStruct.FilterOptions
 		varOsSupportedVersion.VersionName = varOsSupportedVersionWithoutEmbeddedStruct.VersionName
 		varOsSupportedVersion.Vendor = varOsSupportedVersionWithoutEmbeddedStruct.Vendor
 		varOsSupportedVersion.Version = varOsSupportedVersionWithoutEmbeddedStruct.Version
@@ -361,6 +401,7 @@ func (o *OsSupportedVersion) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "FilterOptions")
 		delete(additionalProperties, "VersionName")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Version")

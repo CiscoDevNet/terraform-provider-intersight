@@ -6,11 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.UserGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.UserGroup"]
-**Name** | Pointer to **string** | The name of the user group which the dynamic user belongs to. | [optional] 
+**AccessActivationTime** | Pointer to **time.Time** | AccessActivationTime indicates the activation time for the guest user&#39;s access to the Account.  Before this time, if guest user tries to login to the account, access the account will be denied. | [optional] 
+**AccessExpiryTime** | Pointer to **time.Time** | AccessExpiryTime indicates the expiration time for the guest user&#39;s access to the Account. Its value can only be  assigned a date that falls within the range determined by the maximum expiration time configured for the  API entries. The AccessExpiry date can be edited to be earlier or later. | [optional] 
+**AccessLink** | Pointer to **string** | AccessLink using which the guest user uses to log in to Intersight. | [optional] [readonly] 
+**GroupType** | Pointer to **string** | Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login. * &#x60;Default&#x60; - Default User Group Type used for dynamic users login. * &#x60;Guest&#x60; - Guest User Group type used for guest users login. | [optional] [default to "Default"]
+**Instruction** | Pointer to **string** | Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience. | [optional] 
+**Name** | Pointer to **string** | The name of the user group which the dynamic/or guest user belongs to. | [optional] 
+**UniqueReferenceId** | Pointer to **string** | A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups. | [optional] [readonly] 
 **Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
 **Idpreference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] 
-**Qualifier** | Pointer to [**NullableIamQualifierRelationship**](IamQualifierRelationship.md) |  | [optional] 
+**Qualifier** | Pointer to [**NullableIamAbstractQualifierRelationship**](IamAbstractQualifierRelationship.md) |  | [optional] 
 **Users** | Pointer to [**[]IamUserRelationship**](IamUserRelationship.md) | An array of relationships to iamUser resources. | [optional] [readonly] 
 
 ## Methods
@@ -72,6 +78,131 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAccessActivationTime
+
+`func (o *IamUserGroup) GetAccessActivationTime() time.Time`
+
+GetAccessActivationTime returns the AccessActivationTime field if non-nil, zero value otherwise.
+
+### GetAccessActivationTimeOk
+
+`func (o *IamUserGroup) GetAccessActivationTimeOk() (*time.Time, bool)`
+
+GetAccessActivationTimeOk returns a tuple with the AccessActivationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessActivationTime
+
+`func (o *IamUserGroup) SetAccessActivationTime(v time.Time)`
+
+SetAccessActivationTime sets AccessActivationTime field to given value.
+
+### HasAccessActivationTime
+
+`func (o *IamUserGroup) HasAccessActivationTime() bool`
+
+HasAccessActivationTime returns a boolean if a field has been set.
+
+### GetAccessExpiryTime
+
+`func (o *IamUserGroup) GetAccessExpiryTime() time.Time`
+
+GetAccessExpiryTime returns the AccessExpiryTime field if non-nil, zero value otherwise.
+
+### GetAccessExpiryTimeOk
+
+`func (o *IamUserGroup) GetAccessExpiryTimeOk() (*time.Time, bool)`
+
+GetAccessExpiryTimeOk returns a tuple with the AccessExpiryTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessExpiryTime
+
+`func (o *IamUserGroup) SetAccessExpiryTime(v time.Time)`
+
+SetAccessExpiryTime sets AccessExpiryTime field to given value.
+
+### HasAccessExpiryTime
+
+`func (o *IamUserGroup) HasAccessExpiryTime() bool`
+
+HasAccessExpiryTime returns a boolean if a field has been set.
+
+### GetAccessLink
+
+`func (o *IamUserGroup) GetAccessLink() string`
+
+GetAccessLink returns the AccessLink field if non-nil, zero value otherwise.
+
+### GetAccessLinkOk
+
+`func (o *IamUserGroup) GetAccessLinkOk() (*string, bool)`
+
+GetAccessLinkOk returns a tuple with the AccessLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessLink
+
+`func (o *IamUserGroup) SetAccessLink(v string)`
+
+SetAccessLink sets AccessLink field to given value.
+
+### HasAccessLink
+
+`func (o *IamUserGroup) HasAccessLink() bool`
+
+HasAccessLink returns a boolean if a field has been set.
+
+### GetGroupType
+
+`func (o *IamUserGroup) GetGroupType() string`
+
+GetGroupType returns the GroupType field if non-nil, zero value otherwise.
+
+### GetGroupTypeOk
+
+`func (o *IamUserGroup) GetGroupTypeOk() (*string, bool)`
+
+GetGroupTypeOk returns a tuple with the GroupType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupType
+
+`func (o *IamUserGroup) SetGroupType(v string)`
+
+SetGroupType sets GroupType field to given value.
+
+### HasGroupType
+
+`func (o *IamUserGroup) HasGroupType() bool`
+
+HasGroupType returns a boolean if a field has been set.
+
+### GetInstruction
+
+`func (o *IamUserGroup) GetInstruction() string`
+
+GetInstruction returns the Instruction field if non-nil, zero value otherwise.
+
+### GetInstructionOk
+
+`func (o *IamUserGroup) GetInstructionOk() (*string, bool)`
+
+GetInstructionOk returns a tuple with the Instruction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstruction
+
+`func (o *IamUserGroup) SetInstruction(v string)`
+
+SetInstruction sets Instruction field to given value.
+
+### HasInstruction
+
+`func (o *IamUserGroup) HasInstruction() bool`
+
+HasInstruction returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *IamUserGroup) GetName() string`
@@ -96,6 +227,31 @@ SetName sets Name field to given value.
 `func (o *IamUserGroup) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetUniqueReferenceId
+
+`func (o *IamUserGroup) GetUniqueReferenceId() string`
+
+GetUniqueReferenceId returns the UniqueReferenceId field if non-nil, zero value otherwise.
+
+### GetUniqueReferenceIdOk
+
+`func (o *IamUserGroup) GetUniqueReferenceIdOk() (*string, bool)`
+
+GetUniqueReferenceIdOk returns a tuple with the UniqueReferenceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniqueReferenceId
+
+`func (o *IamUserGroup) SetUniqueReferenceId(v string)`
+
+SetUniqueReferenceId sets UniqueReferenceId field to given value.
+
+### HasUniqueReferenceId
+
+`func (o *IamUserGroup) HasUniqueReferenceId() bool`
+
+HasUniqueReferenceId returns a boolean if a field has been set.
 
 ### GetIdp
 
@@ -204,20 +360,20 @@ HasPermissions returns a boolean if a field has been set.
 UnsetPermissions ensures that no value is present for Permissions, not even an explicit nil
 ### GetQualifier
 
-`func (o *IamUserGroup) GetQualifier() IamQualifierRelationship`
+`func (o *IamUserGroup) GetQualifier() IamAbstractQualifierRelationship`
 
 GetQualifier returns the Qualifier field if non-nil, zero value otherwise.
 
 ### GetQualifierOk
 
-`func (o *IamUserGroup) GetQualifierOk() (*IamQualifierRelationship, bool)`
+`func (o *IamUserGroup) GetQualifierOk() (*IamAbstractQualifierRelationship, bool)`
 
 GetQualifierOk returns a tuple with the Qualifier field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQualifier
 
-`func (o *IamUserGroup) SetQualifier(v IamQualifierRelationship)`
+`func (o *IamUserGroup) SetQualifier(v IamAbstractQualifierRelationship)`
 
 SetQualifier sets Qualifier field to given value.
 

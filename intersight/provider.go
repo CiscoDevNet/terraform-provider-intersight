@@ -54,7 +54,7 @@ func configureProvider(c context.Context, d *schema.ResourceData) (interface{}, 
 	client := Client{}
 	config.ctx, err = client.SetInputs(config.ApiKey, config.SecretKey, config.Endpoint, true)
 	if err != nil {
-		return nil, diag.Errorf(err.Error())
+		return nil, diag.Errorf("Failed to initialize Intersight client: %s", err)
 	}
 	config.ApiClient = client.GetApiClient(config.ctx, true)
 	return &config, de

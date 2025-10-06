@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "scheduler.TaskSchedule"]
 **Action** | Pointer to **string** | The action of the scheduled task such as suspend or resume. * &#x60;None&#x60; - No action is set (default). * &#x60;Suspend&#x60; - Suspend a scheduled task indefinitely. * &#x60;Resume&#x60; - Resume a suspended scheduled task. * &#x60;SuspendTill&#x60; - Suspend the scheduled task until a specified end-date. Not supported in this release. | [optional] [default to "None"]
 **Description** | Pointer to **string** | A description to describe the schedule for easier identification. | [optional] 
+**ExecutionStatuses** | Pointer to [**[]SchedulerTaskSchedulePolicyExecutionStatus**](SchedulerTaskSchedulePolicyExecutionStatus.md) |  | [optional] 
 **LastAction** | Pointer to **string** | The last action for the scheduled task is saved in this field. Set to none if there was no action. * &#x60;None&#x60; - No action is set (default). * &#x60;Suspend&#x60; - Suspend a scheduled task indefinitely. * &#x60;Resume&#x60; - Resume a suspended scheduled task. * &#x60;SuspendTill&#x60; - Suspend the scheduled task until a specified end-date. Not supported in this release. | [optional] [readonly] [default to "None"]
 **Name** | Pointer to **string** | A schedule name for easier identification (not required to be unique). | [optional] 
 **ScheduleParams** | Pointer to [**SchedulerBaseScheduleParams**](SchedulerBaseScheduleParams.md) |  | [optional] 
@@ -15,7 +16,9 @@ Name | Type | Description | Notes
 **SuspendEndTime** | Pointer to **time.Time** | Suspend a task until an end date. this applies only to the action suspendTill. | [optional] 
 **TaskRequest** | Pointer to [**SchedulerRestStimTaskRequest**](SchedulerRestStimTaskRequest.md) |  | [optional] 
 **Type** | Pointer to **string** | An Enum describing the type of scheduler to use. * &#x60;None&#x60; - No value was set for the schedule type (Enum value None). * &#x60;OneTime&#x60; - Define a one-time task execution time that will not automatically repeat. * &#x60;Recurring&#x60; - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, or every &lt;interval&gt; pattern. | [optional] [default to "None"]
+**UsePolicy** | Pointer to **bool** | Indicates if the schedule is policy based or not. | [optional] [default to false]
 **AssociatedObject** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Policy** | Pointer to [**NullableSchedulerSchedulePolicyRelationship**](SchedulerSchedulePolicyRelationship.md) |  | [optional] 
 **WorkflowDefinition** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
@@ -127,6 +130,41 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetExecutionStatuses
+
+`func (o *SchedulerTaskSchedule) GetExecutionStatuses() []SchedulerTaskSchedulePolicyExecutionStatus`
+
+GetExecutionStatuses returns the ExecutionStatuses field if non-nil, zero value otherwise.
+
+### GetExecutionStatusesOk
+
+`func (o *SchedulerTaskSchedule) GetExecutionStatusesOk() (*[]SchedulerTaskSchedulePolicyExecutionStatus, bool)`
+
+GetExecutionStatusesOk returns a tuple with the ExecutionStatuses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionStatuses
+
+`func (o *SchedulerTaskSchedule) SetExecutionStatuses(v []SchedulerTaskSchedulePolicyExecutionStatus)`
+
+SetExecutionStatuses sets ExecutionStatuses field to given value.
+
+### HasExecutionStatuses
+
+`func (o *SchedulerTaskSchedule) HasExecutionStatuses() bool`
+
+HasExecutionStatuses returns a boolean if a field has been set.
+
+### SetExecutionStatusesNil
+
+`func (o *SchedulerTaskSchedule) SetExecutionStatusesNil(b bool)`
+
+ SetExecutionStatusesNil sets the value for ExecutionStatuses to be an explicit nil
+
+### UnsetExecutionStatuses
+`func (o *SchedulerTaskSchedule) UnsetExecutionStatuses()`
+
+UnsetExecutionStatuses ensures that no value is present for ExecutionStatuses, not even an explicit nil
 ### GetLastAction
 
 `func (o *SchedulerTaskSchedule) GetLastAction() string`
@@ -312,6 +350,31 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
+### GetUsePolicy
+
+`func (o *SchedulerTaskSchedule) GetUsePolicy() bool`
+
+GetUsePolicy returns the UsePolicy field if non-nil, zero value otherwise.
+
+### GetUsePolicyOk
+
+`func (o *SchedulerTaskSchedule) GetUsePolicyOk() (*bool, bool)`
+
+GetUsePolicyOk returns a tuple with the UsePolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsePolicy
+
+`func (o *SchedulerTaskSchedule) SetUsePolicy(v bool)`
+
+SetUsePolicy sets UsePolicy field to given value.
+
+### HasUsePolicy
+
+`func (o *SchedulerTaskSchedule) HasUsePolicy() bool`
+
+HasUsePolicy returns a boolean if a field has been set.
+
 ### GetAssociatedObject
 
 `func (o *SchedulerTaskSchedule) GetAssociatedObject() MoBaseMoRelationship`
@@ -347,6 +410,41 @@ HasAssociatedObject returns a boolean if a field has been set.
 `func (o *SchedulerTaskSchedule) UnsetAssociatedObject()`
 
 UnsetAssociatedObject ensures that no value is present for AssociatedObject, not even an explicit nil
+### GetPolicy
+
+`func (o *SchedulerTaskSchedule) GetPolicy() SchedulerSchedulePolicyRelationship`
+
+GetPolicy returns the Policy field if non-nil, zero value otherwise.
+
+### GetPolicyOk
+
+`func (o *SchedulerTaskSchedule) GetPolicyOk() (*SchedulerSchedulePolicyRelationship, bool)`
+
+GetPolicyOk returns a tuple with the Policy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicy
+
+`func (o *SchedulerTaskSchedule) SetPolicy(v SchedulerSchedulePolicyRelationship)`
+
+SetPolicy sets Policy field to given value.
+
+### HasPolicy
+
+`func (o *SchedulerTaskSchedule) HasPolicy() bool`
+
+HasPolicy returns a boolean if a field has been set.
+
+### SetPolicyNil
+
+`func (o *SchedulerTaskSchedule) SetPolicyNil(b bool)`
+
+ SetPolicyNil sets the value for Policy to be an explicit nil
+
+### UnsetPolicy
+`func (o *SchedulerTaskSchedule) UnsetPolicy()`
+
+UnsetPolicy ensures that no value is present for Policy, not even an explicit nil
 ### GetWorkflowDefinition
 
 `func (o *SchedulerTaskSchedule) GetWorkflowDefinition() WorkflowWorkflowDefinitionRelationship`

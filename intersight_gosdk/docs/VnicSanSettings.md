@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.SanSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.SanSettings"]
+**OldInfo** | Pointer to [**NullableVnicSanSettingsOldInfo**](VnicSanSettingsOldInfo.md) |  | [optional] 
 **Wwnn** | Pointer to **string** | The WWNN address that is assigned to the server node based on the wwn pool that has been assigned in the SAN Connectivity Policy. | [optional] [readonly] 
 **Profile** | Pointer to [**NullablePolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) |  | [optional] 
 **WwnnLease** | Pointer to [**NullableFcpoolLeaseRelationship**](FcpoolLeaseRelationship.md) |  | [optional] 
@@ -69,6 +70,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetOldInfo
+
+`func (o *VnicSanSettings) GetOldInfo() VnicSanSettingsOldInfo`
+
+GetOldInfo returns the OldInfo field if non-nil, zero value otherwise.
+
+### GetOldInfoOk
+
+`func (o *VnicSanSettings) GetOldInfoOk() (*VnicSanSettingsOldInfo, bool)`
+
+GetOldInfoOk returns a tuple with the OldInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOldInfo
+
+`func (o *VnicSanSettings) SetOldInfo(v VnicSanSettingsOldInfo)`
+
+SetOldInfo sets OldInfo field to given value.
+
+### HasOldInfo
+
+`func (o *VnicSanSettings) HasOldInfo() bool`
+
+HasOldInfo returns a boolean if a field has been set.
+
+### SetOldInfoNil
+
+`func (o *VnicSanSettings) SetOldInfoNil(b bool)`
+
+ SetOldInfoNil sets the value for OldInfo to be an explicit nil
+
+### UnsetOldInfo
+`func (o *VnicSanSettings) UnsetOldInfo()`
+
+UnsetOldInfo ensures that no value is present for OldInfo, not even an explicit nil
 ### GetWwnn
 
 `func (o *VnicSanSettings) GetWwnn() string`
