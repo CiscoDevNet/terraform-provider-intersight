@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
 **LastPowerStateChangedTime** | Pointer to **string** | The Last host power state changed time of the server. | [optional] [readonly] 
 **Lifecycle** | Pointer to **string** | The lifecycle of the blade server. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. * &#x60;SecureEraseInProgress&#x60; - Secure Erase is in progress on given physical entity. * &#x60;ScrubInProgress&#x60; - Scrub is in progress on given physical entity. * &#x60;BladeMigrationInProgress&#x60; - Server slot migration is in progress on given physical entity. * &#x60;SlotMismatch&#x60; - The blade server is detected in a different chassis/slot than it was previously. * &#x60;Removed&#x60; - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * &#x60;Moved&#x60; - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * &#x60;Replaced&#x60; - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * &#x60;MovedAndReplaced&#x60; - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade. | [optional] [readonly] [default to "None"]
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] [readonly] 
@@ -697,6 +698,41 @@ SetLifecycle sets Lifecycle field to given value.
 
 HasLifecycle returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *ComputePhysicalSummary) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *ComputePhysicalSummary) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *ComputePhysicalSummary) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *ComputePhysicalSummary) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *ComputePhysicalSummary) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *ComputePhysicalSummary) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetManagementMode
 
 `func (o *ComputePhysicalSummary) GetManagementMode() string`

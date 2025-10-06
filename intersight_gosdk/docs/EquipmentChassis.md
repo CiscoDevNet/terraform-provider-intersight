@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **ConnectionStatus** | Pointer to **string** | This field identifies the connectivity status for the chassis enclosure. | [optional] [readonly] 
 **Description** | Pointer to **string** | This field is to provide description for chassis model. | [optional] [readonly] 
 **FaultSummary** | Pointer to **int64** | This field summarizes the faults on the chassis enclosure. | [optional] [readonly] 
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the blade server chassis. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **Name** | Pointer to **string** | This field identifies the name for the chassis enclosure. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
@@ -24,6 +25,7 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the chassis enclosure. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the chassis. | [optional] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the chassis enclosure. | [optional] [readonly] 
+**AssignedLocation** | Pointer to [**NullableAssetGeoLocationRelationship**](AssetGeoLocationRelationship.md) |  | [optional] 
 **Blades** | Pointer to [**[]ComputeBladeRelationship**](ComputeBladeRelationship.md) | An array of relationships to computeBlade resources. | [optional] [readonly] 
 **ExpanderModules** | Pointer to [**[]EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) | An array of relationships to equipmentExpanderModule resources. | [optional] [readonly] 
 **FanControl** | Pointer to [**NullableEquipmentFanControlRelationship**](EquipmentFanControlRelationship.md) |  | [optional] 
@@ -286,6 +288,41 @@ SetFaultSummary sets FaultSummary field to given value.
 
 HasFaultSummary returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *EquipmentChassis) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *EquipmentChassis) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *EquipmentChassis) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *EquipmentChassis) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *EquipmentChassis) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *EquipmentChassis) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetManagementMode
 
 `func (o *EquipmentChassis) GetManagementMode() string`
@@ -571,6 +608,41 @@ SetVid sets Vid field to given value.
 
 HasVid returns a boolean if a field has been set.
 
+### GetAssignedLocation
+
+`func (o *EquipmentChassis) GetAssignedLocation() AssetGeoLocationRelationship`
+
+GetAssignedLocation returns the AssignedLocation field if non-nil, zero value otherwise.
+
+### GetAssignedLocationOk
+
+`func (o *EquipmentChassis) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool)`
+
+GetAssignedLocationOk returns a tuple with the AssignedLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedLocation
+
+`func (o *EquipmentChassis) SetAssignedLocation(v AssetGeoLocationRelationship)`
+
+SetAssignedLocation sets AssignedLocation field to given value.
+
+### HasAssignedLocation
+
+`func (o *EquipmentChassis) HasAssignedLocation() bool`
+
+HasAssignedLocation returns a boolean if a field has been set.
+
+### SetAssignedLocationNil
+
+`func (o *EquipmentChassis) SetAssignedLocationNil(b bool)`
+
+ SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+
+### UnsetAssignedLocation
+`func (o *EquipmentChassis) UnsetAssignedLocation()`
+
+UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
 ### GetBlades
 
 `func (o *EquipmentChassis) GetBlades() []ComputeBladeRelationship`

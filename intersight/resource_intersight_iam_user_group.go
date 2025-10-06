@@ -24,6 +24,27 @@ func resourceIamUserGroup() *schema.Resource {
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
+			"access_activation_time": {
+				Description: "AccessActivationTime indicates the activation time for the guest user's access to the Account.  Before this time, if guest user tries to login to the account, access the account will be denied.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"access_expiry_time": {
+				Description: "AccessExpiryTime indicates the expiration time for the guest user's access to the Account. Its value can only be  assigned a date that falls within the range determined by the maximum expiration time configured for the  API entries. The AccessExpiry date can be edited to be earlier or later.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"access_link": {
+				Description: "AccessLink using which the guest user uses to log in to Intersight.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
 				Type:        schema.TypeString,
@@ -107,6 +128,13 @@ func resourceIamUserGroup() *schema.Resource {
 					}
 					return
 				}},
+			"group_type": {
+				Description:  "Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login.\n* `Default` - Default User Group Type used for dynamic users login.\n* `Guest` - Guest User Group type used for guest users login.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Default", "Guest"}, false),
+				Optional:     true,
+				Default:      "Default",
+			},
 			"idp": {
 				Description: "A reference to a iamIdp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -187,6 +215,12 @@ func resourceIamUserGroup() *schema.Resource {
 					},
 				},
 			},
+			"instruction": {
+				Description:  "Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience.",
+				Type:         schema.TypeString,
+				ValidateFunc: StringLenMaximum(2048),
+				Optional:     true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -206,11 +240,10 @@ func resourceIamUserGroup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description:  "The name of the user group which the dynamic user belongs to.",
+				Description:  "The name of the user group which the dynamic/or guest user belongs to.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringLenBetween(1, 2048),
 				Optional:     true,
-				ForceNew:     true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -345,7 +378,7 @@ func resourceIamUserGroup() *schema.Resource {
 				},
 			},
 			"qualifier": {
-				Description: "A reference to a iamQualifier resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Description: "A reference to a iamAbstractQualifier resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -407,12 +440,112 @@ func resourceIamUserGroup() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
+						"ancestor_definitions": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"definition": {
+							Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 128),
+							ValidateFunc: validation.StringLenBetween(1, 256),
 							Optional:     true,
 						},
+						"propagated": {
+							Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"type": {
+							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -422,6 +555,17 @@ func resourceIamUserGroup() *schema.Resource {
 					},
 				},
 			},
+			"unique_reference_id": {
+				Description: "A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"users": {
 				Description: "An array of relationships to iamUser resources.",
 				Type:        schema.TypeList,
@@ -621,6 +765,15 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamUserGroupWithDefaults()
+	if v, ok := d.GetOk("access_activation_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetAccessActivationTime(x)
+	}
+
+	if v, ok := d.GetOk("access_expiry_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetAccessExpiryTime(x)
+	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -632,6 +785,11 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	o.SetClassId("iam.UserGroup")
+
+	if v, ok := d.GetOk("group_type"); ok {
+		x := (v.(string))
+		o.SetGroupType(x)
+	}
 
 	if v, ok := d.GetOk("idp"); ok {
 		p := make([]models.IamIdpRelationship, 0, 1)
@@ -719,6 +877,11 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("instruction"); ok {
+		x := (v.(string))
+		o.SetInstruction(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -774,7 +937,7 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("qualifier"); ok {
-		p := make([]models.IamQualifierRelationship, 0, 1)
+		p := make([]models.IamAbstractQualifierRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -808,7 +971,7 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsIamQualifierRelationship(o))
+			p = append(p, models.MoMoRefAsIamAbstractQualifierRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -829,6 +992,49 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}
@@ -897,6 +1103,18 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while fetching IamUserGroup: %s", responseErr.Error())
 	}
 
+	if err := d.Set("access_activation_time", (s.GetAccessActivationTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property AccessActivationTime in IamUserGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("access_expiry_time", (s.GetAccessExpiryTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property AccessExpiryTime in IamUserGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("access_link", (s.GetAccessLink())); err != nil {
+		return diag.Errorf("error occurred while setting property AccessLink in IamUserGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("account_moid", (s.GetAccountMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property AccountMoid in IamUserGroup object: %s", err.Error())
 	}
@@ -921,12 +1139,20 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in IamUserGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("group_type", (s.GetGroupType())); err != nil {
+		return diag.Errorf("error occurred while setting property GroupType in IamUserGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("idp", flattenMapIamIdpRelationship(s.GetIdp(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Idp in IamUserGroup object: %s", err.Error())
 	}
 
 	if err := d.Set("idpreference", flattenMapIamIdpReferenceRelationship(s.GetIdpreference(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Idpreference in IamUserGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("instruction", (s.GetInstruction())); err != nil {
+		return diag.Errorf("error occurred while setting property Instruction in IamUserGroup object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -961,7 +1187,7 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while setting property Permissions in IamUserGroup object: %s", err.Error())
 	}
 
-	if err := d.Set("qualifier", flattenMapIamQualifierRelationship(s.GetQualifier(), d)); err != nil {
+	if err := d.Set("qualifier", flattenMapIamAbstractQualifierRelationship(s.GetQualifier(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Qualifier in IamUserGroup object: %s", err.Error())
 	}
 
@@ -971,6 +1197,10 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in IamUserGroup object: %s", err.Error())
+	}
+
+	if err := d.Set("unique_reference_id", (s.GetUniqueReferenceId())); err != nil {
+		return diag.Errorf("error occurred while setting property UniqueReferenceId in IamUserGroup object: %s", err.Error())
 	}
 
 	if err := d.Set("users", flattenListIamUserRelationship(s.GetUsers(), d)); err != nil {
@@ -991,6 +1221,17 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamUserGroup{}
+	if d.HasChange("access_activation_time") {
+		v := d.Get("access_activation_time")
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetAccessActivationTime(x)
+	}
+
+	if d.HasChange("access_expiry_time") {
+		v := d.Get("access_expiry_time")
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetAccessExpiryTime(x)
+	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1003,6 +1244,12 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	o.SetClassId("iam.UserGroup")
+
+	if d.HasChange("group_type") {
+		v := d.Get("group_type")
+		x := (v.(string))
+		o.SetGroupType(x)
+	}
 
 	if d.HasChange("idp") {
 		v := d.Get("idp")
@@ -1092,6 +1339,12 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if d.HasChange("instruction") {
+		v := d.Get("instruction")
+		x := (v.(string))
+		o.SetInstruction(x)
+	}
+
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -1149,7 +1402,7 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 
 	if d.HasChange("qualifier") {
 		v := d.Get("qualifier")
-		p := make([]models.IamQualifierRelationship, 0, 1)
+		p := make([]models.IamAbstractQualifierRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -1183,7 +1436,7 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsIamQualifierRelationship(o))
+			p = append(p, models.MoMoRefAsIamAbstractQualifierRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -1205,6 +1458,49 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

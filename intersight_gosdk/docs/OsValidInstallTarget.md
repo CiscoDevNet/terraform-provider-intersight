@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.ValidInstallTarget"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.ValidInstallTarget"]
+**E1sNvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **E3sNvme** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **Error** | Pointer to **string** | Error message if any errors are encountered while fetching and validating Install targets for the server. | [optional] [readonly] 
 **InstallTargets** | Pointer to [**[]OsInstallTargetResponse**](OsInstallTargetResponse.md) |  | [optional] 
@@ -79,6 +80,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetE1sNvme
+
+`func (o *OsValidInstallTarget) GetE1sNvme() []OsPhysicalDiskResponse`
+
+GetE1sNvme returns the E1sNvme field if non-nil, zero value otherwise.
+
+### GetE1sNvmeOk
+
+`func (o *OsValidInstallTarget) GetE1sNvmeOk() (*[]OsPhysicalDiskResponse, bool)`
+
+GetE1sNvmeOk returns a tuple with the E1sNvme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetE1sNvme
+
+`func (o *OsValidInstallTarget) SetE1sNvme(v []OsPhysicalDiskResponse)`
+
+SetE1sNvme sets E1sNvme field to given value.
+
+### HasE1sNvme
+
+`func (o *OsValidInstallTarget) HasE1sNvme() bool`
+
+HasE1sNvme returns a boolean if a field has been set.
+
+### SetE1sNvmeNil
+
+`func (o *OsValidInstallTarget) SetE1sNvmeNil(b bool)`
+
+ SetE1sNvmeNil sets the value for E1sNvme to be an explicit nil
+
+### UnsetE1sNvme
+`func (o *OsValidInstallTarget) UnsetE1sNvme()`
+
+UnsetE1sNvme ensures that no value is present for E1sNvme, not even an explicit nil
 ### GetE3sNvme
 
 `func (o *OsValidInstallTarget) GetE3sNvme() []OsPhysicalDiskResponse`

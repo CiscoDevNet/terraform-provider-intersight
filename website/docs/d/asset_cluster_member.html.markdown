@@ -3,12 +3,12 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_cluster_member"
 description: |-
-        A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the nodes current leadership within the cluster.
+        A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the node's current leadership state within the cluster.
 
 ---
 
 # Data Source: intersight_asset_cluster_member
-A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the nodes current leadership within the cluster.
+A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the node's current leadership state within the cluster.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

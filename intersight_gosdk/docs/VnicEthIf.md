@@ -15,9 +15,11 @@ Name | Type | Description | Notes
 **MacAddress** | Pointer to **string** | The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
+**OldInfo** | Pointer to [**NullableVnicEthIfOldInfo**](VnicEthIfOldInfo.md) |  | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
+**Stale** | Pointer to **bool** | An EthIf is marked stale if it was deployed to the endpoint and the LAN Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the LAN Connectivity Policy being removed from the server profile or a different LAN Connectivity Policy is attached which does not include any EthIf with the same name. | [optional] [readonly] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] 
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
@@ -336,6 +338,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetOldInfo
+
+`func (o *VnicEthIf) GetOldInfo() VnicEthIfOldInfo`
+
+GetOldInfo returns the OldInfo field if non-nil, zero value otherwise.
+
+### GetOldInfoOk
+
+`func (o *VnicEthIf) GetOldInfoOk() (*VnicEthIfOldInfo, bool)`
+
+GetOldInfoOk returns a tuple with the OldInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOldInfo
+
+`func (o *VnicEthIf) SetOldInfo(v VnicEthIfOldInfo)`
+
+SetOldInfo sets OldInfo field to given value.
+
+### HasOldInfo
+
+`func (o *VnicEthIf) HasOldInfo() bool`
+
+HasOldInfo returns a boolean if a field has been set.
+
+### SetOldInfoNil
+
+`func (o *VnicEthIf) SetOldInfoNil(b bool)`
+
+ SetOldInfoNil sets the value for OldInfo to be an explicit nil
+
+### UnsetOldInfo
+`func (o *VnicEthIf) UnsetOldInfo()`
+
+UnsetOldInfo ensures that no value is present for OldInfo, not even an explicit nil
 ### GetOrder
 
 `func (o *VnicEthIf) GetOrder() int64`
@@ -431,6 +468,31 @@ HasPlacement returns a boolean if a field has been set.
 `func (o *VnicEthIf) UnsetPlacement()`
 
 UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
+### GetStale
+
+`func (o *VnicEthIf) GetStale() bool`
+
+GetStale returns the Stale field if non-nil, zero value otherwise.
+
+### GetStaleOk
+
+`func (o *VnicEthIf) GetStaleOk() (*bool, bool)`
+
+GetStaleOk returns a tuple with the Stale field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStale
+
+`func (o *VnicEthIf) SetStale(v bool)`
+
+SetStale sets Stale field to given value.
+
+### HasStale
+
+`func (o *VnicEthIf) HasStale() bool`
+
+HasStale returns a boolean if a field has been set.
+
 ### GetStandbyVifId
 
 `func (o *VnicEthIf) GetStandbyVifId() int64`

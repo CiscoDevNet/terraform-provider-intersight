@@ -23,9 +23,17 @@ The following arguments can be used to get data of already created objects in In
 * `management_address`:(string) The management address of the switch. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `neighbor_capability`:(string) System capabilities of the neighboring device. 
+* `neighbor_description`:(string) The software description of the neighboring device. 
 * `neighbor_device_id`:(string) Device identifier of the neighboring device. 
 * `neighbor_interface`:(string) Neighboring device interface. 
+* `neighbor_model`:(string) Model of the neighbor device. 
+* `neighbor_native_vlan`:(string) Native VLAN of the neighbor device. 
 * `neighbor_port_id`:(string) PortID of the neighbor device configured. 
+* `neighbor_serial`:(string) Serial number of the neighbor device. 
+* `neighbor_type`:(string) Type of the neighbor device. 
+* `neighbor_vendor`:(string) Vendor of the neighbor device. 
+* `neighbor_version`:(string) Version of the neighbor device. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `switch_port_id`:(string) Name of the local interface. 

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"regexp"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -81,6 +81,14 @@ func resourceCommTagDefinition() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"allowed_values": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -149,21 +157,15 @@ func resourceCommTagDefinition() *schema.Resource {
 					return
 				}},
 			"enable_propagation": {
-				Description: "If this flag is enabled, the tag will be propagated to related managed objects.\nThis is currently set to true by default for hierarchical tags. Propagation is managed by the system and cannot be configured by users.",
+				Description: "If this flag is enabled, the tag will be propagated to related managed objects.\nPropagation is supported in a limited manner for path tags and it is not supported for key value. Rules for propagation are\nconfigured by Intersight and cannot be configured by user.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
+				ForceNew:    true,
+			},
 			"key": {
-				Description:  "The string representation of the tag key. If the tag is of hierarchical type, then \"/\" will be interpreted as hierarchy delimiters.\nIt can contain alphabets, numbers, \"_\", \"-\". Key cannot start with \"_\", \"-\" or \"/\".\nThe tag key must be unique within the account. The tag key is case sensitive and must not be empty.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[A-Za-z0-9]([A-Za-z0-9_.-]{0,48}[A-Za-z0-9])?(\\/[A-Za-z0-9]([A-Za-z0-9_.-]{0,48}[A-Za-z0-9])?)*$"), ""),
-				Optional:     true,
+				Description: "The string representation of the tag key. If the tag is of path type, then \"/\" will be interpreted as path delimiters.\nThe tag key must be unique within the account. The tag key is case sensitive and must not be empty.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -316,9 +318,25 @@ func resourceCommTagDefinition() *schema.Resource {
 					},
 				},
 			},
+			"restrict_values": {
+				Description: "If this flag is enabled, then values of the KeyValue tag is restricted to values present in the allowedValues list. RestrictValues is not applicable to path tags.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"sys_tag": {
+				Description: "Specifies whether the tag is user-defined or owned by the system.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
@@ -339,12 +357,112 @@ func resourceCommTagDefinition() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
+						"ancestor_definitions": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"definition": {
+							Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 128),
+							ValidateFunc: validation.StringLenBetween(1, 256),
 							Optional:     true,
 						},
+						"propagated": {
+							Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"type": {
+							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"value": {
 							Description:  "The string representation of a tag value.",
 							Type:         schema.TypeString,
@@ -355,12 +473,60 @@ func resourceCommTagDefinition() *schema.Resource {
 				},
 			},
 			"type": {
-				Description:  "An enum type that defines the type of tag. Only hierarchical tags are supported for now, and the type is set to hierarchical by default.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The hierarchy is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+				Description:  "An enum type that defines the type of tag. Only path tags are supported for now, and the type is set to path by default.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"KeyValue", "PathTag"}, false),
 				Optional:     true,
 				Default:      "KeyValue",
 				ForceNew:     true,
+			},
+			"usage": {
+				Description: "Indicates whether the tag is used in the system or not.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "comm.TagUsage",
+						},
+						"nr_count": {
+							Description: "Total count of managed objects that are tagged with this tag. For path tags, this will be a cumulative count. By default, this property is not returned.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "comm.TagUsage",
+						},
+						"tagged_object_types": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							}},
+					},
+				},
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -532,7 +698,25 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("allowed_values"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetAllowedValues(x)
+		}
+	}
+
 	o.SetClassId("comm.TagDefinition")
+
+	if v, ok := d.GetOkExists("enable_propagation"); ok {
+		x := (v.(bool))
+		o.SetEnablePropagation(x)
+	}
 
 	if v, ok := d.GetOk("key"); ok {
 		x := (v.(string))
@@ -545,6 +729,11 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	o.SetObjectType("comm.TagDefinition")
+
+	if v, ok := d.GetOkExists("restrict_values"); ok {
+		x := (v.(bool))
+		o.SetRestrictValues(x)
+	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
@@ -559,6 +748,49 @@ func resourceCommTagDefinitionCreate(c context.Context, d *schema.ResourceData, 
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}
@@ -644,6 +876,10 @@ func resourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property AdditionalProperties in CommTagDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("allowed_values", (s.GetAllowedValues())); err != nil {
+		return diag.Errorf("error occurred while setting property AllowedValues in CommTagDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("ancestors", flattenListMoBaseMoRelationship(s.GetAncestors(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Ancestors in CommTagDefinition object: %s", err.Error())
 	}
@@ -696,8 +932,16 @@ func resourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property PermissionResources in CommTagDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("restrict_values", (s.GetRestrictValues())); err != nil {
+		return diag.Errorf("error occurred while setting property RestrictValues in CommTagDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in CommTagDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("sys_tag", (s.GetSysTag())); err != nil {
+		return diag.Errorf("error occurred while setting property SysTag in CommTagDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
@@ -706,6 +950,10 @@ func resourceCommTagDefinitionRead(c context.Context, d *schema.ResourceData, me
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in CommTagDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("usage", flattenMapCommTagUsage(s.GetUsage(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Usage in CommTagDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -733,7 +981,25 @@ func resourceCommTagDefinitionUpdate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if d.HasChange("allowed_values") {
+		v := d.Get("allowed_values")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetAllowedValues(x)
+	}
+
 	o.SetClassId("comm.TagDefinition")
+
+	if d.HasChange("enable_propagation") {
+		v := d.Get("enable_propagation")
+		x := (v.(bool))
+		o.SetEnablePropagation(x)
+	}
 
 	if d.HasChange("key") {
 		v := d.Get("key")
@@ -749,6 +1015,12 @@ func resourceCommTagDefinitionUpdate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("comm.TagDefinition")
 
+	if d.HasChange("restrict_values") {
+		v := d.Get("restrict_values")
+		x := (v.(bool))
+		o.SetRestrictValues(x)
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -763,6 +1035,49 @@ func resourceCommTagDefinitionUpdate(c context.Context, d *schema.ResourceData, 
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

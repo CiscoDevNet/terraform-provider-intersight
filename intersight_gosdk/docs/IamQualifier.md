@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Qualifier"]
 **Name** | Pointer to **string** | The name of the SAML attribute used to qualify a user to user group. By default this is memberOf attribute in SAML assertion. | [optional] [readonly] 
 **Value** | Pointer to **[]string** |  | [optional] 
-**Usergroup** | Pointer to [**NullableIamUserGroupRelationship**](IamUserGroupRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -129,41 +128,6 @@ HasValue returns a boolean if a field has been set.
 `func (o *IamQualifier) UnsetValue()`
 
 UnsetValue ensures that no value is present for Value, not even an explicit nil
-### GetUsergroup
-
-`func (o *IamQualifier) GetUsergroup() IamUserGroupRelationship`
-
-GetUsergroup returns the Usergroup field if non-nil, zero value otherwise.
-
-### GetUsergroupOk
-
-`func (o *IamQualifier) GetUsergroupOk() (*IamUserGroupRelationship, bool)`
-
-GetUsergroupOk returns a tuple with the Usergroup field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsergroup
-
-`func (o *IamQualifier) SetUsergroup(v IamUserGroupRelationship)`
-
-SetUsergroup sets Usergroup field to given value.
-
-### HasUsergroup
-
-`func (o *IamQualifier) HasUsergroup() bool`
-
-HasUsergroup returns a boolean if a field has been set.
-
-### SetUsergroupNil
-
-`func (o *IamQualifier) SetUsergroupNil(b bool)`
-
- SetUsergroupNil sets the value for Usergroup to be an explicit nil
-
-### UnsetUsergroup
-`func (o *IamQualifier) UnsetUsergroup()`
-
-UnsetUsergroup ensures that no value is present for Usergroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

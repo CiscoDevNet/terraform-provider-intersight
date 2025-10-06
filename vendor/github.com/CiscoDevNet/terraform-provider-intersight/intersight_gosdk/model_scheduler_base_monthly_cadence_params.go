@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025081401
+API version: 1.0.11-2025091920
 Contact: intersight@cisco.com
 */
 
@@ -28,9 +28,8 @@ type SchedulerBaseMonthlyCadenceParams struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
-	// Significant business days, such as days when reports are generated for analysis. * `None` - Placeholder. One of the following two fields must be selected. * `FirstWeekDay` - First week day of the month. * `MonthLastDay` - The last day of the month.
-	CustomDayOfMonth     *string `json:"CustomDayOfMonth,omitempty"`
-	DayOfMonth           []int64 `json:"DayOfMonth,omitempty"`
+	// Run every month by default if not specified.
+	RunEvery             *int64 `json:"RunEvery,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,8 +43,8 @@ func NewSchedulerBaseMonthlyCadenceParams(classId string, objectType string) *Sc
 	this := SchedulerBaseMonthlyCadenceParams{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var customDayOfMonth string = "None"
-	this.CustomDayOfMonth = &customDayOfMonth
+	var runEvery int64 = 1
+	this.RunEvery = &runEvery
 	return &this
 }
 
@@ -58,8 +57,8 @@ func NewSchedulerBaseMonthlyCadenceParamsWithDefaults() *SchedulerBaseMonthlyCad
 	this.ClassId = classId
 	var objectType string = "scheduler.MonthlyCadenceParams"
 	this.ObjectType = objectType
-	var customDayOfMonth string = "None"
-	this.CustomDayOfMonth = &customDayOfMonth
+	var runEvery int64 = 1
+	this.RunEvery = &runEvery
 	return &this
 }
 
@@ -121,69 +120,36 @@ func (o *SchedulerBaseMonthlyCadenceParams) GetDefaultObjectType() interface{} {
 	return "scheduler.MonthlyCadenceParams"
 }
 
-// GetCustomDayOfMonth returns the CustomDayOfMonth field value if set, zero value otherwise.
-func (o *SchedulerBaseMonthlyCadenceParams) GetCustomDayOfMonth() string {
-	if o == nil || IsNil(o.CustomDayOfMonth) {
-		var ret string
+// GetRunEvery returns the RunEvery field value if set, zero value otherwise.
+func (o *SchedulerBaseMonthlyCadenceParams) GetRunEvery() int64 {
+	if o == nil || IsNil(o.RunEvery) {
+		var ret int64
 		return ret
 	}
-	return *o.CustomDayOfMonth
+	return *o.RunEvery
 }
 
-// GetCustomDayOfMonthOk returns a tuple with the CustomDayOfMonth field value if set, nil otherwise
+// GetRunEveryOk returns a tuple with the RunEvery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SchedulerBaseMonthlyCadenceParams) GetCustomDayOfMonthOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomDayOfMonth) {
+func (o *SchedulerBaseMonthlyCadenceParams) GetRunEveryOk() (*int64, bool) {
+	if o == nil || IsNil(o.RunEvery) {
 		return nil, false
 	}
-	return o.CustomDayOfMonth, true
+	return o.RunEvery, true
 }
 
-// HasCustomDayOfMonth returns a boolean if a field has been set.
-func (o *SchedulerBaseMonthlyCadenceParams) HasCustomDayOfMonth() bool {
-	if o != nil && !IsNil(o.CustomDayOfMonth) {
+// HasRunEvery returns a boolean if a field has been set.
+func (o *SchedulerBaseMonthlyCadenceParams) HasRunEvery() bool {
+	if o != nil && !IsNil(o.RunEvery) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustomDayOfMonth gets a reference to the given string and assigns it to the CustomDayOfMonth field.
-func (o *SchedulerBaseMonthlyCadenceParams) SetCustomDayOfMonth(v string) {
-	o.CustomDayOfMonth = &v
-}
-
-// GetDayOfMonth returns the DayOfMonth field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SchedulerBaseMonthlyCadenceParams) GetDayOfMonth() []int64 {
-	if o == nil {
-		var ret []int64
-		return ret
-	}
-	return o.DayOfMonth
-}
-
-// GetDayOfMonthOk returns a tuple with the DayOfMonth field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SchedulerBaseMonthlyCadenceParams) GetDayOfMonthOk() ([]int64, bool) {
-	if o == nil || IsNil(o.DayOfMonth) {
-		return nil, false
-	}
-	return o.DayOfMonth, true
-}
-
-// HasDayOfMonth returns a boolean if a field has been set.
-func (o *SchedulerBaseMonthlyCadenceParams) HasDayOfMonth() bool {
-	if o != nil && !IsNil(o.DayOfMonth) {
-		return true
-	}
-
-	return false
-}
-
-// SetDayOfMonth gets a reference to the given []int64 and assigns it to the DayOfMonth field.
-func (o *SchedulerBaseMonthlyCadenceParams) SetDayOfMonth(v []int64) {
-	o.DayOfMonth = v
+// SetRunEvery gets a reference to the given int64 and assigns it to the RunEvery field.
+func (o *SchedulerBaseMonthlyCadenceParams) SetRunEvery(v int64) {
+	o.RunEvery = &v
 }
 
 func (o SchedulerBaseMonthlyCadenceParams) MarshalJSON() ([]byte, error) {
@@ -212,11 +178,8 @@ func (o SchedulerBaseMonthlyCadenceParams) ToMap() (map[string]interface{}, erro
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
-	if !IsNil(o.CustomDayOfMonth) {
-		toSerialize["CustomDayOfMonth"] = o.CustomDayOfMonth
-	}
-	if o.DayOfMonth != nil {
-		toSerialize["DayOfMonth"] = o.DayOfMonth
+	if !IsNil(o.RunEvery) {
+		toSerialize["RunEvery"] = o.RunEvery
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -273,9 +236,8 @@ func (o *SchedulerBaseMonthlyCadenceParams) UnmarshalJSON(data []byte) (err erro
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
-		// Significant business days, such as days when reports are generated for analysis. * `None` - Placeholder. One of the following two fields must be selected. * `FirstWeekDay` - First week day of the month. * `MonthLastDay` - The last day of the month.
-		CustomDayOfMonth *string `json:"CustomDayOfMonth,omitempty"`
-		DayOfMonth       []int64 `json:"DayOfMonth,omitempty"`
+		// Run every month by default if not specified.
+		RunEvery *int64 `json:"RunEvery,omitempty"`
 	}
 
 	varSchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct := SchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct{}
@@ -285,8 +247,7 @@ func (o *SchedulerBaseMonthlyCadenceParams) UnmarshalJSON(data []byte) (err erro
 		varSchedulerBaseMonthlyCadenceParams := _SchedulerBaseMonthlyCadenceParams{}
 		varSchedulerBaseMonthlyCadenceParams.ClassId = varSchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct.ClassId
 		varSchedulerBaseMonthlyCadenceParams.ObjectType = varSchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct.ObjectType
-		varSchedulerBaseMonthlyCadenceParams.CustomDayOfMonth = varSchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct.CustomDayOfMonth
-		varSchedulerBaseMonthlyCadenceParams.DayOfMonth = varSchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct.DayOfMonth
+		varSchedulerBaseMonthlyCadenceParams.RunEvery = varSchedulerBaseMonthlyCadenceParamsWithoutEmbeddedStruct.RunEvery
 		*o = SchedulerBaseMonthlyCadenceParams(varSchedulerBaseMonthlyCadenceParams)
 	} else {
 		return err
@@ -306,8 +267,7 @@ func (o *SchedulerBaseMonthlyCadenceParams) UnmarshalJSON(data []byte) (err erro
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "CustomDayOfMonth")
-		delete(additionalProperties, "DayOfMonth")
+		delete(additionalProperties, "RunEvery")
 
 		// remove fields from embedded structs
 		reflectSchedulerBaseCadenceParams := reflect.ValueOf(o.SchedulerBaseCadenceParams)

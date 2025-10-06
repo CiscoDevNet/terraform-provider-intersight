@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resourcepool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resourcepool.Lease"]
+**ChildLeaseCondition** | Pointer to [**[]ResourcepoolChildLeaseCondition**](ResourcepoolChildLeaseCondition.md) |  | [optional] 
 **Condition** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Feature** | Pointer to **string** | Lease opertion applied for the feature. | [optional] 
 **IsExclusiveAtAssignedEntity** | Pointer to **bool** | Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later. | [optional] [default to false]
 **LeaseParameters** | Pointer to [**NullableResourcepoolLeaseParameters**](ResourcepoolLeaseParameters.md) |  | [optional] 
 **Resource** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
-**ResourceType** | Pointer to **string** | The type of resource present in the pool, such as &#39;server&#39; can be a RackUnit or Blade. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. | [optional] [default to "Server"]
+**ResourceType** | Pointer to **string** | The type of resource present in the pool, such as &#39;server&#39; can be a RackUnit or Blade. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. * &#x60;Mixed&#x60; - Resource Pool holds the resources like Rack Server, Blade or Chassis. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. | [optional] [default to "Server"]
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **LeasedResource** | Pointer to [**NullableResourcepoolLeaseResourceRelationship**](ResourcepoolLeaseResourceRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
@@ -77,6 +78,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetChildLeaseCondition
+
+`func (o *ResourcepoolLease) GetChildLeaseCondition() []ResourcepoolChildLeaseCondition`
+
+GetChildLeaseCondition returns the ChildLeaseCondition field if non-nil, zero value otherwise.
+
+### GetChildLeaseConditionOk
+
+`func (o *ResourcepoolLease) GetChildLeaseConditionOk() (*[]ResourcepoolChildLeaseCondition, bool)`
+
+GetChildLeaseConditionOk returns a tuple with the ChildLeaseCondition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildLeaseCondition
+
+`func (o *ResourcepoolLease) SetChildLeaseCondition(v []ResourcepoolChildLeaseCondition)`
+
+SetChildLeaseCondition sets ChildLeaseCondition field to given value.
+
+### HasChildLeaseCondition
+
+`func (o *ResourcepoolLease) HasChildLeaseCondition() bool`
+
+HasChildLeaseCondition returns a boolean if a field has been set.
+
+### SetChildLeaseConditionNil
+
+`func (o *ResourcepoolLease) SetChildLeaseConditionNil(b bool)`
+
+ SetChildLeaseConditionNil sets the value for ChildLeaseCondition to be an explicit nil
+
+### UnsetChildLeaseCondition
+`func (o *ResourcepoolLease) UnsetChildLeaseCondition()`
+
+UnsetChildLeaseCondition ensures that no value is present for ChildLeaseCondition, not even an explicit nil
 ### GetCondition
 
 `func (o *ResourcepoolLease) GetCondition() []ResourceSelector`
