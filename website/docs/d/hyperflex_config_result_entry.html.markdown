@@ -3,12 +3,28 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_config_result_entry"
 description: |-
-        An entry that describes the result of a cluster validation or deployment operation.
+        # Overview
+        The ConfigResultEntry object describes the result of a cluster validation or deployment operation, providing detailed result entries and context.
+        ## Purpose
+        ConfigResultEntry is designed to offer detailed feedback on validation and deployment operations, ensuring that administrators have comprehensive insight into configuration processes.
+        ## Key Concepts
+        - **Detailed Feedback** – Provides comprehensive result entries, supporting efficient troubleshooting and understanding of validation and deployment  operations.
+        - **Result Management** –  Facilitates structured management of configuration outcomes, ensuring efficient adjustments and improvements.
+        - **Access Control** –  Managed through privilege sets, ensuring secure access and management of configuration result entries.
+        - **Integration** –  Supports integration with configuration results, ensuring cohesive feedback and management of validation and deployment operations.
 
 ---
 
 # Data Source: intersight_hyperflex_config_result_entry
-An entry that describes the result of a cluster validation or deployment operation.
+# Overview
+The ConfigResultEntry object describes the result of a cluster validation or deployment operation, providing detailed result entries and context.
+## Purpose
+ConfigResultEntry is designed to offer detailed feedback on validation and deployment operations, ensuring that administrators have comprehensive insight into configuration processes.
+## Key Concepts
+- **Detailed Feedback** – Provides comprehensive result entries, supporting efficient troubleshooting and understanding of validation and deployment  operations.
+- **Result Management** –  Facilitates structured management of configuration outcomes, ensuring efficient adjustments and improvements.
+- **Access Control** –  Managed through privilege sets, ensuring secure access and management of configuration result entries.
+- **Integration** –  Supports integration with configuration results, ensuring cohesive feedback and management of validation and deployment operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

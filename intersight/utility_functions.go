@@ -353,3 +353,130 @@ func CombinedCustomizeDiff(ctx context.Context, diff *schema.ResourceDiff, i int
 	}
 	return err
 }
+
+// parseVlanRange converts a VLAN range string (e.g., "1-5") to a slice of integers
+func parseVlanRange(rangeStr string) ([]int, error) {
+	var vlans []int
+
+	if strings.Contains(rangeStr, "-") {
+		parts := strings.Split(rangeStr, "-")
+		if len(parts) != 2 {
+			return nil, fmt.Errorf("invalid range format: %s", rangeStr)
+		}
+
+		start, err := strconv.Atoi(strings.TrimSpace(parts[0]))
+		if err != nil {
+			return nil, fmt.Errorf("invalid start range: %s", parts[0])
+		}
+
+		end, err := strconv.Atoi(strings.TrimSpace(parts[1]))
+		if err != nil {
+			return nil, fmt.Errorf("invalid end range: %s", parts[1])
+		}
+
+		if start < 1 {
+			return nil, fmt.Errorf("Invalid Vlan ID: %d Valid VLAN range is 1-4093.", start)
+		}
+
+		if start > end {
+			return nil, fmt.Errorf("Invalid Vlan ID: start %d is greater than end %d", start, end)
+		}
+
+		if end > 4093 {
+			return nil, fmt.Errorf("Invalid Vlan ID: %d Valid VLAN range is 1-4093.", end)
+		}
+
+		for i := start; i <= end; i++ {
+			vlans = append(vlans, i)
+		}
+	} else {
+		vlan, err := strconv.Atoi(strings.TrimSpace(rangeStr))
+		if err != nil {
+			return nil, fmt.Errorf("invalid VLAN: %s", rangeStr)
+		}
+		vlans = []int{vlan}
+	}
+
+	return vlans, nil
+}
+
+// parseVlanString converts a VLAN string (comma and/or hyphen separated) to a sorted slice of integers
+func parseVlanString(vlanStr string) ([]int, error) {
+	if vlanStr == "" {
+		return []int{}, nil
+	}
+
+	var allVlans []int
+	parts := strings.Split(vlanStr, ",")
+
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+
+		vlans, err := parseVlanRange(part)
+		if err != nil {
+			return nil, err
+		}
+
+		allVlans = append(allVlans, vlans...)
+	}
+
+	// Remove duplicates and sort
+	vlanMap := make(map[int]bool)
+	for _, vlan := range allVlans {
+		vlanMap[vlan] = true
+	}
+
+	var uniqueVlans []int
+	for vlan := range vlanMap {
+		uniqueVlans = append(uniqueVlans, vlan)
+	}
+
+	sort.Ints(uniqueVlans)
+	return uniqueVlans, nil
+}
+
+// compareVlanRanges compares two VLAN range strings and returns true if they represent the same set of VLANs
+func compareVlanRanges(oldVlans, newVlans string) bool {
+	oldParsed, err := parseVlanString(oldVlans)
+	if err != nil {
+		log.Printf("Error parsing old VLAN string '%s': %v", oldVlans, err)
+		return false
+	}
+
+	newParsed, err := parseVlanString(newVlans)
+	if err != nil {
+		log.Printf("Error parsing new VLAN string '%s': %v", newVlans, err)
+		return false
+	}
+
+	if len(oldParsed) != len(newParsed) {
+		return false
+	}
+
+	for i, vlan := range oldParsed {
+		if vlan != newParsed[i] {
+			return false
+		}
+	}
+
+	return true
+}
+
+// SuppressDiffVlanRanges is a Terraform suppress diff function for VLAN ranges
+// It handles comparison between comma-separated and hyphen-separated VLAN values
+func SuppressDiffVlanRanges(k, old, new string, d *schema.ResourceData) bool {
+	if old == "" && new == "" {
+		return true
+	}
+
+	// Direct string comparison first
+	if old == new {
+		return true
+	}
+
+	// Compare VLAN ranges
+	return compareVlanRanges(old, new)
+}

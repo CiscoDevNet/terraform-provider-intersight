@@ -3,12 +3,34 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_definition"
 description: |-
-        An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+        # Overview
+        The AdvisoryDefinition object is a critical component in Intersight.
+        It encompasses various types of advisories, including Field Notices, End of Life (EOL),
+        End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
+        ## Purpose
+        AdvisoryDefinition provides a comprehensive framework for defining potential advisories
+        that may impact managed objects in the datacenter.
+        It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
+        ## Key Concepts
+        - **Diverse Advisory Types** – Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
+        - **Actionable Guidance** – Provides recommendations and potential workarounds to mitigate identified issues.
+        - **Role-Based Access** – Access to create, update, or delete advisories is controlled through user privilege sets.
 
 ---
 
 # Resource: intersight_tam_advisory_definition
-An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+# Overview
+The AdvisoryDefinition object is a critical component in Intersight.  
+It encompasses various types of advisories, including Field Notices, End of Life (EOL),  
+End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
+## Purpose
+AdvisoryDefinition provides a comprehensive framework for defining potential advisories  
+that may impact managed objects in the datacenter.  
+It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
+## Key Concepts
+- **Diverse Advisory Types** – Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
+- **Actionable Guidance** – Provides recommendations and potential workarounds to mitigate identified issues.
+- **Role-Based Access** – Access to create, update, or delete advisories is controlled through user privilege sets.
 ## Usage Example
 ### Resource Creation
 

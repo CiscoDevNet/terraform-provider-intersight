@@ -1192,6 +1192,9 @@ docs/EquipmentEndPointLog.md
 docs/EquipmentEndPointLogList.md
 docs/EquipmentEndPointLogResponse.md
 docs/EquipmentExpanderModule.md
+docs/EquipmentExpanderModuleIdentity.md
+docs/EquipmentExpanderModuleIdentityList.md
+docs/EquipmentExpanderModuleIdentityResponse.md
 docs/EquipmentExpanderModuleList.md
 docs/EquipmentExpanderModuleRelationship.md
 docs/EquipmentExpanderModuleResponse.md
@@ -6552,6 +6555,9 @@ model_equipment_end_point_log.go
 model_equipment_end_point_log_list.go
 model_equipment_end_point_log_response.go
 model_equipment_expander_module.go
+model_equipment_expander_module_identity.go
+model_equipment_expander_module_identity_list.go
+model_equipment_expander_module_identity_response.go
 model_equipment_expander_module_list.go
 model_equipment_expander_module_relationship.go
 model_equipment_expander_module_response.go

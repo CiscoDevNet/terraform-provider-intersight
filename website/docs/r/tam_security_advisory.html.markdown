@@ -3,12 +3,32 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_security_advisory"
 description: |-
-        Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
+        # Overview
+        The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories,
+        focusing on security issues with associated CVE identifiers and CVSS scores.
+        It helps users identify and address security vulnerabilities within their managed objects.
+        ## Purpose
+        SecurityAdvisory provides a structured representation of security advisories,
+        enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
+        ## Key Concepts
+        - **PSIRT Integration** – Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
+        - **Detailed Severity Assessment** – Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
+        - **Access Control and Management** – Ensures that only authorized personnel can manage security advisories.
 
 ---
 
 # Resource: intersight_tam_security_advisory
-Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
+# Overview
+The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories,  
+focusing on security issues with associated CVE identifiers and CVSS scores.  
+It helps users identify and address security vulnerabilities within their managed objects.
+## Purpose
+SecurityAdvisory provides a structured representation of security advisories,  
+enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
+## Key Concepts
+- **PSIRT Integration** – Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
+- **Detailed Severity Assessment** – Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
+- **Access Control and Management** – Ensures that only authorized personnel can manage security advisories.
 ## Usage Example
 ### Resource Creation
 

@@ -576,10 +576,11 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"allowed_vlans": {
-							Description:  "Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges.",
-							Type:         schema.TypeString,
-							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
-							Optional:     true,
+							Description:      "Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges.",
+							Type:             schema.TypeString,
+							ValidateFunc:     validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffVlanRanges,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
