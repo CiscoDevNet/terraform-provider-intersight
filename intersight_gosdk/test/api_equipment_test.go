@@ -245,6 +245,32 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService GetEquipmentExpanderModuleIdentityByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleIdentityByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentExpanderModuleIdentityList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleIdentityList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService GetEquipmentExpanderModuleList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -991,6 +1017,20 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService PatchEquipmentExpanderModuleIdentity", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.PatchEquipmentExpanderModuleIdentity(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService PatchEquipmentFan", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1362,6 +1402,20 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.EquipmentApi.UpdateEquipmentExpanderModule(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService UpdateEquipmentExpanderModuleIdentity", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.UpdateEquipmentExpanderModuleIdentity(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

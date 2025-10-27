@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025091920
+API version: 1.0.11-2025092610
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,7 @@ import (
 // checks if the TamAdvisoryDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TamAdvisoryDefinition{}
 
-// TamAdvisoryDefinition An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+// TamAdvisoryDefinition # Overview The AdvisoryDefinition object is a critical component in Intersight.   It encompasses various types of advisories, including Field Notices, End of Life (EOL),   End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them. ## Purpose AdvisoryDefinition provides a comprehensive framework for defining potential advisories   that may impact managed objects in the datacenter.   It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively. ## Key Concepts - **Diverse Advisory Types** – Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations. - **Actionable Guidance** – Provides recommendations and potential workarounds to mitigate identified issues. - **Role-Based Access** – Access to create, update, or delete advisories is controlled through user privilege sets.
 type TamAdvisoryDefinition struct {
 	TamBaseAdvisory
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

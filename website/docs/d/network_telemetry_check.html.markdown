@@ -3,12 +3,42 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_telemetry_check"
 description: |-
-        Checking configured Telementry data in endpoint.
+        # Overview
+        The TelemetryCheck object is an essential element within network management systems,
+        designed to monitor and verify telemetry configurations across devices.
+        It ensures that telemetry data is correctly configured and operational,
+        providing insights into system health and performance.
+        ## Purpose
+        TelemetryCheck acts as a verification mechanism for network telemetry settings,
+        assessing the status and integrity of data collection processes.
+        It aims to detect configuration failures and provide actionable insights,
+        facilitating prompt troubleshooting and resolution.
+        ## Key Concepts
+        - **Monitoring and Verification** – Continuously checks telemetry configurations for failures, ensuring data integrity and system reliability.
+        - **Read-Only Access** – Designed for consumption, providing consistent and secure integration with monitoring systems.
+        - **Device Relationships** – Associates with registered devices, ensuring that telemetry checks are performed across all relevant network components.
+        - **Status Reporting** – Provides clear indicators of configuration health, enabling swift identification and rectification of issues.
+        - **Telemetry Data Check** – Ensures configured telemetry data is validated at the endpoint.
 
 ---
 
 # Data Source: intersight_network_telemetry_check
-Checking configured Telementry data in endpoint.
+# Overview
+The TelemetryCheck object is an essential element within network management systems,  
+designed to monitor and verify telemetry configurations across devices.  
+It ensures that telemetry data is correctly configured and operational,  
+providing insights into system health and performance.
+## Purpose
+TelemetryCheck acts as a verification mechanism for network telemetry settings,  
+assessing the status and integrity of data collection processes.  
+It aims to detect configuration failures and provide actionable insights,  
+facilitating prompt troubleshooting and resolution.
+## Key Concepts
+- **Monitoring and Verification** – Continuously checks telemetry configurations for failures, ensuring data integrity and system reliability.
+- **Read-Only Access** – Designed for consumption, providing consistent and secure integration with monitoring systems.
+- **Device Relationships** – Associates with registered devices, ensuring that telemetry checks are performed across all relevant network components.
+- **Status Reporting** – Provides clear indicators of configuration health, enabling swift identification and rectification of issues.
+- **Telemetry Data Check** – Ensures configured telemetry data is validated at the endpoint.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

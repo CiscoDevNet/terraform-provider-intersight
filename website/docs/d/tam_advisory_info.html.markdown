@@ -3,12 +3,32 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_info"
 description: |-
-        State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+        # Overview
+        The AdvisoryInfo object captures the state of Security Advisories and Field Notices,
+        including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
+        ## Purpose
+        AdvisoryInfo serves as a personalized repository of advisory states for each account,
+        allowing users to manage and track advisories relevant to their environment.
+        ## Key Concepts
+        - **State Management** – Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
+        - **Account Association** – Directly links advisory states to specific accounts for tailored management.
+        - **Shared Resource** – Supports collaborative management of advisories within shared organizational contexts.
+        - **Controlled Permissions** – Restricts creation, updating, and deletion of advisory states to Account Administrators.
 
 ---
 
 # Data Source: intersight_tam_advisory_info
-State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+# Overview
+The AdvisoryInfo object captures the state of Security Advisories and Field Notices,  
+including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
+## Purpose
+AdvisoryInfo serves as a personalized repository of advisory states for each account,  
+allowing users to manage and track advisories relevant to their environment.
+## Key Concepts
+- **State Management** – Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
+- **Account Association** – Directly links advisory states to specific accounts for tailored management.
+- **Shared Resource** – Supports collaborative management of advisories within shared organizational contexts.
+- **Controlled Permissions** – Restricts creation, updating, and deletion of advisory states to Account Administrators.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

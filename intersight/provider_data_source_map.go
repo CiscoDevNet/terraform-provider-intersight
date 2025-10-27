@@ -239,6 +239,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_equipment_enclosure_element":                             dataSourceEquipmentEnclosureElement(),
 		"intersight_equipment_end_point_log":                                 dataSourceEquipmentEndPointLog(),
 		"intersight_equipment_expander_module":                               dataSourceEquipmentExpanderModule(),
+		"intersight_equipment_expander_module_identity":                      dataSourceEquipmentExpanderModuleIdentity(),
 		"intersight_equipment_fan":                                           dataSourceEquipmentFan(),
 		"intersight_equipment_fan_control":                                   dataSourceEquipmentFanControl(),
 		"intersight_equipment_fan_module":                                    dataSourceEquipmentFanModule(),
