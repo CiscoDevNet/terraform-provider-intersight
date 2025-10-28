@@ -16,7 +16,7 @@ resource "intersight_tam_security_advisory" "tam_security_advisory1" {
     name           = "tam_security_advisories1"
     object_type    = "tam.SecurityAdvisoryDetails"
     alert_type     = "psirt"
-    type           = "restApi"
+    nr_type           = "restApi"
   }
 
   status = "final"
