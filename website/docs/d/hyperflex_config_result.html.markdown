@@ -3,30 +3,30 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_config_result"
 description: |-
-        # Overview
+        ### Overview
         ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
         
-        ## Purpose
+        #### Purpose
         ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
-        ## Key Concepts
-        - **Result Management** –  Provides structured information on configuration outcomes, supporting efficient troubleshooting and adjustments.
-        - **Feedback Support** –  Offers detailed result messages, facilitating understanding of configuration processes and outcomes.
-        - **Access Control** –  Managed through privilege sets, ensuring secure access and management of configuration results.
-        - **Integration** –  Supports integration with configuration profiles, ensuring cohesive feedback and management of configuration operations.
+        #### Key Concepts
+        - **Result Management** - Provides structured information on configuration outcomes, supporting efficient troubleshooting and adjustments.
+        - **Feedback Support** - Offers detailed result messages, facilitating understanding of configuration processes and outcomes.
+        - **Access Control** - Managed through privilege sets, ensuring secure access and management of configuration results.
+        - **Integration** - Supports integration with configuration profiles, ensuring cohesive feedback and management of configuration operations.
 
 ---
 
 # Data Source: intersight_hyperflex_config_result
-# Overview
+### Overview
  ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
  
-## Purpose
+#### Purpose
 ConfigResult is designed to provide feedback on profile configuration processes, offering insights into the state and outcomes of validation and deployment operations.
-## Key Concepts
-- **Result Management** –  Provides structured information on configuration outcomes, supporting efficient troubleshooting and adjustments.
-- **Feedback Support** –  Offers detailed result messages, facilitating understanding of configuration processes and outcomes.
-- **Access Control** –  Managed through privilege sets, ensuring secure access and management of configuration results.
-- **Integration** –  Supports integration with configuration profiles, ensuring cohesive feedback and management of configuration operations.
+#### Key Concepts
+- **Result Management** - Provides structured information on configuration outcomes, supporting efficient troubleshooting and adjustments.
+- **Feedback Support** - Offers detailed result messages, facilitating understanding of configuration processes and outcomes.
+- **Access Control** - Managed through privilege sets, ensuring secure access and management of configuration results.
+- **Integration** - Supports integration with configuration profiles, ensuring cohesive feedback and management of configuration operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

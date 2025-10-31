@@ -150,6 +150,11 @@ func resourceSoftwareApplianceDistributable() *schema.Resource {
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
+						"alternate_packed_version": {
+							Description: "Certain components have multiple versions packaged in the distributable. For example, the GPU component has multiple versions of the image packaged in the distributable due to a different onboard chip.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
@@ -162,9 +167,9 @@ func resourceSoftwareApplianceDistributable() *schema.Resource {
 							Optional:    true,
 						},
 						"component_type": {
-							Description:  "The type of component image within the distributable.\n* `ALL` - This represents all the components.\n* `ALL,HDD` - This represents all the components plus the HDDs.\n* `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category).\n* `Storage` - This represents the storage controller components.\n* `None` - This represents none of the components.\n* `NXOS` - This represents NXOS components.\n* `ESU` - This represents ESU components.\n* `IOM` - This represents IOM components.\n* `PSU` - This represents PSU components.\n* `CIMC` - This represents CIMC components.\n* `BIOS` - This represents BIOS components.\n* `PCIE` - This represents PCIE components.\n* `Drive` - This represents Drive components.\n* `DIMM` - This represents DIMM components.\n* `BoardController` - This represents Board Controller components.\n* `StorageController` - This represents Storage Controller components.\n* `Storage-Sasexpander` - This represents Storage Sas-Expander components.\n* `Storage-U.2` - This represents U2 Storage Controller components.\n* `HBA` - This represents HBA components.\n* `GPU` - This represents GPU components.\n* `SasExpander` - This represents SasExpander components.\n* `MSwitch` - This represents mSwitch components.\n* `CMC` - This represents CMC components.",
+							Description:  "The type of component image within the distributable.\n* `ALL` - This represents all the components.\n* `ALL,HDD` - This represents all the components plus the HDDs.\n* `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category).\n* `Storage` - This represents the storage controller components.\n* `None` - This represents none of the components.\n* `NXOS` - This represents NXOS components.\n* `ESU` - This represents ESU components.\n* `IOM` - This represents IOM components.\n* `PSU` - This represents PSU components.\n* `CIMC` - This represents CIMC components.\n* `BIOS` - This represents BIOS components.\n* `PCIE` - This represents PCIE components.\n* `Drive` - This represents Drive components.\n* `DIMM` - This represents DIMM components.\n* `BoardController` - This represents Board Controller components.\n* `StorageController` - This represents Storage Controller components.\n* `Storage-Sasexpander` - This represents Storage Sas-Expander components.\n* `Storage-U.2` - This represents U2 Storage Controller components.\n* `HBA` - This represents HBA components.\n* `GPU` - This represents GPU components.\n* `SasExpander` - This represents SasExpander components.\n* `MSwitch` - This represents mSwitch components.\n* `CMC` - This represents CMC components.\n* `PSX` - This represents PSX components.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "ESU", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"ALL", "ALL,HDD", "Drive-U.2", "Storage", "None", "NXOS", "ESU", "IOM", "PSU", "CIMC", "BIOS", "PCIE", "Drive", "DIMM", "BoardController", "StorageController", "Storage-Sasexpander", "Storage-U.2", "HBA", "GPU", "SasExpander", "MSwitch", "CMC", "PSX"}, false),
 							Optional:     true,
 							Default:      "ALL",
 						},
@@ -1027,6 +1032,12 @@ func resourceSoftwareApplianceDistributableCreate(c context.Context, d *schema.R
 					}
 				}
 			}
+			if v, ok := l["alternate_packed_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetAlternatePackedVersion(x)
+				}
+			}
 			o.SetClassId("firmware.ComponentMeta")
 			if v, ok := l["component_label"]; ok {
 				{
@@ -1716,6 +1727,12 @@ func resourceSoftwareApplianceDistributableUpdate(c context.Context, d *schema.R
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
 					}
+				}
+			}
+			if v, ok := l["alternate_packed_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetAlternatePackedVersion(x)
 				}
 			}
 			o.SetClassId("firmware.ComponentMeta")

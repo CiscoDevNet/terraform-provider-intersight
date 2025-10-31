@@ -32,7 +32,7 @@ func getEquipmentFexOperationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"admin_locator_led_action_state": {
-			Description: "Defines status of action performed on AdminLocatorLedState.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Description: "Defines status of action performed on AdminLocatorLedState.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.\n* `Scheduled` - User configured settings are scheduled to be applied.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

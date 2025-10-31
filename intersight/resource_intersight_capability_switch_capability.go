@@ -359,7 +359,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Default:     "firmware.FeatureVersionMap",
 						},
 						"feature_name": {
-							Description: "Name of the feature for which the version map is applicable.\n* `Unknown` - Unknown or Invalid feature in the equipment.\n* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.",
+							Description: "Name of the feature for which the version map is applicable.\n* `Unknown` - Unknown or Invalid feature in the equipment.\n* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.\n* `FIAuditd` - AuditD feature for Fabric Interconnect.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,

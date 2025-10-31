@@ -3,12 +3,28 @@ subcategory: "oauth"
 layout: "intersight"
 page_title: "Intersight: intersight_oauth_access_token"
 description: |-
-        API access token associated with a given account.
+        ### Overview
+        The AccessToken object is a key component of the OAuth-based authentication system, designed to manage API access tokens associated with user accounts. This provides a secure mechanism for applications to access services on behalf of users, ensuring that permissions and access controls are upheld.
+        #### Purpose
+        The AccessToken object serves as a secure representation of authorization for specific applications to interact with designated services. It supports seamless and efficient access management while maintaining strict security protocols.
+        #### Key Concepts
+        - **Authorization Management:** - Represents the OAuth access token, which embodies the permissions granted to a specific application for accessing a service.
+        - **Security:** - Ensures that access tokens are securely issued and managed, with support for refresh tokens to prolong access without user intervention.
+        - **Access Control:** - The AccessToken object supports privilege sets to ensure that only authorized administrators can read or delete access tokens.
+        - **Relationship Handling: Linked to the iam.Account object, representing the account responsible for managing the OAuth process.
 
 ---
 
 # Data Source: intersight_oauth_access_token
-API access token associated with a given account.
+### Overview
+The AccessToken object is a key component of the OAuth-based authentication system, designed to manage API access tokens associated with user accounts. This provides a secure mechanism for applications to access services on behalf of users, ensuring that permissions and access controls are upheld.
+#### Purpose
+The AccessToken object serves as a secure representation of authorization for specific applications to interact with designated services. It supports seamless and efficient access management while maintaining strict security protocols.
+#### Key Concepts
+- **Authorization Management:** - Represents the OAuth access token, which embodies the permissions granted to a specific application for accessing a service.
+- **Security:** - Ensures that access tokens are securely issued and managed, with support for refresh tokens to prolong access without user intervention.
+- **Access Control:** - The AccessToken object supports privilege sets to ensure that only authorized administrators can read or delete access tokens.
+- **Relationship Handling: Linked to the iam.Account object, representing the account responsible for managing the OAuth process.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

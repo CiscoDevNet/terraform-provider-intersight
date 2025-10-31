@@ -29,6 +29,8 @@ Name | Type | Description | Notes
 **ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **EquipmentEnclosureElement** | Pointer to [**NullableEquipmentEnclosureElementRelationship**](EquipmentEnclosureElementRelationship.md) |  | [optional] 
+**EquipmentInterconnect** | Pointer to [**NullableEquipmentInterconnectRelationship**](EquipmentInterconnectRelationship.md) |  | [optional] 
+**EquipmentSharedGraphicsCard** | Pointer to [**NullableEquipmentSharedGraphicsCardRelationship**](EquipmentSharedGraphicsCardRelationship.md) |  | [optional] 
 **GraphicsControllers** | Pointer to [**[]GraphicsControllerRelationship**](GraphicsControllerRelationship.md) | An array of relationships to graphicsController resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PciDevice** | Pointer to [**NullablePciDeviceRelationship**](PciDeviceRelationship.md) |  | [optional] 
@@ -720,6 +722,76 @@ HasEquipmentEnclosureElement returns a boolean if a field has been set.
 `func (o *GraphicsCard) UnsetEquipmentEnclosureElement()`
 
 UnsetEquipmentEnclosureElement ensures that no value is present for EquipmentEnclosureElement, not even an explicit nil
+### GetEquipmentInterconnect
+
+`func (o *GraphicsCard) GetEquipmentInterconnect() EquipmentInterconnectRelationship`
+
+GetEquipmentInterconnect returns the EquipmentInterconnect field if non-nil, zero value otherwise.
+
+### GetEquipmentInterconnectOk
+
+`func (o *GraphicsCard) GetEquipmentInterconnectOk() (*EquipmentInterconnectRelationship, bool)`
+
+GetEquipmentInterconnectOk returns a tuple with the EquipmentInterconnect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentInterconnect
+
+`func (o *GraphicsCard) SetEquipmentInterconnect(v EquipmentInterconnectRelationship)`
+
+SetEquipmentInterconnect sets EquipmentInterconnect field to given value.
+
+### HasEquipmentInterconnect
+
+`func (o *GraphicsCard) HasEquipmentInterconnect() bool`
+
+HasEquipmentInterconnect returns a boolean if a field has been set.
+
+### SetEquipmentInterconnectNil
+
+`func (o *GraphicsCard) SetEquipmentInterconnectNil(b bool)`
+
+ SetEquipmentInterconnectNil sets the value for EquipmentInterconnect to be an explicit nil
+
+### UnsetEquipmentInterconnect
+`func (o *GraphicsCard) UnsetEquipmentInterconnect()`
+
+UnsetEquipmentInterconnect ensures that no value is present for EquipmentInterconnect, not even an explicit nil
+### GetEquipmentSharedGraphicsCard
+
+`func (o *GraphicsCard) GetEquipmentSharedGraphicsCard() EquipmentSharedGraphicsCardRelationship`
+
+GetEquipmentSharedGraphicsCard returns the EquipmentSharedGraphicsCard field if non-nil, zero value otherwise.
+
+### GetEquipmentSharedGraphicsCardOk
+
+`func (o *GraphicsCard) GetEquipmentSharedGraphicsCardOk() (*EquipmentSharedGraphicsCardRelationship, bool)`
+
+GetEquipmentSharedGraphicsCardOk returns a tuple with the EquipmentSharedGraphicsCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentSharedGraphicsCard
+
+`func (o *GraphicsCard) SetEquipmentSharedGraphicsCard(v EquipmentSharedGraphicsCardRelationship)`
+
+SetEquipmentSharedGraphicsCard sets EquipmentSharedGraphicsCard field to given value.
+
+### HasEquipmentSharedGraphicsCard
+
+`func (o *GraphicsCard) HasEquipmentSharedGraphicsCard() bool`
+
+HasEquipmentSharedGraphicsCard returns a boolean if a field has been set.
+
+### SetEquipmentSharedGraphicsCardNil
+
+`func (o *GraphicsCard) SetEquipmentSharedGraphicsCardNil(b bool)`
+
+ SetEquipmentSharedGraphicsCardNil sets the value for EquipmentSharedGraphicsCard to be an explicit nil
+
+### UnsetEquipmentSharedGraphicsCard
+`func (o *GraphicsCard) UnsetEquipmentSharedGraphicsCard()`
+
+UnsetEquipmentSharedGraphicsCard ensures that no value is present for EquipmentSharedGraphicsCard, not even an explicit nil
 ### GetGraphicsControllers
 
 `func (o *GraphicsCard) GetGraphicsControllers() []GraphicsControllerRelationship`

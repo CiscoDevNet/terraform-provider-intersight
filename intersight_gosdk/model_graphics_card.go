@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -64,11 +64,13 @@ type GraphicsCard struct {
 	// The sub vendor id of the graphics processor unit.
 	SubVendorId *int64 `json:"SubVendorId,omitempty"`
 	// The vendor id of the graphics processor unit.
-	VendorId                  *int64                                        `json:"VendorId,omitempty"`
-	ComputeBlade              NullableComputeBladeRelationship              `json:"ComputeBlade,omitempty"`
-	ComputeBoard              NullableComputeBoardRelationship              `json:"ComputeBoard,omitempty"`
-	ComputeRackUnit           NullableComputeRackUnitRelationship           `json:"ComputeRackUnit,omitempty"`
-	EquipmentEnclosureElement NullableEquipmentEnclosureElementRelationship `json:"EquipmentEnclosureElement,omitempty"`
+	VendorId                    *int64                                          `json:"VendorId,omitempty"`
+	ComputeBlade                NullableComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
+	ComputeBoard                NullableComputeBoardRelationship                `json:"ComputeBoard,omitempty"`
+	ComputeRackUnit             NullableComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
+	EquipmentEnclosureElement   NullableEquipmentEnclosureElementRelationship   `json:"EquipmentEnclosureElement,omitempty"`
+	EquipmentInterconnect       NullableEquipmentInterconnectRelationship       `json:"EquipmentInterconnect,omitempty"`
+	EquipmentSharedGraphicsCard NullableEquipmentSharedGraphicsCardRelationship `json:"EquipmentSharedGraphicsCard,omitempty"`
 	// An array of relationships to graphicsController resources.
 	GraphicsControllers []GraphicsControllerRelationship            `json:"GraphicsControllers,omitempty"`
 	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
@@ -944,6 +946,92 @@ func (o *GraphicsCard) UnsetEquipmentEnclosureElement() {
 	o.EquipmentEnclosureElement.Unset()
 }
 
+// GetEquipmentInterconnect returns the EquipmentInterconnect field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GraphicsCard) GetEquipmentInterconnect() EquipmentInterconnectRelationship {
+	if o == nil || IsNil(o.EquipmentInterconnect.Get()) {
+		var ret EquipmentInterconnectRelationship
+		return ret
+	}
+	return *o.EquipmentInterconnect.Get()
+}
+
+// GetEquipmentInterconnectOk returns a tuple with the EquipmentInterconnect field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GraphicsCard) GetEquipmentInterconnectOk() (*EquipmentInterconnectRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentInterconnect.Get(), o.EquipmentInterconnect.IsSet()
+}
+
+// HasEquipmentInterconnect returns a boolean if a field has been set.
+func (o *GraphicsCard) HasEquipmentInterconnect() bool {
+	if o != nil && o.EquipmentInterconnect.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentInterconnect gets a reference to the given NullableEquipmentInterconnectRelationship and assigns it to the EquipmentInterconnect field.
+func (o *GraphicsCard) SetEquipmentInterconnect(v EquipmentInterconnectRelationship) {
+	o.EquipmentInterconnect.Set(&v)
+}
+
+// SetEquipmentInterconnectNil sets the value for EquipmentInterconnect to be an explicit nil
+func (o *GraphicsCard) SetEquipmentInterconnectNil() {
+	o.EquipmentInterconnect.Set(nil)
+}
+
+// UnsetEquipmentInterconnect ensures that no value is present for EquipmentInterconnect, not even an explicit nil
+func (o *GraphicsCard) UnsetEquipmentInterconnect() {
+	o.EquipmentInterconnect.Unset()
+}
+
+// GetEquipmentSharedGraphicsCard returns the EquipmentSharedGraphicsCard field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GraphicsCard) GetEquipmentSharedGraphicsCard() EquipmentSharedGraphicsCardRelationship {
+	if o == nil || IsNil(o.EquipmentSharedGraphicsCard.Get()) {
+		var ret EquipmentSharedGraphicsCardRelationship
+		return ret
+	}
+	return *o.EquipmentSharedGraphicsCard.Get()
+}
+
+// GetEquipmentSharedGraphicsCardOk returns a tuple with the EquipmentSharedGraphicsCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GraphicsCard) GetEquipmentSharedGraphicsCardOk() (*EquipmentSharedGraphicsCardRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentSharedGraphicsCard.Get(), o.EquipmentSharedGraphicsCard.IsSet()
+}
+
+// HasEquipmentSharedGraphicsCard returns a boolean if a field has been set.
+func (o *GraphicsCard) HasEquipmentSharedGraphicsCard() bool {
+	if o != nil && o.EquipmentSharedGraphicsCard.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentSharedGraphicsCard gets a reference to the given NullableEquipmentSharedGraphicsCardRelationship and assigns it to the EquipmentSharedGraphicsCard field.
+func (o *GraphicsCard) SetEquipmentSharedGraphicsCard(v EquipmentSharedGraphicsCardRelationship) {
+	o.EquipmentSharedGraphicsCard.Set(&v)
+}
+
+// SetEquipmentSharedGraphicsCardNil sets the value for EquipmentSharedGraphicsCard to be an explicit nil
+func (o *GraphicsCard) SetEquipmentSharedGraphicsCardNil() {
+	o.EquipmentSharedGraphicsCard.Set(nil)
+}
+
+// UnsetEquipmentSharedGraphicsCard ensures that no value is present for EquipmentSharedGraphicsCard, not even an explicit nil
+func (o *GraphicsCard) UnsetEquipmentSharedGraphicsCard() {
+	o.EquipmentSharedGraphicsCard.Unset()
+}
+
 // GetGraphicsControllers returns the GraphicsControllers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GraphicsCard) GetGraphicsControllers() []GraphicsControllerRelationship {
 	if o == nil {
@@ -1277,6 +1365,12 @@ func (o GraphicsCard) ToMap() (map[string]interface{}, error) {
 	if o.EquipmentEnclosureElement.IsSet() {
 		toSerialize["EquipmentEnclosureElement"] = o.EquipmentEnclosureElement.Get()
 	}
+	if o.EquipmentInterconnect.IsSet() {
+		toSerialize["EquipmentInterconnect"] = o.EquipmentInterconnect.Get()
+	}
+	if o.EquipmentSharedGraphicsCard.IsSet() {
+		toSerialize["EquipmentSharedGraphicsCard"] = o.EquipmentSharedGraphicsCard.Get()
+	}
 	if o.GraphicsControllers != nil {
 		toSerialize["GraphicsControllers"] = o.GraphicsControllers
 	}
@@ -1386,11 +1480,13 @@ func (o *GraphicsCard) UnmarshalJSON(data []byte) (err error) {
 		// The sub vendor id of the graphics processor unit.
 		SubVendorId *int64 `json:"SubVendorId,omitempty"`
 		// The vendor id of the graphics processor unit.
-		VendorId                  *int64                                        `json:"VendorId,omitempty"`
-		ComputeBlade              NullableComputeBladeRelationship              `json:"ComputeBlade,omitempty"`
-		ComputeBoard              NullableComputeBoardRelationship              `json:"ComputeBoard,omitempty"`
-		ComputeRackUnit           NullableComputeRackUnitRelationship           `json:"ComputeRackUnit,omitempty"`
-		EquipmentEnclosureElement NullableEquipmentEnclosureElementRelationship `json:"EquipmentEnclosureElement,omitempty"`
+		VendorId                    *int64                                          `json:"VendorId,omitempty"`
+		ComputeBlade                NullableComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
+		ComputeBoard                NullableComputeBoardRelationship                `json:"ComputeBoard,omitempty"`
+		ComputeRackUnit             NullableComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
+		EquipmentEnclosureElement   NullableEquipmentEnclosureElementRelationship   `json:"EquipmentEnclosureElement,omitempty"`
+		EquipmentInterconnect       NullableEquipmentInterconnectRelationship       `json:"EquipmentInterconnect,omitempty"`
+		EquipmentSharedGraphicsCard NullableEquipmentSharedGraphicsCardRelationship `json:"EquipmentSharedGraphicsCard,omitempty"`
 		// An array of relationships to graphicsController resources.
 		GraphicsControllers []GraphicsControllerRelationship            `json:"GraphicsControllers,omitempty"`
 		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
@@ -1431,6 +1527,8 @@ func (o *GraphicsCard) UnmarshalJSON(data []byte) (err error) {
 		varGraphicsCard.ComputeBoard = varGraphicsCardWithoutEmbeddedStruct.ComputeBoard
 		varGraphicsCard.ComputeRackUnit = varGraphicsCardWithoutEmbeddedStruct.ComputeRackUnit
 		varGraphicsCard.EquipmentEnclosureElement = varGraphicsCardWithoutEmbeddedStruct.EquipmentEnclosureElement
+		varGraphicsCard.EquipmentInterconnect = varGraphicsCardWithoutEmbeddedStruct.EquipmentInterconnect
+		varGraphicsCard.EquipmentSharedGraphicsCard = varGraphicsCardWithoutEmbeddedStruct.EquipmentSharedGraphicsCard
 		varGraphicsCard.GraphicsControllers = varGraphicsCardWithoutEmbeddedStruct.GraphicsControllers
 		varGraphicsCard.InventoryDeviceInfo = varGraphicsCardWithoutEmbeddedStruct.InventoryDeviceInfo
 		varGraphicsCard.PciDevice = varGraphicsCardWithoutEmbeddedStruct.PciDevice
@@ -1479,6 +1577,8 @@ func (o *GraphicsCard) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ComputeBoard")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "EquipmentEnclosureElement")
+		delete(additionalProperties, "EquipmentInterconnect")
+		delete(additionalProperties, "EquipmentSharedGraphicsCard")
 		delete(additionalProperties, "GraphicsControllers")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "PciDevice")

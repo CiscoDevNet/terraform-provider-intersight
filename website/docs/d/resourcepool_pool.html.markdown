@@ -17,7 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `action`:(string) The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool.* `None` - The pool will not be considered for evaluation.* `ReEvaluate` - The resources in the pool will be re-evaluated against the server pool qualification associated with it. 
 * `assigned`:(int) Number of IDs that are currently assigned (in use). 
-* `assignment_order`:(string) Assignment order decides the order in which the next identifier is allocated.* `sequential` - Identifiers are assigned in a sequential order.* `default` - Assignment order is decided by the system. 
+* `assignment_order`:(string) Property is deprecated. Sequential is the only assignment order supported.* `sequential` - Identifiers are assigned in a sequential order.* `default` - Assignment order is decided by the system. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

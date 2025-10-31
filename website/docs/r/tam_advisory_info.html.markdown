@@ -3,32 +3,28 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_info"
 description: |-
-        # Overview
-        The AdvisoryInfo object captures the state of Security Advisories and Field Notices,
-        including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
-        ## Purpose
-        AdvisoryInfo serves as a personalized repository of advisory states for each account,
-        allowing users to manage and track advisories relevant to their environment.
-        ## Key Concepts
-        - **State Management** – Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
-        - **Account Association** – Directly links advisory states to specific accounts for tailored management.
-        - **Shared Resource** – Supports collaborative management of advisories within shared organizational contexts.
-        - **Controlled Permissions** – Restricts creation, updating, and deletion of advisory states to Account Administrators.
+        ### Overview
+        The AdvisoryInfo object captures the state of Security Advisories and Field Notices, including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
+        #### Purpose
+        AdvisoryInfo serves as a personalized repository of advisory states for each account, allowing users to manage and track advisories relevant to their environment.
+        #### Key Concepts
+        - **State Management** - Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
+        - **Account Association** - Directly links advisory states to specific accounts for tailored management.
+        - **Shared Resource** - Supports collaborative management of advisories within shared organizational contexts.
+        - **Controlled Permissions** - Restricts creation, updating, and deletion of advisory states to Account Administrators.
 
 ---
 
 # Resource: intersight_tam_advisory_info
-# Overview
-The AdvisoryInfo object captures the state of Security Advisories and Field Notices,  
-including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
-## Purpose
-AdvisoryInfo serves as a personalized repository of advisory states for each account,  
-allowing users to manage and track advisories relevant to their environment.
-## Key Concepts
-- **State Management** – Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
-- **Account Association** – Directly links advisory states to specific accounts for tailored management.
-- **Shared Resource** – Supports collaborative management of advisories within shared organizational contexts.
-- **Controlled Permissions** – Restricts creation, updating, and deletion of advisory states to Account Administrators.
+### Overview
+The AdvisoryInfo object captures the state of Security Advisories and Field Notices, including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
+#### Purpose
+AdvisoryInfo serves as a personalized repository of advisory states for each account, allowing users to manage and track advisories relevant to their environment.
+#### Key Concepts
+- **State Management** - Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
+- **Account Association** - Directly links advisory states to specific accounts for tailored management.
+- **Shared Resource** - Supports collaborative management of advisories within shared organizational contexts.
+- **Controlled Permissions** - Restricts creation, updating, and deletion of advisory states to Account Administrators.
 ## Usage Example
 ### Resource Creation
 

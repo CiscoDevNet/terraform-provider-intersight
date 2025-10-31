@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.ChassisUpgradeImpact"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.ChassisUpgradeImpact"]
 **ImpactDetail** | Pointer to [**[]FirmwareComponentImpact**](FirmwareComponentImpact.md) |  | [optional] 
+**ImpactServersDetail** | Pointer to [**[]FirmwareServerImpact**](FirmwareServerImpact.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the chassis that will be affected by the upgrade. | [optional] 
 **UserLabel** | Pointer to **string** | Details for the chassis that will be impacted by the upgrade. | [optional] 
 
@@ -104,6 +105,41 @@ HasImpactDetail returns a boolean if a field has been set.
 `func (o *FirmwareChassisUpgradeImpact) UnsetImpactDetail()`
 
 UnsetImpactDetail ensures that no value is present for ImpactDetail, not even an explicit nil
+### GetImpactServersDetail
+
+`func (o *FirmwareChassisUpgradeImpact) GetImpactServersDetail() []FirmwareServerImpact`
+
+GetImpactServersDetail returns the ImpactServersDetail field if non-nil, zero value otherwise.
+
+### GetImpactServersDetailOk
+
+`func (o *FirmwareChassisUpgradeImpact) GetImpactServersDetailOk() (*[]FirmwareServerImpact, bool)`
+
+GetImpactServersDetailOk returns a tuple with the ImpactServersDetail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImpactServersDetail
+
+`func (o *FirmwareChassisUpgradeImpact) SetImpactServersDetail(v []FirmwareServerImpact)`
+
+SetImpactServersDetail sets ImpactServersDetail field to given value.
+
+### HasImpactServersDetail
+
+`func (o *FirmwareChassisUpgradeImpact) HasImpactServersDetail() bool`
+
+HasImpactServersDetail returns a boolean if a field has been set.
+
+### SetImpactServersDetailNil
+
+`func (o *FirmwareChassisUpgradeImpact) SetImpactServersDetailNil(b bool)`
+
+ SetImpactServersDetailNil sets the value for ImpactServersDetail to be an explicit nil
+
+### UnsetImpactServersDetail
+`func (o *FirmwareChassisUpgradeImpact) UnsetImpactServersDetail()`
+
+UnsetImpactServersDetail ensures that no value is present for ImpactServersDetail, not even an explicit nil
 ### GetName
 
 `func (o *FirmwareChassisUpgradeImpact) GetName() string`

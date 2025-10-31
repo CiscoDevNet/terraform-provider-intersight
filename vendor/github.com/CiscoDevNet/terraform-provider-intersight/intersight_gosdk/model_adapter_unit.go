@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -52,11 +52,12 @@ type AdapterUnit struct {
 	// Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server. * `Not Applicable` - Set the state of VIC communication to Not Applicable for other Platforms. * `Yes` - VIC is reachable from CIMC. * `No` - VIC is not reachable from CIMC.
 	VicCommunicable *string `json:"VicCommunicable,omitempty"`
 	// Virtual Id of the adapter in the server.
-	Vid                 *string                                  `json:"Vid,omitempty"`
-	AdapterUnitExpander NullableAdapterUnitExpanderRelationship  `json:"AdapterUnitExpander,omitempty"`
-	ComputeBlade        NullableComputeBladeRelationship         `json:"ComputeBlade,omitempty"`
-	ComputeRackUnit     NullableComputeRackUnitRelationship      `json:"ComputeRackUnit,omitempty"`
-	Controller          NullableManagementControllerRelationship `json:"Controller,omitempty"`
+	Vid                        *string                                        `json:"Vid,omitempty"`
+	AdapterUnitExpander        NullableAdapterUnitExpanderRelationship        `json:"AdapterUnitExpander,omitempty"`
+	ComputeBlade               NullableComputeBladeRelationship               `json:"ComputeBlade,omitempty"`
+	ComputeRackUnit            NullableComputeRackUnitRelationship            `json:"ComputeRackUnit,omitempty"`
+	Controller                 NullableManagementControllerRelationship       `json:"Controller,omitempty"`
+	EquipmentSharedAdapterUnit NullableEquipmentSharedAdapterUnitRelationship `json:"EquipmentSharedAdapterUnit,omitempty"`
 	// An array of relationships to adapterExtEthInterface resources.
 	ExtEthIfs []AdapterExtEthInterfaceRelationship `json:"ExtEthIfs,omitempty"`
 	// An array of relationships to adapterHostEthInterface resources.
@@ -742,6 +743,49 @@ func (o *AdapterUnit) UnsetController() {
 	o.Controller.Unset()
 }
 
+// GetEquipmentSharedAdapterUnit returns the EquipmentSharedAdapterUnit field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AdapterUnit) GetEquipmentSharedAdapterUnit() EquipmentSharedAdapterUnitRelationship {
+	if o == nil || IsNil(o.EquipmentSharedAdapterUnit.Get()) {
+		var ret EquipmentSharedAdapterUnitRelationship
+		return ret
+	}
+	return *o.EquipmentSharedAdapterUnit.Get()
+}
+
+// GetEquipmentSharedAdapterUnitOk returns a tuple with the EquipmentSharedAdapterUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AdapterUnit) GetEquipmentSharedAdapterUnitOk() (*EquipmentSharedAdapterUnitRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentSharedAdapterUnit.Get(), o.EquipmentSharedAdapterUnit.IsSet()
+}
+
+// HasEquipmentSharedAdapterUnit returns a boolean if a field has been set.
+func (o *AdapterUnit) HasEquipmentSharedAdapterUnit() bool {
+	if o != nil && o.EquipmentSharedAdapterUnit.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentSharedAdapterUnit gets a reference to the given NullableEquipmentSharedAdapterUnitRelationship and assigns it to the EquipmentSharedAdapterUnit field.
+func (o *AdapterUnit) SetEquipmentSharedAdapterUnit(v EquipmentSharedAdapterUnitRelationship) {
+	o.EquipmentSharedAdapterUnit.Set(&v)
+}
+
+// SetEquipmentSharedAdapterUnitNil sets the value for EquipmentSharedAdapterUnit to be an explicit nil
+func (o *AdapterUnit) SetEquipmentSharedAdapterUnitNil() {
+	o.EquipmentSharedAdapterUnit.Set(nil)
+}
+
+// UnsetEquipmentSharedAdapterUnit ensures that no value is present for EquipmentSharedAdapterUnit, not even an explicit nil
+func (o *AdapterUnit) UnsetEquipmentSharedAdapterUnit() {
+	o.EquipmentSharedAdapterUnit.Unset()
+}
+
 // GetExtEthIfs returns the ExtEthIfs field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetExtEthIfs() []AdapterExtEthInterfaceRelationship {
 	if o == nil {
@@ -1037,6 +1081,9 @@ func (o AdapterUnit) ToMap() (map[string]interface{}, error) {
 	if o.Controller.IsSet() {
 		toSerialize["Controller"] = o.Controller.Get()
 	}
+	if o.EquipmentSharedAdapterUnit.IsSet() {
+		toSerialize["EquipmentSharedAdapterUnit"] = o.EquipmentSharedAdapterUnit.Get()
+	}
 	if o.ExtEthIfs != nil {
 		toSerialize["ExtEthIfs"] = o.ExtEthIfs
 	}
@@ -1134,11 +1181,12 @@ func (o *AdapterUnit) UnmarshalJSON(data []byte) (err error) {
 		// Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server. * `Not Applicable` - Set the state of VIC communication to Not Applicable for other Platforms. * `Yes` - VIC is reachable from CIMC. * `No` - VIC is not reachable from CIMC.
 		VicCommunicable *string `json:"VicCommunicable,omitempty"`
 		// Virtual Id of the adapter in the server.
-		Vid                 *string                                  `json:"Vid,omitempty"`
-		AdapterUnitExpander NullableAdapterUnitExpanderRelationship  `json:"AdapterUnitExpander,omitempty"`
-		ComputeBlade        NullableComputeBladeRelationship         `json:"ComputeBlade,omitempty"`
-		ComputeRackUnit     NullableComputeRackUnitRelationship      `json:"ComputeRackUnit,omitempty"`
-		Controller          NullableManagementControllerRelationship `json:"Controller,omitempty"`
+		Vid                        *string                                        `json:"Vid,omitempty"`
+		AdapterUnitExpander        NullableAdapterUnitExpanderRelationship        `json:"AdapterUnitExpander,omitempty"`
+		ComputeBlade               NullableComputeBladeRelationship               `json:"ComputeBlade,omitempty"`
+		ComputeRackUnit            NullableComputeRackUnitRelationship            `json:"ComputeRackUnit,omitempty"`
+		Controller                 NullableManagementControllerRelationship       `json:"Controller,omitempty"`
+		EquipmentSharedAdapterUnit NullableEquipmentSharedAdapterUnitRelationship `json:"EquipmentSharedAdapterUnit,omitempty"`
 		// An array of relationships to adapterExtEthInterface resources.
 		ExtEthIfs []AdapterExtEthInterfaceRelationship `json:"ExtEthIfs,omitempty"`
 		// An array of relationships to adapterHostEthInterface resources.
@@ -1175,6 +1223,7 @@ func (o *AdapterUnit) UnmarshalJSON(data []byte) (err error) {
 		varAdapterUnit.ComputeBlade = varAdapterUnitWithoutEmbeddedStruct.ComputeBlade
 		varAdapterUnit.ComputeRackUnit = varAdapterUnitWithoutEmbeddedStruct.ComputeRackUnit
 		varAdapterUnit.Controller = varAdapterUnitWithoutEmbeddedStruct.Controller
+		varAdapterUnit.EquipmentSharedAdapterUnit = varAdapterUnitWithoutEmbeddedStruct.EquipmentSharedAdapterUnit
 		varAdapterUnit.ExtEthIfs = varAdapterUnitWithoutEmbeddedStruct.ExtEthIfs
 		varAdapterUnit.HostEthIfs = varAdapterUnitWithoutEmbeddedStruct.HostEthIfs
 		varAdapterUnit.HostFcIfs = varAdapterUnitWithoutEmbeddedStruct.HostFcIfs
@@ -1217,6 +1266,7 @@ func (o *AdapterUnit) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ComputeBlade")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "Controller")
+		delete(additionalProperties, "EquipmentSharedAdapterUnit")
 		delete(additionalProperties, "ExtEthIfs")
 		delete(additionalProperties, "HostEthIfs")
 		delete(additionalProperties, "HostFcIfs")

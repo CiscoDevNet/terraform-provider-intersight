@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **EquipmentRackEnclosure** | Pointer to [**NullableEquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
+**FirmwareRunningFirmwares** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -613,6 +614,41 @@ HasEquipmentRackEnclosure returns a boolean if a field has been set.
 `func (o *EquipmentPsu) UnsetEquipmentRackEnclosure()`
 
 UnsetEquipmentRackEnclosure ensures that no value is present for EquipmentRackEnclosure, not even an explicit nil
+### GetFirmwareRunningFirmwares
+
+`func (o *EquipmentPsu) GetFirmwareRunningFirmwares() []FirmwareRunningFirmwareRelationship`
+
+GetFirmwareRunningFirmwares returns the FirmwareRunningFirmwares field if non-nil, zero value otherwise.
+
+### GetFirmwareRunningFirmwaresOk
+
+`func (o *EquipmentPsu) GetFirmwareRunningFirmwaresOk() (*[]FirmwareRunningFirmwareRelationship, bool)`
+
+GetFirmwareRunningFirmwaresOk returns a tuple with the FirmwareRunningFirmwares field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirmwareRunningFirmwares
+
+`func (o *EquipmentPsu) SetFirmwareRunningFirmwares(v []FirmwareRunningFirmwareRelationship)`
+
+SetFirmwareRunningFirmwares sets FirmwareRunningFirmwares field to given value.
+
+### HasFirmwareRunningFirmwares
+
+`func (o *EquipmentPsu) HasFirmwareRunningFirmwares() bool`
+
+HasFirmwareRunningFirmwares returns a boolean if a field has been set.
+
+### SetFirmwareRunningFirmwaresNil
+
+`func (o *EquipmentPsu) SetFirmwareRunningFirmwaresNil(b bool)`
+
+ SetFirmwareRunningFirmwaresNil sets the value for FirmwareRunningFirmwares to be an explicit nil
+
+### UnsetFirmwareRunningFirmwares
+`func (o *EquipmentPsu) UnsetFirmwareRunningFirmwares()`
+
+UnsetFirmwareRunningFirmwares ensures that no value is present for FirmwareRunningFirmwares, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentPsu) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

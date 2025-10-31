@@ -31,6 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `firmware`:(string) The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. 
 * `front_panel_lock_state`:(string) The actual front panel state of the server.* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.* `Lock` - Front Panel of the server is set to Locked state.* `Unlock` - Front Panel of the server is set to Unlocked state. 
 * `hardware_uuid`:(string) The universally unique hardware identity of the server provided by the manufacturer. 
+* `has_e3_s_support`:(bool) The flag to indicate server has the support for E3.S drives. 
 * `ipv4_address`:(string) The IPv4 address configured on the management interface of the Integrated Management Controller. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `kvm_server_state_enabled`:(bool) The KVM server state of the server. 

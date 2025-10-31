@@ -334,6 +334,11 @@ func getCapabilitySwitchDescriptorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"unsupported_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"vendor": {
 			Description: "The vendor of the endpoint, for which this capability information is applicable.",
 			Type:        schema.TypeString,
@@ -808,6 +813,17 @@ func dataSourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resou
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("unsupported_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnsupportedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -955,6 +971,7 @@ func dataSourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resou
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["unsupported_policies"] = (s.GetUnsupportedPolicies())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
 

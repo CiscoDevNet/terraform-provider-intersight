@@ -283,6 +283,32 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService GetEquipmentExpanderModuleOperationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleOperationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentExpanderModuleOperationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentExpanderModuleOperationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService GetEquipmentFanByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -484,6 +510,32 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentHybridDriveSlotList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentInterconnectByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentInterconnectByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentInterconnectList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentInterconnectList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -777,6 +829,58 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test EquipmentApiService GetEquipmentSharedAdapterUnitByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentSharedAdapterUnitByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentSharedAdapterUnitList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentSharedAdapterUnitList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentSharedGraphicsCardByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentSharedGraphicsCardByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService GetEquipmentSharedGraphicsCardList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.EquipmentApi.GetEquipmentSharedGraphicsCardList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EquipmentApiService GetEquipmentSharedIoModuleByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1024,6 +1128,20 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.EquipmentApi.PatchEquipmentExpanderModuleIdentity(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService PatchEquipmentExpanderModuleOperation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.PatchEquipmentExpanderModuleOperation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1416,6 +1534,20 @@ func Test_intersight_EquipmentApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.EquipmentApi.UpdateEquipmentExpanderModuleIdentity(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test EquipmentApiService UpdateEquipmentExpanderModuleOperation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.EquipmentApi.UpdateEquipmentExpanderModuleOperation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

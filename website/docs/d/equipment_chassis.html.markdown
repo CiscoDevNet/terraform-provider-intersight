@@ -32,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) This field identifies the name for the chassis enclosure. 
 * `oper_state`:(string) This field identifies the Chassis Operational State. 
+* `package_version`:(string) Bundle version which the XFM and PSU firmware belongs to. 
 * `part_number`:(string) Part Number identifier for the chassis enclosure. 
 * `pid`:(string) This field identifies the Product ID for the chassis enclosure. 
 * `platform_type`:(string) The platform type that the chassis is a part of. 

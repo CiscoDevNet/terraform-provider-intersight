@@ -92,7 +92,7 @@ func resourceMacpoolPool() *schema.Resource {
 					return
 				}},
 			"assignment_order": {
-				Description:  "Assignment order decides the order in which the next identifier is allocated.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
+				Description:  "Property is deprecated. Sequential is the only assignment order supported.\n* `sequential` - Identifiers are assigned in a sequential order.\n* `default` - Assignment order is decided by the system.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"sequential", "default"}, false),
 				Optional:     true,

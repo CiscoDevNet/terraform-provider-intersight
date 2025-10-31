@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,10 @@ type EquipmentChassisOperationStatus struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
+	// The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied. * `Scheduled` - User configured settings are scheduled to be applied.
 	ConfigState *string `json:"ConfigState,omitempty"`
+	// The slot id of the expander module within the chassis on which the chassis operation is performed.
+	ExpanderModuleSlotId *int64 `json:"ExpanderModuleSlotId,omitempty"`
 	// The slot id of the device within the chassis on which the chassis operation is performed.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// The workflow Id of the chassis operations workflow.
@@ -152,6 +154,38 @@ func (o *EquipmentChassisOperationStatus) HasConfigState() bool {
 // SetConfigState gets a reference to the given string and assigns it to the ConfigState field.
 func (o *EquipmentChassisOperationStatus) SetConfigState(v string) {
 	o.ConfigState = &v
+}
+
+// GetExpanderModuleSlotId returns the ExpanderModuleSlotId field value if set, zero value otherwise.
+func (o *EquipmentChassisOperationStatus) GetExpanderModuleSlotId() int64 {
+	if o == nil || IsNil(o.ExpanderModuleSlotId) {
+		var ret int64
+		return ret
+	}
+	return *o.ExpanderModuleSlotId
+}
+
+// GetExpanderModuleSlotIdOk returns a tuple with the ExpanderModuleSlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassisOperationStatus) GetExpanderModuleSlotIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.ExpanderModuleSlotId) {
+		return nil, false
+	}
+	return o.ExpanderModuleSlotId, true
+}
+
+// HasExpanderModuleSlotId returns a boolean if a field has been set.
+func (o *EquipmentChassisOperationStatus) HasExpanderModuleSlotId() bool {
+	if o != nil && !IsNil(o.ExpanderModuleSlotId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpanderModuleSlotId gets a reference to the given int64 and assigns it to the ExpanderModuleSlotId field.
+func (o *EquipmentChassisOperationStatus) SetExpanderModuleSlotId(v int64) {
+	o.ExpanderModuleSlotId = &v
 }
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
@@ -279,6 +313,9 @@ func (o EquipmentChassisOperationStatus) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.ConfigState) {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
+	if !IsNil(o.ExpanderModuleSlotId) {
+		toSerialize["ExpanderModuleSlotId"] = o.ExpanderModuleSlotId
+	}
 	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
@@ -343,8 +380,10 @@ func (o *EquipmentChassisOperationStatus) UnmarshalJSON(data []byte) (err error)
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
+		// The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied. * `Scheduled` - User configured settings are scheduled to be applied.
 		ConfigState *string `json:"ConfigState,omitempty"`
+		// The slot id of the expander module within the chassis on which the chassis operation is performed.
+		ExpanderModuleSlotId *int64 `json:"ExpanderModuleSlotId,omitempty"`
 		// The slot id of the device within the chassis on which the chassis operation is performed.
 		SlotId *int64 `json:"SlotId,omitempty"`
 		// The workflow Id of the chassis operations workflow.
@@ -361,6 +400,7 @@ func (o *EquipmentChassisOperationStatus) UnmarshalJSON(data []byte) (err error)
 		varEquipmentChassisOperationStatus.ClassId = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.ClassId
 		varEquipmentChassisOperationStatus.ObjectType = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.ObjectType
 		varEquipmentChassisOperationStatus.ConfigState = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.ConfigState
+		varEquipmentChassisOperationStatus.ExpanderModuleSlotId = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.ExpanderModuleSlotId
 		varEquipmentChassisOperationStatus.SlotId = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.SlotId
 		varEquipmentChassisOperationStatus.WorkflowId = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.WorkflowId
 		varEquipmentChassisOperationStatus.WorkflowType = varEquipmentChassisOperationStatusWithoutEmbeddedStruct.WorkflowType
@@ -384,6 +424,7 @@ func (o *EquipmentChassisOperationStatus) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigState")
+		delete(additionalProperties, "ExpanderModuleSlotId")
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "WorkflowId")
 		delete(additionalProperties, "WorkflowType")

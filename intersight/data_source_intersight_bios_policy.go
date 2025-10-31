@@ -735,6 +735,26 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"gpu_direct_cpu1": {
+			Description: "BIOS Token for setting GPU Direct CPU1 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"gpu_direct_cpu2": {
+			Description: "BIOS Token for setting GPU Direct CPU2 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"gpu_direct_cpu3": {
+			Description: "BIOS Token for setting GPU Direct CPU3 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"gpu_direct_cpu4": {
+			Description: "BIOS Token for setting GPU Direct CPU4 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hardware_prefetch": {
 			Description: "BIOS Token for setting Hardware Prefetcher configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
@@ -3533,6 +3553,26 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetFrb2enable(x)
 	}
 
+	if v, ok := d.GetOk("gpu_direct_cpu1"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu1(x)
+	}
+
+	if v, ok := d.GetOk("gpu_direct_cpu2"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu2(x)
+	}
+
+	if v, ok := d.GetOk("gpu_direct_cpu3"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu3(x)
+	}
+
+	if v, ok := d.GetOk("gpu_direct_cpu4"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu4(x)
+	}
+
 	if v, ok := d.GetOk("hardware_prefetch"); ok {
 		x := (v.(string))
 		o.SetHardwarePrefetch(x)
@@ -5725,6 +5765,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["extended_apic"] = (s.GetExtendedApic())
 				temp["flow_control"] = (s.GetFlowControl())
 				temp["frb2enable"] = (s.GetFrb2enable())
+				temp["gpu_direct_cpu1"] = (s.GetGpuDirectCpu1())
+				temp["gpu_direct_cpu2"] = (s.GetGpuDirectCpu2())
+				temp["gpu_direct_cpu3"] = (s.GetGpuDirectCpu3())
+				temp["gpu_direct_cpu4"] = (s.GetGpuDirectCpu4())
 				temp["hardware_prefetch"] = (s.GetHardwarePrefetch())
 				temp["hwpm_enable"] = (s.GetHwpmEnable())
 				temp["imc_interleave"] = (s.GetImcInterleave())

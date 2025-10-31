@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | This field identifies the name for the chassis enclosure. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field identifies the Chassis Operational State. | [optional] [readonly] 
+**PackageVersion** | Pointer to **string** | Bundle version which the XFM and PSU firmware belongs to. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the chassis enclosure. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the chassis enclosure. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type that the chassis is a part of. | [optional] [readonly] 
@@ -35,6 +36,7 @@ Name | Type | Description | Notes
 **LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **ManagementInterface** | Pointer to [**NullableManagementInterfaceRelationship**](ManagementInterfaceRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] [readonly] 
+**PciNodes** | Pointer to [**[]PciNodeRelationship**](PciNodeRelationship.md) | An array of relationships to pciNode resources. | [optional] [readonly] 
 **PowerControlState** | Pointer to [**NullablePowerControlStateRelationship**](PowerControlStateRelationship.md) |  | [optional] 
 **PsuControl** | Pointer to [**NullableEquipmentPsuControlRelationship**](EquipmentPsuControlRelationship.md) |  | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
@@ -432,6 +434,31 @@ SetOperState sets OperState field to given value.
 `func (o *EquipmentChassis) HasOperState() bool`
 
 HasOperState returns a boolean if a field has been set.
+
+### GetPackageVersion
+
+`func (o *EquipmentChassis) GetPackageVersion() string`
+
+GetPackageVersion returns the PackageVersion field if non-nil, zero value otherwise.
+
+### GetPackageVersionOk
+
+`func (o *EquipmentChassis) GetPackageVersionOk() (*string, bool)`
+
+GetPackageVersionOk returns a tuple with the PackageVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageVersion
+
+`func (o *EquipmentChassis) SetPackageVersion(v string)`
+
+SetPackageVersion sets PackageVersion field to given value.
+
+### HasPackageVersion
+
+`func (o *EquipmentChassis) HasPackageVersion() bool`
+
+HasPackageVersion returns a boolean if a field has been set.
 
 ### GetPartNumber
 
@@ -958,6 +985,41 @@ HasNetworkElements returns a boolean if a field has been set.
 `func (o *EquipmentChassis) UnsetNetworkElements()`
 
 UnsetNetworkElements ensures that no value is present for NetworkElements, not even an explicit nil
+### GetPciNodes
+
+`func (o *EquipmentChassis) GetPciNodes() []PciNodeRelationship`
+
+GetPciNodes returns the PciNodes field if non-nil, zero value otherwise.
+
+### GetPciNodesOk
+
+`func (o *EquipmentChassis) GetPciNodesOk() (*[]PciNodeRelationship, bool)`
+
+GetPciNodesOk returns a tuple with the PciNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNodes
+
+`func (o *EquipmentChassis) SetPciNodes(v []PciNodeRelationship)`
+
+SetPciNodes sets PciNodes field to given value.
+
+### HasPciNodes
+
+`func (o *EquipmentChassis) HasPciNodes() bool`
+
+HasPciNodes returns a boolean if a field has been set.
+
+### SetPciNodesNil
+
+`func (o *EquipmentChassis) SetPciNodesNil(b bool)`
+
+ SetPciNodesNil sets the value for PciNodes to be an explicit nil
+
+### UnsetPciNodes
+`func (o *EquipmentChassis) UnsetPciNodes()`
+
+UnsetPciNodes ensures that no value is present for PciNodes, not even an explicit nil
 ### GetPowerControlState
 
 `func (o *EquipmentChassis) GetPowerControlState() PowerControlStateRelationship`

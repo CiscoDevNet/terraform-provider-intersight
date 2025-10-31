@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IsAvatarEcmc** | Pointer to **bool** | Identifies whether Switch is part of Avatar series. | [optional] [default to false]
 **IsUcsxDirectSwitch** | Pointer to **bool** | Identifies whether Switch is part of UCSX Direct chassis. | [optional] [default to false]
 **Revision** | Pointer to **string** | Revision for the fabric interconnect. | [optional] 
+**UnsupportedPolicies** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -170,6 +171,41 @@ SetRevision sets Revision field to given value.
 
 HasRevision returns a boolean if a field has been set.
 
+### GetUnsupportedPolicies
+
+`func (o *CapabilitySwitchDescriptor) GetUnsupportedPolicies() []string`
+
+GetUnsupportedPolicies returns the UnsupportedPolicies field if non-nil, zero value otherwise.
+
+### GetUnsupportedPoliciesOk
+
+`func (o *CapabilitySwitchDescriptor) GetUnsupportedPoliciesOk() (*[]string, bool)`
+
+GetUnsupportedPoliciesOk returns a tuple with the UnsupportedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnsupportedPolicies
+
+`func (o *CapabilitySwitchDescriptor) SetUnsupportedPolicies(v []string)`
+
+SetUnsupportedPolicies sets UnsupportedPolicies field to given value.
+
+### HasUnsupportedPolicies
+
+`func (o *CapabilitySwitchDescriptor) HasUnsupportedPolicies() bool`
+
+HasUnsupportedPolicies returns a boolean if a field has been set.
+
+### SetUnsupportedPoliciesNil
+
+`func (o *CapabilitySwitchDescriptor) SetUnsupportedPoliciesNil(b bool)`
+
+ SetUnsupportedPoliciesNil sets the value for UnsupportedPolicies to be an explicit nil
+
+### UnsetUnsupportedPolicies
+`func (o *CapabilitySwitchDescriptor) UnsetUnsupportedPolicies()`
+
+UnsetUnsupportedPolicies ensures that no value is present for UnsupportedPolicies, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

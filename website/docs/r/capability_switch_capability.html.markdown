@@ -63,7 +63,7 @@ This complex property has following sub-properties:
 * `max_slots`:(int)(ReadOnly) Maximum allowed physical slots on this switch. 
 * `min_version_map_for_switch_features`:(Array)
 This complex property has following sub-properties:
-  + `feature_name`:(string)(ReadOnly) Name of the feature for which the version map is applicable.* `Unknown` - Unknown or Invalid feature in the equipment.* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware. 
+  + `feature_name`:(string)(ReadOnly) Name of the feature for which the version map is applicable.* `Unknown` - Unknown or Invalid feature in the equipment.* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.* `FIAuditd` - AuditD feature for Fabric Interconnect. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `version_map`:(HashMap) -(ReadOnly) Maps device firmware version to bundle version. 
 This complex property has following sub-properties:

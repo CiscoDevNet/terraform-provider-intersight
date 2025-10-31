@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **Firmware** | Pointer to **string** | The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. | [optional] [readonly] 
 **FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] [readonly] 
+**HasE3SSupport** | Pointer to **bool** | The flag to indicate server has the support for E3.S drives. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | The IPv4 address configured on the management interface of the Integrated Management Controller. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
@@ -512,6 +513,31 @@ SetHardwareUuid sets HardwareUuid field to given value.
 `func (o *ComputePhysicalSummary) HasHardwareUuid() bool`
 
 HasHardwareUuid returns a boolean if a field has been set.
+
+### GetHasE3SSupport
+
+`func (o *ComputePhysicalSummary) GetHasE3SSupport() bool`
+
+GetHasE3SSupport returns the HasE3SSupport field if non-nil, zero value otherwise.
+
+### GetHasE3SSupportOk
+
+`func (o *ComputePhysicalSummary) GetHasE3SSupportOk() (*bool, bool)`
+
+GetHasE3SSupportOk returns a tuple with the HasE3SSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasE3SSupport
+
+`func (o *ComputePhysicalSummary) SetHasE3SSupport(v bool)`
+
+SetHasE3SSupport sets HasE3SSupport field to given value.
+
+### HasHasE3SSupport
+
+`func (o *ComputePhysicalSummary) HasHasE3SSupport() bool`
+
+HasHasE3SSupport returns a boolean if a field has been set.
 
 ### GetIpv4Address
 
