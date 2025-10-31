@@ -154,6 +154,16 @@ func getEquipmentExpanderModuleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"firmware_version": {
+			Description: "Firmware Version of the Chassis expander module.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"inventory_ready": {
+			Description: "The inventory ready field indicates whether the chassis expander module management controller has completed inventory of the installed devices.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
 			Type:        schema.TypeBool,
@@ -239,9 +249,112 @@ func getEquipmentExpanderModuleSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"pci_switches": {
+			Description: "An array of relationships to pciSwitch resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"pci_zones": {
+			Description: "An array of relationships to pciZone resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"physical_device_registration": {
+			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -363,8 +476,47 @@ func getEquipmentExpanderModuleSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"shared_adapter_units": {
+			Description: "An array of relationships to equipmentSharedAdapterUnit resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"side": {
+			Description: "Location of the expander module within a chassis. The value can be top or bottom.\n* `unknown` - Physical location of the module is unknown.\n* `top` - Physical location of the module is on the top part of the chassis.\n* `bottom` - Physical location of the module is on the bottom part of the chassis.\n* `left` - Physical location of the module is on the left side of the chassis.\n* `right` - Physical location of the module is on the right side of the chassis.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -771,6 +923,16 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 		o.SetFanModules(x)
 	}
 
+	if v, ok := d.GetOk("firmware_version"); ok {
+		x := (v.(string))
+		o.SetFirmwareVersion(x)
+	}
+
+	if v, ok := d.GetOkExists("inventory_ready"); ok {
+		x := (v.(bool))
+		o.SetInventoryReady(x)
+	}
+
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
 		x := (v.(bool))
 		o.SetIsUpgraded(x)
@@ -876,6 +1038,86 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 		o.SetPartNumber(x)
 	}
 
+	if v, ok := d.GetOk("pci_switches"); ok {
+		x := make([]models.PciSwitchRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPciSwitchRelationship(o))
+		}
+		o.SetPciSwitches(x)
+	}
+
+	if v, ok := d.GetOk("pci_zones"); ok {
+		x := make([]models.PciZoneRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPciZoneRelationship(o))
+		}
+		o.SetPciZones(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -914,6 +1156,49 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("physical_device_registration"); ok {
+		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsAssetDeviceRegistrationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPhysicalDeviceRegistration(x)
+		}
 	}
 
 	if v, ok := d.GetOk("presence"); ok {
@@ -1022,9 +1307,54 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 		o.SetSerial(x)
 	}
 
+	if v, ok := d.GetOk("shared_adapter_units"); ok {
+		x := make([]models.EquipmentSharedAdapterUnitRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsEquipmentSharedAdapterUnitRelationship(o))
+		}
+		o.SetSharedAdapterUnits(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("side"); ok {
+		x := (v.(string))
+		o.SetSide(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1231,6 +1561,8 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 
 				temp["fan_modules"] = flattenListEquipmentFanModuleRelationship(s.GetFanModules(), d)
+				temp["firmware_version"] = (s.GetFirmwareVersion())
+				temp["inventory_ready"] = (s.GetInventoryReady())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1245,7 +1577,13 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["part_number"] = (s.GetPartNumber())
 
+				temp["pci_switches"] = flattenListPciSwitchRelationship(s.GetPciSwitches(), d)
+
+				temp["pci_zones"] = flattenListPciZoneRelationship(s.GetPciZones(), d)
+
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["physical_device_registration"] = flattenMapAssetDeviceRegistrationRelationship(s.GetPhysicalDeviceRegistration(), d)
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)
@@ -1254,7 +1592,10 @@ func dataSourceEquipmentExpanderModuleRead(c context.Context, d *schema.Resource
 				temp["revision"] = (s.GetRevision())
 				temp["rn"] = (s.GetRn())
 				temp["serial"] = (s.GetSerial())
+
+				temp["shared_adapter_units"] = flattenListEquipmentSharedAdapterUnitRelationship(s.GetSharedAdapterUnits(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["side"] = (s.GetSide())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())

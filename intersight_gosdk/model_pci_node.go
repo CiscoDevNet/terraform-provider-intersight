@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -21,25 +21,42 @@ import (
 // checks if the PciNode type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PciNode{}
 
-// PciNode External pci nodes connected to a server.
+// PciNode External PCIe nodes connected to a server.
 type PciNode struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// The id of the chassis that the pcie node is currently located in.
-	ChassisId  *string  `json:"ChassisId,omitempty"`
+	ObjectType   string                      `json:"ObjectType"`
+	AlarmSummary NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
+	// The id of the chassis that the PCIe node is currently located in.
+	ChassisId *string `json:"ChassisId,omitempty"`
+	// The version of the PCIe node CIMC firmware.
+	FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
+	// The inventory ready field indicates whether the PCIe node management controller has completed inventory of the installed PCIe devices.
+	InventoryReady *bool `json:"InventoryReady,omitempty"`
+	// The lifecycle state of the PCIe node. This will map to the discovery lifecycle as represented in the Identity object. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `ScrubInProgress` - Scrub is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. * `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.
+	Lifecycle *string `json:"Lifecycle,omitempty"`
+	// The name of the PCIe node, the value of this property is the name of the UCS Domain along with the chassis and node slot ids.
+	Name       *string  `json:"Name,omitempty"`
 	OperReason []string `json:"OperReason,omitempty"`
-	// Operational state of the pcie node.
+	// Operational state of the PCIe node.
 	OperState *string `json:"OperState,omitempty"`
-	// The slot number in the chassis that the pcie node is currently located in.
-	SlotId       *string                          `json:"SlotId,omitempty"`
-	ComputeBlade NullableComputeBladeRelationship `json:"ComputeBlade,omitempty"`
+	// Bundle version which the CIMC firmware belongs to.
+	PackageVersion *string `json:"PackageVersion,omitempty"`
+	// The slot number in the chassis that the PCIe node is currently located in.
+	SlotId           *string                              `json:"SlotId,omitempty"`
+	ComputeBlade     NullableComputeBladeRelationship     `json:"ComputeBlade,omitempty"`
+	EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to graphicsCard resources.
-	GraphicsCards        []GraphicsCardRelationship                  `json:"GraphicsCards,omitempty"`
-	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
+	// An array of relationships to equipmentInterconnect resources.
+	Interconnects       []EquipmentInterconnectRelationship         `json:"Interconnects,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	LocatorLed          NullableEquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
+	RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	// An array of relationships to equipmentSharedGraphicsCard resources.
+	SharedGraphicsCards  []EquipmentSharedGraphicsCardRelationship `json:"SharedGraphicsCards,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,6 +143,49 @@ func (o *PciNode) GetDefaultObjectType() interface{} {
 	return "pci.Node"
 }
 
+// GetAlarmSummary returns the AlarmSummary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciNode) GetAlarmSummary() ComputeAlarmSummary {
+	if o == nil || IsNil(o.AlarmSummary.Get()) {
+		var ret ComputeAlarmSummary
+		return ret
+	}
+	return *o.AlarmSummary.Get()
+}
+
+// GetAlarmSummaryOk returns a tuple with the AlarmSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciNode) GetAlarmSummaryOk() (*ComputeAlarmSummary, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AlarmSummary.Get(), o.AlarmSummary.IsSet()
+}
+
+// HasAlarmSummary returns a boolean if a field has been set.
+func (o *PciNode) HasAlarmSummary() bool {
+	if o != nil && o.AlarmSummary.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAlarmSummary gets a reference to the given NullableComputeAlarmSummary and assigns it to the AlarmSummary field.
+func (o *PciNode) SetAlarmSummary(v ComputeAlarmSummary) {
+	o.AlarmSummary.Set(&v)
+}
+
+// SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+func (o *PciNode) SetAlarmSummaryNil() {
+	o.AlarmSummary.Set(nil)
+}
+
+// UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
+func (o *PciNode) UnsetAlarmSummary() {
+	o.AlarmSummary.Unset()
+}
+
 // GetChassisId returns the ChassisId field value if set, zero value otherwise.
 func (o *PciNode) GetChassisId() string {
 	if o == nil || IsNil(o.ChassisId) {
@@ -156,6 +216,134 @@ func (o *PciNode) HasChassisId() bool {
 // SetChassisId gets a reference to the given string and assigns it to the ChassisId field.
 func (o *PciNode) SetChassisId(v string) {
 	o.ChassisId = &v
+}
+
+// GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
+func (o *PciNode) GetFirmwareVersion() string {
+	if o == nil || IsNil(o.FirmwareVersion) {
+		var ret string
+		return ret
+	}
+	return *o.FirmwareVersion
+}
+
+// GetFirmwareVersionOk returns a tuple with the FirmwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciNode) GetFirmwareVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.FirmwareVersion) {
+		return nil, false
+	}
+	return o.FirmwareVersion, true
+}
+
+// HasFirmwareVersion returns a boolean if a field has been set.
+func (o *PciNode) HasFirmwareVersion() bool {
+	if o != nil && !IsNil(o.FirmwareVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirmwareVersion gets a reference to the given string and assigns it to the FirmwareVersion field.
+func (o *PciNode) SetFirmwareVersion(v string) {
+	o.FirmwareVersion = &v
+}
+
+// GetInventoryReady returns the InventoryReady field value if set, zero value otherwise.
+func (o *PciNode) GetInventoryReady() bool {
+	if o == nil || IsNil(o.InventoryReady) {
+		var ret bool
+		return ret
+	}
+	return *o.InventoryReady
+}
+
+// GetInventoryReadyOk returns a tuple with the InventoryReady field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciNode) GetInventoryReadyOk() (*bool, bool) {
+	if o == nil || IsNil(o.InventoryReady) {
+		return nil, false
+	}
+	return o.InventoryReady, true
+}
+
+// HasInventoryReady returns a boolean if a field has been set.
+func (o *PciNode) HasInventoryReady() bool {
+	if o != nil && !IsNil(o.InventoryReady) {
+		return true
+	}
+
+	return false
+}
+
+// SetInventoryReady gets a reference to the given bool and assigns it to the InventoryReady field.
+func (o *PciNode) SetInventoryReady(v bool) {
+	o.InventoryReady = &v
+}
+
+// GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
+func (o *PciNode) GetLifecycle() string {
+	if o == nil || IsNil(o.Lifecycle) {
+		var ret string
+		return ret
+	}
+	return *o.Lifecycle
+}
+
+// GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciNode) GetLifecycleOk() (*string, bool) {
+	if o == nil || IsNil(o.Lifecycle) {
+		return nil, false
+	}
+	return o.Lifecycle, true
+}
+
+// HasLifecycle returns a boolean if a field has been set.
+func (o *PciNode) HasLifecycle() bool {
+	if o != nil && !IsNil(o.Lifecycle) {
+		return true
+	}
+
+	return false
+}
+
+// SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
+func (o *PciNode) SetLifecycle(v string) {
+	o.Lifecycle = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PciNode) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciNode) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PciNode) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PciNode) SetName(v string) {
+	o.Name = &v
 }
 
 // GetOperReason returns the OperReason field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -221,6 +409,38 @@ func (o *PciNode) HasOperState() bool {
 // SetOperState gets a reference to the given string and assigns it to the OperState field.
 func (o *PciNode) SetOperState(v string) {
 	o.OperState = &v
+}
+
+// GetPackageVersion returns the PackageVersion field value if set, zero value otherwise.
+func (o *PciNode) GetPackageVersion() string {
+	if o == nil || IsNil(o.PackageVersion) {
+		var ret string
+		return ret
+	}
+	return *o.PackageVersion
+}
+
+// GetPackageVersionOk returns a tuple with the PackageVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciNode) GetPackageVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.PackageVersion) {
+		return nil, false
+	}
+	return o.PackageVersion, true
+}
+
+// HasPackageVersion returns a boolean if a field has been set.
+func (o *PciNode) HasPackageVersion() bool {
+	if o != nil && !IsNil(o.PackageVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetPackageVersion gets a reference to the given string and assigns it to the PackageVersion field.
+func (o *PciNode) SetPackageVersion(v string) {
+	o.PackageVersion = &v
 }
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
@@ -298,6 +518,49 @@ func (o *PciNode) UnsetComputeBlade() {
 	o.ComputeBlade.Unset()
 }
 
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciNode) GetEquipmentChassis() EquipmentChassisRelationship {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
+		var ret EquipmentChassisRelationship
+		return ret
+	}
+	return *o.EquipmentChassis.Get()
+}
+
+// GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciNode) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
+}
+
+// HasEquipmentChassis returns a boolean if a field has been set.
+func (o *PciNode) HasEquipmentChassis() bool {
+	if o != nil && o.EquipmentChassis.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+func (o *PciNode) SetEquipmentChassis(v EquipmentChassisRelationship) {
+	o.EquipmentChassis.Set(&v)
+}
+
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *PciNode) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *PciNode) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
 // GetGraphicsCards returns the GraphicsCards field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciNode) GetGraphicsCards() []GraphicsCardRelationship {
 	if o == nil {
@@ -329,6 +592,39 @@ func (o *PciNode) HasGraphicsCards() bool {
 // SetGraphicsCards gets a reference to the given []GraphicsCardRelationship and assigns it to the GraphicsCards field.
 func (o *PciNode) SetGraphicsCards(v []GraphicsCardRelationship) {
 	o.GraphicsCards = v
+}
+
+// GetInterconnects returns the Interconnects field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciNode) GetInterconnects() []EquipmentInterconnectRelationship {
+	if o == nil {
+		var ret []EquipmentInterconnectRelationship
+		return ret
+	}
+	return o.Interconnects
+}
+
+// GetInterconnectsOk returns a tuple with the Interconnects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciNode) GetInterconnectsOk() ([]EquipmentInterconnectRelationship, bool) {
+	if o == nil || IsNil(o.Interconnects) {
+		return nil, false
+	}
+	return o.Interconnects, true
+}
+
+// HasInterconnects returns a boolean if a field has been set.
+func (o *PciNode) HasInterconnects() bool {
+	if o != nil && !IsNil(o.Interconnects) {
+		return true
+	}
+
+	return false
+}
+
+// SetInterconnects gets a reference to the given []EquipmentInterconnectRelationship and assigns it to the Interconnects field.
+func (o *PciNode) SetInterconnects(v []EquipmentInterconnectRelationship) {
+	o.Interconnects = v
 }
 
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -374,6 +670,49 @@ func (o *PciNode) UnsetInventoryDeviceInfo() {
 	o.InventoryDeviceInfo.Unset()
 }
 
+// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciNode) GetLocatorLed() EquipmentLocatorLedRelationship {
+	if o == nil || IsNil(o.LocatorLed.Get()) {
+		var ret EquipmentLocatorLedRelationship
+		return ret
+	}
+	return *o.LocatorLed.Get()
+}
+
+// GetLocatorLedOk returns a tuple with the LocatorLed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciNode) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocatorLed.Get(), o.LocatorLed.IsSet()
+}
+
+// HasLocatorLed returns a boolean if a field has been set.
+func (o *PciNode) HasLocatorLed() bool {
+	if o != nil && o.LocatorLed.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocatorLed gets a reference to the given NullableEquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
+func (o *PciNode) SetLocatorLed(v EquipmentLocatorLedRelationship) {
+	o.LocatorLed.Set(&v)
+}
+
+// SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+func (o *PciNode) SetLocatorLedNil() {
+	o.LocatorLed.Set(nil)
+}
+
+// UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
+func (o *PciNode) UnsetLocatorLed() {
+	o.LocatorLed.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciNode) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -417,6 +756,39 @@ func (o *PciNode) UnsetRegisteredDevice() {
 	o.RegisteredDevice.Unset()
 }
 
+// GetSharedGraphicsCards returns the SharedGraphicsCards field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciNode) GetSharedGraphicsCards() []EquipmentSharedGraphicsCardRelationship {
+	if o == nil {
+		var ret []EquipmentSharedGraphicsCardRelationship
+		return ret
+	}
+	return o.SharedGraphicsCards
+}
+
+// GetSharedGraphicsCardsOk returns a tuple with the SharedGraphicsCards field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciNode) GetSharedGraphicsCardsOk() ([]EquipmentSharedGraphicsCardRelationship, bool) {
+	if o == nil || IsNil(o.SharedGraphicsCards) {
+		return nil, false
+	}
+	return o.SharedGraphicsCards, true
+}
+
+// HasSharedGraphicsCards returns a boolean if a field has been set.
+func (o *PciNode) HasSharedGraphicsCards() bool {
+	if o != nil && !IsNil(o.SharedGraphicsCards) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedGraphicsCards gets a reference to the given []EquipmentSharedGraphicsCardRelationship and assigns it to the SharedGraphicsCards field.
+func (o *PciNode) SetSharedGraphicsCards(v []EquipmentSharedGraphicsCardRelationship) {
+	o.SharedGraphicsCards = v
+}
+
 func (o PciNode) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -443,8 +815,23 @@ func (o PciNode) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.AlarmSummary.IsSet() {
+		toSerialize["AlarmSummary"] = o.AlarmSummary.Get()
+	}
 	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
+	}
+	if !IsNil(o.FirmwareVersion) {
+		toSerialize["FirmwareVersion"] = o.FirmwareVersion
+	}
+	if !IsNil(o.InventoryReady) {
+		toSerialize["InventoryReady"] = o.InventoryReady
+	}
+	if !IsNil(o.Lifecycle) {
+		toSerialize["Lifecycle"] = o.Lifecycle
+	}
+	if !IsNil(o.Name) {
+		toSerialize["Name"] = o.Name
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
@@ -452,20 +839,35 @@ func (o PciNode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
+	if !IsNil(o.PackageVersion) {
+		toSerialize["PackageVersion"] = o.PackageVersion
+	}
 	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
 	if o.ComputeBlade.IsSet() {
 		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
+	}
 	if o.GraphicsCards != nil {
 		toSerialize["GraphicsCards"] = o.GraphicsCards
+	}
+	if o.Interconnects != nil {
+		toSerialize["Interconnects"] = o.Interconnects
 	}
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
+	if o.LocatorLed.IsSet() {
+		toSerialize["LocatorLed"] = o.LocatorLed.Get()
+	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
+	}
+	if o.SharedGraphicsCards != nil {
+		toSerialize["SharedGraphicsCards"] = o.SharedGraphicsCards
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -521,19 +923,36 @@ func (o *PciNode) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
-		// The id of the chassis that the pcie node is currently located in.
-		ChassisId  *string  `json:"ChassisId,omitempty"`
+		ObjectType   string                      `json:"ObjectType"`
+		AlarmSummary NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
+		// The id of the chassis that the PCIe node is currently located in.
+		ChassisId *string `json:"ChassisId,omitempty"`
+		// The version of the PCIe node CIMC firmware.
+		FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
+		// The inventory ready field indicates whether the PCIe node management controller has completed inventory of the installed PCIe devices.
+		InventoryReady *bool `json:"InventoryReady,omitempty"`
+		// The lifecycle state of the PCIe node. This will map to the discovery lifecycle as represented in the Identity object. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `ScrubInProgress` - Scrub is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. * `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.
+		Lifecycle *string `json:"Lifecycle,omitempty"`
+		// The name of the PCIe node, the value of this property is the name of the UCS Domain along with the chassis and node slot ids.
+		Name       *string  `json:"Name,omitempty"`
 		OperReason []string `json:"OperReason,omitempty"`
-		// Operational state of the pcie node.
+		// Operational state of the PCIe node.
 		OperState *string `json:"OperState,omitempty"`
-		// The slot number in the chassis that the pcie node is currently located in.
-		SlotId       *string                          `json:"SlotId,omitempty"`
-		ComputeBlade NullableComputeBladeRelationship `json:"ComputeBlade,omitempty"`
+		// Bundle version which the CIMC firmware belongs to.
+		PackageVersion *string `json:"PackageVersion,omitempty"`
+		// The slot number in the chassis that the PCIe node is currently located in.
+		SlotId           *string                              `json:"SlotId,omitempty"`
+		ComputeBlade     NullableComputeBladeRelationship     `json:"ComputeBlade,omitempty"`
+		EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 		// An array of relationships to graphicsCard resources.
-		GraphicsCards       []GraphicsCardRelationship                  `json:"GraphicsCards,omitempty"`
+		GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
+		// An array of relationships to equipmentInterconnect resources.
+		Interconnects       []EquipmentInterconnectRelationship         `json:"Interconnects,omitempty"`
 		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		LocatorLed          NullableEquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
 		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		// An array of relationships to equipmentSharedGraphicsCard resources.
+		SharedGraphicsCards []EquipmentSharedGraphicsCardRelationship `json:"SharedGraphicsCards,omitempty"`
 	}
 
 	varPciNodeWithoutEmbeddedStruct := PciNodeWithoutEmbeddedStruct{}
@@ -543,14 +962,24 @@ func (o *PciNode) UnmarshalJSON(data []byte) (err error) {
 		varPciNode := _PciNode{}
 		varPciNode.ClassId = varPciNodeWithoutEmbeddedStruct.ClassId
 		varPciNode.ObjectType = varPciNodeWithoutEmbeddedStruct.ObjectType
+		varPciNode.AlarmSummary = varPciNodeWithoutEmbeddedStruct.AlarmSummary
 		varPciNode.ChassisId = varPciNodeWithoutEmbeddedStruct.ChassisId
+		varPciNode.FirmwareVersion = varPciNodeWithoutEmbeddedStruct.FirmwareVersion
+		varPciNode.InventoryReady = varPciNodeWithoutEmbeddedStruct.InventoryReady
+		varPciNode.Lifecycle = varPciNodeWithoutEmbeddedStruct.Lifecycle
+		varPciNode.Name = varPciNodeWithoutEmbeddedStruct.Name
 		varPciNode.OperReason = varPciNodeWithoutEmbeddedStruct.OperReason
 		varPciNode.OperState = varPciNodeWithoutEmbeddedStruct.OperState
+		varPciNode.PackageVersion = varPciNodeWithoutEmbeddedStruct.PackageVersion
 		varPciNode.SlotId = varPciNodeWithoutEmbeddedStruct.SlotId
 		varPciNode.ComputeBlade = varPciNodeWithoutEmbeddedStruct.ComputeBlade
+		varPciNode.EquipmentChassis = varPciNodeWithoutEmbeddedStruct.EquipmentChassis
 		varPciNode.GraphicsCards = varPciNodeWithoutEmbeddedStruct.GraphicsCards
+		varPciNode.Interconnects = varPciNodeWithoutEmbeddedStruct.Interconnects
 		varPciNode.InventoryDeviceInfo = varPciNodeWithoutEmbeddedStruct.InventoryDeviceInfo
+		varPciNode.LocatorLed = varPciNodeWithoutEmbeddedStruct.LocatorLed
 		varPciNode.RegisteredDevice = varPciNodeWithoutEmbeddedStruct.RegisteredDevice
+		varPciNode.SharedGraphicsCards = varPciNodeWithoutEmbeddedStruct.SharedGraphicsCards
 		*o = PciNode(varPciNode)
 	} else {
 		return err
@@ -570,14 +999,24 @@ func (o *PciNode) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "ChassisId")
+		delete(additionalProperties, "FirmwareVersion")
+		delete(additionalProperties, "InventoryReady")
+		delete(additionalProperties, "Lifecycle")
+		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OperReason")
 		delete(additionalProperties, "OperState")
+		delete(additionalProperties, "PackageVersion")
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "ComputeBlade")
+		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "GraphicsCards")
+		delete(additionalProperties, "Interconnects")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "LocatorLed")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "SharedGraphicsCards")
 
 		// remove fields from embedded structs
 		reflectEquipmentBase := reflect.ValueOf(o.EquipmentBase)

@@ -125,6 +125,41 @@ func getPciSwitchSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"equipment_expander_module": {
+			Description: "A reference to a equipmentExpanderModule resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"health": {
 			Description: "The composite health of the switch.",
 			Type:        schema.TypeString,
@@ -220,12 +255,17 @@ func getPciSwitchSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"num_of_adaptors": {
-			Description: "The number of GPUs and PCI adapters connected the switch.",
+			Description: "The number of GPUs and PCIe adapters connected the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_state": {
+			Description: "Operational state of the PCIe switch that connects the CPU GPU and the PCIe adapter.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -270,17 +310,90 @@ func getPciSwitchSchema() map[string]*schema.Schema {
 			},
 		},
 		"pci_address": {
-			Description: "The PCI address of the switch.",
+			Description: "The PCIe address of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"pci_endpoints": {
+			Description: "An array of relationships to pciEndpoint resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"pci_slot": {
-			Description: "The PCI slot name of the switch.",
+			Description: "The PCIe slot name of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"pci_switch_id": {
+			Description: "Unique Identifier of a PCIe switch within a chassis expander module.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"ports": {
+			Description: "An array of relationships to pciPort resources.",
 			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
@@ -845,6 +958,49 @@ func dataSourcePciSwitchRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("equipment_expander_module"); ok {
+		p := make([]models.EquipmentExpanderModuleRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsEquipmentExpanderModuleRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetEquipmentExpanderModule(x)
+		}
+	}
+
 	if v, ok := d.GetOk("health"); ok {
 		x := (v.(string))
 		o.SetHealth(x)
@@ -963,6 +1119,11 @@ func dataSourcePciSwitchRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetObjectType(x)
 	}
 
+	if v, ok := d.GetOk("oper_state"); ok {
+		x := (v.(string))
+		o.SetOperState(x)
+	}
+
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -1022,9 +1183,54 @@ func dataSourcePciSwitchRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetPciAddress(x)
 	}
 
+	if v, ok := d.GetOk("pci_endpoints"); ok {
+		x := make([]models.PciEndpointRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPciEndpointRelationship(o))
+		}
+		o.SetPciEndpoints(x)
+	}
+
 	if v, ok := d.GetOk("pci_slot"); ok {
 		x := (v.(string))
 		o.SetPciSlot(x)
+	}
+
+	if v, ok := d.GetOk("pci_switch_id"); ok {
+		x := (v.(string))
+		o.SetPciSwitchId(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -1065,6 +1271,46 @@ func dataSourcePciSwitchRead(c context.Context, d *schema.ResourceData, meta int
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("ports"); ok {
+		x := make([]models.PciPortRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPciPortRelationship(o))
+		}
+		o.SetPorts(x)
 	}
 
 	if v, ok := d.GetOk("presence"); ok {
@@ -1456,6 +1702,8 @@ func dataSourcePciSwitchRead(c context.Context, d *schema.ResourceData, meta int
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["equipment_expander_module"] = flattenMapEquipmentExpanderModuleRelationship(s.GetEquipmentExpanderModule(), d)
 				temp["health"] = (s.GetHealth())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
@@ -1468,13 +1716,19 @@ func dataSourcePciSwitchRead(c context.Context, d *schema.ResourceData, meta int
 				temp["moid"] = (s.GetMoid())
 				temp["num_of_adaptors"] = (s.GetNumOfAdaptors())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["pci_address"] = (s.GetPciAddress())
+
+				temp["pci_endpoints"] = flattenListPciEndpointRelationship(s.GetPciEndpoints(), d)
 				temp["pci_slot"] = (s.GetPciSlot())
+				temp["pci_switch_id"] = (s.GetPciSwitchId())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["ports"] = flattenListPciPortRelationship(s.GetPorts(), d)
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)

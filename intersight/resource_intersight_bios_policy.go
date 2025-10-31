@@ -1031,6 +1031,34 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"gpu_direct_cpu1": {
+				Description:  "BIOS Token for setting GPU Direct CPU1 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"gpu_direct_cpu2": {
+				Description:  "BIOS Token for setting GPU Direct CPU2 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"gpu_direct_cpu3": {
+				Description:  "BIOS Token for setting GPU Direct CPU3 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"gpu_direct_cpu4": {
+				Description:  "BIOS Token for setting GPU Direct CPU4 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"hardware_prefetch": {
 				Description:  "BIOS Token for setting Hardware Prefetcher configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
@@ -4529,6 +4557,26 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetFrb2enable(x)
 	}
 
+	if v, ok := d.GetOk("gpu_direct_cpu1"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu1(x)
+	}
+
+	if v, ok := d.GetOk("gpu_direct_cpu2"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu2(x)
+	}
+
+	if v, ok := d.GetOk("gpu_direct_cpu3"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu3(x)
+	}
+
+	if v, ok := d.GetOk("gpu_direct_cpu4"); ok {
+		x := (v.(string))
+		o.SetGpuDirectCpu4(x)
+	}
+
 	if v, ok := d.GetOk("hardware_prefetch"); ok {
 		x := (v.(string))
 		o.SetHardwarePrefetch(x)
@@ -6988,6 +7036,22 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property Frb2enable in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("gpu_direct_cpu1", (s.GetGpuDirectCpu1())); err != nil {
+		return diag.Errorf("error occurred while setting property GpuDirectCpu1 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("gpu_direct_cpu2", (s.GetGpuDirectCpu2())); err != nil {
+		return diag.Errorf("error occurred while setting property GpuDirectCpu2 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("gpu_direct_cpu3", (s.GetGpuDirectCpu3())); err != nil {
+		return diag.Errorf("error occurred while setting property GpuDirectCpu3 in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("gpu_direct_cpu4", (s.GetGpuDirectCpu4())); err != nil {
+		return diag.Errorf("error occurred while setting property GpuDirectCpu4 in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("hardware_prefetch", (s.GetHardwarePrefetch())); err != nil {
 		return diag.Errorf("error occurred while setting property HardwarePrefetch in BiosPolicy object: %s", err.Error())
 	}
@@ -9181,6 +9245,30 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("frb2enable")
 		x := (v.(string))
 		o.SetFrb2enable(x)
+	}
+
+	if d.HasChange("gpu_direct_cpu1") {
+		v := d.Get("gpu_direct_cpu1")
+		x := (v.(string))
+		o.SetGpuDirectCpu1(x)
+	}
+
+	if d.HasChange("gpu_direct_cpu2") {
+		v := d.Get("gpu_direct_cpu2")
+		x := (v.(string))
+		o.SetGpuDirectCpu2(x)
+	}
+
+	if d.HasChange("gpu_direct_cpu3") {
+		v := d.Get("gpu_direct_cpu3")
+		x := (v.(string))
+		o.SetGpuDirectCpu3(x)
+	}
+
+	if d.HasChange("gpu_direct_cpu4") {
+		v := d.Get("gpu_direct_cpu4")
+		x := (v.(string))
+		o.SetGpuDirectCpu4(x)
 	}
 
 	if d.HasChange("hardware_prefetch") {

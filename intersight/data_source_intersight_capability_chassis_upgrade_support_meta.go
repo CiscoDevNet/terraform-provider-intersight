@@ -194,6 +194,16 @@ func getCapabilityChassisUpgradeSupportMetaSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"supported_psu_models": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"supported_xfm_models": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -644,6 +654,28 @@ func dataSourceCapabilityChassisUpgradeSupportMetaRead(c context.Context, d *sch
 		o.SetSupportedModels(x)
 	}
 
+	if v, ok := d.GetOk("supported_psu_models"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetSupportedPsuModels(x)
+	}
+
+	if v, ok := d.GetOk("supported_xfm_models"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetSupportedXfmModels(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -852,6 +884,8 @@ func dataSourceCapabilityChassisUpgradeSupportMetaRead(c context.Context, d *sch
 				temp["series_id"] = (s.GetSeriesId())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["supported_models"] = (s.GetSupportedModels())
+				temp["supported_psu_models"] = (s.GetSupportedPsuModels())
+				temp["supported_xfm_models"] = (s.GetSupportedXfmModels())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

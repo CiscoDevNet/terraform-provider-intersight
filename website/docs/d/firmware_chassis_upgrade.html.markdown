@@ -23,4 +23,5 @@ The following arguments can be used to get data of already created objects in In
 * `skip_estimate_impact`:(bool) User has the option to skip the estimate impact calculation. 
 * `status`:(string) Status of the upgrade operation.* `NONE` - Upgrade status is not populated.* `IN_PROGRESS` - The upgrade is in progress.* `SUCCESSFUL` - The upgrade successfully completed.* `FAILED` - The upgrade shows failed status.* `TERMINATED` - The upgrade has been terminated. 
 * `upgrade_type`:(string) Desired upgrade mode to choose either direct download based upgrade or network share upgrade.* `direct_upgrade` - Upgrade mode is direct download.* `network_upgrade` - Upgrade mode is network upgrade. 
+* `xfm_upgrade_option`:(string) XFM upgrade option Full or Partial Disruption.* `none` - If no option is selected for exclusion.* `full-shutdown` - PSX Switch in XFM will be upgraded in single action.* `partial-shutdown` - PSX Switch in XFM will be upgraded one after other. 
  

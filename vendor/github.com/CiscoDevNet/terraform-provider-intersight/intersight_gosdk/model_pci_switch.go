@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the PciSwitch type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PciSwitch{}
 
-// PciSwitch PCI Switch present in a server connected to two GPUs and one PCIe adapter.
+// PciSwitch PCIe switch present in the system which connects PCIe devices (CPU, GPU and the PCIe adapter).
 type PciSwitch struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -32,12 +32,16 @@ type PciSwitch struct {
 	DeviceId *string `json:"DeviceId,omitempty"`
 	// The composite health of the switch.
 	Health *string `json:"Health,omitempty"`
-	// The number of GPUs and PCI adapters connected the switch.
+	// The number of GPUs and PCIe adapters connected the switch.
 	NumOfAdaptors *string `json:"NumOfAdaptors,omitempty"`
-	// The PCI address of the switch.
+	// Operational state of the PCIe switch that connects the CPU GPU and the PCIe adapter.
+	OperState *string `json:"OperState,omitempty"`
+	// The PCIe address of the switch.
 	PciAddress *string `json:"PciAddress,omitempty"`
-	// The PCI slot name of the switch.
+	// The PCIe slot name of the switch.
 	PciSlot *string `json:"PciSlot,omitempty"`
+	// Unique Identifier of a PCIe switch within a chassis expander module.
+	PciSwitchId *string `json:"PciSwitchId,omitempty"`
 	// The model information for the switch.
 	ProductName *string `json:"ProductName,omitempty"`
 	// The product revision of the switch.
@@ -51,11 +55,16 @@ type PciSwitch struct {
 	// The type information of the switch.
 	Type *string `json:"Type,omitempty"`
 	// The vendor id of the switch.
-	VendorId            *string                                 `json:"VendorId,omitempty"`
-	ComputeBoard        NullableComputeBoardRelationship        `json:"ComputeBoard,omitempty"`
-	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	VendorId                *string                                     `json:"VendorId,omitempty"`
+	ComputeBoard            NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+	EquipmentExpanderModule NullableEquipmentExpanderModuleRelationship `json:"EquipmentExpanderModule,omitempty"`
+	InventoryDeviceInfo     NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to pciLink resources.
-	Links            []PciLinkRelationship                       `json:"Links,omitempty"`
+	Links []PciLinkRelationship `json:"Links,omitempty"`
+	// An array of relationships to pciEndpoint resources.
+	PciEndpoints []PciEndpointRelationship `json:"PciEndpoints,omitempty"`
+	// An array of relationships to pciPort resources.
+	Ports            []PciPortRelationship                       `json:"Ports,omitempty"`
 	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to firmwareRunningFirmware resources.
 	RunningFirmware      []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
@@ -241,6 +250,38 @@ func (o *PciSwitch) SetNumOfAdaptors(v string) {
 	o.NumOfAdaptors = &v
 }
 
+// GetOperState returns the OperState field value if set, zero value otherwise.
+func (o *PciSwitch) GetOperState() string {
+	if o == nil || IsNil(o.OperState) {
+		var ret string
+		return ret
+	}
+	return *o.OperState
+}
+
+// GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciSwitch) GetOperStateOk() (*string, bool) {
+	if o == nil || IsNil(o.OperState) {
+		return nil, false
+	}
+	return o.OperState, true
+}
+
+// HasOperState returns a boolean if a field has been set.
+func (o *PciSwitch) HasOperState() bool {
+	if o != nil && !IsNil(o.OperState) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperState gets a reference to the given string and assigns it to the OperState field.
+func (o *PciSwitch) SetOperState(v string) {
+	o.OperState = &v
+}
+
 // GetPciAddress returns the PciAddress field value if set, zero value otherwise.
 func (o *PciSwitch) GetPciAddress() string {
 	if o == nil || IsNil(o.PciAddress) {
@@ -303,6 +344,38 @@ func (o *PciSwitch) HasPciSlot() bool {
 // SetPciSlot gets a reference to the given string and assigns it to the PciSlot field.
 func (o *PciSwitch) SetPciSlot(v string) {
 	o.PciSlot = &v
+}
+
+// GetPciSwitchId returns the PciSwitchId field value if set, zero value otherwise.
+func (o *PciSwitch) GetPciSwitchId() string {
+	if o == nil || IsNil(o.PciSwitchId) {
+		var ret string
+		return ret
+	}
+	return *o.PciSwitchId
+}
+
+// GetPciSwitchIdOk returns a tuple with the PciSwitchId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PciSwitch) GetPciSwitchIdOk() (*string, bool) {
+	if o == nil || IsNil(o.PciSwitchId) {
+		return nil, false
+	}
+	return o.PciSwitchId, true
+}
+
+// HasPciSwitchId returns a boolean if a field has been set.
+func (o *PciSwitch) HasPciSwitchId() bool {
+	if o != nil && !IsNil(o.PciSwitchId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPciSwitchId gets a reference to the given string and assigns it to the PciSwitchId field.
+func (o *PciSwitch) SetPciSwitchId(v string) {
+	o.PciSwitchId = &v
 }
 
 // GetProductName returns the ProductName field value if set, zero value otherwise.
@@ -572,6 +645,49 @@ func (o *PciSwitch) UnsetComputeBoard() {
 	o.ComputeBoard.Unset()
 }
 
+// GetEquipmentExpanderModule returns the EquipmentExpanderModule field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciSwitch) GetEquipmentExpanderModule() EquipmentExpanderModuleRelationship {
+	if o == nil || IsNil(o.EquipmentExpanderModule.Get()) {
+		var ret EquipmentExpanderModuleRelationship
+		return ret
+	}
+	return *o.EquipmentExpanderModule.Get()
+}
+
+// GetEquipmentExpanderModuleOk returns a tuple with the EquipmentExpanderModule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciSwitch) GetEquipmentExpanderModuleOk() (*EquipmentExpanderModuleRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentExpanderModule.Get(), o.EquipmentExpanderModule.IsSet()
+}
+
+// HasEquipmentExpanderModule returns a boolean if a field has been set.
+func (o *PciSwitch) HasEquipmentExpanderModule() bool {
+	if o != nil && o.EquipmentExpanderModule.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentExpanderModule gets a reference to the given NullableEquipmentExpanderModuleRelationship and assigns it to the EquipmentExpanderModule field.
+func (o *PciSwitch) SetEquipmentExpanderModule(v EquipmentExpanderModuleRelationship) {
+	o.EquipmentExpanderModule.Set(&v)
+}
+
+// SetEquipmentExpanderModuleNil sets the value for EquipmentExpanderModule to be an explicit nil
+func (o *PciSwitch) SetEquipmentExpanderModuleNil() {
+	o.EquipmentExpanderModule.Set(nil)
+}
+
+// UnsetEquipmentExpanderModule ensures that no value is present for EquipmentExpanderModule, not even an explicit nil
+func (o *PciSwitch) UnsetEquipmentExpanderModule() {
+	o.EquipmentExpanderModule.Unset()
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciSwitch) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
@@ -646,6 +762,72 @@ func (o *PciSwitch) HasLinks() bool {
 // SetLinks gets a reference to the given []PciLinkRelationship and assigns it to the Links field.
 func (o *PciSwitch) SetLinks(v []PciLinkRelationship) {
 	o.Links = v
+}
+
+// GetPciEndpoints returns the PciEndpoints field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciSwitch) GetPciEndpoints() []PciEndpointRelationship {
+	if o == nil {
+		var ret []PciEndpointRelationship
+		return ret
+	}
+	return o.PciEndpoints
+}
+
+// GetPciEndpointsOk returns a tuple with the PciEndpoints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciSwitch) GetPciEndpointsOk() ([]PciEndpointRelationship, bool) {
+	if o == nil || IsNil(o.PciEndpoints) {
+		return nil, false
+	}
+	return o.PciEndpoints, true
+}
+
+// HasPciEndpoints returns a boolean if a field has been set.
+func (o *PciSwitch) HasPciEndpoints() bool {
+	if o != nil && !IsNil(o.PciEndpoints) {
+		return true
+	}
+
+	return false
+}
+
+// SetPciEndpoints gets a reference to the given []PciEndpointRelationship and assigns it to the PciEndpoints field.
+func (o *PciSwitch) SetPciEndpoints(v []PciEndpointRelationship) {
+	o.PciEndpoints = v
+}
+
+// GetPorts returns the Ports field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PciSwitch) GetPorts() []PciPortRelationship {
+	if o == nil {
+		var ret []PciPortRelationship
+		return ret
+	}
+	return o.Ports
+}
+
+// GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PciSwitch) GetPortsOk() ([]PciPortRelationship, bool) {
+	if o == nil || IsNil(o.Ports) {
+		return nil, false
+	}
+	return o.Ports, true
+}
+
+// HasPorts returns a boolean if a field has been set.
+func (o *PciSwitch) HasPorts() bool {
+	if o != nil && !IsNil(o.Ports) {
+		return true
+	}
+
+	return false
+}
+
+// SetPorts gets a reference to the given []PciPortRelationship and assigns it to the Ports field.
+func (o *PciSwitch) SetPorts(v []PciPortRelationship) {
+	o.Ports = v
 }
 
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -759,11 +941,17 @@ func (o PciSwitch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NumOfAdaptors) {
 		toSerialize["NumOfAdaptors"] = o.NumOfAdaptors
 	}
+	if !IsNil(o.OperState) {
+		toSerialize["OperState"] = o.OperState
+	}
 	if !IsNil(o.PciAddress) {
 		toSerialize["PciAddress"] = o.PciAddress
 	}
 	if !IsNil(o.PciSlot) {
 		toSerialize["PciSlot"] = o.PciSlot
+	}
+	if !IsNil(o.PciSwitchId) {
+		toSerialize["PciSwitchId"] = o.PciSwitchId
 	}
 	if !IsNil(o.ProductName) {
 		toSerialize["ProductName"] = o.ProductName
@@ -789,11 +977,20 @@ func (o PciSwitch) ToMap() (map[string]interface{}, error) {
 	if o.ComputeBoard.IsSet() {
 		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
+	if o.EquipmentExpanderModule.IsSet() {
+		toSerialize["EquipmentExpanderModule"] = o.EquipmentExpanderModule.Get()
+	}
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
 	if o.Links != nil {
 		toSerialize["Links"] = o.Links
+	}
+	if o.PciEndpoints != nil {
+		toSerialize["PciEndpoints"] = o.PciEndpoints
+	}
+	if o.Ports != nil {
+		toSerialize["Ports"] = o.Ports
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -860,12 +1057,16 @@ func (o *PciSwitch) UnmarshalJSON(data []byte) (err error) {
 		DeviceId *string `json:"DeviceId,omitempty"`
 		// The composite health of the switch.
 		Health *string `json:"Health,omitempty"`
-		// The number of GPUs and PCI adapters connected the switch.
+		// The number of GPUs and PCIe adapters connected the switch.
 		NumOfAdaptors *string `json:"NumOfAdaptors,omitempty"`
-		// The PCI address of the switch.
+		// Operational state of the PCIe switch that connects the CPU GPU and the PCIe adapter.
+		OperState *string `json:"OperState,omitempty"`
+		// The PCIe address of the switch.
 		PciAddress *string `json:"PciAddress,omitempty"`
-		// The PCI slot name of the switch.
+		// The PCIe slot name of the switch.
 		PciSlot *string `json:"PciSlot,omitempty"`
+		// Unique Identifier of a PCIe switch within a chassis expander module.
+		PciSwitchId *string `json:"PciSwitchId,omitempty"`
 		// The model information for the switch.
 		ProductName *string `json:"ProductName,omitempty"`
 		// The product revision of the switch.
@@ -879,11 +1080,16 @@ func (o *PciSwitch) UnmarshalJSON(data []byte) (err error) {
 		// The type information of the switch.
 		Type *string `json:"Type,omitempty"`
 		// The vendor id of the switch.
-		VendorId            *string                                 `json:"VendorId,omitempty"`
-		ComputeBoard        NullableComputeBoardRelationship        `json:"ComputeBoard,omitempty"`
-		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		VendorId                *string                                     `json:"VendorId,omitempty"`
+		ComputeBoard            NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+		EquipmentExpanderModule NullableEquipmentExpanderModuleRelationship `json:"EquipmentExpanderModule,omitempty"`
+		InventoryDeviceInfo     NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 		// An array of relationships to pciLink resources.
-		Links            []PciLinkRelationship                       `json:"Links,omitempty"`
+		Links []PciLinkRelationship `json:"Links,omitempty"`
+		// An array of relationships to pciEndpoint resources.
+		PciEndpoints []PciEndpointRelationship `json:"PciEndpoints,omitempty"`
+		// An array of relationships to pciPort resources.
+		Ports            []PciPortRelationship                       `json:"Ports,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to firmwareRunningFirmware resources.
 		RunningFirmware []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
@@ -899,8 +1105,10 @@ func (o *PciSwitch) UnmarshalJSON(data []byte) (err error) {
 		varPciSwitch.DeviceId = varPciSwitchWithoutEmbeddedStruct.DeviceId
 		varPciSwitch.Health = varPciSwitchWithoutEmbeddedStruct.Health
 		varPciSwitch.NumOfAdaptors = varPciSwitchWithoutEmbeddedStruct.NumOfAdaptors
+		varPciSwitch.OperState = varPciSwitchWithoutEmbeddedStruct.OperState
 		varPciSwitch.PciAddress = varPciSwitchWithoutEmbeddedStruct.PciAddress
 		varPciSwitch.PciSlot = varPciSwitchWithoutEmbeddedStruct.PciSlot
+		varPciSwitch.PciSwitchId = varPciSwitchWithoutEmbeddedStruct.PciSwitchId
 		varPciSwitch.ProductName = varPciSwitchWithoutEmbeddedStruct.ProductName
 		varPciSwitch.ProductRevision = varPciSwitchWithoutEmbeddedStruct.ProductRevision
 		varPciSwitch.SubDeviceId = varPciSwitchWithoutEmbeddedStruct.SubDeviceId
@@ -909,8 +1117,11 @@ func (o *PciSwitch) UnmarshalJSON(data []byte) (err error) {
 		varPciSwitch.Type = varPciSwitchWithoutEmbeddedStruct.Type
 		varPciSwitch.VendorId = varPciSwitchWithoutEmbeddedStruct.VendorId
 		varPciSwitch.ComputeBoard = varPciSwitchWithoutEmbeddedStruct.ComputeBoard
+		varPciSwitch.EquipmentExpanderModule = varPciSwitchWithoutEmbeddedStruct.EquipmentExpanderModule
 		varPciSwitch.InventoryDeviceInfo = varPciSwitchWithoutEmbeddedStruct.InventoryDeviceInfo
 		varPciSwitch.Links = varPciSwitchWithoutEmbeddedStruct.Links
+		varPciSwitch.PciEndpoints = varPciSwitchWithoutEmbeddedStruct.PciEndpoints
+		varPciSwitch.Ports = varPciSwitchWithoutEmbeddedStruct.Ports
 		varPciSwitch.RegisteredDevice = varPciSwitchWithoutEmbeddedStruct.RegisteredDevice
 		varPciSwitch.RunningFirmware = varPciSwitchWithoutEmbeddedStruct.RunningFirmware
 		*o = PciSwitch(varPciSwitch)
@@ -935,8 +1146,10 @@ func (o *PciSwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "Health")
 		delete(additionalProperties, "NumOfAdaptors")
+		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "PciAddress")
 		delete(additionalProperties, "PciSlot")
+		delete(additionalProperties, "PciSwitchId")
 		delete(additionalProperties, "ProductName")
 		delete(additionalProperties, "ProductRevision")
 		delete(additionalProperties, "SubDeviceId")
@@ -945,8 +1158,11 @@ func (o *PciSwitch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "VendorId")
 		delete(additionalProperties, "ComputeBoard")
+		delete(additionalProperties, "EquipmentExpanderModule")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "Links")
+		delete(additionalProperties, "PciEndpoints")
+		delete(additionalProperties, "Ports")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "RunningFirmware")
 

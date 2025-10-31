@@ -381,7 +381,7 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				Computed:   true,
 				Elem: &schema.Schema{
 					Type:         schema.TypeString,
-					ValidateFunc: validation.StringInSlice([]string{"none", "local-disk"}, false),
+					ValidateFunc: validation.StringInSlice([]string{"none", "local-disk", "psu", "xfm"}, false),
 				}, ForceNew: true,
 			},
 			"file_server": {
@@ -1313,6 +1313,14 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"xfm_upgrade_option": {
+				Description:  "XFM upgrade option Full or Partial Disruption.\n* `none` - If no option is selected for exclusion.\n* `full-shutdown` - PSX Switch in XFM will be upgraded in single action.\n* `partial-shutdown` - PSX Switch in XFM will be upgraded one after other.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"none", "full-shutdown", "partial-shutdown"}, false),
+				Optional:     true,
+				Default:      "none",
+				ForceNew:     true,
+			},
 		},
 	}
 }
@@ -1893,6 +1901,11 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 		o.SetUpgradeType(x)
 	}
 
+	if v, ok := d.GetOk("xfm_upgrade_option"); ok {
+		x := (v.(string))
+		o.SetXfmUpgradeOption(x)
+	}
+
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareChassisUpgrade(conn.ctx).FirmwareChassisUpgrade(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -2049,6 +2062,10 @@ func resourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceDat
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in FirmwareChassisUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("xfm_upgrade_option", (s.GetXfmUpgradeOption())); err != nil {
+		return diag.Errorf("error occurred while setting property XfmUpgradeOption in FirmwareChassisUpgrade object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)

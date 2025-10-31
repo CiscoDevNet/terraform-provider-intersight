@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -55,7 +55,9 @@ type ComputePhysical struct {
 	// The actual front panel state of the server. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 	FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 	// The universally unique hardware identity of the server provided by the manufacturer.
-	HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
+	HardwareUuid *string `json:"HardwareUuid,omitempty"`
+	// The flag to indicate server has the support for E3.S drives.
+	HasE3SSupport  *bool              `json:"HasE3SSupport,omitempty"`
 	KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 	// The KVM server state of the server.
 	KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
@@ -671,6 +673,38 @@ func (o *ComputePhysical) HasHardwareUuid() bool {
 // SetHardwareUuid gets a reference to the given string and assigns it to the HardwareUuid field.
 func (o *ComputePhysical) SetHardwareUuid(v string) {
 	o.HardwareUuid = &v
+}
+
+// GetHasE3SSupport returns the HasE3SSupport field value if set, zero value otherwise.
+func (o *ComputePhysical) GetHasE3SSupport() bool {
+	if o == nil || IsNil(o.HasE3SSupport) {
+		var ret bool
+		return ret
+	}
+	return *o.HasE3SSupport
+}
+
+// GetHasE3SSupportOk returns a tuple with the HasE3SSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetHasE3SSupportOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasE3SSupport) {
+		return nil, false
+	}
+	return o.HasE3SSupport, true
+}
+
+// HasHasE3SSupport returns a boolean if a field has been set.
+func (o *ComputePhysical) HasHasE3SSupport() bool {
+	if o != nil && !IsNil(o.HasE3SSupport) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasE3SSupport gets a reference to the given bool and assigns it to the HasE3SSupport field.
+func (o *ComputePhysical) SetHasE3SSupport(v bool) {
+	o.HasE3SSupport = &v
 }
 
 // GetKvmIpAddresses returns the KvmIpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2061,6 +2095,9 @@ func (o ComputePhysical) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HardwareUuid) {
 		toSerialize["HardwareUuid"] = o.HardwareUuid
 	}
+	if !IsNil(o.HasE3SSupport) {
+		toSerialize["HasE3SSupport"] = o.HasE3SSupport
+	}
 	if o.KvmIpAddresses != nil {
 		toSerialize["KvmIpAddresses"] = o.KvmIpAddresses
 	}
@@ -2260,7 +2297,9 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		// The actual front panel state of the server. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 		FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 		// The universally unique hardware identity of the server provided by the manufacturer.
-		HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
+		HardwareUuid *string `json:"HardwareUuid,omitempty"`
+		// The flag to indicate server has the support for E3.S drives.
+		HasE3SSupport  *bool              `json:"HasE3SSupport,omitempty"`
 		KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 		// The KVM server state of the server.
 		KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
@@ -2359,6 +2398,7 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysical.FaultSummary = varComputePhysicalWithoutEmbeddedStruct.FaultSummary
 		varComputePhysical.FrontPanelLockState = varComputePhysicalWithoutEmbeddedStruct.FrontPanelLockState
 		varComputePhysical.HardwareUuid = varComputePhysicalWithoutEmbeddedStruct.HardwareUuid
+		varComputePhysical.HasE3SSupport = varComputePhysicalWithoutEmbeddedStruct.HasE3SSupport
 		varComputePhysical.KvmIpAddresses = varComputePhysicalWithoutEmbeddedStruct.KvmIpAddresses
 		varComputePhysical.KvmServerStateEnabled = varComputePhysicalWithoutEmbeddedStruct.KvmServerStateEnabled
 		varComputePhysical.KvmVendor = varComputePhysicalWithoutEmbeddedStruct.KvmVendor
@@ -2432,6 +2472,7 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FaultSummary")
 		delete(additionalProperties, "FrontPanelLockState")
 		delete(additionalProperties, "HardwareUuid")
+		delete(additionalProperties, "HasE3SSupport")
 		delete(additionalProperties, "KvmIpAddresses")
 		delete(additionalProperties, "KvmServerStateEnabled")
 		delete(additionalProperties, "KvmVendor")

@@ -3,12 +3,28 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_connector_manager"
 description: |-
-        Information pertaining to a Registered Intersight Assist Appliance Device in Intersight.
+        ### Overview
+        The DeviceConnectorManager object is a central component in managing registered Intersight Assist Appliance Devices within the Intersight ecosystem. This provides essential information and controls pertaining to device registration and management.
+        #### Purpose
+        DeviceConnectorManager is responsible for maintaining and overseeing the registration status of Intersight Assist appliances. It helps manage the lifecycle and connectivity of devices, ensuring they are effectively integrated and operational within the system.
+        #### Key Concepts
+        - **Device Registration:** - Manages the registration of Intersight Assist appliances, ensuring they are correctly enrolled and identified within the system.
+        - **Lifecycle Management:** - Facilitates the management of the device lifecycle, including registration, updates, and potential deregistration.
+        - **Relationship Management:** - Establishes and maintains relationships with registered devices, supporting cascading updates and ensuring that connected systems are informed of changes.
+        - **Access Control:** - Utilizes privilege sets to control access and operations, ensuring that only authorized users can perform device management tasks.
 
 ---
 
 # Data Source: intersight_asset_device_connector_manager
-Information pertaining to a Registered Intersight Assist Appliance Device in Intersight.
+### Overview
+The DeviceConnectorManager object is a central component in managing registered Intersight Assist Appliance Devices within the Intersight ecosystem. This provides essential information and controls pertaining to device registration and management.
+ #### Purpose
+DeviceConnectorManager is responsible for maintaining and overseeing the registration status of Intersight Assist appliances. It helps manage the lifecycle and connectivity of devices, ensuring they are effectively integrated and operational within the system.
+#### Key Concepts
+- **Device Registration:** - Manages the registration of Intersight Assist appliances, ensuring they are correctly enrolled and identified within the system.
+- **Lifecycle Management:** - Facilitates the management of the device lifecycle, including registration, updates, and potential deregistration.
+- **Relationship Management:** - Establishes and maintains relationships with registered devices, supporting cascading updates and ensuring that connected systems are informed of changes.
+- **Access Control:** - Utilizes privilege sets to control access and operations, ensuring that only authorized users can perform device management tasks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

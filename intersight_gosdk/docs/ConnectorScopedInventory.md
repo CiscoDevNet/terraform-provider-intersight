@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**Immediate** | Pointer to **bool** | Device will immediately collect the objects from the platform. If false, the device will wait for any in flight scheduled collections to complete first. Used to ensure that any long running collections do not delay the scoped collection result. | [optional] 
 **NamingProperty** | Pointer to **string** | A property that uniquely identifies the object to be inventoried as a part of the scoped inventory. | [optional] 
 **Queries** | Pointer to **interface{}** | Set of queries to identify objects to be inventoried as part of this scoped inventory action. | [optional] 
 **Type** | Pointer to **string** | Type of the object for which scoped inventory needs to be run. | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetImmediate
+
+`func (o *ConnectorScopedInventory) GetImmediate() bool`
+
+GetImmediate returns the Immediate field if non-nil, zero value otherwise.
+
+### GetImmediateOk
+
+`func (o *ConnectorScopedInventory) GetImmediateOk() (*bool, bool)`
+
+GetImmediateOk returns a tuple with the Immediate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImmediate
+
+`func (o *ConnectorScopedInventory) SetImmediate(v bool)`
+
+SetImmediate sets Immediate field to given value.
+
+### HasImmediate
+
+`func (o *ConnectorScopedInventory) HasImmediate() bool`
+
+HasImmediate returns a boolean if a field has been set.
 
 ### GetNamingProperty
 

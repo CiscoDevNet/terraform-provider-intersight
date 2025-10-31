@@ -3,12 +3,28 @@ subcategory: "oauth"
 layout: "intersight"
 page_title: "Intersight: intersight_oauth_authorization"
 description: |-
-        User's consent for Intersight to contact an external software repository such as cisco.com, on the user's behalf. Used by Intersight Appliance to support the resource owner grant type.
+        ### Overview
+        The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services.
+        #### Purpose
+        Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types.
+        #### Key Concepts
+        - **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
+        - **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
+        - **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
+        - **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 
 ---
 
 # Data Source: intersight_oauth_authorization
-User's consent for Intersight to contact an external software repository such as cisco.com, on the user's behalf. Used by Intersight Appliance to support the resource owner grant type.
+### Overview
+The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services.
+#### Purpose
+Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types.
+#### Key Concepts
+- **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
+- **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
+- **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
+- **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

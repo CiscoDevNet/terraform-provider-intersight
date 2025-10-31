@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -35,6 +35,8 @@ type CapabilityChassisUpgradeSupportMeta struct {
 	// Classification of a set of chassis models.
 	SeriesId             *string  `json:"SeriesId,omitempty"`
 	SupportedModels      []string `json:"SupportedModels,omitempty"`
+	SupportedPsuModels   []string `json:"SupportedPsuModels,omitempty"`
+	SupportedXfmModels   []string `json:"SupportedXfmModels,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -250,6 +252,72 @@ func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedModels(v []string) {
 	o.SupportedModels = v
 }
 
+// GetSupportedPsuModels returns the SupportedPsuModels field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedPsuModels() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.SupportedPsuModels
+}
+
+// GetSupportedPsuModelsOk returns a tuple with the SupportedPsuModels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedPsuModelsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SupportedPsuModels) {
+		return nil, false
+	}
+	return o.SupportedPsuModels, true
+}
+
+// HasSupportedPsuModels returns a boolean if a field has been set.
+func (o *CapabilityChassisUpgradeSupportMeta) HasSupportedPsuModels() bool {
+	if o != nil && !IsNil(o.SupportedPsuModels) {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportedPsuModels gets a reference to the given []string and assigns it to the SupportedPsuModels field.
+func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedPsuModels(v []string) {
+	o.SupportedPsuModels = v
+}
+
+// GetSupportedXfmModels returns the SupportedXfmModels field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedXfmModels() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.SupportedXfmModels
+}
+
+// GetSupportedXfmModelsOk returns a tuple with the SupportedXfmModels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedXfmModelsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SupportedXfmModels) {
+		return nil, false
+	}
+	return o.SupportedXfmModels, true
+}
+
+// HasSupportedXfmModels returns a boolean if a field has been set.
+func (o *CapabilityChassisUpgradeSupportMeta) HasSupportedXfmModels() bool {
+	if o != nil && !IsNil(o.SupportedXfmModels) {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportedXfmModels gets a reference to the given []string and assigns it to the SupportedXfmModels field.
+func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedXfmModels(v []string) {
+	o.SupportedXfmModels = v
+}
+
 func (o CapabilityChassisUpgradeSupportMeta) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -287,6 +355,12 @@ func (o CapabilityChassisUpgradeSupportMeta) ToMap() (map[string]interface{}, er
 	}
 	if o.SupportedModels != nil {
 		toSerialize["SupportedModels"] = o.SupportedModels
+	}
+	if o.SupportedPsuModels != nil {
+		toSerialize["SupportedPsuModels"] = o.SupportedPsuModels
+	}
+	if o.SupportedXfmModels != nil {
+		toSerialize["SupportedXfmModels"] = o.SupportedXfmModels
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -348,8 +422,10 @@ func (o *CapabilityChassisUpgradeSupportMeta) UnmarshalJSON(data []byte) (err er
 		// Verbose description regarding this group of chassis.
 		Description *string `json:"Description,omitempty"`
 		// Classification of a set of chassis models.
-		SeriesId        *string  `json:"SeriesId,omitempty"`
-		SupportedModels []string `json:"SupportedModels,omitempty"`
+		SeriesId           *string  `json:"SeriesId,omitempty"`
+		SupportedModels    []string `json:"SupportedModels,omitempty"`
+		SupportedPsuModels []string `json:"SupportedPsuModels,omitempty"`
+		SupportedXfmModels []string `json:"SupportedXfmModels,omitempty"`
 	}
 
 	varCapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct := CapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct{}
@@ -363,6 +439,8 @@ func (o *CapabilityChassisUpgradeSupportMeta) UnmarshalJSON(data []byte) (err er
 		varCapabilityChassisUpgradeSupportMeta.Description = varCapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct.Description
 		varCapabilityChassisUpgradeSupportMeta.SeriesId = varCapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct.SeriesId
 		varCapabilityChassisUpgradeSupportMeta.SupportedModels = varCapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct.SupportedModels
+		varCapabilityChassisUpgradeSupportMeta.SupportedPsuModels = varCapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct.SupportedPsuModels
+		varCapabilityChassisUpgradeSupportMeta.SupportedXfmModels = varCapabilityChassisUpgradeSupportMetaWithoutEmbeddedStruct.SupportedXfmModels
 		*o = CapabilityChassisUpgradeSupportMeta(varCapabilityChassisUpgradeSupportMeta)
 	} else {
 		return err
@@ -386,6 +464,8 @@ func (o *CapabilityChassisUpgradeSupportMeta) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "SeriesId")
 		delete(additionalProperties, "SupportedModels")
+		delete(additionalProperties, "SupportedPsuModels")
+		delete(additionalProperties, "SupportedXfmModels")
 
 		// remove fields from embedded structs
 		reflectCapabilityCapability := reflect.ValueOf(o.CapabilityCapability)

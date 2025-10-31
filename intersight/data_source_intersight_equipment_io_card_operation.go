@@ -81,7 +81,7 @@ func getEquipmentIoCardOperationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"config_state": {
-			Description: "The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Description: "The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.\n* `Scheduled` - User configured settings are scheduled to be applied.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -181,7 +181,7 @@ func getEquipmentIoCardOperationSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"config_state": {
-						Description: "The configured state of the settings in the target IO Card. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target IO Card. Applying - The state denotes that the settings are being applied in the target IO Card. Failed - The state denotes that the settings could not be applied in the target IO Card.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+						Description: "The configured state of the settings in the target IO Card. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target IO Card. Applying - The state denotes that the settings are being applied in the target IO Card. Failed - The state denotes that the settings could not be applied in the target IO Card.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.\n* `Scheduled` - User configured settings are scheduled to be applied.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

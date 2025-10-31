@@ -191,6 +191,18 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirmwareApiService CreateFirmwarePciNodeUpgrade", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FirmwareApi.CreateFirmwarePciNodeUpgrade(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirmwareApiService CreateFirmwarePcieDescriptor", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -220,6 +232,18 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FirmwareApi.CreateFirmwarePsuDescriptor(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService CreateFirmwarePsxDescriptor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FirmwareApi.CreateFirmwarePsxDescriptor(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -492,6 +516,19 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirmwareApiService DeleteFirmwarePciNodeUpgrade", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FirmwareApi.DeleteFirmwarePciNodeUpgrade(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirmwareApiService DeleteFirmwarePcieDescriptor", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -525,6 +562,19 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.FirmwareApi.DeleteFirmwarePsuDescriptor(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService DeleteFirmwarePsxDescriptor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FirmwareApi.DeleteFirmwarePsxDescriptor(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -1025,6 +1075,32 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirmwareApiService GetFirmwarePciNodeUpgradeByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwarePciNodeUpgradeByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService GetFirmwarePciNodeUpgradeList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwarePciNodeUpgradeList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirmwareApiService GetFirmwarePcieDescriptorByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1096,6 +1172,32 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwarePsuDescriptorList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService GetFirmwarePsxDescriptorByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwarePsxDescriptorByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService GetFirmwarePsxDescriptorList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FirmwareApi.GetFirmwarePsxDescriptorList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1547,6 +1649,20 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirmwareApiService PatchFirmwarePsxDescriptor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FirmwareApi.PatchFirmwarePsxDescriptor(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirmwareApiService PatchFirmwareRunningFirmware", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1834,6 +1950,20 @@ func Test_intersight_FirmwareApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.FirmwareApi.UpdateFirmwarePsuDescriptor(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirmwareApiService UpdateFirmwarePsxDescriptor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FirmwareApi.UpdateFirmwarePsxDescriptor(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

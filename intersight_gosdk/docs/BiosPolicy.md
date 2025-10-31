@@ -137,6 +137,10 @@ Name | Type | Description | Notes
 **ExtendedApic** | Pointer to **string** | BIOS Token for setting Local X2 Apic configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;disabled&#x60; - Value - disabled for configuring ExtendedApic token. * &#x60;enabled&#x60; - Value - enabled for configuring ExtendedApic token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring ExtendedApic token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring ExtendedApic token. | [optional] [default to "platform-default"]
 **FlowControl** | Pointer to **string** | BIOS Token for setting Flow Control configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;none&#x60; - Value - none for configuring FlowControl token. * &#x60;rts-cts&#x60; - Value - rts-cts for configuring FlowControl token. | [optional] [default to "platform-default"]
 **Frb2enable** | Pointer to **string** | BIOS Token for setting FRB-2 Timer configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**GpuDirectCpu1** | Pointer to **string** | BIOS Token for setting GPU Direct CPU1 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**GpuDirectCpu2** | Pointer to **string** | BIOS Token for setting GPU Direct CPU2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**GpuDirectCpu3** | Pointer to **string** | BIOS Token for setting GPU Direct CPU3 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
+**GpuDirectCpu4** | Pointer to **string** | BIOS Token for setting GPU Direct CPU4 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **HardwarePrefetch** | Pointer to **string** | BIOS Token for setting Hardware Prefetcher configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **HwpmEnable** | Pointer to **string** | BIOS Token for setting CPU Hardware Power Management configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Disabled&#x60; - Value - Disabled for configuring HwpmEnable token. * &#x60;HWPM Native Mode&#x60; - Value - HWPM Native Mode for configuring HwpmEnable token. * &#x60;HWPM OOB Mode&#x60; - Value - HWPM OOB Mode for configuring HwpmEnable token. * &#x60;NATIVE MODE&#x60; - Value - NATIVE MODE for configuring HwpmEnable token. * &#x60;Native Mode with no Legacy&#x60; - Value - Native Mode with no Legacy for configuring HwpmEnable token. * &#x60;OOB MODE&#x60; - Value - OOB MODE for configuring HwpmEnable token. | [optional] [default to "platform-default"]
 **ImcInterleave** | Pointer to **string** | BIOS Token for setting IMC Interleaving configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;1-way Interleave&#x60; - Value - 1-way Interleave for configuring ImcInterleave token. * &#x60;2-way Interleave&#x60; - Value - 2-way Interleave for configuring ImcInterleave token. * &#x60;Auto&#x60; - Value - Auto for configuring ImcInterleave token. | [optional] [default to "platform-default"]
@@ -3806,6 +3810,106 @@ SetFrb2enable sets Frb2enable field to given value.
 `func (o *BiosPolicy) HasFrb2enable() bool`
 
 HasFrb2enable returns a boolean if a field has been set.
+
+### GetGpuDirectCpu1
+
+`func (o *BiosPolicy) GetGpuDirectCpu1() string`
+
+GetGpuDirectCpu1 returns the GpuDirectCpu1 field if non-nil, zero value otherwise.
+
+### GetGpuDirectCpu1Ok
+
+`func (o *BiosPolicy) GetGpuDirectCpu1Ok() (*string, bool)`
+
+GetGpuDirectCpu1Ok returns a tuple with the GpuDirectCpu1 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuDirectCpu1
+
+`func (o *BiosPolicy) SetGpuDirectCpu1(v string)`
+
+SetGpuDirectCpu1 sets GpuDirectCpu1 field to given value.
+
+### HasGpuDirectCpu1
+
+`func (o *BiosPolicy) HasGpuDirectCpu1() bool`
+
+HasGpuDirectCpu1 returns a boolean if a field has been set.
+
+### GetGpuDirectCpu2
+
+`func (o *BiosPolicy) GetGpuDirectCpu2() string`
+
+GetGpuDirectCpu2 returns the GpuDirectCpu2 field if non-nil, zero value otherwise.
+
+### GetGpuDirectCpu2Ok
+
+`func (o *BiosPolicy) GetGpuDirectCpu2Ok() (*string, bool)`
+
+GetGpuDirectCpu2Ok returns a tuple with the GpuDirectCpu2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuDirectCpu2
+
+`func (o *BiosPolicy) SetGpuDirectCpu2(v string)`
+
+SetGpuDirectCpu2 sets GpuDirectCpu2 field to given value.
+
+### HasGpuDirectCpu2
+
+`func (o *BiosPolicy) HasGpuDirectCpu2() bool`
+
+HasGpuDirectCpu2 returns a boolean if a field has been set.
+
+### GetGpuDirectCpu3
+
+`func (o *BiosPolicy) GetGpuDirectCpu3() string`
+
+GetGpuDirectCpu3 returns the GpuDirectCpu3 field if non-nil, zero value otherwise.
+
+### GetGpuDirectCpu3Ok
+
+`func (o *BiosPolicy) GetGpuDirectCpu3Ok() (*string, bool)`
+
+GetGpuDirectCpu3Ok returns a tuple with the GpuDirectCpu3 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuDirectCpu3
+
+`func (o *BiosPolicy) SetGpuDirectCpu3(v string)`
+
+SetGpuDirectCpu3 sets GpuDirectCpu3 field to given value.
+
+### HasGpuDirectCpu3
+
+`func (o *BiosPolicy) HasGpuDirectCpu3() bool`
+
+HasGpuDirectCpu3 returns a boolean if a field has been set.
+
+### GetGpuDirectCpu4
+
+`func (o *BiosPolicy) GetGpuDirectCpu4() string`
+
+GetGpuDirectCpu4 returns the GpuDirectCpu4 field if non-nil, zero value otherwise.
+
+### GetGpuDirectCpu4Ok
+
+`func (o *BiosPolicy) GetGpuDirectCpu4Ok() (*string, bool)`
+
+GetGpuDirectCpu4Ok returns a tuple with the GpuDirectCpu4 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuDirectCpu4
+
+`func (o *BiosPolicy) SetGpuDirectCpu4(v string)`
+
+SetGpuDirectCpu4 sets GpuDirectCpu4 field to given value.
+
+### HasGpuDirectCpu4
+
+`func (o *BiosPolicy) HasGpuDirectCpu4() bool`
+
+HasGpuDirectCpu4 returns a boolean if a field has been set.
 
 ### GetHardwarePrefetch
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025092610
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -290,6 +290,14 @@ type BiosPolicy struct {
 	FlowControl *string `json:"FlowControl,omitempty"`
 	// BIOS Token for setting FRB-2 Timer configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	Frb2enable *string `json:"Frb2enable,omitempty"`
+	// BIOS Token for setting GPU Direct CPU1 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	GpuDirectCpu1 *string `json:"GpuDirectCpu1,omitempty"`
+	// BIOS Token for setting GPU Direct CPU2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	GpuDirectCpu2 *string `json:"GpuDirectCpu2,omitempty"`
+	// BIOS Token for setting GPU Direct CPU3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	GpuDirectCpu3 *string `json:"GpuDirectCpu3,omitempty"`
+	// BIOS Token for setting GPU Direct CPU4 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	GpuDirectCpu4 *string `json:"GpuDirectCpu4,omitempty"`
 	// BIOS Token for setting Hardware Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	HardwarePrefetch *string `json:"HardwarePrefetch,omitempty"`
 	// BIOS Token for setting CPU Hardware Power Management configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring HwpmEnable token. * `HWPM Native Mode` - Value - HWPM Native Mode for configuring HwpmEnable token. * `HWPM OOB Mode` - Value - HWPM OOB Mode for configuring HwpmEnable token. * `NATIVE MODE` - Value - NATIVE MODE for configuring HwpmEnable token. * `Native Mode with no Legacy` - Value - Native Mode with no Legacy for configuring HwpmEnable token. * `OOB MODE` - Value - OOB MODE for configuring HwpmEnable token.
@@ -1235,6 +1243,14 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.FlowControl = &flowControl
 	var frb2enable string = "platform-default"
 	this.Frb2enable = &frb2enable
+	var gpuDirectCpu1 string = "platform-default"
+	this.GpuDirectCpu1 = &gpuDirectCpu1
+	var gpuDirectCpu2 string = "platform-default"
+	this.GpuDirectCpu2 = &gpuDirectCpu2
+	var gpuDirectCpu3 string = "platform-default"
+	this.GpuDirectCpu3 = &gpuDirectCpu3
+	var gpuDirectCpu4 string = "platform-default"
+	this.GpuDirectCpu4 = &gpuDirectCpu4
 	var hardwarePrefetch string = "platform-default"
 	this.HardwarePrefetch = &hardwarePrefetch
 	var hwpmEnable string = "platform-default"
@@ -2175,6 +2191,14 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.FlowControl = &flowControl
 	var frb2enable string = "platform-default"
 	this.Frb2enable = &frb2enable
+	var gpuDirectCpu1 string = "platform-default"
+	this.GpuDirectCpu1 = &gpuDirectCpu1
+	var gpuDirectCpu2 string = "platform-default"
+	this.GpuDirectCpu2 = &gpuDirectCpu2
+	var gpuDirectCpu3 string = "platform-default"
+	this.GpuDirectCpu3 = &gpuDirectCpu3
+	var gpuDirectCpu4 string = "platform-default"
+	this.GpuDirectCpu4 = &gpuDirectCpu4
 	var hardwarePrefetch string = "platform-default"
 	this.HardwarePrefetch = &hardwarePrefetch
 	var hwpmEnable string = "platform-default"
@@ -7092,6 +7116,134 @@ func (o *BiosPolicy) HasFrb2enable() bool {
 // SetFrb2enable gets a reference to the given string and assigns it to the Frb2enable field.
 func (o *BiosPolicy) SetFrb2enable(v string) {
 	o.Frb2enable = &v
+}
+
+// GetGpuDirectCpu1 returns the GpuDirectCpu1 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetGpuDirectCpu1() string {
+	if o == nil || IsNil(o.GpuDirectCpu1) {
+		var ret string
+		return ret
+	}
+	return *o.GpuDirectCpu1
+}
+
+// GetGpuDirectCpu1Ok returns a tuple with the GpuDirectCpu1 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetGpuDirectCpu1Ok() (*string, bool) {
+	if o == nil || IsNil(o.GpuDirectCpu1) {
+		return nil, false
+	}
+	return o.GpuDirectCpu1, true
+}
+
+// HasGpuDirectCpu1 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasGpuDirectCpu1() bool {
+	if o != nil && !IsNil(o.GpuDirectCpu1) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuDirectCpu1 gets a reference to the given string and assigns it to the GpuDirectCpu1 field.
+func (o *BiosPolicy) SetGpuDirectCpu1(v string) {
+	o.GpuDirectCpu1 = &v
+}
+
+// GetGpuDirectCpu2 returns the GpuDirectCpu2 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetGpuDirectCpu2() string {
+	if o == nil || IsNil(o.GpuDirectCpu2) {
+		var ret string
+		return ret
+	}
+	return *o.GpuDirectCpu2
+}
+
+// GetGpuDirectCpu2Ok returns a tuple with the GpuDirectCpu2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetGpuDirectCpu2Ok() (*string, bool) {
+	if o == nil || IsNil(o.GpuDirectCpu2) {
+		return nil, false
+	}
+	return o.GpuDirectCpu2, true
+}
+
+// HasGpuDirectCpu2 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasGpuDirectCpu2() bool {
+	if o != nil && !IsNil(o.GpuDirectCpu2) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuDirectCpu2 gets a reference to the given string and assigns it to the GpuDirectCpu2 field.
+func (o *BiosPolicy) SetGpuDirectCpu2(v string) {
+	o.GpuDirectCpu2 = &v
+}
+
+// GetGpuDirectCpu3 returns the GpuDirectCpu3 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetGpuDirectCpu3() string {
+	if o == nil || IsNil(o.GpuDirectCpu3) {
+		var ret string
+		return ret
+	}
+	return *o.GpuDirectCpu3
+}
+
+// GetGpuDirectCpu3Ok returns a tuple with the GpuDirectCpu3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetGpuDirectCpu3Ok() (*string, bool) {
+	if o == nil || IsNil(o.GpuDirectCpu3) {
+		return nil, false
+	}
+	return o.GpuDirectCpu3, true
+}
+
+// HasGpuDirectCpu3 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasGpuDirectCpu3() bool {
+	if o != nil && !IsNil(o.GpuDirectCpu3) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuDirectCpu3 gets a reference to the given string and assigns it to the GpuDirectCpu3 field.
+func (o *BiosPolicy) SetGpuDirectCpu3(v string) {
+	o.GpuDirectCpu3 = &v
+}
+
+// GetGpuDirectCpu4 returns the GpuDirectCpu4 field value if set, zero value otherwise.
+func (o *BiosPolicy) GetGpuDirectCpu4() string {
+	if o == nil || IsNil(o.GpuDirectCpu4) {
+		var ret string
+		return ret
+	}
+	return *o.GpuDirectCpu4
+}
+
+// GetGpuDirectCpu4Ok returns a tuple with the GpuDirectCpu4 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetGpuDirectCpu4Ok() (*string, bool) {
+	if o == nil || IsNil(o.GpuDirectCpu4) {
+		return nil, false
+	}
+	return o.GpuDirectCpu4, true
+}
+
+// HasGpuDirectCpu4 returns a boolean if a field has been set.
+func (o *BiosPolicy) HasGpuDirectCpu4() bool {
+	if o != nil && !IsNil(o.GpuDirectCpu4) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuDirectCpu4 gets a reference to the given string and assigns it to the GpuDirectCpu4 field.
+func (o *BiosPolicy) SetGpuDirectCpu4(v string) {
+	o.GpuDirectCpu4 = &v
 }
 
 // GetHardwarePrefetch returns the HardwarePrefetch field value if set, zero value otherwise.
@@ -18248,6 +18400,18 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Frb2enable) {
 		toSerialize["Frb2enable"] = o.Frb2enable
 	}
+	if !IsNil(o.GpuDirectCpu1) {
+		toSerialize["GpuDirectCpu1"] = o.GpuDirectCpu1
+	}
+	if !IsNil(o.GpuDirectCpu2) {
+		toSerialize["GpuDirectCpu2"] = o.GpuDirectCpu2
+	}
+	if !IsNil(o.GpuDirectCpu3) {
+		toSerialize["GpuDirectCpu3"] = o.GpuDirectCpu3
+	}
+	if !IsNil(o.GpuDirectCpu4) {
+		toSerialize["GpuDirectCpu4"] = o.GpuDirectCpu4
+	}
 	if !IsNil(o.HardwarePrefetch) {
 		toSerialize["HardwarePrefetch"] = o.HardwarePrefetch
 	}
@@ -19570,6 +19734,14 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		FlowControl *string `json:"FlowControl,omitempty"`
 		// BIOS Token for setting FRB-2 Timer configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		Frb2enable *string `json:"Frb2enable,omitempty"`
+		// BIOS Token for setting GPU Direct CPU1 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		GpuDirectCpu1 *string `json:"GpuDirectCpu1,omitempty"`
+		// BIOS Token for setting GPU Direct CPU2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		GpuDirectCpu2 *string `json:"GpuDirectCpu2,omitempty"`
+		// BIOS Token for setting GPU Direct CPU3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		GpuDirectCpu3 *string `json:"GpuDirectCpu3,omitempty"`
+		// BIOS Token for setting GPU Direct CPU4 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		GpuDirectCpu4 *string `json:"GpuDirectCpu4,omitempty"`
 		// BIOS Token for setting Hardware Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		HardwarePrefetch *string `json:"HardwarePrefetch,omitempty"`
 		// BIOS Token for setting CPU Hardware Power Management configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring HwpmEnable token. * `HWPM Native Mode` - Value - HWPM Native Mode for configuring HwpmEnable token. * `HWPM OOB Mode` - Value - HWPM OOB Mode for configuring HwpmEnable token. * `NATIVE MODE` - Value - NATIVE MODE for configuring HwpmEnable token. * `Native Mode with no Legacy` - Value - Native Mode with no Legacy for configuring HwpmEnable token. * `OOB MODE` - Value - OOB MODE for configuring HwpmEnable token.
@@ -20380,6 +20552,10 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.ExtendedApic = varBiosPolicyWithoutEmbeddedStruct.ExtendedApic
 		varBiosPolicy.FlowControl = varBiosPolicyWithoutEmbeddedStruct.FlowControl
 		varBiosPolicy.Frb2enable = varBiosPolicyWithoutEmbeddedStruct.Frb2enable
+		varBiosPolicy.GpuDirectCpu1 = varBiosPolicyWithoutEmbeddedStruct.GpuDirectCpu1
+		varBiosPolicy.GpuDirectCpu2 = varBiosPolicyWithoutEmbeddedStruct.GpuDirectCpu2
+		varBiosPolicy.GpuDirectCpu3 = varBiosPolicyWithoutEmbeddedStruct.GpuDirectCpu3
+		varBiosPolicy.GpuDirectCpu4 = varBiosPolicyWithoutEmbeddedStruct.GpuDirectCpu4
 		varBiosPolicy.HardwarePrefetch = varBiosPolicyWithoutEmbeddedStruct.HardwarePrefetch
 		varBiosPolicy.HwpmEnable = varBiosPolicyWithoutEmbeddedStruct.HwpmEnable
 		varBiosPolicy.ImcInterleave = varBiosPolicyWithoutEmbeddedStruct.ImcInterleave
@@ -20865,6 +21041,10 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ExtendedApic")
 		delete(additionalProperties, "FlowControl")
 		delete(additionalProperties, "Frb2enable")
+		delete(additionalProperties, "GpuDirectCpu1")
+		delete(additionalProperties, "GpuDirectCpu2")
+		delete(additionalProperties, "GpuDirectCpu3")
+		delete(additionalProperties, "GpuDirectCpu4")
 		delete(additionalProperties, "HardwarePrefetch")
 		delete(additionalProperties, "HwpmEnable")
 		delete(additionalProperties, "ImcInterleave")

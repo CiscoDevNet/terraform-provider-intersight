@@ -31,6 +31,11 @@ func getEquipmentChassisOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"admin_power_cycle_expander_module_slot_id": {
+			Description: "Slot id of the expander module slot within chassis that needs to be power cycled.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"admin_power_cycle_slot_id": {
 			Description: "Slot id of the chassis slot that needs to be power cycled.",
 			Type:        schema.TypeInt,
@@ -121,8 +126,13 @@ func getEquipmentChassisOperationSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"config_state": {
-						Description: "The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+						Description: "The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.\n* `Scheduled` - User configured settings are scheduled to be applied.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"expander_module_slot_id": {
+						Description: "The slot id of the expander module within the chassis on which the chassis operation is performed.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"object_type": {
@@ -154,7 +164,7 @@ func getEquipmentChassisOperationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"config_state": {
-			Description: "The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Description: "The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.\n* `Scheduled` - User configured settings are scheduled to be applied.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -550,6 +560,11 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("admin_locator_led_action"); ok {
 		x := (v.(string))
 		o.SetAdminLocatorLedAction(x)
+	}
+
+	if v, ok := d.GetOkExists("admin_power_cycle_expander_module_slot_id"); ok {
+		x := int64(v.(int))
+		o.SetAdminPowerCycleExpanderModuleSlotId(x)
 	}
 
 	if v, ok := d.GetOkExists("admin_power_cycle_slot_id"); ok {
@@ -1033,6 +1048,7 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["admin_locator_led_action"] = (s.GetAdminLocatorLedAction())
+				temp["admin_power_cycle_expander_module_slot_id"] = (s.GetAdminPowerCycleExpanderModuleSlotId())
 				temp["admin_power_cycle_slot_id"] = (s.GetAdminPowerCycleSlotId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)

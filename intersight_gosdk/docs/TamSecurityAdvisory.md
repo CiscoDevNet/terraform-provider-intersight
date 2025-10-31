@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **DatePublished** | Pointer to **time.Time** | Date when the security advisory was first published by Cisco. | [optional] 
 **DateUpdated** | Pointer to **time.Time** | Date when the security advisory was last updated by Cisco. | [optional] 
 **EnvironmentalScore** | Pointer to **float32** | CVSS version 3 environmental score for the security Advisory. | [optional] 
-**ExecuteOnPod** | Pointer to **string** | Orion pod on which this advisory should process. * &#x60;tier1&#x60; - Advisory processing will be taken care in first advisory driver of multinode cluster. * &#x60;tier2&#x60; - Advisory processing will be taken care in second advisory driver of multinode cluster. | [optional] [default to "tier1"]
+**ExecuteOnPod** | Pointer to **string** | Orion pod on which this advisory should process. * &#x60;tier1&#x60; - Advisory processing will be taken care by batch processing. * &#x60;tier2&#x60; - Advisory processing will be taken care by stream processing. | [optional] [default to "tier1"]
 **ExternalUrl** | Pointer to **string** | A link to an external URL describing security Advisory in more details. | [optional] 
 **OtherRefUrls** | Pointer to **[]string** |  | [optional] 
 **Recommendation** | Pointer to **string** | Recommended action to resolve the security advisory. | [optional] 

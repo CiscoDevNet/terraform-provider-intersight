@@ -16,7 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_fabric_sp
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `admin_state`:(string) Admin state to enable or disable the SPAN session.* `Disabled` - Admin configured Disabled State.* `Enabled` - Admin configured Enabled State. 
-* `config_state`:(string) The configured state of SPAN configuration. If the configuration fails to deploy to the Fabric Interconnect, it can be redeployed by toggling the admin state.* `None` - Nil value when no action has been triggered by the user.* `Applied` - User configured settings are in applied state.* `Applying` - User settings are being applied on the target server.* `Failed` - User configured settings could not be applied. 
+* `config_state`:(string) The configured state of SPAN configuration. If the configuration fails to deploy to the Fabric Interconnect, it can be redeployed by toggling the admin state.* `None` - Nil value when no action has been triggered by the user.* `Applied` - User configured settings are in applied state.* `Applying` - User settings are being applied on the target server.* `Failed` - User configured settings could not be applied.* `Scheduled` - User configured settings are scheduled to be applied. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 

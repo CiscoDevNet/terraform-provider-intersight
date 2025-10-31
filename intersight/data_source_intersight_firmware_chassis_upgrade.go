@@ -908,6 +908,11 @@ func getFirmwareChassisUpgradeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"xfm_upgrade_option": {
+			Description: "XFM upgrade option Full or Partial Disruption.\n* `none` - If no option is selected for exclusion.\n* `full-shutdown` - PSX Switch in XFM will be upgraded in single action.\n* `partial-shutdown` - PSX Switch in XFM will be upgraded one after other.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -1864,6 +1869,11 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("xfm_upgrade_option"); ok {
+		x := (v.(string))
+		o.SetXfmUpgradeOption(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of FirmwareChassisUpgrade object failed with error : %s", err.Error())
@@ -1943,6 +1953,7 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 				temp["upgrade_type"] = (s.GetUpgradeType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["xfm_upgrade_option"] = (s.GetXfmUpgradeOption())
 				firmwareChassisUpgradeResults = append(firmwareChassisUpgradeResults, temp)
 			}
 		}

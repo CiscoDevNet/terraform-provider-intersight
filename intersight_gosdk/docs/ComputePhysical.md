@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
 **FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] 
+**HasE3SSupport** | Pointer to **bool** | The flag to indicate server has the support for E3.S drives. | [optional] [readonly] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
 **KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
@@ -479,6 +480,31 @@ SetHardwareUuid sets HardwareUuid field to given value.
 `func (o *ComputePhysical) HasHardwareUuid() bool`
 
 HasHardwareUuid returns a boolean if a field has been set.
+
+### GetHasE3SSupport
+
+`func (o *ComputePhysical) GetHasE3SSupport() bool`
+
+GetHasE3SSupport returns the HasE3SSupport field if non-nil, zero value otherwise.
+
+### GetHasE3SSupportOk
+
+`func (o *ComputePhysical) GetHasE3SSupportOk() (*bool, bool)`
+
+GetHasE3SSupportOk returns a tuple with the HasE3SSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasE3SSupport
+
+`func (o *ComputePhysical) SetHasE3SSupport(v bool)`
+
+SetHasE3SSupport sets HasE3SSupport field to given value.
+
+### HasHasE3SSupport
+
+`func (o *ComputePhysical) HasHasE3SSupport() bool`
+
+HasHasE3SSupport returns a boolean if a field has been set.
 
 ### GetKvmIpAddresses
 

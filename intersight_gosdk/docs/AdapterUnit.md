@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **Controller** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**EquipmentSharedAdapterUnit** | Pointer to [**NullableEquipmentSharedAdapterUnitRelationship**](EquipmentSharedAdapterUnitRelationship.md) |  | [optional] 
 **ExtEthIfs** | Pointer to [**[]AdapterExtEthInterfaceRelationship**](AdapterExtEthInterfaceRelationship.md) | An array of relationships to adapterExtEthInterface resources. | [optional] [readonly] 
 **HostEthIfs** | Pointer to [**[]AdapterHostEthInterfaceRelationship**](AdapterHostEthInterfaceRelationship.md) | An array of relationships to adapterHostEthInterface resources. | [optional] [readonly] 
 **HostFcIfs** | Pointer to [**[]AdapterHostFcInterfaceRelationship**](AdapterHostFcInterfaceRelationship.md) | An array of relationships to adapterHostFcInterface resources. | [optional] [readonly] 
@@ -564,6 +565,41 @@ HasController returns a boolean if a field has been set.
 `func (o *AdapterUnit) UnsetController()`
 
 UnsetController ensures that no value is present for Controller, not even an explicit nil
+### GetEquipmentSharedAdapterUnit
+
+`func (o *AdapterUnit) GetEquipmentSharedAdapterUnit() EquipmentSharedAdapterUnitRelationship`
+
+GetEquipmentSharedAdapterUnit returns the EquipmentSharedAdapterUnit field if non-nil, zero value otherwise.
+
+### GetEquipmentSharedAdapterUnitOk
+
+`func (o *AdapterUnit) GetEquipmentSharedAdapterUnitOk() (*EquipmentSharedAdapterUnitRelationship, bool)`
+
+GetEquipmentSharedAdapterUnitOk returns a tuple with the EquipmentSharedAdapterUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentSharedAdapterUnit
+
+`func (o *AdapterUnit) SetEquipmentSharedAdapterUnit(v EquipmentSharedAdapterUnitRelationship)`
+
+SetEquipmentSharedAdapterUnit sets EquipmentSharedAdapterUnit field to given value.
+
+### HasEquipmentSharedAdapterUnit
+
+`func (o *AdapterUnit) HasEquipmentSharedAdapterUnit() bool`
+
+HasEquipmentSharedAdapterUnit returns a boolean if a field has been set.
+
+### SetEquipmentSharedAdapterUnitNil
+
+`func (o *AdapterUnit) SetEquipmentSharedAdapterUnitNil(b bool)`
+
+ SetEquipmentSharedAdapterUnitNil sets the value for EquipmentSharedAdapterUnit to be an explicit nil
+
+### UnsetEquipmentSharedAdapterUnit
+`func (o *AdapterUnit) UnsetEquipmentSharedAdapterUnit()`
+
+UnsetEquipmentSharedAdapterUnit ensures that no value is present for EquipmentSharedAdapterUnit, not even an explicit nil
 ### GetExtEthIfs
 
 `func (o *AdapterUnit) GetExtEthIfs() []AdapterExtEthInterfaceRelationship`

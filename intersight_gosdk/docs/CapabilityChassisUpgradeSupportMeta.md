@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Verbose description regarding this group of chassis. | [optional] [readonly] 
 **SeriesId** | Pointer to **string** | Classification of a set of chassis models. | [optional] [readonly] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
+**SupportedPsuModels** | Pointer to **[]string** |  | [optional] 
+**SupportedXfmModels** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -180,6 +182,76 @@ HasSupportedModels returns a boolean if a field has been set.
 `func (o *CapabilityChassisUpgradeSupportMeta) UnsetSupportedModels()`
 
 UnsetSupportedModels ensures that no value is present for SupportedModels, not even an explicit nil
+### GetSupportedPsuModels
+
+`func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedPsuModels() []string`
+
+GetSupportedPsuModels returns the SupportedPsuModels field if non-nil, zero value otherwise.
+
+### GetSupportedPsuModelsOk
+
+`func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedPsuModelsOk() (*[]string, bool)`
+
+GetSupportedPsuModelsOk returns a tuple with the SupportedPsuModels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedPsuModels
+
+`func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedPsuModels(v []string)`
+
+SetSupportedPsuModels sets SupportedPsuModels field to given value.
+
+### HasSupportedPsuModels
+
+`func (o *CapabilityChassisUpgradeSupportMeta) HasSupportedPsuModels() bool`
+
+HasSupportedPsuModels returns a boolean if a field has been set.
+
+### SetSupportedPsuModelsNil
+
+`func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedPsuModelsNil(b bool)`
+
+ SetSupportedPsuModelsNil sets the value for SupportedPsuModels to be an explicit nil
+
+### UnsetSupportedPsuModels
+`func (o *CapabilityChassisUpgradeSupportMeta) UnsetSupportedPsuModels()`
+
+UnsetSupportedPsuModels ensures that no value is present for SupportedPsuModels, not even an explicit nil
+### GetSupportedXfmModels
+
+`func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedXfmModels() []string`
+
+GetSupportedXfmModels returns the SupportedXfmModels field if non-nil, zero value otherwise.
+
+### GetSupportedXfmModelsOk
+
+`func (o *CapabilityChassisUpgradeSupportMeta) GetSupportedXfmModelsOk() (*[]string, bool)`
+
+GetSupportedXfmModelsOk returns a tuple with the SupportedXfmModels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedXfmModels
+
+`func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedXfmModels(v []string)`
+
+SetSupportedXfmModels sets SupportedXfmModels field to given value.
+
+### HasSupportedXfmModels
+
+`func (o *CapabilityChassisUpgradeSupportMeta) HasSupportedXfmModels() bool`
+
+HasSupportedXfmModels returns a boolean if a field has been set.
+
+### SetSupportedXfmModelsNil
+
+`func (o *CapabilityChassisUpgradeSupportMeta) SetSupportedXfmModelsNil(b bool)`
+
+ SetSupportedXfmModelsNil sets the value for SupportedXfmModels to be an explicit nil
+
+### UnsetSupportedXfmModels
+`func (o *CapabilityChassisUpgradeSupportMeta) UnsetSupportedXfmModels()`
+
+UnsetSupportedXfmModels ensures that no value is present for SupportedXfmModels, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

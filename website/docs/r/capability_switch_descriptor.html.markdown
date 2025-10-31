@@ -82,6 +82,8 @@ This complex property has following sub-properties:
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
+* `unsupported_policies`:
+                (Array of schema.TypeString) -
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

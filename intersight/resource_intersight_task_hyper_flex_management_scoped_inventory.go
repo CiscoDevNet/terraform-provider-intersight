@@ -118,6 +118,12 @@ func resourceTaskHyperFlexManagementScopedInventory() *schema.Resource {
 					return
 				}, ForceNew: true,
 			},
+			"immediate": {
+				Description: "Device will immediately collect the objects from the platform. If false, the device will wait for any in flight scheduled collections to complete first. Used to ensure that any long running collections do not delay the scoped collection result.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				ForceNew:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -665,6 +671,11 @@ func resourceTaskHyperFlexManagementScopedInventoryCreate(c context.Context, d *
 	}
 
 	o.SetClassId("task.HyperFlexManagementScopedInventory")
+
+	if v, ok := d.GetOkExists("immediate"); ok {
+		x := (v.(bool))
+		o.SetImmediate(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

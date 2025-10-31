@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ChassisOperationStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ChassisOperationStatus"]
-**ConfigState** | Pointer to **string** | The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**ConfigState** | Pointer to **string** | The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [readonly] [default to "None"]
+**ExpanderModuleSlotId** | Pointer to **int64** | The slot id of the expander module within the chassis on which the chassis operation is performed. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | The slot id of the device within the chassis on which the chassis operation is performed. | [optional] [readonly] 
 **WorkflowId** | Pointer to **string** | The workflow Id of the chassis operations workflow. | [optional] [readonly] 
 **WorkflowType** | Pointer to **string** | The workflow type of the chassis operation workflow. This can be used to distinguish different chassis operations. | [optional] [readonly] 
@@ -94,6 +95,31 @@ SetConfigState sets ConfigState field to given value.
 `func (o *EquipmentChassisOperationStatus) HasConfigState() bool`
 
 HasConfigState returns a boolean if a field has been set.
+
+### GetExpanderModuleSlotId
+
+`func (o *EquipmentChassisOperationStatus) GetExpanderModuleSlotId() int64`
+
+GetExpanderModuleSlotId returns the ExpanderModuleSlotId field if non-nil, zero value otherwise.
+
+### GetExpanderModuleSlotIdOk
+
+`func (o *EquipmentChassisOperationStatus) GetExpanderModuleSlotIdOk() (*int64, bool)`
+
+GetExpanderModuleSlotIdOk returns a tuple with the ExpanderModuleSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpanderModuleSlotId
+
+`func (o *EquipmentChassisOperationStatus) SetExpanderModuleSlotId(v int64)`
+
+SetExpanderModuleSlotId sets ExpanderModuleSlotId field to given value.
+
+### HasExpanderModuleSlotId
+
+`func (o *EquipmentChassisOperationStatus) HasExpanderModuleSlotId() bool`
+
+HasExpanderModuleSlotId returns a boolean if a field has been set.
 
 ### GetSlotId
 

@@ -3,30 +3,30 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_instance"
 description: |-
-        # Overview
+        ### Overview
         The AdvisoryInstance object represents instances of advisories applicable to Intersight managed objects,
         maintaining advisory applicability and state changes.
-        ## Purpose
+        #### Purpose
         AdvisoryInstance tracks the lifecycle and applicability of advisories for specific managed objects,
         ensuring users have visibility into which devices or components are impacted and require resolution.
-        ## Key Concepts
-        - **Lifecycle Tracking** – Maintains records of advisory applicability, including state changes over time.
-        - **Managed Object Integration** – Directly links advisories to affected managed objects for precise applicability.
-        - **Controlled Access** – Provides access and management capabilities based on administrative privileges.
+        #### Key Concepts
+        - **Lifecycle Tracking** - Maintains records of advisory applicability, including state changes over time.
+        - **Managed Object Integration** - Directly links advisories to affected managed objects for precise applicability.
+        - **Controlled Access** - Provides access and management capabilities based on administrative privileges.
 
 ---
 
 # Data Source: intersight_tam_advisory_instance
-# Overview
+### Overview
 The AdvisoryInstance object represents instances of advisories applicable to Intersight managed objects,  
 maintaining advisory applicability and state changes.
-## Purpose
+#### Purpose
 AdvisoryInstance tracks the lifecycle and applicability of advisories for specific managed objects,  
 ensuring users have visibility into which devices or components are impacted and require resolution.
-## Key Concepts
-- **Lifecycle Tracking** – Maintains records of advisory applicability, including state changes over time.
- - **Managed Object Integration** – Directly links advisories to affected managed objects for precise applicability.
-- **Controlled Access** – Provides access and management capabilities based on administrative privileges.
+#### Key Concepts
+- **Lifecycle Tracking** - Maintains records of advisory applicability, including state changes over time.
+- **Managed Object Integration** - Directly links advisories to affected managed objects for precise applicability.
+- **Controlled Access** - Provides access and management capabilities based on administrative privileges.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

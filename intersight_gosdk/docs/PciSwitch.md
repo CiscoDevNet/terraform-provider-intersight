@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pci.Switch"]
 **DeviceId** | Pointer to **string** | The device id of the switch. | [optional] [readonly] 
 **Health** | Pointer to **string** | The composite health of the switch. | [optional] [readonly] 
-**NumOfAdaptors** | Pointer to **string** | The number of GPUs and PCI adapters connected the switch. | [optional] [readonly] 
-**PciAddress** | Pointer to **string** | The PCI address of the switch. | [optional] [readonly] 
-**PciSlot** | Pointer to **string** | The PCI slot name of the switch. | [optional] [readonly] 
+**NumOfAdaptors** | Pointer to **string** | The number of GPUs and PCIe adapters connected the switch. | [optional] [readonly] 
+**OperState** | Pointer to **string** | Operational state of the PCIe switch that connects the CPU GPU and the PCIe adapter. | [optional] [readonly] 
+**PciAddress** | Pointer to **string** | The PCIe address of the switch. | [optional] [readonly] 
+**PciSlot** | Pointer to **string** | The PCIe slot name of the switch. | [optional] [readonly] 
+**PciSwitchId** | Pointer to **string** | Unique Identifier of a PCIe switch within a chassis expander module. | [optional] [readonly] 
 **ProductName** | Pointer to **string** | The model information for the switch. | [optional] [readonly] 
 **ProductRevision** | Pointer to **string** | The product revision of the switch. | [optional] [readonly] 
 **SubDeviceId** | Pointer to **string** | The sub device id of the switch. | [optional] [readonly] 
@@ -19,8 +21,11 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | The type information of the switch. | [optional] 
 **VendorId** | Pointer to **string** | The vendor id of the switch. | [optional] [readonly] 
 **ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**EquipmentExpanderModule** | Pointer to [**NullableEquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **Links** | Pointer to [**[]PciLinkRelationship**](PciLinkRelationship.md) | An array of relationships to pciLink resources. | [optional] [readonly] 
+**PciEndpoints** | Pointer to [**[]PciEndpointRelationship**](PciEndpointRelationship.md) | An array of relationships to pciEndpoint resources. | [optional] [readonly] 
+**Ports** | Pointer to [**[]PciPortRelationship**](PciPortRelationship.md) | An array of relationships to pciPort resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 
@@ -158,6 +163,31 @@ SetNumOfAdaptors sets NumOfAdaptors field to given value.
 
 HasNumOfAdaptors returns a boolean if a field has been set.
 
+### GetOperState
+
+`func (o *PciSwitch) GetOperState() string`
+
+GetOperState returns the OperState field if non-nil, zero value otherwise.
+
+### GetOperStateOk
+
+`func (o *PciSwitch) GetOperStateOk() (*string, bool)`
+
+GetOperStateOk returns a tuple with the OperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperState
+
+`func (o *PciSwitch) SetOperState(v string)`
+
+SetOperState sets OperState field to given value.
+
+### HasOperState
+
+`func (o *PciSwitch) HasOperState() bool`
+
+HasOperState returns a boolean if a field has been set.
+
 ### GetPciAddress
 
 `func (o *PciSwitch) GetPciAddress() string`
@@ -207,6 +237,31 @@ SetPciSlot sets PciSlot field to given value.
 `func (o *PciSwitch) HasPciSlot() bool`
 
 HasPciSlot returns a boolean if a field has been set.
+
+### GetPciSwitchId
+
+`func (o *PciSwitch) GetPciSwitchId() string`
+
+GetPciSwitchId returns the PciSwitchId field if non-nil, zero value otherwise.
+
+### GetPciSwitchIdOk
+
+`func (o *PciSwitch) GetPciSwitchIdOk() (*string, bool)`
+
+GetPciSwitchIdOk returns a tuple with the PciSwitchId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciSwitchId
+
+`func (o *PciSwitch) SetPciSwitchId(v string)`
+
+SetPciSwitchId sets PciSwitchId field to given value.
+
+### HasPciSwitchId
+
+`func (o *PciSwitch) HasPciSwitchId() bool`
+
+HasPciSwitchId returns a boolean if a field has been set.
 
 ### GetProductName
 
@@ -418,6 +473,41 @@ HasComputeBoard returns a boolean if a field has been set.
 `func (o *PciSwitch) UnsetComputeBoard()`
 
 UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+### GetEquipmentExpanderModule
+
+`func (o *PciSwitch) GetEquipmentExpanderModule() EquipmentExpanderModuleRelationship`
+
+GetEquipmentExpanderModule returns the EquipmentExpanderModule field if non-nil, zero value otherwise.
+
+### GetEquipmentExpanderModuleOk
+
+`func (o *PciSwitch) GetEquipmentExpanderModuleOk() (*EquipmentExpanderModuleRelationship, bool)`
+
+GetEquipmentExpanderModuleOk returns a tuple with the EquipmentExpanderModule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentExpanderModule
+
+`func (o *PciSwitch) SetEquipmentExpanderModule(v EquipmentExpanderModuleRelationship)`
+
+SetEquipmentExpanderModule sets EquipmentExpanderModule field to given value.
+
+### HasEquipmentExpanderModule
+
+`func (o *PciSwitch) HasEquipmentExpanderModule() bool`
+
+HasEquipmentExpanderModule returns a boolean if a field has been set.
+
+### SetEquipmentExpanderModuleNil
+
+`func (o *PciSwitch) SetEquipmentExpanderModuleNil(b bool)`
+
+ SetEquipmentExpanderModuleNil sets the value for EquipmentExpanderModule to be an explicit nil
+
+### UnsetEquipmentExpanderModule
+`func (o *PciSwitch) UnsetEquipmentExpanderModule()`
+
+UnsetEquipmentExpanderModule ensures that no value is present for EquipmentExpanderModule, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *PciSwitch) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -488,6 +578,76 @@ HasLinks returns a boolean if a field has been set.
 `func (o *PciSwitch) UnsetLinks()`
 
 UnsetLinks ensures that no value is present for Links, not even an explicit nil
+### GetPciEndpoints
+
+`func (o *PciSwitch) GetPciEndpoints() []PciEndpointRelationship`
+
+GetPciEndpoints returns the PciEndpoints field if non-nil, zero value otherwise.
+
+### GetPciEndpointsOk
+
+`func (o *PciSwitch) GetPciEndpointsOk() (*[]PciEndpointRelationship, bool)`
+
+GetPciEndpointsOk returns a tuple with the PciEndpoints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciEndpoints
+
+`func (o *PciSwitch) SetPciEndpoints(v []PciEndpointRelationship)`
+
+SetPciEndpoints sets PciEndpoints field to given value.
+
+### HasPciEndpoints
+
+`func (o *PciSwitch) HasPciEndpoints() bool`
+
+HasPciEndpoints returns a boolean if a field has been set.
+
+### SetPciEndpointsNil
+
+`func (o *PciSwitch) SetPciEndpointsNil(b bool)`
+
+ SetPciEndpointsNil sets the value for PciEndpoints to be an explicit nil
+
+### UnsetPciEndpoints
+`func (o *PciSwitch) UnsetPciEndpoints()`
+
+UnsetPciEndpoints ensures that no value is present for PciEndpoints, not even an explicit nil
+### GetPorts
+
+`func (o *PciSwitch) GetPorts() []PciPortRelationship`
+
+GetPorts returns the Ports field if non-nil, zero value otherwise.
+
+### GetPortsOk
+
+`func (o *PciSwitch) GetPortsOk() (*[]PciPortRelationship, bool)`
+
+GetPortsOk returns a tuple with the Ports field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPorts
+
+`func (o *PciSwitch) SetPorts(v []PciPortRelationship)`
+
+SetPorts sets Ports field to given value.
+
+### HasPorts
+
+`func (o *PciSwitch) HasPorts() bool`
+
+HasPorts returns a boolean if a field has been set.
+
+### SetPortsNil
+
+`func (o *PciSwitch) SetPortsNil(b bool)`
+
+ SetPortsNil sets the value for Ports to be an explicit nil
+
+### UnsetPorts
+`func (o *PciSwitch) UnsetPorts()`
+
+UnsetPorts ensures that no value is present for Ports, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *PciSwitch) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

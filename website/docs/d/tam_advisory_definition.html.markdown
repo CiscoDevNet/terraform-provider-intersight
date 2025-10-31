@@ -3,34 +3,26 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_definition"
 description: |-
-        # Overview
-        The AdvisoryDefinition object is a critical component in Intersight.
-        It encompasses various types of advisories, including Field Notices, End of Life (EOL),
-        End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
-        ## Purpose
-        AdvisoryDefinition provides a comprehensive framework for defining potential advisories
-        that may impact managed objects in the datacenter.
-        It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
-        ## Key Concepts
-        - **Diverse Advisory Types** – Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
-        - **Actionable Guidance** – Provides recommendations and potential workarounds to mitigate identified issues.
-        - **Role-Based Access** – Access to create, update, or delete advisories is controlled through user privilege sets.
+        ### Overview
+        The AdvisoryDefinition object is a critical component in Intersight. It encompasses various types of advisories, including Field Notices, End of Life (EOL), End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
+        #### Purpose
+        AdvisoryDefinition provides a comprehensive framework for defining potential advisories that may impact managed objects in the datacenter. It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
+        #### Key Concepts
+        - **Diverse Advisory Types** - Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
+        - **Actionable Guidance** - Provides recommendations and potential workarounds to mitigate identified issues.
+        - **Role-Based Access** - Access to create, update, or delete advisories is controlled through user privilege sets.
 
 ---
 
 # Data Source: intersight_tam_advisory_definition
-# Overview
-The AdvisoryDefinition object is a critical component in Intersight.  
-It encompasses various types of advisories, including Field Notices, End of Life (EOL),  
-End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
-## Purpose
-AdvisoryDefinition provides a comprehensive framework for defining potential advisories  
-that may impact managed objects in the datacenter.  
-It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
-## Key Concepts
-- **Diverse Advisory Types** – Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
-- **Actionable Guidance** – Provides recommendations and potential workarounds to mitigate identified issues.
-- **Role-Based Access** – Access to create, update, or delete advisories is controlled through user privilege sets.
+### Overview
+The AdvisoryDefinition object is a critical component in Intersight. It encompasses various types of advisories, including Field Notices, End of Life (EOL), End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
+#### Purpose
+AdvisoryDefinition provides a comprehensive framework for defining potential advisories that may impact managed objects in the datacenter. It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
+#### Key Concepts
+- **Diverse Advisory Types** - Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
+- **Actionable Guidance** - Provides recommendations and potential workarounds to mitigate identified issues.
+- **Role-Based Access** - Access to create, update, or delete advisories is controlled through user privilege sets.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -43,7 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `date_updated`:(string) Date when the security/field-notice/end-of-life advisory was last updated by Cisco. 
 * `description`:(string) Brief description of the advisory details. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster.* `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster. 
+* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care by batch processing.* `tier2` - Advisory processing will be taken care by stream processing. 
 * `external_url`:(string) A link to an external URL describing security Advisory in more details. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

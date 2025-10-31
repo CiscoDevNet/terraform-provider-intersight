@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_key_encryption_key"
 description: |-
-        Key Encryption Key and associated resource parameters specification.
+        #### Overview
+        The `KeyEncryptionKey` object is fundamental to the security architecture of HyperFlex clusters,       providing encryption key management and ensuring data protection across various resources.
+        #### Purpose
+        The `KeyEncryptionKey` object serves as the cornerstone for managing encryption keys within HyperFlex clusters. It supports the creation, reading, updating, and deletion of keys essential for protecting sensitive data.
+        #### Key Concepts
+        - **Encryption Key Management** - Centralizes the handling of encryption keys, ensuring secure data encryption across resources.
+        - **Access Control** - Implements privilege sets to control key operations, maintaining security through defined user permissions.
+        - **Integration** - Supports tagging and identity management for seamless integration with HyperFlex clusters and associated profiles.
 
 ---
 
 # Data Source: intersight_hyperflex_key_encryption_key
-Key Encryption Key and associated resource parameters specification.
+#### Overview
+The `KeyEncryptionKey` object is fundamental to the security architecture of HyperFlex clusters,       providing encryption key management and ensuring data protection across various resources.
+#### Purpose
+The `KeyEncryptionKey` object serves as the cornerstone for managing encryption keys within HyperFlex clusters. It supports the creation, reading, updating, and deletion of keys essential for protecting sensitive data.
+ #### Key Concepts
+ - **Encryption Key Management** - Centralizes the handling of encryption keys, ensuring secure data encryption across resources.  
+ - **Access Control** - Implements privilege sets to control key operations, maintaining security through defined user permissions.  
+ - **Integration** - Supports tagging and identity management for seamless integration with HyperFlex clusters and associated profiles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

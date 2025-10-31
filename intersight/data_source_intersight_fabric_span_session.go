@@ -71,7 +71,7 @@ func getFabricSpanSessionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"config_state": {
-			Description: "The configured state of SPAN configuration. If the configuration fails to deploy to the Fabric Interconnect, it can be redeployed by toggling the admin state.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Description: "The configured state of SPAN configuration. If the configuration fails to deploy to the Fabric Interconnect, it can be redeployed by toggling the admin state.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.\n* `Scheduled` - User configured settings are scheduled to be applied.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

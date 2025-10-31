@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **EquipmentTpms** | Pointer to [**[]EquipmentTpmRelationship**](EquipmentTpmRelationship.md) | An array of relationships to equipmentTpm resources. | [optional] [readonly] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] [readonly] 
 **HybridDriveSlots** | Pointer to [**[]EquipmentHybridDriveSlotRelationship**](EquipmentHybridDriveSlotRelationship.md) | An array of relationships to equipmentHybridDriveSlot resources. | [optional] [readonly] 
+**Interconnects** | Pointer to [**[]EquipmentInterconnectRelationship**](EquipmentInterconnectRelationship.md) | An array of relationships to equipmentInterconnect resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **MemoryArrays** | Pointer to [**[]MemoryArrayRelationship**](MemoryArrayRelationship.md) | An array of relationships to memoryArray resources. | [optional] [readonly] 
 **PciCoprocessorCards** | Pointer to [**[]PciCoprocessorCardRelationship**](PciCoprocessorCardRelationship.md) | An array of relationships to pciCoprocessorCard resources. | [optional] [readonly] 
@@ -372,6 +373,41 @@ HasHybridDriveSlots returns a boolean if a field has been set.
 `func (o *ComputeBoard) UnsetHybridDriveSlots()`
 
 UnsetHybridDriveSlots ensures that no value is present for HybridDriveSlots, not even an explicit nil
+### GetInterconnects
+
+`func (o *ComputeBoard) GetInterconnects() []EquipmentInterconnectRelationship`
+
+GetInterconnects returns the Interconnects field if non-nil, zero value otherwise.
+
+### GetInterconnectsOk
+
+`func (o *ComputeBoard) GetInterconnectsOk() (*[]EquipmentInterconnectRelationship, bool)`
+
+GetInterconnectsOk returns a tuple with the Interconnects field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterconnects
+
+`func (o *ComputeBoard) SetInterconnects(v []EquipmentInterconnectRelationship)`
+
+SetInterconnects sets Interconnects field to given value.
+
+### HasInterconnects
+
+`func (o *ComputeBoard) HasInterconnects() bool`
+
+HasInterconnects returns a boolean if a field has been set.
+
+### SetInterconnectsNil
+
+`func (o *ComputeBoard) SetInterconnectsNil(b bool)`
+
+ SetInterconnectsNil sets the value for Interconnects to be an explicit nil
+
+### UnsetInterconnects
+`func (o *ComputeBoard) UnsetInterconnects()`
+
+UnsetInterconnects ensures that no value is present for Interconnects, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *ComputeBoard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

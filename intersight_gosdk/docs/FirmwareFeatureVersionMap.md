@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.FeatureVersionMap"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.FeatureVersionMap"]
-**FeatureName** | Pointer to **string** | Name of the feature for which the version map is applicable. * &#x60;Unknown&#x60; - Unknown or Invalid feature in the equipment. * &#x60;ServerRole&#x60; - Server Role support for Fabric Interconnect Direct Hardware. | [optional] [readonly] [default to "Unknown"]
+**FeatureName** | Pointer to **string** | Name of the feature for which the version map is applicable. * &#x60;Unknown&#x60; - Unknown or Invalid feature in the equipment. * &#x60;ServerRole&#x60; - Server Role support for Fabric Interconnect Direct Hardware. * &#x60;FIAuditd&#x60; - AuditD feature for Fabric Interconnect. | [optional] [readonly] [default to "Unknown"]
 **VersionMap** | Pointer to [**NullableFirmwareVersionMap**](FirmwareVersionMap.md) |  | [optional] 
 
 ## Methods

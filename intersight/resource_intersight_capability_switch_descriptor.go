@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -427,6 +428,14 @@ func resourceCapabilitySwitchDescriptor() *schema.Resource {
 					},
 				},
 			},
+			"unsupported_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"vendor": {
 				Description: "The vendor of the endpoint, for which this capability information is applicable.",
 				Type:        schema.TypeString,
@@ -766,6 +775,19 @@ func resourceCapabilitySwitchDescriptorCreate(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("unsupported_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetUnsupportedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -904,6 +926,10 @@ func resourceCapabilitySwitchDescriptorRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in CapabilitySwitchDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("unsupported_policies", (s.GetUnsupportedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property UnsupportedPolicies in CapabilitySwitchDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("vendor", (s.GetVendor())); err != nil {
@@ -1101,6 +1127,18 @@ func resourceCapabilitySwitchDescriptorUpdate(c context.Context, d *schema.Resou
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("unsupported_policies") {
+		v := d.Get("unsupported_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnsupportedPolicies(x)
 	}
 
 	if d.HasChange("vendor") {

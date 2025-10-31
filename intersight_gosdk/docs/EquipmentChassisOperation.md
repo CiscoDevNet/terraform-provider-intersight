@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ChassisOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ChassisOperation"]
 **AdminLocatorLedAction** | Pointer to **string** | User configured state of the locator LED for the Chassis. * &#x60;None&#x60; - No operation action for the Locator Led of an equipment. * &#x60;TurnOn&#x60; - Turn on the Locator Led of an equipment. * &#x60;TurnOff&#x60; - Turn off the Locator Led of an equipment. | [optional] [default to "None"]
+**AdminPowerCycleExpanderModuleSlotId** | Pointer to **int64** | Slot id of the expander module slot within chassis that needs to be power cycled. | [optional] 
 **AdminPowerCycleSlotId** | Pointer to **int64** | Slot id of the chassis slot that needs to be power cycled. | [optional] 
 **ChassisOperationStatus** | Pointer to [**[]EquipmentChassisOperationStatus**](EquipmentChassisOperationStatus.md) |  | [optional] 
-**ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [readonly] [default to "None"]
 **Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -96,6 +97,31 @@ SetAdminLocatorLedAction sets AdminLocatorLedAction field to given value.
 `func (o *EquipmentChassisOperation) HasAdminLocatorLedAction() bool`
 
 HasAdminLocatorLedAction returns a boolean if a field has been set.
+
+### GetAdminPowerCycleExpanderModuleSlotId
+
+`func (o *EquipmentChassisOperation) GetAdminPowerCycleExpanderModuleSlotId() int64`
+
+GetAdminPowerCycleExpanderModuleSlotId returns the AdminPowerCycleExpanderModuleSlotId field if non-nil, zero value otherwise.
+
+### GetAdminPowerCycleExpanderModuleSlotIdOk
+
+`func (o *EquipmentChassisOperation) GetAdminPowerCycleExpanderModuleSlotIdOk() (*int64, bool)`
+
+GetAdminPowerCycleExpanderModuleSlotIdOk returns a tuple with the AdminPowerCycleExpanderModuleSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminPowerCycleExpanderModuleSlotId
+
+`func (o *EquipmentChassisOperation) SetAdminPowerCycleExpanderModuleSlotId(v int64)`
+
+SetAdminPowerCycleExpanderModuleSlotId sets AdminPowerCycleExpanderModuleSlotId field to given value.
+
+### HasAdminPowerCycleExpanderModuleSlotId
+
+`func (o *EquipmentChassisOperation) HasAdminPowerCycleExpanderModuleSlotId() bool`
+
+HasAdminPowerCycleExpanderModuleSlotId returns a boolean if a field has been set.
 
 ### GetAdminPowerCycleSlotId
 
