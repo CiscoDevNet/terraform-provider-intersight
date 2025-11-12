@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -41,6 +41,8 @@ type ComputePhysicalSummary struct {
 	ChassisId *string `json:"ChassisId,omitempty"`
 	// Connectivity Status of RackUnit to Switch - A or B or AB.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
+	// Cooling mode representation of the server, supported modes include Air and Immersion. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
+	CoolingMode *string `json:"CoolingMode,omitempty"`
 	// Total processing capacity of the server.
 	CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 	// The MoId of the registered device that coresponds to the server.
@@ -55,6 +57,8 @@ type ComputePhysicalSummary struct {
 	FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 	// The universally unique hardware identity of the server provided by the manufacturer.
 	HardwareUuid *string `json:"HardwareUuid,omitempty"`
+	// The flag to indicate server has the support for E3.S drives.
+	HasE3SSupport *bool `json:"HasE3SSupport,omitempty"`
 	// The IPv4 address configured on the management interface of the Integrated Management Controller.
 	Ipv4Address *string `json:"Ipv4Address,omitempty"`
 	// This field indicates the compute status of the catalog values for the associated component or hardware.
@@ -64,8 +68,11 @@ type ComputePhysicalSummary struct {
 	KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
 	// The KVM Vendor for the server.
 	KvmVendor *string `json:"KvmVendor,omitempty"`
+	// The Last host power state changed time of the server.
+	LastPowerStateChangedTime *string `json:"LastPowerStateChangedTime,omitempty"`
 	// The lifecycle of the blade server. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `ScrubInProgress` - Scrub is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. * `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.
-	Lifecycle *string `json:"Lifecycle,omitempty"`
+	Lifecycle       *string                        `json:"Lifecycle,omitempty"`
+	LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// The maximum memory speed in MHz available on the server.
@@ -132,12 +139,14 @@ type ComputePhysicalSummary struct {
 	// The universally unique identity of the server.
 	Uuid *string `json:"Uuid,omitempty"`
 	// This field identifies the vendor of the given component.
-	Vendor               *string                                     `json:"Vendor,omitempty"`
-	EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	InventoryParent      NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Vendor *string `json:"Vendor,omitempty"`
+	// An array of relationships to moBaseMo resources.
+	CustomPermissionResources []MoBaseMoRelationship                      `json:"CustomPermissionResources,omitempty"`
+	EquipmentChassis          NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+	InventoryDeviceInfo       NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	InventoryParent           NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
+	RegisteredDevice          NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
 
 type _ComputePhysicalSummary ComputePhysicalSummary
@@ -462,6 +471,38 @@ func (o *ComputePhysicalSummary) SetConnectionStatus(v string) {
 	o.ConnectionStatus = &v
 }
 
+// GetCoolingMode returns the CoolingMode field value if set, zero value otherwise.
+func (o *ComputePhysicalSummary) GetCoolingMode() string {
+	if o == nil || IsNil(o.CoolingMode) {
+		var ret string
+		return ret
+	}
+	return *o.CoolingMode
+}
+
+// GetCoolingModeOk returns a tuple with the CoolingMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummary) GetCoolingModeOk() (*string, bool) {
+	if o == nil || IsNil(o.CoolingMode) {
+		return nil, false
+	}
+	return o.CoolingMode, true
+}
+
+// HasCoolingMode returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasCoolingMode() bool {
+	if o != nil && !IsNil(o.CoolingMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoolingMode gets a reference to the given string and assigns it to the CoolingMode field.
+func (o *ComputePhysicalSummary) SetCoolingMode(v string) {
+	o.CoolingMode = &v
+}
+
 // GetCpuCapacity returns the CpuCapacity field value if set, zero value otherwise.
 func (o *ComputePhysicalSummary) GetCpuCapacity() float32 {
 	if o == nil || IsNil(o.CpuCapacity) {
@@ -686,6 +727,38 @@ func (o *ComputePhysicalSummary) SetHardwareUuid(v string) {
 	o.HardwareUuid = &v
 }
 
+// GetHasE3SSupport returns the HasE3SSupport field value if set, zero value otherwise.
+func (o *ComputePhysicalSummary) GetHasE3SSupport() bool {
+	if o == nil || IsNil(o.HasE3SSupport) {
+		var ret bool
+		return ret
+	}
+	return *o.HasE3SSupport
+}
+
+// GetHasE3SSupportOk returns a tuple with the HasE3SSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummary) GetHasE3SSupportOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasE3SSupport) {
+		return nil, false
+	}
+	return o.HasE3SSupport, true
+}
+
+// HasHasE3SSupport returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasHasE3SSupport() bool {
+	if o != nil && !IsNil(o.HasE3SSupport) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasE3SSupport gets a reference to the given bool and assigns it to the HasE3SSupport field.
+func (o *ComputePhysicalSummary) SetHasE3SSupport(v bool) {
+	o.HasE3SSupport = &v
+}
+
 // GetIpv4Address returns the Ipv4Address field value if set, zero value otherwise.
 func (o *ComputePhysicalSummary) GetIpv4Address() string {
 	if o == nil || IsNil(o.Ipv4Address) {
@@ -847,6 +920,38 @@ func (o *ComputePhysicalSummary) SetKvmVendor(v string) {
 	o.KvmVendor = &v
 }
 
+// GetLastPowerStateChangedTime returns the LastPowerStateChangedTime field value if set, zero value otherwise.
+func (o *ComputePhysicalSummary) GetLastPowerStateChangedTime() string {
+	if o == nil || IsNil(o.LastPowerStateChangedTime) {
+		var ret string
+		return ret
+	}
+	return *o.LastPowerStateChangedTime
+}
+
+// GetLastPowerStateChangedTimeOk returns a tuple with the LastPowerStateChangedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummary) GetLastPowerStateChangedTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.LastPowerStateChangedTime) {
+		return nil, false
+	}
+	return o.LastPowerStateChangedTime, true
+}
+
+// HasLastPowerStateChangedTime returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasLastPowerStateChangedTime() bool {
+	if o != nil && !IsNil(o.LastPowerStateChangedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastPowerStateChangedTime gets a reference to the given string and assigns it to the LastPowerStateChangedTime field.
+func (o *ComputePhysicalSummary) SetLastPowerStateChangedTime(v string) {
+	o.LastPowerStateChangedTime = &v
+}
+
 // GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
 func (o *ComputePhysicalSummary) GetLifecycle() string {
 	if o == nil || IsNil(o.Lifecycle) {
@@ -877,6 +982,49 @@ func (o *ComputePhysicalSummary) HasLifecycle() bool {
 // SetLifecycle gets a reference to the given string and assigns it to the Lifecycle field.
 func (o *ComputePhysicalSummary) SetLifecycle(v string) {
 	o.Lifecycle = &v
+}
+
+// GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputePhysicalSummary) GetLocationDetails() CommGeoLocationDetails {
+	if o == nil || IsNil(o.LocationDetails.Get()) {
+		var ret CommGeoLocationDetails
+		return ret
+	}
+	return *o.LocationDetails.Get()
+}
+
+// GetLocationDetailsOk returns a tuple with the LocationDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputePhysicalSummary) GetLocationDetailsOk() (*CommGeoLocationDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationDetails.Get(), o.LocationDetails.IsSet()
+}
+
+// HasLocationDetails returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasLocationDetails() bool {
+	if o != nil && o.LocationDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationDetails gets a reference to the given NullableCommGeoLocationDetails and assigns it to the LocationDetails field.
+func (o *ComputePhysicalSummary) SetLocationDetails(v CommGeoLocationDetails) {
+	o.LocationDetails.Set(&v)
+}
+
+// SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+func (o *ComputePhysicalSummary) SetLocationDetailsNil() {
+	o.LocationDetails.Set(nil)
+}
+
+// UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
+func (o *ComputePhysicalSummary) UnsetLocationDetails() {
+	o.LocationDetails.Unset()
 }
 
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
@@ -1968,6 +2116,39 @@ func (o *ComputePhysicalSummary) SetVendor(v string) {
 	o.Vendor = &v
 }
 
+// GetCustomPermissionResources returns the CustomPermissionResources field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputePhysicalSummary) GetCustomPermissionResources() []MoBaseMoRelationship {
+	if o == nil {
+		var ret []MoBaseMoRelationship
+		return ret
+	}
+	return o.CustomPermissionResources
+}
+
+// GetCustomPermissionResourcesOk returns a tuple with the CustomPermissionResources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputePhysicalSummary) GetCustomPermissionResourcesOk() ([]MoBaseMoRelationship, bool) {
+	if o == nil || IsNil(o.CustomPermissionResources) {
+		return nil, false
+	}
+	return o.CustomPermissionResources, true
+}
+
+// HasCustomPermissionResources returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasCustomPermissionResources() bool {
+	if o != nil && !IsNil(o.CustomPermissionResources) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomPermissionResources gets a reference to the given []MoBaseMoRelationship and assigns it to the CustomPermissionResources field.
+func (o *ComputePhysicalSummary) SetCustomPermissionResources(v []MoBaseMoRelationship) {
+	o.CustomPermissionResources = v
+}
+
 // GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship {
 	if o == nil || IsNil(o.EquipmentChassis.Get()) {
@@ -2187,6 +2368,9 @@ func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
+	if !IsNil(o.CoolingMode) {
+		toSerialize["CoolingMode"] = o.CoolingMode
+	}
 	if !IsNil(o.CpuCapacity) {
 		toSerialize["CpuCapacity"] = o.CpuCapacity
 	}
@@ -2208,6 +2392,9 @@ func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HardwareUuid) {
 		toSerialize["HardwareUuid"] = o.HardwareUuid
 	}
+	if !IsNil(o.HasE3SSupport) {
+		toSerialize["HasE3SSupport"] = o.HasE3SSupport
+	}
 	if !IsNil(o.Ipv4Address) {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
@@ -2223,8 +2410,14 @@ func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.KvmVendor) {
 		toSerialize["KvmVendor"] = o.KvmVendor
 	}
+	if !IsNil(o.LastPowerStateChangedTime) {
+		toSerialize["LastPowerStateChangedTime"] = o.LastPowerStateChangedTime
+	}
 	if !IsNil(o.Lifecycle) {
 		toSerialize["Lifecycle"] = o.Lifecycle
+	}
+	if o.LocationDetails.IsSet() {
+		toSerialize["LocationDetails"] = o.LocationDetails.Get()
 	}
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
@@ -2328,6 +2521,9 @@ func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
+	if o.CustomPermissionResources != nil {
+		toSerialize["CustomPermissionResources"] = o.CustomPermissionResources
+	}
 	if o.EquipmentChassis.IsSet() {
 		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
@@ -2408,6 +2604,8 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		ChassisId *string `json:"ChassisId,omitempty"`
 		// Connectivity Status of RackUnit to Switch - A or B or AB.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
+		// Cooling mode representation of the server, supported modes include Air and Immersion. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
+		CoolingMode *string `json:"CoolingMode,omitempty"`
 		// Total processing capacity of the server.
 		CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 		// The MoId of the registered device that coresponds to the server.
@@ -2422,6 +2620,8 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 		// The universally unique hardware identity of the server provided by the manufacturer.
 		HardwareUuid *string `json:"HardwareUuid,omitempty"`
+		// The flag to indicate server has the support for E3.S drives.
+		HasE3SSupport *bool `json:"HasE3SSupport,omitempty"`
 		// The IPv4 address configured on the management interface of the Integrated Management Controller.
 		Ipv4Address *string `json:"Ipv4Address,omitempty"`
 		// This field indicates the compute status of the catalog values for the associated component or hardware.
@@ -2431,8 +2631,11 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
 		// The KVM Vendor for the server.
 		KvmVendor *string `json:"KvmVendor,omitempty"`
+		// The Last host power state changed time of the server.
+		LastPowerStateChangedTime *string `json:"LastPowerStateChangedTime,omitempty"`
 		// The lifecycle of the blade server. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `ScrubInProgress` - Scrub is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. * `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.
-		Lifecycle *string `json:"Lifecycle,omitempty"`
+		Lifecycle       *string                        `json:"Lifecycle,omitempty"`
+		LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// The maximum memory speed in MHz available on the server.
@@ -2499,11 +2702,13 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		// The universally unique identity of the server.
 		Uuid *string `json:"Uuid,omitempty"`
 		// This field identifies the vendor of the given component.
-		Vendor              *string                                     `json:"Vendor,omitempty"`
-		EquipmentChassis    NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		InventoryParent     NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
-		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Vendor *string `json:"Vendor,omitempty"`
+		// An array of relationships to moBaseMo resources.
+		CustomPermissionResources []MoBaseMoRelationship                      `json:"CustomPermissionResources,omitempty"`
+		EquipmentChassis          NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+		InventoryDeviceInfo       NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		InventoryParent           NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
+		RegisteredDevice          NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varComputePhysicalSummaryWithoutEmbeddedStruct := ComputePhysicalSummaryWithoutEmbeddedStruct{}
@@ -2520,6 +2725,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysicalSummary.BiosPostComplete = varComputePhysicalSummaryWithoutEmbeddedStruct.BiosPostComplete
 		varComputePhysicalSummary.ChassisId = varComputePhysicalSummaryWithoutEmbeddedStruct.ChassisId
 		varComputePhysicalSummary.ConnectionStatus = varComputePhysicalSummaryWithoutEmbeddedStruct.ConnectionStatus
+		varComputePhysicalSummary.CoolingMode = varComputePhysicalSummaryWithoutEmbeddedStruct.CoolingMode
 		varComputePhysicalSummary.CpuCapacity = varComputePhysicalSummaryWithoutEmbeddedStruct.CpuCapacity
 		varComputePhysicalSummary.DeviceMoId = varComputePhysicalSummaryWithoutEmbeddedStruct.DeviceMoId
 		varComputePhysicalSummary.Dn = varComputePhysicalSummaryWithoutEmbeddedStruct.Dn
@@ -2527,12 +2733,15 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysicalSummary.Firmware = varComputePhysicalSummaryWithoutEmbeddedStruct.Firmware
 		varComputePhysicalSummary.FrontPanelLockState = varComputePhysicalSummaryWithoutEmbeddedStruct.FrontPanelLockState
 		varComputePhysicalSummary.HardwareUuid = varComputePhysicalSummaryWithoutEmbeddedStruct.HardwareUuid
+		varComputePhysicalSummary.HasE3SSupport = varComputePhysicalSummaryWithoutEmbeddedStruct.HasE3SSupport
 		varComputePhysicalSummary.Ipv4Address = varComputePhysicalSummaryWithoutEmbeddedStruct.Ipv4Address
 		varComputePhysicalSummary.IsUpgraded = varComputePhysicalSummaryWithoutEmbeddedStruct.IsUpgraded
 		varComputePhysicalSummary.KvmIpAddresses = varComputePhysicalSummaryWithoutEmbeddedStruct.KvmIpAddresses
 		varComputePhysicalSummary.KvmServerStateEnabled = varComputePhysicalSummaryWithoutEmbeddedStruct.KvmServerStateEnabled
 		varComputePhysicalSummary.KvmVendor = varComputePhysicalSummaryWithoutEmbeddedStruct.KvmVendor
+		varComputePhysicalSummary.LastPowerStateChangedTime = varComputePhysicalSummaryWithoutEmbeddedStruct.LastPowerStateChangedTime
 		varComputePhysicalSummary.Lifecycle = varComputePhysicalSummaryWithoutEmbeddedStruct.Lifecycle
+		varComputePhysicalSummary.LocationDetails = varComputePhysicalSummaryWithoutEmbeddedStruct.LocationDetails
 		varComputePhysicalSummary.ManagementMode = varComputePhysicalSummaryWithoutEmbeddedStruct.ManagementMode
 		varComputePhysicalSummary.MemorySpeed = varComputePhysicalSummaryWithoutEmbeddedStruct.MemorySpeed
 		varComputePhysicalSummary.MgmtIpAddress = varComputePhysicalSummaryWithoutEmbeddedStruct.MgmtIpAddress
@@ -2567,6 +2776,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysicalSummary.UserLabel = varComputePhysicalSummaryWithoutEmbeddedStruct.UserLabel
 		varComputePhysicalSummary.Uuid = varComputePhysicalSummaryWithoutEmbeddedStruct.Uuid
 		varComputePhysicalSummary.Vendor = varComputePhysicalSummaryWithoutEmbeddedStruct.Vendor
+		varComputePhysicalSummary.CustomPermissionResources = varComputePhysicalSummaryWithoutEmbeddedStruct.CustomPermissionResources
 		varComputePhysicalSummary.EquipmentChassis = varComputePhysicalSummaryWithoutEmbeddedStruct.EquipmentChassis
 		varComputePhysicalSummary.InventoryDeviceInfo = varComputePhysicalSummaryWithoutEmbeddedStruct.InventoryDeviceInfo
 		varComputePhysicalSummary.InventoryParent = varComputePhysicalSummaryWithoutEmbeddedStruct.InventoryParent
@@ -2597,6 +2807,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "BiosPostComplete")
 		delete(additionalProperties, "ChassisId")
 		delete(additionalProperties, "ConnectionStatus")
+		delete(additionalProperties, "CoolingMode")
 		delete(additionalProperties, "CpuCapacity")
 		delete(additionalProperties, "DeviceMoId")
 		delete(additionalProperties, "Dn")
@@ -2604,12 +2815,15 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Firmware")
 		delete(additionalProperties, "FrontPanelLockState")
 		delete(additionalProperties, "HardwareUuid")
+		delete(additionalProperties, "HasE3SSupport")
 		delete(additionalProperties, "Ipv4Address")
 		delete(additionalProperties, "IsUpgraded")
 		delete(additionalProperties, "KvmIpAddresses")
 		delete(additionalProperties, "KvmServerStateEnabled")
 		delete(additionalProperties, "KvmVendor")
+		delete(additionalProperties, "LastPowerStateChangedTime")
 		delete(additionalProperties, "Lifecycle")
+		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "MemorySpeed")
 		delete(additionalProperties, "MgmtIpAddress")
@@ -2644,6 +2858,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "Vendor")
+		delete(additionalProperties, "CustomPermissionResources")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "InventoryParent")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -30,10 +30,12 @@ type EquipmentChassisOperation struct {
 	ObjectType string `json:"ObjectType"`
 	// User configured state of the locator LED for the Chassis. * `None` - No operation action for the Locator Led of an equipment. * `TurnOn` - Turn on the Locator Led of an equipment. * `TurnOff` - Turn off the Locator Led of an equipment.
 	AdminLocatorLedAction *string `json:"AdminLocatorLedAction,omitempty"`
+	// Slot id of the expander module slot within chassis that needs to be power cycled.
+	AdminPowerCycleExpanderModuleSlotId *int64 `json:"AdminPowerCycleExpanderModuleSlotId,omitempty"`
 	// Slot id of the chassis slot that needs to be power cycled.
 	AdminPowerCycleSlotId  *int64                            `json:"AdminPowerCycleSlotId,omitempty"`
 	ChassisOperationStatus []EquipmentChassisOperationStatus `json:"ChassisOperationStatus,omitempty"`
-	// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
+	// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied. * `Scheduled` - User configured settings are scheduled to be applied.
 	ConfigState          *string                                     `json:"ConfigState,omitempty"`
 	Chassis              NullableEquipmentChassisRelationship        `json:"Chassis,omitempty"`
 	DeviceRegistration   NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
@@ -157,6 +159,38 @@ func (o *EquipmentChassisOperation) HasAdminLocatorLedAction() bool {
 // SetAdminLocatorLedAction gets a reference to the given string and assigns it to the AdminLocatorLedAction field.
 func (o *EquipmentChassisOperation) SetAdminLocatorLedAction(v string) {
 	o.AdminLocatorLedAction = &v
+}
+
+// GetAdminPowerCycleExpanderModuleSlotId returns the AdminPowerCycleExpanderModuleSlotId field value if set, zero value otherwise.
+func (o *EquipmentChassisOperation) GetAdminPowerCycleExpanderModuleSlotId() int64 {
+	if o == nil || IsNil(o.AdminPowerCycleExpanderModuleSlotId) {
+		var ret int64
+		return ret
+	}
+	return *o.AdminPowerCycleExpanderModuleSlotId
+}
+
+// GetAdminPowerCycleExpanderModuleSlotIdOk returns a tuple with the AdminPowerCycleExpanderModuleSlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassisOperation) GetAdminPowerCycleExpanderModuleSlotIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.AdminPowerCycleExpanderModuleSlotId) {
+		return nil, false
+	}
+	return o.AdminPowerCycleExpanderModuleSlotId, true
+}
+
+// HasAdminPowerCycleExpanderModuleSlotId returns a boolean if a field has been set.
+func (o *EquipmentChassisOperation) HasAdminPowerCycleExpanderModuleSlotId() bool {
+	if o != nil && !IsNil(o.AdminPowerCycleExpanderModuleSlotId) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminPowerCycleExpanderModuleSlotId gets a reference to the given int64 and assigns it to the AdminPowerCycleExpanderModuleSlotId field.
+func (o *EquipmentChassisOperation) SetAdminPowerCycleExpanderModuleSlotId(v int64) {
+	o.AdminPowerCycleExpanderModuleSlotId = &v
 }
 
 // GetAdminPowerCycleSlotId returns the AdminPowerCycleSlotId field value if set, zero value otherwise.
@@ -371,6 +405,9 @@ func (o EquipmentChassisOperation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AdminLocatorLedAction) {
 		toSerialize["AdminLocatorLedAction"] = o.AdminLocatorLedAction
 	}
+	if !IsNil(o.AdminPowerCycleExpanderModuleSlotId) {
+		toSerialize["AdminPowerCycleExpanderModuleSlotId"] = o.AdminPowerCycleExpanderModuleSlotId
+	}
 	if !IsNil(o.AdminPowerCycleSlotId) {
 		toSerialize["AdminPowerCycleSlotId"] = o.AdminPowerCycleSlotId
 	}
@@ -443,10 +480,12 @@ func (o *EquipmentChassisOperation) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// User configured state of the locator LED for the Chassis. * `None` - No operation action for the Locator Led of an equipment. * `TurnOn` - Turn on the Locator Led of an equipment. * `TurnOff` - Turn off the Locator Led of an equipment.
 		AdminLocatorLedAction *string `json:"AdminLocatorLedAction,omitempty"`
+		// Slot id of the expander module slot within chassis that needs to be power cycled.
+		AdminPowerCycleExpanderModuleSlotId *int64 `json:"AdminPowerCycleExpanderModuleSlotId,omitempty"`
 		// Slot id of the chassis slot that needs to be power cycled.
 		AdminPowerCycleSlotId  *int64                            `json:"AdminPowerCycleSlotId,omitempty"`
 		ChassisOperationStatus []EquipmentChassisOperationStatus `json:"ChassisOperationStatus,omitempty"`
-		// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
+		// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied. * `Scheduled` - User configured settings are scheduled to be applied.
 		ConfigState        *string                                     `json:"ConfigState,omitempty"`
 		Chassis            NullableEquipmentChassisRelationship        `json:"Chassis,omitempty"`
 		DeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
@@ -460,6 +499,7 @@ func (o *EquipmentChassisOperation) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentChassisOperation.ClassId = varEquipmentChassisOperationWithoutEmbeddedStruct.ClassId
 		varEquipmentChassisOperation.ObjectType = varEquipmentChassisOperationWithoutEmbeddedStruct.ObjectType
 		varEquipmentChassisOperation.AdminLocatorLedAction = varEquipmentChassisOperationWithoutEmbeddedStruct.AdminLocatorLedAction
+		varEquipmentChassisOperation.AdminPowerCycleExpanderModuleSlotId = varEquipmentChassisOperationWithoutEmbeddedStruct.AdminPowerCycleExpanderModuleSlotId
 		varEquipmentChassisOperation.AdminPowerCycleSlotId = varEquipmentChassisOperationWithoutEmbeddedStruct.AdminPowerCycleSlotId
 		varEquipmentChassisOperation.ChassisOperationStatus = varEquipmentChassisOperationWithoutEmbeddedStruct.ChassisOperationStatus
 		varEquipmentChassisOperation.ConfigState = varEquipmentChassisOperationWithoutEmbeddedStruct.ConfigState
@@ -485,6 +525,7 @@ func (o *EquipmentChassisOperation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminLocatorLedAction")
+		delete(additionalProperties, "AdminPowerCycleExpanderModuleSlotId")
 		delete(additionalProperties, "AdminPowerCycleSlotId")
 		delete(additionalProperties, "ChassisOperationStatus")
 		delete(additionalProperties, "ConfigState")

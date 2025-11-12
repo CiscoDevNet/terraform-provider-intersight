@@ -361,6 +361,58 @@ func Test_intersight_NiaapiApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test NiaapiApiService GetNiaapiNdMetadataByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NiaapiApi.GetNiaapiNdMetadataByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NiaapiApiService GetNiaapiNdMetadataFileDownloaderByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.NiaapiApi.GetNiaapiNdMetadataFileDownloaderByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NiaapiApiService GetNiaapiNdMetadataFileDownloaderList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.NiaapiApi.GetNiaapiNdMetadataFileDownloaderList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test NiaapiApiService GetNiaapiNdMetadataList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.NiaapiApi.GetNiaapiNdMetadataList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test NiaapiApiService GetNiaapiNiaMetadataByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

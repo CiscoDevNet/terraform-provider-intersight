@@ -35,6 +35,18 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComputeApiService CreateComputePcieConnectivityPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ComputeApi.CreateComputePcieConnectivityPolicy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComputeApiService CreateComputeScrubPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -43,6 +55,19 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService DeleteComputePcieConnectivityPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.ComputeApi.DeleteComputePcieConnectivityPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -255,6 +280,58 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComputeApiService GetComputePcieConnectivityPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputePcieConnectivityPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService GetComputePcieConnectivityPolicyInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputePcieConnectivityPolicyInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService GetComputePcieConnectivityPolicyInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputePcieConnectivityPolicyInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService GetComputePcieConnectivityPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputePcieConnectivityPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComputeApiService GetComputePersonalityByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -411,6 +488,32 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComputeApiService GetComputeServerPowerParametersByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputeServerPowerParametersByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService GetComputeServerPowerParametersList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputeServerPowerParametersList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComputeApiService GetComputeServerPowerPolicyByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -538,6 +641,20 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ComputeApi.PatchComputeMapping(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService PatchComputePcieConnectivityPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.PatchComputePcieConnectivityPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -678,6 +795,20 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ComputeApi.UpdateComputeMapping(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService UpdateComputePcieConnectivityPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.UpdateComputePcieConnectivityPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

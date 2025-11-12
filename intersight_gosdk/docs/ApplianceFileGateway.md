@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.FileGateway"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.FileGateway"]
 **BucketName** | Pointer to **string** | Bucket name in the cloud storage service where the file is stored. | [optional] [readonly] 
+**ExternalHost** | Pointer to **bool** | Flag to specify if the requested file is served from an external host. An external host is a host other than the Intersight endpoint URL that resides outside of an endpoint device&#39;s local network. A download client (e.g. the Intersight Appliance device connector) should use this property to determine if a proxy is required to reach the host. | [optional] [readonly] 
 **FileSize** | Pointer to **int64** | Size of the file in bytes. FileSize maybe zero if the storage service does not report file size. | [optional] [readonly] 
 **FileTime** | Pointer to **time.Time** | File timestamp as reported by the cloud storage service. | [optional] [readonly] 
 **FileType** | Pointer to **string** | User defined file type supplied by the caller. | [optional] [readonly] 
@@ -100,6 +101,31 @@ SetBucketName sets BucketName field to given value.
 `func (o *ApplianceFileGateway) HasBucketName() bool`
 
 HasBucketName returns a boolean if a field has been set.
+
+### GetExternalHost
+
+`func (o *ApplianceFileGateway) GetExternalHost() bool`
+
+GetExternalHost returns the ExternalHost field if non-nil, zero value otherwise.
+
+### GetExternalHostOk
+
+`func (o *ApplianceFileGateway) GetExternalHostOk() (*bool, bool)`
+
+GetExternalHostOk returns a tuple with the ExternalHost field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalHost
+
+`func (o *ApplianceFileGateway) SetExternalHost(v bool)`
+
+SetExternalHost sets ExternalHost field to given value.
+
+### HasExternalHost
+
+`func (o *ApplianceFileGateway) HasExternalHost() bool`
+
+HasExternalHost returns a boolean if a field has been set.
 
 ### GetFileSize
 

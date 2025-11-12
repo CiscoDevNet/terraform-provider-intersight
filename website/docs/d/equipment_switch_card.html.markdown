@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `fc_switching_mode`:(string) The user configured FC switching mode for this switch (End-Host or Switch).* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. 
 * `hw_version`:(string) The Hardware version of the switch hardware. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
+* `jumbo_frame_enabled`:(bool) Jumbo Frame configuration for the switch. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -42,7 +43,7 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `slot_id`:(int) Slot identifier of the local Switch slot Interface. 
+* `slot_id`:(int) Slot identifier of the SwitchCard within the Switch. 
 * `state`:(string) Operational state of the switch hardware. 
 * `status`:(string) The connection status of the switch hardware like up/down.* `Down` - Connection status of the switch card is down.* `Up` - Connection status of the switch card is up. 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 

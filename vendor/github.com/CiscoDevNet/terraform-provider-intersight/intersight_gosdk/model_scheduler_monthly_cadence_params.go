@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,14 @@ var _ MappedNullable = &SchedulerMonthlyCadenceParams{}
 // SchedulerMonthlyCadenceParams Used for a monthly cadence.
 type SchedulerMonthlyCadenceParams struct {
 	SchedulerBaseMonthlyCadenceParams
+	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+	ClassId string `json:"ClassId"`
+	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+	ObjectType string `json:"ObjectType"`
+	// Significant business days, such as days when reports are generated for analysis. * `None` - Placeholder. One of the following two fields must be selected. * `FirstWeekDay` - First week day of the month. * `MonthLastDay` - The last day of the month. * `FirstWeek` - Selected weekdays on first week of the month. * `SecondWeek` - Selected weekdays on second week of the month. * `ThirdWeek` - Selected weekdays on third week of the month. * `FourthWeek` - Selected weekdays on fourth week of the month. * `FifthWeek` - Selected weekdays on fifth week of the month.
+	CustomDayOfMonth     *string  `json:"CustomDayOfMonth,omitempty"`
+	DayOfMonth           []int64  `json:"DayOfMonth,omitempty"`
+	DayOfWeek            []string `json:"DayOfWeek,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,6 +45,8 @@ func NewSchedulerMonthlyCadenceParams(classId string, objectType string) *Schedu
 	this := SchedulerMonthlyCadenceParams{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var runEvery int64 = 1
+	this.RunEvery = &runEvery
 	var customDayOfMonth string = "None"
 	this.CustomDayOfMonth = &customDayOfMonth
 	return &this
@@ -47,7 +57,169 @@ func NewSchedulerMonthlyCadenceParams(classId string, objectType string) *Schedu
 // but it doesn't guarantee that properties required by API are set
 func NewSchedulerMonthlyCadenceParamsWithDefaults() *SchedulerMonthlyCadenceParams {
 	this := SchedulerMonthlyCadenceParams{}
+	var classId string = "scheduler.MonthlyCadenceParams"
+	this.ClassId = classId
+	var objectType string = "scheduler.MonthlyCadenceParams"
+	this.ObjectType = objectType
+	var customDayOfMonth string = "None"
+	this.CustomDayOfMonth = &customDayOfMonth
 	return &this
+}
+
+// GetClassId returns the ClassId field value
+func (o *SchedulerMonthlyCadenceParams) GetClassId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClassId
+}
+
+// GetClassIdOk returns a tuple with the ClassId field value
+// and a boolean to check if the value has been set.
+func (o *SchedulerMonthlyCadenceParams) GetClassIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClassId, true
+}
+
+// SetClassId sets field value
+func (o *SchedulerMonthlyCadenceParams) SetClassId(v string) {
+	o.ClassId = v
+}
+
+// GetDefaultClassId returns the default value "scheduler.MonthlyCadenceParams" of the ClassId field.
+func (o *SchedulerMonthlyCadenceParams) GetDefaultClassId() interface{} {
+	return "scheduler.MonthlyCadenceParams"
+}
+
+// GetObjectType returns the ObjectType field value
+func (o *SchedulerMonthlyCadenceParams) GetObjectType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ObjectType
+}
+
+// GetObjectTypeOk returns a tuple with the ObjectType field value
+// and a boolean to check if the value has been set.
+func (o *SchedulerMonthlyCadenceParams) GetObjectTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ObjectType, true
+}
+
+// SetObjectType sets field value
+func (o *SchedulerMonthlyCadenceParams) SetObjectType(v string) {
+	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "scheduler.MonthlyCadenceParams" of the ObjectType field.
+func (o *SchedulerMonthlyCadenceParams) GetDefaultObjectType() interface{} {
+	return "scheduler.MonthlyCadenceParams"
+}
+
+// GetCustomDayOfMonth returns the CustomDayOfMonth field value if set, zero value otherwise.
+func (o *SchedulerMonthlyCadenceParams) GetCustomDayOfMonth() string {
+	if o == nil || IsNil(o.CustomDayOfMonth) {
+		var ret string
+		return ret
+	}
+	return *o.CustomDayOfMonth
+}
+
+// GetCustomDayOfMonthOk returns a tuple with the CustomDayOfMonth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchedulerMonthlyCadenceParams) GetCustomDayOfMonthOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomDayOfMonth) {
+		return nil, false
+	}
+	return o.CustomDayOfMonth, true
+}
+
+// HasCustomDayOfMonth returns a boolean if a field has been set.
+func (o *SchedulerMonthlyCadenceParams) HasCustomDayOfMonth() bool {
+	if o != nil && !IsNil(o.CustomDayOfMonth) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomDayOfMonth gets a reference to the given string and assigns it to the CustomDayOfMonth field.
+func (o *SchedulerMonthlyCadenceParams) SetCustomDayOfMonth(v string) {
+	o.CustomDayOfMonth = &v
+}
+
+// GetDayOfMonth returns the DayOfMonth field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SchedulerMonthlyCadenceParams) GetDayOfMonth() []int64 {
+	if o == nil {
+		var ret []int64
+		return ret
+	}
+	return o.DayOfMonth
+}
+
+// GetDayOfMonthOk returns a tuple with the DayOfMonth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SchedulerMonthlyCadenceParams) GetDayOfMonthOk() ([]int64, bool) {
+	if o == nil || IsNil(o.DayOfMonth) {
+		return nil, false
+	}
+	return o.DayOfMonth, true
+}
+
+// HasDayOfMonth returns a boolean if a field has been set.
+func (o *SchedulerMonthlyCadenceParams) HasDayOfMonth() bool {
+	if o != nil && !IsNil(o.DayOfMonth) {
+		return true
+	}
+
+	return false
+}
+
+// SetDayOfMonth gets a reference to the given []int64 and assigns it to the DayOfMonth field.
+func (o *SchedulerMonthlyCadenceParams) SetDayOfMonth(v []int64) {
+	o.DayOfMonth = v
+}
+
+// GetDayOfWeek returns the DayOfWeek field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SchedulerMonthlyCadenceParams) GetDayOfWeek() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.DayOfWeek
+}
+
+// GetDayOfWeekOk returns a tuple with the DayOfWeek field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SchedulerMonthlyCadenceParams) GetDayOfWeekOk() ([]string, bool) {
+	if o == nil || IsNil(o.DayOfWeek) {
+		return nil, false
+	}
+	return o.DayOfWeek, true
+}
+
+// HasDayOfWeek returns a boolean if a field has been set.
+func (o *SchedulerMonthlyCadenceParams) HasDayOfWeek() bool {
+	if o != nil && !IsNil(o.DayOfWeek) {
+		return true
+	}
+
+	return false
+}
+
+// SetDayOfWeek gets a reference to the given []string and assigns it to the DayOfWeek field.
+func (o *SchedulerMonthlyCadenceParams) SetDayOfWeek(v []string) {
+	o.DayOfWeek = v
 }
 
 func (o SchedulerMonthlyCadenceParams) MarshalJSON() ([]byte, error) {
@@ -67,6 +239,23 @@ func (o SchedulerMonthlyCadenceParams) ToMap() (map[string]interface{}, error) {
 	errSchedulerBaseMonthlyCadenceParams = json.Unmarshal([]byte(serializedSchedulerBaseMonthlyCadenceParams), &toSerialize)
 	if errSchedulerBaseMonthlyCadenceParams != nil {
 		return map[string]interface{}{}, errSchedulerBaseMonthlyCadenceParams
+	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
+	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CustomDayOfMonth) {
+		toSerialize["CustomDayOfMonth"] = o.CustomDayOfMonth
+	}
+	if o.DayOfMonth != nil {
+		toSerialize["DayOfMonth"] = o.DayOfMonth
+	}
+	if o.DayOfWeek != nil {
+		toSerialize["DayOfWeek"] = o.DayOfWeek
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -119,6 +308,14 @@ func (o *SchedulerMonthlyCadenceParams) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 	type SchedulerMonthlyCadenceParamsWithoutEmbeddedStruct struct {
+		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+		ClassId string `json:"ClassId"`
+		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+		ObjectType string `json:"ObjectType"`
+		// Significant business days, such as days when reports are generated for analysis. * `None` - Placeholder. One of the following two fields must be selected. * `FirstWeekDay` - First week day of the month. * `MonthLastDay` - The last day of the month. * `FirstWeek` - Selected weekdays on first week of the month. * `SecondWeek` - Selected weekdays on second week of the month. * `ThirdWeek` - Selected weekdays on third week of the month. * `FourthWeek` - Selected weekdays on fourth week of the month. * `FifthWeek` - Selected weekdays on fifth week of the month.
+		CustomDayOfMonth *string  `json:"CustomDayOfMonth,omitempty"`
+		DayOfMonth       []int64  `json:"DayOfMonth,omitempty"`
+		DayOfWeek        []string `json:"DayOfWeek,omitempty"`
 	}
 
 	varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct := SchedulerMonthlyCadenceParamsWithoutEmbeddedStruct{}
@@ -126,6 +323,11 @@ func (o *SchedulerMonthlyCadenceParams) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct)
 	if err == nil {
 		varSchedulerMonthlyCadenceParams := _SchedulerMonthlyCadenceParams{}
+		varSchedulerMonthlyCadenceParams.ClassId = varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct.ClassId
+		varSchedulerMonthlyCadenceParams.ObjectType = varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct.ObjectType
+		varSchedulerMonthlyCadenceParams.CustomDayOfMonth = varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct.CustomDayOfMonth
+		varSchedulerMonthlyCadenceParams.DayOfMonth = varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct.DayOfMonth
+		varSchedulerMonthlyCadenceParams.DayOfWeek = varSchedulerMonthlyCadenceParamsWithoutEmbeddedStruct.DayOfWeek
 		*o = SchedulerMonthlyCadenceParams(varSchedulerMonthlyCadenceParams)
 	} else {
 		return err
@@ -143,6 +345,11 @@ func (o *SchedulerMonthlyCadenceParams) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ClassId")
+		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CustomDayOfMonth")
+		delete(additionalProperties, "DayOfMonth")
+		delete(additionalProperties, "DayOfWeek")
 
 		// remove fields from embedded structs
 		reflectSchedulerBaseMonthlyCadenceParams := reflect.ValueOf(o.SchedulerBaseMonthlyCadenceParams)

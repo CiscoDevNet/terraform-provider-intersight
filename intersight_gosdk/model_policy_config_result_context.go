@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,8 @@ type PolicyConfigResultContext struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType          string   `json:"ObjectType"`
+	DependentPolicyList []string `json:"DependentPolicyList,omitempty"`
 	// The data of the object present in config result context.
 	EntityData interface{} `json:"EntityData,omitempty"`
 	// The Moid of the object present in config result context.
@@ -38,6 +39,8 @@ type PolicyConfigResultContext struct {
 	EntityType *string `json:"EntityType,omitempty"`
 	// The Moid of the parent object present in config result context.
 	ParentMoid *string `json:"ParentMoid,omitempty"`
+	// The type of the policy object associated with the profile.
+	ParentPolicyObjectType *string `json:"ParentPolicyObjectType,omitempty"`
 	// The type of the parent object present in config result context.
 	ParentType           *string `json:"ParentType,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -124,6 +127,39 @@ func (o *PolicyConfigResultContext) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "policy.ConfigResultContext" of the ObjectType field.
 func (o *PolicyConfigResultContext) GetDefaultObjectType() interface{} {
 	return "policy.ConfigResultContext"
+}
+
+// GetDependentPolicyList returns the DependentPolicyList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyConfigResultContext) GetDependentPolicyList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.DependentPolicyList
+}
+
+// GetDependentPolicyListOk returns a tuple with the DependentPolicyList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyConfigResultContext) GetDependentPolicyListOk() ([]string, bool) {
+	if o == nil || IsNil(o.DependentPolicyList) {
+		return nil, false
+	}
+	return o.DependentPolicyList, true
+}
+
+// HasDependentPolicyList returns a boolean if a field has been set.
+func (o *PolicyConfigResultContext) HasDependentPolicyList() bool {
+	if o != nil && !IsNil(o.DependentPolicyList) {
+		return true
+	}
+
+	return false
+}
+
+// SetDependentPolicyList gets a reference to the given []string and assigns it to the DependentPolicyList field.
+func (o *PolicyConfigResultContext) SetDependentPolicyList(v []string) {
+	o.DependentPolicyList = v
 }
 
 // GetEntityData returns the EntityData field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -287,6 +323,38 @@ func (o *PolicyConfigResultContext) SetParentMoid(v string) {
 	o.ParentMoid = &v
 }
 
+// GetParentPolicyObjectType returns the ParentPolicyObjectType field value if set, zero value otherwise.
+func (o *PolicyConfigResultContext) GetParentPolicyObjectType() string {
+	if o == nil || IsNil(o.ParentPolicyObjectType) {
+		var ret string
+		return ret
+	}
+	return *o.ParentPolicyObjectType
+}
+
+// GetParentPolicyObjectTypeOk returns a tuple with the ParentPolicyObjectType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyConfigResultContext) GetParentPolicyObjectTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ParentPolicyObjectType) {
+		return nil, false
+	}
+	return o.ParentPolicyObjectType, true
+}
+
+// HasParentPolicyObjectType returns a boolean if a field has been set.
+func (o *PolicyConfigResultContext) HasParentPolicyObjectType() bool {
+	if o != nil && !IsNil(o.ParentPolicyObjectType) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentPolicyObjectType gets a reference to the given string and assigns it to the ParentPolicyObjectType field.
+func (o *PolicyConfigResultContext) SetParentPolicyObjectType(v string) {
+	o.ParentPolicyObjectType = &v
+}
+
 // GetParentType returns the ParentType field value if set, zero value otherwise.
 func (o *PolicyConfigResultContext) GetParentType() string {
 	if o == nil || IsNil(o.ParentType) {
@@ -345,6 +413,9 @@ func (o PolicyConfigResultContext) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.DependentPolicyList != nil {
+		toSerialize["DependentPolicyList"] = o.DependentPolicyList
+	}
 	if o.EntityData != nil {
 		toSerialize["EntityData"] = o.EntityData
 	}
@@ -359,6 +430,9 @@ func (o PolicyConfigResultContext) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ParentMoid) {
 		toSerialize["ParentMoid"] = o.ParentMoid
+	}
+	if !IsNil(o.ParentPolicyObjectType) {
+		toSerialize["ParentPolicyObjectType"] = o.ParentPolicyObjectType
 	}
 	if !IsNil(o.ParentType) {
 		toSerialize["ParentType"] = o.ParentType
@@ -417,7 +491,8 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType          string   `json:"ObjectType"`
+		DependentPolicyList []string `json:"DependentPolicyList,omitempty"`
 		// The data of the object present in config result context.
 		EntityData interface{} `json:"EntityData,omitempty"`
 		// The Moid of the object present in config result context.
@@ -428,6 +503,8 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(data []byte) (err error) {
 		EntityType *string `json:"EntityType,omitempty"`
 		// The Moid of the parent object present in config result context.
 		ParentMoid *string `json:"ParentMoid,omitempty"`
+		// The type of the policy object associated with the profile.
+		ParentPolicyObjectType *string `json:"ParentPolicyObjectType,omitempty"`
 		// The type of the parent object present in config result context.
 		ParentType *string `json:"ParentType,omitempty"`
 	}
@@ -439,11 +516,13 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(data []byte) (err error) {
 		varPolicyConfigResultContext := _PolicyConfigResultContext{}
 		varPolicyConfigResultContext.ClassId = varPolicyConfigResultContextWithoutEmbeddedStruct.ClassId
 		varPolicyConfigResultContext.ObjectType = varPolicyConfigResultContextWithoutEmbeddedStruct.ObjectType
+		varPolicyConfigResultContext.DependentPolicyList = varPolicyConfigResultContextWithoutEmbeddedStruct.DependentPolicyList
 		varPolicyConfigResultContext.EntityData = varPolicyConfigResultContextWithoutEmbeddedStruct.EntityData
 		varPolicyConfigResultContext.EntityMoid = varPolicyConfigResultContextWithoutEmbeddedStruct.EntityMoid
 		varPolicyConfigResultContext.EntityName = varPolicyConfigResultContextWithoutEmbeddedStruct.EntityName
 		varPolicyConfigResultContext.EntityType = varPolicyConfigResultContextWithoutEmbeddedStruct.EntityType
 		varPolicyConfigResultContext.ParentMoid = varPolicyConfigResultContextWithoutEmbeddedStruct.ParentMoid
+		varPolicyConfigResultContext.ParentPolicyObjectType = varPolicyConfigResultContextWithoutEmbeddedStruct.ParentPolicyObjectType
 		varPolicyConfigResultContext.ParentType = varPolicyConfigResultContextWithoutEmbeddedStruct.ParentType
 		*o = PolicyConfigResultContext(varPolicyConfigResultContext)
 	} else {
@@ -464,11 +543,13 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "DependentPolicyList")
 		delete(additionalProperties, "EntityData")
 		delete(additionalProperties, "EntityMoid")
 		delete(additionalProperties, "EntityName")
 		delete(additionalProperties, "EntityType")
 		delete(additionalProperties, "ParentMoid")
+		delete(additionalProperties, "ParentPolicyObjectType")
 		delete(additionalProperties, "ParentType")
 
 		// remove fields from embedded structs

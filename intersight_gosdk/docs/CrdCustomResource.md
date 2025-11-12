@@ -6,15 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "crd.CustomResource"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "crd.CustomResource"]
-**DcLauncher** | Pointer to **string** | Type of custom resource or &#39;kind&#39; in K8s. | [optional] 
-**Image** | Pointer to **string** | Docker image URL for public cloud DC. | [optional] 
-**Name** | Pointer to **string** | A string property called name which is used as part of a uniqueness constraint. See &#39;identity&#39; specification in this MO definition. | [optional] 
-**Namespace** | Pointer to **string** | Namespace to launch the deployment associated with the custom resource. | [optional] 
-**Port** | Pointer to **int64** | Port used for public cloud DC. | [optional] 
+**DcLauncher** | Pointer to **string** | The type of custom resource in Kubernetes. | [optional] 
+**Image** | Pointer to **string** | The docker image URL for the cloud DC. | [optional] 
+**Name** | Pointer to **string** | A string property called &#39;name&#39;, used as part of a uniqueness constraint. Refer to the &#39;identity&#39; specification in this MO definition. | [optional] 
+**Namespace** | Pointer to **string** | Namespace for launching the deployment associated with the custom resource. | [optional] 
+**Port** | Pointer to **int64** | Port used for the cloud DC. | [optional] 
 **Properties** | Pointer to [**[]CrdCustomResourceConfigProperty**](CrdCustomResourceConfigProperty.md) |  | [optional] 
-**TargetId** | Pointer to **string** | Target ID for public cloud DC. | [optional] 
-**TargetMoid** | Pointer to **string** | Target Moid for public cloud DC. | [optional] 
-**TargetType** | Pointer to **string** | Target type for public cloud DC. | [optional] 
+**TargetId** | Pointer to **string** | Target Id for the cloud DC. | [optional] 
+**TargetMoid** | Pointer to **string** | Target MOID for the cloud DC. | [optional] 
+**TargetType** | Pointer to **string** | Target type for the cloud DC. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods

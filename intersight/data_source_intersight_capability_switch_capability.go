@@ -26,6 +26,41 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"allowed_uplink_pc_id_range": {
+			Description: "Range of port-channel IDs supported on this switch.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"end_pc_id": {
+						Description: "Ending Port-Channel ID in this range of port-channels.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"start_pc_id": {
+						Description: "Starting Port-Channel ID in this range of port-channels.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -143,10 +178,58 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"inter_cluster_link_vlan_supported": {
+			Description: "Inter cluster link vlan support on this switch.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"locator_beacon_supported": {
 			Description: "Locator Beacon LED support on this switch.",
 			Type:        schema.TypeBool,
 			Optional:    true,
+		},
+		"macsec_supported_ports": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"end_port_id": {
+						Description: "Ending Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"end_slot_id": {
+						Description: "Ending Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"start_port_id": {
+						Description: "Starting Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"start_slot_id": {
+						Description: "Starting Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"max_ports": {
 			Description: "Maximum allowed physical ports on this switch.",
@@ -157,6 +240,69 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			Description: "Maximum allowed physical slots on this switch.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"min_version_map_for_switch_features": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"feature_name": {
+						Description: "Name of the feature for which the version map is applicable.\n* `Unknown` - Unknown or Invalid feature in the equipment.\n* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.\n* `FIAuditd` - AuditD feature for Fabric Interconnect.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_map": {
+						Description: "Maps device firmware version to bundle version.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"bundle_version": {
+									Description: "Bundle version. Usually the first released bundle containing the specific device firmware version.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"device_firmware_version": {
+									Description: "Bundled device firmware version.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 		"min_version_map_with_breakout_support": {
 			Description: "Minimum firmware version supported for breakout ports on this switch.",
@@ -458,7 +604,7 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			},
 		},
 		"pid": {
-			Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.\n* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.\n* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.\n* `unknown` - Unknown device type, usage is TBD.",
+			Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.\n* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.\n* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.\n* `UCS-FI-6652` - The standard 6th generation UCS Fabric Interconnect.\n* `UCSXE-ECMC-10G` - Cisco UCS XE ECMC 10G with 2 ports.\n* `UCSXE-ECMC-G1` - Cisco UCS XE ECMC G1 with 2 ports.\n* `unknown` - Unknown device type, usage is TBD.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -677,6 +823,49 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"ports_supporting_appliance_role": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"end_port_id": {
+						Description: "Ending Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"end_slot_id": {
+						Description: "Ending Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"start_port_id": {
+						Description: "Starting Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"start_slot_id": {
+						Description: "Starting Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ports_supporting_breakout": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -721,6 +910,49 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 			},
 		},
 		"ports_supporting_fcoe": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"end_port_id": {
+						Description: "Ending Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"end_slot_id": {
+						Description: "Ending Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"start_port_id": {
+						Description: "Starting Port ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"start_slot_id": {
+						Description: "Starting Slot ID in this range of ports.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"ports_supporting_inter_cluster_link": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem: &schema.Resource{
@@ -1002,8 +1234,86 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1015,6 +1325,11 @@ func getCapabilitySwitchCapabilitySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"un_supported_equipment_model": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"unified_ports": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1222,6 +1537,49 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
+	if v, ok := d.GetOk("allowed_uplink_pc_id_range"); ok {
+		p := make([]models.CapabilityPcIdRange, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CapabilityPcIdRange{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.PcIdRange")
+			if v, ok := l["end_pc_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndPcId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_pc_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartPcId(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAllowedUplinkPcIdRange(x)
+		}
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1354,9 +1712,66 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetImmControlsVpcompression(x)
 	}
 
+	if v, ok := d.GetOkExists("inter_cluster_link_vlan_supported"); ok {
+		x := (v.(bool))
+		o.SetInterClusterLinkVlanSupported(x)
+	}
+
 	if v, ok := d.GetOkExists("locator_beacon_supported"); ok {
 		x := (v.(bool))
 		o.SetLocatorBeaconSupported(x)
+	}
+
+	if v, ok := d.GetOk("macsec_supported_ports"); ok {
+		x := make([]models.CapabilityPortRange, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilityPortRange{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.PortRange")
+			if v, ok := l["end_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndPortId(x)
+				}
+			}
+			if v, ok := l["end_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndSlotId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartPortId(x)
+				}
+			}
+			if v, ok := l["start_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartSlotId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetMacsecSupportedPorts(x)
 	}
 
 	if v, ok := d.GetOkExists("max_ports"); ok {
@@ -1367,6 +1782,34 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOkExists("max_slots"); ok {
 		x := int64(v.(int))
 		o.SetMaxSlots(x)
+	}
+
+	if v, ok := d.GetOk("min_version_map_for_switch_features"); ok {
+		x := make([]models.FirmwareFeatureVersionMap, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.FirmwareFeatureVersionMap{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("firmware.FeatureVersionMap")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetMinVersionMapForSwitchFeatures(x)
 	}
 
 	if v, ok := d.GetOk("min_version_map_with_breakout_support"); ok {
@@ -1962,6 +2405,58 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting40gSpeed(x)
 	}
 
+	if v, ok := d.GetOk("ports_supporting_appliance_role"); ok {
+		x := make([]models.CapabilityPortRange, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilityPortRange{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.PortRange")
+			if v, ok := l["end_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndPortId(x)
+				}
+			}
+			if v, ok := l["end_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndSlotId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartPortId(x)
+				}
+			}
+			if v, ok := l["start_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartSlotId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetPortsSupportingApplianceRole(x)
+	}
+
 	if v, ok := d.GetOk("ports_supporting_breakout"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
@@ -2064,6 +2559,58 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 			x = append(x, *o)
 		}
 		o.SetPortsSupportingFcoe(x)
+	}
+
+	if v, ok := d.GetOk("ports_supporting_inter_cluster_link"); ok {
+		x := make([]models.CapabilityPortRange, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilityPortRange{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.PortRange")
+			if v, ok := l["end_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndPortId(x)
+				}
+			}
+			if v, ok := l["end_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetEndSlotId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_port_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartPortId(x)
+				}
+			}
+			if v, ok := l["start_slot_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetStartSlotId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetPortsSupportingInterClusterLink(x)
 	}
 
 	if v, ok := d.GetOk("ports_supporting_server_role"); ok {
@@ -2362,6 +2909,49 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
+					}
+				}
+			}
 			if v, ok := l["key"]; ok {
 				{
 					x := (v.(string))
@@ -2377,6 +2967,17 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("un_supported_equipment_model"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUnSupportedEquipmentModel(x)
 	}
 
 	if v, ok := d.GetOk("unified_ports"); ok {
@@ -2558,6 +3159,8 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
+				temp["allowed_uplink_pc_id_range"] = flattenMapCapabilityPcIdRange(s.GetAllowedUplinkPcIdRange(), d)
+
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
@@ -2570,9 +3173,14 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["fc_end_host_mode_reserved_vsans"] = flattenListCapabilityPortRange(s.GetFcEndHostModeReservedVsans(), d)
 				temp["fc_uplink_ports_auto_negotiation_supported"] = (s.GetFcUplinkPortsAutoNegotiationSupported())
 				temp["imm_controls_vpcompression"] = (s.GetImmControlsVpcompression())
+				temp["inter_cluster_link_vlan_supported"] = (s.GetInterClusterLinkVlanSupported())
 				temp["locator_beacon_supported"] = (s.GetLocatorBeaconSupported())
+
+				temp["macsec_supported_ports"] = flattenListCapabilityPortRange(s.GetMacsecSupportedPorts(), d)
 				temp["max_ports"] = (s.GetMaxPorts())
 				temp["max_slots"] = (s.GetMaxSlots())
+
+				temp["min_version_map_for_switch_features"] = flattenListFirmwareFeatureVersionMap(s.GetMinVersionMapForSwitchFeatures(), d)
 
 				temp["min_version_map_with_breakout_support"] = flattenMapFirmwareVersionMap(s.GetMinVersionMapWithBreakoutSupport(), d)
 
@@ -2603,9 +3211,13 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 
 				temp["ports_supporting40g_speed"] = flattenListCapabilityPortRange(s.GetPortsSupporting40gSpeed(), d)
 
+				temp["ports_supporting_appliance_role"] = flattenListCapabilityPortRange(s.GetPortsSupportingApplianceRole(), d)
+
 				temp["ports_supporting_breakout"] = flattenListCapabilityPortRange(s.GetPortsSupportingBreakout(), d)
 
 				temp["ports_supporting_fcoe"] = flattenListCapabilityPortRange(s.GetPortsSupportingFcoe(), d)
+
+				temp["ports_supporting_inter_cluster_link"] = flattenListCapabilityPortRange(s.GetPortsSupportingInterClusterLink(), d)
 
 				temp["ports_supporting_server_role"] = flattenListCapabilityPortRange(s.GetPortsSupportingServerRole(), d)
 
@@ -2622,6 +3234,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 				temp["system_limits"] = flattenMapCapabilitySwitchSystemLimits(s.GetSystemLimits(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["un_supported_equipment_model"] = (s.GetUnSupportedEquipmentModel())
 
 				temp["unified_ports"] = flattenListCapabilityPortRange(s.GetUnifiedPorts(), d)
 				temp["unified_rule"] = (s.GetUnifiedRule())

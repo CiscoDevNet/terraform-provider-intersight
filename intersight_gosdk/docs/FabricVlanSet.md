@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.VlanSet"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.VlanSet"]
+**AutoAllowOnClusterLinks** | Pointer to **bool** | This setting determines whether the VLAN is automatically allowed on inter-cluster links within this domain. | [optional] [default to false]
 **AutoAllowOnUplinks** | Pointer to **bool** | Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI. | [optional] [readonly] [default to true]
 **IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] [readonly] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] [readonly] 
@@ -73,6 +74,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAutoAllowOnClusterLinks
+
+`func (o *FabricVlanSet) GetAutoAllowOnClusterLinks() bool`
+
+GetAutoAllowOnClusterLinks returns the AutoAllowOnClusterLinks field if non-nil, zero value otherwise.
+
+### GetAutoAllowOnClusterLinksOk
+
+`func (o *FabricVlanSet) GetAutoAllowOnClusterLinksOk() (*bool, bool)`
+
+GetAutoAllowOnClusterLinksOk returns a tuple with the AutoAllowOnClusterLinks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoAllowOnClusterLinks
+
+`func (o *FabricVlanSet) SetAutoAllowOnClusterLinks(v bool)`
+
+SetAutoAllowOnClusterLinks sets AutoAllowOnClusterLinks field to given value.
+
+### HasAutoAllowOnClusterLinks
+
+`func (o *FabricVlanSet) HasAutoAllowOnClusterLinks() bool`
+
+HasAutoAllowOnClusterLinks returns a boolean if a field has been set.
 
 ### GetAutoAllowOnUplinks
 

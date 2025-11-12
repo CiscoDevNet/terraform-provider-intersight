@@ -13,10 +13,12 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **string** | SAML metadata of the IdP. | [optional] 
 **Name** | Pointer to **string** | The name of the Identity Provider, for example Cisco, Okta, or OneID. | [optional] 
 **SkipWarning** | Pointer to **bool** | When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message. | [optional] 
-**Type** | Pointer to **string** | Authentication protocol used by the IdP. * &#x60;saml&#x60; - Use SAML as the authentication protocol for sign-on. * &#x60;oidc&#x60; - Open ID connect to be used as an authentication protocol for sign-on. * &#x60;local&#x60; - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. | [optional] [default to "saml"]
+**Type** | Pointer to **string** | Authentication protocol used by the IdP. * &#x60;saml&#x60; - Use SAML as the authentication protocol for sign-on. * &#x60;oidc&#x60; - Open ID connect to be used as an authentication protocol for sign-on. * &#x60;local&#x60; - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP. * &#x60;guest&#x60; - Guest users accessing Intersight are assigned to a guest Identity Provider (IdP). They do not have single sign-on options available and must log in  using their email address and a one-time password (OTP). Upon successful authentication, all guest users associated with the account are grouped under  the guest IdP. Guest IdP is primarily used in cloud environment. | [optional] [default to "saml"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**LdapMeta** | Pointer to [**NullableIamLdapMetaRelationship**](IamLdapMetaRelationship.md) |  | [optional] 
 **LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 **System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
+**TestIdp** | Pointer to [**NullableIamTestIdpConfigurationRelationship**](IamTestIdpConfigurationRelationship.md) |  | [optional] 
 **UserPreferences** | Pointer to [**[]IamUserPreferenceRelationship**](IamUserPreferenceRelationship.md) | An array of relationships to iamUserPreference resources. | [optional] [readonly] 
 **UserSettings** | Pointer to [**[]IamUserSettingRelationship**](IamUserSettingRelationship.md) | An array of relationships to iamUserSetting resources. | [optional] [readonly] 
 **Usergroups** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
@@ -326,6 +328,41 @@ HasAccount returns a boolean if a field has been set.
 `func (o *IamIdp) UnsetAccount()`
 
 UnsetAccount ensures that no value is present for Account, not even an explicit nil
+### GetLdapMeta
+
+`func (o *IamIdp) GetLdapMeta() IamLdapMetaRelationship`
+
+GetLdapMeta returns the LdapMeta field if non-nil, zero value otherwise.
+
+### GetLdapMetaOk
+
+`func (o *IamIdp) GetLdapMetaOk() (*IamLdapMetaRelationship, bool)`
+
+GetLdapMetaOk returns a tuple with the LdapMeta field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLdapMeta
+
+`func (o *IamIdp) SetLdapMeta(v IamLdapMetaRelationship)`
+
+SetLdapMeta sets LdapMeta field to given value.
+
+### HasLdapMeta
+
+`func (o *IamIdp) HasLdapMeta() bool`
+
+HasLdapMeta returns a boolean if a field has been set.
+
+### SetLdapMetaNil
+
+`func (o *IamIdp) SetLdapMetaNil(b bool)`
+
+ SetLdapMetaNil sets the value for LdapMeta to be an explicit nil
+
+### UnsetLdapMeta
+`func (o *IamIdp) UnsetLdapMeta()`
+
+UnsetLdapMeta ensures that no value is present for LdapMeta, not even an explicit nil
 ### GetLdapPolicy
 
 `func (o *IamIdp) GetLdapPolicy() IamLdapPolicyRelationship`
@@ -396,6 +433,41 @@ HasSystem returns a boolean if a field has been set.
 `func (o *IamIdp) UnsetSystem()`
 
 UnsetSystem ensures that no value is present for System, not even an explicit nil
+### GetTestIdp
+
+`func (o *IamIdp) GetTestIdp() IamTestIdpConfigurationRelationship`
+
+GetTestIdp returns the TestIdp field if non-nil, zero value otherwise.
+
+### GetTestIdpOk
+
+`func (o *IamIdp) GetTestIdpOk() (*IamTestIdpConfigurationRelationship, bool)`
+
+GetTestIdpOk returns a tuple with the TestIdp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTestIdp
+
+`func (o *IamIdp) SetTestIdp(v IamTestIdpConfigurationRelationship)`
+
+SetTestIdp sets TestIdp field to given value.
+
+### HasTestIdp
+
+`func (o *IamIdp) HasTestIdp() bool`
+
+HasTestIdp returns a boolean if a field has been set.
+
+### SetTestIdpNil
+
+`func (o *IamIdp) SetTestIdpNil(b bool)`
+
+ SetTestIdpNil sets the value for TestIdp to be an explicit nil
+
+### UnsetTestIdp
+`func (o *IamIdp) UnsetTestIdp()`
+
+UnsetTestIdp ensures that no value is present for TestIdp, not even an explicit nil
 ### GetUserPreferences
 
 `func (o *IamIdp) GetUserPreferences() []IamUserPreferenceRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -23,15 +23,13 @@ var _ MappedNullable = &BiosSystemBootOrder{}
 
 // BiosSystemBootOrder Actual Boot Order of the system.
 type BiosSystemBootOrder struct {
-	MoBaseMo
+	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. * `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. * `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.
 	BootMode *string `json:"BootMode,omitempty"`
-	// The Distinguished Name for this object, used to uniquely identify this object.
-	Dn *string `json:"Dn,omitempty"`
 	// Secure boot if set to enabled, enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). * `NotAvailable` - Set the state of Secure Boot to Not Available. * `Disabled` - Set the state of Secure Boot to Disabled. * `Enabled` - Set the state of Secure Boot to Enabled.
 	SecureBoot *string                      `json:"SecureBoot,omitempty"`
 	BiosUnit   NullableBiosUnitRelationship `json:"BiosUnit,omitempty"`
@@ -154,38 +152,6 @@ func (o *BiosSystemBootOrder) HasBootMode() bool {
 // SetBootMode gets a reference to the given string and assigns it to the BootMode field.
 func (o *BiosSystemBootOrder) SetBootMode(v string) {
 	o.BootMode = &v
-}
-
-// GetDn returns the Dn field value if set, zero value otherwise.
-func (o *BiosSystemBootOrder) GetDn() string {
-	if o == nil || IsNil(o.Dn) {
-		var ret string
-		return ret
-	}
-	return *o.Dn
-}
-
-// GetDnOk returns a tuple with the Dn field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BiosSystemBootOrder) GetDnOk() (*string, bool) {
-	if o == nil || IsNil(o.Dn) {
-		return nil, false
-	}
-	return o.Dn, true
-}
-
-// HasDn returns a boolean if a field has been set.
-func (o *BiosSystemBootOrder) HasDn() bool {
-	if o != nil && !IsNil(o.Dn) {
-		return true
-	}
-
-	return false
-}
-
-// SetDn gets a reference to the given string and assigns it to the Dn field.
-func (o *BiosSystemBootOrder) SetDn(v string) {
-	o.Dn = &v
 }
 
 // GetSecureBoot returns the SecureBoot field value if set, zero value otherwise.
@@ -349,13 +315,13 @@ func (o BiosSystemBootOrder) MarshalJSON() ([]byte, error) {
 
 func (o BiosSystemBootOrder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
+	if errEquipmentBase != nil {
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
+	if errEquipmentBase != nil {
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -367,9 +333,6 @@ func (o BiosSystemBootOrder) ToMap() (map[string]interface{}, error) {
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.BootMode) {
 		toSerialize["BootMode"] = o.BootMode
-	}
-	if !IsNil(o.Dn) {
-		toSerialize["Dn"] = o.Dn
 	}
 	if !IsNil(o.SecureBoot) {
 		toSerialize["SecureBoot"] = o.SecureBoot
@@ -440,8 +403,6 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the MBR partitioning scheme. * `Legacy` - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the MBR to locate the bootloader. * `Uefi` - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from.
 		BootMode *string `json:"BootMode,omitempty"`
-		// The Distinguished Name for this object, used to uniquely identify this object.
-		Dn *string `json:"Dn,omitempty"`
 		// Secure boot if set to enabled, enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). * `NotAvailable` - Set the state of Secure Boot to Not Available. * `Disabled` - Set the state of Secure Boot to Disabled. * `Enabled` - Set the state of Secure Boot to Enabled.
 		SecureBoot *string                      `json:"SecureBoot,omitempty"`
 		BiosUnit   NullableBiosUnitRelationship `json:"BiosUnit,omitempty"`
@@ -458,7 +419,6 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(data []byte) (err error) {
 		varBiosSystemBootOrder.ClassId = varBiosSystemBootOrderWithoutEmbeddedStruct.ClassId
 		varBiosSystemBootOrder.ObjectType = varBiosSystemBootOrderWithoutEmbeddedStruct.ObjectType
 		varBiosSystemBootOrder.BootMode = varBiosSystemBootOrderWithoutEmbeddedStruct.BootMode
-		varBiosSystemBootOrder.Dn = varBiosSystemBootOrderWithoutEmbeddedStruct.Dn
 		varBiosSystemBootOrder.SecureBoot = varBiosSystemBootOrderWithoutEmbeddedStruct.SecureBoot
 		varBiosSystemBootOrder.BiosUnit = varBiosSystemBootOrderWithoutEmbeddedStruct.BiosUnit
 		varBiosSystemBootOrder.BootDevices = varBiosSystemBootOrderWithoutEmbeddedStruct.BootDevices
@@ -472,7 +432,7 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varBiosSystemBootOrder)
 	if err == nil {
-		o.MoBaseMo = varBiosSystemBootOrder.MoBaseMo
+		o.EquipmentBase = varBiosSystemBootOrder.EquipmentBase
 	} else {
 		return err
 	}
@@ -483,16 +443,15 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BootMode")
-		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "SecureBoot")
 		delete(additionalProperties, "BiosUnit")
 		delete(additionalProperties, "BootDevices")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectEquipmentBase := reflect.ValueOf(o.EquipmentBase)
+		for i := 0; i < reflectEquipmentBase.Type().NumField(); i++ {
+			t := reflectEquipmentBase.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

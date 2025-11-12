@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,9 @@ type MacpoolLease struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// MAC address allocated for pool-based allocation.
-	MacAddress           *string                               `json:"MacAddress,omitempty"`
+	MacAddress *string `json:"MacAddress,omitempty"`
+	// The preferred MAC address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that MAC address if it is available in the pool. If the specified preferred MAC address  is not in the range of the pool or if it is already leased or reserved, then the next available MAC address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred MAC address property. When the preferred MAC address  property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests.
+	PreferredMacAddress  *string                               `json:"PreferredMacAddress,omitempty"`
 	Reservation          *MacpoolReservationReference          `json:"Reservation,omitempty"`
 	AssignedToEntity     NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
 	Pool                 NullableMacpoolPoolRelationship       `json:"Pool,omitempty"`
@@ -52,6 +54,8 @@ func NewMacpoolLease(classId string, objectType string) *MacpoolLease {
 	this.AllocationType = &allocationType
 	var hasDuplicate bool = false
 	this.HasDuplicate = &hasDuplicate
+	var migrate bool = false
+	this.Migrate = &migrate
 	return &this
 }
 
@@ -155,6 +159,38 @@ func (o *MacpoolLease) HasMacAddress() bool {
 // SetMacAddress gets a reference to the given string and assigns it to the MacAddress field.
 func (o *MacpoolLease) SetMacAddress(v string) {
 	o.MacAddress = &v
+}
+
+// GetPreferredMacAddress returns the PreferredMacAddress field value if set, zero value otherwise.
+func (o *MacpoolLease) GetPreferredMacAddress() string {
+	if o == nil || IsNil(o.PreferredMacAddress) {
+		var ret string
+		return ret
+	}
+	return *o.PreferredMacAddress
+}
+
+// GetPreferredMacAddressOk returns a tuple with the PreferredMacAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MacpoolLease) GetPreferredMacAddressOk() (*string, bool) {
+	if o == nil || IsNil(o.PreferredMacAddress) {
+		return nil, false
+	}
+	return o.PreferredMacAddress, true
+}
+
+// HasPreferredMacAddress returns a boolean if a field has been set.
+func (o *MacpoolLease) HasPreferredMacAddress() bool {
+	if o != nil && !IsNil(o.PreferredMacAddress) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreferredMacAddress gets a reference to the given string and assigns it to the PreferredMacAddress field.
+func (o *MacpoolLease) SetPreferredMacAddress(v string) {
+	o.PreferredMacAddress = &v
 }
 
 // GetReservation returns the Reservation field value if set, zero value otherwise.
@@ -390,6 +426,9 @@ func (o MacpoolLease) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
+	if !IsNil(o.PreferredMacAddress) {
+		toSerialize["PreferredMacAddress"] = o.PreferredMacAddress
+	}
 	if !IsNil(o.Reservation) {
 		toSerialize["Reservation"] = o.Reservation
 	}
@@ -461,12 +500,14 @@ func (o *MacpoolLease) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// MAC address allocated for pool-based allocation.
-		MacAddress       *string                               `json:"MacAddress,omitempty"`
-		Reservation      *MacpoolReservationReference          `json:"Reservation,omitempty"`
-		AssignedToEntity NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
-		Pool             NullableMacpoolPoolRelationship       `json:"Pool,omitempty"`
-		PoolMember       NullableMacpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
-		Universe         NullableMacpoolUniverseRelationship   `json:"Universe,omitempty"`
+		MacAddress *string `json:"MacAddress,omitempty"`
+		// The preferred MAC address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that MAC address if it is available in the pool. If the specified preferred MAC address  is not in the range of the pool or if it is already leased or reserved, then the next available MAC address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred MAC address property. When the preferred MAC address  property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests.
+		PreferredMacAddress *string                               `json:"PreferredMacAddress,omitempty"`
+		Reservation         *MacpoolReservationReference          `json:"Reservation,omitempty"`
+		AssignedToEntity    NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
+		Pool                NullableMacpoolPoolRelationship       `json:"Pool,omitempty"`
+		PoolMember          NullableMacpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
+		Universe            NullableMacpoolUniverseRelationship   `json:"Universe,omitempty"`
 	}
 
 	varMacpoolLeaseWithoutEmbeddedStruct := MacpoolLeaseWithoutEmbeddedStruct{}
@@ -477,6 +518,7 @@ func (o *MacpoolLease) UnmarshalJSON(data []byte) (err error) {
 		varMacpoolLease.ClassId = varMacpoolLeaseWithoutEmbeddedStruct.ClassId
 		varMacpoolLease.ObjectType = varMacpoolLeaseWithoutEmbeddedStruct.ObjectType
 		varMacpoolLease.MacAddress = varMacpoolLeaseWithoutEmbeddedStruct.MacAddress
+		varMacpoolLease.PreferredMacAddress = varMacpoolLeaseWithoutEmbeddedStruct.PreferredMacAddress
 		varMacpoolLease.Reservation = varMacpoolLeaseWithoutEmbeddedStruct.Reservation
 		varMacpoolLease.AssignedToEntity = varMacpoolLeaseWithoutEmbeddedStruct.AssignedToEntity
 		varMacpoolLease.Pool = varMacpoolLeaseWithoutEmbeddedStruct.Pool
@@ -502,6 +544,7 @@ func (o *MacpoolLease) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MacAddress")
+		delete(additionalProperties, "PreferredMacAddress")
 		delete(additionalProperties, "Reservation")
 		delete(additionalProperties, "AssignedToEntity")
 		delete(additionalProperties, "Pool")

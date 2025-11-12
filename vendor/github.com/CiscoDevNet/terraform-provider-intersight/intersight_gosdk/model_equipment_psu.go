@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -51,18 +51,22 @@ type EquipmentPsu struct {
 	PsuWattage *string `json:"PsuWattage,omitempty"`
 	// This field identifies the Stockkeeping Unit for this Power Supply.
 	Sku *string `json:"Sku,omitempty"`
+	// This field identifies whether the power supply unit is spare or not. * `` - Spare status for power supply unit is not applicable or not available. * `Spare` - Power supply unit is spare. * `Not Spare` - Power supply unit is not spare.
+	SpareStatus *string `json:"SpareStatus,omitempty"`
 	// This field identifies the Vendor ID for this Power Supply Unit.
 	Vid *string `json:"Vid,omitempty"`
 	// This field is used to indicate the voltage state for this Power Supply.
-	Voltage                *string                                     `json:"Voltage,omitempty"`
-	ComputeRackUnit        NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-	EquipmentChassis       NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-	EquipmentFex           NullableEquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
-	EquipmentRackEnclosure NullableEquipmentRackEnclosureRelationship  `json:"EquipmentRackEnclosure,omitempty"`
-	InventoryDeviceInfo    NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement         NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	Voltage                *string                                    `json:"Voltage,omitempty"`
+	ComputeRackUnit        NullableComputeRackUnitRelationship        `json:"ComputeRackUnit,omitempty"`
+	EquipmentChassis       NullableEquipmentChassisRelationship       `json:"EquipmentChassis,omitempty"`
+	EquipmentFex           NullableEquipmentFexRelationship           `json:"EquipmentFex,omitempty"`
+	EquipmentRackEnclosure NullableEquipmentRackEnclosureRelationship `json:"EquipmentRackEnclosure,omitempty"`
+	// An array of relationships to firmwareRunningFirmware resources.
+	FirmwareRunningFirmwares []FirmwareRunningFirmwareRelationship       `json:"FirmwareRunningFirmwares,omitempty"`
+	InventoryDeviceInfo      NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement           NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice         NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _EquipmentPsu EquipmentPsu
@@ -533,6 +537,38 @@ func (o *EquipmentPsu) SetSku(v string) {
 	o.Sku = &v
 }
 
+// GetSpareStatus returns the SpareStatus field value if set, zero value otherwise.
+func (o *EquipmentPsu) GetSpareStatus() string {
+	if o == nil || IsNil(o.SpareStatus) {
+		var ret string
+		return ret
+	}
+	return *o.SpareStatus
+}
+
+// GetSpareStatusOk returns a tuple with the SpareStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentPsu) GetSpareStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.SpareStatus) {
+		return nil, false
+	}
+	return o.SpareStatus, true
+}
+
+// HasSpareStatus returns a boolean if a field has been set.
+func (o *EquipmentPsu) HasSpareStatus() bool {
+	if o != nil && !IsNil(o.SpareStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpareStatus gets a reference to the given string and assigns it to the SpareStatus field.
+func (o *EquipmentPsu) SetSpareStatus(v string) {
+	o.SpareStatus = &v
+}
+
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *EquipmentPsu) GetVid() string {
 	if o == nil || IsNil(o.Vid) {
@@ -769,6 +805,39 @@ func (o *EquipmentPsu) UnsetEquipmentRackEnclosure() {
 	o.EquipmentRackEnclosure.Unset()
 }
 
+// GetFirmwareRunningFirmwares returns the FirmwareRunningFirmwares field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentPsu) GetFirmwareRunningFirmwares() []FirmwareRunningFirmwareRelationship {
+	if o == nil {
+		var ret []FirmwareRunningFirmwareRelationship
+		return ret
+	}
+	return o.FirmwareRunningFirmwares
+}
+
+// GetFirmwareRunningFirmwaresOk returns a tuple with the FirmwareRunningFirmwares field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentPsu) GetFirmwareRunningFirmwaresOk() ([]FirmwareRunningFirmwareRelationship, bool) {
+	if o == nil || IsNil(o.FirmwareRunningFirmwares) {
+		return nil, false
+	}
+	return o.FirmwareRunningFirmwares, true
+}
+
+// HasFirmwareRunningFirmwares returns a boolean if a field has been set.
+func (o *EquipmentPsu) HasFirmwareRunningFirmwares() bool {
+	if o != nil && !IsNil(o.FirmwareRunningFirmwares) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirmwareRunningFirmwares gets a reference to the given []FirmwareRunningFirmwareRelationship and assigns it to the FirmwareRunningFirmwares field.
+func (o *EquipmentPsu) SetFirmwareRunningFirmwares(v []FirmwareRunningFirmwareRelationship) {
+	o.FirmwareRunningFirmwares = v
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentPsu) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
@@ -960,6 +1029,9 @@ func (o EquipmentPsu) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
+	if !IsNil(o.SpareStatus) {
+		toSerialize["SpareStatus"] = o.SpareStatus
+	}
 	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
@@ -977,6 +1049,9 @@ func (o EquipmentPsu) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EquipmentRackEnclosure.IsSet() {
 		toSerialize["EquipmentRackEnclosure"] = o.EquipmentRackEnclosure.Get()
+	}
+	if o.FirmwareRunningFirmwares != nil {
+		toSerialize["FirmwareRunningFirmwares"] = o.FirmwareRunningFirmwares
 	}
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
@@ -1065,17 +1140,21 @@ func (o *EquipmentPsu) UnmarshalJSON(data []byte) (err error) {
 		PsuWattage *string `json:"PsuWattage,omitempty"`
 		// This field identifies the Stockkeeping Unit for this Power Supply.
 		Sku *string `json:"Sku,omitempty"`
+		// This field identifies whether the power supply unit is spare or not. * `` - Spare status for power supply unit is not applicable or not available. * `Spare` - Power supply unit is spare. * `Not Spare` - Power supply unit is not spare.
+		SpareStatus *string `json:"SpareStatus,omitempty"`
 		// This field identifies the Vendor ID for this Power Supply Unit.
 		Vid *string `json:"Vid,omitempty"`
 		// This field is used to indicate the voltage state for this Power Supply.
-		Voltage                *string                                     `json:"Voltage,omitempty"`
-		ComputeRackUnit        NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-		EquipmentChassis       NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-		EquipmentFex           NullableEquipmentFexRelationship            `json:"EquipmentFex,omitempty"`
-		EquipmentRackEnclosure NullableEquipmentRackEnclosureRelationship  `json:"EquipmentRackEnclosure,omitempty"`
-		InventoryDeviceInfo    NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement         NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice       NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Voltage                *string                                    `json:"Voltage,omitempty"`
+		ComputeRackUnit        NullableComputeRackUnitRelationship        `json:"ComputeRackUnit,omitempty"`
+		EquipmentChassis       NullableEquipmentChassisRelationship       `json:"EquipmentChassis,omitempty"`
+		EquipmentFex           NullableEquipmentFexRelationship           `json:"EquipmentFex,omitempty"`
+		EquipmentRackEnclosure NullableEquipmentRackEnclosureRelationship `json:"EquipmentRackEnclosure,omitempty"`
+		// An array of relationships to firmwareRunningFirmware resources.
+		FirmwareRunningFirmwares []FirmwareRunningFirmwareRelationship       `json:"FirmwareRunningFirmwares,omitempty"`
+		InventoryDeviceInfo      NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement           NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice         NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentPsuWithoutEmbeddedStruct := EquipmentPsuWithoutEmbeddedStruct{}
@@ -1097,12 +1176,14 @@ func (o *EquipmentPsu) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentPsu.PsuType = varEquipmentPsuWithoutEmbeddedStruct.PsuType
 		varEquipmentPsu.PsuWattage = varEquipmentPsuWithoutEmbeddedStruct.PsuWattage
 		varEquipmentPsu.Sku = varEquipmentPsuWithoutEmbeddedStruct.Sku
+		varEquipmentPsu.SpareStatus = varEquipmentPsuWithoutEmbeddedStruct.SpareStatus
 		varEquipmentPsu.Vid = varEquipmentPsuWithoutEmbeddedStruct.Vid
 		varEquipmentPsu.Voltage = varEquipmentPsuWithoutEmbeddedStruct.Voltage
 		varEquipmentPsu.ComputeRackUnit = varEquipmentPsuWithoutEmbeddedStruct.ComputeRackUnit
 		varEquipmentPsu.EquipmentChassis = varEquipmentPsuWithoutEmbeddedStruct.EquipmentChassis
 		varEquipmentPsu.EquipmentFex = varEquipmentPsuWithoutEmbeddedStruct.EquipmentFex
 		varEquipmentPsu.EquipmentRackEnclosure = varEquipmentPsuWithoutEmbeddedStruct.EquipmentRackEnclosure
+		varEquipmentPsu.FirmwareRunningFirmwares = varEquipmentPsuWithoutEmbeddedStruct.FirmwareRunningFirmwares
 		varEquipmentPsu.InventoryDeviceInfo = varEquipmentPsuWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEquipmentPsu.NetworkElement = varEquipmentPsuWithoutEmbeddedStruct.NetworkElement
 		varEquipmentPsu.RegisteredDevice = varEquipmentPsuWithoutEmbeddedStruct.RegisteredDevice
@@ -1137,12 +1218,14 @@ func (o *EquipmentPsu) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PsuType")
 		delete(additionalProperties, "PsuWattage")
 		delete(additionalProperties, "Sku")
+		delete(additionalProperties, "SpareStatus")
 		delete(additionalProperties, "Vid")
 		delete(additionalProperties, "Voltage")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "EquipmentFex")
 		delete(additionalProperties, "EquipmentRackEnclosure")
+		delete(additionalProperties, "FirmwareRunningFirmwares")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "RegisteredDevice")

@@ -365,9 +365,9 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 										ForceNew:    true,
 									},
 									"widget_type": {
-										Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+										Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.\n* `MultiSelect` - Display the widget as a multi-select.",
 										Type:         schema.TypeString,
-										ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector"}, false),
+										ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector", "MultiSelect"}, false),
 										Optional:     true,
 										Default:      "None",
 										ForceNew:     true,
@@ -513,6 +513,59 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 												},
 												"regex": {
 													Description: "When the parameter is a string this regular expression is used to ensure the value is valid.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													ForceNew:    true,
+												},
+											},
+										},
+										ForceNew: true,
+									},
+									"data_source_selector": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+													ForceNew:         true,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.DataSourceSelector",
+													ForceNew:    true,
+												},
+												"display_attributes": {
+													Type:       schema.TypeList,
+													MinItems:   1,
+													Optional:   true,
+													ConfigMode: schema.SchemaConfigModeAttr,
+													Computed:   true,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													}, ForceNew: true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.DataSourceSelector",
+													ForceNew:    true,
+												},
+												"selector": {
+													Description: "This field holds mapping information used to provide suggestions to the user. The mapping should be in the '${workflow.input.property}' format. It supports workflow input mapping for workflows, and for User Actions, it supports workflow inputs, workflow outputs, workflow variables, and outputs from previous tasks.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													ForceNew:    true,
+												},
+												"value_attribute": {
+													Description: "A property from the mapped parameter, value of which can be used as value for referenced input definition.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													ForceNew:    true,
@@ -682,12 +735,126 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 							ForceNew:         true,
 						},
+						"ancestor_definitions": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+										ForceNew:         true,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+										ForceNew:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										ForceNew:    true,
+									},
+								},
+							},
+							ForceNew: true,
+						},
+						"definition": {
+							Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+										ForceNew:         true,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+										ForceNew:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										ForceNew:    true,
+									},
+								},
+							},
+							ForceNew: true,
+						},
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 128),
+							ValidateFunc: validation.StringLenBetween(1, 256),
 							Optional:     true,
 							ForceNew:     true,
+						},
+						"propagated": {
+							Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"type": {
+							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"value": {
 							Description:  "The string representation of a tag value.",
@@ -1161,6 +1328,63 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 								}
 							}
 						}
+						if v, ok := l["data_source_selector"]; ok {
+							{
+								x := make([]models.WorkflowDataSourceSelector, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewWorkflowDataSourceSelectorWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("workflow.DataSourceSelector")
+									if v, ok := l["display_attributes"]; ok {
+										{
+											x := make([]string, 0)
+											y := reflect.ValueOf(v)
+											for i := 0; i < y.Len(); i++ {
+												if y.Index(i).Interface() != nil {
+													x = append(x, y.Index(i).Interface().(string))
+												}
+											}
+											if len(x) > 0 {
+												o.SetDisplayAttributes(x)
+											}
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["selector"]; ok {
+										{
+											x := (v.(string))
+											o.SetSelector(x)
+										}
+									}
+									if v, ok := l["value_attribute"]; ok {
+										{
+											x := (v.(string))
+											o.SetValueAttribute(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetDataSourceSelector(x)
+								}
+							}
+						}
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := make([]models.WorkflowMoReferenceProperty, 0)
@@ -1319,6 +1543,49 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

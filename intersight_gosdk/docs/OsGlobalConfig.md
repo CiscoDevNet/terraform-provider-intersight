@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ConfigurationSource** | Pointer to **string** | Configuration source for the OS Installation. | [optional] [readonly] 
 **InstallMethod** | Pointer to **string** | The install method to be used for OS installation - vMedia, iPXE. Only vMedia is supported as of now. | [optional] [readonly] 
 **InstallTargetType** | Pointer to **string** | The Prefill install Target Name. | [optional] [readonly] 
-**OperatingSystemParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Installation parameters specific to selected OS. | [optional] 
+**OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
 **OsImageName** | Pointer to **string** | The Operating System Image name. | [optional] [readonly] 
 **OverrideSecureBoot** | Pointer to **bool** | ESXi Secure Boot installation is currently not supported. As a workaround, Secure Boot will be disabled before installation and restored after installation is complete. Enable to Override Secure Boot Configuration. | [optional] [default to false]
 **ScuImageName** | Pointer to **string** | The name of the Server Configuration Utilities Image. | [optional] [readonly] 
@@ -177,20 +177,20 @@ HasInstallTargetType returns a boolean if a field has been set.
 
 ### GetOperatingSystemParameters
 
-`func (o *OsGlobalConfig) GetOperatingSystemParameters() MoBaseComplexType`
+`func (o *OsGlobalConfig) GetOperatingSystemParameters() OsOperatingSystemParameters`
 
 GetOperatingSystemParameters returns the OperatingSystemParameters field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemParametersOk
 
-`func (o *OsGlobalConfig) GetOperatingSystemParametersOk() (*MoBaseComplexType, bool)`
+`func (o *OsGlobalConfig) GetOperatingSystemParametersOk() (*OsOperatingSystemParameters, bool)`
 
 GetOperatingSystemParametersOk returns a tuple with the OperatingSystemParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystemParameters
 
-`func (o *OsGlobalConfig) SetOperatingSystemParameters(v MoBaseComplexType)`
+`func (o *OsGlobalConfig) SetOperatingSystemParameters(v OsOperatingSystemParameters)`
 
 SetOperatingSystemParameters sets OperatingSystemParameters field to given value.
 

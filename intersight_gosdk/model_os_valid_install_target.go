@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -27,7 +27,9 @@ type OsValidInstallTarget struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType string                   `json:"ObjectType"`
+	E1sNvme    []OsPhysicalDiskResponse `json:"E1sNvme,omitempty"`
+	E3sNvme    []OsPhysicalDiskResponse `json:"E3sNvme,omitempty"`
 	// Error message if any errors are encountered while fetching and validating Install targets for the server.
 	Error                   *string                   `json:"Error,omitempty"`
 	InstallTargets          []OsInstallTargetResponse `json:"InstallTargets,omitempty"`
@@ -127,6 +129,72 @@ func (o *OsValidInstallTarget) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "os.ValidInstallTarget" of the ObjectType field.
 func (o *OsValidInstallTarget) GetDefaultObjectType() interface{} {
 	return "os.ValidInstallTarget"
+}
+
+// GetE1sNvme returns the E1sNvme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetE1sNvme() []OsPhysicalDiskResponse {
+	if o == nil {
+		var ret []OsPhysicalDiskResponse
+		return ret
+	}
+	return o.E1sNvme
+}
+
+// GetE1sNvmeOk returns a tuple with the E1sNvme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetE1sNvmeOk() ([]OsPhysicalDiskResponse, bool) {
+	if o == nil || IsNil(o.E1sNvme) {
+		return nil, false
+	}
+	return o.E1sNvme, true
+}
+
+// HasE1sNvme returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasE1sNvme() bool {
+	if o != nil && !IsNil(o.E1sNvme) {
+		return true
+	}
+
+	return false
+}
+
+// SetE1sNvme gets a reference to the given []OsPhysicalDiskResponse and assigns it to the E1sNvme field.
+func (o *OsValidInstallTarget) SetE1sNvme(v []OsPhysicalDiskResponse) {
+	o.E1sNvme = v
+}
+
+// GetE3sNvme returns the E3sNvme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OsValidInstallTarget) GetE3sNvme() []OsPhysicalDiskResponse {
+	if o == nil {
+		var ret []OsPhysicalDiskResponse
+		return ret
+	}
+	return o.E3sNvme
+}
+
+// GetE3sNvmeOk returns a tuple with the E3sNvme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OsValidInstallTarget) GetE3sNvmeOk() ([]OsPhysicalDiskResponse, bool) {
+	if o == nil || IsNil(o.E3sNvme) {
+		return nil, false
+	}
+	return o.E3sNvme, true
+}
+
+// HasE3sNvme returns a boolean if a field has been set.
+func (o *OsValidInstallTarget) HasE3sNvme() bool {
+	if o != nil && !IsNil(o.E3sNvme) {
+		return true
+	}
+
+	return false
+}
+
+// SetE3sNvme gets a reference to the given []OsPhysicalDiskResponse and assigns it to the E3sNvme field.
+func (o *OsValidInstallTarget) SetE3sNvme(v []OsPhysicalDiskResponse) {
+	o.E3sNvme = v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
@@ -549,6 +617,12 @@ func (o OsValidInstallTarget) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.E1sNvme != nil {
+		toSerialize["E1sNvme"] = o.E1sNvme
+	}
+	if o.E3sNvme != nil {
+		toSerialize["E3sNvme"] = o.E3sNvme
+	}
 	if !IsNil(o.Error) {
 		toSerialize["Error"] = o.Error
 	}
@@ -639,7 +713,9 @@ func (o *OsValidInstallTarget) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType string                   `json:"ObjectType"`
+		E1sNvme    []OsPhysicalDiskResponse `json:"E1sNvme,omitempty"`
+		E3sNvme    []OsPhysicalDiskResponse `json:"E3sNvme,omitempty"`
 		// Error message if any errors are encountered while fetching and validating Install targets for the server.
 		Error                   *string                   `json:"Error,omitempty"`
 		InstallTargets          []OsInstallTargetResponse `json:"InstallTargets,omitempty"`
@@ -664,6 +740,8 @@ func (o *OsValidInstallTarget) UnmarshalJSON(data []byte) (err error) {
 		varOsValidInstallTarget := _OsValidInstallTarget{}
 		varOsValidInstallTarget.ClassId = varOsValidInstallTargetWithoutEmbeddedStruct.ClassId
 		varOsValidInstallTarget.ObjectType = varOsValidInstallTargetWithoutEmbeddedStruct.ObjectType
+		varOsValidInstallTarget.E1sNvme = varOsValidInstallTargetWithoutEmbeddedStruct.E1sNvme
+		varOsValidInstallTarget.E3sNvme = varOsValidInstallTargetWithoutEmbeddedStruct.E3sNvme
 		varOsValidInstallTarget.Error = varOsValidInstallTargetWithoutEmbeddedStruct.Error
 		varOsValidInstallTarget.InstallTargets = varOsValidInstallTargetWithoutEmbeddedStruct.InstallTargets
 		varOsValidInstallTarget.M2Jbod = varOsValidInstallTargetWithoutEmbeddedStruct.M2Jbod
@@ -695,6 +773,8 @@ func (o *OsValidInstallTarget) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "E1sNvme")
+		delete(additionalProperties, "E3sNvme")
 		delete(additionalProperties, "Error")
 		delete(additionalProperties, "InstallTargets")
 		delete(additionalProperties, "M2Jbod")

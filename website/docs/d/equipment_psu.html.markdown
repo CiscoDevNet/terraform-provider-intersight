@@ -39,6 +39,7 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `sku`:(string) This field identifies the Stockkeeping Unit for this Power Supply. 
+* `spare_status`:(string) This field identifies whether the power supply unit is spare or not.* `` - Spare status for power supply unit is not applicable or not available.* `Spare` - Power supply unit is spare.* `Not Spare` - Power supply unit is not spare. 
 * `vendor`:(string) This field displays the vendor information of the associated component or hardware. 
 * `vid`:(string) This field identifies the Vendor ID for this Power Supply Unit. 
 * `voltage`:(string) This field is used to indicate the voltage state for this Power Supply. 

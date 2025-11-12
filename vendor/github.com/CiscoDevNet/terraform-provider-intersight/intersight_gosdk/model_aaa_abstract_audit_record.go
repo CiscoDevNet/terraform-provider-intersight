@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -32,6 +32,10 @@ type AaaAbstractAuditRecord struct {
 	Event *string `json:"Event,omitempty"`
 	// The REST URL for the operation.
 	HttpOperation *string `json:"HttpOperation,omitempty"`
+	// The response code of the operation.
+	HttpResponseCode *int64 `json:"HttpResponseCode,omitempty"`
+	// The response body of the operation, with JSON truncated to 2 nested levels when its size exceeds 10KB.
+	HttpResponsePayload interface{} `json:"HttpResponsePayload,omitempty"`
 	// The user-friendly names of the changed MO.
 	MoDisplayNames interface{} `json:"MoDisplayNames,omitempty"`
 	// The object type of the REST resource that was created, modified or deleted.
@@ -193,6 +197,71 @@ func (o *AaaAbstractAuditRecord) HasHttpOperation() bool {
 // SetHttpOperation gets a reference to the given string and assigns it to the HttpOperation field.
 func (o *AaaAbstractAuditRecord) SetHttpOperation(v string) {
 	o.HttpOperation = &v
+}
+
+// GetHttpResponseCode returns the HttpResponseCode field value if set, zero value otherwise.
+func (o *AaaAbstractAuditRecord) GetHttpResponseCode() int64 {
+	if o == nil || IsNil(o.HttpResponseCode) {
+		var ret int64
+		return ret
+	}
+	return *o.HttpResponseCode
+}
+
+// GetHttpResponseCodeOk returns a tuple with the HttpResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AaaAbstractAuditRecord) GetHttpResponseCodeOk() (*int64, bool) {
+	if o == nil || IsNil(o.HttpResponseCode) {
+		return nil, false
+	}
+	return o.HttpResponseCode, true
+}
+
+// HasHttpResponseCode returns a boolean if a field has been set.
+func (o *AaaAbstractAuditRecord) HasHttpResponseCode() bool {
+	if o != nil && !IsNil(o.HttpResponseCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpResponseCode gets a reference to the given int64 and assigns it to the HttpResponseCode field.
+func (o *AaaAbstractAuditRecord) SetHttpResponseCode(v int64) {
+	o.HttpResponseCode = &v
+}
+
+// GetHttpResponsePayload returns the HttpResponsePayload field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AaaAbstractAuditRecord) GetHttpResponsePayload() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.HttpResponsePayload
+}
+
+// GetHttpResponsePayloadOk returns a tuple with the HttpResponsePayload field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AaaAbstractAuditRecord) GetHttpResponsePayloadOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.HttpResponsePayload) {
+		return nil, false
+	}
+	return &o.HttpResponsePayload, true
+}
+
+// HasHttpResponsePayload returns a boolean if a field has been set.
+func (o *AaaAbstractAuditRecord) HasHttpResponsePayload() bool {
+	if o != nil && !IsNil(o.HttpResponsePayload) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpResponsePayload gets a reference to the given interface{} and assigns it to the HttpResponsePayload field.
+func (o *AaaAbstractAuditRecord) SetHttpResponsePayload(v interface{}) {
+	o.HttpResponsePayload = v
 }
 
 // GetMoDisplayNames returns the MoDisplayNames field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -464,6 +533,12 @@ func (o AaaAbstractAuditRecord) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HttpOperation) {
 		toSerialize["HttpOperation"] = o.HttpOperation
 	}
+	if !IsNil(o.HttpResponseCode) {
+		toSerialize["HttpResponseCode"] = o.HttpResponseCode
+	}
+	if o.HttpResponsePayload != nil {
+		toSerialize["HttpResponsePayload"] = o.HttpResponsePayload
+	}
 	if o.MoDisplayNames != nil {
 		toSerialize["MoDisplayNames"] = o.MoDisplayNames
 	}
@@ -544,6 +619,10 @@ func (o *AaaAbstractAuditRecord) UnmarshalJSON(data []byte) (err error) {
 		Event *string `json:"Event,omitempty"`
 		// The REST URL for the operation.
 		HttpOperation *string `json:"HttpOperation,omitempty"`
+		// The response code of the operation.
+		HttpResponseCode *int64 `json:"HttpResponseCode,omitempty"`
+		// The response body of the operation, with JSON truncated to 2 nested levels when its size exceeds 10KB.
+		HttpResponsePayload interface{} `json:"HttpResponsePayload,omitempty"`
 		// The user-friendly names of the changed MO.
 		MoDisplayNames interface{} `json:"MoDisplayNames,omitempty"`
 		// The object type of the REST resource that was created, modified or deleted.
@@ -568,6 +647,8 @@ func (o *AaaAbstractAuditRecord) UnmarshalJSON(data []byte) (err error) {
 		varAaaAbstractAuditRecord.ObjectType = varAaaAbstractAuditRecordWithoutEmbeddedStruct.ObjectType
 		varAaaAbstractAuditRecord.Event = varAaaAbstractAuditRecordWithoutEmbeddedStruct.Event
 		varAaaAbstractAuditRecord.HttpOperation = varAaaAbstractAuditRecordWithoutEmbeddedStruct.HttpOperation
+		varAaaAbstractAuditRecord.HttpResponseCode = varAaaAbstractAuditRecordWithoutEmbeddedStruct.HttpResponseCode
+		varAaaAbstractAuditRecord.HttpResponsePayload = varAaaAbstractAuditRecordWithoutEmbeddedStruct.HttpResponsePayload
 		varAaaAbstractAuditRecord.MoDisplayNames = varAaaAbstractAuditRecordWithoutEmbeddedStruct.MoDisplayNames
 		varAaaAbstractAuditRecord.MoType = varAaaAbstractAuditRecordWithoutEmbeddedStruct.MoType
 		varAaaAbstractAuditRecord.ObjectMoid = varAaaAbstractAuditRecordWithoutEmbeddedStruct.ObjectMoid
@@ -596,6 +677,8 @@ func (o *AaaAbstractAuditRecord) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Event")
 		delete(additionalProperties, "HttpOperation")
+		delete(additionalProperties, "HttpResponseCode")
+		delete(additionalProperties, "HttpResponsePayload")
 		delete(additionalProperties, "MoDisplayNames")
 		delete(additionalProperties, "MoType")
 		delete(additionalProperties, "ObjectMoid")

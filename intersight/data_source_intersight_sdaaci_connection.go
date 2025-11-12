@@ -22,17 +22,17 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 		Optional:    true,
 	},
 		"aci_l3_out": {
-			Description: "ACI L3Out Name User Input.",
+			Description: "User input for ACI L3Out name.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"aci_match_rule_name": {
-			Description: "Name of the Match Rule in Cisco APIC.",
+			Description: "Match rule name in Cisco APIC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"aci_tenant": {
-			Description: "ACI tenant Name for Selected APIC Target.",
+			Description: "ACI tenant name for the selected APIC target.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -111,7 +111,7 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			},
 		},
 		"campus_fabric_site": {
-			Description: "Campus fabric site id in which the border node has configured.",
+			Description: "Campus fabric site Id where the border node is configured.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -166,22 +166,22 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"epg": {
-			Description: "Application EPG Name of this connection.",
+			Description: "Application EPG name for this connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"epg_subnet": {
-			Description: "EPG Subnet Ipv4Cidr which is configured on APIC.",
+			Description: "EPG Subnet Ipv4Cidr configured on APIC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"firewall_device": {
-			Description: "Device within the selected domain used to configure Firewall.",
+			Description: "Device within the selected domain used for firewall configuration.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"firewall_domain": {
-			Description: "Domain used to configure Firewall.",
+			Description: "Domain used for firewall configuration.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -231,7 +231,7 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"node_profile": {
-			Description: "L3Out Node Profile in Cisco APIC.",
+			Description: "L3Out node profile in Cisco APIC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -355,7 +355,7 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Connection status between SDA and ACI.\n* `NotConnected` - Connection Status NotConnected.\n* `Connected` - Connection Status Connected.",
+			Description: "Connection status between SDA and ACI.\n* `NotConnected` - Status of the connection:Not connected.\n* `Connected` - Status of the connection:Connected.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -369,8 +369,86 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -383,7 +461,7 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			},
 		},
 		"transit": {
-			Description: "Transit id for given border node.",
+			Description: "Transit Id for the given border node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -501,17 +579,17 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			},
 		},
 		"virtual_network": {
-			Description: "Virtual Network of this connection.",
+			Description: "Virtual Network for this connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"vn_epg": {
-			Description: "Contains both VN and EPG of this connection.",
+			Description: "VN and EPG information for this connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"vrf": {
-			Description: "APIC Tenant VRF from APIC.",
+			Description: "Tenant VRF in Cisco APIC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -955,6 +1033,49 @@ func dataSourceSdaaciConnectionRead(c context.Context, d *schema.ResourceData, m
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

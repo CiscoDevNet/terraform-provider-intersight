@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ucsd.ConnectorPack"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ucsd.ConnectorPack"]
-**ConnectorFeature** | Pointer to **string** | State of the connector pack whether it is enabled or disabled. | [optional] [readonly] 
+**ConnectorFeature** | Pointer to **string** | State of connector pack (enabled/ disabled). | [optional] [readonly] 
 **DependencyNames** | Pointer to **[]string** |  | [optional] 
-**DownloadedVersion** | Pointer to **string** | Version of the connector pack that is last downloaded successfully to UCS Director. | [optional] [readonly] 
-**Name** | Pointer to **string** | Name of the connector pack running on the UCS Director. | [optional] [readonly] 
+**DownloadedVersion** | Pointer to **string** | Last successfully downloaded connector pack version successfully for UCS Director. | [optional] [readonly] 
+**Name** | Pointer to **string** | UCS Director connector pack name. | [optional] [readonly] 
 **Services** | Pointer to **[]string** |  | [optional] 
-**State** | Pointer to **string** | State of the connector pack whether it is enabled or disabled. | [optional] [readonly] 
-**Version** | Pointer to **string** | Version of the connector pack. | [optional] [readonly] 
+**State** | Pointer to **string** | Connector pack state (enabled/disabled). | [optional] [readonly] 
+**Version** | Pointer to **string** | The connector pack version. | [optional] [readonly] 
 
 ## Methods
 

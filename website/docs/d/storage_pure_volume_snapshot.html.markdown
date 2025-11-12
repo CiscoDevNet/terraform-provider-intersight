@@ -21,9 +21,14 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the snapshot which represents point-in-time copy of volume. 
+* `pod`:(string) A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. 
 * `protection_group_name`:(string) Name of the protection group to which the snapshot belongs. Value is empty, if the snapshot is created directly on volume. 
 * `serial`:(string) Unique serial number of the snapshot allocated by the storage array. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(int) Snapshot size represented in bytes. 
+* `snapshot_size`:(int) The size of the snapshot created. 
 * `nr_source`:(string) Source object on which the snapshot is created. It is the name of the originating volume. 
+* `total_provisioned`:(int) The overall size of the snapshot allocated by the storage array. 
+* `used_provisioned`:(int) The used size of the snapshot allocated by the storage array. 
+* `volume_group`:(string) Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine. 
  

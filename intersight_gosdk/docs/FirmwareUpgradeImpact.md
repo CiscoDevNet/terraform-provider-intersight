@@ -6,10 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.UpgradeImpact"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeImpact"]
+**ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
+**XfmUpgradeOption** | Pointer to **string** | XFM upgrade option Full or Partial Disruption. * &#x60;none&#x60; - If no option is selected for exclusion. * &#x60;full-shutdown&#x60; - PSX Switch in XFM will be upgraded in single action. * &#x60;partial-shutdown&#x60; - PSX Switch in XFM will be upgraded one after other. | [optional] [default to "none"]
 **Chassis** | Pointer to [**[]EquipmentChassisRelationship**](EquipmentChassisRelationship.md) | An array of relationships to equipmentChassis resources. | [optional] 
 **Device** | Pointer to [**[]AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] [readonly] 
 **Distributable** | Pointer to [**NullableFirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
+**PciNode** | Pointer to [**[]PciNodeRelationship**](PciNodeRelationship.md) | An array of relationships to pciNode resources. | [optional] 
 **Release** | Pointer to [**NullableSoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
 **Server** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
@@ -71,6 +74,66 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetExcludeComponentList
+
+`func (o *FirmwareUpgradeImpact) GetExcludeComponentList() []string`
+
+GetExcludeComponentList returns the ExcludeComponentList field if non-nil, zero value otherwise.
+
+### GetExcludeComponentListOk
+
+`func (o *FirmwareUpgradeImpact) GetExcludeComponentListOk() (*[]string, bool)`
+
+GetExcludeComponentListOk returns a tuple with the ExcludeComponentList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExcludeComponentList
+
+`func (o *FirmwareUpgradeImpact) SetExcludeComponentList(v []string)`
+
+SetExcludeComponentList sets ExcludeComponentList field to given value.
+
+### HasExcludeComponentList
+
+`func (o *FirmwareUpgradeImpact) HasExcludeComponentList() bool`
+
+HasExcludeComponentList returns a boolean if a field has been set.
+
+### SetExcludeComponentListNil
+
+`func (o *FirmwareUpgradeImpact) SetExcludeComponentListNil(b bool)`
+
+ SetExcludeComponentListNil sets the value for ExcludeComponentList to be an explicit nil
+
+### UnsetExcludeComponentList
+`func (o *FirmwareUpgradeImpact) UnsetExcludeComponentList()`
+
+UnsetExcludeComponentList ensures that no value is present for ExcludeComponentList, not even an explicit nil
+### GetXfmUpgradeOption
+
+`func (o *FirmwareUpgradeImpact) GetXfmUpgradeOption() string`
+
+GetXfmUpgradeOption returns the XfmUpgradeOption field if non-nil, zero value otherwise.
+
+### GetXfmUpgradeOptionOk
+
+`func (o *FirmwareUpgradeImpact) GetXfmUpgradeOptionOk() (*string, bool)`
+
+GetXfmUpgradeOptionOk returns a tuple with the XfmUpgradeOption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXfmUpgradeOption
+
+`func (o *FirmwareUpgradeImpact) SetXfmUpgradeOption(v string)`
+
+SetXfmUpgradeOption sets XfmUpgradeOption field to given value.
+
+### HasXfmUpgradeOption
+
+`func (o *FirmwareUpgradeImpact) HasXfmUpgradeOption() bool`
+
+HasXfmUpgradeOption returns a boolean if a field has been set.
 
 ### GetChassis
 
@@ -212,6 +275,41 @@ HasNetworkElements returns a boolean if a field has been set.
 `func (o *FirmwareUpgradeImpact) UnsetNetworkElements()`
 
 UnsetNetworkElements ensures that no value is present for NetworkElements, not even an explicit nil
+### GetPciNode
+
+`func (o *FirmwareUpgradeImpact) GetPciNode() []PciNodeRelationship`
+
+GetPciNode returns the PciNode field if non-nil, zero value otherwise.
+
+### GetPciNodeOk
+
+`func (o *FirmwareUpgradeImpact) GetPciNodeOk() (*[]PciNodeRelationship, bool)`
+
+GetPciNodeOk returns a tuple with the PciNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNode
+
+`func (o *FirmwareUpgradeImpact) SetPciNode(v []PciNodeRelationship)`
+
+SetPciNode sets PciNode field to given value.
+
+### HasPciNode
+
+`func (o *FirmwareUpgradeImpact) HasPciNode() bool`
+
+HasPciNode returns a boolean if a field has been set.
+
+### SetPciNodeNil
+
+`func (o *FirmwareUpgradeImpact) SetPciNodeNil(b bool)`
+
+ SetPciNodeNil sets the value for PciNode to be an explicit nil
+
+### UnsetPciNode
+`func (o *FirmwareUpgradeImpact) UnsetPciNode()`
+
+UnsetPciNode ensures that no value is present for PciNode, not even an explicit nil
 ### GetRelease
 
 `func (o *FirmwareUpgradeImpact) GetRelease() SoftwarerepositoryReleaseRelationship`

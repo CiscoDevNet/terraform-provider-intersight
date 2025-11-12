@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type EquipmentChassis struct {
 	AlarmSummary NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
 	// The assigned identifier for a chassis.
 	ChassisId *int64 `json:"ChassisId,omitempty"`
+	// The distinguished name of the chassis profile to which the chassis is associated to. It is applicable only for chassis which are managed via UCSM.
+	ChassisProfile *string `json:"ChassisProfile,omitempty"`
 	// This field identifies the connectivity path for the chassis enclosure.
 	ConnectionPath *string `json:"ConnectionPath,omitempty"`
 	// This field identifies the connectivity status for the chassis enclosure.
@@ -39,7 +41,8 @@ type EquipmentChassis struct {
 	Description *string `json:"Description,omitempty"`
 	// This field summarizes the faults on the chassis enclosure.
 	// Deprecated
-	FaultSummary *int64 `json:"FaultSummary,omitempty"`
+	FaultSummary    *int64                         `json:"FaultSummary,omitempty"`
+	LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// The management mode of the blade server chassis. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// This field identifies the name for the chassis enclosure.
@@ -47,6 +50,8 @@ type EquipmentChassis struct {
 	OperReason []string `json:"OperReason,omitempty"`
 	// This field identifies the Chassis Operational State.
 	OperState *string `json:"OperState,omitempty"`
+	// Bundle version which the XFM and PSU firmware belongs to.
+	PackageVersion *string `json:"PackageVersion,omitempty"`
 	// Part Number identifier for the chassis enclosure.
 	PartNumber *string `json:"PartNumber,omitempty"`
 	// This field identifies the Product ID for the chassis enclosure.
@@ -60,7 +65,8 @@ type EquipmentChassis struct {
 	// The user defined label assigned to the chassis.
 	UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	// This field identifies the Vendor ID for the chassis enclosure.
-	Vid *string `json:"Vid,omitempty"`
+	Vid              *string                              `json:"Vid,omitempty"`
+	AssignedLocation NullableAssetGeoLocationRelationship `json:"AssignedLocation,omitempty"`
 	// An array of relationships to computeBlade resources.
 	Blades []ComputeBladeRelationship `json:"Blades,omitempty"`
 	// An array of relationships to equipmentExpanderModule resources.
@@ -73,8 +79,12 @@ type EquipmentChassis struct {
 	Ioms                []EquipmentIoCardRelationship           `json:"Ioms,omitempty"`
 	LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 	ManagementInterface NullableManagementInterfaceRelationship `json:"ManagementInterface,omitempty"`
-	PowerControlState   NullablePowerControlStateRelationship   `json:"PowerControlState,omitempty"`
-	PsuControl          NullableEquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
+	// An array of relationships to networkElement resources.
+	NetworkElements []NetworkElementRelationship `json:"NetworkElements,omitempty"`
+	// An array of relationships to pciNode resources.
+	PciNodes          []PciNodeRelationship                   `json:"PciNodes,omitempty"`
+	PowerControlState NullablePowerControlStateRelationship   `json:"PowerControlState,omitempty"`
+	PsuControl        NullableEquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
 	// An array of relationships to equipmentPsu resources.
 	Psus             []EquipmentPsuRelationship                  `json:"Psus,omitempty"`
 	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -247,6 +257,38 @@ func (o *EquipmentChassis) SetChassisId(v int64) {
 	o.ChassisId = &v
 }
 
+// GetChassisProfile returns the ChassisProfile field value if set, zero value otherwise.
+func (o *EquipmentChassis) GetChassisProfile() string {
+	if o == nil || IsNil(o.ChassisProfile) {
+		var ret string
+		return ret
+	}
+	return *o.ChassisProfile
+}
+
+// GetChassisProfileOk returns a tuple with the ChassisProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassis) GetChassisProfileOk() (*string, bool) {
+	if o == nil || IsNil(o.ChassisProfile) {
+		return nil, false
+	}
+	return o.ChassisProfile, true
+}
+
+// HasChassisProfile returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasChassisProfile() bool {
+	if o != nil && !IsNil(o.ChassisProfile) {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisProfile gets a reference to the given string and assigns it to the ChassisProfile field.
+func (o *EquipmentChassis) SetChassisProfile(v string) {
+	o.ChassisProfile = &v
+}
+
 // GetConnectionPath returns the ConnectionPath field value if set, zero value otherwise.
 func (o *EquipmentChassis) GetConnectionPath() string {
 	if o == nil || IsNil(o.ConnectionPath) {
@@ -378,6 +420,49 @@ func (o *EquipmentChassis) SetFaultSummary(v int64) {
 	o.FaultSummary = &v
 }
 
+// GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentChassis) GetLocationDetails() CommGeoLocationDetails {
+	if o == nil || IsNil(o.LocationDetails.Get()) {
+		var ret CommGeoLocationDetails
+		return ret
+	}
+	return *o.LocationDetails.Get()
+}
+
+// GetLocationDetailsOk returns a tuple with the LocationDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentChassis) GetLocationDetailsOk() (*CommGeoLocationDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationDetails.Get(), o.LocationDetails.IsSet()
+}
+
+// HasLocationDetails returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasLocationDetails() bool {
+	if o != nil && o.LocationDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationDetails gets a reference to the given NullableCommGeoLocationDetails and assigns it to the LocationDetails field.
+func (o *EquipmentChassis) SetLocationDetails(v CommGeoLocationDetails) {
+	o.LocationDetails.Set(&v)
+}
+
+// SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+func (o *EquipmentChassis) SetLocationDetailsNil() {
+	o.LocationDetails.Set(nil)
+}
+
+// UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
+func (o *EquipmentChassis) UnsetLocationDetails() {
+	o.LocationDetails.Unset()
+}
+
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
 func (o *EquipmentChassis) GetManagementMode() string {
 	if o == nil || IsNil(o.ManagementMode) {
@@ -505,6 +590,38 @@ func (o *EquipmentChassis) HasOperState() bool {
 // SetOperState gets a reference to the given string and assigns it to the OperState field.
 func (o *EquipmentChassis) SetOperState(v string) {
 	o.OperState = &v
+}
+
+// GetPackageVersion returns the PackageVersion field value if set, zero value otherwise.
+func (o *EquipmentChassis) GetPackageVersion() string {
+	if o == nil || IsNil(o.PackageVersion) {
+		var ret string
+		return ret
+	}
+	return *o.PackageVersion
+}
+
+// GetPackageVersionOk returns a tuple with the PackageVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassis) GetPackageVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.PackageVersion) {
+		return nil, false
+	}
+	return o.PackageVersion, true
+}
+
+// HasPackageVersion returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasPackageVersion() bool {
+	if o != nil && !IsNil(o.PackageVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetPackageVersion gets a reference to the given string and assigns it to the PackageVersion field.
+func (o *EquipmentChassis) SetPackageVersion(v string) {
+	o.PackageVersion = &v
 }
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
@@ -729,6 +846,49 @@ func (o *EquipmentChassis) HasVid() bool {
 // SetVid gets a reference to the given string and assigns it to the Vid field.
 func (o *EquipmentChassis) SetVid(v string) {
 	o.Vid = &v
+}
+
+// GetAssignedLocation returns the AssignedLocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentChassis) GetAssignedLocation() AssetGeoLocationRelationship {
+	if o == nil || IsNil(o.AssignedLocation.Get()) {
+		var ret AssetGeoLocationRelationship
+		return ret
+	}
+	return *o.AssignedLocation.Get()
+}
+
+// GetAssignedLocationOk returns a tuple with the AssignedLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentChassis) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AssignedLocation.Get(), o.AssignedLocation.IsSet()
+}
+
+// HasAssignedLocation returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasAssignedLocation() bool {
+	if o != nil && o.AssignedLocation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedLocation gets a reference to the given NullableAssetGeoLocationRelationship and assigns it to the AssignedLocation field.
+func (o *EquipmentChassis) SetAssignedLocation(v AssetGeoLocationRelationship) {
+	o.AssignedLocation.Set(&v)
+}
+
+// SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+func (o *EquipmentChassis) SetAssignedLocationNil() {
+	o.AssignedLocation.Set(nil)
+}
+
+// UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
+func (o *EquipmentChassis) UnsetAssignedLocation() {
+	o.AssignedLocation.Unset()
 }
 
 // GetBlades returns the Blades field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1033,6 +1193,72 @@ func (o *EquipmentChassis) SetManagementInterfaceNil() {
 // UnsetManagementInterface ensures that no value is present for ManagementInterface, not even an explicit nil
 func (o *EquipmentChassis) UnsetManagementInterface() {
 	o.ManagementInterface.Unset()
+}
+
+// GetNetworkElements returns the NetworkElements field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentChassis) GetNetworkElements() []NetworkElementRelationship {
+	if o == nil {
+		var ret []NetworkElementRelationship
+		return ret
+	}
+	return o.NetworkElements
+}
+
+// GetNetworkElementsOk returns a tuple with the NetworkElements field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentChassis) GetNetworkElementsOk() ([]NetworkElementRelationship, bool) {
+	if o == nil || IsNil(o.NetworkElements) {
+		return nil, false
+	}
+	return o.NetworkElements, true
+}
+
+// HasNetworkElements returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasNetworkElements() bool {
+	if o != nil && !IsNil(o.NetworkElements) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkElements gets a reference to the given []NetworkElementRelationship and assigns it to the NetworkElements field.
+func (o *EquipmentChassis) SetNetworkElements(v []NetworkElementRelationship) {
+	o.NetworkElements = v
+}
+
+// GetPciNodes returns the PciNodes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentChassis) GetPciNodes() []PciNodeRelationship {
+	if o == nil {
+		var ret []PciNodeRelationship
+		return ret
+	}
+	return o.PciNodes
+}
+
+// GetPciNodesOk returns a tuple with the PciNodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentChassis) GetPciNodesOk() ([]PciNodeRelationship, bool) {
+	if o == nil || IsNil(o.PciNodes) {
+		return nil, false
+	}
+	return o.PciNodes, true
+}
+
+// HasPciNodes returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasPciNodes() bool {
+	if o != nil && !IsNil(o.PciNodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetPciNodes gets a reference to the given []PciNodeRelationship and assigns it to the PciNodes field.
+func (o *EquipmentChassis) SetPciNodes(v []PciNodeRelationship) {
+	o.PciNodes = v
 }
 
 // GetPowerControlState returns the PowerControlState field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1361,6 +1587,9 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
+	if !IsNil(o.ChassisProfile) {
+		toSerialize["ChassisProfile"] = o.ChassisProfile
+	}
 	if !IsNil(o.ConnectionPath) {
 		toSerialize["ConnectionPath"] = o.ConnectionPath
 	}
@@ -1373,6 +1602,9 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FaultSummary) {
 		toSerialize["FaultSummary"] = o.FaultSummary
 	}
+	if o.LocationDetails.IsSet() {
+		toSerialize["LocationDetails"] = o.LocationDetails.Get()
+	}
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
@@ -1384,6 +1616,9 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
+	}
+	if !IsNil(o.PackageVersion) {
+		toSerialize["PackageVersion"] = o.PackageVersion
 	}
 	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
@@ -1405,6 +1640,9 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
+	}
+	if o.AssignedLocation.IsSet() {
+		toSerialize["AssignedLocation"] = o.AssignedLocation.Get()
 	}
 	if o.Blades != nil {
 		toSerialize["Blades"] = o.Blades
@@ -1429,6 +1667,12 @@ func (o EquipmentChassis) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ManagementInterface.IsSet() {
 		toSerialize["ManagementInterface"] = o.ManagementInterface.Get()
+	}
+	if o.NetworkElements != nil {
+		toSerialize["NetworkElements"] = o.NetworkElements
+	}
+	if o.PciNodes != nil {
+		toSerialize["PciNodes"] = o.PciNodes
 	}
 	if o.PowerControlState.IsSet() {
 		toSerialize["PowerControlState"] = o.PowerControlState.Get()
@@ -1512,6 +1756,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		AlarmSummary NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
 		// The assigned identifier for a chassis.
 		ChassisId *int64 `json:"ChassisId,omitempty"`
+		// The distinguished name of the chassis profile to which the chassis is associated to. It is applicable only for chassis which are managed via UCSM.
+		ChassisProfile *string `json:"ChassisProfile,omitempty"`
 		// This field identifies the connectivity path for the chassis enclosure.
 		ConnectionPath *string `json:"ConnectionPath,omitempty"`
 		// This field identifies the connectivity status for the chassis enclosure.
@@ -1520,7 +1766,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		Description *string `json:"Description,omitempty"`
 		// This field summarizes the faults on the chassis enclosure.
 		// Deprecated
-		FaultSummary *int64 `json:"FaultSummary,omitempty"`
+		FaultSummary    *int64                         `json:"FaultSummary,omitempty"`
+		LocationDetails NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// The management mode of the blade server chassis. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// This field identifies the name for the chassis enclosure.
@@ -1528,6 +1775,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		OperReason []string `json:"OperReason,omitempty"`
 		// This field identifies the Chassis Operational State.
 		OperState *string `json:"OperState,omitempty"`
+		// Bundle version which the XFM and PSU firmware belongs to.
+		PackageVersion *string `json:"PackageVersion,omitempty"`
 		// Part Number identifier for the chassis enclosure.
 		PartNumber *string `json:"PartNumber,omitempty"`
 		// This field identifies the Product ID for the chassis enclosure.
@@ -1541,7 +1790,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		// The user defined label assigned to the chassis.
 		UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		// This field identifies the Vendor ID for the chassis enclosure.
-		Vid *string `json:"Vid,omitempty"`
+		Vid              *string                              `json:"Vid,omitempty"`
+		AssignedLocation NullableAssetGeoLocationRelationship `json:"AssignedLocation,omitempty"`
 		// An array of relationships to computeBlade resources.
 		Blades []ComputeBladeRelationship `json:"Blades,omitempty"`
 		// An array of relationships to equipmentExpanderModule resources.
@@ -1554,8 +1804,12 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		Ioms                []EquipmentIoCardRelationship           `json:"Ioms,omitempty"`
 		LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 		ManagementInterface NullableManagementInterfaceRelationship `json:"ManagementInterface,omitempty"`
-		PowerControlState   NullablePowerControlStateRelationship   `json:"PowerControlState,omitempty"`
-		PsuControl          NullableEquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
+		// An array of relationships to networkElement resources.
+		NetworkElements []NetworkElementRelationship `json:"NetworkElements,omitempty"`
+		// An array of relationships to pciNode resources.
+		PciNodes          []PciNodeRelationship                   `json:"PciNodes,omitempty"`
+		PowerControlState NullablePowerControlStateRelationship   `json:"PowerControlState,omitempty"`
+		PsuControl        NullableEquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
 		// An array of relationships to equipmentPsu resources.
 		Psus             []EquipmentPsuRelationship                  `json:"Psus,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -1578,14 +1832,17 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentChassis.ObjectType = varEquipmentChassisWithoutEmbeddedStruct.ObjectType
 		varEquipmentChassis.AlarmSummary = varEquipmentChassisWithoutEmbeddedStruct.AlarmSummary
 		varEquipmentChassis.ChassisId = varEquipmentChassisWithoutEmbeddedStruct.ChassisId
+		varEquipmentChassis.ChassisProfile = varEquipmentChassisWithoutEmbeddedStruct.ChassisProfile
 		varEquipmentChassis.ConnectionPath = varEquipmentChassisWithoutEmbeddedStruct.ConnectionPath
 		varEquipmentChassis.ConnectionStatus = varEquipmentChassisWithoutEmbeddedStruct.ConnectionStatus
 		varEquipmentChassis.Description = varEquipmentChassisWithoutEmbeddedStruct.Description
 		varEquipmentChassis.FaultSummary = varEquipmentChassisWithoutEmbeddedStruct.FaultSummary
+		varEquipmentChassis.LocationDetails = varEquipmentChassisWithoutEmbeddedStruct.LocationDetails
 		varEquipmentChassis.ManagementMode = varEquipmentChassisWithoutEmbeddedStruct.ManagementMode
 		varEquipmentChassis.Name = varEquipmentChassisWithoutEmbeddedStruct.Name
 		varEquipmentChassis.OperReason = varEquipmentChassisWithoutEmbeddedStruct.OperReason
 		varEquipmentChassis.OperState = varEquipmentChassisWithoutEmbeddedStruct.OperState
+		varEquipmentChassis.PackageVersion = varEquipmentChassisWithoutEmbeddedStruct.PackageVersion
 		varEquipmentChassis.PartNumber = varEquipmentChassisWithoutEmbeddedStruct.PartNumber
 		varEquipmentChassis.Pid = varEquipmentChassisWithoutEmbeddedStruct.Pid
 		varEquipmentChassis.PlatformType = varEquipmentChassisWithoutEmbeddedStruct.PlatformType
@@ -1593,6 +1850,7 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentChassis.Sku = varEquipmentChassisWithoutEmbeddedStruct.Sku
 		varEquipmentChassis.UserLabel = varEquipmentChassisWithoutEmbeddedStruct.UserLabel
 		varEquipmentChassis.Vid = varEquipmentChassisWithoutEmbeddedStruct.Vid
+		varEquipmentChassis.AssignedLocation = varEquipmentChassisWithoutEmbeddedStruct.AssignedLocation
 		varEquipmentChassis.Blades = varEquipmentChassisWithoutEmbeddedStruct.Blades
 		varEquipmentChassis.ExpanderModules = varEquipmentChassisWithoutEmbeddedStruct.ExpanderModules
 		varEquipmentChassis.FanControl = varEquipmentChassisWithoutEmbeddedStruct.FanControl
@@ -1601,6 +1859,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentChassis.Ioms = varEquipmentChassisWithoutEmbeddedStruct.Ioms
 		varEquipmentChassis.LocatorLed = varEquipmentChassisWithoutEmbeddedStruct.LocatorLed
 		varEquipmentChassis.ManagementInterface = varEquipmentChassisWithoutEmbeddedStruct.ManagementInterface
+		varEquipmentChassis.NetworkElements = varEquipmentChassisWithoutEmbeddedStruct.NetworkElements
+		varEquipmentChassis.PciNodes = varEquipmentChassisWithoutEmbeddedStruct.PciNodes
 		varEquipmentChassis.PowerControlState = varEquipmentChassisWithoutEmbeddedStruct.PowerControlState
 		varEquipmentChassis.PsuControl = varEquipmentChassisWithoutEmbeddedStruct.PsuControl
 		varEquipmentChassis.Psus = varEquipmentChassisWithoutEmbeddedStruct.Psus
@@ -1630,14 +1890,17 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "ChassisId")
+		delete(additionalProperties, "ChassisProfile")
 		delete(additionalProperties, "ConnectionPath")
 		delete(additionalProperties, "ConnectionStatus")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "FaultSummary")
+		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OperReason")
 		delete(additionalProperties, "OperState")
+		delete(additionalProperties, "PackageVersion")
 		delete(additionalProperties, "PartNumber")
 		delete(additionalProperties, "Pid")
 		delete(additionalProperties, "PlatformType")
@@ -1645,6 +1908,7 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Sku")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Vid")
+		delete(additionalProperties, "AssignedLocation")
 		delete(additionalProperties, "Blades")
 		delete(additionalProperties, "ExpanderModules")
 		delete(additionalProperties, "FanControl")
@@ -1653,6 +1917,8 @@ func (o *EquipmentChassis) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Ioms")
 		delete(additionalProperties, "LocatorLed")
 		delete(additionalProperties, "ManagementInterface")
+		delete(additionalProperties, "NetworkElements")
+		delete(additionalProperties, "PciNodes")
 		delete(additionalProperties, "PowerControlState")
 		delete(additionalProperties, "PsuControl")
 		delete(additionalProperties, "Psus")

@@ -3,12 +3,12 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_switch"
 description: |-
-        PCI Switch present in a server connected to two GPUs and one PCIe adapter.
+        PCIe switch present in the system which connects PCIe devices (CPU, GPU and the PCIe adapter).
 
 ---
 
 # Data Source: intersight_pci_switch
-PCI Switch present in a server connected to two GPUs and one PCIe adapter.
+PCIe switch present in the system which connects PCIe devices (CPU, GPU and the PCIe adapter).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -25,9 +25,11 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `num_of_adaptors`:(string) The number of GPUs and PCI adapters connected the switch. 
-* `pci_address`:(string) The PCI address of the switch. 
-* `pci_slot`:(string) The PCI slot name of the switch. 
+* `num_of_adaptors`:(string) The number of GPUs and PCIe adapters connected the switch. 
+* `oper_state`:(string) Operational state of the PCIe switch that connects the CPU GPU and the PCIe adapter. 
+* `pci_address`:(string) The PCIe address of the switch. 
+* `pci_slot`:(string) The PCIe slot name of the switch. 
+* `pci_switch_id`:(string) Unique Identifier of a PCIe switch within a chassis expander module. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `product_name`:(string) The model information for the switch. 
 * `product_revision`:(string) The product revision of the switch. 

@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.IscsiBootPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.IscsiBootPolicy"]
-**AutoTargetvendorName** | Pointer to **string** | Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters. | [optional] 
+**AutoTargetvendorName** | Pointer to **string** | Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 64 characters. | [optional] 
 **Chap** | Pointer to [**NullableVnicIscsiAuthProfile**](VnicIscsiAuthProfile.md) |  | [optional] 
 **InitiatorIpSource** | Pointer to **string** | Source Type of Initiator IP Address - Auto/Static/Pool. * &#x60;DHCP&#x60; - The IP address is assigned using DHCP, if available. * &#x60;Static&#x60; - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * &#x60;Pool&#x60; - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. | [optional] [default to "DHCP"]
-**InitiatorStaticIpV4Address** | Pointer to **string** | Static IP address provided for iSCSI Initiator. | [optional] 
+**InitiatorStaticIpV4Address** | Pointer to **string** | Static IPv4 address provided for iSCSI Initiator. | [optional] 
 **InitiatorStaticIpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
+**InitiatorStaticIpV6Address** | Pointer to **string** | Static IPv6 address provided for iSCSI Initiator. | [optional] 
+**InitiatorStaticIpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
+**IscsiIpType** | Pointer to **string** | Type of the IP address requested for iSCSI vNIC - IPv4/IPv6. * &#x60;IPv4&#x60; - IP V4 address type requested. * &#x60;IPv6&#x60; - IP V6 address type requested. | [optional] [default to "IPv4"]
 **MutualChap** | Pointer to [**NullableVnicIscsiAuthProfile**](VnicIscsiAuthProfile.md) |  | [optional] 
 **TargetSourceType** | Pointer to **string** | Source Type of Targets - Auto/Static. * &#x60;Static&#x60; - Type indicates that static target interface is assigned to iSCSI boot. * &#x60;Auto&#x60; - Type indicates that the system selects the target interface automatically during iSCSI boot. | [optional] [default to "Static"]
 **InitiatorIpPool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
@@ -223,6 +226,91 @@ HasInitiatorStaticIpV4Config returns a boolean if a field has been set.
 `func (o *VnicIscsiBootPolicy) UnsetInitiatorStaticIpV4Config()`
 
 UnsetInitiatorStaticIpV4Config ensures that no value is present for InitiatorStaticIpV4Config, not even an explicit nil
+### GetInitiatorStaticIpV6Address
+
+`func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV6Address() string`
+
+GetInitiatorStaticIpV6Address returns the InitiatorStaticIpV6Address field if non-nil, zero value otherwise.
+
+### GetInitiatorStaticIpV6AddressOk
+
+`func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV6AddressOk() (*string, bool)`
+
+GetInitiatorStaticIpV6AddressOk returns a tuple with the InitiatorStaticIpV6Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitiatorStaticIpV6Address
+
+`func (o *VnicIscsiBootPolicy) SetInitiatorStaticIpV6Address(v string)`
+
+SetInitiatorStaticIpV6Address sets InitiatorStaticIpV6Address field to given value.
+
+### HasInitiatorStaticIpV6Address
+
+`func (o *VnicIscsiBootPolicy) HasInitiatorStaticIpV6Address() bool`
+
+HasInitiatorStaticIpV6Address returns a boolean if a field has been set.
+
+### GetInitiatorStaticIpV6Config
+
+`func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV6Config() IppoolIpV6Config`
+
+GetInitiatorStaticIpV6Config returns the InitiatorStaticIpV6Config field if non-nil, zero value otherwise.
+
+### GetInitiatorStaticIpV6ConfigOk
+
+`func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV6ConfigOk() (*IppoolIpV6Config, bool)`
+
+GetInitiatorStaticIpV6ConfigOk returns a tuple with the InitiatorStaticIpV6Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInitiatorStaticIpV6Config
+
+`func (o *VnicIscsiBootPolicy) SetInitiatorStaticIpV6Config(v IppoolIpV6Config)`
+
+SetInitiatorStaticIpV6Config sets InitiatorStaticIpV6Config field to given value.
+
+### HasInitiatorStaticIpV6Config
+
+`func (o *VnicIscsiBootPolicy) HasInitiatorStaticIpV6Config() bool`
+
+HasInitiatorStaticIpV6Config returns a boolean if a field has been set.
+
+### SetInitiatorStaticIpV6ConfigNil
+
+`func (o *VnicIscsiBootPolicy) SetInitiatorStaticIpV6ConfigNil(b bool)`
+
+ SetInitiatorStaticIpV6ConfigNil sets the value for InitiatorStaticIpV6Config to be an explicit nil
+
+### UnsetInitiatorStaticIpV6Config
+`func (o *VnicIscsiBootPolicy) UnsetInitiatorStaticIpV6Config()`
+
+UnsetInitiatorStaticIpV6Config ensures that no value is present for InitiatorStaticIpV6Config, not even an explicit nil
+### GetIscsiIpType
+
+`func (o *VnicIscsiBootPolicy) GetIscsiIpType() string`
+
+GetIscsiIpType returns the IscsiIpType field if non-nil, zero value otherwise.
+
+### GetIscsiIpTypeOk
+
+`func (o *VnicIscsiBootPolicy) GetIscsiIpTypeOk() (*string, bool)`
+
+GetIscsiIpTypeOk returns a tuple with the IscsiIpType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpType
+
+`func (o *VnicIscsiBootPolicy) SetIscsiIpType(v string)`
+
+SetIscsiIpType sets IscsiIpType field to given value.
+
+### HasIscsiIpType
+
+`func (o *VnicIscsiBootPolicy) HasIscsiIpType() bool`
+
+HasIscsiIpType returns a boolean if a field has been set.
+
 ### GetMutualChap
 
 `func (o *VnicIscsiBootPolicy) GetMutualChap() VnicIscsiAuthProfile`

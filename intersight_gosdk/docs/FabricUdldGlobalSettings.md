@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.UdldGlobalSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UdldGlobalSettings"]
-**MessageInterval** | Pointer to **int64** | Configures the time between UDLD probe messages on ports that are in advertisement mode and are currently determined to be bidirectional. Valid values are from 7 to 90 seconds. | [optional] [default to 15]
+**MessageInterval** | Pointer to **int64** | Configures the time between UDLD probe messages on ports that are in advertisement mode and are currently determined to be bidirectional. Valid values are from 1 to 90 seconds. | [optional] [default to 15]
 **RecoveryAction** | Pointer to **string** | UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset. * &#x60;none&#x60; - The standard 4th generation UCS Fabric Interconnect with 54 ports. * &#x60;reset&#x60; - The expanded 4th generation UCS Fabric Interconnect with 108 ports. | [optional] [default to "none"]
 
 ## Methods

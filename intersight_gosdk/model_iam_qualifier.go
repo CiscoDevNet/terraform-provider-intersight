@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -23,15 +23,14 @@ var _ MappedNullable = &IamQualifier{}
 
 // IamQualifier The qualifier defines how a user qualifies to be part of a user group.
 type IamQualifier struct {
-	MoBaseMo
+	IamAbstractQualifier
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The name of the SAML attribute used to qualify a user to user group. By default this is memberOf attribute in SAML assertion.
-	Name                 *string                          `json:"Name,omitempty"`
-	Value                []string                         `json:"Value,omitempty"`
-	Usergroup            NullableIamUserGroupRelationship `json:"Usergroup,omitempty"`
+	Name                 *string  `json:"Name,omitempty"`
+	Value                []string `json:"Value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -183,49 +182,6 @@ func (o *IamQualifier) SetValue(v []string) {
 	o.Value = v
 }
 
-// GetUsergroup returns the Usergroup field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IamQualifier) GetUsergroup() IamUserGroupRelationship {
-	if o == nil || IsNil(o.Usergroup.Get()) {
-		var ret IamUserGroupRelationship
-		return ret
-	}
-	return *o.Usergroup.Get()
-}
-
-// GetUsergroupOk returns a tuple with the Usergroup field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamQualifier) GetUsergroupOk() (*IamUserGroupRelationship, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Usergroup.Get(), o.Usergroup.IsSet()
-}
-
-// HasUsergroup returns a boolean if a field has been set.
-func (o *IamQualifier) HasUsergroup() bool {
-	if o != nil && o.Usergroup.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUsergroup gets a reference to the given NullableIamUserGroupRelationship and assigns it to the Usergroup field.
-func (o *IamQualifier) SetUsergroup(v IamUserGroupRelationship) {
-	o.Usergroup.Set(&v)
-}
-
-// SetUsergroupNil sets the value for Usergroup to be an explicit nil
-func (o *IamQualifier) SetUsergroupNil() {
-	o.Usergroup.Set(nil)
-}
-
-// UnsetUsergroup ensures that no value is present for Usergroup, not even an explicit nil
-func (o *IamQualifier) UnsetUsergroup() {
-	o.Usergroup.Unset()
-}
-
 func (o IamQualifier) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -236,13 +192,13 @@ func (o IamQualifier) MarshalJSON() ([]byte, error) {
 
 func (o IamQualifier) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	serializedIamAbstractQualifier, errIamAbstractQualifier := json.Marshal(o.IamAbstractQualifier)
+	if errIamAbstractQualifier != nil {
+		return map[string]interface{}{}, errIamAbstractQualifier
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	errIamAbstractQualifier = json.Unmarshal([]byte(serializedIamAbstractQualifier), &toSerialize)
+	if errIamAbstractQualifier != nil {
+		return map[string]interface{}{}, errIamAbstractQualifier
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -257,9 +213,6 @@ func (o IamQualifier) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Value != nil {
 		toSerialize["Value"] = o.Value
-	}
-	if o.Usergroup.IsSet() {
-		toSerialize["Usergroup"] = o.Usergroup.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -317,9 +270,8 @@ func (o *IamQualifier) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The name of the SAML attribute used to qualify a user to user group. By default this is memberOf attribute in SAML assertion.
-		Name      *string                          `json:"Name,omitempty"`
-		Value     []string                         `json:"Value,omitempty"`
-		Usergroup NullableIamUserGroupRelationship `json:"Usergroup,omitempty"`
+		Name  *string  `json:"Name,omitempty"`
+		Value []string `json:"Value,omitempty"`
 	}
 
 	varIamQualifierWithoutEmbeddedStruct := IamQualifierWithoutEmbeddedStruct{}
@@ -331,7 +283,6 @@ func (o *IamQualifier) UnmarshalJSON(data []byte) (err error) {
 		varIamQualifier.ObjectType = varIamQualifierWithoutEmbeddedStruct.ObjectType
 		varIamQualifier.Name = varIamQualifierWithoutEmbeddedStruct.Name
 		varIamQualifier.Value = varIamQualifierWithoutEmbeddedStruct.Value
-		varIamQualifier.Usergroup = varIamQualifierWithoutEmbeddedStruct.Usergroup
 		*o = IamQualifier(varIamQualifier)
 	} else {
 		return err
@@ -341,7 +292,7 @@ func (o *IamQualifier) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varIamQualifier)
 	if err == nil {
-		o.MoBaseMo = varIamQualifier.MoBaseMo
+		o.IamAbstractQualifier = varIamQualifier.IamAbstractQualifier
 	} else {
 		return err
 	}
@@ -353,12 +304,11 @@ func (o *IamQualifier) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Value")
-		delete(additionalProperties, "Usergroup")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectIamAbstractQualifier := reflect.ValueOf(o.IamAbstractQualifier)
+		for i := 0; i < reflectIamAbstractQualifier.Type().NumField(); i++ {
+			t := reflectIamAbstractQualifier.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

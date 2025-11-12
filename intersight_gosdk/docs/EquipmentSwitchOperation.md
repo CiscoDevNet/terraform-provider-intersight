@@ -8,11 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.SwitchOperation"]
 **AdminEvacState** | Pointer to **string** | Sets evacuation state of the switch. When evacuation is enabled, data traffic flowing through this switch will be suspended for all the servers. Fabric evacuation can be enabled during any maintenance activity on the switch in order to gracefully failover data flows to the peer switch. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
 **AdminLocatorLedAction** | Pointer to **string** | Action performed on the locator LED of the switch. * &#x60;None&#x60; - No operation action for the Locator Led of an equipment. * &#x60;TurnOn&#x60; - Turn on the Locator Led of an equipment. * &#x60;TurnOff&#x60; - Turn off the Locator Led of an equipment. | [optional] [default to "None"]
-**AdminLocatorLedActionState** | Pointer to **string** | Defines status of action performed on AdminLocatorLedState. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
-**ConfigEvacState** | Pointer to **string** | Captures the status of evacuation on this switch. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
+**AdminLocatorLedActionState** | Pointer to **string** | Defines status of action performed on AdminLocatorLedState. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [default to "None"]
+**ConfigEvacState** | Pointer to **string** | Captures the status of evacuation on this switch. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [default to "None"]
 **ForceEvac** | Pointer to **bool** | Evacuation is blocked by the system if it can cause a traffic outage in the domain. Select \&quot;Force Evacuation\&quot; only if system rejects the operation and you want to override that. | [optional] 
 **ResetAction** | Pointer to [**NullableEquipmentResetAction**](EquipmentResetAction.md) |  | [optional] 
-**ResetActionState** | Pointer to **string** | Current status of the reset operation executed on the Fabric Interconnect. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
+**ResetActionState** | Pointer to **string** | Current status of the reset operation executed on the Fabric Interconnect. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [default to "None"]
+**SwitchName** | Pointer to **string** | Name of the switch on which the switch operation is performed. | [optional] [readonly] 
 **DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
@@ -259,6 +260,31 @@ SetResetActionState sets ResetActionState field to given value.
 `func (o *EquipmentSwitchOperation) HasResetActionState() bool`
 
 HasResetActionState returns a boolean if a field has been set.
+
+### GetSwitchName
+
+`func (o *EquipmentSwitchOperation) GetSwitchName() string`
+
+GetSwitchName returns the SwitchName field if non-nil, zero value otherwise.
+
+### GetSwitchNameOk
+
+`func (o *EquipmentSwitchOperation) GetSwitchNameOk() (*string, bool)`
+
+GetSwitchNameOk returns a tuple with the SwitchName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchName
+
+`func (o *EquipmentSwitchOperation) SetSwitchName(v string)`
+
+SetSwitchName sets SwitchName field to given value.
+
+### HasSwitchName
+
+`func (o *EquipmentSwitchOperation) HasSwitchName() bool`
+
+HasSwitchName returns a boolean if a field has been set.
 
 ### GetDeviceRegistration
 

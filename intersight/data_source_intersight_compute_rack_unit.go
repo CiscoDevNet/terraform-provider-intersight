@@ -353,6 +353,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"bmc_inventory_ready": {
+			Description: "The BMC inventory readiness status of the server.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"board": {
 			Description: "A reference to a computeBoard resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -560,6 +565,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"boot_last_state": {
+			Description: "The boot progress state of a rack or blade server.\n* `None` - The server is powered off.\n* `OSBootStarted` - The operating system boot process has started.\n* `OSRunning` - The operating system boot process has started and running.\n* `OEM` - The server is in an OEM-defined startup state.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"boot_nvme_devices": {
 			Description: "An array of relationships to bootNvmeDevice resources.",
 			Type:        schema.TypeList,
@@ -593,6 +603,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"boot_oem_last_state": {
+			Description: "The last known OEM-defined startup state of a rack or blade server.\n* `None` - The server has not yet completed OEM initialization.\n* `PlatformInitializing` - The server is initializing after being powered on.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"boot_pch_storage_devices": {
 			Description: "An array of relationships to bootPchStorageDevice resources.",
@@ -871,8 +886,48 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"compute_server_power_parameters": {
+			Description: "A reference to a computeServerPowerParameters resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"connection_status": {
 			Description: "Connectivity Status of RackUnit to Switch - A or B or AB.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cooling_mode": {
+			Description: "Cooling mode representation of the server.\n* `Air` - Cooling mode of the device is set to Air.\n* `Immersion` - Cooling mode of the device is set to Immersion.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -905,6 +960,74 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"equipment_enclosure_elements": {
+			Description: "An array of relationships to equipmentEnclosureElement resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"equipment_risers": {
+			Description: "An array of relationships to equipmentRiser resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"fanmodules": {
 			Description: "An array of relationships to equipmentFanModule resources.",
@@ -1021,6 +1144,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 		"hardware_uuid": {
 			Description: "The universally unique hardware identity of the server provided by the manufacturer.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"has_e3_s_support": {
+			Description: "The flag to indicate server has the support for E3.S drives.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"hybrid_drive_slots": {
@@ -1185,10 +1313,135 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"last_power_state_changed_time": {
+			Description: "The Last host power state changed time of the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_lifecycle": {
 			Description: "The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.\n* `ScrubInProgress` - Scrub is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.\n* `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade.\n* `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade.\n* `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade.\n* `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"location_details": {
+			Description: "Location details associated with the managed object. When a top level resource (i.e., Unified Edge Chassis) is assigned to a location, the details of the associated location are propagated to related inventory and configuration objects like servers, profiles, alarms and metrics to facilitate location based filtering.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The location's street address.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"address1": {
+									Description: "The primary street address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"address2": {
+									Description: "Additional address information, such as suite number or floor.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"city": {
+									Description: "The city where the address is located.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"country": {
+									Description: "The country code in ISO 3166-1 alpha-2 format.\n* `Unknown` - The value Unknown is used when the country code is not known or applicable.\n* `AD` - The country code for Andorra.\n* `AE` - The country code for United Arab Emirates.\n* `AF` - The country code for Afghanistan.\n* `AG` - The country code for Antigua and Barbuda.\n* `AI` - The country code for Anguilla.\n* `AL` - The country code for Albania.\n* `AM` - The country code for Armenia.\n* `AO` - The country code for Angola.\n* `AQ` - The country code for Antarctica.\n* `AR` - The country code for Argentina.\n* `AS` - The country code for American Samoa.\n* `AT` - The country code for Austria.\n* `AU` - The country code for Australia.\n* `AW` - The country code for Aruba.\n* `AX` - The country code for Åland Islands.\n* `AZ` - The country code for Azerbaijan.\n* `BA` - The country code for Bosnia and Herzegovina.\n* `BB` - The country code for Barbados.\n* `BD` - The country code for Bangladesh.\n* `BE` - The country code for Belgium.\n* `BF` - The country code for Burkina Faso.\n* `BG` - The country code for Bulgaria.\n* `BH` - The country code for Bahrain.\n* `BI` - The country code for Burundi.\n* `BJ` - The country code for Benin.\n* `BL` - The country code for Saint Barthélemy.\n* `BM` - The country code for Bermuda.\n* `BN` - The country code for Brunei Darussalam.\n* `BO` - The country code for Plurinational State of Bolivia.\n* `BQ` - The country code for Sint Eustatius and Saba Bonaire.\n* `BR` - The country code for Brazil.\n* `BS` - The country code for Bahamas.\n* `BT` - The country code for Bhutan.\n* `BV` - The country code for Bouvet Island.\n* `BW` - The country code for Botswana.\n* `BZ` - The country code for Belize.\n* `CA` - The country code for Canada.\n* `CC` - The country code for Cocos (Keeling) Islands.\n* `CD` - The country code for Democratic Republic of the Congo.\n* `CF` - The country code for Central African Republic.\n* `CG` - The country code for Congo.\n* `CH` - The country code for Switzerland.\n* `CI` - The country code for Côte d'Ivoire.\n* `CK` - The country code for Cook Islands.\n* `CL` - The country code for Chile.\n* `CM` - The country code for Cameroon.\n* `CN` - The country code for China.\n* `CO` - The country code for Colombia.\n* `CR` - The country code for Costa Rica.\n* `CV` - The country code for Cabo Verde.\n* `CW` - The country code for Curaçao.\n* `CX` - The country code for Christmas Island.\n* `CY` - The country code for Cyprus.\n* `CZ` - The country code for Czechia.\n* `DE` - The country code for Germany.\n* `DJ` - The country code for Djibouti.\n* `DK` - The country code for Denmark.\n* `DM` - The country code for Dominica.\n* `DO` - The country code for Dominican Republic.\n* `DZ` - The country code for Algeria.\n* `EC` - The country code for Ecuador.\n* `EE` - The country code for Estonia.\n* `EG` - The country code for Egypt.\n* `EH` - The country code for Western Sahara.\n* `ER` - The country code for Eritrea.\n* `ES` - The country code for Spain.\n* `ET` - The country code for Ethiopia.\n* `FI` - The country code for Finland.\n* `FJ` - The country code for Fiji.\n* `FK` - The country code for Falkland Islands (Malvinas).\n* `FM` - The country code for Federated States of Micronesia.\n* `FO` - The country code for Faroe Islands.\n* `FR` - The country code for France.\n* `GA` - The country code for Gabon.\n* `GB` - The country code for United Kingdom of Great Britain and Northern Ireland.\n* `GD` - The country code for Grenada.\n* `GE` - The country code for Georgia.\n* `GF` - The country code for French Guiana.\n* `GG` - The country code for Guernsey.\n* `GH` - The country code for Ghana.\n* `GI` - The country code for Gibraltar.\n* `GL` - The country code for Greenland.\n* `GM` - The country code for Gambia.\n* `GN` - The country code for Guinea.\n* `GP` - The country code for Guadeloupe.\n* `GQ` - The country code for Equatorial Guinea.\n* `GR` - The country code for Greece.\n* `GS` - The country code for South Georgia and the South Sandwich Islands.\n* `GT` - The country code for Guatemala.\n* `GU` - The country code for Guam.\n* `GW` - The country code for Guinea-Bissau.\n* `GY` - The country code for Guyana.\n* `HK` - The country code for Hong Kong.\n* `HM` - The country code for Heard Island and McDonald Islands.\n* `HN` - The country code for Honduras.\n* `HR` - The country code for Croatia.\n* `HT` - The country code for Haiti.\n* `HU` - The country code for Hungary.\n* `ID` - The country code for Indonesia.\n* `IE` - The country code for Ireland.\n* `IL` - The country code for Israel.\n* `IM` - The country code for Isle of Man.\n* `IN` - The country code for India.\n* `IO` - The country code for British Indian Ocean Territory.\n* `IQ` - The country code for Iraq.\n* `IS` - The country code for Iceland.\n* `IT` - The country code for Italy.\n* `JE` - The country code for Jersey.\n* `JM` - The country code for Jamaica.\n* `JO` - The country code for Jordan.\n* `JP` - The country code for Japan.\n* `KE` - The country code for Kenya.\n* `KG` - The country code for Kyrgyzstan.\n* `KH` - The country code for Cambodia.\n* `KI` - The country code for Kiribati.\n* `KM` - The country code for Comoros.\n* `KN` - The country code for Saint Kitts and Nevis.\n* `KR` - The country code for Republic of Korea.\n* `KW` - The country code for Kuwait.\n* `KY` - The country code for Cayman Islands.\n* `KZ` - The country code for Kazakhstan.\n* `LA` - The country code for Lao People's Democratic Republic.\n* `LB` - The country code for Lebanon.\n* `LC` - The country code for Saint Lucia.\n* `LI` - The country code for Liechtenstein.\n* `LK` - The country code for Sri Lanka.\n* `LR` - The country code for Liberia.\n* `LS` - The country code for Lesotho.\n* `LT` - The country code for Lithuania.\n* `LU` - The country code for Luxembourg.\n* `LV` - The country code for Latvia.\n* `LY` - The country code for Libya.\n* `MA` - The country code for Morocco.\n* `MC` - The country code for Monaco.\n* `MD` - The country code for Republic of Moldova.\n* `ME` - The country code for Montenegro.\n* `MF` - The country code for Saint Martin (French part).\n* `MG` - The country code for Madagascar.\n* `MH` - The country code for Marshall Islands.\n* `MK` - The country code for North Macedonia.\n* `ML` - The country code for Mali.\n* `MM` - The country code for Myanmar.\n* `MN` - The country code for Mongolia.\n* `MO` - The country code for Macao.\n* `MP` - The country code for Northern Mariana Islands.\n* `MQ` - The country code for Martinique.\n* `MR` - The country code for Mauritania.\n* `MS` - The country code for Montserrat.\n* `MT` - The country code for Malta.\n* `MU` - The country code for Mauritius.\n* `MV` - The country code for Maldives.\n* `MW` - The country code for Malawi.\n* `MX` - The country code for Mexico.\n* `MY` - The country code for Malaysia.\n* `MZ` - The country code for Mozambique.\n* `NA` - The country code for Namibia.\n* `NC` - The country code for New Caledonia.\n* `NE` - The country code for Niger.\n* `NF` - The country code for Norfolk Island.\n* `NG` - The country code for Nigeria.\n* `NI` - The country code for Nicaragua.\n* `NL` - The country code for Kingdom of the Netherlands.\n* `NO` - The country code for Norway.\n* `NP` - The country code for Nepal.\n* `NR` - The country code for Nauru.\n* `NU` - The country code for Niue.\n* `NZ` - The country code for New Zealand.\n* `OM` - The country code for Oman.\n* `PA` - The country code for Panama.\n* `PE` - The country code for Peru.\n* `PF` - The country code for French Polynesia.\n* `PG` - The country code for Papua New Guinea.\n* `PH` - The country code for Philippines.\n* `PK` - The country code for Pakistan.\n* `PL` - The country code for Poland.\n* `PM` - The country code for Saint Pierre and Miquelon.\n* `PN` - The country code for Pitcairn.\n* `PR` - The country code for Puerto Rico.\n* `PS` - The country code for State of Palestine.\n* `PT` - The country code for Portugal.\n* `PW` - The country code for Palau.\n* `PY` - The country code for Paraguay.\n* `QA` - The country code for Qatar.\n* `RE` - The country code for Réunion.\n* `RO` - The country code for Romania.\n* `RS` - The country code for Serbia.\n* `RW` - The country code for Rwanda.\n* `SA` - The country code for Saudi Arabia.\n* `SB` - The country code for Solomon Islands.\n* `SC` - The country code for Seychelles.\n* `SD` - The country code for Sudan.\n* `SE` - The country code for Sweden.\n* `SG` - The country code for Singapore.\n* `SH` - The country code for Ascension and Tristan da Cunha Saint Helena.\n* `SI` - The country code for Slovenia.\n* `SJ` - The country code for Svalbard and Jan Mayen.\n* `SK` - The country code for Slovakia.\n* `SL` - The country code for Sierra Leone.\n* `SM` - The country code for San Marino.\n* `SN` - The country code for Senegal.\n* `SO` - The country code for Somalia.\n* `SR` - The country code for Suriname.\n* `SS` - The country code for South Sudan.\n* `ST` - The country code for Sao Tome and Principe.\n* `SV` - The country code for El Salvador.\n* `SX` - The country code for Sint Maarten (Dutch part).\n* `SZ` - The country code for Eswatini.\n* `TC` - The country code for Turks and Caicos Islands.\n* `TD` - The country code for Chad.\n* `TF` - The country code for French Southern Territories.\n* `TG` - The country code for Togo.\n* `TH` - The country code for Thailand.\n* `TJ` - The country code for Tajikistan.\n* `TK` - The country code for Tokelau.\n* `TL` - The country code for Timor-Leste.\n* `TM` - The country code for Turkmenistan.\n* `TN` - The country code for Tunisia.\n* `TO` - The country code for Tonga.\n* `TR` - The country code for Türkiye.\n* `TT` - The country code for Trinidad and Tobago.\n* `TV` - The country code for Tuvalu.\n* `TW` - The country code for Province of China Taiwan.\n* `TZ` - The country code for United Republic of Tanzania.\n* `UA` - The country code for Ukraine.\n* `UG` - The country code for Uganda.\n* `UM` - The country code for United States Minor Outlying Islands.\n* `US` - The country code for United States of America.\n* `UY` - The country code for Uruguay.\n* `UZ` - The country code for Uzbekistan.\n* `VA` - The country code for Holy See.\n* `VC` - The country code for Saint Vincent and the Grenadines.\n* `VE` - The country code for Bolivarian Republic of Venezuela.\n* `VG` - The country code for Virgin Islands (British).\n* `VI` - The country code for Virgin Islands (U.S.).\n* `VN` - The country code for Viet Nam.\n* `VU` - The country code for Vanuatu.\n* `WF` - The country code for Wallis and Futuna.\n* `WS` - The country code for Samoa.\n* `YE` - The country code for Yemen.\n* `YT` - The country code for Mayotte.\n* `ZA` - The country code for South Africa.\n* `ZM` - The country code for Zambia.\n* `ZW` - The country code for Zimbabwe.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"postal_code": {
+									Description: "The postal or ZIP code for the address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"state_province": {
+									Description: "The state or province where the address is located.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"coordinates": {
+						Description: "The location's longitude and latitude coordinates.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"latitude": {
+									Description: "The latitude coordinate value.",
+									Type:        schema.TypeFloat,
+									Optional:    true,
+								},
+								"longitude": {
+									Description: "The longitude coordinate value.",
+									Type:        schema.TypeFloat,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"name": {
+						Description: "A user provided name for the location.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"locator_led": {
 			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1431,6 +1684,40 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 		},
 		"pci_devices": {
 			Description: "An array of relationships to pciDevice resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"pci_slots": {
+			Description: "An array of relationships to pciSlot resources.",
 			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
@@ -1822,8 +2109,86 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2461,6 +2826,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOkExists("bmc_inventory_ready"); ok {
+		x := (v.(bool))
+		o.SetBmcInventoryReady(x)
+	}
+
 	if v, ok := d.GetOk("board"); ok {
 		p := make([]models.ComputeBoardRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2710,6 +3080,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetBootIscsiDevices(x)
 	}
 
+	if v, ok := d.GetOk("boot_last_state"); ok {
+		x := (v.(string))
+		o.SetBootLastState(x)
+	}
+
 	if v, ok := d.GetOk("boot_nvme_devices"); ok {
 		x := make([]models.BootNvmeDeviceRelationship, 0)
 		s := v.([]interface{})
@@ -2748,6 +3123,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 			x = append(x, models.MoMoRefAsBootNvmeDeviceRelationship(o))
 		}
 		o.SetBootNvmeDevices(x)
+	}
+
+	if v, ok := d.GetOk("boot_oem_last_state"); ok {
+		x := (v.(string))
+		o.SetBootOemLastState(x)
 	}
 
 	if v, ok := d.GetOk("boot_pch_storage_devices"); ok {
@@ -3075,9 +3455,57 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetComputePersonality(x)
 	}
 
+	if v, ok := d.GetOk("compute_server_power_parameters"); ok {
+		p := make([]models.ComputeServerPowerParametersRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsComputeServerPowerParametersRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetComputeServerPowerParameters(x)
+		}
+	}
+
 	if v, ok := d.GetOk("connection_status"); ok {
 		x := (v.(string))
 		o.SetConnectionStatus(x)
+	}
+
+	if v, ok := d.GetOk("cooling_mode"); ok {
+		x := (v.(string))
+		o.SetCoolingMode(x)
 	}
 
 	if v, ok := d.GetOk("cpu_capacity"); ok {
@@ -3108,6 +3536,86 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("equipment_enclosure_elements"); ok {
+		x := make([]models.EquipmentEnclosureElementRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsEquipmentEnclosureElementRelationship(o))
+		}
+		o.SetEquipmentEnclosureElements(x)
+	}
+
+	if v, ok := d.GetOk("equipment_risers"); ok {
+		x := make([]models.EquipmentRiserRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsEquipmentRiserRelationship(o))
+		}
+		o.SetEquipmentRisers(x)
 	}
 
 	if v, ok := d.GetOk("fanmodules"); ok {
@@ -3245,6 +3753,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetHardwareUuid(x)
 	}
 
+	if v, ok := d.GetOkExists("has_e3_s_support"); ok {
+		x := (v.(bool))
+		o.SetHasE3SSupport(x)
+	}
+
 	if v, ok := d.GetOk("hybrid_drive_slots"); ok {
 		x := make([]models.EquipmentHybridDriveSlotRelationship, 0)
 		s := v.([]interface{})
@@ -3371,9 +3884,45 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetKvmVendor(x)
 	}
 
+	if v, ok := d.GetOk("last_power_state_changed_time"); ok {
+		x := (v.(string))
+		o.SetLastPowerStateChangedTime(x)
+	}
+
 	if v, ok := d.GetOk("nr_lifecycle"); ok {
 		x := (v.(string))
 		o.SetLifecycle(x)
+	}
+
+	if v, ok := d.GetOk("location_details"); ok {
+		p := make([]models.CommGeoLocationDetails, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CommGeoLocationDetails{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("comm.GeoLocationDetails")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetLocationDetails(x)
+		}
 	}
 
 	if v, ok := d.GetOk("locator_led"); ok {
@@ -3695,6 +4244,46 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 			x = append(x, models.MoMoRefAsPciDeviceRelationship(o))
 		}
 		o.SetPciDevices(x)
+	}
+
+	if v, ok := d.GetOk("pci_slots"); ok {
+		x := make([]models.PciSlotRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPciSlotRelationship(o))
+		}
+		o.SetPciSlots(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -4122,6 +4711,49 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
+					}
+				}
+			}
 			if v, ok := l["key"]; ok {
 				{
 					x := (v.(string))
@@ -4426,6 +5058,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["biosunits"] = flattenListBiosUnitRelationship(s.GetBiosunits(), d)
 
 				temp["bmc"] = flattenMapManagementControllerRelationship(s.GetBmc(), d)
+				temp["bmc_inventory_ready"] = (s.GetBmcInventoryReady())
 
 				temp["board"] = flattenMapComputeBoardRelationship(s.GetBoard(), d)
 
@@ -4438,8 +5071,10 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["boot_hdd_devices"] = flattenListBootHddDeviceRelationship(s.GetBootHddDevices(), d)
 
 				temp["boot_iscsi_devices"] = flattenListBootIscsiDeviceRelationship(s.GetBootIscsiDevices(), d)
+				temp["boot_last_state"] = (s.GetBootLastState())
 
 				temp["boot_nvme_devices"] = flattenListBootNvmeDeviceRelationship(s.GetBootNvmeDevices(), d)
+				temp["boot_oem_last_state"] = (s.GetBootOemLastState())
 
 				temp["boot_pch_storage_devices"] = flattenListBootPchStorageDeviceRelationship(s.GetBootPchStorageDevices(), d)
 
@@ -4457,7 +5092,10 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["class_id"] = (s.GetClassId())
 
 				temp["compute_personality"] = flattenListComputePersonalityRelationship(s.GetComputePersonality(), d)
+
+				temp["compute_server_power_parameters"] = flattenMapComputeServerPowerParametersRelationship(s.GetComputeServerPowerParameters(), d)
 				temp["connection_status"] = (s.GetConnectionStatus())
+				temp["cooling_mode"] = (s.GetCoolingMode())
 				temp["cpu_capacity"] = (s.GetCpuCapacity())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -4465,6 +5103,10 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["dimm_blocklisting"] = (s.GetDimmBlocklisting())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["equipment_enclosure_elements"] = flattenListEquipmentEnclosureElementRelationship(s.GetEquipmentEnclosureElements(), d)
+
+				temp["equipment_risers"] = flattenListEquipmentRiserRelationship(s.GetEquipmentRisers(), d)
 
 				temp["fanmodules"] = flattenListEquipmentFanModuleRelationship(s.GetFanmodules(), d)
 				temp["fault_summary"] = (s.GetFaultSummary())
@@ -4474,6 +5116,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 
 				temp["graphics_cards"] = flattenListGraphicsCardRelationship(s.GetGraphicsCards(), d)
 				temp["hardware_uuid"] = (s.GetHardwareUuid())
+				temp["has_e3_s_support"] = (s.GetHasE3SSupport())
 
 				temp["hybrid_drive_slots"] = flattenListEquipmentHybridDriveSlotRelationship(s.GetHybridDriveSlots(), d)
 
@@ -4483,7 +5126,10 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["kvm_ip_addresses"] = flattenListComputeIpAddress(s.GetKvmIpAddresses(), d)
 				temp["kvm_server_state_enabled"] = (s.GetKvmServerStateEnabled())
 				temp["kvm_vendor"] = (s.GetKvmVendor())
+				temp["last_power_state_changed_time"] = (s.GetLastPowerStateChangedTime())
 				temp["nr_lifecycle"] = (s.GetLifecycle())
+
+				temp["location_details"] = flattenMapCommGeoLocationDetails(s.GetLocationDetails(), d)
 
 				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
 				temp["management_mode"] = (s.GetManagementMode())
@@ -4515,6 +5161,8 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["pci_devices"] = flattenListPciDeviceRelationship(s.GetPciDevices(), d)
+
+				temp["pci_slots"] = flattenListPciSlotRelationship(s.GetPciSlots(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["platform_type"] = (s.GetPlatformType())

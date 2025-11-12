@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,8 @@ type VnicFcIfInventory struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Name of the virtual fibre channel interface.
-	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\-\\\\._:]+$"`
+	Name    *string                 `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\-\\\\._:]+$"`
+	OldInfo NullableVnicFcIfOldInfo `json:"OldInfo,omitempty"`
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
 	Order          *int64   `json:"Order,omitempty"`
 	OverriddenList []string `json:"OverriddenList,omitempty"`
@@ -38,6 +39,8 @@ type VnicFcIfInventory struct {
 	// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
 	PinGroupName *string                       `json:"PinGroupName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.:-]{1,64}$"`
 	Placement    NullableVnicPlacementSettings `json:"Placement,omitempty"`
+	// An FcIf is marked stale if it was deployed to the endpoint and the San Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the San Connectivity Policy being removed from the server profile or a different San Connectivity Policy is attached which does not include any FcIf with the same name.
+	Stale *bool `json:"Stale,omitempty"`
 	// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
 	StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 	TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
@@ -180,6 +183,49 @@ func (o *VnicFcIfInventory) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *VnicFcIfInventory) SetName(v string) {
 	o.Name = &v
+}
+
+// GetOldInfo returns the OldInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicFcIfInventory) GetOldInfo() VnicFcIfOldInfo {
+	if o == nil || IsNil(o.OldInfo.Get()) {
+		var ret VnicFcIfOldInfo
+		return ret
+	}
+	return *o.OldInfo.Get()
+}
+
+// GetOldInfoOk returns a tuple with the OldInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicFcIfInventory) GetOldInfoOk() (*VnicFcIfOldInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OldInfo.Get(), o.OldInfo.IsSet()
+}
+
+// HasOldInfo returns a boolean if a field has been set.
+func (o *VnicFcIfInventory) HasOldInfo() bool {
+	if o != nil && o.OldInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOldInfo gets a reference to the given NullableVnicFcIfOldInfo and assigns it to the OldInfo field.
+func (o *VnicFcIfInventory) SetOldInfo(v VnicFcIfOldInfo) {
+	o.OldInfo.Set(&v)
+}
+
+// SetOldInfoNil sets the value for OldInfo to be an explicit nil
+func (o *VnicFcIfInventory) SetOldInfoNil() {
+	o.OldInfo.Set(nil)
+}
+
+// UnsetOldInfo ensures that no value is present for OldInfo, not even an explicit nil
+func (o *VnicFcIfInventory) UnsetOldInfo() {
+	o.OldInfo.Unset()
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
@@ -352,6 +398,38 @@ func (o *VnicFcIfInventory) SetPlacementNil() {
 // UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
 func (o *VnicFcIfInventory) UnsetPlacement() {
 	o.Placement.Unset()
+}
+
+// GetStale returns the Stale field value if set, zero value otherwise.
+func (o *VnicFcIfInventory) GetStale() bool {
+	if o == nil || IsNil(o.Stale) {
+		var ret bool
+		return ret
+	}
+	return *o.Stale
+}
+
+// GetStaleOk returns a tuple with the Stale field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicFcIfInventory) GetStaleOk() (*bool, bool) {
+	if o == nil || IsNil(o.Stale) {
+		return nil, false
+	}
+	return o.Stale, true
+}
+
+// HasStale returns a boolean if a field has been set.
+func (o *VnicFcIfInventory) HasStale() bool {
+	if o != nil && !IsNil(o.Stale) {
+		return true
+	}
+
+	return false
+}
+
+// SetStale gets a reference to the given bool and assigns it to the Stale field.
+func (o *VnicFcIfInventory) SetStale(v bool) {
+	o.Stale = &v
 }
 
 // GetStaticWwpnAddress returns the StaticWwpnAddress field value if set, zero value otherwise.
@@ -1051,6 +1129,9 @@ func (o VnicFcIfInventory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
+	if o.OldInfo.IsSet() {
+		toSerialize["OldInfo"] = o.OldInfo.Get()
+	}
 	if !IsNil(o.Order) {
 		toSerialize["Order"] = o.Order
 	}
@@ -1065,6 +1146,9 @@ func (o VnicFcIfInventory) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Placement.IsSet() {
 		toSerialize["Placement"] = o.Placement.Get()
+	}
+	if !IsNil(o.Stale) {
+		toSerialize["Stale"] = o.Stale
 	}
 	if !IsNil(o.StaticWwpnAddress) {
 		toSerialize["StaticWwpnAddress"] = o.StaticWwpnAddress
@@ -1176,7 +1260,8 @@ func (o *VnicFcIfInventory) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Name of the virtual fibre channel interface.
-		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\-\\\\._:]+$"`
+		Name    *string                 `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\-\\\\._:]+$"`
+		OldInfo NullableVnicFcIfOldInfo `json:"OldInfo,omitempty"`
 		// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
 		Order          *int64   `json:"Order,omitempty"`
 		OverriddenList []string `json:"OverriddenList,omitempty"`
@@ -1185,6 +1270,8 @@ func (o *VnicFcIfInventory) UnmarshalJSON(data []byte) (err error) {
 		// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
 		PinGroupName *string                       `json:"PinGroupName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.:-]{1,64}$"`
 		Placement    NullableVnicPlacementSettings `json:"Placement,omitempty"`
+		// An FcIf is marked stale if it was deployed to the endpoint and the San Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the San Connectivity Policy being removed from the server profile or a different San Connectivity Policy is attached which does not include any FcIf with the same name.
+		Stale *bool `json:"Stale,omitempty"`
 		// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
 		StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 		TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
@@ -1221,11 +1308,13 @@ func (o *VnicFcIfInventory) UnmarshalJSON(data []byte) (err error) {
 		varVnicFcIfInventory.ClassId = varVnicFcIfInventoryWithoutEmbeddedStruct.ClassId
 		varVnicFcIfInventory.ObjectType = varVnicFcIfInventoryWithoutEmbeddedStruct.ObjectType
 		varVnicFcIfInventory.Name = varVnicFcIfInventoryWithoutEmbeddedStruct.Name
+		varVnicFcIfInventory.OldInfo = varVnicFcIfInventoryWithoutEmbeddedStruct.OldInfo
 		varVnicFcIfInventory.Order = varVnicFcIfInventoryWithoutEmbeddedStruct.Order
 		varVnicFcIfInventory.OverriddenList = varVnicFcIfInventoryWithoutEmbeddedStruct.OverriddenList
 		varVnicFcIfInventory.PersistentBindings = varVnicFcIfInventoryWithoutEmbeddedStruct.PersistentBindings
 		varVnicFcIfInventory.PinGroupName = varVnicFcIfInventoryWithoutEmbeddedStruct.PinGroupName
 		varVnicFcIfInventory.Placement = varVnicFcIfInventoryWithoutEmbeddedStruct.Placement
+		varVnicFcIfInventory.Stale = varVnicFcIfInventoryWithoutEmbeddedStruct.Stale
 		varVnicFcIfInventory.StaticWwpnAddress = varVnicFcIfInventoryWithoutEmbeddedStruct.StaticWwpnAddress
 		varVnicFcIfInventory.TemplateActions = varVnicFcIfInventoryWithoutEmbeddedStruct.TemplateActions
 		varVnicFcIfInventory.TemplateSyncErrors = varVnicFcIfInventoryWithoutEmbeddedStruct.TemplateSyncErrors
@@ -1264,11 +1353,13 @@ func (o *VnicFcIfInventory) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "OldInfo")
 		delete(additionalProperties, "Order")
 		delete(additionalProperties, "OverriddenList")
 		delete(additionalProperties, "PersistentBindings")
 		delete(additionalProperties, "PinGroupName")
 		delete(additionalProperties, "Placement")
+		delete(additionalProperties, "Stale")
 		delete(additionalProperties, "StaticWwpnAddress")
 		delete(additionalProperties, "TemplateActions")
 		delete(additionalProperties, "TemplateSyncErrors")

@@ -115,6 +115,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"eradication_config": {
+			Description: "The configuration of eradication feature.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -209,6 +214,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"pod": {
+			Description: "A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"protection_group": {
 			Description: "A reference to a storagePureProtectionGroup resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -289,6 +299,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"snapshot_size": {
+			Description: "The size of the snapshot created.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"nr_source": {
 			Description: "Source protection group name on which the snapshot is created.",
 			Type:        schema.TypeString,
@@ -304,8 +319,86 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -316,6 +409,11 @@ func getStoragePureProtectionGroupSnapshotSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"total_provisioned": {
+			Description: "The overall size of the snapshot allocated by the storage array.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -569,6 +667,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("eradication_config"); ok {
+		x := (v.(string))
+		o.SetEradicationConfig(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -683,6 +786,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("pod"); ok {
+		x := (v.(string))
+		o.SetPod(x)
+	}
+
 	if v, ok := d.GetOk("protection_group"); ok {
 		p := make([]models.StoragePureProtectionGroupRelationship, 0, 1)
 		s := v.([]interface{})
@@ -779,6 +887,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 		o.SetSize(x)
 	}
 
+	if v, ok := d.GetOkExists("snapshot_size"); ok {
+		x := int64(v.(int))
+		o.SetSnapshotSize(x)
+	}
+
 	if v, ok := d.GetOk("nr_source"); ok {
 		x := (v.(string))
 		o.SetSource(x)
@@ -800,6 +913,49 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 					}
 				}
 			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
+					}
+				}
+			}
 			if v, ok := l["key"]; ok {
 				{
 					x := (v.(string))
@@ -815,6 +971,11 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOkExists("total_provisioned"); ok {
+		x := int64(v.(int))
+		o.SetTotalProvisioned(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -938,6 +1099,7 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 
 				temp["created_time"] = (s.GetCreatedTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["eradication_config"] = (s.GetEradicationConfig())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -948,15 +1110,18 @@ func dataSourceStoragePureProtectionGroupSnapshotRead(c context.Context, d *sche
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pod"] = (s.GetPod())
 
 				temp["protection_group"] = flattenMapStoragePureProtectionGroupRelationship(s.GetProtectionGroup(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
+				temp["snapshot_size"] = (s.GetSnapshotSize())
 				temp["nr_source"] = (s.GetSource())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_provisioned"] = (s.GetTotalProvisioned())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				storagePureProtectionGroupSnapshotResults = append(storagePureProtectionGroupSnapshotResults, temp)

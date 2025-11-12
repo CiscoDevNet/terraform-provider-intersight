@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -21,13 +21,16 @@ import (
 // checks if the AssetClusterMember type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssetClusterMember{}
 
-// AssetClusterMember A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the nodes current leadership within the cluster.
+// AssetClusterMember A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the node's current leadership state within the cluster.
 type AssetClusterMember struct {
 	AssetDeviceConnection
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The DNS hostname the device connector has used to connect to Intersight. Devices may be configured to connect to a set of DNS hostnames which all resolve to the same Intersight instance, the connected host is the latest hostname the device used to connect successfully to Intersight.
+	ConnectedHost        *string                           `json:"ConnectedHost,omitempty"`
+	ConnectionFlapStatus NullableAssetConnectionFlapStatus `json:"ConnectionFlapStatus,omitempty"`
 	// The current leadershipstate of this member. Updated by the device connector on failover or leadership change. If a member is elected as Primary within the cluster this connection will be the same as the DeviceRegistration connection. E.g a message addressed to the DeviceRegistration will be forwarded to the ClusterMember connection. * `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials, it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight. * `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary node in a given cluster, while the underlying platform may be active. If it is active, only one connector will assume the primary role. * `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. E.g. file upload will be enabled, but requests to the underlying platform management will be disabled.
 	Leadership *string `json:"Leadership,omitempty"`
 	// Devices lock their leadership on failure to heartbeat with peers. Value acts as a third party tie breaker in election between nodes. Intersight enforces that only one cluster member exists with this value set to true.
@@ -122,6 +125,81 @@ func (o *AssetClusterMember) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "asset.ClusterMember" of the ObjectType field.
 func (o *AssetClusterMember) GetDefaultObjectType() interface{} {
 	return "asset.ClusterMember"
+}
+
+// GetConnectedHost returns the ConnectedHost field value if set, zero value otherwise.
+func (o *AssetClusterMember) GetConnectedHost() string {
+	if o == nil || IsNil(o.ConnectedHost) {
+		var ret string
+		return ret
+	}
+	return *o.ConnectedHost
+}
+
+// GetConnectedHostOk returns a tuple with the ConnectedHost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetClusterMember) GetConnectedHostOk() (*string, bool) {
+	if o == nil || IsNil(o.ConnectedHost) {
+		return nil, false
+	}
+	return o.ConnectedHost, true
+}
+
+// HasConnectedHost returns a boolean if a field has been set.
+func (o *AssetClusterMember) HasConnectedHost() bool {
+	if o != nil && !IsNil(o.ConnectedHost) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectedHost gets a reference to the given string and assigns it to the ConnectedHost field.
+func (o *AssetClusterMember) SetConnectedHost(v string) {
+	o.ConnectedHost = &v
+}
+
+// GetConnectionFlapStatus returns the ConnectionFlapStatus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AssetClusterMember) GetConnectionFlapStatus() AssetConnectionFlapStatus {
+	if o == nil || IsNil(o.ConnectionFlapStatus.Get()) {
+		var ret AssetConnectionFlapStatus
+		return ret
+	}
+	return *o.ConnectionFlapStatus.Get()
+}
+
+// GetConnectionFlapStatusOk returns a tuple with the ConnectionFlapStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AssetClusterMember) GetConnectionFlapStatusOk() (*AssetConnectionFlapStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ConnectionFlapStatus.Get(), o.ConnectionFlapStatus.IsSet()
+}
+
+// HasConnectionFlapStatus returns a boolean if a field has been set.
+func (o *AssetClusterMember) HasConnectionFlapStatus() bool {
+	if o != nil && o.ConnectionFlapStatus.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionFlapStatus gets a reference to the given NullableAssetConnectionFlapStatus and assigns it to the ConnectionFlapStatus field.
+func (o *AssetClusterMember) SetConnectionFlapStatus(v AssetConnectionFlapStatus) {
+	o.ConnectionFlapStatus.Set(&v)
+}
+
+// SetConnectionFlapStatusNil sets the value for ConnectionFlapStatus to be an explicit nil
+func (o *AssetClusterMember) SetConnectionFlapStatusNil() {
+	o.ConnectionFlapStatus.Set(nil)
+}
+
+// UnsetConnectionFlapStatus ensures that no value is present for ConnectionFlapStatus, not even an explicit nil
+func (o *AssetClusterMember) UnsetConnectionFlapStatus() {
+	o.ConnectionFlapStatus.Unset()
 }
 
 // GetLeadership returns the Leadership field value if set, zero value otherwise.
@@ -364,6 +442,12 @@ func (o AssetClusterMember) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectedHost) {
+		toSerialize["ConnectedHost"] = o.ConnectedHost
+	}
+	if o.ConnectionFlapStatus.IsSet() {
+		toSerialize["ConnectionFlapStatus"] = o.ConnectionFlapStatus.Get()
+	}
 	if !IsNil(o.Leadership) {
 		toSerialize["Leadership"] = o.Leadership
 	}
@@ -437,6 +521,9 @@ func (o *AssetClusterMember) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The DNS hostname the device connector has used to connect to Intersight. Devices may be configured to connect to a set of DNS hostnames which all resolve to the same Intersight instance, the connected host is the latest hostname the device used to connect successfully to Intersight.
+		ConnectedHost        *string                           `json:"ConnectedHost,omitempty"`
+		ConnectionFlapStatus NullableAssetConnectionFlapStatus `json:"ConnectionFlapStatus,omitempty"`
 		// The current leadershipstate of this member. Updated by the device connector on failover or leadership change. If a member is elected as Primary within the cluster this connection will be the same as the DeviceRegistration connection. E.g a message addressed to the DeviceRegistration will be forwarded to the ClusterMember connection. * `Unknown` - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials, it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight. * `Primary` - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary node in a given cluster, while the underlying platform may be active. If it is active, only one connector will assume the primary role. * `Secondary` - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. E.g. file upload will be enabled, but requests to the underlying platform management will be disabled.
 		Leadership *string `json:"Leadership,omitempty"`
 		// Devices lock their leadership on failure to heartbeat with peers. Value acts as a third party tie breaker in election between nodes. Intersight enforces that only one cluster member exists with this value set to true.
@@ -456,6 +543,8 @@ func (o *AssetClusterMember) UnmarshalJSON(data []byte) (err error) {
 		varAssetClusterMember := _AssetClusterMember{}
 		varAssetClusterMember.ClassId = varAssetClusterMemberWithoutEmbeddedStruct.ClassId
 		varAssetClusterMember.ObjectType = varAssetClusterMemberWithoutEmbeddedStruct.ObjectType
+		varAssetClusterMember.ConnectedHost = varAssetClusterMemberWithoutEmbeddedStruct.ConnectedHost
+		varAssetClusterMember.ConnectionFlapStatus = varAssetClusterMemberWithoutEmbeddedStruct.ConnectionFlapStatus
 		varAssetClusterMember.Leadership = varAssetClusterMemberWithoutEmbeddedStruct.Leadership
 		varAssetClusterMember.LockedLeader = varAssetClusterMemberWithoutEmbeddedStruct.LockedLeader
 		varAssetClusterMember.MemberIdentity = varAssetClusterMemberWithoutEmbeddedStruct.MemberIdentity
@@ -481,6 +570,8 @@ func (o *AssetClusterMember) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ConnectedHost")
+		delete(additionalProperties, "ConnectionFlapStatus")
 		delete(additionalProperties, "Leadership")
 		delete(additionalProperties, "LockedLeader")
 		delete(additionalProperties, "MemberIdentity")

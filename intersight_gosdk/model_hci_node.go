@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -115,6 +115,8 @@ type HciNode struct {
 	MemoryUsageBytes *int64 `json:"MemoryUsageBytes,omitempty"`
 	// The unique identifier of the node.
 	NodeExtId *string `json:"NodeExtId,omitempty"`
+	// The serial number of this node.
+	NodeSerial *string `json:"NodeSerial,omitempty"`
 	// The status of the node such as NORMAL, TO_BE_REMOVED, OK_TO_BE_REMOVED, NEW_NODE, TO_BE_PREPROTECTED, PREPROTECTED.
 	NodeStatus *string `json:"NodeStatus,omitempty"`
 	// The number of CPU cores on the node.
@@ -133,9 +135,11 @@ type HciNode struct {
 	// An array of relationships to hciDisk resources.
 	Disks []HciDiskRelationship `json:"Disks,omitempty"`
 	// An array of relationships to hciGpu resources.
-	Gpus                 []HciGpuRelationship                        `json:"Gpus,omitempty"`
-	PhysicalServer       NullableComputePhysicalRelationship         `json:"PhysicalServer,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Gpus             []HciGpuRelationship                        `json:"Gpus,omitempty"`
+	PhysicalServer   NullableComputePhysicalRelationship         `json:"PhysicalServer,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	// An array of relationships to hciBaseVm resources.
+	Vms                  []HciBaseVmRelationship `json:"Vms,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1793,6 +1797,38 @@ func (o *HciNode) SetNodeExtId(v string) {
 	o.NodeExtId = &v
 }
 
+// GetNodeSerial returns the NodeSerial field value if set, zero value otherwise.
+func (o *HciNode) GetNodeSerial() string {
+	if o == nil || IsNil(o.NodeSerial) {
+		var ret string
+		return ret
+	}
+	return *o.NodeSerial
+}
+
+// GetNodeSerialOk returns a tuple with the NodeSerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HciNode) GetNodeSerialOk() (*string, bool) {
+	if o == nil || IsNil(o.NodeSerial) {
+		return nil, false
+	}
+	return o.NodeSerial, true
+}
+
+// HasNodeSerial returns a boolean if a field has been set.
+func (o *HciNode) HasNodeSerial() bool {
+	if o != nil && !IsNil(o.NodeSerial) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeSerial gets a reference to the given string and assigns it to the NodeSerial field.
+func (o *HciNode) SetNodeSerial(v string) {
+	o.NodeSerial = &v
+}
+
 // GetNodeStatus returns the NodeStatus field value if set, zero value otherwise.
 func (o *HciNode) GetNodeStatus() string {
 	if o == nil || IsNil(o.NodeStatus) {
@@ -2212,6 +2248,39 @@ func (o *HciNode) UnsetRegisteredDevice() {
 	o.RegisteredDevice.Unset()
 }
 
+// GetVms returns the Vms field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HciNode) GetVms() []HciBaseVmRelationship {
+	if o == nil {
+		var ret []HciBaseVmRelationship
+		return ret
+	}
+	return o.Vms
+}
+
+// GetVmsOk returns a tuple with the Vms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HciNode) GetVmsOk() ([]HciBaseVmRelationship, bool) {
+	if o == nil || IsNil(o.Vms) {
+		return nil, false
+	}
+	return o.Vms, true
+}
+
+// HasVms returns a boolean if a field has been set.
+func (o *HciNode) HasVms() bool {
+	if o != nil && !IsNil(o.Vms) {
+		return true
+	}
+
+	return false
+}
+
+// SetVms gets a reference to the given []HciBaseVmRelationship and assigns it to the Vms field.
+func (o *HciNode) SetVms(v []HciBaseVmRelationship) {
+	o.Vms = v
+}
+
 func (o HciNode) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -2379,6 +2448,9 @@ func (o HciNode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NodeExtId) {
 		toSerialize["NodeExtId"] = o.NodeExtId
 	}
+	if !IsNil(o.NodeSerial) {
+		toSerialize["NodeSerial"] = o.NodeSerial
+	}
 	if !IsNil(o.NodeStatus) {
 		toSerialize["NodeStatus"] = o.NodeStatus
 	}
@@ -2414,6 +2486,9 @@ func (o HciNode) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
+	}
+	if o.Vms != nil {
+		toSerialize["Vms"] = o.Vms
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -2557,6 +2632,8 @@ func (o *HciNode) UnmarshalJSON(data []byte) (err error) {
 		MemoryUsageBytes *int64 `json:"MemoryUsageBytes,omitempty"`
 		// The unique identifier of the node.
 		NodeExtId *string `json:"NodeExtId,omitempty"`
+		// The serial number of this node.
+		NodeSerial *string `json:"NodeSerial,omitempty"`
 		// The status of the node such as NORMAL, TO_BE_REMOVED, OK_TO_BE_REMOVED, NEW_NODE, TO_BE_PREPROTECTED, PREPROTECTED.
 		NodeStatus *string `json:"NodeStatus,omitempty"`
 		// The number of CPU cores on the node.
@@ -2578,6 +2655,8 @@ func (o *HciNode) UnmarshalJSON(data []byte) (err error) {
 		Gpus             []HciGpuRelationship                        `json:"Gpus,omitempty"`
 		PhysicalServer   NullableComputePhysicalRelationship         `json:"PhysicalServer,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		// An array of relationships to hciBaseVm resources.
+		Vms []HciBaseVmRelationship `json:"Vms,omitempty"`
 	}
 
 	varHciNodeWithoutEmbeddedStruct := HciNodeWithoutEmbeddedStruct{}
@@ -2634,6 +2713,7 @@ func (o *HciNode) UnmarshalJSON(data []byte) (err error) {
 		varHciNode.MemorySizeBytes = varHciNodeWithoutEmbeddedStruct.MemorySizeBytes
 		varHciNode.MemoryUsageBytes = varHciNodeWithoutEmbeddedStruct.MemoryUsageBytes
 		varHciNode.NodeExtId = varHciNodeWithoutEmbeddedStruct.NodeExtId
+		varHciNode.NodeSerial = varHciNodeWithoutEmbeddedStruct.NodeSerial
 		varHciNode.NodeStatus = varHciNodeWithoutEmbeddedStruct.NodeStatus
 		varHciNode.NumberOfCpuCores = varHciNodeWithoutEmbeddedStruct.NumberOfCpuCores
 		varHciNode.NumberOfCpuSockets = varHciNodeWithoutEmbeddedStruct.NumberOfCpuSockets
@@ -2646,6 +2726,7 @@ func (o *HciNode) UnmarshalJSON(data []byte) (err error) {
 		varHciNode.Gpus = varHciNodeWithoutEmbeddedStruct.Gpus
 		varHciNode.PhysicalServer = varHciNodeWithoutEmbeddedStruct.PhysicalServer
 		varHciNode.RegisteredDevice = varHciNodeWithoutEmbeddedStruct.RegisteredDevice
+		varHciNode.Vms = varHciNodeWithoutEmbeddedStruct.Vms
 		*o = HciNode(varHciNode)
 	} else {
 		return err
@@ -2712,6 +2793,7 @@ func (o *HciNode) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "MemorySizeBytes")
 		delete(additionalProperties, "MemoryUsageBytes")
 		delete(additionalProperties, "NodeExtId")
+		delete(additionalProperties, "NodeSerial")
 		delete(additionalProperties, "NodeStatus")
 		delete(additionalProperties, "NumberOfCpuCores")
 		delete(additionalProperties, "NumberOfCpuSockets")
@@ -2724,6 +2806,7 @@ func (o *HciNode) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Gpus")
 		delete(additionalProperties, "PhysicalServer")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "Vms")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

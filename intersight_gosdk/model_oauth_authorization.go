@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -21,22 +21,22 @@ import (
 // checks if the OauthAuthorization type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OauthAuthorization{}
 
-// OauthAuthorization User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user. It is used by Intersight Appliance to support resource owner grant type.
+// OauthAuthorization ### Overview The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services. #### Purpose Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types. #### Key Concepts - **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected. - **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions. - **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls. - **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 type OauthAuthorization struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Type of OAuth Api. For example, Smart-licensing-API. * `Unknown` - Unknown is the default API type. * `SmartLicensing-API` - Smart licensing API type. * `CommerceEstimate-API` - Commerce Estimate API type.
+	// OAuth API type (e.g., Smart licensing API). * `Unknown` - Unknown serves as the default API type. * `SmartLicensing-API` - Smart licensing API type. * `CommerceEstimate-API` - Commerce Estimate API type.
 	ApiType *string `json:"ApiType,omitempty"`
 	// Indicates whether the value of the 'password' property has been set.
 	IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
 	// Indicates whether the value of the 'userId' property has been set.
 	IsUserIdSet *bool `json:"IsUserIdSet,omitempty"`
-	// The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
+	// Password used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account.
 	Password *string `json:"Password,omitempty"`
-	// The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
+	// Username used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account.
 	UserId               *string                              `json:"UserId,omitempty"`
 	AccessToken          NullableOauthAccessTokenRelationship `json:"AccessToken,omitempty"`
 	Account              NullableIamAccountRelationship       `json:"Account,omitempty"`
@@ -478,15 +478,15 @@ func (o *OauthAuthorization) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Type of OAuth Api. For example, Smart-licensing-API. * `Unknown` - Unknown is the default API type. * `SmartLicensing-API` - Smart licensing API type. * `CommerceEstimate-API` - Commerce Estimate API type.
+		// OAuth API type (e.g., Smart licensing API). * `Unknown` - Unknown serves as the default API type. * `SmartLicensing-API` - Smart licensing API type. * `CommerceEstimate-API` - Commerce Estimate API type.
 		ApiType *string `json:"ApiType,omitempty"`
 		// Indicates whether the value of the 'password' property has been set.
 		IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
 		// Indicates whether the value of the 'userId' property has been set.
 		IsUserIdSet *bool `json:"IsUserIdSet,omitempty"`
-		// The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
+		// Password used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account.
 		Password *string `json:"Password,omitempty"`
-		// The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf.
+		// Username used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account.
 		UserId      *string                              `json:"UserId,omitempty"`
 		AccessToken NullableOauthAccessTokenRelationship `json:"AccessToken,omitempty"`
 		Account     NullableIamAccountRelationship       `json:"Account,omitempty"`

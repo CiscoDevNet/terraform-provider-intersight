@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,13 +28,17 @@ type ApplianceNodeInfo struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc.
+	DeploymentSize *string `json:"DeploymentSize,omitempty"`
 	// Cluster node's FQDN or IP address.
 	Hostname *string `json:"Hostname,omitempty"`
 	// System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance cluster starting with a value of 1.
 	NodeId         *int64                    `json:"NodeId,omitempty"`
 	NodeIpV4Config NullableCommIpV4Interface `json:"NodeIpV4Config,omitempty"`
 	NodeIpV6Config NullableCommIpV6Interface `json:"NodeIpV6Config,omitempty"`
-	// Operational status of the Intersight Appliance node. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement.
+	// The node type of Intersight Virtual Appliance. * `standalone` - Single Node Intersight Virtual Appliance. * `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment. * `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment. * `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.
+	NodeType *string `json:"NodeType,omitempty"`
+	// Operational status of the Intersight Appliance node. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement. * `WorkerNodeInstInProgress` - The worker node installation is in progress. * `WorkerNodeInstSuccess` - The worker node installation succeeded. * `WorkerNodeInstFailed` - The worker node installation failed.
 	OperationalStatus    *string `json:"OperationalStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -120,6 +124,38 @@ func (o *ApplianceNodeInfo) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "appliance.NodeInfo" of the ObjectType field.
 func (o *ApplianceNodeInfo) GetDefaultObjectType() interface{} {
 	return "appliance.NodeInfo"
+}
+
+// GetDeploymentSize returns the DeploymentSize field value if set, zero value otherwise.
+func (o *ApplianceNodeInfo) GetDeploymentSize() string {
+	if o == nil || IsNil(o.DeploymentSize) {
+		var ret string
+		return ret
+	}
+	return *o.DeploymentSize
+}
+
+// GetDeploymentSizeOk returns a tuple with the DeploymentSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceNodeInfo) GetDeploymentSizeOk() (*string, bool) {
+	if o == nil || IsNil(o.DeploymentSize) {
+		return nil, false
+	}
+	return o.DeploymentSize, true
+}
+
+// HasDeploymentSize returns a boolean if a field has been set.
+func (o *ApplianceNodeInfo) HasDeploymentSize() bool {
+	if o != nil && !IsNil(o.DeploymentSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentSize gets a reference to the given string and assigns it to the DeploymentSize field.
+func (o *ApplianceNodeInfo) SetDeploymentSize(v string) {
+	o.DeploymentSize = &v
 }
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
@@ -272,6 +308,38 @@ func (o *ApplianceNodeInfo) UnsetNodeIpV6Config() {
 	o.NodeIpV6Config.Unset()
 }
 
+// GetNodeType returns the NodeType field value if set, zero value otherwise.
+func (o *ApplianceNodeInfo) GetNodeType() string {
+	if o == nil || IsNil(o.NodeType) {
+		var ret string
+		return ret
+	}
+	return *o.NodeType
+}
+
+// GetNodeTypeOk returns a tuple with the NodeType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceNodeInfo) GetNodeTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.NodeType) {
+		return nil, false
+	}
+	return o.NodeType, true
+}
+
+// HasNodeType returns a boolean if a field has been set.
+func (o *ApplianceNodeInfo) HasNodeType() bool {
+	if o != nil && !IsNil(o.NodeType) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeType gets a reference to the given string and assigns it to the NodeType field.
+func (o *ApplianceNodeInfo) SetNodeType(v string) {
+	o.NodeType = &v
+}
+
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
 func (o *ApplianceNodeInfo) GetOperationalStatus() string {
 	if o == nil || IsNil(o.OperationalStatus) {
@@ -330,6 +398,9 @@ func (o ApplianceNodeInfo) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeploymentSize) {
+		toSerialize["DeploymentSize"] = o.DeploymentSize
+	}
 	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
@@ -341,6 +412,9 @@ func (o ApplianceNodeInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if o.NodeIpV6Config.IsSet() {
 		toSerialize["NodeIpV6Config"] = o.NodeIpV6Config.Get()
+	}
+	if !IsNil(o.NodeType) {
+		toSerialize["NodeType"] = o.NodeType
 	}
 	if !IsNil(o.OperationalStatus) {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
@@ -400,13 +474,17 @@ func (o *ApplianceNodeInfo) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc.
+		DeploymentSize *string `json:"DeploymentSize,omitempty"`
 		// Cluster node's FQDN or IP address.
 		Hostname *string `json:"Hostname,omitempty"`
 		// System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance cluster starting with a value of 1.
 		NodeId         *int64                    `json:"NodeId,omitempty"`
 		NodeIpV4Config NullableCommIpV4Interface `json:"NodeIpV4Config,omitempty"`
 		NodeIpV6Config NullableCommIpV6Interface `json:"NodeIpV6Config,omitempty"`
-		// Operational status of the Intersight Appliance node. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement.
+		// The node type of Intersight Virtual Appliance. * `standalone` - Single Node Intersight Virtual Appliance. * `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment. * `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment. * `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.
+		NodeType *string `json:"NodeType,omitempty"`
+		// Operational status of the Intersight Appliance node. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement. * `WorkerNodeInstInProgress` - The worker node installation is in progress. * `WorkerNodeInstSuccess` - The worker node installation succeeded. * `WorkerNodeInstFailed` - The worker node installation failed.
 		OperationalStatus *string `json:"OperationalStatus,omitempty"`
 	}
 
@@ -417,10 +495,12 @@ func (o *ApplianceNodeInfo) UnmarshalJSON(data []byte) (err error) {
 		varApplianceNodeInfo := _ApplianceNodeInfo{}
 		varApplianceNodeInfo.ClassId = varApplianceNodeInfoWithoutEmbeddedStruct.ClassId
 		varApplianceNodeInfo.ObjectType = varApplianceNodeInfoWithoutEmbeddedStruct.ObjectType
+		varApplianceNodeInfo.DeploymentSize = varApplianceNodeInfoWithoutEmbeddedStruct.DeploymentSize
 		varApplianceNodeInfo.Hostname = varApplianceNodeInfoWithoutEmbeddedStruct.Hostname
 		varApplianceNodeInfo.NodeId = varApplianceNodeInfoWithoutEmbeddedStruct.NodeId
 		varApplianceNodeInfo.NodeIpV4Config = varApplianceNodeInfoWithoutEmbeddedStruct.NodeIpV4Config
 		varApplianceNodeInfo.NodeIpV6Config = varApplianceNodeInfoWithoutEmbeddedStruct.NodeIpV6Config
+		varApplianceNodeInfo.NodeType = varApplianceNodeInfoWithoutEmbeddedStruct.NodeType
 		varApplianceNodeInfo.OperationalStatus = varApplianceNodeInfoWithoutEmbeddedStruct.OperationalStatus
 		*o = ApplianceNodeInfo(varApplianceNodeInfo)
 	} else {
@@ -441,10 +521,12 @@ func (o *ApplianceNodeInfo) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "DeploymentSize")
 		delete(additionalProperties, "Hostname")
 		delete(additionalProperties, "NodeId")
 		delete(additionalProperties, "NodeIpV4Config")
 		delete(additionalProperties, "NodeIpV6Config")
+		delete(additionalProperties, "NodeType")
 		delete(additionalProperties, "OperationalStatus")
 
 		// remove fields from embedded structs

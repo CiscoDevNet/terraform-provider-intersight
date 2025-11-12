@@ -3,12 +3,26 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_security_advisory"
 description: |-
-        Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
+        ### Overview
+        The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects.
+        #### Purpose
+        SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
+        #### Key Concepts
+        - **PSIRT Integration** - Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
+        - **Detailed Severity Assessment** - Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
+        - **Access Control and Management** - Ensures that only authorized personnel can manage security advisories.
 
 ---
 
 # Resource: intersight_tam_security_advisory
-Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
+### Overview
+The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects.
+#### Purpose
+SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems.
+#### Key Concepts
+- **PSIRT Integration** - Aligns with Cisco's PSIRT advisories for comprehensive security coverage.
+- **Detailed Severity Assessment** - Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities.
+- **Access Control and Management** - Ensures that only authorized personnel can manage security advisories.
 ## Usage Example
 ### Resource Creation
 
@@ -92,7 +106,7 @@ This complex property has following sub-properties:
 * `description`:(string) Brief description of the advisory details. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `environmental_score`:(float) CVSS version 3 environmental score for the security Advisory. 
-* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster.* `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster. 
+* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care by batch processing.* `tier2` - Advisory processing will be taken care by stream processing. 
 * `external_url`:(string) A link to an external URL describing security Advisory in more details. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -125,7 +139,19 @@ This complex property has following sub-properties:
 * `status`:(string) Cisco assigned status of the published advisory based on whether the investigation is complete or on-going.* `interim` - The Cisco investigation for the advisory is ongoing. Cisco will issue revisions to the advisory when additional information, including fixed software release data, becomes available.* `final` - Cisco has completed its evaluation of the vulnerability described in the advisory. There will be no further updates unless there is a material change in the nature of the vulnerability. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `temporal_score`:(float) CVSS version 3 temporal score for the security Advisory. 
 * `nr_version`:(string) Cisco assigned advisory version after latest revision. 

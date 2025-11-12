@@ -19,7 +19,11 @@ The following arguments can be used to get data of already created objects in In
 * `asset_tag`:(string) The user defined asset tag assigned to the server. 
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
+* `bmc_inventory_ready`:(bool) The BMC inventory readiness status of the server. 
+* `boot_last_state`:(string) The boot progress state of a rack or blade server.* `None` - The server is powered off.* `OSBootStarted` - The operating system boot process has started.* `OSRunning` - The operating system boot process has started and running.* `OEM` - The server is in an OEM-defined startup state. 
+* `boot_oem_last_state`:(string) The last known OEM-defined startup state of a rack or blade server.* `None` - The server has not yet completed OEM initialization.* `PlatformInitializing` - The server is initializing after being powered on. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
+* `cooling_mode`:(string) Cooling mode representation of the server.* `Air` - Cooling mode of the device is set to Air.* `Immersion` - Cooling mode of the device is set to Immersion. 
 * `cpu_capacity`:(float) Total processing capacity of the server. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -29,9 +33,11 @@ The following arguments can be used to get data of already created objects in In
 * `fault_summary`:(int) The fault summary for the server. 
 * `front_panel_lock_state`:(string) The actual front panel state of the server.* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.* `Lock` - Front Panel of the server is set to Locked state.* `Unlock` - Front Panel of the server is set to Unlocked state. 
 * `hardware_uuid`:(string) The universally unique hardware identity of the server provided by the manufacturer. 
+* `has_e3_s_support`:(bool) The flag to indicate server has the support for E3.S drives. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `kvm_server_state_enabled`:(bool) The KVM server state of the server. 
 * `kvm_vendor`:(string) The KVM Vendor for the server. 
+* `last_power_state_changed_time`:(string) The Last host power state changed time of the server. 
 * `nr_lifecycle`:(string) The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object.* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.* `Active` - Default Lifecycle State for a physical entity.* `Decommissioned` - Decommission Lifecycle state.* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.* `ScrubInProgress` - Scrub is in progress on given physical entity.* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.* `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade.* `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade.* `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade.* `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade. 
 * `management_mode`:(string) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `memory_speed`:(string) The maximum memory speed in MHz available on the server. 

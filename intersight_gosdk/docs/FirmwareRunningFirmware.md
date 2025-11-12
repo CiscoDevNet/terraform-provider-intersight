@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | The type of the firmware. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the firmware. | [optional] [readonly] 
 **BiosUnit** | Pointer to [**NullableBiosUnitRelationship**](BiosUnitRelationship.md) |  | [optional] 
+**EquipmentEnclosureElement** | Pointer to [**NullableEquipmentEnclosureElementRelationship**](EquipmentEnclosureElementRelationship.md) |  | [optional] 
+**EquipmentPsu** | Pointer to [**NullableEquipmentPsuRelationship**](EquipmentPsuRelationship.md) |  | [optional] 
 **GraphicsCard** | Pointer to [**NullableGraphicsCardRelationship**](GraphicsCardRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **ManagementController** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
@@ -215,6 +217,76 @@ HasBiosUnit returns a boolean if a field has been set.
 `func (o *FirmwareRunningFirmware) UnsetBiosUnit()`
 
 UnsetBiosUnit ensures that no value is present for BiosUnit, not even an explicit nil
+### GetEquipmentEnclosureElement
+
+`func (o *FirmwareRunningFirmware) GetEquipmentEnclosureElement() EquipmentEnclosureElementRelationship`
+
+GetEquipmentEnclosureElement returns the EquipmentEnclosureElement field if non-nil, zero value otherwise.
+
+### GetEquipmentEnclosureElementOk
+
+`func (o *FirmwareRunningFirmware) GetEquipmentEnclosureElementOk() (*EquipmentEnclosureElementRelationship, bool)`
+
+GetEquipmentEnclosureElementOk returns a tuple with the EquipmentEnclosureElement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentEnclosureElement
+
+`func (o *FirmwareRunningFirmware) SetEquipmentEnclosureElement(v EquipmentEnclosureElementRelationship)`
+
+SetEquipmentEnclosureElement sets EquipmentEnclosureElement field to given value.
+
+### HasEquipmentEnclosureElement
+
+`func (o *FirmwareRunningFirmware) HasEquipmentEnclosureElement() bool`
+
+HasEquipmentEnclosureElement returns a boolean if a field has been set.
+
+### SetEquipmentEnclosureElementNil
+
+`func (o *FirmwareRunningFirmware) SetEquipmentEnclosureElementNil(b bool)`
+
+ SetEquipmentEnclosureElementNil sets the value for EquipmentEnclosureElement to be an explicit nil
+
+### UnsetEquipmentEnclosureElement
+`func (o *FirmwareRunningFirmware) UnsetEquipmentEnclosureElement()`
+
+UnsetEquipmentEnclosureElement ensures that no value is present for EquipmentEnclosureElement, not even an explicit nil
+### GetEquipmentPsu
+
+`func (o *FirmwareRunningFirmware) GetEquipmentPsu() EquipmentPsuRelationship`
+
+GetEquipmentPsu returns the EquipmentPsu field if non-nil, zero value otherwise.
+
+### GetEquipmentPsuOk
+
+`func (o *FirmwareRunningFirmware) GetEquipmentPsuOk() (*EquipmentPsuRelationship, bool)`
+
+GetEquipmentPsuOk returns a tuple with the EquipmentPsu field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentPsu
+
+`func (o *FirmwareRunningFirmware) SetEquipmentPsu(v EquipmentPsuRelationship)`
+
+SetEquipmentPsu sets EquipmentPsu field to given value.
+
+### HasEquipmentPsu
+
+`func (o *FirmwareRunningFirmware) HasEquipmentPsu() bool`
+
+HasEquipmentPsu returns a boolean if a field has been set.
+
+### SetEquipmentPsuNil
+
+`func (o *FirmwareRunningFirmware) SetEquipmentPsuNil(b bool)`
+
+ SetEquipmentPsuNil sets the value for EquipmentPsu to be an explicit nil
+
+### UnsetEquipmentPsu
+`func (o *FirmwareRunningFirmware) UnsetEquipmentPsu()`
+
+UnsetEquipmentPsu ensures that no value is present for EquipmentPsu, not even an explicit nil
 ### GetGraphicsCard
 
 `func (o *FirmwareRunningFirmware) GetGraphicsCard() GraphicsCardRelationship`

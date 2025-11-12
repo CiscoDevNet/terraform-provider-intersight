@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppVolume"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppVolume"]
 **AutosizeMode** | Pointer to **string** | The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink. * &#x60;off&#x60; - The volume will not grow or shrink in size in response to the amount of used space. * &#x60;grow&#x60; - The volume will automatically grow when used space in the volume is above the grow threshold. * &#x60;grow_shrink&#x60; - The volume will grow or shrink in size in response to the amount of used space. | [optional] [readonly] [default to "off"]
-**AvgPerformanceMetrics** | Pointer to [**NullableStorageBasePerformanceMetricsAverage**](StorageBasePerformanceMetricsAverage.md) | Average performance metrics data for a NetApp storage resource over a given period of time. | [optional] 
+**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ExportPolicyName** | Pointer to **string** | The name of the Export Policy. | [optional] [readonly] 
 **FlexCacheEndpointType** | Pointer to **string** | FlexCache endpoint type. The endpoint type can be the origin of a FlexCache volume, a FlexCache volume, or neither. | [optional] [readonly] 
 **IsObjectStore** | Pointer to **bool** | Specifies whether the volume is provisioned for an object store server. | [optional] [readonly] 
@@ -113,20 +113,20 @@ HasAutosizeMode returns a boolean if a field has been set.
 
 ### GetAvgPerformanceMetrics
 
-`func (o *StorageNetAppVolume) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage`
+`func (o *StorageNetAppVolume) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
 
 GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
 
 ### GetAvgPerformanceMetricsOk
 
-`func (o *StorageNetAppVolume) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool)`
+`func (o *StorageNetAppVolume) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
 
 GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgPerformanceMetrics
 
-`func (o *StorageNetAppVolume) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage)`
+`func (o *StorageNetAppVolume) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
 
 SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
@@ -136,16 +136,6 @@ SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
 HasAvgPerformanceMetrics returns a boolean if a field has been set.
 
-### SetAvgPerformanceMetricsNil
-
-`func (o *StorageNetAppVolume) SetAvgPerformanceMetricsNil(b bool)`
-
- SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
-
-### UnsetAvgPerformanceMetrics
-`func (o *StorageNetAppVolume) UnsetAvgPerformanceMetrics()`
-
-UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
 ### GetExportPolicyName
 
 `func (o *StorageNetAppVolume) GetExportPolicyName() string`

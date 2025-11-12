@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "changelog.Item"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "changelog.Item"]
-**DateVersion** | Pointer to **time.Time** | The date version for the API contract changelog item in the format rfc3339 with no fraction seconds set.  Note that there can be more than one item per DateVersion. Example: 2023-12-19T00:00:00Z . | [optional] 
-**Entity** | Pointer to **string** | The operationId of the endpoint for which changelog item is being generated. | [optional] 
-**SemanticVersion** | Pointer to **string** | The semantic version for the API contract changelog item. Note that there can be more than one item per SemanticVersion. | [optional] 
-**Value** | Pointer to **string** | The value of the API contract changelog item. | [optional] 
+**DateVersion** | Pointer to **time.Time** | Date version for the API contract changelog item in rfc3339 format, without fractional seconds. Note, multiple items can exist for a single DateVersion. Example: 2023-12-19T00:00:00Z . | [optional] 
+**Entity** | Pointer to **string** | Operation Id of the endpoint for which the changelog item is generated. | [optional] 
+**SemanticVersion** | Pointer to **string** | Semantic version for the API contract changelog item. Note, multiple items can exist for a single SemanticVersion. | [optional] 
+**Value** | Pointer to **string** | The value associated with the API contract changelog item. | [optional] 
 **Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 
 ## Methods

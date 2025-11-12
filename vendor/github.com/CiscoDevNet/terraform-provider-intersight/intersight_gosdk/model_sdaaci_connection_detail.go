@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -21,38 +21,38 @@ import (
 // checks if the SdaaciConnectionDetail type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SdaaciConnectionDetail{}
 
-// SdaaciConnectionDetail Peer connection details for each connection.
+// SdaaciConnectionDetail Peer connection details for all connections.
 type SdaaciConnectionDetail struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Description of this connection between two peers.
+	// Description of the connection between the two peers.
 	Description *string `json:"Description,omitempty"`
-	// Id of the ip pool configured for this connection.
+	// Ip pool Id configured for this connection.
 	IpPool *string `json:"IpPool,omitempty"`
-	// Id of layer 3 handoff configured between a border node and a border leaf.
+	// Layer 3 handoff Id configured between a border node and a border leaf.
 	Layer3HandoffId *string `json:"Layer3HandoffId,omitempty"`
-	// Interface id configured on Peer A.
+	// Interface Id configured on Peer A.
 	PeerAinterface *string `json:"PeerAinterface,omitempty"`
-	// The IP Address of the device used as the local peer.
+	// IP address of the device used as the local peer.
 	PeerAipAddress *string `json:"PeerAipAddress,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
-	// Type of device used as Peer A for this peer connection.
+	// Type of device used as Peer A in this peer connection.
 	PeerAtype *string `json:"PeerAtype,omitempty"`
-	// Interface id configured on Peer B.
+	// Interface Id configured on Peer B.
 	PeerBinterface *string `json:"PeerBinterface,omitempty"`
-	// The IP Address of the device used as the remote peer.
+	// IP address of the device used as the remote peer.
 	PeerBipAddress *string `json:"PeerBipAddress,omitempty"`
-	// Type of device used as Peer B for this peer connection.
+	// Type of device used as Peer B in this peer connection.
 	PeerBtype *string `json:"PeerBtype,omitempty"`
-	// First peer of the connection.
+	// First peer in the connection.
 	Peera *string `json:"Peera,omitempty"`
-	// Second Peer of the connection.
+	// Second peer in the connection.
 	Peerb *string `json:"Peerb,omitempty"`
-	// Router id defined for this peer connection.
+	// Router Id defined for this peer connection.
 	RouterId *string `json:"RouterId,omitempty"`
-	// Connection status between the peers. * `NotConnected` - Connection Status NotConnected. * `Connected` - Connection Status Connected.
+	// Connection status between the peers. * `NotConnected` - Status of the connection:Not connected. * `Connected` - Status of the connection:Connected.
 	Status               *string                              `json:"Status,omitempty"`
 	Connection           NullableSdaaciConnectionRelationship `json:"Connection,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -727,31 +727,31 @@ func (o *SdaaciConnectionDetail) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Description of this connection between two peers.
+		// Description of the connection between the two peers.
 		Description *string `json:"Description,omitempty"`
-		// Id of the ip pool configured for this connection.
+		// Ip pool Id configured for this connection.
 		IpPool *string `json:"IpPool,omitempty"`
-		// Id of layer 3 handoff configured between a border node and a border leaf.
+		// Layer 3 handoff Id configured between a border node and a border leaf.
 		Layer3HandoffId *string `json:"Layer3HandoffId,omitempty"`
-		// Interface id configured on Peer A.
+		// Interface Id configured on Peer A.
 		PeerAinterface *string `json:"PeerAinterface,omitempty"`
-		// The IP Address of the device used as the local peer.
+		// IP address of the device used as the local peer.
 		PeerAipAddress *string `json:"PeerAipAddress,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
-		// Type of device used as Peer A for this peer connection.
+		// Type of device used as Peer A in this peer connection.
 		PeerAtype *string `json:"PeerAtype,omitempty"`
-		// Interface id configured on Peer B.
+		// Interface Id configured on Peer B.
 		PeerBinterface *string `json:"PeerBinterface,omitempty"`
-		// The IP Address of the device used as the remote peer.
+		// IP address of the device used as the remote peer.
 		PeerBipAddress *string `json:"PeerBipAddress,omitempty"`
-		// Type of device used as Peer B for this peer connection.
+		// Type of device used as Peer B in this peer connection.
 		PeerBtype *string `json:"PeerBtype,omitempty"`
-		// First peer of the connection.
+		// First peer in the connection.
 		Peera *string `json:"Peera,omitempty"`
-		// Second Peer of the connection.
+		// Second peer in the connection.
 		Peerb *string `json:"Peerb,omitempty"`
-		// Router id defined for this peer connection.
+		// Router Id defined for this peer connection.
 		RouterId *string `json:"RouterId,omitempty"`
-		// Connection status between the peers. * `NotConnected` - Connection Status NotConnected. * `Connected` - Connection Status Connected.
+		// Connection status between the peers. * `NotConnected` - Status of the connection:Not connected. * `Connected` - Status of the connection:Connected.
 		Status     *string                              `json:"Status,omitempty"`
 		Connection NullableSdaaciConnectionRelationship `json:"Connection,omitempty"`
 	}

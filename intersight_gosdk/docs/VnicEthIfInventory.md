@@ -10,15 +10,20 @@ Name | Type | Description | Notes
 **FailoverEnabled** | Pointer to **bool** | Enabling failover ensures that traffic from the vNIC automatically fails over to the secondary Fabric Interconnect, in case the specified Fabric Interconnect path goes down. Failover applies only to Cisco VICs that are connected to a Fabric Interconnect cluster. | [optional] [readonly] [default to false]
 **IscsiIpV4AddressAllocationType** | Pointer to **string** | Static/Pool/DHCP Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * &#x60;None&#x60; - Type indicates that there is no IP associated to an vnic. * &#x60;DHCP&#x60; - The IP address is assigned using DHCP, if available. * &#x60;Static&#x60; - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * &#x60;Pool&#x60; - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. | [optional] [readonly] [default to "None"]
 **IscsiIpV4Config** | Pointer to [**NullableIppoolIpV4Config**](IppoolIpV4Config.md) |  | [optional] 
+**IscsiIpV6AddressAllocationType** | Pointer to **string** | Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * &#x60;None&#x60; - Type indicates that there is no IP associated to an vnic. * &#x60;DHCP&#x60; - The IP address is assigned using DHCP, if available. * &#x60;Static&#x60; - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * &#x60;Pool&#x60; - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. | [optional] [readonly] [default to "None"]
+**IscsiIpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
 **IscsiIpv4Address** | Pointer to **string** | IP address associated to the vNIC. | [optional] [readonly] 
+**IscsiIpv6Address** | Pointer to **string** | IPv6 address associated to the iSCSI vNIC. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [readonly] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] [readonly] 
+**OldInfo** | Pointer to [**NullableVnicEthIfOldInfo**](VnicEthIfOldInfo.md) |  | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] [readonly] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
 **PinGroupName** | Pointer to **string** | Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. | [optional] [readonly] 
 **Placement** | Pointer to [**NullableVnicPlacementSettings**](VnicPlacementSettings.md) |  | [optional] 
 **SriovSettings** | Pointer to [**NullableVnicSriovSettings**](VnicSriovSettings.md) |  | [optional] 
+**Stale** | Pointer to **bool** | An EthIf is marked stale if it was deployed to the endpoint and the LAN Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the LAN Connectivity Policy being removed from the server profile or a different LAN Connectivity Policy is attached which does not include any EthIf with the same name. | [optional] [readonly] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
 **StaticMacAddress** | Pointer to **string** | The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. | [optional] [readonly] 
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
@@ -220,6 +225,66 @@ HasIscsiIpV4Config returns a boolean if a field has been set.
 `func (o *VnicEthIfInventory) UnsetIscsiIpV4Config()`
 
 UnsetIscsiIpV4Config ensures that no value is present for IscsiIpV4Config, not even an explicit nil
+### GetIscsiIpV6AddressAllocationType
+
+`func (o *VnicEthIfInventory) GetIscsiIpV6AddressAllocationType() string`
+
+GetIscsiIpV6AddressAllocationType returns the IscsiIpV6AddressAllocationType field if non-nil, zero value otherwise.
+
+### GetIscsiIpV6AddressAllocationTypeOk
+
+`func (o *VnicEthIfInventory) GetIscsiIpV6AddressAllocationTypeOk() (*string, bool)`
+
+GetIscsiIpV6AddressAllocationTypeOk returns a tuple with the IscsiIpV6AddressAllocationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpV6AddressAllocationType
+
+`func (o *VnicEthIfInventory) SetIscsiIpV6AddressAllocationType(v string)`
+
+SetIscsiIpV6AddressAllocationType sets IscsiIpV6AddressAllocationType field to given value.
+
+### HasIscsiIpV6AddressAllocationType
+
+`func (o *VnicEthIfInventory) HasIscsiIpV6AddressAllocationType() bool`
+
+HasIscsiIpV6AddressAllocationType returns a boolean if a field has been set.
+
+### GetIscsiIpV6Config
+
+`func (o *VnicEthIfInventory) GetIscsiIpV6Config() IppoolIpV6Config`
+
+GetIscsiIpV6Config returns the IscsiIpV6Config field if non-nil, zero value otherwise.
+
+### GetIscsiIpV6ConfigOk
+
+`func (o *VnicEthIfInventory) GetIscsiIpV6ConfigOk() (*IppoolIpV6Config, bool)`
+
+GetIscsiIpV6ConfigOk returns a tuple with the IscsiIpV6Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpV6Config
+
+`func (o *VnicEthIfInventory) SetIscsiIpV6Config(v IppoolIpV6Config)`
+
+SetIscsiIpV6Config sets IscsiIpV6Config field to given value.
+
+### HasIscsiIpV6Config
+
+`func (o *VnicEthIfInventory) HasIscsiIpV6Config() bool`
+
+HasIscsiIpV6Config returns a boolean if a field has been set.
+
+### SetIscsiIpV6ConfigNil
+
+`func (o *VnicEthIfInventory) SetIscsiIpV6ConfigNil(b bool)`
+
+ SetIscsiIpV6ConfigNil sets the value for IscsiIpV6Config to be an explicit nil
+
+### UnsetIscsiIpV6Config
+`func (o *VnicEthIfInventory) UnsetIscsiIpV6Config()`
+
+UnsetIscsiIpV6Config ensures that no value is present for IscsiIpV6Config, not even an explicit nil
 ### GetIscsiIpv4Address
 
 `func (o *VnicEthIfInventory) GetIscsiIpv4Address() string`
@@ -244,6 +309,31 @@ SetIscsiIpv4Address sets IscsiIpv4Address field to given value.
 `func (o *VnicEthIfInventory) HasIscsiIpv4Address() bool`
 
 HasIscsiIpv4Address returns a boolean if a field has been set.
+
+### GetIscsiIpv6Address
+
+`func (o *VnicEthIfInventory) GetIscsiIpv6Address() string`
+
+GetIscsiIpv6Address returns the IscsiIpv6Address field if non-nil, zero value otherwise.
+
+### GetIscsiIpv6AddressOk
+
+`func (o *VnicEthIfInventory) GetIscsiIpv6AddressOk() (*string, bool)`
+
+GetIscsiIpv6AddressOk returns a tuple with the IscsiIpv6Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIscsiIpv6Address
+
+`func (o *VnicEthIfInventory) SetIscsiIpv6Address(v string)`
+
+SetIscsiIpv6Address sets IscsiIpv6Address field to given value.
+
+### HasIscsiIpv6Address
+
+`func (o *VnicEthIfInventory) HasIscsiIpv6Address() bool`
+
+HasIscsiIpv6Address returns a boolean if a field has been set.
 
 ### GetMacAddress
 
@@ -320,6 +410,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetOldInfo
+
+`func (o *VnicEthIfInventory) GetOldInfo() VnicEthIfOldInfo`
+
+GetOldInfo returns the OldInfo field if non-nil, zero value otherwise.
+
+### GetOldInfoOk
+
+`func (o *VnicEthIfInventory) GetOldInfoOk() (*VnicEthIfOldInfo, bool)`
+
+GetOldInfoOk returns a tuple with the OldInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOldInfo
+
+`func (o *VnicEthIfInventory) SetOldInfo(v VnicEthIfOldInfo)`
+
+SetOldInfo sets OldInfo field to given value.
+
+### HasOldInfo
+
+`func (o *VnicEthIfInventory) HasOldInfo() bool`
+
+HasOldInfo returns a boolean if a field has been set.
+
+### SetOldInfoNil
+
+`func (o *VnicEthIfInventory) SetOldInfoNil(b bool)`
+
+ SetOldInfoNil sets the value for OldInfo to be an explicit nil
+
+### UnsetOldInfo
+`func (o *VnicEthIfInventory) UnsetOldInfo()`
+
+UnsetOldInfo ensures that no value is present for OldInfo, not even an explicit nil
 ### GetOrder
 
 `func (o *VnicEthIfInventory) GetOrder() int64`
@@ -475,6 +600,31 @@ HasSriovSettings returns a boolean if a field has been set.
 `func (o *VnicEthIfInventory) UnsetSriovSettings()`
 
 UnsetSriovSettings ensures that no value is present for SriovSettings, not even an explicit nil
+### GetStale
+
+`func (o *VnicEthIfInventory) GetStale() bool`
+
+GetStale returns the Stale field if non-nil, zero value otherwise.
+
+### GetStaleOk
+
+`func (o *VnicEthIfInventory) GetStaleOk() (*bool, bool)`
+
+GetStaleOk returns a tuple with the Stale field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStale
+
+`func (o *VnicEthIfInventory) SetStale(v bool)`
+
+SetStale sets Stale field to given value.
+
+### HasStale
+
+`func (o *VnicEthIfInventory) HasStale() bool`
+
+HasStale returns a boolean if a field has been set.
+
 ### GetStandbyVifId
 
 `func (o *VnicEthIfInventory) GetStandbyVifId() int64`

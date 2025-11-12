@@ -61,22 +61,22 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"backup_file_name": {
-			Description: "Auto generated backup File Name with combination of file prefix given an user input and the timestamp.",
+			Description: "Auto generated backup file name with user defined prefix and timestamp.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"backup_location": {
-			Description: "Backup location that contains the backup images for end device which can be used for restore operation.",
+			Description: "Backup location for restore operation.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"backup_server_ip": {
-			Description: "Backup server where backup images are maintained.",
+			Description: "Backup server for storing backup images.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"backup_size": {
-			Description: "Size of the backup image in bytes.",
+			Description: "Backup image size in bytes.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -101,7 +101,7 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"connector_feature": {
-						Description: "State of the connector pack whether it is enabled or disabled.",
+						Description: "State of connector pack (enabled/ disabled).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -111,12 +111,12 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
 					"downloaded_version": {
-						Description: "Version of the connector pack that is last downloaded successfully to UCS Director.",
+						Description: "Last successfully downloaded connector pack version successfully for UCS Director.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the connector pack running on the UCS Director.",
+						Description: "UCS Director connector pack name.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -131,12 +131,12 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
 					"state": {
-						Description: "State of the connector pack whether it is enabled or disabled.",
+						Description: "Connector pack state (enabled/disabled).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"nr_version": {
-						Description: "Version of the connector pack.",
+						Description: "The connector pack version.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -154,27 +154,27 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"duration": {
-			Description: "Time taken for the backup to be completed.",
+			Description: "Time taken to complete the backup.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"encryption_key": {
-			Description: "The key used for encrypting the backup file.",
+			Description: "Encryption key for backup file.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"failure_reason": {
-			Description: "Reason for backup failure.",
+			Description: "The cause of the backup failure.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"is_purged": {
-			Description: "Backup image got purged or not. The backup images get purged based on the retention count set by the user in the backup config policy.",
+			Description: "Backup image purge status based on retention policy.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"last_modified": {
-			Description: "Last modified time when this backup record got updated.",
+			Description: "Backup record last modified time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -234,7 +234,7 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"percentage_completion": {
-			Description: "Backup current precentage completion status information.",
+			Description: "Backup completion percentage status.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -273,12 +273,12 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			},
 		},
 		"product_version": {
-			Description: "The end device product version when the backup image was taken.",
+			Description: "End device product version at the backup time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"protocol": {
-			Description: "Protocol used for the remote backup. possible values are FTP, SCP and SFTP. Not applicable for the localhost (127.0.0.1).",
+			Description: "Supported remote backup protocol (FTP, SCP and SFTP); not applicable for localhost (127.0.0.1).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -323,17 +323,17 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"stage_completion": {
-			Description: "Backup current status stage information.",
+			Description: "Backup status stage information.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"start_time": {
-			Description: "Start time of backup when it got initiated.",
+			Description: "Backup initiation start time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"status": {
-			Description: "Current status of Backup current.",
+			Description: "The current backup status.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -347,8 +347,86 @@ func getUcsdBackupInfoSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -865,6 +943,49 @@ func dataSourceUcsdBackupInfoRead(c context.Context, d *schema.ResourceData, met
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

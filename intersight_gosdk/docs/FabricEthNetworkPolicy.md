@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.EthNetworkPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.EthNetworkPolicy"]
+**TargetPlatform** | Pointer to **string** | The target platform type of the Ethernet Network policy. * &#x60;UCS Domain&#x60; - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * &#x60;Unified Edge&#x60; - Profile/policy type for network, management and chassis configuration on Unified Edge. | [optional] [default to "UCS Domain"]
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetTargetPlatform
+
+`func (o *FabricEthNetworkPolicy) GetTargetPlatform() string`
+
+GetTargetPlatform returns the TargetPlatform field if non-nil, zero value otherwise.
+
+### GetTargetPlatformOk
+
+`func (o *FabricEthNetworkPolicy) GetTargetPlatformOk() (*string, bool)`
+
+GetTargetPlatformOk returns a tuple with the TargetPlatform field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetPlatform
+
+`func (o *FabricEthNetworkPolicy) SetTargetPlatform(v string)`
+
+SetTargetPlatform sets TargetPlatform field to given value.
+
+### HasTargetPlatform
+
+`func (o *FabricEthNetworkPolicy) HasTargetPlatform() bool`
+
+HasTargetPlatform returns a boolean if a field has been set.
 
 ### GetOrganization
 

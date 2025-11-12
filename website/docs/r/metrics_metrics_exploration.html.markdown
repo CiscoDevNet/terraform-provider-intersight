@@ -3,12 +3,12 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_metrics_exploration"
 description: |-
-        Contains info regarding metrics query and templating information.
+        Details of the metrics query and the templating information.
 
 ---
 
 # Resource: intersight_metrics_metrics_exploration
-Contains info regarding metrics query and templating information.
+Details of the metrics query and the templating information.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -18,29 +18,29 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
-* `description`:(string) User specified description of this MetricsExploration. 
+* `description`:(string) User specified description of the MetricsExploration. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `granularity`:(string) The time unit in which the metrics will be aggregated into. 
+* `granularity`:(string) Time unit for aggregating the metrics. 
 * `intervals`:
                 (Array of schema.TypeString) -
-* `is_widget`:(bool) True when this MetricsExploration is exposed as a Dashlet widget. 
+* `is_widget`:(bool) Set to true when the MetricsExploration is presented as a Dashlet widget. 
 * `metric_criteria`:(Array)
 This complex property has following sub-properties:
-  + `aggregation`:(string) Function name which used to combine the group buckets into a single timeseries. 
+  + `aggregation`:(string) Function name for combining group buckets into a single timeseries. 
   + `filters`:
                 (Array of schema.TypeString) -
   + `groups`:
                 (Array of schema.TypeString) -
-  + `instrument`:(string) Instrument name used to collect measurements for the query. 
-  + `is_enabled`:(bool) Indicates if this criterion should be used for the query. 
-  + `metric`:(string) Measurement name that is collected by the instrument for the query. 
-  + `metric_aggregation`:(string) Function name which used to combine the metrics into granularity buckets. 
+  + `instrument`:(string) Instrument name for measurement collection in the query. 
+  + `is_enabled`:(bool) Flag indicating if this criterion should be used for the query. 
+  + `metric`:(string) Measurement name for instrument collection in the query. 
+  + `metric_aggregation`:(string) Function name for combining metrics into granularity buckets. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `top_limit`:(int) The maximum number of result rows. 
-  + `top_sort`:(string) Method on how to sort the result rows. 
+  + `top_limit`:(int) Maximum number of rows in the result. 
+  + `top_sort`:(string) Method for sorting the result rows. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) User specified name of this MetricsExploration. 
+* `name`:(string) User specified name of the MetricsExploration. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -63,7 +63,19 @@ This complex property has following sub-properties:
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Sha512sum** | Pointer to **string** | The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **Size** | Pointer to **int64** | The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **SoftwareAdvisoryUrl** | Pointer to **string** | The software advisory, if any, provided by the vendor for this file. | [optional] 
-**Source** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | An external software repository which serves as the source of the file to be imported into the image catalog. If the source is available in the user&#39;s local machine, needs to be corrected to source image or just image If not, only a pointer to the file in the external repository is created in the image catalog. For more information, please refer to the softwarerepositoryUploader and softwarerepositoryFile object descriptions where this type is used. | [optional] 
+**Source** | Pointer to [**NullableSoftwarerepositoryFileServer**](SoftwarerepositoryFileServer.md) |  | [optional] 
 **Version** | Pointer to **string** | Vendor provided version for the file. | [optional] 
 
 ## Methods
@@ -434,20 +434,20 @@ HasSoftwareAdvisoryUrl returns a boolean if a field has been set.
 
 ### GetSource
 
-`func (o *SoftwarerepositoryFile) GetSource() MoBaseComplexType`
+`func (o *SoftwarerepositoryFile) GetSource() SoftwarerepositoryFileServer`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *SoftwarerepositoryFile) GetSourceOk() (*MoBaseComplexType, bool)`
+`func (o *SoftwarerepositoryFile) GetSourceOk() (*SoftwarerepositoryFileServer, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *SoftwarerepositoryFile) SetSource(v MoBaseComplexType)`
+`func (o *SoftwarerepositoryFile) SetSource(v SoftwarerepositoryFileServer)`
 
 SetSource sets Source field to given value.
 

@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
 **LicenseGrace** | Pointer to **string** | The number of days this port&#39;s license has been in Grace Period for. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The state of the port&#39;s licensing. | [optional] [readonly] 
+**MacsecOperData** | Pointer to [**NullableEtherMacsecOperData**](EtherMacsecOperData.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the Physical Port. | [optional] [readonly] 
+**UserLabel** | Pointer to **string** | The user defined label assigned to the port. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PortGroup** | Pointer to [**NullablePortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
 **PortSubGroup** | Pointer to [**NullablePortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
@@ -201,6 +203,41 @@ SetLicenseState sets LicenseState field to given value.
 
 HasLicenseState returns a boolean if a field has been set.
 
+### GetMacsecOperData
+
+`func (o *EtherPhysicalPort) GetMacsecOperData() EtherMacsecOperData`
+
+GetMacsecOperData returns the MacsecOperData field if non-nil, zero value otherwise.
+
+### GetMacsecOperDataOk
+
+`func (o *EtherPhysicalPort) GetMacsecOperDataOk() (*EtherMacsecOperData, bool)`
+
+GetMacsecOperDataOk returns a tuple with the MacsecOperData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacsecOperData
+
+`func (o *EtherPhysicalPort) SetMacsecOperData(v EtherMacsecOperData)`
+
+SetMacsecOperData sets MacsecOperData field to given value.
+
+### HasMacsecOperData
+
+`func (o *EtherPhysicalPort) HasMacsecOperData() bool`
+
+HasMacsecOperData returns a boolean if a field has been set.
+
+### SetMacsecOperDataNil
+
+`func (o *EtherPhysicalPort) SetMacsecOperDataNil(b bool)`
+
+ SetMacsecOperDataNil sets the value for MacsecOperData to be an explicit nil
+
+### UnsetMacsecOperData
+`func (o *EtherPhysicalPort) UnsetMacsecOperData()`
+
+UnsetMacsecOperData ensures that no value is present for MacsecOperData, not even an explicit nil
 ### GetName
 
 `func (o *EtherPhysicalPort) GetName() string`
@@ -225,6 +262,31 @@ SetName sets Name field to given value.
 `func (o *EtherPhysicalPort) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *EtherPhysicalPort) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *EtherPhysicalPort) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *EtherPhysicalPort) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *EtherPhysicalPort) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

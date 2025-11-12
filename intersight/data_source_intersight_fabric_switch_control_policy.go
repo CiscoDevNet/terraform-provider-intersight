@@ -26,6 +26,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aes_primary_key": {
+			Description: "Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -80,6 +85,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_jumbo_frame": {
+			Description: "To enable or disable Jumbo Frames on the switch.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"ethernet_switching_mode": {
 			Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
@@ -93,6 +103,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 		"fc_switching_mode": {
 			Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_aes_primary_key_set": {
+			Description: "Indicates whether the value of the 'aesPrimaryKey' property has been set.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"mac_aging_settings": {
@@ -313,8 +328,86 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -325,6 +418,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"target_platform": {
+			Description: "The target platform type of the Switch Control policy.\n* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.\n* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"udld_settings": {
 			Description: "This specifies the UDLD Global configurations for this switch.",
@@ -344,7 +442,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"message_interval": {
-						Description: "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 7 to 90 seconds.",
+						Description: "Configures the time between UDLD probe messages on ports that are in advertisement mode and are\ncurrently determined to be bidirectional.\nValid values are from 1 to 90 seconds.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -475,7 +573,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"vlan_port_optimization_enabled": {
-			Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for Cisco UCS Fabric Interconnect 9108 100G.",
+			Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for\nCisco UCS Fabric Interconnect 9108 100G and also enabled on the IMM 6.x Bundle version and onwards.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -513,6 +611,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOk("aes_primary_key"); ok {
+		x := (v.(string))
+		o.SetAesPrimaryKey(x)
 	}
 
 	if v, ok := d.GetOk("ancestors"); ok {
@@ -575,6 +678,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_jumbo_frame"); ok {
+		x := (v.(bool))
+		o.SetEnableJumboFrame(x)
+	}
+
 	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
 		x := (v.(string))
 		o.SetEthernetSwitchingMode(x)
@@ -588,6 +696,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("fc_switching_mode"); ok {
 		x := (v.(string))
 		o.SetFcSwitchingMode(x)
+	}
+
+	if v, ok := d.GetOkExists("is_aes_primary_key_set"); ok {
+		x := (v.(bool))
+		o.SetIsAesPrimaryKeySet(x)
 	}
 
 	if v, ok := d.GetOk("mac_aging_settings"); ok {
@@ -856,6 +969,49 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
+					}
+				}
+			}
 			if v, ok := l["key"]; ok {
 				{
 					x := (v.(string))
@@ -871,6 +1027,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("target_platform"); ok {
+		x := (v.(string))
+		o.SetTargetPlatform(x)
 	}
 
 	if v, ok := d.GetOk("udld_settings"); ok {
@@ -1039,9 +1200,11 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enable_jumbo_frame"] = (s.GetEnableJumboFrame())
 				temp["ethernet_switching_mode"] = (s.GetEthernetSwitchingMode())
 				temp["fabric_pc_vhba_reset"] = (s.GetFabricPcVhbaReset())
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
+				temp["is_aes_primary_key_set"] = (s.GetIsAesPrimaryKeySet())
 
 				temp["mac_aging_settings"] = flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)
 
@@ -1062,6 +1225,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_platform"] = (s.GetTargetPlatform())
 
 				temp["udld_settings"] = flattenMapFabricUdldGlobalSettings(s.GetUdldSettings(), d)
 

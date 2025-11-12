@@ -25,7 +25,9 @@ Method | HTTP request | Description
 [**CreateCapabilityPsuManufacturingDef**](CapabilityApi.md#CreateCapabilityPsuManufacturingDef) | **Post** /api/v1/capability/PsuManufacturingDefs | Create a &#39;capability.PsuManufacturingDef&#39; resource.
 [**CreateCapabilityServerDescriptor**](CapabilityApi.md#CreateCapabilityServerDescriptor) | **Post** /api/v1/capability/ServerDescriptors | Create a &#39;capability.ServerDescriptor&#39; resource.
 [**CreateCapabilityServerModelsCapabilityDef**](CapabilityApi.md#CreateCapabilityServerModelsCapabilityDef) | **Post** /api/v1/capability/ServerModelsCapabilityDefs | Create a &#39;capability.ServerModelsCapabilityDef&#39; resource.
+[**CreateCapabilityServerPcieConnectivityCatalog**](CapabilityApi.md#CreateCapabilityServerPcieConnectivityCatalog) | **Post** /api/v1/capability/ServerPcieConnectivityCatalogs | Create a &#39;capability.ServerPcieConnectivityCatalog&#39; resource.
 [**CreateCapabilityServerSchemaDescriptor**](CapabilityApi.md#CreateCapabilityServerSchemaDescriptor) | **Post** /api/v1/capability/ServerSchemaDescriptors | Create a &#39;capability.ServerSchemaDescriptor&#39; resource.
+[**CreateCapabilityServerTopologyMap**](CapabilityApi.md#CreateCapabilityServerTopologyMap) | **Post** /api/v1/capability/ServerTopologyMaps | Create a &#39;capability.ServerTopologyMap&#39; resource.
 [**CreateCapabilitySiocModuleCapabilityDef**](CapabilityApi.md#CreateCapabilitySiocModuleCapabilityDef) | **Post** /api/v1/capability/SiocModuleCapabilityDefs | Create a &#39;capability.SiocModuleCapabilityDef&#39; resource.
 [**CreateCapabilitySiocModuleDescriptor**](CapabilityApi.md#CreateCapabilitySiocModuleDescriptor) | **Post** /api/v1/capability/SiocModuleDescriptors | Create a &#39;capability.SiocModuleDescriptor&#39; resource.
 [**CreateCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#CreateCapabilitySiocModuleManufacturingDef) | **Post** /api/v1/capability/SiocModuleManufacturingDefs | Create a &#39;capability.SiocModuleManufacturingDef&#39; resource.
@@ -56,7 +58,9 @@ Method | HTTP request | Description
 [**DeleteCapabilityServerActionsMeta**](CapabilityApi.md#DeleteCapabilityServerActionsMeta) | **Delete** /api/v1/capability/ServerActionsMeta/{Moid} | Delete a &#39;capability.ServerActionsMeta&#39; resource.
 [**DeleteCapabilityServerDescriptor**](CapabilityApi.md#DeleteCapabilityServerDescriptor) | **Delete** /api/v1/capability/ServerDescriptors/{Moid} | Delete a &#39;capability.ServerDescriptor&#39; resource.
 [**DeleteCapabilityServerModelsCapabilityDef**](CapabilityApi.md#DeleteCapabilityServerModelsCapabilityDef) | **Delete** /api/v1/capability/ServerModelsCapabilityDefs/{Moid} | Delete a &#39;capability.ServerModelsCapabilityDef&#39; resource.
+[**DeleteCapabilityServerPcieConnectivityCatalog**](CapabilityApi.md#DeleteCapabilityServerPcieConnectivityCatalog) | **Delete** /api/v1/capability/ServerPcieConnectivityCatalogs/{Moid} | Delete a &#39;capability.ServerPcieConnectivityCatalog&#39; resource.
 [**DeleteCapabilityServerSchemaDescriptor**](CapabilityApi.md#DeleteCapabilityServerSchemaDescriptor) | **Delete** /api/v1/capability/ServerSchemaDescriptors/{Moid} | Delete a &#39;capability.ServerSchemaDescriptor&#39; resource.
+[**DeleteCapabilityServerTopologyMap**](CapabilityApi.md#DeleteCapabilityServerTopologyMap) | **Delete** /api/v1/capability/ServerTopologyMaps/{Moid} | Delete a &#39;capability.ServerTopologyMap&#39; resource.
 [**DeleteCapabilitySiocModuleCapabilityDef**](CapabilityApi.md#DeleteCapabilitySiocModuleCapabilityDef) | **Delete** /api/v1/capability/SiocModuleCapabilityDefs/{Moid} | Delete a &#39;capability.SiocModuleCapabilityDef&#39; resource.
 [**DeleteCapabilitySiocModuleDescriptor**](CapabilityApi.md#DeleteCapabilitySiocModuleDescriptor) | **Delete** /api/v1/capability/SiocModuleDescriptors/{Moid} | Delete a &#39;capability.SiocModuleDescriptor&#39; resource.
 [**DeleteCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#DeleteCapabilitySiocModuleManufacturingDef) | **Delete** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Delete a &#39;capability.SiocModuleManufacturingDef&#39; resource.
@@ -109,6 +113,8 @@ Method | HTTP request | Description
 [**GetCapabilityFexDescriptorList**](CapabilityApi.md#GetCapabilityFexDescriptorList) | **Get** /api/v1/capability/FexDescriptors | Read a &#39;capability.FexDescriptor&#39; resource.
 [**GetCapabilityFexManufacturingDefByMoid**](CapabilityApi.md#GetCapabilityFexManufacturingDefByMoid) | **Get** /api/v1/capability/FexManufacturingDefs/{Moid} | Read a &#39;capability.FexManufacturingDef&#39; resource.
 [**GetCapabilityFexManufacturingDefList**](CapabilityApi.md#GetCapabilityFexManufacturingDefList) | **Get** /api/v1/capability/FexManufacturingDefs | Read a &#39;capability.FexManufacturingDef&#39; resource.
+[**GetCapabilityFexSupportMetaByMoid**](CapabilityApi.md#GetCapabilityFexSupportMetaByMoid) | **Get** /api/v1/capability/FexSupportMeta/{Moid} | Read a &#39;capability.FexSupportMeta&#39; resource.
+[**GetCapabilityFexSupportMetaList**](CapabilityApi.md#GetCapabilityFexSupportMetaList) | **Get** /api/v1/capability/FexSupportMeta | Read a &#39;capability.FexSupportMeta&#39; resource.
 [**GetCapabilityGpuEndpointDescriptorByMoid**](CapabilityApi.md#GetCapabilityGpuEndpointDescriptorByMoid) | **Get** /api/v1/capability/GpuEndpointDescriptors/{Moid} | Read a &#39;capability.GpuEndpointDescriptor&#39; resource.
 [**GetCapabilityGpuEndpointDescriptorList**](CapabilityApi.md#GetCapabilityGpuEndpointDescriptorList) | **Get** /api/v1/capability/GpuEndpointDescriptors | Read a &#39;capability.GpuEndpointDescriptor&#39; resource.
 [**GetCapabilityHsuIsoFileSupportMetaByMoid**](CapabilityApi.md#GetCapabilityHsuIsoFileSupportMetaByMoid) | **Get** /api/v1/capability/HsuIsoFileSupportMeta/{Moid} | Read a &#39;capability.HsuIsoFileSupportMeta&#39; resource.
@@ -135,8 +141,12 @@ Method | HTTP request | Description
 [**GetCapabilityServerDescriptorList**](CapabilityApi.md#GetCapabilityServerDescriptorList) | **Get** /api/v1/capability/ServerDescriptors | Read a &#39;capability.ServerDescriptor&#39; resource.
 [**GetCapabilityServerModelsCapabilityDefByMoid**](CapabilityApi.md#GetCapabilityServerModelsCapabilityDefByMoid) | **Get** /api/v1/capability/ServerModelsCapabilityDefs/{Moid} | Read a &#39;capability.ServerModelsCapabilityDef&#39; resource.
 [**GetCapabilityServerModelsCapabilityDefList**](CapabilityApi.md#GetCapabilityServerModelsCapabilityDefList) | **Get** /api/v1/capability/ServerModelsCapabilityDefs | Read a &#39;capability.ServerModelsCapabilityDef&#39; resource.
+[**GetCapabilityServerPcieConnectivityCatalogByMoid**](CapabilityApi.md#GetCapabilityServerPcieConnectivityCatalogByMoid) | **Get** /api/v1/capability/ServerPcieConnectivityCatalogs/{Moid} | Read a &#39;capability.ServerPcieConnectivityCatalog&#39; resource.
+[**GetCapabilityServerPcieConnectivityCatalogList**](CapabilityApi.md#GetCapabilityServerPcieConnectivityCatalogList) | **Get** /api/v1/capability/ServerPcieConnectivityCatalogs | Read a &#39;capability.ServerPcieConnectivityCatalog&#39; resource.
 [**GetCapabilityServerSchemaDescriptorByMoid**](CapabilityApi.md#GetCapabilityServerSchemaDescriptorByMoid) | **Get** /api/v1/capability/ServerSchemaDescriptors/{Moid} | Read a &#39;capability.ServerSchemaDescriptor&#39; resource.
 [**GetCapabilityServerSchemaDescriptorList**](CapabilityApi.md#GetCapabilityServerSchemaDescriptorList) | **Get** /api/v1/capability/ServerSchemaDescriptors | Read a &#39;capability.ServerSchemaDescriptor&#39; resource.
+[**GetCapabilityServerTopologyMapByMoid**](CapabilityApi.md#GetCapabilityServerTopologyMapByMoid) | **Get** /api/v1/capability/ServerTopologyMaps/{Moid} | Read a &#39;capability.ServerTopologyMap&#39; resource.
+[**GetCapabilityServerTopologyMapList**](CapabilityApi.md#GetCapabilityServerTopologyMapList) | **Get** /api/v1/capability/ServerTopologyMaps | Read a &#39;capability.ServerTopologyMap&#39; resource.
 [**GetCapabilityServerUpgradeSupportMetaByMoid**](CapabilityApi.md#GetCapabilityServerUpgradeSupportMetaByMoid) | **Get** /api/v1/capability/ServerUpgradeSupportMeta/{Moid} | Read a &#39;capability.ServerUpgradeSupportMeta&#39; resource.
 [**GetCapabilityServerUpgradeSupportMetaList**](CapabilityApi.md#GetCapabilityServerUpgradeSupportMetaList) | **Get** /api/v1/capability/ServerUpgradeSupportMeta | Read a &#39;capability.ServerUpgradeSupportMeta&#39; resource.
 [**GetCapabilitySiocModuleCapabilityDefByMoid**](CapabilityApi.md#GetCapabilitySiocModuleCapabilityDefByMoid) | **Get** /api/v1/capability/SiocModuleCapabilityDefs/{Moid} | Read a &#39;capability.SiocModuleCapabilityDef&#39; resource.
@@ -145,6 +155,8 @@ Method | HTTP request | Description
 [**GetCapabilitySiocModuleDescriptorList**](CapabilityApi.md#GetCapabilitySiocModuleDescriptorList) | **Get** /api/v1/capability/SiocModuleDescriptors | Read a &#39;capability.SiocModuleDescriptor&#39; resource.
 [**GetCapabilitySiocModuleManufacturingDefByMoid**](CapabilityApi.md#GetCapabilitySiocModuleManufacturingDefByMoid) | **Get** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Read a &#39;capability.SiocModuleManufacturingDef&#39; resource.
 [**GetCapabilitySiocModuleManufacturingDefList**](CapabilityApi.md#GetCapabilitySiocModuleManufacturingDefList) | **Get** /api/v1/capability/SiocModuleManufacturingDefs | Read a &#39;capability.SiocModuleManufacturingDef&#39; resource.
+[**GetCapabilityStandardRedfishSupportMetaByMoid**](CapabilityApi.md#GetCapabilityStandardRedfishSupportMetaByMoid) | **Get** /api/v1/capability/StandardRedfishSupportMeta/{Moid} | Read a &#39;capability.StandardRedfishSupportMeta&#39; resource.
+[**GetCapabilityStandardRedfishSupportMetaList**](CapabilityApi.md#GetCapabilityStandardRedfishSupportMetaList) | **Get** /api/v1/capability/StandardRedfishSupportMeta | Read a &#39;capability.StandardRedfishSupportMeta&#39; resource.
 [**GetCapabilityStorageControllerUpdateConstraintMetaByMoid**](CapabilityApi.md#GetCapabilityStorageControllerUpdateConstraintMetaByMoid) | **Get** /api/v1/capability/StorageControllerUpdateConstraintMeta/{Moid} | Read a &#39;capability.StorageControllerUpdateConstraintMeta&#39; resource.
 [**GetCapabilityStorageControllerUpdateConstraintMetaList**](CapabilityApi.md#GetCapabilityStorageControllerUpdateConstraintMetaList) | **Get** /api/v1/capability/StorageControllerUpdateConstraintMeta | Read a &#39;capability.StorageControllerUpdateConstraintMeta&#39; resource.
 [**GetCapabilityStorageControllersMetaDataByMoid**](CapabilityApi.md#GetCapabilityStorageControllersMetaDataByMoid) | **Get** /api/v1/capability/StorageControllersMetaData/{Moid} | Read a &#39;capability.StorageControllersMetaData&#39; resource.
@@ -186,7 +198,9 @@ Method | HTTP request | Description
 [**PatchCapabilityServerActionsMeta**](CapabilityApi.md#PatchCapabilityServerActionsMeta) | **Patch** /api/v1/capability/ServerActionsMeta/{Moid} | Update a &#39;capability.ServerActionsMeta&#39; resource.
 [**PatchCapabilityServerDescriptor**](CapabilityApi.md#PatchCapabilityServerDescriptor) | **Patch** /api/v1/capability/ServerDescriptors/{Moid} | Update a &#39;capability.ServerDescriptor&#39; resource.
 [**PatchCapabilityServerModelsCapabilityDef**](CapabilityApi.md#PatchCapabilityServerModelsCapabilityDef) | **Patch** /api/v1/capability/ServerModelsCapabilityDefs/{Moid} | Update a &#39;capability.ServerModelsCapabilityDef&#39; resource.
+[**PatchCapabilityServerPcieConnectivityCatalog**](CapabilityApi.md#PatchCapabilityServerPcieConnectivityCatalog) | **Patch** /api/v1/capability/ServerPcieConnectivityCatalogs/{Moid} | Update a &#39;capability.ServerPcieConnectivityCatalog&#39; resource.
 [**PatchCapabilityServerSchemaDescriptor**](CapabilityApi.md#PatchCapabilityServerSchemaDescriptor) | **Patch** /api/v1/capability/ServerSchemaDescriptors/{Moid} | Update a &#39;capability.ServerSchemaDescriptor&#39; resource.
+[**PatchCapabilityServerTopologyMap**](CapabilityApi.md#PatchCapabilityServerTopologyMap) | **Patch** /api/v1/capability/ServerTopologyMaps/{Moid} | Update a &#39;capability.ServerTopologyMap&#39; resource.
 [**PatchCapabilitySiocModuleCapabilityDef**](CapabilityApi.md#PatchCapabilitySiocModuleCapabilityDef) | **Patch** /api/v1/capability/SiocModuleCapabilityDefs/{Moid} | Update a &#39;capability.SiocModuleCapabilityDef&#39; resource.
 [**PatchCapabilitySiocModuleDescriptor**](CapabilityApi.md#PatchCapabilitySiocModuleDescriptor) | **Patch** /api/v1/capability/SiocModuleDescriptors/{Moid} | Update a &#39;capability.SiocModuleDescriptor&#39; resource.
 [**PatchCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#PatchCapabilitySiocModuleManufacturingDef) | **Patch** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Update a &#39;capability.SiocModuleManufacturingDef&#39; resource.
@@ -218,7 +232,9 @@ Method | HTTP request | Description
 [**UpdateCapabilityServerActionsMeta**](CapabilityApi.md#UpdateCapabilityServerActionsMeta) | **Post** /api/v1/capability/ServerActionsMeta/{Moid} | Update a &#39;capability.ServerActionsMeta&#39; resource.
 [**UpdateCapabilityServerDescriptor**](CapabilityApi.md#UpdateCapabilityServerDescriptor) | **Post** /api/v1/capability/ServerDescriptors/{Moid} | Update a &#39;capability.ServerDescriptor&#39; resource.
 [**UpdateCapabilityServerModelsCapabilityDef**](CapabilityApi.md#UpdateCapabilityServerModelsCapabilityDef) | **Post** /api/v1/capability/ServerModelsCapabilityDefs/{Moid} | Update a &#39;capability.ServerModelsCapabilityDef&#39; resource.
+[**UpdateCapabilityServerPcieConnectivityCatalog**](CapabilityApi.md#UpdateCapabilityServerPcieConnectivityCatalog) | **Post** /api/v1/capability/ServerPcieConnectivityCatalogs/{Moid} | Update a &#39;capability.ServerPcieConnectivityCatalog&#39; resource.
 [**UpdateCapabilityServerSchemaDescriptor**](CapabilityApi.md#UpdateCapabilityServerSchemaDescriptor) | **Post** /api/v1/capability/ServerSchemaDescriptors/{Moid} | Update a &#39;capability.ServerSchemaDescriptor&#39; resource.
+[**UpdateCapabilityServerTopologyMap**](CapabilityApi.md#UpdateCapabilityServerTopologyMap) | **Post** /api/v1/capability/ServerTopologyMaps/{Moid} | Update a &#39;capability.ServerTopologyMap&#39; resource.
 [**UpdateCapabilitySiocModuleCapabilityDef**](CapabilityApi.md#UpdateCapabilitySiocModuleCapabilityDef) | **Post** /api/v1/capability/SiocModuleCapabilityDefs/{Moid} | Update a &#39;capability.SiocModuleCapabilityDef&#39; resource.
 [**UpdateCapabilitySiocModuleDescriptor**](CapabilityApi.md#UpdateCapabilitySiocModuleDescriptor) | **Post** /api/v1/capability/SiocModuleDescriptors/{Moid} | Update a &#39;capability.SiocModuleDescriptor&#39; resource.
 [**UpdateCapabilitySiocModuleManufacturingDef**](CapabilityApi.md#UpdateCapabilitySiocModuleManufacturingDef) | **Post** /api/v1/capability/SiocModuleManufacturingDefs/{Moid} | Update a &#39;capability.SiocModuleManufacturingDef&#39; resource.
@@ -1658,6 +1674,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateCapabilityServerPcieConnectivityCatalog
+
+> CapabilityServerPcieConnectivityCatalog CreateCapabilityServerPcieConnectivityCatalog(ctx).CapabilityServerPcieConnectivityCatalog(capabilityServerPcieConnectivityCatalog).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'capability.ServerPcieConnectivityCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	capabilityServerPcieConnectivityCatalog := *openapiclient.NewCapabilityServerPcieConnectivityCatalog("ClassId_example", "ObjectType_example") // CapabilityServerPcieConnectivityCatalog | The 'capability.ServerPcieConnectivityCatalog' resource to create.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.CreateCapabilityServerPcieConnectivityCatalog(context.Background()).CapabilityServerPcieConnectivityCatalog(capabilityServerPcieConnectivityCatalog).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityServerPcieConnectivityCatalog``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateCapabilityServerPcieConnectivityCatalog`: CapabilityServerPcieConnectivityCatalog
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.CreateCapabilityServerPcieConnectivityCatalog`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateCapabilityServerPcieConnectivityCatalogRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **capabilityServerPcieConnectivityCatalog** | [**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md) | The &#39;capability.ServerPcieConnectivityCatalog&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateCapabilityServerSchemaDescriptor
 
 > CapabilityServerSchemaDescriptor CreateCapabilityServerSchemaDescriptor(ctx).CapabilityServerSchemaDescriptor(capabilityServerSchemaDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1711,6 +1795,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateCapabilityServerTopologyMap
+
+> CapabilityServerTopologyMap CreateCapabilityServerTopologyMap(ctx).CapabilityServerTopologyMap(capabilityServerTopologyMap).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'capability.ServerTopologyMap' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	capabilityServerTopologyMap := *openapiclient.NewCapabilityServerTopologyMap("ClassId_example", "ObjectType_example") // CapabilityServerTopologyMap | The 'capability.ServerTopologyMap' resource to create.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.CreateCapabilityServerTopologyMap(context.Background()).CapabilityServerTopologyMap(capabilityServerTopologyMap).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityServerTopologyMap``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateCapabilityServerTopologyMap`: CapabilityServerTopologyMap
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.CreateCapabilityServerTopologyMap`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateCapabilityServerTopologyMapRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **capabilityServerTopologyMap** | [**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md) | The &#39;capability.ServerTopologyMap&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md)
 
 ### Authorization
 
@@ -3722,6 +3874,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteCapabilityServerPcieConnectivityCatalog
+
+> DeleteCapabilityServerPcieConnectivityCatalog(ctx, moid).Execute()
+
+Delete a 'capability.ServerPcieConnectivityCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CapabilityApi.DeleteCapabilityServerPcieConnectivityCatalog(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.DeleteCapabilityServerPcieConnectivityCatalog``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteCapabilityServerPcieConnectivityCatalogRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteCapabilityServerSchemaDescriptor
 
 > DeleteCapabilityServerSchemaDescriptor(ctx, moid).Execute()
@@ -3764,6 +3982,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCapabilityServerSchemaDescriptorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteCapabilityServerTopologyMap
+
+> DeleteCapabilityServerTopologyMap(ctx, moid).Execute()
+
+Delete a 'capability.ServerTopologyMap' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CapabilityApi.DeleteCapabilityServerTopologyMap(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.DeleteCapabilityServerTopologyMap``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteCapabilityServerTopologyMapRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -4926,7 +5210,7 @@ Name | Type | Description  | Notes
 
 ## GetCapabilityAdapterUpdateConstraintMetaByMoid
 
-> CapabilityUpdateConstraintMeta GetCapabilityAdapterUpdateConstraintMetaByMoid(ctx, moid).Execute()
+> CapabilityAdapterUpdateConstraintMeta GetCapabilityAdapterUpdateConstraintMetaByMoid(ctx, moid).Execute()
 
 Read a 'capability.AdapterUpdateConstraintMeta' resource.
 
@@ -4952,7 +5236,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityAdapterUpdateConstraintMetaByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCapabilityAdapterUpdateConstraintMetaByMoid`: CapabilityUpdateConstraintMeta
+	// response from `GetCapabilityAdapterUpdateConstraintMetaByMoid`: CapabilityAdapterUpdateConstraintMeta
 	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityAdapterUpdateConstraintMetaByMoid`: %v\n", resp)
 }
 ```
@@ -4976,7 +5260,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityUpdateConstraintMeta**](CapabilityUpdateConstraintMeta.md)
+[**CapabilityAdapterUpdateConstraintMeta**](CapabilityAdapterUpdateConstraintMeta.md)
 
 ### Authorization
 
@@ -7660,6 +7944,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetCapabilityFexSupportMetaByMoid
+
+> CapabilityFexSupportMeta GetCapabilityFexSupportMetaByMoid(ctx, moid).Execute()
+
+Read a 'capability.FexSupportMeta' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityFexSupportMetaByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityFexSupportMetaByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityFexSupportMetaByMoid`: CapabilityFexSupportMeta
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityFexSupportMetaByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityFexSupportMetaByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityFexSupportMeta**](CapabilityFexSupportMeta.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityFexSupportMetaList
+
+> CapabilityFexSupportMetaResponse GetCapabilityFexSupportMetaList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.FexSupportMeta' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityFexSupportMetaList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityFexSupportMetaList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityFexSupportMetaList`: CapabilityFexSupportMetaResponse
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityFexSupportMetaList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityFexSupportMetaListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityFexSupportMetaResponse**](CapabilityFexSupportMetaResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCapabilityGpuEndpointDescriptorByMoid
 
 > CapabilityGpuEndpointDescriptor GetCapabilityGpuEndpointDescriptorByMoid(ctx, moid).Execute()
@@ -8726,7 +9162,7 @@ Name | Type | Description  | Notes
 
 ## GetCapabilityProcessorUnitUpdateConstraintMetaByMoid
 
-> CapabilityUpdateConstraintMeta GetCapabilityProcessorUnitUpdateConstraintMetaByMoid(ctx, moid).Execute()
+> CapabilityProcessorUnitUpdateConstraintMeta GetCapabilityProcessorUnitUpdateConstraintMetaByMoid(ctx, moid).Execute()
 
 Read a 'capability.ProcessorUnitUpdateConstraintMeta' resource.
 
@@ -8752,7 +9188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityProcessorUnitUpdateConstraintMetaByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCapabilityProcessorUnitUpdateConstraintMetaByMoid`: CapabilityUpdateConstraintMeta
+	// response from `GetCapabilityProcessorUnitUpdateConstraintMetaByMoid`: CapabilityProcessorUnitUpdateConstraintMeta
 	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityProcessorUnitUpdateConstraintMetaByMoid`: %v\n", resp)
 }
 ```
@@ -8776,7 +9212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityUpdateConstraintMeta**](CapabilityUpdateConstraintMeta.md)
+[**CapabilityProcessorUnitUpdateConstraintMeta**](CapabilityProcessorUnitUpdateConstraintMeta.md)
 
 ### Authorization
 
@@ -9636,6 +10072,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetCapabilityServerPcieConnectivityCatalogByMoid
+
+> CapabilityServerPcieConnectivityCatalog GetCapabilityServerPcieConnectivityCatalogByMoid(ctx, moid).Execute()
+
+Read a 'capability.ServerPcieConnectivityCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityServerPcieConnectivityCatalogByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityServerPcieConnectivityCatalogByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityServerPcieConnectivityCatalogByMoid`: CapabilityServerPcieConnectivityCatalog
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityServerPcieConnectivityCatalogByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityServerPcieConnectivityCatalogByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityServerPcieConnectivityCatalogList
+
+> CapabilityServerPcieConnectivityCatalogResponse GetCapabilityServerPcieConnectivityCatalogList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.ServerPcieConnectivityCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityServerPcieConnectivityCatalogList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityServerPcieConnectivityCatalogList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityServerPcieConnectivityCatalogList`: CapabilityServerPcieConnectivityCatalogResponse
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityServerPcieConnectivityCatalogList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityServerPcieConnectivityCatalogListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityServerPcieConnectivityCatalogResponse**](CapabilityServerPcieConnectivityCatalogResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCapabilityServerSchemaDescriptorByMoid
 
 > CapabilityServerSchemaDescriptor GetCapabilityServerSchemaDescriptorByMoid(ctx, moid).Execute()
@@ -9773,6 +10361,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityServerSchemaDescriptorResponse**](CapabilityServerSchemaDescriptorResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityServerTopologyMapByMoid
+
+> CapabilityServerTopologyMap GetCapabilityServerTopologyMapByMoid(ctx, moid).Execute()
+
+Read a 'capability.ServerTopologyMap' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityServerTopologyMapByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityServerTopologyMapByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityServerTopologyMapByMoid`: CapabilityServerTopologyMap
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityServerTopologyMapByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityServerTopologyMapByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityServerTopologyMapList
+
+> CapabilityServerTopologyMapResponse GetCapabilityServerTopologyMapList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.ServerTopologyMap' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityServerTopologyMapList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityServerTopologyMapList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityServerTopologyMapList`: CapabilityServerTopologyMapResponse
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityServerTopologyMapList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityServerTopologyMapListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityServerTopologyMapResponse**](CapabilityServerTopologyMapResponse.md)
 
 ### Authorization
 
@@ -10396,9 +11136,161 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetCapabilityStandardRedfishSupportMetaByMoid
+
+> CapabilityStandardRedfishSupportMeta GetCapabilityStandardRedfishSupportMetaByMoid(ctx, moid).Execute()
+
+Read a 'capability.StandardRedfishSupportMeta' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityStandardRedfishSupportMetaByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityStandardRedfishSupportMetaByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityStandardRedfishSupportMetaByMoid`: CapabilityStandardRedfishSupportMeta
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityStandardRedfishSupportMetaByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityStandardRedfishSupportMetaByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CapabilityStandardRedfishSupportMeta**](CapabilityStandardRedfishSupportMeta.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCapabilityStandardRedfishSupportMetaList
+
+> CapabilityStandardRedfishSupportMetaResponse GetCapabilityStandardRedfishSupportMetaList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'capability.StandardRedfishSupportMeta' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.GetCapabilityStandardRedfishSupportMetaList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityStandardRedfishSupportMetaList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCapabilityStandardRedfishSupportMetaList`: CapabilityStandardRedfishSupportMetaResponse
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityStandardRedfishSupportMetaList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCapabilityStandardRedfishSupportMetaListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**CapabilityStandardRedfishSupportMetaResponse**](CapabilityStandardRedfishSupportMetaResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCapabilityStorageControllerUpdateConstraintMetaByMoid
 
-> CapabilityUpdateConstraintMeta GetCapabilityStorageControllerUpdateConstraintMetaByMoid(ctx, moid).Execute()
+> CapabilityStorageControllerUpdateConstraintMeta GetCapabilityStorageControllerUpdateConstraintMetaByMoid(ctx, moid).Execute()
 
 Read a 'capability.StorageControllerUpdateConstraintMeta' resource.
 
@@ -10424,7 +11316,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityStorageControllerUpdateConstraintMetaByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCapabilityStorageControllerUpdateConstraintMetaByMoid`: CapabilityUpdateConstraintMeta
+	// response from `GetCapabilityStorageControllerUpdateConstraintMetaByMoid`: CapabilityStorageControllerUpdateConstraintMeta
 	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.GetCapabilityStorageControllerUpdateConstraintMetaByMoid`: %v\n", resp)
 }
 ```
@@ -10448,7 +11340,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityUpdateConstraintMeta**](CapabilityUpdateConstraintMeta.md)
+[**CapabilityStorageControllerUpdateConstraintMeta**](CapabilityStorageControllerUpdateConstraintMeta.md)
 
 ### Authorization
 
@@ -13420,6 +14312,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchCapabilityServerPcieConnectivityCatalog
+
+> CapabilityServerPcieConnectivityCatalog PatchCapabilityServerPcieConnectivityCatalog(ctx, moid).CapabilityServerPcieConnectivityCatalog(capabilityServerPcieConnectivityCatalog).IfMatch(ifMatch).Execute()
+
+Update a 'capability.ServerPcieConnectivityCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	capabilityServerPcieConnectivityCatalog := *openapiclient.NewCapabilityServerPcieConnectivityCatalog("ClassId_example", "ObjectType_example") // CapabilityServerPcieConnectivityCatalog | The 'capability.ServerPcieConnectivityCatalog' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.PatchCapabilityServerPcieConnectivityCatalog(context.Background(), moid).CapabilityServerPcieConnectivityCatalog(capabilityServerPcieConnectivityCatalog).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityServerPcieConnectivityCatalog``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchCapabilityServerPcieConnectivityCatalog`: CapabilityServerPcieConnectivityCatalog
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.PatchCapabilityServerPcieConnectivityCatalog`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCapabilityServerPcieConnectivityCatalogRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityServerPcieConnectivityCatalog** | [**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md) | The &#39;capability.ServerPcieConnectivityCatalog&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchCapabilityServerSchemaDescriptor
 
 > CapabilityServerSchemaDescriptor PatchCapabilityServerSchemaDescriptor(ctx, moid).CapabilityServerSchemaDescriptor(capabilityServerSchemaDescriptor).IfMatch(ifMatch).Execute()
@@ -13477,6 +14441,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchCapabilityServerTopologyMap
+
+> CapabilityServerTopologyMap PatchCapabilityServerTopologyMap(ctx, moid).CapabilityServerTopologyMap(capabilityServerTopologyMap).IfMatch(ifMatch).Execute()
+
+Update a 'capability.ServerTopologyMap' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	capabilityServerTopologyMap := *openapiclient.NewCapabilityServerTopologyMap("ClassId_example", "ObjectType_example") // CapabilityServerTopologyMap | The 'capability.ServerTopologyMap' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.PatchCapabilityServerTopologyMap(context.Background(), moid).CapabilityServerTopologyMap(capabilityServerTopologyMap).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityServerTopologyMap``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchCapabilityServerTopologyMap`: CapabilityServerTopologyMap
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.PatchCapabilityServerTopologyMap`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCapabilityServerTopologyMapRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityServerTopologyMap** | [**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md) | The &#39;capability.ServerTopologyMap&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md)
 
 ### Authorization
 
@@ -15724,6 +16760,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateCapabilityServerPcieConnectivityCatalog
+
+> CapabilityServerPcieConnectivityCatalog UpdateCapabilityServerPcieConnectivityCatalog(ctx, moid).CapabilityServerPcieConnectivityCatalog(capabilityServerPcieConnectivityCatalog).IfMatch(ifMatch).Execute()
+
+Update a 'capability.ServerPcieConnectivityCatalog' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	capabilityServerPcieConnectivityCatalog := *openapiclient.NewCapabilityServerPcieConnectivityCatalog("ClassId_example", "ObjectType_example") // CapabilityServerPcieConnectivityCatalog | The 'capability.ServerPcieConnectivityCatalog' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.UpdateCapabilityServerPcieConnectivityCatalog(context.Background(), moid).CapabilityServerPcieConnectivityCatalog(capabilityServerPcieConnectivityCatalog).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityServerPcieConnectivityCatalog``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateCapabilityServerPcieConnectivityCatalog`: CapabilityServerPcieConnectivityCatalog
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.UpdateCapabilityServerPcieConnectivityCatalog`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCapabilityServerPcieConnectivityCatalogRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityServerPcieConnectivityCatalog** | [**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md) | The &#39;capability.ServerPcieConnectivityCatalog&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityServerPcieConnectivityCatalog**](CapabilityServerPcieConnectivityCatalog.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateCapabilityServerSchemaDescriptor
 
 > CapabilityServerSchemaDescriptor UpdateCapabilityServerSchemaDescriptor(ctx, moid).CapabilityServerSchemaDescriptor(capabilityServerSchemaDescriptor).IfMatch(ifMatch).Execute()
@@ -15781,6 +16889,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateCapabilityServerTopologyMap
+
+> CapabilityServerTopologyMap UpdateCapabilityServerTopologyMap(ctx, moid).CapabilityServerTopologyMap(capabilityServerTopologyMap).IfMatch(ifMatch).Execute()
+
+Update a 'capability.ServerTopologyMap' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	capabilityServerTopologyMap := *openapiclient.NewCapabilityServerTopologyMap("ClassId_example", "ObjectType_example") // CapabilityServerTopologyMap | The 'capability.ServerTopologyMap' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CapabilityApi.UpdateCapabilityServerTopologyMap(context.Background(), moid).CapabilityServerTopologyMap(capabilityServerTopologyMap).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityServerTopologyMap``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateCapabilityServerTopologyMap`: CapabilityServerTopologyMap
+	fmt.Fprintf(os.Stdout, "Response from `CapabilityApi.UpdateCapabilityServerTopologyMap`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCapabilityServerTopologyMapRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **capabilityServerTopologyMap** | [**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md) | The &#39;capability.ServerTopologyMap&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CapabilityServerTopologyMap**](CapabilityServerTopologyMap.md)
 
 ### Authorization
 

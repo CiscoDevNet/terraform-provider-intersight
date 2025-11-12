@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,9 @@ type WorkflowServiceItemActionProperties struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Type of action operation to be executed on the service item. * `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item. * `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment. * `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item.
-	OperationType *string `json:"OperationType,omitempty"`
+	// Type of action operation to be executed on the service item. * `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item. * `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment. * `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item. * `Migration` - This represents the migration action, used to migrate service item instance from one service item definition version to another service item definition version. There can be more than one migration operations associated with a service item. Once a migration action is running on a service item instance, no further operations are allowed on that service item instance during the migration process.
+	OperationType *string                                       `json:"OperationType,omitempty"`
+	Properties    NullableWorkflowBaseServiceItemActionProperty `json:"Properties,omitempty"`
 	// When true, the action on the service item will be stopped when it reaches a failure by either calling the configured stop workflow or by calling the rollback workflow. By default value is set to true.
 	StopOnFailure        *bool `json:"StopOnFailure,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -158,6 +159,49 @@ func (o *WorkflowServiceItemActionProperties) SetOperationType(v string) {
 	o.OperationType = &v
 }
 
+// GetProperties returns the Properties field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowServiceItemActionProperties) GetProperties() WorkflowBaseServiceItemActionProperty {
+	if o == nil || IsNil(o.Properties.Get()) {
+		var ret WorkflowBaseServiceItemActionProperty
+		return ret
+	}
+	return *o.Properties.Get()
+}
+
+// GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowServiceItemActionProperties) GetPropertiesOk() (*WorkflowBaseServiceItemActionProperty, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Properties.Get(), o.Properties.IsSet()
+}
+
+// HasProperties returns a boolean if a field has been set.
+func (o *WorkflowServiceItemActionProperties) HasProperties() bool {
+	if o != nil && o.Properties.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProperties gets a reference to the given NullableWorkflowBaseServiceItemActionProperty and assigns it to the Properties field.
+func (o *WorkflowServiceItemActionProperties) SetProperties(v WorkflowBaseServiceItemActionProperty) {
+	o.Properties.Set(&v)
+}
+
+// SetPropertiesNil sets the value for Properties to be an explicit nil
+func (o *WorkflowServiceItemActionProperties) SetPropertiesNil() {
+	o.Properties.Set(nil)
+}
+
+// UnsetProperties ensures that no value is present for Properties, not even an explicit nil
+func (o *WorkflowServiceItemActionProperties) UnsetProperties() {
+	o.Properties.Unset()
+}
+
 // GetStopOnFailure returns the StopOnFailure field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionProperties) GetStopOnFailure() bool {
 	if o == nil || IsNil(o.StopOnFailure) {
@@ -219,6 +263,9 @@ func (o WorkflowServiceItemActionProperties) ToMap() (map[string]interface{}, er
 	if !IsNil(o.OperationType) {
 		toSerialize["OperationType"] = o.OperationType
 	}
+	if o.Properties.IsSet() {
+		toSerialize["Properties"] = o.Properties.Get()
+	}
 	if !IsNil(o.StopOnFailure) {
 		toSerialize["StopOnFailure"] = o.StopOnFailure
 	}
@@ -277,8 +324,9 @@ func (o *WorkflowServiceItemActionProperties) UnmarshalJSON(data []byte) (err er
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Type of action operation to be executed on the service item. * `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item. * `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment. * `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item.
-		OperationType *string `json:"OperationType,omitempty"`
+		// Type of action operation to be executed on the service item. * `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item. * `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment. * `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item. * `Migration` - This represents the migration action, used to migrate service item instance from one service item definition version to another service item definition version. There can be more than one migration operations associated with a service item. Once a migration action is running on a service item instance, no further operations are allowed on that service item instance during the migration process.
+		OperationType *string                                       `json:"OperationType,omitempty"`
+		Properties    NullableWorkflowBaseServiceItemActionProperty `json:"Properties,omitempty"`
 		// When true, the action on the service item will be stopped when it reaches a failure by either calling the configured stop workflow or by calling the rollback workflow. By default value is set to true.
 		StopOnFailure *bool `json:"StopOnFailure,omitempty"`
 	}
@@ -291,6 +339,7 @@ func (o *WorkflowServiceItemActionProperties) UnmarshalJSON(data []byte) (err er
 		varWorkflowServiceItemActionProperties.ClassId = varWorkflowServiceItemActionPropertiesWithoutEmbeddedStruct.ClassId
 		varWorkflowServiceItemActionProperties.ObjectType = varWorkflowServiceItemActionPropertiesWithoutEmbeddedStruct.ObjectType
 		varWorkflowServiceItemActionProperties.OperationType = varWorkflowServiceItemActionPropertiesWithoutEmbeddedStruct.OperationType
+		varWorkflowServiceItemActionProperties.Properties = varWorkflowServiceItemActionPropertiesWithoutEmbeddedStruct.Properties
 		varWorkflowServiceItemActionProperties.StopOnFailure = varWorkflowServiceItemActionPropertiesWithoutEmbeddedStruct.StopOnFailure
 		*o = WorkflowServiceItemActionProperties(varWorkflowServiceItemActionProperties)
 	} else {
@@ -312,6 +361,7 @@ func (o *WorkflowServiceItemActionProperties) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperationType")
+		delete(additionalProperties, "Properties")
 		delete(additionalProperties, "StopOnFailure")
 
 		// remove fields from embedded structs

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SystemQosPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SystemQosPolicy"]
 **Classes** | Pointer to [**[]FabricQosClass**](FabricQosClass.md) |  | [optional] 
+**TargetPlatform** | Pointer to **string** | The target platform type of the system QoS policy. * &#x60;UCS Domain&#x60; - Profile/policy type for network and management configuration on UCS Fabric Interconnect. * &#x60;Unified Edge&#x60; - Profile/policy type for network, management and chassis configuration on Unified Edge. | [optional] [default to "UCS Domain"]
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]FabricBaseSwitchProfileRelationship**](FabricBaseSwitchProfileRelationship.md) | An array of relationships to fabricBaseSwitchProfile resources. | [optional] 
 
@@ -104,6 +105,31 @@ HasClasses returns a boolean if a field has been set.
 `func (o *FabricSystemQosPolicy) UnsetClasses()`
 
 UnsetClasses ensures that no value is present for Classes, not even an explicit nil
+### GetTargetPlatform
+
+`func (o *FabricSystemQosPolicy) GetTargetPlatform() string`
+
+GetTargetPlatform returns the TargetPlatform field if non-nil, zero value otherwise.
+
+### GetTargetPlatformOk
+
+`func (o *FabricSystemQosPolicy) GetTargetPlatformOk() (*string, bool)`
+
+GetTargetPlatformOk returns a tuple with the TargetPlatform field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetPlatform
+
+`func (o *FabricSystemQosPolicy) SetTargetPlatform(v string)`
+
+SetTargetPlatform sets TargetPlatform field to given value.
+
+### HasTargetPlatform
+
+`func (o *FabricSystemQosPolicy) HasTargetPlatform() bool`
+
+HasTargetPlatform returns a boolean if a field has been set.
+
 ### GetOrganization
 
 `func (o *FabricSystemQosPolicy) GetOrganization() OrganizationOrganizationRelationship`

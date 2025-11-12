@@ -3,12 +3,28 @@ subcategory: "oauth"
 layout: "intersight"
 page_title: "Intersight: intersight_oauth_authorization"
 description: |-
-        User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user. It is used by Intersight Appliance to support resource owner grant type.
+        ### Overview
+        The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services.
+        #### Purpose
+        Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types.
+        #### Key Concepts
+        - **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
+        - **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
+        - **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
+        - **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 
 ---
 
 # Resource: intersight_oauth_authorization
-User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user. It is used by Intersight Appliance to support resource owner grant type.
+### Overview
+The Authorization object underpins the OAuth2 authorization process, enabling user consent for external interactions on behalf of their account. It supports secure and efficient management of user credentials for accessing external services.
+#### Purpose
+Authorization serves as the conduit for user consent, allowing Intersight to interact with external software repositories securely on behalf of users, particularly in support of OAuth2 resource owner grant types.
+#### Key Concepts
+- **User Consent:** - Facilitates secure consent mechanisms for external interactions, ensuring user credentials are protected.
+- **Security Measures:** - Incorporates encryption and secure handling of user credentials, safeguarding access and interactions.
+- **Privileged Access:** - Ensures that only authorized administrators can create, update, or read authorizations, maintaining strict access controls.
+- **Account Integration:** - Associated with the iam.Account object, providing a structured approach to managing user authorization processes.
 ## Argument Reference
 The following arguments are supported:
 * `access_token`:(HashMap) -(ReadOnly) A reference to a oauthAccessToken resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -27,7 +43,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `api_type`:(string) Type of OAuth Api. For example, Smart-licensing-API.* `Unknown` - Unknown is the default API type.* `SmartLicensing-API` - Smart licensing API type.* `CommerceEstimate-API` - Commerce Estimate API type. 
+* `api_type`:(string) OAuth API type (e.g., Smart licensing API).* `Unknown` - Unknown serves as the default API type.* `SmartLicensing-API` - Smart licensing API type.* `CommerceEstimate-API` - Commerce Estimate API type. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
@@ -41,7 +57,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `password`:(string) The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf. 
+* `password`:(string) Password used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account. 
 * `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -50,9 +66,21 @@ This complex property has following sub-properties:
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
-* `user_id`:(string) The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account's behalf. 
+* `user_id`:(string) Username used by Intersight to create OAuth2 tokens for interacting with the external repository on behalf of the user account. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

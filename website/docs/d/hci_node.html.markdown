@@ -59,6 +59,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `node_ext_id`:(string) The unique identifier of the node. 
+* `node_serial`:(string) The serial number of this node. 
 * `node_status`:(string) The status of the node such as NORMAL, TO_BE_REMOVED, OK_TO_BE_REMOVED,NEW_NODE, TO_BE_PREPROTECTED, PREPROTECTED. 
 * `number_of_cpu_cores`:(int) The number of CPU cores on the node. 
 * `number_of_cpu_sockets`:(int) The number of sockets on the node. 

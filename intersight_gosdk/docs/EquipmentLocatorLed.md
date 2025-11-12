@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**PciNode** | Pointer to [**NullablePciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **StoragePhysicalDisk** | Pointer to [**NullableStoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
 
@@ -336,6 +337,41 @@ HasNetworkElement returns a boolean if a field has been set.
 `func (o *EquipmentLocatorLed) UnsetNetworkElement()`
 
 UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+### GetPciNode
+
+`func (o *EquipmentLocatorLed) GetPciNode() PciNodeRelationship`
+
+GetPciNode returns the PciNode field if non-nil, zero value otherwise.
+
+### GetPciNodeOk
+
+`func (o *EquipmentLocatorLed) GetPciNodeOk() (*PciNodeRelationship, bool)`
+
+GetPciNodeOk returns a tuple with the PciNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNode
+
+`func (o *EquipmentLocatorLed) SetPciNode(v PciNodeRelationship)`
+
+SetPciNode sets PciNode field to given value.
+
+### HasPciNode
+
+`func (o *EquipmentLocatorLed) HasPciNode() bool`
+
+HasPciNode returns a boolean if a field has been set.
+
+### SetPciNodeNil
+
+`func (o *EquipmentLocatorLed) SetPciNodeNil(b bool)`
+
+ SetPciNodeNil sets the value for PciNode to be an explicit nil
+
+### UnsetPciNode
+`func (o *EquipmentLocatorLed) UnsetPciNode()`
+
+UnsetPciNode ensures that no value is present for PciNode, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentLocatorLed) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

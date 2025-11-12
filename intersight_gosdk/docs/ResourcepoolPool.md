@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **Action** | Pointer to **string** | The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool. * &#x60;None&#x60; - The pool will not be considered for evaluation. * &#x60;ReEvaluate&#x60; - The resources in the pool will be re-evaluated against the server pool qualification associated with it. | [optional] [default to "None"]
 **PoolType** | Pointer to **string** | The resource management type in the pool, it can be either static or dynamic. * &#x60;Static&#x60; - The resources in the pool will not be changed until user manually update it. * &#x60;Dynamic&#x60; - The resources in the pool will be updated dynamically based on the condition. * &#x60;Hybrid&#x60; - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid. | [optional] [default to "Static"]
 **ResourceEvaluationStatus** | Pointer to [**NullableResourcepoolResourceEvaluationStatus**](ResourcepoolResourceEvaluationStatus.md) |  | [optional] 
-**ResourcePoolParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The resource pool can hold different type of resources, each resources can have some specific parameters and functionality, those details are captured as part of this. | [optional] 
-**ResourceType** | Pointer to **string** | The type of the resource present in the pool, example &#39;server&#39; its combination of RackUnit and Blade. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. | [optional] [default to "Server"]
+**ResourcePoolParameters** | Pointer to [**NullableResourcepoolResourcePoolParameters**](ResourcepoolResourcePoolParameters.md) |  | [optional] 
+**ResourceType** | Pointer to **string** | The type of the resource present in the pool, example &#39;server&#39; its combination of RackUnit and Blade. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. * &#x60;Mixed&#x60; - Resource Pool holds the resources like Rack Server, Blade or Chassis. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. | [optional] [default to "Server"]
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**QualificationPolicies** | Pointer to [**[]ResourcepoolQualificationPolicyRelationship**](ResourcepoolQualificationPolicyRelationship.md) | An array of relationships to resourcepoolQualificationPolicy resources. | [optional] 
+**QualificationPolicies** | Pointer to [**[]ResourceAbstractResourceQualificationPolicyRelationship**](ResourceAbstractResourceQualificationPolicyRelationship.md) | An array of relationships to resourceAbstractResourceQualificationPolicy resources. | [optional] 
 
 ## Methods
 
@@ -161,20 +161,20 @@ HasResourceEvaluationStatus returns a boolean if a field has been set.
 UnsetResourceEvaluationStatus ensures that no value is present for ResourceEvaluationStatus, not even an explicit nil
 ### GetResourcePoolParameters
 
-`func (o *ResourcepoolPool) GetResourcePoolParameters() MoBaseComplexType`
+`func (o *ResourcepoolPool) GetResourcePoolParameters() ResourcepoolResourcePoolParameters`
 
 GetResourcePoolParameters returns the ResourcePoolParameters field if non-nil, zero value otherwise.
 
 ### GetResourcePoolParametersOk
 
-`func (o *ResourcepoolPool) GetResourcePoolParametersOk() (*MoBaseComplexType, bool)`
+`func (o *ResourcepoolPool) GetResourcePoolParametersOk() (*ResourcepoolResourcePoolParameters, bool)`
 
 GetResourcePoolParametersOk returns a tuple with the ResourcePoolParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResourcePoolParameters
 
-`func (o *ResourcepoolPool) SetResourcePoolParameters(v MoBaseComplexType)`
+`func (o *ResourcepoolPool) SetResourcePoolParameters(v ResourcepoolResourcePoolParameters)`
 
 SetResourcePoolParameters sets ResourcePoolParameters field to given value.
 
@@ -291,20 +291,20 @@ HasOrganization returns a boolean if a field has been set.
 UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetQualificationPolicies
 
-`func (o *ResourcepoolPool) GetQualificationPolicies() []ResourcepoolQualificationPolicyRelationship`
+`func (o *ResourcepoolPool) GetQualificationPolicies() []ResourceAbstractResourceQualificationPolicyRelationship`
 
 GetQualificationPolicies returns the QualificationPolicies field if non-nil, zero value otherwise.
 
 ### GetQualificationPoliciesOk
 
-`func (o *ResourcepoolPool) GetQualificationPoliciesOk() (*[]ResourcepoolQualificationPolicyRelationship, bool)`
+`func (o *ResourcepoolPool) GetQualificationPoliciesOk() (*[]ResourceAbstractResourceQualificationPolicyRelationship, bool)`
 
 GetQualificationPoliciesOk returns a tuple with the QualificationPolicies field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQualificationPolicies
 
-`func (o *ResourcepoolPool) SetQualificationPolicies(v []ResourcepoolQualificationPolicyRelationship)`
+`func (o *ResourcepoolPool) SetQualificationPolicies(v []ResourceAbstractResourceQualificationPolicyRelationship)`
 
 SetQualificationPolicies sets QualificationPolicies field to given value.
 

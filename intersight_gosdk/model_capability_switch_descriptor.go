@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -30,10 +30,13 @@ type CapabilitySwitchDescriptor struct {
 	ObjectType string `json:"ObjectType"`
 	// The total expected memory for this hardware.
 	ExpectedMemory *int64 `json:"ExpectedMemory,omitempty"`
+	// Identifies whether Switch is part of Avatar series.
+	IsAvatarEcmc *bool `json:"IsAvatarEcmc,omitempty"`
 	// Identifies whether Switch is part of UCSX Direct chassis.
 	IsUcsxDirectSwitch *bool `json:"IsUcsxDirectSwitch,omitempty"`
 	// Revision for the fabric interconnect.
-	Revision             *string `json:"Revision,omitempty"`
+	Revision             *string  `json:"Revision,omitempty"`
+	UnsupportedPolicies  []string `json:"UnsupportedPolicies,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,6 +50,8 @@ func NewCapabilitySwitchDescriptor(classId string, objectType string) *Capabilit
 	this := CapabilitySwitchDescriptor{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var isAvatarEcmc bool = false
+	this.IsAvatarEcmc = &isAvatarEcmc
 	var isUcsxDirectSwitch bool = false
 	this.IsUcsxDirectSwitch = &isUcsxDirectSwitch
 	return &this
@@ -61,6 +66,8 @@ func NewCapabilitySwitchDescriptorWithDefaults() *CapabilitySwitchDescriptor {
 	this.ClassId = classId
 	var objectType string = "capability.SwitchDescriptor"
 	this.ObjectType = objectType
+	var isAvatarEcmc bool = false
+	this.IsAvatarEcmc = &isAvatarEcmc
 	var isUcsxDirectSwitch bool = false
 	this.IsUcsxDirectSwitch = &isUcsxDirectSwitch
 	return &this
@@ -156,6 +163,38 @@ func (o *CapabilitySwitchDescriptor) SetExpectedMemory(v int64) {
 	o.ExpectedMemory = &v
 }
 
+// GetIsAvatarEcmc returns the IsAvatarEcmc field value if set, zero value otherwise.
+func (o *CapabilitySwitchDescriptor) GetIsAvatarEcmc() bool {
+	if o == nil || IsNil(o.IsAvatarEcmc) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAvatarEcmc
+}
+
+// GetIsAvatarEcmcOk returns a tuple with the IsAvatarEcmc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilitySwitchDescriptor) GetIsAvatarEcmcOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAvatarEcmc) {
+		return nil, false
+	}
+	return o.IsAvatarEcmc, true
+}
+
+// HasIsAvatarEcmc returns a boolean if a field has been set.
+func (o *CapabilitySwitchDescriptor) HasIsAvatarEcmc() bool {
+	if o != nil && !IsNil(o.IsAvatarEcmc) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAvatarEcmc gets a reference to the given bool and assigns it to the IsAvatarEcmc field.
+func (o *CapabilitySwitchDescriptor) SetIsAvatarEcmc(v bool) {
+	o.IsAvatarEcmc = &v
+}
+
 // GetIsUcsxDirectSwitch returns the IsUcsxDirectSwitch field value if set, zero value otherwise.
 func (o *CapabilitySwitchDescriptor) GetIsUcsxDirectSwitch() bool {
 	if o == nil || IsNil(o.IsUcsxDirectSwitch) {
@@ -220,6 +259,39 @@ func (o *CapabilitySwitchDescriptor) SetRevision(v string) {
 	o.Revision = &v
 }
 
+// GetUnsupportedPolicies returns the UnsupportedPolicies field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilitySwitchDescriptor) GetUnsupportedPolicies() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.UnsupportedPolicies
+}
+
+// GetUnsupportedPoliciesOk returns a tuple with the UnsupportedPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilitySwitchDescriptor) GetUnsupportedPoliciesOk() ([]string, bool) {
+	if o == nil || IsNil(o.UnsupportedPolicies) {
+		return nil, false
+	}
+	return o.UnsupportedPolicies, true
+}
+
+// HasUnsupportedPolicies returns a boolean if a field has been set.
+func (o *CapabilitySwitchDescriptor) HasUnsupportedPolicies() bool {
+	if o != nil && !IsNil(o.UnsupportedPolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnsupportedPolicies gets a reference to the given []string and assigns it to the UnsupportedPolicies field.
+func (o *CapabilitySwitchDescriptor) SetUnsupportedPolicies(v []string) {
+	o.UnsupportedPolicies = v
+}
+
 func (o CapabilitySwitchDescriptor) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -249,11 +321,17 @@ func (o CapabilitySwitchDescriptor) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpectedMemory) {
 		toSerialize["ExpectedMemory"] = o.ExpectedMemory
 	}
+	if !IsNil(o.IsAvatarEcmc) {
+		toSerialize["IsAvatarEcmc"] = o.IsAvatarEcmc
+	}
 	if !IsNil(o.IsUcsxDirectSwitch) {
 		toSerialize["IsUcsxDirectSwitch"] = o.IsUcsxDirectSwitch
 	}
 	if !IsNil(o.Revision) {
 		toSerialize["Revision"] = o.Revision
+	}
+	if o.UnsupportedPolicies != nil {
+		toSerialize["UnsupportedPolicies"] = o.UnsupportedPolicies
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -312,10 +390,13 @@ func (o *CapabilitySwitchDescriptor) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The total expected memory for this hardware.
 		ExpectedMemory *int64 `json:"ExpectedMemory,omitempty"`
+		// Identifies whether Switch is part of Avatar series.
+		IsAvatarEcmc *bool `json:"IsAvatarEcmc,omitempty"`
 		// Identifies whether Switch is part of UCSX Direct chassis.
 		IsUcsxDirectSwitch *bool `json:"IsUcsxDirectSwitch,omitempty"`
 		// Revision for the fabric interconnect.
-		Revision *string `json:"Revision,omitempty"`
+		Revision            *string  `json:"Revision,omitempty"`
+		UnsupportedPolicies []string `json:"UnsupportedPolicies,omitempty"`
 	}
 
 	varCapabilitySwitchDescriptorWithoutEmbeddedStruct := CapabilitySwitchDescriptorWithoutEmbeddedStruct{}
@@ -326,8 +407,10 @@ func (o *CapabilitySwitchDescriptor) UnmarshalJSON(data []byte) (err error) {
 		varCapabilitySwitchDescriptor.ClassId = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.ClassId
 		varCapabilitySwitchDescriptor.ObjectType = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.ObjectType
 		varCapabilitySwitchDescriptor.ExpectedMemory = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.ExpectedMemory
+		varCapabilitySwitchDescriptor.IsAvatarEcmc = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.IsAvatarEcmc
 		varCapabilitySwitchDescriptor.IsUcsxDirectSwitch = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.IsUcsxDirectSwitch
 		varCapabilitySwitchDescriptor.Revision = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.Revision
+		varCapabilitySwitchDescriptor.UnsupportedPolicies = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.UnsupportedPolicies
 		*o = CapabilitySwitchDescriptor(varCapabilitySwitchDescriptor)
 	} else {
 		return err
@@ -348,8 +431,10 @@ func (o *CapabilitySwitchDescriptor) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExpectedMemory")
+		delete(additionalProperties, "IsAvatarEcmc")
 		delete(additionalProperties, "IsUcsxDirectSwitch")
 		delete(additionalProperties, "Revision")
+		delete(additionalProperties, "UnsupportedPolicies")
 
 		// remove fields from embedded structs
 		reflectCapabilityHardwareDescriptor := reflect.ValueOf(o.CapabilityHardwareDescriptor)

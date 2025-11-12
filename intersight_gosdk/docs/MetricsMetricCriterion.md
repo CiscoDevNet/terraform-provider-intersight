@@ -6,15 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "metrics.MetricCriterion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "metrics.MetricCriterion"]
-**Aggregation** | Pointer to **string** | Function name which used to combine the group buckets into a single timeseries. | [optional] 
+**Aggregation** | Pointer to **string** | Function name for combining group buckets into a single timeseries. | [optional] 
 **Filters** | Pointer to **[]string** |  | [optional] 
 **Groups** | Pointer to **[]string** |  | [optional] 
-**Instrument** | Pointer to **string** | Instrument name used to collect measurements for the query. | [optional] 
-**IsEnabled** | Pointer to **bool** | Indicates if this criterion should be used for the query. | [optional] 
-**Metric** | Pointer to **string** | Measurement name that is collected by the instrument for the query. | [optional] 
-**MetricAggregation** | Pointer to **string** | Function name which used to combine the metrics into granularity buckets. | [optional] 
-**TopLimit** | Pointer to **int64** | The maximum number of result rows. | [optional] 
-**TopSort** | Pointer to **string** | Method on how to sort the result rows. | [optional] 
+**Instrument** | Pointer to **string** | Instrument name for measurement collection in the query. | [optional] 
+**IsEnabled** | Pointer to **bool** | Flag indicating if this criterion should be used for the query. | [optional] 
+**Metric** | Pointer to **string** | Measurement name for instrument collection in the query. | [optional] 
+**MetricAggregation** | Pointer to **string** | Function name for combining metrics into granularity buckets. | [optional] 
+**TopLimit** | Pointer to **int64** | Maximum number of rows in the result. | [optional] 
+**TopSort** | Pointer to **string** | Method for sorting the result rows. | [optional] 
 
 ## Methods
 

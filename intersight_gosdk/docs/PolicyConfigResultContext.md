@@ -6,11 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.ConfigResultContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ConfigResultContext"]
+**DependentPolicyList** | Pointer to **[]string** |  | [optional] 
 **EntityData** | Pointer to **interface{}** | The data of the object present in config result context. | [optional] [readonly] 
 **EntityMoid** | Pointer to **string** | The Moid of the object present in config result context. | [optional] 
 **EntityName** | Pointer to **string** | The name of the object present in config result context. | [optional] 
 **EntityType** | Pointer to **string** | The type of the object present in config result context. | [optional] 
 **ParentMoid** | Pointer to **string** | The Moid of the parent object present in config result context. | [optional] 
+**ParentPolicyObjectType** | Pointer to **string** | The type of the policy object associated with the profile. | [optional] 
 **ParentType** | Pointer to **string** | The type of the parent object present in config result context. | [optional] 
 
 ## Methods
@@ -72,6 +74,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetDependentPolicyList
+
+`func (o *PolicyConfigResultContext) GetDependentPolicyList() []string`
+
+GetDependentPolicyList returns the DependentPolicyList field if non-nil, zero value otherwise.
+
+### GetDependentPolicyListOk
+
+`func (o *PolicyConfigResultContext) GetDependentPolicyListOk() (*[]string, bool)`
+
+GetDependentPolicyListOk returns a tuple with the DependentPolicyList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDependentPolicyList
+
+`func (o *PolicyConfigResultContext) SetDependentPolicyList(v []string)`
+
+SetDependentPolicyList sets DependentPolicyList field to given value.
+
+### HasDependentPolicyList
+
+`func (o *PolicyConfigResultContext) HasDependentPolicyList() bool`
+
+HasDependentPolicyList returns a boolean if a field has been set.
+
+### SetDependentPolicyListNil
+
+`func (o *PolicyConfigResultContext) SetDependentPolicyListNil(b bool)`
+
+ SetDependentPolicyListNil sets the value for DependentPolicyList to be an explicit nil
+
+### UnsetDependentPolicyList
+`func (o *PolicyConfigResultContext) UnsetDependentPolicyList()`
+
+UnsetDependentPolicyList ensures that no value is present for DependentPolicyList, not even an explicit nil
 ### GetEntityData
 
 `func (o *PolicyConfigResultContext) GetEntityData() interface{}`
@@ -206,6 +243,31 @@ SetParentMoid sets ParentMoid field to given value.
 `func (o *PolicyConfigResultContext) HasParentMoid() bool`
 
 HasParentMoid returns a boolean if a field has been set.
+
+### GetParentPolicyObjectType
+
+`func (o *PolicyConfigResultContext) GetParentPolicyObjectType() string`
+
+GetParentPolicyObjectType returns the ParentPolicyObjectType field if non-nil, zero value otherwise.
+
+### GetParentPolicyObjectTypeOk
+
+`func (o *PolicyConfigResultContext) GetParentPolicyObjectTypeOk() (*string, bool)`
+
+GetParentPolicyObjectTypeOk returns a tuple with the ParentPolicyObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentPolicyObjectType
+
+`func (o *PolicyConfigResultContext) SetParentPolicyObjectType(v string)`
+
+SetParentPolicyObjectType sets ParentPolicyObjectType field to given value.
+
+### HasParentPolicyObjectType
+
+`func (o *PolicyConfigResultContext) HasParentPolicyObjectType() bool`
+
+HasParentPolicyObjectType returns a boolean if a field has been set.
 
 ### GetParentType
 

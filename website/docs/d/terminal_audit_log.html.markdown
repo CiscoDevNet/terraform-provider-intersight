@@ -3,12 +3,26 @@ subcategory: "terminal"
 layout: "intersight"
 page_title: "Intersight: intersight_terminal_audit_log"
 description: |-
-        Audit log of remote terminal user sessions.
+        ### Overview
+        The AuditLog object captures and records the audit trail of remote terminal user sessions. This provides a comprehensive history of user interactions with terminal sessions, ensuring accountability and traceability of actions performed.
+        #### Purpose
+        The primary purpose of an AuditLog is to maintain a detailed record of all remote terminal user sessions. This record is crucial for security, compliance, and troubleshooting, allowing administrators to review who accessed what, when, and for how long, thereby ensuring operational transparency and accountability.
+        #### Key Concepts
+        - **Session Tracking** - Records key events and timestamps related to the opening and closing of terminal sessions.
+        - **Accountability** - The audit log object records only the session metadata, specifically the start and end times for a given user and device. It does not capture or retain the detailed contents of the session itself.
+        - **Security and Compliance** - Supports auditing requirements by offering a clear and immutable log of session activities.
 
 ---
 
 # Data Source: intersight_terminal_audit_log
-Audit log of remote terminal user sessions.
+### Overview  
+The AuditLog object captures and records the audit trail of remote terminal user sessions. This provides a comprehensive history of user interactions with terminal sessions, ensuring accountability and traceability of actions performed.
+#### Purpose
+The primary purpose of an AuditLog is to maintain a detailed record of all remote terminal user sessions. This record is crucial for security, compliance, and troubleshooting, allowing administrators to review who accessed what, when, and for how long, thereby ensuring operational transparency and accountability.
+#### Key Concepts
+- **Session Tracking** - Records key events and timestamps related to the opening and closing of terminal sessions. 
+- **Accountability** - The audit log object records only the session metadata, specifically the start and end times for a given user and device. It does not capture or retain the detailed contents of the session itself. 
+- **Security and Compliance** - Supports auditing requirements by offering a clear and immutable log of session activities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

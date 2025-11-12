@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,17 +28,30 @@ type EquipmentExpanderModule struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Firmware Version of the Chassis expander module.
+	FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
+	// The inventory ready field indicates whether the chassis expander module management controller has completed inventory of the installed devices.
+	InventoryReady *bool `json:"InventoryReady,omitempty"`
 	// Module identifier for the expander module.
 	ModuleId   *int64   `json:"ModuleId,omitempty"`
 	OperReason []string `json:"OperReason,omitempty"`
 	// Operational state of expander module.
 	OperState *string `json:"OperState,omitempty"`
 	// Part number identifier for the expander module.
-	PartNumber       *string                              `json:"PartNumber,omitempty"`
+	PartNumber *string `json:"PartNumber,omitempty"`
+	// Location of the expander module within a chassis. The value can be top or bottom. * `unknown` - Physical location of the module is unknown. * `top` - Physical location of the module is on the top part of the chassis. * `bottom` - Physical location of the module is on the bottom part of the chassis. * `left` - Physical location of the module is on the left side of the chassis. * `right` - Physical location of the module is on the right side of the chassis.
+	Side             *string                              `json:"Side,omitempty"`
 	EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
-	FanModules           []EquipmentFanModuleRelationship            `json:"FanModules,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	FanModules []EquipmentFanModuleRelationship `json:"FanModules,omitempty"`
+	// An array of relationships to pciSwitch resources.
+	PciSwitches []PciSwitchRelationship `json:"PciSwitches,omitempty"`
+	// An array of relationships to pciZone resources.
+	PciZones                   []PciZoneRelationship                       `json:"PciZones,omitempty"`
+	PhysicalDeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"PhysicalDeviceRegistration,omitempty"`
+	RegisteredDevice           NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	// An array of relationships to equipmentSharedAdapterUnit resources.
+	SharedAdapterUnits   []EquipmentSharedAdapterUnitRelationship `json:"SharedAdapterUnits,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,6 +136,70 @@ func (o *EquipmentExpanderModule) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "equipment.ExpanderModule" of the ObjectType field.
 func (o *EquipmentExpanderModule) GetDefaultObjectType() interface{} {
 	return "equipment.ExpanderModule"
+}
+
+// GetFirmwareVersion returns the FirmwareVersion field value if set, zero value otherwise.
+func (o *EquipmentExpanderModule) GetFirmwareVersion() string {
+	if o == nil || IsNil(o.FirmwareVersion) {
+		var ret string
+		return ret
+	}
+	return *o.FirmwareVersion
+}
+
+// GetFirmwareVersionOk returns a tuple with the FirmwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentExpanderModule) GetFirmwareVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.FirmwareVersion) {
+		return nil, false
+	}
+	return o.FirmwareVersion, true
+}
+
+// HasFirmwareVersion returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasFirmwareVersion() bool {
+	if o != nil && !IsNil(o.FirmwareVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirmwareVersion gets a reference to the given string and assigns it to the FirmwareVersion field.
+func (o *EquipmentExpanderModule) SetFirmwareVersion(v string) {
+	o.FirmwareVersion = &v
+}
+
+// GetInventoryReady returns the InventoryReady field value if set, zero value otherwise.
+func (o *EquipmentExpanderModule) GetInventoryReady() bool {
+	if o == nil || IsNil(o.InventoryReady) {
+		var ret bool
+		return ret
+	}
+	return *o.InventoryReady
+}
+
+// GetInventoryReadyOk returns a tuple with the InventoryReady field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentExpanderModule) GetInventoryReadyOk() (*bool, bool) {
+	if o == nil || IsNil(o.InventoryReady) {
+		return nil, false
+	}
+	return o.InventoryReady, true
+}
+
+// HasInventoryReady returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasInventoryReady() bool {
+	if o != nil && !IsNil(o.InventoryReady) {
+		return true
+	}
+
+	return false
+}
+
+// SetInventoryReady gets a reference to the given bool and assigns it to the InventoryReady field.
+func (o *EquipmentExpanderModule) SetInventoryReady(v bool) {
+	o.InventoryReady = &v
 }
 
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
@@ -254,6 +331,38 @@ func (o *EquipmentExpanderModule) SetPartNumber(v string) {
 	o.PartNumber = &v
 }
 
+// GetSide returns the Side field value if set, zero value otherwise.
+func (o *EquipmentExpanderModule) GetSide() string {
+	if o == nil || IsNil(o.Side) {
+		var ret string
+		return ret
+	}
+	return *o.Side
+}
+
+// GetSideOk returns a tuple with the Side field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentExpanderModule) GetSideOk() (*string, bool) {
+	if o == nil || IsNil(o.Side) {
+		return nil, false
+	}
+	return o.Side, true
+}
+
+// HasSide returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasSide() bool {
+	if o != nil && !IsNil(o.Side) {
+		return true
+	}
+
+	return false
+}
+
+// SetSide gets a reference to the given string and assigns it to the Side field.
+func (o *EquipmentExpanderModule) SetSide(v string) {
+	o.Side = &v
+}
+
 // GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentExpanderModule) GetEquipmentChassis() EquipmentChassisRelationship {
 	if o == nil || IsNil(o.EquipmentChassis.Get()) {
@@ -330,6 +439,115 @@ func (o *EquipmentExpanderModule) SetFanModules(v []EquipmentFanModuleRelationsh
 	o.FanModules = v
 }
 
+// GetPciSwitches returns the PciSwitches field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentExpanderModule) GetPciSwitches() []PciSwitchRelationship {
+	if o == nil {
+		var ret []PciSwitchRelationship
+		return ret
+	}
+	return o.PciSwitches
+}
+
+// GetPciSwitchesOk returns a tuple with the PciSwitches field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentExpanderModule) GetPciSwitchesOk() ([]PciSwitchRelationship, bool) {
+	if o == nil || IsNil(o.PciSwitches) {
+		return nil, false
+	}
+	return o.PciSwitches, true
+}
+
+// HasPciSwitches returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasPciSwitches() bool {
+	if o != nil && !IsNil(o.PciSwitches) {
+		return true
+	}
+
+	return false
+}
+
+// SetPciSwitches gets a reference to the given []PciSwitchRelationship and assigns it to the PciSwitches field.
+func (o *EquipmentExpanderModule) SetPciSwitches(v []PciSwitchRelationship) {
+	o.PciSwitches = v
+}
+
+// GetPciZones returns the PciZones field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentExpanderModule) GetPciZones() []PciZoneRelationship {
+	if o == nil {
+		var ret []PciZoneRelationship
+		return ret
+	}
+	return o.PciZones
+}
+
+// GetPciZonesOk returns a tuple with the PciZones field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentExpanderModule) GetPciZonesOk() ([]PciZoneRelationship, bool) {
+	if o == nil || IsNil(o.PciZones) {
+		return nil, false
+	}
+	return o.PciZones, true
+}
+
+// HasPciZones returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasPciZones() bool {
+	if o != nil && !IsNil(o.PciZones) {
+		return true
+	}
+
+	return false
+}
+
+// SetPciZones gets a reference to the given []PciZoneRelationship and assigns it to the PciZones field.
+func (o *EquipmentExpanderModule) SetPciZones(v []PciZoneRelationship) {
+	o.PciZones = v
+}
+
+// GetPhysicalDeviceRegistration returns the PhysicalDeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentExpanderModule) GetPhysicalDeviceRegistration() AssetDeviceRegistrationRelationship {
+	if o == nil || IsNil(o.PhysicalDeviceRegistration.Get()) {
+		var ret AssetDeviceRegistrationRelationship
+		return ret
+	}
+	return *o.PhysicalDeviceRegistration.Get()
+}
+
+// GetPhysicalDeviceRegistrationOk returns a tuple with the PhysicalDeviceRegistration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentExpanderModule) GetPhysicalDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PhysicalDeviceRegistration.Get(), o.PhysicalDeviceRegistration.IsSet()
+}
+
+// HasPhysicalDeviceRegistration returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasPhysicalDeviceRegistration() bool {
+	if o != nil && o.PhysicalDeviceRegistration.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPhysicalDeviceRegistration gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the PhysicalDeviceRegistration field.
+func (o *EquipmentExpanderModule) SetPhysicalDeviceRegistration(v AssetDeviceRegistrationRelationship) {
+	o.PhysicalDeviceRegistration.Set(&v)
+}
+
+// SetPhysicalDeviceRegistrationNil sets the value for PhysicalDeviceRegistration to be an explicit nil
+func (o *EquipmentExpanderModule) SetPhysicalDeviceRegistrationNil() {
+	o.PhysicalDeviceRegistration.Set(nil)
+}
+
+// UnsetPhysicalDeviceRegistration ensures that no value is present for PhysicalDeviceRegistration, not even an explicit nil
+func (o *EquipmentExpanderModule) UnsetPhysicalDeviceRegistration() {
+	o.PhysicalDeviceRegistration.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentExpanderModule) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -373,6 +591,39 @@ func (o *EquipmentExpanderModule) UnsetRegisteredDevice() {
 	o.RegisteredDevice.Unset()
 }
 
+// GetSharedAdapterUnits returns the SharedAdapterUnits field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentExpanderModule) GetSharedAdapterUnits() []EquipmentSharedAdapterUnitRelationship {
+	if o == nil {
+		var ret []EquipmentSharedAdapterUnitRelationship
+		return ret
+	}
+	return o.SharedAdapterUnits
+}
+
+// GetSharedAdapterUnitsOk returns a tuple with the SharedAdapterUnits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentExpanderModule) GetSharedAdapterUnitsOk() ([]EquipmentSharedAdapterUnitRelationship, bool) {
+	if o == nil || IsNil(o.SharedAdapterUnits) {
+		return nil, false
+	}
+	return o.SharedAdapterUnits, true
+}
+
+// HasSharedAdapterUnits returns a boolean if a field has been set.
+func (o *EquipmentExpanderModule) HasSharedAdapterUnits() bool {
+	if o != nil && !IsNil(o.SharedAdapterUnits) {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedAdapterUnits gets a reference to the given []EquipmentSharedAdapterUnitRelationship and assigns it to the SharedAdapterUnits field.
+func (o *EquipmentExpanderModule) SetSharedAdapterUnits(v []EquipmentSharedAdapterUnitRelationship) {
+	o.SharedAdapterUnits = v
+}
+
 func (o EquipmentExpanderModule) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -399,6 +650,12 @@ func (o EquipmentExpanderModule) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FirmwareVersion) {
+		toSerialize["FirmwareVersion"] = o.FirmwareVersion
+	}
+	if !IsNil(o.InventoryReady) {
+		toSerialize["InventoryReady"] = o.InventoryReady
+	}
 	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
@@ -411,14 +668,29 @@ func (o EquipmentExpanderModule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
+	if !IsNil(o.Side) {
+		toSerialize["Side"] = o.Side
+	}
 	if o.EquipmentChassis.IsSet() {
 		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
 	if o.FanModules != nil {
 		toSerialize["FanModules"] = o.FanModules
 	}
+	if o.PciSwitches != nil {
+		toSerialize["PciSwitches"] = o.PciSwitches
+	}
+	if o.PciZones != nil {
+		toSerialize["PciZones"] = o.PciZones
+	}
+	if o.PhysicalDeviceRegistration.IsSet() {
+		toSerialize["PhysicalDeviceRegistration"] = o.PhysicalDeviceRegistration.Get()
+	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
+	}
+	if o.SharedAdapterUnits != nil {
+		toSerialize["SharedAdapterUnits"] = o.SharedAdapterUnits
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -475,17 +747,30 @@ func (o *EquipmentExpanderModule) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Firmware Version of the Chassis expander module.
+		FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
+		// The inventory ready field indicates whether the chassis expander module management controller has completed inventory of the installed devices.
+		InventoryReady *bool `json:"InventoryReady,omitempty"`
 		// Module identifier for the expander module.
 		ModuleId   *int64   `json:"ModuleId,omitempty"`
 		OperReason []string `json:"OperReason,omitempty"`
 		// Operational state of expander module.
 		OperState *string `json:"OperState,omitempty"`
 		// Part number identifier for the expander module.
-		PartNumber       *string                              `json:"PartNumber,omitempty"`
+		PartNumber *string `json:"PartNumber,omitempty"`
+		// Location of the expander module within a chassis. The value can be top or bottom. * `unknown` - Physical location of the module is unknown. * `top` - Physical location of the module is on the top part of the chassis. * `bottom` - Physical location of the module is on the bottom part of the chassis. * `left` - Physical location of the module is on the left side of the chassis. * `right` - Physical location of the module is on the right side of the chassis.
+		Side             *string                              `json:"Side,omitempty"`
 		EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 		// An array of relationships to equipmentFanModule resources.
-		FanModules       []EquipmentFanModuleRelationship            `json:"FanModules,omitempty"`
-		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		FanModules []EquipmentFanModuleRelationship `json:"FanModules,omitempty"`
+		// An array of relationships to pciSwitch resources.
+		PciSwitches []PciSwitchRelationship `json:"PciSwitches,omitempty"`
+		// An array of relationships to pciZone resources.
+		PciZones                   []PciZoneRelationship                       `json:"PciZones,omitempty"`
+		PhysicalDeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"PhysicalDeviceRegistration,omitempty"`
+		RegisteredDevice           NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		// An array of relationships to equipmentSharedAdapterUnit resources.
+		SharedAdapterUnits []EquipmentSharedAdapterUnitRelationship `json:"SharedAdapterUnits,omitempty"`
 	}
 
 	varEquipmentExpanderModuleWithoutEmbeddedStruct := EquipmentExpanderModuleWithoutEmbeddedStruct{}
@@ -495,13 +780,20 @@ func (o *EquipmentExpanderModule) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentExpanderModule := _EquipmentExpanderModule{}
 		varEquipmentExpanderModule.ClassId = varEquipmentExpanderModuleWithoutEmbeddedStruct.ClassId
 		varEquipmentExpanderModule.ObjectType = varEquipmentExpanderModuleWithoutEmbeddedStruct.ObjectType
+		varEquipmentExpanderModule.FirmwareVersion = varEquipmentExpanderModuleWithoutEmbeddedStruct.FirmwareVersion
+		varEquipmentExpanderModule.InventoryReady = varEquipmentExpanderModuleWithoutEmbeddedStruct.InventoryReady
 		varEquipmentExpanderModule.ModuleId = varEquipmentExpanderModuleWithoutEmbeddedStruct.ModuleId
 		varEquipmentExpanderModule.OperReason = varEquipmentExpanderModuleWithoutEmbeddedStruct.OperReason
 		varEquipmentExpanderModule.OperState = varEquipmentExpanderModuleWithoutEmbeddedStruct.OperState
 		varEquipmentExpanderModule.PartNumber = varEquipmentExpanderModuleWithoutEmbeddedStruct.PartNumber
+		varEquipmentExpanderModule.Side = varEquipmentExpanderModuleWithoutEmbeddedStruct.Side
 		varEquipmentExpanderModule.EquipmentChassis = varEquipmentExpanderModuleWithoutEmbeddedStruct.EquipmentChassis
 		varEquipmentExpanderModule.FanModules = varEquipmentExpanderModuleWithoutEmbeddedStruct.FanModules
+		varEquipmentExpanderModule.PciSwitches = varEquipmentExpanderModuleWithoutEmbeddedStruct.PciSwitches
+		varEquipmentExpanderModule.PciZones = varEquipmentExpanderModuleWithoutEmbeddedStruct.PciZones
+		varEquipmentExpanderModule.PhysicalDeviceRegistration = varEquipmentExpanderModuleWithoutEmbeddedStruct.PhysicalDeviceRegistration
 		varEquipmentExpanderModule.RegisteredDevice = varEquipmentExpanderModuleWithoutEmbeddedStruct.RegisteredDevice
+		varEquipmentExpanderModule.SharedAdapterUnits = varEquipmentExpanderModuleWithoutEmbeddedStruct.SharedAdapterUnits
 		*o = EquipmentExpanderModule(varEquipmentExpanderModule)
 	} else {
 		return err
@@ -521,13 +813,20 @@ func (o *EquipmentExpanderModule) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "FirmwareVersion")
+		delete(additionalProperties, "InventoryReady")
 		delete(additionalProperties, "ModuleId")
 		delete(additionalProperties, "OperReason")
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "PartNumber")
+		delete(additionalProperties, "Side")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "FanModules")
+		delete(additionalProperties, "PciSwitches")
+		delete(additionalProperties, "PciZones")
+		delete(additionalProperties, "PhysicalDeviceRegistration")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "SharedAdapterUnits")
 
 		// remove fields from embedded structs
 		reflectEquipmentBase := reflect.ValueOf(o.EquipmentBase)

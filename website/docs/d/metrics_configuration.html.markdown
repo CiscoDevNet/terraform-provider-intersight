@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_metrics_c
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `collect_new_devices`:(string) The behavior of the system when new resources are added, controls whether metric collection are automatically enabled for the new resources.* `AutoEnable` - Automatically enable metric collection for new resources, up to the limit of resource collection.* `Disabled` - Metrics will not be enabled on new resources, to enable collection requires an explicit user enable. 
+* `collection_granularity`:(string) The current supported collection granularity by the system, defined as the lowest granularity supported, with the actual granularity per resource determined by the license tier of the resource. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `enabled`:(bool) Enables metric collection for the account, if disabled metrics will be stopped for all resources in the account. 

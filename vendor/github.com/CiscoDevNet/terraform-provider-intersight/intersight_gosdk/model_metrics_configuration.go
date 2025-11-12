@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type MetricsConfiguration struct {
 	ObjectType string `json:"ObjectType"`
 	// The behavior of the system when new resources are added, controls whether metric collection are automatically enabled for the new resources. * `AutoEnable` - Automatically enable metric collection for new resources, up to the limit of resource collection. * `Disabled` - Metrics will not be enabled on new resources, to enable collection requires an explicit user enable.
 	CollectNewDevices *string `json:"CollectNewDevices,omitempty"`
+	// The current supported collection granularity by the system, defined as the lowest granularity supported, with the actual granularity per resource determined by the license tier of the resource.
+	CollectionGranularity *string `json:"CollectionGranularity,omitempty"`
 	// Enables metric collection for the account, if disabled metrics will be stopped for all resources in the account.
 	Enabled *bool `json:"Enabled,omitempty"`
 	// The total number of resources that can be enabled for metric collection in this account.
@@ -155,6 +157,38 @@ func (o *MetricsConfiguration) HasCollectNewDevices() bool {
 // SetCollectNewDevices gets a reference to the given string and assigns it to the CollectNewDevices field.
 func (o *MetricsConfiguration) SetCollectNewDevices(v string) {
 	o.CollectNewDevices = &v
+}
+
+// GetCollectionGranularity returns the CollectionGranularity field value if set, zero value otherwise.
+func (o *MetricsConfiguration) GetCollectionGranularity() string {
+	if o == nil || IsNil(o.CollectionGranularity) {
+		var ret string
+		return ret
+	}
+	return *o.CollectionGranularity
+}
+
+// GetCollectionGranularityOk returns a tuple with the CollectionGranularity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricsConfiguration) GetCollectionGranularityOk() (*string, bool) {
+	if o == nil || IsNil(o.CollectionGranularity) {
+		return nil, false
+	}
+	return o.CollectionGranularity, true
+}
+
+// HasCollectionGranularity returns a boolean if a field has been set.
+func (o *MetricsConfiguration) HasCollectionGranularity() bool {
+	if o != nil && !IsNil(o.CollectionGranularity) {
+		return true
+	}
+
+	return false
+}
+
+// SetCollectionGranularity gets a reference to the given string and assigns it to the CollectionGranularity field.
+func (o *MetricsConfiguration) SetCollectionGranularity(v string) {
+	o.CollectionGranularity = &v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -293,6 +327,9 @@ func (o MetricsConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CollectNewDevices) {
 		toSerialize["CollectNewDevices"] = o.CollectNewDevices
 	}
+	if !IsNil(o.CollectionGranularity) {
+		toSerialize["CollectionGranularity"] = o.CollectionGranularity
+	}
 	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
@@ -359,6 +396,8 @@ func (o *MetricsConfiguration) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The behavior of the system when new resources are added, controls whether metric collection are automatically enabled for the new resources. * `AutoEnable` - Automatically enable metric collection for new resources, up to the limit of resource collection. * `Disabled` - Metrics will not be enabled on new resources, to enable collection requires an explicit user enable.
 		CollectNewDevices *string `json:"CollectNewDevices,omitempty"`
+		// The current supported collection granularity by the system, defined as the lowest granularity supported, with the actual granularity per resource determined by the license tier of the resource.
+		CollectionGranularity *string `json:"CollectionGranularity,omitempty"`
 		// Enables metric collection for the account, if disabled metrics will be stopped for all resources in the account.
 		Enabled *bool `json:"Enabled,omitempty"`
 		// The total number of resources that can be enabled for metric collection in this account.
@@ -374,6 +413,7 @@ func (o *MetricsConfiguration) UnmarshalJSON(data []byte) (err error) {
 		varMetricsConfiguration.ClassId = varMetricsConfigurationWithoutEmbeddedStruct.ClassId
 		varMetricsConfiguration.ObjectType = varMetricsConfigurationWithoutEmbeddedStruct.ObjectType
 		varMetricsConfiguration.CollectNewDevices = varMetricsConfigurationWithoutEmbeddedStruct.CollectNewDevices
+		varMetricsConfiguration.CollectionGranularity = varMetricsConfigurationWithoutEmbeddedStruct.CollectionGranularity
 		varMetricsConfiguration.Enabled = varMetricsConfigurationWithoutEmbeddedStruct.Enabled
 		varMetricsConfiguration.Limit = varMetricsConfigurationWithoutEmbeddedStruct.Limit
 		varMetricsConfiguration.Account = varMetricsConfigurationWithoutEmbeddedStruct.Account
@@ -397,6 +437,7 @@ func (o *MetricsConfiguration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CollectNewDevices")
+		delete(additionalProperties, "CollectionGranularity")
 		delete(additionalProperties, "Enabled")
 		delete(additionalProperties, "Limit")
 		delete(additionalProperties, "Account")

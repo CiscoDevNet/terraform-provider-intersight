@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PermissionReference"]
 **PermissionIdentifier** | Pointer to **string** | MOID of the permission which user has access to. | [optional] [readonly] 
 **PermissionName** | Pointer to **string** | Name of the permission which user has access to. | [optional] [readonly] 
+**UserGroupMappings** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +119,41 @@ SetPermissionName sets PermissionName field to given value.
 
 HasPermissionName returns a boolean if a field has been set.
 
+### GetUserGroupMappings
+
+`func (o *IamPermissionReference) GetUserGroupMappings() []MoMoRef`
+
+GetUserGroupMappings returns the UserGroupMappings field if non-nil, zero value otherwise.
+
+### GetUserGroupMappingsOk
+
+`func (o *IamPermissionReference) GetUserGroupMappingsOk() (*[]MoMoRef, bool)`
+
+GetUserGroupMappingsOk returns a tuple with the UserGroupMappings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserGroupMappings
+
+`func (o *IamPermissionReference) SetUserGroupMappings(v []MoMoRef)`
+
+SetUserGroupMappings sets UserGroupMappings field to given value.
+
+### HasUserGroupMappings
+
+`func (o *IamPermissionReference) HasUserGroupMappings() bool`
+
+HasUserGroupMappings returns a boolean if a field has been set.
+
+### SetUserGroupMappingsNil
+
+`func (o *IamPermissionReference) SetUserGroupMappingsNil(b bool)`
+
+ SetUserGroupMappingsNil sets the value for UserGroupMappings to be an explicit nil
+
+### UnsetUserGroupMappings
+`func (o *IamPermissionReference) UnsetUserGroupMappings()`
+
+UnsetUserGroupMappings ensures that no value is present for UserGroupMappings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

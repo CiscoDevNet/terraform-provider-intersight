@@ -3,12 +3,36 @@ subcategory: "changelog"
 layout: "intersight"
 page_title: "Intersight: intersight_changelog_item"
 description: |-
-        An API contract changelog item. It represents an item of contract changes between the version indicated by the attribute semanticVersion and the previous version.
+        # Overview
+        The Item object serves as a pivotal component within the API contract changelog system,
+        representing individual changes as specified by version attributes.
+        It acts as a concrete entity within the changelog package, enabling precise tracking and management of updates across semantic and date versions.
+        ## Purpose
+        The Item object encapsulates and manages changes within the API contract,
+        providing a structured approach to version tracking and documentation.
+        It ensures that changes are recorded with detailed versioning information, supporting clarity and consistency across the API lifecycle.
+        ## Key Concepts
+        - **Version Control** – Supports semantic versioning to track changes systematically, ensuring smooth transitions across different API states.
+        - **Access Control** – Privilege sets dictate access and operations, ensuring only authorized users can read, create, update, or delete changelog items.
+        - **Catalog Integration** – Closely linked with catalogs, providing a structured environment for storing and retrieving version-related information.
+        - **Identity Management** – Uses identity properties to prevent duplication, ensuring updates reflect the latest modifications without creating redundant entries.
 
 ---
 
 # Resource: intersight_changelog_item
-An API contract changelog item. It represents an item of contract changes between the version indicated by the attribute semanticVersion and the previous version.
+# Overview
+The Item object serves as a pivotal component within the API contract changelog system,  
+representing individual changes as specified by version attributes.  
+It acts as a concrete entity within the changelog package, enabling precise tracking and management of updates across semantic and date versions.
+## Purpose
+The Item object encapsulates and manages changes within the API contract,  
+providing a structured approach to version tracking and documentation.  
+It ensures that changes are recorded with detailed versioning information, supporting clarity and consistency across the API lifecycle.
+## Key Concepts
+- **Version Control** – Supports semantic versioning to track changes systematically, ensuring smooth transitions across different API states.
+- **Access Control** – Privilege sets dictate access and operations, ensuring only authorized users can read, create, update, or delete changelog items.
+- **Catalog Integration** – Closely linked with catalogs, providing a structured environment for storing and retrieving version-related information.
+- **Identity Management** – Uses identity properties to prevent duplication, ensuring updates reflect the latest modifications without creating redundant entries.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -23,9 +47,9 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
-* `date_version`:(string) The date version for the API contract changelog item in the format rfc3339 with no fraction seconds set.  Note that there can be more than one item per DateVersion. Example: 2023-12-19T00:00:00Z . 
+* `date_version`:(string) Date version for the API contract changelog item in rfc3339 format, without fractional seconds. Note, multiple items can exist for a single DateVersion. Example: 2023-12-19T00:00:00Z . 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `entity`:(string) The operationId of the endpoint for which changelog item is being generated. 
+* `entity`:(string) Operation Id of the endpoint for which the changelog item is generated. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:
@@ -40,13 +64,25 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `semantic_version`:(string) The semantic version for the API contract changelog item. Note that there can be more than one item per SemanticVersion. 
+* `semantic_version`:(string) Semantic version for the API contract changelog item. Note, multiple items can exist for a single SemanticVersion. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
-* `value`:(string) The value of the API contract changelog item. 
+* `value`:(string) The value associated with the API contract changelog item. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

@@ -3,12 +3,30 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_instance"
 description: |-
-        Instance of an Intersight advisory applicable for an Intersight managed object. An advisory instance is created when a given advisory is found applicable for an Intersight managed object. An advisory instance is retained for some time even after being cleared for historical purposes. A 'cleared' advisory instance is deleted after the retention time is elaspsed.
+        ### Overview
+        The AdvisoryInstance object represents instances of advisories applicable to Intersight managed objects,
+        maintaining advisory applicability and state changes.
+        #### Purpose
+        AdvisoryInstance tracks the lifecycle and applicability of advisories for specific managed objects,
+        ensuring users have visibility into which devices or components are impacted and require resolution.
+        #### Key Concepts
+        - **Lifecycle Tracking** - Maintains records of advisory applicability, including state changes over time.
+        - **Managed Object Integration** - Directly links advisories to affected managed objects for precise applicability.
+        - **Controlled Access** - Provides access and management capabilities based on administrative privileges.
 
 ---
 
 # Resource: intersight_tam_advisory_instance
-Instance of an Intersight advisory applicable for an Intersight managed object. An advisory instance is created when a given advisory is found applicable for an Intersight managed object. An advisory instance is retained for some time even after being cleared for historical purposes. A 'cleared' advisory instance is deleted after the retention time is elaspsed.
+### Overview
+The AdvisoryInstance object represents instances of advisories applicable to Intersight managed objects,  
+maintaining advisory applicability and state changes.
+#### Purpose
+AdvisoryInstance tracks the lifecycle and applicability of advisories for specific managed objects,  
+ensuring users have visibility into which devices or components are impacted and require resolution.
+#### Key Concepts
+- **Lifecycle Tracking** - Maintains records of advisory applicability, including state changes over time.
+- **Managed Object Integration** - Directly links advisories to affected managed objects for precise applicability.
+- **Controlled Access** - Provides access and management capabilities based on administrative privileges.
 ## Usage Example
 ### Resource Creation
 
@@ -64,7 +82,19 @@ This complex property has following sub-properties:
 * `state`:(string) Current state of the advisory instance (Active/Cleared/Unknown etc.).* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.* `active` - Advisory instance is currently active and applicable for the affected managed object.* `cleared` - Advisory instance is no longer applicable for the affected managed object. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -37,6 +37,14 @@ type ComputePhysical struct {
 	AvailableMemory *int64 `json:"AvailableMemory,omitempty"`
 	// The BIOS POST completion status of the server.
 	BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
+	// The BMC inventory readiness status of the server.
+	BmcInventoryReady *bool `json:"BmcInventoryReady,omitempty"`
+	// The boot progress state of a rack or blade server. * `None` - The server is powered off. * `OSBootStarted` - The operating system boot process has started. * `OSRunning` - The operating system boot process has started and running. * `OEM` - The server is in an OEM-defined startup state.
+	BootLastState *string `json:"BootLastState,omitempty"`
+	// The last known OEM-defined startup state of a rack or blade server. * `None` - The server has not yet completed OEM initialization. * `PlatformInitializing` - The server is initializing after being powered on.
+	BootOemLastState *string `json:"BootOemLastState,omitempty"`
+	// Cooling mode representation of the server. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
+	CoolingMode *string `json:"CoolingMode,omitempty"`
 	// Total processing capacity of the server.
 	CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 	// The DIMM Blocklisting setting configured on the server. * `Unknown` - The configured state is unknown. * `Enabled` - The configured state is enabled. * `Disabled` - The configured state is disabled.
@@ -47,12 +55,16 @@ type ComputePhysical struct {
 	// The actual front panel state of the server. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 	FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 	// The universally unique hardware identity of the server provided by the manufacturer.
-	HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
+	HardwareUuid *string `json:"HardwareUuid,omitempty"`
+	// The flag to indicate server has the support for E3.S drives.
+	HasE3SSupport  *bool              `json:"HasE3SSupport,omitempty"`
 	KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 	// The KVM server state of the server.
 	KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
 	// The KVM Vendor for the server.
 	KvmVendor *string `json:"KvmVendor,omitempty"`
+	// The Last host power state changed time of the server.
+	LastPowerStateChangedTime *string `json:"LastPowerStateChangedTime,omitempty"`
 	// The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `ScrubInProgress` - Scrub is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. * `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.
 	Lifecycle *string `json:"Lifecycle,omitempty"`
 	// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
@@ -372,6 +384,134 @@ func (o *ComputePhysical) SetBiosPostComplete(v bool) {
 	o.BiosPostComplete = &v
 }
 
+// GetBmcInventoryReady returns the BmcInventoryReady field value if set, zero value otherwise.
+func (o *ComputePhysical) GetBmcInventoryReady() bool {
+	if o == nil || IsNil(o.BmcInventoryReady) {
+		var ret bool
+		return ret
+	}
+	return *o.BmcInventoryReady
+}
+
+// GetBmcInventoryReadyOk returns a tuple with the BmcInventoryReady field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetBmcInventoryReadyOk() (*bool, bool) {
+	if o == nil || IsNil(o.BmcInventoryReady) {
+		return nil, false
+	}
+	return o.BmcInventoryReady, true
+}
+
+// HasBmcInventoryReady returns a boolean if a field has been set.
+func (o *ComputePhysical) HasBmcInventoryReady() bool {
+	if o != nil && !IsNil(o.BmcInventoryReady) {
+		return true
+	}
+
+	return false
+}
+
+// SetBmcInventoryReady gets a reference to the given bool and assigns it to the BmcInventoryReady field.
+func (o *ComputePhysical) SetBmcInventoryReady(v bool) {
+	o.BmcInventoryReady = &v
+}
+
+// GetBootLastState returns the BootLastState field value if set, zero value otherwise.
+func (o *ComputePhysical) GetBootLastState() string {
+	if o == nil || IsNil(o.BootLastState) {
+		var ret string
+		return ret
+	}
+	return *o.BootLastState
+}
+
+// GetBootLastStateOk returns a tuple with the BootLastState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetBootLastStateOk() (*string, bool) {
+	if o == nil || IsNil(o.BootLastState) {
+		return nil, false
+	}
+	return o.BootLastState, true
+}
+
+// HasBootLastState returns a boolean if a field has been set.
+func (o *ComputePhysical) HasBootLastState() bool {
+	if o != nil && !IsNil(o.BootLastState) {
+		return true
+	}
+
+	return false
+}
+
+// SetBootLastState gets a reference to the given string and assigns it to the BootLastState field.
+func (o *ComputePhysical) SetBootLastState(v string) {
+	o.BootLastState = &v
+}
+
+// GetBootOemLastState returns the BootOemLastState field value if set, zero value otherwise.
+func (o *ComputePhysical) GetBootOemLastState() string {
+	if o == nil || IsNil(o.BootOemLastState) {
+		var ret string
+		return ret
+	}
+	return *o.BootOemLastState
+}
+
+// GetBootOemLastStateOk returns a tuple with the BootOemLastState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetBootOemLastStateOk() (*string, bool) {
+	if o == nil || IsNil(o.BootOemLastState) {
+		return nil, false
+	}
+	return o.BootOemLastState, true
+}
+
+// HasBootOemLastState returns a boolean if a field has been set.
+func (o *ComputePhysical) HasBootOemLastState() bool {
+	if o != nil && !IsNil(o.BootOemLastState) {
+		return true
+	}
+
+	return false
+}
+
+// SetBootOemLastState gets a reference to the given string and assigns it to the BootOemLastState field.
+func (o *ComputePhysical) SetBootOemLastState(v string) {
+	o.BootOemLastState = &v
+}
+
+// GetCoolingMode returns the CoolingMode field value if set, zero value otherwise.
+func (o *ComputePhysical) GetCoolingMode() string {
+	if o == nil || IsNil(o.CoolingMode) {
+		var ret string
+		return ret
+	}
+	return *o.CoolingMode
+}
+
+// GetCoolingModeOk returns a tuple with the CoolingMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetCoolingModeOk() (*string, bool) {
+	if o == nil || IsNil(o.CoolingMode) {
+		return nil, false
+	}
+	return o.CoolingMode, true
+}
+
+// HasCoolingMode returns a boolean if a field has been set.
+func (o *ComputePhysical) HasCoolingMode() bool {
+	if o != nil && !IsNil(o.CoolingMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoolingMode gets a reference to the given string and assigns it to the CoolingMode field.
+func (o *ComputePhysical) SetCoolingMode(v string) {
+	o.CoolingMode = &v
+}
+
 // GetCpuCapacity returns the CpuCapacity field value if set, zero value otherwise.
 func (o *ComputePhysical) GetCpuCapacity() float32 {
 	if o == nil || IsNil(o.CpuCapacity) {
@@ -535,6 +675,38 @@ func (o *ComputePhysical) SetHardwareUuid(v string) {
 	o.HardwareUuid = &v
 }
 
+// GetHasE3SSupport returns the HasE3SSupport field value if set, zero value otherwise.
+func (o *ComputePhysical) GetHasE3SSupport() bool {
+	if o == nil || IsNil(o.HasE3SSupport) {
+		var ret bool
+		return ret
+	}
+	return *o.HasE3SSupport
+}
+
+// GetHasE3SSupportOk returns a tuple with the HasE3SSupport field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetHasE3SSupportOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasE3SSupport) {
+		return nil, false
+	}
+	return o.HasE3SSupport, true
+}
+
+// HasHasE3SSupport returns a boolean if a field has been set.
+func (o *ComputePhysical) HasHasE3SSupport() bool {
+	if o != nil && !IsNil(o.HasE3SSupport) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasE3SSupport gets a reference to the given bool and assigns it to the HasE3SSupport field.
+func (o *ComputePhysical) SetHasE3SSupport(v bool) {
+	o.HasE3SSupport = &v
+}
+
 // GetKvmIpAddresses returns the KvmIpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputePhysical) GetKvmIpAddresses() []ComputeIpAddress {
 	if o == nil {
@@ -630,6 +802,38 @@ func (o *ComputePhysical) HasKvmVendor() bool {
 // SetKvmVendor gets a reference to the given string and assigns it to the KvmVendor field.
 func (o *ComputePhysical) SetKvmVendor(v string) {
 	o.KvmVendor = &v
+}
+
+// GetLastPowerStateChangedTime returns the LastPowerStateChangedTime field value if set, zero value otherwise.
+func (o *ComputePhysical) GetLastPowerStateChangedTime() string {
+	if o == nil || IsNil(o.LastPowerStateChangedTime) {
+		var ret string
+		return ret
+	}
+	return *o.LastPowerStateChangedTime
+}
+
+// GetLastPowerStateChangedTimeOk returns a tuple with the LastPowerStateChangedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetLastPowerStateChangedTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.LastPowerStateChangedTime) {
+		return nil, false
+	}
+	return o.LastPowerStateChangedTime, true
+}
+
+// HasLastPowerStateChangedTime returns a boolean if a field has been set.
+func (o *ComputePhysical) HasLastPowerStateChangedTime() bool {
+	if o != nil && !IsNil(o.LastPowerStateChangedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastPowerStateChangedTime gets a reference to the given string and assigns it to the LastPowerStateChangedTime field.
+func (o *ComputePhysical) SetLastPowerStateChangedTime(v string) {
+	o.LastPowerStateChangedTime = &v
 }
 
 // GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
@@ -1864,6 +2068,18 @@ func (o ComputePhysical) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BiosPostComplete) {
 		toSerialize["BiosPostComplete"] = o.BiosPostComplete
 	}
+	if !IsNil(o.BmcInventoryReady) {
+		toSerialize["BmcInventoryReady"] = o.BmcInventoryReady
+	}
+	if !IsNil(o.BootLastState) {
+		toSerialize["BootLastState"] = o.BootLastState
+	}
+	if !IsNil(o.BootOemLastState) {
+		toSerialize["BootOemLastState"] = o.BootOemLastState
+	}
+	if !IsNil(o.CoolingMode) {
+		toSerialize["CoolingMode"] = o.CoolingMode
+	}
 	if !IsNil(o.CpuCapacity) {
 		toSerialize["CpuCapacity"] = o.CpuCapacity
 	}
@@ -1879,6 +2095,9 @@ func (o ComputePhysical) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HardwareUuid) {
 		toSerialize["HardwareUuid"] = o.HardwareUuid
 	}
+	if !IsNil(o.HasE3SSupport) {
+		toSerialize["HasE3SSupport"] = o.HasE3SSupport
+	}
 	if o.KvmIpAddresses != nil {
 		toSerialize["KvmIpAddresses"] = o.KvmIpAddresses
 	}
@@ -1887,6 +2106,9 @@ func (o ComputePhysical) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.KvmVendor) {
 		toSerialize["KvmVendor"] = o.KvmVendor
+	}
+	if !IsNil(o.LastPowerStateChangedTime) {
+		toSerialize["LastPowerStateChangedTime"] = o.LastPowerStateChangedTime
 	}
 	if !IsNil(o.Lifecycle) {
 		toSerialize["Lifecycle"] = o.Lifecycle
@@ -2057,6 +2279,14 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		AvailableMemory *int64 `json:"AvailableMemory,omitempty"`
 		// The BIOS POST completion status of the server.
 		BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
+		// The BMC inventory readiness status of the server.
+		BmcInventoryReady *bool `json:"BmcInventoryReady,omitempty"`
+		// The boot progress state of a rack or blade server. * `None` - The server is powered off. * `OSBootStarted` - The operating system boot process has started. * `OSRunning` - The operating system boot process has started and running. * `OEM` - The server is in an OEM-defined startup state.
+		BootLastState *string `json:"BootLastState,omitempty"`
+		// The last known OEM-defined startup state of a rack or blade server. * `None` - The server has not yet completed OEM initialization. * `PlatformInitializing` - The server is initializing after being powered on.
+		BootOemLastState *string `json:"BootOemLastState,omitempty"`
+		// Cooling mode representation of the server. * `Air` - Cooling mode of the device is set to Air. * `Immersion` - Cooling mode of the device is set to Immersion.
+		CoolingMode *string `json:"CoolingMode,omitempty"`
 		// Total processing capacity of the server.
 		CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 		// The DIMM Blocklisting setting configured on the server. * `Unknown` - The configured state is unknown. * `Enabled` - The configured state is enabled. * `Disabled` - The configured state is disabled.
@@ -2067,12 +2297,16 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		// The actual front panel state of the server. * `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * `Lock` - Front Panel of the server is set to Locked state. * `Unlock` - Front Panel of the server is set to Unlocked state.
 		FrontPanelLockState *string `json:"FrontPanelLockState,omitempty"`
 		// The universally unique hardware identity of the server provided by the manufacturer.
-		HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
+		HardwareUuid *string `json:"HardwareUuid,omitempty"`
+		// The flag to indicate server has the support for E3.S drives.
+		HasE3SSupport  *bool              `json:"HasE3SSupport,omitempty"`
 		KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 		// The KVM server state of the server.
 		KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
 		// The KVM Vendor for the server.
 		KvmVendor *string `json:"KvmVendor,omitempty"`
+		// The Last host power state changed time of the server.
+		LastPowerStateChangedTime *string `json:"LastPowerStateChangedTime,omitempty"`
 		// The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `ScrubInProgress` - Scrub is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. * `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.
 		Lifecycle *string `json:"Lifecycle,omitempty"`
 		// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
@@ -2155,14 +2389,20 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysical.AssetTag = varComputePhysicalWithoutEmbeddedStruct.AssetTag
 		varComputePhysical.AvailableMemory = varComputePhysicalWithoutEmbeddedStruct.AvailableMemory
 		varComputePhysical.BiosPostComplete = varComputePhysicalWithoutEmbeddedStruct.BiosPostComplete
+		varComputePhysical.BmcInventoryReady = varComputePhysicalWithoutEmbeddedStruct.BmcInventoryReady
+		varComputePhysical.BootLastState = varComputePhysicalWithoutEmbeddedStruct.BootLastState
+		varComputePhysical.BootOemLastState = varComputePhysicalWithoutEmbeddedStruct.BootOemLastState
+		varComputePhysical.CoolingMode = varComputePhysicalWithoutEmbeddedStruct.CoolingMode
 		varComputePhysical.CpuCapacity = varComputePhysicalWithoutEmbeddedStruct.CpuCapacity
 		varComputePhysical.DimmBlocklisting = varComputePhysicalWithoutEmbeddedStruct.DimmBlocklisting
 		varComputePhysical.FaultSummary = varComputePhysicalWithoutEmbeddedStruct.FaultSummary
 		varComputePhysical.FrontPanelLockState = varComputePhysicalWithoutEmbeddedStruct.FrontPanelLockState
 		varComputePhysical.HardwareUuid = varComputePhysicalWithoutEmbeddedStruct.HardwareUuid
+		varComputePhysical.HasE3SSupport = varComputePhysicalWithoutEmbeddedStruct.HasE3SSupport
 		varComputePhysical.KvmIpAddresses = varComputePhysicalWithoutEmbeddedStruct.KvmIpAddresses
 		varComputePhysical.KvmServerStateEnabled = varComputePhysicalWithoutEmbeddedStruct.KvmServerStateEnabled
 		varComputePhysical.KvmVendor = varComputePhysicalWithoutEmbeddedStruct.KvmVendor
+		varComputePhysical.LastPowerStateChangedTime = varComputePhysicalWithoutEmbeddedStruct.LastPowerStateChangedTime
 		varComputePhysical.Lifecycle = varComputePhysicalWithoutEmbeddedStruct.Lifecycle
 		varComputePhysical.ManagementMode = varComputePhysicalWithoutEmbeddedStruct.ManagementMode
 		varComputePhysical.MemorySpeed = varComputePhysicalWithoutEmbeddedStruct.MemorySpeed
@@ -2223,14 +2463,20 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AssetTag")
 		delete(additionalProperties, "AvailableMemory")
 		delete(additionalProperties, "BiosPostComplete")
+		delete(additionalProperties, "BmcInventoryReady")
+		delete(additionalProperties, "BootLastState")
+		delete(additionalProperties, "BootOemLastState")
+		delete(additionalProperties, "CoolingMode")
 		delete(additionalProperties, "CpuCapacity")
 		delete(additionalProperties, "DimmBlocklisting")
 		delete(additionalProperties, "FaultSummary")
 		delete(additionalProperties, "FrontPanelLockState")
 		delete(additionalProperties, "HardwareUuid")
+		delete(additionalProperties, "HasE3SSupport")
 		delete(additionalProperties, "KvmIpAddresses")
 		delete(additionalProperties, "KvmServerStateEnabled")
 		delete(additionalProperties, "KvmVendor")
+		delete(additionalProperties, "LastPowerStateChangedTime")
 		delete(additionalProperties, "Lifecycle")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "MemorySpeed")

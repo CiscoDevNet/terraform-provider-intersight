@@ -26,8 +26,10 @@ Name | Type | Description | Notes
 **ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**ConnectedPcieDevices** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**PciEndpoint** | Pointer to [**NullablePciEndpointRelationship**](PciEndpointRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -629,6 +631,41 @@ HasComputeRackUnit returns a boolean if a field has been set.
 `func (o *ProcessorUnit) UnsetComputeRackUnit()`
 
 UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+### GetConnectedPcieDevices
+
+`func (o *ProcessorUnit) GetConnectedPcieDevices() []MoBaseMoRelationship`
+
+GetConnectedPcieDevices returns the ConnectedPcieDevices field if non-nil, zero value otherwise.
+
+### GetConnectedPcieDevicesOk
+
+`func (o *ProcessorUnit) GetConnectedPcieDevicesOk() (*[]MoBaseMoRelationship, bool)`
+
+GetConnectedPcieDevicesOk returns a tuple with the ConnectedPcieDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectedPcieDevices
+
+`func (o *ProcessorUnit) SetConnectedPcieDevices(v []MoBaseMoRelationship)`
+
+SetConnectedPcieDevices sets ConnectedPcieDevices field to given value.
+
+### HasConnectedPcieDevices
+
+`func (o *ProcessorUnit) HasConnectedPcieDevices() bool`
+
+HasConnectedPcieDevices returns a boolean if a field has been set.
+
+### SetConnectedPcieDevicesNil
+
+`func (o *ProcessorUnit) SetConnectedPcieDevicesNil(b bool)`
+
+ SetConnectedPcieDevicesNil sets the value for ConnectedPcieDevices to be an explicit nil
+
+### UnsetConnectedPcieDevices
+`func (o *ProcessorUnit) UnsetConnectedPcieDevices()`
+
+UnsetConnectedPcieDevices ensures that no value is present for ConnectedPcieDevices, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *ProcessorUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -699,6 +736,41 @@ HasNetworkElement returns a boolean if a field has been set.
 `func (o *ProcessorUnit) UnsetNetworkElement()`
 
 UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+### GetPciEndpoint
+
+`func (o *ProcessorUnit) GetPciEndpoint() PciEndpointRelationship`
+
+GetPciEndpoint returns the PciEndpoint field if non-nil, zero value otherwise.
+
+### GetPciEndpointOk
+
+`func (o *ProcessorUnit) GetPciEndpointOk() (*PciEndpointRelationship, bool)`
+
+GetPciEndpointOk returns a tuple with the PciEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciEndpoint
+
+`func (o *ProcessorUnit) SetPciEndpoint(v PciEndpointRelationship)`
+
+SetPciEndpoint sets PciEndpoint field to given value.
+
+### HasPciEndpoint
+
+`func (o *ProcessorUnit) HasPciEndpoint() bool`
+
+HasPciEndpoint returns a boolean if a field has been set.
+
+### SetPciEndpointNil
+
+`func (o *ProcessorUnit) SetPciEndpointNil(b bool)`
+
+ SetPciEndpointNil sets the value for PciEndpoint to be an explicit nil
+
+### UnsetPciEndpoint
+`func (o *ProcessorUnit) UnsetPciEndpoint()`
+
+UnsetPciEndpoint ensures that no value is present for PciEndpoint, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ProcessorUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

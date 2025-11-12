@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,8 +28,18 @@ type StoragePureVolumeSnapshot struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+	Pod *string `json:"Pod,omitempty"`
 	// Unique serial number of the snapshot allocated by the storage array.
-	Serial                  *string                                                `json:"Serial,omitempty"`
+	Serial *string `json:"Serial,omitempty"`
+	// The size of the snapshot created.
+	SnapshotSize *int64 `json:"SnapshotSize,omitempty"`
+	// The overall size of the snapshot allocated by the storage array.
+	TotalProvisioned *int64 `json:"TotalProvisioned,omitempty"`
+	// The used size of the snapshot allocated by the storage array.
+	UsedProvisioned *int64 `json:"UsedProvisioned,omitempty"`
+	// Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine.
+	VolumeGroup             *string                                                `json:"VolumeGroup,omitempty"`
 	Array                   NullableStoragePureArrayRelationship                   `json:"Array,omitempty"`
 	ProtectionGroupSnapshot NullableStoragePureProtectionGroupSnapshotRelationship `json:"ProtectionGroupSnapshot,omitempty"`
 	RegisteredDevice        NullableAssetDeviceRegistrationRelationship            `json:"RegisteredDevice,omitempty"`
@@ -120,6 +130,38 @@ func (o *StoragePureVolumeSnapshot) GetDefaultObjectType() interface{} {
 	return "storage.PureVolumeSnapshot"
 }
 
+// GetPod returns the Pod field value if set, zero value otherwise.
+func (o *StoragePureVolumeSnapshot) GetPod() string {
+	if o == nil || IsNil(o.Pod) {
+		var ret string
+		return ret
+	}
+	return *o.Pod
+}
+
+// GetPodOk returns a tuple with the Pod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolumeSnapshot) GetPodOk() (*string, bool) {
+	if o == nil || IsNil(o.Pod) {
+		return nil, false
+	}
+	return o.Pod, true
+}
+
+// HasPod returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasPod() bool {
+	if o != nil && !IsNil(o.Pod) {
+		return true
+	}
+
+	return false
+}
+
+// SetPod gets a reference to the given string and assigns it to the Pod field.
+func (o *StoragePureVolumeSnapshot) SetPod(v string) {
+	o.Pod = &v
+}
+
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *StoragePureVolumeSnapshot) GetSerial() string {
 	if o == nil || IsNil(o.Serial) {
@@ -150,6 +192,134 @@ func (o *StoragePureVolumeSnapshot) HasSerial() bool {
 // SetSerial gets a reference to the given string and assigns it to the Serial field.
 func (o *StoragePureVolumeSnapshot) SetSerial(v string) {
 	o.Serial = &v
+}
+
+// GetSnapshotSize returns the SnapshotSize field value if set, zero value otherwise.
+func (o *StoragePureVolumeSnapshot) GetSnapshotSize() int64 {
+	if o == nil || IsNil(o.SnapshotSize) {
+		var ret int64
+		return ret
+	}
+	return *o.SnapshotSize
+}
+
+// GetSnapshotSizeOk returns a tuple with the SnapshotSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolumeSnapshot) GetSnapshotSizeOk() (*int64, bool) {
+	if o == nil || IsNil(o.SnapshotSize) {
+		return nil, false
+	}
+	return o.SnapshotSize, true
+}
+
+// HasSnapshotSize returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasSnapshotSize() bool {
+	if o != nil && !IsNil(o.SnapshotSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnapshotSize gets a reference to the given int64 and assigns it to the SnapshotSize field.
+func (o *StoragePureVolumeSnapshot) SetSnapshotSize(v int64) {
+	o.SnapshotSize = &v
+}
+
+// GetTotalProvisioned returns the TotalProvisioned field value if set, zero value otherwise.
+func (o *StoragePureVolumeSnapshot) GetTotalProvisioned() int64 {
+	if o == nil || IsNil(o.TotalProvisioned) {
+		var ret int64
+		return ret
+	}
+	return *o.TotalProvisioned
+}
+
+// GetTotalProvisionedOk returns a tuple with the TotalProvisioned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolumeSnapshot) GetTotalProvisionedOk() (*int64, bool) {
+	if o == nil || IsNil(o.TotalProvisioned) {
+		return nil, false
+	}
+	return o.TotalProvisioned, true
+}
+
+// HasTotalProvisioned returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasTotalProvisioned() bool {
+	if o != nil && !IsNil(o.TotalProvisioned) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalProvisioned gets a reference to the given int64 and assigns it to the TotalProvisioned field.
+func (o *StoragePureVolumeSnapshot) SetTotalProvisioned(v int64) {
+	o.TotalProvisioned = &v
+}
+
+// GetUsedProvisioned returns the UsedProvisioned field value if set, zero value otherwise.
+func (o *StoragePureVolumeSnapshot) GetUsedProvisioned() int64 {
+	if o == nil || IsNil(o.UsedProvisioned) {
+		var ret int64
+		return ret
+	}
+	return *o.UsedProvisioned
+}
+
+// GetUsedProvisionedOk returns a tuple with the UsedProvisioned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolumeSnapshot) GetUsedProvisionedOk() (*int64, bool) {
+	if o == nil || IsNil(o.UsedProvisioned) {
+		return nil, false
+	}
+	return o.UsedProvisioned, true
+}
+
+// HasUsedProvisioned returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasUsedProvisioned() bool {
+	if o != nil && !IsNil(o.UsedProvisioned) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsedProvisioned gets a reference to the given int64 and assigns it to the UsedProvisioned field.
+func (o *StoragePureVolumeSnapshot) SetUsedProvisioned(v int64) {
+	o.UsedProvisioned = &v
+}
+
+// GetVolumeGroup returns the VolumeGroup field value if set, zero value otherwise.
+func (o *StoragePureVolumeSnapshot) GetVolumeGroup() string {
+	if o == nil || IsNil(o.VolumeGroup) {
+		var ret string
+		return ret
+	}
+	return *o.VolumeGroup
+}
+
+// GetVolumeGroupOk returns a tuple with the VolumeGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolumeSnapshot) GetVolumeGroupOk() (*string, bool) {
+	if o == nil || IsNil(o.VolumeGroup) {
+		return nil, false
+	}
+	return o.VolumeGroup, true
+}
+
+// HasVolumeGroup returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasVolumeGroup() bool {
+	if o != nil && !IsNil(o.VolumeGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeGroup gets a reference to the given string and assigns it to the VolumeGroup field.
+func (o *StoragePureVolumeSnapshot) SetVolumeGroup(v string) {
+	o.VolumeGroup = &v
 }
 
 // GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -350,8 +520,23 @@ func (o StoragePureVolumeSnapshot) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Pod) {
+		toSerialize["Pod"] = o.Pod
+	}
 	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
+	}
+	if !IsNil(o.SnapshotSize) {
+		toSerialize["SnapshotSize"] = o.SnapshotSize
+	}
+	if !IsNil(o.TotalProvisioned) {
+		toSerialize["TotalProvisioned"] = o.TotalProvisioned
+	}
+	if !IsNil(o.UsedProvisioned) {
+		toSerialize["UsedProvisioned"] = o.UsedProvisioned
+	}
+	if !IsNil(o.VolumeGroup) {
+		toSerialize["VolumeGroup"] = o.VolumeGroup
 	}
 	if o.Array.IsSet() {
 		toSerialize["Array"] = o.Array.Get()
@@ -420,8 +605,18 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+		Pod *string `json:"Pod,omitempty"`
 		// Unique serial number of the snapshot allocated by the storage array.
-		Serial                  *string                                                `json:"Serial,omitempty"`
+		Serial *string `json:"Serial,omitempty"`
+		// The size of the snapshot created.
+		SnapshotSize *int64 `json:"SnapshotSize,omitempty"`
+		// The overall size of the snapshot allocated by the storage array.
+		TotalProvisioned *int64 `json:"TotalProvisioned,omitempty"`
+		// The used size of the snapshot allocated by the storage array.
+		UsedProvisioned *int64 `json:"UsedProvisioned,omitempty"`
+		// Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine.
+		VolumeGroup             *string                                                `json:"VolumeGroup,omitempty"`
 		Array                   NullableStoragePureArrayRelationship                   `json:"Array,omitempty"`
 		ProtectionGroupSnapshot NullableStoragePureProtectionGroupSnapshotRelationship `json:"ProtectionGroupSnapshot,omitempty"`
 		RegisteredDevice        NullableAssetDeviceRegistrationRelationship            `json:"RegisteredDevice,omitempty"`
@@ -435,7 +630,12 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		varStoragePureVolumeSnapshot := _StoragePureVolumeSnapshot{}
 		varStoragePureVolumeSnapshot.ClassId = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.ClassId
 		varStoragePureVolumeSnapshot.ObjectType = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.ObjectType
+		varStoragePureVolumeSnapshot.Pod = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Pod
 		varStoragePureVolumeSnapshot.Serial = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Serial
+		varStoragePureVolumeSnapshot.SnapshotSize = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.SnapshotSize
+		varStoragePureVolumeSnapshot.TotalProvisioned = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.TotalProvisioned
+		varStoragePureVolumeSnapshot.UsedProvisioned = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.UsedProvisioned
+		varStoragePureVolumeSnapshot.VolumeGroup = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.VolumeGroup
 		varStoragePureVolumeSnapshot.Array = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Array
 		varStoragePureVolumeSnapshot.ProtectionGroupSnapshot = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.ProtectionGroupSnapshot
 		varStoragePureVolumeSnapshot.RegisteredDevice = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.RegisteredDevice
@@ -459,7 +659,12 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Pod")
 		delete(additionalProperties, "Serial")
+		delete(additionalProperties, "SnapshotSize")
+		delete(additionalProperties, "TotalProvisioned")
+		delete(additionalProperties, "UsedProvisioned")
+		delete(additionalProperties, "VolumeGroup")
 		delete(additionalProperties, "Array")
 		delete(additionalProperties, "ProtectionGroupSnapshot")
 		delete(additionalProperties, "RegisteredDevice")

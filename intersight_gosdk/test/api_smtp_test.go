@@ -35,6 +35,18 @@ func Test_intersight_SmtpApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test SmtpApiService CreateSmtpPolicyTest", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.SmtpApi.CreateSmtpPolicyTest(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SmtpApiService DeleteSmtpPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -42,6 +54,19 @@ func Test_intersight_SmtpApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.SmtpApi.DeleteSmtpPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SmtpApiService DeleteSmtpPolicyTest", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.SmtpApi.DeleteSmtpPolicyTest(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -74,6 +99,32 @@ func Test_intersight_SmtpApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test SmtpApiService GetSmtpPolicyTestByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SmtpApi.GetSmtpPolicyTestByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SmtpApiService GetSmtpPolicyTestList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.SmtpApi.GetSmtpPolicyTestList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SmtpApiService PatchSmtpPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -88,6 +139,20 @@ func Test_intersight_SmtpApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test SmtpApiService PatchSmtpPolicyTest", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SmtpApi.PatchSmtpPolicyTest(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SmtpApiService UpdateSmtpPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -95,6 +160,20 @@ func Test_intersight_SmtpApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.SmtpApi.UpdateSmtpPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SmtpApiService UpdateSmtpPolicyTest", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.SmtpApi.UpdateSmtpPolicyTest(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

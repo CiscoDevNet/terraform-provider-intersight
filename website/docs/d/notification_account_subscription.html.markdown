@@ -3,21 +3,47 @@ subcategory: "notification"
 layout: "intersight"
 page_title: "Intersight: intersight_notification_account_subscription"
 description: |-
-        AccountSubscription is a concrete type that extends abstract Subscription type and intent to be used only
-        for account level subscriptions by Account Administrator.
+        # Overview
+        The AccountSubscription object is a crucial component of the Intersight notification framework,
+        designed to facilitate account-level subscriptions managed by Account Administrators.
+        It provides a structured way to handle notifications based on specific events within an account,
+        ensuring administrators can effectively configure and manage subscription settings.
+        ## Purpose
+        The AccountSubscription object enables administrators to set up notifications for various account events.
+        It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+        ## Key Concepts
+        - **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+        - **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
+        - **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+        - **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+        - **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
 
 ---
 
 # Data Source: intersight_notification_account_subscription
-AccountSubscription is a concrete type that extends abstract Subscription type and intent to be used only
-for account level subscriptions by Account Administrator.
+# Overview
+The AccountSubscription object is a crucial component of the Intersight notification framework,  
+designed to facilitate account-level subscriptions managed by Account Administrators.  
+It provides a structured way to handle notifications based on specific events within an account,  
+ensuring administrators can effectively configure and manage subscription settings.
+## Purpose
+The AccountSubscription object enables administrators to set up notifications for various account events.  
+It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+## Key Concepts
+- **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+- **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
+- **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+- **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+- **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_notification_account_subscription.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `condition_operator`:(string) Operation that binds all the different conditions together.* `All` - All is an AND condition applied against the individual conditions.* `Any` - Any is an OR condition applied against the individual conditions. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) The description for the subscription. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `enabled`:(bool) Subscription can be switched on/off without necessity to change the subscriptionsettings: notification methods, conditions, etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string) The time when this managed object was last modified. 

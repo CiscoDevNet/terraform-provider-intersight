@@ -26,6 +26,11 @@ resource "intersight_capability_switch_capability" "capability_switch_capability
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `allowed_uplink_pc_id_range`:(HashMap) -(ReadOnly) Range of port-channel IDs supported on this switch. 
+This complex property has following sub-properties:
+  + `end_pc_id`:(int) Ending Port-Channel ID in this range of port-channels. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `start_pc_id`:(int) Starting Port-Channel ID in this range of port-channels. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -45,9 +50,26 @@ This complex property has following sub-properties:
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `fc_uplink_ports_auto_negotiation_supported`:(bool)(ReadOnly) Fc Uplink ports auto negotiation speed support on this switch. 
 * `imm_controls_vpcompression`:(bool)(ReadOnly) VlanPort Compression is controlled by IMM. 
+* `inter_cluster_link_vlan_supported`:(bool)(ReadOnly) Inter cluster link vlan support on this switch. 
 * `locator_beacon_supported`:(bool)(ReadOnly) Locator Beacon LED support on this switch. 
+* `macsec_supported_ports`:(Array)
+This complex property has following sub-properties:
+  + `end_port_id`:(int) Ending Port ID in this range of ports. 
+  + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `start_port_id`:(int) Starting Port ID in this range of ports. 
+  + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `max_ports`:(int)(ReadOnly) Maximum allowed physical ports on this switch. 
 * `max_slots`:(int)(ReadOnly) Maximum allowed physical slots on this switch. 
+* `min_version_map_for_switch_features`:(Array)
+This complex property has following sub-properties:
+  + `feature_name`:(string)(ReadOnly) Name of the feature for which the version map is applicable.* `Unknown` - Unknown or Invalid feature in the equipment.* `ServerRole` - Server Role support for Fabric Interconnect Direct Hardware.* `FIAuditd` - AuditD feature for Fabric Interconnect. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `version_map`:(HashMap) -(ReadOnly) Maps device firmware version to bundle version. 
+This complex property has following sub-properties:
+    + `bundle_version`:(string)(ReadOnly) Bundle version. Usually the first released bundle containing the specific device firmware version. 
+    + `device_firmware_version`:(string)(ReadOnly) Bundled device firmware version. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `min_version_map_with_breakout_support`:(HashMap) -(ReadOnly) Minimum firmware version supported for breakout ports on this switch. 
 This complex property has following sub-properties:
   + `bundle_version`:(string)(ReadOnly) Bundle version. Usually the first released bundle containing the specific device firmware version. 
@@ -96,7 +118,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.* `unknown` - Unknown device type, usage is TBD. 
+* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.* `UCS-FI-6652` - The standard 6th generation UCS Fabric Interconnect.* `UCSXE-ECMC-10G` - Cisco UCS XE ECMC 10G with 2 ports.* `UCSXE-ECMC-G1` - Cisco UCS XE ECMC G1 with 2 ports.* `unknown` - Unknown device type, usage is TBD. 
 * `ports_supporting100g_speed`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
@@ -132,6 +154,13 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
+* `ports_supporting_appliance_role`:(Array)
+This complex property has following sub-properties:
+  + `end_port_id`:(int) Ending Port ID in this range of ports. 
+  + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `start_port_id`:(int) Starting Port ID in this range of ports. 
+  + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting_breakout`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
@@ -140,6 +169,13 @@ This complex property has following sub-properties:
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting_fcoe`:(Array)
+This complex property has following sub-properties:
+  + `end_port_id`:(int) Ending Port ID in this range of ports. 
+  + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `start_port_id`:(int) Starting Port ID in this range of ports. 
+  + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
+* `ports_supporting_inter_cluster_link`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
@@ -186,8 +222,22 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
+* `un_supported_equipment_model`:
+                (Array of schema.TypeString) -
 * `unified_ports`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 

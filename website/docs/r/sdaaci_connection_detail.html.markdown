@@ -3,12 +3,12 @@ subcategory: "sdaaci"
 layout: "intersight"
 page_title: "Intersight: intersight_sdaaci_connection_detail"
 description: |-
-        Peer connection details for each connection.
+        Peer connection details for all connections.
 
 ---
 
 # Resource: intersight_sdaaci_connection_detail
-Peer connection details for each connection.
+Peer connection details for all connections.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -23,10 +23,10 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
-* `description`:(string) Description of this connection between two peers. 
+* `description`:(string) Description of the connection between the two peers. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `ip_pool`:(string) Id of the ip pool configured for this connection. 
-* `layer3_handoff_id`:(string) Id of layer 3 handoff configured between a border node and a border leaf. 
+* `ip_pool`:(string) Ip pool Id configured for this connection. 
+* `layer3_handoff_id`:(string) Layer 3 handoff Id configured between a border node and a border leaf. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:
@@ -36,25 +36,37 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `peer_ainterface`:(string) Interface id configured on Peer A. 
-* `peer_aip_address`:(string) The IP Address of the device used as the local peer. 
-* `peer_atype`:(string) Type of device used as Peer A for this peer connection. 
-* `peer_binterface`:(string) Interface id configured on Peer B. 
-* `peer_bip_address`:(string) The IP Address of the device used as the remote peer. 
-* `peer_btype`:(string) Type of device used as Peer B for this peer connection. 
-* `peera`:(string) First peer of the connection. 
-* `peerb`:(string) Second Peer of the connection. 
+* `peer_ainterface`:(string) Interface Id configured on Peer A. 
+* `peer_aip_address`:(string) IP address of the device used as the local peer. 
+* `peer_atype`:(string) Type of device used as Peer A in this peer connection. 
+* `peer_binterface`:(string) Interface Id configured on Peer B. 
+* `peer_bip_address`:(string) IP address of the device used as the remote peer. 
+* `peer_btype`:(string) Type of device used as Peer B in this peer connection. 
+* `peera`:(string) First peer in the connection. 
+* `peerb`:(string) Second peer in the connection. 
 * `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `router_id`:(string) Router id defined for this peer connection. 
+* `router_id`:(string) Router Id defined for this peer connection. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `status`:(string) Connection status between the peers.* `NotConnected` - Connection Status NotConnected.* `Connected` - Connection Status Connected. 
+* `status`:(string) Connection status between the peers.* `NotConnected` - Status of the connection:Not connected.* `Connected` - Status of the connection:Connected. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -22,43 +22,43 @@ import (
 // checks if the UcsdBackupInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UcsdBackupInfo{}
 
-// UcsdBackupInfo List of backup images available for target end device for restore operation.
+// UcsdBackupInfo Available backup images for target device restoration.
 type UcsdBackupInfo struct {
 	RecoveryAbstractBackupInfo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Auto generated backup File Name with combination of file prefix given an user input and the timestamp.
+	// Auto generated backup file name with user defined prefix and timestamp.
 	BackupFileName *string `json:"BackupFileName,omitempty"`
-	// Backup location that contains the backup images for end device which can be used for restore operation.
+	// Backup location for restore operation.
 	BackupLocation *string `json:"BackupLocation,omitempty"`
-	// Backup server where backup images are maintained.
+	// Backup server for storing backup images.
 	BackupServerIp *string `json:"BackupServerIp,omitempty"`
-	// Size of the backup image in bytes.
+	// Backup image size in bytes.
 	BackupSize *int64              `json:"BackupSize,omitempty"`
 	Connectors []UcsdConnectorPack `json:"Connectors,omitempty"`
-	// Time taken for the backup to be completed.
+	// Time taken to complete the backup.
 	Duration *int64 `json:"Duration,omitempty"`
-	// The key used for encrypting the backup file.
+	// Encryption key for backup file.
 	EncryptionKey *string `json:"EncryptionKey,omitempty"`
-	// Reason for backup failure.
+	// The cause of the backup failure.
 	FailureReason *string `json:"FailureReason,omitempty"`
-	// Backup image got purged or not. The backup images get purged based on the retention count set by the user in the backup config policy.
+	// Backup image purge status based on retention policy.
 	IsPurged *bool `json:"IsPurged,omitempty"`
-	// Last modified time when this backup record got updated.
+	// Backup record last modified time.
 	LastModified *time.Time `json:"LastModified,omitempty"`
-	// Backup current precentage completion status information.
+	// Backup completion percentage status.
 	PercentageCompletion *int64 `json:"PercentageCompletion,omitempty"`
-	// The end device product version when the backup image was taken.
+	// End device product version at the backup time.
 	ProductVersion *string `json:"ProductVersion,omitempty"`
-	// Protocol used for the remote backup. possible values are FTP, SCP and SFTP. Not applicable for the localhost (127.0.0.1).
+	// Supported remote backup protocol (FTP, SCP and SFTP); not applicable for localhost (127.0.0.1).
 	Protocol *string `json:"Protocol,omitempty"`
-	// Backup current status stage information.
+	// Backup status stage information.
 	StageCompletion *string `json:"StageCompletion,omitempty"`
-	// Start time of backup when it got initiated.
+	// Backup initiation start time.
 	StartTime *time.Time `json:"StartTime,omitempty"`
-	// Current status of Backup current.
+	// The current backup status.
 	Status               *string `json:"Status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -788,36 +788,36 @@ func (o *UcsdBackupInfo) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Auto generated backup File Name with combination of file prefix given an user input and the timestamp.
+		// Auto generated backup file name with user defined prefix and timestamp.
 		BackupFileName *string `json:"BackupFileName,omitempty"`
-		// Backup location that contains the backup images for end device which can be used for restore operation.
+		// Backup location for restore operation.
 		BackupLocation *string `json:"BackupLocation,omitempty"`
-		// Backup server where backup images are maintained.
+		// Backup server for storing backup images.
 		BackupServerIp *string `json:"BackupServerIp,omitempty"`
-		// Size of the backup image in bytes.
+		// Backup image size in bytes.
 		BackupSize *int64              `json:"BackupSize,omitempty"`
 		Connectors []UcsdConnectorPack `json:"Connectors,omitempty"`
-		// Time taken for the backup to be completed.
+		// Time taken to complete the backup.
 		Duration *int64 `json:"Duration,omitempty"`
-		// The key used for encrypting the backup file.
+		// Encryption key for backup file.
 		EncryptionKey *string `json:"EncryptionKey,omitempty"`
-		// Reason for backup failure.
+		// The cause of the backup failure.
 		FailureReason *string `json:"FailureReason,omitempty"`
-		// Backup image got purged or not. The backup images get purged based on the retention count set by the user in the backup config policy.
+		// Backup image purge status based on retention policy.
 		IsPurged *bool `json:"IsPurged,omitempty"`
-		// Last modified time when this backup record got updated.
+		// Backup record last modified time.
 		LastModified *time.Time `json:"LastModified,omitempty"`
-		// Backup current precentage completion status information.
+		// Backup completion percentage status.
 		PercentageCompletion *int64 `json:"PercentageCompletion,omitempty"`
-		// The end device product version when the backup image was taken.
+		// End device product version at the backup time.
 		ProductVersion *string `json:"ProductVersion,omitempty"`
-		// Protocol used for the remote backup. possible values are FTP, SCP and SFTP. Not applicable for the localhost (127.0.0.1).
+		// Supported remote backup protocol (FTP, SCP and SFTP); not applicable for localhost (127.0.0.1).
 		Protocol *string `json:"Protocol,omitempty"`
-		// Backup current status stage information.
+		// Backup status stage information.
 		StageCompletion *string `json:"StageCompletion,omitempty"`
-		// Start time of backup when it got initiated.
+		// Backup initiation start time.
 		StartTime *time.Time `json:"StartTime,omitempty"`
-		// Current status of Backup current.
+		// The current backup status.
 		Status *string `json:"Status,omitempty"`
 	}
 

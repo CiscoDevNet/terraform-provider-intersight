@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -31,7 +31,9 @@ type StorageNvmeRaidConfiguration struct {
 	// The storage controller Dn Name for which Nvme RAID is created at endpoint.
 	ControllerDn *string `json:"ControllerDn,omitempty"`
 	// The storage controller Moid for which Nvme RAID creation is supported.
-	ControllerMoid       *string                                  `json:"ControllerMoid,omitempty"`
+	ControllerMoid *string `json:"ControllerMoid,omitempty"`
+	// Describes series of the installed controller. This will be used in the activation step after reboot to calculate the different parameters w.r.t specific controller series.
+	ControllerSeries     *string                                  `json:"ControllerSeries,omitempty"`
 	DiskStates           []StorageNvmePhysicalDiskState           `json:"DiskStates,omitempty"`
 	DriveGroups          []StorageNvmeRaidDriveGroup              `json:"DriveGroups,omitempty"`
 	ServerProfile        NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
@@ -184,6 +186,38 @@ func (o *StorageNvmeRaidConfiguration) HasControllerMoid() bool {
 // SetControllerMoid gets a reference to the given string and assigns it to the ControllerMoid field.
 func (o *StorageNvmeRaidConfiguration) SetControllerMoid(v string) {
 	o.ControllerMoid = &v
+}
+
+// GetControllerSeries returns the ControllerSeries field value if set, zero value otherwise.
+func (o *StorageNvmeRaidConfiguration) GetControllerSeries() string {
+	if o == nil || IsNil(o.ControllerSeries) {
+		var ret string
+		return ret
+	}
+	return *o.ControllerSeries
+}
+
+// GetControllerSeriesOk returns a tuple with the ControllerSeries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNvmeRaidConfiguration) GetControllerSeriesOk() (*string, bool) {
+	if o == nil || IsNil(o.ControllerSeries) {
+		return nil, false
+	}
+	return o.ControllerSeries, true
+}
+
+// HasControllerSeries returns a boolean if a field has been set.
+func (o *StorageNvmeRaidConfiguration) HasControllerSeries() bool {
+	if o != nil && !IsNil(o.ControllerSeries) {
+		return true
+	}
+
+	return false
+}
+
+// SetControllerSeries gets a reference to the given string and assigns it to the ControllerSeries field.
+func (o *StorageNvmeRaidConfiguration) SetControllerSeries(v string) {
+	o.ControllerSeries = &v
 }
 
 // GetDiskStates returns the DiskStates field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -370,6 +404,9 @@ func (o StorageNvmeRaidConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ControllerMoid) {
 		toSerialize["ControllerMoid"] = o.ControllerMoid
 	}
+	if !IsNil(o.ControllerSeries) {
+		toSerialize["ControllerSeries"] = o.ControllerSeries
+	}
 	if o.DiskStates != nil {
 		toSerialize["DiskStates"] = o.DiskStates
 	}
@@ -440,11 +477,13 @@ func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(data []byte) (err error) {
 		// The storage controller Dn Name for which Nvme RAID is created at endpoint.
 		ControllerDn *string `json:"ControllerDn,omitempty"`
 		// The storage controller Moid for which Nvme RAID creation is supported.
-		ControllerMoid *string                                  `json:"ControllerMoid,omitempty"`
-		DiskStates     []StorageNvmePhysicalDiskState           `json:"DiskStates,omitempty"`
-		DriveGroups    []StorageNvmeRaidDriveGroup              `json:"DriveGroups,omitempty"`
-		ServerProfile  NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
-		StoragePolicy  NullableStorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
+		ControllerMoid *string `json:"ControllerMoid,omitempty"`
+		// Describes series of the installed controller. This will be used in the activation step after reboot to calculate the different parameters w.r.t specific controller series.
+		ControllerSeries *string                                  `json:"ControllerSeries,omitempty"`
+		DiskStates       []StorageNvmePhysicalDiskState           `json:"DiskStates,omitempty"`
+		DriveGroups      []StorageNvmeRaidDriveGroup              `json:"DriveGroups,omitempty"`
+		ServerProfile    NullableServerProfileRelationship        `json:"ServerProfile,omitempty"`
+		StoragePolicy    NullableStorageStoragePolicyRelationship `json:"StoragePolicy,omitempty"`
 	}
 
 	varStorageNvmeRaidConfigurationWithoutEmbeddedStruct := StorageNvmeRaidConfigurationWithoutEmbeddedStruct{}
@@ -456,6 +495,7 @@ func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(data []byte) (err error) {
 		varStorageNvmeRaidConfiguration.ObjectType = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.ObjectType
 		varStorageNvmeRaidConfiguration.ControllerDn = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.ControllerDn
 		varStorageNvmeRaidConfiguration.ControllerMoid = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.ControllerMoid
+		varStorageNvmeRaidConfiguration.ControllerSeries = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.ControllerSeries
 		varStorageNvmeRaidConfiguration.DiskStates = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.DiskStates
 		varStorageNvmeRaidConfiguration.DriveGroups = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.DriveGroups
 		varStorageNvmeRaidConfiguration.ServerProfile = varStorageNvmeRaidConfigurationWithoutEmbeddedStruct.ServerProfile
@@ -481,6 +521,7 @@ func (o *StorageNvmeRaidConfiguration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ControllerDn")
 		delete(additionalProperties, "ControllerMoid")
+		delete(additionalProperties, "ControllerSeries")
 		delete(additionalProperties, "DiskStates")
 		delete(additionalProperties, "DriveGroups")
 		delete(additionalProperties, "ServerProfile")

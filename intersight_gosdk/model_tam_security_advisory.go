@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,7 @@ import (
 // checks if the TamSecurityAdvisory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TamSecurityAdvisory{}
 
-// TamSecurityAdvisory Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
+// TamSecurityAdvisory ### Overview The SecurityAdvisory object represents the Intersight adaptation of Cisco PSIRT advisories, focusing on security issues with associated CVE identifiers and CVSS scores. It helps users identify and address security vulnerabilities within their managed objects. #### Purpose SecurityAdvisory provides a structured representation of security advisories, enabling users to understand vulnerabilities and take appropriate actions to secure their systems. #### Key Concepts - **PSIRT Integration** - Aligns with Cisco's PSIRT advisories for comprehensive security coverage. - **Detailed Severity Assessment** - Uses CVE identifiers and CVSS scores to quantify the severity of vulnerabilities. - **Access Control and Management** - Ensures that only authorized personnel can manage security advisories.
 type TamSecurityAdvisory struct {
 	TamBaseAdvisory
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -42,7 +42,7 @@ type TamSecurityAdvisory struct {
 	DateUpdated *time.Time `json:"DateUpdated,omitempty"`
 	// CVSS version 3 environmental score for the security Advisory.
 	EnvironmentalScore *float32 `json:"EnvironmentalScore,omitempty"`
-	// Orion pod on which this advisory should process. * `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster. * `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster.
+	// Orion pod on which this advisory should process. * `tier1` - Advisory processing will be taken care by batch processing. * `tier2` - Advisory processing will be taken care by stream processing.
 	ExecuteOnPod *string `json:"ExecuteOnPod,omitempty"`
 	// A link to an external URL describing security Advisory in more details.
 	ExternalUrl  *string  `json:"ExternalUrl,omitempty" validate:"regexp=^$|^(?:http(s)?:\\/\\/)?[\\\\w.-]+(?:\\\\.[\\\\w\\\\.-]+)+[\\\\w\\\\-\\\\._~:\\/?#[\\\\]@!\\\\$&'\\\\(\\\\)\\\\*\\\\+,;=.]+$"`
@@ -858,7 +858,7 @@ func (o *TamSecurityAdvisory) UnmarshalJSON(data []byte) (err error) {
 		DateUpdated *time.Time `json:"DateUpdated,omitempty"`
 		// CVSS version 3 environmental score for the security Advisory.
 		EnvironmentalScore *float32 `json:"EnvironmentalScore,omitempty"`
-		// Orion pod on which this advisory should process. * `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster. * `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster.
+		// Orion pod on which this advisory should process. * `tier1` - Advisory processing will be taken care by batch processing. * `tier2` - Advisory processing will be taken care by stream processing.
 		ExecuteOnPod *string `json:"ExecuteOnPod,omitempty"`
 		// A link to an external URL describing security Advisory in more details.
 		ExternalUrl  *string  `json:"ExternalUrl,omitempty" validate:"regexp=^$|^(?:http(s)?:\\/\\/)?[\\\\w.-]+(?:\\\\.[\\\\w\\\\.-]+)+[\\\\w\\\\-\\\\._~:\\/?#[\\\\]@!\\\\$&'\\\\(\\\\)\\\\*\\\\+,;=.]+$"`

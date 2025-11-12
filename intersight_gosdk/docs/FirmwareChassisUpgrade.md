@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.ChassisUpgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.ChassisUpgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
+**XfmUpgradeOption** | Pointer to **string** | XFM upgrade option Full or Partial Disruption. * &#x60;none&#x60; - If no option is selected for exclusion. * &#x60;full-shutdown&#x60; - PSX Switch in XFM will be upgraded in single action. * &#x60;partial-shutdown&#x60; - PSX Switch in XFM will be upgraded one after other. | [optional] [default to "none"]
 **Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -104,6 +105,31 @@ HasExcludeComponentList returns a boolean if a field has been set.
 `func (o *FirmwareChassisUpgrade) UnsetExcludeComponentList()`
 
 UnsetExcludeComponentList ensures that no value is present for ExcludeComponentList, not even an explicit nil
+### GetXfmUpgradeOption
+
+`func (o *FirmwareChassisUpgrade) GetXfmUpgradeOption() string`
+
+GetXfmUpgradeOption returns the XfmUpgradeOption field if non-nil, zero value otherwise.
+
+### GetXfmUpgradeOptionOk
+
+`func (o *FirmwareChassisUpgrade) GetXfmUpgradeOptionOk() (*string, bool)`
+
+GetXfmUpgradeOptionOk returns a tuple with the XfmUpgradeOption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXfmUpgradeOption
+
+`func (o *FirmwareChassisUpgrade) SetXfmUpgradeOption(v string)`
+
+SetXfmUpgradeOption sets XfmUpgradeOption field to given value.
+
+### HasXfmUpgradeOption
+
+`func (o *FirmwareChassisUpgrade) HasXfmUpgradeOption() bool`
+
+HasXfmUpgradeOption returns a boolean if a field has been set.
+
 ### GetChassis
 
 `func (o *FirmwareChassisUpgrade) GetChassis() EquipmentChassisRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,15 +28,16 @@ type FabricUplinkPcRole struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
+	// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `400Gbps` - Admin configurable speed 400Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
 	AdminSpeed *string `json:"AdminSpeed,omitempty"`
-	// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
+	// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. Supported speeds are Auto, 1Gbps, 10Gbps, 25Gbps, 40Gbps and 100 Gbps. * `Cl91` - Forward error correction option 'cl91'. Supported speeds are 25Gbps and 100 Gbps. * `Cl74` - Forward error correction option 'cl74'. Supported speeds are 25Gbps. * `rs-cons16` - Forward error correction option \"rs-cons16\". Supported speeds are 25Gbps. * `rs-ieee` - Forward error correction option \"rs-ieee\". Supported speeds are 25Gbps. * `Off` - Turn off forward error correction. Supported speeds are 25Gbps and 100 Gbps.
 	Fec *string `json:"Fec,omitempty"`
 	// An array of relationships to fabricEthNetworkGroupPolicy resources.
 	EthNetworkGroupPolicy []FabricEthNetworkGroupPolicyRelationship       `json:"EthNetworkGroupPolicy,omitempty"`
 	FlowControlPolicy     NullableFabricFlowControlPolicyRelationship     `json:"FlowControlPolicy,omitempty"`
 	LinkAggregationPolicy NullableFabricLinkAggregationPolicyRelationship `json:"LinkAggregationPolicy,omitempty"`
 	LinkControlPolicy     NullableFabricLinkControlPolicyRelationship     `json:"LinkControlPolicy,omitempty"`
+	MacSecPolicy          NullableFabricMacSecPolicyRelationship          `json:"MacSecPolicy,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -357,6 +358,49 @@ func (o *FabricUplinkPcRole) UnsetLinkControlPolicy() {
 	o.LinkControlPolicy.Unset()
 }
 
+// GetMacSecPolicy returns the MacSecPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricUplinkPcRole) GetMacSecPolicy() FabricMacSecPolicyRelationship {
+	if o == nil || IsNil(o.MacSecPolicy.Get()) {
+		var ret FabricMacSecPolicyRelationship
+		return ret
+	}
+	return *o.MacSecPolicy.Get()
+}
+
+// GetMacSecPolicyOk returns a tuple with the MacSecPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricUplinkPcRole) GetMacSecPolicyOk() (*FabricMacSecPolicyRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MacSecPolicy.Get(), o.MacSecPolicy.IsSet()
+}
+
+// HasMacSecPolicy returns a boolean if a field has been set.
+func (o *FabricUplinkPcRole) HasMacSecPolicy() bool {
+	if o != nil && o.MacSecPolicy.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMacSecPolicy gets a reference to the given NullableFabricMacSecPolicyRelationship and assigns it to the MacSecPolicy field.
+func (o *FabricUplinkPcRole) SetMacSecPolicy(v FabricMacSecPolicyRelationship) {
+	o.MacSecPolicy.Set(&v)
+}
+
+// SetMacSecPolicyNil sets the value for MacSecPolicy to be an explicit nil
+func (o *FabricUplinkPcRole) SetMacSecPolicyNil() {
+	o.MacSecPolicy.Set(nil)
+}
+
+// UnsetMacSecPolicy ensures that no value is present for MacSecPolicy, not even an explicit nil
+func (o *FabricUplinkPcRole) UnsetMacSecPolicy() {
+	o.MacSecPolicy.Unset()
+}
+
 func (o FabricUplinkPcRole) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -400,6 +444,9 @@ func (o FabricUplinkPcRole) ToMap() (map[string]interface{}, error) {
 	}
 	if o.LinkControlPolicy.IsSet() {
 		toSerialize["LinkControlPolicy"] = o.LinkControlPolicy.Get()
+	}
+	if o.MacSecPolicy.IsSet() {
+		toSerialize["MacSecPolicy"] = o.MacSecPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -456,15 +503,16 @@ func (o *FabricUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
+		// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `400Gbps` - Admin configurable speed 400Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
 		AdminSpeed *string `json:"AdminSpeed,omitempty"`
-		// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
+		// Forward error correction configuration for Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. Supported speeds are Auto, 1Gbps, 10Gbps, 25Gbps, 40Gbps and 100 Gbps. * `Cl91` - Forward error correction option 'cl91'. Supported speeds are 25Gbps and 100 Gbps. * `Cl74` - Forward error correction option 'cl74'. Supported speeds are 25Gbps. * `rs-cons16` - Forward error correction option \"rs-cons16\". Supported speeds are 25Gbps. * `rs-ieee` - Forward error correction option \"rs-ieee\". Supported speeds are 25Gbps. * `Off` - Turn off forward error correction. Supported speeds are 25Gbps and 100 Gbps.
 		Fec *string `json:"Fec,omitempty"`
 		// An array of relationships to fabricEthNetworkGroupPolicy resources.
 		EthNetworkGroupPolicy []FabricEthNetworkGroupPolicyRelationship       `json:"EthNetworkGroupPolicy,omitempty"`
 		FlowControlPolicy     NullableFabricFlowControlPolicyRelationship     `json:"FlowControlPolicy,omitempty"`
 		LinkAggregationPolicy NullableFabricLinkAggregationPolicyRelationship `json:"LinkAggregationPolicy,omitempty"`
 		LinkControlPolicy     NullableFabricLinkControlPolicyRelationship     `json:"LinkControlPolicy,omitempty"`
+		MacSecPolicy          NullableFabricMacSecPolicyRelationship          `json:"MacSecPolicy,omitempty"`
 	}
 
 	varFabricUplinkPcRoleWithoutEmbeddedStruct := FabricUplinkPcRoleWithoutEmbeddedStruct{}
@@ -480,6 +528,7 @@ func (o *FabricUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		varFabricUplinkPcRole.FlowControlPolicy = varFabricUplinkPcRoleWithoutEmbeddedStruct.FlowControlPolicy
 		varFabricUplinkPcRole.LinkAggregationPolicy = varFabricUplinkPcRoleWithoutEmbeddedStruct.LinkAggregationPolicy
 		varFabricUplinkPcRole.LinkControlPolicy = varFabricUplinkPcRoleWithoutEmbeddedStruct.LinkControlPolicy
+		varFabricUplinkPcRole.MacSecPolicy = varFabricUplinkPcRoleWithoutEmbeddedStruct.MacSecPolicy
 		*o = FabricUplinkPcRole(varFabricUplinkPcRole)
 	} else {
 		return err
@@ -505,6 +554,7 @@ func (o *FabricUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FlowControlPolicy")
 		delete(additionalProperties, "LinkAggregationPolicy")
 		delete(additionalProperties, "LinkControlPolicy")
+		delete(additionalProperties, "MacSecPolicy")
 
 		// remove fields from embedded structs
 		reflectFabricPortChannelRole := reflect.ValueOf(o.FabricPortChannelRole)

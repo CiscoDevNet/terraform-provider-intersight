@@ -3,14 +3,38 @@ subcategory: "notification"
 layout: "intersight"
 page_title: "Intersight: intersight_notification_account_subscription"
 description: |-
-        AccountSubscription is a concrete type that extends abstract Subscription type and intent to be used only
-        for account level subscriptions by Account Administrator.
+        # Overview
+        The AccountSubscription object is a crucial component of the Intersight notification framework,
+        designed to facilitate account-level subscriptions managed by Account Administrators.
+        It provides a structured way to handle notifications based on specific events within an account,
+        ensuring administrators can effectively configure and manage subscription settings.
+        ## Purpose
+        The AccountSubscription object enables administrators to set up notifications for various account events.
+        It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+        ## Key Concepts
+        - **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+        - **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
+        - **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+        - **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+        - **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
 
 ---
 
 # Resource: intersight_notification_account_subscription
-AccountSubscription is a concrete type that extends abstract Subscription type and intent to be used only
-for account level subscriptions by Account Administrator.
+# Overview
+The AccountSubscription object is a crucial component of the Intersight notification framework,  
+designed to facilitate account-level subscriptions managed by Account Administrators.  
+It provides a structured way to handle notifications based on specific events within an account,  
+ensuring administrators can effectively configure and manage subscription settings.
+## Purpose
+The AccountSubscription object enables administrators to set up notifications for various account events.  
+It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+## Key Concepts
+- **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+- **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
+- **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+- **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+- **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -27,10 +51,12 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `condition_operator`:(string) Operation that binds all the different conditions together.* `All` - All is an AND condition applied against the individual conditions.* `Any` - Any is an OR condition applied against the individual conditions. 
 * `conditions`:(Array)
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
+* `description`:(string) The description for the subscription. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `enabled`:(bool) Subscription can be switched on/off without necessity to change the subscriptionsettings: notification methods, conditions, etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
@@ -51,7 +77,19 @@ This complex property has following sub-properties:
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) The chosen subscription type imposes it is own validation rules.When 'email' type is chosen, actions array can contain only one entry and it is entry should be of canbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and conditiontypes should be unique.When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of canbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of themshould be of type notification.MoCondition.* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. 
 * `verify`:(string) Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verifythat the webhook server is accessible. For an 'email' type there will be a verification email sent.* `none` - No actions will be verified. Default value.* `all` - All actions will be re-verified. The previous state of the verification will be preserved. 

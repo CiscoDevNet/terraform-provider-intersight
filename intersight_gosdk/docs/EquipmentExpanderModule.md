@@ -6,13 +6,20 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ExpanderModule"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ExpanderModule"]
+**FirmwareVersion** | Pointer to **string** | Firmware Version of the Chassis expander module. | [optional] [readonly] 
+**InventoryReady** | Pointer to **bool** | The inventory ready field indicates whether the chassis expander module management controller has completed inventory of the installed devices. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Module identifier for the expander module. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of expander module. | [optional] [readonly] 
-**PartNumber** | Pointer to **string** | Part number identifier for the expander module. | [optional] 
+**PartNumber** | Pointer to **string** | Part number identifier for the expander module. | [optional] [readonly] 
+**Side** | Pointer to **string** | Location of the expander module within a chassis. The value can be top or bottom. * &#x60;unknown&#x60; - Physical location of the module is unknown. * &#x60;top&#x60; - Physical location of the module is on the top part of the chassis. * &#x60;bottom&#x60; - Physical location of the module is on the bottom part of the chassis. * &#x60;left&#x60; - Physical location of the module is on the left side of the chassis. * &#x60;right&#x60; - Physical location of the module is on the right side of the chassis. | [optional] [readonly] [default to "unknown"]
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**FanModules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] 
+**FanModules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
+**PciSwitches** | Pointer to [**[]PciSwitchRelationship**](PciSwitchRelationship.md) | An array of relationships to pciSwitch resources. | [optional] [readonly] 
+**PciZones** | Pointer to [**[]PciZoneRelationship**](PciZoneRelationship.md) | An array of relationships to pciZone resources. | [optional] [readonly] 
+**PhysicalDeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SharedAdapterUnits** | Pointer to [**[]EquipmentSharedAdapterUnitRelationship**](EquipmentSharedAdapterUnitRelationship.md) | An array of relationships to equipmentSharedAdapterUnit resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -72,6 +79,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetFirmwareVersion
+
+`func (o *EquipmentExpanderModule) GetFirmwareVersion() string`
+
+GetFirmwareVersion returns the FirmwareVersion field if non-nil, zero value otherwise.
+
+### GetFirmwareVersionOk
+
+`func (o *EquipmentExpanderModule) GetFirmwareVersionOk() (*string, bool)`
+
+GetFirmwareVersionOk returns a tuple with the FirmwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirmwareVersion
+
+`func (o *EquipmentExpanderModule) SetFirmwareVersion(v string)`
+
+SetFirmwareVersion sets FirmwareVersion field to given value.
+
+### HasFirmwareVersion
+
+`func (o *EquipmentExpanderModule) HasFirmwareVersion() bool`
+
+HasFirmwareVersion returns a boolean if a field has been set.
+
+### GetInventoryReady
+
+`func (o *EquipmentExpanderModule) GetInventoryReady() bool`
+
+GetInventoryReady returns the InventoryReady field if non-nil, zero value otherwise.
+
+### GetInventoryReadyOk
+
+`func (o *EquipmentExpanderModule) GetInventoryReadyOk() (*bool, bool)`
+
+GetInventoryReadyOk returns a tuple with the InventoryReady field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryReady
+
+`func (o *EquipmentExpanderModule) SetInventoryReady(v bool)`
+
+SetInventoryReady sets InventoryReady field to given value.
+
+### HasInventoryReady
+
+`func (o *EquipmentExpanderModule) HasInventoryReady() bool`
+
+HasInventoryReady returns a boolean if a field has been set.
 
 ### GetModuleId
 
@@ -183,6 +240,31 @@ SetPartNumber sets PartNumber field to given value.
 
 HasPartNumber returns a boolean if a field has been set.
 
+### GetSide
+
+`func (o *EquipmentExpanderModule) GetSide() string`
+
+GetSide returns the Side field if non-nil, zero value otherwise.
+
+### GetSideOk
+
+`func (o *EquipmentExpanderModule) GetSideOk() (*string, bool)`
+
+GetSideOk returns a tuple with the Side field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSide
+
+`func (o *EquipmentExpanderModule) SetSide(v string)`
+
+SetSide sets Side field to given value.
+
+### HasSide
+
+`func (o *EquipmentExpanderModule) HasSide() bool`
+
+HasSide returns a boolean if a field has been set.
+
 ### GetEquipmentChassis
 
 `func (o *EquipmentExpanderModule) GetEquipmentChassis() EquipmentChassisRelationship`
@@ -253,6 +335,111 @@ HasFanModules returns a boolean if a field has been set.
 `func (o *EquipmentExpanderModule) UnsetFanModules()`
 
 UnsetFanModules ensures that no value is present for FanModules, not even an explicit nil
+### GetPciSwitches
+
+`func (o *EquipmentExpanderModule) GetPciSwitches() []PciSwitchRelationship`
+
+GetPciSwitches returns the PciSwitches field if non-nil, zero value otherwise.
+
+### GetPciSwitchesOk
+
+`func (o *EquipmentExpanderModule) GetPciSwitchesOk() (*[]PciSwitchRelationship, bool)`
+
+GetPciSwitchesOk returns a tuple with the PciSwitches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciSwitches
+
+`func (o *EquipmentExpanderModule) SetPciSwitches(v []PciSwitchRelationship)`
+
+SetPciSwitches sets PciSwitches field to given value.
+
+### HasPciSwitches
+
+`func (o *EquipmentExpanderModule) HasPciSwitches() bool`
+
+HasPciSwitches returns a boolean if a field has been set.
+
+### SetPciSwitchesNil
+
+`func (o *EquipmentExpanderModule) SetPciSwitchesNil(b bool)`
+
+ SetPciSwitchesNil sets the value for PciSwitches to be an explicit nil
+
+### UnsetPciSwitches
+`func (o *EquipmentExpanderModule) UnsetPciSwitches()`
+
+UnsetPciSwitches ensures that no value is present for PciSwitches, not even an explicit nil
+### GetPciZones
+
+`func (o *EquipmentExpanderModule) GetPciZones() []PciZoneRelationship`
+
+GetPciZones returns the PciZones field if non-nil, zero value otherwise.
+
+### GetPciZonesOk
+
+`func (o *EquipmentExpanderModule) GetPciZonesOk() (*[]PciZoneRelationship, bool)`
+
+GetPciZonesOk returns a tuple with the PciZones field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciZones
+
+`func (o *EquipmentExpanderModule) SetPciZones(v []PciZoneRelationship)`
+
+SetPciZones sets PciZones field to given value.
+
+### HasPciZones
+
+`func (o *EquipmentExpanderModule) HasPciZones() bool`
+
+HasPciZones returns a boolean if a field has been set.
+
+### SetPciZonesNil
+
+`func (o *EquipmentExpanderModule) SetPciZonesNil(b bool)`
+
+ SetPciZonesNil sets the value for PciZones to be an explicit nil
+
+### UnsetPciZones
+`func (o *EquipmentExpanderModule) UnsetPciZones()`
+
+UnsetPciZones ensures that no value is present for PciZones, not even an explicit nil
+### GetPhysicalDeviceRegistration
+
+`func (o *EquipmentExpanderModule) GetPhysicalDeviceRegistration() AssetDeviceRegistrationRelationship`
+
+GetPhysicalDeviceRegistration returns the PhysicalDeviceRegistration field if non-nil, zero value otherwise.
+
+### GetPhysicalDeviceRegistrationOk
+
+`func (o *EquipmentExpanderModule) GetPhysicalDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool)`
+
+GetPhysicalDeviceRegistrationOk returns a tuple with the PhysicalDeviceRegistration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalDeviceRegistration
+
+`func (o *EquipmentExpanderModule) SetPhysicalDeviceRegistration(v AssetDeviceRegistrationRelationship)`
+
+SetPhysicalDeviceRegistration sets PhysicalDeviceRegistration field to given value.
+
+### HasPhysicalDeviceRegistration
+
+`func (o *EquipmentExpanderModule) HasPhysicalDeviceRegistration() bool`
+
+HasPhysicalDeviceRegistration returns a boolean if a field has been set.
+
+### SetPhysicalDeviceRegistrationNil
+
+`func (o *EquipmentExpanderModule) SetPhysicalDeviceRegistrationNil(b bool)`
+
+ SetPhysicalDeviceRegistrationNil sets the value for PhysicalDeviceRegistration to be an explicit nil
+
+### UnsetPhysicalDeviceRegistration
+`func (o *EquipmentExpanderModule) UnsetPhysicalDeviceRegistration()`
+
+UnsetPhysicalDeviceRegistration ensures that no value is present for PhysicalDeviceRegistration, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentExpanderModule) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -288,6 +475,41 @@ HasRegisteredDevice returns a boolean if a field has been set.
 `func (o *EquipmentExpanderModule) UnsetRegisteredDevice()`
 
 UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+### GetSharedAdapterUnits
+
+`func (o *EquipmentExpanderModule) GetSharedAdapterUnits() []EquipmentSharedAdapterUnitRelationship`
+
+GetSharedAdapterUnits returns the SharedAdapterUnits field if non-nil, zero value otherwise.
+
+### GetSharedAdapterUnitsOk
+
+`func (o *EquipmentExpanderModule) GetSharedAdapterUnitsOk() (*[]EquipmentSharedAdapterUnitRelationship, bool)`
+
+GetSharedAdapterUnitsOk returns a tuple with the SharedAdapterUnits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSharedAdapterUnits
+
+`func (o *EquipmentExpanderModule) SetSharedAdapterUnits(v []EquipmentSharedAdapterUnitRelationship)`
+
+SetSharedAdapterUnits sets SharedAdapterUnits field to given value.
+
+### HasSharedAdapterUnits
+
+`func (o *EquipmentExpanderModule) HasSharedAdapterUnits() bool`
+
+HasSharedAdapterUnits returns a boolean if a field has been set.
+
+### SetSharedAdapterUnitsNil
+
+`func (o *EquipmentExpanderModule) SetSharedAdapterUnitsNil(b bool)`
+
+ SetSharedAdapterUnitsNil sets the value for SharedAdapterUnits to be an explicit nil
+
+### UnsetSharedAdapterUnits
+`func (o *EquipmentExpanderModule) UnsetSharedAdapterUnits()`
+
+UnsetSharedAdapterUnits ensures that no value is present for SharedAdapterUnits, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

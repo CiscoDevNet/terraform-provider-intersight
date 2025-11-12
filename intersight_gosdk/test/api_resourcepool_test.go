@@ -23,6 +23,18 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ResourcepoolApiService CreateResourcepoolChassisQualificationPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ResourcepoolApi.CreateResourcepoolChassisQualificationPolicy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ResourcepoolApiService CreateResourcepoolPool", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -43,6 +55,19 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcepoolApiService DeleteResourcepoolChassisQualificationPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.ResourcepoolApi.DeleteResourcepoolChassisQualificationPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -95,6 +120,32 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 		httpRes, err := apiClient.ResourcepoolApi.DeleteResourcepoolQualificationPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcepoolApiService GetResourcepoolChassisQualificationPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ResourcepoolApi.GetResourcepoolChassisQualificationPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcepoolApiService GetResourcepoolChassisQualificationPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ResourcepoolApi.GetResourcepoolChassisQualificationPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -281,6 +332,20 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ResourcepoolApiService PatchResourcepoolChassisQualificationPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ResourcepoolApi.PatchResourcepoolChassisQualificationPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ResourcepoolApiService PatchResourcepoolMembershipReservation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -316,6 +381,20 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ResourcepoolApi.PatchResourcepoolQualificationPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcepoolApiService UpdateResourcepoolChassisQualificationPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ResourcepoolApi.UpdateResourcepoolChassisQualificationPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

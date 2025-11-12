@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoCardOperation"]
 **AdminPeerPowerState** | Pointer to **string** | User configured power state of the peer IO module. * &#x60;None&#x60; - Placeholder default value for iom power state property. * &#x60;Reboot&#x60; - IO Module reboot state property value. | [optional] [default to "None"]
 **AdminPowerState** | Pointer to **string** | User configured power state of the IO module. * &#x60;None&#x60; - Placeholder default value for iom power state property. * &#x60;Reboot&#x60; - IO Module reboot state property value. | [optional] [default to "None"]
-**ConfigState** | Pointer to **string** | The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**AffectedObjName** | Pointer to **string** | Placeholder for affected object name which is a combination of chassis and IOM ID. Used to display affected object in audit log. | [optional] [readonly] 
+**ConfigState** | Pointer to **string** | The configured state of these settings in the target IO module. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target IO module. Applying - This state denotes that the settings are being applied in the target IO module. Failed - This state denotes that the settings could not be applied in the target IO module. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [readonly] [default to "None"]
 **IoCardOperationStatus** | Pointer to [**[]EquipmentIoCardOperationStatus**](EquipmentIoCardOperationStatus.md) |  | [optional] 
 **DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **IoCard** | Pointer to [**NullableEquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) |  | [optional] 
@@ -121,6 +122,31 @@ SetAdminPowerState sets AdminPowerState field to given value.
 `func (o *EquipmentIoCardOperation) HasAdminPowerState() bool`
 
 HasAdminPowerState returns a boolean if a field has been set.
+
+### GetAffectedObjName
+
+`func (o *EquipmentIoCardOperation) GetAffectedObjName() string`
+
+GetAffectedObjName returns the AffectedObjName field if non-nil, zero value otherwise.
+
+### GetAffectedObjNameOk
+
+`func (o *EquipmentIoCardOperation) GetAffectedObjNameOk() (*string, bool)`
+
+GetAffectedObjNameOk returns a tuple with the AffectedObjName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAffectedObjName
+
+`func (o *EquipmentIoCardOperation) SetAffectedObjName(v string)`
+
+SetAffectedObjName sets AffectedObjName field to given value.
+
+### HasAffectedObjName
+
+`func (o *EquipmentIoCardOperation) HasAffectedObjName() bool`
+
+HasAffectedObjName returns a boolean if a field has been set.
 
 ### GetConfigState
 

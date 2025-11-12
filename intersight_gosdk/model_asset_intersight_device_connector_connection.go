@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,14 @@ var _ MappedNullable = &AssetIntersightDeviceConnectorConnection{}
 // AssetIntersightDeviceConnectorConnection Target is connected to Intersight using a Device Connector.
 type AssetIntersightDeviceConnectorConnection struct {
 	AssetConnection
+	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+	ClassId string `json:"ClassId"`
+	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+	ObjectType string `json:"ObjectType"`
+	// Obtained from the device connector management UI or API (REST endpoint '/connector/SecurityTokens').
+	SecurityToken *string `json:"SecurityToken,omitempty"`
+	// Obtained from the device connector management UI or API (REST endpoint '/connector/DeviceIdentifiers').
+	SerialNumber         *string `json:"SerialNumber,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,7 +53,133 @@ func NewAssetIntersightDeviceConnectorConnection(classId string, objectType stri
 // but it doesn't guarantee that properties required by API are set
 func NewAssetIntersightDeviceConnectorConnectionWithDefaults() *AssetIntersightDeviceConnectorConnection {
 	this := AssetIntersightDeviceConnectorConnection{}
+	var classId string = "asset.IntersightDeviceConnectorConnection"
+	this.ClassId = classId
+	var objectType string = "asset.IntersightDeviceConnectorConnection"
+	this.ObjectType = objectType
 	return &this
+}
+
+// GetClassId returns the ClassId field value
+func (o *AssetIntersightDeviceConnectorConnection) GetClassId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClassId
+}
+
+// GetClassIdOk returns a tuple with the ClassId field value
+// and a boolean to check if the value has been set.
+func (o *AssetIntersightDeviceConnectorConnection) GetClassIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClassId, true
+}
+
+// SetClassId sets field value
+func (o *AssetIntersightDeviceConnectorConnection) SetClassId(v string) {
+	o.ClassId = v
+}
+
+// GetDefaultClassId returns the default value "asset.IntersightDeviceConnectorConnection" of the ClassId field.
+func (o *AssetIntersightDeviceConnectorConnection) GetDefaultClassId() interface{} {
+	return "asset.IntersightDeviceConnectorConnection"
+}
+
+// GetObjectType returns the ObjectType field value
+func (o *AssetIntersightDeviceConnectorConnection) GetObjectType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ObjectType
+}
+
+// GetObjectTypeOk returns a tuple with the ObjectType field value
+// and a boolean to check if the value has been set.
+func (o *AssetIntersightDeviceConnectorConnection) GetObjectTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ObjectType, true
+}
+
+// SetObjectType sets field value
+func (o *AssetIntersightDeviceConnectorConnection) SetObjectType(v string) {
+	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "asset.IntersightDeviceConnectorConnection" of the ObjectType field.
+func (o *AssetIntersightDeviceConnectorConnection) GetDefaultObjectType() interface{} {
+	return "asset.IntersightDeviceConnectorConnection"
+}
+
+// GetSecurityToken returns the SecurityToken field value if set, zero value otherwise.
+func (o *AssetIntersightDeviceConnectorConnection) GetSecurityToken() string {
+	if o == nil || IsNil(o.SecurityToken) {
+		var ret string
+		return ret
+	}
+	return *o.SecurityToken
+}
+
+// GetSecurityTokenOk returns a tuple with the SecurityToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetIntersightDeviceConnectorConnection) GetSecurityTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.SecurityToken) {
+		return nil, false
+	}
+	return o.SecurityToken, true
+}
+
+// HasSecurityToken returns a boolean if a field has been set.
+func (o *AssetIntersightDeviceConnectorConnection) HasSecurityToken() bool {
+	if o != nil && !IsNil(o.SecurityToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityToken gets a reference to the given string and assigns it to the SecurityToken field.
+func (o *AssetIntersightDeviceConnectorConnection) SetSecurityToken(v string) {
+	o.SecurityToken = &v
+}
+
+// GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
+func (o *AssetIntersightDeviceConnectorConnection) GetSerialNumber() string {
+	if o == nil || IsNil(o.SerialNumber) {
+		var ret string
+		return ret
+	}
+	return *o.SerialNumber
+}
+
+// GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetIntersightDeviceConnectorConnection) GetSerialNumberOk() (*string, bool) {
+	if o == nil || IsNil(o.SerialNumber) {
+		return nil, false
+	}
+	return o.SerialNumber, true
+}
+
+// HasSerialNumber returns a boolean if a field has been set.
+func (o *AssetIntersightDeviceConnectorConnection) HasSerialNumber() bool {
+	if o != nil && !IsNil(o.SerialNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetSerialNumber gets a reference to the given string and assigns it to the SerialNumber field.
+func (o *AssetIntersightDeviceConnectorConnection) SetSerialNumber(v string) {
+	o.SerialNumber = &v
 }
 
 func (o AssetIntersightDeviceConnectorConnection) MarshalJSON() ([]byte, error) {
@@ -66,6 +200,20 @@ func (o AssetIntersightDeviceConnectorConnection) ToMap() (map[string]interface{
 	if errAssetConnection != nil {
 		return map[string]interface{}{}, errAssetConnection
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
+	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.SecurityToken) {
+		toSerialize["SecurityToken"] = o.SecurityToken
+	}
+	if !IsNil(o.SerialNumber) {
+		toSerialize["SerialNumber"] = o.SerialNumber
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -85,7 +233,10 @@ func (o *AssetIntersightDeviceConnectorConnection) UnmarshalJSON(data []byte) (e
 
 	// defaultValueFuncMap captures the default values for required properties.
 	// These values are used when required properties are missing from the payload.
-	defaultValueFuncMap := map[string]func() interface{}{}
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
 	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
@@ -114,6 +265,14 @@ func (o *AssetIntersightDeviceConnectorConnection) UnmarshalJSON(data []byte) (e
 		}
 	}
 	type AssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct struct {
+		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+		ClassId string `json:"ClassId"`
+		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+		ObjectType string `json:"ObjectType"`
+		// Obtained from the device connector management UI or API (REST endpoint '/connector/SecurityTokens').
+		SecurityToken *string `json:"SecurityToken,omitempty"`
+		// Obtained from the device connector management UI or API (REST endpoint '/connector/DeviceIdentifiers').
+		SerialNumber *string `json:"SerialNumber,omitempty"`
 	}
 
 	varAssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct := AssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct{}
@@ -121,6 +280,10 @@ func (o *AssetIntersightDeviceConnectorConnection) UnmarshalJSON(data []byte) (e
 	err = json.Unmarshal(data, &varAssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetIntersightDeviceConnectorConnection := _AssetIntersightDeviceConnectorConnection{}
+		varAssetIntersightDeviceConnectorConnection.ClassId = varAssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct.ClassId
+		varAssetIntersightDeviceConnectorConnection.ObjectType = varAssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct.ObjectType
+		varAssetIntersightDeviceConnectorConnection.SecurityToken = varAssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct.SecurityToken
+		varAssetIntersightDeviceConnectorConnection.SerialNumber = varAssetIntersightDeviceConnectorConnectionWithoutEmbeddedStruct.SerialNumber
 		*o = AssetIntersightDeviceConnectorConnection(varAssetIntersightDeviceConnectorConnection)
 	} else {
 		return err
@@ -138,6 +301,10 @@ func (o *AssetIntersightDeviceConnectorConnection) UnmarshalJSON(data []byte) (e
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ClassId")
+		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "SecurityToken")
+		delete(additionalProperties, "SerialNumber")
 
 		// remove fields from embedded structs
 		reflectAssetConnection := reflect.ValueOf(o.AssetConnection)

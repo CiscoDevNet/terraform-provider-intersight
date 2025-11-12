@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] [readonly] 
 **ChassisId** | Pointer to **string** | The id of the chassis that the blade is discovered in. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of RackUnit to Switch - A or B or AB. | [optional] [readonly] 
+**CoolingMode** | Pointer to **string** | Cooling mode representation of the server, supported modes include Air and Immersion. * &#x60;Air&#x60; - Cooling mode of the device is set to Air. * &#x60;Immersion&#x60; - Cooling mode of the device is set to Immersion. | [optional] [readonly] [default to "Air"]
 **CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
 **DeviceMoId** | Pointer to **string** | The MoId of the registered device that coresponds to the server. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
@@ -20,12 +21,15 @@ Name | Type | Description | Notes
 **Firmware** | Pointer to **string** | The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. | [optional] [readonly] 
 **FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] [readonly] 
+**HasE3SSupport** | Pointer to **bool** | The flag to indicate server has the support for E3.S drives. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | The IPv4 address configured on the management interface of the Integrated Management Controller. | [optional] [readonly] 
 **IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
 **KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
+**LastPowerStateChangedTime** | Pointer to **string** | The Last host power state changed time of the server. | [optional] [readonly] 
 **Lifecycle** | Pointer to **string** | The lifecycle of the blade server. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. * &#x60;SecureEraseInProgress&#x60; - Secure Erase is in progress on given physical entity. * &#x60;ScrubInProgress&#x60; - Scrub is in progress on given physical entity. * &#x60;BladeMigrationInProgress&#x60; - Server slot migration is in progress on given physical entity. * &#x60;SlotMismatch&#x60; - The blade server is detected in a different chassis/slot than it was previously. * &#x60;Removed&#x60; - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade. * &#x60;Moved&#x60; - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade. * &#x60;Replaced&#x60; - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade. * &#x60;MovedAndReplaced&#x60; - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade. | [optional] [readonly] [default to "None"]
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] [readonly] 
@@ -60,6 +64,7 @@ Name | Type | Description | Notes
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**CustomPermissionResources** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **InventoryParent** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -309,6 +314,31 @@ SetConnectionStatus sets ConnectionStatus field to given value.
 
 HasConnectionStatus returns a boolean if a field has been set.
 
+### GetCoolingMode
+
+`func (o *ComputePhysicalSummary) GetCoolingMode() string`
+
+GetCoolingMode returns the CoolingMode field if non-nil, zero value otherwise.
+
+### GetCoolingModeOk
+
+`func (o *ComputePhysicalSummary) GetCoolingModeOk() (*string, bool)`
+
+GetCoolingModeOk returns a tuple with the CoolingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCoolingMode
+
+`func (o *ComputePhysicalSummary) SetCoolingMode(v string)`
+
+SetCoolingMode sets CoolingMode field to given value.
+
+### HasCoolingMode
+
+`func (o *ComputePhysicalSummary) HasCoolingMode() bool`
+
+HasCoolingMode returns a boolean if a field has been set.
+
 ### GetCpuCapacity
 
 `func (o *ComputePhysicalSummary) GetCpuCapacity() float32`
@@ -484,6 +514,31 @@ SetHardwareUuid sets HardwareUuid field to given value.
 
 HasHardwareUuid returns a boolean if a field has been set.
 
+### GetHasE3SSupport
+
+`func (o *ComputePhysicalSummary) GetHasE3SSupport() bool`
+
+GetHasE3SSupport returns the HasE3SSupport field if non-nil, zero value otherwise.
+
+### GetHasE3SSupportOk
+
+`func (o *ComputePhysicalSummary) GetHasE3SSupportOk() (*bool, bool)`
+
+GetHasE3SSupportOk returns a tuple with the HasE3SSupport field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasE3SSupport
+
+`func (o *ComputePhysicalSummary) SetHasE3SSupport(v bool)`
+
+SetHasE3SSupport sets HasE3SSupport field to given value.
+
+### HasHasE3SSupport
+
+`func (o *ComputePhysicalSummary) HasHasE3SSupport() bool`
+
+HasHasE3SSupport returns a boolean if a field has been set.
+
 ### GetIpv4Address
 
 `func (o *ComputePhysicalSummary) GetIpv4Address() string`
@@ -619,6 +674,31 @@ SetKvmVendor sets KvmVendor field to given value.
 
 HasKvmVendor returns a boolean if a field has been set.
 
+### GetLastPowerStateChangedTime
+
+`func (o *ComputePhysicalSummary) GetLastPowerStateChangedTime() string`
+
+GetLastPowerStateChangedTime returns the LastPowerStateChangedTime field if non-nil, zero value otherwise.
+
+### GetLastPowerStateChangedTimeOk
+
+`func (o *ComputePhysicalSummary) GetLastPowerStateChangedTimeOk() (*string, bool)`
+
+GetLastPowerStateChangedTimeOk returns a tuple with the LastPowerStateChangedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastPowerStateChangedTime
+
+`func (o *ComputePhysicalSummary) SetLastPowerStateChangedTime(v string)`
+
+SetLastPowerStateChangedTime sets LastPowerStateChangedTime field to given value.
+
+### HasLastPowerStateChangedTime
+
+`func (o *ComputePhysicalSummary) HasLastPowerStateChangedTime() bool`
+
+HasLastPowerStateChangedTime returns a boolean if a field has been set.
+
 ### GetLifecycle
 
 `func (o *ComputePhysicalSummary) GetLifecycle() string`
@@ -644,6 +724,41 @@ SetLifecycle sets Lifecycle field to given value.
 
 HasLifecycle returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *ComputePhysicalSummary) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *ComputePhysicalSummary) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *ComputePhysicalSummary) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *ComputePhysicalSummary) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *ComputePhysicalSummary) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *ComputePhysicalSummary) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetManagementMode
 
 `func (o *ComputePhysicalSummary) GetManagementMode() string`
@@ -1504,6 +1619,41 @@ SetVendor sets Vendor field to given value.
 
 HasVendor returns a boolean if a field has been set.
 
+### GetCustomPermissionResources
+
+`func (o *ComputePhysicalSummary) GetCustomPermissionResources() []MoBaseMoRelationship`
+
+GetCustomPermissionResources returns the CustomPermissionResources field if non-nil, zero value otherwise.
+
+### GetCustomPermissionResourcesOk
+
+`func (o *ComputePhysicalSummary) GetCustomPermissionResourcesOk() (*[]MoBaseMoRelationship, bool)`
+
+GetCustomPermissionResourcesOk returns a tuple with the CustomPermissionResources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomPermissionResources
+
+`func (o *ComputePhysicalSummary) SetCustomPermissionResources(v []MoBaseMoRelationship)`
+
+SetCustomPermissionResources sets CustomPermissionResources field to given value.
+
+### HasCustomPermissionResources
+
+`func (o *ComputePhysicalSummary) HasCustomPermissionResources() bool`
+
+HasCustomPermissionResources returns a boolean if a field has been set.
+
+### SetCustomPermissionResourcesNil
+
+`func (o *ComputePhysicalSummary) SetCustomPermissionResourcesNil(b bool)`
+
+ SetCustomPermissionResourcesNil sets the value for CustomPermissionResources to be an explicit nil
+
+### UnsetCustomPermissionResources
+`func (o *ComputePhysicalSummary) UnsetCustomPermissionResources()`
+
+UnsetCustomPermissionResources ensures that no value is present for CustomPermissionResources, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship`

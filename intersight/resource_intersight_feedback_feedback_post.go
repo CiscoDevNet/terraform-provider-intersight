@@ -175,7 +175,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"account_name": {
-							Description: "Account name of the feedback sender. Copied in order to be persisted in case of account removal.",
+							Description: "Account name of the feedback sender, copied for persistence in case of account removal.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							ForceNew:    true,
@@ -205,7 +205,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"comment": {
-							Description:  "Text of the feedback as provided by the user, if it is a bug or a comment.",
+							Description:  "User feedback text (a bug or a suggestion).",
 							Type:         schema.TypeString,
 							ValidateFunc: StringLenMaximum(5000),
 							Optional:     true,
@@ -218,7 +218,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"evaluation": {
-							Description:  "Evalation rating as provided by the user to capture user sentiment regarding the issue.\n* `Excellent` - Option that specifies user's excelent evaluation.\n* `Poor` - Option that specifies user's poor evaluation.\n* `Fair` - Option that specifies user's fair evaluation.\n* `Good` - Option that specifies user's good evaluation.",
+							Description:  "Evaluation rating provided by the user to capture user sentiment regarding the issue.\n* `Excellent` - Option indicating user's excellent evaluation.\n* `Poor` - Option indicating user's poor evaluation.\n* `Fair` - Option indicating user's fair evaluation.\n* `Good` - Option indicating user's good evaluation.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"Excellent", "Poor", "Fair", "Good"}, false),
 							Optional:     true,
@@ -226,7 +226,7 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:     true,
 						},
 						"follow_up": {
-							Description: "If a user is open for follow-up or not.",
+							Description: "User's consent for follow-up communication.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							ForceNew:    true,
@@ -245,20 +245,20 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"product_satisfaction_scale": {
-							Description:  "User's overall satisfaction with the product on a 0-10 scale.",
+							Description:  "User's satisfaction with the product on a 0-10 scale.",
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(0, 10),
 							Optional:     true,
 							ForceNew:     true,
 						},
 						"survey_completed": {
-							Description: "Indicates if the user completed the survey. True if completed, false otherwise.",
+							Description: "Survey completion status (True if completed, False otherwise).",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							ForceNew:    true,
 						},
 						"trace_ids": {
-							Description: "Bunch of last traceId for reproducing user last activity.",
+							Description: "Collection of last traceId for replicating the user's last activity.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							ForceNew:    true,
@@ -426,12 +426,126 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 							ForceNew:         true,
 						},
+						"ancestor_definitions": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+										ForceNew:         true,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+										ForceNew:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										ForceNew:    true,
+									},
+								},
+							},
+							ForceNew: true,
+						},
+						"definition": {
+							Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+										ForceNew:         true,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "mo.MoRef",
+										ForceNew:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ForceNew:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										ForceNew:    true,
+									},
+								},
+							},
+							ForceNew: true,
+						},
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 128),
+							ValidateFunc: validation.StringLenBetween(1, 256),
 							Optional:     true,
 							ForceNew:     true,
+						},
+						"propagated": {
+							Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
+						},
+						"type": {
+							Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"value": {
 							Description:  "The string representation of a tag value.",
@@ -766,6 +880,49 @@ func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceDat
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

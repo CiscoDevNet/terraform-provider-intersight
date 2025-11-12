@@ -3,12 +3,26 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_definition"
 description: |-
-        An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+        ### Overview
+        The AdvisoryDefinition object is a critical component in Intersight. It encompasses various types of advisories, including Field Notices, End of Life (EOL), End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
+        #### Purpose
+        AdvisoryDefinition provides a comprehensive framework for defining potential advisories that may impact managed objects in the datacenter. It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
+        #### Key Concepts
+        - **Diverse Advisory Types** - Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
+        - **Actionable Guidance** - Provides recommendations and potential workarounds to mitigate identified issues.
+        - **Role-Based Access** - Access to create, update, or delete advisories is controlled through user privilege sets.
 
 ---
 
 # Resource: intersight_tam_advisory_definition
-An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+### Overview
+The AdvisoryDefinition object is a critical component in Intersight. It encompasses various types of advisories, including Field Notices, End of Life (EOL), End of Sale (EOS), and End of Support advisories, each with specific recommendations for addressing them.
+#### Purpose
+AdvisoryDefinition provides a comprehensive framework for defining potential advisories that may impact managed objects in the datacenter. It delivers insights and guidance for handling Field Notices, EOL, EOS, and similar advisories effectively.
+#### Key Concepts
+- **Diverse Advisory Types** - Supports Field Notices, EOL, EOS, and other advisory types, each with tailored recommendations.
+- **Actionable Guidance** - Provides recommendations and potential workarounds to mitigate identified issues.
+- **Role-Based Access** - Access to create, update, or delete advisories is controlled through user privilege sets.
 ## Usage Example
 ### Resource Creation
 
@@ -101,7 +115,7 @@ This complex property has following sub-properties:
 * `date_updated`:(string) Date when the security/field-notice/end-of-life advisory was last updated by Cisco. 
 * `description`:(string) Brief description of the advisory details. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care in first advisory driver of multinode cluster.* `tier2` - Advisory processing will be taken care in second advisory driver of multinode cluster. 
+* `execute_on_pod`:(string) Orion pod on which this advisory should process.* `tier1` - Advisory processing will be taken care by batch processing.* `tier2` - Advisory processing will be taken care by stream processing. 
 * `external_url`:(string) A link to an external URL describing security Advisory in more details. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -145,7 +159,19 @@ This complex property has following sub-properties:
 * `state`:(string) Current state of the advisory.* `ready` - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created.* `evaluating` - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) The type (field notice, security advisory, end-of-life milestone advisory etc.) of Intersight advisory.* `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).* `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html). 
 * `nr_version`:(string) Cisco assigned advisory/field-notice/end-of-life version after latest revision. 

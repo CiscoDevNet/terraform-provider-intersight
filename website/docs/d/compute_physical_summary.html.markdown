@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `chassis_id`:(string) The id of the chassis that the blade is discovered in. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
+* `cooling_mode`:(string) Cooling mode representation of the server, supported modes include Air and Immersion.* `Air` - Cooling mode of the device is set to Air.* `Immersion` - Cooling mode of the device is set to Immersion. 
 * `cpu_capacity`:(float) Total processing capacity of the server. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The MoId of the registered device that coresponds to the server. 
@@ -30,10 +31,12 @@ The following arguments can be used to get data of already created objects in In
 * `firmware`:(string) The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. 
 * `front_panel_lock_state`:(string) The actual front panel state of the server.* `None` - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered.* `Lock` - Front Panel of the server is set to Locked state.* `Unlock` - Front Panel of the server is set to Unlocked state. 
 * `hardware_uuid`:(string) The universally unique hardware identity of the server provided by the manufacturer. 
+* `has_e3_s_support`:(bool) The flag to indicate server has the support for E3.S drives. 
 * `ipv4_address`:(string) The IPv4 address configured on the management interface of the Integrated Management Controller. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `kvm_server_state_enabled`:(bool) The KVM server state of the server. 
 * `kvm_vendor`:(string) The KVM Vendor for the server. 
+* `last_power_state_changed_time`:(string) The Last host power state changed time of the server. 
 * `nr_lifecycle`:(string) The lifecycle of the blade server.* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.* `Active` - Default Lifecycle State for a physical entity.* `Decommissioned` - Decommission Lifecycle state.* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.* `ScrubInProgress` - Scrub is in progress on given physical entity.* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.* `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade.* `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade.* `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade.* `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade. 
 * `management_mode`:(string) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `memory_speed`:(string) The maximum memory speed in MHz available on the server. 

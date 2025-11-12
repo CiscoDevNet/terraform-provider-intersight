@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.RackUnit"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.RackUnit"]
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of RackUnit to Switch - A or B or AB. | [optional] [readonly] 
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] 
 **Adapters** | Pointer to [**[]AdapterUnitRelationship**](AdapterUnitRelationship.md) | An array of relationships to adapterUnit resources. | [optional] [readonly] 
@@ -18,6 +19,9 @@ Name | Type | Description | Notes
 **Board** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **BootDeviceBootmode** | Pointer to [**NullableBootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
 **ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
+**ComputeServerPowerParameters** | Pointer to [**NullableComputeServerPowerParametersRelationship**](ComputeServerPowerParametersRelationship.md) |  | [optional] 
+**EquipmentEnclosureElements** | Pointer to [**[]EquipmentEnclosureElementRelationship**](EquipmentEnclosureElementRelationship.md) | An array of relationships to equipmentEnclosureElement resources. | [optional] [readonly] 
+**EquipmentRisers** | Pointer to [**[]EquipmentRiserRelationship**](EquipmentRiserRelationship.md) | An array of relationships to equipmentRiser resources. | [optional] [readonly] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] 
@@ -26,6 +30,7 @@ Name | Type | Description | Notes
 **LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **MemoryArrays** | Pointer to [**[]MemoryArrayRelationship**](MemoryArrayRelationship.md) | An array of relationships to memoryArray resources. | [optional] 
 **PciDevices** | Pointer to [**[]PciDeviceRelationship**](PciDeviceRelationship.md) | An array of relationships to pciDevice resources. | [optional] [readonly] 
+**PciSlots** | Pointer to [**[]PciSlotRelationship**](PciSlotRelationship.md) | An array of relationships to pciSlot resources. | [optional] [readonly] 
 **Processors** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
 **RackEnclosureSlot** | Pointer to [**NullableEquipmentRackEnclosureSlotRelationship**](EquipmentRackEnclosureSlotRelationship.md) |  | [optional] 
@@ -120,6 +125,41 @@ SetConnectionStatus sets ConnectionStatus field to given value.
 
 HasConnectionStatus returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *ComputeRackUnit) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *ComputeRackUnit) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *ComputeRackUnit) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *ComputeRackUnit) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *ComputeRackUnit) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *ComputeRackUnit) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetServerId
 
 `func (o *ComputeRackUnit) GetServerId() int64`
@@ -485,6 +525,111 @@ HasComputePersonality returns a boolean if a field has been set.
 `func (o *ComputeRackUnit) UnsetComputePersonality()`
 
 UnsetComputePersonality ensures that no value is present for ComputePersonality, not even an explicit nil
+### GetComputeServerPowerParameters
+
+`func (o *ComputeRackUnit) GetComputeServerPowerParameters() ComputeServerPowerParametersRelationship`
+
+GetComputeServerPowerParameters returns the ComputeServerPowerParameters field if non-nil, zero value otherwise.
+
+### GetComputeServerPowerParametersOk
+
+`func (o *ComputeRackUnit) GetComputeServerPowerParametersOk() (*ComputeServerPowerParametersRelationship, bool)`
+
+GetComputeServerPowerParametersOk returns a tuple with the ComputeServerPowerParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeServerPowerParameters
+
+`func (o *ComputeRackUnit) SetComputeServerPowerParameters(v ComputeServerPowerParametersRelationship)`
+
+SetComputeServerPowerParameters sets ComputeServerPowerParameters field to given value.
+
+### HasComputeServerPowerParameters
+
+`func (o *ComputeRackUnit) HasComputeServerPowerParameters() bool`
+
+HasComputeServerPowerParameters returns a boolean if a field has been set.
+
+### SetComputeServerPowerParametersNil
+
+`func (o *ComputeRackUnit) SetComputeServerPowerParametersNil(b bool)`
+
+ SetComputeServerPowerParametersNil sets the value for ComputeServerPowerParameters to be an explicit nil
+
+### UnsetComputeServerPowerParameters
+`func (o *ComputeRackUnit) UnsetComputeServerPowerParameters()`
+
+UnsetComputeServerPowerParameters ensures that no value is present for ComputeServerPowerParameters, not even an explicit nil
+### GetEquipmentEnclosureElements
+
+`func (o *ComputeRackUnit) GetEquipmentEnclosureElements() []EquipmentEnclosureElementRelationship`
+
+GetEquipmentEnclosureElements returns the EquipmentEnclosureElements field if non-nil, zero value otherwise.
+
+### GetEquipmentEnclosureElementsOk
+
+`func (o *ComputeRackUnit) GetEquipmentEnclosureElementsOk() (*[]EquipmentEnclosureElementRelationship, bool)`
+
+GetEquipmentEnclosureElementsOk returns a tuple with the EquipmentEnclosureElements field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentEnclosureElements
+
+`func (o *ComputeRackUnit) SetEquipmentEnclosureElements(v []EquipmentEnclosureElementRelationship)`
+
+SetEquipmentEnclosureElements sets EquipmentEnclosureElements field to given value.
+
+### HasEquipmentEnclosureElements
+
+`func (o *ComputeRackUnit) HasEquipmentEnclosureElements() bool`
+
+HasEquipmentEnclosureElements returns a boolean if a field has been set.
+
+### SetEquipmentEnclosureElementsNil
+
+`func (o *ComputeRackUnit) SetEquipmentEnclosureElementsNil(b bool)`
+
+ SetEquipmentEnclosureElementsNil sets the value for EquipmentEnclosureElements to be an explicit nil
+
+### UnsetEquipmentEnclosureElements
+`func (o *ComputeRackUnit) UnsetEquipmentEnclosureElements()`
+
+UnsetEquipmentEnclosureElements ensures that no value is present for EquipmentEnclosureElements, not even an explicit nil
+### GetEquipmentRisers
+
+`func (o *ComputeRackUnit) GetEquipmentRisers() []EquipmentRiserRelationship`
+
+GetEquipmentRisers returns the EquipmentRisers field if non-nil, zero value otherwise.
+
+### GetEquipmentRisersOk
+
+`func (o *ComputeRackUnit) GetEquipmentRisersOk() (*[]EquipmentRiserRelationship, bool)`
+
+GetEquipmentRisersOk returns a tuple with the EquipmentRisers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentRisers
+
+`func (o *ComputeRackUnit) SetEquipmentRisers(v []EquipmentRiserRelationship)`
+
+SetEquipmentRisers sets EquipmentRisers field to given value.
+
+### HasEquipmentRisers
+
+`func (o *ComputeRackUnit) HasEquipmentRisers() bool`
+
+HasEquipmentRisers returns a boolean if a field has been set.
+
+### SetEquipmentRisersNil
+
+`func (o *ComputeRackUnit) SetEquipmentRisersNil(b bool)`
+
+ SetEquipmentRisersNil sets the value for EquipmentRisers to be an explicit nil
+
+### UnsetEquipmentRisers
+`func (o *ComputeRackUnit) UnsetEquipmentRisers()`
+
+UnsetEquipmentRisers ensures that no value is present for EquipmentRisers, not even an explicit nil
 ### GetFanmodules
 
 `func (o *ComputeRackUnit) GetFanmodules() []EquipmentFanModuleRelationship`
@@ -765,6 +910,41 @@ HasPciDevices returns a boolean if a field has been set.
 `func (o *ComputeRackUnit) UnsetPciDevices()`
 
 UnsetPciDevices ensures that no value is present for PciDevices, not even an explicit nil
+### GetPciSlots
+
+`func (o *ComputeRackUnit) GetPciSlots() []PciSlotRelationship`
+
+GetPciSlots returns the PciSlots field if non-nil, zero value otherwise.
+
+### GetPciSlotsOk
+
+`func (o *ComputeRackUnit) GetPciSlotsOk() (*[]PciSlotRelationship, bool)`
+
+GetPciSlotsOk returns a tuple with the PciSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciSlots
+
+`func (o *ComputeRackUnit) SetPciSlots(v []PciSlotRelationship)`
+
+SetPciSlots sets PciSlots field to given value.
+
+### HasPciSlots
+
+`func (o *ComputeRackUnit) HasPciSlots() bool`
+
+HasPciSlots returns a boolean if a field has been set.
+
+### SetPciSlotsNil
+
+`func (o *ComputeRackUnit) SetPciSlotsNil(b bool)`
+
+ SetPciSlotsNil sets the value for PciSlots to be an explicit nil
+
+### UnsetPciSlots
+`func (o *ComputeRackUnit) UnsetPciSlots()`
+
+UnsetPciSlots ensures that no value is present for PciSlots, not even an explicit nil
 ### GetProcessors
 
 `func (o *ComputeRackUnit) GetProcessors() []ProcessorUnitRelationship`

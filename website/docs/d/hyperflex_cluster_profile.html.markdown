@@ -3,12 +3,28 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_profile"
 description: |-
-        A profile specifying configuration settings for a HyperFlex cluster.
+        ### Overview
+        The ClusterProfile object specifies configuration settings for a HyperFlex cluster, defining node settings and operational parameters.
+        #### Purpose
+        ClusterProfile acts as a blueprint for HyperFlex cluster configurations, detailing settings such as IP address configurations, storage settings, and management platforms. It ensures consistent and efficient cluster setup and operation.
+        #### Key Concepts
+        - **Configuration Management** - Provides a structured framework for defining and managing cluster settings, supporting efficient deployment and operation.
+        - **Integration** - Integrates various configuration aspects, including node settings and network configurations, ensuring a cohesive cluster setup.
+        - **Access Control** - Managed through privilege sets, ensuring secure and authorized configuration management.
+        - **Relationship Management** - Establishes relationships with related objects, such as node profiles and associated clusters, for comprehensive cluster management.
 
 ---
 
 # Data Source: intersight_hyperflex_cluster_profile
-A profile specifying configuration settings for a HyperFlex cluster.
+### Overview
+The ClusterProfile object specifies configuration settings for a HyperFlex cluster, defining node settings and operational parameters.
+#### Purpose
+ClusterProfile acts as a blueprint for HyperFlex cluster configurations, detailing settings such as IP address configurations, storage settings, and management platforms. It ensures consistent and efficient cluster setup and operation.
+#### Key Concepts
+- **Configuration Management** - Provides a structured framework for defining and managing cluster settings, supporting efficient deployment and operation.
+- **Integration** - Integrates various configuration aspects, including node settings and network configurations, ensuring a cohesive cluster setup.
+- **Access Control** - Managed through privilege sets, ensuring secure and authorized configuration management.
+- **Relationship Management** - Establishes relationships with related objects, such as node profiles and associated clusters, for comprehensive cluster management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

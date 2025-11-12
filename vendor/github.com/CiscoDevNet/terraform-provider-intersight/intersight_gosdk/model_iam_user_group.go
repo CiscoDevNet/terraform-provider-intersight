@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the IamUserGroup type satisfies the MappedNullable interface at compile time
@@ -28,13 +29,25 @@ type IamUserGroup struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The name of the user group which the dynamic user belongs to.
-	Name         *string                             `json:"Name,omitempty"`
-	Idp          NullableIamIdpRelationship          `json:"Idp,omitempty"`
-	Idpreference NullableIamIdpReferenceRelationship `json:"Idpreference,omitempty"`
+	// AccessActivationTime indicates the activation time for the guest user's access to the Account.  Before this time, if guest user tries to login to the account, access the account will be denied.
+	AccessActivationTime *time.Time `json:"AccessActivationTime,omitempty"`
+	// AccessExpiryTime indicates the expiration time for the guest user's access to the Account. Its value can only be  assigned a date that falls within the range determined by the maximum expiration time configured for the  API entries. The AccessExpiry date can be edited to be earlier or later.
+	AccessExpiryTime *time.Time `json:"AccessExpiryTime,omitempty"`
+	// AccessLink using which the guest user uses to log in to Intersight.
+	AccessLink *string `json:"AccessLink,omitempty"`
+	// Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login. * `Default` - Default User Group Type used for dynamic users login. * `Guest` - Guest User Group type used for guest users login.
+	GroupType *string `json:"GroupType,omitempty"`
+	// Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience.
+	Instruction *string `json:"Instruction,omitempty"`
+	// The name of the user group which the dynamic/or guest user belongs to.
+	Name *string `json:"Name,omitempty"`
+	// A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups.
+	UniqueReferenceId *string                             `json:"UniqueReferenceId,omitempty"`
+	Idp               NullableIamIdpRelationship          `json:"Idp,omitempty"`
+	Idpreference      NullableIamIdpReferenceRelationship `json:"Idpreference,omitempty"`
 	// An array of relationships to iamPermission resources.
-	Permissions []IamPermissionRelationship      `json:"Permissions,omitempty"`
-	Qualifier   NullableIamQualifierRelationship `json:"Qualifier,omitempty"`
+	Permissions []IamPermissionRelationship              `json:"Permissions,omitempty"`
+	Qualifier   NullableIamAbstractQualifierRelationship `json:"Qualifier,omitempty"`
 	// An array of relationships to iamUser resources.
 	Users                []IamUserRelationship `json:"Users,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -50,6 +63,8 @@ func NewIamUserGroup(classId string, objectType string) *IamUserGroup {
 	this := IamUserGroup{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var groupType string = "Default"
+	this.GroupType = &groupType
 	return &this
 }
 
@@ -62,6 +77,8 @@ func NewIamUserGroupWithDefaults() *IamUserGroup {
 	this.ClassId = classId
 	var objectType string = "iam.UserGroup"
 	this.ObjectType = objectType
+	var groupType string = "Default"
+	this.GroupType = &groupType
 	return &this
 }
 
@@ -123,6 +140,166 @@ func (o *IamUserGroup) GetDefaultObjectType() interface{} {
 	return "iam.UserGroup"
 }
 
+// GetAccessActivationTime returns the AccessActivationTime field value if set, zero value otherwise.
+func (o *IamUserGroup) GetAccessActivationTime() time.Time {
+	if o == nil || IsNil(o.AccessActivationTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.AccessActivationTime
+}
+
+// GetAccessActivationTimeOk returns a tuple with the AccessActivationTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetAccessActivationTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.AccessActivationTime) {
+		return nil, false
+	}
+	return o.AccessActivationTime, true
+}
+
+// HasAccessActivationTime returns a boolean if a field has been set.
+func (o *IamUserGroup) HasAccessActivationTime() bool {
+	if o != nil && !IsNil(o.AccessActivationTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessActivationTime gets a reference to the given time.Time and assigns it to the AccessActivationTime field.
+func (o *IamUserGroup) SetAccessActivationTime(v time.Time) {
+	o.AccessActivationTime = &v
+}
+
+// GetAccessExpiryTime returns the AccessExpiryTime field value if set, zero value otherwise.
+func (o *IamUserGroup) GetAccessExpiryTime() time.Time {
+	if o == nil || IsNil(o.AccessExpiryTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.AccessExpiryTime
+}
+
+// GetAccessExpiryTimeOk returns a tuple with the AccessExpiryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetAccessExpiryTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.AccessExpiryTime) {
+		return nil, false
+	}
+	return o.AccessExpiryTime, true
+}
+
+// HasAccessExpiryTime returns a boolean if a field has been set.
+func (o *IamUserGroup) HasAccessExpiryTime() bool {
+	if o != nil && !IsNil(o.AccessExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessExpiryTime gets a reference to the given time.Time and assigns it to the AccessExpiryTime field.
+func (o *IamUserGroup) SetAccessExpiryTime(v time.Time) {
+	o.AccessExpiryTime = &v
+}
+
+// GetAccessLink returns the AccessLink field value if set, zero value otherwise.
+func (o *IamUserGroup) GetAccessLink() string {
+	if o == nil || IsNil(o.AccessLink) {
+		var ret string
+		return ret
+	}
+	return *o.AccessLink
+}
+
+// GetAccessLinkOk returns a tuple with the AccessLink field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetAccessLinkOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessLink) {
+		return nil, false
+	}
+	return o.AccessLink, true
+}
+
+// HasAccessLink returns a boolean if a field has been set.
+func (o *IamUserGroup) HasAccessLink() bool {
+	if o != nil && !IsNil(o.AccessLink) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLink gets a reference to the given string and assigns it to the AccessLink field.
+func (o *IamUserGroup) SetAccessLink(v string) {
+	o.AccessLink = &v
+}
+
+// GetGroupType returns the GroupType field value if set, zero value otherwise.
+func (o *IamUserGroup) GetGroupType() string {
+	if o == nil || IsNil(o.GroupType) {
+		var ret string
+		return ret
+	}
+	return *o.GroupType
+}
+
+// GetGroupTypeOk returns a tuple with the GroupType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetGroupTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupType) {
+		return nil, false
+	}
+	return o.GroupType, true
+}
+
+// HasGroupType returns a boolean if a field has been set.
+func (o *IamUserGroup) HasGroupType() bool {
+	if o != nil && !IsNil(o.GroupType) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupType gets a reference to the given string and assigns it to the GroupType field.
+func (o *IamUserGroup) SetGroupType(v string) {
+	o.GroupType = &v
+}
+
+// GetInstruction returns the Instruction field value if set, zero value otherwise.
+func (o *IamUserGroup) GetInstruction() string {
+	if o == nil || IsNil(o.Instruction) {
+		var ret string
+		return ret
+	}
+	return *o.Instruction
+}
+
+// GetInstructionOk returns a tuple with the Instruction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetInstructionOk() (*string, bool) {
+	if o == nil || IsNil(o.Instruction) {
+		return nil, false
+	}
+	return o.Instruction, true
+}
+
+// HasInstruction returns a boolean if a field has been set.
+func (o *IamUserGroup) HasInstruction() bool {
+	if o != nil && !IsNil(o.Instruction) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstruction gets a reference to the given string and assigns it to the Instruction field.
+func (o *IamUserGroup) SetInstruction(v string) {
+	o.Instruction = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamUserGroup) GetName() string {
 	if o == nil || IsNil(o.Name) {
@@ -153,6 +330,38 @@ func (o *IamUserGroup) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *IamUserGroup) SetName(v string) {
 	o.Name = &v
+}
+
+// GetUniqueReferenceId returns the UniqueReferenceId field value if set, zero value otherwise.
+func (o *IamUserGroup) GetUniqueReferenceId() string {
+	if o == nil || IsNil(o.UniqueReferenceId) {
+		var ret string
+		return ret
+	}
+	return *o.UniqueReferenceId
+}
+
+// GetUniqueReferenceIdOk returns a tuple with the UniqueReferenceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUserGroup) GetUniqueReferenceIdOk() (*string, bool) {
+	if o == nil || IsNil(o.UniqueReferenceId) {
+		return nil, false
+	}
+	return o.UniqueReferenceId, true
+}
+
+// HasUniqueReferenceId returns a boolean if a field has been set.
+func (o *IamUserGroup) HasUniqueReferenceId() bool {
+	if o != nil && !IsNil(o.UniqueReferenceId) {
+		return true
+	}
+
+	return false
+}
+
+// SetUniqueReferenceId gets a reference to the given string and assigns it to the UniqueReferenceId field.
+func (o *IamUserGroup) SetUniqueReferenceId(v string) {
+	o.UniqueReferenceId = &v
 }
 
 // GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -275,9 +484,9 @@ func (o *IamUserGroup) SetPermissions(v []IamPermissionRelationship) {
 }
 
 // GetQualifier returns the Qualifier field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IamUserGroup) GetQualifier() IamQualifierRelationship {
+func (o *IamUserGroup) GetQualifier() IamAbstractQualifierRelationship {
 	if o == nil || IsNil(o.Qualifier.Get()) {
-		var ret IamQualifierRelationship
+		var ret IamAbstractQualifierRelationship
 		return ret
 	}
 	return *o.Qualifier.Get()
@@ -286,7 +495,7 @@ func (o *IamUserGroup) GetQualifier() IamQualifierRelationship {
 // GetQualifierOk returns a tuple with the Qualifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamUserGroup) GetQualifierOk() (*IamQualifierRelationship, bool) {
+func (o *IamUserGroup) GetQualifierOk() (*IamAbstractQualifierRelationship, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -302,8 +511,8 @@ func (o *IamUserGroup) HasQualifier() bool {
 	return false
 }
 
-// SetQualifier gets a reference to the given NullableIamQualifierRelationship and assigns it to the Qualifier field.
-func (o *IamUserGroup) SetQualifier(v IamQualifierRelationship) {
+// SetQualifier gets a reference to the given NullableIamAbstractQualifierRelationship and assigns it to the Qualifier field.
+func (o *IamUserGroup) SetQualifier(v IamAbstractQualifierRelationship) {
 	o.Qualifier.Set(&v)
 }
 
@@ -376,8 +585,26 @@ func (o IamUserGroup) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessActivationTime) {
+		toSerialize["AccessActivationTime"] = o.AccessActivationTime
+	}
+	if !IsNil(o.AccessExpiryTime) {
+		toSerialize["AccessExpiryTime"] = o.AccessExpiryTime
+	}
+	if !IsNil(o.AccessLink) {
+		toSerialize["AccessLink"] = o.AccessLink
+	}
+	if !IsNil(o.GroupType) {
+		toSerialize["GroupType"] = o.GroupType
+	}
+	if !IsNil(o.Instruction) {
+		toSerialize["Instruction"] = o.Instruction
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
+	}
+	if !IsNil(o.UniqueReferenceId) {
+		toSerialize["UniqueReferenceId"] = o.UniqueReferenceId
 	}
 	if o.Idp.IsSet() {
 		toSerialize["Idp"] = o.Idp.Get()
@@ -449,13 +676,25 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The name of the user group which the dynamic user belongs to.
-		Name         *string                             `json:"Name,omitempty"`
-		Idp          NullableIamIdpRelationship          `json:"Idp,omitempty"`
-		Idpreference NullableIamIdpReferenceRelationship `json:"Idpreference,omitempty"`
+		// AccessActivationTime indicates the activation time for the guest user's access to the Account.  Before this time, if guest user tries to login to the account, access the account will be denied.
+		AccessActivationTime *time.Time `json:"AccessActivationTime,omitempty"`
+		// AccessExpiryTime indicates the expiration time for the guest user's access to the Account. Its value can only be  assigned a date that falls within the range determined by the maximum expiration time configured for the  API entries. The AccessExpiry date can be edited to be earlier or later.
+		AccessExpiryTime *time.Time `json:"AccessExpiryTime,omitempty"`
+		// AccessLink using which the guest user uses to log in to Intersight.
+		AccessLink *string `json:"AccessLink,omitempty"`
+		// Group type determines the type of groups that is being associated with users. By default, Default User group will be used for associating dynamic user login. If the value of the User Group is set to guest, then this type of user group will be used for guest user login. * `Default` - Default User Group Type used for dynamic users login. * `Guest` - Guest User Group type used for guest users login.
+		GroupType *string `json:"GroupType,omitempty"`
+		// Instruction property holds detailed guidance and information intended for individuals  accessing the system as guest users. It holds the information to assist guests in navigating the platform,  understanding policies, and performing necessary actions to ensure a seamless and secure user experience.
+		Instruction *string `json:"Instruction,omitempty"`
+		// The name of the user group which the dynamic/or guest user belongs to.
+		Name *string `json:"Name,omitempty"`
+		// A random mixed character string which is unique per user groups. UniqueReferenceId is used as key for identifying the guest user groups.
+		UniqueReferenceId *string                             `json:"UniqueReferenceId,omitempty"`
+		Idp               NullableIamIdpRelationship          `json:"Idp,omitempty"`
+		Idpreference      NullableIamIdpReferenceRelationship `json:"Idpreference,omitempty"`
 		// An array of relationships to iamPermission resources.
-		Permissions []IamPermissionRelationship      `json:"Permissions,omitempty"`
-		Qualifier   NullableIamQualifierRelationship `json:"Qualifier,omitempty"`
+		Permissions []IamPermissionRelationship              `json:"Permissions,omitempty"`
+		Qualifier   NullableIamAbstractQualifierRelationship `json:"Qualifier,omitempty"`
 		// An array of relationships to iamUser resources.
 		Users []IamUserRelationship `json:"Users,omitempty"`
 	}
@@ -467,7 +706,13 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 		varIamUserGroup := _IamUserGroup{}
 		varIamUserGroup.ClassId = varIamUserGroupWithoutEmbeddedStruct.ClassId
 		varIamUserGroup.ObjectType = varIamUserGroupWithoutEmbeddedStruct.ObjectType
+		varIamUserGroup.AccessActivationTime = varIamUserGroupWithoutEmbeddedStruct.AccessActivationTime
+		varIamUserGroup.AccessExpiryTime = varIamUserGroupWithoutEmbeddedStruct.AccessExpiryTime
+		varIamUserGroup.AccessLink = varIamUserGroupWithoutEmbeddedStruct.AccessLink
+		varIamUserGroup.GroupType = varIamUserGroupWithoutEmbeddedStruct.GroupType
+		varIamUserGroup.Instruction = varIamUserGroupWithoutEmbeddedStruct.Instruction
 		varIamUserGroup.Name = varIamUserGroupWithoutEmbeddedStruct.Name
+		varIamUserGroup.UniqueReferenceId = varIamUserGroupWithoutEmbeddedStruct.UniqueReferenceId
 		varIamUserGroup.Idp = varIamUserGroupWithoutEmbeddedStruct.Idp
 		varIamUserGroup.Idpreference = varIamUserGroupWithoutEmbeddedStruct.Idpreference
 		varIamUserGroup.Permissions = varIamUserGroupWithoutEmbeddedStruct.Permissions
@@ -492,7 +737,13 @@ func (o *IamUserGroup) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AccessActivationTime")
+		delete(additionalProperties, "AccessExpiryTime")
+		delete(additionalProperties, "AccessLink")
+		delete(additionalProperties, "GroupType")
+		delete(additionalProperties, "Instruction")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "UniqueReferenceId")
 		delete(additionalProperties, "Idp")
 		delete(additionalProperties, "Idpreference")
 		delete(additionalProperties, "Permissions")

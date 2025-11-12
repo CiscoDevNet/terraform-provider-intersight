@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **PeerDn** | Pointer to **string** | PeerDn for fibre channel physical port. | [optional] [readonly] 
 **PortChannelId** | Pointer to **int64** | Port channel id of FC port channel created on FI switch. | [optional] [readonly] 
 **TransceiverType** | Pointer to **string** | Transceiver type of a Fibre Channel port. | [optional] [readonly] 
+**UserLabel** | Pointer to **string** | The user defined label assigned to the port. | [optional] [readonly] 
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port. | [optional] [readonly] 
 **Wwn** | Pointer to **string** | World Wide Name of a Fibre Channel port. | [optional] [readonly] 
 **EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
@@ -360,6 +361,31 @@ SetTransceiverType sets TransceiverType field to given value.
 `func (o *FcPhysicalPort) HasTransceiverType() bool`
 
 HasTransceiverType returns a boolean if a field has been set.
+
+### GetUserLabel
+
+`func (o *FcPhysicalPort) GetUserLabel() string`
+
+GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
+
+### GetUserLabelOk
+
+`func (o *FcPhysicalPort) GetUserLabelOk() (*string, bool)`
+
+GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserLabel
+
+`func (o *FcPhysicalPort) SetUserLabel(v string)`
+
+SetUserLabel sets UserLabel field to given value.
+
+### HasUserLabel
+
+`func (o *FcPhysicalPort) HasUserLabel() bool`
+
+HasUserLabel returns a boolean if a field has been set.
 
 ### GetVsan
 

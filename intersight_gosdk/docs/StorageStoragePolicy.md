@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.StoragePolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.StoragePolicy"]
+**ControllerAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives need to be specified, entered slots will be moved to controller attached mode. Allowed slots are 1-9, 21-24, 101-104. Allowed value is a comma or hyphen separated number ranges. | [optional] 
 **DefaultDriveMode** | Pointer to **string** | All unconfigured drives will move to the selected state on deployment. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. This setting is applicable only to selected set of controllers on FI attached servers. * &#x60;UnconfiguredGood&#x60; - Newly inserted drives or on reboot, drives will remain the same state. * &#x60;Jbod&#x60; - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood. * &#x60;RAID0&#x60; - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state. | [optional] [default to "UnconfiguredGood"]
-**DirectAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range. | [optional] 
+**DirectAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives need to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-9, 21-24, 101-104. Allowed value is a comma or hyphen separated number ranges. | [optional] 
 **GlobalHotSpares** | Pointer to **string** | A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen. | [optional] 
 **M2VirtualDrive** | Pointer to [**NullableStorageM2VirtualDriveConfig**](StorageM2VirtualDriveConfig.md) |  | [optional] 
 **Raid0Drive** | Pointer to [**NullableStorageR0Drive**](StorageR0Drive.md) |  | [optional] 
-**RaidAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range. | [optional] 
+**RaidAttachedNvmeSlots** | Pointer to **string** | Only U.3 NVMe drives need to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges. Deprecated in favor of controllerAttachedNvmeSlots. | [optional] 
 **SecureJbods** | Pointer to **string** | JBOD drives specified in this slot range will be encrypted. Allowed values are &#39;ALL&#39;, or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to &#39;ALL&#39; will encrypt all the unused UnconfigureGood/JBOD disks. | [optional] 
 **UnusedDisksState** | Pointer to **string** | State to which drives, not used in this policy, are to be moved. NoChange will not change the drive state. No Change must be selected if Default Drive State is set to JBOD or RAID0. * &#x60;NoChange&#x60; - Drive state will not be modified by Storage Policy. * &#x60;UnconfiguredGood&#x60; - Unconfigured good state -ready to be added in a RAID group. * &#x60;Jbod&#x60; - JBOD state where the disks start showing up to Host OS. | [optional] [default to "NoChange"]
 **UseJbodForVdCreation** | Pointer to **bool** | Disks in JBOD State are used to create virtual drives. This setting must be disabled if Default Drive State is set to JBOD. | [optional] 
@@ -77,6 +78,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetControllerAttachedNvmeSlots
+
+`func (o *StorageStoragePolicy) GetControllerAttachedNvmeSlots() string`
+
+GetControllerAttachedNvmeSlots returns the ControllerAttachedNvmeSlots field if non-nil, zero value otherwise.
+
+### GetControllerAttachedNvmeSlotsOk
+
+`func (o *StorageStoragePolicy) GetControllerAttachedNvmeSlotsOk() (*string, bool)`
+
+GetControllerAttachedNvmeSlotsOk returns a tuple with the ControllerAttachedNvmeSlots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetControllerAttachedNvmeSlots
+
+`func (o *StorageStoragePolicy) SetControllerAttachedNvmeSlots(v string)`
+
+SetControllerAttachedNvmeSlots sets ControllerAttachedNvmeSlots field to given value.
+
+### HasControllerAttachedNvmeSlots
+
+`func (o *StorageStoragePolicy) HasControllerAttachedNvmeSlots() bool`
+
+HasControllerAttachedNvmeSlots returns a boolean if a field has been set.
 
 ### GetDefaultDriveMode
 

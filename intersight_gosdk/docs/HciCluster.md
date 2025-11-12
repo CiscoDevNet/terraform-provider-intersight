@@ -56,8 +56,11 @@ Name | Type | Description | Notes
 **DomainManager** | Pointer to [**NullableHciDomainManagerRelationship**](HciDomainManagerRelationship.md) |  | [optional] 
 **Entitlement** | Pointer to [**NullableHciEntitlementRelationship**](HciEntitlementRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HciNodeRelationship**](HciNodeRelationship.md) | An array of relationships to hciNode resources. | [optional] [readonly] 
+**PhysicalGpus** | Pointer to [**[]HciPhysicalGpuRelationship**](HciPhysicalGpuRelationship.md) | An array of relationships to hciPhysicalGpu resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Violation** | Pointer to [**NullableHciViolationRelationship**](HciViolationRelationship.md) |  | [optional] 
+**VirtualGpus** | Pointer to [**[]HciVirtualGpuRelationship**](HciVirtualGpuRelationship.md) | An array of relationships to hciVirtualGpu resources. | [optional] [readonly] 
+**Vms** | Pointer to [**[]HciBaseVmRelationship**](HciBaseVmRelationship.md) | An array of relationships to hciBaseVm resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -1548,6 +1551,41 @@ HasNodes returns a boolean if a field has been set.
 `func (o *HciCluster) UnsetNodes()`
 
 UnsetNodes ensures that no value is present for Nodes, not even an explicit nil
+### GetPhysicalGpus
+
+`func (o *HciCluster) GetPhysicalGpus() []HciPhysicalGpuRelationship`
+
+GetPhysicalGpus returns the PhysicalGpus field if non-nil, zero value otherwise.
+
+### GetPhysicalGpusOk
+
+`func (o *HciCluster) GetPhysicalGpusOk() (*[]HciPhysicalGpuRelationship, bool)`
+
+GetPhysicalGpusOk returns a tuple with the PhysicalGpus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalGpus
+
+`func (o *HciCluster) SetPhysicalGpus(v []HciPhysicalGpuRelationship)`
+
+SetPhysicalGpus sets PhysicalGpus field to given value.
+
+### HasPhysicalGpus
+
+`func (o *HciCluster) HasPhysicalGpus() bool`
+
+HasPhysicalGpus returns a boolean if a field has been set.
+
+### SetPhysicalGpusNil
+
+`func (o *HciCluster) SetPhysicalGpusNil(b bool)`
+
+ SetPhysicalGpusNil sets the value for PhysicalGpus to be an explicit nil
+
+### UnsetPhysicalGpus
+`func (o *HciCluster) UnsetPhysicalGpus()`
+
+UnsetPhysicalGpus ensures that no value is present for PhysicalGpus, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *HciCluster) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -1618,6 +1656,76 @@ HasViolation returns a boolean if a field has been set.
 `func (o *HciCluster) UnsetViolation()`
 
 UnsetViolation ensures that no value is present for Violation, not even an explicit nil
+### GetVirtualGpus
+
+`func (o *HciCluster) GetVirtualGpus() []HciVirtualGpuRelationship`
+
+GetVirtualGpus returns the VirtualGpus field if non-nil, zero value otherwise.
+
+### GetVirtualGpusOk
+
+`func (o *HciCluster) GetVirtualGpusOk() (*[]HciVirtualGpuRelationship, bool)`
+
+GetVirtualGpusOk returns a tuple with the VirtualGpus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualGpus
+
+`func (o *HciCluster) SetVirtualGpus(v []HciVirtualGpuRelationship)`
+
+SetVirtualGpus sets VirtualGpus field to given value.
+
+### HasVirtualGpus
+
+`func (o *HciCluster) HasVirtualGpus() bool`
+
+HasVirtualGpus returns a boolean if a field has been set.
+
+### SetVirtualGpusNil
+
+`func (o *HciCluster) SetVirtualGpusNil(b bool)`
+
+ SetVirtualGpusNil sets the value for VirtualGpus to be an explicit nil
+
+### UnsetVirtualGpus
+`func (o *HciCluster) UnsetVirtualGpus()`
+
+UnsetVirtualGpus ensures that no value is present for VirtualGpus, not even an explicit nil
+### GetVms
+
+`func (o *HciCluster) GetVms() []HciBaseVmRelationship`
+
+GetVms returns the Vms field if non-nil, zero value otherwise.
+
+### GetVmsOk
+
+`func (o *HciCluster) GetVmsOk() (*[]HciBaseVmRelationship, bool)`
+
+GetVmsOk returns a tuple with the Vms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVms
+
+`func (o *HciCluster) SetVms(v []HciBaseVmRelationship)`
+
+SetVms sets Vms field to given value.
+
+### HasVms
+
+`func (o *HciCluster) HasVms() bool`
+
+HasVms returns a boolean if a field has been set.
+
+### SetVmsNil
+
+`func (o *HciCluster) SetVmsNil(b bool)`
+
+ SetVmsNil sets the value for Vms to be an explicit nil
+
+### UnsetVms
+`func (o *HciCluster) UnsetVms()`
+
+UnsetVms ensures that no value is present for Vms, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

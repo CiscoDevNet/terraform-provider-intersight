@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -84,6 +84,9 @@ type NetworkElementSummary struct {
 	Ipv4Address *string `json:"Ipv4Address,omitempty"`
 	// This field indicates the compute status of the catalog values for the associated component or hardware.
 	IsUpgraded *bool `json:"IsUpgraded,omitempty"`
+	// Jumbo Frame configuration for the switch.
+	JumboFrameEnabled *bool                          `json:"JumboFrameEnabled,omitempty"`
+	LocationDetails   NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
 	// This field identifies the model of the given component.
@@ -140,6 +143,8 @@ type NetworkElementSummary struct {
 	Rn *string `json:"Rn,omitempty"`
 	// This field identifies the serial of the given component.
 	Serial *string `json:"Serial,omitempty"`
+	// The Slot Id of the network Element when embedded inside a chassis.
+	SlotId *int64 `json:"SlotId,omitempty"`
 	// Stores the source object type used to fill the properties of this object.
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
 	// The status of the switch.
@@ -148,7 +153,7 @@ type NetworkElementSummary struct {
 	SwitchId *string `json:"SwitchId,omitempty"`
 	// The name of switch profile associated with the switch.
 	SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
-	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
+	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices. * `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.
 	SwitchType *string `json:"SwitchType,omitempty"`
 	// System up time of the switch.
 	SystemUpTime *string `json:"SystemUpTime,omitempty"`
@@ -162,6 +167,7 @@ type NetworkElementSummary struct {
 	Vendor *string `json:"Vendor,omitempty"`
 	// Firmware version of the switch.
 	Version              *string                                     `json:"Version,omitempty"`
+	EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	InventoryParent      NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -1138,6 +1144,81 @@ func (o *NetworkElementSummary) SetIsUpgraded(v bool) {
 	o.IsUpgraded = &v
 }
 
+// GetJumboFrameEnabled returns the JumboFrameEnabled field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetJumboFrameEnabled() bool {
+	if o == nil || IsNil(o.JumboFrameEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.JumboFrameEnabled
+}
+
+// GetJumboFrameEnabledOk returns a tuple with the JumboFrameEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetJumboFrameEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.JumboFrameEnabled) {
+		return nil, false
+	}
+	return o.JumboFrameEnabled, true
+}
+
+// HasJumboFrameEnabled returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasJumboFrameEnabled() bool {
+	if o != nil && !IsNil(o.JumboFrameEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetJumboFrameEnabled gets a reference to the given bool and assigns it to the JumboFrameEnabled field.
+func (o *NetworkElementSummary) SetJumboFrameEnabled(v bool) {
+	o.JumboFrameEnabled = &v
+}
+
+// GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElementSummary) GetLocationDetails() CommGeoLocationDetails {
+	if o == nil || IsNil(o.LocationDetails.Get()) {
+		var ret CommGeoLocationDetails
+		return ret
+	}
+	return *o.LocationDetails.Get()
+}
+
+// GetLocationDetailsOk returns a tuple with the LocationDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElementSummary) GetLocationDetailsOk() (*CommGeoLocationDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationDetails.Get(), o.LocationDetails.IsSet()
+}
+
+// HasLocationDetails returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasLocationDetails() bool {
+	if o != nil && o.LocationDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationDetails gets a reference to the given NullableCommGeoLocationDetails and assigns it to the LocationDetails field.
+func (o *NetworkElementSummary) SetLocationDetails(v CommGeoLocationDetails) {
+	o.LocationDetails.Set(&v)
+}
+
+// SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+func (o *NetworkElementSummary) SetLocationDetailsNil() {
+	o.LocationDetails.Set(nil)
+}
+
+// UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
+func (o *NetworkElementSummary) UnsetLocationDetails() {
+	o.LocationDetails.Unset()
+}
+
 // GetManagementMode returns the ManagementMode field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetManagementMode() string {
 	if o == nil || IsNil(o.ManagementMode) {
@@ -2034,6 +2115,38 @@ func (o *NetworkElementSummary) SetSerial(v string) {
 	o.Serial = &v
 }
 
+// GetSlotId returns the SlotId field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetSlotId() int64 {
+	if o == nil || IsNil(o.SlotId) {
+		var ret int64
+		return ret
+	}
+	return *o.SlotId
+}
+
+// GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetSlotIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.SlotId) {
+		return nil, false
+	}
+	return o.SlotId, true
+}
+
+// HasSlotId returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasSlotId() bool {
+	if o != nil && !IsNil(o.SlotId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotId gets a reference to the given int64 and assigns it to the SlotId field.
+func (o *NetworkElementSummary) SetSlotId(v int64) {
+	o.SlotId = &v
+}
+
 // GetSourceObjectType returns the SourceObjectType field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetSourceObjectType() string {
 	if o == nil || IsNil(o.SourceObjectType) {
@@ -2386,6 +2499,49 @@ func (o *NetworkElementSummary) SetVersion(v string) {
 	o.Version = &v
 }
 
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElementSummary) GetEquipmentChassis() EquipmentChassisRelationship {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
+		var ret EquipmentChassisRelationship
+		return ret
+	}
+	return *o.EquipmentChassis.Get()
+}
+
+// GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElementSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
+}
+
+// HasEquipmentChassis returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasEquipmentChassis() bool {
+	if o != nil && o.EquipmentChassis.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+func (o *NetworkElementSummary) SetEquipmentChassis(v EquipmentChassisRelationship) {
+	o.EquipmentChassis.Set(&v)
+}
+
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *NetworkElementSummary) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *NetworkElementSummary) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
 // GetInventoryParent returns the InventoryParent field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkElementSummary) GetInventoryParent() MoBaseMoRelationship {
 	if o == nil || IsNil(o.InventoryParent.Get()) {
@@ -2579,6 +2735,12 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsUpgraded) {
 		toSerialize["IsUpgraded"] = o.IsUpgraded
 	}
+	if !IsNil(o.JumboFrameEnabled) {
+		toSerialize["JumboFrameEnabled"] = o.JumboFrameEnabled
+	}
+	if o.LocationDetails.IsSet() {
+		toSerialize["LocationDetails"] = o.LocationDetails.Get()
+	}
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
 	}
@@ -2663,6 +2825,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
+	if !IsNil(o.SlotId) {
+		toSerialize["SlotId"] = o.SlotId
+	}
 	if !IsNil(o.SourceObjectType) {
 		toSerialize["SourceObjectType"] = o.SourceObjectType
 	}
@@ -2695,6 +2860,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
+	}
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
 	if o.InventoryParent.IsSet() {
 		toSerialize["InventoryParent"] = o.InventoryParent.Get()
@@ -2813,6 +2981,9 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		Ipv4Address *string `json:"Ipv4Address,omitempty"`
 		// This field indicates the compute status of the catalog values for the associated component or hardware.
 		IsUpgraded *bool `json:"IsUpgraded,omitempty"`
+		// Jumbo Frame configuration for the switch.
+		JumboFrameEnabled *bool                          `json:"JumboFrameEnabled,omitempty"`
+		LocationDetails   NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
 		// This field identifies the model of the given component.
@@ -2869,6 +3040,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		Rn *string `json:"Rn,omitempty"`
 		// This field identifies the serial of the given component.
 		Serial *string `json:"Serial,omitempty"`
+		// The Slot Id of the network Element when embedded inside a chassis.
+		SlotId *int64 `json:"SlotId,omitempty"`
 		// Stores the source object type used to fill the properties of this object.
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
 		// The status of the switch.
@@ -2877,7 +3050,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		SwitchId *string `json:"SwitchId,omitempty"`
 		// The name of switch profile associated with the switch.
 		SwitchProfileName *string `json:"SwitchProfileName,omitempty"`
-		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
+		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices. * `EdgeChassisManagementController` - Switch type of Edge Chassis Management Controller.
 		SwitchType *string `json:"SwitchType,omitempty"`
 		// System up time of the switch.
 		SystemUpTime *string `json:"SystemUpTime,omitempty"`
@@ -2891,6 +3064,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		Vendor *string `json:"Vendor,omitempty"`
 		// Firmware version of the switch.
 		Version          *string                                     `json:"Version,omitempty"`
+		EquipmentChassis NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 		InventoryParent  NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
@@ -2929,6 +3103,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.InterClusterLinkState = varNetworkElementSummaryWithoutEmbeddedStruct.InterClusterLinkState
 		varNetworkElementSummary.Ipv4Address = varNetworkElementSummaryWithoutEmbeddedStruct.Ipv4Address
 		varNetworkElementSummary.IsUpgraded = varNetworkElementSummaryWithoutEmbeddedStruct.IsUpgraded
+		varNetworkElementSummary.JumboFrameEnabled = varNetworkElementSummaryWithoutEmbeddedStruct.JumboFrameEnabled
+		varNetworkElementSummary.LocationDetails = varNetworkElementSummaryWithoutEmbeddedStruct.LocationDetails
 		varNetworkElementSummary.ManagementMode = varNetworkElementSummaryWithoutEmbeddedStruct.ManagementMode
 		varNetworkElementSummary.Model = varNetworkElementSummaryWithoutEmbeddedStruct.Model
 		varNetworkElementSummary.Name = varNetworkElementSummaryWithoutEmbeddedStruct.Name
@@ -2957,6 +3133,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.Revision = varNetworkElementSummaryWithoutEmbeddedStruct.Revision
 		varNetworkElementSummary.Rn = varNetworkElementSummaryWithoutEmbeddedStruct.Rn
 		varNetworkElementSummary.Serial = varNetworkElementSummaryWithoutEmbeddedStruct.Serial
+		varNetworkElementSummary.SlotId = varNetworkElementSummaryWithoutEmbeddedStruct.SlotId
 		varNetworkElementSummary.SourceObjectType = varNetworkElementSummaryWithoutEmbeddedStruct.SourceObjectType
 		varNetworkElementSummary.Status = varNetworkElementSummaryWithoutEmbeddedStruct.Status
 		varNetworkElementSummary.SwitchId = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchId
@@ -2968,6 +3145,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.UserLabel = varNetworkElementSummaryWithoutEmbeddedStruct.UserLabel
 		varNetworkElementSummary.Vendor = varNetworkElementSummaryWithoutEmbeddedStruct.Vendor
 		varNetworkElementSummary.Version = varNetworkElementSummaryWithoutEmbeddedStruct.Version
+		varNetworkElementSummary.EquipmentChassis = varNetworkElementSummaryWithoutEmbeddedStruct.EquipmentChassis
 		varNetworkElementSummary.InventoryParent = varNetworkElementSummaryWithoutEmbeddedStruct.InventoryParent
 		varNetworkElementSummary.RegisteredDevice = varNetworkElementSummaryWithoutEmbeddedStruct.RegisteredDevice
 		*o = NetworkElementSummary(varNetworkElementSummary)
@@ -3016,6 +3194,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "InterClusterLinkState")
 		delete(additionalProperties, "Ipv4Address")
 		delete(additionalProperties, "IsUpgraded")
+		delete(additionalProperties, "JumboFrameEnabled")
+		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "Name")
@@ -3044,6 +3224,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Revision")
 		delete(additionalProperties, "Rn")
 		delete(additionalProperties, "Serial")
+		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "SourceObjectType")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SwitchId")
@@ -3055,6 +3236,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Version")
+		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "InventoryParent")
 		delete(additionalProperties, "RegisteredDevice")
 

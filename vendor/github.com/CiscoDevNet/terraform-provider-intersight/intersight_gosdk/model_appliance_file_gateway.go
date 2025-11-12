@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type ApplianceFileGateway struct {
 	ObjectType string `json:"ObjectType"`
 	// Bucket name in the cloud storage service where the file is stored.
 	BucketName *string `json:"BucketName,omitempty"`
+	// Flag to specify if the requested file is served from an external host. An external host is a host other than the Intersight endpoint URL that resides outside of an endpoint device's local network. A download client (e.g. the Intersight Appliance device connector) should use this property to determine if a proxy is required to reach the host.
+	ExternalHost *bool `json:"ExternalHost,omitempty"`
 	// Size of the file in bytes. FileSize maybe zero if the storage service does not report file size.
 	FileSize *int64 `json:"FileSize,omitempty"`
 	// File timestamp as reported by the cloud storage service.
@@ -164,6 +166,38 @@ func (o *ApplianceFileGateway) HasBucketName() bool {
 // SetBucketName gets a reference to the given string and assigns it to the BucketName field.
 func (o *ApplianceFileGateway) SetBucketName(v string) {
 	o.BucketName = &v
+}
+
+// GetExternalHost returns the ExternalHost field value if set, zero value otherwise.
+func (o *ApplianceFileGateway) GetExternalHost() bool {
+	if o == nil || IsNil(o.ExternalHost) {
+		var ret bool
+		return ret
+	}
+	return *o.ExternalHost
+}
+
+// GetExternalHostOk returns a tuple with the ExternalHost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceFileGateway) GetExternalHostOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExternalHost) {
+		return nil, false
+	}
+	return o.ExternalHost, true
+}
+
+// HasExternalHost returns a boolean if a field has been set.
+func (o *ApplianceFileGateway) HasExternalHost() bool {
+	if o != nil && !IsNil(o.ExternalHost) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalHost gets a reference to the given bool and assigns it to the ExternalHost field.
+func (o *ApplianceFileGateway) SetExternalHost(v bool) {
+	o.ExternalHost = &v
 }
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
@@ -494,6 +528,9 @@ func (o ApplianceFileGateway) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BucketName) {
 		toSerialize["BucketName"] = o.BucketName
 	}
+	if !IsNil(o.ExternalHost) {
+		toSerialize["ExternalHost"] = o.ExternalHost
+	}
 	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
@@ -578,6 +615,8 @@ func (o *ApplianceFileGateway) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Bucket name in the cloud storage service where the file is stored.
 		BucketName *string `json:"BucketName,omitempty"`
+		// Flag to specify if the requested file is served from an external host. An external host is a host other than the Intersight endpoint URL that resides outside of an endpoint device's local network. A download client (e.g. the Intersight Appliance device connector) should use this property to determine if a proxy is required to reach the host.
+		ExternalHost *bool `json:"ExternalHost,omitempty"`
 		// Size of the file in bytes. FileSize maybe zero if the storage service does not report file size.
 		FileSize *int64 `json:"FileSize,omitempty"`
 		// File timestamp as reported by the cloud storage service.
@@ -605,6 +644,7 @@ func (o *ApplianceFileGateway) UnmarshalJSON(data []byte) (err error) {
 		varApplianceFileGateway.ClassId = varApplianceFileGatewayWithoutEmbeddedStruct.ClassId
 		varApplianceFileGateway.ObjectType = varApplianceFileGatewayWithoutEmbeddedStruct.ObjectType
 		varApplianceFileGateway.BucketName = varApplianceFileGatewayWithoutEmbeddedStruct.BucketName
+		varApplianceFileGateway.ExternalHost = varApplianceFileGatewayWithoutEmbeddedStruct.ExternalHost
 		varApplianceFileGateway.FileSize = varApplianceFileGatewayWithoutEmbeddedStruct.FileSize
 		varApplianceFileGateway.FileTime = varApplianceFileGatewayWithoutEmbeddedStruct.FileTime
 		varApplianceFileGateway.FileType = varApplianceFileGatewayWithoutEmbeddedStruct.FileType
@@ -634,6 +674,7 @@ func (o *ApplianceFileGateway) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BucketName")
+		delete(additionalProperties, "ExternalHost")
 		delete(additionalProperties, "FileSize")
 		delete(additionalProperties, "FileTime")
 		delete(additionalProperties, "FileType")

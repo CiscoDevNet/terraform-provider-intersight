@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -36,7 +36,8 @@ type ServerProfile struct {
 	DeployedSwitches              *string                    `json:"DeployedSwitches,omitempty"`
 	InternalReservationReferences []PoolReservationReference `json:"InternalReservationReferences,omitempty"`
 	// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
-	IsPmcDeployedSecurePassphraseSet *bool `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
+	IsPmcDeployedSecurePassphraseSet *bool    `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
+	OverriddenList                   []string `json:"OverriddenList,omitempty"`
 	// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
 	PmcDeployedSecurePassphrase *string                    `json:"PmcDeployedSecurePassphrase,omitempty"`
 	ReservationReferences       []PoolReservationReference `json:"ReservationReferences,omitempty"`
@@ -46,7 +47,11 @@ type ServerProfile struct {
 	ServerPreAssignBySerial *string                            `json:"ServerPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
 	ServerPreAssignBySlot   NullableServerServerAssignTypeSlot `json:"ServerPreAssignBySlot,omitempty"`
 	// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
-	StaticUuidAddress *string `json:"StaticUuidAddress,omitempty" validate:"regexp=^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"`
+	StaticUuidAddress  *string                 `json:"StaticUuidAddress,omitempty" validate:"regexp=^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"`
+	TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+	TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
+	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+	TemplateSyncStatus *string `json:"TemplateSyncStatus,omitempty"`
 	// User label assigned to the server profile.
 	UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	// The UUID address that is assigned to the server based on the UUID pool.
@@ -376,6 +381,39 @@ func (o *ServerProfile) SetIsPmcDeployedSecurePassphraseSet(v bool) {
 	o.IsPmcDeployedSecurePassphraseSet = &v
 }
 
+// GetOverriddenList returns the OverriddenList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerProfile) GetOverriddenList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.OverriddenList
+}
+
+// GetOverriddenListOk returns a tuple with the OverriddenList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerProfile) GetOverriddenListOk() ([]string, bool) {
+	if o == nil || IsNil(o.OverriddenList) {
+		return nil, false
+	}
+	return o.OverriddenList, true
+}
+
+// HasOverriddenList returns a boolean if a field has been set.
+func (o *ServerProfile) HasOverriddenList() bool {
+	if o != nil && !IsNil(o.OverriddenList) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
+func (o *ServerProfile) SetOverriddenList(v []string) {
+	o.OverriddenList = v
+}
+
 // GetPmcDeployedSecurePassphrase returns the PmcDeployedSecurePassphrase field value if set, zero value otherwise.
 func (o *ServerProfile) GetPmcDeployedSecurePassphrase() string {
 	if o == nil || IsNil(o.PmcDeployedSecurePassphrase) {
@@ -578,6 +616,104 @@ func (o *ServerProfile) HasStaticUuidAddress() bool {
 // SetStaticUuidAddress gets a reference to the given string and assigns it to the StaticUuidAddress field.
 func (o *ServerProfile) SetStaticUuidAddress(v string) {
 	o.StaticUuidAddress = &v
+}
+
+// GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerProfile) GetTemplateActions() []MotemplateActionEntry {
+	if o == nil {
+		var ret []MotemplateActionEntry
+		return ret
+	}
+	return o.TemplateActions
+}
+
+// GetTemplateActionsOk returns a tuple with the TemplateActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerProfile) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
+	if o == nil || IsNil(o.TemplateActions) {
+		return nil, false
+	}
+	return o.TemplateActions, true
+}
+
+// HasTemplateActions returns a boolean if a field has been set.
+func (o *ServerProfile) HasTemplateActions() bool {
+	if o != nil && !IsNil(o.TemplateActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateActions gets a reference to the given []MotemplateActionEntry and assigns it to the TemplateActions field.
+func (o *ServerProfile) SetTemplateActions(v []MotemplateActionEntry) {
+	o.TemplateActions = v
+}
+
+// GetTemplateSyncErrors returns the TemplateSyncErrors field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerProfile) GetTemplateSyncErrors() []MotemplateSyncError {
+	if o == nil {
+		var ret []MotemplateSyncError
+		return ret
+	}
+	return o.TemplateSyncErrors
+}
+
+// GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerProfile) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
+	if o == nil || IsNil(o.TemplateSyncErrors) {
+		return nil, false
+	}
+	return o.TemplateSyncErrors, true
+}
+
+// HasTemplateSyncErrors returns a boolean if a field has been set.
+func (o *ServerProfile) HasTemplateSyncErrors() bool {
+	if o != nil && !IsNil(o.TemplateSyncErrors) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncErrors gets a reference to the given []MotemplateSyncError and assigns it to the TemplateSyncErrors field.
+func (o *ServerProfile) SetTemplateSyncErrors(v []MotemplateSyncError) {
+	o.TemplateSyncErrors = v
+}
+
+// GetTemplateSyncStatus returns the TemplateSyncStatus field value if set, zero value otherwise.
+func (o *ServerProfile) GetTemplateSyncStatus() string {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
+		var ret string
+		return ret
+	}
+	return *o.TemplateSyncStatus
+}
+
+// GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetTemplateSyncStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
+		return nil, false
+	}
+	return o.TemplateSyncStatus, true
+}
+
+// HasTemplateSyncStatus returns a boolean if a field has been set.
+func (o *ServerProfile) HasTemplateSyncStatus() bool {
+	if o != nil && !IsNil(o.TemplateSyncStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncStatus gets a reference to the given string and assigns it to the TemplateSyncStatus field.
+func (o *ServerProfile) SetTemplateSyncStatus(v string) {
+	o.TemplateSyncStatus = &v
 }
 
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
@@ -1098,6 +1234,9 @@ func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPmcDeployedSecurePassphraseSet) {
 		toSerialize["IsPmcDeployedSecurePassphraseSet"] = o.IsPmcDeployedSecurePassphraseSet
 	}
+	if o.OverriddenList != nil {
+		toSerialize["OverriddenList"] = o.OverriddenList
+	}
 	if !IsNil(o.PmcDeployedSecurePassphrase) {
 		toSerialize["PmcDeployedSecurePassphrase"] = o.PmcDeployedSecurePassphrase
 	}
@@ -1115,6 +1254,15 @@ func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.StaticUuidAddress) {
 		toSerialize["StaticUuidAddress"] = o.StaticUuidAddress
+	}
+	if o.TemplateActions != nil {
+		toSerialize["TemplateActions"] = o.TemplateActions
+	}
+	if o.TemplateSyncErrors != nil {
+		toSerialize["TemplateSyncErrors"] = o.TemplateSyncErrors
+	}
+	if !IsNil(o.TemplateSyncStatus) {
+		toSerialize["TemplateSyncStatus"] = o.TemplateSyncStatus
 	}
 	if !IsNil(o.UserLabel) {
 		toSerialize["UserLabel"] = o.UserLabel
@@ -1215,7 +1363,8 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		DeployedSwitches              *string                    `json:"DeployedSwitches,omitempty"`
 		InternalReservationReferences []PoolReservationReference `json:"InternalReservationReferences,omitempty"`
 		// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
-		IsPmcDeployedSecurePassphraseSet *bool `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
+		IsPmcDeployedSecurePassphraseSet *bool    `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
+		OverriddenList                   []string `json:"OverriddenList,omitempty"`
 		// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
 		PmcDeployedSecurePassphrase *string                    `json:"PmcDeployedSecurePassphrase,omitempty"`
 		ReservationReferences       []PoolReservationReference `json:"ReservationReferences,omitempty"`
@@ -1225,7 +1374,11 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		ServerPreAssignBySerial *string                            `json:"ServerPreAssignBySerial,omitempty" validate:"regexp=^[a-zA-Z0-9]{0,20}$"`
 		ServerPreAssignBySlot   NullableServerServerAssignTypeSlot `json:"ServerPreAssignBySlot,omitempty"`
 		// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
-		StaticUuidAddress *string `json:"StaticUuidAddress,omitempty" validate:"regexp=^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"`
+		StaticUuidAddress  *string                 `json:"StaticUuidAddress,omitempty" validate:"regexp=^$|^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"`
+		TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
+		TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
+		// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+		TemplateSyncStatus *string `json:"TemplateSyncStatus,omitempty"`
 		// User label assigned to the server profile.
 		UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		// The UUID address that is assigned to the server based on the UUID pool.
@@ -1257,12 +1410,16 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		varServerProfile.DeployedSwitches = varServerProfileWithoutEmbeddedStruct.DeployedSwitches
 		varServerProfile.InternalReservationReferences = varServerProfileWithoutEmbeddedStruct.InternalReservationReferences
 		varServerProfile.IsPmcDeployedSecurePassphraseSet = varServerProfileWithoutEmbeddedStruct.IsPmcDeployedSecurePassphraseSet
+		varServerProfile.OverriddenList = varServerProfileWithoutEmbeddedStruct.OverriddenList
 		varServerProfile.PmcDeployedSecurePassphrase = varServerProfileWithoutEmbeddedStruct.PmcDeployedSecurePassphrase
 		varServerProfile.ReservationReferences = varServerProfileWithoutEmbeddedStruct.ReservationReferences
 		varServerProfile.ServerAssignmentMode = varServerProfileWithoutEmbeddedStruct.ServerAssignmentMode
 		varServerProfile.ServerPreAssignBySerial = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySerial
 		varServerProfile.ServerPreAssignBySlot = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySlot
 		varServerProfile.StaticUuidAddress = varServerProfileWithoutEmbeddedStruct.StaticUuidAddress
+		varServerProfile.TemplateActions = varServerProfileWithoutEmbeddedStruct.TemplateActions
+		varServerProfile.TemplateSyncErrors = varServerProfileWithoutEmbeddedStruct.TemplateSyncErrors
+		varServerProfile.TemplateSyncStatus = varServerProfileWithoutEmbeddedStruct.TemplateSyncStatus
 		varServerProfile.UserLabel = varServerProfileWithoutEmbeddedStruct.UserLabel
 		varServerProfile.Uuid = varServerProfileWithoutEmbeddedStruct.Uuid
 		varServerProfile.AssignedServer = varServerProfileWithoutEmbeddedStruct.AssignedServer
@@ -1300,12 +1457,16 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "DeployedSwitches")
 		delete(additionalProperties, "InternalReservationReferences")
 		delete(additionalProperties, "IsPmcDeployedSecurePassphraseSet")
+		delete(additionalProperties, "OverriddenList")
 		delete(additionalProperties, "PmcDeployedSecurePassphrase")
 		delete(additionalProperties, "ReservationReferences")
 		delete(additionalProperties, "ServerAssignmentMode")
 		delete(additionalProperties, "ServerPreAssignBySerial")
 		delete(additionalProperties, "ServerPreAssignBySlot")
 		delete(additionalProperties, "StaticUuidAddress")
+		delete(additionalProperties, "TemplateActions")
+		delete(additionalProperties, "TemplateSyncErrors")
+		delete(additionalProperties, "TemplateSyncStatus")
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "AssignedServer")

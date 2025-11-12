@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -28,9 +28,11 @@ type FirmwareComponentMeta struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Certain components have multiple versions packaged in the distributable. For example, the GPU component has multiple versions of the image packaged in the distributable due to a different onboard chip.
+	AlternatePackedVersion *string `json:"AlternatePackedVersion,omitempty"`
 	// The name of the component in the compressed HSU bundle.
 	ComponentLabel *string `json:"ComponentLabel,omitempty"`
-	// The type of component image within the distributable. * `ALL` - This represents all the components. * `ALL,HDD` - This represents all the components plus the HDDs. * `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category). * `Storage` - This represents the storage controller components. * `None` - This represents none of the components. * `NXOS` - This represents NXOS components. * `IOM` - This represents IOM components. * `PSU` - This represents PSU components. * `CIMC` - This represents CIMC components. * `BIOS` - This represents BIOS components. * `PCIE` - This represents PCIE components. * `Drive` - This represents Drive components. * `DIMM` - This represents DIMM components. * `BoardController` - This represents Board Controller components. * `StorageController` - This represents Storage Controller components. * `Storage-Sasexpander` - This represents Storage Sas-Expander components. * `Storage-U.2` - This represents U2 Storage Controller components. * `HBA` - This represents HBA components. * `GPU` - This represents GPU components. * `SasExpander` - This represents SasExpander components. * `MSwitch` - This represents mSwitch components. * `CMC` - This represents CMC components.
+	// The type of component image within the distributable. * `ALL` - This represents all the components. * `ALL,HDD` - This represents all the components plus the HDDs. * `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category). * `Storage` - This represents the storage controller components. * `None` - This represents none of the components. * `NXOS` - This represents NXOS components. * `ESU` - This represents ESU components. * `IOM` - This represents IOM components. * `PSU` - This represents PSU components. * `CIMC` - This represents CIMC components. * `BIOS` - This represents BIOS components. * `PCIE` - This represents PCIE components. * `Drive` - This represents Drive components. * `DIMM` - This represents DIMM components. * `BoardController` - This represents Board Controller components. * `StorageController` - This represents Storage Controller components. * `Storage-Sasexpander` - This represents Storage Sas-Expander components. * `Storage-U.2` - This represents U2 Storage Controller components. * `HBA` - This represents HBA components. * `GPU` - This represents GPU components. * `SasExpander` - This represents SasExpander components. * `MSwitch` - This represents mSwitch components. * `CMC` - This represents CMC components. * `PSX` - This represents PSX components.
 	ComponentType *string `json:"ComponentType,omitempty"`
 	// This shows the description of component image within the distributable.
 	Description *string `json:"Description,omitempty"`
@@ -141,6 +143,38 @@ func (o *FirmwareComponentMeta) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "firmware.ComponentMeta" of the ObjectType field.
 func (o *FirmwareComponentMeta) GetDefaultObjectType() interface{} {
 	return "firmware.ComponentMeta"
+}
+
+// GetAlternatePackedVersion returns the AlternatePackedVersion field value if set, zero value otherwise.
+func (o *FirmwareComponentMeta) GetAlternatePackedVersion() string {
+	if o == nil || IsNil(o.AlternatePackedVersion) {
+		var ret string
+		return ret
+	}
+	return *o.AlternatePackedVersion
+}
+
+// GetAlternatePackedVersionOk returns a tuple with the AlternatePackedVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareComponentMeta) GetAlternatePackedVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.AlternatePackedVersion) {
+		return nil, false
+	}
+	return o.AlternatePackedVersion, true
+}
+
+// HasAlternatePackedVersion returns a boolean if a field has been set.
+func (o *FirmwareComponentMeta) HasAlternatePackedVersion() bool {
+	if o != nil && !IsNil(o.AlternatePackedVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlternatePackedVersion gets a reference to the given string and assigns it to the AlternatePackedVersion field.
+func (o *FirmwareComponentMeta) SetAlternatePackedVersion(v string) {
+	o.AlternatePackedVersion = &v
 }
 
 // GetComponentLabel returns the ComponentLabel field value if set, zero value otherwise.
@@ -522,6 +556,9 @@ func (o FirmwareComponentMeta) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AlternatePackedVersion) {
+		toSerialize["AlternatePackedVersion"] = o.AlternatePackedVersion
+	}
 	if !IsNil(o.ComponentLabel) {
 		toSerialize["ComponentLabel"] = o.ComponentLabel
 	}
@@ -610,9 +647,11 @@ func (o *FirmwareComponentMeta) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Certain components have multiple versions packaged in the distributable. For example, the GPU component has multiple versions of the image packaged in the distributable due to a different onboard chip.
+		AlternatePackedVersion *string `json:"AlternatePackedVersion,omitempty"`
 		// The name of the component in the compressed HSU bundle.
 		ComponentLabel *string `json:"ComponentLabel,omitempty"`
-		// The type of component image within the distributable. * `ALL` - This represents all the components. * `ALL,HDD` - This represents all the components plus the HDDs. * `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category). * `Storage` - This represents the storage controller components. * `None` - This represents none of the components. * `NXOS` - This represents NXOS components. * `IOM` - This represents IOM components. * `PSU` - This represents PSU components. * `CIMC` - This represents CIMC components. * `BIOS` - This represents BIOS components. * `PCIE` - This represents PCIE components. * `Drive` - This represents Drive components. * `DIMM` - This represents DIMM components. * `BoardController` - This represents Board Controller components. * `StorageController` - This represents Storage Controller components. * `Storage-Sasexpander` - This represents Storage Sas-Expander components. * `Storage-U.2` - This represents U2 Storage Controller components. * `HBA` - This represents HBA components. * `GPU` - This represents GPU components. * `SasExpander` - This represents SasExpander components. * `MSwitch` - This represents mSwitch components. * `CMC` - This represents CMC components.
+		// The type of component image within the distributable. * `ALL` - This represents all the components. * `ALL,HDD` - This represents all the components plus the HDDs. * `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category). * `Storage` - This represents the storage controller components. * `None` - This represents none of the components. * `NXOS` - This represents NXOS components. * `ESU` - This represents ESU components. * `IOM` - This represents IOM components. * `PSU` - This represents PSU components. * `CIMC` - This represents CIMC components. * `BIOS` - This represents BIOS components. * `PCIE` - This represents PCIE components. * `Drive` - This represents Drive components. * `DIMM` - This represents DIMM components. * `BoardController` - This represents Board Controller components. * `StorageController` - This represents Storage Controller components. * `Storage-Sasexpander` - This represents Storage Sas-Expander components. * `Storage-U.2` - This represents U2 Storage Controller components. * `HBA` - This represents HBA components. * `GPU` - This represents GPU components. * `SasExpander` - This represents SasExpander components. * `MSwitch` - This represents mSwitch components. * `CMC` - This represents CMC components. * `PSX` - This represents PSX components.
 		ComponentType *string `json:"ComponentType,omitempty"`
 		// This shows the description of component image within the distributable.
 		Description *string `json:"Description,omitempty"`
@@ -640,6 +679,7 @@ func (o *FirmwareComponentMeta) UnmarshalJSON(data []byte) (err error) {
 		varFirmwareComponentMeta := _FirmwareComponentMeta{}
 		varFirmwareComponentMeta.ClassId = varFirmwareComponentMetaWithoutEmbeddedStruct.ClassId
 		varFirmwareComponentMeta.ObjectType = varFirmwareComponentMetaWithoutEmbeddedStruct.ObjectType
+		varFirmwareComponentMeta.AlternatePackedVersion = varFirmwareComponentMetaWithoutEmbeddedStruct.AlternatePackedVersion
 		varFirmwareComponentMeta.ComponentLabel = varFirmwareComponentMetaWithoutEmbeddedStruct.ComponentLabel
 		varFirmwareComponentMeta.ComponentType = varFirmwareComponentMetaWithoutEmbeddedStruct.ComponentType
 		varFirmwareComponentMeta.Description = varFirmwareComponentMetaWithoutEmbeddedStruct.Description
@@ -670,6 +710,7 @@ func (o *FirmwareComponentMeta) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AlternatePackedVersion")
 		delete(additionalProperties, "ComponentLabel")
 		delete(additionalProperties, "ComponentType")
 		delete(additionalProperties, "Description")

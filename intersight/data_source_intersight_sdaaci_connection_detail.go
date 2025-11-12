@@ -106,7 +106,7 @@ func getSdaaciConnectionDetailSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"description": {
-			Description: "Description of this connection between two peers.",
+			Description: "Description of the connection between the two peers.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -116,12 +116,12 @@ func getSdaaciConnectionDetailSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"ip_pool": {
-			Description: "Id of the ip pool configured for this connection.",
+			Description: "Ip pool Id configured for this connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"layer3_handoff_id": {
-			Description: "Id of layer 3 handoff configured between a border node and a border leaf.",
+			Description: "Layer 3 handoff Id configured between a border node and a border leaf.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -181,42 +181,42 @@ func getSdaaciConnectionDetailSchema() map[string]*schema.Schema {
 			},
 		},
 		"peer_ainterface": {
-			Description: "Interface id configured on Peer A.",
+			Description: "Interface Id configured on Peer A.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peer_aip_address": {
-			Description: "The IP Address of the device used as the local peer.",
+			Description: "IP address of the device used as the local peer.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peer_atype": {
-			Description: "Type of device used as Peer A for this peer connection.",
+			Description: "Type of device used as Peer A in this peer connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peer_binterface": {
-			Description: "Interface id configured on Peer B.",
+			Description: "Interface Id configured on Peer B.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peer_bip_address": {
-			Description: "The IP Address of the device used as the remote peer.",
+			Description: "IP address of the device used as the remote peer.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peer_btype": {
-			Description: "Type of device used as Peer B for this peer connection.",
+			Description: "Type of device used as Peer B in this peer connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peera": {
-			Description: "First peer of the connection.",
+			Description: "First peer in the connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"peerb": {
-			Description: "Second Peer of the connection.",
+			Description: "Second peer in the connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -255,7 +255,7 @@ func getSdaaciConnectionDetailSchema() map[string]*schema.Schema {
 			},
 		},
 		"router_id": {
-			Description: "Router id defined for this peer connection.",
+			Description: "Router Id defined for this peer connection.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -265,7 +265,7 @@ func getSdaaciConnectionDetailSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Connection status between the peers.\n* `NotConnected` - Connection Status NotConnected.\n* `Connected` - Connection Status Connected.",
+			Description: "Connection status between the peers.\n* `NotConnected` - Status of the connection:Not connected.\n* `Connected` - Status of the connection:Connected.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -279,8 +279,86 @@ func getSdaaciConnectionDetailSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -731,6 +809,49 @@ func dataSourceSdaaciConnectionDetailRead(c context.Context, d *schema.ResourceD
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}

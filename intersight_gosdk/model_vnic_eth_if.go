@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -31,18 +31,26 @@ type VnicEthIf struct {
 	// Static/Pool/DHCP Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * `None` - Type indicates that there is no IP associated to an vnic. * `DHCP` - The IP address is assigned using DHCP, if available. * `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.
 	IscsiIpV4AddressAllocationType *string                  `json:"IscsiIpV4AddressAllocationType,omitempty"`
 	IscsiIpV4Config                NullableIppoolIpV4Config `json:"IscsiIpV4Config,omitempty"`
+	// Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * `None` - Type indicates that there is no IP associated to an vnic. * `DHCP` - The IP address is assigned using DHCP, if available. * `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.
+	IscsiIpV6AddressAllocationType *string                  `json:"IscsiIpV6AddressAllocationType,omitempty"`
+	IscsiIpV6Config                NullableIppoolIpV6Config `json:"IscsiIpV6Config,omitempty"`
 	// IP address associated to the vNIC.
 	IscsiIpv4Address *string `json:"IscsiIpv4Address,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
+	// IPv6 address associated to the iSCSI vNIC.
+	IscsiIpv6Address *string `json:"IscsiIpv6Address,omitempty" validate:"regexp=^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"`
 	// The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy.
 	MacAddress *string `json:"MacAddress,omitempty"`
 	// Type of allocation selected to assign a MAC address for the vnic. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
 	MacAddressType *string `json:"MacAddressType,omitempty"`
 	// Name of the virtual ethernet interface.
-	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]+$"`
+	Name    *string                  `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]+$"`
+	OldInfo NullableVnicEthIfOldInfo `json:"OldInfo,omitempty"`
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
 	Order          *int64                        `json:"Order,omitempty"`
 	OverriddenList []string                      `json:"OverriddenList,omitempty"`
 	Placement      NullableVnicPlacementSettings `json:"Placement,omitempty"`
+	// An EthIf is marked stale if it was deployed to the endpoint and the LAN Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the LAN Connectivity Policy being removed from the server profile or a different LAN Connectivity Policy is attached which does not include any EthIf with the same name.
+	Stale *bool `json:"Stale,omitempty"`
 	// The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.
 	StandbyVifId *int64 `json:"StandbyVifId,omitempty"`
 	// The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx.
@@ -228,6 +236,81 @@ func (o *VnicEthIf) UnsetIscsiIpV4Config() {
 	o.IscsiIpV4Config.Unset()
 }
 
+// GetIscsiIpV6AddressAllocationType returns the IscsiIpV6AddressAllocationType field value if set, zero value otherwise.
+func (o *VnicEthIf) GetIscsiIpV6AddressAllocationType() string {
+	if o == nil || IsNil(o.IscsiIpV6AddressAllocationType) {
+		var ret string
+		return ret
+	}
+	return *o.IscsiIpV6AddressAllocationType
+}
+
+// GetIscsiIpV6AddressAllocationTypeOk returns a tuple with the IscsiIpV6AddressAllocationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIf) GetIscsiIpV6AddressAllocationTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.IscsiIpV6AddressAllocationType) {
+		return nil, false
+	}
+	return o.IscsiIpV6AddressAllocationType, true
+}
+
+// HasIscsiIpV6AddressAllocationType returns a boolean if a field has been set.
+func (o *VnicEthIf) HasIscsiIpV6AddressAllocationType() bool {
+	if o != nil && !IsNil(o.IscsiIpV6AddressAllocationType) {
+		return true
+	}
+
+	return false
+}
+
+// SetIscsiIpV6AddressAllocationType gets a reference to the given string and assigns it to the IscsiIpV6AddressAllocationType field.
+func (o *VnicEthIf) SetIscsiIpV6AddressAllocationType(v string) {
+	o.IscsiIpV6AddressAllocationType = &v
+}
+
+// GetIscsiIpV6Config returns the IscsiIpV6Config field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicEthIf) GetIscsiIpV6Config() IppoolIpV6Config {
+	if o == nil || IsNil(o.IscsiIpV6Config.Get()) {
+		var ret IppoolIpV6Config
+		return ret
+	}
+	return *o.IscsiIpV6Config.Get()
+}
+
+// GetIscsiIpV6ConfigOk returns a tuple with the IscsiIpV6Config field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicEthIf) GetIscsiIpV6ConfigOk() (*IppoolIpV6Config, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IscsiIpV6Config.Get(), o.IscsiIpV6Config.IsSet()
+}
+
+// HasIscsiIpV6Config returns a boolean if a field has been set.
+func (o *VnicEthIf) HasIscsiIpV6Config() bool {
+	if o != nil && o.IscsiIpV6Config.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIscsiIpV6Config gets a reference to the given NullableIppoolIpV6Config and assigns it to the IscsiIpV6Config field.
+func (o *VnicEthIf) SetIscsiIpV6Config(v IppoolIpV6Config) {
+	o.IscsiIpV6Config.Set(&v)
+}
+
+// SetIscsiIpV6ConfigNil sets the value for IscsiIpV6Config to be an explicit nil
+func (o *VnicEthIf) SetIscsiIpV6ConfigNil() {
+	o.IscsiIpV6Config.Set(nil)
+}
+
+// UnsetIscsiIpV6Config ensures that no value is present for IscsiIpV6Config, not even an explicit nil
+func (o *VnicEthIf) UnsetIscsiIpV6Config() {
+	o.IscsiIpV6Config.Unset()
+}
+
 // GetIscsiIpv4Address returns the IscsiIpv4Address field value if set, zero value otherwise.
 func (o *VnicEthIf) GetIscsiIpv4Address() string {
 	if o == nil || IsNil(o.IscsiIpv4Address) {
@@ -258,6 +341,38 @@ func (o *VnicEthIf) HasIscsiIpv4Address() bool {
 // SetIscsiIpv4Address gets a reference to the given string and assigns it to the IscsiIpv4Address field.
 func (o *VnicEthIf) SetIscsiIpv4Address(v string) {
 	o.IscsiIpv4Address = &v
+}
+
+// GetIscsiIpv6Address returns the IscsiIpv6Address field value if set, zero value otherwise.
+func (o *VnicEthIf) GetIscsiIpv6Address() string {
+	if o == nil || IsNil(o.IscsiIpv6Address) {
+		var ret string
+		return ret
+	}
+	return *o.IscsiIpv6Address
+}
+
+// GetIscsiIpv6AddressOk returns a tuple with the IscsiIpv6Address field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIf) GetIscsiIpv6AddressOk() (*string, bool) {
+	if o == nil || IsNil(o.IscsiIpv6Address) {
+		return nil, false
+	}
+	return o.IscsiIpv6Address, true
+}
+
+// HasIscsiIpv6Address returns a boolean if a field has been set.
+func (o *VnicEthIf) HasIscsiIpv6Address() bool {
+	if o != nil && !IsNil(o.IscsiIpv6Address) {
+		return true
+	}
+
+	return false
+}
+
+// SetIscsiIpv6Address gets a reference to the given string and assigns it to the IscsiIpv6Address field.
+func (o *VnicEthIf) SetIscsiIpv6Address(v string) {
+	o.IscsiIpv6Address = &v
 }
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
@@ -354,6 +469,49 @@ func (o *VnicEthIf) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *VnicEthIf) SetName(v string) {
 	o.Name = &v
+}
+
+// GetOldInfo returns the OldInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VnicEthIf) GetOldInfo() VnicEthIfOldInfo {
+	if o == nil || IsNil(o.OldInfo.Get()) {
+		var ret VnicEthIfOldInfo
+		return ret
+	}
+	return *o.OldInfo.Get()
+}
+
+// GetOldInfoOk returns a tuple with the OldInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VnicEthIf) GetOldInfoOk() (*VnicEthIfOldInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OldInfo.Get(), o.OldInfo.IsSet()
+}
+
+// HasOldInfo returns a boolean if a field has been set.
+func (o *VnicEthIf) HasOldInfo() bool {
+	if o != nil && o.OldInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOldInfo gets a reference to the given NullableVnicEthIfOldInfo and assigns it to the OldInfo field.
+func (o *VnicEthIf) SetOldInfo(v VnicEthIfOldInfo) {
+	o.OldInfo.Set(&v)
+}
+
+// SetOldInfoNil sets the value for OldInfo to be an explicit nil
+func (o *VnicEthIf) SetOldInfoNil() {
+	o.OldInfo.Set(nil)
+}
+
+// UnsetOldInfo ensures that no value is present for OldInfo, not even an explicit nil
+func (o *VnicEthIf) UnsetOldInfo() {
+	o.OldInfo.Unset()
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
@@ -462,6 +620,38 @@ func (o *VnicEthIf) SetPlacementNil() {
 // UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
 func (o *VnicEthIf) UnsetPlacement() {
 	o.Placement.Unset()
+}
+
+// GetStale returns the Stale field value if set, zero value otherwise.
+func (o *VnicEthIf) GetStale() bool {
+	if o == nil || IsNil(o.Stale) {
+		var ret bool
+		return ret
+	}
+	return *o.Stale
+}
+
+// GetStaleOk returns a tuple with the Stale field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIf) GetStaleOk() (*bool, bool) {
+	if o == nil || IsNil(o.Stale) {
+		return nil, false
+	}
+	return o.Stale, true
+}
+
+// HasStale returns a boolean if a field has been set.
+func (o *VnicEthIf) HasStale() bool {
+	if o != nil && !IsNil(o.Stale) {
+		return true
+	}
+
+	return false
+}
+
+// SetStale gets a reference to the given bool and assigns it to the Stale field.
+func (o *VnicEthIf) SetStale(v bool) {
+	o.Stale = &v
 }
 
 // GetStandbyVifId returns the StandbyVifId field value if set, zero value otherwise.
@@ -981,8 +1171,17 @@ func (o VnicEthIf) ToMap() (map[string]interface{}, error) {
 	if o.IscsiIpV4Config.IsSet() {
 		toSerialize["IscsiIpV4Config"] = o.IscsiIpV4Config.Get()
 	}
+	if !IsNil(o.IscsiIpV6AddressAllocationType) {
+		toSerialize["IscsiIpV6AddressAllocationType"] = o.IscsiIpV6AddressAllocationType
+	}
+	if o.IscsiIpV6Config.IsSet() {
+		toSerialize["IscsiIpV6Config"] = o.IscsiIpV6Config.Get()
+	}
 	if !IsNil(o.IscsiIpv4Address) {
 		toSerialize["IscsiIpv4Address"] = o.IscsiIpv4Address
+	}
+	if !IsNil(o.IscsiIpv6Address) {
+		toSerialize["IscsiIpv6Address"] = o.IscsiIpv6Address
 	}
 	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
@@ -993,6 +1192,9 @@ func (o VnicEthIf) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
+	if o.OldInfo.IsSet() {
+		toSerialize["OldInfo"] = o.OldInfo.Get()
+	}
 	if !IsNil(o.Order) {
 		toSerialize["Order"] = o.Order
 	}
@@ -1001,6 +1203,9 @@ func (o VnicEthIf) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Placement.IsSet() {
 		toSerialize["Placement"] = o.Placement.Get()
+	}
+	if !IsNil(o.Stale) {
+		toSerialize["Stale"] = o.Stale
 	}
 	if !IsNil(o.StandbyVifId) {
 		toSerialize["StandbyVifId"] = o.StandbyVifId
@@ -1099,18 +1304,26 @@ func (o *VnicEthIf) UnmarshalJSON(data []byte) (err error) {
 		// Static/Pool/DHCP Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * `None` - Type indicates that there is no IP associated to an vnic. * `DHCP` - The IP address is assigned using DHCP, if available. * `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.
 		IscsiIpV4AddressAllocationType *string                  `json:"IscsiIpV4AddressAllocationType,omitempty"`
 		IscsiIpV4Config                NullableIppoolIpV4Config `json:"IscsiIpV4Config,omitempty"`
+		// Static/Pool/DHCP Type of IPv6 address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type. * `None` - Type indicates that there is no IP associated to an vnic. * `DHCP` - The IP address is assigned using DHCP, if available. * `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area. * `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.
+		IscsiIpV6AddressAllocationType *string                  `json:"IscsiIpV6AddressAllocationType,omitempty"`
+		IscsiIpV6Config                NullableIppoolIpV6Config `json:"IscsiIpV6Config,omitempty"`
 		// IP address associated to the vNIC.
 		IscsiIpv4Address *string `json:"IscsiIpv4Address,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
+		// IPv6 address associated to the iSCSI vNIC.
+		IscsiIpv6Address *string `json:"IscsiIpv6Address,omitempty" validate:"regexp=^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"`
 		// The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy.
 		MacAddress *string `json:"MacAddress,omitempty"`
 		// Type of allocation selected to assign a MAC address for the vnic. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
 		MacAddressType *string `json:"MacAddressType,omitempty"`
 		// Name of the virtual ethernet interface.
-		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]+$"`
+		Name    *string                  `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]+$"`
+		OldInfo NullableVnicEthIfOldInfo `json:"OldInfo,omitempty"`
 		// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
 		Order          *int64                        `json:"Order,omitempty"`
 		OverriddenList []string                      `json:"OverriddenList,omitempty"`
 		Placement      NullableVnicPlacementSettings `json:"Placement,omitempty"`
+		// An EthIf is marked stale if it was deployed to the endpoint and the LAN Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the LAN Connectivity Policy being removed from the server profile or a different LAN Connectivity Policy is attached which does not include any EthIf with the same name.
+		Stale *bool `json:"Stale,omitempty"`
 		// The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.
 		StandbyVifId *int64 `json:"StandbyVifId,omitempty"`
 		// The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx.
@@ -1140,13 +1353,18 @@ func (o *VnicEthIf) UnmarshalJSON(data []byte) (err error) {
 		varVnicEthIf.ObjectType = varVnicEthIfWithoutEmbeddedStruct.ObjectType
 		varVnicEthIf.IscsiIpV4AddressAllocationType = varVnicEthIfWithoutEmbeddedStruct.IscsiIpV4AddressAllocationType
 		varVnicEthIf.IscsiIpV4Config = varVnicEthIfWithoutEmbeddedStruct.IscsiIpV4Config
+		varVnicEthIf.IscsiIpV6AddressAllocationType = varVnicEthIfWithoutEmbeddedStruct.IscsiIpV6AddressAllocationType
+		varVnicEthIf.IscsiIpV6Config = varVnicEthIfWithoutEmbeddedStruct.IscsiIpV6Config
 		varVnicEthIf.IscsiIpv4Address = varVnicEthIfWithoutEmbeddedStruct.IscsiIpv4Address
+		varVnicEthIf.IscsiIpv6Address = varVnicEthIfWithoutEmbeddedStruct.IscsiIpv6Address
 		varVnicEthIf.MacAddress = varVnicEthIfWithoutEmbeddedStruct.MacAddress
 		varVnicEthIf.MacAddressType = varVnicEthIfWithoutEmbeddedStruct.MacAddressType
 		varVnicEthIf.Name = varVnicEthIfWithoutEmbeddedStruct.Name
+		varVnicEthIf.OldInfo = varVnicEthIfWithoutEmbeddedStruct.OldInfo
 		varVnicEthIf.Order = varVnicEthIfWithoutEmbeddedStruct.Order
 		varVnicEthIf.OverriddenList = varVnicEthIfWithoutEmbeddedStruct.OverriddenList
 		varVnicEthIf.Placement = varVnicEthIfWithoutEmbeddedStruct.Placement
+		varVnicEthIf.Stale = varVnicEthIfWithoutEmbeddedStruct.Stale
 		varVnicEthIf.StandbyVifId = varVnicEthIfWithoutEmbeddedStruct.StandbyVifId
 		varVnicEthIf.StaticMacAddress = varVnicEthIfWithoutEmbeddedStruct.StaticMacAddress
 		varVnicEthIf.TemplateActions = varVnicEthIfWithoutEmbeddedStruct.TemplateActions
@@ -1181,13 +1399,18 @@ func (o *VnicEthIf) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IscsiIpV4AddressAllocationType")
 		delete(additionalProperties, "IscsiIpV4Config")
+		delete(additionalProperties, "IscsiIpV6AddressAllocationType")
+		delete(additionalProperties, "IscsiIpV6Config")
 		delete(additionalProperties, "IscsiIpv4Address")
+		delete(additionalProperties, "IscsiIpv6Address")
 		delete(additionalProperties, "MacAddress")
 		delete(additionalProperties, "MacAddressType")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "OldInfo")
 		delete(additionalProperties, "Order")
 		delete(additionalProperties, "OverriddenList")
 		delete(additionalProperties, "Placement")
+		delete(additionalProperties, "Stale")
 		delete(additionalProperties, "StandbyVifId")
 		delete(additionalProperties, "StaticMacAddress")
 		delete(additionalProperties, "TemplateActions")

@@ -60,6 +60,11 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 				},
 			},
 		},
+		"bundle_type": {
+			Description: "The bundle type of the image, as published on cisco.com.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"catalog": {
 			Description: "A reference to a softwarerepositoryCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -125,6 +130,16 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"guid": {
+			Description: "The unique identifier for an image in a Cisco repository.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"image_type": {
+			Description: "The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, Unified Edge server. The field is used in private appliance mode, where image does not have description populated from CCO.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"import_action": {
 			Description: "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
 			Type:        schema.TypeString,
@@ -155,8 +170,18 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mdfid": {
+			Description: "The mdfid of the image provided by cisco.com.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"model": {
+			Description: "The endpoint model for which this firmware image is applicable.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -249,8 +274,58 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 				},
 			},
 		},
+		"platform_type": {
+			Description: "The platform type of the image.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"recommended_build": {
+			Description: "The build which is recommended by Cisco.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"release": {
+			Description: "A reference to a softwarerepositoryRelease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"release_date": {
 			Description: "The date on which the file was released or distributed by its vendor.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"release_notes_url": {
+			Description: "The url for the release notes of this image.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -271,6 +346,11 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 		},
 		"software_advisory_url": {
 			Description: "The software advisory, if any, provided by the vendor for this file.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"software_type_id": {
+			Description: "The software type id provided by cisco.com.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -309,8 +389,86 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -521,6 +679,11 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("bundle_type"); ok {
+		x := (v.(string))
+		o.SetBundleType(x)
+	}
+
 	if v, ok := d.GetOk("catalog"); ok {
 		p := make([]models.SoftwarerepositoryCatalogRelationship, 0, 1)
 		s := v.([]interface{})
@@ -594,6 +757,16 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetFeatureSource(x)
 	}
 
+	if v, ok := d.GetOk("guid"); ok {
+		x := (v.(string))
+		o.SetGuid(x)
+	}
+
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
+	}
+
 	if v, ok := d.GetOk("import_action"); ok {
 		x := (v.(string))
 		o.SetImportAction(x)
@@ -624,9 +797,19 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetMd5sum(x)
 	}
 
+	if v, ok := d.GetOk("mdfid"); ok {
+		x := (v.(string))
+		o.SetMdfid(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
+	}
+
+	if v, ok := d.GetOk("model"); ok {
+		x := (v.(string))
+		o.SetModel(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -738,9 +921,67 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("platform_type"); ok {
+		x := (v.(string))
+		o.SetPlatformType(x)
+	}
+
+	if v, ok := d.GetOk("recommended_build"); ok {
+		x := (v.(string))
+		o.SetRecommendedBuild(x)
+	}
+
+	if v, ok := d.GetOk("release"); ok {
+		p := make([]models.SoftwarerepositoryReleaseRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsSoftwarerepositoryReleaseRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRelease(x)
+		}
+	}
+
 	if v, ok := d.GetOk("release_date"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetReleaseDate(x)
+	}
+
+	if v, ok := d.GetOk("release_notes_url"); ok {
+		x := (v.(string))
+		o.SetReleaseNotesUrl(x)
 	}
 
 	if v, ok := d.GetOk("sha512sum"); ok {
@@ -763,12 +1004,17 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetSoftwareAdvisoryUrl(x)
 	}
 
+	if v, ok := d.GetOk("software_type_id"); ok {
+		x := (v.(string))
+		o.SetSoftwareTypeId(x)
+	}
+
 	if v, ok := d.GetOk("nr_source"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.SoftwarerepositoryFileServer{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -807,6 +1053,49 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 					err := json.Unmarshal(x, &x1)
 					if err == nil && x1 != nil {
 						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
 					}
 				}
 			}
@@ -950,6 +1239,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["bundle_type"] = (s.GetBundleType())
 
 				temp["catalog"] = flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -959,6 +1249,8 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
 				temp["feature_source"] = (s.GetFeatureSource())
+				temp["guid"] = (s.GetGuid())
+				temp["image_type"] = (s.GetImageType())
 				temp["import_action"] = (s.GetImportAction())
 				temp["import_state"] = (s.GetImportState())
 
@@ -967,8 +1259,10 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["last_access_time"] = (s.GetLastAccessTime()).String()
 				temp["md5e_tag"] = (s.GetMd5eTag())
 				temp["md5sum"] = (s.GetMd5sum())
+				temp["mdfid"] = (s.GetMdfid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
+				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
@@ -977,14 +1271,20 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["platform_type"] = (s.GetPlatformType())
+				temp["recommended_build"] = (s.GetRecommendedBuild())
+
+				temp["release"] = flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)
 
 				temp["release_date"] = (s.GetReleaseDate()).String()
+				temp["release_notes_url"] = (s.GetReleaseNotesUrl())
 				temp["sha512sum"] = (s.GetSha512sum())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
 				temp["software_advisory_url"] = (s.GetSoftwareAdvisoryUrl())
+				temp["software_type_id"] = (s.GetSoftwareTypeId())
 
-				temp["nr_source"] = flattenMapMoBaseComplexType(s.GetSource(), d)
+				temp["nr_source"] = flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())

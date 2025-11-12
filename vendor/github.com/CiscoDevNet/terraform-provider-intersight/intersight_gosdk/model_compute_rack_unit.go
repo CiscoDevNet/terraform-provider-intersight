@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,8 @@ type ComputeRackUnit struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Connectivity Status of RackUnit to Switch - A or B or AB.
-	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
+	ConnectionStatus *string                        `json:"ConnectionStatus,omitempty"`
+	LocationDetails  NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// RackUnit ID that uniquely identifies the server.
 	ServerId *int64 `json:"ServerId,omitempty"`
 	// To maintain the Topology workflow run status.
@@ -46,7 +47,12 @@ type ComputeRackUnit struct {
 	Board              NullableComputeBoardRelationship         `json:"Board,omitempty"`
 	BootDeviceBootmode NullableBootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
 	// An array of relationships to computePersonality resources.
-	ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
+	ComputePersonality           []ComputePersonalityRelationship                 `json:"ComputePersonality,omitempty"`
+	ComputeServerPowerParameters NullableComputeServerPowerParametersRelationship `json:"ComputeServerPowerParameters,omitempty"`
+	// An array of relationships to equipmentEnclosureElement resources.
+	EquipmentEnclosureElements []EquipmentEnclosureElementRelationship `json:"EquipmentEnclosureElements,omitempty"`
+	// An array of relationships to equipmentRiser resources.
+	EquipmentRisers []EquipmentRiserRelationship `json:"EquipmentRisers,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
 	Fanmodules []EquipmentFanModuleRelationship `json:"Fanmodules,omitempty"`
 	// An array of relationships to inventoryGenericInventoryHolder resources.
@@ -61,6 +67,8 @@ type ComputeRackUnit struct {
 	MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 	// An array of relationships to pciDevice resources.
 	PciDevices []PciDeviceRelationship `json:"PciDevices,omitempty"`
+	// An array of relationships to pciSlot resources.
+	PciSlots []PciSlotRelationship `json:"PciSlots,omitempty"`
 	// An array of relationships to processorUnit resources.
 	Processors []ProcessorUnitRelationship `json:"Processors,omitempty"`
 	// An array of relationships to equipmentPsu resources.
@@ -196,6 +204,49 @@ func (o *ComputeRackUnit) HasConnectionStatus() bool {
 // SetConnectionStatus gets a reference to the given string and assigns it to the ConnectionStatus field.
 func (o *ComputeRackUnit) SetConnectionStatus(v string) {
 	o.ConnectionStatus = &v
+}
+
+// GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeRackUnit) GetLocationDetails() CommGeoLocationDetails {
+	if o == nil || IsNil(o.LocationDetails.Get()) {
+		var ret CommGeoLocationDetails
+		return ret
+	}
+	return *o.LocationDetails.Get()
+}
+
+// GetLocationDetailsOk returns a tuple with the LocationDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeRackUnit) GetLocationDetailsOk() (*CommGeoLocationDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationDetails.Get(), o.LocationDetails.IsSet()
+}
+
+// HasLocationDetails returns a boolean if a field has been set.
+func (o *ComputeRackUnit) HasLocationDetails() bool {
+	if o != nil && o.LocationDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationDetails gets a reference to the given NullableCommGeoLocationDetails and assigns it to the LocationDetails field.
+func (o *ComputeRackUnit) SetLocationDetails(v CommGeoLocationDetails) {
+	o.LocationDetails.Set(&v)
+}
+
+// SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+func (o *ComputeRackUnit) SetLocationDetailsNil() {
+	o.LocationDetails.Set(nil)
+}
+
+// UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
+func (o *ComputeRackUnit) UnsetLocationDetails() {
+	o.LocationDetails.Unset()
 }
 
 // GetServerId returns the ServerId field value if set, zero value otherwise.
@@ -622,6 +673,115 @@ func (o *ComputeRackUnit) SetComputePersonality(v []ComputePersonalityRelationsh
 	o.ComputePersonality = v
 }
 
+// GetComputeServerPowerParameters returns the ComputeServerPowerParameters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeRackUnit) GetComputeServerPowerParameters() ComputeServerPowerParametersRelationship {
+	if o == nil || IsNil(o.ComputeServerPowerParameters.Get()) {
+		var ret ComputeServerPowerParametersRelationship
+		return ret
+	}
+	return *o.ComputeServerPowerParameters.Get()
+}
+
+// GetComputeServerPowerParametersOk returns a tuple with the ComputeServerPowerParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeRackUnit) GetComputeServerPowerParametersOk() (*ComputeServerPowerParametersRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ComputeServerPowerParameters.Get(), o.ComputeServerPowerParameters.IsSet()
+}
+
+// HasComputeServerPowerParameters returns a boolean if a field has been set.
+func (o *ComputeRackUnit) HasComputeServerPowerParameters() bool {
+	if o != nil && o.ComputeServerPowerParameters.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetComputeServerPowerParameters gets a reference to the given NullableComputeServerPowerParametersRelationship and assigns it to the ComputeServerPowerParameters field.
+func (o *ComputeRackUnit) SetComputeServerPowerParameters(v ComputeServerPowerParametersRelationship) {
+	o.ComputeServerPowerParameters.Set(&v)
+}
+
+// SetComputeServerPowerParametersNil sets the value for ComputeServerPowerParameters to be an explicit nil
+func (o *ComputeRackUnit) SetComputeServerPowerParametersNil() {
+	o.ComputeServerPowerParameters.Set(nil)
+}
+
+// UnsetComputeServerPowerParameters ensures that no value is present for ComputeServerPowerParameters, not even an explicit nil
+func (o *ComputeRackUnit) UnsetComputeServerPowerParameters() {
+	o.ComputeServerPowerParameters.Unset()
+}
+
+// GetEquipmentEnclosureElements returns the EquipmentEnclosureElements field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeRackUnit) GetEquipmentEnclosureElements() []EquipmentEnclosureElementRelationship {
+	if o == nil {
+		var ret []EquipmentEnclosureElementRelationship
+		return ret
+	}
+	return o.EquipmentEnclosureElements
+}
+
+// GetEquipmentEnclosureElementsOk returns a tuple with the EquipmentEnclosureElements field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeRackUnit) GetEquipmentEnclosureElementsOk() ([]EquipmentEnclosureElementRelationship, bool) {
+	if o == nil || IsNil(o.EquipmentEnclosureElements) {
+		return nil, false
+	}
+	return o.EquipmentEnclosureElements, true
+}
+
+// HasEquipmentEnclosureElements returns a boolean if a field has been set.
+func (o *ComputeRackUnit) HasEquipmentEnclosureElements() bool {
+	if o != nil && !IsNil(o.EquipmentEnclosureElements) {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentEnclosureElements gets a reference to the given []EquipmentEnclosureElementRelationship and assigns it to the EquipmentEnclosureElements field.
+func (o *ComputeRackUnit) SetEquipmentEnclosureElements(v []EquipmentEnclosureElementRelationship) {
+	o.EquipmentEnclosureElements = v
+}
+
+// GetEquipmentRisers returns the EquipmentRisers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeRackUnit) GetEquipmentRisers() []EquipmentRiserRelationship {
+	if o == nil {
+		var ret []EquipmentRiserRelationship
+		return ret
+	}
+	return o.EquipmentRisers
+}
+
+// GetEquipmentRisersOk returns a tuple with the EquipmentRisers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeRackUnit) GetEquipmentRisersOk() ([]EquipmentRiserRelationship, bool) {
+	if o == nil || IsNil(o.EquipmentRisers) {
+		return nil, false
+	}
+	return o.EquipmentRisers, true
+}
+
+// HasEquipmentRisers returns a boolean if a field has been set.
+func (o *ComputeRackUnit) HasEquipmentRisers() bool {
+	if o != nil && !IsNil(o.EquipmentRisers) {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentRisers gets a reference to the given []EquipmentRiserRelationship and assigns it to the EquipmentRisers field.
+func (o *ComputeRackUnit) SetEquipmentRisers(v []EquipmentRiserRelationship) {
+	o.EquipmentRisers = v
+}
+
 // GetFanmodules returns the Fanmodules field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetFanmodules() []EquipmentFanModuleRelationship {
 	if o == nil {
@@ -904,6 +1064,39 @@ func (o *ComputeRackUnit) HasPciDevices() bool {
 // SetPciDevices gets a reference to the given []PciDeviceRelationship and assigns it to the PciDevices field.
 func (o *ComputeRackUnit) SetPciDevices(v []PciDeviceRelationship) {
 	o.PciDevices = v
+}
+
+// GetPciSlots returns the PciSlots field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeRackUnit) GetPciSlots() []PciSlotRelationship {
+	if o == nil {
+		var ret []PciSlotRelationship
+		return ret
+	}
+	return o.PciSlots
+}
+
+// GetPciSlotsOk returns a tuple with the PciSlots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeRackUnit) GetPciSlotsOk() ([]PciSlotRelationship, bool) {
+	if o == nil || IsNil(o.PciSlots) {
+		return nil, false
+	}
+	return o.PciSlots, true
+}
+
+// HasPciSlots returns a boolean if a field has been set.
+func (o *ComputeRackUnit) HasPciSlots() bool {
+	if o != nil && !IsNil(o.PciSlots) {
+		return true
+	}
+
+	return false
+}
+
+// SetPciSlots gets a reference to the given []PciSlotRelationship and assigns it to the PciSlots field.
+func (o *ComputeRackUnit) SetPciSlots(v []PciSlotRelationship) {
+	o.PciSlots = v
 }
 
 // GetProcessors returns the Processors field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1262,6 +1455,9 @@ func (o ComputeRackUnit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
+	if o.LocationDetails.IsSet() {
+		toSerialize["LocationDetails"] = o.LocationDetails.Get()
+	}
 	if !IsNil(o.ServerId) {
 		toSerialize["ServerId"] = o.ServerId
 	}
@@ -1295,6 +1491,15 @@ func (o ComputeRackUnit) ToMap() (map[string]interface{}, error) {
 	if o.ComputePersonality != nil {
 		toSerialize["ComputePersonality"] = o.ComputePersonality
 	}
+	if o.ComputeServerPowerParameters.IsSet() {
+		toSerialize["ComputeServerPowerParameters"] = o.ComputeServerPowerParameters.Get()
+	}
+	if o.EquipmentEnclosureElements != nil {
+		toSerialize["EquipmentEnclosureElements"] = o.EquipmentEnclosureElements
+	}
+	if o.EquipmentRisers != nil {
+		toSerialize["EquipmentRisers"] = o.EquipmentRisers
+	}
 	if o.Fanmodules != nil {
 		toSerialize["Fanmodules"] = o.Fanmodules
 	}
@@ -1318,6 +1523,9 @@ func (o ComputeRackUnit) ToMap() (map[string]interface{}, error) {
 	}
 	if o.PciDevices != nil {
 		toSerialize["PciDevices"] = o.PciDevices
+	}
+	if o.PciSlots != nil {
+		toSerialize["PciSlots"] = o.PciSlots
 	}
 	if o.Processors != nil {
 		toSerialize["Processors"] = o.Processors
@@ -1402,7 +1610,8 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Connectivity Status of RackUnit to Switch - A or B or AB.
-		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
+		ConnectionStatus *string                        `json:"ConnectionStatus,omitempty"`
+		LocationDetails  NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// RackUnit ID that uniquely identifies the server.
 		ServerId *int64 `json:"ServerId,omitempty"`
 		// To maintain the Topology workflow run status.
@@ -1419,7 +1628,12 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		Board              NullableComputeBoardRelationship         `json:"Board,omitempty"`
 		BootDeviceBootmode NullableBootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
 		// An array of relationships to computePersonality resources.
-		ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
+		ComputePersonality           []ComputePersonalityRelationship                 `json:"ComputePersonality,omitempty"`
+		ComputeServerPowerParameters NullableComputeServerPowerParametersRelationship `json:"ComputeServerPowerParameters,omitempty"`
+		// An array of relationships to equipmentEnclosureElement resources.
+		EquipmentEnclosureElements []EquipmentEnclosureElementRelationship `json:"EquipmentEnclosureElements,omitempty"`
+		// An array of relationships to equipmentRiser resources.
+		EquipmentRisers []EquipmentRiserRelationship `json:"EquipmentRisers,omitempty"`
 		// An array of relationships to equipmentFanModule resources.
 		Fanmodules []EquipmentFanModuleRelationship `json:"Fanmodules,omitempty"`
 		// An array of relationships to inventoryGenericInventoryHolder resources.
@@ -1434,6 +1648,8 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 		// An array of relationships to pciDevice resources.
 		PciDevices []PciDeviceRelationship `json:"PciDevices,omitempty"`
+		// An array of relationships to pciSlot resources.
+		PciSlots []PciSlotRelationship `json:"PciSlots,omitempty"`
 		// An array of relationships to processorUnit resources.
 		Processors []ProcessorUnitRelationship `json:"Processors,omitempty"`
 		// An array of relationships to equipmentPsu resources.
@@ -1459,6 +1675,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		varComputeRackUnit.ClassId = varComputeRackUnitWithoutEmbeddedStruct.ClassId
 		varComputeRackUnit.ObjectType = varComputeRackUnitWithoutEmbeddedStruct.ObjectType
 		varComputeRackUnit.ConnectionStatus = varComputeRackUnitWithoutEmbeddedStruct.ConnectionStatus
+		varComputeRackUnit.LocationDetails = varComputeRackUnitWithoutEmbeddedStruct.LocationDetails
 		varComputeRackUnit.ServerId = varComputeRackUnitWithoutEmbeddedStruct.ServerId
 		varComputeRackUnit.TopologyScanStatus = varComputeRackUnitWithoutEmbeddedStruct.TopologyScanStatus
 		varComputeRackUnit.Adapters = varComputeRackUnitWithoutEmbeddedStruct.Adapters
@@ -1470,6 +1687,9 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		varComputeRackUnit.Board = varComputeRackUnitWithoutEmbeddedStruct.Board
 		varComputeRackUnit.BootDeviceBootmode = varComputeRackUnitWithoutEmbeddedStruct.BootDeviceBootmode
 		varComputeRackUnit.ComputePersonality = varComputeRackUnitWithoutEmbeddedStruct.ComputePersonality
+		varComputeRackUnit.ComputeServerPowerParameters = varComputeRackUnitWithoutEmbeddedStruct.ComputeServerPowerParameters
+		varComputeRackUnit.EquipmentEnclosureElements = varComputeRackUnitWithoutEmbeddedStruct.EquipmentEnclosureElements
+		varComputeRackUnit.EquipmentRisers = varComputeRackUnitWithoutEmbeddedStruct.EquipmentRisers
 		varComputeRackUnit.Fanmodules = varComputeRackUnitWithoutEmbeddedStruct.Fanmodules
 		varComputeRackUnit.GenericInventoryHolders = varComputeRackUnitWithoutEmbeddedStruct.GenericInventoryHolders
 		varComputeRackUnit.GraphicsCards = varComputeRackUnitWithoutEmbeddedStruct.GraphicsCards
@@ -1478,6 +1698,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		varComputeRackUnit.LocatorLed = varComputeRackUnitWithoutEmbeddedStruct.LocatorLed
 		varComputeRackUnit.MemoryArrays = varComputeRackUnitWithoutEmbeddedStruct.MemoryArrays
 		varComputeRackUnit.PciDevices = varComputeRackUnitWithoutEmbeddedStruct.PciDevices
+		varComputeRackUnit.PciSlots = varComputeRackUnitWithoutEmbeddedStruct.PciSlots
 		varComputeRackUnit.Processors = varComputeRackUnitWithoutEmbeddedStruct.Processors
 		varComputeRackUnit.Psus = varComputeRackUnitWithoutEmbeddedStruct.Psus
 		varComputeRackUnit.RackEnclosureSlot = varComputeRackUnitWithoutEmbeddedStruct.RackEnclosureSlot
@@ -1507,6 +1728,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionStatus")
+		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "ServerId")
 		delete(additionalProperties, "TopologyScanStatus")
 		delete(additionalProperties, "Adapters")
@@ -1518,6 +1740,9 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Board")
 		delete(additionalProperties, "BootDeviceBootmode")
 		delete(additionalProperties, "ComputePersonality")
+		delete(additionalProperties, "ComputeServerPowerParameters")
+		delete(additionalProperties, "EquipmentEnclosureElements")
+		delete(additionalProperties, "EquipmentRisers")
 		delete(additionalProperties, "Fanmodules")
 		delete(additionalProperties, "GenericInventoryHolders")
 		delete(additionalProperties, "GraphicsCards")
@@ -1526,6 +1751,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "LocatorLed")
 		delete(additionalProperties, "MemoryArrays")
 		delete(additionalProperties, "PciDevices")
+		delete(additionalProperties, "PciSlots")
 		delete(additionalProperties, "Processors")
 		delete(additionalProperties, "Psus")
 		delete(additionalProperties, "RackEnclosureSlot")

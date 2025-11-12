@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -35,6 +35,8 @@ type WorkflowServiceItemDefinition struct {
 	CreateUser *string `json:"CreateUser,omitempty"`
 	// The Cisco Validated Design (CVD) Identifier that this service item provides.
 	CvdId *string `json:"CvdId,omitempty"`
+	// The flag to indicate that this is the default version of the service item.
+	DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 	// The flag to indicate that service item instance will be deleted after the completion of decommission action.
 	DeleteInstanceOnDecommission *bool `json:"DeleteInstanceOnDecommission,omitempty"`
 	// The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item.
@@ -77,6 +79,8 @@ func NewWorkflowServiceItemDefinition(classId string, objectType string) *Workfl
 	this.ObjectType = objectType
 	var allowMultipleServiceItemInstances bool = true
 	this.AllowMultipleServiceItemInstances = &allowMultipleServiceItemInstances
+	var defaultVersion bool = false
+	this.DefaultVersion = &defaultVersion
 	var deleteInstanceOnDecommission bool = false
 	this.DeleteInstanceOnDecommission = &deleteInstanceOnDecommission
 	var publishStatus string = "Draft"
@@ -99,6 +103,8 @@ func NewWorkflowServiceItemDefinitionWithDefaults() *WorkflowServiceItemDefiniti
 	this.ObjectType = objectType
 	var allowMultipleServiceItemInstances bool = true
 	this.AllowMultipleServiceItemInstances = &allowMultipleServiceItemInstances
+	var defaultVersion bool = false
+	this.DefaultVersion = &defaultVersion
 	var deleteInstanceOnDecommission bool = false
 	this.DeleteInstanceOnDecommission = &deleteInstanceOnDecommission
 	var publishStatus string = "Draft"
@@ -295,6 +301,38 @@ func (o *WorkflowServiceItemDefinition) HasCvdId() bool {
 // SetCvdId gets a reference to the given string and assigns it to the CvdId field.
 func (o *WorkflowServiceItemDefinition) SetCvdId(v string) {
 	o.CvdId = &v
+}
+
+// GetDefaultVersion returns the DefaultVersion field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinition) GetDefaultVersion() bool {
+	if o == nil || IsNil(o.DefaultVersion) {
+		var ret bool
+		return ret
+	}
+	return *o.DefaultVersion
+}
+
+// GetDefaultVersionOk returns a tuple with the DefaultVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemDefinition) GetDefaultVersionOk() (*bool, bool) {
+	if o == nil || IsNil(o.DefaultVersion) {
+		return nil, false
+	}
+	return o.DefaultVersion, true
+}
+
+// HasDefaultVersion returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinition) HasDefaultVersion() bool {
+	if o != nil && !IsNil(o.DefaultVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultVersion gets a reference to the given bool and assigns it to the DefaultVersion field.
+func (o *WorkflowServiceItemDefinition) SetDefaultVersion(v bool) {
+	o.DefaultVersion = &v
 }
 
 // GetDeleteInstanceOnDecommission returns the DeleteInstanceOnDecommission field value if set, zero value otherwise.
@@ -809,6 +847,9 @@ func (o WorkflowServiceItemDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CvdId) {
 		toSerialize["CvdId"] = o.CvdId
 	}
+	if !IsNil(o.DefaultVersion) {
+		toSerialize["DefaultVersion"] = o.DefaultVersion
+	}
 	if !IsNil(o.DeleteInstanceOnDecommission) {
 		toSerialize["DeleteInstanceOnDecommission"] = o.DeleteInstanceOnDecommission
 	}
@@ -913,6 +954,8 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		CreateUser *string `json:"CreateUser,omitempty"`
 		// The Cisco Validated Design (CVD) Identifier that this service item provides.
 		CvdId *string `json:"CvdId,omitempty"`
+		// The flag to indicate that this is the default version of the service item.
+		DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 		// The flag to indicate that service item instance will be deleted after the completion of decommission action.
 		DeleteInstanceOnDecommission *bool `json:"DeleteInstanceOnDecommission,omitempty"`
 		// The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item.
@@ -953,6 +996,7 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowServiceItemDefinition.AttributeDefinition = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.AttributeDefinition
 		varWorkflowServiceItemDefinition.CreateUser = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.CreateUser
 		varWorkflowServiceItemDefinition.CvdId = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.CvdId
+		varWorkflowServiceItemDefinition.DefaultVersion = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.DefaultVersion
 		varWorkflowServiceItemDefinition.DeleteInstanceOnDecommission = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.DeleteInstanceOnDecommission
 		varWorkflowServiceItemDefinition.Description = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Description
 		varWorkflowServiceItemDefinition.Label = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Label
@@ -990,6 +1034,7 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AttributeDefinition")
 		delete(additionalProperties, "CreateUser")
 		delete(additionalProperties, "CvdId")
+		delete(additionalProperties, "DefaultVersion")
 		delete(additionalProperties, "DeleteInstanceOnDecommission")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Label")

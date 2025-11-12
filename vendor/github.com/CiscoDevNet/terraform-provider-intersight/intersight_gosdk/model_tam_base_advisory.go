@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -31,9 +31,8 @@ type TamBaseAdvisory struct {
 	// Brief description of the advisory details.
 	Description *string `json:"Description,omitempty"`
 	// A user defined name for the Intersight Advisory.
-	Name *string `json:"Name,omitempty"`
-	// < Severity associated with the advisory. Severity assignment and interpretation is specific to each type of advisory. Each advisory type (SecurityAdvisory etc.) is supposed to extend and implement Severity type based on the advisory type requirements.
-	Severity NullableMoBaseComplexType `json:"Severity,omitempty"`
+	Name     *string             `json:"Name,omitempty"`
+	Severity NullableTamSeverity `json:"Severity,omitempty"`
 	// Current state of the advisory. * `ready` - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created. * `evaluating` - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation.
 	State                *string `json:"State,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -177,9 +176,9 @@ func (o *TamBaseAdvisory) SetName(v string) {
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TamBaseAdvisory) GetSeverity() MoBaseComplexType {
+func (o *TamBaseAdvisory) GetSeverity() TamSeverity {
 	if o == nil || IsNil(o.Severity.Get()) {
-		var ret MoBaseComplexType
+		var ret TamSeverity
 		return ret
 	}
 	return *o.Severity.Get()
@@ -188,7 +187,7 @@ func (o *TamBaseAdvisory) GetSeverity() MoBaseComplexType {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TamBaseAdvisory) GetSeverityOk() (*MoBaseComplexType, bool) {
+func (o *TamBaseAdvisory) GetSeverityOk() (*TamSeverity, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -204,8 +203,8 @@ func (o *TamBaseAdvisory) HasSeverity() bool {
 	return false
 }
 
-// SetSeverity gets a reference to the given NullableMoBaseComplexType and assigns it to the Severity field.
-func (o *TamBaseAdvisory) SetSeverity(v MoBaseComplexType) {
+// SetSeverity gets a reference to the given NullableTamSeverity and assigns it to the Severity field.
+func (o *TamBaseAdvisory) SetSeverity(v TamSeverity) {
 	o.Severity.Set(&v)
 }
 
@@ -338,9 +337,8 @@ func (o *TamBaseAdvisory) UnmarshalJSON(data []byte) (err error) {
 		// Brief description of the advisory details.
 		Description *string `json:"Description,omitempty"`
 		// A user defined name for the Intersight Advisory.
-		Name *string `json:"Name,omitempty"`
-		// < Severity associated with the advisory. Severity assignment and interpretation is specific to each type of advisory. Each advisory type (SecurityAdvisory etc.) is supposed to extend and implement Severity type based on the advisory type requirements.
-		Severity NullableMoBaseComplexType `json:"Severity,omitempty"`
+		Name     *string             `json:"Name,omitempty"`
+		Severity NullableTamSeverity `json:"Severity,omitempty"`
 		// Current state of the advisory. * `ready` - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created. * `evaluating` - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation.
 		State *string `json:"State,omitempty"`
 	}

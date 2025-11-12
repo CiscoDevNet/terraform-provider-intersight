@@ -30,6 +30,10 @@ Method | HTTP request | Description
 [**GetNiaapiDcnmSweolList**](NiaapiApi.md#GetNiaapiDcnmSweolList) | **Get** /api/v1/niaapi/DcnmSweols | Read a &#39;niaapi.DcnmSweol&#39; resource.
 [**GetNiaapiFileDownloaderByMoid**](NiaapiApi.md#GetNiaapiFileDownloaderByMoid) | **Get** /api/v1/niaapi/FileDownloaders/{Moid} | Read a &#39;niaapi.FileDownloader&#39; resource.
 [**GetNiaapiFileDownloaderList**](NiaapiApi.md#GetNiaapiFileDownloaderList) | **Get** /api/v1/niaapi/FileDownloaders | Read a &#39;niaapi.FileDownloader&#39; resource.
+[**GetNiaapiNdMetadataByMoid**](NiaapiApi.md#GetNiaapiNdMetadataByMoid) | **Get** /api/v1/niaapi/NdMetadata/{Moid} | Read a &#39;niaapi.NdMetadata&#39; resource.
+[**GetNiaapiNdMetadataFileDownloaderByMoid**](NiaapiApi.md#GetNiaapiNdMetadataFileDownloaderByMoid) | **Get** /api/v1/niaapi/NdMetadataFileDownloaders/{Moid} | Read a &#39;niaapi.NdMetadataFileDownloader&#39; resource.
+[**GetNiaapiNdMetadataFileDownloaderList**](NiaapiApi.md#GetNiaapiNdMetadataFileDownloaderList) | **Get** /api/v1/niaapi/NdMetadataFileDownloaders | Read a &#39;niaapi.NdMetadataFileDownloader&#39; resource.
+[**GetNiaapiNdMetadataList**](NiaapiApi.md#GetNiaapiNdMetadataList) | **Get** /api/v1/niaapi/NdMetadata | Read a &#39;niaapi.NdMetadata&#39; resource.
 [**GetNiaapiNiaMetadataByMoid**](NiaapiApi.md#GetNiaapiNiaMetadataByMoid) | **Get** /api/v1/niaapi/NiaMetadata/{Moid} | Read a &#39;niaapi.NiaMetadata&#39; resource.
 [**GetNiaapiNiaMetadataList**](NiaapiApi.md#GetNiaapiNiaMetadataList) | **Get** /api/v1/niaapi/NiaMetadata | Read a &#39;niaapi.NiaMetadata&#39; resource.
 [**GetNiaapiNibFileDownloaderByMoid**](NiaapiApi.md#GetNiaapiNibFileDownloaderByMoid) | **Get** /api/v1/niaapi/NibFileDownloaders/{Moid} | Read a &#39;niaapi.NibFileDownloader&#39; resource.
@@ -49,7 +53,7 @@ Method | HTTP request | Description
 
 ## GetNiaapiApicCcoPostByMoid
 
-> NiaapiNewReleasePost GetNiaapiApicCcoPostByMoid(ctx, moid).Execute()
+> NiaapiApicCcoPost GetNiaapiApicCcoPostByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicCcoPost' resource.
 
@@ -75,7 +79,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicCcoPostByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicCcoPostByMoid`: NiaapiNewReleasePost
+	// response from `GetNiaapiApicCcoPostByMoid`: NiaapiApicCcoPost
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicCcoPostByMoid`: %v\n", resp)
 }
 ```
@@ -99,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNewReleasePost**](NiaapiNewReleasePost.md)
+[**NiaapiApicCcoPost**](NiaapiApicCcoPost.md)
 
 ### Authorization
 
@@ -201,7 +205,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicFieldNoticeByMoid
 
-> NiaapiFieldNotice GetNiaapiApicFieldNoticeByMoid(ctx, moid).Execute()
+> NiaapiApicFieldNotice GetNiaapiApicFieldNoticeByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicFieldNotice' resource.
 
@@ -227,7 +231,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicFieldNoticeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicFieldNoticeByMoid`: NiaapiFieldNotice
+	// response from `GetNiaapiApicFieldNoticeByMoid`: NiaapiApicFieldNotice
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicFieldNoticeByMoid`: %v\n", resp)
 }
 ```
@@ -251,7 +255,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiFieldNotice**](NiaapiFieldNotice.md)
+[**NiaapiApicFieldNotice**](NiaapiApicFieldNotice.md)
 
 ### Authorization
 
@@ -353,7 +357,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicHweolByMoid
 
-> NiaapiHardwareEol GetNiaapiApicHweolByMoid(ctx, moid).Execute()
+> NiaapiApicHweol GetNiaapiApicHweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicHweol' resource.
 
@@ -379,7 +383,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicHweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicHweolByMoid`: NiaapiHardwareEol
+	// response from `GetNiaapiApicHweolByMoid`: NiaapiApicHweol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicHweolByMoid`: %v\n", resp)
 }
 ```
@@ -403,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiHardwareEol**](NiaapiHardwareEol.md)
+[**NiaapiApicHweol**](NiaapiApicHweol.md)
 
 ### Authorization
 
@@ -505,7 +509,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicLatestMaintainedReleaseByMoid
 
-> NiaapiMaintainedRelease GetNiaapiApicLatestMaintainedReleaseByMoid(ctx, moid).Execute()
+> NiaapiApicLatestMaintainedRelease GetNiaapiApicLatestMaintainedReleaseByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicLatestMaintainedRelease' resource.
 
@@ -531,7 +535,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicLatestMaintainedReleaseByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicLatestMaintainedReleaseByMoid`: NiaapiMaintainedRelease
+	// response from `GetNiaapiApicLatestMaintainedReleaseByMoid`: NiaapiApicLatestMaintainedRelease
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicLatestMaintainedReleaseByMoid`: %v\n", resp)
 }
 ```
@@ -555,7 +559,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiMaintainedRelease**](NiaapiMaintainedRelease.md)
+[**NiaapiApicLatestMaintainedRelease**](NiaapiApicLatestMaintainedRelease.md)
 
 ### Authorization
 
@@ -657,7 +661,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicReleaseRecommendByMoid
 
-> NiaapiReleaseRecommend GetNiaapiApicReleaseRecommendByMoid(ctx, moid).Execute()
+> NiaapiApicReleaseRecommend GetNiaapiApicReleaseRecommendByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicReleaseRecommend' resource.
 
@@ -683,7 +687,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicReleaseRecommendByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicReleaseRecommendByMoid`: NiaapiReleaseRecommend
+	// response from `GetNiaapiApicReleaseRecommendByMoid`: NiaapiApicReleaseRecommend
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicReleaseRecommendByMoid`: %v\n", resp)
 }
 ```
@@ -707,7 +711,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiReleaseRecommend**](NiaapiReleaseRecommend.md)
+[**NiaapiApicReleaseRecommend**](NiaapiApicReleaseRecommend.md)
 
 ### Authorization
 
@@ -809,7 +813,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicSweolByMoid
 
-> NiaapiSoftwareEol GetNiaapiApicSweolByMoid(ctx, moid).Execute()
+> NiaapiApicSweol GetNiaapiApicSweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicSweol' resource.
 
@@ -835,7 +839,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicSweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicSweolByMoid`: NiaapiSoftwareEol
+	// response from `GetNiaapiApicSweolByMoid`: NiaapiApicSweol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicSweolByMoid`: %v\n", resp)
 }
 ```
@@ -859,7 +863,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiSoftwareEol**](NiaapiSoftwareEol.md)
+[**NiaapiApicSweol**](NiaapiApicSweol.md)
 
 ### Authorization
 
@@ -961,7 +965,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmCcoPostByMoid
 
-> NiaapiNewReleasePost GetNiaapiDcnmCcoPostByMoid(ctx, moid).Execute()
+> NiaapiDcnmCcoPost GetNiaapiDcnmCcoPostByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmCcoPost' resource.
 
@@ -987,7 +991,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmCcoPostByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmCcoPostByMoid`: NiaapiNewReleasePost
+	// response from `GetNiaapiDcnmCcoPostByMoid`: NiaapiDcnmCcoPost
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmCcoPostByMoid`: %v\n", resp)
 }
 ```
@@ -1011,7 +1015,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNewReleasePost**](NiaapiNewReleasePost.md)
+[**NiaapiDcnmCcoPost**](NiaapiDcnmCcoPost.md)
 
 ### Authorization
 
@@ -1113,7 +1117,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmFieldNoticeByMoid
 
-> NiaapiFieldNotice GetNiaapiDcnmFieldNoticeByMoid(ctx, moid).Execute()
+> NiaapiDcnmFieldNotice GetNiaapiDcnmFieldNoticeByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmFieldNotice' resource.
 
@@ -1139,7 +1143,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmFieldNoticeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmFieldNoticeByMoid`: NiaapiFieldNotice
+	// response from `GetNiaapiDcnmFieldNoticeByMoid`: NiaapiDcnmFieldNotice
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmFieldNoticeByMoid`: %v\n", resp)
 }
 ```
@@ -1163,7 +1167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiFieldNotice**](NiaapiFieldNotice.md)
+[**NiaapiDcnmFieldNotice**](NiaapiDcnmFieldNotice.md)
 
 ### Authorization
 
@@ -1265,7 +1269,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmHweolByMoid
 
-> NiaapiHardwareEol GetNiaapiDcnmHweolByMoid(ctx, moid).Execute()
+> NiaapiDcnmHweol GetNiaapiDcnmHweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmHweol' resource.
 
@@ -1291,7 +1295,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmHweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmHweolByMoid`: NiaapiHardwareEol
+	// response from `GetNiaapiDcnmHweolByMoid`: NiaapiDcnmHweol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmHweolByMoid`: %v\n", resp)
 }
 ```
@@ -1315,7 +1319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiHardwareEol**](NiaapiHardwareEol.md)
+[**NiaapiDcnmHweol**](NiaapiDcnmHweol.md)
 
 ### Authorization
 
@@ -1417,7 +1421,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmLatestMaintainedReleaseByMoid
 
-> NiaapiMaintainedRelease GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx, moid).Execute()
+> NiaapiDcnmLatestMaintainedRelease GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmLatestMaintainedRelease' resource.
 
@@ -1443,7 +1447,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmLatestMaintainedReleaseByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmLatestMaintainedReleaseByMoid`: NiaapiMaintainedRelease
+	// response from `GetNiaapiDcnmLatestMaintainedReleaseByMoid`: NiaapiDcnmLatestMaintainedRelease
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmLatestMaintainedReleaseByMoid`: %v\n", resp)
 }
 ```
@@ -1467,7 +1471,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiMaintainedRelease**](NiaapiMaintainedRelease.md)
+[**NiaapiDcnmLatestMaintainedRelease**](NiaapiDcnmLatestMaintainedRelease.md)
 
 ### Authorization
 
@@ -1569,7 +1573,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmReleaseRecommendByMoid
 
-> NiaapiReleaseRecommend GetNiaapiDcnmReleaseRecommendByMoid(ctx, moid).Execute()
+> NiaapiDcnmReleaseRecommend GetNiaapiDcnmReleaseRecommendByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmReleaseRecommend' resource.
 
@@ -1595,7 +1599,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmReleaseRecommendByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmReleaseRecommendByMoid`: NiaapiReleaseRecommend
+	// response from `GetNiaapiDcnmReleaseRecommendByMoid`: NiaapiDcnmReleaseRecommend
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmReleaseRecommendByMoid`: %v\n", resp)
 }
 ```
@@ -1619,7 +1623,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiReleaseRecommend**](NiaapiReleaseRecommend.md)
+[**NiaapiDcnmReleaseRecommend**](NiaapiDcnmReleaseRecommend.md)
 
 ### Authorization
 
@@ -1721,7 +1725,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmSweolByMoid
 
-> NiaapiSoftwareEol GetNiaapiDcnmSweolByMoid(ctx, moid).Execute()
+> NiaapiDcnmSweol GetNiaapiDcnmSweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmSweol' resource.
 
@@ -1747,7 +1751,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmSweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmSweolByMoid`: NiaapiSoftwareEol
+	// response from `GetNiaapiDcnmSweolByMoid`: NiaapiDcnmSweol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmSweolByMoid`: %v\n", resp)
 }
 ```
@@ -1771,7 +1775,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiSoftwareEol**](NiaapiSoftwareEol.md)
+[**NiaapiDcnmSweol**](NiaapiDcnmSweol.md)
 
 ### Authorization
 
@@ -2008,6 +2012,310 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NiaapiFileDownloaderResponse**](NiaapiFileDownloaderResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetNiaapiNdMetadataByMoid
+
+> NiaapiNdMetadata GetNiaapiNdMetadataByMoid(ctx, moid).Execute()
+
+Read a 'niaapi.NdMetadata' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NiaapiApi.GetNiaapiNdMetadataByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiNdMetadataByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetNiaapiNdMetadataByMoid`: NiaapiNdMetadata
+	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiNdMetadataByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetNiaapiNdMetadataByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**NiaapiNdMetadata**](NiaapiNdMetadata.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetNiaapiNdMetadataFileDownloaderByMoid
+
+> NiaapiNdMetadataFileDownloader GetNiaapiNdMetadataFileDownloaderByMoid(ctx, moid).Execute()
+
+Read a 'niaapi.NdMetadataFileDownloader' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NiaapiApi.GetNiaapiNdMetadataFileDownloaderByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiNdMetadataFileDownloaderByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetNiaapiNdMetadataFileDownloaderByMoid`: NiaapiNdMetadataFileDownloader
+	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiNdMetadataFileDownloaderByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetNiaapiNdMetadataFileDownloaderByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**NiaapiNdMetadataFileDownloader**](NiaapiNdMetadataFileDownloader.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetNiaapiNdMetadataFileDownloaderList
+
+> NiaapiNdMetadataFileDownloaderResponse GetNiaapiNdMetadataFileDownloaderList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'niaapi.NdMetadataFileDownloader' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NiaapiApi.GetNiaapiNdMetadataFileDownloaderList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiNdMetadataFileDownloaderList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetNiaapiNdMetadataFileDownloaderList`: NiaapiNdMetadataFileDownloaderResponse
+	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiNdMetadataFileDownloaderList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetNiaapiNdMetadataFileDownloaderListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**NiaapiNdMetadataFileDownloaderResponse**](NiaapiNdMetadataFileDownloaderResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetNiaapiNdMetadataList
+
+> NiaapiNdMetadataResponse GetNiaapiNdMetadataList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'niaapi.NdMetadata' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NiaapiApi.GetNiaapiNdMetadataList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiNdMetadataList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetNiaapiNdMetadataList`: NiaapiNdMetadataResponse
+	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiNdMetadataList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetNiaapiNdMetadataListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**NiaapiNdMetadataResponse**](NiaapiNdMetadataResponse.md)
 
 ### Authorization
 

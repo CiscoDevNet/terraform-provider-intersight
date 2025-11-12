@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.ScheduledAction"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ScheduledAction"]
 **Action** | Pointer to **string** | Name of the action to be performed on the profile. | [optional] 
+**ActionQualifier** | Pointer to [**NullablePolicyActionQualifier**](PolicyActionQualifier.md) |  | [optional] 
 **ProceedOnReboot** | Pointer to **bool** | ProceedOnReboot can be used to acknowledge server reboot while triggering deploy/activate. | [optional] 
 
 ## Methods
@@ -93,6 +94,41 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### GetActionQualifier
+
+`func (o *PolicyScheduledAction) GetActionQualifier() PolicyActionQualifier`
+
+GetActionQualifier returns the ActionQualifier field if non-nil, zero value otherwise.
+
+### GetActionQualifierOk
+
+`func (o *PolicyScheduledAction) GetActionQualifierOk() (*PolicyActionQualifier, bool)`
+
+GetActionQualifierOk returns a tuple with the ActionQualifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionQualifier
+
+`func (o *PolicyScheduledAction) SetActionQualifier(v PolicyActionQualifier)`
+
+SetActionQualifier sets ActionQualifier field to given value.
+
+### HasActionQualifier
+
+`func (o *PolicyScheduledAction) HasActionQualifier() bool`
+
+HasActionQualifier returns a boolean if a field has been set.
+
+### SetActionQualifierNil
+
+`func (o *PolicyScheduledAction) SetActionQualifierNil(b bool)`
+
+ SetActionQualifierNil sets the value for ActionQualifier to be an explicit nil
+
+### UnsetActionQualifier
+`func (o *PolicyScheduledAction) UnsetActionQualifier()`
+
+UnsetActionQualifier ensures that no value is present for ActionQualifier, not even an explicit nil
 ### GetProceedOnReboot
 
 `func (o *PolicyScheduledAction) GetProceedOnReboot() bool`

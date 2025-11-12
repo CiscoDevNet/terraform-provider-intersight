@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.FirmwareSummary"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.FirmwareSummary"]
-**BundleVersion** | Pointer to **string** | Version details at the bundle level for the each of server. | [optional] 
+**BundleVersion** | Pointer to **string** | Version details at the bundle level for the each of server. | [optional] [readonly] 
 **ComponentsFwInventory** | Pointer to [**[]FirmwareFirmwareInventory**](FirmwareFirmwareInventory.md) |  | [optional] 
+**ExpanderModule** | Pointer to [**NullableEquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
+**PciNode** | Pointer to [**NullablePciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
 **Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **TargetMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
@@ -130,6 +132,76 @@ HasComponentsFwInventory returns a boolean if a field has been set.
 `func (o *FirmwareFirmwareSummary) UnsetComponentsFwInventory()`
 
 UnsetComponentsFwInventory ensures that no value is present for ComponentsFwInventory, not even an explicit nil
+### GetExpanderModule
+
+`func (o *FirmwareFirmwareSummary) GetExpanderModule() EquipmentExpanderModuleRelationship`
+
+GetExpanderModule returns the ExpanderModule field if non-nil, zero value otherwise.
+
+### GetExpanderModuleOk
+
+`func (o *FirmwareFirmwareSummary) GetExpanderModuleOk() (*EquipmentExpanderModuleRelationship, bool)`
+
+GetExpanderModuleOk returns a tuple with the ExpanderModule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpanderModule
+
+`func (o *FirmwareFirmwareSummary) SetExpanderModule(v EquipmentExpanderModuleRelationship)`
+
+SetExpanderModule sets ExpanderModule field to given value.
+
+### HasExpanderModule
+
+`func (o *FirmwareFirmwareSummary) HasExpanderModule() bool`
+
+HasExpanderModule returns a boolean if a field has been set.
+
+### SetExpanderModuleNil
+
+`func (o *FirmwareFirmwareSummary) SetExpanderModuleNil(b bool)`
+
+ SetExpanderModuleNil sets the value for ExpanderModule to be an explicit nil
+
+### UnsetExpanderModule
+`func (o *FirmwareFirmwareSummary) UnsetExpanderModule()`
+
+UnsetExpanderModule ensures that no value is present for ExpanderModule, not even an explicit nil
+### GetPciNode
+
+`func (o *FirmwareFirmwareSummary) GetPciNode() PciNodeRelationship`
+
+GetPciNode returns the PciNode field if non-nil, zero value otherwise.
+
+### GetPciNodeOk
+
+`func (o *FirmwareFirmwareSummary) GetPciNodeOk() (*PciNodeRelationship, bool)`
+
+GetPciNodeOk returns a tuple with the PciNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNode
+
+`func (o *FirmwareFirmwareSummary) SetPciNode(v PciNodeRelationship)`
+
+SetPciNode sets PciNode field to given value.
+
+### HasPciNode
+
+`func (o *FirmwareFirmwareSummary) HasPciNode() bool`
+
+HasPciNode returns a boolean if a field has been set.
+
+### SetPciNodeNil
+
+`func (o *FirmwareFirmwareSummary) SetPciNodeNil(b bool)`
+
+ SetPciNodeNil sets the value for PciNode to be an explicit nil
+
+### UnsetPciNode
+`func (o *FirmwareFirmwareSummary) UnsetPciNode()`
+
+UnsetPciNode ensures that no value is present for PciNode, not even an explicit nil
 ### GetServer
 
 `func (o *FirmwareFirmwareSummary) GetServer() ComputePhysicalRelationship`

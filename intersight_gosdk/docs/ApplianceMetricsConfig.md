@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.MetricsConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.MetricsConfig"]
 **CurrentEndpointCount** | Pointer to **int64** | Number of discovered endpoints from where metrics is being collected currently. | [optional] [readonly] [default to 0]
+**DiskCapacity** | Pointer to **int64** | Capacity of the metrics disk /opt/database in bytes. | [optional] [readonly] 
+**DiskUsage** | Pointer to **int64** | Disk usage of the metrics disk /opt/database in bytes. | [optional] [readonly] 
 **EndpointUsagePercent** | Pointer to **int64** | Usage percentage of the discovered endpoints. | [optional] [readonly] [default to 0]
 **LastDisabledDate** | Pointer to **time.Time** | Disabled date of the metrics collection feature. | [optional] [readonly] 
 **LastEnabledDate** | Pointer to **time.Time** | Enabled date of the metrics collection feature. | [optional] [readonly] 
@@ -99,6 +101,56 @@ SetCurrentEndpointCount sets CurrentEndpointCount field to given value.
 `func (o *ApplianceMetricsConfig) HasCurrentEndpointCount() bool`
 
 HasCurrentEndpointCount returns a boolean if a field has been set.
+
+### GetDiskCapacity
+
+`func (o *ApplianceMetricsConfig) GetDiskCapacity() int64`
+
+GetDiskCapacity returns the DiskCapacity field if non-nil, zero value otherwise.
+
+### GetDiskCapacityOk
+
+`func (o *ApplianceMetricsConfig) GetDiskCapacityOk() (*int64, bool)`
+
+GetDiskCapacityOk returns a tuple with the DiskCapacity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskCapacity
+
+`func (o *ApplianceMetricsConfig) SetDiskCapacity(v int64)`
+
+SetDiskCapacity sets DiskCapacity field to given value.
+
+### HasDiskCapacity
+
+`func (o *ApplianceMetricsConfig) HasDiskCapacity() bool`
+
+HasDiskCapacity returns a boolean if a field has been set.
+
+### GetDiskUsage
+
+`func (o *ApplianceMetricsConfig) GetDiskUsage() int64`
+
+GetDiskUsage returns the DiskUsage field if non-nil, zero value otherwise.
+
+### GetDiskUsageOk
+
+`func (o *ApplianceMetricsConfig) GetDiskUsageOk() (*int64, bool)`
+
+GetDiskUsageOk returns a tuple with the DiskUsage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskUsage
+
+`func (o *ApplianceMetricsConfig) SetDiskUsage(v int64)`
+
+SetDiskUsage sets DiskUsage field to given value.
+
+### HasDiskUsage
+
+`func (o *ApplianceMetricsConfig) HasDiskUsage() bool`
+
+HasDiskUsage returns a boolean if a field has been set.
 
 ### GetEndpointUsagePercent
 

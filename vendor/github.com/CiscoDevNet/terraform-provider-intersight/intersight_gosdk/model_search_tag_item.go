@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -30,8 +30,13 @@ type SearchTagItem struct {
 	ObjectType string `json:"ObjectType"`
 	// The number of times this tag key has been set across all resources.
 	Count *int64 `json:"Count,omitempty"`
-	// Key of the Tag from all the resources in Intersight.
-	Key                  *string  `json:"Key,omitempty"`
+	// Key of the tag from all the resources in Intersight.
+	Key *string `json:"Key,omitempty"`
+	// The unique identifier of the tag definition managed object. Refer to the comm.TagDefinition API.
+	ExtMoid           *string  `json:"Ext_Moid,omitempty"`
+	TaggedObjectTypes []string `json:"TaggedObjectTypes,omitempty"`
+	// Type of the tag definition. Refer to comm.TagDefinitionType API.
+	Type                 *string  `json:"Type,omitempty"`
 	Values               []string `json:"Values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -183,6 +188,103 @@ func (o *SearchTagItem) SetKey(v string) {
 	o.Key = &v
 }
 
+// GetExtMoid returns the ExtMoid field value if set, zero value otherwise.
+func (o *SearchTagItem) GetExtMoid() string {
+	if o == nil || IsNil(o.ExtMoid) {
+		var ret string
+		return ret
+	}
+	return *o.ExtMoid
+}
+
+// GetExtMoidOk returns a tuple with the ExtMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SearchTagItem) GetExtMoidOk() (*string, bool) {
+	if o == nil || IsNil(o.ExtMoid) {
+		return nil, false
+	}
+	return o.ExtMoid, true
+}
+
+// HasExtMoid returns a boolean if a field has been set.
+func (o *SearchTagItem) HasExtMoid() bool {
+	if o != nil && !IsNil(o.ExtMoid) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtMoid gets a reference to the given string and assigns it to the ExtMoid field.
+func (o *SearchTagItem) SetExtMoid(v string) {
+	o.ExtMoid = &v
+}
+
+// GetTaggedObjectTypes returns the TaggedObjectTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SearchTagItem) GetTaggedObjectTypes() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.TaggedObjectTypes
+}
+
+// GetTaggedObjectTypesOk returns a tuple with the TaggedObjectTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SearchTagItem) GetTaggedObjectTypesOk() ([]string, bool) {
+	if o == nil || IsNil(o.TaggedObjectTypes) {
+		return nil, false
+	}
+	return o.TaggedObjectTypes, true
+}
+
+// HasTaggedObjectTypes returns a boolean if a field has been set.
+func (o *SearchTagItem) HasTaggedObjectTypes() bool {
+	if o != nil && !IsNil(o.TaggedObjectTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaggedObjectTypes gets a reference to the given []string and assigns it to the TaggedObjectTypes field.
+func (o *SearchTagItem) SetTaggedObjectTypes(v []string) {
+	o.TaggedObjectTypes = v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *SearchTagItem) GetType() string {
+	if o == nil || IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SearchTagItem) GetTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *SearchTagItem) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *SearchTagItem) SetType(v string) {
+	o.Type = &v
+}
+
 // GetValues returns the Values field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SearchTagItem) GetValues() []string {
 	if o == nil {
@@ -248,6 +350,15 @@ func (o SearchTagItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
+	if !IsNil(o.ExtMoid) {
+		toSerialize["Ext_Moid"] = o.ExtMoid
+	}
+	if o.TaggedObjectTypes != nil {
+		toSerialize["TaggedObjectTypes"] = o.TaggedObjectTypes
+	}
+	if !IsNil(o.Type) {
+		toSerialize["Type"] = o.Type
+	}
 	if o.Values != nil {
 		toSerialize["Values"] = o.Values
 	}
@@ -308,8 +419,13 @@ func (o *SearchTagItem) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The number of times this tag key has been set across all resources.
 		Count *int64 `json:"Count,omitempty"`
-		// Key of the Tag from all the resources in Intersight.
-		Key    *string  `json:"Key,omitempty"`
+		// Key of the tag from all the resources in Intersight.
+		Key *string `json:"Key,omitempty"`
+		// The unique identifier of the tag definition managed object. Refer to the comm.TagDefinition API.
+		ExtMoid           *string  `json:"Ext_Moid,omitempty"`
+		TaggedObjectTypes []string `json:"TaggedObjectTypes,omitempty"`
+		// Type of the tag definition. Refer to comm.TagDefinitionType API.
+		Type   *string  `json:"Type,omitempty"`
 		Values []string `json:"Values,omitempty"`
 	}
 
@@ -322,6 +438,9 @@ func (o *SearchTagItem) UnmarshalJSON(data []byte) (err error) {
 		varSearchTagItem.ObjectType = varSearchTagItemWithoutEmbeddedStruct.ObjectType
 		varSearchTagItem.Count = varSearchTagItemWithoutEmbeddedStruct.Count
 		varSearchTagItem.Key = varSearchTagItemWithoutEmbeddedStruct.Key
+		varSearchTagItem.ExtMoid = varSearchTagItemWithoutEmbeddedStruct.ExtMoid
+		varSearchTagItem.TaggedObjectTypes = varSearchTagItemWithoutEmbeddedStruct.TaggedObjectTypes
+		varSearchTagItem.Type = varSearchTagItemWithoutEmbeddedStruct.Type
 		varSearchTagItem.Values = varSearchTagItemWithoutEmbeddedStruct.Values
 		*o = SearchTagItem(varSearchTagItem)
 	} else {
@@ -344,6 +463,9 @@ func (o *SearchTagItem) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Count")
 		delete(additionalProperties, "Key")
+		delete(additionalProperties, "Ext_Moid")
+		delete(additionalProperties, "TaggedObjectTypes")
+		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Values")
 
 		// remove fields from embedded structs

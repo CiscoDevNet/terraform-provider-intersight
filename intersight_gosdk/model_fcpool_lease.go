@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -29,8 +29,10 @@ type FcpoolLease struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Purpose of this WWN pool.
-	PoolPurpose *string                     `json:"PoolPurpose,omitempty"`
-	Reservation *FcpoolReservationReference `json:"Reservation,omitempty"`
+	PoolPurpose *string `json:"PoolPurpose,omitempty"`
+	// The preferred WWN ID address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that WWN ID address if it is available in the pool. If the specified preferred WWN ID address  is not in the range of the pool or if it is already leased or reserved, then the next available WWN ID address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred WWN ID address property. When the preferred WWN ID address  property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests.
+	PreferredWwnId *string                     `json:"PreferredWwnId,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
+	Reservation    *FcpoolReservationReference `json:"Reservation,omitempty"`
 	// WWN ID allocated for pool based allocation.
 	WwnId                *string                              `json:"WwnId,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 	AssignedToEntity     NullableMoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
@@ -54,6 +56,8 @@ func NewFcpoolLease(classId string, objectType string) *FcpoolLease {
 	this.AllocationType = &allocationType
 	var hasDuplicate bool = false
 	this.HasDuplicate = &hasDuplicate
+	var migrate bool = false
+	this.Migrate = &migrate
 	return &this
 }
 
@@ -157,6 +161,38 @@ func (o *FcpoolLease) HasPoolPurpose() bool {
 // SetPoolPurpose gets a reference to the given string and assigns it to the PoolPurpose field.
 func (o *FcpoolLease) SetPoolPurpose(v string) {
 	o.PoolPurpose = &v
+}
+
+// GetPreferredWwnId returns the PreferredWwnId field value if set, zero value otherwise.
+func (o *FcpoolLease) GetPreferredWwnId() string {
+	if o == nil || IsNil(o.PreferredWwnId) {
+		var ret string
+		return ret
+	}
+	return *o.PreferredWwnId
+}
+
+// GetPreferredWwnIdOk returns a tuple with the PreferredWwnId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcpoolLease) GetPreferredWwnIdOk() (*string, bool) {
+	if o == nil || IsNil(o.PreferredWwnId) {
+		return nil, false
+	}
+	return o.PreferredWwnId, true
+}
+
+// HasPreferredWwnId returns a boolean if a field has been set.
+func (o *FcpoolLease) HasPreferredWwnId() bool {
+	if o != nil && !IsNil(o.PreferredWwnId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreferredWwnId gets a reference to the given string and assigns it to the PreferredWwnId field.
+func (o *FcpoolLease) SetPreferredWwnId(v string) {
+	o.PreferredWwnId = &v
 }
 
 // GetReservation returns the Reservation field value if set, zero value otherwise.
@@ -424,6 +460,9 @@ func (o FcpoolLease) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PoolPurpose) {
 		toSerialize["PoolPurpose"] = o.PoolPurpose
 	}
+	if !IsNil(o.PreferredWwnId) {
+		toSerialize["PreferredWwnId"] = o.PreferredWwnId
+	}
 	if !IsNil(o.Reservation) {
 		toSerialize["Reservation"] = o.Reservation
 	}
@@ -498,8 +537,10 @@ func (o *FcpoolLease) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Purpose of this WWN pool.
-		PoolPurpose *string                     `json:"PoolPurpose,omitempty"`
-		Reservation *FcpoolReservationReference `json:"Reservation,omitempty"`
+		PoolPurpose *string `json:"PoolPurpose,omitempty"`
+		// The preferred WWN ID address can be specified only for dynamic lease requests. Intersight will make its best  effort to allocate that WWN ID address if it is available in the pool. If the specified preferred WWN ID address  is not in the range of the pool or if it is already leased or reserved, then the next available WWN ID address  from the pool will be leased. Since this feature is specific to dynamic lease requests only, static lease  request will fail if it specifies the preferred WWN ID address property. When the preferred WWN ID address  property is specified in conjunction with 'migrate' property, existing static or dynamic lease will be  replaced by the new lease. Migration also supported only for dynamic lease requests.
+		PreferredWwnId *string                     `json:"PreferredWwnId,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
+		Reservation    *FcpoolReservationReference `json:"Reservation,omitempty"`
 		// WWN ID allocated for pool based allocation.
 		WwnId            *string                              `json:"WwnId,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 		AssignedToEntity NullableMoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
@@ -516,6 +557,7 @@ func (o *FcpoolLease) UnmarshalJSON(data []byte) (err error) {
 		varFcpoolLease.ClassId = varFcpoolLeaseWithoutEmbeddedStruct.ClassId
 		varFcpoolLease.ObjectType = varFcpoolLeaseWithoutEmbeddedStruct.ObjectType
 		varFcpoolLease.PoolPurpose = varFcpoolLeaseWithoutEmbeddedStruct.PoolPurpose
+		varFcpoolLease.PreferredWwnId = varFcpoolLeaseWithoutEmbeddedStruct.PreferredWwnId
 		varFcpoolLease.Reservation = varFcpoolLeaseWithoutEmbeddedStruct.Reservation
 		varFcpoolLease.WwnId = varFcpoolLeaseWithoutEmbeddedStruct.WwnId
 		varFcpoolLease.AssignedToEntity = varFcpoolLeaseWithoutEmbeddedStruct.AssignedToEntity
@@ -542,6 +584,7 @@ func (o *FcpoolLease) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PoolPurpose")
+		delete(additionalProperties, "PreferredWwnId")
 		delete(additionalProperties, "Reservation")
 		delete(additionalProperties, "WwnId")
 		delete(additionalProperties, "AssignedToEntity")

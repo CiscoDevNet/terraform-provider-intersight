@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **IsUserTriggered** | Pointer to **bool** | Indicates if the upgrade is triggered by user or due to schedule. | [optional] [readonly] [default to false]
 **Messages** | Pointer to **[]string** |  | [optional] 
 **NodeInfo** | Pointer to [**[]ApplianceNodeIpInfo**](ApplianceNodeIpInfo.md) |  | [optional] 
+**PreviousInstallAttempts** | Pointer to **int64** | The number of previous failed install attempts of the same upgrade version. | [optional] [readonly] 
 **RollbackNeeded** | Pointer to **bool** | Track if rollback is needed. | [optional] [default to false]
 **RollbackPhases** | Pointer to [**[]OnpremUpgradePhase**](OnpremUpgradePhase.md) |  | [optional] 
 **RollbackStatus** | Pointer to **string** | Status of the Intersight Appliance&#39;s software rollback status. | [optional] [readonly] 
@@ -483,6 +484,31 @@ HasNodeInfo returns a boolean if a field has been set.
 `func (o *ApplianceUpgrade) UnsetNodeInfo()`
 
 UnsetNodeInfo ensures that no value is present for NodeInfo, not even an explicit nil
+### GetPreviousInstallAttempts
+
+`func (o *ApplianceUpgrade) GetPreviousInstallAttempts() int64`
+
+GetPreviousInstallAttempts returns the PreviousInstallAttempts field if non-nil, zero value otherwise.
+
+### GetPreviousInstallAttemptsOk
+
+`func (o *ApplianceUpgrade) GetPreviousInstallAttemptsOk() (*int64, bool)`
+
+GetPreviousInstallAttemptsOk returns a tuple with the PreviousInstallAttempts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreviousInstallAttempts
+
+`func (o *ApplianceUpgrade) SetPreviousInstallAttempts(v int64)`
+
+SetPreviousInstallAttempts sets PreviousInstallAttempts field to given value.
+
+### HasPreviousInstallAttempts
+
+`func (o *ApplianceUpgrade) HasPreviousInstallAttempts() bool`
+
+HasPreviousInstallAttempts returns a boolean if a field has been set.
+
 ### GetRollbackNeeded
 
 `func (o *ApplianceUpgrade) GetRollbackNeeded() bool`

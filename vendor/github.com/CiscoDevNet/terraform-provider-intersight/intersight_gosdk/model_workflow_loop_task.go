@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type WorkflowLoopTask struct {
 	ObjectType string `json:"ObjectType"`
 	// The policy to handle the failure of an iteration within a parallel loop. * `FailOnFirstFailure` - The enum specifies the option as FailOnFirstFailure where the loop task will fail if one of the iteration in the loop fails. The running iterations will be cancelled on first failure and the loop will be marked as failed. * `ContinueOnFailure` - The enum specifies the option as ContinueOnFailure where the loop task will continue with all iterations, even if one fails. Running iterations will not be canceled, but the loop will be marked as failed after all iterations are complete.
 	FailurePolicy *string `json:"FailurePolicy,omitempty"`
+	// The percentage of iterations that can fail before the entire loop is considered failed. The default is 0 which means all iterations must succeed.
+	FailureThreshold *int64 `json:"FailureThreshold,omitempty"`
 	// All iterations of the loop run in parallel within a single batch, with a maximum of 100 iterations. To run more than 100 iterations, you can increase the number of batches. The configuration is acceptable as long as the total number of iterations divided by the number of batches is less than 100. Adjusting the number of batches also allows you to control how many iterations run in parallel. For example, if the total count is 100 and you set the number of batches to 5, then 20 tasks will run in parallel across the 5 batches. It's important to note that the number of batches must be less than the total count. If the count is dynamic and falls below the number of batches, this may result in empty batches with no tasks.
 	NumberOfBatches *int64 `json:"NumberOfBatches,omitempty"`
 	// This field is deprecated. Always set to true for parallel loop.
@@ -50,6 +52,8 @@ func NewWorkflowLoopTask(classId string, objectType string) *WorkflowLoopTask {
 	this.ObjectType = objectType
 	var failurePolicy string = "FailOnFirstFailure"
 	this.FailurePolicy = &failurePolicy
+	var failureThreshold int64 = 0
+	this.FailureThreshold = &failureThreshold
 	var numberOfBatches int64 = 1
 	this.NumberOfBatches = &numberOfBatches
 	var parallel bool = true
@@ -68,6 +72,8 @@ func NewWorkflowLoopTaskWithDefaults() *WorkflowLoopTask {
 	this.ObjectType = objectType
 	var failurePolicy string = "FailOnFirstFailure"
 	this.FailurePolicy = &failurePolicy
+	var failureThreshold int64 = 0
+	this.FailureThreshold = &failureThreshold
 	var numberOfBatches int64 = 1
 	this.NumberOfBatches = &numberOfBatches
 	var parallel bool = true
@@ -163,6 +169,38 @@ func (o *WorkflowLoopTask) HasFailurePolicy() bool {
 // SetFailurePolicy gets a reference to the given string and assigns it to the FailurePolicy field.
 func (o *WorkflowLoopTask) SetFailurePolicy(v string) {
 	o.FailurePolicy = &v
+}
+
+// GetFailureThreshold returns the FailureThreshold field value if set, zero value otherwise.
+func (o *WorkflowLoopTask) GetFailureThreshold() int64 {
+	if o == nil || IsNil(o.FailureThreshold) {
+		var ret int64
+		return ret
+	}
+	return *o.FailureThreshold
+}
+
+// GetFailureThresholdOk returns a tuple with the FailureThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowLoopTask) GetFailureThresholdOk() (*int64, bool) {
+	if o == nil || IsNil(o.FailureThreshold) {
+		return nil, false
+	}
+	return o.FailureThreshold, true
+}
+
+// HasFailureThreshold returns a boolean if a field has been set.
+func (o *WorkflowLoopTask) HasFailureThreshold() bool {
+	if o != nil && !IsNil(o.FailureThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailureThreshold gets a reference to the given int64 and assigns it to the FailureThreshold field.
+func (o *WorkflowLoopTask) SetFailureThreshold(v int64) {
+	o.FailureThreshold = &v
 }
 
 // GetNumberOfBatches returns the NumberOfBatches field value if set, zero value otherwise.
@@ -261,6 +299,9 @@ func (o WorkflowLoopTask) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailurePolicy) {
 		toSerialize["FailurePolicy"] = o.FailurePolicy
 	}
+	if !IsNil(o.FailureThreshold) {
+		toSerialize["FailureThreshold"] = o.FailureThreshold
+	}
 	if !IsNil(o.NumberOfBatches) {
 		toSerialize["NumberOfBatches"] = o.NumberOfBatches
 	}
@@ -324,6 +365,8 @@ func (o *WorkflowLoopTask) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The policy to handle the failure of an iteration within a parallel loop. * `FailOnFirstFailure` - The enum specifies the option as FailOnFirstFailure where the loop task will fail if one of the iteration in the loop fails. The running iterations will be cancelled on first failure and the loop will be marked as failed. * `ContinueOnFailure` - The enum specifies the option as ContinueOnFailure where the loop task will continue with all iterations, even if one fails. Running iterations will not be canceled, but the loop will be marked as failed after all iterations are complete.
 		FailurePolicy *string `json:"FailurePolicy,omitempty"`
+		// The percentage of iterations that can fail before the entire loop is considered failed. The default is 0 which means all iterations must succeed.
+		FailureThreshold *int64 `json:"FailureThreshold,omitempty"`
 		// All iterations of the loop run in parallel within a single batch, with a maximum of 100 iterations. To run more than 100 iterations, you can increase the number of batches. The configuration is acceptable as long as the total number of iterations divided by the number of batches is less than 100. Adjusting the number of batches also allows you to control how many iterations run in parallel. For example, if the total count is 100 and you set the number of batches to 5, then 20 tasks will run in parallel across the 5 batches. It's important to note that the number of batches must be less than the total count. If the count is dynamic and falls below the number of batches, this may result in empty batches with no tasks.
 		NumberOfBatches *int64 `json:"NumberOfBatches,omitempty"`
 		// This field is deprecated. Always set to true for parallel loop.
@@ -339,6 +382,7 @@ func (o *WorkflowLoopTask) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowLoopTask.ClassId = varWorkflowLoopTaskWithoutEmbeddedStruct.ClassId
 		varWorkflowLoopTask.ObjectType = varWorkflowLoopTaskWithoutEmbeddedStruct.ObjectType
 		varWorkflowLoopTask.FailurePolicy = varWorkflowLoopTaskWithoutEmbeddedStruct.FailurePolicy
+		varWorkflowLoopTask.FailureThreshold = varWorkflowLoopTaskWithoutEmbeddedStruct.FailureThreshold
 		varWorkflowLoopTask.NumberOfBatches = varWorkflowLoopTaskWithoutEmbeddedStruct.NumberOfBatches
 		varWorkflowLoopTask.Parallel = varWorkflowLoopTaskWithoutEmbeddedStruct.Parallel
 		*o = WorkflowLoopTask(varWorkflowLoopTask)
@@ -361,6 +405,7 @@ func (o *WorkflowLoopTask) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FailurePolicy")
+		delete(additionalProperties, "FailureThreshold")
 		delete(additionalProperties, "NumberOfBatches")
 		delete(additionalProperties, "Parallel")
 

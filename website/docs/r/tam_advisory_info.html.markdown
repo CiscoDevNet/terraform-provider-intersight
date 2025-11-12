@@ -3,12 +3,28 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_info"
 description: |-
-        State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+        ### Overview
+        The AdvisoryInfo object captures the state of Security Advisories and Field Notices, including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
+        #### Purpose
+        AdvisoryInfo serves as a personalized repository of advisory states for each account, allowing users to manage and track advisories relevant to their environment.
+        #### Key Concepts
+        - **State Management** - Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
+        - **Account Association** - Directly links advisory states to specific accounts for tailored management.
+        - **Shared Resource** - Supports collaborative management of advisories within shared organizational contexts.
+        - **Controlled Permissions** - Restricts creation, updating, and deletion of advisory states to Account Administrators.
 
 ---
 
 # Resource: intersight_tam_advisory_info
-State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+### Overview
+The AdvisoryInfo object captures the state of Security Advisories and Field Notices, including whether an advisory is visible in the Intersight account, as depicted by its acknowledgement status.
+#### Purpose
+AdvisoryInfo serves as a personalized repository of advisory states for each account, allowing users to manage and track advisories relevant to their environment.
+#### Key Concepts
+- **State Management** - Tracks whether advisories are active or acknowledged, reflecting user preferences for updates.
+- **Account Association** - Directly links advisory states to specific accounts for tailored management.
+- **Shared Resource** - Supports collaborative management of advisories within shared organizational contexts.
+- **Controlled Permissions** - Restricts creation, updating, and deletion of advisory states to Account Administrators.
 ## Usage Example
 ### Resource Creation
 
@@ -64,7 +80,19 @@ This complex property has following sub-properties:
 * `state`:(string) Current state of the advisory for the owner. Indicates if the user is interested in getting updates for the advisory.* `active` - Advisory is currently active and the user wants to receive updates for this advisory.* `acknowledged` - Advisory is seen and acknowledged by the user and she no longer wants to recieve updates. 
 * `tags`:(Array)
 This complex property has following sub-properties:
+  + `ancestor_definitions`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `definition`:(HashMap) -(ReadOnly) The definition is a reference to the tag definition object.The tag definition object contains the properties of the tag such as name, type, and description. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
+  + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

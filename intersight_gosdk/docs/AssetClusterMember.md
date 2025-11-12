@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.ClusterMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ClusterMember"]
+**ConnectedHost** | Pointer to **string** | The DNS hostname the device connector has used to connect to Intersight. Devices may be configured to connect to a set of DNS hostnames which all resolve to the same Intersight instance, the connected host is the latest hostname the device used to connect successfully to Intersight. | [optional] [readonly] 
+**ConnectionFlapStatus** | Pointer to [**NullableAssetConnectionFlapStatus**](AssetConnectionFlapStatus.md) |  | [optional] 
 **Leadership** | Pointer to **string** | The current leadershipstate of this member. Updated by the device connector on failover or leadership change. If a member is elected as Primary within the cluster this connection will be the same as the DeviceRegistration connection. E.g a message addressed to the DeviceRegistration will be forwarded to the ClusterMember connection. * &#x60;Unknown&#x60; - The node is unable to complete election or determine the current state. If the device has been registered before and the node has access to the current credentials, it will establish a connection to Intersight with limited capabilities that can be used to debug the HA failure from Intersight. * &#x60;Primary&#x60; - The node has been elected as the primary and will establish a connection to the Intersight service and accept all message types enabled for a primary node. There can only be one primary node in a given cluster, while the underlying platform may be active. If it is active, only one connector will assume the primary role. * &#x60;Secondary&#x60; - The node has been elected as a secondary node in the cluster. The device connector will establish a connection to the Intersight service with limited capabilities. E.g. file upload will be enabled, but requests to the underlying platform management will be disabled. | [optional] [readonly] [default to "Unknown"]
 **LockedLeader** | Pointer to **bool** | Devices lock their leadership on failure to heartbeat with peers. Value acts as a third party tie breaker in election between nodes. Intersight enforces that only one cluster member exists with this value set to true. | [optional] 
 **MemberIdentity** | Pointer to **string** | The unique identity of the member within the cluster. The identity is retrieved from the platform and reported by the device connector at connection time. | [optional] [readonly] 
@@ -72,6 +74,66 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetConnectedHost
+
+`func (o *AssetClusterMember) GetConnectedHost() string`
+
+GetConnectedHost returns the ConnectedHost field if non-nil, zero value otherwise.
+
+### GetConnectedHostOk
+
+`func (o *AssetClusterMember) GetConnectedHostOk() (*string, bool)`
+
+GetConnectedHostOk returns a tuple with the ConnectedHost field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectedHost
+
+`func (o *AssetClusterMember) SetConnectedHost(v string)`
+
+SetConnectedHost sets ConnectedHost field to given value.
+
+### HasConnectedHost
+
+`func (o *AssetClusterMember) HasConnectedHost() bool`
+
+HasConnectedHost returns a boolean if a field has been set.
+
+### GetConnectionFlapStatus
+
+`func (o *AssetClusterMember) GetConnectionFlapStatus() AssetConnectionFlapStatus`
+
+GetConnectionFlapStatus returns the ConnectionFlapStatus field if non-nil, zero value otherwise.
+
+### GetConnectionFlapStatusOk
+
+`func (o *AssetClusterMember) GetConnectionFlapStatusOk() (*AssetConnectionFlapStatus, bool)`
+
+GetConnectionFlapStatusOk returns a tuple with the ConnectionFlapStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionFlapStatus
+
+`func (o *AssetClusterMember) SetConnectionFlapStatus(v AssetConnectionFlapStatus)`
+
+SetConnectionFlapStatus sets ConnectionFlapStatus field to given value.
+
+### HasConnectionFlapStatus
+
+`func (o *AssetClusterMember) HasConnectionFlapStatus() bool`
+
+HasConnectionFlapStatus returns a boolean if a field has been set.
+
+### SetConnectionFlapStatusNil
+
+`func (o *AssetClusterMember) SetConnectionFlapStatusNil(b bool)`
+
+ SetConnectionFlapStatusNil sets the value for ConnectionFlapStatus to be an explicit nil
+
+### UnsetConnectionFlapStatus
+`func (o *AssetClusterMember) UnsetConnectionFlapStatus()`
+
+UnsetConnectionFlapStatus ensures that no value is present for ConnectionFlapStatus, not even an explicit nil
 ### GetLeadership
 
 `func (o *AssetClusterMember) GetLeadership() string`

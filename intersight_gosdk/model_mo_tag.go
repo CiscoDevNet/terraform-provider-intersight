@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025101412
 Contact: intersight@cisco.com
 */
 
@@ -20,8 +20,14 @@ var _ MappedNullable = &MoTag{}
 
 // MoTag An arbitrary key and value pair that can be used to tag REST resources and organize managed objects by assigning meta-data tags to any object.
 type MoTag struct {
+	AncestorDefinitions []MoMoRef `json:"AncestorDefinitions,omitempty"`
+	Definition          *MoMoRef  `json:"Definition,omitempty"`
 	// The string representation of a tag key.
 	Key *string `json:"Key,omitempty"`
+	// Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.
+	Propagated *bool `json:"Propagated,omitempty"`
+	// An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'. * `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional. * `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".
+	Type *string `json:"Type,omitempty"`
 	// The string representation of a tag value.
 	Value                *string `json:"Value,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,6 +50,71 @@ func NewMoTag() *MoTag {
 func NewMoTagWithDefaults() *MoTag {
 	this := MoTag{}
 	return &this
+}
+
+// GetAncestorDefinitions returns the AncestorDefinitions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MoTag) GetAncestorDefinitions() []MoMoRef {
+	if o == nil {
+		var ret []MoMoRef
+		return ret
+	}
+	return o.AncestorDefinitions
+}
+
+// GetAncestorDefinitionsOk returns a tuple with the AncestorDefinitions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MoTag) GetAncestorDefinitionsOk() ([]MoMoRef, bool) {
+	if o == nil || IsNil(o.AncestorDefinitions) {
+		return nil, false
+	}
+	return o.AncestorDefinitions, true
+}
+
+// HasAncestorDefinitions returns a boolean if a field has been set.
+func (o *MoTag) HasAncestorDefinitions() bool {
+	if o != nil && !IsNil(o.AncestorDefinitions) {
+		return true
+	}
+
+	return false
+}
+
+// SetAncestorDefinitions gets a reference to the given []MoMoRef and assigns it to the AncestorDefinitions field.
+func (o *MoTag) SetAncestorDefinitions(v []MoMoRef) {
+	o.AncestorDefinitions = v
+}
+
+// GetDefinition returns the Definition field value if set, zero value otherwise.
+func (o *MoTag) GetDefinition() MoMoRef {
+	if o == nil || IsNil(o.Definition) {
+		var ret MoMoRef
+		return ret
+	}
+	return *o.Definition
+}
+
+// GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MoTag) GetDefinitionOk() (*MoMoRef, bool) {
+	if o == nil || IsNil(o.Definition) {
+		return nil, false
+	}
+	return o.Definition, true
+}
+
+// HasDefinition returns a boolean if a field has been set.
+func (o *MoTag) HasDefinition() bool {
+	if o != nil && !IsNil(o.Definition) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefinition gets a reference to the given MoMoRef and assigns it to the Definition field.
+func (o *MoTag) SetDefinition(v MoMoRef) {
+	o.Definition = &v
 }
 
 // GetKey returns the Key field value if set, zero value otherwise.
@@ -76,6 +147,70 @@ func (o *MoTag) HasKey() bool {
 // SetKey gets a reference to the given string and assigns it to the Key field.
 func (o *MoTag) SetKey(v string) {
 	o.Key = &v
+}
+
+// GetPropagated returns the Propagated field value if set, zero value otherwise.
+func (o *MoTag) GetPropagated() bool {
+	if o == nil || IsNil(o.Propagated) {
+		var ret bool
+		return ret
+	}
+	return *o.Propagated
+}
+
+// GetPropagatedOk returns a tuple with the Propagated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MoTag) GetPropagatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Propagated) {
+		return nil, false
+	}
+	return o.Propagated, true
+}
+
+// HasPropagated returns a boolean if a field has been set.
+func (o *MoTag) HasPropagated() bool {
+	if o != nil && !IsNil(o.Propagated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPropagated gets a reference to the given bool and assigns it to the Propagated field.
+func (o *MoTag) SetPropagated(v bool) {
+	o.Propagated = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *MoTag) GetType() string {
+	if o == nil || IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MoTag) GetTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *MoTag) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *MoTag) SetType(v string) {
+	o.Type = &v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -120,8 +255,20 @@ func (o MoTag) MarshalJSON() ([]byte, error) {
 
 func (o MoTag) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AncestorDefinitions != nil {
+		toSerialize["AncestorDefinitions"] = o.AncestorDefinitions
+	}
+	if !IsNil(o.Definition) {
+		toSerialize["Definition"] = o.Definition
+	}
 	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
+	}
+	if !IsNil(o.Propagated) {
+		toSerialize["Propagated"] = o.Propagated
+	}
+	if !IsNil(o.Type) {
+		toSerialize["Type"] = o.Type
 	}
 	if !IsNil(o.Value) {
 		toSerialize["Value"] = o.Value
@@ -148,7 +295,11 @@ func (o *MoTag) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "AncestorDefinitions")
+		delete(additionalProperties, "Definition")
 		delete(additionalProperties, "Key")
+		delete(additionalProperties, "Propagated")
+		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Value")
 		o.AdditionalProperties = additionalProperties
 	}

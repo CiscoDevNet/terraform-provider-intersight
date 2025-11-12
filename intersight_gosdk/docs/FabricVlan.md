@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.Vlan"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.Vlan"]
-**AutoAllowOnUplinks** | Pointer to **bool** | Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN. | [optional] [default to true]
+**AutoAllowOnClusterLinks** | Pointer to **bool** | Enable this option to automatically allow the VLAN on inter-cluster links. To configure disjoint Layer 2 VLANs, &#39;Disable&#39; must be specified together with &#39;AutoAllowOnUplinks.&#39; Note that &#39;AutoAllowOnClusterLinks&#39; cannot be enabled for the default VLAN 1 or the native VLAN. | [optional] [default to false]
+**AutoAllowOnUplinks** | Pointer to **bool** | Enable to automatically allow this VLAN on all uplinks. Disable must be specified alongside AutoAllowOnClusterLinks for disjoint layer 2 VLAN configuration. Default VLAN 1 cannot be configured as disjoint layer 2 VLAN. | [optional] [default to true]
 **IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] 
 **PrimaryVlanId** | Pointer to **int64** | The Primary VLAN ID of the VLAN, if the sharing type of the VLAN is Isolated or Community. | [optional] [default to 0]
@@ -74,6 +75,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAutoAllowOnClusterLinks
+
+`func (o *FabricVlan) GetAutoAllowOnClusterLinks() bool`
+
+GetAutoAllowOnClusterLinks returns the AutoAllowOnClusterLinks field if non-nil, zero value otherwise.
+
+### GetAutoAllowOnClusterLinksOk
+
+`func (o *FabricVlan) GetAutoAllowOnClusterLinksOk() (*bool, bool)`
+
+GetAutoAllowOnClusterLinksOk returns a tuple with the AutoAllowOnClusterLinks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoAllowOnClusterLinks
+
+`func (o *FabricVlan) SetAutoAllowOnClusterLinks(v bool)`
+
+SetAutoAllowOnClusterLinks sets AutoAllowOnClusterLinks field to given value.
+
+### HasAutoAllowOnClusterLinks
+
+`func (o *FabricVlan) HasAutoAllowOnClusterLinks() bool`
+
+HasAutoAllowOnClusterLinks returns a boolean if a field has been set.
 
 ### GetAutoAllowOnUplinks
 

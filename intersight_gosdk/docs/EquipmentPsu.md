@@ -18,12 +18,14 @@ Name | Type | Description | Notes
 **PsuType** | Pointer to **string** | This field identifies the type of the Power Supply. | [optional] [readonly] 
 **PsuWattage** | Pointer to **string** | This field identifies the Wattage of the Power Supply. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Power Supply. | [optional] [readonly] 
+**SpareStatus** | Pointer to **string** | This field identifies whether the power supply unit is spare or not. * &#x60;&#x60; - Spare status for power supply unit is not applicable or not available. * &#x60;Spare&#x60; - Power supply unit is spare. * &#x60;Not Spare&#x60; - Power supply unit is not spare. | [optional] [readonly] [default to ""]
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Power Supply Unit. | [optional] [readonly] 
 **Voltage** | Pointer to **string** | This field is used to indicate the voltage state for this Power Supply. | [optional] [readonly] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **EquipmentRackEnclosure** | Pointer to [**NullableEquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
+**FirmwareRunningFirmwares** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -397,6 +399,31 @@ SetSku sets Sku field to given value.
 
 HasSku returns a boolean if a field has been set.
 
+### GetSpareStatus
+
+`func (o *EquipmentPsu) GetSpareStatus() string`
+
+GetSpareStatus returns the SpareStatus field if non-nil, zero value otherwise.
+
+### GetSpareStatusOk
+
+`func (o *EquipmentPsu) GetSpareStatusOk() (*string, bool)`
+
+GetSpareStatusOk returns a tuple with the SpareStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpareStatus
+
+`func (o *EquipmentPsu) SetSpareStatus(v string)`
+
+SetSpareStatus sets SpareStatus field to given value.
+
+### HasSpareStatus
+
+`func (o *EquipmentPsu) HasSpareStatus() bool`
+
+HasSpareStatus returns a boolean if a field has been set.
+
 ### GetVid
 
 `func (o *EquipmentPsu) GetVid() string`
@@ -587,6 +614,41 @@ HasEquipmentRackEnclosure returns a boolean if a field has been set.
 `func (o *EquipmentPsu) UnsetEquipmentRackEnclosure()`
 
 UnsetEquipmentRackEnclosure ensures that no value is present for EquipmentRackEnclosure, not even an explicit nil
+### GetFirmwareRunningFirmwares
+
+`func (o *EquipmentPsu) GetFirmwareRunningFirmwares() []FirmwareRunningFirmwareRelationship`
+
+GetFirmwareRunningFirmwares returns the FirmwareRunningFirmwares field if non-nil, zero value otherwise.
+
+### GetFirmwareRunningFirmwaresOk
+
+`func (o *EquipmentPsu) GetFirmwareRunningFirmwaresOk() (*[]FirmwareRunningFirmwareRelationship, bool)`
+
+GetFirmwareRunningFirmwaresOk returns a tuple with the FirmwareRunningFirmwares field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirmwareRunningFirmwares
+
+`func (o *EquipmentPsu) SetFirmwareRunningFirmwares(v []FirmwareRunningFirmwareRelationship)`
+
+SetFirmwareRunningFirmwares sets FirmwareRunningFirmwares field to given value.
+
+### HasFirmwareRunningFirmwares
+
+`func (o *EquipmentPsu) HasFirmwareRunningFirmwares() bool`
+
+HasFirmwareRunningFirmwares returns a boolean if a field has been set.
+
+### SetFirmwareRunningFirmwaresNil
+
+`func (o *EquipmentPsu) SetFirmwareRunningFirmwaresNil(b bool)`
+
+ SetFirmwareRunningFirmwaresNil sets the value for FirmwareRunningFirmwares to be an explicit nil
+
+### UnsetFirmwareRunningFirmwares
+`func (o *EquipmentPsu) UnsetFirmwareRunningFirmwares()`
+
+UnsetFirmwareRunningFirmwares ensures that no value is present for FirmwareRunningFirmwares, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentPsu) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

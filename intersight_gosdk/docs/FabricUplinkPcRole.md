@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.UplinkPcRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UplinkPcRole"]
-**AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. * &#x60;NegAuto25Gbps&#x60; - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108. | [optional] [default to "Auto"]
-**Fec** | Pointer to **string** | Forward error correction configuration for Uplink Port Channel member ports. * &#x60;Auto&#x60; - Forward error correction option &#39;Auto&#39;. * &#x60;Cl91&#x60; - Forward error correction option &#39;cl91&#39;. * &#x60;Cl74&#x60; - Forward error correction option &#39;cl74&#39;. | [optional] [default to "Auto"]
+**AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. * &#x60;400Gbps&#x60; - Admin configurable speed 400Gbps. * &#x60;NegAuto25Gbps&#x60; - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108. | [optional] [default to "Auto"]
+**Fec** | Pointer to **string** | Forward error correction configuration for Uplink Port Channel member ports. * &#x60;Auto&#x60; - Forward error correction option &#39;Auto&#39;. Supported speeds are Auto, 1Gbps, 10Gbps, 25Gbps, 40Gbps and 100 Gbps. * &#x60;Cl91&#x60; - Forward error correction option &#39;cl91&#39;. Supported speeds are 25Gbps and 100 Gbps. * &#x60;Cl74&#x60; - Forward error correction option &#39;cl74&#39;. Supported speeds are 25Gbps. * &#x60;rs-cons16&#x60; - Forward error correction option \&quot;rs-cons16\&quot;. Supported speeds are 25Gbps. * &#x60;rs-ieee&#x60; - Forward error correction option \&quot;rs-ieee\&quot;. Supported speeds are 25Gbps. * &#x60;Off&#x60; - Turn off forward error correction. Supported speeds are 25Gbps and 100 Gbps. | [optional] [default to "Auto"]
 **EthNetworkGroupPolicy** | Pointer to [**[]FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) | An array of relationships to fabricEthNetworkGroupPolicy resources. | [optional] 
 **FlowControlPolicy** | Pointer to [**NullableFabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
 **LinkAggregationPolicy** | Pointer to [**NullableFabricLinkAggregationPolicyRelationship**](FabricLinkAggregationPolicyRelationship.md) |  | [optional] 
 **LinkControlPolicy** | Pointer to [**NullableFabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
+**MacSecPolicy** | Pointer to [**NullableFabricMacSecPolicyRelationship**](FabricMacSecPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -262,6 +263,41 @@ HasLinkControlPolicy returns a boolean if a field has been set.
 `func (o *FabricUplinkPcRole) UnsetLinkControlPolicy()`
 
 UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
+### GetMacSecPolicy
+
+`func (o *FabricUplinkPcRole) GetMacSecPolicy() FabricMacSecPolicyRelationship`
+
+GetMacSecPolicy returns the MacSecPolicy field if non-nil, zero value otherwise.
+
+### GetMacSecPolicyOk
+
+`func (o *FabricUplinkPcRole) GetMacSecPolicyOk() (*FabricMacSecPolicyRelationship, bool)`
+
+GetMacSecPolicyOk returns a tuple with the MacSecPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacSecPolicy
+
+`func (o *FabricUplinkPcRole) SetMacSecPolicy(v FabricMacSecPolicyRelationship)`
+
+SetMacSecPolicy sets MacSecPolicy field to given value.
+
+### HasMacSecPolicy
+
+`func (o *FabricUplinkPcRole) HasMacSecPolicy() bool`
+
+HasMacSecPolicy returns a boolean if a field has been set.
+
+### SetMacSecPolicyNil
+
+`func (o *FabricUplinkPcRole) SetMacSecPolicyNil(b bool)`
+
+ SetMacSecPolicyNil sets the value for MacSecPolicy to be an explicit nil
+
+### UnsetMacSecPolicy
+`func (o *FabricUplinkPcRole) UnsetMacSecPolicy()`
+
+UnsetMacSecPolicy ensures that no value is present for MacSecPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

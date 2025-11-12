@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **OauthTokens** | Pointer to [**[]IamOAuthTokenRelationship**](IamOAuthTokenRelationship.md) | An array of relationships to iamOAuthToken resources. | [optional] [readonly] 
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] 
 **Sessions** | Pointer to [**[]IamSessionRelationship**](IamSessionRelationship.md) | An array of relationships to iamSession resources. | [optional] [readonly] 
+**Usergroup** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -640,6 +641,41 @@ HasSessions returns a boolean if a field has been set.
 `func (o *IamUser) UnsetSessions()`
 
 UnsetSessions ensures that no value is present for Sessions, not even an explicit nil
+### GetUsergroup
+
+`func (o *IamUser) GetUsergroup() []IamUserGroupRelationship`
+
+GetUsergroup returns the Usergroup field if non-nil, zero value otherwise.
+
+### GetUsergroupOk
+
+`func (o *IamUser) GetUsergroupOk() (*[]IamUserGroupRelationship, bool)`
+
+GetUsergroupOk returns a tuple with the Usergroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsergroup
+
+`func (o *IamUser) SetUsergroup(v []IamUserGroupRelationship)`
+
+SetUsergroup sets Usergroup field to given value.
+
+### HasUsergroup
+
+`func (o *IamUser) HasUsergroup() bool`
+
+HasUsergroup returns a boolean if a field has been set.
+
+### SetUsergroupNil
+
+`func (o *IamUser) SetUsergroupNil(b bool)`
+
+ SetUsergroupNil sets the value for Usergroup to be an explicit nil
+
+### UnsetUsergroup
+`func (o *IamUser) UnsetUsergroup()`
+
+UnsetUsergroup ensures that no value is present for Usergroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

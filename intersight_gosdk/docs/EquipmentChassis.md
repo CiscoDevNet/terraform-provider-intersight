@@ -8,14 +8,17 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Chassis"]
 **AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](ComputeAlarmSummary.md) |  | [optional] 
 **ChassisId** | Pointer to **int64** | The assigned identifier for a chassis. | [optional] [readonly] 
+**ChassisProfile** | Pointer to **string** | The distinguished name of the chassis profile to which the chassis is associated to. It is applicable only for chassis which are managed via UCSM. | [optional] [readonly] 
 **ConnectionPath** | Pointer to **string** | This field identifies the connectivity path for the chassis enclosure. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | This field identifies the connectivity status for the chassis enclosure. | [optional] [readonly] 
 **Description** | Pointer to **string** | This field is to provide description for chassis model. | [optional] [readonly] 
 **FaultSummary** | Pointer to **int64** | This field summarizes the faults on the chassis enclosure. | [optional] [readonly] 
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the blade server chassis. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **Name** | Pointer to **string** | This field identifies the name for the chassis enclosure. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field identifies the Chassis Operational State. | [optional] [readonly] 
+**PackageVersion** | Pointer to **string** | Bundle version which the XFM and PSU firmware belongs to. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the chassis enclosure. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the chassis enclosure. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type that the chassis is a part of. | [optional] [readonly] 
@@ -23,6 +26,7 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the chassis enclosure. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the chassis. | [optional] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the chassis enclosure. | [optional] [readonly] 
+**AssignedLocation** | Pointer to [**NullableAssetGeoLocationRelationship**](AssetGeoLocationRelationship.md) |  | [optional] 
 **Blades** | Pointer to [**[]ComputeBladeRelationship**](ComputeBladeRelationship.md) | An array of relationships to computeBlade resources. | [optional] [readonly] 
 **ExpanderModules** | Pointer to [**[]EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) | An array of relationships to equipmentExpanderModule resources. | [optional] [readonly] 
 **FanControl** | Pointer to [**NullableEquipmentFanControlRelationship**](EquipmentFanControlRelationship.md) |  | [optional] 
@@ -31,6 +35,8 @@ Name | Type | Description | Notes
 **Ioms** | Pointer to [**[]EquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) | An array of relationships to equipmentIoCard resources. | [optional] [readonly] 
 **LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **ManagementInterface** | Pointer to [**NullableManagementInterfaceRelationship**](ManagementInterfaceRelationship.md) |  | [optional] 
+**NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] [readonly] 
+**PciNodes** | Pointer to [**[]PciNodeRelationship**](PciNodeRelationship.md) | An array of relationships to pciNode resources. | [optional] [readonly] 
 **PowerControlState** | Pointer to [**NullablePowerControlStateRelationship**](PowerControlStateRelationship.md) |  | [optional] 
 **PsuControl** | Pointer to [**NullableEquipmentPsuControlRelationship**](EquipmentPsuControlRelationship.md) |  | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
@@ -159,6 +165,31 @@ SetChassisId sets ChassisId field to given value.
 
 HasChassisId returns a boolean if a field has been set.
 
+### GetChassisProfile
+
+`func (o *EquipmentChassis) GetChassisProfile() string`
+
+GetChassisProfile returns the ChassisProfile field if non-nil, zero value otherwise.
+
+### GetChassisProfileOk
+
+`func (o *EquipmentChassis) GetChassisProfileOk() (*string, bool)`
+
+GetChassisProfileOk returns a tuple with the ChassisProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisProfile
+
+`func (o *EquipmentChassis) SetChassisProfile(v string)`
+
+SetChassisProfile sets ChassisProfile field to given value.
+
+### HasChassisProfile
+
+`func (o *EquipmentChassis) HasChassisProfile() bool`
+
+HasChassisProfile returns a boolean if a field has been set.
+
 ### GetConnectionPath
 
 `func (o *EquipmentChassis) GetConnectionPath() string`
@@ -259,6 +290,41 @@ SetFaultSummary sets FaultSummary field to given value.
 
 HasFaultSummary returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *EquipmentChassis) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *EquipmentChassis) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *EquipmentChassis) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *EquipmentChassis) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *EquipmentChassis) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *EquipmentChassis) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetManagementMode
 
 `func (o *EquipmentChassis) GetManagementMode() string`
@@ -368,6 +434,31 @@ SetOperState sets OperState field to given value.
 `func (o *EquipmentChassis) HasOperState() bool`
 
 HasOperState returns a boolean if a field has been set.
+
+### GetPackageVersion
+
+`func (o *EquipmentChassis) GetPackageVersion() string`
+
+GetPackageVersion returns the PackageVersion field if non-nil, zero value otherwise.
+
+### GetPackageVersionOk
+
+`func (o *EquipmentChassis) GetPackageVersionOk() (*string, bool)`
+
+GetPackageVersionOk returns a tuple with the PackageVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageVersion
+
+`func (o *EquipmentChassis) SetPackageVersion(v string)`
+
+SetPackageVersion sets PackageVersion field to given value.
+
+### HasPackageVersion
+
+`func (o *EquipmentChassis) HasPackageVersion() bool`
+
+HasPackageVersion returns a boolean if a field has been set.
 
 ### GetPartNumber
 
@@ -544,6 +635,41 @@ SetVid sets Vid field to given value.
 
 HasVid returns a boolean if a field has been set.
 
+### GetAssignedLocation
+
+`func (o *EquipmentChassis) GetAssignedLocation() AssetGeoLocationRelationship`
+
+GetAssignedLocation returns the AssignedLocation field if non-nil, zero value otherwise.
+
+### GetAssignedLocationOk
+
+`func (o *EquipmentChassis) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool)`
+
+GetAssignedLocationOk returns a tuple with the AssignedLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedLocation
+
+`func (o *EquipmentChassis) SetAssignedLocation(v AssetGeoLocationRelationship)`
+
+SetAssignedLocation sets AssignedLocation field to given value.
+
+### HasAssignedLocation
+
+`func (o *EquipmentChassis) HasAssignedLocation() bool`
+
+HasAssignedLocation returns a boolean if a field has been set.
+
+### SetAssignedLocationNil
+
+`func (o *EquipmentChassis) SetAssignedLocationNil(b bool)`
+
+ SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+
+### UnsetAssignedLocation
+`func (o *EquipmentChassis) UnsetAssignedLocation()`
+
+UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
 ### GetBlades
 
 `func (o *EquipmentChassis) GetBlades() []ComputeBladeRelationship`
@@ -824,6 +950,76 @@ HasManagementInterface returns a boolean if a field has been set.
 `func (o *EquipmentChassis) UnsetManagementInterface()`
 
 UnsetManagementInterface ensures that no value is present for ManagementInterface, not even an explicit nil
+### GetNetworkElements
+
+`func (o *EquipmentChassis) GetNetworkElements() []NetworkElementRelationship`
+
+GetNetworkElements returns the NetworkElements field if non-nil, zero value otherwise.
+
+### GetNetworkElementsOk
+
+`func (o *EquipmentChassis) GetNetworkElementsOk() (*[]NetworkElementRelationship, bool)`
+
+GetNetworkElementsOk returns a tuple with the NetworkElements field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkElements
+
+`func (o *EquipmentChassis) SetNetworkElements(v []NetworkElementRelationship)`
+
+SetNetworkElements sets NetworkElements field to given value.
+
+### HasNetworkElements
+
+`func (o *EquipmentChassis) HasNetworkElements() bool`
+
+HasNetworkElements returns a boolean if a field has been set.
+
+### SetNetworkElementsNil
+
+`func (o *EquipmentChassis) SetNetworkElementsNil(b bool)`
+
+ SetNetworkElementsNil sets the value for NetworkElements to be an explicit nil
+
+### UnsetNetworkElements
+`func (o *EquipmentChassis) UnsetNetworkElements()`
+
+UnsetNetworkElements ensures that no value is present for NetworkElements, not even an explicit nil
+### GetPciNodes
+
+`func (o *EquipmentChassis) GetPciNodes() []PciNodeRelationship`
+
+GetPciNodes returns the PciNodes field if non-nil, zero value otherwise.
+
+### GetPciNodesOk
+
+`func (o *EquipmentChassis) GetPciNodesOk() (*[]PciNodeRelationship, bool)`
+
+GetPciNodesOk returns a tuple with the PciNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciNodes
+
+`func (o *EquipmentChassis) SetPciNodes(v []PciNodeRelationship)`
+
+SetPciNodes sets PciNodes field to given value.
+
+### HasPciNodes
+
+`func (o *EquipmentChassis) HasPciNodes() bool`
+
+HasPciNodes returns a boolean if a field has been set.
+
+### SetPciNodesNil
+
+`func (o *EquipmentChassis) SetPciNodesNil(b bool)`
+
+ SetPciNodesNil sets the value for PciNodes to be an explicit nil
+
+### UnsetPciNodes
+`func (o *EquipmentChassis) UnsetPciNodes()`
+
+UnsetPciNodes ensures that no value is present for PciNodes, not even an explicit nil
 ### GetPowerControlState
 
 `func (o *EquipmentChassis) GetPowerControlState() PowerControlStateRelationship`

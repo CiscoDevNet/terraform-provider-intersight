@@ -209,6 +209,11 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"pod": {
+			Description: "A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"protection_group_name": {
 			Description: "Name of the protection group to which the snapshot belongs. Value is empty, if the snapshot is created directly on volume.",
 			Type:        schema.TypeString,
@@ -299,6 +304,11 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"snapshot_size": {
+			Description: "The size of the snapshot created.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"nr_source": {
 			Description: "Source object on which the snapshot is created. It is the name of the originating volume.",
 			Type:        schema.TypeString,
@@ -314,8 +324,86 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"ancestor_definitions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"definition": {
+						Description: "The definition is a reference to the tag definition object.\nThe tag definition object contains the properties of the tag such as name, type, and description.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"key": {
 						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"propagated": {
+						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"type": {
+						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -326,6 +414,16 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"total_provisioned": {
+			Description: "The overall size of the snapshot allocated by the storage array.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"used_provisioned": {
+			Description: "The used size of the snapshot allocated by the storage array.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -474,6 +572,11 @@ func getStoragePureVolumeSnapshotSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"volume_group": {
+			Description: "Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 	}
 	return schemaMap
@@ -728,6 +831,11 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("pod"); ok {
+		x := (v.(string))
+		o.SetPod(x)
+	}
+
 	if v, ok := d.GetOk("protection_group_name"); ok {
 		x := (v.(string))
 		o.SetProtectionGroupName(x)
@@ -834,6 +942,11 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetSize(x)
 	}
 
+	if v, ok := d.GetOkExists("snapshot_size"); ok {
+		x := int64(v.(int))
+		o.SetSnapshotSize(x)
+	}
+
 	if v, ok := d.GetOk("nr_source"); ok {
 		x := (v.(string))
 		o.SetSource(x)
@@ -855,6 +968,49 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
+			if v, ok := l["ancestor_definitions"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetAncestorDefinitions(x)
+					}
+				}
+			}
 			if v, ok := l["key"]; ok {
 				{
 					x := (v.(string))
@@ -870,6 +1026,16 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOkExists("total_provisioned"); ok {
+		x := int64(v.(int))
+		o.SetTotalProvisioned(x)
+	}
+
+	if v, ok := d.GetOkExists("used_provisioned"); ok {
+		x := int64(v.(int))
+		o.SetUsedProvisioned(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -989,6 +1155,11 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("volume_group"); ok {
+		x := (v.(string))
+		o.SetVolumeGroup(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of StoragePureVolumeSnapshot object failed with error : %s", err.Error())
@@ -1046,6 +1217,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pod"] = (s.GetPod())
 				temp["protection_group_name"] = (s.GetProtectionGroupName())
 
 				temp["protection_group_snapshot"] = flattenMapStoragePureProtectionGroupSnapshotRelationship(s.GetProtectionGroupSnapshot(), d)
@@ -1054,13 +1226,17 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
+				temp["snapshot_size"] = (s.GetSnapshotSize())
 				temp["nr_source"] = (s.GetSource())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_provisioned"] = (s.GetTotalProvisioned())
+				temp["used_provisioned"] = (s.GetUsedProvisioned())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["volume"] = flattenMapStoragePureVolumeRelationship(s.GetVolume(), d)
+				temp["volume_group"] = (s.GetVolumeGroup())
 				storagePureVolumeSnapshotResults = append(storagePureVolumeSnapshotResults, temp)
 			}
 		}
