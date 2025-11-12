@@ -22,7 +22,7 @@ resource "intersight_snmp_policy" "tf_snmp" {
     destination = "10.10.10.1"
     enabled     = false
     port        = 660
-    type        = "Trap"
+    nr_type        = "Trap"
     user        = "demouser"
     nr_version  = "V3"
     object_type = "snmp.Trap"

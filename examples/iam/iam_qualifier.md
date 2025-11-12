@@ -13,7 +13,7 @@ resource "intersight_iam_qualifier" "iam_qualifier1" {
         object_type = "iam.Account"
         moid        = var.iam_account
       }
-      type = "saml"
+      nr_type = "saml"
     }
     permissions = [
       {
