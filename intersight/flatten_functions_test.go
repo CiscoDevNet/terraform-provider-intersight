@@ -7328,7 +7328,7 @@ func TestFlattenListMoMoRef(t *testing.T) {
 func TestFlattenListMoTag(t *testing.T) {
 	p := []models.MoTag{}
 	var d = &schema.ResourceData{}
-	c := `{"Key":"Key %d","Propagated":true,"Type":"Type %d","Value":"Value %d"}`
+	c := `{"Key":"Key %d","Propagated":true,"SysTag":true,"Type":"Type %d","Value":"Value %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenListMoTag(p, d)
@@ -7343,7 +7343,7 @@ func TestFlattenListMoTag(t *testing.T) {
 		p = append(p, x)
 	}
 	ffOp := flattenListMoTag(p, d)
-	expectedOp := []map[string]interface{}{{"key": "Key 1", "propagated": true, "type": "Type 1", "value": "Value 1"}, {"key": "Key 2", "propagated": true, "type": "Type 2", "value": "Value 2"}}
+	expectedOp := []map[string]interface{}{{"key": "Key 1", "propagated": true, "sys_tag": true, "type": "Type 1", "value": "Value 1"}, {"key": "Key 2", "propagated": true, "sys_tag": true, "type": "Type 2", "value": "Value 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)

@@ -3,12 +3,26 @@ subcategory: "webhook"
 layout: "intersight"
 page_title: "Intersight: intersight_webhook_endpoint"
 description: |-
-        The webhook endpoint which an controller can use to forward events.
+        ### Overview
+        The Endpoint object is a crucial component for managing webhook communications within the system. Endpoint provides a structured approach for controllers to forward events, enabling seamless integration with external systems.
+        #### Purpose
+        An Endpoint serves as the conduit for event-driven interactions, allowing applications to communicate through predefined webhook routes. It ensures that events can be reliably received and processed by external systems.
+        #### Key Concepts
+        - **Webhook Integration:** - Designed to facilitate the forwarding of events to external systems using webhooks, ensuring real-time communication and data exchange.
+        - **Access Control:** - Incorporates privilege sets to manage who can create, read, update, and delete endpoints, safeguarding against unauthorized access.
+        - **Relationship Management:** - Establishes connections with accounts and organizations, ensuring that each endpoint is associated with the relevant entities for efficient management and tracking.
 
 ---
 
 # Data Source: intersight_webhook_endpoint
-The webhook endpoint which an controller can use to forward events.
+### Overview
+The Endpoint object is a crucial component for managing webhook communications within the system. Endpoint provides a structured approach for controllers to forward events, enabling seamless integration with external systems.
+#### Purpose
+An Endpoint serves as the conduit for event-driven interactions, allowing applications to communicate through predefined webhook routes. It ensures that events can be reliably received and processed by external systems.
+#### Key Concepts
+- **Webhook Integration:** - Designed to facilitate the forwarding of events to external systems using webhooks, ensuring real-time communication and data exchange.
+- **Access Control:** - Incorporates privilege sets to manage who can create, read, update, and delete endpoints, safeguarding against unauthorized access.
+- **Relationship Management:** - Establishes connections with accounts and organizations, ensuring that each endpoint is associated with the relevant entities for efficient management and tracking.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

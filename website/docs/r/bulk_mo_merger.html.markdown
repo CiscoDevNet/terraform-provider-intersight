@@ -3,20 +3,28 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_merger"
 description: |-
-        The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances.
-        The Sources array should contain the list of source MO instances as MoRef objects.
-        The Targets array should contain the list of target MO instances as MoRef objects.
-        The TargetConfig property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property.
-        Currently this API is used to synchronize template update to all its derived instances for the Server Profile Templates, vNIC Templates and vHBA Templates.
+        ### Overview
+        The MoMerger object is an interface designed to merge properties of managed object (MO) instances. It allows for the synchronization and updating of multiple target MOs based on specified source configurations.
+        #### Purpose
+        MoMerger is instrumental in template synchronization, enabling bulk updates of derived instances with changes made to their parent templates, ensuring consistency across configurations.
+        #### Key Concepts
+        - **Property Merging: Supports the merging of selected properties from source to target instances, allowing for efficient updates and configuration synchronization.
+        - **Template Synchronization: Facilitates the propagation of template changes to derived profiles, ensuring uniformity and adherence to updated configurations.
+        - **Configuration Application: Offers the ability to apply specific configuration changes across all target instances during the merge process.
+        - **Async Processing: Operates asynchronously, accommodating large-scale merge operations without impacting system performance.
 
 ---
 
 # Resource: intersight_bulk_mo_merger
-The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances.
-The "Sources" array should contain the list of source MO instances as MoRef objects.
-The "Targets" array should contain the list of target MO instances as MoRef objects.
-The "TargetConfig" property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property.
-Currently this API is used to synchronize template update to all its derived instances for the Server Profile Templates, vNIC Templates and vHBA Templates.
+### Overview
+The MoMerger object is an interface designed to merge properties of managed object (MO) instances. It allows for the synchronization and updating of multiple target MOs based on specified source configurations.   
+#### Purpose  
+MoMerger is instrumental in template synchronization, enabling bulk updates of derived instances with changes made to their parent templates, ensuring consistency across configurations.   
+#### Key Concepts 
+- **Property Merging: Supports the merging of selected properties from source to target instances, allowing for efficient updates and configuration synchronization. 
+- **Template Synchronization: Facilitates the propagation of template changes to derived profiles, ensuring uniformity and adherence to updated configurations. 
+- **Configuration Application: Offers the ability to apply specific configuration changes across all target instances during the merge process. 
+- **Async Processing: Operates asynchronously, accommodating large-scale merge operations without impacting system performance.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -94,6 +102,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
@@ -157,6 +166,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
@@ -190,6 +200,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `target_config`:(HashMap) - JSON document specifying the configuration, if applicable, to be applied on all the target MOs. 
@@ -232,6 +243,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
@@ -291,6 +303,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

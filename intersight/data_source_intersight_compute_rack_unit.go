@@ -60,6 +60,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_action": {
+			Description: "Updated by UI/API to trigger specific action type.\n* `None` - No operation value for maintenance actions on an equipment.\n* `Reack` - Reacknowledge the equipment and discover it again.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"admin_power_state": {
 			Description: "The desired power state of the server.",
 			Type:        schema.TypeString,
@@ -2187,6 +2192,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"type": {
 						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
@@ -2521,6 +2531,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOk("admin_action"); ok {
+		x := (v.(string))
+		o.SetAdminAction(x)
 	}
 
 	if v, ok := d.GetOk("admin_power_state"); ok {
@@ -5040,6 +5055,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 
 				temp["adapters"] = flattenListAdapterUnitRelationship(s.GetAdapters(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_action"] = (s.GetAdminAction())
 				temp["admin_power_state"] = (s.GetAdminPowerState())
 
 				temp["alarm_summary"] = flattenMapComputeAlarmSummary(s.GetAlarmSummary(), d)

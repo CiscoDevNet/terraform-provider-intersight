@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ChassisController"]
 **EquipmentType** | Pointer to **string** | The type of chassis controller. * &#x60;Unknown&#x60; - Chassis Controller equipment type is unknown. * &#x60;ECMC&#x60; - Chassis Controller equipment type is ECMC. | [optional] [readonly] [default to "Unknown"]
 **OperReason** | Pointer to **[]string** |  | [optional] 
+**OperState** | Pointer to **string** | Operational state of chassis controller. | [optional] [readonly] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -130,6 +131,31 @@ HasOperReason returns a boolean if a field has been set.
 `func (o *EquipmentChassisController) UnsetOperReason()`
 
 UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
+### GetOperState
+
+`func (o *EquipmentChassisController) GetOperState() string`
+
+GetOperState returns the OperState field if non-nil, zero value otherwise.
+
+### GetOperStateOk
+
+`func (o *EquipmentChassisController) GetOperStateOk() (*string, bool)`
+
+GetOperStateOk returns a tuple with the OperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperState
+
+`func (o *EquipmentChassisController) SetOperState(v string)`
+
+SetOperState sets OperState field to given value.
+
+### HasOperState
+
+`func (o *EquipmentChassisController) HasOperState() bool`
+
+HasOperState returns a boolean if a field has been set.
+
 ### GetNetworkElement
 
 `func (o *EquipmentChassisController) GetNetworkElement() NetworkElementRelationship`

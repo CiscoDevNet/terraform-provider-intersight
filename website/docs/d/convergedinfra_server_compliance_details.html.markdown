@@ -3,12 +3,28 @@ subcategory: "convergedinfra"
 layout: "intersight"
 page_title: "Intersight: intersight_convergedinfra_server_compliance_details"
 description: |-
-        The compliance details of a server in a converged infrastructure pod.
+        ### Overview
+        The ServerComplianceDetails object provides compliance information for servers within a converged infrastructure pod, detailing hardware compatibility and operational status.
+        #### Purpose
+        ServerComplianceDetails is focused on evaluating server compliance, ensuring that server components meet hardware compatibility list (HCL) criteria and operational standards necessary for reliable infrastructure performance.
+        #### Key Concepts
+        - **HCL Compatibility:** - Provides status and reasoning related to hardware compatibility, ensuring that server components are aligned with prescribed standards.
+        - **Platform Information:** - Encompasses detailed information about server platforms, processors, firmware, and operating systems, aiding in compliance evaluation.
+        - **Integration with Pod Compliance:** - Connects server compliance data with pod-level compliance insights, facilitating integrated compliance management.
+        - **Read-Only Access:** - Designed for secure consumption of server compliance data, ensuring consistent integration with management interfaces.
 
 ---
 
 # Data Source: intersight_convergedinfra_server_compliance_details
-The compliance details of a server in a converged infrastructure pod.
+### Overview
+The ServerComplianceDetails object provides compliance information for servers within a converged infrastructure pod, detailing hardware compatibility and operational status.   
+#### Purpose  
+ServerComplianceDetails is focused on evaluating server compliance, ensuring that server components meet hardware compatibility list (HCL) criteria and operational standards necessary for reliable infrastructure performance.   
+#### Key Concepts  
+- **HCL Compatibility:** - Provides status and reasoning related to hardware compatibility, ensuring that server components are aligned with prescribed standards. 
+- **Platform Information:** - Encompasses detailed information about server platforms, processors, firmware, and operating systems, aiding in compliance evaluation. 
+- **Integration with Pod Compliance:** - Connects server compliance data with pod-level compliance insights, facilitating integrated compliance management. 
+- **Read-Only Access:** - Designed for secure consumption of server compliance data, ensuring consistent integration with management interfaces.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

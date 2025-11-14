@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025101412
+API version: 1.0.11-2025102807
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,8 @@ type MoTag struct {
 	Key *string `json:"Key,omitempty"`
 	// Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.
 	Propagated *bool `json:"Propagated,omitempty"`
+	// Specifies whether the tag is user-defined or owned by the system.
+	SysTag *bool `json:"SysTag,omitempty"`
 	// An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'. * `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional. * `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".
 	Type *string `json:"Type,omitempty"`
 	// The string representation of a tag value.
@@ -181,6 +183,38 @@ func (o *MoTag) SetPropagated(v bool) {
 	o.Propagated = &v
 }
 
+// GetSysTag returns the SysTag field value if set, zero value otherwise.
+func (o *MoTag) GetSysTag() bool {
+	if o == nil || IsNil(o.SysTag) {
+		var ret bool
+		return ret
+	}
+	return *o.SysTag
+}
+
+// GetSysTagOk returns a tuple with the SysTag field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MoTag) GetSysTagOk() (*bool, bool) {
+	if o == nil || IsNil(o.SysTag) {
+		return nil, false
+	}
+	return o.SysTag, true
+}
+
+// HasSysTag returns a boolean if a field has been set.
+func (o *MoTag) HasSysTag() bool {
+	if o != nil && !IsNil(o.SysTag) {
+		return true
+	}
+
+	return false
+}
+
+// SetSysTag gets a reference to the given bool and assigns it to the SysTag field.
+func (o *MoTag) SetSysTag(v bool) {
+	o.SysTag = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *MoTag) GetType() string {
 	if o == nil || IsNil(o.Type) {
@@ -267,6 +301,9 @@ func (o MoTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Propagated) {
 		toSerialize["Propagated"] = o.Propagated
 	}
+	if !IsNil(o.SysTag) {
+		toSerialize["SysTag"] = o.SysTag
+	}
 	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
@@ -299,6 +336,7 @@ func (o *MoTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Definition")
 		delete(additionalProperties, "Key")
 		delete(additionalProperties, "Propagated")
+		delete(additionalProperties, "SysTag")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "Value")
 		o.AdditionalProperties = additionalProperties

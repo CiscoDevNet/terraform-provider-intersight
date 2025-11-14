@@ -3,12 +3,26 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_metrics_exploration"
 description: |-
-        Details of the metrics query and the templating information.
+        #### Overview
+        The MetricsExploration object is pivotal for querying and analyzing metrics data within the system. This provides a structured approach to defining and executing metrics queries for data exploration and visualization.
+        #### Purpose
+        MetricsExploration enables users to define complex queries and visualize metrics data for deeper analysis and actionable insights. It supports interactive, user-driven exploration to identify trends, patterns, and opportunities for data-driven decisions.
+        #### Key Concepts
+        - **Flexible Querying:** - Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
+        - **Visualization Options:** - Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
+        - **Access Control:** - Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
 
 ---
 
 # Resource: intersight_metrics_metrics_exploration
-Details of the metrics query and the templating information.
+#### Overview
+The MetricsExploration object is pivotal for querying and analyzing metrics data within the system. This provides a structured approach to defining and executing metrics queries for data exploration and visualization.
+#### Purpose
+MetricsExploration enables users to define complex queries and visualize metrics data for deeper analysis and actionable insights. It supports interactive, user-driven exploration to identify trends, patterns, and opportunities for data-driven decisions.
+#### Key Concepts
+- **Flexible Querying:** - Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
+- **Visualization Options:** - Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
+- **Access Control:** - Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -75,6 +89,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

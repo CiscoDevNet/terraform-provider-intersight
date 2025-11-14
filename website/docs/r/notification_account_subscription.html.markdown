@@ -3,38 +3,32 @@ subcategory: "notification"
 layout: "intersight"
 page_title: "Intersight: intersight_notification_account_subscription"
 description: |-
-        # Overview
-        The AccountSubscription object is a crucial component of the Intersight notification framework,
-        designed to facilitate account-level subscriptions managed by Account Administrators.
-        It provides a structured way to handle notifications based on specific events within an account,
-        ensuring administrators can effectively configure and manage subscription settings.
-        ## Purpose
-        The AccountSubscription object enables administrators to set up notifications for various account events.
-        It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
-        ## Key Concepts
-        - **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
-        - **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
-        - **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
-        - **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
-        - **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
+        ### Overview
+        The AccountSubscription object is a crucial component of the Intersight notification framework,   designed to facilitate account-level subscriptions managed by Account Administrators.
+        It provides a structured way to handle notifications based on specific events within an account, ensuring administrators can effectively configure and manage subscription settings.
+        #### Purpose
+        The AccountSubscription object enables administrators to set up notifications for various account events. It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+        #### Key Concepts
+        - **Account-Level Management** - Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+        - **Integration with Notification Methods** - Supports multiple notification methods such as email and webhook to meet diverse requirements.
+        - **Conditional Notifications** - Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+        - **Access Control** - Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+        - **Flexibility and Scalability** - Scales notification features to support complex use cases and evolving business needs.
 
 ---
 
 # Resource: intersight_notification_account_subscription
-# Overview
-The AccountSubscription object is a crucial component of the Intersight notification framework,  
-designed to facilitate account-level subscriptions managed by Account Administrators.  
-It provides a structured way to handle notifications based on specific events within an account,  
-ensuring administrators can effectively configure and manage subscription settings.
-## Purpose
-The AccountSubscription object enables administrators to set up notifications for various account events.  
-It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
-## Key Concepts
-- **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
-- **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
-- **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
-- **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
-- **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
+### Overview
+The AccountSubscription object is a crucial component of the Intersight notification framework,   designed to facilitate account-level subscriptions managed by Account Administrators.  
+It provides a structured way to handle notifications based on specific events within an account, ensuring administrators can effectively configure and manage subscription settings.
+#### Purpose
+The AccountSubscription object enables administrators to set up notifications for various account events. It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+#### Key Concepts
+- **Account-Level Management** - Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+- **Integration with Notification Methods** - Supports multiple notification methods such as email and webhook to meet diverse requirements.
+- **Conditional Notifications** - Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+- **Access Control** - Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+- **Flexibility and Scalability** - Scales notification features to support complex use cases and evolving business needs.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -89,6 +83,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) The chosen subscription type imposes it is own validation rules.When 'email' type is chosen, actions array can contain only one entry and it is entry should be of canbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and conditiontypes should be unique.When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of canbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of themshould be of type notification.MoCondition.* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. 

@@ -3,26 +3,28 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_cloner"
 description: |-
-        The MO Cloner interface facilitates making n number of shallow copies of any resource instance which supports the CREATE operation.
-        For deep copy and reference clone support, refer to the MoDeepCloner API.
-        The MO to be cloned must be specified as an MoRef object in the Sources.
-        The Targets array must contain n JSON documents each compliant to RFC 7386.
-        For each target MO to be created, you can specify the following -
-        - new values for the identity properties, if applicable
-        - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
-        Currently this API is used to perform template derive operations for Server Profile Templates, vNIC Templates and vHBA Templates.
+        ### Overview
+        The MoCloner object is an interface designed to facilitate the cloning of managed objects (MOs) in bulk operations. It enables the creation of multiple copies of a specified resource instance.
+        #### Purpose
+        MoCloner is used primarily for template derivation operations, allowing users to replicate existing templates into new derived instances while applying specific overrides to identity properties or other configurations.
+        #### Key Concepts
+        - **Bulk Cloning:** - Supports the generation of multiple clones in a single operation, optimizing resource duplication processes.
+        - **Template Derivation:** - Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances.
+        - **Configuration Override:** - Allows for customization of cloned instances by specifying new values for identity and other properties.
+        - **Async Processing:** - Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
 
 ---
 
 # Data Source: intersight_bulk_mo_cloner
-The MO Cloner interface facilitates making n number of shallow copies of any resource instance which supports the CREATE operation.
-For deep copy and reference clone support, refer to the MoDeepCloner API.
-The MO to be cloned must be specified as an MoRef object in the "Sources".
-The "Targets" array must contain n JSON documents each compliant to RFC 7386. 
-For each target MO to be created, you can specify the following -
-- new values for the identity properties, if applicable
-- new values for specific properties or references of the source MO which need to be overridden in the cloned object.
-Currently this API is used to perform template derive operations for Server Profile Templates, vNIC Templates and vHBA Templates.
+### Overview
+The MoCloner object is an interface designed to facilitate the cloning of managed objects (MOs) in bulk operations. It enables the creation of multiple copies of a specified resource instance.   
+#### Purpose  
+MoCloner is used primarily for template derivation operations, allowing users to replicate existing templates into new derived instances while applying specific overrides to identity properties or other configurations.   
+#### Key Concepts 
+- **Bulk Cloning:** - Supports the generation of multiple clones in a single operation, optimizing resource duplication processes. 
+- **Template Derivation:** - Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances. 
+- **Configuration Override:** - Allows for customization of cloned instances by specifying new values for identity and other properties. 
+- **Async Processing:** - Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025101412
+API version: 1.0.11-2025102807
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the WebhookEndpoint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookEndpoint{}
 
-// WebhookEndpoint The webhook endpoint which an controller can use to forward events.
+// WebhookEndpoint ### Overview The Endpoint object is a crucial component for managing webhook communications within the system. Endpoint provides a structured approach for controllers to forward events, enabling seamless integration with external systems. #### Purpose An Endpoint serves as the conduit for event-driven interactions, allowing applications to communicate through predefined webhook routes. It ensures that events can be reliably received and processed by external systems. #### Key Concepts - **Webhook Integration:** - Designed to facilitate the forwarding of events to external systems using webhooks, ensuring real-time communication and data exchange. - **Access Control:** - Incorporates privilege sets to manage who can create, read, update, and delete endpoints, safeguarding against unauthorized access. - **Relationship Management:** - Establishes connections with accounts and organizations, ensuring that each endpoint is associated with the relevant entities for efficient management and tracking.
 type WebhookEndpoint struct {
 	IamAbstractClientApplication
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

@@ -3,34 +3,28 @@ subcategory: "aaa"
 layout: "intersight"
 page_title: "Intersight: intersight_aaa_retention_config"
 description: |-
-        # Overview
-        The RetentionConfig object provides default configurations for audit log retention,
-        offering a standardized approach to managing retention periods in the absence of specific policies.
-        ## Purpose
-        RetentionConfig serves as a baseline configuration for audit log retention,
-        ensuring logs are preserved for a defined period by default when no explicit retention policy exists.
-        This helps maintain consistent log management practices across the system.
-        ## Key Concepts
-        - **Default Settings** – Establishes default retention periods, ensuring systematic log retention even without custom policies.
-        - **System Ownership** – Managed by the system to guarantee reliable and consistent application of retention settings across all accounts.
-        - **Read-Only Access** – Designed for safe consumption, ensuring default configurations are applied without unauthorized modifications.
-        - **Policy Integration** – Complements account-specific RetentionPolicies, harmonizing log retention across the system.
+        ### Overview
+        The RetentionConfig object provides default configurations for audit log retention, offering a standardized approach to managing retention periods in the absence of specific policies.
+        #### Purpose
+        RetentionConfig serves as a baseline configuration for audit log retention, ensuring logs are preserved for a defined period by default when no explicit retention policy exists. This helps maintain consistent log management practices across the system.
+        #### Key Concepts
+        - **Default Settings** - Establishes default retention periods, ensuring systematic log retention even without custom policies.
+        - **System Ownership** - Managed by the system to guarantee reliable and consistent application of retention settings across all accounts.
+        - **Read-Only Access** - Designed for safe consumption, ensuring default configurations are applied without unauthorized modifications.
+        - **Policy Integration** - Complements account-specific RetentionPolicies, harmonizing log retention across the system.
 
 ---
 
 # Data Source: intersight_aaa_retention_config
-# Overview
-The RetentionConfig object provides default configurations for audit log retention,  
-offering a standardized approach to managing retention periods in the absence of specific policies.
-## Purpose
-RetentionConfig serves as a baseline configuration for audit log retention,  
-ensuring logs are preserved for a defined period by default when no explicit retention policy exists.  
-This helps maintain consistent log management practices across the system.
-## Key Concepts
-- **Default Settings** – Establishes default retention periods, ensuring systematic log retention even without custom policies.
-- **System Ownership** – Managed by the system to guarantee reliable and consistent application of retention settings across all accounts.
-- **Read-Only Access** – Designed for safe consumption, ensuring default configurations are applied without unauthorized modifications.
-- **Policy Integration** – Complements account-specific RetentionPolicies, harmonizing log retention across the system.
+### Overview
+The RetentionConfig object provides default configurations for audit log retention, offering a standardized approach to managing retention periods in the absence of specific policies.
+#### Purpose
+RetentionConfig serves as a baseline configuration for audit log retention, ensuring logs are preserved for a defined period by default when no explicit retention policy exists. This helps maintain consistent log management practices across the system.
+#### Key Concepts
+- **Default Settings** - Establishes default retention periods, ensuring systematic log retention even without custom policies.
+- **System Ownership** - Managed by the system to guarantee reliable and consistent application of retention settings across all accounts.
+- **Read-Only Access** - Designed for safe consumption, ensuring default configurations are applied without unauthorized modifications.
+- **Policy Integration** - Complements account-specific RetentionPolicies, harmonizing log retention across the system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

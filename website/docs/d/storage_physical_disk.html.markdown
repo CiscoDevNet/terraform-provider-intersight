@@ -34,6 +34,9 @@ The following arguments can be used to get data of already created objects in In
 * `encryption_status`:(string) Encryption status of the physical disk. 
 * `failure_predicted`:(bool) Possibility of physical disk failure. 
 * `fde_capable`:(string) Full-Disk Encryption capability parameter of the physical disk. 
+* `health`:(string) This field displays the health of the physical disk. 
+* `health_message`:(string) This field displays the message in relation to physical disk health. 
+* `health_resolution`:(string) This field displays the recommended action to take regarding the physical disk based on its health status. 
 * `hot_spare_type`:(string) Type of hotspare configured on the physical disk. 
 * `indicator_led`:(string) Status of the locator LED corresponding to the physical disk. 
 * `is_platform_supported`:(bool) This field indicates whether the physical disk is supported on the server or not. 

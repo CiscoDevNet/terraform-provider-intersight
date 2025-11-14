@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] 
+**ConfigRestoreState** | Pointer to **bool** | Indicates if the network Element is in a config restore state. | [optional] [readonly] [default to false]
 **ConnectionStatus** | Pointer to **string** | Connection status of the switch. | [optional] 
 **DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
@@ -333,6 +334,31 @@ SetConfModTsBackup sets ConfModTsBackup field to given value.
 `func (o *NetworkElement) HasConfModTsBackup() bool`
 
 HasConfModTsBackup returns a boolean if a field has been set.
+
+### GetConfigRestoreState
+
+`func (o *NetworkElement) GetConfigRestoreState() bool`
+
+GetConfigRestoreState returns the ConfigRestoreState field if non-nil, zero value otherwise.
+
+### GetConfigRestoreStateOk
+
+`func (o *NetworkElement) GetConfigRestoreStateOk() (*bool, bool)`
+
+GetConfigRestoreStateOk returns a tuple with the ConfigRestoreState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigRestoreState
+
+`func (o *NetworkElement) SetConfigRestoreState(v bool)`
+
+SetConfigRestoreState sets ConfigRestoreState field to given value.
+
+### HasConfigRestoreState
+
+`func (o *NetworkElement) HasConfigRestoreState() bool`
+
+HasConfigRestoreState returns a boolean if a field has been set.
 
 ### GetConnectionStatus
 

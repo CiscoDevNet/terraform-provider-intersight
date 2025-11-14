@@ -3,12 +3,28 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_supported_driver_name"
 description: |-
-        Supported driver names for a given product for the given operating system.
+        ### Overview
+        The SupportedDriverName object facilitates the identification and management of driver names supported for specific products and operating systems. It plays a critical role in ensuring that hardware components operate smoothly with their corresponding software environments.
+        #### Purpose
+        SupportedDriverName focuses on cataloging driver names compatible with particular products and operating systems. It aids in the deployment and maintenance of system components by providing a reliable reference for supported drivers.
+        #### Key Concepts
+        - **Driver Identification:** - Provides a structured approach to identifying drivers that are compatible with specific products and operating systems, aiding in system setup and maintenance.
+        - **Product Association:** - Establishes a clear link between products and their supported drivers, ensuring a seamless integration within the system.
+        - **API Interaction:** - Designed for interaction through API requests, allowing authorized users to access and utilize driver compatibility information effectively.
+        - **Entitlement Management:** - Governed by entitlements that ensure access is restricted to authorized personnel, maintaining security and operational integrity.
 
 ---
 
 # Resource: intersight_hcl_supported_driver_name
-Supported driver names for a given product for the given operating system.
+### Overview
+The SupportedDriverName object facilitates the identification and management of driver names supported for specific products and operating systems. It plays a critical role in ensuring that hardware components operate smoothly with their corresponding software environments.
+#### Purpose
+SupportedDriverName focuses on cataloging driver names compatible with particular products and operating systems. It aids in the deployment and maintenance of system components by providing a reliable reference for supported drivers.
+#### Key Concepts
+- **Driver Identification:** - Provides a structured approach to identifying drivers that are compatible with specific products and operating systems, aiding in system setup and maintenance.
+- **Product Association:** - Establishes a clear link between products and their supported drivers, ensuring a seamless integration within the system.
+- **API Interaction:** - Designed for interaction through API requests, allowing authorized users to access and utilize driver compatibility information effectively.
+- **Entitlement Management:** - Governed by entitlements that ensure access is restricted to authorized personnel, maintaining security and operational integrity.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -71,6 +87,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

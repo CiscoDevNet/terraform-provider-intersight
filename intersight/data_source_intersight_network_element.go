@@ -263,6 +263,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"config_restore_state": {
+			Description: "Indicates if the network Element is in a config restore state.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"connection_status": {
 			Description: "Connection status of the switch.",
 			Type:        schema.TypeString,
@@ -1654,6 +1659,11 @@ func getNetworkElementSchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"type": {
 						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
@@ -2343,6 +2353,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 	if v, ok := d.GetOk("conf_mod_ts_backup"); ok {
 		x := (v.(string))
 		o.SetConfModTsBackup(x)
+	}
+
+	if v, ok := d.GetOkExists("config_restore_state"); ok {
+		x := (v.(bool))
+		o.SetConfigRestoreState(x)
 	}
 
 	if v, ok := d.GetOk("connection_status"); ok {
@@ -4305,6 +4320,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["class_id"] = (s.GetClassId())
 				temp["conf_mod_ts"] = (s.GetConfModTs())
 				temp["conf_mod_ts_backup"] = (s.GetConfModTsBackup())
+				temp["config_restore_state"] = (s.GetConfigRestoreState())
 				temp["connection_status"] = (s.GetConnectionStatus())
 
 				temp["console"] = flattenListConsoleConsoleConfigRelationship(s.GetConsole(), d)

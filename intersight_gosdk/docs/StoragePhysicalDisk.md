@@ -21,6 +21,9 @@ Name | Type | Description | Notes
 **EncryptionStatus** | Pointer to **string** | Encryption status of the physical disk. | [optional] 
 **FailurePredicted** | Pointer to **bool** | Possibility of physical disk failure. | [optional] 
 **FdeCapable** | Pointer to **string** | Full-Disk Encryption capability parameter of the physical disk. | [optional] 
+**Health** | Pointer to **string** | This field displays the health of the physical disk. | [optional] [readonly] 
+**HealthMessage** | Pointer to **string** | This field displays the message in relation to physical disk health. | [optional] [readonly] 
+**HealthResolution** | Pointer to **string** | This field displays the recommended action to take regarding the physical disk based on its health status. | [optional] [readonly] 
 **HotSpareType** | Pointer to **string** | Type of hotspare configured on the physical disk. | [optional] 
 **IndicatorLed** | Pointer to **string** | Status of the locator LED corresponding to the physical disk. | [optional] 
 **IsPlatformSupported** | Pointer to **bool** | This field indicates whether the physical disk is supported on the server or not. | [optional] [readonly] [default to true]
@@ -502,6 +505,81 @@ SetFdeCapable sets FdeCapable field to given value.
 `func (o *StoragePhysicalDisk) HasFdeCapable() bool`
 
 HasFdeCapable returns a boolean if a field has been set.
+
+### GetHealth
+
+`func (o *StoragePhysicalDisk) GetHealth() string`
+
+GetHealth returns the Health field if non-nil, zero value otherwise.
+
+### GetHealthOk
+
+`func (o *StoragePhysicalDisk) GetHealthOk() (*string, bool)`
+
+GetHealthOk returns a tuple with the Health field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHealth
+
+`func (o *StoragePhysicalDisk) SetHealth(v string)`
+
+SetHealth sets Health field to given value.
+
+### HasHealth
+
+`func (o *StoragePhysicalDisk) HasHealth() bool`
+
+HasHealth returns a boolean if a field has been set.
+
+### GetHealthMessage
+
+`func (o *StoragePhysicalDisk) GetHealthMessage() string`
+
+GetHealthMessage returns the HealthMessage field if non-nil, zero value otherwise.
+
+### GetHealthMessageOk
+
+`func (o *StoragePhysicalDisk) GetHealthMessageOk() (*string, bool)`
+
+GetHealthMessageOk returns a tuple with the HealthMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHealthMessage
+
+`func (o *StoragePhysicalDisk) SetHealthMessage(v string)`
+
+SetHealthMessage sets HealthMessage field to given value.
+
+### HasHealthMessage
+
+`func (o *StoragePhysicalDisk) HasHealthMessage() bool`
+
+HasHealthMessage returns a boolean if a field has been set.
+
+### GetHealthResolution
+
+`func (o *StoragePhysicalDisk) GetHealthResolution() string`
+
+GetHealthResolution returns the HealthResolution field if non-nil, zero value otherwise.
+
+### GetHealthResolutionOk
+
+`func (o *StoragePhysicalDisk) GetHealthResolutionOk() (*string, bool)`
+
+GetHealthResolutionOk returns a tuple with the HealthResolution field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHealthResolution
+
+`func (o *StoragePhysicalDisk) SetHealthResolution(v string)`
+
+SetHealthResolution sets HealthResolution field to given value.
+
+### HasHealthResolution
+
+`func (o *StoragePhysicalDisk) HasHealthResolution() bool`
+
+HasHealthResolution returns a boolean if a field has been set.
 
 ### GetHotSpareType
 

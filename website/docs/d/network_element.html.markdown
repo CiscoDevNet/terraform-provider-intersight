@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `chassis`:(string) Chassis IP of the switch. 
 * `conf_mod_ts`:(string) Configuration modified timestamp of the switch. 
 * `conf_mod_ts_backup`:(string) Configuration modified backup timestamp of the switch. 
+* `config_restore_state`:(bool) Indicates if the network Element is in a config restore state. 
 * `connection_status`:(string) Connection status of the switch. 
 * `create_time`:(string) The time when this managed object was created. 
 * `default_domain`:(string) The default domain name configured on the switch. 

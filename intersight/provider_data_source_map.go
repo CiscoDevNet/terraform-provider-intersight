@@ -54,6 +54,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_appliance_file_gateway":                                  dataSourceApplianceFileGateway(),
 		"intersight_appliance_file_system_op_status":                         dataSourceApplianceFileSystemOpStatus(),
 		"intersight_appliance_file_system_status":                            dataSourceApplianceFileSystemStatus(),
+		"intersight_appliance_fqdn_update":                                   dataSourceApplianceFqdnUpdate(),
 		"intersight_appliance_group_op_status":                               dataSourceApplianceGroupOpStatus(),
 		"intersight_appliance_group_status":                                  dataSourceApplianceGroupStatus(),
 		"intersight_appliance_image_bundle":                                  dataSourceApplianceImageBundle(),

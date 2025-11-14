@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **RollbackStatus** | Pointer to **string** | Status of the Intersight Appliance&#39;s software rollback status. | [optional] [readonly] 
 **Services** | Pointer to **[]string** |  | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date of the software upgrade. UI can modify startTime to re-schedule an upgrade. | [optional] 
-**Status** | Pointer to **string** | Status of the Intersight Appliance&#39;s software upgrade. | [optional] [readonly] 
+**Status** | Pointer to **string** | Status of the Intersight Appliance&#39;s software upgrade. | [optional] 
 **TotalNodes** | Pointer to **int64** | Total number of nodes this upgrade will run on. | [optional] [readonly] 
 **TotalPhases** | Pointer to **int64** | TotalPhase represents the total number of the upgradePhases for one upgrade. | [optional] [readonly] 
 **UiPackages** | Pointer to **[]string** |  | [optional] 

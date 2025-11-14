@@ -3,26 +3,28 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_cloner"
 description: |-
-        The MO Cloner interface facilitates making n number of shallow copies of any resource instance which supports the CREATE operation.
-        For deep copy and reference clone support, refer to the MoDeepCloner API.
-        The MO to be cloned must be specified as an MoRef object in the Sources.
-        The Targets array must contain n JSON documents each compliant to RFC 7386.
-        For each target MO to be created, you can specify the following -
-        - new values for the identity properties, if applicable
-        - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
-        Currently this API is used to perform template derive operations for Server Profile Templates, vNIC Templates and vHBA Templates.
+        ### Overview
+        The MoCloner object is an interface designed to facilitate the cloning of managed objects (MOs) in bulk operations. It enables the creation of multiple copies of a specified resource instance.
+        #### Purpose
+        MoCloner is used primarily for template derivation operations, allowing users to replicate existing templates into new derived instances while applying specific overrides to identity properties or other configurations.
+        #### Key Concepts
+        - **Bulk Cloning:** - Supports the generation of multiple clones in a single operation, optimizing resource duplication processes.
+        - **Template Derivation:** - Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances.
+        - **Configuration Override:** - Allows for customization of cloned instances by specifying new values for identity and other properties.
+        - **Async Processing:** - Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
 
 ---
 
 # Resource: intersight_bulk_mo_cloner
-The MO Cloner interface facilitates making n number of shallow copies of any resource instance which supports the CREATE operation.
-For deep copy and reference clone support, refer to the MoDeepCloner API.
-The MO to be cloned must be specified as an MoRef object in the "Sources".
-The "Targets" array must contain n JSON documents each compliant to RFC 7386. 
-For each target MO to be created, you can specify the following -
-- new values for the identity properties, if applicable
-- new values for specific properties or references of the source MO which need to be overridden in the cloned object.
-Currently this API is used to perform template derive operations for Server Profile Templates, vNIC Templates and vHBA Templates.
+### Overview
+The MoCloner object is an interface designed to facilitate the cloning of managed objects (MOs) in bulk operations. It enables the creation of multiple copies of a specified resource instance.   
+#### Purpose  
+MoCloner is used primarily for template derivation operations, allowing users to replicate existing templates into new derived instances while applying specific overrides to identity properties or other configurations.   
+#### Key Concepts 
+- **Bulk Cloning:** - Supports the generation of multiple clones in a single operation, optimizing resource duplication processes. 
+- **Template Derivation:** - Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances. 
+- **Configuration Override:** - Allows for customization of cloned instances by specifying new values for identity and other properties. 
+- **Async Processing:** - Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -101,6 +103,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
@@ -164,6 +167,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
@@ -197,6 +201,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `targets`:(Array)
@@ -239,6 +244,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

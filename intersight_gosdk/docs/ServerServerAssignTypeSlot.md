@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "server.ServerAssignTypeSlot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.ServerAssignTypeSlot"]
 **ChassisId** | Pointer to **int64** | Chassis-id of the slot that would be assigned to this pre-assigned server profile. | [optional] [default to 0]
-**DomainName** | Pointer to **string** | Domain name of the Fabric Interconnect to which the chassis is or to be connected. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It can have underscores and hyphens. It cannot be more than 30 characters. | [optional] 
+**DomainName** | Pointer to **string** | The domain name of the Fabric Interconnect or the chassis name prefix. The name must start and end with an alphanumeric character, can include underscores and hyphens, and has a maximum length of 30 characters. | [optional] 
 **SlotId** | Pointer to **int64** | Slot-id of the server that would be assigned to this pre-assigned server profile. | [optional] [default to 0]
 
 ## Methods

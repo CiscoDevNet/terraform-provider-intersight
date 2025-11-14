@@ -3,12 +3,28 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_compatibility_status"
 description: |-
-        Check the compatibility status for the given hardware and software configurations.
+        ### Overview
+        The CompatibilityStatus object evaluates the compatibility of hardware and software configurations within the system. This provides insights into the compatibility status of various configurations, aiding in decision-making and system optimization.
+        #### Purpose
+        CompatibilityStatus is integral to ensuring that hardware and software components are compatible with each other. It facilitates the evaluation of configurations to determine their suitability for deployment within the system.
+        #### Key Concepts
+        - **Configuration Evaluation:** - Enables the assessment of compatibility across diverse hardware and software configurations, helping to identify potential issues before deployment.
+        - **Request Types:** - Offers flexible request types to serve different compatibility evaluation needs, from checking compatibility to filling supported version details.
+        - **Access Control:** - Privilege sets dictate who can interact with the CompatibilityStatus object, ensuring secure and appropriate usage.
+        - **Entitlements and Licenses:** - Operates under specific entitlements, aligning with organizational policies and ensuring compliance with licensing requirements.
 
 ---
 
 # Resource: intersight_hcl_compatibility_status
-Check the compatibility status for the given hardware and software configurations.
+### Overview
+The CompatibilityStatus object evaluates the compatibility of hardware and software configurations within the system. This provides insights into the compatibility status of various configurations, aiding in decision-making and system optimization.
+#### Purpose
+CompatibilityStatus is integral to ensuring that hardware and software components are compatible with each other. It facilitates the evaluation of configurations to determine their suitability for deployment within the system.
+#### Key Concepts
+- **Configuration Evaluation:** - Enables the assessment of compatibility across diverse hardware and software configurations, helping to identify potential issues before deployment.
+- **Request Types:** - Offers flexible request types to serve different compatibility evaluation needs, from checking compatibility to filling supported version details.
+- **Access Control:** - Privilege sets dictate who can interact with the CompatibilityStatus object, ensuring secure and appropriate usage.
+- **Entitlements and Licenses:** - Operates under specific entitlements, aligning with organizational policies and ensuring compliance with licensing requirements.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -84,6 +100,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

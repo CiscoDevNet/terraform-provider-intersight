@@ -327,6 +327,11 @@ func getNiatelemetrySupervisorModuleDetailsSchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"type": {
 						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,

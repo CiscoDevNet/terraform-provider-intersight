@@ -3,12 +3,26 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_cluster_member"
 description: |-
-        A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the node's current leadership state within the cluster.
+        ### Overview
+        The ClusterMember object represents a node within a cluster of device connectors. This provides detailed insights into the individual members of a device cluster, supporting high availability and redundancy in device management.
+        #### Purpose
+        ClusterMember facilitates the management of clustered devices by capturing connection details and leadership states of each node. It plays a crucial role in ensuring that device management is robust and scalable, supporting seamless failover and load balancing.
+        #### Key Concepts
+        - **Cluster Identity:** - Maintains unique identities for each node within the cluster, ensuring precise tracking and management.
+        - **Leadership Management:** - Monitors leadership states within the cluster, supporting efficient failover and recovery processes.
+        - **Connection Details:** - Provides granular visibility into the connection status and configuration of each cluster member, enabling proactive management.
 
 ---
 
 # Data Source: intersight_asset_cluster_member
-A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the node's current leadership state within the cluster.
+### Overview
+The ClusterMember object represents a node within a cluster of device connectors. This provides detailed insights into the individual members of a device cluster, supporting high availability and redundancy in device management.
+#### Purpose
+ClusterMember facilitates the management of clustered devices by capturing connection details and leadership states of each node. It plays a crucial role in ensuring that device management is robust and scalable, supporting seamless failover and load balancing.
+#### Key Concepts
+- **Cluster Identity:** - Maintains unique identities for each node within the cluster, ensuring precise tracking and management.
+- **Leadership Management:** - Monitors leadership states within the cluster, supporting efficient failover and recovery processes.
+- **Connection Details:** - Provides granular visibility into the connection status and configuration of each cluster member, enabling proactive management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
