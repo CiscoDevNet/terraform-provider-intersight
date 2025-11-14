@@ -3,12 +3,28 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_storage_vm"
 description: |-
-        NetApp Storage Virtual Machines contain data volumes and one or more Logical Interfaces ( LIFs ) through which they serve data to the clients.
+        ### Overview
+        The NetAppStorageVm object encapsulates a storage virtual machine, a fundamental entity within the NetAppCluster environment, responsible for serving data to clients through logical interfaces. It is integral to managing virtualized storage resources and ensuring efficient data delivery.
+        #### Purpose
+        A NetAppStorageVm provides a virtual framework for storage operations, enabling flexible data management and service provisioning. It acts as a virtual entity within the cluster, orchestrating data access and supporting diverse protocol configurations.
+        #### Key Concepts
+        - **Virtualization:** - Offers a virtualized approach to storage management, facilitating dynamic resource allocation and provisioning.
+        - **Service Integration:** - Manages multiple logical interfaces (LIFs) to deliver data services to clients, ensuring seamless connectivity and interaction.
+        - **Protocol Support:** - Supports various storage protocols, including NFS, CIFS, iSCSI, and NVMe, to accommodate diverse client requirements.
+        - **Data Protection:** - Implements robust data protection strategies, utilizing SnapMirror and other technologies to safeguard data integrity and availability.
 
 ---
 
 # Data Source: intersight_storage_net_app_storage_vm
-NetApp Storage Virtual Machines contain data volumes and one or more Logical Interfaces ( LIFs ) through which they serve data to the clients.
+### Overview
+The NetAppStorageVm object encapsulates a storage virtual machine, a fundamental entity within the NetAppCluster environment, responsible for serving data to clients through logical interfaces. It is integral to managing virtualized storage resources and ensuring efficient data delivery.
+#### Purpose
+A NetAppStorageVm provides a virtual framework for storage operations, enabling flexible data management and service provisioning. It acts as a virtual entity within the cluster, orchestrating data access and supporting diverse protocol configurations.
+#### Key Concepts
+- **Virtualization:** - Offers a virtualized approach to storage management, facilitating dynamic resource allocation and provisioning.
+- **Service Integration:** - Manages multiple logical interfaces (LIFs) to deliver data services to clients, ensuring seamless connectivity and interaction.
+- **Protocol Support:** - Supports various storage protocols, including NFS, CIFS, iSCSI, and NVMe, to accommodate diverse client requirements.
+- **Data Protection:** - Implements robust data protection strategies, utilizing SnapMirror and other technologies to safeguard data integrity and availability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,28 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_result"
 description: |-
-        The Result API is a status-monitor resource used to show the processing status of any bulk MO API when the request HTTP 'prefer' header is set to 'respond-async' value.
+        ### Overview
+        The Result object serves as a status-monitoring resource within asynchronous bulk operations. This provides detailed insights into the processing status of bulk API requests.
+        #### Purpose
+        Result is used to track the progress and outcome of bulk operations, offering transparency and accountability for asynchronous API transactions.
+        #### Key Concepts
+        - **Status Monitoring:** - Provides real-time updates on the processing status of requests, including success, failure, and completion states.
+        - **Error Handling:** - Captures error details and status messages, facilitating troubleshooting and resolution of failed operations.
+        - **Async Support:** - Integrates seamlessly with asynchronous workflows, supporting efficient management of large-scale API operations.
+        - **Workflow Integration:** - Links to workflow objects for comprehensive status tracking and management within automation processes.
 
 ---
 
 # Data Source: intersight_bulk_result
-The Result API is a status-monitor resource used to show the processing status of any bulk MO API when the request HTTP 'prefer' header is set to 'respond-async' value.
+### Overview
+The Result object serves as a status-monitoring resource within asynchronous bulk operations. This provides detailed insights into the processing status of bulk API requests.   
+#### Purpose 
+Result is used to track the progress and outcome of bulk operations, offering transparency and accountability for asynchronous API transactions.  
+#### Key Concepts
+- **Status Monitoring:** - Provides real-time updates on the processing status of requests, including success, failure, and completion states. 
+- **Error Handling:** - Captures error details and status messages, facilitating troubleshooting and resolution of failed operations. 
+- **Async Support:** - Integrates seamlessly with asynchronous workflows, supporting efficient management of large-scale API operations. 
+- **Workflow Integration:** - Links to workflow objects for comprehensive status tracking and management within automation processes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

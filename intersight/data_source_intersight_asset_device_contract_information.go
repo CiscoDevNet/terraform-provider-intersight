@@ -251,7 +251,7 @@ func getAssetDeviceContractInformationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"device_type": {
-			Description: "Type used to classify the device in Cisco Intersight. Currently supported values are Server and FabricInterconnect. This will be expanded to support more types in future.\n* `None` - A default value to catch cases where device type is not correctly detected.\n* `CiscoUcsServer` - A device of type server. It includes Cisco IMC and UCS Managed servers.\n* `CiscoUcsFI` - A device of type Fabric Interconnect. It includes the various types of Cisco Fabric Interconnects supported by Cisco Intersight.\n* `CiscoUcsChassis` - A device of type Chassis. It includes various UCS chassis supported by Cisco Intersight.\n* `CiscoNexusSwitch` - A device of type Nexus switch. It includes various Nexus switches supported by Cisco Intersight.\n* `CiscoMDSSwitch` - A device of type MDS switch. It includes various MDS switches supported by Cisco Intersight.",
+			Description: "Type used to classify the device in Cisco Intersight. Currently supported values are Server and FabricInterconnect. This will be expanded to support more types in future.\n* `None` - A default value to catch cases where device type is not correctly detected.\n* `CiscoUcsServer` - A device of type server. It includes Cisco IMC and UCS Managed servers.\n* `CiscoUcsFI` - A device of type Fabric Interconnect. It includes the various types of Cisco Fabric Interconnects supported by Cisco Intersight.\n* `CiscoUcsChassis` - A device of type Chassis. It includes various UCS chassis supported by Cisco Intersight.\n* `CiscoNexusSwitch` - A device of type Nexus switch. It includes various Nexus switches supported by Cisco Intersight.\n* `CiscoMDSSwitch` - A device of type MDS switch. It includes various MDS switches supported by Cisco Intersight.\n* `CiscoEdgeServer` - A device of type Edge Server. It includes various edge servers supported by Cisco Intersight.\n* `CiscoEdgeChassis` - A device of type Edge Chassis. It includes various edge chassis supported by Cisco Intersight.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -974,6 +974,11 @@ func getAssetDeviceContractInformationSchema() map[string]*schema.Schema {
 					},
 					"propagated": {
 						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},

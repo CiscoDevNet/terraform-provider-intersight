@@ -27,7 +27,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"aes_primary_key": {
-			Description: "Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it.",
+			Description: "Encrypts MACsec keys in type-6 format. If a MACsec key is already provided in a type-6 format, the primary key decrypts it. MACSec is not supported on Unified Edge, so the primary key cannot be configured.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -86,22 +86,22 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"enable_jumbo_frame": {
-			Description: "To enable or disable Jumbo Frames on the switch.",
+			Description: "To enable or disable Jumbo Frames on the switch. On Fabric Interconnects, Jumbo Frames are controlled by the System QoS policy, so this setting is ignored.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"ethernet_switching_mode": {
-			Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Description: "Enable or Disable Ethernet End Host Switching Mode. Ethernet End Host Switching Mode is not applicable for Unified Edge; the value defaults to Ethernet Switch Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"fabric_pc_vhba_reset": {
-			Description: "When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
+			Description: "When enabled, a Registered State Change Notification (RSCN) is sent to the VIC adapter when any member port within the fabric port-channel goes down and vHBA would reset to restore the connection immediately. When disabled (default), vHBA reset is done only when all the members of a fabric port-channel are down. Fabric port-channel vHBA reset is not supported on Unified Edge and cannot be enabled.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"fc_switching_mode": {
-			Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Description: "Enable or Disable FC End Host Switching Mode. FC is not supported on Unified Edge, so this setting cannot be configured and is ignored.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -309,7 +309,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"reserved_vlan_start_id": {
-			Description: "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of\na contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in\nVLAN policy.\nIf this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.",
+			Description: "The starting ID for VLANs reserved for internal use within the Fabric Interconnect. This VLAN ID is the starting ID of\na contiguous block of 128 VLANs that cannot be configured for user data.  This range of VLANs cannot be configured in\nVLAN policy.\nIf this property is not configured, VLAN range 3915 - 4042 is reserved for internal use by default.\nThe reserved VLAN range is fixed for Unified Edge, so this setting cannot be configured and is ignored.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -406,6 +406,11 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"type": {
 						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
@@ -425,7 +430,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"udld_settings": {
-			Description: "This specifies the UDLD Global configurations for this switch.",
+			Description: "This specifies the UDLD Global configurations for this switch. UDLD is not supported on Unified Edge, so these settings cannot be configured.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -573,7 +578,7 @@ func getFabricSwitchControlPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"vlan_port_optimization_enabled": {
-			Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for\nCisco UCS Fabric Interconnect 9108 100G and also enabled on the IMM 6.x Bundle version and onwards.",
+			Description: "To enable or disable the VLAN port count optimization. This feature will always be enabled for\nCisco UCS Fabric Interconnect 9108 100G and also enabled on the IMM 6.x Bundle version and onwards.\nVLAN Port Count Optimization is not applicable for Unified Edge, so this setting cannot be configured.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

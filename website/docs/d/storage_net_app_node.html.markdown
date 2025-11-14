@@ -3,12 +3,28 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_node"
 description: |-
-        NetApp node is a controller in a NetApp cluster. Services and components are controlled and managed by the NetApp node.
+        ### Overview
+        The NetAppNode object represents an individual controller within a NetAppCluster, responsible for managing specific services and components of the storage environment. This NetAppNode object is essential for understanding the operational state and capabilities of a node, contributing to the overall functionality of the cluster.
+        #### Purpose
+        A NetAppNode operates as a fundamental unit within a cluster, executing storage-related tasks, and maintaining critical infrastructure. It plays a crucial role in ensuring the stability and efficiency of storage operations, interfacing with other nodes to deliver comprehensive cluster services.
+        #### Key Concepts
+        - **Service Management:** - Handles various services required for data storage and retrieval, including protocol management and connectivity.
+        - **Component Integration:** - Interfaces with hardware components, such as disks and ports, to facilitate seamless data flow and system interaction.
+        - **Health Monitoring:** - Continuously assesses the node's operational state, providing insights into performance metrics and potential issues.
+        - **Resource Allocation:** - Manages the distribution of tasks and data across nodes, optimizing resource utilization and ensuring balanced workloads.
 
 ---
 
 # Data Source: intersight_storage_net_app_node
-NetApp node is a controller in a NetApp cluster. Services and components are controlled and managed by the NetApp node.
+### Overview
+The NetAppNode object represents an individual controller within a NetAppCluster, responsible for managing specific services and components of the storage environment. This NetAppNode object is essential for understanding the operational state and capabilities of a node, contributing to the overall functionality of the cluster.
+#### Purpose
+A NetAppNode operates as a fundamental unit within a cluster, executing storage-related tasks, and maintaining critical infrastructure. It plays a crucial role in ensuring the stability and efficiency of storage operations, interfacing with other nodes to deliver comprehensive cluster services.
+#### Key Concepts
+- **Service Management:** - Handles various services required for data storage and retrieval, including protocol management and connectivity.
+- **Component Integration:** - Interfaces with hardware components, such as disks and ports, to facilitate seamless data flow and system interaction.
+- **Health Monitoring:** - Continuously assesses the node's operational state, providing insights into performance metrics and potential issues.
+- **Resource Allocation:** - Manages the distribution of tasks and data across nodes, optimizing resource utilization and ensuring balanced workloads.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -27,7 +27,7 @@ func getFabricSpanDestEthPortSchema() map[string]*schema.Schema {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"admin_speed": {
-			Description: "Admin speed of the SPAN Destination Port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.\n* `400Gbps` - Admin configurable speed 400Gbps.\n* `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.",
+			Description: "Admin speed of the SPAN Destination Port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `50Gbps` - Admin configurable speed 50Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.\n* `400Gbps` - Admin configurable speed 400Gbps.\n* `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -349,6 +349,11 @@ func getFabricSpanDestEthPortSchema() map[string]*schema.Schema {
 					},
 					"propagated": {
 						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},

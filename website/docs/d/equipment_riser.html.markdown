@@ -3,12 +3,12 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_riser"
 description: |-
-        This represents Riser of Server which holds the manageable sub comoponents.
+        This represents Riser of Server which holds the manageable sub components.
 
 ---
 
 # Data Source: intersight_equipment_riser
-This represents Riser of Server which holds the manageable sub comoponents.
+This represents Riser of Server which holds the manageable sub components.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

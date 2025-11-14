@@ -3,22 +3,28 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_deep_cloner"
 description: |-
-        The MODeepCloner interface facilitates making n number of deep copies of any resource instance which supports the CREATE operation.
-        The MO to be cloned should be specified as an MoRef object in the Source.
-        The Targets array should contain n JSON documents each compliant to RFC 7386.
-        For each target MO to be created, the user can specify the following -
-        - new values for the identity properties, if applicable
-        - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
+        ### Overview
+        The MoDeepCloner object is an advanced cloning interface that enables deep copies of managed objects (MOs). It supports the replication of complex structures with nested relationships.
+        #### Purpose
+        MoDeepCloner provides enhanced cloning capabilities beyond shallow copies, enabling the duplication of intricate MO structures for scenarios requiring comprehensive data replication.
+        #### Key Concepts
+        - **Deep Copying:** - Facilitates the replication of entire MO structures, preserving nested relationships and dependencies within the cloned instances.
+        - **Customization:** - Allows for the specification of identity and configuration overrides, ensuring each clone meets specific requirements.
+        - ** Reference Handling:** - Offers options for managing references during cloning, including creating new references or preserving existing ones.
+        - **Async Operation:** - Supports only asynchronous processing, enabling efficient handling of complex cloning tasks with minimal performance impact.
 
 ---
 
 # Resource: intersight_bulk_mo_deep_cloner
-The MODeepCloner interface facilitates making n number of deep copies of any resource instance which supports the CREATE operation.
-The MO to be cloned should be specified as an MoRef object in the "Source".
-The "Targets" array should contain n JSON documents each compliant to RFC 7386. 
-For each target MO to be created, the user can specify the following -
-- new values for the identity properties, if applicable
-- new values for specific properties or references of the source MO which need to be overridden in the cloned object.
+### Overview
+The MoDeepCloner object is an advanced cloning interface that enables deep copies of managed objects (MOs). It supports the replication of complex structures with nested relationships.   
+#### Purpose  
+MoDeepCloner provides enhanced cloning capabilities beyond shallow copies, enabling the duplication of intricate MO structures for scenarios requiring comprehensive data replication.  
+#### Key Concepts 
+- **Deep Copying:** - Facilitates the replication of entire MO structures, preserving nested relationships and dependencies within the cloned instances.  
+- **Customization:** - Allows for the specification of identity and configuration overrides, ensuring each clone meets specific requirements.
+- ** Reference Handling:** - Offers options for managing references during cloning, including creating new references or preserving existing ones. 
+- **Async Operation:** - Supports only asynchronous processing, enabling efficient handling of complex cloning tasks with minimal performance impact.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -77,6 +83,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `targets`:(Array)
@@ -119,6 +126,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
   + `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

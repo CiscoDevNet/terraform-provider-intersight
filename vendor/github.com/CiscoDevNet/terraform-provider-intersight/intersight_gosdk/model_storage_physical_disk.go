@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025101412
+API version: 1.0.11-2025102807
 Contact: intersight@cisco.com
 */
 
@@ -58,6 +58,12 @@ type StoragePhysicalDisk struct {
 	FailurePredicted *bool `json:"FailurePredicted,omitempty"`
 	// Full-Disk Encryption capability parameter of the physical disk.
 	FdeCapable *string `json:"FdeCapable,omitempty"`
+	// This field displays the health of the physical disk.
+	Health *string `json:"Health,omitempty"`
+	// This field displays the message in relation to physical disk health.
+	HealthMessage *string `json:"HealthMessage,omitempty"`
+	// This field displays the recommended action to take regarding the physical disk based on its health status.
+	HealthResolution *string `json:"HealthResolution,omitempty"`
 	// Type of hotspare configured on the physical disk.
 	HotSpareType *string `json:"HotSpareType,omitempty"`
 	// Status of the locator LED corresponding to the physical disk.
@@ -710,6 +716,102 @@ func (o *StoragePhysicalDisk) HasFdeCapable() bool {
 // SetFdeCapable gets a reference to the given string and assigns it to the FdeCapable field.
 func (o *StoragePhysicalDisk) SetFdeCapable(v string) {
 	o.FdeCapable = &v
+}
+
+// GetHealth returns the Health field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetHealth() string {
+	if o == nil || IsNil(o.Health) {
+		var ret string
+		return ret
+	}
+	return *o.Health
+}
+
+// GetHealthOk returns a tuple with the Health field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetHealthOk() (*string, bool) {
+	if o == nil || IsNil(o.Health) {
+		return nil, false
+	}
+	return o.Health, true
+}
+
+// HasHealth returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasHealth() bool {
+	if o != nil && !IsNil(o.Health) {
+		return true
+	}
+
+	return false
+}
+
+// SetHealth gets a reference to the given string and assigns it to the Health field.
+func (o *StoragePhysicalDisk) SetHealth(v string) {
+	o.Health = &v
+}
+
+// GetHealthMessage returns the HealthMessage field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetHealthMessage() string {
+	if o == nil || IsNil(o.HealthMessage) {
+		var ret string
+		return ret
+	}
+	return *o.HealthMessage
+}
+
+// GetHealthMessageOk returns a tuple with the HealthMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetHealthMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.HealthMessage) {
+		return nil, false
+	}
+	return o.HealthMessage, true
+}
+
+// HasHealthMessage returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasHealthMessage() bool {
+	if o != nil && !IsNil(o.HealthMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetHealthMessage gets a reference to the given string and assigns it to the HealthMessage field.
+func (o *StoragePhysicalDisk) SetHealthMessage(v string) {
+	o.HealthMessage = &v
+}
+
+// GetHealthResolution returns the HealthResolution field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetHealthResolution() string {
+	if o == nil || IsNil(o.HealthResolution) {
+		var ret string
+		return ret
+	}
+	return *o.HealthResolution
+}
+
+// GetHealthResolutionOk returns a tuple with the HealthResolution field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetHealthResolutionOk() (*string, bool) {
+	if o == nil || IsNil(o.HealthResolution) {
+		return nil, false
+	}
+	return o.HealthResolution, true
+}
+
+// HasHealthResolution returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasHealthResolution() bool {
+	if o != nil && !IsNil(o.HealthResolution) {
+		return true
+	}
+
+	return false
+}
+
+// SetHealthResolution gets a reference to the given string and assigns it to the HealthResolution field.
+func (o *StoragePhysicalDisk) SetHealthResolution(v string) {
+	o.HealthResolution = &v
 }
 
 // GetHotSpareType returns the HotSpareType field value if set, zero value otherwise.
@@ -2346,6 +2448,15 @@ func (o StoragePhysicalDisk) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FdeCapable) {
 		toSerialize["FdeCapable"] = o.FdeCapable
 	}
+	if !IsNil(o.Health) {
+		toSerialize["Health"] = o.Health
+	}
+	if !IsNil(o.HealthMessage) {
+		toSerialize["HealthMessage"] = o.HealthMessage
+	}
+	if !IsNil(o.HealthResolution) {
+		toSerialize["HealthResolution"] = o.HealthResolution
+	}
 	if !IsNil(o.HotSpareType) {
 		toSerialize["HotSpareType"] = o.HotSpareType
 	}
@@ -2572,6 +2683,12 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(data []byte) (err error) {
 		FailurePredicted *bool `json:"FailurePredicted,omitempty"`
 		// Full-Disk Encryption capability parameter of the physical disk.
 		FdeCapable *string `json:"FdeCapable,omitempty"`
+		// This field displays the health of the physical disk.
+		Health *string `json:"Health,omitempty"`
+		// This field displays the message in relation to physical disk health.
+		HealthMessage *string `json:"HealthMessage,omitempty"`
+		// This field displays the recommended action to take regarding the physical disk based on its health status.
+		HealthResolution *string `json:"HealthResolution,omitempty"`
 		// Type of hotspare configured on the physical disk.
 		HotSpareType *string `json:"HotSpareType,omitempty"`
 		// Status of the locator LED corresponding to the physical disk.
@@ -2684,6 +2801,9 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(data []byte) (err error) {
 		varStoragePhysicalDisk.EncryptionStatus = varStoragePhysicalDiskWithoutEmbeddedStruct.EncryptionStatus
 		varStoragePhysicalDisk.FailurePredicted = varStoragePhysicalDiskWithoutEmbeddedStruct.FailurePredicted
 		varStoragePhysicalDisk.FdeCapable = varStoragePhysicalDiskWithoutEmbeddedStruct.FdeCapable
+		varStoragePhysicalDisk.Health = varStoragePhysicalDiskWithoutEmbeddedStruct.Health
+		varStoragePhysicalDisk.HealthMessage = varStoragePhysicalDiskWithoutEmbeddedStruct.HealthMessage
+		varStoragePhysicalDisk.HealthResolution = varStoragePhysicalDiskWithoutEmbeddedStruct.HealthResolution
 		varStoragePhysicalDisk.HotSpareType = varStoragePhysicalDiskWithoutEmbeddedStruct.HotSpareType
 		varStoragePhysicalDisk.IndicatorLed = varStoragePhysicalDiskWithoutEmbeddedStruct.IndicatorLed
 		varStoragePhysicalDisk.IsPlatformSupported = varStoragePhysicalDiskWithoutEmbeddedStruct.IsPlatformSupported
@@ -2765,6 +2885,9 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "EncryptionStatus")
 		delete(additionalProperties, "FailurePredicted")
 		delete(additionalProperties, "FdeCapable")
+		delete(additionalProperties, "Health")
+		delete(additionalProperties, "HealthMessage")
+		delete(additionalProperties, "HealthResolution")
 		delete(additionalProperties, "HotSpareType")
 		delete(additionalProperties, "IndicatorLed")
 		delete(additionalProperties, "IsPlatformSupported")

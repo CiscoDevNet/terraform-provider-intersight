@@ -3,12 +3,28 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_hcl_status"
 description: |-
-        The HCL status of a managed object after we have validated the managed object components' firmware and drivers against the HCL.
+        ### Overview
+        The HCL Status stores the Hardware Compatibility List (HCL) validation status of servers. It evaluates the compatibility of Cisco Servers by checking if the hardware and software components—such as server model, processor, firmware, adapters, operating system, and drivers—have been tested and validated by Cisco or its partners.
+        #### Purpose
+        HclStatus ensures that server components are compatible with the HCL, safeguarding the reliability and performance of hardware and software integrations. It facilitates the evaluation of Cisco servers, ensuring they meet established standards.
+        #### Key Concepts
+        - **Compatibility Validation:** - Evaluates and reports on the compatibility status of server components with the HCL.
+        - **Status Reporting:** - Provides detailed statuses such as Validated, Not-Listed, and Incomplete offering  clear insights into compatibility.
+        - **Reason Enumeration:** - Offers reasons for validation outcomes, aiding in troubleshooting and compliance checks.
+        - **Relationship Management:** - Integrates with related components and devices for comprehensive validation reporting.
 
 ---
 
 # Data Source: intersight_cond_hcl_status
-The HCL status of a managed object after we have validated the managed object components' firmware and drivers against the HCL.
+### Overview
+The HCL Status stores the Hardware Compatibility List (HCL) validation status of servers. It evaluates the compatibility of Cisco Servers by checking if the hardware and software components—such as server model, processor, firmware, adapters, operating system, and drivers—have been tested and validated by Cisco or its partners.
+#### Purpose
+HclStatus ensures that server components are compatible with the HCL, safeguarding the reliability and performance of hardware and software integrations. It facilitates the evaluation of Cisco servers, ensuring they meet established standards.
+#### Key Concepts
+- **Compatibility Validation:** - Evaluates and reports on the compatibility status of server components with the HCL.
+- **Status Reporting:** - Provides detailed statuses such as "Validated", "Not-Listed", and "Incomplete" offering  clear insights into compatibility.
+- **Reason Enumeration:** - Offers reasons for validation outcomes, aiding in troubleshooting and compliance checks.
+- **Relationship Management:** - Integrates with related components and devices for comprehensive validation reporting.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

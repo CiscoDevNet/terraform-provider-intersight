@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Definition** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Key** | Pointer to **string** | The string representation of a tag key. | [optional] 
 **Propagated** | Pointer to **bool** | Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. | [optional] [readonly] 
+**SysTag** | Pointer to **bool** | Specifies whether the tag is user-defined or owned by the system. | [optional] [readonly] 
 **Type** | Pointer to **string** | An enum type that defines the type of tag. Supported values are &#39;pathtag&#39; and &#39;keyvalue&#39;. * &#x60;KeyValue&#x60; - KeyValue type of tag. Key is required for these tags. Value is optional. * &#x60;PathTag&#x60; - Key contain path information. Value is not present for these tags. The path is created by using the &#39;/&#39; character as a delimiter.For example, if the tag is \&quot;A/B/C\&quot;, then \&quot;A\&quot; is the parent tag, \&quot;B\&quot; is the child tag of \&quot;A\&quot; and \&quot;C\&quot; is the child tag of \&quot;B\&quot;. | [optional] [readonly] [default to "KeyValue"]
 **Value** | Pointer to **string** | The string representation of a tag value. | [optional] 
 
@@ -139,6 +140,31 @@ SetPropagated sets Propagated field to given value.
 `func (o *MoTag) HasPropagated() bool`
 
 HasPropagated returns a boolean if a field has been set.
+
+### GetSysTag
+
+`func (o *MoTag) GetSysTag() bool`
+
+GetSysTag returns the SysTag field if non-nil, zero value otherwise.
+
+### GetSysTagOk
+
+`func (o *MoTag) GetSysTagOk() (*bool, bool)`
+
+GetSysTagOk returns a tuple with the SysTag field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSysTag
+
+`func (o *MoTag) SetSysTag(v bool)`
+
+SetSysTag sets SysTag field to given value.
+
+### HasSysTag
+
+`func (o *MoTag) HasSysTag() bool`
+
+HasSysTag returns a boolean if a field has been set.
 
 ### GetType
 

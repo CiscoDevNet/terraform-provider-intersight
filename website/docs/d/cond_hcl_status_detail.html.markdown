@@ -3,12 +3,28 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_hcl_status_detail"
 description: |-
-        The HCL status detail for each component firmware and driver.
+        ### Overview
+        The HclStatusDetail object provides detailed validation information for each component's firmware and drivers against the Hardware Compatibility List (HCL). It complements the broader HclStatus object by breaking down validation results at a component level.
+        #### Purpose
+        HclStatusDetail is essential for providing granular insights into the compatibility of individual components, helping identify specific issues and validation failures. It aids in maintaining high standards of component compatibility within Cisco environments.
+        #### Key Concepts
+        - **Detailed Validation:** - Offers component-specific validation results, such as Validated and Not-Validated, for precise compatibility reporting.
+        - **Status Reasoning:** - Provides detailed reasons for validation outcomes, facilitating targeted troubleshooting.
+        - **Integration:** - Works alongside the HclStatus object to deliver comprehensive compatibility insights across server components.
+        - **Access Control:** - Establishes privilege sets for reading component validation details, supporting secure management.
 
 ---
 
 # Data Source: intersight_cond_hcl_status_detail
-The HCL status detail for each component firmware and driver.
+### Overview
+The HclStatusDetail object provides detailed validation information for each component's firmware and drivers against the Hardware Compatibility List (HCL). It complements the broader HclStatus object by breaking down validation results at a component level.
+#### Purpose
+HclStatusDetail is essential for providing granular insights into the compatibility of individual components, helping identify specific issues and validation failures. It aids in maintaining high standards of component compatibility within Cisco environments.
+#### Key Concepts
+- **Detailed Validation:** - Offers component-specific validation results, such as "Validated" and "Not-Validated", for precise compatibility reporting.
+- **Status Reasoning:** - Provides detailed reasons for validation outcomes, facilitating targeted troubleshooting.
+- **Integration:** - Works alongside the HclStatus object to deliver comprehensive compatibility insights across server components.
+- **Access Control:** - Establishes privilege sets for reading component validation details, supporting secure management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

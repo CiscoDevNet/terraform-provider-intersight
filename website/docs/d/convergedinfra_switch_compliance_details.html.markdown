@@ -3,12 +3,28 @@ subcategory: "convergedinfra"
 layout: "intersight"
 page_title: "Intersight: intersight_convergedinfra_switch_compliance_details"
 description: |-
-        The compliance details for a switch (Fabric Interconnect/Nexus/MDS) which is part of a converged infrastructure pod.
+        ### Overview
+        The SwitchComplianceDetails object captures compliance information for switches, such as Fabric Interconnects, Nexus, and MDS, within a converged infrastructure pod.
+        #### Purpose
+        SwitchComplianceDetails is dedicated to assessing switch compliance, ensuring that switch components meet operational and compatibility standards essential for network connectivity and performance.
+        #### Key Concepts
+        - **Switch Type Specifics:** - Provides compliance evaluation tailored to specific switch types, including Fabric Interconnects, Nexus, and MDS.
+        - **Firmware Evaluation:** - Includes detailed firmware information necessary for compliance assessments and operational reliability.
+        - **Pod Integration:** - Links switch compliance data with pod-level compliance insights, supporting comprehensive infrastructure management.
+        - **Privilege Sets:** - Offers controlled access to switch compliance data, ensuring secure and authorized management interactions.
 
 ---
 
 # Data Source: intersight_convergedinfra_switch_compliance_details
-The compliance details for a switch (Fabric Interconnect/Nexus/MDS) which is part of a converged infrastructure pod.
+### Overview
+The SwitchComplianceDetails object captures compliance information for switches, such as Fabric Interconnects, Nexus, and MDS, within a converged infrastructure pod.   
+#### Purpose  
+SwitchComplianceDetails is dedicated to assessing switch compliance, ensuring that switch components meet operational and compatibility standards essential for network connectivity and performance.   
+#### Key Concepts  
+- **Switch Type Specifics:** - Provides compliance evaluation tailored to specific switch types, including Fabric Interconnects, Nexus, and MDS. 
+- **Firmware Evaluation:** - Includes detailed firmware information necessary for compliance assessments and operational reliability. 
+- **Pod Integration:** - Links switch compliance data with pod-level compliance insights, supporting comprehensive infrastructure management. 
+- **Privilege Sets:** - Offers controlled access to switch compliance data, ensuring secure and authorized management interactions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

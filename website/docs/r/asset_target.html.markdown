@@ -3,12 +3,26 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_target"
 description: |-
-        Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+        ### Overview
+        The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem.
+        #### Purpose
+        Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets.
+        #### Key Concepts
+        - **Type and Status Management:** - Defines the type of the managed entity and provides insights into its connection and operational status.
+        - **Service Integration:** - Supports the enablement of services for the target, facilitating comprehensive management and optimization.
+        - **Connection and Authentication:** - Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
 
 ---
 
 # Resource: intersight_asset_target
-Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+### Overview 
+The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem.
+#### Purpose
+Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets.
+#### Key Concepts
+- **Type and Status Management:** - Defines the type of the managed entity and provides insights into its connection and operational status.
+- **Service Integration:** - Supports the enablement of services for the target, facilitating comprehensive management and optimization.
+- **Connection and Authentication:** - Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
 ## Usage Example
 ### Resource Creation
 
@@ -159,6 +173,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `target_id`:
@@ -216,7 +231,7 @@ HttpConnection provides the necessary details for Intersight to connect to and a
 
 ### [asset.IntersightDeviceConnectorConnection](#argument-reference)
 Target is connected to Intersight using a Device Connector.
-* `security_token`:(string) Obtained from the device connector management UI or API (REST endpoint '/connector/SecurityTokens'). 
+* `security_token`:(string) ### OverviewThe SecurityToken object holds a time-limited random string used for claiming a device. It is created implicitly for each device connector at the time of registration, providing a secure mechanism for users to assert administrative access during device claim operations.#### PurposeSecurityToken acts as a temporary credential that proves a user's administrative access to a device, allowing them to claim the device within Intersight. It strengthens the security of claim operations, preventing unauthorized device claims by restricting access to users who possess the token.#### Key Concepts- **Time-Bound Security:** - Tokens are generated with expiration times, ensuring they are only valid for a limited duration to reduce the risk of misuse.- **Claim Validation:** - Used during claim operations to validate that the user has the necessary privileges to manage the device.- **Access Control:** - Integrates with Intersight's security model, providing controlled access to device claim functionalities. 
 * `serial_number`:(string) Obtained from the device connector management UI or API (REST endpoint '/connector/DeviceIdentifiers'). 
 
 ### [asset.ScopedTargetConnection](#argument-reference)

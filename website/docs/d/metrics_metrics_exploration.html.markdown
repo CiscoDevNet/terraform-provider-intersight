@@ -3,12 +3,26 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_metrics_exploration"
 description: |-
-        Details of the metrics query and the templating information.
+        #### Overview
+        The MetricsExploration object is pivotal for querying and analyzing metrics data within the system. This provides a structured approach to defining and executing metrics queries for data exploration and visualization.
+        #### Purpose
+        MetricsExploration enables users to define complex queries and visualize metrics data for deeper analysis and actionable insights. It supports interactive, user-driven exploration to identify trends, patterns, and opportunities for data-driven decisions.
+        #### Key Concepts
+        - **Flexible Querying:** - Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
+        - **Visualization Options:** - Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
+        - **Access Control:** - Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
 
 ---
 
 # Data Source: intersight_metrics_metrics_exploration
-Details of the metrics query and the templating information.
+#### Overview
+The MetricsExploration object is pivotal for querying and analyzing metrics data within the system. This provides a structured approach to defining and executing metrics queries for data exploration and visualization.
+#### Purpose
+MetricsExploration enables users to define complex queries and visualize metrics data for deeper analysis and actionable insights. It supports interactive, user-driven exploration to identify trends, patterns, and opportunities for data-driven decisions.
+#### Key Concepts
+- **Flexible Querying:** - Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
+- **Visualization Options:** - Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
+- **Access Control:** - Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

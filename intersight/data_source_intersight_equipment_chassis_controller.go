@@ -155,6 +155,11 @@ func getEquipmentChassisControllerSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"oper_state": {
+			Description: "Operational state of chassis controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -409,6 +414,11 @@ func getEquipmentChassisControllerSchema() map[string]*schema.Schema {
 					},
 					"propagated": {
 						Description: "Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -726,6 +736,11 @@ func dataSourceEquipmentChassisControllerRead(c context.Context, d *schema.Resou
 			}
 		}
 		o.SetOperReason(x)
+	}
+
+	if v, ok := d.GetOk("oper_state"); ok {
+		x := (v.(string))
+		o.SetOperState(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1143,6 +1158,7 @@ func dataSourceEquipmentChassisControllerRead(c context.Context, d *schema.Resou
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
+				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

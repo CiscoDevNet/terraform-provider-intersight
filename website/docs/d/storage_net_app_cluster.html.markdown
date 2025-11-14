@@ -3,12 +3,28 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cluster"
 description: |-
-        NetApp cluster consists of one or more nodes grouped together as HA pairs to form a scalable cluster.
+        ### Overview
+        The NetAppCluster object is a pivotal component within storage systems, representing a unified collection of nodes that function together as a scalable entity. This encapsulates the core characteristics and operational aspects of a storage cluster, providing a comprehensive framework for managing and monitoring cluster-level resources and activities.
+        #### Purpose
+        A NetAppCluster serves as the central entity for storage management, integrating multiple nodes to deliver high availability, performance, and capacity management. It acts as a control point for orchestrating storage operations, facilitating seamless data management across nodes within the cluster.
+        #### Key Concepts
+        - **Scalability:** - NetAppCluster supports the expansion of storage resources by adding nodes, enabling dynamic growth and increased capacity.
+        - **High Availability:** - Ensures continuous operation and data accessibility, even during node failures, through integrated failover and redundancy mechanisms.
+        - **Performance Optimization:** - Utilizes advanced algorithms to balance workloads across nodes, enhancing throughput and minimizing latency.
+        - **Unified Management:** - Provides a centralized interface for configuring, monitoring, and managing all aspects of the cluster, streamlining administrative tasks and reducing complexity.
 
 ---
 
 # Data Source: intersight_storage_net_app_cluster
-NetApp cluster consists of one or more nodes grouped together as HA pairs to form a scalable cluster.
+### Overview
+The NetAppCluster object is a pivotal component within storage systems, representing a unified collection of nodes that function together as a scalable entity. This encapsulates the core characteristics and operational aspects of a storage cluster, providing a comprehensive framework for managing and monitoring cluster-level resources and activities.
+#### Purpose
+A NetAppCluster serves as the central entity for storage management, integrating multiple nodes to deliver high availability, performance, and capacity management. It acts as a control point for orchestrating storage operations, facilitating seamless data management across nodes within the cluster.
+#### Key Concepts
+- **Scalability:** - NetAppCluster supports the expansion of storage resources by adding nodes, enabling dynamic growth and increased capacity.
+- **High Availability:** - Ensures continuous operation and data accessibility, even during node failures, through integrated failover and redundancy mechanisms.
+- **Performance Optimization:** - Utilizes advanced algorithms to balance workloads across nodes, enhancing throughput and minimizing latency.
+- **Unified Management:** - Provides a centralized interface for configuring, monitoring, and managing all aspects of the cluster, streamlining administrative tasks and reducing complexity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

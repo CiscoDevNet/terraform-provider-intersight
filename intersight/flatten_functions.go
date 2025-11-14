@@ -1067,6 +1067,7 @@ func flattenListBulkRestResult(p []models.BulkRestResult, d *schema.ResourceData
 					})(item.GetDefinition(), tags_x)
 					motag["key"] = item.GetKey()
 					motag["propagated"] = item.GetPropagated()
+					motag["sys_tag"] = item.GetSysTag()
 					motag["type"] = item.GetType()
 					motag["value"] = item.GetValue()
 					motags = append(motags, motag)
@@ -6291,7 +6292,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 		mobasemo := make(map[string]interface{})
 		mobasemo["account_moid"] = item.GetAccountMoid()
 		mobasemo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		sources_x, _ := d.GetOk("sources")
+		targets_x, _ := d.GetOk("targets")
 		mobasemo["ancestors"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6303,7 +6304,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetAncestors(), sources_x)
+		})(item.GetAncestors(), targets_x)
 		mobasemo["class_id"] = item.GetClassId()
 		mobasemo["create_time"] = item.GetCreateTime().String()
 		mobasemo["domain_group_moid"] = item.GetDomainGroupMoid()
@@ -6328,7 +6329,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			return mobasemorelationships
-		})(item.GetParent(), sources_x)
+		})(item.GetParent(), targets_x)
 		mobasemo["permission_resources"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6340,7 +6341,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetPermissionResources(), sources_x)
+		})(item.GetPermissionResources(), targets_x)
 		mobasemo["shared_scope"] = item.GetSharedScope()
 		mobasemo["tags"] = (func(p []models.MoTag, v interface{}) []map[string]interface{} {
 			var motags []map[string]interface{}
@@ -6391,12 +6392,13 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				})(item.GetDefinition(), tags_x)
 				motag["key"] = item.GetKey()
 				motag["propagated"] = item.GetPropagated()
+				motag["sys_tag"] = item.GetSysTag()
 				motag["type"] = item.GetType()
 				motag["value"] = item.GetValue()
 				motags = append(motags, motag)
 			}
 			return motags
-		})(item.GetTags(), sources_x)
+		})(item.GetTags(), targets_x)
 		mobasemo["version_context"] = (func(p models.MoVersionContext, v interface{}) []map[string]interface{} {
 			var moversioncontexts []map[string]interface{}
 			var ret models.MoVersionContext
@@ -6454,7 +6456,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			moversioncontexts = append(moversioncontexts, moversioncontext)
 			return moversioncontexts
-		})(item.GetVersionContext(), sources_x)
+		})(item.GetVersionContext(), targets_x)
 		mobasemos = append(mobasemos, mobasemo)
 	}
 	return mobasemos
@@ -6531,6 +6533,7 @@ func flattenListMoTag(p []models.MoTag, d *schema.ResourceData) []map[string]int
 		})(item.GetDefinition(), tags_x)
 		motag["key"] = item.GetKey()
 		motag["propagated"] = item.GetPropagated()
+		motag["sys_tag"] = item.GetSysTag()
 		motag["type"] = item.GetType()
 		motag["value"] = item.GetValue()
 		motags = append(motags, motag)
@@ -10076,7 +10079,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		type_definition_x, _ := d.GetOk("type_definition")
+		input_definition_x, _ := d.GetOk("input_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -10094,7 +10097,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), type_definition_x)
+		})(item.GetDefault(), input_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -10112,7 +10115,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), type_definition_x)
+		})(item.GetDisplayMeta(), input_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -20545,6 +20548,7 @@ func flattenMapMoBaseMo(p models.MoBaseMo, d *schema.ResourceData) []map[string]
 			})(item.GetDefinition(), tags_x)
 			motag["key"] = item.GetKey()
 			motag["propagated"] = item.GetPropagated()
+			motag["sys_tag"] = item.GetSysTag()
 			motag["type"] = item.GetType()
 			motag["value"] = item.GetValue()
 			motags = append(motags, motag)

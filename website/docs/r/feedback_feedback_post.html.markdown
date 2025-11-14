@@ -3,12 +3,24 @@ subcategory: "feedback"
 layout: "intersight"
 page_title: "Intersight: intersight_feedback_feedback_post"
 description: |-
-        Initial feedback submitted by the user through the UI.
+        ### Overview
+        The FeedbackPost object serves as the initial entry point for user feedback within the system. This provides a mechanism for users to submit their comments and evaluations directly through the user interface.
+        #### Purpose
+        Feedback Post enables users to capture and submit first-hand feedback directly from the interface, ensuring that original input is accurately preserved and processed. It supports seamless UI integration, immediate submission, and reliable data retention for effective analysis and response
+        #### Key Concepts
+        - **User-Driven:** - Facilitates direct interaction between users and the feedback system, ensuring that user voices are heard and considered.
+        - **Shared Resource:** -Functions as a shared organizational resource, accessible across various departments and privilege sets.
 
 ---
 
 # Resource: intersight_feedback_feedback_post
-Initial feedback submitted by the user through the UI.
+### Overview
+The FeedbackPost object serves as the initial entry point for user feedback within the system. This provides a mechanism for users to submit their comments and evaluations directly through the user interface. 
+#### Purpose
+Feedback Post enables users to capture and submit first-hand feedback directly from the interface, ensuring that original input is accurately preserved and processed. It supports seamless UI integration, immediate submission, and reliable data retention for effective analysis and response
+#### Key Concepts
+- **User-Driven:** - Facilitates direct interaction between users and the feedback system, ensuring that user voices are heard and considered.
+- **Shared Resource:** -Functions as a shared organizational resource, accessible across various departments and privilege sets.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -68,6 +80,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

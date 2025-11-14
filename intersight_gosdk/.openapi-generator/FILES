@@ -306,6 +306,9 @@ docs/ApplianceFileSystemStatus.md
 docs/ApplianceFileSystemStatusList.md
 docs/ApplianceFileSystemStatusRelationship.md
 docs/ApplianceFileSystemStatusResponse.md
+docs/ApplianceFqdnUpdate.md
+docs/ApplianceFqdnUpdateList.md
+docs/ApplianceFqdnUpdateResponse.md
 docs/ApplianceGroupOpStatus.md
 docs/ApplianceGroupOpStatusList.md
 docs/ApplianceGroupOpStatusRelationship.md
@@ -5764,6 +5767,9 @@ model_appliance_file_system_status.go
 model_appliance_file_system_status_list.go
 model_appliance_file_system_status_relationship.go
 model_appliance_file_system_status_response.go
+model_appliance_fqdn_update.go
+model_appliance_fqdn_update_list.go
+model_appliance_fqdn_update_response.go
 model_appliance_group_op_status.go
 model_appliance_group_op_status_list.go
 model_appliance_group_op_status_relationship.go

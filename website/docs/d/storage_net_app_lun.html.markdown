@@ -3,12 +3,28 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_lun"
 description: |-
-        NetApp LUN (logical unit number) is an identifier for a device called a logical unit addressed by a SAN protocol.
+        ### Overview
+        The NetAppLun object refers to a logical unit number, an identifier for a device within the storage system, used to facilitate SAN protocol operations. It is crucial for managing block-level storage resources and ensuring efficient data access.
+        #### Purpose
+        A NetAppLun acts as a gateway for data transactions, allowing hosts to interact with storage devices seamlessly. This provides a structured environment for organizing and accessing data, supporting high-performance storage applications and workloads.
+        #### Key Concepts
+        - **Identifier Assignment:** - Assigns unique identifiers to storage units, enabling precise management and access controls.
+        - **Protocol Support:** - Interfaces with SAN protocols to deliver block-level storage services, ensuring compatibility and performance.
+        - **Mapping Capabilities:** - Allows LUNs to be mapped to initiator groups, granting access and defining interaction scopes with storage resources.
+        - **Operational State:** - Monitors the administrative state of LUNs, ensuring they are available and functioning optimally within the storage infrastructure.
 
 ---
 
 # Data Source: intersight_storage_net_app_lun
-NetApp LUN (logical unit number) is an identifier for a device called a logical unit addressed by a SAN protocol.
+### Overview
+The NetAppLun object refers to a logical unit number, an identifier for a device within the storage system, used to facilitate SAN protocol operations. It is crucial for managing block-level storage resources and ensuring efficient data access.
+#### Purpose
+A NetAppLun acts as a gateway for data transactions, allowing hosts to interact with storage devices seamlessly. This provides a structured environment for organizing and accessing data, supporting high-performance storage applications and workloads.
+#### Key Concepts
+- **Identifier Assignment:** - Assigns unique identifiers to storage units, enabling precise management and access controls.
+- **Protocol Support:** - Interfaces with SAN protocols to deliver block-level storage services, ensuring compatibility and performance.
+- **Mapping Capabilities:** - Allows LUNs to be mapped to initiator groups, granting access and defining interaction scopes with storage resources.
+- **Operational State:** - Monitors the administrative state of LUNs, ensuring they are available and functioning optimally within the storage infrastructure.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

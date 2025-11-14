@@ -3,38 +3,32 @@ subcategory: "notification"
 layout: "intersight"
 page_title: "Intersight: intersight_notification_account_subscription"
 description: |-
-        # Overview
-        The AccountSubscription object is a crucial component of the Intersight notification framework,
-        designed to facilitate account-level subscriptions managed by Account Administrators.
-        It provides a structured way to handle notifications based on specific events within an account,
-        ensuring administrators can effectively configure and manage subscription settings.
-        ## Purpose
-        The AccountSubscription object enables administrators to set up notifications for various account events.
-        It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
-        ## Key Concepts
-        - **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
-        - **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
-        - **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
-        - **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
-        - **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
+        ### Overview
+        The AccountSubscription object is a crucial component of the Intersight notification framework,   designed to facilitate account-level subscriptions managed by Account Administrators.
+        It provides a structured way to handle notifications based on specific events within an account, ensuring administrators can effectively configure and manage subscription settings.
+        #### Purpose
+        The AccountSubscription object enables administrators to set up notifications for various account events. It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+        #### Key Concepts
+        - **Account-Level Management** - Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+        - **Integration with Notification Methods** - Supports multiple notification methods such as email and webhook to meet diverse requirements.
+        - **Conditional Notifications** - Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+        - **Access Control** - Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+        - **Flexibility and Scalability** - Scales notification features to support complex use cases and evolving business needs.
 
 ---
 
 # Data Source: intersight_notification_account_subscription
-# Overview
-The AccountSubscription object is a crucial component of the Intersight notification framework,  
-designed to facilitate account-level subscriptions managed by Account Administrators.  
-It provides a structured way to handle notifications based on specific events within an account,  
-ensuring administrators can effectively configure and manage subscription settings.
-## Purpose
-The AccountSubscription object enables administrators to set up notifications for various account events.  
-It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
-## Key Concepts
-- **Account-Level Management** – Designed for account administrators, allowing easy configuration of subscription settings at the account level.
-- **Integration with Notification Methods** – Supports multiple notification methods such as email and webhook to meet diverse requirements.
-- **Conditional Notifications** – Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
-- **Access Control** – Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
-- **Flexibility and Scalability** – Scales notification features to support complex use cases and evolving business needs.
+### Overview
+The AccountSubscription object is a crucial component of the Intersight notification framework,   designed to facilitate account-level subscriptions managed by Account Administrators.  
+It provides a structured way to handle notifications based on specific events within an account, ensuring administrators can effectively configure and manage subscription settings.
+#### Purpose
+The AccountSubscription object enables administrators to set up notifications for various account events. It serves as the blueprint for creating, updating, and managing subscriptions, ensuring that notifications are sent according to predefined conditions and actions.
+#### Key Concepts
+- **Account-Level Management** - Designed for account administrators, allowing easy configuration of subscription settings at the account level.
+- **Integration with Notification Methods** - Supports multiple notification methods such as email and webhook to meet diverse requirements.
+- **Conditional Notifications** - Allows definition of conditions that trigger notifications, ensuring only relevant alerts are sent.
+- **Access Control** - Enforces privilege sets so only authorized users can create, update, or delete subscriptions, maintaining security and integrity.
+- **Flexibility and Scalability** - Scales notification features to support complex use cases and evolving business needs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

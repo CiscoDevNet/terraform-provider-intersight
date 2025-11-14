@@ -3,12 +3,26 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_target"
 description: |-
-        Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+        ### Overview
+        The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem.
+        #### Purpose
+        Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets.
+        #### Key Concepts
+        - **Type and Status Management:** - Defines the type of the managed entity and provides insights into its connection and operational status.
+        - **Service Integration:** - Supports the enablement of services for the target, facilitating comprehensive management and optimization.
+        - **Connection and Authentication:** - Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
 
 ---
 
 # Data Source: intersight_asset_target
-Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+### Overview 
+The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem.
+#### Purpose
+Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets.
+#### Key Concepts
+- **Type and Status Management:** - Defines the type of the managed entity and provides insights into its connection and operational status.
+- **Service Integration:** - Supports the enablement of services for the target, facilitating comprehensive management and optimization.
+- **Connection and Authentication:** - Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

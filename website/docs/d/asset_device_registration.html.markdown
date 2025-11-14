@@ -3,12 +3,28 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_registration"
 description: |-
-        DeviceRegistration represents a device connector enabled endpoint which has registered with Intersight.
+        ### Overview
+        The DeviceRegistration object represents a device connector-enabled endpoint that has registered with Intersight. It is a concrete object central to the management of devices, allowing them to be claimed, configured, and monitored within Intersight's infrastructure.
+        #### Purpose
+        The DeviceRegistration serves as the primary interface for representing devices within Intersight. It facilitates device management, enabling users to perform operations like claiming, updating, or deleting device-related data. It is essential for capturing the status and configuration of devices interacting with Intersight services.
+        #### Key Concepts
+        - **Claiming and Ownership:** - Supports claiming devices into a user's account, establishing ownership and enabling management operations.
+        - **Connectivity Status:** - Provides insights into the device's connection status with Intersight, including persistent connection details.
+        - **Device Identity:** - Maintains device-specific information, such as serial numbers and product IDs, crucial for device validation and tracking.
+        - **Security and Access:** - Ensures secure management through authentication keys and tokens, facilitating safe device operation and interaction with Intersight.
 
 ---
 
 # Data Source: intersight_asset_device_registration
-DeviceRegistration represents a device connector enabled endpoint which has registered with Intersight.
+### Overview
+The DeviceRegistration object represents a device connector-enabled endpoint that has registered with Intersight. It is a concrete object central to the management of devices, allowing them to be claimed, configured, and monitored within Intersight's infrastructure.
+#### Purpose
+The DeviceRegistration serves as the primary interface for representing devices within Intersight. It facilitates device management, enabling users to perform operations like claiming, updating, or deleting device-related data. It is essential for capturing the status and configuration of devices interacting with Intersight services.
+#### Key Concepts
+- **Claiming and Ownership:** - Supports claiming devices into a user's account, establishing ownership and enabling management operations.
+- **Connectivity Status:** - Provides insights into the device's connection status with Intersight, including persistent connection details.
+- **Device Identity:** - Maintains device-specific information, such as serial numbers and product IDs, crucial for device validation and tracking.
+- **Security and Access:** - Ensures secure management through authentication keys and tokens, facilitating safe device operation and interaction with Intersight.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

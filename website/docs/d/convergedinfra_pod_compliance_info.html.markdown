@@ -3,12 +3,28 @@ subcategory: "convergedinfra"
 layout: "intersight"
 page_title: "Intersight: intersight_convergedinfra_pod_compliance_info"
 description: |-
-        Captures the compliance information for a converged infrastructure pod.
+        ### Overview
+        The PodComplianceInfo object captures compliance information for a converged infrastructure pod, extending the base compliance details to include specific compliance assessments for the pod itself.
+        #### Purpose
+        PodComplianceInfo provides a detailed view of the compliance status of a pod, highlighting areas that meet or deviate from established standards. This  supports comprehensive compliance management and helps identify non-compliant components.
+        #### Key Concepts
+        - **Compliance Tracking:** - Offers insights into the compliance status of the entire pod, facilitating proactive management and remediation.
+        - **Inheritance:** - Leverages the base compliance details, extending them to encompass pod-specific compliance metrics.
+        - **Detailed Relationships:** - Establishes connections with the pod and its components, enabling a holistic view of compliance across the infrastructure.
+        - **Administrative Access:** - Supports a range of privilege sets, allowing different levels of administrative interaction with compliance data.
 
 ---
 
 # Data Source: intersight_convergedinfra_pod_compliance_info
-Captures the compliance information for a converged infrastructure pod.
+### Overview
+The PodComplianceInfo object captures compliance information for a converged infrastructure pod, extending the base compliance details to include specific compliance assessments for the pod itself.   
+#### Purpose  
+PodComplianceInfo provides a detailed view of the compliance status of a pod, highlighting areas that meet or deviate from established standards. This  supports comprehensive compliance management and helps identify non-compliant components.   
+#### Key Concepts  
+- **Compliance Tracking:** - Offers insights into the compliance status of the entire pod, facilitating proactive management and remediation. 
+- **Inheritance:** - Leverages the base compliance details, extending them to encompass pod-specific compliance metrics. 
+- **Detailed Relationships:** - Establishes connections with the pod and its components, enabling a holistic view of compliance across the infrastructure.
+- **Administrative Access:** - Supports a range of privilege sets, allowing different levels of administrative interaction with compliance data.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

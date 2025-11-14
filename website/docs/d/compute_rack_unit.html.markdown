@@ -15,6 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_compute_rack_unit.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `admin_action`:(string) Updated by UI/API to trigger specific action type.* `None` - No operation value for maintenance actions on an equipment.* `Reack` - Reacknowledge the equipment and discover it again. 
 * `admin_power_state`:(string) The desired power state of the server. 
 * `asset_tag`:(string) The user defined asset tag assigned to the server. 
 * `available_memory`:(int) The amount of memory available on the server. 

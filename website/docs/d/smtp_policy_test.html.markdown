@@ -3,28 +3,26 @@ subcategory: "smtp"
 layout: "intersight"
 page_title: "Intersight: intersight_smtp_policy_test"
 description: |-
-        # Overview
+        ### Overview
         The PolicyTest object is designed to assist with the testing of SMTP policy compliance within Intersight Appliance, providing a mechanism for Account Administrators to verify the effectiveness of their email notification configurations.
-        ## Purpose
-        PolicyTest serves as a tool for sending test emails to validate SMTP policy settings.
-        It ensures that email notifications are configured correctly, allowing administrators to troubleshoot and refine their notification strategies.
-        ## Key Concepts
-        - **SMTP Policy Verification** – Enables testing of SMTP configurations by sending test emails, helping administrators ensure compliance and correct settings.
-        - **Account Administrator Access** – Specifically available to Account Administrators, enabling them to manage email settings and perform tests.
-        - **Troubleshooting Support** – Provides detailed feedback on test results, including error specifics, to assist in resolving SMTP policy issues.
+        #### Purpose
+        PolicyTest serves as a tool for sending test emails to validate SMTP policy settings. It ensures that email notifications are configured correctly, allowing administrators to troubleshoot and refine their notification strategies.
+        #### Key Concepts
+        - **SMTP Policy Verification** - Enables testing of SMTP configurations by sending test emails, helping administrators ensure compliance and correct settings.
+        - **Account Administrator Access** - Specifically available to Account Administrators, enabling them to manage email settings and perform tests.
+        - **Troubleshooting Support** - Provides detailed feedback on test results, including error specifics, to assist in  resolving SMTP policy issues.
 
 ---
 
 # Data Source: intersight_smtp_policy_test
-# Overview
+### Overview
 The PolicyTest object is designed to assist with the testing of SMTP policy compliance within Intersight Appliance, providing a mechanism for Account Administrators to verify the effectiveness of their email notification configurations.
-## Purpose
-PolicyTest serves as a tool for sending test emails to validate SMTP policy settings.  
-It ensures that email notifications are configured correctly, allowing administrators to troubleshoot and refine their notification strategies.
-## Key Concepts
-- **SMTP Policy Verification** – Enables testing of SMTP configurations by sending test emails, helping administrators ensure compliance and correct settings.
-- **Account Administrator Access** – Specifically available to Account Administrators, enabling them to manage email settings and perform tests.
-- **Troubleshooting Support** – Provides detailed feedback on test results, including error specifics, to assist in resolving SMTP policy issues.
+#### Purpose
+PolicyTest serves as a tool for sending test emails to validate SMTP policy settings. It ensures that email notifications are configured correctly, allowing administrators to troubleshoot and refine their notification strategies.
+#### Key Concepts
+- **SMTP Policy Verification** - Enables testing of SMTP configurations by sending test emails, helping administrators ensure compliance and correct settings.
+- **Account Administrator Access** - Specifically available to Account Administrators, enabling them to manage email settings and perform tests.
+- **Troubleshooting Support** - Provides detailed feedback on test results, including error specifics, to assist in  resolving SMTP policy issues.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

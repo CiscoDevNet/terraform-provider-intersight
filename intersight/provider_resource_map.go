@@ -21,6 +21,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_appliance_device_claim":                                  resourceApplianceDeviceClaim(),
 		"intersight_appliance_diag_setting":                                  resourceApplianceDiagSetting(),
 		"intersight_appliance_external_syslog_setting":                       resourceApplianceExternalSyslogSetting(),
+		"intersight_appliance_fqdn_update":                                   resourceApplianceFqdnUpdate(),
 		"intersight_appliance_remote_file_import":                            resourceApplianceRemoteFileImport(),
 		"intersight_appliance_restore":                                       resourceApplianceRestore(),
 		"intersight_asset_device_claim":                                      resourceAssetDeviceClaim(),

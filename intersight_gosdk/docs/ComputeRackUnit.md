@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.RackUnit"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.RackUnit"]
+**AdminAction** | Pointer to **string** | Updated by UI/API to trigger specific action type. * &#x60;None&#x60; - No operation value for maintenance actions on an equipment. * &#x60;Reack&#x60; - Reacknowledge the equipment and discover it again. | [optional] [default to "None"]
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of RackUnit to Switch - A or B or AB. | [optional] [readonly] 
 **LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
@@ -99,6 +100,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAdminAction
+
+`func (o *ComputeRackUnit) GetAdminAction() string`
+
+GetAdminAction returns the AdminAction field if non-nil, zero value otherwise.
+
+### GetAdminActionOk
+
+`func (o *ComputeRackUnit) GetAdminActionOk() (*string, bool)`
+
+GetAdminActionOk returns a tuple with the AdminAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminAction
+
+`func (o *ComputeRackUnit) SetAdminAction(v string)`
+
+SetAdminAction sets AdminAction field to given value.
+
+### HasAdminAction
+
+`func (o *ComputeRackUnit) HasAdminAction() bool`
+
+HasAdminAction returns a boolean if a field has been set.
 
 ### GetConnectionStatus
 

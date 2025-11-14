@@ -3,12 +3,26 @@ subcategory: "webhook"
 layout: "intersight"
 page_title: "Intersight: intersight_webhook_endpoint"
 description: |-
-        The webhook endpoint which an controller can use to forward events.
+        ### Overview
+        The Endpoint object is a crucial component for managing webhook communications within the system. Endpoint provides a structured approach for controllers to forward events, enabling seamless integration with external systems.
+        #### Purpose
+        An Endpoint serves as the conduit for event-driven interactions, allowing applications to communicate through predefined webhook routes. It ensures that events can be reliably received and processed by external systems.
+        #### Key Concepts
+        - **Webhook Integration:** - Designed to facilitate the forwarding of events to external systems using webhooks, ensuring real-time communication and data exchange.
+        - **Access Control:** - Incorporates privilege sets to manage who can create, read, update, and delete endpoints, safeguarding against unauthorized access.
+        - **Relationship Management:** - Establishes connections with accounts and organizations, ensuring that each endpoint is associated with the relevant entities for efficient management and tracking.
 
 ---
 
 # Resource: intersight_webhook_endpoint
-The webhook endpoint which an controller can use to forward events.
+### Overview
+The Endpoint object is a crucial component for managing webhook communications within the system. Endpoint provides a structured approach for controllers to forward events, enabling seamless integration with external systems.
+#### Purpose
+An Endpoint serves as the conduit for event-driven interactions, allowing applications to communicate through predefined webhook routes. It ensures that events can be reliably received and processed by external systems.
+#### Key Concepts
+- **Webhook Integration:** - Designed to facilitate the forwarding of events to external systems using webhooks, ensuring real-time communication and data exchange.
+- **Access Control:** - Incorporates privilege sets to manage who can create, read, update, and delete endpoints, safeguarding against unauthorized access.
+- **Relationship Management:** - Establishes connections with accounts and organizations, ensuring that each endpoint is associated with the relevant entities for efficient management and tracking.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -74,6 +88,7 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `key`:(string) The string representation of a tag key. 
   + `propagated`:(bool)(ReadOnly) Propagated is a boolean flag that indicates whether the tag is propagated to the related managed objects. 
+  + `sys_tag`:(bool)(ReadOnly) Specifies whether the tag is user-defined or owned by the system. 
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `url`:(string)(ReadOnly) The endpoint URL. The CREATE and UPDATE APIs can cause the change to the value. 

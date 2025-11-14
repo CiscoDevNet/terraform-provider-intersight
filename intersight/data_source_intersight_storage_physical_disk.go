@@ -160,6 +160,21 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"health": {
+			Description: "This field displays the health of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"health_message": {
+			Description: "This field displays the message in relation to physical disk health.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"health_resolution": {
+			Description: "This field displays the recommended action to take regarding the physical disk based on its health status.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hot_spare_type": {
 			Description: "Type of hotspare configured on the physical disk.",
 			Type:        schema.TypeString,
@@ -844,6 +859,11 @@ func getStoragePhysicalDiskSchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"sys_tag": {
+						Description: "Specifies whether the tag is user-defined or owned by the system.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"type": {
 						Description: "An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.\n* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.\n* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \"A/B/C\", then \"A\" is the parent tag, \"B\" is the child tag of \"A\" and \"C\" is the child tag of \"B\".",
 						Type:        schema.TypeString,
@@ -1184,6 +1204,21 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("fde_capable"); ok {
 		x := (v.(string))
 		o.SetFdeCapable(x)
+	}
+
+	if v, ok := d.GetOk("health"); ok {
+		x := (v.(string))
+		o.SetHealth(x)
+	}
+
+	if v, ok := d.GetOk("health_message"); ok {
+		x := (v.(string))
+		o.SetHealthMessage(x)
+	}
+
+	if v, ok := d.GetOk("health_resolution"); ok {
+		x := (v.(string))
+		o.SetHealthResolution(x)
 	}
 
 	if v, ok := d.GetOk("hot_spare_type"); ok {
@@ -2124,6 +2159,9 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["encryption_status"] = (s.GetEncryptionStatus())
 				temp["failure_predicted"] = (s.GetFailurePredicted())
 				temp["fde_capable"] = (s.GetFdeCapable())
+				temp["health"] = (s.GetHealth())
+				temp["health_message"] = (s.GetHealthMessage())
+				temp["health_resolution"] = (s.GetHealthResolution())
 				temp["hot_spare_type"] = (s.GetHotSpareType())
 				temp["indicator_led"] = (s.GetIndicatorLed())
 

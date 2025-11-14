@@ -3,36 +3,28 @@ subcategory: "aaa"
 layout: "intersight"
 page_title: "Intersight: intersight_aaa_audit_record"
 description: |-
-        # Overview
-        The AuditRecord object is a crucial element within the system,
-        providing a comprehensive overview of configuration changes made by users.
-        It serves as a reliable log of actions, supporting transparency, accountability, and operational integrity.
-        ## Purpose
-        An AuditRecord functions as a historical record of configuration changes,
-        capturing essential details about modifications in real time.
-        This ensures that all changes are traceable and can be reviewed for compliance and audit purposes.
-        ## Key Concepts
-        - **Transparency** – Provides visibility into user actions, ensuring all changes are logged with details such as timestamps, user identities, and affected objects.
-        - **Accountability** – By documenting changes, AuditRecords promote accountability among users, encouraging responsible and informed decision-making.
-        - **Access Control** – Access is governed by privilege sets, ensuring only authorized personnel can view audit logs and understand the context of changes.
-        - **Relationship Management** – AuditRecords are associated with user accounts and sessions, allowing a detailed trace of who made changes and under what circumstances.
+        ### Overview
+        The AuditRecord object is a crucial element within the system, providing a comprehensive overview of configuration changes made by users. It serves as a reliable log of actions, supporting transparency, accountability, and operational integrity.
+        #### Purpose
+        An AuditRecord functions as a historical record of configuration changes, capturing essential details about modifications in real time. This ensures that all changes are traceable and can be reviewed for compliance and audit purposes.
+        #### Key Concepts
+        - **Transparency** - Provides visibility into user actions, ensuring all changes are logged with details such as timestamps, user identities, and affected objects.
+        - **Accountability** - By documenting changes, AuditRecords promote accountability among users, encouraging responsible and informed decision-making.
+        - **Access Control** - Access is governed by privilege sets, ensuring only authorized personnel can view audit logs and understand the context of changes.
+        - **Relationship Management** - AuditRecords are associated with user accounts and sessions, allowing a detailed trace of who made changes and under what circumstances.
 
 ---
 
 # Data Source: intersight_aaa_audit_record
-# Overview
-The AuditRecord object is a crucial element within the system,  
-providing a comprehensive overview of configuration changes made by users.  
-It serves as a reliable log of actions, supporting transparency, accountability, and operational integrity.
-## Purpose
-An AuditRecord functions as a historical record of configuration changes,  
-capturing essential details about modifications in real time.  
-This ensures that all changes are traceable and can be reviewed for compliance and audit purposes.
-## Key Concepts
-- **Transparency** – Provides visibility into user actions, ensuring all changes are logged with details such as timestamps, user identities, and affected objects.
-- **Accountability** – By documenting changes, AuditRecords promote accountability among users, encouraging responsible and informed decision-making.
-- **Access Control** – Access is governed by privilege sets, ensuring only authorized personnel can view audit logs and understand the context of changes.
-- **Relationship Management** – AuditRecords are associated with user accounts and sessions, allowing a detailed trace of who made changes and under what circumstances.
+### Overview
+The AuditRecord object is a crucial element within the system, providing a comprehensive overview of configuration changes made by users. It serves as a reliable log of actions, supporting transparency, accountability, and operational integrity.
+#### Purpose
+An AuditRecord functions as a historical record of configuration changes, capturing essential details about modifications in real time. This ensures that all changes are traceable and can be reviewed for compliance and audit purposes.
+#### Key Concepts
+- **Transparency** - Provides visibility into user actions, ensuring all changes are logged with details such as timestamps, user identities, and affected objects.
+- **Accountability** - By documenting changes, AuditRecords promote accountability among users, encouraging responsible and informed decision-making.
+- **Access Control** - Access is governed by privilege sets, ensuring only authorized personnel can view audit logs and understand the context of changes.
+- **Relationship Management** - AuditRecords are associated with user accounts and sessions, allowing a detailed trace of who made changes and under what circumstances.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

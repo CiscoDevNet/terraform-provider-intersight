@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025101412
+API version: 1.0.11-2025102807
 Contact: intersight@cisco.com
 */
 
@@ -41,6 +41,8 @@ type NetworkElement struct {
 	ConfModTs *string `json:"ConfModTs,omitempty"`
 	// Configuration modified backup timestamp of the switch.
 	ConfModTsBackup *string `json:"ConfModTsBackup,omitempty"`
+	// Indicates if the network Element is in a config restore state.
+	ConfigRestoreState *bool `json:"ConfigRestoreState,omitempty"`
 	// Connection status of the switch.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 	// The default domain name configured on the switch.
@@ -510,6 +512,38 @@ func (o *NetworkElement) HasConfModTsBackup() bool {
 // SetConfModTsBackup gets a reference to the given string and assigns it to the ConfModTsBackup field.
 func (o *NetworkElement) SetConfModTsBackup(v string) {
 	o.ConfModTsBackup = &v
+}
+
+// GetConfigRestoreState returns the ConfigRestoreState field value if set, zero value otherwise.
+func (o *NetworkElement) GetConfigRestoreState() bool {
+	if o == nil || IsNil(o.ConfigRestoreState) {
+		var ret bool
+		return ret
+	}
+	return *o.ConfigRestoreState
+}
+
+// GetConfigRestoreStateOk returns a tuple with the ConfigRestoreState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElement) GetConfigRestoreStateOk() (*bool, bool) {
+	if o == nil || IsNil(o.ConfigRestoreState) {
+		return nil, false
+	}
+	return o.ConfigRestoreState, true
+}
+
+// HasConfigRestoreState returns a boolean if a field has been set.
+func (o *NetworkElement) HasConfigRestoreState() bool {
+	if o != nil && !IsNil(o.ConfigRestoreState) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigRestoreState gets a reference to the given bool and assigns it to the ConfigRestoreState field.
+func (o *NetworkElement) SetConfigRestoreState(v bool) {
+	o.ConfigRestoreState = &v
 }
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
@@ -3166,6 +3200,9 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfModTsBackup) {
 		toSerialize["ConfModTsBackup"] = o.ConfModTsBackup
 	}
+	if !IsNil(o.ConfigRestoreState) {
+		toSerialize["ConfigRestoreState"] = o.ConfigRestoreState
+	}
 	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
@@ -3462,6 +3499,8 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		ConfModTs *string `json:"ConfModTs,omitempty"`
 		// Configuration modified backup timestamp of the switch.
 		ConfModTsBackup *string `json:"ConfModTsBackup,omitempty"`
+		// Indicates if the network Element is in a config restore state.
+		ConfigRestoreState *bool `json:"ConfigRestoreState,omitempty"`
 		// Connection status of the switch.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 		// The default domain name configured on the switch.
@@ -3620,6 +3659,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElement.Chassis = varNetworkElementWithoutEmbeddedStruct.Chassis
 		varNetworkElement.ConfModTs = varNetworkElementWithoutEmbeddedStruct.ConfModTs
 		varNetworkElement.ConfModTsBackup = varNetworkElementWithoutEmbeddedStruct.ConfModTsBackup
+		varNetworkElement.ConfigRestoreState = varNetworkElementWithoutEmbeddedStruct.ConfigRestoreState
 		varNetworkElement.ConnectionStatus = varNetworkElementWithoutEmbeddedStruct.ConnectionStatus
 		varNetworkElement.DefaultDomain = varNetworkElementWithoutEmbeddedStruct.DefaultDomain
 		varNetworkElement.EthernetMode = varNetworkElementWithoutEmbeddedStruct.EthernetMode
@@ -3722,6 +3762,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Chassis")
 		delete(additionalProperties, "ConfModTs")
 		delete(additionalProperties, "ConfModTsBackup")
+		delete(additionalProperties, "ConfigRestoreState")
 		delete(additionalProperties, "ConnectionStatus")
 		delete(additionalProperties, "DefaultDomain")
 		delete(additionalProperties, "EthernetMode")
