@@ -3,16 +3,24 @@ subcategory: "search"
 layout: "intersight"
 page_title: "Intersight: intersight_search_search_item"
 description: |-
-        The Search service entry point to search Intersight REST resources using OData query syntax.
-        See [Search API query syntax](/apidocs/introduction/query/#search-api) for details
-        about the query syntax.
+        ### Overview
+        The SearchItem object represents an entry point for searching Intersight REST resources. It enables users to query and retrieve data using the OData query syntax, providing a standardized and flexible method for resource discovery within the system.
+        #### Purpose
+        A SearchItem serves as the primary interface for performing structured searches across various Intersight resources. Its purpose is to facilitate efficient data retrieval by allowing users to construct complex queries based on OData syntax, thereby enabling precise filtering, ordering, and selection of desired information.
+        #### Key Concepts
+        - **Resource Discovery:** - Designed to help users locate and access specific REST resources within the Intersight environment.
+        - **API Entry Point:** - Functions as a dedicated endpoint for initiating search operations, streamlining the process of data lookup.
 
 ---
 
 # Data Source: intersight_search_search_item
-The Search service entry point to search Intersight REST resources using OData query syntax.
-See [Search API query syntax](/apidocs/introduction/query/#search-api) for details
-about the query syntax.
+### Overview
+The SearchItem object represents an entry point for searching Intersight REST resources. It enables users to query and retrieve data using the OData query syntax, providing a standardized and flexible method for resource discovery within the system.
+#### Purpose
+A SearchItem serves as the primary interface for performing structured searches across various Intersight resources. Its purpose is to facilitate efficient data retrieval by allowing users to construct complex queries based on OData syntax, thereby enabling precise filtering, ordering, and selection of desired information.
+#### Key Concepts
+- **Resource Discovery:** - Designed to help users locate and access specific REST resources within the Intersight environment.
+- **API Entry Point:** - Functions as a dedicated endpoint for initiating search operations, streamlining the process of data lookup.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -256,6 +256,20 @@ func Test_intersight_FcpoolApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FcpoolApiService PatchFcpoolReservation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FcpoolApi.PatchFcpoolReservation(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FcpoolApiService UpdateFcpoolPool", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -263,6 +277,20 @@ func Test_intersight_FcpoolApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.FcpoolApi.UpdateFcpoolPool(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FcpoolApiService UpdateFcpoolReservation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FcpoolApi.UpdateFcpoolReservation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

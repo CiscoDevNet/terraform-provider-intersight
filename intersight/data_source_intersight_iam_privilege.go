@@ -95,13 +95,28 @@ func getIamPrivilegeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"attribute_names": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"condition": {
+			Description: "The condition expression or criteria that determines when this conditional privilege can grant access to update the specified attribute names.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"description": {
+			Description: "Informative description about each privilege.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -113,6 +128,11 @@ func getIamPrivilegeSchema() map[string]*schema.Schema {
 		"hostname_prefix": {
 			Description: "The hostname prefix of the resource corresponding to this privilege. For example \\'sentry\\' in https://sentry.intersight.com .",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_conditional_privilege": {
+			Description: "Flag that indicates whether this privilege is conditional.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"method": {
@@ -602,14 +622,35 @@ func dataSourceIamPrivilegeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("attribute_names"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetAttributeNames(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("condition"); ok {
+		x := (v.(string))
+		o.SetCondition(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -620,6 +661,11 @@ func dataSourceIamPrivilegeRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("hostname_prefix"); ok {
 		x := (v.(string))
 		o.SetHostnamePrefix(x)
+	}
+
+	if v, ok := d.GetOkExists("is_conditional_privilege"); ok {
+		x := (v.(bool))
+		o.SetIsConditionalPrivilege(x)
 	}
 
 	if v, ok := d.GetOk("method"); ok {
@@ -990,11 +1036,15 @@ func dataSourceIamPrivilegeRead(c context.Context, d *schema.ResourceData, meta 
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["attribute_names"] = (s.GetAttributeNames())
 				temp["class_id"] = (s.GetClassId())
+				temp["condition"] = (s.GetCondition())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hostname_prefix"] = (s.GetHostnamePrefix())
+				temp["is_conditional_privilege"] = (s.GetIsConditionalPrivilege())
 				temp["method"] = (s.GetMethod())
 
 				temp["mod_time"] = (s.GetModTime()).String()

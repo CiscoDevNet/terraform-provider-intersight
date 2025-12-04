@@ -71,12 +71,12 @@ func getApicTenantSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"description": {
-			Description: "Tenant description in Cisco Application Policy Infrastructure Controller (APIC).",
+			Description: "Description for Tenant in Cisco Application Policy Infrastructure Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"dn": {
-			Description: "Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -96,7 +96,7 @@ func getApicTenantSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Tenant name in Cisco Application Policy Infrastructure Controller (APIC).",
+			Description: "Tenant Name in Cisco Application Policy Infrastructure Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

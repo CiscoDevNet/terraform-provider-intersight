@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "apic.AciPod"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "apic.AciPod"]
-**Name** | Pointer to **string** | Pod name extracted from DN in Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
-**PodType** | Pointer to **string** | Object pod type in Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
+**Name** | Pointer to **string** | Name of a pod extracted from Dn within the Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
+**PodType** | Pointer to **string** | Pod type of an object within the Cisco Application Policy Infrastructure Controller (APIC). | [optional] 
 
 ## Methods
 

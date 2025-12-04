@@ -168,6 +168,45 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 					},
 				},
 			},
+			"associated_privilege_sets": {
+				Description: "An array of relationships to iamPrivilegeSet resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"associated_roles": {
 				Description: "An array of relationships to iamRole resources.",
 				Type:        schema.TypeList,
@@ -1084,7 +1123,7 @@ func resourceWorkflowServiceItemActionDefinition() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -1665,6 +1704,48 @@ func resourceWorkflowServiceItemActionDefinitionCreate(c context.Context, d *sch
 		}
 		if len(x) > 0 {
 			o.SetAllowedInstanceStates(x)
+		}
+	}
+
+	if v, ok := d.GetOk("associated_privilege_sets"); ok {
+		x := make([]models.IamPrivilegeSetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIamPrivilegeSetRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetAssociatedPrivilegeSets(x)
 		}
 	}
 
@@ -2488,6 +2569,10 @@ func resourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *schem
 		return diag.Errorf("error occurred while setting property Ancestors in WorkflowServiceItemActionDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("associated_privilege_sets", flattenListIamPrivilegeSetRelationship(s.GetAssociatedPrivilegeSets(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AssociatedPrivilegeSets in WorkflowServiceItemActionDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("associated_roles", flattenListIamRoleRelationship(s.GetAssociatedRoles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property AssociatedRoles in WorkflowServiceItemActionDefinition object: %s", err.Error())
 	}
@@ -2717,6 +2802,47 @@ func resourceWorkflowServiceItemActionDefinitionUpdate(c context.Context, d *sch
 			}
 		}
 		o.SetAllowedInstanceStates(x)
+	}
+
+	if d.HasChange("associated_privilege_sets") {
+		v := d.Get("associated_privilege_sets")
+		x := make([]models.IamPrivilegeSetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIamPrivilegeSetRelationship(o))
+		}
+		o.SetAssociatedPrivilegeSets(x)
 	}
 
 	if d.HasChange("associated_roles") {

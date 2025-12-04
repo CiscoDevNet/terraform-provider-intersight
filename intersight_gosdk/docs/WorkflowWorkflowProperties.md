@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RollbackOnCancel** | Pointer to **bool** | When set to true, the changes are automatically rolled back if the workflow execution is canceled. | [optional] [default to false]
 **RollbackOnFailure** | Pointer to **bool** | When set to true, the changes are automatically rolled back if the workflow fails to execute. | [optional] [default to false]
 **SupportStatus** | Pointer to **string** | Supported status of the definition. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
+**TargetCtxPolicy** | Pointer to **string** | The target context policy that controls how target context is set for this workflow when it is run as a subworkflow. * &#x60;InheritFromParent&#x60; - The target context is inherited from the parent workflow and additional targets from this current workflow are also added. Use this setting when the parent workflow is operating on a target set which is still applicable for this current subworkflow. * &#x60;OnlyThisWorkflowTargets&#x60; - The target context is set only from the targets defined in the current workflow and nothing is inherited from parent workflow. Use this setting if the parent workflow is operating on a superset of targets and this current workflow is operating on a subset of those targets or a completely different set of targets. | [optional] [default to "InheritFromParent"]
 
 ## Methods
 
@@ -299,6 +300,31 @@ SetSupportStatus sets SupportStatus field to given value.
 `func (o *WorkflowWorkflowProperties) HasSupportStatus() bool`
 
 HasSupportStatus returns a boolean if a field has been set.
+
+### GetTargetCtxPolicy
+
+`func (o *WorkflowWorkflowProperties) GetTargetCtxPolicy() string`
+
+GetTargetCtxPolicy returns the TargetCtxPolicy field if non-nil, zero value otherwise.
+
+### GetTargetCtxPolicyOk
+
+`func (o *WorkflowWorkflowProperties) GetTargetCtxPolicyOk() (*string, bool)`
+
+GetTargetCtxPolicyOk returns a tuple with the TargetCtxPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetCtxPolicy
+
+`func (o *WorkflowWorkflowProperties) SetTargetCtxPolicy(v string)`
+
+SetTargetCtxPolicy sets TargetCtxPolicy field to given value.
+
+### HasTargetCtxPolicy
+
+`func (o *WorkflowWorkflowProperties) HasTargetCtxPolicy() bool`
+
+HasTargetCtxPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

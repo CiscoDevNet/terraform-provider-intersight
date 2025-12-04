@@ -214,7 +214,7 @@ func resourceIamPermission() *schema.Resource {
 			"name": {
 				Description:  "The name of the permission which has to be granted to user.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ .:-]{1,64}$"), ""), validation.StringLenBetween(1, 64)),
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ .:-]{1,128}$"), ""), validation.StringLenBetween(1, 128)),
 				Optional:     true,
 			},
 			"object_type": {
@@ -314,8 +314,8 @@ func resourceIamPermission() *schema.Resource {
 				Description: "An array of relationships to iamPrivilegeSet resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
-				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -572,7 +572,7 @@ func resourceIamPermission() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -883,6 +883,48 @@ func resourceIamPermissionCreate(c context.Context, d *schema.ResourceData, meta
 	}
 
 	o.SetObjectType("iam.Permission")
+
+	if v, ok := d.GetOk("privilege_sets"); ok {
+		x := make([]models.IamPrivilegeSetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIamPrivilegeSetRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPrivilegeSets(x)
+		}
+	}
 
 	if v, ok := d.GetOk("resource_roles"); ok {
 		x := make([]models.IamResourceRolesRelationship, 0)
@@ -1361,6 +1403,47 @@ func resourceIamPermissionUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 
 	o.SetObjectType("iam.Permission")
+
+	if d.HasChange("privilege_sets") {
+		v := d.Get("privilege_sets")
+		x := make([]models.IamPrivilegeSetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIamPrivilegeSetRelationship(o))
+		}
+		o.SetPrivilegeSets(x)
+	}
 
 	if d.HasChange("resource_roles") {
 		v := d.Get("resource_roles")

@@ -302,8 +302,8 @@ func resourceIamResourceRoles() *schema.Resource {
 				Description: "An array of relationships to iamPrivilegeSet resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
-				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -521,7 +521,7 @@ func resourceIamResourceRoles() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -785,6 +785,48 @@ func resourceIamResourceRolesCreate(c context.Context, d *schema.ResourceData, m
 		if len(p) > 0 {
 			x := p[0]
 			o.SetPermission(x)
+		}
+	}
+
+	if v, ok := d.GetOk("privilege_sets"); ok {
+		x := make([]models.IamPrivilegeSetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIamPrivilegeSetRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPrivilegeSets(x)
 		}
 	}
 
@@ -1150,6 +1192,47 @@ func resourceIamResourceRolesUpdate(c context.Context, d *schema.ResourceData, m
 			x := p[0]
 			o.SetPermission(x)
 		}
+	}
+
+	if d.HasChange("privilege_sets") {
+		v := d.Get("privilege_sets")
+		x := make([]models.IamPrivilegeSetRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIamPrivilegeSetRelationship(o))
+		}
+		o.SetPrivilegeSets(x)
 	}
 
 	if d.HasChange("resource") {

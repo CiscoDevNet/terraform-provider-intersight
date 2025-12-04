@@ -37,17 +37,17 @@ func resourceSdaaciConnection() *schema.Resource {
 					return
 				}},
 			"aci_l3_out": {
-				Description: "User input for ACI L3Out name.",
+				Description: "ACI L3Out Name User Input.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"aci_match_rule_name": {
-				Description: "Match rule name in Cisco APIC.",
+				Description: "Name of the Match Rule in Cisco APIC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"aci_tenant": {
-				Description: "ACI tenant name for the selected APIC target.",
+				Description: "ACI tenant Name for Selected APIC Target.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -136,7 +136,7 @@ func resourceSdaaciConnection() *schema.Resource {
 				},
 			},
 			"campus_fabric_site": {
-				Description: "Campus fabric site Id where the border node is configured.",
+				Description: "Campus fabric site id in which the border node has configured.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -209,23 +209,23 @@ func resourceSdaaciConnection() *schema.Resource {
 					return
 				}},
 			"epg": {
-				Description: "Application EPG name for this connection.",
+				Description: "Application EPG Name of this connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"epg_subnet": {
-				Description:  "EPG Subnet Ipv4Cidr configured on APIC.",
+				Description:  "EPG Subnet Ipv4Cidr which is configured on APIC.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
 				Optional:     true,
 			},
 			"firewall_device": {
-				Description: "Device within the selected domain used for firewall configuration.",
+				Description: "Device within the selected domain used to configure Firewall.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"firewall_domain": {
-				Description: "Domain used for firewall configuration.",
+				Description: "Domain used to configure Firewall.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -288,7 +288,7 @@ func resourceSdaaciConnection() *schema.Resource {
 				ForceNew:    true,
 			},
 			"node_profile": {
-				Description: "L3Out node profile in Cisco APIC.",
+				Description: "L3Out Node Profile in Cisco APIC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -438,7 +438,7 @@ func resourceSdaaciConnection() *schema.Resource {
 					return
 				}},
 			"status": {
-				Description:  "Connection status between SDA and ACI.\n* `NotConnected` - Status of the connection:Not connected.\n* `Connected` - Status of the connection:Connected.",
+				Description:  "Connection status between SDA and ACI.\n* `NotConnected` - Connection Status NotConnected.\n* `Connected` - Connection Status Connected.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"NotConnected", "Connected"}, false),
 				Optional:     true,
@@ -537,7 +537,7 @@ func resourceSdaaciConnection() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -583,7 +583,7 @@ func resourceSdaaciConnection() *schema.Resource {
 				},
 			},
 			"transit": {
-				Description: "Transit Id for the given border node.",
+				Description: "Transit id for given border node.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -739,17 +739,17 @@ func resourceSdaaciConnection() *schema.Resource {
 				},
 			},
 			"virtual_network": {
-				Description: "Virtual Network for this connection.",
+				Description: "Virtual Network of this connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"vn_epg": {
-				Description: "VN and EPG information for this connection.",
+				Description: "Contains both VN and EPG of this connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"vrf": {
-				Description: "Tenant VRF in Cisco APIC.",
+				Description: "APIC Tenant VRF from APIC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

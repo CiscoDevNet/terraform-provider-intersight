@@ -3,14 +3,24 @@ subcategory: "search"
 layout: "intersight"
 page_title: "Intersight: intersight_search_tag_item"
 description: |-
-        The TagItems service entry point to search Tags across all Intersight REST resources using OData Query syntax.
-        See [Search Tags API query syntax](/apidocs/introduction/query/#search-tags-api) for details about the tag query syntax.
+        ### Overview
+        The TagItem object serves as an entry point for searching tags associated with Intersight REST resources. It allows users to query and discover tags across the system using OData Query syntax, providing a mechanism for organizing and categorizing resources.
+        #### Purpose
+        The purpose of a TagItem is to enable efficient discovery and management of tags applied to various Intersight resources. This provides a centralized way to search for specific tags and understand their prevalence and associated values across the system, facilitating resource organization and retrieval based on custom metadata.
+        #### Key Concepts
+        - **Tag-Based Search:** - Specializes in querying resources based on their assigned tags, offering an alternative or supplementary search method to direct resource queries.
+        - **Metadata Organization:** - Supports the systematic organization and classification of Intersight resources through tagging.
 
 ---
 
 # Data Source: intersight_search_tag_item
-The TagItems service entry point to search Tags across all Intersight REST resources using OData Query syntax.
-See [Search Tags API query syntax](/apidocs/introduction/query/#search-tags-api) for details about the tag query syntax.
+### Overview
+The TagItem object serves as an entry point for searching tags associated with Intersight REST resources. It allows users to query and discover tags across the system using OData Query syntax, providing a mechanism for organizing and categorizing resources.
+#### Purpose
+The purpose of a TagItem is to enable efficient discovery and management of tags applied to various Intersight resources. This provides a centralized way to search for specific tags and understand their prevalence and associated values across the system, facilitating resource organization and retrieval based on custom metadata.
+#### Key Concepts
+- **Tag-Based Search:** - Specializes in querying resources based on their assigned tags, offering an alternative or supplementary search method to direct resource queries.
+- **Metadata Organization:** - Supports the systematic organization and classification of Intersight resources through tagging.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

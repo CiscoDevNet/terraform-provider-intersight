@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **FlappingCount** | Pointer to **int64** | Alarm flapping counter. This will be incremented every time the state of the alarm transitions to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. If no more transitions occur within the system-defined flap interval (usually less than 5 minutes), the counter will be reset to zero. This represents the amount of times the alarm has flapped between an active and a cleared state since the last time the Flapping state was cleared. | [optional] [readonly] 
 **FlappingStartTime** | Pointer to **time.Time** | Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored. | [optional] [readonly] 
 **LastTransitionTime** | Pointer to **time.Time** | The time the alarm last had a change in severity. | [optional] [readonly] 
+**LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **MsAffectedObject** | Pointer to **string** | A unique key for the alarm from the managed system&#39;s point of view. For example, in the case of UCS, this is the fault&#39;s dn. | [optional] [readonly] 
 **Name** | Pointer to **string** | Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. | [optional] [readonly] 
 **OrigSeverity** | Pointer to **string** | The original severity when the alarm was first created. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
@@ -491,6 +492,41 @@ SetLastTransitionTime sets LastTransitionTime field to given value.
 
 HasLastTransitionTime returns a boolean if a field has been set.
 
+### GetLocationDetails
+
+`func (o *CondAlarm) GetLocationDetails() CommGeoLocationDetails`
+
+GetLocationDetails returns the LocationDetails field if non-nil, zero value otherwise.
+
+### GetLocationDetailsOk
+
+`func (o *CondAlarm) GetLocationDetailsOk() (*CommGeoLocationDetails, bool)`
+
+GetLocationDetailsOk returns a tuple with the LocationDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocationDetails
+
+`func (o *CondAlarm) SetLocationDetails(v CommGeoLocationDetails)`
+
+SetLocationDetails sets LocationDetails field to given value.
+
+### HasLocationDetails
+
+`func (o *CondAlarm) HasLocationDetails() bool`
+
+HasLocationDetails returns a boolean if a field has been set.
+
+### SetLocationDetailsNil
+
+`func (o *CondAlarm) SetLocationDetailsNil(b bool)`
+
+ SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+
+### UnsetLocationDetails
+`func (o *CondAlarm) UnsetLocationDetails()`
+
+UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
 ### GetMsAffectedObject
 
 `func (o *CondAlarm) GetMsAffectedObject() string`

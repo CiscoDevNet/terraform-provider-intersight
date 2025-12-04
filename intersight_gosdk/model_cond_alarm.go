@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -65,7 +65,8 @@ type CondAlarm struct {
 	// Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored.
 	FlappingStartTime *time.Time `json:"FlappingStartTime,omitempty"`
 	// The time the alarm last had a change in severity.
-	LastTransitionTime *time.Time `json:"LastTransitionTime,omitempty"`
+	LastTransitionTime *time.Time                     `json:"LastTransitionTime,omitempty"`
+	LocationDetails    NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 	// A unique key for the alarm from the managed system's point of view. For example, in the case of UCS, this is the fault's dn.
 	MsAffectedObject *string `json:"MsAffectedObject,omitempty"`
 	// Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code.
@@ -698,6 +699,49 @@ func (o *CondAlarm) SetLastTransitionTime(v time.Time) {
 	o.LastTransitionTime = &v
 }
 
+// GetLocationDetails returns the LocationDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarm) GetLocationDetails() CommGeoLocationDetails {
+	if o == nil || IsNil(o.LocationDetails.Get()) {
+		var ret CommGeoLocationDetails
+		return ret
+	}
+	return *o.LocationDetails.Get()
+}
+
+// GetLocationDetailsOk returns a tuple with the LocationDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarm) GetLocationDetailsOk() (*CommGeoLocationDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocationDetails.Get(), o.LocationDetails.IsSet()
+}
+
+// HasLocationDetails returns a boolean if a field has been set.
+func (o *CondAlarm) HasLocationDetails() bool {
+	if o != nil && o.LocationDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLocationDetails gets a reference to the given NullableCommGeoLocationDetails and assigns it to the LocationDetails field.
+func (o *CondAlarm) SetLocationDetails(v CommGeoLocationDetails) {
+	o.LocationDetails.Set(&v)
+}
+
+// SetLocationDetailsNil sets the value for LocationDetails to be an explicit nil
+func (o *CondAlarm) SetLocationDetailsNil() {
+	o.LocationDetails.Set(nil)
+}
+
+// UnsetLocationDetails ensures that no value is present for LocationDetails, not even an explicit nil
+func (o *CondAlarm) UnsetLocationDetails() {
+	o.LocationDetails.Unset()
+}
+
 // GetMsAffectedObject returns the MsAffectedObject field value if set, zero value otherwise.
 func (o *CondAlarm) GetMsAffectedObject() string {
 	if o == nil || IsNil(o.MsAffectedObject) {
@@ -1094,6 +1138,9 @@ func (o CondAlarm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastTransitionTime) {
 		toSerialize["LastTransitionTime"] = o.LastTransitionTime
 	}
+	if o.LocationDetails.IsSet() {
+		toSerialize["LocationDetails"] = o.LocationDetails.Get()
+	}
 	if !IsNil(o.MsAffectedObject) {
 		toSerialize["MsAffectedObject"] = o.MsAffectedObject
 	}
@@ -1212,7 +1259,8 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		// Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored.
 		FlappingStartTime *time.Time `json:"FlappingStartTime,omitempty"`
 		// The time the alarm last had a change in severity.
-		LastTransitionTime *time.Time `json:"LastTransitionTime,omitempty"`
+		LastTransitionTime *time.Time                     `json:"LastTransitionTime,omitempty"`
+		LocationDetails    NullableCommGeoLocationDetails `json:"LocationDetails,omitempty"`
 		// A unique key for the alarm from the managed system's point of view. For example, in the case of UCS, this is the fault's dn.
 		MsAffectedObject *string `json:"MsAffectedObject,omitempty"`
 		// Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code.
@@ -1253,6 +1301,7 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarm.FlappingCount = varCondAlarmWithoutEmbeddedStruct.FlappingCount
 		varCondAlarm.FlappingStartTime = varCondAlarmWithoutEmbeddedStruct.FlappingStartTime
 		varCondAlarm.LastTransitionTime = varCondAlarmWithoutEmbeddedStruct.LastTransitionTime
+		varCondAlarm.LocationDetails = varCondAlarmWithoutEmbeddedStruct.LocationDetails
 		varCondAlarm.MsAffectedObject = varCondAlarmWithoutEmbeddedStruct.MsAffectedObject
 		varCondAlarm.Name = varCondAlarmWithoutEmbeddedStruct.Name
 		varCondAlarm.OrigSeverity = varCondAlarmWithoutEmbeddedStruct.OrigSeverity
@@ -1297,6 +1346,7 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FlappingCount")
 		delete(additionalProperties, "FlappingStartTime")
 		delete(additionalProperties, "LastTransitionTime")
+		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "MsAffectedObject")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OrigSeverity")

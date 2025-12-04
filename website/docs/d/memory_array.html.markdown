@@ -15,7 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_memory_array.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `array_id`:(int) The instance number of the memory array. 
+* `array_id`:(int) ID of the memory array on a server. 
 * `cpu_id`:(int) ID of the CPU that access this memory array. 
 * `create_time`:(string) The time when this managed object was created. 
 * `current_capacity`:(string) Current capacity of all the memory units on a server. 

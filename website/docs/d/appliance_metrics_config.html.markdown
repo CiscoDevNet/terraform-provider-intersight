@@ -30,4 +30,5 @@ The following arguments can be used to get data of already created objects in In
 * `status_message`:(string) The overall metrics collection Status based on resource constraints. 
 * `system_enabled`:(bool) Metric collection state defined by the system. 
 * `user_enabled`:(bool) Configured metric collection state by the account administrator. 
+* `utilization`:(int) Measures the utilization of the metrics feature in relation to the available capacity of the system. 
  

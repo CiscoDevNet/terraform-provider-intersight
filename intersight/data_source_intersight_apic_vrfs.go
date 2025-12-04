@@ -71,7 +71,7 @@ func getApicVrfsSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"dn": {
-			Description: "Distinguished name generated from URL parameters.",
+			Description: "Distinguished Name generated from URL Parameters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -91,7 +91,7 @@ func getApicVrfsSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "VRF name generated from URL parameters.",
+			Description: "VRF Namegenerated from URL Parameters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

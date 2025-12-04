@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **EnablePdbFpgaUpgrade** | Pointer to **bool** | The flag to enable or disable firmware upgrade functionality for the PDB FPGA. | [optional] [default to false]
 **EnablePsuUpgrade** | Pointer to **bool** | The flag to enable or disable firmware upgrade functionality for the Power Supply Unit (PSU). | [optional] [default to false]
 **SkipWaitForIoPathConnectivity** | Pointer to **bool** | The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade. | [optional] [default to false]
+**WaitTimeOut** | Pointer to **int64** | Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1. | [optional] [default to -1]
 **Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
 
@@ -171,6 +172,31 @@ SetSkipWaitForIoPathConnectivity sets SkipWaitForIoPathConnectivity field to giv
 `func (o *FirmwareSwitchUpgrade) HasSkipWaitForIoPathConnectivity() bool`
 
 HasSkipWaitForIoPathConnectivity returns a boolean if a field has been set.
+
+### GetWaitTimeOut
+
+`func (o *FirmwareSwitchUpgrade) GetWaitTimeOut() int64`
+
+GetWaitTimeOut returns the WaitTimeOut field if non-nil, zero value otherwise.
+
+### GetWaitTimeOutOk
+
+`func (o *FirmwareSwitchUpgrade) GetWaitTimeOutOk() (*int64, bool)`
+
+GetWaitTimeOutOk returns a tuple with the WaitTimeOut field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaitTimeOut
+
+`func (o *FirmwareSwitchUpgrade) SetWaitTimeOut(v int64)`
+
+SetWaitTimeOut sets WaitTimeOut field to given value.
+
+### HasWaitTimeOut
+
+`func (o *FirmwareSwitchUpgrade) HasWaitTimeOut() bool`
+
+HasWaitTimeOut returns a boolean if a field has been set.
 
 ### GetDevice
 

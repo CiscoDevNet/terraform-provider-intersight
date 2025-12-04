@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,10 @@ type SoftwarerepositoryOperatingSystemFile struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The progress percentage for the import operation.
+	ImportProgress *int64 `json:"ImportProgress,omitempty"`
+	// File sample hashes at deterministic positions for efficient duplicate detection of large files.
+	SampleHashes *string `json:"SampleHashes,omitempty"`
 	// The vendor or publisher of this file.
 	Vendor               *string                                       `json:"Vendor,omitempty"`
 	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
@@ -117,6 +121,70 @@ func (o *SoftwarerepositoryOperatingSystemFile) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "softwarerepository.OperatingSystemFile" of the ObjectType field.
 func (o *SoftwarerepositoryOperatingSystemFile) GetDefaultObjectType() interface{} {
 	return "softwarerepository.OperatingSystemFile"
+}
+
+// GetImportProgress returns the ImportProgress field value if set, zero value otherwise.
+func (o *SoftwarerepositoryOperatingSystemFile) GetImportProgress() int64 {
+	if o == nil || IsNil(o.ImportProgress) {
+		var ret int64
+		return ret
+	}
+	return *o.ImportProgress
+}
+
+// GetImportProgressOk returns a tuple with the ImportProgress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwarerepositoryOperatingSystemFile) GetImportProgressOk() (*int64, bool) {
+	if o == nil || IsNil(o.ImportProgress) {
+		return nil, false
+	}
+	return o.ImportProgress, true
+}
+
+// HasImportProgress returns a boolean if a field has been set.
+func (o *SoftwarerepositoryOperatingSystemFile) HasImportProgress() bool {
+	if o != nil && !IsNil(o.ImportProgress) {
+		return true
+	}
+
+	return false
+}
+
+// SetImportProgress gets a reference to the given int64 and assigns it to the ImportProgress field.
+func (o *SoftwarerepositoryOperatingSystemFile) SetImportProgress(v int64) {
+	o.ImportProgress = &v
+}
+
+// GetSampleHashes returns the SampleHashes field value if set, zero value otherwise.
+func (o *SoftwarerepositoryOperatingSystemFile) GetSampleHashes() string {
+	if o == nil || IsNil(o.SampleHashes) {
+		var ret string
+		return ret
+	}
+	return *o.SampleHashes
+}
+
+// GetSampleHashesOk returns a tuple with the SampleHashes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwarerepositoryOperatingSystemFile) GetSampleHashesOk() (*string, bool) {
+	if o == nil || IsNil(o.SampleHashes) {
+		return nil, false
+	}
+	return o.SampleHashes, true
+}
+
+// HasSampleHashes returns a boolean if a field has been set.
+func (o *SoftwarerepositoryOperatingSystemFile) HasSampleHashes() bool {
+	if o != nil && !IsNil(o.SampleHashes) {
+		return true
+	}
+
+	return false
+}
+
+// SetSampleHashes gets a reference to the given string and assigns it to the SampleHashes field.
+func (o *SoftwarerepositoryOperatingSystemFile) SetSampleHashes(v string) {
+	o.SampleHashes = &v
 }
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
@@ -220,6 +288,12 @@ func (o SoftwarerepositoryOperatingSystemFile) ToMap() (map[string]interface{}, 
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ImportProgress) {
+		toSerialize["ImportProgress"] = o.ImportProgress
+	}
+	if !IsNil(o.SampleHashes) {
+		toSerialize["SampleHashes"] = o.SampleHashes
+	}
 	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
@@ -281,6 +355,10 @@ func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(data []byte) (err 
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The progress percentage for the import operation.
+		ImportProgress *int64 `json:"ImportProgress,omitempty"`
+		// File sample hashes at deterministic positions for efficient duplicate detection of large files.
+		SampleHashes *string `json:"SampleHashes,omitempty"`
 		// The vendor or publisher of this file.
 		Vendor  *string                                       `json:"Vendor,omitempty"`
 		Catalog NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
@@ -293,6 +371,8 @@ func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(data []byte) (err 
 		varSoftwarerepositoryOperatingSystemFile := _SoftwarerepositoryOperatingSystemFile{}
 		varSoftwarerepositoryOperatingSystemFile.ClassId = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.ClassId
 		varSoftwarerepositoryOperatingSystemFile.ObjectType = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.ObjectType
+		varSoftwarerepositoryOperatingSystemFile.ImportProgress = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.ImportProgress
+		varSoftwarerepositoryOperatingSystemFile.SampleHashes = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.SampleHashes
 		varSoftwarerepositoryOperatingSystemFile.Vendor = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.Vendor
 		varSoftwarerepositoryOperatingSystemFile.Catalog = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.Catalog
 		*o = SoftwarerepositoryOperatingSystemFile(varSoftwarerepositoryOperatingSystemFile)
@@ -314,6 +394,8 @@ func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(data []byte) (err 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ImportProgress")
+		delete(additionalProperties, "SampleHashes")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Catalog")
 

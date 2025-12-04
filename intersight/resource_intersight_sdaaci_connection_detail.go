@@ -138,7 +138,7 @@ func resourceSdaaciConnectionDetail() *schema.Resource {
 					return
 				}},
 			"description": {
-				Description: "Description of the connection between the two peers.",
+				Description: "Description of this connection between two peers.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -154,12 +154,12 @@ func resourceSdaaciConnectionDetail() *schema.Resource {
 					return
 				}},
 			"ip_pool": {
-				Description: "Ip pool Id configured for this connection.",
+				Description: "Id of the ip pool configured for this connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"layer3_handoff_id": {
-				Description: "Layer 3 handoff Id configured between a border node and a border leaf.",
+				Description: "Id of layer 3 handoff configured between a border node and a border leaf.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -236,43 +236,43 @@ func resourceSdaaciConnectionDetail() *schema.Resource {
 				},
 			},
 			"peer_ainterface": {
-				Description: "Interface Id configured on Peer A.",
+				Description: "Interface id configured on Peer A.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"peer_aip_address": {
-				Description:  "IP address of the device used as the local peer.",
+				Description:  "The IP Address of the device used as the local peer.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"), ""),
 				Optional:     true,
 			},
 			"peer_atype": {
-				Description: "Type of device used as Peer A in this peer connection.",
+				Description: "Type of device used as Peer A for this peer connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"peer_binterface": {
-				Description: "Interface Id configured on Peer B.",
+				Description: "Interface id configured on Peer B.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"peer_bip_address": {
-				Description: "IP address of the device used as the remote peer.",
+				Description: "The IP Address of the device used as the remote peer.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"peer_btype": {
-				Description: "Type of device used as Peer B in this peer connection.",
+				Description: "Type of device used as Peer B for this peer connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"peera": {
-				Description: "First peer in the connection.",
+				Description: "First peer of the connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"peerb": {
-				Description: "Second peer in the connection.",
+				Description: "Second Peer of the connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -316,7 +316,7 @@ func resourceSdaaciConnectionDetail() *schema.Resource {
 				},
 			},
 			"router_id": {
-				Description: "Router Id defined for this peer connection.",
+				Description: "Router id defined for this peer connection.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -332,7 +332,7 @@ func resourceSdaaciConnectionDetail() *schema.Resource {
 					return
 				}},
 			"status": {
-				Description:  "Connection status between the peers.\n* `NotConnected` - Status of the connection:Not connected.\n* `Connected` - Status of the connection:Connected.",
+				Description:  "Connection status between the peers.\n* `NotConnected` - Connection Status NotConnected.\n* `Connected` - Connection Status Connected.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"NotConnected", "Connected"}, false),
 				Optional:     true,
@@ -431,7 +431,7 @@ func resourceSdaaciConnectionDetail() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {

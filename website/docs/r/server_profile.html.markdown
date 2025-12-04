@@ -3,12 +3,28 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_profile"
 description: |-
-        A profile specifying configuration settings for a physical server.
+        ### Overview
+        The Profile object represents a server profile, specifying configuration settings for a physical server. It encapsulates all necessary information to deploy, manage, and monitor a server within the infrastructure.
+        #### Purpose
+        A Profile is used to apply detailed configuration and policy settings to an individual server, supporting lifecycle management, compliance, and automation.
+        #### Key Concepts
+        - **Configuration Management:** - Centralizes all relevant configuration states, changes, and compliance results for the server.
+        - **Policy Attachment:** - Associates various policies and pools (such as UUID pools and resource pools) to define operational parameters.
+        - **Assignment and Deployment:** - Supports both static and dynamic assignment of physical servers, as well as monitoring deployment status and results.
+        - **Lifecycle Tracking:** - Integrates with workflow engines and maintains audit trails for configuration changes and applied policies.
 
 ---
 
 # Resource: intersight_server_profile
-A profile specifying configuration settings for a physical server.
+### Overview
+The Profile object represents a server profile, specifying configuration settings for a physical server. It encapsulates all necessary information to deploy, manage, and monitor a server within the infrastructure.
+#### Purpose
+A Profile is used to apply detailed configuration and policy settings to an individual server, supporting lifecycle management, compliance, and automation.
+#### Key Concepts
+- **Configuration Management:** - Centralizes all relevant configuration states, changes, and compliance results for the server.
+- **Policy Attachment:** - Associates various policies and pools (such as UUID pools and resource pools) to define operational parameters.
+- **Assignment and Deployment:** - Supports both static and dynamic assignment of physical servers, as well as monitoring deployment status and results.
+- **Lifecycle Tracking:** - Integrates with workflow engines and maintains audit trails for configuration changes and applied policies.
 ## Usage Example
 ### Resource Creation
 
@@ -67,7 +83,7 @@ This complex property has following sub-properties:
   + `initial_config_context`:(HashMap) -(ReadOnly) Stores initial Configuration state. Used for reverting back to initial state of ConfigContext in case of validation failure. 
 This complex property has following sub-properties:
     + `config_state`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
-    + `config_state_summary`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.* `None` - The default state is none.* `Not-assigned` - Server is not assigned to the profile.* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.* `Preparing` - Preparing to deploy the configuration.* `Validating` - Profile validation in progress.* `Configuring` - Profile deploy operation is in progress.* `UnConfiguring` - Server is unassigned and config cleanup is in progress.* `Analyzing` - Profile changes are being analyzed.* `Activating` - Configuration is being activated at the endpoint.* `Inconsistent` - Profile is inconsistent with the endpoint configuration.* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.* `Failed` - The last action on the profile has failed.* `Not-complete` - Config import operation on the profile is not complete.* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints. 
+    + `config_state_summary`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.* `None` - The default state is none.* `Not-assigned` - Server is not assigned to the profile.* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.* `Preparing` - Preparing to deploy the configuration.* `Validating` - Profile validation in progress.* `Evaluating` - Policy edit configuration change evaluation in progress.* `Configuring` - Profile deploy operation is in progress.* `UnConfiguring` - Server is unassigned and config cleanup is in progress.* `Analyzing` - Profile changes are being analyzed.* `Activating` - Configuration is being activated at the endpoint.* `Inconsistent` - Profile is inconsistent with the endpoint configuration.* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.* `Failed` - The last action on the profile has failed.* `Not-complete` - Config import operation on the profile is not complete.* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints. 
     + `config_type`:(string)(ReadOnly) The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress. 
     + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
     + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
@@ -101,7 +117,7 @@ This complex property has following sub-properties:
 * `config_context`:(HashMap) - The configuration state and results of the last configuration operation. 
 This complex property has following sub-properties:
   + `config_state`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
-  + `config_state_summary`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.* `None` - The default state is none.* `Not-assigned` - Server is not assigned to the profile.* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.* `Preparing` - Preparing to deploy the configuration.* `Validating` - Profile validation in progress.* `Configuring` - Profile deploy operation is in progress.* `UnConfiguring` - Server is unassigned and config cleanup is in progress.* `Analyzing` - Profile changes are being analyzed.* `Activating` - Configuration is being activated at the endpoint.* `Inconsistent` - Profile is inconsistent with the endpoint configuration.* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.* `Failed` - The last action on the profile has failed.* `Not-complete` - Config import operation on the profile is not complete.* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints. 
+  + `config_state_summary`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.* `None` - The default state is none.* `Not-assigned` - Server is not assigned to the profile.* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.* `Preparing` - Preparing to deploy the configuration.* `Validating` - Profile validation in progress.* `Evaluating` - Policy edit configuration change evaluation in progress.* `Configuring` - Profile deploy operation is in progress.* `UnConfiguring` - Server is unassigned and config cleanup is in progress.* `Analyzing` - Profile changes are being analyzed.* `Activating` - Configuration is being activated at the endpoint.* `Inconsistent` - Profile is inconsistent with the endpoint configuration.* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.* `Failed` - The last action on the profile has failed.* `Not-complete` - Config import operation on the profile is not complete.* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints. 
   + `config_type`:(string)(ReadOnly) The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress. 
   + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
   + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
@@ -183,8 +199,36 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `policy_change_details`:(Array)
+This complex property has following sub-properties:
+  + `changes`:
+                (Array of schema.TypeString) -
+  + `config_change_context`:(HashMap) - Context information on the change. 
+This complex property has following sub-properties:
+    + `dependent_policy_list`:
+                (Array of schema.TypeString) -
+    + `entity_data`:(JSON as string)(ReadOnly) The data of the object present in config result context. 
+    + `entity_moid`:(string) The Moid of the object present in config result context. 
+    + `entity_name`:(string) The name of the object present in config result context. 
+    + `entity_type`:(string) The type of the object present in config result context. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `parent_moid`:(string) The Moid of the parent object present in config result context. 
+    + `parent_policy_object_type`:(string) The type of the policy object associated with the profile. 
+    + `parent_type`:(string) The type of the parent object present in config result context. 
+  + `config_change_flag`:(string) Config change flag to differentiate Pending-changes and Config-drift.* `Pending-changes` - Config change flag represents changes are due to not deployed changes from Intersight.* `Drift-changes` - Config change flag represents changes are due to endpoint configuration changes. 
+  + `disruptions`:
+                (Array of schema.TypeString) -
+  + `message`:(string) Detailed description of the config change. 
+  + `mod_status`:(string) Modification status of the mo in this config change.* `None` - The 'none' operation/state.Indicates a configuration profile has been deployed, and the desired configuration matches the actual device configuration.* `Created` - The 'create' operation/state.Indicates a configuration profile has been created and associated with a device, but the configuration specified in the profilehas not been applied yet. For example, this could happen when the user creates a server profile and has not deployed the profile yet.* `Modified` - The 'update' operation/state.Indicates some of the desired configuration changes specified in a profile have not been been applied to the associated device.This happens when the user has made changes to a profile and has not deployed the changes yet, or when the workflow to applythe configuration changes has not completed successfully.* `Deleted` - The 'delete' operation/state.Indicates a configuration profile has been been disassociated from a device and the user has not undeployed these changes yet. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `removed_policies`:
                 (Array of schema.TypeString) -
+* `reported_policy_changes`:(Array)
+This complex property has following sub-properties:
+  + `change_id`:(string)(ReadOnly) The change evaluation identifier for which the change is reported. 
+  + `change_status`:(string)(ReadOnly) The status of policy change evaluation which has been reported.* `Initiated` - The status when policy change evaluation is triggered for a policy.* `Reported` - The status when policy change evaluation is reported for a policy. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `policy_type`:(string)(ReadOnly) The type of policy for which the change has been reported. 
 * `reservation_references`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [fcpool.ReservationReference](#fcpoolReservationReference)

@@ -10,7 +10,9 @@ Name | Type | Description | Notes
 **ActionParams** | Pointer to [**[]PolicyActionParam**](PolicyActionParam.md) |  | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
 **DeployedPolicies** | Pointer to **[]string** |  | [optional] 
+**PolicyChangeDetails** | Pointer to [**[]PolicyConfigChangeDetailType**](PolicyConfigChangeDetailType.md) |  | [optional] 
 **RemovedPolicies** | Pointer to **[]string** |  | [optional] 
+**ReportedPolicyChanges** | Pointer to [**[]PolicyReportedPolicyChange**](PolicyReportedPolicyChange.md) |  | [optional] 
 **ScheduledActions** | Pointer to [**[]PolicyScheduledAction**](PolicyScheduledAction.md) |  | [optional] 
 **PolicyBucket** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] 
 
@@ -203,6 +205,41 @@ HasDeployedPolicies returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetDeployedPolicies()`
 
 UnsetDeployedPolicies ensures that no value is present for DeployedPolicies, not even an explicit nil
+### GetPolicyChangeDetails
+
+`func (o *PolicyAbstractConfigProfile) GetPolicyChangeDetails() []PolicyConfigChangeDetailType`
+
+GetPolicyChangeDetails returns the PolicyChangeDetails field if non-nil, zero value otherwise.
+
+### GetPolicyChangeDetailsOk
+
+`func (o *PolicyAbstractConfigProfile) GetPolicyChangeDetailsOk() (*[]PolicyConfigChangeDetailType, bool)`
+
+GetPolicyChangeDetailsOk returns a tuple with the PolicyChangeDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyChangeDetails
+
+`func (o *PolicyAbstractConfigProfile) SetPolicyChangeDetails(v []PolicyConfigChangeDetailType)`
+
+SetPolicyChangeDetails sets PolicyChangeDetails field to given value.
+
+### HasPolicyChangeDetails
+
+`func (o *PolicyAbstractConfigProfile) HasPolicyChangeDetails() bool`
+
+HasPolicyChangeDetails returns a boolean if a field has been set.
+
+### SetPolicyChangeDetailsNil
+
+`func (o *PolicyAbstractConfigProfile) SetPolicyChangeDetailsNil(b bool)`
+
+ SetPolicyChangeDetailsNil sets the value for PolicyChangeDetails to be an explicit nil
+
+### UnsetPolicyChangeDetails
+`func (o *PolicyAbstractConfigProfile) UnsetPolicyChangeDetails()`
+
+UnsetPolicyChangeDetails ensures that no value is present for PolicyChangeDetails, not even an explicit nil
 ### GetRemovedPolicies
 
 `func (o *PolicyAbstractConfigProfile) GetRemovedPolicies() []string`
@@ -238,6 +275,41 @@ HasRemovedPolicies returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetRemovedPolicies()`
 
 UnsetRemovedPolicies ensures that no value is present for RemovedPolicies, not even an explicit nil
+### GetReportedPolicyChanges
+
+`func (o *PolicyAbstractConfigProfile) GetReportedPolicyChanges() []PolicyReportedPolicyChange`
+
+GetReportedPolicyChanges returns the ReportedPolicyChanges field if non-nil, zero value otherwise.
+
+### GetReportedPolicyChangesOk
+
+`func (o *PolicyAbstractConfigProfile) GetReportedPolicyChangesOk() (*[]PolicyReportedPolicyChange, bool)`
+
+GetReportedPolicyChangesOk returns a tuple with the ReportedPolicyChanges field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReportedPolicyChanges
+
+`func (o *PolicyAbstractConfigProfile) SetReportedPolicyChanges(v []PolicyReportedPolicyChange)`
+
+SetReportedPolicyChanges sets ReportedPolicyChanges field to given value.
+
+### HasReportedPolicyChanges
+
+`func (o *PolicyAbstractConfigProfile) HasReportedPolicyChanges() bool`
+
+HasReportedPolicyChanges returns a boolean if a field has been set.
+
+### SetReportedPolicyChangesNil
+
+`func (o *PolicyAbstractConfigProfile) SetReportedPolicyChangesNil(b bool)`
+
+ SetReportedPolicyChangesNil sets the value for ReportedPolicyChanges to be an explicit nil
+
+### UnsetReportedPolicyChanges
+`func (o *PolicyAbstractConfigProfile) UnsetReportedPolicyChanges()`
+
+UnsetReportedPolicyChanges ensures that no value is present for ReportedPolicyChanges, not even an explicit nil
 ### GetScheduledActions
 
 `func (o *PolicyAbstractConfigProfile) GetScheduledActions() []PolicyScheduledAction`

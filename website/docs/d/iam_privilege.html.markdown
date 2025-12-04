@@ -15,9 +15,12 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_iam_privilege.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `condition`:(string) The condition expression or criteria that determines when this conditional privilege can grant access to update the specified attribute names. 
 * `create_time`:(string) The time when this managed object was created. 
+* `description`:(string) Informative description about each privilege. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `hostname_prefix`:(string) The hostname prefix of the resource corresponding to this privilege. For example \\'sentry\\' in https://sentry.intersight.com . 
+* `is_conditional_privilege`:(bool) Flag that indicates whether this privilege is conditional. 
 * `method`:(string) The API method on the rest resource corresponding to privilege. For example READ, CREATE, UPDATE etc. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

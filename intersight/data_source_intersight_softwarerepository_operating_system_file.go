@@ -145,8 +145,13 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"import_progress": {
+			Description: "The progress percentage for the import operation.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"import_state": {
-			Description: "The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process.\n* `ReadyForImport` - The image is ready to be imported into the repository.\n* `Importing` - The image is being imported into the repository.\n* `Imported` - The image has been extracted and imported into the repository.\n* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.\n* `Extracting` - Indicates that the image is being extracted into the repository.\n* `Extracted` - Indicates that the image has been extracted into the repository.\n* `Failed` - The image import from an external source to the repository has failed.\n* `MetaOnly` - The image is present in an external repository.\n* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.\n* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.\n* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.\n* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.\n* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.\n* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.\n* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.",
+			Description: "The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process.\n* `ReadyForImport` - The image is ready to be imported into the repository.\n* `Importing` - The image is being imported into the repository.\n* `Imported` - The image has been extracted and imported into the repository.\n* `ComputingMetadata` - Indicates that the image has been imported but its metadata computation has not been done.\n* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.\n* `Extracting` - Indicates that the image is being extracted into the repository.\n* `Extracted` - Indicates that the image has been extracted into the repository.\n* `Failed` - The image import from an external source to the repository has failed.\n* `MetaOnly` - The image is present in an external repository.\n* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.\n* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.\n* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.\n* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.\n* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.\n* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.\n* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -326,6 +331,11 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 		},
 		"release_notes_url": {
 			Description: "The url for the release notes of this image.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sample_hashes": {
+			Description: "File sample hashes at deterministic positions for efficient duplicate detection of large files.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -777,6 +787,11 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetImportAction(x)
 	}
 
+	if v, ok := d.GetOkExists("import_progress"); ok {
+		x := int64(v.(int))
+		o.SetImportProgress(x)
+	}
+
 	if v, ok := d.GetOk("import_state"); ok {
 		x := (v.(string))
 		o.SetImportState(x)
@@ -987,6 +1002,11 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	if v, ok := d.GetOk("release_notes_url"); ok {
 		x := (v.(string))
 		o.SetReleaseNotesUrl(x)
+	}
+
+	if v, ok := d.GetOk("sample_hashes"); ok {
+		x := (v.(string))
+		o.SetSampleHashes(x)
 	}
 
 	if v, ok := d.GetOk("sha512sum"); ok {
@@ -1257,6 +1277,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["guid"] = (s.GetGuid())
 				temp["image_type"] = (s.GetImageType())
 				temp["import_action"] = (s.GetImportAction())
+				temp["import_progress"] = (s.GetImportProgress())
 				temp["import_state"] = (s.GetImportState())
 
 				temp["imported_time"] = (s.GetImportedTime()).String()
@@ -1283,6 +1304,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 
 				temp["release_date"] = (s.GetReleaseDate()).String()
 				temp["release_notes_url"] = (s.GetReleaseNotesUrl())
+				temp["sample_hashes"] = (s.GetSampleHashes())
 				temp["sha512sum"] = (s.GetSha512sum())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())

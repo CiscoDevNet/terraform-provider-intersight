@@ -5018,6 +5018,22 @@ func flattenListIamPermissionToRoles(p []models.IamPermissionToRoles, d *schema.
 			momorefs = append(momorefs, momoref)
 			return momorefs
 		})(item.GetPermission(), permission_roles_x)
+		iampermissiontoroles["privilege_sets"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				momoref := make(map[string]interface{})
+				momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				momoref["class_id"] = item.GetClassId()
+				momoref["moid"] = item.GetMoid()
+				momoref["object_type"] = item.GetObjectType()
+				momoref["selector"] = item.GetSelector()
+				momorefs = append(momorefs, momoref)
+			}
+			return momorefs
+		})(item.GetPrivilegeSets(), permission_roles_x)
 		iampermissiontoroles["roles"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
 			var momorefs []map[string]interface{}
 			if len(p) == 0 {
@@ -6292,7 +6308,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 		mobasemo := make(map[string]interface{})
 		mobasemo["account_moid"] = item.GetAccountMoid()
 		mobasemo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		targets_x, _ := d.GetOk("targets")
+		sources_x, _ := d.GetOk("sources")
 		mobasemo["ancestors"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6304,7 +6320,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetAncestors(), targets_x)
+		})(item.GetAncestors(), sources_x)
 		mobasemo["class_id"] = item.GetClassId()
 		mobasemo["create_time"] = item.GetCreateTime().String()
 		mobasemo["domain_group_moid"] = item.GetDomainGroupMoid()
@@ -6329,7 +6345,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			return mobasemorelationships
-		})(item.GetParent(), targets_x)
+		})(item.GetParent(), sources_x)
 		mobasemo["permission_resources"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6341,7 +6357,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetPermissionResources(), targets_x)
+		})(item.GetPermissionResources(), sources_x)
 		mobasemo["shared_scope"] = item.GetSharedScope()
 		mobasemo["tags"] = (func(p []models.MoTag, v interface{}) []map[string]interface{} {
 			var motags []map[string]interface{}
@@ -6398,7 +6414,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				motags = append(motags, motag)
 			}
 			return motags
-		})(item.GetTags(), targets_x)
+		})(item.GetTags(), sources_x)
 		mobasemo["version_context"] = (func(p models.MoVersionContext, v interface{}) []map[string]interface{} {
 			var moversioncontexts []map[string]interface{}
 			var ret models.MoVersionContext
@@ -6456,7 +6472,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			moversioncontexts = append(moversioncontexts, moversioncontext)
 			return moversioncontexts
-		})(item.GetVersionContext(), targets_x)
+		})(item.GetVersionContext(), sources_x)
 		mobasemos = append(mobasemos, mobasemo)
 	}
 	return mobasemos
@@ -7739,6 +7755,49 @@ func flattenListPolicyActionParam(p []models.PolicyActionParam, d *schema.Resour
 	}
 	return policyactionparams
 }
+func flattenListPolicyConfigChangeDetailType(p []models.PolicyConfigChangeDetailType, d *schema.ResourceData) []map[string]interface{} {
+	var policyconfigchangedetailtypes []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		policyconfigchangedetailtype := make(map[string]interface{})
+		policyconfigchangedetailtype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		policyconfigchangedetailtype["changes"] = item.GetChanges()
+		policyconfigchangedetailtype["class_id"] = item.GetClassId()
+		policy_change_details_x, _ := d.GetOk("policy_change_details")
+		policyconfigchangedetailtype["config_change_context"] = (func(p models.PolicyConfigResultContext, v interface{}) []map[string]interface{} {
+			var policyconfigresultcontexts []map[string]interface{}
+			var ret models.PolicyConfigResultContext
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			policyconfigresultcontext := make(map[string]interface{})
+			policyconfigresultcontext["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			policyconfigresultcontext["class_id"] = item.GetClassId()
+			policyconfigresultcontext["dependent_policy_list"] = item.GetDependentPolicyList()
+			policyconfigresultcontext["entity_data"] = flattenAdditionalProperties(item.EntityData)
+			policyconfigresultcontext["entity_moid"] = item.GetEntityMoid()
+			policyconfigresultcontext["entity_name"] = item.GetEntityName()
+			policyconfigresultcontext["entity_type"] = item.GetEntityType()
+			policyconfigresultcontext["object_type"] = item.GetObjectType()
+			policyconfigresultcontext["parent_moid"] = item.GetParentMoid()
+			policyconfigresultcontext["parent_policy_object_type"] = item.GetParentPolicyObjectType()
+			policyconfigresultcontext["parent_type"] = item.GetParentType()
+
+			policyconfigresultcontexts = append(policyconfigresultcontexts, policyconfigresultcontext)
+			return policyconfigresultcontexts
+		})(item.GetConfigChangeContext(), policy_change_details_x)
+		policyconfigchangedetailtype["config_change_flag"] = item.GetConfigChangeFlag()
+		policyconfigchangedetailtype["disruptions"] = item.GetDisruptions()
+		policyconfigchangedetailtype["message"] = item.GetMessage()
+		policyconfigchangedetailtype["mod_status"] = item.GetModStatus()
+		policyconfigchangedetailtype["object_type"] = item.GetObjectType()
+		policyconfigchangedetailtypes = append(policyconfigchangedetailtypes, policyconfigchangedetailtype)
+	}
+	return policyconfigchangedetailtypes
+}
 func flattenListPolicyPolicyStatus(p []models.PolicyPolicyStatus, d *schema.ResourceData) []map[string]interface{} {
 	var policypolicystatuss []map[string]interface{}
 	if len(p) == 0 {
@@ -7774,6 +7833,23 @@ func flattenListPolicyPolicyStatus(p []models.PolicyPolicyStatus, d *schema.Reso
 		policypolicystatuss = append(policypolicystatuss, policypolicystatus)
 	}
 	return policypolicystatuss
+}
+func flattenListPolicyReportedPolicyChange(p []models.PolicyReportedPolicyChange, d *schema.ResourceData) []map[string]interface{} {
+	var policyreportedpolicychanges []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		policyreportedpolicychange := make(map[string]interface{})
+		policyreportedpolicychange["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		policyreportedpolicychange["change_id"] = item.GetChangeId()
+		policyreportedpolicychange["change_status"] = item.GetChangeStatus()
+		policyreportedpolicychange["class_id"] = item.GetClassId()
+		policyreportedpolicychange["object_type"] = item.GetObjectType()
+		policyreportedpolicychange["policy_type"] = item.GetPolicyType()
+		policyreportedpolicychanges = append(policyreportedpolicychanges, policyreportedpolicychange)
+	}
+	return policyreportedpolicychanges
 }
 func flattenListPolicyScheduledAction(p []models.PolicyScheduledAction, d *schema.ResourceData) []map[string]interface{} {
 	var policyscheduledactions []map[string]interface{}
@@ -10079,7 +10155,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		input_definition_x, _ := d.GetOk("input_definition")
+		type_definition_x, _ := d.GetOk("type_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -10097,7 +10173,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), input_definition_x)
+		})(item.GetDefault(), type_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -10115,7 +10191,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), input_definition_x)
+		})(item.GetDisplayMeta(), type_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -16615,7 +16691,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
+	data_ip_range_x, _ := d.GetOk("data_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -16631,7 +16707,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
+	})(item.GetIpAddrBlocks(), data_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -20437,6 +20513,21 @@ func flattenMapMerakiOrganizationRelationship(p models.MerakiOrganizationRelatio
 
 	merakiorganizationrelationships = append(merakiorganizationrelationships, merakiorganizationrelationship)
 	return merakiorganizationrelationships
+}
+func flattenMapMoBaseComplexType(p models.MoBaseComplexType, d *schema.ResourceData) []map[string]interface{} {
+	var mobasecomplextypes []map[string]interface{}
+	var ret models.MoBaseComplexType
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	mobasecomplextype := make(map[string]interface{})
+	mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	mobasecomplextype["class_id"] = item.GetClassId()
+	mobasecomplextype["object_type"] = item.GetObjectType()
+
+	mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+	return mobasecomplextypes
 }
 func flattenMapMoBaseMo(p models.MoBaseMo, d *schema.ResourceData) []map[string]interface{} {
 	var mobasemos []map[string]interface{}
@@ -24386,25 +24477,6 @@ func flattenMapTamSeverity(p models.TamSeverity, d *schema.ResourceData) []map[s
 	tamseveritys = append(tamseveritys, tamseverity)
 	return tamseveritys
 }
-func flattenMapTaskFileDownloadInfo(p models.TaskFileDownloadInfo, d *schema.ResourceData) []map[string]interface{} {
-	var taskfiledownloadinfos []map[string]interface{}
-	var ret models.TaskFileDownloadInfo
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	taskfiledownloadinfo := make(map[string]interface{})
-	taskfiledownloadinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	taskfiledownloadinfo["class_id"] = item.GetClassId()
-	taskfiledownloadinfo["contents"] = item.GetContents()
-	taskfiledownloadinfo["object_type"] = item.GetObjectType()
-	taskfiledownloadinfo["path"] = item.GetPath()
-	taskfiledownloadinfo["nr_source"] = item.GetSource()
-	taskfiledownloadinfo["type"] = item.GetType()
-
-	taskfiledownloadinfos = append(taskfiledownloadinfos, taskfiledownloadinfo)
-	return taskfiledownloadinfos
-}
 func flattenMapTechsupportmanagementTechSupportBundleRelationship(p models.TechsupportmanagementTechSupportBundleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var techsupportmanagementtechsupportbundlerelationships []map[string]interface{}
 	var ret models.TechsupportmanagementTechSupportBundleRelationship
@@ -27270,6 +27342,7 @@ func flattenMapWorkflowWorkflowProperties(p models.WorkflowWorkflowProperties, d
 	workflowworkflowproperties["rollback_on_cancel"] = item.GetRollbackOnCancel()
 	workflowworkflowproperties["rollback_on_failure"] = item.GetRollbackOnFailure()
 	workflowworkflowproperties["support_status"] = item.GetSupportStatus()
+	workflowworkflowproperties["target_ctx_policy"] = item.GetTargetCtxPolicy()
 
 	workflowworkflowpropertiess = append(workflowworkflowpropertiess, workflowworkflowproperties)
 	return workflowworkflowpropertiess
@@ -27408,7 +27481,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 	x509certificate := make(map[string]interface{})
 	x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	x509certificate["class_id"] = item.GetClassId()
-	ca_cert_x, _ := d.GetOk("ca_cert")
+	certificate_x, _ := d.GetOk("certificate")
 	x509certificate["issuer"] = (func(p models.PkixDistinguishedName, v interface{}) []map[string]interface{} {
 		var pkixdistinguishednames []map[string]interface{}
 		var ret models.PkixDistinguishedName
@@ -27429,7 +27502,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetIssuer(), ca_cert_x)
+	})(item.GetIssuer(), certificate_x)
 	x509certificate["not_after"] = item.GetNotAfter().String()
 	x509certificate["not_before"] = item.GetNotBefore().String()
 	x509certificate["object_type"] = item.GetObjectType()
@@ -27456,7 +27529,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetSubject(), ca_cert_x)
+	})(item.GetSubject(), certificate_x)
 
 	x509certificates = append(x509certificates, x509certificate)
 	return x509certificates

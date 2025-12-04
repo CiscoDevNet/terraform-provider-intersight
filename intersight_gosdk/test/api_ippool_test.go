@@ -308,6 +308,20 @@ func Test_intersight_IppoolApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IppoolApiService PatchIppoolReservation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IppoolApi.PatchIppoolReservation(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IppoolApiService UpdateIppoolPool", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -315,6 +329,20 @@ func Test_intersight_IppoolApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IppoolApi.UpdateIppoolPool(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IppoolApiService UpdateIppoolReservation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IppoolApi.UpdateIppoolReservation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -45,7 +45,9 @@ type WorkflowWorkflowProperties struct {
 	// When set to true, the changes are automatically rolled back if the workflow fails to execute.
 	RollbackOnFailure *bool `json:"RollbackOnFailure,omitempty"`
 	// Supported status of the definition. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
-	SupportStatus        *string `json:"SupportStatus,omitempty"`
+	SupportStatus *string `json:"SupportStatus,omitempty"`
+	// The target context policy that controls how target context is set for this workflow when it is run as a subworkflow. * `InheritFromParent` - The target context is inherited from the parent workflow and additional targets from this current workflow are also added. Use this setting when the parent workflow is operating on a target set which is still applicable for this current subworkflow. * `OnlyThisWorkflowTargets` - The target context is set only from the targets defined in the current workflow and nothing is inherited from parent workflow. Use this setting if the parent workflow is operating on a superset of targets and this current workflow is operating on a subset of those targets or a completely different set of targets.
+	TargetCtxPolicy      *string `json:"TargetCtxPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -73,6 +75,8 @@ func NewWorkflowWorkflowProperties(classId string, objectType string) *WorkflowW
 	this.RollbackOnFailure = &rollbackOnFailure
 	var supportStatus string = "Supported"
 	this.SupportStatus = &supportStatus
+	var targetCtxPolicy string = "InheritFromParent"
+	this.TargetCtxPolicy = &targetCtxPolicy
 	return &this
 }
 
@@ -99,6 +103,8 @@ func NewWorkflowWorkflowPropertiesWithDefaults() *WorkflowWorkflowProperties {
 	this.RollbackOnFailure = &rollbackOnFailure
 	var supportStatus string = "Supported"
 	this.SupportStatus = &supportStatus
+	var targetCtxPolicy string = "InheritFromParent"
+	this.TargetCtxPolicy = &targetCtxPolicy
 	return &this
 }
 
@@ -448,6 +454,38 @@ func (o *WorkflowWorkflowProperties) SetSupportStatus(v string) {
 	o.SupportStatus = &v
 }
 
+// GetTargetCtxPolicy returns the TargetCtxPolicy field value if set, zero value otherwise.
+func (o *WorkflowWorkflowProperties) GetTargetCtxPolicy() string {
+	if o == nil || IsNil(o.TargetCtxPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.TargetCtxPolicy
+}
+
+// GetTargetCtxPolicyOk returns a tuple with the TargetCtxPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowProperties) GetTargetCtxPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.TargetCtxPolicy) {
+		return nil, false
+	}
+	return o.TargetCtxPolicy, true
+}
+
+// HasTargetCtxPolicy returns a boolean if a field has been set.
+func (o *WorkflowWorkflowProperties) HasTargetCtxPolicy() bool {
+	if o != nil && !IsNil(o.TargetCtxPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetCtxPolicy gets a reference to the given string and assigns it to the TargetCtxPolicy field.
+func (o *WorkflowWorkflowProperties) SetTargetCtxPolicy(v string) {
+	o.TargetCtxPolicy = &v
+}
+
 func (o WorkflowWorkflowProperties) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -500,6 +538,9 @@ func (o WorkflowWorkflowProperties) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SupportStatus) {
 		toSerialize["SupportStatus"] = o.SupportStatus
+	}
+	if !IsNil(o.TargetCtxPolicy) {
+		toSerialize["TargetCtxPolicy"] = o.TargetCtxPolicy
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -574,6 +615,8 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(data []byte) (err error) {
 		RollbackOnFailure *bool `json:"RollbackOnFailure,omitempty"`
 		// Supported status of the definition. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 		SupportStatus *string `json:"SupportStatus,omitempty"`
+		// The target context policy that controls how target context is set for this workflow when it is run as a subworkflow. * `InheritFromParent` - The target context is inherited from the parent workflow and additional targets from this current workflow are also added. Use this setting when the parent workflow is operating on a target set which is still applicable for this current subworkflow. * `OnlyThisWorkflowTargets` - The target context is set only from the targets defined in the current workflow and nothing is inherited from parent workflow. Use this setting if the parent workflow is operating on a superset of targets and this current workflow is operating on a subset of those targets or a completely different set of targets.
+		TargetCtxPolicy *string `json:"TargetCtxPolicy,omitempty"`
 	}
 
 	varWorkflowWorkflowPropertiesWithoutEmbeddedStruct := WorkflowWorkflowPropertiesWithoutEmbeddedStruct{}
@@ -592,6 +635,7 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowWorkflowProperties.RollbackOnCancel = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.RollbackOnCancel
 		varWorkflowWorkflowProperties.RollbackOnFailure = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.RollbackOnFailure
 		varWorkflowWorkflowProperties.SupportStatus = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.SupportStatus
+		varWorkflowWorkflowProperties.TargetCtxPolicy = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.TargetCtxPolicy
 		*o = WorkflowWorkflowProperties(varWorkflowWorkflowProperties)
 	} else {
 		return err
@@ -620,6 +664,7 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "RollbackOnCancel")
 		delete(additionalProperties, "RollbackOnFailure")
 		delete(additionalProperties, "SupportStatus")
+		delete(additionalProperties, "TargetCtxPolicy")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

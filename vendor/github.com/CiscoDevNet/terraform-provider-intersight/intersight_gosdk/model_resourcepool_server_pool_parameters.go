@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,9 @@ type ResourcepoolServerPoolParameters struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The platform for which the servers in resource pool are applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
-	ManagementMode       *string `json:"ManagementMode,omitempty"`
+	ManagementMode *string `json:"ManagementMode,omitempty"`
+	// The platform for which the servers in resource pool are applicable. It can either be a server that is operating in standalone mode or or one that is attached to a Fabric Interconnect or Unified Edge Chassis managed by Intersight. * `None` - Server which are not belongs to any platform. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. * `UnifiedEdgeServer` - Unified Edge sleds that is managed by Intersight.
+	TargetPlatform       *string `json:"TargetPlatform,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,6 +47,8 @@ func NewResourcepoolServerPoolParameters(classId string, objectType string) *Res
 	this.ObjectType = objectType
 	var managementMode string = "IntersightStandalone"
 	this.ManagementMode = &managementMode
+	var targetPlatform string = "None"
+	this.TargetPlatform = &targetPlatform
 	return &this
 }
 
@@ -59,6 +63,8 @@ func NewResourcepoolServerPoolParametersWithDefaults() *ResourcepoolServerPoolPa
 	this.ObjectType = objectType
 	var managementMode string = "IntersightStandalone"
 	this.ManagementMode = &managementMode
+	var targetPlatform string = "None"
+	this.TargetPlatform = &targetPlatform
 	return &this
 }
 
@@ -152,6 +158,38 @@ func (o *ResourcepoolServerPoolParameters) SetManagementMode(v string) {
 	o.ManagementMode = &v
 }
 
+// GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
+func (o *ResourcepoolServerPoolParameters) GetTargetPlatform() string {
+	if o == nil || IsNil(o.TargetPlatform) {
+		var ret string
+		return ret
+	}
+	return *o.TargetPlatform
+}
+
+// GetTargetPlatformOk returns a tuple with the TargetPlatform field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourcepoolServerPoolParameters) GetTargetPlatformOk() (*string, bool) {
+	if o == nil || IsNil(o.TargetPlatform) {
+		return nil, false
+	}
+	return o.TargetPlatform, true
+}
+
+// HasTargetPlatform returns a boolean if a field has been set.
+func (o *ResourcepoolServerPoolParameters) HasTargetPlatform() bool {
+	if o != nil && !IsNil(o.TargetPlatform) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetPlatform gets a reference to the given string and assigns it to the TargetPlatform field.
+func (o *ResourcepoolServerPoolParameters) SetTargetPlatform(v string) {
+	o.TargetPlatform = &v
+}
+
 func (o ResourcepoolServerPoolParameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -180,6 +218,9 @@ func (o ResourcepoolServerPoolParameters) ToMap() (map[string]interface{}, error
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.ManagementMode) {
 		toSerialize["ManagementMode"] = o.ManagementMode
+	}
+	if !IsNil(o.TargetPlatform) {
+		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -238,6 +279,8 @@ func (o *ResourcepoolServerPoolParameters) UnmarshalJSON(data []byte) (err error
 		ObjectType string `json:"ObjectType"`
 		// The platform for which the servers in resource pool are applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
+		// The platform for which the servers in resource pool are applicable. It can either be a server that is operating in standalone mode or or one that is attached to a Fabric Interconnect or Unified Edge Chassis managed by Intersight. * `None` - Server which are not belongs to any platform. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. * `UnifiedEdgeServer` - Unified Edge sleds that is managed by Intersight.
+		TargetPlatform *string `json:"TargetPlatform,omitempty"`
 	}
 
 	varResourcepoolServerPoolParametersWithoutEmbeddedStruct := ResourcepoolServerPoolParametersWithoutEmbeddedStruct{}
@@ -248,6 +291,7 @@ func (o *ResourcepoolServerPoolParameters) UnmarshalJSON(data []byte) (err error
 		varResourcepoolServerPoolParameters.ClassId = varResourcepoolServerPoolParametersWithoutEmbeddedStruct.ClassId
 		varResourcepoolServerPoolParameters.ObjectType = varResourcepoolServerPoolParametersWithoutEmbeddedStruct.ObjectType
 		varResourcepoolServerPoolParameters.ManagementMode = varResourcepoolServerPoolParametersWithoutEmbeddedStruct.ManagementMode
+		varResourcepoolServerPoolParameters.TargetPlatform = varResourcepoolServerPoolParametersWithoutEmbeddedStruct.TargetPlatform
 		*o = ResourcepoolServerPoolParameters(varResourcepoolServerPoolParameters)
 	} else {
 		return err
@@ -268,6 +312,7 @@ func (o *ResourcepoolServerPoolParameters) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ManagementMode")
+		delete(additionalProperties, "TargetPlatform")
 
 		// remove fields from embedded structs
 		reflectResourcepoolResourcePoolParameters := reflect.ValueOf(o.ResourcepoolResourcePoolParameters)

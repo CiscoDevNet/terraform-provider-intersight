@@ -71,7 +71,7 @@ func getApicOutSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"dn": {
-			Description: "Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -91,7 +91,7 @@ func getApicOutSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Object L3Out name in Cisco Application Policy Infrastructure Controller (APIC).",
+			Description: "L3Out Name of an object within the Cisco Application Policy Infrastructure Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -330,6 +330,11 @@ func getMetricsConfigurationSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"user_max_ingestion_bytes": {
+			Description: "User override of the max ingestion rate for metrics. Provided as an advanced option to override the default limits. Option should only be used in coordination with TAC engineers.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -787,6 +792,11 @@ func dataSourceMetricsConfigurationRead(c context.Context, d *schema.ResourceDat
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("user_max_ingestion_bytes"); ok {
+		x := int64(v.(int))
+		o.SetUserMaxIngestionBytes(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -922,6 +932,7 @@ func dataSourceMetricsConfigurationRead(c context.Context, d *schema.ResourceDat
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_max_ingestion_bytes"] = (s.GetUserMaxIngestionBytes())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				metricsConfigurationResults = append(metricsConfigurationResults, temp)

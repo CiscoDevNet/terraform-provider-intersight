@@ -166,7 +166,7 @@ Device type used when booting from FlexMMC device.
 
 ### [boot.Http](#argument-reference)
 Device type used in boot policy to boot from HTTP device.
-* `interface_name`:(string) The name of the underlying virtual ethernet interface used by the HTTP boot device. 
+* `interface_name`:(string) For integrated NICs, specify the underlying network interface card name (such as 1 or 2). For virtual NICs, specify the vNIC name (customized name like eth0). 
 * `interface_source`:(string) Lists the supported Interface Source for HTTP device. Supported values are \ name\  and \ mac\ .* `name` - Use interface name to select virtual ethernet interface.* `mac` - Use MAC address to select virtual ethernet interface.* `port` - Use port to select virtual ethernet interface. 
 * `ip_config_type`:(string) The IP config type to use during the HTTP boot process. For DHCP configuration, the IP address, DNS server, netmask and gateway details are obtained from DHCP server. For static configuration, please provide the IP address, DNS server, netmask, and gateway details.* `DHCP` - The type of the IP config is DHCP.* `Static` - The type of the IP config is Static. 
 * `ip_type`:(string) The IP address family type to use during the HTTP boot process.* `IPv4` - The type of the IP address is IPv4.* `IPv6` - The type of the IP address is IPv6. 
@@ -236,7 +236,7 @@ This complex property has following sub-properties:
 
 ### [boot.Pxe](#argument-reference)
 Device type used when booting from a PXE boot device.
-* `interface_name`:(string) The name of the underlying virtual ethernet interface used by the PXE boot device. 
+* `interface_name`:(string) For integrated NICs, specify the underlying network interface card name (such as 1 or 2). For virtual NICs, specify the vNIC name (customized name like eth0). 
 * `interface_source`:(string) Lists the supported methods to provide network boot device configuration. Supported values are \ name\  and \ mac\ .* `name` - Use interface name to select virtual ethernet interface.* `mac` - Use MAC address to select virtual ethernet interface.* `port` - Use port to select virtual ethernet interface. 
 * `ip_type`:(string) The IP Address family type to use during the PXE Boot process.* `None` - Default value if IpType is not specified.* `IPv4` - The IPv4 address family type.* `IPv6` - The IPv6 address family type. 
 * `mac_address`:(string) The MAC Address of the underlying virtual ethernet interface used by the PXE boot device. 

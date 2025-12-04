@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "boot.Pxe"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.Pxe"]
-**InterfaceName** | Pointer to **string** | The name of the underlying virtual ethernet interface used by the PXE boot device. | [optional] 
+**InterfaceName** | Pointer to **string** | For integrated NICs, specify the underlying network interface card name (such as 1 or 2). For virtual NICs, specify the vNIC name (customized name like eth0). | [optional] 
 **InterfaceSource** | Pointer to **string** | Lists the supported methods to provide network boot device configuration. Supported values are \&quot;name\&quot; and \&quot;mac\&quot;. * &#x60;name&#x60; - Use interface name to select virtual ethernet interface. * &#x60;mac&#x60; - Use MAC address to select virtual ethernet interface. * &#x60;port&#x60; - Use port to select virtual ethernet interface. | [optional] [default to "name"]
 **IpType** | Pointer to **string** | The IP Address family type to use during the PXE Boot process. * &#x60;None&#x60; - Default value if IpType is not specified. * &#x60;IPv4&#x60; - The IPv4 address family type. * &#x60;IPv6&#x60; - The IPv6 address family type. | [optional] [default to "None"]
 **MacAddress** | Pointer to **string** | The MAC Address of the underlying virtual ethernet interface used by the PXE boot device. | [optional] 

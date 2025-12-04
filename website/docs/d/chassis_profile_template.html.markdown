@@ -3,112 +3,26 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_profile_template"
 description: |-
-        The Chassis Profile Template consists of common chassis profile configurations, which can be reused across multiple profiles. Chassis profiles can be created from the template using the Derive operation. Additionally, an existing profile can be attached to a template to use the configuration set in the template.
-        To derive chassis profiles from a chassis profile template, you must use the synchronous /v1/bulk/MoCloners bulk API.
-        Deriving profiles from a Chassis Profile Template
-        URL: /v1/bulk/MoCloners
-        Method: POST
-        Body: >
-        {
-        Sources:[
-        {
-        Moid:64fb5d17656e6f301e43045b,
-        ObjectType:chassis.ProfileTemplate
-        }],
-        Targets:[
-        {
-        Name:template1_DERIVED-1”,
-        ObjectType:chassis.Profile,
-        Organization:
-        {
-        ObjectType:organization.Organization,
-        Moid:64b0b9ef697265301e52ea0c
-        },
-        Description:,
-        Tags:[],
-        AssignedChassis:
-        {
-        Moid:65efe097617675301ecf186f,
-        ObjectType:equipment.Chassis
-        }
-        }]
-        }
-        The API response includes the derived Chassis profile MO details.
-        Template Updates
-        When the profile template is updated, a call to the /v1/bulk/MoMergers API is to be made by the client, to synchronize the template changes to all derived profile instances.
-        Updating profiles from a Chassis Profile Template
-        URL: /v1/bulk/MoMergers
-        Method: POST
-        Body: >
-        {
-        Sources:[
-        {
-        Moid:64fb5d17656e6f301e43045b,
-        ObjectType:chassis.ProfileTemplate
-        }],
-        Targets:[
-        {
-        Moid:6502ffc8656e6f301e5e9f6b,
-        ObjectType:chassis.Profile
-        }],
-        MergeAction:Replace
-        }
-        The response of the MoMerger API call would contain the changed profiles.
+        ### Overview
+        The ProfileTemplate object for chassis profiles defines reusable templates for chassis configurations, supporting rapid deployment and consistent configuration across multiple chassis.
+        #### Purpose
+        Chassis ProfileTemplate streamlines the creation, management, and propagation of standardized chassis configurations within an organization.
+        #### Key Concepts
+        - **Template-Based Deployment:** - Accelerates chassis onboarding and ensures consistent application of best practices.
+        - **Centralized Management:** - Templates can be updated to affect all derived chassis profiles, simplifying large-scale configuration changes.
+        - **Lifecycle Integration:** - Supports derivation and update workflows, integrating with bulk operations for efficient management.
 
 ---
 
 # Data Source: intersight_chassis_profile_template
-The Chassis Profile Template consists of common chassis profile configurations, which can be reused across multiple profiles. Chassis profiles can be created from the template using the Derive operation. Additionally, an existing profile can be attached to a template to use the configuration set in the template.
-To derive chassis profiles from a chassis profile template, you must use the synchronous /v1/bulk/MoCloners bulk API.
-Deriving profiles from a Chassis Profile Template
-URL: /v1/bulk/MoCloners
-Method: POST
-Body: >
- {
-    "Sources":[
-      {
-        "Moid":"64fb5d17656e6f301e43045b",
-        "ObjectType":"chassis.ProfileTemplate"
-      }],
-    "Targets":[
-      {
-        "Name":"template1_DERIVED-1”,
-        "ObjectType":"chassis.Profile",
-        "Organization":
-          {
-            "ObjectType":"organization.Organization",
-            "Moid":"64b0b9ef697265301e52ea0c"
-          },
-        "Description":"",
-        "Tags":[],
-        "AssignedChassis":
-          {
-            "Moid":"65efe097617675301ecf186f",
-            "ObjectType":"equipment.Chassis
-          }
-      }]
- }
-The API response includes the derived Chassis profile MO details.
-Template Updates
-When the profile template is updated, a call to the /v1/bulk/MoMergers API is to be made by the client, to synchronize the template changes to all derived profile instances.
-Updating profiles from a Chassis Profile Template
-URL: /v1/bulk/MoMergers
-Method: POST
-Body: >
- {
-    "Sources":[
-      {
-        "Moid":"64fb5d17656e6f301e43045b",
-        "ObjectType":"chassis.ProfileTemplate"
-      }],
-    "Targets":[
-      {
-        "Moid":"6502ffc8656e6f301e5e9f6b",
-        "ObjectType":"chassis.Profile"
-      }],
-    "MergeAction":"Replace"
- }
-The response of the MoMerger API call would contain the changed profiles.
+### Overview
+The ProfileTemplate object for chassis profiles defines reusable templates for chassis configurations, supporting rapid deployment and consistent configuration across multiple chassis.
+#### Purpose
+Chassis ProfileTemplate streamlines the creation, management, and propagation of standardized chassis configurations within an organization.
+#### Key Concepts
+- **Template-Based Deployment:** - Accelerates chassis onboarding and ensures consistent application of best practices.
+- **Centralized Management:** - Templates can be updated to affect all derived chassis profiles, simplifying large-scale configuration changes.
+- **Lifecycle Integration:** - Supports derivation and update workflows, integrating with bulk operations for efficient management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

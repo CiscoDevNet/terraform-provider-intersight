@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | The description for this workflow. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the workflow metadata. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
 **Name** | Pointer to **string** | The name for this workflow metadata. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
+**AssociatedPrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] 
 **AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
 **Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 
@@ -146,6 +147,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetAssociatedPrivilegeSets
+
+`func (o *WorkflowWorkflowMetadata) GetAssociatedPrivilegeSets() []IamPrivilegeSetRelationship`
+
+GetAssociatedPrivilegeSets returns the AssociatedPrivilegeSets field if non-nil, zero value otherwise.
+
+### GetAssociatedPrivilegeSetsOk
+
+`func (o *WorkflowWorkflowMetadata) GetAssociatedPrivilegeSetsOk() (*[]IamPrivilegeSetRelationship, bool)`
+
+GetAssociatedPrivilegeSetsOk returns a tuple with the AssociatedPrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssociatedPrivilegeSets
+
+`func (o *WorkflowWorkflowMetadata) SetAssociatedPrivilegeSets(v []IamPrivilegeSetRelationship)`
+
+SetAssociatedPrivilegeSets sets AssociatedPrivilegeSets field to given value.
+
+### HasAssociatedPrivilegeSets
+
+`func (o *WorkflowWorkflowMetadata) HasAssociatedPrivilegeSets() bool`
+
+HasAssociatedPrivilegeSets returns a boolean if a field has been set.
+
+### SetAssociatedPrivilegeSetsNil
+
+`func (o *WorkflowWorkflowMetadata) SetAssociatedPrivilegeSetsNil(b bool)`
+
+ SetAssociatedPrivilegeSetsNil sets the value for AssociatedPrivilegeSets to be an explicit nil
+
+### UnsetAssociatedPrivilegeSets
+`func (o *WorkflowWorkflowMetadata) UnsetAssociatedPrivilegeSets()`
+
+UnsetAssociatedPrivilegeSets ensures that no value is present for AssociatedPrivilegeSets, not even an explicit nil
 ### GetAssociatedRoles
 
 `func (o *WorkflowWorkflowMetadata) GetAssociatedRoles() []IamRoleRelationship`
