@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | The task metadata description to describe what this task will do when executed. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the task metadata. | [optional] 
 **Name** | Pointer to **string** | The name of the task metadata. The name should follow this convention &lt;Verb or Action&gt;&lt;Category&gt;&lt;Vendor&gt;&lt;Product&gt;&lt;Noun or object&gt; Verb or Action is a required portion of the name and this must be part of the pre-approved verb list. Category is an optional field and this will refer to the broad category of the task referring to the type of resource or endpoint. If there is no specific category then use \&quot;Generic\&quot; if required. Vendor is an optional field and this will refer to the specific vendor this task applies to. If the task is generic and not tied to a vendor, then do not specify anything. Product is an optional field, this will contain the vendor product and model when desired. Noun or object is a required field and  this will contain the noun or object on which the action is being performed. Examples SendEmail  - This is a task in Generic category for sending email. NewStorageVolume - This is a vendor agnostic task under Storage device category for creating a new volume. | [optional] 
+**AssociatedPrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] 
 **AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
 **Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 
@@ -146,6 +147,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetAssociatedPrivilegeSets
+
+`func (o *WorkflowTaskMetadata) GetAssociatedPrivilegeSets() []IamPrivilegeSetRelationship`
+
+GetAssociatedPrivilegeSets returns the AssociatedPrivilegeSets field if non-nil, zero value otherwise.
+
+### GetAssociatedPrivilegeSetsOk
+
+`func (o *WorkflowTaskMetadata) GetAssociatedPrivilegeSetsOk() (*[]IamPrivilegeSetRelationship, bool)`
+
+GetAssociatedPrivilegeSetsOk returns a tuple with the AssociatedPrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssociatedPrivilegeSets
+
+`func (o *WorkflowTaskMetadata) SetAssociatedPrivilegeSets(v []IamPrivilegeSetRelationship)`
+
+SetAssociatedPrivilegeSets sets AssociatedPrivilegeSets field to given value.
+
+### HasAssociatedPrivilegeSets
+
+`func (o *WorkflowTaskMetadata) HasAssociatedPrivilegeSets() bool`
+
+HasAssociatedPrivilegeSets returns a boolean if a field has been set.
+
+### SetAssociatedPrivilegeSetsNil
+
+`func (o *WorkflowTaskMetadata) SetAssociatedPrivilegeSetsNil(b bool)`
+
+ SetAssociatedPrivilegeSetsNil sets the value for AssociatedPrivilegeSets to be an explicit nil
+
+### UnsetAssociatedPrivilegeSets
+`func (o *WorkflowTaskMetadata) UnsetAssociatedPrivilegeSets()`
+
+UnsetAssociatedPrivilegeSets ensures that no value is present for AssociatedPrivilegeSets, not even an explicit nil
 ### GetAssociatedRoles
 
 `func (o *WorkflowTaskMetadata) GetAssociatedRoles() []IamRoleRelationship`

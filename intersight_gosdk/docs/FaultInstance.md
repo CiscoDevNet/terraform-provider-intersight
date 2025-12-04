@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **AncestorMoType** | Pointer to **string** | Object type of the parent of the Managed object which was affected. | [optional] [readonly] 
 **Code** | Pointer to **string** | Numerical fault code of the fault found. | [optional] [readonly] 
 **CreationTime** | Pointer to **string** | The time of creation of the fault instance. | [optional] [readonly] 
-**Description** | Pointer to **string** | Detailed message of the fault. | [optional] [readonly] 
+**Description** | Pointer to **string** | Short summary of the fault found. | [optional] [readonly] 
 **LastTransitionTime** | Pointer to **string** | Last transition time of the fault. | [optional] [readonly] 
 **NumOccurrences** | Pointer to **int64** | The number of times this fault has occured. | [optional] [readonly] 
 **OriginalSeverity** | Pointer to **string** | Current Severity of the fault found. | [optional] [readonly] 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -28,12 +28,22 @@ type IamPrivilegeSet struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Flag used by UI to keep track of the user selection option for future updates of privilege sets.
+	AllowFutureUpdates *bool `json:"AllowFutureUpdates,omitempty"`
 	// Description of the privilege set.
 	Description *string `json:"Description,omitempty"`
+	// Flag to indicate if the privilege names are updated.
+	IsPrivilegeNamesUpdated *bool `json:"IsPrivilegeNamesUpdated,omitempty"`
 	// Name of the privilege set.
-	Name           *string                        `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_ .:-]{1,64}$"`
-	PrivilegeNames []string                       `json:"PrivilegeNames,omitempty"`
-	Account        NullableIamAccountRelationship `json:"Account,omitempty"`
+	Name           *string  `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_ .:,()&\\/-]{1,128}$"`
+	PrivilegeNames []string `json:"PrivilegeNames,omitempty"`
+	// Type of the privilege set. * `Internal` - Privilege set is internal to the system. * `SystemPackaged` - Privilege set is packaged by the system and user can use it as a reference for custom privilege set creation. * `SystemDefined` - Privilege set is defined by the system. * `TreeNode` - Privilege set is a tree node in the custom privilege set creation hierarchy. * `TreeRoot` - Privilege set is a tree root in the custom privilege set creation hierarchy. * `TreeLeaf` - Privilege set is a tree leaf in the custom privilege set creation hierarchy. * `UserCreated` - Privilege set is created by the user.
+	PrivilegeSetType *string `json:"PrivilegeSetType,omitempty"`
+	// The scope of the privilege set. * `Generic` - Privilege set can be added to account wide permission or organization permissions. * `Account` - Privilege set can be added to account wide permission only.
+	Scope *string `json:"Scope,omitempty"`
+	// UUID of the privilege set.
+	Uuid    *string                        `json:"Uuid,omitempty" validate:"regexp=^[a-zA-Z0-9_ .:,-]{0,128}$"`
+	Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to iamPrivilegeSet resources.
 	AssociatedPrivilegeSets []IamPrivilegeSetRelationship `json:"AssociatedPrivilegeSets,omitempty"`
 	// An array of relationships to iamPrivilege resources.
@@ -52,6 +62,10 @@ func NewIamPrivilegeSet(classId string, objectType string) *IamPrivilegeSet {
 	this := IamPrivilegeSet{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var allowFutureUpdates bool = true
+	this.AllowFutureUpdates = &allowFutureUpdates
+	var isPrivilegeNamesUpdated bool = false
+	this.IsPrivilegeNamesUpdated = &isPrivilegeNamesUpdated
 	return &this
 }
 
@@ -64,6 +78,10 @@ func NewIamPrivilegeSetWithDefaults() *IamPrivilegeSet {
 	this.ClassId = classId
 	var objectType string = "iam.PrivilegeSet"
 	this.ObjectType = objectType
+	var allowFutureUpdates bool = true
+	this.AllowFutureUpdates = &allowFutureUpdates
+	var isPrivilegeNamesUpdated bool = false
+	this.IsPrivilegeNamesUpdated = &isPrivilegeNamesUpdated
 	return &this
 }
 
@@ -125,6 +143,38 @@ func (o *IamPrivilegeSet) GetDefaultObjectType() interface{} {
 	return "iam.PrivilegeSet"
 }
 
+// GetAllowFutureUpdates returns the AllowFutureUpdates field value if set, zero value otherwise.
+func (o *IamPrivilegeSet) GetAllowFutureUpdates() bool {
+	if o == nil || IsNil(o.AllowFutureUpdates) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowFutureUpdates
+}
+
+// GetAllowFutureUpdatesOk returns a tuple with the AllowFutureUpdates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilegeSet) GetAllowFutureUpdatesOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowFutureUpdates) {
+		return nil, false
+	}
+	return o.AllowFutureUpdates, true
+}
+
+// HasAllowFutureUpdates returns a boolean if a field has been set.
+func (o *IamPrivilegeSet) HasAllowFutureUpdates() bool {
+	if o != nil && !IsNil(o.AllowFutureUpdates) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowFutureUpdates gets a reference to the given bool and assigns it to the AllowFutureUpdates field.
+func (o *IamPrivilegeSet) SetAllowFutureUpdates(v bool) {
+	o.AllowFutureUpdates = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *IamPrivilegeSet) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -155,6 +205,38 @@ func (o *IamPrivilegeSet) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *IamPrivilegeSet) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetIsPrivilegeNamesUpdated returns the IsPrivilegeNamesUpdated field value if set, zero value otherwise.
+func (o *IamPrivilegeSet) GetIsPrivilegeNamesUpdated() bool {
+	if o == nil || IsNil(o.IsPrivilegeNamesUpdated) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPrivilegeNamesUpdated
+}
+
+// GetIsPrivilegeNamesUpdatedOk returns a tuple with the IsPrivilegeNamesUpdated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilegeSet) GetIsPrivilegeNamesUpdatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPrivilegeNamesUpdated) {
+		return nil, false
+	}
+	return o.IsPrivilegeNamesUpdated, true
+}
+
+// HasIsPrivilegeNamesUpdated returns a boolean if a field has been set.
+func (o *IamPrivilegeSet) HasIsPrivilegeNamesUpdated() bool {
+	if o != nil && !IsNil(o.IsPrivilegeNamesUpdated) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPrivilegeNamesUpdated gets a reference to the given bool and assigns it to the IsPrivilegeNamesUpdated field.
+func (o *IamPrivilegeSet) SetIsPrivilegeNamesUpdated(v bool) {
+	o.IsPrivilegeNamesUpdated = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -220,6 +302,102 @@ func (o *IamPrivilegeSet) HasPrivilegeNames() bool {
 // SetPrivilegeNames gets a reference to the given []string and assigns it to the PrivilegeNames field.
 func (o *IamPrivilegeSet) SetPrivilegeNames(v []string) {
 	o.PrivilegeNames = v
+}
+
+// GetPrivilegeSetType returns the PrivilegeSetType field value if set, zero value otherwise.
+func (o *IamPrivilegeSet) GetPrivilegeSetType() string {
+	if o == nil || IsNil(o.PrivilegeSetType) {
+		var ret string
+		return ret
+	}
+	return *o.PrivilegeSetType
+}
+
+// GetPrivilegeSetTypeOk returns a tuple with the PrivilegeSetType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilegeSet) GetPrivilegeSetTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.PrivilegeSetType) {
+		return nil, false
+	}
+	return o.PrivilegeSetType, true
+}
+
+// HasPrivilegeSetType returns a boolean if a field has been set.
+func (o *IamPrivilegeSet) HasPrivilegeSetType() bool {
+	if o != nil && !IsNil(o.PrivilegeSetType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivilegeSetType gets a reference to the given string and assigns it to the PrivilegeSetType field.
+func (o *IamPrivilegeSet) SetPrivilegeSetType(v string) {
+	o.PrivilegeSetType = &v
+}
+
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *IamPrivilegeSet) GetScope() string {
+	if o == nil || IsNil(o.Scope) {
+		var ret string
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilegeSet) GetScopeOk() (*string, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *IamPrivilegeSet) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given string and assigns it to the Scope field.
+func (o *IamPrivilegeSet) SetScope(v string) {
+	o.Scope = &v
+}
+
+// GetUuid returns the Uuid field value if set, zero value otherwise.
+func (o *IamPrivilegeSet) GetUuid() string {
+	if o == nil || IsNil(o.Uuid) {
+		var ret string
+		return ret
+	}
+	return *o.Uuid
+}
+
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilegeSet) GetUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.Uuid) {
+		return nil, false
+	}
+	return o.Uuid, true
+}
+
+// HasUuid returns a boolean if a field has been set.
+func (o *IamPrivilegeSet) HasUuid() bool {
+	if o != nil && !IsNil(o.Uuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+func (o *IamPrivilegeSet) SetUuid(v string) {
+	o.Uuid = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -400,14 +578,29 @@ func (o IamPrivilegeSet) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllowFutureUpdates) {
+		toSerialize["AllowFutureUpdates"] = o.AllowFutureUpdates
+	}
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
+	}
+	if !IsNil(o.IsPrivilegeNamesUpdated) {
+		toSerialize["IsPrivilegeNamesUpdated"] = o.IsPrivilegeNamesUpdated
 	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.PrivilegeNames != nil {
 		toSerialize["PrivilegeNames"] = o.PrivilegeNames
+	}
+	if !IsNil(o.PrivilegeSetType) {
+		toSerialize["PrivilegeSetType"] = o.PrivilegeSetType
+	}
+	if !IsNil(o.Scope) {
+		toSerialize["Scope"] = o.Scope
+	}
+	if !IsNil(o.Uuid) {
+		toSerialize["Uuid"] = o.Uuid
 	}
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
@@ -476,12 +669,22 @@ func (o *IamPrivilegeSet) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Flag used by UI to keep track of the user selection option for future updates of privilege sets.
+		AllowFutureUpdates *bool `json:"AllowFutureUpdates,omitempty"`
 		// Description of the privilege set.
 		Description *string `json:"Description,omitempty"`
+		// Flag to indicate if the privilege names are updated.
+		IsPrivilegeNamesUpdated *bool `json:"IsPrivilegeNamesUpdated,omitempty"`
 		// Name of the privilege set.
-		Name           *string                        `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_ .:-]{1,64}$"`
-		PrivilegeNames []string                       `json:"PrivilegeNames,omitempty"`
-		Account        NullableIamAccountRelationship `json:"Account,omitempty"`
+		Name           *string  `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_ .:,()&\\/-]{1,128}$"`
+		PrivilegeNames []string `json:"PrivilegeNames,omitempty"`
+		// Type of the privilege set. * `Internal` - Privilege set is internal to the system. * `SystemPackaged` - Privilege set is packaged by the system and user can use it as a reference for custom privilege set creation. * `SystemDefined` - Privilege set is defined by the system. * `TreeNode` - Privilege set is a tree node in the custom privilege set creation hierarchy. * `TreeRoot` - Privilege set is a tree root in the custom privilege set creation hierarchy. * `TreeLeaf` - Privilege set is a tree leaf in the custom privilege set creation hierarchy. * `UserCreated` - Privilege set is created by the user.
+		PrivilegeSetType *string `json:"PrivilegeSetType,omitempty"`
+		// The scope of the privilege set. * `Generic` - Privilege set can be added to account wide permission or organization permissions. * `Account` - Privilege set can be added to account wide permission only.
+		Scope *string `json:"Scope,omitempty"`
+		// UUID of the privilege set.
+		Uuid    *string                        `json:"Uuid,omitempty" validate:"regexp=^[a-zA-Z0-9_ .:,-]{0,128}$"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to iamPrivilegeSet resources.
 		AssociatedPrivilegeSets []IamPrivilegeSetRelationship `json:"AssociatedPrivilegeSets,omitempty"`
 		// An array of relationships to iamPrivilege resources.
@@ -496,9 +699,14 @@ func (o *IamPrivilegeSet) UnmarshalJSON(data []byte) (err error) {
 		varIamPrivilegeSet := _IamPrivilegeSet{}
 		varIamPrivilegeSet.ClassId = varIamPrivilegeSetWithoutEmbeddedStruct.ClassId
 		varIamPrivilegeSet.ObjectType = varIamPrivilegeSetWithoutEmbeddedStruct.ObjectType
+		varIamPrivilegeSet.AllowFutureUpdates = varIamPrivilegeSetWithoutEmbeddedStruct.AllowFutureUpdates
 		varIamPrivilegeSet.Description = varIamPrivilegeSetWithoutEmbeddedStruct.Description
+		varIamPrivilegeSet.IsPrivilegeNamesUpdated = varIamPrivilegeSetWithoutEmbeddedStruct.IsPrivilegeNamesUpdated
 		varIamPrivilegeSet.Name = varIamPrivilegeSetWithoutEmbeddedStruct.Name
 		varIamPrivilegeSet.PrivilegeNames = varIamPrivilegeSetWithoutEmbeddedStruct.PrivilegeNames
+		varIamPrivilegeSet.PrivilegeSetType = varIamPrivilegeSetWithoutEmbeddedStruct.PrivilegeSetType
+		varIamPrivilegeSet.Scope = varIamPrivilegeSetWithoutEmbeddedStruct.Scope
+		varIamPrivilegeSet.Uuid = varIamPrivilegeSetWithoutEmbeddedStruct.Uuid
 		varIamPrivilegeSet.Account = varIamPrivilegeSetWithoutEmbeddedStruct.Account
 		varIamPrivilegeSet.AssociatedPrivilegeSets = varIamPrivilegeSetWithoutEmbeddedStruct.AssociatedPrivilegeSets
 		varIamPrivilegeSet.Privileges = varIamPrivilegeSetWithoutEmbeddedStruct.Privileges
@@ -522,9 +730,14 @@ func (o *IamPrivilegeSet) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AllowFutureUpdates")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "IsPrivilegeNamesUpdated")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PrivilegeNames")
+		delete(additionalProperties, "PrivilegeSetType")
+		delete(additionalProperties, "Scope")
+		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedPrivilegeSets")
 		delete(additionalProperties, "Privileges")

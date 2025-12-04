@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CollectionGranularity** | Pointer to **string** | The current supported collection granularity by the system, defined as the lowest granularity supported, with the actual granularity per resource determined by the license tier of the resource. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Enables metric collection for the account, if disabled metrics will be stopped for all resources in the account. | [optional] [readonly] 
 **Limit** | Pointer to **int64** | The total number of resources that can be enabled for metric collection in this account. | [optional] [readonly] 
+**UserMaxIngestionBytes** | Pointer to **int64** | User override of the max ingestion rate for metrics. Provided as an advanced option to override the default limits. Option should only be used in coordination with TAC engineers. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -170,6 +171,31 @@ SetLimit sets Limit field to given value.
 `func (o *MetricsConfiguration) HasLimit() bool`
 
 HasLimit returns a boolean if a field has been set.
+
+### GetUserMaxIngestionBytes
+
+`func (o *MetricsConfiguration) GetUserMaxIngestionBytes() int64`
+
+GetUserMaxIngestionBytes returns the UserMaxIngestionBytes field if non-nil, zero value otherwise.
+
+### GetUserMaxIngestionBytesOk
+
+`func (o *MetricsConfiguration) GetUserMaxIngestionBytesOk() (*int64, bool)`
+
+GetUserMaxIngestionBytesOk returns a tuple with the UserMaxIngestionBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserMaxIngestionBytes
+
+`func (o *MetricsConfiguration) SetUserMaxIngestionBytes(v int64)`
+
+SetUserMaxIngestionBytes sets UserMaxIngestionBytes field to given value.
+
+### HasUserMaxIngestionBytes
+
+`func (o *MetricsConfiguration) HasUserMaxIngestionBytes() bool`
+
+HasUserMaxIngestionBytes returns a boolean if a field has been set.
 
 ### GetAccount
 

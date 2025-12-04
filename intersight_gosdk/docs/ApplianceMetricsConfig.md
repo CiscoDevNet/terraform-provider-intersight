@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **StatusMessage** | Pointer to **string** | The overall metrics collection Status based on resource constraints. | [optional] [readonly] 
 **SystemEnabled** | Pointer to **bool** | Metric collection state defined by the system. | [optional] [readonly] [default to false]
 **UserEnabled** | Pointer to **bool** | Configured metric collection state by the account administrator. | [optional] [default to false]
+**Utilization** | Pointer to **int64** | Measures the utilization of the metrics feature in relation to the available capacity of the system. | [optional] [readonly] [default to 0]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -326,6 +327,31 @@ SetUserEnabled sets UserEnabled field to given value.
 `func (o *ApplianceMetricsConfig) HasUserEnabled() bool`
 
 HasUserEnabled returns a boolean if a field has been set.
+
+### GetUtilization
+
+`func (o *ApplianceMetricsConfig) GetUtilization() int64`
+
+GetUtilization returns the Utilization field if non-nil, zero value otherwise.
+
+### GetUtilizationOk
+
+`func (o *ApplianceMetricsConfig) GetUtilizationOk() (*int64, bool)`
+
+GetUtilizationOk returns a tuple with the Utilization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUtilization
+
+`func (o *ApplianceMetricsConfig) SetUtilization(v int64)`
+
+SetUtilization sets Utilization field to given value.
+
+### HasUtilization
+
+`func (o *ApplianceMetricsConfig) HasUtilization() bool`
+
+HasUtilization returns a boolean if a field has been set.
 
 ### GetAccount
 

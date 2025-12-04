@@ -3,12 +3,26 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_config_change_detail"
 description: |-
-        The configuration change details are captured here.
+        ### Overview
+        The ConfigChangeDetail object records specific details about configuration changes made to a chassis profile. It enables in-depth tracking of modifications for audit and compliance purposes.
+        #### Purpose
+        ConfigChangeDetail is crucial for maintaining a clear history of changes, allowing administrators to review and understand the impact of each configuration update.
+        #### Key Concepts
+        - **Change Auditing:** - Tracks changes at a granular level, supporting regulatory and operational audit requirements.
+        - **Traceability:** - Links changes to the relevant profile, ensuring context and accountability.
+        - **Compliance Support:** - Facilitates compliance monitoring by documenting every configuration alteration.
 
 ---
 
 # Data Source: intersight_chassis_config_change_detail
-The configuration change details are captured here.
+### Overview
+The ConfigChangeDetail object records specific details about configuration changes made to a chassis profile. It enables in-depth tracking of modifications for audit and compliance purposes.
+#### Purpose
+ConfigChangeDetail is crucial for maintaining a clear history of changes, allowing administrators to review and understand the impact of each configuration update.
+#### Key Concepts
+- **Change Auditing:** - Tracks changes at a granular level, supporting regulatory and operational audit requirements.
+- **Traceability:** - Links changes to the relevant profile, ensuring context and accountability.
+- **Compliance Support:** - Facilitates compliance monitoring by documenting every configuration alteration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

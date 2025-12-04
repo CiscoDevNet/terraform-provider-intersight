@@ -22,7 +22,9 @@ Method | HTTP request | Description
 [**GetMacpoolUniverseByMoid**](MacpoolApi.md#GetMacpoolUniverseByMoid) | **Get** /api/v1/macpool/Universes/{Moid} | Read a &#39;macpool.Universe&#39; resource.
 [**GetMacpoolUniverseList**](MacpoolApi.md#GetMacpoolUniverseList) | **Get** /api/v1/macpool/Universes | Read a &#39;macpool.Universe&#39; resource.
 [**PatchMacpoolPool**](MacpoolApi.md#PatchMacpoolPool) | **Patch** /api/v1/macpool/Pools/{Moid} | Update a &#39;macpool.Pool&#39; resource.
+[**PatchMacpoolReservation**](MacpoolApi.md#PatchMacpoolReservation) | **Patch** /api/v1/macpool/Reservations/{Moid} | Update a &#39;macpool.Reservation&#39; resource.
 [**UpdateMacpoolPool**](MacpoolApi.md#UpdateMacpoolPool) | **Post** /api/v1/macpool/Pools/{Moid} | Update a &#39;macpool.Pool&#39; resource.
+[**UpdateMacpoolReservation**](MacpoolApi.md#UpdateMacpoolReservation) | **Post** /api/v1/macpool/Reservations/{Moid} | Update a &#39;macpool.Reservation&#39; resource.
 
 
 
@@ -1344,6 +1346,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchMacpoolReservation
+
+> MacpoolReservation PatchMacpoolReservation(ctx, moid).MacpoolReservation(macpoolReservation).IfMatch(ifMatch).Execute()
+
+Update a 'macpool.Reservation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	macpoolReservation := *openapiclient.NewMacpoolReservation("ClassId_example", "ObjectType_example") // MacpoolReservation | The 'macpool.Reservation' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MacpoolApi.PatchMacpoolReservation(context.Background(), moid).MacpoolReservation(macpoolReservation).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MacpoolApi.PatchMacpoolReservation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchMacpoolReservation`: MacpoolReservation
+	fmt.Fprintf(os.Stdout, "Response from `MacpoolApi.PatchMacpoolReservation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchMacpoolReservationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **macpoolReservation** | [**MacpoolReservation**](MacpoolReservation.md) | The &#39;macpool.Reservation&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**MacpoolReservation**](MacpoolReservation.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateMacpoolPool
 
 > MacpoolPool UpdateMacpoolPool(ctx, moid).MacpoolPool(macpoolPool).IfMatch(ifMatch).Execute()
@@ -1401,6 +1475,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**MacpoolPool**](MacpoolPool.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateMacpoolReservation
+
+> MacpoolReservation UpdateMacpoolReservation(ctx, moid).MacpoolReservation(macpoolReservation).IfMatch(ifMatch).Execute()
+
+Update a 'macpool.Reservation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	macpoolReservation := *openapiclient.NewMacpoolReservation("ClassId_example", "ObjectType_example") // MacpoolReservation | The 'macpool.Reservation' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MacpoolApi.UpdateMacpoolReservation(context.Background(), moid).MacpoolReservation(macpoolReservation).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MacpoolApi.UpdateMacpoolReservation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateMacpoolReservation`: MacpoolReservation
+	fmt.Fprintf(os.Stdout, "Response from `MacpoolApi.UpdateMacpoolReservation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateMacpoolReservationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **macpoolReservation** | [**MacpoolReservation**](MacpoolReservation.md) | The &#39;macpool.Reservation&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**MacpoolReservation**](MacpoolReservation.md)
 
 ### Authorization
 

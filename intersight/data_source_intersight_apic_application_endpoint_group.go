@@ -106,7 +106,7 @@ func getApicApplicationEndpointGroupSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"dn": {
-			Description: "Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -126,7 +126,7 @@ func getApicApplicationEndpointGroupSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Object name in Cisco Application Policy Infrastructure Controller (APIC) GUI.",
+			Description: "Name of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

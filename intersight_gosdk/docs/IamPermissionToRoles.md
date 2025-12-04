@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.PermissionToRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PermissionToRoles"]
 **Permission** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
+**PrivilegeSets** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
 **Roles** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
 
 ## Methods
@@ -93,6 +94,41 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
+### GetPrivilegeSets
+
+`func (o *IamPermissionToRoles) GetPrivilegeSets() []MoMoRef`
+
+GetPrivilegeSets returns the PrivilegeSets field if non-nil, zero value otherwise.
+
+### GetPrivilegeSetsOk
+
+`func (o *IamPermissionToRoles) GetPrivilegeSetsOk() (*[]MoMoRef, bool)`
+
+GetPrivilegeSetsOk returns a tuple with the PrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivilegeSets
+
+`func (o *IamPermissionToRoles) SetPrivilegeSets(v []MoMoRef)`
+
+SetPrivilegeSets sets PrivilegeSets field to given value.
+
+### HasPrivilegeSets
+
+`func (o *IamPermissionToRoles) HasPrivilegeSets() bool`
+
+HasPrivilegeSets returns a boolean if a field has been set.
+
+### SetPrivilegeSetsNil
+
+`func (o *IamPermissionToRoles) SetPrivilegeSetsNil(b bool)`
+
+ SetPrivilegeSetsNil sets the value for PrivilegeSets to be an explicit nil
+
+### UnsetPrivilegeSets
+`func (o *IamPermissionToRoles) UnsetPrivilegeSets()`
+
+UnsetPrivilegeSets ensures that no value is present for PrivilegeSets, not even an explicit nil
 ### GetRoles
 
 `func (o *IamPermissionToRoles) GetRoles() []MoMoRef`

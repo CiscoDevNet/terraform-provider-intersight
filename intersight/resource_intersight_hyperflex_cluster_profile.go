@@ -369,7 +369,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 								return
 							}},
 						"config_state_summary": {
-							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.\n* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints.",
+							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, InConsistent, Validating, Configuring, Failed, Activating, UnConfiguring.\n* `None` - The default state is none.\n* `Not-assigned` - Server is not assigned to the profile.\n* `Assigned` - Server is assigned to the profile and the configurations are not yet deployed.\n* `Preparing` - Preparing to deploy the configuration.\n* `Validating` - Profile validation in progress.\n* `Evaluating` - Policy edit configuration change evaluation in progress.\n* `Configuring` - Profile deploy operation is in progress.\n* `UnConfiguring` - Server is unassigned and config cleanup is in progress.\n* `Analyzing` - Profile changes are being analyzed.\n* `Activating` - Configuration is being activated at the endpoint.\n* `Inconsistent` - Profile is inconsistent with the endpoint configuration.\n* `Associated` - The profile configuration has been applied to the endpoint and no inconsistencies have been detected.\n* `Failed` - The last action on the profile has failed.\n* `Not-complete` - Config import operation on the profile is not complete.\n* `Waiting-for-resource` - Waiting for the resource to be allocated for the profile.\n* `Partially-deployed` - The profile configuration has been applied on a subset of endpoints.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1002,6 +1002,146 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 					},
 				},
 			},
+			"policy_change_details": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"changes": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							}},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ConfigChangeDetailType",
+						},
+						"config_change_context": {
+							Description: "Context information on the change.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "policy.ConfigResultContext",
+									},
+									"dependent_policy_list": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}},
+									"entity_data": {
+										Description: "The data of the object present in config result context.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"entity_moid": {
+										Description: "The Moid of the object present in config result context.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"entity_name": {
+										Description: "The name of the object present in config result context.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"entity_type": {
+										Description: "The type of the object present in config result context.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "policy.ConfigResultContext",
+									},
+									"parent_moid": {
+										Description: "The Moid of the parent object present in config result context.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"parent_policy_object_type": {
+										Description: "The type of the policy object associated with the profile.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"parent_type": {
+										Description: "The type of the parent object present in config result context.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"config_change_flag": {
+							Description:  "Config change flag to differentiate Pending-changes and Config-drift.\n* `Pending-changes` - Config change flag represents changes are due to not deployed changes from Intersight.\n* `Drift-changes` - Config change flag represents changes are due to endpoint configuration changes.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Pending-changes", "Drift-changes"}, false),
+							Optional:     true,
+							Default:      "Pending-changes",
+						},
+						"disruptions": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString,
+							}},
+						"message": {
+							Description: "Detailed description of the config change.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"mod_status": {
+							Description:  "Modification status of the mo in this config change.\n* `None` - The 'none' operation/state.Indicates a configuration profile has been deployed, and the desired configuration matches the actual device configuration.\n* `Created` - The 'create' operation/state.Indicates a configuration profile has been created and associated with a device, but the configuration specified in the profilehas not been applied yet. For example, this could happen when the user creates a server profile and has not deployed the profile yet.\n* `Modified` - The 'update' operation/state.Indicates some of the desired configuration changes specified in a profile have not been been applied to the associated device.This happens when the user has made changes to a profile and has not deployed the changes yet, or when the workflow to applythe configuration changes has not completed successfully.\n* `Deleted` - The 'delete' operation/state.Indicates a configuration profile has been been disassociated from a device and the user has not undeployed these changes yet.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"None", "Created", "Modified", "Deleted"}, false),
+							Optional:     true,
+							Default:      "None",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ConfigChangeDetailType",
+						},
+					},
+				},
+			},
 			"proxy_setting": {
 				Description: "A reference to a hyperflexProxySettingPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1059,6 +1199,66 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 						return true
 					}
 					return false
+				},
+			},
+			"reported_policy_changes": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"change_id": {
+							Description: "The change evaluation identifier for which the change is reported.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"change_status": {
+							Description: "The status of policy change evaluation which has been reported.\n* `Initiated` - The status when policy change evaluation is triggered for a policy.\n* `Reported` - The status when policy change evaluation is reported for a policy.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ReportedPolicyChange",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ReportedPolicyChange",
+						},
+						"policy_type": {
+							Description: "The type of policy for which the change has been reported.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+					},
 				},
 			},
 			"running_workflows": {
@@ -1508,7 +1708,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -2555,6 +2755,164 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		}
 	}
 
+	if v, ok := d.GetOk("policy_change_details"); ok {
+		x := make([]models.PolicyConfigChangeDetailType, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewPolicyConfigChangeDetailTypeWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["changes"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetChanges(x)
+					}
+				}
+			}
+			o.SetClassId("policy.ConfigChangeDetailType")
+			if v, ok := l["config_change_context"]; ok {
+				{
+					p := make([]models.PolicyConfigResultContext, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyConfigResultContextWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ConfigResultContext")
+						if v, ok := l["dependent_policy_list"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetDependentPolicyList(x)
+								}
+							}
+						}
+						if v, ok := l["entity_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetEntityMoid(x)
+							}
+						}
+						if v, ok := l["entity_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetEntityName(x)
+							}
+						}
+						if v, ok := l["entity_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetEntityType(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["parent_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetParentMoid(x)
+							}
+						}
+						if v, ok := l["parent_policy_object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetParentPolicyObjectType(x)
+							}
+						}
+						if v, ok := l["parent_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetParentType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetConfigChangeContext(x)
+					}
+				}
+			}
+			if v, ok := l["config_change_flag"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigChangeFlag(x)
+				}
+			}
+			if v, ok := l["disruptions"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetDisruptions(x)
+					}
+				}
+			}
+			if v, ok := l["message"]; ok {
+				{
+					x := (v.(string))
+					o.SetMessage(x)
+				}
+			}
+			if v, ok := l["mod_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetModStatus(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetPolicyChangeDetails(x)
+		}
+	}
+
 	if v, ok := d.GetOk("proxy_setting"); ok {
 		p := make([]models.HyperflexProxySettingPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2614,6 +2972,36 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 	if v, ok := d.GetOkExists("replication"); ok {
 		x := int64(v.(int))
 		o.SetReplication(x)
+	}
+
+	if v, ok := d.GetOk("reported_policy_changes"); ok {
+		x := make([]models.PolicyReportedPolicyChange, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewPolicyReportedPolicyChangeWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ReportedPolicyChange")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetReportedPolicyChanges(x)
+		}
 	}
 
 	if v, ok := d.GetOk("scheduled_actions"); ok {
@@ -3354,6 +3742,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while setting property PolicyBucket in HyperflexClusterProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("policy_change_details", flattenListPolicyConfigChangeDetailType(s.GetPolicyChangeDetails(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PolicyChangeDetails in HyperflexClusterProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("proxy_setting", flattenMapHyperflexProxySettingPolicyRelationship(s.GetProxySetting(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ProxySetting in HyperflexClusterProfile object: %s", err.Error())
 	}
@@ -3364,6 +3756,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 
 	if err := d.Set("replication", (s.GetReplication())); err != nil {
 		return diag.Errorf("error occurred while setting property Replication in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("reported_policy_changes", flattenListPolicyReportedPolicyChange(s.GetReportedPolicyChanges(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ReportedPolicyChanges in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("running_workflows", flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)); err != nil {
@@ -4212,6 +4608,163 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		o.SetPolicyBucket(x)
 	}
 
+	if d.HasChange("policy_change_details") {
+		v := d.Get("policy_change_details")
+		x := make([]models.PolicyConfigChangeDetailType, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyConfigChangeDetailType{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["changes"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetChanges(x)
+					}
+				}
+			}
+			o.SetClassId("policy.ConfigChangeDetailType")
+			if v, ok := l["config_change_context"]; ok {
+				{
+					p := make([]models.PolicyConfigResultContext, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyConfigResultContextWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ConfigResultContext")
+						if v, ok := l["dependent_policy_list"]; ok {
+							{
+								x := make([]string, 0)
+								y := reflect.ValueOf(v)
+								for i := 0; i < y.Len(); i++ {
+									if y.Index(i).Interface() != nil {
+										x = append(x, y.Index(i).Interface().(string))
+									}
+								}
+								if len(x) > 0 {
+									o.SetDependentPolicyList(x)
+								}
+							}
+						}
+						if v, ok := l["entity_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetEntityMoid(x)
+							}
+						}
+						if v, ok := l["entity_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetEntityName(x)
+							}
+						}
+						if v, ok := l["entity_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetEntityType(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["parent_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetParentMoid(x)
+							}
+						}
+						if v, ok := l["parent_policy_object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetParentPolicyObjectType(x)
+							}
+						}
+						if v, ok := l["parent_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetParentType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetConfigChangeContext(x)
+					}
+				}
+			}
+			if v, ok := l["config_change_flag"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigChangeFlag(x)
+				}
+			}
+			if v, ok := l["disruptions"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetDisruptions(x)
+					}
+				}
+			}
+			if v, ok := l["message"]; ok {
+				{
+					x := (v.(string))
+					o.SetMessage(x)
+				}
+			}
+			if v, ok := l["mod_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetModStatus(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetPolicyChangeDetails(x)
+	}
+
 	if d.HasChange("proxy_setting") {
 		v := d.Get("proxy_setting")
 		p := make([]models.HyperflexProxySettingPolicyRelationship, 0, 1)
@@ -4272,6 +4825,35 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		v := d.Get("replication")
 		x := int64(v.(int))
 		o.SetReplication(x)
+	}
+
+	if d.HasChange("reported_policy_changes") {
+		v := d.Get("reported_policy_changes")
+		x := make([]models.PolicyReportedPolicyChange, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyReportedPolicyChange{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ReportedPolicyChange")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetReportedPolicyChanges(x)
 	}
 
 	if d.HasChange("scheduled_actions") {

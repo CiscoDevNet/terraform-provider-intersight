@@ -424,7 +424,7 @@ func resourceCrdCustomResource() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {

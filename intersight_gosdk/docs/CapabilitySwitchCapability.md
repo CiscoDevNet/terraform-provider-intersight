@@ -27,7 +27,9 @@ Name | Type | Description | Notes
 **PortsSupporting10gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting1gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting25gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
+**PortsSupporting400gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupporting40gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
+**PortsSupporting50gSpeed** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingApplianceRole** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingBreakout** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
 **PortsSupportingFcoe** | Pointer to [**[]CapabilityPortRange**](CapabilityPortRange.md) |  | [optional] 
@@ -748,6 +750,41 @@ HasPortsSupporting25gSpeed returns a boolean if a field has been set.
 `func (o *CapabilitySwitchCapability) UnsetPortsSupporting25gSpeed()`
 
 UnsetPortsSupporting25gSpeed ensures that no value is present for PortsSupporting25gSpeed, not even an explicit nil
+### GetPortsSupporting400gSpeed
+
+`func (o *CapabilitySwitchCapability) GetPortsSupporting400gSpeed() []CapabilityPortRange`
+
+GetPortsSupporting400gSpeed returns the PortsSupporting400gSpeed field if non-nil, zero value otherwise.
+
+### GetPortsSupporting400gSpeedOk
+
+`func (o *CapabilitySwitchCapability) GetPortsSupporting400gSpeedOk() (*[]CapabilityPortRange, bool)`
+
+GetPortsSupporting400gSpeedOk returns a tuple with the PortsSupporting400gSpeed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortsSupporting400gSpeed
+
+`func (o *CapabilitySwitchCapability) SetPortsSupporting400gSpeed(v []CapabilityPortRange)`
+
+SetPortsSupporting400gSpeed sets PortsSupporting400gSpeed field to given value.
+
+### HasPortsSupporting400gSpeed
+
+`func (o *CapabilitySwitchCapability) HasPortsSupporting400gSpeed() bool`
+
+HasPortsSupporting400gSpeed returns a boolean if a field has been set.
+
+### SetPortsSupporting400gSpeedNil
+
+`func (o *CapabilitySwitchCapability) SetPortsSupporting400gSpeedNil(b bool)`
+
+ SetPortsSupporting400gSpeedNil sets the value for PortsSupporting400gSpeed to be an explicit nil
+
+### UnsetPortsSupporting400gSpeed
+`func (o *CapabilitySwitchCapability) UnsetPortsSupporting400gSpeed()`
+
+UnsetPortsSupporting400gSpeed ensures that no value is present for PortsSupporting400gSpeed, not even an explicit nil
 ### GetPortsSupporting40gSpeed
 
 `func (o *CapabilitySwitchCapability) GetPortsSupporting40gSpeed() []CapabilityPortRange`
@@ -783,6 +820,41 @@ HasPortsSupporting40gSpeed returns a boolean if a field has been set.
 `func (o *CapabilitySwitchCapability) UnsetPortsSupporting40gSpeed()`
 
 UnsetPortsSupporting40gSpeed ensures that no value is present for PortsSupporting40gSpeed, not even an explicit nil
+### GetPortsSupporting50gSpeed
+
+`func (o *CapabilitySwitchCapability) GetPortsSupporting50gSpeed() []CapabilityPortRange`
+
+GetPortsSupporting50gSpeed returns the PortsSupporting50gSpeed field if non-nil, zero value otherwise.
+
+### GetPortsSupporting50gSpeedOk
+
+`func (o *CapabilitySwitchCapability) GetPortsSupporting50gSpeedOk() (*[]CapabilityPortRange, bool)`
+
+GetPortsSupporting50gSpeedOk returns a tuple with the PortsSupporting50gSpeed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortsSupporting50gSpeed
+
+`func (o *CapabilitySwitchCapability) SetPortsSupporting50gSpeed(v []CapabilityPortRange)`
+
+SetPortsSupporting50gSpeed sets PortsSupporting50gSpeed field to given value.
+
+### HasPortsSupporting50gSpeed
+
+`func (o *CapabilitySwitchCapability) HasPortsSupporting50gSpeed() bool`
+
+HasPortsSupporting50gSpeed returns a boolean if a field has been set.
+
+### SetPortsSupporting50gSpeedNil
+
+`func (o *CapabilitySwitchCapability) SetPortsSupporting50gSpeedNil(b bool)`
+
+ SetPortsSupporting50gSpeedNil sets the value for PortsSupporting50gSpeed to be an explicit nil
+
+### UnsetPortsSupporting50gSpeed
+`func (o *CapabilitySwitchCapability) UnsetPortsSupporting50gSpeed()`
+
+UnsetPortsSupporting50gSpeed ensures that no value is present for PortsSupporting50gSpeed, not even an explicit nil
 ### GetPortsSupportingApplianceRole
 
 `func (o *CapabilitySwitchCapability) GetPortsSupportingApplianceRole() []CapabilityPortRange`

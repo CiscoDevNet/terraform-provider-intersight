@@ -61,6 +61,11 @@ func getIamPrivilegeSetSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"allow_future_updates": {
+			Description: "Flag used by UI to keep track of the user selection option for future updates of privilege sets.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -147,6 +152,11 @@ func getIamPrivilegeSetSchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_privilege_names_updated": {
+			Description: "Flag to indicate if the privilege names are updated.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -248,6 +258,11 @@ func getIamPrivilegeSetSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"privilege_set_type": {
+			Description: "Type of the privilege set.\n* `Internal` - Privilege set is internal to the system.\n* `SystemPackaged` - Privilege set is packaged by the system and user can use it as a reference for custom privilege set creation.\n* `SystemDefined` - Privilege set is defined by the system.\n* `TreeNode` - Privilege set is a tree node in the custom privilege set creation hierarchy.\n* `TreeRoot` - Privilege set is a tree root in the custom privilege set creation hierarchy.\n* `TreeLeaf` - Privilege set is a tree leaf in the custom privilege set creation hierarchy.\n* `UserCreated` - Privilege set is created by the user.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"privileges": {
 			Description: "An array of relationships to iamPrivilege resources.",
 			Type:        schema.TypeList,
@@ -281,6 +296,11 @@ func getIamPrivilegeSetSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"scope": {
+			Description: "The scope of the privilege set.\n* `Generic` - Privilege set can be added to account wide permission or organization permissions.\n* `Account` - Privilege set can be added to account wide permission only.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -427,6 +447,11 @@ func getIamPrivilegeSetSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"uuid": {
+			Description: "UUID of the privilege set.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -620,6 +645,11 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOkExists("allow_future_updates"); ok {
+		x := (v.(bool))
+		o.SetAllowFutureUpdates(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -718,6 +748,11 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("is_privilege_names_updated"); ok {
+		x := (v.(bool))
+		o.SetIsPrivilegeNamesUpdated(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -845,6 +880,11 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 		o.SetPrivilegeNames(x)
 	}
 
+	if v, ok := d.GetOk("privilege_set_type"); ok {
+		x := (v.(string))
+		o.SetPrivilegeSetType(x)
+	}
+
 	if v, ok := d.GetOk("privileges"); ok {
 		x := make([]models.IamPrivilegeRelationship, 0)
 		s := v.([]interface{})
@@ -883,6 +923,11 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 			x = append(x, models.MoMoRefAsIamPrivilegeRelationship(o))
 		}
 		o.SetPrivileges(x)
+	}
+
+	if v, ok := d.GetOk("scope"); ok {
+		x := (v.(string))
+		o.SetScope(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -1009,6 +1054,11 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("uuid"); ok {
+		x := (v.(string))
+		o.SetUuid(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1122,6 +1172,7 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["allow_future_updates"] = (s.GetAllowFutureUpdates())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
@@ -1131,6 +1182,7 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["is_privilege_names_updated"] = (s.GetIsPrivilegeNamesUpdated())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1142,13 +1194,16 @@ func dataSourceIamPrivilegeSetRead(c context.Context, d *schema.ResourceData, me
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["privilege_names"] = (s.GetPrivilegeNames())
+				temp["privilege_set_type"] = (s.GetPrivilegeSetType())
 
 				temp["privileges"] = flattenListIamPrivilegeRelationship(s.GetPrivileges(), d)
+				temp["scope"] = (s.GetScope())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["system"] = flattenMapIamSystemRelationship(s.GetSystem(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				iamPrivilegeSetResults = append(iamPrivilegeSetResults, temp)

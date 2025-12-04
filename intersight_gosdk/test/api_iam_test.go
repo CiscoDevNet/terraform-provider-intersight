@@ -263,6 +263,30 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService CreateIamPrivilegeSet", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.CreateIamPrivilegeSet(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService CreateIamPrivilegeSetMetaInfo", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.CreateIamPrivilegeSetMetaInfo(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService CreateIamQualifier", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -599,6 +623,19 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.IamApi.DeleteIamPrivateKeySpec(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService DeleteIamPrivilegeSet", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.IamApi.DeleteIamPrivilegeSet(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -1632,6 +1669,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService GetIamPrivilegeSetMetaInfoByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamPrivilegeSetMetaInfoByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamPrivilegeSetMetaInfoList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamPrivilegeSetMetaInfoList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService GetIamQualifierByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2436,6 +2499,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService PatchIamPrivilegeSet", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.PatchIamPrivilegeSet(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService PatchIamQualifier", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2485,6 +2562,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IamApi.PatchIamSessionLimits(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService PatchIamSharingRule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.PatchIamSharingRule(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -2912,6 +3003,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService UpdateIamPrivilegeSet", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.UpdateIamPrivilegeSet(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService UpdateIamQualifier", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2961,6 +3066,20 @@ func Test_intersight_IamApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.IamApi.UpdateIamSessionLimits(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService UpdateIamSharingRule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.UpdateIamSharingRule(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

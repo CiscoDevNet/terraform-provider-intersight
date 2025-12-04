@@ -966,7 +966,7 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"mmioh_base": {
-			Description: "BIOS Token for setting MMIO High Base configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `512G` - Value - 512G for configuring MmiohBase token.\n* `1T` - Value - 1T for configuring MmiohBase token.\n* `2T` - Value - 2T for configuring MmiohBase token.\n* `4T` - Value - 4T for configuring MmiohBase token.\n* `16T` - Value - 16T for configuring MmiohBase token.\n* `24T` - Value - 24T for configuring MmiohBase token.\n* `32T` - Value - 32T for configuring MmiohBase token.\n* `40T` - Value - 40T for configuring MmiohBase token.\n* `56T` - Value - 56T for configuring MmiohBase token.\n* `Auto` - Value - Auto for configuring MmiohBase token.",
+			Description: "BIOS Token for setting MMIO High Base configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `512G` - Value - 512G for configuring MmiohBase token.\n* `1T` - Value - 1T for configuring MmiohBase token.\n* `2T` - Value - 2T for configuring MmiohBase token.\n* `4T` - Value - 4T for configuring MmiohBase token.\n* `16T` - Value - 16T for configuring MmiohBase token.\n* `24T` - Value - 24T for configuring MmiohBase token.\n* `30T` - Value - 30T for configuring MmiohBase token.\n* `32T` - Value - 32T for configuring MmiohBase token.\n* `40T` - Value - 40T for configuring MmiohBase token.\n* `56T` - Value - 56T for configuring MmiohBase token.\n* `60T` - Value - 60T for configuring MmiohBase token.\n* `Auto` - Value - Auto for configuring MmiohBase token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1989,7 +1989,7 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"slot_front_nvme3link_speed": {
-			Description: "BIOS Token for setting Front NVME 3 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.",
+			Description: "BIOS Token for setting PCIe Slot:Front NVME 3 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1999,7 +1999,7 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"slot_front_nvme4link_speed": {
-			Description: "BIOS Token for setting Front NVME 4 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme4linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme4linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme4linkSpeed token.",
+			Description: "BIOS Token for setting PCIe Slot:Front NVME 4 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme4linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme4linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme4linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme4linkSpeed token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2596,6 +2596,11 @@ func getBiosPolicySchema() map[string]*schema.Schema {
 		},
 		"ufs_disable": {
 			Description: "BIOS Token for setting Uncore Frequency Scaling configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring UfsDisable token.\n* `enabled` - Value - enabled for configuring UfsDisable token.\n* `Mode 0` - Value - Mode 0 for configuring UfsDisable token.\n* `Mode 1` - Value - Mode 1 for configuring UfsDisable token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ufs_disable_io": {
+			Description: "BIOS Token for setting Uncore Frequency Scaling IO configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Mode 0` - Value - Mode 0 for configuring UfsDisableIo token.\n* `Mode 1` - Value - Mode 1 for configuring UfsDisableIo token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -5426,6 +5431,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetUfsDisable(x)
 	}
 
+	if v, ok := d.GetOk("ufs_disable_io"); ok {
+		x := (v.(string))
+		o.SetUfsDisableIo(x)
+	}
+
 	if v, ok := d.GetOk("uma_based_clustering"); ok {
 		x := (v.(string))
 		o.SetUmaBasedClustering(x)
@@ -6105,6 +6115,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["ucsm_boot_order_rule"] = (s.GetUcsmBootOrderRule())
 				temp["uefi_mem_map_sp_flag_en"] = (s.GetUefiMemMapSpFlagEn())
 				temp["ufs_disable"] = (s.GetUfsDisable())
+				temp["ufs_disable_io"] = (s.GetUfsDisableIo())
 				temp["uma_based_clustering"] = (s.GetUmaBasedClustering())
 				temp["upi_link_enablement"] = (s.GetUpiLinkEnablement())
 				temp["upi_power_management"] = (s.GetUpiPowerManagement())

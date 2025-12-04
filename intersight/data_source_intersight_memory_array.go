@@ -61,7 +61,7 @@ func getMemoryArraySchema() map[string]*schema.Schema {
 			},
 		},
 		"array_id": {
-			Description: "The instance number of the memory array.",
+			Description: "ID of the memory array on a server.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

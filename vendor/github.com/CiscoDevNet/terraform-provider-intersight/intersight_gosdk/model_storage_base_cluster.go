@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the StorageBaseCluster type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageBaseCluster{}
 
-// StorageBaseCluster Common attributes of a storage cluster.
+// StorageBaseCluster ### Overview The BaseCluster object represents common attributes of a storage cluster. It serves as a foundational element for storage management, enabling efficient handling and orchestration of storage resources within a clustered environment. #### Purpose The BaseCluster object is designed to encapsulate general attributes shared among storage clusters, providing a consistent framework for storage management across various implementations. It supports a wide range of storage configurations, enabling organizations to manage storage resources seamlessly. #### Key Concepts - **Storage Management:** - Acts as a container for various storage resources, ensuring efficient storage allocation and management within a cluster. - **Extensibility:** - Provides a base structure that can be extended by more specialized storage cluster implementations, promoting reusability and modularity. - **Integration:** - Facilitates integration with other storage management tools, enhancing the ability to manage storage clusters effectively and cohesively.
 type StorageBaseCluster struct {
 	InfraBaseCluster
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.

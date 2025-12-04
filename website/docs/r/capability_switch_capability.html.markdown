@@ -118,7 +118,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.* `UCS-FI-6652` - The standard 6th generation UCS Fabric Interconnect.* `UCSXE-ECMC-10G` - Cisco UCS XE ECMC 10G with 2 ports.* `UCSXE-ECMC-G1` - Cisco UCS XE ECMC G1 with 2 ports.* `unknown` - Unknown device type, usage is TBD. 
+* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `UCSX-S9108-100G` - Cisco UCS Fabric Interconnect 9108 100G with 8 ports.* `UCS-FI-6664` - The standard 6th generation UCS Fabric Interconnect with 64 ports.* `UCS-FI-6652` - The standard 6th generation UCS Fabric Interconnect with 52 ports.* `UCSXE-ECMC-10G` - Cisco UCS XE ECMC 10G with 2 ports.* `UCSXE-ECMC-G1` - Cisco UCS XE ECMC G1 with 2 ports.* `unknown` - Unknown device type, usage is TBD. 
 * `ports_supporting100g_speed`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
@@ -147,7 +147,21 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
+* `ports_supporting400g_speed`:(Array)
+This complex property has following sub-properties:
+  + `end_port_id`:(int) Ending Port ID in this range of ports. 
+  + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `start_port_id`:(int) Starting Port ID in this range of ports. 
+  + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting40g_speed`:(Array)
+This complex property has following sub-properties:
+  + `end_port_id`:(int) Ending Port ID in this range of ports. 
+  + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `start_port_id`:(int) Starting Port ID in this range of ports. 
+  + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
+* `ports_supporting50g_speed`:(Array)
 This complex property has following sub-properties:
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 

@@ -256,6 +256,20 @@ func Test_intersight_MacpoolApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MacpoolApiService PatchMacpoolReservation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MacpoolApi.PatchMacpoolReservation(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MacpoolApiService UpdateMacpoolPool", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -263,6 +277,20 @@ func Test_intersight_MacpoolApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.MacpoolApi.UpdateMacpoolPool(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MacpoolApiService UpdateMacpoolReservation", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MacpoolApi.UpdateMacpoolReservation(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

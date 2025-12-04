@@ -181,7 +181,7 @@ func getFaultInstanceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"description": {
-			Description: "Detailed message of the fault.",
+			Description: "Short summary of the fault found.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

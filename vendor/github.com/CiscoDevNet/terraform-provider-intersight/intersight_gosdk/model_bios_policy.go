@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -382,7 +382,7 @@ type BiosPolicy struct {
 	MirroringMode *string `json:"MirroringMode,omitempty"`
 	// BIOS Token for setting MMCFG BASE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 GB` - Value - 1 GiB for configuring MmcfgBase token. * `2 GB` - Value - 2 GiB for configuring MmcfgBase token. * `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token. * `3 GB` - Value - 3 GiB for configuring MmcfgBase token. * `Auto` - Value - Auto for configuring MmcfgBase token.
 	MmcfgBase *string `json:"MmcfgBase,omitempty"`
-	// BIOS Token for setting MMIO High Base configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `512G` - Value - 512G for configuring MmiohBase token. * `1T` - Value - 1T for configuring MmiohBase token. * `2T` - Value - 2T for configuring MmiohBase token. * `4T` - Value - 4T for configuring MmiohBase token. * `16T` - Value - 16T for configuring MmiohBase token. * `24T` - Value - 24T for configuring MmiohBase token. * `32T` - Value - 32T for configuring MmiohBase token. * `40T` - Value - 40T for configuring MmiohBase token. * `56T` - Value - 56T for configuring MmiohBase token. * `Auto` - Value - Auto for configuring MmiohBase token.
+	// BIOS Token for setting MMIO High Base configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `512G` - Value - 512G for configuring MmiohBase token. * `1T` - Value - 1T for configuring MmiohBase token. * `2T` - Value - 2T for configuring MmiohBase token. * `4T` - Value - 4T for configuring MmiohBase token. * `16T` - Value - 16T for configuring MmiohBase token. * `24T` - Value - 24T for configuring MmiohBase token. * `30T` - Value - 30T for configuring MmiohBase token. * `32T` - Value - 32T for configuring MmiohBase token. * `40T` - Value - 40T for configuring MmiohBase token. * `56T` - Value - 56T for configuring MmiohBase token. * `60T` - Value - 60T for configuring MmiohBase token. * `Auto` - Value - Auto for configuring MmiohBase token.
 	MmiohBase *string `json:"MmiohBase,omitempty"`
 	// BIOS Token for setting MMIO High Granularity Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring MmiohSize token. * `4G` - Value - 4G for configuring MmiohSize token. * `16G` - Value - 16G for configuring MmiohSize token. * `32G` - Value - 32G for configuring MmiohSize token. * `64G` - Value - 64G for configuring MmiohSize token. * `256G` - Value - 256G for configuring MmiohSize token. * `1024G` - Value - 1024G for configuring MmiohSize token. * `Auto` - Value - Auto for configuring MmiohSize token.
 	MmiohSize *string `json:"MmiohSize,omitempty"`
@@ -724,11 +724,11 @@ type BiosPolicy struct {
 	SlotFrontNvme32linkSpeed *string `json:"SlotFrontNvme32linkSpeed,omitempty"`
 	// BIOS Token for setting Front NVME 32 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SlotFrontNvme32optionRom *string `json:"SlotFrontNvme32optionRom,omitempty"`
-	// BIOS Token for setting Front NVME 3 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.
+	// BIOS Token for setting PCIe Slot:Front NVME 3 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.
 	SlotFrontNvme3linkSpeed *string `json:"SlotFrontNvme3linkSpeed,omitempty"`
 	// BIOS Token for setting Front NVME 3 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SlotFrontNvme3optionRom *string `json:"SlotFrontNvme3optionRom,omitempty"`
-	// BIOS Token for setting Front NVME 4 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme4linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme4linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme4linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme4linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme4linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme4linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme4linkSpeed token.
+	// BIOS Token for setting PCIe Slot:Front NVME 4 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme4linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme4linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme4linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme4linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme4linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme4linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme4linkSpeed token.
 	SlotFrontNvme4linkSpeed *string `json:"SlotFrontNvme4linkSpeed,omitempty"`
 	// BIOS Token for setting Front NVME 4 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SlotFrontNvme4optionRom *string `json:"SlotFrontNvme4optionRom,omitempty"`
@@ -926,6 +926,8 @@ type BiosPolicy struct {
 	UefiMemMapSpFlagEn *string `json:"UefiMemMapSpFlagEn,omitempty"`
 	// BIOS Token for setting Uncore Frequency Scaling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring UfsDisable token. * `enabled` - Value - enabled for configuring UfsDisable token. * `Mode 0` - Value - Mode 0 for configuring UfsDisable token. * `Mode 1` - Value - Mode 1 for configuring UfsDisable token.
 	UfsDisable *string `json:"UfsDisable,omitempty"`
+	// BIOS Token for setting Uncore Frequency Scaling IO configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Mode 0` - Value - Mode 0 for configuring UfsDisableIo token. * `Mode 1` - Value - Mode 1 for configuring UfsDisableIo token.
+	UfsDisableIo *string `json:"UfsDisableIo,omitempty"`
 	// BIOS Token for setting UMA Based Clustering configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disable (All2All)` - Value - Disable (All2All) for configuring UmaBasedClustering token. * `Hemisphere (2-clusters)` - Value - Hemisphere (2-clusters) for configuring UmaBasedClustering token. * `Quadrant (4-clusters)` - Value - Quadrant (4-clusters) for configuring UmaBasedClustering token.
 	UmaBasedClustering *string `json:"UmaBasedClustering,omitempty"`
 	// BIOS Token for setting UPI Link Enablement configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1` - Value - 1 for configuring UpiLinkEnablement token. * `2` - Value - 2 for configuring UpiLinkEnablement token. * `3` - Value - 3 for configuring UpiLinkEnablement token. * `Auto` - Value - Auto for configuring UpiLinkEnablement token.
@@ -1879,6 +1881,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.UefiMemMapSpFlagEn = &uefiMemMapSpFlagEn
 	var ufsDisable string = "platform-default"
 	this.UfsDisable = &ufsDisable
+	var ufsDisableIo string = "platform-default"
+	this.UfsDisableIo = &ufsDisableIo
 	var umaBasedClustering string = "platform-default"
 	this.UmaBasedClustering = &umaBasedClustering
 	var upiLinkEnablement string = "platform-default"
@@ -2827,6 +2831,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.UefiMemMapSpFlagEn = &uefiMemMapSpFlagEn
 	var ufsDisable string = "platform-default"
 	this.UfsDisable = &ufsDisable
+	var ufsDisableIo string = "platform-default"
+	this.UfsDisableIo = &ufsDisableIo
 	var umaBasedClustering string = "platform-default"
 	this.UmaBasedClustering = &umaBasedClustering
 	var upiLinkEnablement string = "platform-default"
@@ -17294,6 +17300,38 @@ func (o *BiosPolicy) SetUfsDisable(v string) {
 	o.UfsDisable = &v
 }
 
+// GetUfsDisableIo returns the UfsDisableIo field value if set, zero value otherwise.
+func (o *BiosPolicy) GetUfsDisableIo() string {
+	if o == nil || IsNil(o.UfsDisableIo) {
+		var ret string
+		return ret
+	}
+	return *o.UfsDisableIo
+}
+
+// GetUfsDisableIoOk returns a tuple with the UfsDisableIo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetUfsDisableIoOk() (*string, bool) {
+	if o == nil || IsNil(o.UfsDisableIo) {
+		return nil, false
+	}
+	return o.UfsDisableIo, true
+}
+
+// HasUfsDisableIo returns a boolean if a field has been set.
+func (o *BiosPolicy) HasUfsDisableIo() bool {
+	if o != nil && !IsNil(o.UfsDisableIo) {
+		return true
+	}
+
+	return false
+}
+
+// SetUfsDisableIo gets a reference to the given string and assigns it to the UfsDisableIo field.
+func (o *BiosPolicy) SetUfsDisableIo(v string) {
+	o.UfsDisableIo = &v
+}
+
 // GetUmaBasedClustering returns the UmaBasedClustering field value if set, zero value otherwise.
 func (o *BiosPolicy) GetUmaBasedClustering() string {
 	if o == nil || IsNil(o.UmaBasedClustering) {
@@ -19354,6 +19392,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UfsDisable) {
 		toSerialize["UfsDisable"] = o.UfsDisable
 	}
+	if !IsNil(o.UfsDisableIo) {
+		toSerialize["UfsDisableIo"] = o.UfsDisableIo
+	}
 	if !IsNil(o.UmaBasedClustering) {
 		toSerialize["UmaBasedClustering"] = o.UmaBasedClustering
 	}
@@ -19826,7 +19867,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		MirroringMode *string `json:"MirroringMode,omitempty"`
 		// BIOS Token for setting MMCFG BASE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 GB` - Value - 1 GiB for configuring MmcfgBase token. * `2 GB` - Value - 2 GiB for configuring MmcfgBase token. * `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token. * `3 GB` - Value - 3 GiB for configuring MmcfgBase token. * `Auto` - Value - Auto for configuring MmcfgBase token.
 		MmcfgBase *string `json:"MmcfgBase,omitempty"`
-		// BIOS Token for setting MMIO High Base configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `512G` - Value - 512G for configuring MmiohBase token. * `1T` - Value - 1T for configuring MmiohBase token. * `2T` - Value - 2T for configuring MmiohBase token. * `4T` - Value - 4T for configuring MmiohBase token. * `16T` - Value - 16T for configuring MmiohBase token. * `24T` - Value - 24T for configuring MmiohBase token. * `32T` - Value - 32T for configuring MmiohBase token. * `40T` - Value - 40T for configuring MmiohBase token. * `56T` - Value - 56T for configuring MmiohBase token. * `Auto` - Value - Auto for configuring MmiohBase token.
+		// BIOS Token for setting MMIO High Base configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `512G` - Value - 512G for configuring MmiohBase token. * `1T` - Value - 1T for configuring MmiohBase token. * `2T` - Value - 2T for configuring MmiohBase token. * `4T` - Value - 4T for configuring MmiohBase token. * `16T` - Value - 16T for configuring MmiohBase token. * `24T` - Value - 24T for configuring MmiohBase token. * `30T` - Value - 30T for configuring MmiohBase token. * `32T` - Value - 32T for configuring MmiohBase token. * `40T` - Value - 40T for configuring MmiohBase token. * `56T` - Value - 56T for configuring MmiohBase token. * `60T` - Value - 60T for configuring MmiohBase token. * `Auto` - Value - Auto for configuring MmiohBase token.
 		MmiohBase *string `json:"MmiohBase,omitempty"`
 		// BIOS Token for setting MMIO High Granularity Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring MmiohSize token. * `4G` - Value - 4G for configuring MmiohSize token. * `16G` - Value - 16G for configuring MmiohSize token. * `32G` - Value - 32G for configuring MmiohSize token. * `64G` - Value - 64G for configuring MmiohSize token. * `256G` - Value - 256G for configuring MmiohSize token. * `1024G` - Value - 1024G for configuring MmiohSize token. * `Auto` - Value - Auto for configuring MmiohSize token.
 		MmiohSize *string `json:"MmiohSize,omitempty"`
@@ -20168,11 +20209,11 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		SlotFrontNvme32linkSpeed *string `json:"SlotFrontNvme32linkSpeed,omitempty"`
 		// BIOS Token for setting Front NVME 32 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SlotFrontNvme32optionRom *string `json:"SlotFrontNvme32optionRom,omitempty"`
-		// BIOS Token for setting Front NVME 3 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.
+		// BIOS Token for setting PCIe Slot:Front NVME 3 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.
 		SlotFrontNvme3linkSpeed *string `json:"SlotFrontNvme3linkSpeed,omitempty"`
 		// BIOS Token for setting Front NVME 3 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SlotFrontNvme3optionRom *string `json:"SlotFrontNvme3optionRom,omitempty"`
-		// BIOS Token for setting Front NVME 4 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme4linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme4linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme4linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme4linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme4linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme4linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme4linkSpeed token.
+		// BIOS Token for setting PCIe Slot:Front NVME 4 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme4linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme4linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme4linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme4linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme4linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme4linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme4linkSpeed token.
 		SlotFrontNvme4linkSpeed *string `json:"SlotFrontNvme4linkSpeed,omitempty"`
 		// BIOS Token for setting Front NVME 4 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SlotFrontNvme4optionRom *string `json:"SlotFrontNvme4optionRom,omitempty"`
@@ -20370,6 +20411,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		UefiMemMapSpFlagEn *string `json:"UefiMemMapSpFlagEn,omitempty"`
 		// BIOS Token for setting Uncore Frequency Scaling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring UfsDisable token. * `enabled` - Value - enabled for configuring UfsDisable token. * `Mode 0` - Value - Mode 0 for configuring UfsDisable token. * `Mode 1` - Value - Mode 1 for configuring UfsDisable token.
 		UfsDisable *string `json:"UfsDisable,omitempty"`
+		// BIOS Token for setting Uncore Frequency Scaling IO configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Mode 0` - Value - Mode 0 for configuring UfsDisableIo token. * `Mode 1` - Value - Mode 1 for configuring UfsDisableIo token.
+		UfsDisableIo *string `json:"UfsDisableIo,omitempty"`
 		// BIOS Token for setting UMA Based Clustering configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disable (All2All)` - Value - Disable (All2All) for configuring UmaBasedClustering token. * `Hemisphere (2-clusters)` - Value - Hemisphere (2-clusters) for configuring UmaBasedClustering token. * `Quadrant (4-clusters)` - Value - Quadrant (4-clusters) for configuring UmaBasedClustering token.
 		UmaBasedClustering *string `json:"UmaBasedClustering,omitempty"`
 		// BIOS Token for setting UPI Link Enablement configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1` - Value - 1 for configuring UpiLinkEnablement token. * `2` - Value - 2 for configuring UpiLinkEnablement token. * `3` - Value - 3 for configuring UpiLinkEnablement token. * `Auto` - Value - Auto for configuring UpiLinkEnablement token.
@@ -20870,6 +20913,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.UcsmBootOrderRule = varBiosPolicyWithoutEmbeddedStruct.UcsmBootOrderRule
 		varBiosPolicy.UefiMemMapSpFlagEn = varBiosPolicyWithoutEmbeddedStruct.UefiMemMapSpFlagEn
 		varBiosPolicy.UfsDisable = varBiosPolicyWithoutEmbeddedStruct.UfsDisable
+		varBiosPolicy.UfsDisableIo = varBiosPolicyWithoutEmbeddedStruct.UfsDisableIo
 		varBiosPolicy.UmaBasedClustering = varBiosPolicyWithoutEmbeddedStruct.UmaBasedClustering
 		varBiosPolicy.UpiLinkEnablement = varBiosPolicyWithoutEmbeddedStruct.UpiLinkEnablement
 		varBiosPolicy.UpiPowerManagement = varBiosPolicyWithoutEmbeddedStruct.UpiPowerManagement
@@ -21359,6 +21403,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "UcsmBootOrderRule")
 		delete(additionalProperties, "UefiMemMapSpFlagEn")
 		delete(additionalProperties, "UfsDisable")
+		delete(additionalProperties, "UfsDisableIo")
 		delete(additionalProperties, "UmaBasedClustering")
 		delete(additionalProperties, "UpiLinkEnablement")
 		delete(additionalProperties, "UpiPowerManagement")

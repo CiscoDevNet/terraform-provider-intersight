@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -29,12 +29,14 @@ type PolicyAbstractConfigProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.
-	Action           *string                     `json:"Action,omitempty"`
-	ActionParams     []PolicyActionParam         `json:"ActionParams,omitempty"`
-	ConfigContext    NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
-	DeployedPolicies []string                    `json:"DeployedPolicies,omitempty"`
-	RemovedPolicies  []string                    `json:"RemovedPolicies,omitempty"`
-	ScheduledActions []PolicyScheduledAction     `json:"ScheduledActions,omitempty"`
+	Action                *string                        `json:"Action,omitempty"`
+	ActionParams          []PolicyActionParam            `json:"ActionParams,omitempty"`
+	ConfigContext         NullablePolicyConfigContext    `json:"ConfigContext,omitempty"`
+	DeployedPolicies      []string                       `json:"DeployedPolicies,omitempty"`
+	PolicyChangeDetails   []PolicyConfigChangeDetailType `json:"PolicyChangeDetails,omitempty"`
+	RemovedPolicies       []string                       `json:"RemovedPolicies,omitempty"`
+	ReportedPolicyChanges []PolicyReportedPolicyChange   `json:"ReportedPolicyChanges,omitempty"`
+	ScheduledActions      []PolicyScheduledAction        `json:"ScheduledActions,omitempty"`
 	// An array of relationships to policyAbstractPolicy resources.
 	PolicyBucket         []PolicyAbstractPolicyRelationship `json:"PolicyBucket,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -256,6 +258,39 @@ func (o *PolicyAbstractConfigProfile) SetDeployedPolicies(v []string) {
 	o.DeployedPolicies = v
 }
 
+// GetPolicyChangeDetails returns the PolicyChangeDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyAbstractConfigProfile) GetPolicyChangeDetails() []PolicyConfigChangeDetailType {
+	if o == nil {
+		var ret []PolicyConfigChangeDetailType
+		return ret
+	}
+	return o.PolicyChangeDetails
+}
+
+// GetPolicyChangeDetailsOk returns a tuple with the PolicyChangeDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyAbstractConfigProfile) GetPolicyChangeDetailsOk() ([]PolicyConfigChangeDetailType, bool) {
+	if o == nil || IsNil(o.PolicyChangeDetails) {
+		return nil, false
+	}
+	return o.PolicyChangeDetails, true
+}
+
+// HasPolicyChangeDetails returns a boolean if a field has been set.
+func (o *PolicyAbstractConfigProfile) HasPolicyChangeDetails() bool {
+	if o != nil && !IsNil(o.PolicyChangeDetails) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyChangeDetails gets a reference to the given []PolicyConfigChangeDetailType and assigns it to the PolicyChangeDetails field.
+func (o *PolicyAbstractConfigProfile) SetPolicyChangeDetails(v []PolicyConfigChangeDetailType) {
+	o.PolicyChangeDetails = v
+}
+
 // GetRemovedPolicies returns the RemovedPolicies field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PolicyAbstractConfigProfile) GetRemovedPolicies() []string {
 	if o == nil {
@@ -287,6 +322,39 @@ func (o *PolicyAbstractConfigProfile) HasRemovedPolicies() bool {
 // SetRemovedPolicies gets a reference to the given []string and assigns it to the RemovedPolicies field.
 func (o *PolicyAbstractConfigProfile) SetRemovedPolicies(v []string) {
 	o.RemovedPolicies = v
+}
+
+// GetReportedPolicyChanges returns the ReportedPolicyChanges field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyAbstractConfigProfile) GetReportedPolicyChanges() []PolicyReportedPolicyChange {
+	if o == nil {
+		var ret []PolicyReportedPolicyChange
+		return ret
+	}
+	return o.ReportedPolicyChanges
+}
+
+// GetReportedPolicyChangesOk returns a tuple with the ReportedPolicyChanges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyAbstractConfigProfile) GetReportedPolicyChangesOk() ([]PolicyReportedPolicyChange, bool) {
+	if o == nil || IsNil(o.ReportedPolicyChanges) {
+		return nil, false
+	}
+	return o.ReportedPolicyChanges, true
+}
+
+// HasReportedPolicyChanges returns a boolean if a field has been set.
+func (o *PolicyAbstractConfigProfile) HasReportedPolicyChanges() bool {
+	if o != nil && !IsNil(o.ReportedPolicyChanges) {
+		return true
+	}
+
+	return false
+}
+
+// SetReportedPolicyChanges gets a reference to the given []PolicyReportedPolicyChange and assigns it to the ReportedPolicyChanges field.
+func (o *PolicyAbstractConfigProfile) SetReportedPolicyChanges(v []PolicyReportedPolicyChange) {
+	o.ReportedPolicyChanges = v
 }
 
 // GetScheduledActions returns the ScheduledActions field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -387,8 +455,14 @@ func (o PolicyAbstractConfigProfile) ToMap() (map[string]interface{}, error) {
 	if o.DeployedPolicies != nil {
 		toSerialize["DeployedPolicies"] = o.DeployedPolicies
 	}
+	if o.PolicyChangeDetails != nil {
+		toSerialize["PolicyChangeDetails"] = o.PolicyChangeDetails
+	}
 	if o.RemovedPolicies != nil {
 		toSerialize["RemovedPolicies"] = o.RemovedPolicies
+	}
+	if o.ReportedPolicyChanges != nil {
+		toSerialize["ReportedPolicyChanges"] = o.ReportedPolicyChanges
 	}
 	if o.ScheduledActions != nil {
 		toSerialize["ScheduledActions"] = o.ScheduledActions
@@ -449,12 +523,14 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
 		// User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.
-		Action           *string                     `json:"Action,omitempty"`
-		ActionParams     []PolicyActionParam         `json:"ActionParams,omitempty"`
-		ConfigContext    NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
-		DeployedPolicies []string                    `json:"DeployedPolicies,omitempty"`
-		RemovedPolicies  []string                    `json:"RemovedPolicies,omitempty"`
-		ScheduledActions []PolicyScheduledAction     `json:"ScheduledActions,omitempty"`
+		Action                *string                        `json:"Action,omitempty"`
+		ActionParams          []PolicyActionParam            `json:"ActionParams,omitempty"`
+		ConfigContext         NullablePolicyConfigContext    `json:"ConfigContext,omitempty"`
+		DeployedPolicies      []string                       `json:"DeployedPolicies,omitempty"`
+		PolicyChangeDetails   []PolicyConfigChangeDetailType `json:"PolicyChangeDetails,omitempty"`
+		RemovedPolicies       []string                       `json:"RemovedPolicies,omitempty"`
+		ReportedPolicyChanges []PolicyReportedPolicyChange   `json:"ReportedPolicyChanges,omitempty"`
+		ScheduledActions      []PolicyScheduledAction        `json:"ScheduledActions,omitempty"`
 		// An array of relationships to policyAbstractPolicy resources.
 		PolicyBucket []PolicyAbstractPolicyRelationship `json:"PolicyBucket,omitempty"`
 	}
@@ -470,7 +546,9 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(data []byte) (err error) {
 		varPolicyAbstractConfigProfile.ActionParams = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ActionParams
 		varPolicyAbstractConfigProfile.ConfigContext = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ConfigContext
 		varPolicyAbstractConfigProfile.DeployedPolicies = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.DeployedPolicies
+		varPolicyAbstractConfigProfile.PolicyChangeDetails = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.PolicyChangeDetails
 		varPolicyAbstractConfigProfile.RemovedPolicies = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.RemovedPolicies
+		varPolicyAbstractConfigProfile.ReportedPolicyChanges = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ReportedPolicyChanges
 		varPolicyAbstractConfigProfile.ScheduledActions = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ScheduledActions
 		varPolicyAbstractConfigProfile.PolicyBucket = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.PolicyBucket
 		*o = PolicyAbstractConfigProfile(varPolicyAbstractConfigProfile)
@@ -496,7 +574,9 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ActionParams")
 		delete(additionalProperties, "ConfigContext")
 		delete(additionalProperties, "DeployedPolicies")
+		delete(additionalProperties, "PolicyChangeDetails")
 		delete(additionalProperties, "RemovedPolicies")
+		delete(additionalProperties, "ReportedPolicyChanges")
 		delete(additionalProperties, "ScheduledActions")
 		delete(additionalProperties, "PolicyBucket")
 

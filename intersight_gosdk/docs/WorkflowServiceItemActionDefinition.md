@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **UserIdOrEmail** | Pointer to **string** | The user identifier who created or updated the service item action definition. | [optional] [readonly] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **ValidationWorkflows** | Pointer to [**[]WorkflowServiceItemActionWorkflowDefinition**](WorkflowServiceItemActionWorkflowDefinition.md) |  | [optional] 
+**AssociatedPrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] 
 **AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
 **ServiceItemDefinition** | Pointer to [**NullableWorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
 **WorkflowDefinition** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
@@ -611,6 +612,41 @@ HasValidationWorkflows returns a boolean if a field has been set.
 `func (o *WorkflowServiceItemActionDefinition) UnsetValidationWorkflows()`
 
 UnsetValidationWorkflows ensures that no value is present for ValidationWorkflows, not even an explicit nil
+### GetAssociatedPrivilegeSets
+
+`func (o *WorkflowServiceItemActionDefinition) GetAssociatedPrivilegeSets() []IamPrivilegeSetRelationship`
+
+GetAssociatedPrivilegeSets returns the AssociatedPrivilegeSets field if non-nil, zero value otherwise.
+
+### GetAssociatedPrivilegeSetsOk
+
+`func (o *WorkflowServiceItemActionDefinition) GetAssociatedPrivilegeSetsOk() (*[]IamPrivilegeSetRelationship, bool)`
+
+GetAssociatedPrivilegeSetsOk returns a tuple with the AssociatedPrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssociatedPrivilegeSets
+
+`func (o *WorkflowServiceItemActionDefinition) SetAssociatedPrivilegeSets(v []IamPrivilegeSetRelationship)`
+
+SetAssociatedPrivilegeSets sets AssociatedPrivilegeSets field to given value.
+
+### HasAssociatedPrivilegeSets
+
+`func (o *WorkflowServiceItemActionDefinition) HasAssociatedPrivilegeSets() bool`
+
+HasAssociatedPrivilegeSets returns a boolean if a field has been set.
+
+### SetAssociatedPrivilegeSetsNil
+
+`func (o *WorkflowServiceItemActionDefinition) SetAssociatedPrivilegeSetsNil(b bool)`
+
+ SetAssociatedPrivilegeSetsNil sets the value for AssociatedPrivilegeSets to be an explicit nil
+
+### UnsetAssociatedPrivilegeSets
+`func (o *WorkflowServiceItemActionDefinition) UnsetAssociatedPrivilegeSets()`
+
+UnsetAssociatedPrivilegeSets ensures that no value is present for AssociatedPrivilegeSets, not even an explicit nil
 ### GetAssociatedRoles
 
 `func (o *WorkflowServiceItemActionDefinition) GetAssociatedRoles() []IamRoleRelationship`

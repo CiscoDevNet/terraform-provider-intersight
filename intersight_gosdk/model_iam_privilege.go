@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -27,9 +27,16 @@ type IamPrivilege struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType     string   `json:"ObjectType"`
+	AttributeNames []string `json:"AttributeNames,omitempty"`
+	// The condition expression or criteria that determines when this conditional privilege can grant access to update the specified attribute names.
+	Condition *string `json:"Condition,omitempty"`
+	// Informative description about each privilege.
+	Description *string `json:"Description,omitempty"`
 	// The hostname prefix of the resource corresponding to this privilege. For example \\'sentry\\' in https://sentry.intersight.com .
 	HostnamePrefix *string `json:"HostnamePrefix,omitempty"`
+	// Flag that indicates whether this privilege is conditional.
+	IsConditionalPrivilege *bool `json:"IsConditionalPrivilege,omitempty"`
 	// The API method on the rest resource corresponding to privilege. For example READ, CREATE, UPDATE etc.
 	Method *string `json:"Method,omitempty"`
 	// The name of the privilege reported by microservice.
@@ -126,6 +133,103 @@ func (o *IamPrivilege) GetDefaultObjectType() interface{} {
 	return "iam.Privilege"
 }
 
+// GetAttributeNames returns the AttributeNames field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamPrivilege) GetAttributeNames() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.AttributeNames
+}
+
+// GetAttributeNamesOk returns a tuple with the AttributeNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamPrivilege) GetAttributeNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.AttributeNames) {
+		return nil, false
+	}
+	return o.AttributeNames, true
+}
+
+// HasAttributeNames returns a boolean if a field has been set.
+func (o *IamPrivilege) HasAttributeNames() bool {
+	if o != nil && !IsNil(o.AttributeNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetAttributeNames gets a reference to the given []string and assigns it to the AttributeNames field.
+func (o *IamPrivilege) SetAttributeNames(v []string) {
+	o.AttributeNames = v
+}
+
+// GetCondition returns the Condition field value if set, zero value otherwise.
+func (o *IamPrivilege) GetCondition() string {
+	if o == nil || IsNil(o.Condition) {
+		var ret string
+		return ret
+	}
+	return *o.Condition
+}
+
+// GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilege) GetConditionOk() (*string, bool) {
+	if o == nil || IsNil(o.Condition) {
+		return nil, false
+	}
+	return o.Condition, true
+}
+
+// HasCondition returns a boolean if a field has been set.
+func (o *IamPrivilege) HasCondition() bool {
+	if o != nil && !IsNil(o.Condition) {
+		return true
+	}
+
+	return false
+}
+
+// SetCondition gets a reference to the given string and assigns it to the Condition field.
+func (o *IamPrivilege) SetCondition(v string) {
+	o.Condition = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *IamPrivilege) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilege) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *IamPrivilege) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *IamPrivilege) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetHostnamePrefix returns the HostnamePrefix field value if set, zero value otherwise.
 func (o *IamPrivilege) GetHostnamePrefix() string {
 	if o == nil || IsNil(o.HostnamePrefix) {
@@ -156,6 +260,38 @@ func (o *IamPrivilege) HasHostnamePrefix() bool {
 // SetHostnamePrefix gets a reference to the given string and assigns it to the HostnamePrefix field.
 func (o *IamPrivilege) SetHostnamePrefix(v string) {
 	o.HostnamePrefix = &v
+}
+
+// GetIsConditionalPrivilege returns the IsConditionalPrivilege field value if set, zero value otherwise.
+func (o *IamPrivilege) GetIsConditionalPrivilege() bool {
+	if o == nil || IsNil(o.IsConditionalPrivilege) {
+		var ret bool
+		return ret
+	}
+	return *o.IsConditionalPrivilege
+}
+
+// GetIsConditionalPrivilegeOk returns a tuple with the IsConditionalPrivilege field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamPrivilege) GetIsConditionalPrivilegeOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsConditionalPrivilege) {
+		return nil, false
+	}
+	return o.IsConditionalPrivilege, true
+}
+
+// HasIsConditionalPrivilege returns a boolean if a field has been set.
+func (o *IamPrivilege) HasIsConditionalPrivilege() bool {
+	if o != nil && !IsNil(o.IsConditionalPrivilege) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsConditionalPrivilege gets a reference to the given bool and assigns it to the IsConditionalPrivilege field.
+func (o *IamPrivilege) SetIsConditionalPrivilege(v bool) {
+	o.IsConditionalPrivilege = &v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
@@ -398,8 +534,20 @@ func (o IamPrivilege) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.AttributeNames != nil {
+		toSerialize["AttributeNames"] = o.AttributeNames
+	}
+	if !IsNil(o.Condition) {
+		toSerialize["Condition"] = o.Condition
+	}
+	if !IsNil(o.Description) {
+		toSerialize["Description"] = o.Description
+	}
 	if !IsNil(o.HostnamePrefix) {
 		toSerialize["HostnamePrefix"] = o.HostnamePrefix
+	}
+	if !IsNil(o.IsConditionalPrivilege) {
+		toSerialize["IsConditionalPrivilege"] = o.IsConditionalPrivilege
 	}
 	if !IsNil(o.Method) {
 		toSerialize["Method"] = o.Method
@@ -473,9 +621,16 @@ func (o *IamPrivilege) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType     string   `json:"ObjectType"`
+		AttributeNames []string `json:"AttributeNames,omitempty"`
+		// The condition expression or criteria that determines when this conditional privilege can grant access to update the specified attribute names.
+		Condition *string `json:"Condition,omitempty"`
+		// Informative description about each privilege.
+		Description *string `json:"Description,omitempty"`
 		// The hostname prefix of the resource corresponding to this privilege. For example \\'sentry\\' in https://sentry.intersight.com .
 		HostnamePrefix *string `json:"HostnamePrefix,omitempty"`
+		// Flag that indicates whether this privilege is conditional.
+		IsConditionalPrivilege *bool `json:"IsConditionalPrivilege,omitempty"`
 		// The API method on the rest resource corresponding to privilege. For example READ, CREATE, UPDATE etc.
 		Method *string `json:"Method,omitempty"`
 		// The name of the privilege reported by microservice.
@@ -495,7 +650,11 @@ func (o *IamPrivilege) UnmarshalJSON(data []byte) (err error) {
 		varIamPrivilege := _IamPrivilege{}
 		varIamPrivilege.ClassId = varIamPrivilegeWithoutEmbeddedStruct.ClassId
 		varIamPrivilege.ObjectType = varIamPrivilegeWithoutEmbeddedStruct.ObjectType
+		varIamPrivilege.AttributeNames = varIamPrivilegeWithoutEmbeddedStruct.AttributeNames
+		varIamPrivilege.Condition = varIamPrivilegeWithoutEmbeddedStruct.Condition
+		varIamPrivilege.Description = varIamPrivilegeWithoutEmbeddedStruct.Description
 		varIamPrivilege.HostnamePrefix = varIamPrivilegeWithoutEmbeddedStruct.HostnamePrefix
+		varIamPrivilege.IsConditionalPrivilege = varIamPrivilegeWithoutEmbeddedStruct.IsConditionalPrivilege
 		varIamPrivilege.Method = varIamPrivilegeWithoutEmbeddedStruct.Method
 		varIamPrivilege.Name = varIamPrivilegeWithoutEmbeddedStruct.Name
 		varIamPrivilege.RestPath = varIamPrivilegeWithoutEmbeddedStruct.RestPath
@@ -521,7 +680,11 @@ func (o *IamPrivilege) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AttributeNames")
+		delete(additionalProperties, "Condition")
+		delete(additionalProperties, "Description")
 		delete(additionalProperties, "HostnamePrefix")
+		delete(additionalProperties, "IsConditionalPrivilege")
 		delete(additionalProperties, "Method")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "RestPath")

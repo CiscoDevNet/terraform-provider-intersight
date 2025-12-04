@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "apic.Vrfs"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "apic.Vrfs"]
-**Dn** | Pointer to **string** | Distinguished name generated from URL parameters. | [optional] 
-**Name** | Pointer to **string** | VRF name generated from URL parameters. | [optional] 
+**Dn** | Pointer to **string** | Distinguished Name generated from URL Parameters. | [optional] 
+**Name** | Pointer to **string** | VRF Namegenerated from URL Parameters. | [optional] 
 **Tenant** | Pointer to [**NullableApicTenantRelationship**](ApicTenantRelationship.md) |  | [optional] 
 
 ## Methods

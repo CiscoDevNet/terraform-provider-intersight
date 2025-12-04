@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.AssociatedRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.AssociatedRoles"]
 **Moid** | Pointer to **string** | Stores the identifier of the task definition for which the required roles are cached in the workflow definition. In the case of sub workflow tasks, this property stores the identifier of the workflow that is wrapped in the sub workflow task. | [optional] [readonly] 
+**PrivilegeSets** | Pointer to **[]string** |  | [optional] 
 **RequiredPrivilegeNames** | Pointer to **[]string** |  | [optional] 
 **Roles** | Pointer to **[]string** |  | [optional] 
 **TaskNames** | Pointer to **[]string** |  | [optional] 
@@ -96,6 +97,41 @@ SetMoid sets Moid field to given value.
 
 HasMoid returns a boolean if a field has been set.
 
+### GetPrivilegeSets
+
+`func (o *WorkflowAssociatedRoles) GetPrivilegeSets() []string`
+
+GetPrivilegeSets returns the PrivilegeSets field if non-nil, zero value otherwise.
+
+### GetPrivilegeSetsOk
+
+`func (o *WorkflowAssociatedRoles) GetPrivilegeSetsOk() (*[]string, bool)`
+
+GetPrivilegeSetsOk returns a tuple with the PrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivilegeSets
+
+`func (o *WorkflowAssociatedRoles) SetPrivilegeSets(v []string)`
+
+SetPrivilegeSets sets PrivilegeSets field to given value.
+
+### HasPrivilegeSets
+
+`func (o *WorkflowAssociatedRoles) HasPrivilegeSets() bool`
+
+HasPrivilegeSets returns a boolean if a field has been set.
+
+### SetPrivilegeSetsNil
+
+`func (o *WorkflowAssociatedRoles) SetPrivilegeSetsNil(b bool)`
+
+ SetPrivilegeSetsNil sets the value for PrivilegeSets to be an explicit nil
+
+### UnsetPrivilegeSets
+`func (o *WorkflowAssociatedRoles) UnsetPrivilegeSets()`
+
+UnsetPrivilegeSets ensures that no value is present for PrivilegeSets, not even an explicit nil
 ### GetRequiredPrivilegeNames
 
 `func (o *WorkflowAssociatedRoles) GetRequiredPrivilegeNames() []string`

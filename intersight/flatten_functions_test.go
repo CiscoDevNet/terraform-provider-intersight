@@ -9029,6 +9029,30 @@ func TestFlattenListPolicyActionParam(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListPolicyConfigChangeDetailType(t *testing.T) {
+	p := []models.PolicyConfigChangeDetailType{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"policy.ConfigChangeDetailType","ConfigChangeFlag":"ConfigChangeFlag %d","Message":"Message %d","ModStatus":"ModStatus %d","ObjectType":"policy.ConfigChangeDetailType"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPolicyConfigChangeDetailType(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PolicyConfigChangeDetailType{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPolicyConfigChangeDetailType(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "policy.ConfigChangeDetailType", "config_change_flag": "ConfigChangeFlag 1", "message": "Message 1", "mod_status": "ModStatus 1", "object_type": "policy.ConfigChangeDetailType"}, {"class_id": "policy.ConfigChangeDetailType", "config_change_flag": "ConfigChangeFlag 2", "message": "Message 2", "mod_status": "ModStatus 2", "object_type": "policy.ConfigChangeDetailType"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListPolicyPolicyStatus(t *testing.T) {
 	p := []models.PolicyPolicyStatus{}
 	var d = &schema.ResourceData{}
@@ -9048,6 +9072,30 @@ func TestFlattenListPolicyPolicyStatus(t *testing.T) {
 	}
 	ffOp := flattenListPolicyPolicyStatus(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "policy.PolicyStatus", "moid": "Moid 1", "object_type": "policy.PolicyStatus", "reason": "Reason 1", "status": "Status 1", "type": "Type 1"}, {"class_id": "policy.PolicyStatus", "moid": "Moid 2", "object_type": "policy.PolicyStatus", "reason": "Reason 2", "status": "Status 2", "type": "Type 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListPolicyReportedPolicyChange(t *testing.T) {
+	p := []models.PolicyReportedPolicyChange{}
+	var d = &schema.ResourceData{}
+	c := `{"ChangeId":"ChangeId %d","ChangeStatus":"ChangeStatus %d","ClassId":"policy.ReportedPolicyChange","ObjectType":"policy.ReportedPolicyChange","PolicyType":"PolicyType %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListPolicyReportedPolicyChange(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.PolicyReportedPolicyChange{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListPolicyReportedPolicyChange(p, d)
+	expectedOp := []map[string]interface{}{{"change_id": "ChangeId 1", "change_status": "ChangeStatus 1", "class_id": "policy.ReportedPolicyChange", "object_type": "policy.ReportedPolicyChange", "policy_type": "PolicyType 1"}, {"change_id": "ChangeId 2", "change_status": "ChangeStatus 2", "class_id": "policy.ReportedPolicyChange", "object_type": "policy.ReportedPolicyChange", "policy_type": "PolicyType 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -20759,6 +20807,24 @@ func TestFlattenMapMerakiOrganizationRelationship(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapMoBaseComplexType(t *testing.T) {
+	p := models.MoBaseComplexType{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.BaseComplexType","ObjectType":"mo.BaseComplexType"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapMoBaseComplexType(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapMoBaseComplexType(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.BaseComplexType", "object_type": "mo.BaseComplexType"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapMoBaseMo(t *testing.T) {
 	p := models.MoBaseMo{}
 	var d = &schema.ResourceData{}
@@ -23981,24 +24047,6 @@ func TestFlattenMapTamSeverity(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
-func TestFlattenMapTaskFileDownloadInfo(t *testing.T) {
-	p := models.TaskFileDownloadInfo{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"task.FileDownloadInfo","Contents":"Contents %d","ObjectType":"task.FileDownloadInfo","Path":"Path %d","Source":"Source %d","Type":"Type %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapTaskFileDownloadInfo(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapTaskFileDownloadInfo(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "task.FileDownloadInfo", "contents": "Contents 1", "object_type": "task.FileDownloadInfo", "path": "Path 1", "nr_source": "Source 1", "type": "Type 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
 func TestFlattenMapTechsupportmanagementTechSupportBundleRelationship(t *testing.T) {
 	p := models.TechsupportmanagementTechSupportBundleRelationship{}
 	var d = &schema.ResourceData{}
@@ -26432,7 +26480,7 @@ func TestFlattenMapWorkflowWorkflowMetadataRelationship(t *testing.T) {
 func TestFlattenMapWorkflowWorkflowProperties(t *testing.T) {
 	p := models.WorkflowWorkflowProperties{}
 	var d = &schema.ResourceData{}
-	c := `{"ClassId":"workflow.WorkflowProperties","Cloneable":true,"EnableDebug":true,"EnablePublishStatus":true,"ExternalMeta":true,"ObjectType":"workflow.WorkflowProperties","PublishStatus":"PublishStatus %d","Retryable":true,"RollbackOnCancel":true,"RollbackOnFailure":true,"SupportStatus":"SupportStatus %d"}`
+	c := `{"ClassId":"workflow.WorkflowProperties","Cloneable":true,"EnableDebug":true,"EnablePublishStatus":true,"ExternalMeta":true,"ObjectType":"workflow.WorkflowProperties","PublishStatus":"PublishStatus %d","Retryable":true,"RollbackOnCancel":true,"RollbackOnFailure":true,"SupportStatus":"SupportStatus %d","TargetCtxPolicy":"TargetCtxPolicy %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenMapWorkflowWorkflowProperties(p, d)
@@ -26443,7 +26491,7 @@ func TestFlattenMapWorkflowWorkflowProperties(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapWorkflowWorkflowProperties(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "workflow.WorkflowProperties", "cloneable": true, "enable_debug": true, "enable_publish_status": true, "external_meta": true, "object_type": "workflow.WorkflowProperties", "publish_status": "PublishStatus 1", "retryable": true, "rollback_on_cancel": true, "rollback_on_failure": true, "support_status": "SupportStatus 1"}
+	expectedOp := map[string]interface{}{"class_id": "workflow.WorkflowProperties", "cloneable": true, "enable_debug": true, "enable_publish_status": true, "external_meta": true, "object_type": "workflow.WorkflowProperties", "publish_status": "PublishStatus 1", "retryable": true, "rollback_on_cancel": true, "rollback_on_failure": true, "support_status": "SupportStatus 1", "target_ctx_policy": "TargetCtxPolicy 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

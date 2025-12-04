@@ -6,7 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Privilege"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Privilege"]
+**AttributeNames** | Pointer to **[]string** |  | [optional] 
+**Condition** | Pointer to **string** | The condition expression or criteria that determines when this conditional privilege can grant access to update the specified attribute names. | [optional] [readonly] 
+**Description** | Pointer to **string** | Informative description about each privilege. | [optional] [readonly] 
 **HostnamePrefix** | Pointer to **string** | The hostname prefix of the resource corresponding to this privilege. For example \\&#39;sentry\\&#39; in https://sentry.intersight.com . | [optional] [readonly] 
+**IsConditionalPrivilege** | Pointer to **bool** | Flag that indicates whether this privilege is conditional. | [optional] [readonly] 
 **Method** | Pointer to **string** | The API method on the rest resource corresponding to privilege. For example READ, CREATE, UPDATE etc. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the privilege reported by microservice. | [optional] [readonly] 
 **RestPath** | Pointer to **string** | The REST API path of the resource corresponding to this privilege. For example /v1/iam/Accounts, /v1/iam/Sessions. | [optional] [readonly] 
@@ -73,6 +77,91 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAttributeNames
+
+`func (o *IamPrivilege) GetAttributeNames() []string`
+
+GetAttributeNames returns the AttributeNames field if non-nil, zero value otherwise.
+
+### GetAttributeNamesOk
+
+`func (o *IamPrivilege) GetAttributeNamesOk() (*[]string, bool)`
+
+GetAttributeNamesOk returns a tuple with the AttributeNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttributeNames
+
+`func (o *IamPrivilege) SetAttributeNames(v []string)`
+
+SetAttributeNames sets AttributeNames field to given value.
+
+### HasAttributeNames
+
+`func (o *IamPrivilege) HasAttributeNames() bool`
+
+HasAttributeNames returns a boolean if a field has been set.
+
+### SetAttributeNamesNil
+
+`func (o *IamPrivilege) SetAttributeNamesNil(b bool)`
+
+ SetAttributeNamesNil sets the value for AttributeNames to be an explicit nil
+
+### UnsetAttributeNames
+`func (o *IamPrivilege) UnsetAttributeNames()`
+
+UnsetAttributeNames ensures that no value is present for AttributeNames, not even an explicit nil
+### GetCondition
+
+`func (o *IamPrivilege) GetCondition() string`
+
+GetCondition returns the Condition field if non-nil, zero value otherwise.
+
+### GetConditionOk
+
+`func (o *IamPrivilege) GetConditionOk() (*string, bool)`
+
+GetConditionOk returns a tuple with the Condition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCondition
+
+`func (o *IamPrivilege) SetCondition(v string)`
+
+SetCondition sets Condition field to given value.
+
+### HasCondition
+
+`func (o *IamPrivilege) HasCondition() bool`
+
+HasCondition returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *IamPrivilege) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *IamPrivilege) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *IamPrivilege) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *IamPrivilege) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
 ### GetHostnamePrefix
 
 `func (o *IamPrivilege) GetHostnamePrefix() string`
@@ -97,6 +186,31 @@ SetHostnamePrefix sets HostnamePrefix field to given value.
 `func (o *IamPrivilege) HasHostnamePrefix() bool`
 
 HasHostnamePrefix returns a boolean if a field has been set.
+
+### GetIsConditionalPrivilege
+
+`func (o *IamPrivilege) GetIsConditionalPrivilege() bool`
+
+GetIsConditionalPrivilege returns the IsConditionalPrivilege field if non-nil, zero value otherwise.
+
+### GetIsConditionalPrivilegeOk
+
+`func (o *IamPrivilege) GetIsConditionalPrivilegeOk() (*bool, bool)`
+
+GetIsConditionalPrivilegeOk returns a tuple with the IsConditionalPrivilege field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsConditionalPrivilege
+
+`func (o *IamPrivilege) SetIsConditionalPrivilege(v bool)`
+
+SetIsConditionalPrivilege sets IsConditionalPrivilege field to given value.
+
+### HasIsConditionalPrivilege
+
+`func (o *IamPrivilege) HasIsConditionalPrivilege() bool`
+
+HasIsConditionalPrivilege returns a boolean if a field has been set.
 
 ### GetMethod
 

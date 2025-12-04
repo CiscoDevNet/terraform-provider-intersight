@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.OperatingSystemFile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.OperatingSystemFile"]
+**ImportProgress** | Pointer to **int64** | The progress percentage for the import operation. | [optional] 
+**SampleHashes** | Pointer to **string** | File sample hashes at deterministic positions for efficient duplicate detection of large files. | [optional] 
 **Vendor** | Pointer to **string** | The vendor or publisher of this file. | [optional] 
 **Catalog** | Pointer to [**NullableSoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
@@ -67,6 +69,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetImportProgress
+
+`func (o *SoftwarerepositoryOperatingSystemFile) GetImportProgress() int64`
+
+GetImportProgress returns the ImportProgress field if non-nil, zero value otherwise.
+
+### GetImportProgressOk
+
+`func (o *SoftwarerepositoryOperatingSystemFile) GetImportProgressOk() (*int64, bool)`
+
+GetImportProgressOk returns a tuple with the ImportProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImportProgress
+
+`func (o *SoftwarerepositoryOperatingSystemFile) SetImportProgress(v int64)`
+
+SetImportProgress sets ImportProgress field to given value.
+
+### HasImportProgress
+
+`func (o *SoftwarerepositoryOperatingSystemFile) HasImportProgress() bool`
+
+HasImportProgress returns a boolean if a field has been set.
+
+### GetSampleHashes
+
+`func (o *SoftwarerepositoryOperatingSystemFile) GetSampleHashes() string`
+
+GetSampleHashes returns the SampleHashes field if non-nil, zero value otherwise.
+
+### GetSampleHashesOk
+
+`func (o *SoftwarerepositoryOperatingSystemFile) GetSampleHashesOk() (*string, bool)`
+
+GetSampleHashesOk returns a tuple with the SampleHashes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSampleHashes
+
+`func (o *SoftwarerepositoryOperatingSystemFile) SetSampleHashes(v string)`
+
+SetSampleHashes sets SampleHashes field to given value.
+
+### HasSampleHashes
+
+`func (o *SoftwarerepositoryOperatingSystemFile) HasSampleHashes() bool`
+
+HasSampleHashes returns a boolean if a field has been set.
 
 ### GetVendor
 

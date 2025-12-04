@@ -86,7 +86,7 @@ func getApicAciPodSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Pod name extracted from DN in Cisco Application Policy Infrastructure Controller (APIC).",
+			Description: "Name of a pod extracted from Dn within the Cisco Application Policy Infrastructure Controller (APIC).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -170,7 +170,7 @@ func getApicAciPodSchema() map[string]*schema.Schema {
 			},
 		},
 		"pod_type": {
-			Description: "Object pod type in Cisco Application Policy Infrastructure Controller (APIC).",
+			Description: "Pod type of an object within the Cisco Application Policy Infrastructure Controller (APIC).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -71,7 +71,7 @@ func getFmcPhysicalInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"device_id": {
-			Description: "Physical interface device Id.",
+			Description: "Represents Device Id associated with Physical Interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -81,7 +81,7 @@ func getFmcPhysicalInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"domain_id": {
-			Description: "Physical interface domain Id.",
+			Description: "Represents Domain Id associated with Physical Interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -96,7 +96,7 @@ func getFmcPhysicalInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The name for the physical interface.",
+			Description: "Represents Physical Interface Name.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -180,7 +180,7 @@ func getFmcPhysicalInterfaceSchema() map[string]*schema.Schema {
 			},
 		},
 		"physical_interface_id": {
-			Description: "The id for the physical interface.",
+			Description: "Represents Physical Interface Id.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -927,6 +927,11 @@ func getFirmwareSwitchUpgradeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"wait_time_out": {
+			Description: "Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -1889,6 +1894,11 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOkExists("wait_time_out"); ok {
+		x := int64(v.(int))
+		o.SetWaitTimeOut(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of FirmwareSwitchUpgrade object failed with error : %s", err.Error())
@@ -1971,6 +1981,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 				temp["upgrade_type"] = (s.GetUpgradeType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["wait_time_out"] = (s.GetWaitTimeOut())
 				firmwareSwitchUpgradeResults = append(firmwareSwitchUpgradeResults, temp)
 			}
 		}

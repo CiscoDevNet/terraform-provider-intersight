@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "apic.VpcGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "apic.VpcGroup"]
-**Dn** | Pointer to **string** | Distinguished Name (DN) of an object in Cisco Application Policy Infrastructure Controller (APIC) GUI. | [optional] 
-**Name** | Pointer to **string** | Object name in Cisco Application Policy Infrastructure Controller (APIC) GUI. | [optional] 
+**Dn** | Pointer to **string** | Distinguished Name (DN) of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI. | [optional] 
+**Name** | Pointer to **string** | Name of an object within the Cisco Application Policy Infrastructure Controller (APIC) GUI. | [optional] 
 
 ## Methods
 

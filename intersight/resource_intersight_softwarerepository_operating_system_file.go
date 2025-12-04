@@ -209,8 +209,13 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 				Optional:     true,
 				Default:      "None",
 			},
+			"import_progress": {
+				Description: "The progress percentage for the import operation.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"import_state": {
-				Description: "The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process.\n* `ReadyForImport` - The image is ready to be imported into the repository.\n* `Importing` - The image is being imported into the repository.\n* `Imported` - The image has been extracted and imported into the repository.\n* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.\n* `Extracting` - Indicates that the image is being extracted into the repository.\n* `Extracted` - Indicates that the image has been extracted into the repository.\n* `Failed` - The image import from an external source to the repository has failed.\n* `MetaOnly` - The image is present in an external repository.\n* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.\n* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.\n* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.\n* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.\n* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.\n* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.\n* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.",
+				Description: "The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process.\n* `ReadyForImport` - The image is ready to be imported into the repository.\n* `Importing` - The image is being imported into the repository.\n* `Imported` - The image has been extracted and imported into the repository.\n* `ComputingMetadata` - Indicates that the image has been imported but its metadata computation has not been done.\n* `PendingExtraction` - Indicates that the image has been imported but not extracted in the repository.\n* `Extracting` - Indicates that the image is being extracted into the repository.\n* `Extracted` - Indicates that the image has been extracted into the repository.\n* `Failed` - The image import from an external source to the repository has failed.\n* `MetaOnly` - The image is present in an external repository.\n* `ReadyForCache` - The image is ready to be cached into the Intersight Appliance.\n* `Caching` - Indicates that the image is being cached into the Intersight Appliance or endpoint cache.\n* `Cached` - Indicates that the image has been cached into the Intersight Appliance or endpoint cache.\n* `CachingFailed` - Indicates that the image caching into the Intersight Appliance failed or endpoint cache.\n* `Corrupted` - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached.\n* `Evicted` - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space.\n* `Invalid` - Indicates that the corresponding distributable MO has been removed from the backend. This can be due to unpublishing of an image.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -452,6 +457,12 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"sample_hashes": {
+				Description: "File sample hashes at deterministic positions for efficient duplicate detection of large files.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+			},
 			"sha512sum": {
 				Description: "The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository.",
 				Type:        schema.TypeString,
@@ -612,7 +623,7 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -897,6 +908,11 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 		o.SetImportAction(x)
 	}
 
+	if v, ok := d.GetOkExists("import_progress"); ok {
+		x := int64(v.(int))
+		o.SetImportProgress(x)
+	}
+
 	if v, ok := d.GetOk("md5e_tag"); ok {
 		x := (v.(string))
 		o.SetMd5eTag(x)
@@ -980,6 +996,11 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 	if v, ok := d.GetOk("release_notes_url"); ok {
 		x := (v.(string))
 		o.SetReleaseNotesUrl(x)
+	}
+
+	if v, ok := d.GetOk("sample_hashes"); ok {
+		x := (v.(string))
+		o.SetSampleHashes(x)
 	}
 
 	if v, ok := d.GetOk("sha512sum"); ok {
@@ -1218,6 +1239,10 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property ImportAction in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
+	if err := d.Set("import_progress", (s.GetImportProgress())); err != nil {
+		return diag.Errorf("error occurred while setting property ImportProgress in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
 	if err := d.Set("import_state", (s.GetImportState())); err != nil {
 		return diag.Errorf("error occurred while setting property ImportState in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
@@ -1292,6 +1317,10 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 
 	if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
 		return diag.Errorf("error occurred while setting property ReleaseNotesUrl in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
+	}
+
+	if err := d.Set("sample_hashes", (s.GetSampleHashes())); err != nil {
+		return diag.Errorf("error occurred while setting property SampleHashes in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
@@ -1419,6 +1448,12 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 		o.SetImportAction(x)
 	}
 
+	if d.HasChange("import_progress") {
+		v := d.Get("import_progress")
+		x := int64(v.(int))
+		o.SetImportProgress(x)
+	}
+
 	if d.HasChange("md5e_tag") {
 		v := d.Get("md5e_tag")
 		x := (v.(string))
@@ -1511,6 +1546,12 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 		v := d.Get("release_notes_url")
 		x := (v.(string))
 		o.SetReleaseNotesUrl(x)
+	}
+
+	if d.HasChange("sample_hashes") {
+		v := d.Get("sample_hashes")
+		x := (v.(string))
+		o.SetSampleHashes(x)
 	}
 
 	if d.HasChange("sha512sum") {

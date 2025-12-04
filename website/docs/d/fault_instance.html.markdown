@@ -24,7 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `code`:(string) Numerical fault code of the fault found. 
 * `create_time`:(string) The time when this managed object was created. 
 * `creation_time`:(string) The time of creation of the fault instance. 
-* `description`:(string) Detailed message of the fault. 
+* `description`:(string) Short summary of the fault found. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

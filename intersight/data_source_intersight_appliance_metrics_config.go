@@ -360,6 +360,11 @@ func getApplianceMetricsConfigSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"utilization": {
+			Description: "Measures the utilization of the metrics feature in relation to the available capacity of the system.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -847,6 +852,11 @@ func dataSourceApplianceMetricsConfigRead(c context.Context, d *schema.ResourceD
 		o.SetUserEnabled(x)
 	}
 
+	if v, ok := d.GetOkExists("utilization"); ok {
+		x := int64(v.(int))
+		o.SetUtilization(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -990,6 +1000,7 @@ func dataSourceApplianceMetricsConfigRead(c context.Context, d *schema.ResourceD
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["user_enabled"] = (s.GetUserEnabled())
+				temp["utilization"] = (s.GetUtilization())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				applianceMetricsConfigResults = append(applianceMetricsConfigResults, temp)

@@ -1019,7 +1019,7 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 							ForceNew:     true,
 						},
@@ -1340,6 +1340,14 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 					},
 				},
 				ForceNew: true,
+			},
+			"wait_time_out": {
+				Description:  "Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntBetween(-1, 1000),
+				Optional:     true,
+				Default:      -1,
+				ForceNew:     true,
 			},
 		},
 	}
@@ -1927,6 +1935,11 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 		o.SetUpgradeType(x)
 	}
 
+	if v, ok := d.GetOkExists("wait_time_out"); ok {
+		x := int64(v.(int))
+		o.SetWaitTimeOut(x)
+	}
+
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareSwitchUpgrade(conn.ctx).FirmwareSwitchUpgrade(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -2095,6 +2108,10 @@ func resourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in FirmwareSwitchUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("wait_time_out", (s.GetWaitTimeOut())); err != nil {
+		return diag.Errorf("error occurred while setting property WaitTimeOut in FirmwareSwitchUpgrade object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)

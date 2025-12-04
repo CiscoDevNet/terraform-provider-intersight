@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025102807
+API version: 1.0.11-2025120106
 Contact: intersight@cisco.com
 */
 
@@ -48,7 +48,9 @@ type ApplianceMetricsConfig struct {
 	// Metric collection state defined by the system.
 	SystemEnabled *bool `json:"SystemEnabled,omitempty"`
 	// Configured metric collection state by the account administrator.
-	UserEnabled          *bool                          `json:"UserEnabled,omitempty"`
+	UserEnabled *bool `json:"UserEnabled,omitempty"`
+	// Measures the utilization of the metrics feature in relation to the available capacity of the system.
+	Utilization          *int64                         `json:"Utilization,omitempty"`
 	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -460,6 +462,38 @@ func (o *ApplianceMetricsConfig) SetUserEnabled(v bool) {
 	o.UserEnabled = &v
 }
 
+// GetUtilization returns the Utilization field value if set, zero value otherwise.
+func (o *ApplianceMetricsConfig) GetUtilization() int64 {
+	if o == nil || IsNil(o.Utilization) {
+		var ret int64
+		return ret
+	}
+	return *o.Utilization
+}
+
+// GetUtilizationOk returns a tuple with the Utilization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceMetricsConfig) GetUtilizationOk() (*int64, bool) {
+	if o == nil || IsNil(o.Utilization) {
+		return nil, false
+	}
+	return o.Utilization, true
+}
+
+// HasUtilization returns a boolean if a field has been set.
+func (o *ApplianceMetricsConfig) HasUtilization() bool {
+	if o != nil && !IsNil(o.Utilization) {
+		return true
+	}
+
+	return false
+}
+
+// SetUtilization gets a reference to the given int64 and assigns it to the Utilization field.
+func (o *ApplianceMetricsConfig) SetUtilization(v int64) {
+	o.Utilization = &v
+}
+
 // GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceMetricsConfig) GetAccount() IamAccountRelationship {
 	if o == nil || IsNil(o.Account.Get()) {
@@ -559,6 +593,9 @@ func (o ApplianceMetricsConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserEnabled) {
 		toSerialize["UserEnabled"] = o.UserEnabled
 	}
+	if !IsNil(o.Utilization) {
+		toSerialize["Utilization"] = o.Utilization
+	}
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
 	}
@@ -636,7 +673,9 @@ func (o *ApplianceMetricsConfig) UnmarshalJSON(data []byte) (err error) {
 		// Metric collection state defined by the system.
 		SystemEnabled *bool `json:"SystemEnabled,omitempty"`
 		// Configured metric collection state by the account administrator.
-		UserEnabled *bool                          `json:"UserEnabled,omitempty"`
+		UserEnabled *bool `json:"UserEnabled,omitempty"`
+		// Measures the utilization of the metrics feature in relation to the available capacity of the system.
+		Utilization *int64                         `json:"Utilization,omitempty"`
 		Account     NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
@@ -657,6 +696,7 @@ func (o *ApplianceMetricsConfig) UnmarshalJSON(data []byte) (err error) {
 		varApplianceMetricsConfig.StatusMessage = varApplianceMetricsConfigWithoutEmbeddedStruct.StatusMessage
 		varApplianceMetricsConfig.SystemEnabled = varApplianceMetricsConfigWithoutEmbeddedStruct.SystemEnabled
 		varApplianceMetricsConfig.UserEnabled = varApplianceMetricsConfigWithoutEmbeddedStruct.UserEnabled
+		varApplianceMetricsConfig.Utilization = varApplianceMetricsConfigWithoutEmbeddedStruct.Utilization
 		varApplianceMetricsConfig.Account = varApplianceMetricsConfigWithoutEmbeddedStruct.Account
 		*o = ApplianceMetricsConfig(varApplianceMetricsConfig)
 	} else {
@@ -687,6 +727,7 @@ func (o *ApplianceMetricsConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "StatusMessage")
 		delete(additionalProperties, "SystemEnabled")
 		delete(additionalProperties, "UserEnabled")
+		delete(additionalProperties, "Utilization")
 		delete(additionalProperties, "Account")
 
 		// remove fields from embedded structs

@@ -3,12 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_custom_data_type_definition"
 description: |-
-        Captures a customized data type definition that can be used for task or workflow input/output. This can be reused across multiple tasks and workflow definitions.
+        ### Overview
+        The CustomDataTypeDefinition object provides a framework for defining customized data types used within workflows, enhancing flexibility and reusability.
+        #### Purpose
+        CustomDataTypeDefinition allows users to create and manage data types that can be used as inputs or outputs in workflows, tailoring data handling to specific use cases and requirements.
+        #### Key Concepts
+        - **Flexibility:** - Supports the creation of complex data structures that can be reused across multiple workflows.
+        - **Type Management:** - Provides capabilities to define properties, constraints, and relationships for custom data types.
 
 ---
 
 # Resource: intersight_workflow_custom_data_type_definition
-Captures a customized data type definition that can be used for task or workflow input/output. This can be reused across multiple tasks and workflow definitions.
+### Overview
+The CustomDataTypeDefinition object provides a framework for defining customized data types used within workflows, enhancing flexibility and reusability.
+#### Purpose
+CustomDataTypeDefinition allows users to create and manage data types that can be used as inputs or outputs in workflows, tailoring data handling to specific use cases and requirements.
+#### Key Concepts
+- **Flexibility:** - Supports the creation of complex data structures that can be reused across multiple workflows.
+- **Type Management:** - Provides capabilities to define properties, constraints, and relationships for custom data types.
 ## Usage Example
 ### Resource Creation
 

@@ -827,6 +827,13 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Optional:     true,
 							Default:      "Supported",
 						},
+						"target_ctx_policy": {
+							Description:  "The target context policy that controls how target context is set for this workflow when it is run as a subworkflow.\n* `InheritFromParent` - The target context is inherited from the parent workflow and additional targets from this current workflow are also added. Use this setting when the parent workflow is operating on a target set which is still applicable for this current subworkflow.\n* `OnlyThisWorkflowTargets` - The target context is set only from the targets defined in the current workflow and nothing is inherited from parent workflow. Use this setting if the parent workflow is operating on a superset of targets and this current workflow is operating on a subset of those targets or a completely different set of targets.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"InheritFromParent", "OnlyThisWorkflowTargets"}, false),
+							Optional:     true,
+							Default:      "InheritFromParent",
+						},
 					},
 				},
 			},
@@ -934,7 +941,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 						"key": {
 							Description:  "The string representation of a tag key.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringLenBetween(1, 256),
+							ValidateFunc: validation.StringLenBetween(1, 356),
 							Optional:     true,
 						},
 						"propagated": {
@@ -2090,6 +2097,12 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 				{
 					x := (v.(string))
 					o.SetSupportStatus(x)
+				}
+			}
+			if v, ok := l["target_ctx_policy"]; ok {
+				{
+					x := (v.(string))
+					o.SetTargetCtxPolicy(x)
 				}
 			}
 			p = append(p, *o)
@@ -3251,6 +3264,12 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 				{
 					x := (v.(string))
 					o.SetSupportStatus(x)
+				}
+			}
+			if v, ok := l["target_ctx_policy"]; ok {
+				{
+					x := (v.(string))
+					o.SetTargetCtxPolicy(x)
 				}
 			}
 			p = append(p, *o)

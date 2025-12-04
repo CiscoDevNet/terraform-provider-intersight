@@ -178,6 +178,7 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `wait_time_out`:(int) Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1. 
 
 
 ## Import

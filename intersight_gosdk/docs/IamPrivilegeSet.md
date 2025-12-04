@@ -6,11 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.PrivilegeSet"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PrivilegeSet"]
-**Description** | Pointer to **string** | Description of the privilege set. | [optional] [readonly] 
+**AllowFutureUpdates** | Pointer to **bool** | Flag used by UI to keep track of the user selection option for future updates of privilege sets. | [optional] [default to true]
+**Description** | Pointer to **string** | Description of the privilege set. | [optional] 
+**IsPrivilegeNamesUpdated** | Pointer to **bool** | Flag to indicate if the privilege names are updated. | [optional] [default to false]
 **Name** | Pointer to **string** | Name of the privilege set. | [optional] 
 **PrivilegeNames** | Pointer to **[]string** |  | [optional] 
+**PrivilegeSetType** | Pointer to **string** | Type of the privilege set. * &#x60;Internal&#x60; - Privilege set is internal to the system. * &#x60;SystemPackaged&#x60; - Privilege set is packaged by the system and user can use it as a reference for custom privilege set creation. * &#x60;SystemDefined&#x60; - Privilege set is defined by the system. * &#x60;TreeNode&#x60; - Privilege set is a tree node in the custom privilege set creation hierarchy. * &#x60;TreeRoot&#x60; - Privilege set is a tree root in the custom privilege set creation hierarchy. * &#x60;TreeLeaf&#x60; - Privilege set is a tree leaf in the custom privilege set creation hierarchy. * &#x60;UserCreated&#x60; - Privilege set is created by the user. | [optional] [readonly] [default to "Internal"]
+**Scope** | Pointer to **string** | The scope of the privilege set. * &#x60;Generic&#x60; - Privilege set can be added to account wide permission or organization permissions. * &#x60;Account&#x60; - Privilege set can be added to account wide permission only. | [optional] [readonly] [default to "Generic"]
+**Uuid** | Pointer to **string** | UUID of the privilege set. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**AssociatedPrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
+**AssociatedPrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] 
 **Privileges** | Pointer to [**[]IamPrivilegeRelationship**](IamPrivilegeRelationship.md) | An array of relationships to iamPrivilege resources. | [optional] [readonly] 
 **System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 
@@ -73,6 +78,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAllowFutureUpdates
+
+`func (o *IamPrivilegeSet) GetAllowFutureUpdates() bool`
+
+GetAllowFutureUpdates returns the AllowFutureUpdates field if non-nil, zero value otherwise.
+
+### GetAllowFutureUpdatesOk
+
+`func (o *IamPrivilegeSet) GetAllowFutureUpdatesOk() (*bool, bool)`
+
+GetAllowFutureUpdatesOk returns a tuple with the AllowFutureUpdates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowFutureUpdates
+
+`func (o *IamPrivilegeSet) SetAllowFutureUpdates(v bool)`
+
+SetAllowFutureUpdates sets AllowFutureUpdates field to given value.
+
+### HasAllowFutureUpdates
+
+`func (o *IamPrivilegeSet) HasAllowFutureUpdates() bool`
+
+HasAllowFutureUpdates returns a boolean if a field has been set.
+
 ### GetDescription
 
 `func (o *IamPrivilegeSet) GetDescription() string`
@@ -97,6 +127,31 @@ SetDescription sets Description field to given value.
 `func (o *IamPrivilegeSet) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetIsPrivilegeNamesUpdated
+
+`func (o *IamPrivilegeSet) GetIsPrivilegeNamesUpdated() bool`
+
+GetIsPrivilegeNamesUpdated returns the IsPrivilegeNamesUpdated field if non-nil, zero value otherwise.
+
+### GetIsPrivilegeNamesUpdatedOk
+
+`func (o *IamPrivilegeSet) GetIsPrivilegeNamesUpdatedOk() (*bool, bool)`
+
+GetIsPrivilegeNamesUpdatedOk returns a tuple with the IsPrivilegeNamesUpdated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPrivilegeNamesUpdated
+
+`func (o *IamPrivilegeSet) SetIsPrivilegeNamesUpdated(v bool)`
+
+SetIsPrivilegeNamesUpdated sets IsPrivilegeNamesUpdated field to given value.
+
+### HasIsPrivilegeNamesUpdated
+
+`func (o *IamPrivilegeSet) HasIsPrivilegeNamesUpdated() bool`
+
+HasIsPrivilegeNamesUpdated returns a boolean if a field has been set.
 
 ### GetName
 
@@ -158,6 +213,81 @@ HasPrivilegeNames returns a boolean if a field has been set.
 `func (o *IamPrivilegeSet) UnsetPrivilegeNames()`
 
 UnsetPrivilegeNames ensures that no value is present for PrivilegeNames, not even an explicit nil
+### GetPrivilegeSetType
+
+`func (o *IamPrivilegeSet) GetPrivilegeSetType() string`
+
+GetPrivilegeSetType returns the PrivilegeSetType field if non-nil, zero value otherwise.
+
+### GetPrivilegeSetTypeOk
+
+`func (o *IamPrivilegeSet) GetPrivilegeSetTypeOk() (*string, bool)`
+
+GetPrivilegeSetTypeOk returns a tuple with the PrivilegeSetType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivilegeSetType
+
+`func (o *IamPrivilegeSet) SetPrivilegeSetType(v string)`
+
+SetPrivilegeSetType sets PrivilegeSetType field to given value.
+
+### HasPrivilegeSetType
+
+`func (o *IamPrivilegeSet) HasPrivilegeSetType() bool`
+
+HasPrivilegeSetType returns a boolean if a field has been set.
+
+### GetScope
+
+`func (o *IamPrivilegeSet) GetScope() string`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *IamPrivilegeSet) GetScopeOk() (*string, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *IamPrivilegeSet) SetScope(v string)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *IamPrivilegeSet) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
+
+### GetUuid
+
+`func (o *IamPrivilegeSet) GetUuid() string`
+
+GetUuid returns the Uuid field if non-nil, zero value otherwise.
+
+### GetUuidOk
+
+`func (o *IamPrivilegeSet) GetUuidOk() (*string, bool)`
+
+GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUuid
+
+`func (o *IamPrivilegeSet) SetUuid(v string)`
+
+SetUuid sets Uuid field to given value.
+
+### HasUuid
+
+`func (o *IamPrivilegeSet) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
+
 ### GetAccount
 
 `func (o *IamPrivilegeSet) GetAccount() IamAccountRelationship`

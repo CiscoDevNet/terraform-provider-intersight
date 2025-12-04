@@ -24,6 +24,8 @@ Method | HTTP request | Description
 [**CreateIamLocalUserPassword**](IamApi.md#CreateIamLocalUserPassword) | **Post** /api/v1/iam/LocalUserPasswords | Create a &#39;iam.LocalUserPassword&#39; resource.
 [**CreateIamPermission**](IamApi.md#CreateIamPermission) | **Post** /api/v1/iam/Permissions | Create a &#39;iam.Permission&#39; resource.
 [**CreateIamPrivateKeySpec**](IamApi.md#CreateIamPrivateKeySpec) | **Post** /api/v1/iam/PrivateKeySpecs | Create a &#39;iam.PrivateKeySpec&#39; resource.
+[**CreateIamPrivilegeSet**](IamApi.md#CreateIamPrivilegeSet) | **Post** /api/v1/iam/PrivilegeSets | Create a &#39;iam.PrivilegeSet&#39; resource.
+[**CreateIamPrivilegeSetMetaInfo**](IamApi.md#CreateIamPrivilegeSetMetaInfo) | **Post** /api/v1/iam/PrivilegeSetMetaInfos | Create a &#39;iam.PrivilegeSetMetaInfo&#39; resource.
 [**CreateIamQualifier**](IamApi.md#CreateIamQualifier) | **Post** /api/v1/iam/Qualifiers | Create a &#39;iam.Qualifier&#39; resource.
 [**CreateIamResourceRoles**](IamApi.md#CreateIamResourceRoles) | **Post** /api/v1/iam/ResourceRoles | Create a &#39;iam.ResourceRoles&#39; resource.
 [**CreateIamSessionLimits**](IamApi.md#CreateIamSessionLimits) | **Post** /api/v1/iam/SessionLimits | Create a &#39;iam.SessionLimits&#39; resource.
@@ -51,6 +53,7 @@ Method | HTTP request | Description
 [**DeleteIamOAuthToken**](IamApi.md#DeleteIamOAuthToken) | **Delete** /api/v1/iam/OAuthTokens/{Moid} | Delete a &#39;iam.OAuthToken&#39; resource.
 [**DeleteIamPermission**](IamApi.md#DeleteIamPermission) | **Delete** /api/v1/iam/Permissions/{Moid} | Delete a &#39;iam.Permission&#39; resource.
 [**DeleteIamPrivateKeySpec**](IamApi.md#DeleteIamPrivateKeySpec) | **Delete** /api/v1/iam/PrivateKeySpecs/{Moid} | Delete a &#39;iam.PrivateKeySpec&#39; resource.
+[**DeleteIamPrivilegeSet**](IamApi.md#DeleteIamPrivilegeSet) | **Delete** /api/v1/iam/PrivilegeSets/{Moid} | Delete a &#39;iam.PrivilegeSet&#39; resource.
 [**DeleteIamQualifier**](IamApi.md#DeleteIamQualifier) | **Delete** /api/v1/iam/Qualifiers/{Moid} | Delete a &#39;iam.Qualifier&#39; resource.
 [**DeleteIamResourceRoles**](IamApi.md#DeleteIamResourceRoles) | **Delete** /api/v1/iam/ResourceRoles/{Moid} | Delete a &#39;iam.ResourceRoles&#39; resource.
 [**DeleteIamSession**](IamApi.md#DeleteIamSession) | **Delete** /api/v1/iam/Sessions/{Moid} | Delete a &#39;iam.Session&#39; resource.
@@ -130,6 +133,8 @@ Method | HTTP request | Description
 [**GetIamPrivilegeList**](IamApi.md#GetIamPrivilegeList) | **Get** /api/v1/iam/Privileges | Read a &#39;iam.Privilege&#39; resource.
 [**GetIamPrivilegeSetByMoid**](IamApi.md#GetIamPrivilegeSetByMoid) | **Get** /api/v1/iam/PrivilegeSets/{Moid} | Read a &#39;iam.PrivilegeSet&#39; resource.
 [**GetIamPrivilegeSetList**](IamApi.md#GetIamPrivilegeSetList) | **Get** /api/v1/iam/PrivilegeSets | Read a &#39;iam.PrivilegeSet&#39; resource.
+[**GetIamPrivilegeSetMetaInfoByMoid**](IamApi.md#GetIamPrivilegeSetMetaInfoByMoid) | **Get** /api/v1/iam/PrivilegeSetMetaInfos/{Moid} | Read a &#39;iam.PrivilegeSetMetaInfo&#39; resource.
+[**GetIamPrivilegeSetMetaInfoList**](IamApi.md#GetIamPrivilegeSetMetaInfoList) | **Get** /api/v1/iam/PrivilegeSetMetaInfos | Read a &#39;iam.PrivilegeSetMetaInfo&#39; resource.
 [**GetIamQualifierByMoid**](IamApi.md#GetIamQualifierByMoid) | **Get** /api/v1/iam/Qualifiers/{Moid} | Read a &#39;iam.Qualifier&#39; resource.
 [**GetIamQualifierList**](IamApi.md#GetIamQualifierList) | **Get** /api/v1/iam/Qualifiers | Read a &#39;iam.Qualifier&#39; resource.
 [**GetIamResourceLimitsByMoid**](IamApi.md#GetIamResourceLimitsByMoid) | **Get** /api/v1/iam/ResourceLimits/{Moid} | Read a &#39;iam.ResourceLimits&#39; resource.
@@ -190,10 +195,12 @@ Method | HTTP request | Description
 [**PatchIamLocalUserPasswordPolicy**](IamApi.md#PatchIamLocalUserPasswordPolicy) | **Patch** /api/v1/iam/LocalUserPasswordPolicies/{Moid} | Update a &#39;iam.LocalUserPasswordPolicy&#39; resource.
 [**PatchIamPermission**](IamApi.md#PatchIamPermission) | **Patch** /api/v1/iam/Permissions/{Moid} | Update a &#39;iam.Permission&#39; resource.
 [**PatchIamPrivateKeySpec**](IamApi.md#PatchIamPrivateKeySpec) | **Patch** /api/v1/iam/PrivateKeySpecs/{Moid} | Update a &#39;iam.PrivateKeySpec&#39; resource.
+[**PatchIamPrivilegeSet**](IamApi.md#PatchIamPrivilegeSet) | **Patch** /api/v1/iam/PrivilegeSets/{Moid} | Update a &#39;iam.PrivilegeSet&#39; resource.
 [**PatchIamQualifier**](IamApi.md#PatchIamQualifier) | **Patch** /api/v1/iam/Qualifiers/{Moid} | Update a &#39;iam.Qualifier&#39; resource.
 [**PatchIamResourceLimits**](IamApi.md#PatchIamResourceLimits) | **Patch** /api/v1/iam/ResourceLimits/{Moid} | Update a &#39;iam.ResourceLimits&#39; resource.
 [**PatchIamResourceRoles**](IamApi.md#PatchIamResourceRoles) | **Patch** /api/v1/iam/ResourceRoles/{Moid} | Update a &#39;iam.ResourceRoles&#39; resource.
 [**PatchIamSessionLimits**](IamApi.md#PatchIamSessionLimits) | **Patch** /api/v1/iam/SessionLimits/{Moid} | Update a &#39;iam.SessionLimits&#39; resource.
+[**PatchIamSharingRule**](IamApi.md#PatchIamSharingRule) | **Patch** /api/v1/iam/SharingRules/{Moid} | Update a &#39;iam.SharingRule&#39; resource.
 [**PatchIamTestIdpConfiguration**](IamApi.md#PatchIamTestIdpConfiguration) | **Patch** /api/v1/iam/TestIdpConfigurations/{Moid} | Update a &#39;iam.TestIdpConfiguration&#39; resource.
 [**PatchIamUser**](IamApi.md#PatchIamUser) | **Patch** /api/v1/iam/Users/{Moid} | Update a &#39;iam.User&#39; resource.
 [**PatchIamUserGroup**](IamApi.md#PatchIamUserGroup) | **Patch** /api/v1/iam/UserGroups/{Moid} | Update a &#39;iam.UserGroup&#39; resource.
@@ -224,10 +231,12 @@ Method | HTTP request | Description
 [**UpdateIamLocalUserPasswordPolicy**](IamApi.md#UpdateIamLocalUserPasswordPolicy) | **Post** /api/v1/iam/LocalUserPasswordPolicies/{Moid} | Update a &#39;iam.LocalUserPasswordPolicy&#39; resource.
 [**UpdateIamPermission**](IamApi.md#UpdateIamPermission) | **Post** /api/v1/iam/Permissions/{Moid} | Update a &#39;iam.Permission&#39; resource.
 [**UpdateIamPrivateKeySpec**](IamApi.md#UpdateIamPrivateKeySpec) | **Post** /api/v1/iam/PrivateKeySpecs/{Moid} | Update a &#39;iam.PrivateKeySpec&#39; resource.
+[**UpdateIamPrivilegeSet**](IamApi.md#UpdateIamPrivilegeSet) | **Post** /api/v1/iam/PrivilegeSets/{Moid} | Update a &#39;iam.PrivilegeSet&#39; resource.
 [**UpdateIamQualifier**](IamApi.md#UpdateIamQualifier) | **Post** /api/v1/iam/Qualifiers/{Moid} | Update a &#39;iam.Qualifier&#39; resource.
 [**UpdateIamResourceLimits**](IamApi.md#UpdateIamResourceLimits) | **Post** /api/v1/iam/ResourceLimits/{Moid} | Update a &#39;iam.ResourceLimits&#39; resource.
 [**UpdateIamResourceRoles**](IamApi.md#UpdateIamResourceRoles) | **Post** /api/v1/iam/ResourceRoles/{Moid} | Update a &#39;iam.ResourceRoles&#39; resource.
 [**UpdateIamSessionLimits**](IamApi.md#UpdateIamSessionLimits) | **Post** /api/v1/iam/SessionLimits/{Moid} | Update a &#39;iam.SessionLimits&#39; resource.
+[**UpdateIamSharingRule**](IamApi.md#UpdateIamSharingRule) | **Post** /api/v1/iam/SharingRules/{Moid} | Update a &#39;iam.SharingRule&#39; resource.
 [**UpdateIamTestIdpConfiguration**](IamApi.md#UpdateIamTestIdpConfiguration) | **Post** /api/v1/iam/TestIdpConfigurations/{Moid} | Update a &#39;iam.TestIdpConfiguration&#39; resource.
 [**UpdateIamUser**](IamApi.md#UpdateIamUser) | **Post** /api/v1/iam/Users/{Moid} | Update a &#39;iam.User&#39; resource.
 [**UpdateIamUserGroup**](IamApi.md#UpdateIamUserGroup) | **Post** /api/v1/iam/UserGroups/{Moid} | Update a &#39;iam.UserGroup&#39; resource.
@@ -1582,6 +1591,142 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IamPrivateKeySpec**](IamPrivateKeySpec.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateIamPrivilegeSet
+
+> IamPrivilegeSet CreateIamPrivilegeSet(ctx).IamPrivilegeSet(iamPrivilegeSet).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'iam.PrivilegeSet' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	iamPrivilegeSet := *openapiclient.NewIamPrivilegeSet("ClassId_example", "ObjectType_example") // IamPrivilegeSet | The 'iam.PrivilegeSet' resource to create.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.CreateIamPrivilegeSet(context.Background()).IamPrivilegeSet(iamPrivilegeSet).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.CreateIamPrivilegeSet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateIamPrivilegeSet`: IamPrivilegeSet
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.CreateIamPrivilegeSet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateIamPrivilegeSetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **iamPrivilegeSet** | [**IamPrivilegeSet**](IamPrivilegeSet.md) | The &#39;iam.PrivilegeSet&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**IamPrivilegeSet**](IamPrivilegeSet.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateIamPrivilegeSetMetaInfo
+
+> IamPrivilegeSetMetaInfo CreateIamPrivilegeSetMetaInfo(ctx).IamPrivilegeSetMetaInfo(iamPrivilegeSetMetaInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'iam.PrivilegeSetMetaInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	iamPrivilegeSetMetaInfo := *openapiclient.NewIamPrivilegeSetMetaInfo("ClassId_example", "ObjectType_example") // IamPrivilegeSetMetaInfo | The 'iam.PrivilegeSetMetaInfo' resource to create.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.CreateIamPrivilegeSetMetaInfo(context.Background()).IamPrivilegeSetMetaInfo(iamPrivilegeSetMetaInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.CreateIamPrivilegeSetMetaInfo``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateIamPrivilegeSetMetaInfo`: IamPrivilegeSetMetaInfo
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.CreateIamPrivilegeSetMetaInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateIamPrivilegeSetMetaInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **iamPrivilegeSetMetaInfo** | [**IamPrivilegeSetMetaInfo**](IamPrivilegeSetMetaInfo.md) | The &#39;iam.PrivilegeSetMetaInfo&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**IamPrivilegeSetMetaInfo**](IamPrivilegeSetMetaInfo.md)
 
 ### Authorization
 
@@ -3373,6 +3518,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteIamPrivateKeySpecRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteIamPrivilegeSet
+
+> DeleteIamPrivilegeSet(ctx, moid).Execute()
+
+Delete a 'iam.PrivilegeSet' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.IamApi.DeleteIamPrivilegeSet(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.DeleteIamPrivilegeSet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteIamPrivilegeSetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -9311,6 +9522,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetIamPrivilegeSetMetaInfoByMoid
+
+> IamPrivilegeSetMetaInfo GetIamPrivilegeSetMetaInfoByMoid(ctx, moid).Execute()
+
+Read a 'iam.PrivilegeSetMetaInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.GetIamPrivilegeSetMetaInfoByMoid(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.GetIamPrivilegeSetMetaInfoByMoid``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetIamPrivilegeSetMetaInfoByMoid`: IamPrivilegeSetMetaInfo
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.GetIamPrivilegeSetMetaInfoByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetIamPrivilegeSetMetaInfoByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**IamPrivilegeSetMetaInfo**](IamPrivilegeSetMetaInfo.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetIamPrivilegeSetMetaInfoList
+
+> IamPrivilegeSetMetaInfoResponse GetIamPrivilegeSetMetaInfoList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'iam.PrivilegeSetMetaInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+	orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+	top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+	skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+	select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+	expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+	apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+	count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+	inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+	at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+	tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.GetIamPrivilegeSetMetaInfoList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.GetIamPrivilegeSetMetaInfoList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetIamPrivilegeSetMetaInfoList`: IamPrivilegeSetMetaInfoResponse
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.GetIamPrivilegeSetMetaInfoList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetIamPrivilegeSetMetaInfoListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e., the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**IamPrivilegeSetMetaInfoResponse**](IamPrivilegeSetMetaInfoResponse.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetIamQualifierByMoid
 
 > IamQualifier GetIamQualifierByMoid(ctx, moid).Execute()
@@ -13775,6 +14138,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchIamPrivilegeSet
+
+> IamPrivilegeSet PatchIamPrivilegeSet(ctx, moid).IamPrivilegeSet(iamPrivilegeSet).IfMatch(ifMatch).Execute()
+
+Update a 'iam.PrivilegeSet' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	iamPrivilegeSet := *openapiclient.NewIamPrivilegeSet("ClassId_example", "ObjectType_example") // IamPrivilegeSet | The 'iam.PrivilegeSet' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.PatchIamPrivilegeSet(context.Background(), moid).IamPrivilegeSet(iamPrivilegeSet).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.PatchIamPrivilegeSet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchIamPrivilegeSet`: IamPrivilegeSet
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.PatchIamPrivilegeSet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchIamPrivilegeSetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamPrivilegeSet** | [**IamPrivilegeSet**](IamPrivilegeSet.md) | The &#39;iam.PrivilegeSet&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**IamPrivilegeSet**](IamPrivilegeSet.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchIamQualifier
 
 > IamQualifier PatchIamQualifier(ctx, moid).IamQualifier(iamQualifier).IfMatch(ifMatch).Execute()
@@ -14048,6 +14483,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IamSessionLimits**](IamSessionLimits.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchIamSharingRule
+
+> IamSharingRule PatchIamSharingRule(ctx, moid).IamSharingRule(iamSharingRule).IfMatch(ifMatch).Execute()
+
+Update a 'iam.SharingRule' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	iamSharingRule := *openapiclient.NewIamSharingRule("ClassId_example", "ObjectType_example") // IamSharingRule | The 'iam.SharingRule' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.PatchIamSharingRule(context.Background(), moid).IamSharingRule(iamSharingRule).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.PatchIamSharingRule``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchIamSharingRule`: IamSharingRule
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.PatchIamSharingRule`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchIamSharingRuleRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamSharingRule** | [**IamSharingRule**](IamSharingRule.md) | The &#39;iam.SharingRule&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**IamSharingRule**](IamSharingRule.md)
 
 ### Authorization
 
@@ -16223,6 +16730,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateIamPrivilegeSet
+
+> IamPrivilegeSet UpdateIamPrivilegeSet(ctx, moid).IamPrivilegeSet(iamPrivilegeSet).IfMatch(ifMatch).Execute()
+
+Update a 'iam.PrivilegeSet' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	iamPrivilegeSet := *openapiclient.NewIamPrivilegeSet("ClassId_example", "ObjectType_example") // IamPrivilegeSet | The 'iam.PrivilegeSet' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.UpdateIamPrivilegeSet(context.Background(), moid).IamPrivilegeSet(iamPrivilegeSet).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.UpdateIamPrivilegeSet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateIamPrivilegeSet`: IamPrivilegeSet
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.UpdateIamPrivilegeSet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateIamPrivilegeSetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamPrivilegeSet** | [**IamPrivilegeSet**](IamPrivilegeSet.md) | The &#39;iam.PrivilegeSet&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**IamPrivilegeSet**](IamPrivilegeSet.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateIamQualifier
 
 > IamQualifier UpdateIamQualifier(ctx, moid).IamQualifier(iamQualifier).IfMatch(ifMatch).Execute()
@@ -16496,6 +17075,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**IamSessionLimits**](IamSessionLimits.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateIamSharingRule
+
+> IamSharingRule UpdateIamSharingRule(ctx, moid).IamSharingRule(iamSharingRule).IfMatch(ifMatch).Execute()
+
+Update a 'iam.SharingRule' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	iamSharingRule := *openapiclient.NewIamSharingRule("ClassId_example", "ObjectType_example") // IamSharingRule | The 'iam.SharingRule' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IamApi.UpdateIamSharingRule(context.Background(), moid).IamSharingRule(iamSharingRule).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IamApi.UpdateIamSharingRule``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateIamSharingRule`: IamSharingRule
+	fmt.Fprintf(os.Stdout, "Response from `IamApi.UpdateIamSharingRule`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateIamSharingRuleRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **iamSharingRule** | [**IamSharingRule**](IamSharingRule.md) | The &#39;iam.SharingRule&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**IamSharingRule**](IamSharingRule.md)
 
 ### Authorization
 
