@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **EnablePdbFpgaUpgrade** | Pointer to **bool** | The flag to enable or disable firmware upgrade functionality for the PDB FPGA. | [optional] [default to false]
 **EnablePsuUpgrade** | Pointer to **bool** | The flag to enable or disable firmware upgrade functionality for the Power Supply Unit (PSU). | [optional] [default to false]
 **SkipWaitForIoPathConnectivity** | Pointer to **bool** | The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade. | [optional] [default to false]
+**SwitchName** | Pointer to **string** | Name of the Fabric Interconnect on which the firmware upgrade operation is performed. | [optional] [readonly] 
 **WaitTimeOut** | Pointer to **int64** | Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1. | [optional] [default to -1]
 **Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
@@ -172,6 +173,31 @@ SetSkipWaitForIoPathConnectivity sets SkipWaitForIoPathConnectivity field to giv
 `func (o *FirmwareSwitchUpgrade) HasSkipWaitForIoPathConnectivity() bool`
 
 HasSkipWaitForIoPathConnectivity returns a boolean if a field has been set.
+
+### GetSwitchName
+
+`func (o *FirmwareSwitchUpgrade) GetSwitchName() string`
+
+GetSwitchName returns the SwitchName field if non-nil, zero value otherwise.
+
+### GetSwitchNameOk
+
+`func (o *FirmwareSwitchUpgrade) GetSwitchNameOk() (*string, bool)`
+
+GetSwitchNameOk returns a tuple with the SwitchName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchName
+
+`func (o *FirmwareSwitchUpgrade) SetSwitchName(v string)`
+
+SetSwitchName sets SwitchName field to given value.
+
+### HasSwitchName
+
+`func (o *FirmwareSwitchUpgrade) HasSwitchName() bool`
+
+HasSwitchName returns a boolean if a field has been set.
 
 ### GetWaitTimeOut
 

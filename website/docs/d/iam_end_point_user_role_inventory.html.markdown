@@ -15,6 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_iam_end_point_user_role_inventory.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `account_type_user_defined`:(bool) Allows to choose custom account types for the endpoint user. 
 * `change_password`:(bool) Denotes whether password has changed. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) Device ID of the entity from where inventory is reported. 

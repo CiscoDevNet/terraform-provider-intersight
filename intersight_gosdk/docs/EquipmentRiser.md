@@ -7,9 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Riser"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Riser"]
 **Description** | Pointer to **string** | This field is to provide description for the Riser. | [optional] [readonly] 
+**FormFactor** | Pointer to **string** | This field is to provide formFactor for the Riser. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the pluggable Riser. | [optional] [readonly] 
+**PcieType** | Pointer to **string** | This field is to provide pcieType for the Riser. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Riser. | [optional] [readonly] 
 **Type** | Pointer to **string** | Type of the Riser slot in the server. | [optional] [readonly] 
+**ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -97,6 +100,31 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetFormFactor
+
+`func (o *EquipmentRiser) GetFormFactor() string`
+
+GetFormFactor returns the FormFactor field if non-nil, zero value otherwise.
+
+### GetFormFactorOk
+
+`func (o *EquipmentRiser) GetFormFactorOk() (*string, bool)`
+
+GetFormFactorOk returns a tuple with the FormFactor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFormFactor
+
+`func (o *EquipmentRiser) SetFormFactor(v string)`
+
+SetFormFactor sets FormFactor field to given value.
+
+### HasFormFactor
+
+`func (o *EquipmentRiser) HasFormFactor() bool`
+
+HasFormFactor returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *EquipmentRiser) GetName() string`
@@ -121,6 +149,31 @@ SetName sets Name field to given value.
 `func (o *EquipmentRiser) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetPcieType
+
+`func (o *EquipmentRiser) GetPcieType() string`
+
+GetPcieType returns the PcieType field if non-nil, zero value otherwise.
+
+### GetPcieTypeOk
+
+`func (o *EquipmentRiser) GetPcieTypeOk() (*string, bool)`
+
+GetPcieTypeOk returns a tuple with the PcieType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPcieType
+
+`func (o *EquipmentRiser) SetPcieType(v string)`
+
+SetPcieType sets PcieType field to given value.
+
+### HasPcieType
+
+`func (o *EquipmentRiser) HasPcieType() bool`
+
+HasPcieType returns a boolean if a field has been set.
 
 ### GetSku
 
@@ -172,6 +225,41 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
+### GetComputeBlade
+
+`func (o *EquipmentRiser) GetComputeBlade() ComputeBladeRelationship`
+
+GetComputeBlade returns the ComputeBlade field if non-nil, zero value otherwise.
+
+### GetComputeBladeOk
+
+`func (o *EquipmentRiser) GetComputeBladeOk() (*ComputeBladeRelationship, bool)`
+
+GetComputeBladeOk returns a tuple with the ComputeBlade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeBlade
+
+`func (o *EquipmentRiser) SetComputeBlade(v ComputeBladeRelationship)`
+
+SetComputeBlade sets ComputeBlade field to given value.
+
+### HasComputeBlade
+
+`func (o *EquipmentRiser) HasComputeBlade() bool`
+
+HasComputeBlade returns a boolean if a field has been set.
+
+### SetComputeBladeNil
+
+`func (o *EquipmentRiser) SetComputeBladeNil(b bool)`
+
+ SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+
+### UnsetComputeBlade
+`func (o *EquipmentRiser) UnsetComputeBlade()`
+
+UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
 ### GetComputeRackUnit
 
 `func (o *EquipmentRiser) GetComputeRackUnit() ComputeRackUnitRelationship`

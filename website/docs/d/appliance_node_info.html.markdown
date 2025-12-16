@@ -3,18 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_node_info"
 description: |-
-        NodeInfo managed object stores the Intersight Appliance's cluster node information.
-        NodeInfo managed objects are created during the Intersight Appliance setup. The
-        Intersight Appliance updates the NodeInfo managed objects with status information
-        periodically.
+        The NodeInfo object is designed to store the cluster node information of the Intersight Appliance. Created during the appliance's setup, NodeInfo objects are updated periodically to reflect the status of each node within the cluster.
+        #### Purpose
+        NodeInfo serves as an informative entity that provides details about individual nodes in the Intersight Appliance cluster. It includes crucial information such as node IDs, hostnames, IP configurations, and operational status, thus facilitating node management and monitoring.
+        #### Key Concepts
+        - **Cluster Node Representation:** Each NodeInfo object corresponds to a node within the Intersight Appliance cluster, providing node-specific data.
+        - **Read-Only Data:** Ensures that node information is accessible without the risk of unauthorized changes.
+        - **Identity Management:** Utilizes system-assigned unique IDs to maintain node identity and facilitate tracking.
+        - **Network Configuration:** Captures both IPv4 and IPv6 configurations, supporting comprehensive network management.
 
 ---
 
 # Data Source: intersight_appliance_node_info
-NodeInfo managed object stores the Intersight Appliance's cluster node information.
-NodeInfo managed objects are created during the Intersight Appliance setup. The
-Intersight Appliance updates the NodeInfo managed objects with status information
-periodically.
+The NodeInfo object is designed to store the cluster node information of the Intersight Appliance. Created during the appliance's setup, NodeInfo objects are updated periodically to reflect the status of each node within the cluster.
+#### Purpose
+NodeInfo serves as an informative entity that provides details about individual nodes in the Intersight Appliance cluster. It includes crucial information such as node IDs, hostnames, IP configurations, and operational status, thus facilitating node management and monitoring.
+#### Key Concepts
+- **Cluster Node Representation:** Each NodeInfo object corresponds to a node within the Intersight Appliance cluster, providing node-specific data.
+- **Read-Only Data:** Ensures that node information is accessible without the risk of unauthorized changes.
+- **Identity Management:** Utilizes system-assigned unique IDs to maintain node identity and facilitate tracking.
+- **Network Configuration:** Captures both IPv4 and IPv6 configurations, supporting comprehensive network management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

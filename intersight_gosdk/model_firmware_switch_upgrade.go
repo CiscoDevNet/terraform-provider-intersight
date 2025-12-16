@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type FirmwareSwitchUpgrade struct {
 	EnablePsuUpgrade *bool `json:"EnablePsuUpgrade,omitempty"`
 	// The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade.
 	SkipWaitForIoPathConnectivity *bool `json:"SkipWaitForIoPathConnectivity,omitempty"`
+	// Name of the Fabric Interconnect on which the firmware upgrade operation is performed.
+	SwitchName *string `json:"SwitchName,omitempty"`
 	// Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1.
 	WaitTimeOut *int64                                      `json:"WaitTimeOut,omitempty"`
 	Device      NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
@@ -279,6 +281,38 @@ func (o *FirmwareSwitchUpgrade) SetSkipWaitForIoPathConnectivity(v bool) {
 	o.SkipWaitForIoPathConnectivity = &v
 }
 
+// GetSwitchName returns the SwitchName field value if set, zero value otherwise.
+func (o *FirmwareSwitchUpgrade) GetSwitchName() string {
+	if o == nil || IsNil(o.SwitchName) {
+		var ret string
+		return ret
+	}
+	return *o.SwitchName
+}
+
+// GetSwitchNameOk returns a tuple with the SwitchName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareSwitchUpgrade) GetSwitchNameOk() (*string, bool) {
+	if o == nil || IsNil(o.SwitchName) {
+		return nil, false
+	}
+	return o.SwitchName, true
+}
+
+// HasSwitchName returns a boolean if a field has been set.
+func (o *FirmwareSwitchUpgrade) HasSwitchName() bool {
+	if o != nil && !IsNil(o.SwitchName) {
+		return true
+	}
+
+	return false
+}
+
+// SetSwitchName gets a reference to the given string and assigns it to the SwitchName field.
+func (o *FirmwareSwitchUpgrade) SetSwitchName(v string) {
+	o.SwitchName = &v
+}
+
 // GetWaitTimeOut returns the WaitTimeOut field value if set, zero value otherwise.
 func (o *FirmwareSwitchUpgrade) GetWaitTimeOut() int64 {
 	if o == nil || IsNil(o.WaitTimeOut) {
@@ -425,6 +459,9 @@ func (o FirmwareSwitchUpgrade) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkipWaitForIoPathConnectivity) {
 		toSerialize["SkipWaitForIoPathConnectivity"] = o.SkipWaitForIoPathConnectivity
 	}
+	if !IsNil(o.SwitchName) {
+		toSerialize["SwitchName"] = o.SwitchName
+	}
 	if !IsNil(o.WaitTimeOut) {
 		toSerialize["WaitTimeOut"] = o.WaitTimeOut
 	}
@@ -497,6 +534,8 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
 		EnablePsuUpgrade *bool `json:"EnablePsuUpgrade,omitempty"`
 		// The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade.
 		SkipWaitForIoPathConnectivity *bool `json:"SkipWaitForIoPathConnectivity,omitempty"`
+		// Name of the Fabric Interconnect on which the firmware upgrade operation is performed.
+		SwitchName *string `json:"SwitchName,omitempty"`
 		// Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1.
 		WaitTimeOut *int64                                      `json:"WaitTimeOut,omitempty"`
 		Device      NullableAssetDeviceRegistrationRelationship `json:"Device,omitempty"`
@@ -515,6 +554,7 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
 		varFirmwareSwitchUpgrade.EnablePdbFpgaUpgrade = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.EnablePdbFpgaUpgrade
 		varFirmwareSwitchUpgrade.EnablePsuUpgrade = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.EnablePsuUpgrade
 		varFirmwareSwitchUpgrade.SkipWaitForIoPathConnectivity = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.SkipWaitForIoPathConnectivity
+		varFirmwareSwitchUpgrade.SwitchName = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.SwitchName
 		varFirmwareSwitchUpgrade.WaitTimeOut = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.WaitTimeOut
 		varFirmwareSwitchUpgrade.Device = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.Device
 		varFirmwareSwitchUpgrade.NetworkElements = varFirmwareSwitchUpgradeWithoutEmbeddedStruct.NetworkElements
@@ -541,6 +581,7 @@ func (o *FirmwareSwitchUpgrade) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "EnablePdbFpgaUpgrade")
 		delete(additionalProperties, "EnablePsuUpgrade")
 		delete(additionalProperties, "SkipWaitForIoPathConnectivity")
+		delete(additionalProperties, "SwitchName")
 		delete(additionalProperties, "WaitTimeOut")
 		delete(additionalProperties, "Device")
 		delete(additionalProperties, "NetworkElements")

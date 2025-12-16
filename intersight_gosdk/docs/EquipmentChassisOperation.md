@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdminLocatorLedAction** | Pointer to **string** | User configured state of the locator LED for the Chassis. * &#x60;None&#x60; - No operation action for the Locator Led of an equipment. * &#x60;TurnOn&#x60; - Turn on the Locator Led of an equipment. * &#x60;TurnOff&#x60; - Turn off the Locator Led of an equipment. | [optional] [default to "None"]
 **AdminPowerCycleExpanderModuleSlotId** | Pointer to **int64** | Slot id of the expander module slot within chassis that needs to be power cycled. | [optional] 
 **AdminPowerCycleSlotId** | Pointer to **int64** | Slot id of the chassis slot that needs to be power cycled. | [optional] 
+**AdminResetConfigSlotId** | Pointer to **int64** | Slot id of the chassis slot that needs to have its configuration reset. | [optional] 
 **ChassisOperationStatus** | Pointer to [**[]EquipmentChassisOperationStatus**](EquipmentChassisOperationStatus.md) |  | [optional] 
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. * &#x60;Scheduled&#x60; - User configured settings are scheduled to be applied. | [optional] [readonly] [default to "None"]
 **Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
@@ -147,6 +148,31 @@ SetAdminPowerCycleSlotId sets AdminPowerCycleSlotId field to given value.
 `func (o *EquipmentChassisOperation) HasAdminPowerCycleSlotId() bool`
 
 HasAdminPowerCycleSlotId returns a boolean if a field has been set.
+
+### GetAdminResetConfigSlotId
+
+`func (o *EquipmentChassisOperation) GetAdminResetConfigSlotId() int64`
+
+GetAdminResetConfigSlotId returns the AdminResetConfigSlotId field if non-nil, zero value otherwise.
+
+### GetAdminResetConfigSlotIdOk
+
+`func (o *EquipmentChassisOperation) GetAdminResetConfigSlotIdOk() (*int64, bool)`
+
+GetAdminResetConfigSlotIdOk returns a tuple with the AdminResetConfigSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminResetConfigSlotId
+
+`func (o *EquipmentChassisOperation) SetAdminResetConfigSlotId(v int64)`
+
+SetAdminResetConfigSlotId sets AdminResetConfigSlotId field to given value.
+
+### HasAdminResetConfigSlotId
+
+`func (o *EquipmentChassisOperation) HasAdminResetConfigSlotId() bool`
+
+HasAdminResetConfigSlotId returns a boolean if a field has been set.
 
 ### GetChassisOperationStatus
 

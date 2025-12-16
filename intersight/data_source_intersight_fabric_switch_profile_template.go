@@ -218,6 +218,11 @@ func getFabricSwitchProfileTemplateSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_override": {
+			Description: "When enabled, the configuration of the derived instances may override the template configuration.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -272,6 +277,39 @@ func getFabricSwitchProfileTemplateSchema() map[string]*schema.Schema {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"partially_deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"end_point_context": {
+						Description: "Information about the endpoint to which it is applied.\n* `Server` - Configuration is applied to a server context.\n* `FI` - Configuration is applied to a Fabric Identifier (FI) context.\n* `IOM` - Configuration is applied to an Input/Output Module (IOM) context.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"policy": {
+						Description: "The name of the policy for which entry is created.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -751,9 +789,80 @@ func getFabricSwitchProfileTemplateSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"template_actions": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"params": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.\n* `None` - The default parameter that implies that no action parameter is required for the template action.\n* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.\n* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.\n* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The action parameter value is based on the action parameter type. Supported action parameters and their values are-\na) Name - SyncType, Supported Values - SyncFailed, SyncOne.\nb) Name - SyncTimer, Supported Values - 0 to 60 seconds.\nc) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"type": {
+						Description: "The action type to be executed.\n* `Sync` - The action to merge values from the template to its derived objects.\n* `Deploy` - The action to execute deploy action on all the objects derived from the template that is mainly applicable for the various profile types.\n* `Detach` - The action to detach the current derived object from its attached template.\n* `Attach` - The action to attach the current object to the specified template.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"type": {
 			Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"update_status": {
+			Description: "The template sync status with all derived objects.\n* `None` - The Enum value represents that the object is not attached to any template.\n* `OK` - The Enum value represents that the object values are in sync with attached template.\n* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.\n* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.\n* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"usage_count": {
+			Description: "The number of objects derived from a Template MO instance.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"version_context": {
@@ -1121,6 +1230,11 @@ func dataSourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Reso
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_override"); ok {
+		x := (v.(bool))
+		o.SetEnableOverride(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1193,6 +1307,34 @@ func dataSourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Reso
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOk("partially_deployed_policies"); ok {
+		x := make([]models.PolicyPolicyContextHolder, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyPolicyContextHolder{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.PolicyContextHolder")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetPartiallyDeployedPolicies(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -1719,9 +1861,96 @@ func dataSourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Reso
 		o.SetTargetPlatform(x)
 	}
 
+	if v, ok := d.GetOk("template_actions"); ok {
+		x := make([]models.MotemplateActionEntry, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MotemplateActionEntry{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("motemplate.ActionEntry")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["params"]; ok {
+				{
+					x := make([]models.MotemplateActionParam, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMotemplateActionParamWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("motemplate.ActionParam")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								x := (v.(string))
+								o.SetValue(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetParams(x)
+					}
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTemplateActions(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if v, ok := d.GetOk("update_status"); ok {
+		x := (v.(string))
+		o.SetUpdateStatus(x)
+	}
+
+	if v, ok := d.GetOkExists("usage_count"); ok {
+		x := int64(v.(int))
+		o.SetUsageCount(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1850,6 +2079,7 @@ func dataSourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Reso
 				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enable_override"] = (s.GetEnableOverride())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1858,6 +2088,8 @@ func dataSourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Reso
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["partially_deployed_policies"] = flattenListPolicyPolicyContextHolder(s.GetPartiallyDeployedPolicies(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
@@ -1878,7 +2110,11 @@ func dataSourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Reso
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["target_platform"] = (s.GetTargetPlatform())
+
+				temp["template_actions"] = flattenListMotemplateActionEntry(s.GetTemplateActions(), d)
 				temp["type"] = (s.GetType())
+				temp["update_status"] = (s.GetUpdateStatus())
+				temp["usage_count"] = (s.GetUsageCount())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricSwitchProfileTemplateResults = append(fabricSwitchProfileTemplateResults, temp)

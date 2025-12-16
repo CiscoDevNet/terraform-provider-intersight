@@ -21,6 +21,39 @@ func getIamEndPointUserRoleInventorySchema() map[string]*schema.Schema {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"account_type_user_defined": {
+			Description: "Allows to choose custom account types for the endpoint user.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"account_types": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the Account type such as Local or IPMI, that identifies the kind of user account.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -544,6 +577,45 @@ func dataSourceIamEndPointUserRoleInventoryRead(c context.Context, d *schema.Res
 		o.SetAccountMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("account_type_user_defined"); ok {
+		x := (v.(bool))
+		o.SetAccountTypeUserDefined(x)
+	}
+
+	if v, ok := d.GetOk("account_types"); ok {
+		x := make([]models.IamAccountTypeBase, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.IamAccountTypeBase{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.AccountTypeBase")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetAccountTypes(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -1059,6 +1131,9 @@ func dataSourceIamEndPointUserRoleInventoryRead(c context.Context, d *schema.Res
 				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["account_type_user_defined"] = (s.GetAccountTypeUserDefined())
+
+				temp["account_types"] = flattenListIamAccountTypeBase(s.GetAccountTypes(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)

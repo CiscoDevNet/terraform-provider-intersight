@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `skip_estimate_impact`:(bool) User has the option to skip the estimate impact calculation. 
 * `skip_wait_for_io_path_connectivity`:(bool) The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade. 
 * `status`:(string) Status of the upgrade operation.* `NONE` - Upgrade status is not populated.* `IN_PROGRESS` - The upgrade is in progress.* `SUCCESSFUL` - The upgrade successfully completed.* `FAILED` - The upgrade shows failed status.* `TERMINATED` - The upgrade has been terminated. 
+* `switch_name`:(string) Name of the Fabric Interconnect on which the firmware upgrade operation is performed. 
 * `upgrade_type`:(string) Desired upgrade mode to choose either direct download based upgrade or network share upgrade.* `direct_upgrade` - Upgrade mode is direct download.* `network_upgrade` - Upgrade mode is network upgrade. 
 * `wait_time_out`:(int) Specifies a timeout period, in minutes, before the firmware upgrade begins. The valid range is -1 to 1000. A value of -1 requires manual user acknowledgment to proceed, 0 starts the upgrade immediately, and values from 1 to 1000 wait the specified number of minutes before starting. The upgrade will automatically begin once the timeout expires, but it can also be initiated manually at any time before the timeout ends. If no value is specified, manual user acknowledgment is required, equivalent to -1. 
  

@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_group_op_status"
 description: |-
-        Status of a group of applications.
+        The GroupOpStatus object describes the status of a group of applications within the Intersight Appliance system. It consolidates application-specific status to provide a unified view of group health.
+        #### Purpose
+        GroupOpStatus aggregates application status information to offer insights into the collective health and functionality of system features, aiding in efficient management and troubleshooting.
+        #### Key Concepts
+        - **Group Health:** Represents the overall status of applications grouped by features like Identity Management and Core Service.
+        - **Application Aggregation:** Collates individual application statuses, providing a consolidated view for easier monitoring and intervention.
+        - **Operational Insights:** Offers descriptions and status indicators vital for maintaining system operations and performance.
 
 ---
 
 # Data Source: intersight_appliance_group_op_status
-Status of a group of applications.
+The GroupOpStatus object describes the status of a group of applications within the Intersight Appliance system. It consolidates application-specific status to provide a unified view of group health.
+#### Purpose
+GroupOpStatus aggregates application status information to offer insights into the collective health and functionality of system features, aiding in efficient management and troubleshooting.
+#### Key Concepts
+- **Group Health:** Represents the overall status of applications grouped by features like Identity Management and Core Service.
+- **Application Aggregation:** Collates individual application statuses, providing a consolidated view for easier monitoring and intervention.
+- **Operational Insights:** Offers descriptions and status indicators vital for maintaining system operations and performance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

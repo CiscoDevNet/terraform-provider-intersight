@@ -51,6 +51,7 @@ This complex property has following sub-properties:
 * `ip_v4_blocks`:(Array)
 This complex property has following sub-properties:
   + `from`:(string) First IPv4 address of the block. 
+  + `id_mapping_policy_moid`:(string) The managed object ID of the ID mapping policy. 
   + `ip_v4_config`:(HashMap) - Netmask, Gateway and DNS settings for IPv4 addresses. 
 This complex property has following sub-properties:
     + `gateway`:(string) IP address of the default IPv4 gateway. 
@@ -71,6 +72,7 @@ This complex property has following sub-properties:
 * `ip_v6_blocks`:(Array)
 This complex property has following sub-properties:
   + `from`:(string) First IPv6 address of the block. 
+  + `id_mapping_policy_moid`:(string) The managed object ID of the ID mapping policy. 
   + `ip_v6_config`:(HashMap) - Netmask, Gateway and DNS settings for IPv6 addresses. 
 This complex property has following sub-properties:
     + `gateway`:(string) IP address of the default IPv6 gateway. 

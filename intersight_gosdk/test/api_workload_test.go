@@ -35,6 +35,18 @@ func Test_intersight_WorkloadApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test WorkloadApiService CreateWorkloadClearWorkloadTag", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WorkloadApi.CreateWorkloadClearWorkloadTag(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WorkloadApiService CreateWorkloadWorkloadDefinition", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -66,6 +78,19 @@ func Test_intersight_WorkloadApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.WorkloadApi.DeleteWorkloadBlueprint(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkloadApiService DeleteWorkloadClearWorkloadTag", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.WorkloadApi.DeleteWorkloadClearWorkloadTag(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -130,6 +155,32 @@ func Test_intersight_WorkloadApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.WorkloadApi.GetWorkloadBlueprintList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkloadApiService GetWorkloadClearWorkloadTagByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkloadApi.GetWorkloadClearWorkloadTagByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkloadApiService GetWorkloadClearWorkloadTagList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WorkloadApi.GetWorkloadClearWorkloadTagList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -234,6 +285,32 @@ func Test_intersight_WorkloadApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.WorkloadApi.GetWorkloadWorkloadInstanceList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkloadApiService GetWorkloadWorkloadMetadataByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkloadApi.GetWorkloadWorkloadMetadataByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkloadApiService GetWorkloadWorkloadMetadataList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WorkloadApi.GetWorkloadWorkloadMetadataList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

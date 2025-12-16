@@ -3,12 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_system_op_status"
 description: |-
-        Status of the Intersight Appliance.
+        The SystemOpStatus object represents the status of the Intersight Appliance within a system. This provides a comprehensive view of the appliance's operational state, including the health and performance of its nodes and applications.
+        #### Purpose
+        SystemOpStatus serves as the primary indicator of the appliance's operational health. It encompasses the results of status checks across various components, determining the overall status as Operational, AttentionNeeded, or Impaired based on these checks.
+        #### Key Concepts
+        - **Operational Status:** Defines the health of the appliance, influenced by checks on nodes, applications, and system components.
+        - **Node and Application Monitoring:** Tracks the number of nodes and applications that require attention or are impaired.
+        - **Alert System:** Utilizes certificate expiry dates to raise alarms, ensuring timely updates and security compliance.
+        - **Relationships:** Links to system information, applications, groups, and accounts to provide a holistic overview.
 
 ---
 
 # Data Source: intersight_appliance_system_op_status
-Status of the Intersight Appliance.
+The SystemOpStatus object represents the status of the Intersight Appliance within a system. This provides a comprehensive view of the appliance's operational state, including the health and performance of its nodes and applications.
+#### Purpose
+SystemOpStatus serves as the primary indicator of the appliance's operational health. It encompasses the results of status checks across various components, determining the overall status as Operational, AttentionNeeded, or Impaired based on these checks.
+#### Key Concepts
+- **Operational Status:** Defines the health of the appliance, influenced by checks on nodes, applications, and system components.
+- **Node and Application Monitoring:** Tracks the number of nodes and applications that require attention or are impaired.
+- **Alert System:** Utilizes certificate expiry dates to raise alarms, ensuring timely updates and security compliance.
+- **Relationships:** Links to system information, applications, groups, and accounts to provide a holistic overview.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

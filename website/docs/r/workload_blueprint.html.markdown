@@ -3,16 +3,43 @@ subcategory: "workload"
 layout: "intersight"
 page_title: "Intersight: intersight_workload_blueprint"
 description: |-
-        A blueprint detailed description.
+        ### Overview
+        The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions.
+        #### Purpose
+        A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provides a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, platform targeting, and dependency management to ensure reliable and consistent deployments.
+        #### Key Concepts
+        - **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, enabling safe evolution of blueprint specifications while maintaining compatibility with existing workloads.
+        - **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references.
+        - **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured.
+        - **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations.
+        - **Resource Constraints:** - Defines infrastructure resource requirements and constraints that must be satisfied for successful blueprint deployment.
+        - **Blueprint Dependencies:** - Supports declaring dependencies on other blueprints, enabling compositional patterns and ensuring all required components are available during deployment.
+        - **Platform Targeting:** - Specifies which Intersight platform types the blueprint supports, ensuring deployments only target compatible infrastructure.
 
 ---
 
 # Resource: intersight_workload_blueprint
-A blueprint detailed description.
+### Overview
+The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions.
+#### Purpose
+A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provides a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, platform targeting, and dependency management to ensure reliable and consistent deployments.
+#### Key Concepts
+- **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, enabling safe evolution of blueprint specifications while maintaining compatibility with existing workloads.
+- **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references.
+- **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured.
+- **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations.
+- **Resource Constraints:** - Defines infrastructure resource requirements and constraints that must be satisfied for successful blueprint deployment.
+- **Blueprint Dependencies:** - Supports declaring dependencies on other blueprints, enabling compositional patterns and ensuring all required components are available during deployment.
+- **Platform Targeting:** - Specifies which Intersight platform types the blueprint supports, ensuring deployments only target compatible infrastructure.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `associated_roles`:(Array) An array of relationships to iamRole resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 

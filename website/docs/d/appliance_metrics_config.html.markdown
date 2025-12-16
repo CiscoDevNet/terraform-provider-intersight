@@ -3,12 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_metrics_config"
 description: |-
-        MetricsConfig provides system configuration parameters for managing metrics collection on appliance.
+        The MetricsConfig object provides configuration parameters for managing metrics collection on the Intersight Appliance. It supports system and user-defined metrics collection settings.
+        #### Purpose
+        MetricsConfig serves as a framework for configuring metrics collection, enabling administrators to manage data collection based on resource constraints. This provides insights into metrics usage and supports system monitoring.
+        #### Key Concepts
+        - **Metrics Management:** Configures metrics collection settings, supporting efficient data management.
+        - **Resource Constraints:** Monitors metrics usage based on system resources, aiding in capacity planning.
+        - **Access Control:** Restricted to authorized users, ensuring secure configuration of metrics settings.
+        - **Usage Tracking:** Provides detailed insights into endpoint usage, supporting informed decision-making.
 
 ---
 
 # Data Source: intersight_appliance_metrics_config
-MetricsConfig provides system configuration parameters for managing metrics collection on appliance.
+The MetricsConfig object provides configuration parameters for managing metrics collection on the Intersight Appliance. It supports system and user-defined metrics collection settings.
+#### Purpose
+MetricsConfig serves as a framework for configuring metrics collection, enabling administrators to manage data collection based on resource constraints. This provides insights into metrics usage and supports system monitoring.
+#### Key Concepts
+- **Metrics Management:** Configures metrics collection settings, supporting efficient data management.
+- **Resource Constraints:** Monitors metrics usage based on system resources, aiding in capacity planning.
+- **Access Control:** Restricted to authorized users, ensuring secure configuration of metrics settings.
+- **Usage Tracking:** Provides detailed insights into endpoint usage, supporting informed decision-making.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

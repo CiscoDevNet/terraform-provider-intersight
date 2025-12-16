@@ -15,6 +15,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_firmware_chassis_upgrade.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `chassis_name`:(string) Name of the chassis on which the firmware upgrade operation is performed. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 

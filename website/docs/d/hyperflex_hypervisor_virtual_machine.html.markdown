@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hypervisor_virtual_machine"
 description: |-
-        A virtual machine belonging to the HyperFlex cluster spawned via the hypervisor.
+        ### Overview
+        The HypervisorVirtualMachine object is a key component of the HyperFlex virtualization environment, representing virtual machines spawned within the HyperFlex Cluster. This provides a comprehensive interface for managing VM operations, including lifecycle management, connectivity, and resource allocation.
+        #### Purpose
+        The HypervisorVirtualMachine is designed to enable the deployment and management of virtual machines within the HyperFlex infrastructure, supporting operational efficiency and resource optimization.
+        #### Key Concepts
+        - **Lifecycle Management:** - Facilitates the creation, updating, and monitoring of virtual machines, ensuring streamlined management within the cluster.
+        - **Resource Allocation:** - Manages resource provisioning, including storage and compute, to optimize performance and capacity utilization.
+        - **Cluster Integration:** - Linked with HyperFlex Cluster and host entities, enabling coordinated and efficient VM operations.
 
 ---
 
 # Data Source: intersight_hyperflex_hypervisor_virtual_machine
-A virtual machine belonging to the HyperFlex cluster spawned via the hypervisor.
+### Overview
+The HypervisorVirtualMachine object is a key component of the HyperFlex virtualization environment, representing virtual machines spawned within the HyperFlex Cluster. This provides a comprehensive interface for managing VM operations, including lifecycle management, connectivity, and resource allocation.
+#### Purpose
+The HypervisorVirtualMachine is designed to enable the deployment and management of virtual machines within the HyperFlex infrastructure, supporting operational efficiency and resource optimization.
+#### Key Concepts
+- **Lifecycle Management:** - Facilitates the creation, updating, and monitoring of virtual machines, ensuring streamlined management within the cluster.
+- **Resource Allocation:** - Manages resource provisioning, including storage and compute, to optimize performance and capacity utilization.
+- **Cluster Integration:** - Linked with HyperFlex Cluster and host entities, enabling coordinated and efficient VM operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

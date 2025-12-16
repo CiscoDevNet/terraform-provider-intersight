@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.EndPointUserRoleInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.EndPointUserRoleInventory"]
+**AccountTypeUserDefined** | Pointer to **bool** | Allows to choose custom account types for the endpoint user. | [optional] [readonly] [default to false]
+**AccountTypes** | Pointer to [**[]IamAccountTypeBase**](IamAccountTypeBase.md) |  | [optional] 
 **ChangePassword** | Pointer to **bool** | Denotes whether password has changed. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Enables the user account on the endpoint. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
@@ -73,6 +75,66 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAccountTypeUserDefined
+
+`func (o *IamEndPointUserRoleInventory) GetAccountTypeUserDefined() bool`
+
+GetAccountTypeUserDefined returns the AccountTypeUserDefined field if non-nil, zero value otherwise.
+
+### GetAccountTypeUserDefinedOk
+
+`func (o *IamEndPointUserRoleInventory) GetAccountTypeUserDefinedOk() (*bool, bool)`
+
+GetAccountTypeUserDefinedOk returns a tuple with the AccountTypeUserDefined field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountTypeUserDefined
+
+`func (o *IamEndPointUserRoleInventory) SetAccountTypeUserDefined(v bool)`
+
+SetAccountTypeUserDefined sets AccountTypeUserDefined field to given value.
+
+### HasAccountTypeUserDefined
+
+`func (o *IamEndPointUserRoleInventory) HasAccountTypeUserDefined() bool`
+
+HasAccountTypeUserDefined returns a boolean if a field has been set.
+
+### GetAccountTypes
+
+`func (o *IamEndPointUserRoleInventory) GetAccountTypes() []IamAccountTypeBase`
+
+GetAccountTypes returns the AccountTypes field if non-nil, zero value otherwise.
+
+### GetAccountTypesOk
+
+`func (o *IamEndPointUserRoleInventory) GetAccountTypesOk() (*[]IamAccountTypeBase, bool)`
+
+GetAccountTypesOk returns a tuple with the AccountTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountTypes
+
+`func (o *IamEndPointUserRoleInventory) SetAccountTypes(v []IamAccountTypeBase)`
+
+SetAccountTypes sets AccountTypes field to given value.
+
+### HasAccountTypes
+
+`func (o *IamEndPointUserRoleInventory) HasAccountTypes() bool`
+
+HasAccountTypes returns a boolean if a field has been set.
+
+### SetAccountTypesNil
+
+`func (o *IamEndPointUserRoleInventory) SetAccountTypesNil(b bool)`
+
+ SetAccountTypesNil sets the value for AccountTypes to be an explicit nil
+
+### UnsetAccountTypes
+`func (o *IamEndPointUserRoleInventory) UnsetAccountTypes()`
+
+UnsetAccountTypes ensures that no value is present for AccountTypes, not even an explicit nil
 ### GetChangePassword
 
 `func (o *IamEndPointUserRoleInventory) GetChangePassword() bool`

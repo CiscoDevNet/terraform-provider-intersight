@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_remote_file_import"
 description: |-
-        The properties of appliance.RemoteFileImport are used to create an scp or sftp request to import a firmware image.
+        The RemoteFileImport object supports the import of firmware images to the Intersight Appliance. It facilitates remote requests via SCP or SFTP to download files.
+        #### Purpose
+        RemoteFileImport provides a mechanism for importing firmware images, enabling administrators to perform remote file transfers to the appliance. It supports both SCP and SFTP protocols for secure and efficient file management.
+        #### Key Concepts
+        - **Remote Transfers:** Facilitates SCP and SFTP requests, allowing secure remote file imports.
+        - **Protocol Flexibility:** Supports multiple transfer protocols, providing adaptability to different network environments.
+        - **Integration with Accounts:** Aligns file import processes with account management, ensuring secure and authorized operations.
 
 ---
 
 # Resource: intersight_appliance_remote_file_import
-The properties of appliance.RemoteFileImport are used to create an scp or sftp request to import a firmware image.
+The RemoteFileImport object supports the import of firmware images to the Intersight Appliance. It facilitates remote requests via SCP or SFTP to download files.
+#### Purpose
+RemoteFileImport provides a mechanism for importing firmware images, enabling administrators to perform remote file transfers to the appliance. It supports both SCP and SFTP protocols for secure and efficient file management.
+#### Key Concepts
+- **Remote Transfers:** Facilitates SCP and SFTP requests, allowing secure remote file imports.
+- **Protocol Flexibility:** Supports multiple transfer protocols, providing adaptability to different network environments.
+- **Integration with Accounts:** Aligns file import processes with account management, ensuring secure and authorized operations.
 ## Usage Example
 ### Resource Creation
 

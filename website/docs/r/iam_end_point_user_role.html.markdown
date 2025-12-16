@@ -51,6 +51,13 @@ resource "intersight_iam_end_point_user_role" "iam_end_point_user_role1" {
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `account_type_user_defined`:(bool) Allows to choose custom account types for the endpoint user. 
+* `account_types`:(Array)
+This complex property has following sub-properties:
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [iam.AccountTypeIpmi](#iamAccountTypeIpmi)
+[iam.AccountTypeLocal](#iamAccountTypeLocal)
+  + `name`:(string) Name of the Account type such as Local or IPMI, that identifies the kind of user account. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -132,4 +139,15 @@ This complex property has following sub-properties:
 `intersight_iam_end_point_user_role` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_iam_end_point_user_role.example 1234567890987654321abcde
-``` 
+```
+## Allowed Types in `AdditionalProperties`
+ 
+### [iam.AccountTypeIpmi](#argument-reference)
+Account type for creating IPMI user on the endpoint. IPMI user enables IPMI User on the endpoint.
+* `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
+* `password`:(string) The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User's Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =). 
+* `use_diff_ipmi_password`:(bool) Use Different IPMI Password. If false then same Local User Password will be used for IPMI. 
+
+### [iam.AccountTypeLocal](#argument-reference)
+Account type for creating local user on the endpoint. Local user enables Redfish User on the endpoint.
+  

@@ -3,14 +3,24 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_alarm_suppression"
 description: |-
-        Intersight allows alarms to be suppressed at different Intersight entity MO instances. This model captures the suppression information such as which alarms to be suppressed at which entity MO.
-        An Intersight entity MO can have suppressions created directly at the entity MO level or at any of the entity MO ancestors. The resultant alarms to be suppressed at an entity MO level will be based on the combination of suppressions created for that entity and its ancestors. Currently only server maintenance is supported.
+        The AlarmSuppression is for selective suppression of alarms across various managed objects (MOs). It allows users to define which alarms should be hidden or suppressed, ensuring that only relevant alerts are visible and actionable.
+        #### Purpose
+        AlarmSuppression provides a mechanism to control and manage alarms by suppressing them at specific entity levels. This capability is essential for maintaining focus on critical alerts and minimizing unnecessary noise in alarm systems.
+        #### Key Concepts
+        - **Entity-Based Suppression:** Alarms can be suppressed directly at the MO level.
+        - **Privilege-Based Access:** Access to create, update, and delete suppressions is governed by privilege sets, ensuring that only authorized users can modify alarm suppression settings.
+        - **Operational Flexibility:** Suppressions can be tailored to specific server maintenance needs, allowing users to focus on critical alerts during maintenance windows.
 
 ---
 
 # Data Source: intersight_cond_alarm_suppression
-Intersight allows alarms to be suppressed at different Intersight entity MO instances. This model captures the suppression information such as which alarms to be suppressed at which entity MO.
-An Intersight entity MO can have suppressions created directly at the entity MO level or at any of the entity MO ancestors. The resultant alarms to be suppressed at an entity MO level will be based on the combination of suppressions created for that entity and its ancestors. Currently only server maintenance is supported.
+The AlarmSuppression is for selective suppression of alarms across various managed objects (MOs). It allows users to define which alarms should be hidden or suppressed, ensuring that only relevant alerts are visible and actionable.
+#### Purpose
+AlarmSuppression provides a mechanism to control and manage alarms by suppressing them at specific entity levels. This capability is essential for maintaining focus on critical alerts and minimizing unnecessary noise in alarm systems.
+#### Key Concepts
+- **Entity-Based Suppression:** Alarms can be suppressed directly at the MO level.
+- **Privilege-Based Access:** Access to create, update, and delete suppressions is governed by privilege sets, ensuring that only authorized users can modify alarm suppression settings.
+- **Operational Flexibility:** Suppressions can be tailored to specific server maintenance needs, allowing users to focus on critical alerts during maintenance windows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

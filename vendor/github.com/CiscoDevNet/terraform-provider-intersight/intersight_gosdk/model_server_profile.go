@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -41,6 +41,7 @@ type ServerProfile struct {
 	OverriddenList                   []string                       `json:"OverriddenList,omitempty"`
 	// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
 	PmcDeployedSecurePassphrase *string                    `json:"PmcDeployedSecurePassphrase,omitempty"`
+	PostDeployAction            []string                   `json:"PostDeployAction,omitempty"`
 	ReservationReferences       []PoolReservationReference `json:"ReservationReferences,omitempty"`
 	// Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `None` - No server is assigned to the server profile. * `Static` - Server is directly assigned to server profile using assign server. * `Pool` - Server is assigned from a resource pool.
 	ServerAssignmentMode *string `json:"ServerAssignmentMode,omitempty"`
@@ -488,6 +489,39 @@ func (o *ServerProfile) HasPmcDeployedSecurePassphrase() bool {
 // SetPmcDeployedSecurePassphrase gets a reference to the given string and assigns it to the PmcDeployedSecurePassphrase field.
 func (o *ServerProfile) SetPmcDeployedSecurePassphrase(v string) {
 	o.PmcDeployedSecurePassphrase = &v
+}
+
+// GetPostDeployAction returns the PostDeployAction field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerProfile) GetPostDeployAction() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.PostDeployAction
+}
+
+// GetPostDeployActionOk returns a tuple with the PostDeployAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerProfile) GetPostDeployActionOk() ([]string, bool) {
+	if o == nil || IsNil(o.PostDeployAction) {
+		return nil, false
+	}
+	return o.PostDeployAction, true
+}
+
+// HasPostDeployAction returns a boolean if a field has been set.
+func (o *ServerProfile) HasPostDeployAction() bool {
+	if o != nil && !IsNil(o.PostDeployAction) {
+		return true
+	}
+
+	return false
+}
+
+// SetPostDeployAction gets a reference to the given []string and assigns it to the PostDeployAction field.
+func (o *ServerProfile) SetPostDeployAction(v []string) {
+	o.PostDeployAction = v
 }
 
 // GetReservationReferences returns the ReservationReferences field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1287,6 +1321,9 @@ func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PmcDeployedSecurePassphrase) {
 		toSerialize["PmcDeployedSecurePassphrase"] = o.PmcDeployedSecurePassphrase
 	}
+	if o.PostDeployAction != nil {
+		toSerialize["PostDeployAction"] = o.PostDeployAction
+	}
 	if o.ReservationReferences != nil {
 		toSerialize["ReservationReferences"] = o.ReservationReferences
 	}
@@ -1415,6 +1452,7 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		OverriddenList                   []string                       `json:"OverriddenList,omitempty"`
 		// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
 		PmcDeployedSecurePassphrase *string                    `json:"PmcDeployedSecurePassphrase,omitempty"`
+		PostDeployAction            []string                   `json:"PostDeployAction,omitempty"`
 		ReservationReferences       []PoolReservationReference `json:"ReservationReferences,omitempty"`
 		// Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * `None` - No server is assigned to the server profile. * `Static` - Server is directly assigned to server profile using assign server. * `Pool` - Server is assigned from a resource pool.
 		ServerAssignmentMode *string `json:"ServerAssignmentMode,omitempty"`
@@ -1461,6 +1499,7 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		varServerProfile.LocationDetails = varServerProfileWithoutEmbeddedStruct.LocationDetails
 		varServerProfile.OverriddenList = varServerProfileWithoutEmbeddedStruct.OverriddenList
 		varServerProfile.PmcDeployedSecurePassphrase = varServerProfileWithoutEmbeddedStruct.PmcDeployedSecurePassphrase
+		varServerProfile.PostDeployAction = varServerProfileWithoutEmbeddedStruct.PostDeployAction
 		varServerProfile.ReservationReferences = varServerProfileWithoutEmbeddedStruct.ReservationReferences
 		varServerProfile.ServerAssignmentMode = varServerProfileWithoutEmbeddedStruct.ServerAssignmentMode
 		varServerProfile.ServerPreAssignBySerial = varServerProfileWithoutEmbeddedStruct.ServerPreAssignBySerial
@@ -1509,6 +1548,7 @@ func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "LocationDetails")
 		delete(additionalProperties, "OverriddenList")
 		delete(additionalProperties, "PmcDeployedSecurePassphrase")
+		delete(additionalProperties, "PostDeployAction")
 		delete(additionalProperties, "ReservationReferences")
 		delete(additionalProperties, "ServerAssignmentMode")
 		delete(additionalProperties, "ServerPreAssignBySerial")

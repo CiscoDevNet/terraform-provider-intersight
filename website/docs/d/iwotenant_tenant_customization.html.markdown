@@ -3,12 +3,26 @@ subcategory: "iwotenant"
 layout: "intersight"
 page_title: "Intersight: intersight_iwotenant_tenant_customization"
 description: |-
-        Tenant customization that end user can do such as enabling data extractor.
+        ### Overview
+        The TenantCustomization object allows end-users to tailor their IWO tenant configurations, enhancing functionality through options like enabling data extractors.
+        #### Purpose
+        The TenantCustomization object provides mechanisms for users to customize their tenant environments, offering flexibility in data handling and feature management.
+        #### Key Concepts
+        - **Data Management:** - Enables the activation of data extractors, facilitating reporting and analysis within the tenant's namespace.
+        - **Customization Flexibility:** - Provides options for users to enhance tenant capabilities according to their specific requirements.
+        - **Account Linkage:** - Maintains associations with relevant accounts and tenants, ensuring consistent customization across linked entities.
 
 ---
 
 # Data Source: intersight_iwotenant_tenant_customization
-Tenant customization that end user can do such as enabling data extractor.
+### Overview
+The TenantCustomization object allows end-users to tailor their IWO tenant configurations, enhancing functionality through options like enabling data extractors.
+#### Purpose
+The TenantCustomization object provides mechanisms for users to customize their tenant environments, offering flexibility in data handling and feature management. 
+#### Key Concepts
+- **Data Management:** - Enables the activation of data extractors, facilitating reporting and analysis within the tenant's namespace.
+- **Customization Flexibility:** - Provides options for users to enhance tenant capabilities according to their specific requirements.
+- **Account Linkage:** - Maintains associations with relevant accounts and tenants, ensuring consistent customization across linked entities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

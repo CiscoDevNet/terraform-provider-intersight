@@ -1030,6 +1030,40 @@ func getComputeBladeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"equipment_risers": {
+			Description: "An array of relationships to equipmentRiser resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"fault_summary": {
 			Description: "The fault summary for the server.",
 			Type:        schema.TypeInt,
@@ -1286,7 +1320,7 @@ func getComputeBladeSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"nr_lifecycle": {
-			Description: "The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.\n* `ScrubInProgress` - Scrub is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.\n* `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade.\n* `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade.\n* `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade.\n* `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.",
+			Description: "The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `DiagnosticsInProgress` - Diagnostics is in progress on given physical entity.\n* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.\n* `ScrubInProgress` - Scrub is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.\n* `Removed` - The blade server has been removed from its discovered slot, and not detected anywhere else. Blade inventory can be cleaned up by performing a software remove operation on the physically removed blade.\n* `Moved` - The blade server has been moved from its discovered location to a new location. Blade inventory can be updated by performing a rediscover operation on the moved blade.\n* `Replaced` - The blade server has been removed from its discovered location and another blade has been inserted in that location. Blade inventory can be cleaned up and updated by doing a software remove operation on the physically removed blade.\n* `MovedAndReplaced` - The blade server has been moved from its discovered location to a new location and another blade has been inserted into the old discovered location. Blade inventory can be updated by performing a rediscover operation on the moved blade.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -3456,6 +3490,46 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetEquipmentIoExpanders(x)
 	}
 
+	if v, ok := d.GetOk("equipment_risers"); ok {
+		x := make([]models.EquipmentRiserRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsEquipmentRiserRelationship(o))
+		}
+		o.SetEquipmentRisers(x)
+	}
+
 	if v, ok := d.GetOkExists("fault_summary"); ok {
 		x := int64(v.(int))
 		o.SetFaultSummary(x)
@@ -4742,6 +4816,8 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 
 				temp["equipment_io_expanders"] = flattenListEquipmentIoExpanderRelationship(s.GetEquipmentIoExpanders(), d)
+
+				temp["equipment_risers"] = flattenListEquipmentRiserRelationship(s.GetEquipmentRisers(), d)
 				temp["fault_summary"] = (s.GetFaultSummary())
 				temp["front_panel_lock_state"] = (s.GetFrontPanelLockState())
 

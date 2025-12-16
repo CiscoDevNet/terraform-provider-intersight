@@ -913,6 +913,18 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 				Default:      "NONE",
 				ForceNew:     true,
 			},
+			"switch_name": {
+				Description: "Name of the Fabric Interconnect on which the firmware upgrade operation is performed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -2088,6 +2100,10 @@ func resourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("status", (s.GetStatus())); err != nil {
 		return diag.Errorf("error occurred while setting property Status in FirmwareSwitchUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("switch_name", (s.GetSwitchName())); err != nil {
+		return diag.Errorf("error occurred while setting property SwitchName in FirmwareSwitchUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

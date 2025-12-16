@@ -3,20 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_upgrade"
 description: |-
-        Upgrade tracks the Intersight Appliance's software upgrades. Intersight Appliance's
-        upgrade service automatically creates an Upgrade managed object when there is a
-        pending software upgrade. User may modify an active Upgrade managed object to reset
-        the software upgrade start time. However, user may not be able to postpone an upgrade
-        beyond the limit enforced by the upgrade grace period set in the software manifest.
+        The Upgrade object is a crucial component within the Intersight Appliance's software management system, responsible for tracking and managing software upgrades. It facilitates the seamless transition of the appliance software to newer versions, ensuring both functionality and security enhancements are applied effectively.
+        #### Purpose
+        The Upgrade object automates the process of software upgrades by creating managed objects whenever there's a pending software upgrade. It allows users to modify active Upgrade objects to reset the upgrade start time, providing flexibility in scheduling upgrades.
+        #### Key Concepts
+        - **Automated Creation:** Automatically generates Upgrade objects when new software versions are detected, streamlining the upgrade process.
+        - **User Modification:** Offers users the ability to adjust upgrade start times, accommodating specific scheduling needs within set grace period limits.
+        - **Dependency Tracking:** Maintains relationships with other upgrade instances to handle dependencies and ensure smooth transitions.
+        - **Status Monitoring:** Provides comprehensive status updates and error codes, aiding in troubleshooting and decision-making regarding retries.
 
 ---
 
 # Data Source: intersight_appliance_upgrade
-Upgrade tracks the Intersight Appliance's software upgrades. Intersight Appliance's
-upgrade service automatically creates an Upgrade managed object when there is a
-pending software upgrade. User may modify an active Upgrade managed object to reset
-the software upgrade start time. However, user may not be able to postpone an upgrade
-beyond the limit enforced by the upgrade grace period set in the software manifest.
+The Upgrade object is a crucial component within the Intersight Appliance's software management system, responsible for tracking and managing software upgrades. It facilitates the seamless transition of the appliance software to newer versions, ensuring both functionality and security enhancements are applied effectively.
+#### Purpose
+The Upgrade object automates the process of software upgrades by creating managed objects whenever there's a pending software upgrade. It allows users to modify active Upgrade objects to reset the upgrade start time, providing flexibility in scheduling upgrades.
+#### Key Concepts
+- **Automated Creation:** Automatically generates Upgrade objects when new software versions are detected, streamlining the upgrade process.
+- **User Modification:** Offers users the ability to adjust upgrade start times, accommodating specific scheduling needs within set grace period limits.
+- **Dependency Tracking:** Maintains relationships with other upgrade instances to handle dependencies and ensure smooth transitions.
+- **Status Monitoring:** Provides comprehensive status updates and error codes, aiding in troubleshooting and decision-making regarding retries.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -639,6 +639,11 @@ func getFirmwareUpgradeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"server_name": {
+			Description: "Name of the server on which the firmware upgrade operation is performed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -1712,6 +1717,11 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("server_name"); ok {
+		x := (v.(string))
+		o.SetServerName(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -2042,6 +2052,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 				temp["release"] = flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)
 
 				temp["server"] = flattenMapComputePhysicalRelationship(s.GetServer(), d)
+				temp["server_name"] = (s.GetServerName())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["skip_estimate_impact"] = (s.GetSkipEstimateImpact())
 				temp["status"] = (s.GetStatus())

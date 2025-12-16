@@ -369,6 +369,11 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"port_name": {
+			Description: "Switch physical port name.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"port_type": {
 			Description: "Defines the transport type for this port (ethernet OR fc).",
 			Type:        schema.TypeString,
@@ -1100,6 +1105,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		o.SetPortId(x)
 	}
 
+	if v, ok := d.GetOk("port_name"); ok {
+		x := (v.(string))
+		o.SetPortName(x)
+	}
+
 	if v, ok := d.GetOk("port_type"); ok {
 		x := (v.(string))
 		o.SetPortType(x)
@@ -1406,6 +1416,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["port_channel_id"] = (s.GetPortChannelId())
 				temp["port_id"] = (s.GetPortId())
+				temp["port_name"] = (s.GetPortName())
 				temp["port_type"] = (s.GetPortType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)

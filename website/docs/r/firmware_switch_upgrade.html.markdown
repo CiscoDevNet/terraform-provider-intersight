@@ -133,6 +133,7 @@ This complex property has following sub-properties:
 * `skip_estimate_impact`:(bool) User has the option to skip the estimate impact calculation. 
 * `skip_wait_for_io_path_connectivity`:(bool) The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade. 
 * `status`:(string) Status of the upgrade operation.* `NONE` - Upgrade status is not populated.* `IN_PROGRESS` - The upgrade is in progress.* `SUCCESSFUL` - The upgrade successfully completed.* `FAILED` - The upgrade shows failed status.* `TERMINATED` - The upgrade has been terminated. 
+* `switch_name`:(string)(ReadOnly) Name of the Fabric Interconnect on which the firmware upgrade operation is performed. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `ancestor_definitions`:(Array)

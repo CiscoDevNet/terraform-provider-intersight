@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the workload to support multiple versions. | [optional] [default to 1]
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**WorkloadMetadata** | Pointer to [**NullableWorkloadWorkloadMetadataRelationship**](WorkloadWorkloadMetadataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -438,6 +439,41 @@ HasOrganization returns a boolean if a field has been set.
 `func (o *WorkloadWorkloadDefinition) UnsetOrganization()`
 
 UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+### GetWorkloadMetadata
+
+`func (o *WorkloadWorkloadDefinition) GetWorkloadMetadata() WorkloadWorkloadMetadataRelationship`
+
+GetWorkloadMetadata returns the WorkloadMetadata field if non-nil, zero value otherwise.
+
+### GetWorkloadMetadataOk
+
+`func (o *WorkloadWorkloadDefinition) GetWorkloadMetadataOk() (*WorkloadWorkloadMetadataRelationship, bool)`
+
+GetWorkloadMetadataOk returns a tuple with the WorkloadMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkloadMetadata
+
+`func (o *WorkloadWorkloadDefinition) SetWorkloadMetadata(v WorkloadWorkloadMetadataRelationship)`
+
+SetWorkloadMetadata sets WorkloadMetadata field to given value.
+
+### HasWorkloadMetadata
+
+`func (o *WorkloadWorkloadDefinition) HasWorkloadMetadata() bool`
+
+HasWorkloadMetadata returns a boolean if a field has been set.
+
+### SetWorkloadMetadataNil
+
+`func (o *WorkloadWorkloadDefinition) SetWorkloadMetadataNil(b bool)`
+
+ SetWorkloadMetadataNil sets the value for WorkloadMetadata to be an explicit nil
+
+### UnsetWorkloadMetadata
+`func (o *WorkloadWorkloadDefinition) UnsetWorkloadMetadata()`
+
+UnsetWorkloadMetadata ensures that no value is present for WorkloadMetadata, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

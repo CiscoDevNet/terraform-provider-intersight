@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.IpV6Block"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.IpV6Block"]
 **From** | Pointer to **string** | First IPv6 address of the block. | [optional] 
+**IdMappingPolicyMoid** | Pointer to **string** | The managed object ID of the ID mapping policy. | [optional] 
 **IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](IppoolIpV6Config.md) |  | [optional] 
 **To** | Pointer to **string** | Last IPv6 address of the block. | [optional] 
 
@@ -93,6 +94,31 @@ SetFrom sets From field to given value.
 `func (o *IppoolIpV6Block) HasFrom() bool`
 
 HasFrom returns a boolean if a field has been set.
+
+### GetIdMappingPolicyMoid
+
+`func (o *IppoolIpV6Block) GetIdMappingPolicyMoid() string`
+
+GetIdMappingPolicyMoid returns the IdMappingPolicyMoid field if non-nil, zero value otherwise.
+
+### GetIdMappingPolicyMoidOk
+
+`func (o *IppoolIpV6Block) GetIdMappingPolicyMoidOk() (*string, bool)`
+
+GetIdMappingPolicyMoidOk returns a tuple with the IdMappingPolicyMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdMappingPolicyMoid
+
+`func (o *IppoolIpV6Block) SetIdMappingPolicyMoid(v string)`
+
+SetIdMappingPolicyMoid sets IdMappingPolicyMoid field to given value.
+
+### HasIdMappingPolicyMoid
+
+`func (o *IppoolIpV6Block) HasIdMappingPolicyMoid() bool`
+
+HasIdMappingPolicyMoid returns a boolean if a field has been set.
 
 ### GetIpV6Config
 

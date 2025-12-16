@@ -35,6 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `peer_dn`:(string) PeerDn for ethernet physical port. 
 * `port_channel_id`:(int) Port channel id for port channel created on FI switch. 
 * `port_id`:(int) Switch physical port identifier. 
+* `port_name`:(string) Switch physical port name. 
 * `port_type`:(string) Defines the transport type for this port (ethernet OR fc). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `role`:(string) The role assigned to this port. 

@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the PCIe endpoint zone, as reported by the platform software (BMC). | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of the pcie node. | [optional] [readonly] 
-**Uri** | Pointer to **string** | The identifier of the PCIe endpoint zone as reported by the chassis expander module management controller. | [optional] 
 **ZoneId** | Pointer to **string** | The identifier of the PCIe endpoint zone where all PCIe devices are logically connected. | [optional] [readonly] 
 **EquipmentExpanderModule** | Pointer to [**NullableEquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
@@ -159,31 +158,6 @@ SetOperState sets OperState field to given value.
 `func (o *PciZone) HasOperState() bool`
 
 HasOperState returns a boolean if a field has been set.
-
-### GetUri
-
-`func (o *PciZone) GetUri() string`
-
-GetUri returns the Uri field if non-nil, zero value otherwise.
-
-### GetUriOk
-
-`func (o *PciZone) GetUriOk() (*string, bool)`
-
-GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUri
-
-`func (o *PciZone) SetUri(v string)`
-
-SetUri sets Uri field to given value.
-
-### HasUri
-
-`func (o *PciZone) HasUri() bool`
-
-HasUri returns a boolean if a field has been set.
 
 ### GetZoneId
 

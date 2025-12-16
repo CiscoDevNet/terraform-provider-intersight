@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.ChassisUpgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.ChassisUpgrade"]
+**ChassisName** | Pointer to **string** | Name of the chassis on which the firmware upgrade operation is performed. | [optional] [readonly] 
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **XfmUpgradeOption** | Pointer to **string** | XFM upgrade option Full or Partial Disruption. * &#x60;none&#x60; - If no option is selected for exclusion. * &#x60;full-shutdown&#x60; - PSX Switch in XFM will be upgraded in single action. * &#x60;partial-shutdown&#x60; - PSX Switch in XFM will be upgraded one after other. | [optional] [default to "none"]
 **Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetChassisName
+
+`func (o *FirmwareChassisUpgrade) GetChassisName() string`
+
+GetChassisName returns the ChassisName field if non-nil, zero value otherwise.
+
+### GetChassisNameOk
+
+`func (o *FirmwareChassisUpgrade) GetChassisNameOk() (*string, bool)`
+
+GetChassisNameOk returns a tuple with the ChassisName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisName
+
+`func (o *FirmwareChassisUpgrade) SetChassisName(v string)`
+
+SetChassisName sets ChassisName field to given value.
+
+### HasChassisName
+
+`func (o *FirmwareChassisUpgrade) HasChassisName() bool`
+
+HasChassisName returns a boolean if a field has been set.
 
 ### GetExcludeComponentList
 

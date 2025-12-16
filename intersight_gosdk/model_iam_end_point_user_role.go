@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,9 @@ type IamEndPointUserRole struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Allows to choose custom account types for the endpoint user.
+	AccountTypeUserDefined *bool                `json:"AccountTypeUserDefined,omitempty"`
+	AccountTypes           []IamAccountTypeBase `json:"AccountTypes,omitempty"`
 	// Denotes whether password has changed.
 	ChangePassword *bool `json:"ChangePassword,omitempty"`
 	// Enables the user account on the endpoint.
@@ -35,7 +38,7 @@ type IamEndPointUserRole struct {
 	// Indicates whether the value of the 'password' property has been set.
 	IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
 	// The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User's Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).
-	Password *string `json:"Password,omitempty" validate:"regexp=^[a-zA-Z0-9!@#$%^&\\\\*+-_=]+$"`
+	Password *string `json:"Password,omitempty" validate:"regexp=^$|^[a-zA-Z0-9!@#$%^&\\\\*+-_=]+$"`
 	// An array of relationships to iamEndPointRole resources.
 	EndPointRole         []IamEndPointRoleRelationship             `json:"EndPointRole,omitempty"`
 	EndPointUser         NullableIamEndPointUserRelationship       `json:"EndPointUser,omitempty"`
@@ -53,6 +56,8 @@ func NewIamEndPointUserRole(classId string, objectType string) *IamEndPointUserR
 	this := IamEndPointUserRole{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var accountTypeUserDefined bool = false
+	this.AccountTypeUserDefined = &accountTypeUserDefined
 	return &this
 }
 
@@ -65,6 +70,8 @@ func NewIamEndPointUserRoleWithDefaults() *IamEndPointUserRole {
 	this.ClassId = classId
 	var objectType string = "iam.EndPointUserRole"
 	this.ObjectType = objectType
+	var accountTypeUserDefined bool = false
+	this.AccountTypeUserDefined = &accountTypeUserDefined
 	return &this
 }
 
@@ -124,6 +131,71 @@ func (o *IamEndPointUserRole) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "iam.EndPointUserRole" of the ObjectType field.
 func (o *IamEndPointUserRole) GetDefaultObjectType() interface{} {
 	return "iam.EndPointUserRole"
+}
+
+// GetAccountTypeUserDefined returns the AccountTypeUserDefined field value if set, zero value otherwise.
+func (o *IamEndPointUserRole) GetAccountTypeUserDefined() bool {
+	if o == nil || IsNil(o.AccountTypeUserDefined) {
+		var ret bool
+		return ret
+	}
+	return *o.AccountTypeUserDefined
+}
+
+// GetAccountTypeUserDefinedOk returns a tuple with the AccountTypeUserDefined field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamEndPointUserRole) GetAccountTypeUserDefinedOk() (*bool, bool) {
+	if o == nil || IsNil(o.AccountTypeUserDefined) {
+		return nil, false
+	}
+	return o.AccountTypeUserDefined, true
+}
+
+// HasAccountTypeUserDefined returns a boolean if a field has been set.
+func (o *IamEndPointUserRole) HasAccountTypeUserDefined() bool {
+	if o != nil && !IsNil(o.AccountTypeUserDefined) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountTypeUserDefined gets a reference to the given bool and assigns it to the AccountTypeUserDefined field.
+func (o *IamEndPointUserRole) SetAccountTypeUserDefined(v bool) {
+	o.AccountTypeUserDefined = &v
+}
+
+// GetAccountTypes returns the AccountTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamEndPointUserRole) GetAccountTypes() []IamAccountTypeBase {
+	if o == nil {
+		var ret []IamAccountTypeBase
+		return ret
+	}
+	return o.AccountTypes
+}
+
+// GetAccountTypesOk returns a tuple with the AccountTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamEndPointUserRole) GetAccountTypesOk() ([]IamAccountTypeBase, bool) {
+	if o == nil || IsNil(o.AccountTypes) {
+		return nil, false
+	}
+	return o.AccountTypes, true
+}
+
+// HasAccountTypes returns a boolean if a field has been set.
+func (o *IamEndPointUserRole) HasAccountTypes() bool {
+	if o != nil && !IsNil(o.AccountTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountTypes gets a reference to the given []IamAccountTypeBase and assigns it to the AccountTypes field.
+func (o *IamEndPointUserRole) SetAccountTypes(v []IamAccountTypeBase) {
+	o.AccountTypes = v
 }
 
 // GetChangePassword returns the ChangePassword field value if set, zero value otherwise.
@@ -399,6 +471,12 @@ func (o IamEndPointUserRole) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccountTypeUserDefined) {
+		toSerialize["AccountTypeUserDefined"] = o.AccountTypeUserDefined
+	}
+	if o.AccountTypes != nil {
+		toSerialize["AccountTypes"] = o.AccountTypes
+	}
 	if !IsNil(o.ChangePassword) {
 		toSerialize["ChangePassword"] = o.ChangePassword
 	}
@@ -475,6 +553,9 @@ func (o *IamEndPointUserRole) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Allows to choose custom account types for the endpoint user.
+		AccountTypeUserDefined *bool                `json:"AccountTypeUserDefined,omitempty"`
+		AccountTypes           []IamAccountTypeBase `json:"AccountTypes,omitempty"`
 		// Denotes whether password has changed.
 		ChangePassword *bool `json:"ChangePassword,omitempty"`
 		// Enables the user account on the endpoint.
@@ -482,7 +563,7 @@ func (o *IamEndPointUserRole) UnmarshalJSON(data []byte) (err error) {
 		// Indicates whether the value of the 'password' property has been set.
 		IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
 		// The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User's Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).
-		Password *string `json:"Password,omitempty" validate:"regexp=^[a-zA-Z0-9!@#$%^&\\\\*+-_=]+$"`
+		Password *string `json:"Password,omitempty" validate:"regexp=^$|^[a-zA-Z0-9!@#$%^&\\\\*+-_=]+$"`
 		// An array of relationships to iamEndPointRole resources.
 		EndPointRole       []IamEndPointRoleRelationship             `json:"EndPointRole,omitempty"`
 		EndPointUser       NullableIamEndPointUserRelationship       `json:"EndPointUser,omitempty"`
@@ -496,6 +577,8 @@ func (o *IamEndPointUserRole) UnmarshalJSON(data []byte) (err error) {
 		varIamEndPointUserRole := _IamEndPointUserRole{}
 		varIamEndPointUserRole.ClassId = varIamEndPointUserRoleWithoutEmbeddedStruct.ClassId
 		varIamEndPointUserRole.ObjectType = varIamEndPointUserRoleWithoutEmbeddedStruct.ObjectType
+		varIamEndPointUserRole.AccountTypeUserDefined = varIamEndPointUserRoleWithoutEmbeddedStruct.AccountTypeUserDefined
+		varIamEndPointUserRole.AccountTypes = varIamEndPointUserRoleWithoutEmbeddedStruct.AccountTypes
 		varIamEndPointUserRole.ChangePassword = varIamEndPointUserRoleWithoutEmbeddedStruct.ChangePassword
 		varIamEndPointUserRole.Enabled = varIamEndPointUserRoleWithoutEmbeddedStruct.Enabled
 		varIamEndPointUserRole.IsPasswordSet = varIamEndPointUserRoleWithoutEmbeddedStruct.IsPasswordSet
@@ -522,6 +605,8 @@ func (o *IamEndPointUserRole) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AccountTypeUserDefined")
+		delete(additionalProperties, "AccountTypes")
 		delete(additionalProperties, "ChangePassword")
 		delete(additionalProperties, "Enabled")
 		delete(additionalProperties, "IsPasswordSet")

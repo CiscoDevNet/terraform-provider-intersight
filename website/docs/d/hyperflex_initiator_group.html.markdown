@@ -3,14 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_initiator_group"
 description: |-
-        A HyperFlex iSCSI initiator group entity.
-        Contains detailed information about the initaitor group which includes a list of iSCSI initiators and iSCSI target objects.
+        ### Overview
+        The InitiatorGroup object is a fundamental element of the HyperFlex storage system, representing a collection of iSCSI initiators and targets. This provides a structured interface for managing iSCSI interactions, facilitating efficient storage network operations.
+        #### Purpose
+        An InitiatorGroup serves as a container for iSCSI configuration, enabling the organized management of initiators and targets within the HyperFlex storage network.
+        #### Key Concepts
+        - **Configuration Management:** - Manages iSCSI initiators and targets, supporting structured and efficient storage network operations.
+        - **Inventory Tracking:** - Provides detailed inventory information, ensuring accurate and reliable storage resource management.
+        - **Cluster Association:** - Integrated with the HyperFlex Cluster, enabling seamless interaction and coordination of storage network resources.
 
 ---
 
 # Data Source: intersight_hyperflex_initiator_group
-A HyperFlex iSCSI initiator group entity.
-Contains detailed information about the initaitor group which includes a list of iSCSI initiators and iSCSI target objects.
+### Overview
+The InitiatorGroup object is a fundamental element of the HyperFlex storage system, representing a collection of iSCSI initiators and targets. This provides a structured interface for managing iSCSI interactions, facilitating efficient storage network operations.
+#### Purpose
+An InitiatorGroup serves as a container for iSCSI configuration, enabling the organized management of initiators and targets within the HyperFlex storage network.
+#### Key Concepts
+- **Configuration Management:** - Manages iSCSI initiators and targets, supporting structured and efficient storage network operations.
+- **Inventory Tracking:** - Provides detailed inventory information, ensuring accurate and reliable storage resource management.
+- **Cluster Association:** - Integrated with the HyperFlex Cluster, enabling seamless interaction and coordination of storage network resources.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -30,6 +30,8 @@ type EquipmentExpanderModuleIdentity struct {
 	ObjectType string `json:"ObjectType"`
 	// Chassis Identifier of an expander module.
 	ChassisId *int64 `json:"ChassisId,omitempty"`
+	// The presence state of the blade server. * `Unknown` - The default presence state. * `Equipped` - The server is equipped in the slot. * `EquippedMismatch` - The slot is equipped, but there is another server currently inventoried in the slot. * `Missing` - The server is not present in the given slot.
+	Presence *string `json:"Presence,omitempty"`
 	// Chassis slot number of an expander module.
 	SlotId               *int64                                      `json:"SlotId,omitempty"`
 	ExpanderModule       NullableEquipmentExpanderModuleRelationship `json:"ExpanderModule,omitempty"`
@@ -153,6 +155,38 @@ func (o *EquipmentExpanderModuleIdentity) SetChassisId(v int64) {
 	o.ChassisId = &v
 }
 
+// GetPresence returns the Presence field value if set, zero value otherwise.
+func (o *EquipmentExpanderModuleIdentity) GetPresence() string {
+	if o == nil || IsNil(o.Presence) {
+		var ret string
+		return ret
+	}
+	return *o.Presence
+}
+
+// GetPresenceOk returns a tuple with the Presence field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentExpanderModuleIdentity) GetPresenceOk() (*string, bool) {
+	if o == nil || IsNil(o.Presence) {
+		return nil, false
+	}
+	return o.Presence, true
+}
+
+// HasPresence returns a boolean if a field has been set.
+func (o *EquipmentExpanderModuleIdentity) HasPresence() bool {
+	if o != nil && !IsNil(o.Presence) {
+		return true
+	}
+
+	return false
+}
+
+// SetPresence gets a reference to the given string and assigns it to the Presence field.
+func (o *EquipmentExpanderModuleIdentity) SetPresence(v string) {
+	o.Presence = &v
+}
+
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *EquipmentExpanderModuleIdentity) GetSlotId() int64 {
 	if o == nil || IsNil(o.SlotId) {
@@ -257,6 +291,9 @@ func (o EquipmentExpanderModuleIdentity) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
+	if !IsNil(o.Presence) {
+		toSerialize["Presence"] = o.Presence
+	}
 	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
@@ -320,6 +357,8 @@ func (o *EquipmentExpanderModuleIdentity) UnmarshalJSON(data []byte) (err error)
 		ObjectType string `json:"ObjectType"`
 		// Chassis Identifier of an expander module.
 		ChassisId *int64 `json:"ChassisId,omitempty"`
+		// The presence state of the blade server. * `Unknown` - The default presence state. * `Equipped` - The server is equipped in the slot. * `EquippedMismatch` - The slot is equipped, but there is another server currently inventoried in the slot. * `Missing` - The server is not present in the given slot.
+		Presence *string `json:"Presence,omitempty"`
 		// Chassis slot number of an expander module.
 		SlotId         *int64                                      `json:"SlotId,omitempty"`
 		ExpanderModule NullableEquipmentExpanderModuleRelationship `json:"ExpanderModule,omitempty"`
@@ -333,6 +372,7 @@ func (o *EquipmentExpanderModuleIdentity) UnmarshalJSON(data []byte) (err error)
 		varEquipmentExpanderModuleIdentity.ClassId = varEquipmentExpanderModuleIdentityWithoutEmbeddedStruct.ClassId
 		varEquipmentExpanderModuleIdentity.ObjectType = varEquipmentExpanderModuleIdentityWithoutEmbeddedStruct.ObjectType
 		varEquipmentExpanderModuleIdentity.ChassisId = varEquipmentExpanderModuleIdentityWithoutEmbeddedStruct.ChassisId
+		varEquipmentExpanderModuleIdentity.Presence = varEquipmentExpanderModuleIdentityWithoutEmbeddedStruct.Presence
 		varEquipmentExpanderModuleIdentity.SlotId = varEquipmentExpanderModuleIdentityWithoutEmbeddedStruct.SlotId
 		varEquipmentExpanderModuleIdentity.ExpanderModule = varEquipmentExpanderModuleIdentityWithoutEmbeddedStruct.ExpanderModule
 		*o = EquipmentExpanderModuleIdentity(varEquipmentExpanderModuleIdentity)
@@ -355,6 +395,7 @@ func (o *EquipmentExpanderModuleIdentity) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ChassisId")
+		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "ExpanderModule")
 

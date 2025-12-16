@@ -439,6 +439,11 @@ func getEtherPhysicalPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"port_name": {
+			Description: "Switch physical port name.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"port_sub_group": {
 			Description: "A reference to a portSubGroup resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1251,6 +1256,11 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 		o.SetPortId(x)
 	}
 
+	if v, ok := d.GetOk("port_name"); ok {
+		x := (v.(string))
+		o.SetPortName(x)
+	}
+
 	if v, ok := d.GetOk("port_sub_group"); ok {
 		p := make([]models.PortSubGroupRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1605,6 +1615,7 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 
 				temp["port_group"] = flattenMapPortGroupRelationship(s.GetPortGroup(), d)
 				temp["port_id"] = (s.GetPortId())
+				temp["port_name"] = (s.GetPortName())
 
 				temp["port_sub_group"] = flattenMapPortSubGroupRelationship(s.GetPortSubGroup(), d)
 				temp["port_type"] = (s.GetPortType())

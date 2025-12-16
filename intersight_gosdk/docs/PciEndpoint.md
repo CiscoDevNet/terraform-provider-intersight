@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the PCIe endpoint, as reported by the XFM platform software (BMC). | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of the PCIe endpoint. | [optional] [readonly] 
-**Uri** | Pointer to **string** | The unique identifier of the PCIe endpoint as reported by the chassis expander management controller. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PciSwitch** | Pointer to [**NullablePciSwitchRelationship**](PciSwitchRelationship.md) |  | [optional] 
 **PciSwitchPort** | Pointer to [**NullablePciPortRelationship**](PciPortRelationship.md) |  | [optional] 
@@ -266,31 +265,6 @@ SetOperState sets OperState field to given value.
 `func (o *PciEndpoint) HasOperState() bool`
 
 HasOperState returns a boolean if a field has been set.
-
-### GetUri
-
-`func (o *PciEndpoint) GetUri() string`
-
-GetUri returns the Uri field if non-nil, zero value otherwise.
-
-### GetUriOk
-
-`func (o *PciEndpoint) GetUriOk() (*string, bool)`
-
-GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUri
-
-`func (o *PciEndpoint) SetUri(v string)`
-
-SetUri sets Uri field to given value.
-
-### HasUri
-
-`func (o *PciEndpoint) HasUri() bool`
-
-HasUri returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

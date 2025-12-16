@@ -3,28 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_image_bundle"
 description: |-
-        ImageBundle keeps track of all the software bundles installed in the Intersight Appliances.
-        Each ImageBundle managed object is derived from a software upgrade manifest. ImageBundle has
-        additional properties computed during the manifest processing. Additional properties are the
-        dynamic attributes of the software packages declared in the software manifest. For example,
-        SHA256 values of the software packages are computed during the software manifest processing.
-        An ImageBundle managed object named 'current' is always present in the Intersight Appliance.
-        The software upgrade service creates another ImageBundle managed object named 'pending'
-        when there is a pending software upgrade. The upgrade service renames the 'pending' bundle
-        to the 'current' bundle after the software upgrade is successful.
+        The ImageBundle object plays a pivotal role in managing software bundles within the Intersight Appliance. It keeps track of all installed software bundles, derived from upgrade manifests, and includes dynamic properties computed during manifest processing.
+        #### Purpose
+        ImageBundle objects are essential for maintaining software consistency and integrity within the appliance. They manage the lifecycle of software bundles, from pending upgrades to successful installations. >
+        #### Key Concepts
+        - **Manifest Derivation:** Created from software upgrade manifests, incorporating additional computed properties for enhanced tracking and verification.
+        - **Lifecycle Management:** Oversees the transition from pending to current bundles, ensuring software updates are applied correctly.
+        - **Impact Assessment:** Utilizes UpgradeImpactEnum to evaluate the potential disruption of services during upgrades, providing foresight into upgrade effects.
+        - **Dependency Handling:** Tracks dependencies between bundles, ensuring all necessary components are available for successful upgrades.
 
 ---
 
 # Data Source: intersight_appliance_image_bundle
-ImageBundle keeps track of all the software bundles installed in the Intersight Appliances.
-Each ImageBundle managed object is derived from a software upgrade manifest. ImageBundle has
-additional properties computed during the manifest processing. Additional properties are the
-dynamic attributes of the software packages declared in the software manifest. For example,
-SHA256 values of the software packages are computed during the software manifest processing.
-An ImageBundle managed object named 'current' is always present in the Intersight Appliance.
-The software upgrade service creates another ImageBundle managed object named 'pending'
-when there is a pending software upgrade. The upgrade service renames the 'pending' bundle
-to the 'current' bundle after the software upgrade is successful.
+The ImageBundle object plays a pivotal role in managing software bundles within the Intersight Appliance. It keeps track of all installed software bundles, derived from upgrade manifests, and includes dynamic properties computed during manifest processing.
+#### Purpose
+ImageBundle objects are essential for maintaining software consistency and integrity within the appliance. They manage the lifecycle of software bundles, from pending upgrades to successful installations. >
+#### Key Concepts
+- **Manifest Derivation:** Created from software upgrade manifests, incorporating additional computed properties for enhanced tracking and verification.
+- **Lifecycle Management:** Oversees the transition from pending to current bundles, ensuring software updates are applied correctly.
+- **Impact Assessment:** Utilizes UpgradeImpactEnum to evaluate the potential disruption of services during upgrades, providing foresight into upgrade effects.
+- **Dependency Handling:** Tracks dependencies between bundles, ensuring all necessary components are available for successful upgrades.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

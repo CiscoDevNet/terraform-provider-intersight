@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hypervisor_host"
 description: |-
-        A host appliance in the HyperFlex Cluster.
+        ### Overview
+        The HypervisorHost object represents a physical or virtual host appliance within the HyperFlex Cluster. This provides a detailed interface for managing host resources, including status, role, and configuration, supporting efficient cluster operation and management.
+        #### Purpose
+        A HypervisorHost serves as a critical node within the HyperFlex infrastructure, enabling the deployment and management of virtualized environments through resource allocation and operational control.
+        #### Key Concepts
+        - **Status Monitoring:** - Tracks host status, including operational state and maintenance mode, to ensure reliable cluster performance.
+        - **Role Definition:** - Defines the specific role of the host within the HyperFlex environment, such as storage or compute.
+        - **Cluster Association:** - Ensures seamless integration with the HyperFlex Cluster, supporting coordinated resource management and operational efficiency.
 
 ---
 
 # Data Source: intersight_hyperflex_hypervisor_host
-A host appliance in the HyperFlex Cluster.
+### Overview
+The HypervisorHost object represents a physical or virtual host appliance within the HyperFlex Cluster. This provides a detailed interface for managing host resources, including status, role, and configuration, supporting efficient cluster operation and management.
+#### Purpose
+A HypervisorHost serves as a critical node within the HyperFlex infrastructure, enabling the deployment and management of virtualized environments through resource allocation and operational control.
+#### Key Concepts
+- **Status Monitoring:** - Tracks host status, including operational state and maintenance mode, to ensure reliable cluster performance.
+- **Role Definition:** - Defines the specific role of the host within the HyperFlex environment, such as storage or compute.
+- **Cluster Association:** - Ensures seamless integration with the HyperFlex Cluster, supporting coordinated resource management and operational efficiency.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

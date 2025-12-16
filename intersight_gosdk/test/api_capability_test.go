@@ -1590,6 +1590,32 @@ func Test_intersight_CapabilityApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CapabilityApiService GetCapabilityPolicyConstantsByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilityPolicyConstantsByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CapabilityApiService GetCapabilityPolicyConstantsList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilityPolicyConstantsList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CapabilityApiService GetCapabilityPortGroupAggregationDefByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2129,6 +2155,32 @@ func Test_intersight_CapabilityApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilitySwitchManufacturingDefList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CapabilityApiService GetCapabilitySwitchUpgradeSupportMetaByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilitySwitchUpgradeSupportMetaByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CapabilityApiService GetCapabilitySwitchUpgradeSupportMetaList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilitySwitchUpgradeSupportMetaList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

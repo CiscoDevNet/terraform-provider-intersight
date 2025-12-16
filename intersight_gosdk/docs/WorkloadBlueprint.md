@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **ServiceItems** | Pointer to [**[]BlueprintServiceItemDefinition**](BlueprintServiceItemDefinition.md) |  | [optional] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the blueprint to support multiple versions. | [optional] [default to 1]
+**AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
 **Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 
 ## Methods
@@ -501,6 +502,41 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### GetAssociatedRoles
+
+`func (o *WorkloadBlueprint) GetAssociatedRoles() []IamRoleRelationship`
+
+GetAssociatedRoles returns the AssociatedRoles field if non-nil, zero value otherwise.
+
+### GetAssociatedRolesOk
+
+`func (o *WorkloadBlueprint) GetAssociatedRolesOk() (*[]IamRoleRelationship, bool)`
+
+GetAssociatedRolesOk returns a tuple with the AssociatedRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssociatedRoles
+
+`func (o *WorkloadBlueprint) SetAssociatedRoles(v []IamRoleRelationship)`
+
+SetAssociatedRoles sets AssociatedRoles field to given value.
+
+### HasAssociatedRoles
+
+`func (o *WorkloadBlueprint) HasAssociatedRoles() bool`
+
+HasAssociatedRoles returns a boolean if a field has been set.
+
+### SetAssociatedRolesNil
+
+`func (o *WorkloadBlueprint) SetAssociatedRolesNil(b bool)`
+
+ SetAssociatedRolesNil sets the value for AssociatedRoles to be an explicit nil
+
+### UnsetAssociatedRoles
+`func (o *WorkloadBlueprint) UnsetAssociatedRoles()`
+
+UnsetAssociatedRoles ensures that no value is present for AssociatedRoles, not even an explicit nil
 ### GetCatalog
 
 `func (o *WorkloadBlueprint) GetCatalog() WorkflowCatalogRelationship`

@@ -110,6 +110,8 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 
+* `overridden_list`:
+                (Array of schema.TypeString) -
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -117,6 +119,11 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `partially_deployed_policies`:(Array)
+This complex property has following sub-properties:
+  + `end_point_context`:(string)(ReadOnly) Information about the endpoint to which it is applied.* `Server` - Configuration is applied to a server context.* `FI` - Configuration is applied to a Fabric Identifier (FI) context.* `IOM` - Configuration is applied to an Input/Output Module (IOM) context. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `policy`:(string)(ReadOnly) The name of the policy for which entry is created. 
 * `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -200,6 +207,21 @@ This complex property has following sub-properties:
   + `type`:(string)(ReadOnly) An enum type that defines the type of tag. Supported values are 'pathtag' and 'keyvalue'.* `KeyValue` - KeyValue type of tag. Key is required for these tags. Value is optional.* `PathTag` - Key contain path information. Value is not present for these tags. The path is created by using the '/' character as a delimiter.For example, if the tag is \ A/B/C\ , then \ A\  is the parent tag, \ B\  is the child tag of \ A\  and \ C\  is the child tag of \ B\ . 
   + `value`:(string) The string representation of a tag value. 
 * `target_platform`:(string) Type of the profile. 'UcsDomain' profile for network and management configuration on UCS Fabric Interconnect. 'UnifiedEdge' profile for network, management and chassis configuration on Unified Edge.* `UCS Domain` - Profile/policy type for network and management configuration on UCS Fabric Interconnect.* `Unified Edge` - Profile/policy type for network, management and chassis configuration on Unified Edge. 
+* `template_actions`:(Array)
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `params`:(Array)
+This complex property has following sub-properties:
+    + `name`:(string) The action parameter identifier. The supported values are SyncType and SyncTimer for the template sync action.* `None` - The default parameter that implies that no action parameter is required for the template action.* `SyncType` - The parameter that describes the type of sync action such as SyncOne or SyncFailed supported on any template or derived object.* `SyncTimer` - The parameter for the initial delay in seconds after which the sync action must be executed. The supported range is from 0 to 60 seconds.* `OverriddenList` - The parameter applicable in attach operation indicating the configurations that must override the template configurations. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `value`:(string) The action parameter value is based on the action parameter type. Supported action parameters and their values are-a) Name - SyncType, Supported Values - SyncFailed, SyncOne.b) Name - SyncTimer, Supported Values - 0 to 60 seconds.c) Name - OverriddenList, Supported Values - Comma Separated list of overridable configurations. 
+  + `type`:(string) The action type to be executed.* `Sync` - The action to merge values from the template to its derived objects.* `Deploy` - The action to execute deploy action on all the objects derived from the template that is mainly applicable for the various profile types.* `Detach` - The action to detach the current derived object from its attached template.* `Attach` - The action to attach the current object to the specified template. 
+* `template_sync_errors`:(Array)
+This complex property has following sub-properties:
+  + `message`:(string)(ReadOnly) The localized message based on the locale setting of the user's context providing the error description. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `type`:(string)(ReadOnly) The error type that indicates the point of failure.* `Transient` - Any error which is a runtime error due to some other action in progress on the derived object that is blocking the sync action. This error type is retriable.For example, when vNIC Template is updated, but the derived vNIC or vNICs are part of a LAN Connectivity policy associated with a profile being deployed to endpoint. In this scenario, the derived vNIC update displays this error.* `Validation` - When the template sync on the derived object fails due to an incorrect configuration, it displays a validation error. This error type is considered fatal and not retried.For example, when a new policy is attached to a server profile template, the sync to a derived server profile fails due to the policy attach errors.* `User` - Any configuration error due to incorrect or invalid input and that requires user intervention for correction, is displayed under this category. This error type is considered fatal and not retried.For example, when a new policy is attached to a server profile template, the sync to a derived server profile fails. This happens when the policyis not applicable to the server assigned to the server profile, such as the Power policy that is not applicable for UCS Rack servers.* `Internal` - Any application internal errors are displayed under this category. This error type is considered fatal and not retried. 
+* `template_sync_status`:(string)(ReadOnly) The sync status of the current MO wrt the attached Template MO.* `None` - The Enum value represents that the object is not attached to any template.* `OK` - The Enum value represents that the object values are in sync with attached template.* `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template.* `InProgress` - The Enum value represents that the object sync with the attached template is in progress.* `OutOfSync` - The Enum value represents that the object values are not in sync with attached template. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

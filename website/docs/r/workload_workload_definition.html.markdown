@@ -3,12 +3,30 @@ subcategory: "workload"
 layout: "intersight"
 page_title: "Intersight: intersight_workload_workload_definition"
 description: |-
-        Details of a Workload Definition.
+        ### Overview
+        The WorkloadDefinition object represents the blueprint for defining reusable workload configurations that can be deployed across one or more organizations. It serves as the foundational template that captures the complete specification of a workload, including its associated blueprints, validation requirements, and deployment strategies.
+        #### Purpose
+        A WorkloadDefinition provides a versioned, reusable specification for workloads that can be deployed multiple times across different contexts organizations. It enables administrators to define complex multi-component workloads once and deploy them consistently, supporting both iterative development through versioning and controlled rollout through deployment strategies.
+        #### Key Concepts
+        - **Platform Support:** - Platform types can be specified to indicate which Intersight platforms support the workload, ensuring deployments target compatible infrastructure.
+        - **Versioning and Preferred Versions:** - Each workload definition supports multiple versions, with the ability to designate a preferred (default) version. This allows for safe evolution of workload specifications while maintaining backward compatibility with existing deployments.
+        - **Blueprint Composition:** - Workload definitions are composed of one or more blueprint references, enabling modular design where complex workloads are built from reusable blueprint components.
+        - **Validation and Status Tracking:** - Each definition maintains validation information to ensure all required inputs and dependencies are properly configured before deployment, along with deployment summary aggregations across all instances.
+        - **Override Inputs:** - Each workload definition can specify input overrides for the blueprints it references, allowing for customization within deployments.
 
 ---
 
 # Resource: intersight_workload_workload_definition
-Details of a Workload Definition.
+### Overview
+The WorkloadDefinition object represents the blueprint for defining reusable workload configurations that can be deployed across one or more organizations. It serves as the foundational template that captures the complete specification of a workload, including its associated blueprints, validation requirements, and deployment strategies.
+#### Purpose
+A WorkloadDefinition provides a versioned, reusable specification for workloads that can be deployed multiple times across different contexts organizations. It enables administrators to define complex multi-component workloads once and deploy them consistently, supporting both iterative development through versioning and controlled rollout through deployment strategies.
+#### Key Concepts
+- **Platform Support:** - Platform types can be specified to indicate which Intersight platforms support the workload, ensuring deployments target compatible infrastructure.
+- **Versioning and Preferred Versions:** - Each workload definition supports multiple versions, with the ability to designate a preferred (default) version. This allows for safe evolution of workload specifications while maintaining backward compatibility with existing deployments.
+- **Blueprint Composition:** - Workload definitions are composed of one or more blueprint references, enabling modular design where complex workloads are built from reusable blueprint components.
+- **Validation and Status Tracking:** - Each definition maintains validation information to ensure all required inputs and dependencies are properly configured before deployment, along with deployment summary aggregations across all instances.
+- **Override Inputs:** - Each workload definition can specify input overrides for the blueprints it references, allowing for customization within deployments.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -121,6 +139,11 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `workload_metadata`:(HashMap) -(ReadOnly) A reference to a workloadWorkloadMetadata resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 
 
 ## Import

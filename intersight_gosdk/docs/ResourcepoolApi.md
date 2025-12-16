@@ -4,7 +4,6 @@ All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateResourcepoolChassisQualificationPolicy**](ResourcepoolApi.md#CreateResourcepoolChassisQualificationPolicy) | **Post** /api/v1/resourcepool/ChassisQualificationPolicies | Create a &#39;resourcepool.ChassisQualificationPolicy&#39; resource.
 [**CreateResourcepoolPool**](ResourcepoolApi.md#CreateResourcepoolPool) | **Post** /api/v1/resourcepool/Pools | Create a &#39;resourcepool.Pool&#39; resource.
 [**CreateResourcepoolQualificationPolicy**](ResourcepoolApi.md#CreateResourcepoolQualificationPolicy) | **Post** /api/v1/resourcepool/QualificationPolicies | Create a &#39;resourcepool.QualificationPolicy&#39; resource.
 [**DeleteResourcepoolChassisQualificationPolicy**](ResourcepoolApi.md#DeleteResourcepoolChassisQualificationPolicy) | **Delete** /api/v1/resourcepool/ChassisQualificationPolicies/{Moid} | Delete a &#39;resourcepool.ChassisQualificationPolicy&#39; resource.
@@ -28,83 +27,13 @@ Method | HTTP request | Description
 [**GetResourcepoolQualificationPolicyList**](ResourcepoolApi.md#GetResourcepoolQualificationPolicyList) | **Get** /api/v1/resourcepool/QualificationPolicies | Read a &#39;resourcepool.QualificationPolicy&#39; resource.
 [**GetResourcepoolUniverseByMoid**](ResourcepoolApi.md#GetResourcepoolUniverseByMoid) | **Get** /api/v1/resourcepool/Universes/{Moid} | Read a &#39;resourcepool.Universe&#39; resource.
 [**GetResourcepoolUniverseList**](ResourcepoolApi.md#GetResourcepoolUniverseList) | **Get** /api/v1/resourcepool/Universes | Read a &#39;resourcepool.Universe&#39; resource.
-[**PatchResourcepoolChassisQualificationPolicy**](ResourcepoolApi.md#PatchResourcepoolChassisQualificationPolicy) | **Patch** /api/v1/resourcepool/ChassisQualificationPolicies/{Moid} | Update a &#39;resourcepool.ChassisQualificationPolicy&#39; resource.
 [**PatchResourcepoolMembershipReservation**](ResourcepoolApi.md#PatchResourcepoolMembershipReservation) | **Patch** /api/v1/resourcepool/MembershipReservations/{Moid} | Update a &#39;resourcepool.MembershipReservation&#39; resource.
 [**PatchResourcepoolPool**](ResourcepoolApi.md#PatchResourcepoolPool) | **Patch** /api/v1/resourcepool/Pools/{Moid} | Update a &#39;resourcepool.Pool&#39; resource.
 [**PatchResourcepoolQualificationPolicy**](ResourcepoolApi.md#PatchResourcepoolQualificationPolicy) | **Patch** /api/v1/resourcepool/QualificationPolicies/{Moid} | Update a &#39;resourcepool.QualificationPolicy&#39; resource.
-[**UpdateResourcepoolChassisQualificationPolicy**](ResourcepoolApi.md#UpdateResourcepoolChassisQualificationPolicy) | **Post** /api/v1/resourcepool/ChassisQualificationPolicies/{Moid} | Update a &#39;resourcepool.ChassisQualificationPolicy&#39; resource.
 [**UpdateResourcepoolMembershipReservation**](ResourcepoolApi.md#UpdateResourcepoolMembershipReservation) | **Post** /api/v1/resourcepool/MembershipReservations/{Moid} | Update a &#39;resourcepool.MembershipReservation&#39; resource.
 [**UpdateResourcepoolPool**](ResourcepoolApi.md#UpdateResourcepoolPool) | **Post** /api/v1/resourcepool/Pools/{Moid} | Update a &#39;resourcepool.Pool&#39; resource.
 [**UpdateResourcepoolQualificationPolicy**](ResourcepoolApi.md#UpdateResourcepoolQualificationPolicy) | **Post** /api/v1/resourcepool/QualificationPolicies/{Moid} | Update a &#39;resourcepool.QualificationPolicy&#39; resource.
 
-
-
-## CreateResourcepoolChassisQualificationPolicy
-
-> ResourcepoolChassisQualificationPolicy CreateResourcepoolChassisQualificationPolicy(ctx).ResourcepoolChassisQualificationPolicy(resourcepoolChassisQualificationPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'resourcepool.ChassisQualificationPolicy' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	resourcepoolChassisQualificationPolicy := *openapiclient.NewResourcepoolChassisQualificationPolicy("ClassId_example", "ObjectType_example") // ResourcepoolChassisQualificationPolicy | The 'resourcepool.ChassisQualificationPolicy' resource to create.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcepoolApi.CreateResourcepoolChassisQualificationPolicy(context.Background()).ResourcepoolChassisQualificationPolicy(resourcepoolChassisQualificationPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ResourcepoolApi.CreateResourcepoolChassisQualificationPolicy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateResourcepoolChassisQualificationPolicy`: ResourcepoolChassisQualificationPolicy
-	fmt.Fprintf(os.Stdout, "Response from `ResourcepoolApi.CreateResourcepoolChassisQualificationPolicy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateResourcepoolChassisQualificationPolicyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **resourcepoolChassisQualificationPolicy** | [**ResourcepoolChassisQualificationPolicy**](ResourcepoolChassisQualificationPolicy.md) | The &#39;resourcepool.ChassisQualificationPolicy&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**ResourcepoolChassisQualificationPolicy**](ResourcepoolChassisQualificationPolicy.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateResourcepoolPool
@@ -1789,78 +1718,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchResourcepoolChassisQualificationPolicy
-
-> ResourcepoolChassisQualificationPolicy PatchResourcepoolChassisQualificationPolicy(ctx, moid).ResourcepoolChassisQualificationPolicy(resourcepoolChassisQualificationPolicy).IfMatch(ifMatch).Execute()
-
-Update a 'resourcepool.ChassisQualificationPolicy' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	resourcepoolChassisQualificationPolicy := *openapiclient.NewResourcepoolChassisQualificationPolicy("ClassId_example", "ObjectType_example") // ResourcepoolChassisQualificationPolicy | The 'resourcepool.ChassisQualificationPolicy' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcepoolApi.PatchResourcepoolChassisQualificationPolicy(context.Background(), moid).ResourcepoolChassisQualificationPolicy(resourcepoolChassisQualificationPolicy).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ResourcepoolApi.PatchResourcepoolChassisQualificationPolicy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PatchResourcepoolChassisQualificationPolicy`: ResourcepoolChassisQualificationPolicy
-	fmt.Fprintf(os.Stdout, "Response from `ResourcepoolApi.PatchResourcepoolChassisQualificationPolicy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchResourcepoolChassisQualificationPolicyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **resourcepoolChassisQualificationPolicy** | [**ResourcepoolChassisQualificationPolicy**](ResourcepoolChassisQualificationPolicy.md) | The &#39;resourcepool.ChassisQualificationPolicy&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**ResourcepoolChassisQualificationPolicy**](ResourcepoolChassisQualificationPolicy.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchResourcepoolMembershipReservation
 
 > ResourcepoolMembershipReservation PatchResourcepoolMembershipReservation(ctx, moid).ResourcepoolMembershipReservation(resourcepoolMembershipReservation).IfMatch(ifMatch).Execute()
@@ -2062,78 +1919,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ResourcepoolQualificationPolicy**](ResourcepoolQualificationPolicy.md)
-
-### Authorization
-
-[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateResourcepoolChassisQualificationPolicy
-
-> ResourcepoolChassisQualificationPolicy UpdateResourcepoolChassisQualificationPolicy(ctx, moid).ResourcepoolChassisQualificationPolicy(resourcepoolChassisQualificationPolicy).IfMatch(ifMatch).Execute()
-
-Update a 'resourcepool.ChassisQualificationPolicy' resource.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/CiscoDevNet/intersight-go"
-)
-
-func main() {
-	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-	resourcepoolChassisQualificationPolicy := *openapiclient.NewResourcepoolChassisQualificationPolicy("ClassId_example", "ObjectType_example") // ResourcepoolChassisQualificationPolicy | The 'resourcepool.ChassisQualificationPolicy' resource to update.
-	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ResourcepoolApi.UpdateResourcepoolChassisQualificationPolicy(context.Background(), moid).ResourcepoolChassisQualificationPolicy(resourcepoolChassisQualificationPolicy).IfMatch(ifMatch).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ResourcepoolApi.UpdateResourcepoolChassisQualificationPolicy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateResourcepoolChassisQualificationPolicy`: ResourcepoolChassisQualificationPolicy
-	fmt.Fprintf(os.Stdout, "Response from `ResourcepoolApi.UpdateResourcepoolChassisQualificationPolicy`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateResourcepoolChassisQualificationPolicyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **resourcepoolChassisQualificationPolicy** | [**ResourcepoolChassisQualificationPolicy**](ResourcepoolChassisQualificationPolicy.md) | The &#39;resourcepool.ChassisQualificationPolicy&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**ResourcepoolChassisQualificationPolicy**](ResourcepoolChassisQualificationPolicy.md)
 
 ### Authorization
 

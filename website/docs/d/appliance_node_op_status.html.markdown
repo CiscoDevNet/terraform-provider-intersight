@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_node_op_status"
 description: |-
-        Status of an Intersight Appliance node.
+        The NodeOpStatus object captures the status of individual nodes within the Intersight Appliance. It is essential for understanding node-specific operational metrics and performance indicators.
+        #### Purpose
+        NodeOpStatus focuses on node-level health and readiness, providing detailed metrics such as CPU and memory usage, file system status, and network connectivity within a cluster.
+        #### Key Concepts
+        - **Node Health:** Assesses individual nodes' operational status, incorporating checks that reflect Critical, Warning, or Operational states.
+        - **Resource Monitoring:** Reports on CPU and memory usage to optimize node performance and readiness for hosting applications.
+        - **Cluster Connectivity:** Evaluates network status among nodes, ensuring effective communication and data exchange.
 
 ---
 
 # Data Source: intersight_appliance_node_op_status
-Status of an Intersight Appliance node.
+The NodeOpStatus object captures the status of individual nodes within the Intersight Appliance. It is essential for understanding node-specific operational metrics and performance indicators.
+#### Purpose
+NodeOpStatus focuses on node-level health and readiness, providing detailed metrics such as CPU and memory usage, file system status, and network connectivity within a cluster.
+#### Key Concepts
+- **Node Health:** Assesses individual nodes' operational status, incorporating checks that reflect Critical, Warning, or Operational states.
+- **Resource Monitoring:** Reports on CPU and memory usage to optimize node performance and readiness for hosting applications.
+- **Cluster Connectivity:** Evaluates network status among nodes, ensuring effective communication and data exchange.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

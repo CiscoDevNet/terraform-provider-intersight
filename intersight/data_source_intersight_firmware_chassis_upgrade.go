@@ -95,6 +95,11 @@ func getFirmwareChassisUpgradeSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"chassis_name": {
+			Description: "Name of the chassis on which the firmware upgrade operation is performed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -1037,6 +1042,11 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("chassis_name"); ok {
+		x := (v.(string))
+		o.SetChassisName(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1920,6 +1930,7 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["chassis"] = flattenMapEquipmentChassisRelationship(s.GetChassis(), d)
+				temp["chassis_name"] = (s.GetChassisName())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

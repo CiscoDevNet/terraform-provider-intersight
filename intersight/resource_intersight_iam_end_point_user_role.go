@@ -36,6 +36,44 @@ func resourceIamEndPointUserRole() *schema.Resource {
 					}
 					return
 				}},
+			"account_type_user_defined": {
+				Description: "Allows to choose custom account types for the endpoint user.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
+			"account_types": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"name": {
+							Description: "Name of the Account type such as Local or IPMI, that identifies the kind of user account.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+			},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -329,7 +367,7 @@ func resourceIamEndPointUserRole() *schema.Resource {
 			"password": {
 				Description:  "The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User's Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9!@#$%^&\\*+-_=]+$"), ""), validation.StringLenBetween(8, 127)),
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9!@#$%^&\\*+-_=]+$"), ""), validation.StringLenBetween(8, 127)),
 				Optional:     true,
 			},
 			"permission_resources": {
@@ -681,6 +719,47 @@ func resourceIamEndPointUserRoleCreate(c context.Context, d *schema.ResourceData
 	var de diag.Diagnostics
 	var o = models.NewIamEndPointUserRoleWithDefaults()
 
+	if v, ok := d.GetOkExists("account_type_user_defined"); ok {
+		x := (v.(bool))
+		o.SetAccountTypeUserDefined(x)
+	}
+
+	if v, ok := d.GetOk("account_types"); ok {
+		x := make([]models.IamAccountTypeBase, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewIamAccountTypeBaseWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.AccountTypeBase")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetAccountTypes(x)
+		}
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -965,6 +1044,14 @@ func resourceIamEndPointUserRoleRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property AccountMoid in IamEndPointUserRole object: %s", err.Error())
 	}
 
+	if err := d.Set("account_type_user_defined", (s.GetAccountTypeUserDefined())); err != nil {
+		return diag.Errorf("error occurred while setting property AccountTypeUserDefined in IamEndPointUserRole object: %s", err.Error())
+	}
+
+	if err := d.Set("account_types", flattenListIamAccountTypeBase(s.GetAccountTypes(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AccountTypes in IamEndPointUserRole object: %s", err.Error())
+	}
+
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in IamEndPointUserRole object: %s", err.Error())
 	}
@@ -1055,6 +1142,47 @@ func resourceIamEndPointUserRoleUpdate(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamEndPointUserRole{}
+
+	if d.HasChange("account_type_user_defined") {
+		v := d.Get("account_type_user_defined")
+		x := (v.(bool))
+		o.SetAccountTypeUserDefined(x)
+	}
+
+	if d.HasChange("account_types") {
+		v := d.Get("account_types")
+		x := make([]models.IamAccountTypeBase, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.IamAccountTypeBase{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.AccountTypeBase")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetAccountTypes(x)
+	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")

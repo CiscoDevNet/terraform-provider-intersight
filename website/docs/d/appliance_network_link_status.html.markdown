@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_network_link_status"
 description: |-
-        Link between two nodes of an Intersight Appliance cluster.
+        The NetworkLinkStatus object examines the network connection between nodes in an Intersight Appliance cluster. It is vital for ensuring seamless communication and data transfer.
+        #### Purpose
+        NetworkLinkStatus provides insights into the connectivity and network performance between cluster nodes, facilitating efficient data flow and system integration.
+        #### Key Concepts
+        - **Link Health:** Assesses the network link status, reporting on connectivity and ping times between nodes.
+        - **Communication Efficiency:** Ensures robust and efficient data exchange, crucial for maintaining overall system functionality.
+        - **System Integration:** Integrates network link status within broader system monitoring to ensure comprehensive oversight.
 
 ---
 
 # Data Source: intersight_appliance_network_link_status
-Link between two nodes of an Intersight Appliance cluster.
+The NetworkLinkStatus object examines the network connection between nodes in an Intersight Appliance cluster. It is vital for ensuring seamless communication and data transfer.
+#### Purpose
+NetworkLinkStatus provides insights into the connectivity and network performance between cluster nodes, facilitating efficient data flow and system integration.
+#### Key Concepts
+- **Link Health:** Assesses the network link status, reporting on connectivity and ping times between nodes.
+- **Communication Efficiency:** Ensures robust and efficient data exchange, crucial for maintaining overall system functionality.
+- **System Integration:** Integrates network link status within broader system monitoring to ensure comprehensive oversight.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -133,6 +133,18 @@ func resourceFirmwareChassisUpgrade() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"chassis_name": {
+				Description: "Name of the chassis on which the firmware upgrade operation is performed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -1978,6 +1990,10 @@ func resourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceDat
 
 	if err := d.Set("chassis", flattenMapEquipmentChassisRelationship(s.GetChassis(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Chassis in FirmwareChassisUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("chassis_name", (s.GetChassisName())); err != nil {
+		return diag.Errorf("error occurred while setting property ChassisName in FirmwareChassisUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
