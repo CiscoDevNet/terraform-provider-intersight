@@ -27,6 +27,5 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `role`:(string) The current role of the PCIe switch port.* `Unconfigured` - Indicates that the PCIe switch port role is currently unconfigured.* `Downstream` - Indicates that the PCIe switch port role is currently downstream. A downstream port connects to a PCIe peripheral device such as a GPU or a network adapter.* `Upstream` - Indicates that the PCIe switch port role is currently upstream. An upstream port connects to a PCIe root complex such as a CPU.* `Unknown` - Indicates that the PCIe switch port role is currently unknown. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `uri`:(string) The unique identifier of the PCIe switch port as reported by chassis expander module management controller. 
 * `width`:(int) The link width of the PCIe switch port. 
  

@@ -8,6 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchProfile"]
 **ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](PolicyConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
+**OverriddenList** | Pointer to **[]string** |  | [optional] 
+**TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
+**TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
+**TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
 **AssignedSwitch** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **AssociatedSwitch** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]FabricConfigChangeDetailRelationship**](FabricConfigChangeDetailRelationship.md) | An array of relationships to fabricConfigChangeDetail resources. | [optional] [readonly] 
@@ -143,6 +147,136 @@ HasConfigChanges returns a boolean if a field has been set.
 `func (o *FabricSwitchProfile) UnsetConfigChanges()`
 
 UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
+### GetOverriddenList
+
+`func (o *FabricSwitchProfile) GetOverriddenList() []string`
+
+GetOverriddenList returns the OverriddenList field if non-nil, zero value otherwise.
+
+### GetOverriddenListOk
+
+`func (o *FabricSwitchProfile) GetOverriddenListOk() (*[]string, bool)`
+
+GetOverriddenListOk returns a tuple with the OverriddenList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverriddenList
+
+`func (o *FabricSwitchProfile) SetOverriddenList(v []string)`
+
+SetOverriddenList sets OverriddenList field to given value.
+
+### HasOverriddenList
+
+`func (o *FabricSwitchProfile) HasOverriddenList() bool`
+
+HasOverriddenList returns a boolean if a field has been set.
+
+### SetOverriddenListNil
+
+`func (o *FabricSwitchProfile) SetOverriddenListNil(b bool)`
+
+ SetOverriddenListNil sets the value for OverriddenList to be an explicit nil
+
+### UnsetOverriddenList
+`func (o *FabricSwitchProfile) UnsetOverriddenList()`
+
+UnsetOverriddenList ensures that no value is present for OverriddenList, not even an explicit nil
+### GetTemplateActions
+
+`func (o *FabricSwitchProfile) GetTemplateActions() []MotemplateActionEntry`
+
+GetTemplateActions returns the TemplateActions field if non-nil, zero value otherwise.
+
+### GetTemplateActionsOk
+
+`func (o *FabricSwitchProfile) GetTemplateActionsOk() (*[]MotemplateActionEntry, bool)`
+
+GetTemplateActionsOk returns a tuple with the TemplateActions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateActions
+
+`func (o *FabricSwitchProfile) SetTemplateActions(v []MotemplateActionEntry)`
+
+SetTemplateActions sets TemplateActions field to given value.
+
+### HasTemplateActions
+
+`func (o *FabricSwitchProfile) HasTemplateActions() bool`
+
+HasTemplateActions returns a boolean if a field has been set.
+
+### SetTemplateActionsNil
+
+`func (o *FabricSwitchProfile) SetTemplateActionsNil(b bool)`
+
+ SetTemplateActionsNil sets the value for TemplateActions to be an explicit nil
+
+### UnsetTemplateActions
+`func (o *FabricSwitchProfile) UnsetTemplateActions()`
+
+UnsetTemplateActions ensures that no value is present for TemplateActions, not even an explicit nil
+### GetTemplateSyncErrors
+
+`func (o *FabricSwitchProfile) GetTemplateSyncErrors() []MotemplateSyncError`
+
+GetTemplateSyncErrors returns the TemplateSyncErrors field if non-nil, zero value otherwise.
+
+### GetTemplateSyncErrorsOk
+
+`func (o *FabricSwitchProfile) GetTemplateSyncErrorsOk() (*[]MotemplateSyncError, bool)`
+
+GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncErrors
+
+`func (o *FabricSwitchProfile) SetTemplateSyncErrors(v []MotemplateSyncError)`
+
+SetTemplateSyncErrors sets TemplateSyncErrors field to given value.
+
+### HasTemplateSyncErrors
+
+`func (o *FabricSwitchProfile) HasTemplateSyncErrors() bool`
+
+HasTemplateSyncErrors returns a boolean if a field has been set.
+
+### SetTemplateSyncErrorsNil
+
+`func (o *FabricSwitchProfile) SetTemplateSyncErrorsNil(b bool)`
+
+ SetTemplateSyncErrorsNil sets the value for TemplateSyncErrors to be an explicit nil
+
+### UnsetTemplateSyncErrors
+`func (o *FabricSwitchProfile) UnsetTemplateSyncErrors()`
+
+UnsetTemplateSyncErrors ensures that no value is present for TemplateSyncErrors, not even an explicit nil
+### GetTemplateSyncStatus
+
+`func (o *FabricSwitchProfile) GetTemplateSyncStatus() string`
+
+GetTemplateSyncStatus returns the TemplateSyncStatus field if non-nil, zero value otherwise.
+
+### GetTemplateSyncStatusOk
+
+`func (o *FabricSwitchProfile) GetTemplateSyncStatusOk() (*string, bool)`
+
+GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSyncStatus
+
+`func (o *FabricSwitchProfile) SetTemplateSyncStatus(v string)`
+
+SetTemplateSyncStatus sets TemplateSyncStatus field to given value.
+
+### HasTemplateSyncStatus
+
+`func (o *FabricSwitchProfile) HasTemplateSyncStatus() bool`
+
+HasTemplateSyncStatus returns a boolean if a field has been set.
+
 ### GetAssignedSwitch
 
 `func (o *FabricSwitchProfile) GetAssignedSwitch() NetworkElementRelationship`

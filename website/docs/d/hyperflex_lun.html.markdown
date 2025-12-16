@@ -3,16 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_lun"
 description: |-
-        A HyperFlex iSCSI logical unit number (LUN) entity.
-        Contains detailed information about the iSCSI LUN which includes the identity and capacity information, and the
-        iSCSI target to which it is associated.
+        ### Overview
+        The Lun object represents a logical unit number within the HyperFlex iSCSI storage system. This provides a structured interface for managing LUN operations, supporting effective storage resource allocation and utilization.
+        #### Purpose
+        A Lun serves as an integral component within the HyperFlex storage framework, enabling efficient management of storage capacity and access within the iSCSI environment.
+        #### Key Concepts
+        - **Capacity Management: Defines total and used capacity, supporting dynamic storage allocation and utilization.
+        - **Identity Tracking: Utilizes unique identifiers to maintain LUN integrity and configuration.
+        - **Cluster Association: Ensures each LUN is associated with a specific HyperFlex Cluster, supporting structured and organized storage management.
 
 ---
 
 # Data Source: intersight_hyperflex_lun
-A HyperFlex iSCSI logical unit number (LUN) entity.
-Contains detailed information about the iSCSI LUN which includes the identity and capacity information, and the
-iSCSI target to which it is associated.
+### Overview
+The Lun object represents a logical unit number within the HyperFlex iSCSI storage system. This provides a structured interface for managing LUN operations, supporting effective storage resource allocation and utilization.
+#### Purpose
+A Lun serves as an integral component within the HyperFlex storage framework, enabling efficient management of storage capacity and access within the iSCSI environment.
+#### Key Concepts
+- **Capacity Management: Defines total and used capacity, supporting dynamic storage allocation and utilization.
+- **Identity Tracking: Utilizes unique identifiers to maintain LUN integrity and configuration.
+- **Cluster Association: Ensures each LUN is associated with a specific HyperFlex Cluster, supporting structured and organized storage management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

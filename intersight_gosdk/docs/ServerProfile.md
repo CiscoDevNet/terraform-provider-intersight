@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **LocationDetails** | Pointer to [**NullableCommGeoLocationDetails**](CommGeoLocationDetails.md) |  | [optional] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
+**PostDeployAction** | Pointer to **[]string** |  | [optional] 
 **ReservationReferences** | Pointer to [**[]PoolReservationReference**](PoolReservationReference.md) |  | [optional] 
 **ServerAssignmentMode** | Pointer to **string** | Source of the server assigned to the Server Profile. Values can be Static, Pool or None. Static is used if a server is attached directly to a Server Profile. Pool is used if a resource pool is attached to a Server Profile. None is used if no server or resource pool is attached to a Server Profile. Slot or Serial pre-assignment is also considered to be None as it is different form of Assign Later. * &#x60;None&#x60; - No server is assigned to the server profile. * &#x60;Static&#x60; - Server is directly assigned to server profile using assign server. * &#x60;Pool&#x60; - Server is assigned from a resource pool. | [optional] [default to "None"]
 **ServerPreAssignBySerial** | Pointer to **string** | Serial number of the server that would be assigned to this pre-assigned Server Profile. It can be any string that adheres to the following constraints: It should start and end with an alphanumeric character. It cannot be more than 20 characters. | [optional] 
@@ -370,6 +371,41 @@ SetPmcDeployedSecurePassphrase sets PmcDeployedSecurePassphrase field to given v
 
 HasPmcDeployedSecurePassphrase returns a boolean if a field has been set.
 
+### GetPostDeployAction
+
+`func (o *ServerProfile) GetPostDeployAction() []string`
+
+GetPostDeployAction returns the PostDeployAction field if non-nil, zero value otherwise.
+
+### GetPostDeployActionOk
+
+`func (o *ServerProfile) GetPostDeployActionOk() (*[]string, bool)`
+
+GetPostDeployActionOk returns a tuple with the PostDeployAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPostDeployAction
+
+`func (o *ServerProfile) SetPostDeployAction(v []string)`
+
+SetPostDeployAction sets PostDeployAction field to given value.
+
+### HasPostDeployAction
+
+`func (o *ServerProfile) HasPostDeployAction() bool`
+
+HasPostDeployAction returns a boolean if a field has been set.
+
+### SetPostDeployActionNil
+
+`func (o *ServerProfile) SetPostDeployActionNil(b bool)`
+
+ SetPostDeployActionNil sets the value for PostDeployAction to be an explicit nil
+
+### UnsetPostDeployAction
+`func (o *ServerProfile) UnsetPostDeployAction()`
+
+UnsetPostDeployAction ensures that no value is present for PostDeployAction, not even an explicit nil
 ### GetReservationReferences
 
 `func (o *ServerProfile) GetReservationReferences() []PoolReservationReference`

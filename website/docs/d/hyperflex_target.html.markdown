@@ -3,16 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_target"
 description: |-
-        A HyperFlex iSCSI target entity.
-        Contains detailed information about the iSCSI target which includes a list of linked iSCSI initiator group objects,
-        list of iSCSI lun objects associated with the iSCSI target, authorization method and iSCSI qualified name.
+        ### Overview
+        The Target object represents an iSCSI target within the HyperFlex storage system, designed to handle interactions with initiator groups and LUNs. This provides a comprehensive interface for managing iSCSI target operations, supporting effective storage network configuration.
+        #### Purpose
+        A Target serves as a key entity within the iSCSI storage framework, facilitating communication and interaction between initiators and logical storage units.
+        #### Key Concepts
+        - **Identity Management:** - Utilizes unique identifiers to maintain target integrity and configuration.
+        - **Authorization Control:** - Manages authorization methods, ensuring secure and controlled access to storage resources.
+        - **Cluster Integration:** - Linked with the HyperFlex Cluster, supporting efficient and coordinated iSCSI network operations.
 
 ---
 
 # Data Source: intersight_hyperflex_target
-A HyperFlex iSCSI target entity.
-Contains detailed information about the iSCSI target which includes a list of linked iSCSI initiator group objects,
-list of iSCSI lun objects associated with the iSCSI target, authorization method and iSCSI qualified name.
+### Overview
+The Target object represents an iSCSI target within the HyperFlex storage system, designed to handle interactions with initiator groups and LUNs. This provides a comprehensive interface for managing iSCSI target operations, supporting effective storage network configuration.
+#### Purpose
+A Target serves as a key entity within the iSCSI storage framework, facilitating communication and interaction between initiators and logical storage units.
+#### Key Concepts
+- **Identity Management:** - Utilizes unique identifiers to maintain target integrity and configuration.
+- **Authorization Control:** - Manages authorization methods, ensuring secure and controlled access to storage resources.
+- **Cluster Integration:** - Linked with the HyperFlex Cluster, supporting efficient and coordinated iSCSI network operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

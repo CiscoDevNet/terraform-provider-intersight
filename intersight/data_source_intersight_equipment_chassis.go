@@ -690,6 +690,39 @@ func getEquipmentChassisSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"operations": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"config_state": {
+						Description: "The configured state of the settings in the target chassis. The value is any one of Applied, Applying or Failed. Applied - The state denotes that the settings are applied successfully in the target chassis. Applying - The state denotes that the settings are being applied in the target chassis. Failed - The state denotes that the settings could not be applied in the target chassis.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "The workflow type of the chassis operation workflow. This can be used to distinguish different chassis operations.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -2056,6 +2089,34 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 		o.SetOperState(x)
 	}
 
+	if v, ok := d.GetOk("operations"); ok {
+		x := make([]models.EquipmentChassisOperationsDetails, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.EquipmentChassisOperationsDetails{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("equipment.ChassisOperationsDetails")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetOperations(x)
+	}
+
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -2867,6 +2928,8 @@ func dataSourceEquipmentChassisRead(c context.Context, d *schema.ResourceData, m
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
+
+				temp["operations"] = flattenListEquipmentChassisOperationsDetails(s.GetOperations(), d)
 				temp["owners"] = (s.GetOwners())
 				temp["package_version"] = (s.GetPackageVersion())
 

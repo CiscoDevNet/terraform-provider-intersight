@@ -633,6 +633,11 @@ func getFirmwareSwitchUpgradeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"switch_name": {
+			Description: "Name of the Fabric Interconnect on which the firmware upgrade operation is performed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1653,6 +1658,11 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 		o.SetStatus(x)
 	}
 
+	if v, ok := d.GetOk("switch_name"); ok {
+		x := (v.(string))
+		o.SetSwitchName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1972,6 +1982,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 				temp["skip_estimate_impact"] = (s.GetSkipEstimateImpact())
 				temp["skip_wait_for_io_path_connectivity"] = (s.GetSkipWaitForIoPathConnectivity())
 				temp["status"] = (s.GetStatus())
+				temp["switch_name"] = (s.GetSwitchName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

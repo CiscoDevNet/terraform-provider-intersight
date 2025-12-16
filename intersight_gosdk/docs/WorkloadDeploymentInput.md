@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workload.DeploymentInput"]
 **GenNumber** | Pointer to **int64** | A sequential number that increments whenever the input changes. | [optional] [readonly] 
 **Input** | Pointer to [**[]WorkloadDeploymentBlueprintInputType**](WorkloadDeploymentBlueprintInputType.md) |  | [optional] 
+**ObjectGenerationFailed** | Pointer to **bool** | The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state. | [optional] [readonly] 
 **WorkloadDeployment** | Pointer to [**NullableWorkloadWorkloadDeploymentRelationship**](WorkloadWorkloadDeploymentRelationship.md) |  | [optional] 
 
 ## Methods
@@ -129,6 +130,31 @@ HasInput returns a boolean if a field has been set.
 `func (o *WorkloadDeploymentInput) UnsetInput()`
 
 UnsetInput ensures that no value is present for Input, not even an explicit nil
+### GetObjectGenerationFailed
+
+`func (o *WorkloadDeploymentInput) GetObjectGenerationFailed() bool`
+
+GetObjectGenerationFailed returns the ObjectGenerationFailed field if non-nil, zero value otherwise.
+
+### GetObjectGenerationFailedOk
+
+`func (o *WorkloadDeploymentInput) GetObjectGenerationFailedOk() (*bool, bool)`
+
+GetObjectGenerationFailedOk returns a tuple with the ObjectGenerationFailed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectGenerationFailed
+
+`func (o *WorkloadDeploymentInput) SetObjectGenerationFailed(v bool)`
+
+SetObjectGenerationFailed sets ObjectGenerationFailed field to given value.
+
+### HasObjectGenerationFailed
+
+`func (o *WorkloadDeploymentInput) HasObjectGenerationFailed() bool`
+
+HasObjectGenerationFailed returns a boolean if a field has been set.
+
 ### GetWorkloadDeployment
 
 `func (o *WorkloadDeploymentInput) GetWorkloadDeployment() WorkloadWorkloadDeploymentRelationship`

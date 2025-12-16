@@ -55,6 +55,7 @@ Name | Type | Description | Notes
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the switch. | [optional] 
 **Version** | Pointer to **string** | Firmware version of the switch. | [optional] 
+**AssignedLocation** | Pointer to [**NullableAssetGeoLocationRelationship**](AssetGeoLocationRelationship.md) |  | [optional] 
 **Cards** | Pointer to [**[]EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) | An array of relationships to equipmentSwitchCard resources. | [optional] [readonly] 
 **CdpNeighbor** | Pointer to [**[]NetworkDiscoveredNeighborRelationship**](NetworkDiscoveredNeighborRelationship.md) | An array of relationships to networkDiscoveredNeighbor resources. | [optional] [readonly] 
 **ChassisController** | Pointer to [**NullableEquipmentChassisControllerRelationship**](EquipmentChassisControllerRelationship.md) |  | [optional] 
@@ -1395,6 +1396,41 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### GetAssignedLocation
+
+`func (o *NetworkElement) GetAssignedLocation() AssetGeoLocationRelationship`
+
+GetAssignedLocation returns the AssignedLocation field if non-nil, zero value otherwise.
+
+### GetAssignedLocationOk
+
+`func (o *NetworkElement) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool)`
+
+GetAssignedLocationOk returns a tuple with the AssignedLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedLocation
+
+`func (o *NetworkElement) SetAssignedLocation(v AssetGeoLocationRelationship)`
+
+SetAssignedLocation sets AssignedLocation field to given value.
+
+### HasAssignedLocation
+
+`func (o *NetworkElement) HasAssignedLocation() bool`
+
+HasAssignedLocation returns a boolean if a field has been set.
+
+### SetAssignedLocationNil
+
+`func (o *NetworkElement) SetAssignedLocationNil(b bool)`
+
+ SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+
+### UnsetAssignedLocation
+`func (o *NetworkElement) UnsetAssignedLocation()`
+
+UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
 ### GetCards
 
 `func (o *NetworkElement) GetCards() []EquipmentSwitchCardRelationship`

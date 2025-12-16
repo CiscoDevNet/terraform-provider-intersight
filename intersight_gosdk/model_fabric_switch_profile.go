@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -27,11 +27,16 @@ type FabricSwitchProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType          string                             `json:"ObjectType"`
-	ConfigChangeContext NullablePolicyConfigChangeContext  `json:"ConfigChangeContext,omitempty"`
-	ConfigChanges       NullablePolicyConfigChange         `json:"ConfigChanges,omitempty"`
-	AssignedSwitch      NullableNetworkElementRelationship `json:"AssignedSwitch,omitempty"`
-	AssociatedSwitch    NullableNetworkElementRelationship `json:"AssociatedSwitch,omitempty"`
+	ObjectType          string                            `json:"ObjectType"`
+	ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
+	ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+	OverriddenList      []string                          `json:"OverriddenList,omitempty"`
+	TemplateActions     []MotemplateActionEntry           `json:"TemplateActions,omitempty"`
+	TemplateSyncErrors  []MotemplateSyncError             `json:"TemplateSyncErrors,omitempty"`
+	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+	TemplateSyncStatus *string                            `json:"TemplateSyncStatus,omitempty"`
+	AssignedSwitch     NullableNetworkElementRelationship `json:"AssignedSwitch,omitempty"`
+	AssociatedSwitch   NullableNetworkElementRelationship `json:"AssociatedSwitch,omitempty"`
 	// An array of relationships to fabricConfigChangeDetail resources.
 	ConfigChangeDetails []FabricConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
 	// An array of relationships to workflowWorkflowInfo resources.
@@ -215,6 +220,137 @@ func (o *FabricSwitchProfile) SetConfigChangesNil() {
 // UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
 func (o *FabricSwitchProfile) UnsetConfigChanges() {
 	o.ConfigChanges.Unset()
+}
+
+// GetOverriddenList returns the OverriddenList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchProfile) GetOverriddenList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.OverriddenList
+}
+
+// GetOverriddenListOk returns a tuple with the OverriddenList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchProfile) GetOverriddenListOk() ([]string, bool) {
+	if o == nil || IsNil(o.OverriddenList) {
+		return nil, false
+	}
+	return o.OverriddenList, true
+}
+
+// HasOverriddenList returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasOverriddenList() bool {
+	if o != nil && !IsNil(o.OverriddenList) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverriddenList gets a reference to the given []string and assigns it to the OverriddenList field.
+func (o *FabricSwitchProfile) SetOverriddenList(v []string) {
+	o.OverriddenList = v
+}
+
+// GetTemplateActions returns the TemplateActions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchProfile) GetTemplateActions() []MotemplateActionEntry {
+	if o == nil {
+		var ret []MotemplateActionEntry
+		return ret
+	}
+	return o.TemplateActions
+}
+
+// GetTemplateActionsOk returns a tuple with the TemplateActions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchProfile) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
+	if o == nil || IsNil(o.TemplateActions) {
+		return nil, false
+	}
+	return o.TemplateActions, true
+}
+
+// HasTemplateActions returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasTemplateActions() bool {
+	if o != nil && !IsNil(o.TemplateActions) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateActions gets a reference to the given []MotemplateActionEntry and assigns it to the TemplateActions field.
+func (o *FabricSwitchProfile) SetTemplateActions(v []MotemplateActionEntry) {
+	o.TemplateActions = v
+}
+
+// GetTemplateSyncErrors returns the TemplateSyncErrors field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FabricSwitchProfile) GetTemplateSyncErrors() []MotemplateSyncError {
+	if o == nil {
+		var ret []MotemplateSyncError
+		return ret
+	}
+	return o.TemplateSyncErrors
+}
+
+// GetTemplateSyncErrorsOk returns a tuple with the TemplateSyncErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FabricSwitchProfile) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, bool) {
+	if o == nil || IsNil(o.TemplateSyncErrors) {
+		return nil, false
+	}
+	return o.TemplateSyncErrors, true
+}
+
+// HasTemplateSyncErrors returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasTemplateSyncErrors() bool {
+	if o != nil && !IsNil(o.TemplateSyncErrors) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncErrors gets a reference to the given []MotemplateSyncError and assigns it to the TemplateSyncErrors field.
+func (o *FabricSwitchProfile) SetTemplateSyncErrors(v []MotemplateSyncError) {
+	o.TemplateSyncErrors = v
+}
+
+// GetTemplateSyncStatus returns the TemplateSyncStatus field value if set, zero value otherwise.
+func (o *FabricSwitchProfile) GetTemplateSyncStatus() string {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
+		var ret string
+		return ret
+	}
+	return *o.TemplateSyncStatus
+}
+
+// GetTemplateSyncStatusOk returns a tuple with the TemplateSyncStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricSwitchProfile) GetTemplateSyncStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.TemplateSyncStatus) {
+		return nil, false
+	}
+	return o.TemplateSyncStatus, true
+}
+
+// HasTemplateSyncStatus returns a boolean if a field has been set.
+func (o *FabricSwitchProfile) HasTemplateSyncStatus() bool {
+	if o != nil && !IsNil(o.TemplateSyncStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSyncStatus gets a reference to the given string and assigns it to the TemplateSyncStatus field.
+func (o *FabricSwitchProfile) SetTemplateSyncStatus(v string) {
+	o.TemplateSyncStatus = &v
 }
 
 // GetAssignedSwitch returns the AssignedSwitch field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -444,6 +580,18 @@ func (o FabricSwitchProfile) ToMap() (map[string]interface{}, error) {
 	if o.ConfigChanges.IsSet() {
 		toSerialize["ConfigChanges"] = o.ConfigChanges.Get()
 	}
+	if o.OverriddenList != nil {
+		toSerialize["OverriddenList"] = o.OverriddenList
+	}
+	if o.TemplateActions != nil {
+		toSerialize["TemplateActions"] = o.TemplateActions
+	}
+	if o.TemplateSyncErrors != nil {
+		toSerialize["TemplateSyncErrors"] = o.TemplateSyncErrors
+	}
+	if !IsNil(o.TemplateSyncStatus) {
+		toSerialize["TemplateSyncStatus"] = o.TemplateSyncStatus
+	}
 	if o.AssignedSwitch.IsSet() {
 		toSerialize["AssignedSwitch"] = o.AssignedSwitch.Get()
 	}
@@ -513,11 +661,16 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType          string                             `json:"ObjectType"`
-		ConfigChangeContext NullablePolicyConfigChangeContext  `json:"ConfigChangeContext,omitempty"`
-		ConfigChanges       NullablePolicyConfigChange         `json:"ConfigChanges,omitempty"`
-		AssignedSwitch      NullableNetworkElementRelationship `json:"AssignedSwitch,omitempty"`
-		AssociatedSwitch    NullableNetworkElementRelationship `json:"AssociatedSwitch,omitempty"`
+		ObjectType          string                            `json:"ObjectType"`
+		ConfigChangeContext NullablePolicyConfigChangeContext `json:"ConfigChangeContext,omitempty"`
+		ConfigChanges       NullablePolicyConfigChange        `json:"ConfigChanges,omitempty"`
+		OverriddenList      []string                          `json:"OverriddenList,omitempty"`
+		TemplateActions     []MotemplateActionEntry           `json:"TemplateActions,omitempty"`
+		TemplateSyncErrors  []MotemplateSyncError             `json:"TemplateSyncErrors,omitempty"`
+		// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
+		TemplateSyncStatus *string                            `json:"TemplateSyncStatus,omitempty"`
+		AssignedSwitch     NullableNetworkElementRelationship `json:"AssignedSwitch,omitempty"`
+		AssociatedSwitch   NullableNetworkElementRelationship `json:"AssociatedSwitch,omitempty"`
 		// An array of relationships to fabricConfigChangeDetail resources.
 		ConfigChangeDetails []FabricConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
 		// An array of relationships to workflowWorkflowInfo resources.
@@ -534,6 +687,10 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		varFabricSwitchProfile.ObjectType = varFabricSwitchProfileWithoutEmbeddedStruct.ObjectType
 		varFabricSwitchProfile.ConfigChangeContext = varFabricSwitchProfileWithoutEmbeddedStruct.ConfigChangeContext
 		varFabricSwitchProfile.ConfigChanges = varFabricSwitchProfileWithoutEmbeddedStruct.ConfigChanges
+		varFabricSwitchProfile.OverriddenList = varFabricSwitchProfileWithoutEmbeddedStruct.OverriddenList
+		varFabricSwitchProfile.TemplateActions = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateActions
+		varFabricSwitchProfile.TemplateSyncErrors = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateSyncErrors
+		varFabricSwitchProfile.TemplateSyncStatus = varFabricSwitchProfileWithoutEmbeddedStruct.TemplateSyncStatus
 		varFabricSwitchProfile.AssignedSwitch = varFabricSwitchProfileWithoutEmbeddedStruct.AssignedSwitch
 		varFabricSwitchProfile.AssociatedSwitch = varFabricSwitchProfileWithoutEmbeddedStruct.AssociatedSwitch
 		varFabricSwitchProfile.ConfigChangeDetails = varFabricSwitchProfileWithoutEmbeddedStruct.ConfigChangeDetails
@@ -560,6 +717,10 @@ func (o *FabricSwitchProfile) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigChangeContext")
 		delete(additionalProperties, "ConfigChanges")
+		delete(additionalProperties, "OverriddenList")
+		delete(additionalProperties, "TemplateActions")
+		delete(additionalProperties, "TemplateSyncErrors")
+		delete(additionalProperties, "TemplateSyncStatus")
 		delete(additionalProperties, "AssignedSwitch")
 		delete(additionalProperties, "AssociatedSwitch")
 		delete(additionalProperties, "ConfigChangeDetails")

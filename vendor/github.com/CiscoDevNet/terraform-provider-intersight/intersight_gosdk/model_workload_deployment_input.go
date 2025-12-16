@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the WorkloadDeploymentInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WorkloadDeploymentInput{}
 
-// WorkloadDeploymentInput Store all inputs needed for this deployment along with a unique instance identifier and a generation number to track changes over time. This will include the user provided inputs for the workload definition, merged into the overridden inputs for the workload deployment. The final set of user inputs will be populated into the configuration provided by the blueprints and managed objects representing the polices and profiles will be created which will be used for deployment.
+// WorkloadDeploymentInput ### Overview The DeploymentInput object captures a versioned snapshot of all input parameters and configuration values for a workload deployment at a specific point in time. It maintains a complete history of how deployment inputs have evolved, enabling traceability and potential rollback scenarios. #### Purpose DeploymentInput serves as an immutable historical record of deployment configuration states. Each time deployment inputs change, a new DeploymentInput object is created with an incremented generation number. This enables the system to track which workload instances were created with which input configurations and to understand the impact of input changes over time. #### Key Concepts - **Generation-Based Versioning:** - Each input change creates a new generation with an incremented sequence number, providing a complete audit trail of configuration changes. - **Input Composition:** - Combines user-provided inputs at both the workload definition and deployment levels, with deployment-level inputs overriding definition-level inputs where applicable. - **Blueprint Integration:** - Resolves all blueprint-specific inputs and merges them into a unified input structure that can be applied to workload instance creation. - **Object Generation State:** - Tracks whether managed objects (policies, profiles) were successfully generated from this input configuration, supporting rollback scenarios when object generation fails.
 type WorkloadDeploymentInput struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -29,10 +29,12 @@ type WorkloadDeploymentInput struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// A sequential number that increments whenever the input changes.
-	GenNumber            *int64                                         `json:"GenNumber,omitempty"`
-	Input                []WorkloadDeploymentBlueprintInputType         `json:"Input,omitempty"`
-	WorkloadDeployment   NullableWorkloadWorkloadDeploymentRelationship `json:"WorkloadDeployment,omitempty"`
-	AdditionalProperties map[string]interface{}
+	GenNumber *int64                                 `json:"GenNumber,omitempty"`
+	Input     []WorkloadDeploymentBlueprintInputType `json:"Input,omitempty"`
+	// The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state.
+	ObjectGenerationFailed *bool                                          `json:"ObjectGenerationFailed,omitempty"`
+	WorkloadDeployment     NullableWorkloadWorkloadDeploymentRelationship `json:"WorkloadDeployment,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _WorkloadDeploymentInput WorkloadDeploymentInput
@@ -183,6 +185,38 @@ func (o *WorkloadDeploymentInput) SetInput(v []WorkloadDeploymentBlueprintInputT
 	o.Input = v
 }
 
+// GetObjectGenerationFailed returns the ObjectGenerationFailed field value if set, zero value otherwise.
+func (o *WorkloadDeploymentInput) GetObjectGenerationFailed() bool {
+	if o == nil || IsNil(o.ObjectGenerationFailed) {
+		var ret bool
+		return ret
+	}
+	return *o.ObjectGenerationFailed
+}
+
+// GetObjectGenerationFailedOk returns a tuple with the ObjectGenerationFailed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkloadDeploymentInput) GetObjectGenerationFailedOk() (*bool, bool) {
+	if o == nil || IsNil(o.ObjectGenerationFailed) {
+		return nil, false
+	}
+	return o.ObjectGenerationFailed, true
+}
+
+// HasObjectGenerationFailed returns a boolean if a field has been set.
+func (o *WorkloadDeploymentInput) HasObjectGenerationFailed() bool {
+	if o != nil && !IsNil(o.ObjectGenerationFailed) {
+		return true
+	}
+
+	return false
+}
+
+// SetObjectGenerationFailed gets a reference to the given bool and assigns it to the ObjectGenerationFailed field.
+func (o *WorkloadDeploymentInput) SetObjectGenerationFailed(v bool) {
+	o.ObjectGenerationFailed = &v
+}
+
 // GetWorkloadDeployment returns the WorkloadDeployment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkloadDeploymentInput) GetWorkloadDeployment() WorkloadWorkloadDeploymentRelationship {
 	if o == nil || IsNil(o.WorkloadDeployment.Get()) {
@@ -258,6 +292,9 @@ func (o WorkloadDeploymentInput) ToMap() (map[string]interface{}, error) {
 	if o.Input != nil {
 		toSerialize["Input"] = o.Input
 	}
+	if !IsNil(o.ObjectGenerationFailed) {
+		toSerialize["ObjectGenerationFailed"] = o.ObjectGenerationFailed
+	}
 	if o.WorkloadDeployment.IsSet() {
 		toSerialize["WorkloadDeployment"] = o.WorkloadDeployment.Get()
 	}
@@ -317,9 +354,11 @@ func (o *WorkloadDeploymentInput) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// A sequential number that increments whenever the input changes.
-		GenNumber          *int64                                         `json:"GenNumber,omitempty"`
-		Input              []WorkloadDeploymentBlueprintInputType         `json:"Input,omitempty"`
-		WorkloadDeployment NullableWorkloadWorkloadDeploymentRelationship `json:"WorkloadDeployment,omitempty"`
+		GenNumber *int64                                 `json:"GenNumber,omitempty"`
+		Input     []WorkloadDeploymentBlueprintInputType `json:"Input,omitempty"`
+		// The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state.
+		ObjectGenerationFailed *bool                                          `json:"ObjectGenerationFailed,omitempty"`
+		WorkloadDeployment     NullableWorkloadWorkloadDeploymentRelationship `json:"WorkloadDeployment,omitempty"`
 	}
 
 	varWorkloadDeploymentInputWithoutEmbeddedStruct := WorkloadDeploymentInputWithoutEmbeddedStruct{}
@@ -331,6 +370,7 @@ func (o *WorkloadDeploymentInput) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadDeploymentInput.ObjectType = varWorkloadDeploymentInputWithoutEmbeddedStruct.ObjectType
 		varWorkloadDeploymentInput.GenNumber = varWorkloadDeploymentInputWithoutEmbeddedStruct.GenNumber
 		varWorkloadDeploymentInput.Input = varWorkloadDeploymentInputWithoutEmbeddedStruct.Input
+		varWorkloadDeploymentInput.ObjectGenerationFailed = varWorkloadDeploymentInputWithoutEmbeddedStruct.ObjectGenerationFailed
 		varWorkloadDeploymentInput.WorkloadDeployment = varWorkloadDeploymentInputWithoutEmbeddedStruct.WorkloadDeployment
 		*o = WorkloadDeploymentInput(varWorkloadDeploymentInput)
 	} else {
@@ -353,6 +393,7 @@ func (o *WorkloadDeploymentInput) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "GenNumber")
 		delete(additionalProperties, "Input")
+		delete(additionalProperties, "ObjectGenerationFailed")
 		delete(additionalProperties, "WorkloadDeployment")
 
 		// remove fields from embedded structs

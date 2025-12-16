@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Upgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **ExcludeComponentPidList** | Pointer to [**NullableFirmwareExcludeComponentPidListType**](FirmwareExcludeComponentPidListType.md) |  | [optional] 
+**ServerName** | Pointer to **string** | Name of the server on which the firmware upgrade operation is performed. | [optional] [readonly] 
 **UpgradeTriggerMethod** | Pointer to **string** | The source that triggered the upgrade. Either via profile or traditional way. * &#x60;none&#x60; - Upgrade is invoked within the service. * &#x60;profileTrigger&#x60; - Upgrade is invoked from a profile deployment. | [optional] [default to "none"]
 **Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -141,6 +142,31 @@ HasExcludeComponentPidList returns a boolean if a field has been set.
 `func (o *FirmwareUpgrade) UnsetExcludeComponentPidList()`
 
 UnsetExcludeComponentPidList ensures that no value is present for ExcludeComponentPidList, not even an explicit nil
+### GetServerName
+
+`func (o *FirmwareUpgrade) GetServerName() string`
+
+GetServerName returns the ServerName field if non-nil, zero value otherwise.
+
+### GetServerNameOk
+
+`func (o *FirmwareUpgrade) GetServerNameOk() (*string, bool)`
+
+GetServerNameOk returns a tuple with the ServerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerName
+
+`func (o *FirmwareUpgrade) SetServerName(v string)`
+
+SetServerName sets ServerName field to given value.
+
+### HasServerName
+
+`func (o *FirmwareUpgrade) HasServerName() bool`
+
+HasServerName returns a boolean if a field has been set.
+
 ### GetUpgradeTriggerMethod
 
 `func (o *FirmwareUpgrade) GetUpgradeTriggerMethod() string`

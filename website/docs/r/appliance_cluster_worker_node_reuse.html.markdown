@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_cluster_worker_node_reuse"
 description: |-
-        ClusterWorkerNode is used to trigger Intersight Appliance's process for reconnecting a worker node.
+        The ClusterWorkerNodeReuse object facilitates the reconnection process for worker nodes within the Intersight Appliance cluster. It triggers the appliance's procedures to re-establish connectivity with worker nodes.
+        #### Purpose
+        ClusterWorkerNodeReuse is utilized to manage the lifecycle of worker nodes in the Intersight Appliance. It supports operations to reconnect nodes, ensuring that the cluster maintains its integrity and performance.
+        #### Key Concepts
+        - **Reconnection Process:** Provides a structured approach to reconnecting worker nodes, essential for maintaining cluster functionality.
+        - **Integration with Accounts:** Establishes relationships between node objects and accounts, ensuring that node reconnection aligns with account management.
+        - **Lifecycle Management:** Supports the creation of processes necessary for reconnecting nodes, aiding in cluster maintenance and stability.
 
 ---
 
 # Resource: intersight_appliance_cluster_worker_node_reuse
-ClusterWorkerNode is used to trigger Intersight Appliance's process for reconnecting a worker node.
+The ClusterWorkerNodeReuse object facilitates the reconnection process for worker nodes within the Intersight Appliance cluster. It triggers the appliance's procedures to re-establish connectivity with worker nodes.
+#### Purpose
+ClusterWorkerNodeReuse is utilized to manage the lifecycle of worker nodes in the Intersight Appliance. It supports operations to reconnect nodes, ensuring that the cluster maintains its integrity and performance.
+#### Key Concepts
+- **Reconnection Process:** Provides a structured approach to reconnecting worker nodes, essential for maintaining cluster functionality.
+- **Integration with Accounts:** Establishes relationships between node objects and accounts, ensuring that node reconnection aligns with account management.
+- **Lifecycle Management:** Supports the creation of processes necessary for reconnecting nodes, aiding in cluster maintenance and stability.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

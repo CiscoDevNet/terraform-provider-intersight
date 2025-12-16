@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_certificate_setting"
 description: |-
-        Certificate the appliance uses for browser traffic.
+        The CertificateSetting object manages the certificate used by the Intersight Appliance for browser traffic. It ensures secure communication between the appliance and external interfaces.
+        #### Purpose
+        CertificateSetting facilitates the management of certificates used for secure browser interactions. This provides administrators with the ability to update and manage the appliance's certificates, ensuring compliance with security standards.
+        #### Key Concepts
+        - **Security Management:** Enables secure handling of browser certificates, supporting encrypted communication.
+        - **Access Control:** Restricted to account administrators, ensuring that certificate management is conducted securely.
+        - **Integration with Accounts:** Establishes relationships with accounts, aligning certificate settings with account management.
 
 ---
 
 # Data Source: intersight_appliance_certificate_setting
-Certificate the appliance uses for browser traffic.
+The CertificateSetting object manages the certificate used by the Intersight Appliance for browser traffic. It ensures secure communication between the appliance and external interfaces.
+#### Purpose
+CertificateSetting facilitates the management of certificates used for secure browser interactions. This provides administrators with the ability to update and manage the appliance's certificates, ensuring compliance with security standards.
+#### Key Concepts
+- **Security Management:** Enables secure handling of browser certificates, supporting encrypted communication.
+- **Access Control:** Restricted to account administrators, ensuring that certificate management is conducted securely.
+- **Integration with Accounts:** Establishes relationships with accounts, aligning certificate settings with account management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

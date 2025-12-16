@@ -3,12 +3,30 @@ subcategory: "workload"
 layout: "intersight"
 page_title: "Intersight: intersight_workload_workload_instance"
 description: |-
-        A workload instance that can be deployed, modified, or managed.
+        ### Overview
+        The WorkloadInstance object represents a single deployed instance of a workload, created and managed by a workload deployment. It captures the runtime state, assigned resources, and lifecycle operations for an individual workload deployment target.
+        #### Purpose
+        A WorkloadInstance is the concrete manifestation of a workload definition deployed to specific infrastructure resources. It tracks the operational state of the deployment on those resources, manages lifecycle actions, and monitors conformance with the desired state defined by its parent deployment.
+        #### Key Concepts
+        - **Resource Assignment:** - Each instance is bound to specific infrastructure resources (chassis, servers, etc.) assigned during creation, maintaining references to those resources throughout its lifecycle.
+        - **Status and Action Management:** - Maintains current operational status and tracks the last action performed, while also accepting new action requests to change the instance state.
+        - **Change Type Tracking:** - Identifies what types of changes have occurred in the deployment or workload definition that have not yet been applied to this instance, supporting intelligent update operations.
+        - **Conformance Monitoring:** - Continuously monitors whether the actual deployed configuration matches the desired state, detecting and reporting drift that may occur through out-of-band changes.
+        - **Service Item Integration:** - Maintains relationships to service item instances that implement the actual deployment workflows, bridging workload-level abstractions with underlying service implementation.
 
 ---
 
 # Data Source: intersight_workload_workload_instance
-A workload instance that can be deployed, modified, or managed.
+### Overview
+The WorkloadInstance object represents a single deployed instance of a workload, created and managed by a workload deployment. It captures the runtime state, assigned resources, and lifecycle operations for an individual workload deployment target.
+#### Purpose
+A WorkloadInstance is the concrete manifestation of a workload definition deployed to specific infrastructure resources. It tracks the operational state of the deployment on those resources, manages lifecycle actions, and monitors conformance with the desired state defined by its parent deployment.
+#### Key Concepts
+- **Resource Assignment:** - Each instance is bound to specific infrastructure resources (chassis, servers, etc.) assigned during creation, maintaining references to those resources throughout its lifecycle.
+- **Status and Action Management:** - Maintains current operational status and tracks the last action performed, while also accepting new action requests to change the instance state.
+- **Change Type Tracking:** - Identifies what types of changes have occurred in the deployment or workload definition that have not yet been applied to this instance, supporting intelligent update operations.
+- **Conformance Monitoring:** - Continuously monitors whether the actual deployed configuration matches the desired state, detecting and reporting drift that may occur through out-of-band changes.
+- **Service Item Integration:** - Maintains relationships to service item instances that implement the actual deployment workflows, bridging workload-level abstractions with underlying service implementation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -24,6 +42,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name for this Workload instance. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `status`:(string) The current status of the workload instance.* `Staging` - The instance is in the staging phase, awaiting further actions.* `ReadyToDeploy` - The instance is fully configured and ready for deployment.* `InProgress` - Deployment or modification of the instance is currently in progress.* `Ok` - The instance is running successfully without issues.* `Failed` - The instance has encountered an error or failure preventing normal operation.* `Suspended` - The instance has been temporarily paused and is inactive.* `ChangesScheduled` - There is a change in the configuration that needs to be pushed to the instance.* `InSufficientResource` - The instance lacks the necessary resources to operate.* `OutOfService` - The instance is no longer available or operational.* `UnAssigning` - The instance is being unassigned or removed from service. 
+* `status`:(string) The current status of the workload instance.* `Staging` - The instance is in the staging phase, awaiting further actions.* `ReadyToDeploy` - The instance is fully configured and ready for deployment.* `InProgress` - Deployment or modification of the instance is currently in progress.* `Ok` - The instance is running successfully without issues.* `Failed` - The instance has encountered an error or failure preventing normal operation.* `Suspended` - The instance has been temporarily paused and is inactive.* `ChangesScheduled` - There is a change in the configuration that needs to be pushed to the instance.* `InSufficientResource` - The instance lacks the necessary resources to operate.* `OutOfService` - The instance is no longer available or operational.* `UnAssigning` - The instance is being unassigned or removed from service.* `Detaching` - The instance is currently being detached. During the process, the managed objects created by workload will be unlocked. This means for a Unified edge workload, the unified edge profile and server profile will be unlocked and detached from the source template created by workload so users can make changes to those profiles.* `Attaching` - The instance is currently being attached to the deployment. The managed objects created by the workload will no longer be available for modifications. 
 * `status_change_reason`:(string) The context or justification for the status transition.* `None` - No changes have been made.* `ResourceDisqualified` - The change in resource status triggered due to the resource being disqualified. 
  

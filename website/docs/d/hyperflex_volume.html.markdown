@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_volume"
 description: |-
-        A HyperFlex Volume entity.
+        ### Overview
+        The Volume object represents a logical storage unit within the HyperFlex system, designed to encapsulate data storage within a defined capacity framework. This provides a detailed interface for managing individual storage volumes, offering insights into utilization, accessibility, and configuration.
+        #### Purpose
+        A Volume serves as a dedicated storage entity, allowing users to control and monitor specific data storage resources, including capacity allocation and usage tracking.
+        #### Key Concepts
+        - **Capacity Allocation:** - Defines the provisioned capacity of the volume, supporting efficient data storage management within the HyperFlex Cluster.
+        - **Identity Management:** - Utilizes unique identifiers such as UUIDs to maintain distinct volume identification and integrity.
+        - **Cluster Association:** - Ensures each volume is associated with a specific HyperFlex Cluster, enabling structured and organized storage management.
 
 ---
 
 # Data Source: intersight_hyperflex_volume
-A HyperFlex Volume entity.
+### Overview
+The Volume object represents a logical storage unit within the HyperFlex system, designed to encapsulate data storage within a defined capacity framework. This provides a detailed interface for managing individual storage volumes, offering insights into utilization, accessibility, and configuration.
+#### Purpose
+A Volume serves as a dedicated storage entity, allowing users to control and monitor specific data storage resources, including capacity allocation and usage tracking.
+#### Key Concepts
+- **Capacity Allocation:** - Defines the provisioned capacity of the volume, supporting efficient data storage management within the HyperFlex Cluster.
+- **Identity Management:** - Utilizes unique identifiers such as UUIDs to maintain distinct volume identification and integrity.
+- **Cluster Association:** - Ensures each volume is associated with a specific HyperFlex Cluster, enabling structured and organized storage management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

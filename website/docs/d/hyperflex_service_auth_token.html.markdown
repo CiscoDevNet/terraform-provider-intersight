@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_service_auth_token"
 description: |-
-        A Service auth token entity that represents HyperFlex Data Platform service AAA token.
+        ### Overview
+        The ServiceAuthToken object represents an authentication token used within the HyperFlex Data Platform to secure service interactions. This provides a secure mechanism for managing service access and ensuring authorized operations within the cluster environment.
+        #### Purpose
+        A ServiceAuthToken is designed to facilitate secure communication and interaction within the HyperFlex infrastructure, supporting authentication and authorization processes.
+        #### Key Concepts
+        - **Authentication:** - Provides a secure method for validating service access, ensuring authorized interactions with HyperFlex resources.
+        - **Token Management:** - Supports the creation, updating, and revocation of service tokens, maintaining security and operational integrity.
+        - **Cluster Integration:** - Linked with the HyperFlex Cluster, ensuring secure and controlled access to cluster operations and resources.
 
 ---
 
 # Data Source: intersight_hyperflex_service_auth_token
-A Service auth token entity that represents HyperFlex Data Platform service AAA token.
+### Overview
+The ServiceAuthToken object represents an authentication token used within the HyperFlex Data Platform to secure service interactions. This provides a secure mechanism for managing service access and ensuring authorized operations within the cluster environment.
+#### Purpose
+A ServiceAuthToken is designed to facilitate secure communication and interaction within the HyperFlex infrastructure, supporting authentication and authorization processes.
+#### Key Concepts
+- **Authentication:** - Provides a secure method for validating service access, ensuring authorized interactions with HyperFlex resources.
+- **Token Management:** - Supports the creation, updating, and revocation of service tokens, maintaining security and operational integrity.
+- **Cluster Integration:** - Linked with the HyperFlex Cluster, ensuring secure and controlled access to cluster operations and resources.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_external_syslog_setting"
 description: |-
-        Configure External Syslog Server.
+        The ExternalSyslogSetting object configures the external Syslog server for the Intersight Appliance. It allows administrators to define how Syslog messages are transmitted to external servers.
+        #### Purpose
+        ExternalSyslogSetting provides a mechanism to manage Syslog server configurations, facilitating the transmission of logs to external systems for monitoring and analysis. It supports various protocols and configurations to adapt to different network environments.
+        #### Key Concepts
+        - **Syslog Configuration:** Enables configuration of external Syslog servers, including server addresses and ports.
+        - **Protocol Management:** Supports multiple communication protocols, providing flexibility in Syslog message transmission.
+        - **Access Control:** Restricted to authorized users, ensuring secure configuration of Syslog settings.
+        - **Log Exporting:** Facilitates the export of various logs, including audit and alarm logs, to external servers.
 
 ---
 
 # Data Source: intersight_appliance_external_syslog_setting
-Configure External Syslog Server.
+The ExternalSyslogSetting object configures the external Syslog server for the Intersight Appliance. It allows administrators to define how Syslog messages are transmitted to external servers.
+#### Purpose
+ExternalSyslogSetting provides a mechanism to manage Syslog server configurations, facilitating the transmission of logs to external systems for monitoring and analysis. It supports various protocols and configurations to adapt to different network environments.
+#### Key Concepts
+- **Syslog Configuration:** Enables configuration of external Syslog servers, including server addresses and ports.
+- **Protocol Management:** Supports multiple communication protocols, providing flexibility in Syslog message transmission.
+- **Access Control:** Restricted to authorized users, ensuring secure configuration of Syslog settings.
+- **Log Exporting:** Facilitates the export of various logs, including audit and alarm logs, to external servers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

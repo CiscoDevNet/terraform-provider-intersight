@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the WorkloadBlueprint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WorkloadBlueprint{}
 
-// WorkloadBlueprint A blueprint detailed description.
+// WorkloadBlueprint ### Overview The Blueprint object defines a reusable, versioned template for deploying infrastructure configurations and services. It encapsulates input schemas, managed object generation rules, service item associations, and resource constraints into a cohesive deployment unit that can be referenced by workload definitions. #### Purpose A Blueprint serves as a modular building block for constructing complex workload definitions. Blueprints provides a standardized way to define infrastructure patterns, application configurations, and service deployments that can be reused across multiple workloads. Blueprints support versioning, platform targeting, and dependency management to ensure reliable and consistent deployments. #### Key Concepts - **Versioning and Default Versions:** - Each blueprint supports multiple versions with the ability to designate a default version, enabling safe evolution of blueprint specifications while maintaining compatibility with existing workloads. - **Input Definition Schema:** - Defines the schema for all inputs required by the blueprint, supporting complex data types including primitives, collections, and managed object references. - **Generated Object Management:** - Specifies which Intersight managed objects (policies, profiles, etc.) should be automatically generated from blueprint inputs and how those objects should be configured. - **Service Item Integration:** - Associates service items with the blueprint, defining which service workflows are executed during deployment and lifecycle operations. - **Resource Constraints:** - Defines infrastructure resource requirements and constraints that must be satisfied for successful blueprint deployment. - **Blueprint Dependencies:** - Supports declaring dependencies on other blueprints, enabling compositional patterns and ensuring all required components are available during deployment. - **Platform Targeting:** - Specifies which Intersight platform types the blueprint supports, ensuring deployments only target compatible infrastructure.
 type WorkloadBlueprint struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -48,7 +48,9 @@ type WorkloadBlueprint struct {
 	ServiceItems          []BlueprintServiceItemDefinition      `json:"ServiceItems,omitempty"`
 	ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 	// The version of the blueprint to support multiple versions.
-	Version              *int64                              `json:"Version,omitempty"`
+	Version *int64 `json:"Version,omitempty"`
+	// An array of relationships to iamRole resources.
+	AssociatedRoles      []IamRoleRelationship               `json:"AssociatedRoles,omitempty"`
 	Catalog              NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -627,6 +629,39 @@ func (o *WorkloadBlueprint) SetVersion(v int64) {
 	o.Version = &v
 }
 
+// GetAssociatedRoles returns the AssociatedRoles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkloadBlueprint) GetAssociatedRoles() []IamRoleRelationship {
+	if o == nil {
+		var ret []IamRoleRelationship
+		return ret
+	}
+	return o.AssociatedRoles
+}
+
+// GetAssociatedRolesOk returns a tuple with the AssociatedRoles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkloadBlueprint) GetAssociatedRolesOk() ([]IamRoleRelationship, bool) {
+	if o == nil || IsNil(o.AssociatedRoles) {
+		return nil, false
+	}
+	return o.AssociatedRoles, true
+}
+
+// HasAssociatedRoles returns a boolean if a field has been set.
+func (o *WorkloadBlueprint) HasAssociatedRoles() bool {
+	if o != nil && !IsNil(o.AssociatedRoles) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssociatedRoles gets a reference to the given []IamRoleRelationship and assigns it to the AssociatedRoles field.
+func (o *WorkloadBlueprint) SetAssociatedRoles(v []IamRoleRelationship) {
+	o.AssociatedRoles = v
+}
+
 // GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkloadBlueprint) GetCatalog() WorkflowCatalogRelationship {
 	if o == nil || IsNil(o.Catalog.Get()) {
@@ -738,6 +773,9 @@ func (o WorkloadBlueprint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
+	if o.AssociatedRoles != nil {
+		toSerialize["AssociatedRoles"] = o.AssociatedRoles
+	}
 	if o.Catalog.IsSet() {
 		toSerialize["Catalog"] = o.Catalog.Get()
 	}
@@ -816,8 +854,10 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 		ServiceItems          []BlueprintServiceItemDefinition      `json:"ServiceItems,omitempty"`
 		ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 		// The version of the blueprint to support multiple versions.
-		Version *int64                              `json:"Version,omitempty"`
-		Catalog NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
+		Version *int64 `json:"Version,omitempty"`
+		// An array of relationships to iamRole resources.
+		AssociatedRoles []IamRoleRelationship               `json:"AssociatedRoles,omitempty"`
+		Catalog         NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varWorkloadBlueprintWithoutEmbeddedStruct := WorkloadBlueprintWithoutEmbeddedStruct{}
@@ -841,6 +881,7 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 		varWorkloadBlueprint.ServiceItems = varWorkloadBlueprintWithoutEmbeddedStruct.ServiceItems
 		varWorkloadBlueprint.ValidationInformation = varWorkloadBlueprintWithoutEmbeddedStruct.ValidationInformation
 		varWorkloadBlueprint.Version = varWorkloadBlueprintWithoutEmbeddedStruct.Version
+		varWorkloadBlueprint.AssociatedRoles = varWorkloadBlueprintWithoutEmbeddedStruct.AssociatedRoles
 		varWorkloadBlueprint.Catalog = varWorkloadBlueprintWithoutEmbeddedStruct.Catalog
 		*o = WorkloadBlueprint(varWorkloadBlueprint)
 	} else {
@@ -875,6 +916,7 @@ func (o *WorkloadBlueprint) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ServiceItems")
 		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "Version")
+		delete(additionalProperties, "AssociatedRoles")
 		delete(additionalProperties, "Catalog")
 
 		// remove fields from embedded structs

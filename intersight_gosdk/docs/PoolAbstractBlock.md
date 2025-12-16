@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **FreeBlockCount** | Pointer to **int64** | Free IDs that can be allocated in this block. | [optional] [readonly] 
 **NextIdAllocator** | Pointer to **int64** | Moving counter to allocate the next identifier. | [optional] [readonly] 
+**IdMappingPolicy** | Pointer to [**NullablePoolIdMappingPolicyRelationship**](PoolIdMappingPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +119,41 @@ SetNextIdAllocator sets NextIdAllocator field to given value.
 
 HasNextIdAllocator returns a boolean if a field has been set.
 
+### GetIdMappingPolicy
+
+`func (o *PoolAbstractBlock) GetIdMappingPolicy() PoolIdMappingPolicyRelationship`
+
+GetIdMappingPolicy returns the IdMappingPolicy field if non-nil, zero value otherwise.
+
+### GetIdMappingPolicyOk
+
+`func (o *PoolAbstractBlock) GetIdMappingPolicyOk() (*PoolIdMappingPolicyRelationship, bool)`
+
+GetIdMappingPolicyOk returns a tuple with the IdMappingPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdMappingPolicy
+
+`func (o *PoolAbstractBlock) SetIdMappingPolicy(v PoolIdMappingPolicyRelationship)`
+
+SetIdMappingPolicy sets IdMappingPolicy field to given value.
+
+### HasIdMappingPolicy
+
+`func (o *PoolAbstractBlock) HasIdMappingPolicy() bool`
+
+HasIdMappingPolicy returns a boolean if a field has been set.
+
+### SetIdMappingPolicyNil
+
+`func (o *PoolAbstractBlock) SetIdMappingPolicyNil(b bool)`
+
+ SetIdMappingPolicyNil sets the value for IdMappingPolicy to be an explicit nil
+
+### UnsetIdMappingPolicy
+`func (o *PoolAbstractBlock) UnsetIdMappingPolicy()`
+
+UnsetIdMappingPolicy ensures that no value is present for IdMappingPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

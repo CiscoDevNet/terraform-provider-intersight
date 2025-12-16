@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025120106
+API version: 1.0.11-2025121206
 Contact: intersight@cisco.com
 */
 
@@ -30,12 +30,17 @@ type EquipmentRiser struct {
 	ObjectType string `json:"ObjectType"`
 	// This field is to provide description for the Riser.
 	Description *string `json:"Description,omitempty"`
+	// This field is to provide formFactor for the Riser.
+	FormFactor *string `json:"FormFactor,omitempty"`
 	// The name of the pluggable Riser.
 	Name *string `json:"Name,omitempty"`
+	// This field is to provide pcieType for the Riser.
+	PcieType *string `json:"PcieType,omitempty"`
 	// This field identifies the Stockkeeping Unit for this Riser.
 	Sku *string `json:"Sku,omitempty"`
 	// Type of the Riser slot in the server.
 	Type                 *string                                     `json:"Type,omitempty"`
+	ComputeBlade         NullableComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
 	ComputeRackUnit      NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -156,6 +161,38 @@ func (o *EquipmentRiser) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetFormFactor returns the FormFactor field value if set, zero value otherwise.
+func (o *EquipmentRiser) GetFormFactor() string {
+	if o == nil || IsNil(o.FormFactor) {
+		var ret string
+		return ret
+	}
+	return *o.FormFactor
+}
+
+// GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentRiser) GetFormFactorOk() (*string, bool) {
+	if o == nil || IsNil(o.FormFactor) {
+		return nil, false
+	}
+	return o.FormFactor, true
+}
+
+// HasFormFactor returns a boolean if a field has been set.
+func (o *EquipmentRiser) HasFormFactor() bool {
+	if o != nil && !IsNil(o.FormFactor) {
+		return true
+	}
+
+	return false
+}
+
+// SetFormFactor gets a reference to the given string and assigns it to the FormFactor field.
+func (o *EquipmentRiser) SetFormFactor(v string) {
+	o.FormFactor = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EquipmentRiser) GetName() string {
 	if o == nil || IsNil(o.Name) {
@@ -186,6 +223,38 @@ func (o *EquipmentRiser) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *EquipmentRiser) SetName(v string) {
 	o.Name = &v
+}
+
+// GetPcieType returns the PcieType field value if set, zero value otherwise.
+func (o *EquipmentRiser) GetPcieType() string {
+	if o == nil || IsNil(o.PcieType) {
+		var ret string
+		return ret
+	}
+	return *o.PcieType
+}
+
+// GetPcieTypeOk returns a tuple with the PcieType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentRiser) GetPcieTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.PcieType) {
+		return nil, false
+	}
+	return o.PcieType, true
+}
+
+// HasPcieType returns a boolean if a field has been set.
+func (o *EquipmentRiser) HasPcieType() bool {
+	if o != nil && !IsNil(o.PcieType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPcieType gets a reference to the given string and assigns it to the PcieType field.
+func (o *EquipmentRiser) SetPcieType(v string) {
+	o.PcieType = &v
 }
 
 // GetSku returns the Sku field value if set, zero value otherwise.
@@ -250,6 +319,49 @@ func (o *EquipmentRiser) HasType() bool {
 // SetType gets a reference to the given string and assigns it to the Type field.
 func (o *EquipmentRiser) SetType(v string) {
 	o.Type = &v
+}
+
+// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EquipmentRiser) GetComputeBlade() ComputeBladeRelationship {
+	if o == nil || IsNil(o.ComputeBlade.Get()) {
+		var ret ComputeBladeRelationship
+		return ret
+	}
+	return *o.ComputeBlade.Get()
+}
+
+// GetComputeBladeOk returns a tuple with the ComputeBlade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EquipmentRiser) GetComputeBladeOk() (*ComputeBladeRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ComputeBlade.Get(), o.ComputeBlade.IsSet()
+}
+
+// HasComputeBlade returns a boolean if a field has been set.
+func (o *EquipmentRiser) HasComputeBlade() bool {
+	if o != nil && o.ComputeBlade.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetComputeBlade gets a reference to the given NullableComputeBladeRelationship and assigns it to the ComputeBlade field.
+func (o *EquipmentRiser) SetComputeBlade(v ComputeBladeRelationship) {
+	o.ComputeBlade.Set(&v)
+}
+
+// SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+func (o *EquipmentRiser) SetComputeBladeNil() {
+	o.ComputeBlade.Set(nil)
+}
+
+// UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
+func (o *EquipmentRiser) UnsetComputeBlade() {
+	o.ComputeBlade.Unset()
 }
 
 // GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -367,14 +479,23 @@ func (o EquipmentRiser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
+	if !IsNil(o.FormFactor) {
+		toSerialize["FormFactor"] = o.FormFactor
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
+	}
+	if !IsNil(o.PcieType) {
+		toSerialize["PcieType"] = o.PcieType
 	}
 	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
 	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
+	}
+	if o.ComputeBlade.IsSet() {
+		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
 	if o.ComputeRackUnit.IsSet() {
 		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
@@ -439,12 +560,17 @@ func (o *EquipmentRiser) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// This field is to provide description for the Riser.
 		Description *string `json:"Description,omitempty"`
+		// This field is to provide formFactor for the Riser.
+		FormFactor *string `json:"FormFactor,omitempty"`
 		// The name of the pluggable Riser.
 		Name *string `json:"Name,omitempty"`
+		// This field is to provide pcieType for the Riser.
+		PcieType *string `json:"PcieType,omitempty"`
 		// This field identifies the Stockkeeping Unit for this Riser.
 		Sku *string `json:"Sku,omitempty"`
 		// Type of the Riser slot in the server.
 		Type             *string                                     `json:"Type,omitempty"`
+		ComputeBlade     NullableComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
 		ComputeRackUnit  NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
@@ -457,9 +583,12 @@ func (o *EquipmentRiser) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentRiser.ClassId = varEquipmentRiserWithoutEmbeddedStruct.ClassId
 		varEquipmentRiser.ObjectType = varEquipmentRiserWithoutEmbeddedStruct.ObjectType
 		varEquipmentRiser.Description = varEquipmentRiserWithoutEmbeddedStruct.Description
+		varEquipmentRiser.FormFactor = varEquipmentRiserWithoutEmbeddedStruct.FormFactor
 		varEquipmentRiser.Name = varEquipmentRiserWithoutEmbeddedStruct.Name
+		varEquipmentRiser.PcieType = varEquipmentRiserWithoutEmbeddedStruct.PcieType
 		varEquipmentRiser.Sku = varEquipmentRiserWithoutEmbeddedStruct.Sku
 		varEquipmentRiser.Type = varEquipmentRiserWithoutEmbeddedStruct.Type
+		varEquipmentRiser.ComputeBlade = varEquipmentRiserWithoutEmbeddedStruct.ComputeBlade
 		varEquipmentRiser.ComputeRackUnit = varEquipmentRiserWithoutEmbeddedStruct.ComputeRackUnit
 		varEquipmentRiser.RegisteredDevice = varEquipmentRiserWithoutEmbeddedStruct.RegisteredDevice
 		*o = EquipmentRiser(varEquipmentRiser)
@@ -482,9 +611,12 @@ func (o *EquipmentRiser) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "FormFactor")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "PcieType")
 		delete(additionalProperties, "Sku")
 		delete(additionalProperties, "Type")
+		delete(additionalProperties, "ComputeBlade")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "RegisteredDevice")
 

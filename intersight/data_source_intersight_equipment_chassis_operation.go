@@ -41,6 +41,11 @@ func getEquipmentChassisOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"admin_reset_config_slot_id": {
+			Description: "Slot id of the chassis slot that needs to have its configuration reset.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -577,6 +582,11 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 		o.SetAdminPowerCycleSlotId(x)
 	}
 
+	if v, ok := d.GetOkExists("admin_reset_config_slot_id"); ok {
+		x := int64(v.(int))
+		o.SetAdminResetConfigSlotId(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1055,6 +1065,7 @@ func dataSourceEquipmentChassisOperationRead(c context.Context, d *schema.Resour
 				temp["admin_locator_led_action"] = (s.GetAdminLocatorLedAction())
 				temp["admin_power_cycle_expander_module_slot_id"] = (s.GetAdminPowerCycleExpanderModuleSlotId())
 				temp["admin_power_cycle_slot_id"] = (s.GetAdminPowerCycleSlotId())
+				temp["admin_reset_config_slot_id"] = (s.GetAdminResetConfigSlotId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 

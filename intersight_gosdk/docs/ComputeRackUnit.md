@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] 
 **Adapters** | Pointer to [**[]AdapterUnitRelationship**](AdapterUnitRelationship.md) | An array of relationships to adapterUnit resources. | [optional] [readonly] 
+**AssignedLocation** | Pointer to [**NullableAssetGeoLocationRelationship**](AssetGeoLocationRelationship.md) |  | [optional] 
 **BiosBootmode** | Pointer to [**NullableBiosBootModeRelationship**](BiosBootModeRelationship.md) |  | [optional] 
 **BiosTokenSettings** | Pointer to [**NullableBiosTokenSettingsRelationship**](BiosTokenSettingsRelationship.md) |  | [optional] 
 **BiosVfSelectMemoryRasConfiguration** | Pointer to [**NullableBiosVfSelectMemoryRasConfigurationRelationship**](BiosVfSelectMemoryRasConfigurationRelationship.md) |  | [optional] 
@@ -271,6 +272,41 @@ HasAdapters returns a boolean if a field has been set.
 `func (o *ComputeRackUnit) UnsetAdapters()`
 
 UnsetAdapters ensures that no value is present for Adapters, not even an explicit nil
+### GetAssignedLocation
+
+`func (o *ComputeRackUnit) GetAssignedLocation() AssetGeoLocationRelationship`
+
+GetAssignedLocation returns the AssignedLocation field if non-nil, zero value otherwise.
+
+### GetAssignedLocationOk
+
+`func (o *ComputeRackUnit) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool)`
+
+GetAssignedLocationOk returns a tuple with the AssignedLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedLocation
+
+`func (o *ComputeRackUnit) SetAssignedLocation(v AssetGeoLocationRelationship)`
+
+SetAssignedLocation sets AssignedLocation field to given value.
+
+### HasAssignedLocation
+
+`func (o *ComputeRackUnit) HasAssignedLocation() bool`
+
+HasAssignedLocation returns a boolean if a field has been set.
+
+### SetAssignedLocationNil
+
+`func (o *ComputeRackUnit) SetAssignedLocationNil(b bool)`
+
+ SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+
+### UnsetAssignedLocation
+`func (o *ComputeRackUnit) UnsetAssignedLocation()`
+
+UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
 ### GetBiosBootmode
 
 `func (o *ComputeRackUnit) GetBiosBootmode() BiosBootModeRelationship`

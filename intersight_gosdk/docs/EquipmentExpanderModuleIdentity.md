@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ExpanderModuleIdentity"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ExpanderModuleIdentity"]
 **ChassisId** | Pointer to **int64** | Chassis Identifier of an expander module. | [optional] [readonly] 
+**Presence** | Pointer to **string** | The presence state of the blade server. * &#x60;Unknown&#x60; - The default presence state. * &#x60;Equipped&#x60; - The server is equipped in the slot. * &#x60;EquippedMismatch&#x60; - The slot is equipped, but there is another server currently inventoried in the slot. * &#x60;Missing&#x60; - The server is not present in the given slot. | [optional] [readonly] [default to "Unknown"]
 **SlotId** | Pointer to **int64** | Chassis slot number of an expander module. | [optional] [readonly] 
 **ExpanderModule** | Pointer to [**NullableEquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
 
@@ -93,6 +94,31 @@ SetChassisId sets ChassisId field to given value.
 `func (o *EquipmentExpanderModuleIdentity) HasChassisId() bool`
 
 HasChassisId returns a boolean if a field has been set.
+
+### GetPresence
+
+`func (o *EquipmentExpanderModuleIdentity) GetPresence() string`
+
+GetPresence returns the Presence field if non-nil, zero value otherwise.
+
+### GetPresenceOk
+
+`func (o *EquipmentExpanderModuleIdentity) GetPresenceOk() (*string, bool)`
+
+GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPresence
+
+`func (o *EquipmentExpanderModuleIdentity) SetPresence(v string)`
+
+SetPresence sets Presence field to given value.
+
+### HasPresence
+
+`func (o *EquipmentExpanderModuleIdentity) HasPresence() bool`
+
+HasPresence returns a boolean if a field has been set.
 
 ### GetSlotId
 

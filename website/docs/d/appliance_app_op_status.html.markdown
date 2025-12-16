@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_app_op_status"
 description: |-
-        Status of an application running in Intersight Appliance.
+        The AppOpStatus object articulates the operational status of applications running on the Intersight Appliance. It tracks the application's readiness and performance.
+        #### Purpose
+        AppOpStatus is crucial for assessing application-level health, monitoring metrics such as replica counts, restarts, and API statuses to ensure robust application functionality.
+        #### Key Concepts
+        - **Application Health:** Evaluates operational status, readiness, and performance, categorizing applications as Operational, AttentionNeeded, or Impaired.
+        - **Replica Management:** Monitors the number of application instances provisioned and running to ensure adequate resources.
+        - **Performance Tracking:** Keeps track of restarts and API statuses to maintain application stability and efficiency.
 
 ---
 
 # Data Source: intersight_appliance_app_op_status
-Status of an application running in Intersight Appliance.
+The AppOpStatus object articulates the operational status of applications running on the Intersight Appliance. It tracks the application's readiness and performance.
+#### Purpose
+AppOpStatus is crucial for assessing application-level health, monitoring metrics such as replica counts, restarts, and API statuses to ensure robust application functionality.
+#### Key Concepts
+- **Application Health:** Evaluates operational status, readiness, and performance, categorizing applications as Operational, AttentionNeeded, or Impaired.
+- **Replica Management:** Monitors the number of application instances provisioned and running to ensure adequate resources.
+- **Performance Tracking:** Keeps track of restarts and API statuses to maintain application stability and efficiency.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

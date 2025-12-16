@@ -650,6 +650,55 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 					},
 				},
 			},
+			"partially_deployed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.PolicyContextHolder",
+						},
+						"end_point_context": {
+							Description: "Information about the endpoint to which it is applied.\n* `Server` - Configuration is applied to a server context.\n* `FI` - Configuration is applied to a Fabric Identifier (FI) context.\n* `IOM` - Configuration is applied to an Input/Output Module (IOM) context.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.PolicyContextHolder",
+						},
+						"policy": {
+							Description: "The name of the policy for which entry is created.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+					},
+				},
+			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -1869,6 +1918,36 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 
 	o.SetObjectType("kubernetes.NodeGroupProfile")
 
+	if v, ok := d.GetOk("partially_deployed_policies"); ok {
+		x := make([]models.PolicyPolicyContextHolder, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewPolicyPolicyContextHolderWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.PolicyContextHolder")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetPartiallyDeployedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("policy_bucket"); ok {
 		x := make([]models.PolicyAbstractPolicyRelationship, 0)
 		s := v.([]interface{})
@@ -2522,6 +2601,10 @@ func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property Parent in KubernetesNodeGroupProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("partially_deployed_policies", flattenListPolicyPolicyContextHolder(s.GetPartiallyDeployedPolicies(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PartiallyDeployedPolicies in KubernetesNodeGroupProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in KubernetesNodeGroupProfile object: %s", err.Error())
 	}
@@ -3055,6 +3138,35 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 	}
 
 	o.SetObjectType("kubernetes.NodeGroupProfile")
+
+	if d.HasChange("partially_deployed_policies") {
+		v := d.Get("partially_deployed_policies")
+		x := make([]models.PolicyPolicyContextHolder, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyPolicyContextHolder{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.PolicyContextHolder")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetPartiallyDeployedPolicies(x)
+	}
 
 	if d.HasChange("policy_bucket") {
 		v := d.Get("policy_bucket")

@@ -315,6 +315,11 @@ func getWorkloadDeploymentInputSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"object_generation_failed": {
+			Description: "The state of the object generation performed using this input. If object generation fails, then this is set to true when the generated objects are restored to their prior state.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -1039,6 +1044,11 @@ func dataSourceWorkloadDeploymentInputRead(c context.Context, d *schema.Resource
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("object_generation_failed"); ok {
+		x := (v.(bool))
+		o.SetObjectGenerationFailed(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1385,6 +1395,7 @@ func dataSourceWorkloadDeploymentInputRead(c context.Context, d *schema.Resource
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["object_generation_failed"] = (s.GetObjectGenerationFailed())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -23,18 +23,6 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ResourcepoolApiService CreateResourcepoolChassisQualificationPolicy", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		resp, httpRes, err := apiClient.ResourcepoolApi.CreateResourcepoolChassisQualificationPolicy(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test ResourcepoolApiService CreateResourcepoolPool", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -332,20 +320,6 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ResourcepoolApiService PatchResourcepoolChassisQualificationPolicy", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.ResourcepoolApi.PatchResourcepoolChassisQualificationPolicy(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test ResourcepoolApiService PatchResourcepoolMembershipReservation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -381,20 +355,6 @@ func Test_intersight_ResourcepoolApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ResourcepoolApi.PatchResourcepoolQualificationPolicy(context.Background(), moid).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ResourcepoolApiService UpdateResourcepoolChassisQualificationPolicy", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var moid string
-
-		resp, httpRes, err := apiClient.ResourcepoolApi.UpdateResourcepoolChassisQualificationPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

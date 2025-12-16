@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | This field identifies the name for the chassis enclosure. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field identifies the Chassis Operational State. | [optional] [readonly] 
+**Operations** | Pointer to [**[]EquipmentChassisOperationsDetails**](EquipmentChassisOperationsDetails.md) |  | [optional] 
 **PackageVersion** | Pointer to **string** | Bundle version which the XFM and PSU firmware belongs to. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the chassis enclosure. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the chassis enclosure. | [optional] [readonly] 
@@ -435,6 +436,41 @@ SetOperState sets OperState field to given value.
 
 HasOperState returns a boolean if a field has been set.
 
+### GetOperations
+
+`func (o *EquipmentChassis) GetOperations() []EquipmentChassisOperationsDetails`
+
+GetOperations returns the Operations field if non-nil, zero value otherwise.
+
+### GetOperationsOk
+
+`func (o *EquipmentChassis) GetOperationsOk() (*[]EquipmentChassisOperationsDetails, bool)`
+
+GetOperationsOk returns a tuple with the Operations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperations
+
+`func (o *EquipmentChassis) SetOperations(v []EquipmentChassisOperationsDetails)`
+
+SetOperations sets Operations field to given value.
+
+### HasOperations
+
+`func (o *EquipmentChassis) HasOperations() bool`
+
+HasOperations returns a boolean if a field has been set.
+
+### SetOperationsNil
+
+`func (o *EquipmentChassis) SetOperationsNil(b bool)`
+
+ SetOperationsNil sets the value for Operations to be an explicit nil
+
+### UnsetOperations
+`func (o *EquipmentChassis) UnsetOperations()`
+
+UnsetOperations ensures that no value is present for Operations, not even an explicit nil
 ### GetPackageVersion
 
 `func (o *EquipmentChassis) GetPackageVersion() string`

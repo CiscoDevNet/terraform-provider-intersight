@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_storage_container"
 description: |-
-        A storage container (datastore) entity.
+        ### Overview
+        The StorageContainer object is a core entity within the HyperFlex storage system, representing a datastore that manages storage allocation and utilization across the HyperFlex Cluster. This provides a standardized interface for accessing and managing storage resources, facilitating efficient data management and accessibility.
+        #### Purpose
+        The StorageContainer serves as a central point for storage operations, allowing users to perform actions such as provisioning capacity, monitoring utilization, and managing accessibility within the HyperFlex environment.
+        #### Key Concepts
+        - **Capacity Management:** - Facilitates dynamic provisioning and monitoring of storage capacity, ensuring optimal utilization across associated volumes.
+        - **Accessibility:** - Supports the management of storage accessibility, including mount status and encryption, to ensure secure and reliable data access.
+        - **Cluster Integration:** - Tightly integrated with HyperFlex Cluster operations, enabling seamless interaction with related storage and compute resources.
 
 ---
 
 # Data Source: intersight_hyperflex_storage_container
-A storage container (datastore) entity.
+### Overview
+The StorageContainer object is a core entity within the HyperFlex storage system, representing a datastore that manages storage allocation and utilization across the HyperFlex Cluster. This provides a standardized interface for accessing and managing storage resources, facilitating efficient data management and accessibility.
+#### Purpose
+The StorageContainer serves as a central point for storage operations, allowing users to perform actions such as provisioning capacity, monitoring utilization, and managing accessibility within the HyperFlex environment.
+#### Key Concepts
+- **Capacity Management:** - Facilitates dynamic provisioning and monitoring of storage capacity, ensuring optimal utilization across associated volumes.
+- **Accessibility:** - Supports the management of storage accessibility, including mount status and encryption, to ensure secure and reliable data access.
+- **Cluster Integration:** - Tightly integrated with HyperFlex Cluster operations, enabling seamless interaction with related storage and compute resources.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

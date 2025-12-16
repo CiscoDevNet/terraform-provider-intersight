@@ -115,6 +115,11 @@ func getIppoolPoolSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"id_mapping_policy_moid": {
+						Description: "The managed object ID of the ID mapping policy.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"ip_v4_config": {
 						Description: "Netmask, Gateway and DNS settings for IPv4 addresses.",
 						Type:        schema.TypeList,
@@ -240,6 +245,11 @@ func getIppoolPoolSchema() map[string]*schema.Schema {
 					},
 					"from": {
 						Description: "First IPv6 address of the block.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"id_mapping_policy_moid": {
+						Description: "The managed object ID of the ID mapping policy.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -936,6 +946,12 @@ func dataSourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta in
 					o.SetFrom(x)
 				}
 			}
+			if v, ok := l["id_mapping_policy_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetIdMappingPolicyMoid(x)
+				}
+			}
 			if v, ok := l["ip_v4_config"]; ok {
 				{
 					p := make([]models.IppoolIpV4Config, 0, 1)
@@ -1091,6 +1107,12 @@ func dataSourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["id_mapping_policy_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetIdMappingPolicyMoid(x)
 				}
 			}
 			if v, ok := l["ip_v6_config"]; ok {

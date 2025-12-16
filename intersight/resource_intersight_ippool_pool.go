@@ -161,6 +161,11 @@ func resourceIppoolPool() *schema.Resource {
 							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"), ""),
 							Optional:     true,
 						},
+						"id_mapping_policy_moid": {
+							Description: "The managed object ID of the ID mapping policy.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"ip_v4_config": {
 							Description: "Netmask, Gateway and DNS settings for IPv4 addresses.",
 							Type:        schema.TypeList,
@@ -323,6 +328,11 @@ func resourceIppoolPool() *schema.Resource {
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^(([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:([0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{0,4}|:[0-9A-Fa-f]{1,4})?|(:[0-9A-Fa-f]{1,4}){0,2})|(:[0-9A-Fa-f]{1,4}){0,3})|(:[0-9A-Fa-f]{1,4}){0,4})|:(:[0-9A-Fa-f]{1,4}){0,5})((:[0-9A-Fa-f]{1,4}){2}|:(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])(\\.(25[0-5]|(2[0-4]|1[0-9]|[1-9])?[0-9])){3})|(([0-9A-Fa-f]{1,4}:){1,6}|:):[0-9A-Fa-f]{0,4}|([0-9A-Fa-f]{1,4}:){7}:)$"), ""),
 							Optional:     true,
+						},
+						"id_mapping_policy_moid": {
+							Description: "The managed object ID of the ID mapping policy.",
+							Type:        schema.TypeString,
+							Optional:    true,
 						},
 						"ip_v6_config": {
 							Description: "Netmask, Gateway and DNS settings for IPv6 addresses.",
@@ -1112,6 +1122,12 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 					o.SetFrom(x)
 				}
 			}
+			if v, ok := l["id_mapping_policy_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetIdMappingPolicyMoid(x)
+				}
+			}
 			if v, ok := l["ip_v4_config"]; ok {
 				{
 					p := make([]models.IppoolIpV4Config, 0, 1)
@@ -1269,6 +1285,12 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["id_mapping_policy_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetIdMappingPolicyMoid(x)
 				}
 			}
 			if v, ok := l["ip_v6_config"]; ok {
@@ -1825,6 +1847,12 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 					o.SetFrom(x)
 				}
 			}
+			if v, ok := l["id_mapping_policy_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetIdMappingPolicyMoid(x)
+				}
+			}
 			if v, ok := l["ip_v4_config"]; ok {
 				{
 					p := make([]models.IppoolIpV4Config, 0, 1)
@@ -1982,6 +2010,12 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetFrom(x)
+				}
+			}
+			if v, ok := l["id_mapping_policy_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetIdMappingPolicyMoid(x)
 				}
 			}
 			if v, ok := l["ip_v6_config"]; ok {

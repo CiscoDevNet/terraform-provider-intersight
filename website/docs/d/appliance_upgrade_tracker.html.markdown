@@ -3,16 +3,26 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_upgrade_tracker"
 description: |-
-        UpgradeTracker tracks the history of the last upgrade for purpose of serving alarms. Upgrade tracker is
-        a singleton modified object, and will be used by alarm condition to raise an alarm whenever
-        there is a failed upgrade.
+        The UpgradeTracker object is designed to monitor the history of software upgrades within the Intersight Appliance. It acts as a singleton object to facilitate alarm conditions and raise alarms in the event of failed upgrades.
+        #### Purpose
+        UpgradeTracker serves as a historical record of upgrade processes, focusing on the outcome and status of the last upgrade. It supports diagnostic and alert functions by providing clear indicators of upgrade failures.
+        #### Key Concepts
+        - **Failure Indication:** Tracks whether the last software upgrade was unsuccessful, serving as a basis for raising alarms and initiating corrective actions.
+        - **Singleton Nature:** Operates as a single instance within the system, ensuring centralized management and consistency in tracking upgrade history.
+        - **Alarm Integration:** Interfaces with alarm conditions to facilitate timely alerts and responses to upgrade issues.
+        - **Version Documentation:** Records the version and descriptive details of failed upgrades, aiding in troubleshooting and resolution efforts.
 
 ---
 
 # Data Source: intersight_appliance_upgrade_tracker
-UpgradeTracker tracks the history of the last upgrade for purpose of serving alarms. Upgrade tracker is 
-a singleton modified object, and will be used by alarm condition to raise an alarm whenever
-there is a failed upgrade.
+The UpgradeTracker object is designed to monitor the history of software upgrades within the Intersight Appliance. It acts as a singleton object to facilitate alarm conditions and raise alarms in the event of failed upgrades.
+#### Purpose
+UpgradeTracker serves as a historical record of upgrade processes, focusing on the outcome and status of the last upgrade. It supports diagnostic and alert functions by providing clear indicators of upgrade failures. 
+#### Key Concepts 
+- **Failure Indication:** Tracks whether the last software upgrade was unsuccessful, serving as a basis for raising alarms and initiating corrective actions.
+- **Singleton Nature:** Operates as a single instance within the system, ensuring centralized management and consistency in tracking upgrade history.
+- **Alarm Integration:** Interfaces with alarm conditions to facilitate timely alerts and responses to upgrade issues.
+- **Version Documentation:** Records the version and descriptive details of failed upgrades, aiding in troubleshooting and resolution efforts.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

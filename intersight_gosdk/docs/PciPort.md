@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | The operational status of the PCIe switch port. | [optional] [readonly] 
 **PortId** | Pointer to **int64** | The identifier of the PCIe switch port. | [optional] [readonly] 
 **Role** | Pointer to **string** | The current role of the PCIe switch port. * &#x60;Unconfigured&#x60; - Indicates that the PCIe switch port role is currently unconfigured. * &#x60;Downstream&#x60; - Indicates that the PCIe switch port role is currently downstream. A downstream port connects to a PCIe peripheral device such as a GPU or a network adapter. * &#x60;Upstream&#x60; - Indicates that the PCIe switch port role is currently upstream. An upstream port connects to a PCIe root complex such as a CPU. * &#x60;Unknown&#x60; - Indicates that the PCIe switch port role is currently unknown. | [optional] [readonly] [default to "Unconfigured"]
-**Uri** | Pointer to **string** | The unique identifier of the PCIe switch port as reported by chassis expander module management controller. | [optional] 
 **Width** | Pointer to **int64** | The link width of the PCIe switch port. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PciEndpoint** | Pointer to [**NullablePciEndpointRelationship**](PciEndpointRelationship.md) |  | [optional] 
@@ -211,31 +210,6 @@ SetRole sets Role field to given value.
 `func (o *PciPort) HasRole() bool`
 
 HasRole returns a boolean if a field has been set.
-
-### GetUri
-
-`func (o *PciPort) GetUri() string`
-
-GetUri returns the Uri field if non-nil, zero value otherwise.
-
-### GetUriOk
-
-`func (o *PciPort) GetUriOk() (*string, bool)`
-
-GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUri
-
-`func (o *PciPort) SetUri(v string)`
-
-SetUri sets Uri field to given value.
-
-### HasUri
-
-`func (o *PciPort) HasUri() bool`
-
-HasUri returns a boolean if a field has been set.
 
 ### GetWidth
 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **OperSpeed** | Pointer to **string** | Current Operational speed for this port. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerDn for ethernet physical port. | [optional] [readonly] 
 **PortChannelId** | Pointer to **int64** | Port channel id for port channel created on FI switch. | [optional] [readonly] 
+**PortName** | Pointer to **string** | Switch physical port name. | [optional] [readonly] 
 **PortType** | Pointer to **string** | Defines the transport type for this port (ethernet OR fc). | [optional] [readonly] 
 **TransceiverType** | Pointer to **string** | Transceiver model attached to a port in the Fabric Interconnect. | [optional] [readonly] 
 **AcknowledgedPeerInterface** | Pointer to [**NullablePortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
@@ -199,6 +200,31 @@ SetPortChannelId sets PortChannelId field to given value.
 `func (o *EtherPhysicalPortBase) HasPortChannelId() bool`
 
 HasPortChannelId returns a boolean if a field has been set.
+
+### GetPortName
+
+`func (o *EtherPhysicalPortBase) GetPortName() string`
+
+GetPortName returns the PortName field if non-nil, zero value otherwise.
+
+### GetPortNameOk
+
+`func (o *EtherPhysicalPortBase) GetPortNameOk() (*string, bool)`
+
+GetPortNameOk returns a tuple with the PortName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortName
+
+`func (o *EtherPhysicalPortBase) SetPortName(v string)`
+
+SetPortName sets PortName field to given value.
+
+### HasPortName
+
+`func (o *EtherPhysicalPortBase) HasPortName() bool`
+
+HasPortName returns a boolean if a field has been set.
 
 ### GetPortType
 

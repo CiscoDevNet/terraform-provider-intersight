@@ -3,12 +3,30 @@ subcategory: "workload"
 layout: "intersight"
 page_title: "Intersight: intersight_workload_workload_definition"
 description: |-
-        Details of a Workload Definition.
+        ### Overview
+        The WorkloadDefinition object represents the blueprint for defining reusable workload configurations that can be deployed across one or more organizations. It serves as the foundational template that captures the complete specification of a workload, including its associated blueprints, validation requirements, and deployment strategies.
+        #### Purpose
+        A WorkloadDefinition provides a versioned, reusable specification for workloads that can be deployed multiple times across different contexts organizations. It enables administrators to define complex multi-component workloads once and deploy them consistently, supporting both iterative development through versioning and controlled rollout through deployment strategies.
+        #### Key Concepts
+        - **Platform Support:** - Platform types can be specified to indicate which Intersight platforms support the workload, ensuring deployments target compatible infrastructure.
+        - **Versioning and Preferred Versions:** - Each workload definition supports multiple versions, with the ability to designate a preferred (default) version. This allows for safe evolution of workload specifications while maintaining backward compatibility with existing deployments.
+        - **Blueprint Composition:** - Workload definitions are composed of one or more blueprint references, enabling modular design where complex workloads are built from reusable blueprint components.
+        - **Validation and Status Tracking:** - Each definition maintains validation information to ensure all required inputs and dependencies are properly configured before deployment, along with deployment summary aggregations across all instances.
+        - **Override Inputs:** - Each workload definition can specify input overrides for the blueprints it references, allowing for customization within deployments.
 
 ---
 
 # Data Source: intersight_workload_workload_definition
-Details of a Workload Definition.
+### Overview
+The WorkloadDefinition object represents the blueprint for defining reusable workload configurations that can be deployed across one or more organizations. It serves as the foundational template that captures the complete specification of a workload, including its associated blueprints, validation requirements, and deployment strategies.
+#### Purpose
+A WorkloadDefinition provides a versioned, reusable specification for workloads that can be deployed multiple times across different contexts organizations. It enables administrators to define complex multi-component workloads once and deploy them consistently, supporting both iterative development through versioning and controlled rollout through deployment strategies.
+#### Key Concepts
+- **Platform Support:** - Platform types can be specified to indicate which Intersight platforms support the workload, ensuring deployments target compatible infrastructure.
+- **Versioning and Preferred Versions:** - Each workload definition supports multiple versions, with the ability to designate a preferred (default) version. This allows for safe evolution of workload specifications while maintaining backward compatibility with existing deployments.
+- **Blueprint Composition:** - Workload definitions are composed of one or more blueprint references, enabling modular design where complex workloads are built from reusable blueprint components.
+- **Validation and Status Tracking:** - Each definition maintains validation information to ensure all required inputs and dependencies are properly configured before deployment, along with deployment summary aggregations across all instances.
+- **Override Inputs:** - Each workload definition can specify input overrides for the blueprints it references, allowing for customization within deployments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ActionParams** | Pointer to [**[]PolicyActionParam**](PolicyActionParam.md) |  | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
 **DeployedPolicies** | Pointer to **[]string** |  | [optional] 
+**PartiallyDeployedPolicies** | Pointer to [**[]PolicyPolicyContextHolder**](PolicyPolicyContextHolder.md) |  | [optional] 
 **PolicyChangeDetails** | Pointer to [**[]PolicyConfigChangeDetailType**](PolicyConfigChangeDetailType.md) |  | [optional] 
 **RemovedPolicies** | Pointer to **[]string** |  | [optional] 
 **ReportedPolicyChanges** | Pointer to [**[]PolicyReportedPolicyChange**](PolicyReportedPolicyChange.md) |  | [optional] 
@@ -205,6 +206,41 @@ HasDeployedPolicies returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetDeployedPolicies()`
 
 UnsetDeployedPolicies ensures that no value is present for DeployedPolicies, not even an explicit nil
+### GetPartiallyDeployedPolicies
+
+`func (o *PolicyAbstractConfigProfile) GetPartiallyDeployedPolicies() []PolicyPolicyContextHolder`
+
+GetPartiallyDeployedPolicies returns the PartiallyDeployedPolicies field if non-nil, zero value otherwise.
+
+### GetPartiallyDeployedPoliciesOk
+
+`func (o *PolicyAbstractConfigProfile) GetPartiallyDeployedPoliciesOk() (*[]PolicyPolicyContextHolder, bool)`
+
+GetPartiallyDeployedPoliciesOk returns a tuple with the PartiallyDeployedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartiallyDeployedPolicies
+
+`func (o *PolicyAbstractConfigProfile) SetPartiallyDeployedPolicies(v []PolicyPolicyContextHolder)`
+
+SetPartiallyDeployedPolicies sets PartiallyDeployedPolicies field to given value.
+
+### HasPartiallyDeployedPolicies
+
+`func (o *PolicyAbstractConfigProfile) HasPartiallyDeployedPolicies() bool`
+
+HasPartiallyDeployedPolicies returns a boolean if a field has been set.
+
+### SetPartiallyDeployedPoliciesNil
+
+`func (o *PolicyAbstractConfigProfile) SetPartiallyDeployedPoliciesNil(b bool)`
+
+ SetPartiallyDeployedPoliciesNil sets the value for PartiallyDeployedPolicies to be an explicit nil
+
+### UnsetPartiallyDeployedPolicies
+`func (o *PolicyAbstractConfigProfile) UnsetPartiallyDeployedPolicies()`
+
+UnsetPartiallyDeployedPolicies ensures that no value is present for PartiallyDeployedPolicies, not even an explicit nil
 ### GetPolicyChangeDetails
 
 `func (o *PolicyAbstractConfigProfile) GetPolicyChangeDetails() []PolicyConfigChangeDetailType`
