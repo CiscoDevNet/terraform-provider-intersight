@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.NodeOpStatus"]
 **ClusterNetworkStatus** | Pointer to [**[]ApplianceNetworkStatus**](ApplianceNetworkStatus.md) |  | [optional] 
 **CpuUsage** | Pointer to **float32** | Percentage of CPU currently in use. | [optional] [readonly] 
+**DeploymentSize** | Pointer to **string** | Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc. | [optional] [readonly] 
 **MemUsage** | Pointer to **float32** | Percentage of memory currently in use. | [optional] [readonly] 
 **NodeHostname** | Pointer to **string** | Hostname of the Intersight Appliance node. | [optional] [readonly] 
 **NodeId** | Pointer to **int64** | System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance cluster starting with a value of 1. | [optional] [readonly] 
@@ -138,6 +139,31 @@ SetCpuUsage sets CpuUsage field to given value.
 `func (o *ApplianceNodeOpStatus) HasCpuUsage() bool`
 
 HasCpuUsage returns a boolean if a field has been set.
+
+### GetDeploymentSize
+
+`func (o *ApplianceNodeOpStatus) GetDeploymentSize() string`
+
+GetDeploymentSize returns the DeploymentSize field if non-nil, zero value otherwise.
+
+### GetDeploymentSizeOk
+
+`func (o *ApplianceNodeOpStatus) GetDeploymentSizeOk() (*string, bool)`
+
+GetDeploymentSizeOk returns a tuple with the DeploymentSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeploymentSize
+
+`func (o *ApplianceNodeOpStatus) SetDeploymentSize(v string)`
+
+SetDeploymentSize sets DeploymentSize field to given value.
+
+### HasDeploymentSize
+
+`func (o *ApplianceNodeOpStatus) HasDeploymentSize() bool`
+
+HasDeploymentSize returns a boolean if a field has been set.
 
 ### GetMemUsage
 

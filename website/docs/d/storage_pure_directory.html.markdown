@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_directory"
 description: |-
-        Important file system directories should be set up as managed directories. Managed directories can have policies attached to them. Managed directories differ from standard directories in that they provide space reporting and metrics.
+        The PureDirectory object represents a managed directory within a PureStorage FlashArray, offering space reporting and metrics.
+        #### Purpose
+        PureDirectory facilitates the organization and management of storage directories, providing structured space reporting and policy integration within the FlashArray.
+        #### Key Concepts
+        - **Directory Management:** Offers structured management of directories, optimizing space reporting and storage operations.
+        - **Policy Integration:** Supports attachment of policies to directories, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage directory operations within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_directory
-Important file system directories should be set up as managed directories. Managed directories can have policies attached to them. Managed directories differ from standard directories in that they provide space reporting and metrics.
+The PureDirectory object represents a managed directory within a PureStorage FlashArray, offering space reporting and metrics.
+#### Purpose  
+PureDirectory facilitates the organization and management of storage directories, providing structured space reporting and policy integration within the FlashArray.  
+#### Key Concepts  
+- **Directory Management:** Offers structured management of directories, optimizing space reporting and storage operations. 
+- **Policy Integration:** Supports attachment of policies to directories, enhancing storage management capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage directory operations within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

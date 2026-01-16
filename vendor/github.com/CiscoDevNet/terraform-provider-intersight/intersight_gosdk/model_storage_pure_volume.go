@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -31,12 +31,18 @@ type StoragePureVolume struct {
 	ObjectType string `json:"ObjectType"`
 	// Creation time of the volume.
 	Created *time.Time `json:"Created,omitempty"`
+	// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+	PodName *string `json:"PodName,omitempty"`
+	// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+	RealmName *string `json:"RealmName,omitempty"`
 	// Serial number of the volume.
 	Serial *string `json:"Serial,omitempty"`
 	// Source from which the volume is created. Applicable only if the volume is cloned from other volume or snapshot.
 	Source               *string                                        `json:"Source,omitempty"`
 	Array                NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
+	Pod                  NullableStoragePurePodRelationship             `json:"Pod,omitempty"`
 	ProtectionGroup      NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+	Realm                NullableStoragePureRealmRelationship           `json:"Realm,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -156,6 +162,70 @@ func (o *StoragePureVolume) SetCreated(v time.Time) {
 	o.Created = &v
 }
 
+// GetPodName returns the PodName field value if set, zero value otherwise.
+func (o *StoragePureVolume) GetPodName() string {
+	if o == nil || IsNil(o.PodName) {
+		var ret string
+		return ret
+	}
+	return *o.PodName
+}
+
+// GetPodNameOk returns a tuple with the PodName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolume) GetPodNameOk() (*string, bool) {
+	if o == nil || IsNil(o.PodName) {
+		return nil, false
+	}
+	return o.PodName, true
+}
+
+// HasPodName returns a boolean if a field has been set.
+func (o *StoragePureVolume) HasPodName() bool {
+	if o != nil && !IsNil(o.PodName) {
+		return true
+	}
+
+	return false
+}
+
+// SetPodName gets a reference to the given string and assigns it to the PodName field.
+func (o *StoragePureVolume) SetPodName(v string) {
+	o.PodName = &v
+}
+
+// GetRealmName returns the RealmName field value if set, zero value otherwise.
+func (o *StoragePureVolume) GetRealmName() string {
+	if o == nil || IsNil(o.RealmName) {
+		var ret string
+		return ret
+	}
+	return *o.RealmName
+}
+
+// GetRealmNameOk returns a tuple with the RealmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolume) GetRealmNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RealmName) {
+		return nil, false
+	}
+	return o.RealmName, true
+}
+
+// HasRealmName returns a boolean if a field has been set.
+func (o *StoragePureVolume) HasRealmName() bool {
+	if o != nil && !IsNil(o.RealmName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRealmName gets a reference to the given string and assigns it to the RealmName field.
+func (o *StoragePureVolume) SetRealmName(v string) {
+	o.RealmName = &v
+}
+
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *StoragePureVolume) GetSerial() string {
 	if o == nil || IsNil(o.Serial) {
@@ -263,6 +333,49 @@ func (o *StoragePureVolume) UnsetArray() {
 	o.Array.Unset()
 }
 
+// GetPod returns the Pod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StoragePureVolume) GetPod() StoragePurePodRelationship {
+	if o == nil || IsNil(o.Pod.Get()) {
+		var ret StoragePurePodRelationship
+		return ret
+	}
+	return *o.Pod.Get()
+}
+
+// GetPodOk returns a tuple with the Pod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StoragePureVolume) GetPodOk() (*StoragePurePodRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Pod.Get(), o.Pod.IsSet()
+}
+
+// HasPod returns a boolean if a field has been set.
+func (o *StoragePureVolume) HasPod() bool {
+	if o != nil && o.Pod.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPod gets a reference to the given NullableStoragePurePodRelationship and assigns it to the Pod field.
+func (o *StoragePureVolume) SetPod(v StoragePurePodRelationship) {
+	o.Pod.Set(&v)
+}
+
+// SetPodNil sets the value for Pod to be an explicit nil
+func (o *StoragePureVolume) SetPodNil() {
+	o.Pod.Set(nil)
+}
+
+// UnsetPod ensures that no value is present for Pod, not even an explicit nil
+func (o *StoragePureVolume) UnsetPod() {
+	o.Pod.Unset()
+}
+
 // GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureVolume) GetProtectionGroup() StoragePureProtectionGroupRelationship {
 	if o == nil || IsNil(o.ProtectionGroup.Get()) {
@@ -304,6 +417,49 @@ func (o *StoragePureVolume) SetProtectionGroupNil() {
 // UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
 func (o *StoragePureVolume) UnsetProtectionGroup() {
 	o.ProtectionGroup.Unset()
+}
+
+// GetRealm returns the Realm field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StoragePureVolume) GetRealm() StoragePureRealmRelationship {
+	if o == nil || IsNil(o.Realm.Get()) {
+		var ret StoragePureRealmRelationship
+		return ret
+	}
+	return *o.Realm.Get()
+}
+
+// GetRealmOk returns a tuple with the Realm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StoragePureVolume) GetRealmOk() (*StoragePureRealmRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Realm.Get(), o.Realm.IsSet()
+}
+
+// HasRealm returns a boolean if a field has been set.
+func (o *StoragePureVolume) HasRealm() bool {
+	if o != nil && o.Realm.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRealm gets a reference to the given NullableStoragePureRealmRelationship and assigns it to the Realm field.
+func (o *StoragePureVolume) SetRealm(v StoragePureRealmRelationship) {
+	o.Realm.Set(&v)
+}
+
+// SetRealmNil sets the value for Realm to be an explicit nil
+func (o *StoragePureVolume) SetRealmNil() {
+	o.Realm.Set(nil)
+}
+
+// UnsetRealm ensures that no value is present for Realm, not even an explicit nil
+func (o *StoragePureVolume) UnsetRealm() {
+	o.Realm.Unset()
 }
 
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -378,6 +534,12 @@ func (o StoragePureVolume) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Created) {
 		toSerialize["Created"] = o.Created
 	}
+	if !IsNil(o.PodName) {
+		toSerialize["PodName"] = o.PodName
+	}
+	if !IsNil(o.RealmName) {
+		toSerialize["RealmName"] = o.RealmName
+	}
 	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
@@ -387,8 +549,14 @@ func (o StoragePureVolume) ToMap() (map[string]interface{}, error) {
 	if o.Array.IsSet() {
 		toSerialize["Array"] = o.Array.Get()
 	}
+	if o.Pod.IsSet() {
+		toSerialize["Pod"] = o.Pod.Get()
+	}
 	if o.ProtectionGroup.IsSet() {
 		toSerialize["ProtectionGroup"] = o.ProtectionGroup.Get()
+	}
+	if o.Realm.IsSet() {
+		toSerialize["Realm"] = o.Realm.Get()
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -450,12 +618,18 @@ func (o *StoragePureVolume) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Creation time of the volume.
 		Created *time.Time `json:"Created,omitempty"`
+		// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+		PodName *string `json:"PodName,omitempty"`
+		// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+		RealmName *string `json:"RealmName,omitempty"`
 		// Serial number of the volume.
 		Serial *string `json:"Serial,omitempty"`
 		// Source from which the volume is created. Applicable only if the volume is cloned from other volume or snapshot.
 		Source           *string                                        `json:"Source,omitempty"`
 		Array            NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
+		Pod              NullableStoragePurePodRelationship             `json:"Pod,omitempty"`
 		ProtectionGroup  NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+		Realm            NullableStoragePureRealmRelationship           `json:"Realm,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
@@ -467,10 +641,14 @@ func (o *StoragePureVolume) UnmarshalJSON(data []byte) (err error) {
 		varStoragePureVolume.ClassId = varStoragePureVolumeWithoutEmbeddedStruct.ClassId
 		varStoragePureVolume.ObjectType = varStoragePureVolumeWithoutEmbeddedStruct.ObjectType
 		varStoragePureVolume.Created = varStoragePureVolumeWithoutEmbeddedStruct.Created
+		varStoragePureVolume.PodName = varStoragePureVolumeWithoutEmbeddedStruct.PodName
+		varStoragePureVolume.RealmName = varStoragePureVolumeWithoutEmbeddedStruct.RealmName
 		varStoragePureVolume.Serial = varStoragePureVolumeWithoutEmbeddedStruct.Serial
 		varStoragePureVolume.Source = varStoragePureVolumeWithoutEmbeddedStruct.Source
 		varStoragePureVolume.Array = varStoragePureVolumeWithoutEmbeddedStruct.Array
+		varStoragePureVolume.Pod = varStoragePureVolumeWithoutEmbeddedStruct.Pod
 		varStoragePureVolume.ProtectionGroup = varStoragePureVolumeWithoutEmbeddedStruct.ProtectionGroup
+		varStoragePureVolume.Realm = varStoragePureVolumeWithoutEmbeddedStruct.Realm
 		varStoragePureVolume.RegisteredDevice = varStoragePureVolumeWithoutEmbeddedStruct.RegisteredDevice
 		*o = StoragePureVolume(varStoragePureVolume)
 	} else {
@@ -492,10 +670,14 @@ func (o *StoragePureVolume) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Created")
+		delete(additionalProperties, "PodName")
+		delete(additionalProperties, "RealmName")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "Source")
 		delete(additionalProperties, "Array")
+		delete(additionalProperties, "Pod")
 		delete(additionalProperties, "ProtectionGroup")
+		delete(additionalProperties, "Realm")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

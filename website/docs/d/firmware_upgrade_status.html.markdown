@@ -3,12 +3,32 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade_status"
 description: |-
-        The status for the upgrade operation to include the status for the download and upgrade stages.
+        The UpgradeStatus object provides comprehensive status information for firmware upgrade operations. It tracks the progress and outcomes of both the download and upgrade stages, offering detailed insights into the entire process.
+        #### Purpose
+        UpgradeStatus object is designed to give users a clear and detailed view of an ongoing or completed firmware upgrade. It consolidates information regarding the download of firmware images and the subsequent upgrade process on the target endpoint, enabling monitoring and troubleshooting.
+        #### Key Concepts
+        - **Detailed Stage Tracking:** Separates and reports on distinct stages of the upgrade, such as download and the actual firmware flashing, providing granular progress updates.
+        - **Download Metrics:** Includes specific metrics like download percentage and messages from the endpoint during the download phase.
+        - **Overall Operation Status:** Provides an overall status, percentage, and error messages for the entire upgrade operation.
+        - **Power State Monitoring:** Captures the server's power status before and after the upgrade submission, which is crucial for understanding operational state changes.
+        - **Firmware Version Tracking:** Records both the source (pre-upgrade) and target (post-upgrade) firmware versions for clear verification.
+        - **Workflow Integration:** Links to the runtime instance of the workflow orchestrating the upgrade, allowing for comprehensive process tracking.
+        - **Extends DownloadStatus:** Inherits capabilities from `connector.DownloadStatus`, indicating its role in managing file download aspects of the upgrade.
 
 ---
 
 # Data Source: intersight_firmware_upgrade_status
-The status for the upgrade operation to include the status for the download and upgrade stages.
+The UpgradeStatus object provides comprehensive status information for firmware upgrade operations. It tracks the progress and outcomes of both the download and upgrade stages, offering detailed insights into the entire process.
+ #### Purpose
+ UpgradeStatus object is designed to give users a clear and detailed view of an ongoing or completed firmware upgrade. It consolidates information regarding the download of firmware images and the subsequent upgrade process on the target endpoint, enabling monitoring and troubleshooting. 
+ #### Key Concepts
+ - **Detailed Stage Tracking:** Separates and reports on distinct stages of the upgrade, such as download and the actual firmware flashing, providing granular progress updates.
+ - **Download Metrics:** Includes specific metrics like download percentage and messages from the endpoint during the download phase.
+ - **Overall Operation Status:** Provides an overall status, percentage, and error messages for the entire upgrade operation.
+ - **Power State Monitoring:** Captures the server's power status before and after the upgrade submission, which is crucial for understanding operational state changes.
+ - **Firmware Version Tracking:** Records both the source (pre-upgrade) and target (post-upgrade) firmware versions for clear verification.
+ - **Workflow Integration:** Links to the runtime instance of the workflow orchestrating the upgrade, allowing for comprehensive process tracking.
+ - **Extends DownloadStatus:** Inherits capabilities from `connector.DownloadStatus`, indicating its role in managing file download aspects of the upgrade.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

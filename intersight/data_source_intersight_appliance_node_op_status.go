@@ -148,6 +148,11 @@ func getApplianceNodeOpStatusSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployment_size": {
+			Description: "Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -826,6 +831,11 @@ func dataSourceApplianceNodeOpStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deployment_size"); ok {
+		x := (v.(string))
+		o.SetDeploymentSize(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -1376,6 +1386,7 @@ func dataSourceApplianceNodeOpStatusRead(c context.Context, d *schema.ResourceDa
 				temp["cpu_usage"] = (s.GetCpuUsage())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployment_size"] = (s.GetDeploymentSize())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["file_system_op_statuses"] = flattenListApplianceFileSystemOpStatusRelationship(s.GetFileSystemOpStatuses(), d)

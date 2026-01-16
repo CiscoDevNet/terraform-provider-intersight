@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_controller"
 description: |-
-        A storage controller entity in Pure FlashArray.
+        The PureController object represents a storage controller within a PureStorage FlashArray, managing data flow and operations.
+        #### Purpose
+        PureController facilitates the management of storage controllers, ensuring efficient data operations and resource allocation within the FlashArray.
+        #### Key Concepts
+        - **Controller Management:** Offers structured management of storage controllers, optimizing data flow and operations.
+        - **Integration:** Supports integration with array and port objects, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage storage controllers within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_controller
-A storage controller entity in Pure FlashArray.
+The PureController object represents a storage controller within a PureStorage FlashArray, managing data flow and operations.  
+#### Purpose  
+PureController facilitates the management of storage controllers, ensuring efficient data operations and resource allocation within the FlashArray. 
+#### Key Concepts 
+- **Controller Management:** Offers structured management of storage controllers, optimizing data flow and operations. 
+- **Integration:** Supports integration with array and port objects, enhancing storage management capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage storage controllers within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

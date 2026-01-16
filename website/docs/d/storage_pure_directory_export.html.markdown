@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_directory_export"
 description: |-
-        Managed directory exports are created by adding NFS or SMB export policies to managed directories.
+        The PureDirectoryExport object facilitates the creation of managed directory exports within a PureStorage FlashArray, enhancing data accessibility.
+        #### Purpose
+        PureDirectoryExport provides a mechanism for exporting directories, enabling efficient data access and integration with supported protocols.
+        #### Key Concepts
+        - **Export Management:** Facilitates the creation and management of directory exports, optimizing data accessibility and integration.
+        - **Protocol Support:** Supports integration with NFS and SMB protocols, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage directory exports within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_directory_export
-Managed directory exports are created by adding NFS or SMB export policies to managed directories.
+The PureDirectoryExport object facilitates the creation of managed directory exports within a PureStorage FlashArray, enhancing data accessibility.  
+#### Purpose  
+PureDirectoryExport provides a mechanism for exporting directories, enabling efficient data access and integration with supported protocols.
+#### Key Concepts  
+- **Export Management:** Facilitates the creation and management of directory exports, optimizing data accessibility and integration. 
+- **Protocol Support:** Supports integration with NFS and SMB protocols, enhancing storage management capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage directory exports within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

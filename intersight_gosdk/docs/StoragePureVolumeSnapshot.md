@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureVolumeSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureVolumeSnapshot"]
 **Pod** | Pointer to **string** | A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. | [optional] [readonly] 
+**RealmName** | Pointer to **string** | A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Unique serial number of the snapshot allocated by the storage array. | [optional] [readonly] 
 **SnapshotSize** | Pointer to **int64** | The size of the snapshot created. | [optional] [readonly] 
 **TotalProvisioned** | Pointer to **int64** | The overall size of the snapshot allocated by the storage array. | [optional] [readonly] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **VolumeGroup** | Pointer to **string** | Volume groups organize volumes into logical groupings. If virtual volumes are configured, each volume group on the FlashArray array represents its associated virtual machine, and inside each of those volumes groups are the FlashArray volumes that are assigned to the virtual machine. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **ProtectionGroupSnapshot** | Pointer to [**NullableStoragePureProtectionGroupSnapshotRelationship**](StoragePureProtectionGroupSnapshotRelationship.md) |  | [optional] 
+**Realm** | Pointer to [**NullableStoragePureRealmRelationship**](StoragePureRealmRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Volume** | Pointer to [**NullableStoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) |  | [optional] 
 
@@ -100,6 +102,31 @@ SetPod sets Pod field to given value.
 `func (o *StoragePureVolumeSnapshot) HasPod() bool`
 
 HasPod returns a boolean if a field has been set.
+
+### GetRealmName
+
+`func (o *StoragePureVolumeSnapshot) GetRealmName() string`
+
+GetRealmName returns the RealmName field if non-nil, zero value otherwise.
+
+### GetRealmNameOk
+
+`func (o *StoragePureVolumeSnapshot) GetRealmNameOk() (*string, bool)`
+
+GetRealmNameOk returns a tuple with the RealmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealmName
+
+`func (o *StoragePureVolumeSnapshot) SetRealmName(v string)`
+
+SetRealmName sets RealmName field to given value.
+
+### HasRealmName
+
+`func (o *StoragePureVolumeSnapshot) HasRealmName() bool`
+
+HasRealmName returns a boolean if a field has been set.
 
 ### GetSerial
 
@@ -296,6 +323,41 @@ HasProtectionGroupSnapshot returns a boolean if a field has been set.
 `func (o *StoragePureVolumeSnapshot) UnsetProtectionGroupSnapshot()`
 
 UnsetProtectionGroupSnapshot ensures that no value is present for ProtectionGroupSnapshot, not even an explicit nil
+### GetRealm
+
+`func (o *StoragePureVolumeSnapshot) GetRealm() StoragePureRealmRelationship`
+
+GetRealm returns the Realm field if non-nil, zero value otherwise.
+
+### GetRealmOk
+
+`func (o *StoragePureVolumeSnapshot) GetRealmOk() (*StoragePureRealmRelationship, bool)`
+
+GetRealmOk returns a tuple with the Realm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealm
+
+`func (o *StoragePureVolumeSnapshot) SetRealm(v StoragePureRealmRelationship)`
+
+SetRealm sets Realm field to given value.
+
+### HasRealm
+
+`func (o *StoragePureVolumeSnapshot) HasRealm() bool`
+
+HasRealm returns a boolean if a field has been set.
+
+### SetRealmNil
+
+`func (o *StoragePureVolumeSnapshot) SetRealmNil(b bool)`
+
+ SetRealmNil sets the value for Realm to be an explicit nil
+
+### UnsetRealm
+`func (o *StoragePureVolumeSnapshot) UnsetRealm()`
+
+UnsetRealm ensures that no value is present for Realm, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureVolumeSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

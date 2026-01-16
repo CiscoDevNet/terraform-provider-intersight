@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_switch_upgrade"
 description: |-
-        Firmware upgrade operation for Fabric Interconnects that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+        The SwitchUpgrade object is designed for upgrading firmware on Fabric Interconnects, streamlining the process of downloading and applying firmware images from cloud repositories or network shares.
+        #### Purpose
+        SwitchUpgrade simplifies the firmware upgrade process for Fabric Interconnects, enhancing network performance and security by facilitating timely updates. This provides options for both direct download and network share-based upgrades for UCSM devices. IMM Fabric Interconnect supports direct download.
+        #### Key Concepts
+        - **Fabric Interconnect Optimization:** Tailored to address the specific needs of Fabric Interconnects, ensuring efficient and effective firmware upgrades.
+        - **Evacuation Management:** Includes features to manage fabric evacuation during upgrades, enhancing operational continuity and minimizing disruptions.
+        - **Flexible Deployment:** Supports both direct download from Cisco sources and network share-based upgrades, catering to varied infrastructure configurations.
+        - **Security and Compliance:** Implements rigorous access and licensing controls, ensuring upgrades are performed securely and in compliance with organizational policies.
 
 ---
 
 # Resource: intersight_firmware_switch_upgrade
-Firmware upgrade operation for Fabric Interconnects that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+The SwitchUpgrade object is designed for upgrading firmware on Fabric Interconnects, streamlining the process of downloading and applying firmware images from cloud repositories or network shares.
+#### Purpose
+SwitchUpgrade simplifies the firmware upgrade process for Fabric Interconnects, enhancing network performance and security by facilitating timely updates. This provides options for both direct download and network share-based upgrades for UCSM devices. IMM Fabric Interconnect supports direct download.
+#### Key Concepts
+- **Fabric Interconnect Optimization:** Tailored to address the specific needs of Fabric Interconnects, ensuring efficient and effective firmware upgrades.
+- **Evacuation Management:** Includes features to manage fabric evacuation during upgrades, enhancing operational continuity and minimizing disruptions.
+- **Flexible Deployment:** Supports both direct download from Cisco sources and network share-based upgrades, catering to varied infrastructure configurations.
+- **Security and Compliance:** Implements rigorous access and licensing controls, ensuring upgrades are performed securely and in compliance with organizational policies.
 ## Usage Example
 ### Resource Creation
 

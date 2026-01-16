@@ -428,6 +428,5 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_workload_clear_workload_tag":                             resourceWorkloadClearWorkloadTag(),
 		"intersight_workload_workload_definition":                            resourceWorkloadWorkloadDefinition(),
 		"intersight_workload_workload_deployment":                            resourceWorkloadWorkloadDeployment(),
-		"intersight_workspace_folder":                                        resourceWorkspaceFolder(),
 	}
 }

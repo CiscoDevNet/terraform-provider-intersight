@@ -421,6 +421,16 @@ func getMetaDefinitionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"on_delete": {
+						Description: "The action to perform on the peer MO when the local MO is deleted.\n* `Unset` - Any relationship from the peer managed object to the managed object being deleted is unset.\n* `Cascade` - The peer managed object is deleted.\n* `Prohibit` - The deletion is prevented when the relationship is set.\n* `Ignore` - No action is performed on the relationship value or the peer managed object of the relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"on_peer_delete": {
+						Description: "The action to perform on the local MO when the peer MO is deleted.\n* `Unset` - Any relationship from the peer managed object to the managed object being deleted is unset.\n* `Cascade` - The peer managed object is deleted.\n* `Prohibit` - The deletion is prevented when the relationship is set.\n* `Ignore` - No action is performed on the relationship value or the peer managed object of the relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"peer_rel_name": {
 						Description: "Name of relationship in peer managed object.",
 						Type:        schema.TypeString,
@@ -1044,17 +1054,6 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 				}
 			}
 			o.SetClassId("meta.PropDefinition")
-			if v, ok := l["default"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						x2 := x1.(map[string]interface{})
-						o.SetDefault(x2)
-					}
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

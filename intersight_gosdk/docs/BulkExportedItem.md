@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 **ExportTags** | Pointer to **bool** | Specifies whether tags must be exported for item MO. | [optional] [readonly] [default to false]
 **FileName** | Pointer to **string** | Name of the file corresponding to item MO. | [optional] [readonly] 
 **IncludeOrgIdentity** | Pointer to **bool** | Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties. | [optional] [readonly] 
+**IsAesKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;aesKey&#39; property has been set. | [optional] [readonly] [default to false]
 **Item** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | MO item identity (the moref corresponding to item) expressed as a string. | [optional] [readonly] 
+**RelatedTypeOptions** | Pointer to [**[]BulkRelatedTypeExportOption**](BulkRelatedTypeExportOption.md) |  | [optional] 
 **ServiceName** | Pointer to **string** | Name of the target service that owns the item MO. Service responsible for handling exported item mo notifications. | [optional] [readonly] 
 **ServiceVersion** | Pointer to **string** | Version of the service that owns the item MO. | [optional] [readonly] 
-**Status** | Pointer to **string** | Status of the item&#39;s export operation. * &#x60;&#x60; - The operation has not started. * &#x60;ValidationInProgress&#x60; - The validation operation is in progress. * &#x60;Valid&#x60; - The content to be imported is valid. * &#x60;InValid&#x60; - The content to be imported is not valid and the status message will have the reason. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;RollBackInitiated&#x60; - The rollback has been inititiated for import failure. * &#x60;RollBackFailed&#x60; - The rollback has failed for import failure. * &#x60;RollbackCompleted&#x60; - The rollback has completed for import failure. * &#x60;RollbackAborted&#x60; - The rollback has been aborted for import failure. * &#x60;OperationTimedOut&#x60; - The operation has timed out. * &#x60;OperationCancelled&#x60; - The operation has been canceled. * &#x60;CancelInProgress&#x60; - The operation is being canceled. | [optional] [readonly] [default to ""]
+**Status** | Pointer to **string** | Status of the item&#39;s export operation. * &#x60;&#x60; - The operation has not started. * &#x60;Ready&#x60; - The operation is ready to start. * &#x60;ValidationInProgress&#x60; - The validation operation is in progress. * &#x60;Valid&#x60; - The content to be imported is valid. * &#x60;InValid&#x60; - The content to be imported is not valid and the status message will have the reason. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;RollBackInitiated&#x60; - The rollback has been initiated for import failure. * &#x60;RollBackFailed&#x60; - The rollback has failed for import failure. * &#x60;RollbackCompleted&#x60; - The rollback has completed for import failure. * &#x60;RollbackAborted&#x60; - The rollback has been aborted for import failure. * &#x60;OperationTimedOut&#x60; - The operation has timed out. * &#x60;OperationCancelled&#x60; - The operation has been canceled. * &#x60;CancelInProgress&#x60; - The operation is being canceled. | [optional] [readonly] [default to ""]
 **StatusMessage** | Pointer to **string** | Progress or error message for the MO&#39;s export operation. | [optional] [readonly] 
 **Export** | Pointer to [**NullableBulkExportRelationship**](BulkExportRelationship.md) |  | [optional] 
 **ParentItem** | Pointer to [**NullableBulkExportedItemRelationship**](BulkExportedItemRelationship.md) |  | [optional] 
@@ -215,6 +217,31 @@ SetIncludeOrgIdentity sets IncludeOrgIdentity field to given value.
 
 HasIncludeOrgIdentity returns a boolean if a field has been set.
 
+### GetIsAesKeySet
+
+`func (o *BulkExportedItem) GetIsAesKeySet() bool`
+
+GetIsAesKeySet returns the IsAesKeySet field if non-nil, zero value otherwise.
+
+### GetIsAesKeySetOk
+
+`func (o *BulkExportedItem) GetIsAesKeySetOk() (*bool, bool)`
+
+GetIsAesKeySetOk returns a tuple with the IsAesKeySet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAesKeySet
+
+`func (o *BulkExportedItem) SetIsAesKeySet(v bool)`
+
+SetIsAesKeySet sets IsAesKeySet field to given value.
+
+### HasIsAesKeySet
+
+`func (o *BulkExportedItem) HasIsAesKeySet() bool`
+
+HasIsAesKeySet returns a boolean if a field has been set.
+
 ### GetItem
 
 `func (o *BulkExportedItem) GetItem() MoMoRef`
@@ -265,6 +292,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetRelatedTypeOptions
+
+`func (o *BulkExportedItem) GetRelatedTypeOptions() []BulkRelatedTypeExportOption`
+
+GetRelatedTypeOptions returns the RelatedTypeOptions field if non-nil, zero value otherwise.
+
+### GetRelatedTypeOptionsOk
+
+`func (o *BulkExportedItem) GetRelatedTypeOptionsOk() (*[]BulkRelatedTypeExportOption, bool)`
+
+GetRelatedTypeOptionsOk returns a tuple with the RelatedTypeOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRelatedTypeOptions
+
+`func (o *BulkExportedItem) SetRelatedTypeOptions(v []BulkRelatedTypeExportOption)`
+
+SetRelatedTypeOptions sets RelatedTypeOptions field to given value.
+
+### HasRelatedTypeOptions
+
+`func (o *BulkExportedItem) HasRelatedTypeOptions() bool`
+
+HasRelatedTypeOptions returns a boolean if a field has been set.
+
+### SetRelatedTypeOptionsNil
+
+`func (o *BulkExportedItem) SetRelatedTypeOptionsNil(b bool)`
+
+ SetRelatedTypeOptionsNil sets the value for RelatedTypeOptions to be an explicit nil
+
+### UnsetRelatedTypeOptions
+`func (o *BulkExportedItem) UnsetRelatedTypeOptions()`
+
+UnsetRelatedTypeOptions ensures that no value is present for RelatedTypeOptions, not even an explicit nil
 ### GetServiceName
 
 `func (o *BulkExportedItem) GetServiceName() string`

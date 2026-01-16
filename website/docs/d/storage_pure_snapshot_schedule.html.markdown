@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_snapshot_schedule"
 description: |-
-        PureStorage FlashArray snapshot schedule configuration entity.
+        The PureSnapshotSchedule object configures the snapshot schedule for a PureStorage FlashArray, ensuring systematic data backup processes.
+        #### Purpose
+        PureSnapshotSchedule provides structured management of snapshot schedules, enabling efficient and automated data protection strategies within the FlashArray.
+        #### Key Concepts
+        - **Schedule Management:** It orchestrates the timing and frequency of snapshot creation, ensuring consistent data protection.
+        - **Retention Configuration:** Offers options for configuring retention periods and daily snapshot limits, optimizing storage utilization.
+        - **Secure Access:** Employs privilege sets to control and manage snapshot schedules securely.
 
 ---
 
 # Data Source: intersight_storage_pure_snapshot_schedule
-PureStorage FlashArray snapshot schedule configuration entity.
+The PureSnapshotSchedule object configures the snapshot schedule for a PureStorage FlashArray, ensuring systematic data backup processes.  
+#### Purpose  
+PureSnapshotSchedule provides structured management of snapshot schedules, enabling efficient and automated data protection strategies within the FlashArray. 
+#### Key Concepts  
+- **Schedule Management:** It orchestrates the timing and frequency of snapshot creation, ensuring consistent data protection. 
+- **Retention Configuration:** Offers options for configuring retention periods and daily snapshot limits, optimizing storage utilization. 
+- **Secure Access:** Employs privilege sets to control and manage snapshot schedules securely.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

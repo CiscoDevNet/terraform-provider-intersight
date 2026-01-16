@@ -3,28 +3,26 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_profile"
 description: |-
-        ### Overview
         The Profile object represents a server profile, specifying configuration settings for a physical server. It encapsulates all necessary information to deploy, manage, and monitor a server within the infrastructure.
         #### Purpose
         A Profile is used to apply detailed configuration and policy settings to an individual server, supporting lifecycle management, compliance, and automation.
         #### Key Concepts
-        - **Configuration Management:** - Centralizes all relevant configuration states, changes, and compliance results for the server.
-        - **Policy Attachment:** - Associates various policies and pools (such as UUID pools and resource pools) to define operational parameters.
-        - **Assignment and Deployment:** - Supports both static and dynamic assignment of physical servers, as well as monitoring deployment status and results.
-        - **Lifecycle Tracking:** - Integrates with workflow engines and maintains audit trails for configuration changes and applied policies.
+        - **Configuration Management:** Centralizes all relevant configuration states, changes, and compliance results for the server.
+        - **Policy Attachment:** Associates various policies and pools (such as UUID pools and resource pools) to define operational parameters.
+        - **Assignment and Deployment:** Supports both static and dynamic assignment of physical servers, as well as monitoring deployment status and results.
+        - **Lifecycle Tracking:** Integrates with workflow engines and maintains audit trails for configuration changes and applied policies.
 
 ---
 
 # Resource: intersight_server_profile
-### Overview
 The Profile object represents a server profile, specifying configuration settings for a physical server. It encapsulates all necessary information to deploy, manage, and monitor a server within the infrastructure.
 #### Purpose
 A Profile is used to apply detailed configuration and policy settings to an individual server, supporting lifecycle management, compliance, and automation.
 #### Key Concepts
-- **Configuration Management:** - Centralizes all relevant configuration states, changes, and compliance results for the server.
-- **Policy Attachment:** - Associates various policies and pools (such as UUID pools and resource pools) to define operational parameters.
-- **Assignment and Deployment:** - Supports both static and dynamic assignment of physical servers, as well as monitoring deployment status and results.
-- **Lifecycle Tracking:** - Integrates with workflow engines and maintains audit trails for configuration changes and applied policies.
+- **Configuration Management:** Centralizes all relevant configuration states, changes, and compliance results for the server.
+- **Policy Attachment:** Associates various policies and pools (such as UUID pools and resource pools) to define operational parameters.
+- **Assignment and Deployment:** Supports both static and dynamic assignment of physical servers, as well as monitoring deployment status and results.
+- **Lifecycle Tracking:** Integrates with workflow engines and maintains audit trails for configuration changes and applied policies.
 ## Usage Example
 ### Resource Creation
 

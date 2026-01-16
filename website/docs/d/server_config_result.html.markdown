@@ -3,28 +3,26 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_result"
 description: |-
-        ### Overview
         The ConfigResult object plays a vital role in server profile management by providing detailed insights into the configuration process. This captures the results of configuration actions, including deployments and validations, offering transparency and accountability in configuration management.
         #### Purpose
         ConfigResult is essential for tracking the outcomes of server profile configuration actions, ensuring that deployments and validations are accurately reported and issues are promptly identified.
         #### Key Concepts
-        - **Result Tracking:** - Captures detailed information about configuration results, including errors, warnings, and successful actions.
-        - **Validation and Deployment:** - Provides insights into the validation and deployment stages, supporting troubleshooting and optimization of server configurations.
-        - ** Relationship Management:** - Linked with other objects to offer comprehensive views of configuration impacts.
-        - **Read-Only Access:** - Primarily designed for consumption, ensuring safe integration with systems requiring configuration insights.
+        - **Result Tracking:** Captures detailed information about configuration results, including errors, warnings, and successful actions.
+        - **Validation and Deployment:** Provides insights into the validation and deployment stages, supporting troubleshooting and optimization of server configurations.
+        - ** Relationship Management:** Linked with other objects to offer comprehensive views of configuration impacts.
+        - **Read-Only Access:** Primarily designed for consumption, ensuring safe integration with systems requiring configuration insights.
 
 ---
 
 # Data Source: intersight_server_config_result
-### Overview
 The ConfigResult object plays a vital role in server profile management by providing detailed insights into the configuration process. This captures the results of configuration actions, including deployments and validations, offering transparency and accountability in configuration management.   
 #### Purpose  
 ConfigResult is essential for tracking the outcomes of server profile configuration actions, ensuring that deployments and validations are accurately reported and issues are promptly identified.   
 #### Key Concepts  
-- **Result Tracking:** - Captures detailed information about configuration results, including errors, warnings, and successful actions. 
-- **Validation and Deployment:** - Provides insights into the validation and deployment stages, supporting troubleshooting and optimization of server configurations.
-- ** Relationship Management:** - Linked with other objects to offer comprehensive views of configuration impacts. 
-- **Read-Only Access:** - Primarily designed for consumption, ensuring safe integration with systems requiring configuration insights.
+- **Result Tracking:** Captures detailed information about configuration results, including errors, warnings, and successful actions. 
+- **Validation and Deployment:** Provides insights into the validation and deployment stages, supporting troubleshooting and optimization of server configurations.
+- ** Relationship Management:** Linked with other objects to offer comprehensive views of configuration impacts. 
+- **Read-Only Access:** Primarily designed for consumption, ensuring safe integration with systems requiring configuration insights.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

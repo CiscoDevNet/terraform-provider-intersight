@@ -943,6 +943,23 @@ func flattenListBulkHttpHeader(p []models.BulkHttpHeader, d *schema.ResourceData
 	}
 	return bulkhttpheaders
 }
+func flattenListBulkRelatedTypeExportOption(p []models.BulkRelatedTypeExportOption, d *schema.ResourceData) []map[string]interface{} {
+	var bulkrelatedtypeexportoptions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		bulkrelatedtypeexportoption := make(map[string]interface{})
+		bulkrelatedtypeexportoption["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		bulkrelatedtypeexportoption["class_id"] = item.GetClassId()
+		bulkrelatedtypeexportoption["exclude_relations"] = item.GetExcludeRelations()
+		bulkrelatedtypeexportoption["excluded_peers"] = item.GetExcludedPeers()
+		bulkrelatedtypeexportoption["object_type"] = item.GetObjectType()
+		bulkrelatedtypeexportoption["related_type"] = item.GetRelatedType()
+		bulkrelatedtypeexportoptions = append(bulkrelatedtypeexportoptions, bulkrelatedtypeexportoption)
+	}
+	return bulkrelatedtypeexportoptions
+}
 func flattenListBulkRestResult(p []models.BulkRestResult, d *schema.ResourceData) []map[string]interface{} {
 	var bulkrestresults []map[string]interface{}
 	if len(p) == 0 {
@@ -6234,6 +6251,8 @@ func flattenListMetaRelationshipDefinition(p []models.MetaRelationshipDefinition
 		metarelationshipdefinition["export_with_peer"] = item.GetExportWithPeer()
 		metarelationshipdefinition["name"] = item.GetName()
 		metarelationshipdefinition["object_type"] = item.GetObjectType()
+		metarelationshipdefinition["on_delete"] = item.GetOnDelete()
+		metarelationshipdefinition["on_peer_delete"] = item.GetOnPeerDelete()
 		metarelationshipdefinition["peer_rel_name"] = item.GetPeerRelName()
 		metarelationshipdefinition["peer_supported_object_types"] = item.GetPeerSupportedObjectTypes()
 		metarelationshipdefinition["peer_sync"] = item.GetPeerSync()
@@ -9377,6 +9396,42 @@ func flattenListStoragePureNfsPolicyRuleRelationship(p []models.StoragePureNfsPo
 	}
 	return storagepurenfspolicyrulerelationships
 }
+func flattenListStoragePurePodRelationship(p []models.StoragePurePodRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurepodrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepurepodrelationship := flattenMoMoRef(item)
+		storagepurepodrelationships = append(storagepurepodrelationships, storagepurepodrelationship)
+	}
+	return storagepurepodrelationships
+}
+func flattenListStoragePureProtectionGroupRelationship(p []models.StoragePureProtectionGroupRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepureprotectiongrouprelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepureprotectiongrouprelationship := flattenMoMoRef(item)
+		storagepureprotectiongrouprelationships = append(storagepureprotectiongrouprelationships, storagepureprotectiongrouprelationship)
+	}
+	return storagepureprotectiongrouprelationships
+}
+func flattenListStoragePureProtectionGroupSnapshotRelationship(p []models.StoragePureProtectionGroupSnapshotRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepureprotectiongroupsnapshotrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepureprotectiongroupsnapshotrelationship := flattenMoMoRef(item)
+		storagepureprotectiongroupsnapshotrelationships = append(storagepureprotectiongroupsnapshotrelationships, storagepureprotectiongroupsnapshotrelationship)
+	}
+	return storagepureprotectiongroupsnapshotrelationships
+}
 func flattenListStoragePureQuotaPolicyRuleRelationship(p []models.StoragePureQuotaPolicyRuleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagepurequotapolicyrulerelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -9428,6 +9483,18 @@ func flattenListStoragePureVolumeRelationship(p []models.StoragePureVolumeRelati
 		storagepurevolumerelationships = append(storagepurevolumerelationships, storagepurevolumerelationship)
 	}
 	return storagepurevolumerelationships
+}
+func flattenListStoragePureVolumeSnapshotRelationship(p []models.StoragePureVolumeSnapshotRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurevolumesnapshotrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		storagepurevolumesnapshotrelationship := flattenMoMoRef(item)
+		storagepurevolumesnapshotrelationships = append(storagepurevolumesnapshotrelationships, storagepurevolumesnapshotrelationship)
+	}
+	return storagepurevolumesnapshotrelationships
 }
 func flattenListStorageSasExpanderRelationship(p []models.StorageSasExpanderRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagesasexpanderrelationships []map[string]interface{}
@@ -11041,18 +11108,6 @@ func flattenListWorkloadStateAggregation(p []models.WorkloadStateAggregation, d 
 		workloadstateaggregations = append(workloadstateaggregations, workloadstateaggregation)
 	}
 	return workloadstateaggregations
-}
-func flattenListWorkspaceFolderRelationship(p []models.WorkspaceFolderRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var workspacefolderrelationships []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		item := item.MoMoRef
-		workspacefolderrelationship := flattenMoMoRef(item)
-		workspacefolderrelationships = append(workspacefolderrelationships, workspacefolderrelationship)
-	}
-	return workspacefolderrelationships
 }
 func flattenListX509Certificate(p []models.X509Certificate, d *schema.ResourceData) []map[string]interface{} {
 	var x509certificates []map[string]interface{}
@@ -16693,7 +16748,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	data_ip_range_x, _ := d.GetOk("data_ip_range")
+	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -16709,7 +16764,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), data_ip_range_x)
+	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -19708,7 +19763,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
 
-	password_x, exists := d.GetOk("docker_http_proxy")
+	password_x, exists := d.GetOk("http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -24303,6 +24358,52 @@ func flattenMapStoragePureHostGroupRelationship(p models.StoragePureHostGroupRel
 	storagepurehostgrouprelationships = append(storagepurehostgrouprelationships, storagepurehostgrouprelationship)
 	return storagepurehostgrouprelationships
 }
+func flattenMapStoragePurePodRelationship(p models.StoragePurePodRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurepodrelationships []map[string]interface{}
+	var ret models.StoragePurePodRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagepurepodrelationship := make(map[string]interface{})
+	storagepurepodrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepurepodrelationship["class_id"] = item.GetClassId()
+	storagepurepodrelationship["moid"] = item.GetMoid()
+	storagepurepodrelationship["object_type"] = item.GetObjectType()
+	storagepurepodrelationship["selector"] = item.GetSelector()
+
+	storagepurepodrelationships = append(storagepurepodrelationships, storagepurepodrelationship)
+	return storagepurepodrelationships
+}
+func flattenMapStoragePurePodUtilization(p models.StoragePurePodUtilization, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurepodutilizations []map[string]interface{}
+	var ret models.StoragePurePodUtilization
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	storagepurepodutilization := make(map[string]interface{})
+	storagepurepodutilization["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepurepodutilization["class_id"] = item.GetClassId()
+	storagepurepodutilization["data_reduction"] = item.GetDataReduction()
+	storagepurepodutilization["footprint"] = item.GetFootprint()
+	storagepurepodutilization["object_type"] = item.GetObjectType()
+	storagepurepodutilization["replication"] = item.GetReplication()
+	storagepurepodutilization["shared"] = item.GetShared()
+	storagepurepodutilization["snapshots"] = item.GetSnapshots()
+	storagepurepodutilization["thin_provisioning"] = item.GetThinProvisioning()
+	storagepurepodutilization["total_physical"] = item.GetTotalPhysical()
+	storagepurepodutilization["total_provisioned"] = item.GetTotalProvisioned()
+	storagepurepodutilization["total_reduction"] = item.GetTotalReduction()
+	storagepurepodutilization["total_used"] = item.GetTotalUsed()
+	storagepurepodutilization["unique"] = item.GetUnique()
+	storagepurepodutilization["used_provisioned"] = item.GetUsedProvisioned()
+	storagepurepodutilization["virtual"] = item.GetVirtual()
+
+	storagepurepodutilizations = append(storagepurepodutilizations, storagepurepodutilization)
+	return storagepurepodutilizations
+}
 func flattenMapStoragePureProtectionGroupRelationship(p models.StoragePureProtectionGroupRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagepureprotectiongrouprelationships []map[string]interface{}
 	var ret models.StoragePureProtectionGroupRelationship
@@ -24338,6 +24439,51 @@ func flattenMapStoragePureProtectionGroupSnapshotRelationship(p models.StoragePu
 
 	storagepureprotectiongroupsnapshotrelationships = append(storagepureprotectiongroupsnapshotrelationships, storagepureprotectiongroupsnapshotrelationship)
 	return storagepureprotectiongroupsnapshotrelationships
+}
+func flattenMapStoragePureRealmRelationship(p models.StoragePureRealmRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurerealmrelationships []map[string]interface{}
+	var ret models.StoragePureRealmRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	storagepurerealmrelationship := make(map[string]interface{})
+	storagepurerealmrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepurerealmrelationship["class_id"] = item.GetClassId()
+	storagepurerealmrelationship["moid"] = item.GetMoid()
+	storagepurerealmrelationship["object_type"] = item.GetObjectType()
+	storagepurerealmrelationship["selector"] = item.GetSelector()
+
+	storagepurerealmrelationships = append(storagepurerealmrelationships, storagepurerealmrelationship)
+	return storagepurerealmrelationships
+}
+func flattenMapStoragePureRealmUtilization(p models.StoragePureRealmUtilization, d *schema.ResourceData) []map[string]interface{} {
+	var storagepurerealmutilizations []map[string]interface{}
+	var ret models.StoragePureRealmUtilization
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	storagepurerealmutilization := make(map[string]interface{})
+	storagepurerealmutilization["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagepurerealmutilization["class_id"] = item.GetClassId()
+	storagepurerealmutilization["data_reduction"] = item.GetDataReduction()
+	storagepurerealmutilization["footprint"] = item.GetFootprint()
+	storagepurerealmutilization["object_type"] = item.GetObjectType()
+	storagepurerealmutilization["shared"] = item.GetShared()
+	storagepurerealmutilization["snapshots"] = item.GetSnapshots()
+	storagepurerealmutilization["system"] = item.GetSystem()
+	storagepurerealmutilization["thin_provisioning"] = item.GetThinProvisioning()
+	storagepurerealmutilization["total_provisioned"] = item.GetTotalProvisioned()
+	storagepurerealmutilization["total_reduction"] = item.GetTotalReduction()
+	storagepurerealmutilization["total_used"] = item.GetTotalUsed()
+	storagepurerealmutilization["unique"] = item.GetUnique()
+	storagepurerealmutilization["used_provisioned"] = item.GetUsedProvisioned()
+	storagepurerealmutilization["virtual"] = item.GetVirtual()
+
+	storagepurerealmutilizations = append(storagepurerealmutilizations, storagepurerealmutilization)
+	return storagepurerealmutilizations
 }
 func flattenMapStoragePureVolumeRelationship(p models.StoragePureVolumeRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagepurevolumerelationships []map[string]interface{}
@@ -27529,24 +27675,6 @@ func flattenMapWorkloadWorkloadMetadataRelationship(p models.WorkloadWorkloadMet
 	workloadworkloadmetadatarelationships = append(workloadworkloadmetadatarelationships, workloadworkloadmetadatarelationship)
 	return workloadworkloadmetadatarelationships
 }
-func flattenMapWorkspaceFolderRelationship(p models.WorkspaceFolderRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var workspacefolderrelationships []map[string]interface{}
-	var ret models.WorkspaceFolderRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	workspacefolderrelationship := make(map[string]interface{})
-	workspacefolderrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	workspacefolderrelationship["class_id"] = item.GetClassId()
-	workspacefolderrelationship["moid"] = item.GetMoid()
-	workspacefolderrelationship["object_type"] = item.GetObjectType()
-	workspacefolderrelationship["selector"] = item.GetSelector()
-
-	workspacefolderrelationships = append(workspacefolderrelationships, workspacefolderrelationship)
-	return workspacefolderrelationships
-}
 func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData) []map[string]interface{} {
 	var x509certificates []map[string]interface{}
 	var ret models.X509Certificate
@@ -27557,7 +27685,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 	x509certificate := make(map[string]interface{})
 	x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	x509certificate["class_id"] = item.GetClassId()
-	ca_cert_x, _ := d.GetOk("ca_cert")
+	certificate_x, _ := d.GetOk("certificate")
 	x509certificate["issuer"] = (func(p models.PkixDistinguishedName, v interface{}) []map[string]interface{} {
 		var pkixdistinguishednames []map[string]interface{}
 		var ret models.PkixDistinguishedName
@@ -27578,7 +27706,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetIssuer(), ca_cert_x)
+	})(item.GetIssuer(), certificate_x)
 	x509certificate["not_after"] = item.GetNotAfter().String()
 	x509certificate["not_before"] = item.GetNotBefore().String()
 	x509certificate["object_type"] = item.GetObjectType()
@@ -27605,7 +27733,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetSubject(), ca_cert_x)
+	})(item.GetSubject(), certificate_x)
 
 	x509certificates = append(x509certificates, x509certificate)
 	return x509certificates

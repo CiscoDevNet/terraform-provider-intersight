@@ -155,6 +155,11 @@ func getLicenseLicenseInfoSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"last_trial_grace_eval_time": {
+			Description: "The last time the trial/grace period evaluation was performed for this license.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"license_count": {
 			Description: "The total number of license consumed in the Intersight account.",
 			Type:        schema.TypeInt,
@@ -725,6 +730,11 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 		o.SetExtraEvaluation(x)
 	}
 
+	if v, ok := d.GetOk("last_trial_grace_eval_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLastTrialGraceEvalTime(x)
+	}
+
 	if v, ok := d.GetOkExists("license_count"); ok {
 		x := int64(v.(int))
 		o.SetLicenseCount(x)
@@ -1113,6 +1123,8 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 
 				temp["expire_time"] = (s.GetExpireTime()).String()
 				temp["extra_evaluation"] = (s.GetExtraEvaluation())
+
+				temp["last_trial_grace_eval_time"] = (s.GetLastTrialGraceEvalTime()).String()
 				temp["license_count"] = (s.GetLicenseCount())
 				temp["license_count_purchased"] = (s.GetLicenseCountPurchased())
 				temp["license_state"] = (s.GetLicenseState())

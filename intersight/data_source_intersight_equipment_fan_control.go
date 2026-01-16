@@ -166,7 +166,7 @@ func getEquipmentFanControlSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"mode": {
-			Description: "This field identifies the Fan Control Mode on the endpoint.\n* `Balanced` - Value of Fan Speed is Balanced.\n* `LowPower` - Value of Fan Speed is LowPower.\n* `HighPower` - Value of Fan Speed is HighPower.\n* `MaximumPower` - Value of Fan Speed is MaximumPower.\n* `Acoustic` - Value of Fan Speed is Acoustic.",
+			Description: "This field identifies the Fan Control Mode on the endpoint.\n* `Balanced` - Value of Fan Speed is Balanced.\n* `LowPower` - Value of Fan Speed is LowPower.\n* `HighPower` - Value of Fan Speed is HighPower.\n* `MaximumPower` - Value of Fan Speed is MaximumPower.\n* `MaximumCooling` - Value of Fan Speed is MaximumCooling.\n* `Acoustic` - Value of Fan Speed is Acoustic.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

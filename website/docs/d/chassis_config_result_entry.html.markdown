@@ -3,26 +3,24 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_config_result_entry"
 description: |-
-        ### Overview
         The ConfigResultEntry object details individual results from configuration and deployment operations. Each entry represents a specific outcome, such as an error, warning, or informational message, related to a profile's configuration.
         #### Purpose
         ConfigResultEntry provides granular insight into the steps and checks performed during configuration operations, supporting troubleshooting and compliance.
         #### Key Concepts
-        - **Detailed Reporting:** - Captures specific messages and context for each stage of the configuration or deployment process.
-        - **Linked Results:** - Associated with the overall ConfigResult, enabling traceability and contextual understanding of issues.
-        - **Systematic Auditing:** - Supports comprehensive auditing and diagnosis of configuration events.
+        - **Detailed Reporting:** Captures specific messages and context for each stage of the configuration or deployment process.
+        - **Linked Results:** Associated with the overall ConfigResult, enabling traceability and contextual understanding of issues.
+        - **Systematic Auditing:** Supports comprehensive auditing and diagnosis of configuration events.
 
 ---
 
 # Data Source: intersight_chassis_config_result_entry
-### Overview
 The ConfigResultEntry object details individual results from configuration and deployment operations. Each entry represents a specific outcome, such as an error, warning, or informational message, related to a profile's configuration.
 #### Purpose
 ConfigResultEntry provides granular insight into the steps and checks performed during configuration operations, supporting troubleshooting and compliance.
 #### Key Concepts
-- **Detailed Reporting:** - Captures specific messages and context for each stage of the configuration or deployment process.
-- **Linked Results:** - Associated with the overall ConfigResult, enabling traceability and contextual understanding of issues.
-- **Systematic Auditing:** - Supports comprehensive auditing and diagnosis of configuration events.
+- **Detailed Reporting:** Captures specific messages and context for each stage of the configuration or deployment process.
+- **Linked Results:** Associated with the overall ConfigResult, enabling traceability and contextual understanding of issues.
+- **Systematic Auditing:** Supports comprehensive auditing and diagnosis of configuration events.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

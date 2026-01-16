@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the StoragePureVolumeSnapshot type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StoragePureVolumeSnapshot{}
 
-// StoragePureVolumeSnapshot Volume snapshot entity in Pure protection group. Volume snapshots are created either on-demand or using scheduler. Snapshots are immutable and it cannot be connected to hosts or host groups, and therefore the data it contains cannot be read or written.
+// StoragePureVolumeSnapshot The PureVolumeSnapshot object represents a snapshot of a volume within a PureStorage FlashArray, created either on-demand or via scheduler.   #### Purpose   The PureVolumeSnapshot provides a mechanism for data backup and recovery, enabling efficient snapshot creation and management within the storage array.   #### Key Concepts   - **Snapshot Management:** Facilitates the creation and management of immutable snapshots, ensuring data protection and recovery.  - **Scheduler Integration:** Supports both on-demand and scheduled snapshot creation, offering flexible data management options.  - **Secure Access:** Utilizes privilege sets to ensure secure snapshot management within the FlashArray.
 type StoragePureVolumeSnapshot struct {
 	StorageBaseSnapshot
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -30,6 +30,8 @@ type StoragePureVolumeSnapshot struct {
 	ObjectType string `json:"ObjectType"`
 	// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
 	Pod *string `json:"Pod,omitempty"`
+	// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+	RealmName *string `json:"RealmName,omitempty"`
 	// Unique serial number of the snapshot allocated by the storage array.
 	Serial *string `json:"Serial,omitempty"`
 	// The size of the snapshot created.
@@ -42,6 +44,7 @@ type StoragePureVolumeSnapshot struct {
 	VolumeGroup             *string                                                `json:"VolumeGroup,omitempty"`
 	Array                   NullableStoragePureArrayRelationship                   `json:"Array,omitempty"`
 	ProtectionGroupSnapshot NullableStoragePureProtectionGroupSnapshotRelationship `json:"ProtectionGroupSnapshot,omitempty"`
+	Realm                   NullableStoragePureRealmRelationship                   `json:"Realm,omitempty"`
 	RegisteredDevice        NullableAssetDeviceRegistrationRelationship            `json:"RegisteredDevice,omitempty"`
 	Volume                  NullableStoragePureVolumeRelationship                  `json:"Volume,omitempty"`
 	AdditionalProperties    map[string]interface{}
@@ -160,6 +163,38 @@ func (o *StoragePureVolumeSnapshot) HasPod() bool {
 // SetPod gets a reference to the given string and assigns it to the Pod field.
 func (o *StoragePureVolumeSnapshot) SetPod(v string) {
 	o.Pod = &v
+}
+
+// GetRealmName returns the RealmName field value if set, zero value otherwise.
+func (o *StoragePureVolumeSnapshot) GetRealmName() string {
+	if o == nil || IsNil(o.RealmName) {
+		var ret string
+		return ret
+	}
+	return *o.RealmName
+}
+
+// GetRealmNameOk returns a tuple with the RealmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureVolumeSnapshot) GetRealmNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RealmName) {
+		return nil, false
+	}
+	return o.RealmName, true
+}
+
+// HasRealmName returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasRealmName() bool {
+	if o != nil && !IsNil(o.RealmName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRealmName gets a reference to the given string and assigns it to the RealmName field.
+func (o *StoragePureVolumeSnapshot) SetRealmName(v string) {
+	o.RealmName = &v
 }
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
@@ -408,6 +443,49 @@ func (o *StoragePureVolumeSnapshot) UnsetProtectionGroupSnapshot() {
 	o.ProtectionGroupSnapshot.Unset()
 }
 
+// GetRealm returns the Realm field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StoragePureVolumeSnapshot) GetRealm() StoragePureRealmRelationship {
+	if o == nil || IsNil(o.Realm.Get()) {
+		var ret StoragePureRealmRelationship
+		return ret
+	}
+	return *o.Realm.Get()
+}
+
+// GetRealmOk returns a tuple with the Realm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StoragePureVolumeSnapshot) GetRealmOk() (*StoragePureRealmRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Realm.Get(), o.Realm.IsSet()
+}
+
+// HasRealm returns a boolean if a field has been set.
+func (o *StoragePureVolumeSnapshot) HasRealm() bool {
+	if o != nil && o.Realm.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRealm gets a reference to the given NullableStoragePureRealmRelationship and assigns it to the Realm field.
+func (o *StoragePureVolumeSnapshot) SetRealm(v StoragePureRealmRelationship) {
+	o.Realm.Set(&v)
+}
+
+// SetRealmNil sets the value for Realm to be an explicit nil
+func (o *StoragePureVolumeSnapshot) SetRealmNil() {
+	o.Realm.Set(nil)
+}
+
+// UnsetRealm ensures that no value is present for Realm, not even an explicit nil
+func (o *StoragePureVolumeSnapshot) UnsetRealm() {
+	o.Realm.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureVolumeSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -523,6 +601,9 @@ func (o StoragePureVolumeSnapshot) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pod) {
 		toSerialize["Pod"] = o.Pod
 	}
+	if !IsNil(o.RealmName) {
+		toSerialize["RealmName"] = o.RealmName
+	}
 	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
@@ -543,6 +624,9 @@ func (o StoragePureVolumeSnapshot) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ProtectionGroupSnapshot.IsSet() {
 		toSerialize["ProtectionGroupSnapshot"] = o.ProtectionGroupSnapshot.Get()
+	}
+	if o.Realm.IsSet() {
+		toSerialize["Realm"] = o.Realm.Get()
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -607,6 +691,8 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
 		Pod *string `json:"Pod,omitempty"`
+		// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+		RealmName *string `json:"RealmName,omitempty"`
 		// Unique serial number of the snapshot allocated by the storage array.
 		Serial *string `json:"Serial,omitempty"`
 		// The size of the snapshot created.
@@ -619,6 +705,7 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		VolumeGroup             *string                                                `json:"VolumeGroup,omitempty"`
 		Array                   NullableStoragePureArrayRelationship                   `json:"Array,omitempty"`
 		ProtectionGroupSnapshot NullableStoragePureProtectionGroupSnapshotRelationship `json:"ProtectionGroupSnapshot,omitempty"`
+		Realm                   NullableStoragePureRealmRelationship                   `json:"Realm,omitempty"`
 		RegisteredDevice        NullableAssetDeviceRegistrationRelationship            `json:"RegisteredDevice,omitempty"`
 		Volume                  NullableStoragePureVolumeRelationship                  `json:"Volume,omitempty"`
 	}
@@ -631,6 +718,7 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		varStoragePureVolumeSnapshot.ClassId = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.ClassId
 		varStoragePureVolumeSnapshot.ObjectType = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.ObjectType
 		varStoragePureVolumeSnapshot.Pod = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Pod
+		varStoragePureVolumeSnapshot.RealmName = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.RealmName
 		varStoragePureVolumeSnapshot.Serial = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Serial
 		varStoragePureVolumeSnapshot.SnapshotSize = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.SnapshotSize
 		varStoragePureVolumeSnapshot.TotalProvisioned = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.TotalProvisioned
@@ -638,6 +726,7 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		varStoragePureVolumeSnapshot.VolumeGroup = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.VolumeGroup
 		varStoragePureVolumeSnapshot.Array = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Array
 		varStoragePureVolumeSnapshot.ProtectionGroupSnapshot = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.ProtectionGroupSnapshot
+		varStoragePureVolumeSnapshot.Realm = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Realm
 		varStoragePureVolumeSnapshot.RegisteredDevice = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.RegisteredDevice
 		varStoragePureVolumeSnapshot.Volume = varStoragePureVolumeSnapshotWithoutEmbeddedStruct.Volume
 		*o = StoragePureVolumeSnapshot(varStoragePureVolumeSnapshot)
@@ -660,6 +749,7 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Pod")
+		delete(additionalProperties, "RealmName")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SnapshotSize")
 		delete(additionalProperties, "TotalProvisioned")
@@ -667,6 +757,7 @@ func (o *StoragePureVolumeSnapshot) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "VolumeGroup")
 		delete(additionalProperties, "Array")
 		delete(additionalProperties, "ProtectionGroupSnapshot")
+		delete(additionalProperties, "Realm")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "Volume")
 

@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_volume_snapshot"
 description: |-
-        Volume snapshot entity in Pure protection group. Volume snapshots are created either on-demand or using scheduler. Snapshots are immutable and it cannot be connected to hosts or host groups, and therefore the data it contains cannot be read or written.
+        The PureVolumeSnapshot object represents a snapshot of a volume within a PureStorage FlashArray, created either on-demand or via scheduler.
+        #### Purpose
+        The PureVolumeSnapshot provides a mechanism for data backup and recovery, enabling efficient snapshot creation and management within the storage array.
+        #### Key Concepts
+        - **Snapshot Management:** Facilitates the creation and management of immutable snapshots, ensuring data protection and recovery.
+        - **Scheduler Integration:** Supports both on-demand and scheduled snapshot creation, offering flexible data management options.
+        - **Secure Access:** Utilizes privilege sets to ensure secure snapshot management within the FlashArray.
 
 ---
 
 # Data Source: intersight_storage_pure_volume_snapshot
-Volume snapshot entity in Pure protection group. Volume snapshots are created either on-demand or using scheduler. Snapshots are immutable and it cannot be connected to hosts or host groups, and therefore the data it contains cannot be read or written.
+The PureVolumeSnapshot object represents a snapshot of a volume within a PureStorage FlashArray, created either on-demand or via scheduler.  
+#### Purpose  
+The PureVolumeSnapshot provides a mechanism for data backup and recovery, enabling efficient snapshot creation and management within the storage array.  
+#### Key Concepts  
+- **Snapshot Management:** Facilitates the creation and management of immutable snapshots, ensuring data protection and recovery. 
+- **Scheduler Integration:** Supports both on-demand and scheduled snapshot creation, offering flexible data management options. 
+- **Secure Access:** Utilizes privilege sets to ensure secure snapshot management within the FlashArray.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -23,6 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the snapshot which represents point-in-time copy of volume. 
 * `pod`:(string) A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. 
 * `protection_group_name`:(string) Name of the protection group to which the snapshot belongs. Value is empty, if the snapshot is created directly on volume. 
+* `realm_name`:(string) A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance. 
 * `serial`:(string) Unique serial number of the snapshot allocated by the storage array. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(int) Snapshot size represented in bytes. 

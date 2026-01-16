@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade"
 description: |-
-        Firmware upgrade operation for rack and blade servers that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+        The Upgrade object facilitates the firmware upgrade process for rack and blade servers, providing a structured approach to downloading and applying firmware images from various sources, including cloud repositories and network shares.
+        #### Purpose
+        The Upgrade object is central to orchestrating firmware upgrades, offering a standardized method to enhance server functionality and security through timely firmware updates. It supports both direct download and network share upgrade methods.
+        #### Key Concepts
+        - **Flexible Upgrade Options:** Supports direct download from Cisco repositories and network share-based upgrades, accommodating diverse infrastructure setups and preferences.
+        - **Policy Integration:** Seamlessly interacts with firmware policies, ensuring compliance and alignment with organizational upgrade strategies.
+        - **Comprehensive Management:** Facilitates the entire upgrade lifecycle, from image selection and download to installation and verification, ensuring a reliable upgrade experience.
+        - **Secure and Controlled:** Enforces strict access controls and licensing requirements to safeguard the upgrade process, maintaining system security and compliance.
 
 ---
 
 # Resource: intersight_firmware_upgrade
-Firmware upgrade operation for rack and blade servers that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+The Upgrade object facilitates the firmware upgrade process for rack and blade servers, providing a structured approach to downloading and applying firmware images from various sources, including cloud repositories and network shares.
+#### Purpose
+The Upgrade object is central to orchestrating firmware upgrades, offering a standardized method to enhance server functionality and security through timely firmware updates. It supports both direct download and network share upgrade methods.
+#### Key Concepts
+- **Flexible Upgrade Options:** Supports direct download from Cisco repositories and network share-based upgrades, accommodating diverse infrastructure setups and preferences.
+- **Policy Integration:** Seamlessly interacts with firmware policies, ensuring compliance and alignment with organizational upgrade strategies.
+- **Comprehensive Management:** Facilitates the entire upgrade lifecycle, from image selection and download to installation and verification, ensuring a reliable upgrade experience.
+- **Secure and Controlled:** Enforces strict access controls and licensing requirements to safeguard the upgrade process, maintaining system security and compliance.
 ## Usage Example
 ### Resource Creation
 

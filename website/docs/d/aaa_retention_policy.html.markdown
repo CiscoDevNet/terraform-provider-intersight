@@ -3,28 +3,26 @@ subcategory: "aaa"
 layout: "intersight"
 page_title: "Intersight: intersight_aaa_retention_policy"
 description: |-
-        ### Overview
         The RetentionPolicy object governs audit log retention policies at the account level, specifying the duration for which audit logs are preserved before automatic deletion.
         #### Purpose
         A RetentionPolicy defines the time frame for audit log retention, ensuring logs are kept for an appropriate duration to meet organizational and regulatory requirements. This facilitates systematic management of log retention, balancing storage needs with compliance obligations.
         #### Key Concepts
-        - **Policy Management** - Allows administrators to define and update retention periods, providing flexibility for changing compliance needs.
-        - **Automatic Cleanup** - Enables automatic log deletion based on retention periods, reducing manual overhead and ensuring efficient storage use.
-        - **Access Control** - Privilege sets govern the creation, reading, and updating of RetentionPolicies, ensuring only authorized users can modify configurations.
-        - **Account Association** - Each RetentionPolicy is linked to specific accounts, enabling tailored retention strategies for different organizational units.
+        - **Policy Management:** Allows administrators to define and update retention periods, providing flexibility for changing compliance needs.
+        - **Automatic Cleanup:** Enables automatic log deletion based on retention periods, reducing manual overhead and ensuring efficient storage use.
+        - **Access Control:** Privilege sets govern the creation, reading, and updating of RetentionPolicies, ensuring only authorized users can modify configurations.
+        - **Account Association:** Each RetentionPolicy is linked to specific accounts, enabling tailored retention strategies for different organizational units.
 
 ---
 
 # Data Source: intersight_aaa_retention_policy
-### Overview
- The RetentionPolicy object governs audit log retention policies at the account level, specifying the duration for which audit logs are preserved before automatic deletion.
- #### Purpose
- A RetentionPolicy defines the time frame for audit log retention, ensuring logs are kept for an appropriate duration to meet organizational and regulatory requirements. This facilitates systematic management of log retention, balancing storage needs with compliance obligations.
+The RetentionPolicy object governs audit log retention policies at the account level, specifying the duration for which audit logs are preserved before automatic deletion.
+#### Purpose
+A RetentionPolicy defines the time frame for audit log retention, ensuring logs are kept for an appropriate duration to meet organizational and regulatory requirements. This facilitates systematic management of log retention, balancing storage needs with compliance obligations.
 #### Key Concepts
-- **Policy Management** - Allows administrators to define and update retention periods, providing flexibility for changing compliance needs.
-- **Automatic Cleanup** - Enables automatic log deletion based on retention periods, reducing manual overhead and ensuring efficient storage use.
-- **Access Control** - Privilege sets govern the creation, reading, and updating of RetentionPolicies, ensuring only authorized users can modify configurations.
-- **Account Association** - Each RetentionPolicy is linked to specific accounts, enabling tailored retention strategies for different organizational units.
+- **Policy Management:** Allows administrators to define and update retention periods, providing flexibility for changing compliance needs.
+- **Automatic Cleanup:** Enables automatic log deletion based on retention periods, reducing manual overhead and ensuring efficient storage use.
+- **Access Control:** Privilege sets govern the creation, reading, and updating of RetentionPolicies, ensuring only authorized users can modify configurations.
+- **Account Association:** Each RetentionPolicy is linked to specific accounts, enabling tailored retention strategies for different organizational units.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

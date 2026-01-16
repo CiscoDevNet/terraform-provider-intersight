@@ -2905,6 +2905,32 @@ func Test_intersight_StorageApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test StorageApiService GetStoragePureManagementAccessPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePureManagementAccessPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePureManagementAccessPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePureManagementAccessPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test StorageApiService GetStoragePureNfsPolicyRuleByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -2924,6 +2950,32 @@ func Test_intersight_StorageApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.StorageApi.GetStoragePureNfsPolicyRuleList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePurePodByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePurePodByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePurePodList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePurePodList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -3028,6 +3080,32 @@ func Test_intersight_StorageApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.StorageApi.GetStoragePureQuotaPolicyRuleList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePureRealmByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePureRealmByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePureRealmList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePureRealmList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -3146,6 +3224,32 @@ func Test_intersight_StorageApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.StorageApi.GetStoragePureVolumeByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePureVolumeGroupByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePureVolumeGroupByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStoragePureVolumeGroupList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.StorageApi.GetStoragePureVolumeGroupList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

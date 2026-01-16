@@ -3,26 +3,24 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_result_entry"
 description: |-
-        ### Overview
         The ConfigResultEntry object for server profiles provides detailed information about each step or result in the configuration process.
         #### Purpose
         Chassis ConfigResultEntry enables precise tracking and diagnosis of configuration steps, supporting troubleshooting and operational assurance.
         #### Key Concepts
-        - **Granular Reporting:** - Captures individual messages and outcomes for each configuration step.
-        - **Contextual Insight:** - Linked to overall ConfigResult for comprehensive status tracking.
-        - **Operational Transparency:** - Facilitates clear communication of configuration progress and issues.
+        - **Granular Reporting:** Captures individual messages and outcomes for each configuration step.
+        - **Contextual Insight:** Linked to overall ConfigResult for comprehensive status tracking.
+        - **Operational Transparency:** Facilitates clear communication of configuration progress and issues.
 
 ---
 
 # Data Source: intersight_server_config_result_entry
-### Overview
 The ConfigResultEntry object for server profiles provides detailed information about each step or result in the configuration process.
 #### Purpose
 Chassis ConfigResultEntry enables precise tracking and diagnosis of configuration steps, supporting troubleshooting and operational assurance.
 #### Key Concepts
-- **Granular Reporting:** - Captures individual messages and outcomes for each configuration step.
-- **Contextual Insight:** - Linked to overall ConfigResult for comprehensive status tracking.
-- **Operational Transparency:** - Facilitates clear communication of configuration progress and issues.
+- **Granular Reporting:** Captures individual messages and outcomes for each configuration step.
+- **Contextual Insight:** Linked to overall ConfigResult for comprehensive status tracking.
+- **Operational Transparency:** Facilitates clear communication of configuration progress and issues.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

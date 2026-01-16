@@ -18,10 +18,17 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `diagnostics_type`:(string) Type of diagnostics to be performed on the server hardware components.* `Quick` - Perform fast and limited diagnostics on server hardware components.* `Comprehensive` - Perform slow and extensive diagnostics on server hardware components. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `download_error`:(string) Any error encountered. Set to empty when download is in progress or completed. 
+* `download_message`:(string) The message from the endpoint during the download. 
+* `download_percentage`:(int) The percentage of the image downloaded in the endpoint. 
+* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent. 
+* `download_retries`:(int) The number of retries the plugin attempted before succeeding or failing the download. 
+* `download_stage`:(string) The image download stages. Example:downloading, flashing. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the diagnostics being run. 
 * `overall_state`:(string) The overall state of the diagnostics being run.* `Queued` - The diagnostics are queued.* `InProgress` - The diagnostics are in progress.* `Completed` - The diagnostics are completed.* `Failed` - The diagnostics have failed.* `Terminated` - The diagnostics are terminated. 
 * `progress`:(int) The progress of the diagnostics being run. 
+* `sd_card_download_error`:(string) The error message from the endpoint during the SD card download. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
  

@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade_impact"
 description: |-
-        Before submitting firmware upgrade operation, the estimate impact helps to know the list of components be impacted and require host reboot. This cannot be used for network share based upgrade.
+        The UpgradeImpact object provides a detailed analysis of the potential impact of firmware upgrades, offering insights into which components will be affected and whether a host reboot is required.it also offers insights on whether its a potential upgrade or downgrade comparing all the component versions of the endpoint
+        #### Purpose
+        UpgradeImpact serves as a pre-upgrade assessment tool, enabling administrators to understand the implications of firmware upgrades on system components. It aids in planning and decision-making by highlighting upgrade effects.
+        #### Key Concepts
+        - **Impact Analysis:** Delivers a comprehensive overview of the components affected by the upgrade, allowing informed decisions on proceeding with the upgrade.
+        - **Reboot Requirement Assessment:** Identifies whether a system reboot will be necessary post-upgrade, ensuring proper planning and minimizing downtime.
+        - **Pre-Upgrade Insight:** Provides valuable information prior to executing upgrades, facilitating strategic planning and risk mitigation.
+        - **Secure Access:** Equipped with controlled access mechanisms, ensuring sensitive impact data is handled securely and appropriately.
 
 ---
 
 # Resource: intersight_firmware_upgrade_impact
-Before submitting firmware upgrade operation, the estimate impact helps to know the list of components be impacted and require host reboot. This cannot be used for network share based upgrade.
+The UpgradeImpact object provides a detailed analysis of the potential impact of firmware upgrades, offering insights into which components will be affected and whether a host reboot is required.it also offers insights on whether its a potential upgrade or downgrade comparing all the component versions of the endpoint 
+#### Purpose
+UpgradeImpact serves as a pre-upgrade assessment tool, enabling administrators to understand the implications of firmware upgrades on system components. It aids in planning and decision-making by highlighting upgrade effects.
+#### Key Concepts
+- **Impact Analysis:** Delivers a comprehensive overview of the components affected by the upgrade, allowing informed decisions on proceeding with the upgrade.
+- **Reboot Requirement Assessment:** Identifies whether a system reboot will be necessary post-upgrade, ensuring proper planning and minimizing downtime.
+- **Pre-Upgrade Insight:** Provides valuable information prior to executing upgrades, facilitating strategic planning and risk mitigation.
+- **Secure Access:** Equipped with controlled access mechanisms, ensuring sensitive impact data is handled securely and appropriately.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

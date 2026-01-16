@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_directory_snapshot"
 description: |-
-        Directory snapshots are created manually or by adding snapshot policies to managed directories. Each snapshot policy can be re-used for multiple directories.
+        The PureDirectorySnapshot object represents snapshots of directories within a PureStorage FlashArray, ensuring organized data backup and recovery.
+        #### Purpose
+        PureDirectorySnapshot facilitates the creation and management of directory snapshots, providing structured data protection and recovery processes within the FlashArray.
+        #### Key Concepts
+        - **Snapshot Management:** Offers structured management of directory snapshots, optimizing data backup and recovery operations.
+        - **Policy Integration:** Supports integration with snapshot policies, enhancing data protection capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage directory snapshots within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_directory_snapshot
-Directory snapshots are created manually or by adding snapshot policies to managed directories. Each snapshot policy can be re-used for multiple directories.
+The PureDirectorySnapshot object represents snapshots of directories within a PureStorage FlashArray, ensuring organized data backup and recovery.  
+#### Purpose  
+PureDirectorySnapshot facilitates the creation and management of directory snapshots, providing structured data protection and recovery processes within the FlashArray.  
+#### Key Concepts 
+- **Snapshot Management:** Offers structured management of directory snapshots, optimizing data backup and recovery operations. 
+- **Policy Integration:** Supports integration with snapshot policies, enhancing data protection capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage directory snapshots within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

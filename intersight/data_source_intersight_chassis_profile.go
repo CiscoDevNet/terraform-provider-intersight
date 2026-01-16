@@ -303,7 +303,7 @@ func getChassisProfileSchema() map[string]*schema.Schema {
 			},
 		},
 		"config_changes": {
-			Description: "### Overview\nThe ConfigChangeDetail object for chassis profiles tracks specific changes made to chassis configurations, supporting comprehensive change management.\n#### Purpose\nChassis ConfigChangeDetail is used for detailed auditing, ensuring that every configuration modification is recorded for compliance and operational integrity.\n#### Key Concepts\n- **Change Documentation:** - Maintains a clear record of configuration changes.\n- **Compliance and Audit:** - Supports organizational and regulatory requirements for traceability.\n- **Profile Association:** - Ensures all changes are linked to the appropriate chassis profile.",
+			Description: "The ConfigChangeDetail object for chassis profiles tracks specific changes made to chassis configurations, supporting comprehensive change management.\n#### Purpose\nChassis ConfigChangeDetail is used for detailed auditing, ensuring that every configuration modification is recorded for compliance and operational integrity.\n#### Key Concepts\n- **Change Documentation:** Maintains a clear record of configuration changes.\n- **Compliance and Audit:** Supports organizational and regulatory requirements for traceability.\n- **Profile Association:** Ensures all changes are linked to the appropriate chassis profile.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,

@@ -79,6 +79,42 @@ func resourceServerDiagnosticStatus() *schema.Resource {
 					},
 				},
 			},
+			"checksum": {
+				Description: "The checksum of the downloaded file as calculated by the download plugin after successfully downloading a file.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "connector.FileChecksum",
+						},
+						"hash_algorithm": {
+							Description:  "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - An SHA256 hash as defined by RFC 4634.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"crc", "sha256"}, false),
+							Optional:     true,
+							Default:      "crc",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "connector.FileChecksum",
+						},
+					},
+				},
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -145,6 +181,54 @@ func resourceServerDiagnosticStatus() *schema.Resource {
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"download_error": {
+				Description: "Any error encountered. Set to empty when download is in progress or completed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"download_message": {
+				Description: "The message from the endpoint during the download.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"download_percentage": {
+				Description: "The percentage of the image downloaded in the endpoint.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"download_progress": {
+				Description: "The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"download_retries": {
+				Description: "The number of retries the plugin attempted before succeeding or failing the download.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"download_stage": {
+				Description: "The image download stages. Example:downloading, flashing.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -391,6 +475,17 @@ func resourceServerDiagnosticStatus() *schema.Resource {
 					},
 				},
 			},
+			"sd_card_download_error": {
+				Description: "The error message from the endpoint during the SD card download.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"server": {
 				Description: "A reference to a computePhysical resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -796,11 +891,63 @@ func resourceServerDiagnosticStatusCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("checksum"); ok {
+		p := make([]models.ConnectorFileChecksum, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewConnectorFileChecksumWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("connector.FileChecksum")
+			if v, ok := l["hash_algorithm"]; ok {
+				{
+					x := (v.(string))
+					o.SetHashAlgorithm(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetChecksum(x)
+		}
+	}
+
 	o.SetClassId("server.DiagnosticStatus")
 
 	if v, ok := d.GetOk("diagnostics_type"); ok {
 		x := (v.(string))
 		o.SetDiagnosticsType(x)
+	}
+
+	if v, ok := d.GetOk("download_error"); ok {
+		x := (v.(string))
+		o.SetDownloadError(x)
+	}
+
+	if v, ok := d.GetOkExists("download_progress"); ok {
+		x := int64(v.(int))
+		o.SetDownloadProgress(x)
+	}
+
+	if v, ok := d.GetOkExists("download_retries"); ok {
+		x := int64(v.(int))
+		o.SetDownloadRetries(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1068,6 +1215,10 @@ func resourceServerDiagnosticStatusRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while setting property Ancestors in ServerDiagnosticStatus object: %s", err.Error())
 	}
 
+	if err := d.Set("checksum", flattenMapConnectorFileChecksum(s.GetChecksum(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Checksum in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in ServerDiagnosticStatus object: %s", err.Error())
 	}
@@ -1086,6 +1237,30 @@ func resourceServerDiagnosticStatusRead(c context.Context, d *schema.ResourceDat
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("download_error", (s.GetDownloadError())); err != nil {
+		return diag.Errorf("error occurred while setting property DownloadError in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("download_message", (s.GetDownloadMessage())); err != nil {
+		return diag.Errorf("error occurred while setting property DownloadMessage in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("download_percentage", (s.GetDownloadPercentage())); err != nil {
+		return diag.Errorf("error occurred while setting property DownloadPercentage in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("download_progress", (s.GetDownloadProgress())); err != nil {
+		return diag.Errorf("error occurred while setting property DownloadProgress in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("download_retries", (s.GetDownloadRetries())); err != nil {
+		return diag.Errorf("error occurred while setting property DownloadRetries in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("download_stage", (s.GetDownloadStage())); err != nil {
+		return diag.Errorf("error occurred while setting property DownloadStage in ServerDiagnosticStatus object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -1126,6 +1301,10 @@ func resourceServerDiagnosticStatusRead(c context.Context, d *schema.ResourceDat
 
 	if err := d.Set("result", flattenListServerDiagnosticResult(s.GetResult(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Result in ServerDiagnosticStatus object: %s", err.Error())
+	}
+
+	if err := d.Set("sd_card_download_error", (s.GetSdCardDownloadError())); err != nil {
+		return diag.Errorf("error occurred while setting property SdCardDownloadError in ServerDiagnosticStatus object: %s", err.Error())
 	}
 
 	if err := d.Set("server", flattenMapComputePhysicalRelationship(s.GetServer(), d)); err != nil {
@@ -1169,12 +1348,68 @@ func resourceServerDiagnosticStatusUpdate(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if d.HasChange("checksum") {
+		v := d.Get("checksum")
+		p := make([]models.ConnectorFileChecksum, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ConnectorFileChecksum{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("connector.FileChecksum")
+			if v, ok := l["hash_algorithm"]; ok {
+				{
+					x := (v.(string))
+					o.SetHashAlgorithm(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetChecksum(x)
+		}
+	}
+
 	o.SetClassId("server.DiagnosticStatus")
 
 	if d.HasChange("diagnostics_type") {
 		v := d.Get("diagnostics_type")
 		x := (v.(string))
 		o.SetDiagnosticsType(x)
+	}
+
+	if d.HasChange("download_error") {
+		v := d.Get("download_error")
+		x := (v.(string))
+		o.SetDownloadError(x)
+	}
+
+	if d.HasChange("download_progress") {
+		v := d.Get("download_progress")
+		x := int64(v.(int))
+		o.SetDownloadProgress(x)
+	}
+
+	if d.HasChange("download_retries") {
+		v := d.Get("download_retries")
+		x := int64(v.(int))
+		o.SetDownloadRetries(x)
 	}
 
 	if d.HasChange("moid") {

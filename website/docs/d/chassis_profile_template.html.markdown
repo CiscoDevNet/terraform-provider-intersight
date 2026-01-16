@@ -3,26 +3,24 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_profile_template"
 description: |-
-        ### Overview
         The ProfileTemplate object for chassis profiles defines reusable templates for chassis configurations, supporting rapid deployment and consistent configuration across multiple chassis.
         #### Purpose
         Chassis ProfileTemplate streamlines the creation, management, and propagation of standardized chassis configurations within an organization.
         #### Key Concepts
-        - **Template-Based Deployment:** - Accelerates chassis onboarding and ensures consistent application of best practices.
-        - **Centralized Management:** - Templates can be updated to affect all derived chassis profiles, simplifying large-scale configuration changes.
-        - **Lifecycle Integration:** - Supports derivation and update workflows, integrating with bulk operations for efficient management.
+        - **Template-Based Deployment:** Accelerates chassis onboarding and ensures consistent application of best practices.
+        - **Centralized Management:** Templates can be updated to affect all derived chassis profiles, simplifying large-scale configuration changes.
+        - **Lifecycle Integration:** Supports derivation and update workflows, integrating with bulk operations for efficient management.
 
 ---
 
 # Data Source: intersight_chassis_profile_template
-### Overview
 The ProfileTemplate object for chassis profiles defines reusable templates for chassis configurations, supporting rapid deployment and consistent configuration across multiple chassis.
 #### Purpose
 Chassis ProfileTemplate streamlines the creation, management, and propagation of standardized chassis configurations within an organization.
 #### Key Concepts
-- **Template-Based Deployment:** - Accelerates chassis onboarding and ensures consistent application of best practices.
-- **Centralized Management:** - Templates can be updated to affect all derived chassis profiles, simplifying large-scale configuration changes.
-- **Lifecycle Integration:** - Supports derivation and update workflows, integrating with bulk operations for efficient management.
+- **Template-Based Deployment:** Accelerates chassis onboarding and ensures consistent application of best practices.
+- **Centralized Management:** Templates can be updated to affect all derived chassis profiles, simplifying large-scale configuration changes.
+- **Lifecycle Integration:** Supports derivation and update workflows, integrating with bulk operations for efficient management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

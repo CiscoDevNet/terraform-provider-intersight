@@ -50,6 +50,7 @@ This complex property has following sub-properties:
 * `evaluation_period`:(int) The default Trial or Grace period customer is entitled to. 
 * `expire_time`:(string)(ReadOnly) The date and time when the next expiration time of license subscription. 
 * `extra_evaluation`:(int) The number of days the trial Trial or Grace period is extended.The trial or grace period can be extended once. 
+* `last_trial_grace_eval_time`:(string)(ReadOnly) The last time the trial/grace period evaluation was performed for this license. 
 * `license_count`:(int)(ReadOnly) The total number of license consumed in the Intersight account. 
 * `license_count_purchased`:(int)(ReadOnly) The total number of license purchased from cisco. 
 * `license_state`:(string)(ReadOnly) The license state defined by Intersight.The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired.* `NotLicensed` - The license token is neither activated nor registered.* `GraceExpired` - The license grace period has expired.* `TrialPeriod` - The 90 days of trial period.* `OutOfCompliance` - The license is out of compliance.* `Compliance` - The license is in compliance.* `TrialExpired` - The trial period of 90 days has expired. 

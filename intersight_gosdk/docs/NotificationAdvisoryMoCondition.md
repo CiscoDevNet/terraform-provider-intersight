@@ -1,0 +1,134 @@
+# NotificationAdvisoryMoCondition
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.AdvisoryMoCondition"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.AdvisoryMoCondition"]
+**AdvisoryFilters** | Pointer to [**[]NotificationAbstractAdvisoryFilter**](NotificationAbstractAdvisoryFilter.md) |  | [optional] 
+**OdataFilter** | Pointer to **string** | Odata filter string managed internally. It is built with specific ObjectType properties. | [optional] [readonly] 
+
+## Methods
+
+### NewNotificationAdvisoryMoCondition
+
+`func NewNotificationAdvisoryMoCondition(classId string, objectType string, ) *NotificationAdvisoryMoCondition`
+
+NewNotificationAdvisoryMoCondition instantiates a new NotificationAdvisoryMoCondition object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewNotificationAdvisoryMoConditionWithDefaults
+
+`func NewNotificationAdvisoryMoConditionWithDefaults() *NotificationAdvisoryMoCondition`
+
+NewNotificationAdvisoryMoConditionWithDefaults instantiates a new NotificationAdvisoryMoCondition object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NotificationAdvisoryMoCondition) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NotificationAdvisoryMoCondition) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NotificationAdvisoryMoCondition) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NotificationAdvisoryMoCondition) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NotificationAdvisoryMoCondition) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NotificationAdvisoryMoCondition) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetAdvisoryFilters
+
+`func (o *NotificationAdvisoryMoCondition) GetAdvisoryFilters() []NotificationAbstractAdvisoryFilter`
+
+GetAdvisoryFilters returns the AdvisoryFilters field if non-nil, zero value otherwise.
+
+### GetAdvisoryFiltersOk
+
+`func (o *NotificationAdvisoryMoCondition) GetAdvisoryFiltersOk() (*[]NotificationAbstractAdvisoryFilter, bool)`
+
+GetAdvisoryFiltersOk returns a tuple with the AdvisoryFilters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdvisoryFilters
+
+`func (o *NotificationAdvisoryMoCondition) SetAdvisoryFilters(v []NotificationAbstractAdvisoryFilter)`
+
+SetAdvisoryFilters sets AdvisoryFilters field to given value.
+
+### HasAdvisoryFilters
+
+`func (o *NotificationAdvisoryMoCondition) HasAdvisoryFilters() bool`
+
+HasAdvisoryFilters returns a boolean if a field has been set.
+
+### SetAdvisoryFiltersNil
+
+`func (o *NotificationAdvisoryMoCondition) SetAdvisoryFiltersNil(b bool)`
+
+ SetAdvisoryFiltersNil sets the value for AdvisoryFilters to be an explicit nil
+
+### UnsetAdvisoryFilters
+`func (o *NotificationAdvisoryMoCondition) UnsetAdvisoryFilters()`
+
+UnsetAdvisoryFilters ensures that no value is present for AdvisoryFilters, not even an explicit nil
+### GetOdataFilter
+
+`func (o *NotificationAdvisoryMoCondition) GetOdataFilter() string`
+
+GetOdataFilter returns the OdataFilter field if non-nil, zero value otherwise.
+
+### GetOdataFilterOk
+
+`func (o *NotificationAdvisoryMoCondition) GetOdataFilterOk() (*string, bool)`
+
+GetOdataFilterOk returns a tuple with the OdataFilter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdataFilter
+
+`func (o *NotificationAdvisoryMoCondition) SetOdataFilter(v string)`
+
+SetOdataFilter sets OdataFilter field to given value.
+
+### HasOdataFilter
+
+`func (o *NotificationAdvisoryMoCondition) HasOdataFilter() bool`
+
+HasOdataFilter returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
