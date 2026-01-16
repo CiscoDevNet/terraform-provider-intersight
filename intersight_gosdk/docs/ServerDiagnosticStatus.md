@@ -7,10 +7,14 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "server.DiagnosticStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.DiagnosticStatus"]
 **DiagnosticsType** | Pointer to **string** | Type of diagnostics to be performed on the server hardware components. * &#x60;Quick&#x60; - Perform fast and limited diagnostics on server hardware components. * &#x60;Comprehensive&#x60; - Perform slow and extensive diagnostics on server hardware components. | [optional] [default to "Quick"]
+**DownloadMessage** | Pointer to **string** | The message from the endpoint during the download. | [optional] [readonly] 
+**DownloadPercentage** | Pointer to **int64** | The percentage of the image downloaded in the endpoint. | [optional] [readonly] 
+**DownloadStage** | Pointer to **string** | The image download stages. Example:downloading, flashing. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the diagnostics being run. | [optional] [readonly] 
 **OverallState** | Pointer to **string** | The overall state of the diagnostics being run. * &#x60;Queued&#x60; - The diagnostics are queued. * &#x60;InProgress&#x60; - The diagnostics are in progress. * &#x60;Completed&#x60; - The diagnostics are completed. * &#x60;Failed&#x60; - The diagnostics have failed. * &#x60;Terminated&#x60; - The diagnostics are terminated. | [optional] [readonly] [default to "Queued"]
 **Progress** | Pointer to **int64** | The progress of the diagnostics being run. | [optional] [readonly] 
 **Result** | Pointer to [**[]ServerDiagnosticResult**](ServerDiagnosticResult.md) |  | [optional] 
+**SdCardDownloadError** | Pointer to **string** | The error message from the endpoint during the SD card download. | [optional] [readonly] 
 **Diagnostics** | Pointer to [**NullableServerDiagnosticsRelationship**](ServerDiagnosticsRelationship.md) |  | [optional] 
 **Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
@@ -98,6 +102,81 @@ SetDiagnosticsType sets DiagnosticsType field to given value.
 `func (o *ServerDiagnosticStatus) HasDiagnosticsType() bool`
 
 HasDiagnosticsType returns a boolean if a field has been set.
+
+### GetDownloadMessage
+
+`func (o *ServerDiagnosticStatus) GetDownloadMessage() string`
+
+GetDownloadMessage returns the DownloadMessage field if non-nil, zero value otherwise.
+
+### GetDownloadMessageOk
+
+`func (o *ServerDiagnosticStatus) GetDownloadMessageOk() (*string, bool)`
+
+GetDownloadMessageOk returns a tuple with the DownloadMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDownloadMessage
+
+`func (o *ServerDiagnosticStatus) SetDownloadMessage(v string)`
+
+SetDownloadMessage sets DownloadMessage field to given value.
+
+### HasDownloadMessage
+
+`func (o *ServerDiagnosticStatus) HasDownloadMessage() bool`
+
+HasDownloadMessage returns a boolean if a field has been set.
+
+### GetDownloadPercentage
+
+`func (o *ServerDiagnosticStatus) GetDownloadPercentage() int64`
+
+GetDownloadPercentage returns the DownloadPercentage field if non-nil, zero value otherwise.
+
+### GetDownloadPercentageOk
+
+`func (o *ServerDiagnosticStatus) GetDownloadPercentageOk() (*int64, bool)`
+
+GetDownloadPercentageOk returns a tuple with the DownloadPercentage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDownloadPercentage
+
+`func (o *ServerDiagnosticStatus) SetDownloadPercentage(v int64)`
+
+SetDownloadPercentage sets DownloadPercentage field to given value.
+
+### HasDownloadPercentage
+
+`func (o *ServerDiagnosticStatus) HasDownloadPercentage() bool`
+
+HasDownloadPercentage returns a boolean if a field has been set.
+
+### GetDownloadStage
+
+`func (o *ServerDiagnosticStatus) GetDownloadStage() string`
+
+GetDownloadStage returns the DownloadStage field if non-nil, zero value otherwise.
+
+### GetDownloadStageOk
+
+`func (o *ServerDiagnosticStatus) GetDownloadStageOk() (*string, bool)`
+
+GetDownloadStageOk returns a tuple with the DownloadStage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDownloadStage
+
+`func (o *ServerDiagnosticStatus) SetDownloadStage(v string)`
+
+SetDownloadStage sets DownloadStage field to given value.
+
+### HasDownloadStage
+
+`func (o *ServerDiagnosticStatus) HasDownloadStage() bool`
+
+HasDownloadStage returns a boolean if a field has been set.
 
 ### GetName
 
@@ -209,6 +288,31 @@ HasResult returns a boolean if a field has been set.
 `func (o *ServerDiagnosticStatus) UnsetResult()`
 
 UnsetResult ensures that no value is present for Result, not even an explicit nil
+### GetSdCardDownloadError
+
+`func (o *ServerDiagnosticStatus) GetSdCardDownloadError() string`
+
+GetSdCardDownloadError returns the SdCardDownloadError field if non-nil, zero value otherwise.
+
+### GetSdCardDownloadErrorOk
+
+`func (o *ServerDiagnosticStatus) GetSdCardDownloadErrorOk() (*string, bool)`
+
+GetSdCardDownloadErrorOk returns a tuple with the SdCardDownloadError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSdCardDownloadError
+
+`func (o *ServerDiagnosticStatus) SetSdCardDownloadError(v string)`
+
+SetSdCardDownloadError sets SdCardDownloadError field to given value.
+
+### HasSdCardDownloadError
+
+`func (o *ServerDiagnosticStatus) HasSdCardDownloadError() bool`
+
+HasSdCardDownloadError returns a boolean if a field has been set.
+
 ### GetDiagnostics
 
 `func (o *ServerDiagnosticStatus) GetDiagnostics() ServerDiagnosticsRelationship`

@@ -3,26 +3,24 @@ subcategory: "metrics"
 layout: "intersight"
 page_title: "Intersight: intersight_metrics_metrics_exploration"
 description: |-
-        #### Overview
         The MetricsExploration object is pivotal for querying and analyzing metrics data within the system. This provides a structured approach to defining and executing metrics queries for data exploration and visualization.
         #### Purpose
         MetricsExploration enables users to define complex queries and visualize metrics data for deeper analysis and actionable insights. It supports interactive, user-driven exploration to identify trends, patterns, and opportunities for data-driven decisions.
         #### Key Concepts
-        - **Flexible Querying:** - Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
-        - **Visualization Options:** - Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
-        - **Access Control:** - Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
+        - **Flexible Querying:** Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
+        - **Visualization Options:** Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
+        - **Access Control:** Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
 
 ---
 
 # Resource: intersight_metrics_metrics_exploration
-#### Overview
 The MetricsExploration object is pivotal for querying and analyzing metrics data within the system. This provides a structured approach to defining and executing metrics queries for data exploration and visualization.
 #### Purpose
 MetricsExploration enables users to define complex queries and visualize metrics data for deeper analysis and actionable insights. It supports interactive, user-driven exploration to identify trends, patterns, and opportunities for data-driven decisions.
 #### Key Concepts
-- **Flexible Querying:** - Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
-- **Visualization Options:** - Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
-- **Access Control:** - Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
+- **Flexible Querying:** Supports a wide range of query configurations and criteria, allowing users to tailor their metrics exploration.
+- **Visualization Options:** Offers diverse visualization configurations, enhancing the interpretability and presentation of metrics data.
+- **Access Control:** Provides controlled access to metrics data queries, ensuring secure and authorized exploration by privileged users.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

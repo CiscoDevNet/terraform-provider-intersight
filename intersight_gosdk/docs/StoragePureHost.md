@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureHost"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureHost"]
 **HostGroupName** | Pointer to **string** | Name of host group where the host belongs to. Empty if host is not part of any HostGroup. | [optional] [readonly] 
+**RealmName** | Pointer to **string** | A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **HostGroup** | Pointer to [**NullableStoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) |  | [optional] 
 **ProtectionGroup** | Pointer to [**NullableStoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
+**Realm** | Pointer to [**NullableStoragePureRealmRelationship**](StoragePureRealmRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -95,6 +97,31 @@ SetHostGroupName sets HostGroupName field to given value.
 `func (o *StoragePureHost) HasHostGroupName() bool`
 
 HasHostGroupName returns a boolean if a field has been set.
+
+### GetRealmName
+
+`func (o *StoragePureHost) GetRealmName() string`
+
+GetRealmName returns the RealmName field if non-nil, zero value otherwise.
+
+### GetRealmNameOk
+
+`func (o *StoragePureHost) GetRealmNameOk() (*string, bool)`
+
+GetRealmNameOk returns a tuple with the RealmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealmName
+
+`func (o *StoragePureHost) SetRealmName(v string)`
+
+SetRealmName sets RealmName field to given value.
+
+### HasRealmName
+
+`func (o *StoragePureHost) HasRealmName() bool`
+
+HasRealmName returns a boolean if a field has been set.
 
 ### GetArray
 
@@ -201,6 +228,41 @@ HasProtectionGroup returns a boolean if a field has been set.
 `func (o *StoragePureHost) UnsetProtectionGroup()`
 
 UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
+### GetRealm
+
+`func (o *StoragePureHost) GetRealm() StoragePureRealmRelationship`
+
+GetRealm returns the Realm field if non-nil, zero value otherwise.
+
+### GetRealmOk
+
+`func (o *StoragePureHost) GetRealmOk() (*StoragePureRealmRelationship, bool)`
+
+GetRealmOk returns a tuple with the Realm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealm
+
+`func (o *StoragePureHost) SetRealm(v StoragePureRealmRelationship)`
+
+SetRealm sets Realm field to given value.
+
+### HasRealm
+
+`func (o *StoragePureHost) HasRealm() bool`
+
+HasRealm returns a boolean if a field has been set.
+
+### SetRealmNil
+
+`func (o *StoragePureHost) SetRealmNil(b bool)`
+
+ SetRealmNil sets the value for Realm to be an explicit nil
+
+### UnsetRealm
+`func (o *StoragePureHost) UnsetRealm()`
+
+UnsetRealm ensures that no value is present for Realm, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureHost) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

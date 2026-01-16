@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_host_lun"
 description: |-
-        A host LUN entity in Pure storage array. It exists only if the volume has a connection to host or host group. For host group mapping, it provides public connection to all hosts associated within host group. A volume can have private connection to host as well. It cannot have public and private connection. Pure assign same HLU for all the host in case if it is connected through host group.
+        The PureHostLun object represents a logical unit number (LUN) in a PureStorage FlashArray, existing only if a volume is connected to a host or host group.
+        #### Purpose
+        PureHostLun serves to manage the logical connections between volumes and hosts, ensuring organized data access and storage operations within the FlashArray.
+        #### Key Concepts
+        - **LUN Management:** PureHostLun provides a mechanism for organizing volume connections, facilitating efficient data access.
+        - **Connection Type:** It distinguishes between shared connections (via host groups) and direct host connections, optimizing communication pathways.
+        - **Secure Access:** PureHostLun employs privilege sets to ensure secure management of LUNs within the storage array.
 
 ---
 
 # Data Source: intersight_storage_pure_host_lun
-A host LUN entity in Pure storage array. It exists only if the volume has a connection to host or host group. For host group mapping, it provides public connection to all hosts associated within host group. A volume can have private connection to host as well. It cannot have public and private connection. Pure assign same HLU for all the host in case if it is connected through host group.
+The PureHostLun object represents a logical unit number (LUN) in a PureStorage FlashArray, existing only if a volume is connected to a host or host group.  
+#### Purpose  
+PureHostLun serves to manage the logical connections between volumes and hosts, ensuring organized data access and storage operations within the FlashArray.  
+#### Key Concepts 
+- **LUN Management:** PureHostLun provides a mechanism for organizing volume connections, facilitating efficient data access. 
+- **Connection Type:** It distinguishes between shared connections (via host groups) and direct host connections, optimizing communication pathways. 
+- **Secure Access:** PureHostLun employs privilege sets to ensure secure management of LUNs within the storage array.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

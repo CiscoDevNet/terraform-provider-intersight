@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_replication_schedule"
 description: |-
-        Pure snapshot replication schedule entity.
+        The PureReplicationSchedule object configures the replication schedule for snapshots within a PureStorage FlashArray, ensuring systematic data synchronization.
+        #### Purpose
+        PureReplicationSchedule provides structured management of replication schedules, enabling efficient and automated data synchronization strategies within the FlashArray.
+        #### Key Concepts
+        - **Schedule Management:** Orchestrates the timing and frequency of replication, ensuring consistent data synchronization.
+        - **Blackout Periods:** Supports configuration of blackout intervals, optimizing replication operations.
+        - **Secure Access:** Employs privilege sets to control and manage replication schedules securely.
 
 ---
 
 # Data Source: intersight_storage_pure_replication_schedule
-Pure snapshot replication schedule entity.
+The PureReplicationSchedule object configures the replication schedule for snapshots within a PureStorage FlashArray, ensuring systematic data synchronization.  
+#### Purpose  
+PureReplicationSchedule provides structured management of replication schedules, enabling efficient and automated data synchronization strategies within the FlashArray.  
+#### Key Concepts 
+- **Schedule Management:** Orchestrates the timing and frequency of replication, ensuring consistent data synchronization. 
+- **Blackout Periods:** Supports configuration of blackout intervals, optimizing replication operations. 
+- **Secure Access:** Employs privilege sets to control and manage replication schedules securely.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

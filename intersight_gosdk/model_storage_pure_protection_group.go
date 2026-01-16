@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -21,13 +21,17 @@ import (
 // checks if the StoragePureProtectionGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StoragePureProtectionGroup{}
 
-// StoragePureProtectionGroup Protection group entity in Pure storage array. A volume can be protected by associating with protection group either directly or indirectly (either host or host group). Snapshots are created on protected volume in local array or target array or both as per scheduler configuration.
+// StoragePureProtectionGroup The PureProtectionGroup object is a critical element for managing data protection within a PureStorage FlashArray, facilitating volume protection through snapshots.   #### Purpose   PureProtectionGroup enables the protection of volumes by associating them with protection groups, ensuring data integrity and availability through snapshot creation.   #### Key Concepts - **Snapshot Management:** PureProtectionGroup orchestrates the creation and management of snapshots, providing a robust mechanism for data protection.  - **Volume Association:** It supports direct or indirect volume association, allowing flexible protection strategies within the FlashArray.  - **Security:** Utilizes privilege sets to ensure secure access and management of protection groups.
 type StoragePureProtectionGroup struct {
 	StorageBaseProtectionGroup
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+	PodName *string `json:"PodName,omitempty"`
+	// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+	RealmName *string `json:"RealmName,omitempty"`
 	// Overall size of all snapshots in the protection group, represented in bytes.
 	Size *int64 `json:"Size,omitempty"`
 	// Name of PureStorage array name on which the protection group is created.
@@ -38,6 +42,8 @@ type StoragePureProtectionGroup struct {
 	HostGroups []StoragePureHostGroupRelationship `json:"HostGroups,omitempty"`
 	// An array of relationships to storagePureHost resources.
 	Hosts            []StoragePureHostRelationship               `json:"Hosts,omitempty"`
+	Pod              NullableStoragePurePodRelationship          `json:"Pod,omitempty"`
+	Realm            NullableStoragePureRealmRelationship        `json:"Realm,omitempty"`
 	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to storagePureVolume resources.
 	Volumes              []StoragePureVolumeRelationship `json:"Volumes,omitempty"`
@@ -125,6 +131,70 @@ func (o *StoragePureProtectionGroup) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "storage.PureProtectionGroup" of the ObjectType field.
 func (o *StoragePureProtectionGroup) GetDefaultObjectType() interface{} {
 	return "storage.PureProtectionGroup"
+}
+
+// GetPodName returns the PodName field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroup) GetPodName() string {
+	if o == nil || IsNil(o.PodName) {
+		var ret string
+		return ret
+	}
+	return *o.PodName
+}
+
+// GetPodNameOk returns a tuple with the PodName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroup) GetPodNameOk() (*string, bool) {
+	if o == nil || IsNil(o.PodName) {
+		return nil, false
+	}
+	return o.PodName, true
+}
+
+// HasPodName returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroup) HasPodName() bool {
+	if o != nil && !IsNil(o.PodName) {
+		return true
+	}
+
+	return false
+}
+
+// SetPodName gets a reference to the given string and assigns it to the PodName field.
+func (o *StoragePureProtectionGroup) SetPodName(v string) {
+	o.PodName = &v
+}
+
+// GetRealmName returns the RealmName field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroup) GetRealmName() string {
+	if o == nil || IsNil(o.RealmName) {
+		var ret string
+		return ret
+	}
+	return *o.RealmName
+}
+
+// GetRealmNameOk returns a tuple with the RealmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroup) GetRealmNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RealmName) {
+		return nil, false
+	}
+	return o.RealmName, true
+}
+
+// HasRealmName returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroup) HasRealmName() bool {
+	if o != nil && !IsNil(o.RealmName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRealmName gets a reference to the given string and assigns it to the RealmName field.
+func (o *StoragePureProtectionGroup) SetRealmName(v string) {
+	o.RealmName = &v
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
@@ -333,6 +403,92 @@ func (o *StoragePureProtectionGroup) SetHosts(v []StoragePureHostRelationship) {
 	o.Hosts = v
 }
 
+// GetPod returns the Pod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StoragePureProtectionGroup) GetPod() StoragePurePodRelationship {
+	if o == nil || IsNil(o.Pod.Get()) {
+		var ret StoragePurePodRelationship
+		return ret
+	}
+	return *o.Pod.Get()
+}
+
+// GetPodOk returns a tuple with the Pod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StoragePureProtectionGroup) GetPodOk() (*StoragePurePodRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Pod.Get(), o.Pod.IsSet()
+}
+
+// HasPod returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroup) HasPod() bool {
+	if o != nil && o.Pod.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPod gets a reference to the given NullableStoragePurePodRelationship and assigns it to the Pod field.
+func (o *StoragePureProtectionGroup) SetPod(v StoragePurePodRelationship) {
+	o.Pod.Set(&v)
+}
+
+// SetPodNil sets the value for Pod to be an explicit nil
+func (o *StoragePureProtectionGroup) SetPodNil() {
+	o.Pod.Set(nil)
+}
+
+// UnsetPod ensures that no value is present for Pod, not even an explicit nil
+func (o *StoragePureProtectionGroup) UnsetPod() {
+	o.Pod.Unset()
+}
+
+// GetRealm returns the Realm field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StoragePureProtectionGroup) GetRealm() StoragePureRealmRelationship {
+	if o == nil || IsNil(o.Realm.Get()) {
+		var ret StoragePureRealmRelationship
+		return ret
+	}
+	return *o.Realm.Get()
+}
+
+// GetRealmOk returns a tuple with the Realm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StoragePureProtectionGroup) GetRealmOk() (*StoragePureRealmRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Realm.Get(), o.Realm.IsSet()
+}
+
+// HasRealm returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroup) HasRealm() bool {
+	if o != nil && o.Realm.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRealm gets a reference to the given NullableStoragePureRealmRelationship and assigns it to the Realm field.
+func (o *StoragePureProtectionGroup) SetRealm(v StoragePureRealmRelationship) {
+	o.Realm.Set(&v)
+}
+
+// SetRealmNil sets the value for Realm to be an explicit nil
+func (o *StoragePureProtectionGroup) SetRealmNil() {
+	o.Realm.Set(nil)
+}
+
+// UnsetRealm ensures that no value is present for Realm, not even an explicit nil
+func (o *StoragePureProtectionGroup) UnsetRealm() {
+	o.Realm.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureProtectionGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -435,6 +591,12 @@ func (o StoragePureProtectionGroup) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PodName) {
+		toSerialize["PodName"] = o.PodName
+	}
+	if !IsNil(o.RealmName) {
+		toSerialize["RealmName"] = o.RealmName
+	}
 	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
@@ -452,6 +614,12 @@ func (o StoragePureProtectionGroup) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Hosts != nil {
 		toSerialize["Hosts"] = o.Hosts
+	}
+	if o.Pod.IsSet() {
+		toSerialize["Pod"] = o.Pod.Get()
+	}
+	if o.Realm.IsSet() {
+		toSerialize["Realm"] = o.Realm.Get()
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -514,6 +682,10 @@ func (o *StoragePureProtectionGroup) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
+		PodName *string `json:"PodName,omitempty"`
+		// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+		RealmName *string `json:"RealmName,omitempty"`
 		// Overall size of all snapshots in the protection group, represented in bytes.
 		Size *int64 `json:"Size,omitempty"`
 		// Name of PureStorage array name on which the protection group is created.
@@ -524,6 +696,8 @@ func (o *StoragePureProtectionGroup) UnmarshalJSON(data []byte) (err error) {
 		HostGroups []StoragePureHostGroupRelationship `json:"HostGroups,omitempty"`
 		// An array of relationships to storagePureHost resources.
 		Hosts            []StoragePureHostRelationship               `json:"Hosts,omitempty"`
+		Pod              NullableStoragePurePodRelationship          `json:"Pod,omitempty"`
+		Realm            NullableStoragePureRealmRelationship        `json:"Realm,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to storagePureVolume resources.
 		Volumes []StoragePureVolumeRelationship `json:"Volumes,omitempty"`
@@ -536,12 +710,16 @@ func (o *StoragePureProtectionGroup) UnmarshalJSON(data []byte) (err error) {
 		varStoragePureProtectionGroup := _StoragePureProtectionGroup{}
 		varStoragePureProtectionGroup.ClassId = varStoragePureProtectionGroupWithoutEmbeddedStruct.ClassId
 		varStoragePureProtectionGroup.ObjectType = varStoragePureProtectionGroupWithoutEmbeddedStruct.ObjectType
+		varStoragePureProtectionGroup.PodName = varStoragePureProtectionGroupWithoutEmbeddedStruct.PodName
+		varStoragePureProtectionGroup.RealmName = varStoragePureProtectionGroupWithoutEmbeddedStruct.RealmName
 		varStoragePureProtectionGroup.Size = varStoragePureProtectionGroupWithoutEmbeddedStruct.Size
 		varStoragePureProtectionGroup.Source = varStoragePureProtectionGroupWithoutEmbeddedStruct.Source
 		varStoragePureProtectionGroup.Targets = varStoragePureProtectionGroupWithoutEmbeddedStruct.Targets
 		varStoragePureProtectionGroup.Array = varStoragePureProtectionGroupWithoutEmbeddedStruct.Array
 		varStoragePureProtectionGroup.HostGroups = varStoragePureProtectionGroupWithoutEmbeddedStruct.HostGroups
 		varStoragePureProtectionGroup.Hosts = varStoragePureProtectionGroupWithoutEmbeddedStruct.Hosts
+		varStoragePureProtectionGroup.Pod = varStoragePureProtectionGroupWithoutEmbeddedStruct.Pod
+		varStoragePureProtectionGroup.Realm = varStoragePureProtectionGroupWithoutEmbeddedStruct.Realm
 		varStoragePureProtectionGroup.RegisteredDevice = varStoragePureProtectionGroupWithoutEmbeddedStruct.RegisteredDevice
 		varStoragePureProtectionGroup.Volumes = varStoragePureProtectionGroupWithoutEmbeddedStruct.Volumes
 		*o = StoragePureProtectionGroup(varStoragePureProtectionGroup)
@@ -563,12 +741,16 @@ func (o *StoragePureProtectionGroup) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "PodName")
+		delete(additionalProperties, "RealmName")
 		delete(additionalProperties, "Size")
 		delete(additionalProperties, "Source")
 		delete(additionalProperties, "Targets")
 		delete(additionalProperties, "Array")
 		delete(additionalProperties, "HostGroups")
 		delete(additionalProperties, "Hosts")
+		delete(additionalProperties, "Pod")
+		delete(additionalProperties, "Realm")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "Volumes")
 

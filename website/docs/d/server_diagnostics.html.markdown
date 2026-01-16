@@ -3,12 +3,24 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_diagnostics"
 description: |-
-        The health check feature is designed to perform diagnostics on server hardware components.
+        The Diagnostics object is designed to facilitate health checks on server hardware components. It plays a crucial role in ensuring the operational integrity and performance of server infrastructure by performing diagnostics on various hardware elements.
+        #### Purpose
+        The Diagnostics object is intended to conduct quick and comprehensive evaluations of server hardware, identifying potential issues and ensuring that components function as expected. This provides a structured approach to initiating, managing, and reporting on diagnostic tests for server components.
+        #### Key Concepts
+        - **Comprehensive Testing**: Supports a wide range of diagnostic tests, covering multiple hardware components such as CPU, memory, storage, and more.
+        - **Action Management**: Facilitates the start, cancellation, and completion of diagnostic processes, allowing for flexible management of diagnostic operations.
+        - **Access Control**: Employs privilege sets to manage who can initiate and manage diagnostics, ensuring that only authorized users perform these operations.
 
 ---
 
 # Data Source: intersight_server_diagnostics
-The health check feature is designed to perform diagnostics on server hardware components.
+The Diagnostics object is designed to facilitate health checks on server hardware components. It plays a crucial role in ensuring the operational integrity and performance of server infrastructure by performing diagnostics on various hardware elements.
+#### Purpose
+The Diagnostics object is intended to conduct quick and comprehensive evaluations of server hardware, identifying potential issues and ensuring that components function as expected. This provides a structured approach to initiating, managing, and reporting on diagnostic tests for server components.
+#### Key Concepts
+- **Comprehensive Testing**: Supports a wide range of diagnostic tests, covering multiple hardware components such as CPU, memory, storage, and more.
+- **Action Management**: Facilitates the start, cancellation, and completion of diagnostic processes, allowing for flexible management of diagnostic operations.
+- **Access Control**: Employs privilege sets to manage who can initiate and manage diagnostics, ensuring that only authorized users perform these operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

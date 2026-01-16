@@ -29,6 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cpu_usage`:(float) Percentage of CPU currently in use. 
 * `create_time`:(string) The time when this managed object was created. 
+* `deployment_size`:(string) Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mem_usage`:(float) Percentage of memory currently in use. 
 * `mod_time`:(string) The time when this managed object was last modified. 

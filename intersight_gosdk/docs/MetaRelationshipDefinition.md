@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Export** | Pointer to **bool** | When turned off, the peer MO is not exported when the local MO is exported. | [optional] [readonly] 
 **ExportWithPeer** | Pointer to **bool** | When turned on, the local MO is exported when the peer is exported. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the relationship. | [optional] [readonly] 
+**OnDelete** | Pointer to **string** | The action to perform on the peer MO when the local MO is deleted. * &#x60;Unset&#x60; - Any relationship from the peer managed object to the managed object being deleted is unset. * &#x60;Cascade&#x60; - The peer managed object is deleted. * &#x60;Prohibit&#x60; - The deletion is prevented when the relationship is set. * &#x60;Ignore&#x60; - No action is performed on the relationship value or the peer managed object of the relationship. | [optional] [readonly] [default to "Unset"]
+**OnPeerDelete** | Pointer to **string** | The action to perform on the local MO when the peer MO is deleted. * &#x60;Unset&#x60; - Any relationship from the peer managed object to the managed object being deleted is unset. * &#x60;Cascade&#x60; - The peer managed object is deleted. * &#x60;Prohibit&#x60; - The deletion is prevented when the relationship is set. * &#x60;Ignore&#x60; - No action is performed on the relationship value or the peer managed object of the relationship. | [optional] [readonly] [default to "Unset"]
 **PeerRelName** | Pointer to **string** | Name of relationship in peer managed object. | [optional] [readonly] 
 **PeerSupportedObjectTypes** | Pointer to **[]string** |  | [optional] 
 **PeerSync** | Pointer to **bool** | When turned on, peer MO corresponding to the reference provided in relation is updated with a reference to the current MO. | [optional] [readonly] 
@@ -199,6 +201,56 @@ SetName sets Name field to given value.
 `func (o *MetaRelationshipDefinition) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetOnDelete
+
+`func (o *MetaRelationshipDefinition) GetOnDelete() string`
+
+GetOnDelete returns the OnDelete field if non-nil, zero value otherwise.
+
+### GetOnDeleteOk
+
+`func (o *MetaRelationshipDefinition) GetOnDeleteOk() (*string, bool)`
+
+GetOnDeleteOk returns a tuple with the OnDelete field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnDelete
+
+`func (o *MetaRelationshipDefinition) SetOnDelete(v string)`
+
+SetOnDelete sets OnDelete field to given value.
+
+### HasOnDelete
+
+`func (o *MetaRelationshipDefinition) HasOnDelete() bool`
+
+HasOnDelete returns a boolean if a field has been set.
+
+### GetOnPeerDelete
+
+`func (o *MetaRelationshipDefinition) GetOnPeerDelete() string`
+
+GetOnPeerDelete returns the OnPeerDelete field if non-nil, zero value otherwise.
+
+### GetOnPeerDeleteOk
+
+`func (o *MetaRelationshipDefinition) GetOnPeerDeleteOk() (*string, bool)`
+
+GetOnPeerDeleteOk returns a tuple with the OnPeerDelete field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnPeerDelete
+
+`func (o *MetaRelationshipDefinition) SetOnPeerDelete(v string)`
+
+SetOnPeerDelete sets OnPeerDelete field to given value.
+
+### HasOnPeerDelete
+
+`func (o *MetaRelationshipDefinition) HasOnPeerDelete() bool`
+
+HasOnPeerDelete returns a boolean if a field has been set.
 
 ### GetPeerRelName
 

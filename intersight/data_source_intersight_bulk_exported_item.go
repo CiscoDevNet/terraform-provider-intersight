@@ -135,6 +135,11 @@ func getBulkExportedItemSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_aes_key_set": {
+			Description: "Indicates whether the value of the 'aesKey' property has been set.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"item": {
 			Description: "Identity of the MO that is being exported.",
 			Type:        schema.TypeList,
@@ -333,6 +338,44 @@ func getBulkExportedItemSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"related_type_options": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"exclude_relations": {
+						Description: "Do not export relationships.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"excluded_peers": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"related_type": {
+						Description: "The fully qualified related type name.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"service_name": {
 			Description: "Name of the target service that owns the item MO. Service responsible for handling exported item mo notifications.",
 			Type:        schema.TypeString,
@@ -349,7 +392,7 @@ func getBulkExportedItemSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of the item's export operation.\n* `` - The operation has not started.\n* `ValidationInProgress` - The validation operation is in progress.\n* `Valid` - The content to be imported is valid.\n* `InValid` - The content to be imported is not valid and the status message will have the reason.\n* `InProgress` - The operation is in progress.\n* `Success` - The operation has succeeded.\n* `Failed` - The operation has failed.\n* `RollBackInitiated` - The rollback has been inititiated for import failure.\n* `RollBackFailed` - The rollback has failed for import failure.\n* `RollbackCompleted` - The rollback has completed for import failure.\n* `RollbackAborted` - The rollback has been aborted for import failure.\n* `OperationTimedOut` - The operation has timed out.\n* `OperationCancelled` - The operation has been canceled.\n* `CancelInProgress` - The operation is being canceled.",
+			Description: "Status of the item's export operation.\n* `` - The operation has not started.\n* `Ready` - The operation is ready to start.\n* `ValidationInProgress` - The validation operation is in progress.\n* `Valid` - The content to be imported is valid.\n* `InValid` - The content to be imported is not valid and the status message will have the reason.\n* `InProgress` - The operation is in progress.\n* `Success` - The operation has succeeded.\n* `Failed` - The operation has failed.\n* `RollBackInitiated` - The rollback has been initiated for import failure.\n* `RollBackFailed` - The rollback has failed for import failure.\n* `RollbackCompleted` - The rollback has completed for import failure.\n* `RollbackAborted` - The rollback has been aborted for import failure.\n* `OperationTimedOut` - The operation has timed out.\n* `OperationCancelled` - The operation has been canceled.\n* `CancelInProgress` - The operation is being canceled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -742,6 +785,11 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 		o.SetIncludeOrgIdentity(x)
 	}
 
+	if v, ok := d.GetOkExists("is_aes_key_set"); ok {
+		x := (v.(bool))
+		o.SetIsAesKeySet(x)
+	}
+
 	if v, ok := d.GetOk("item"); ok {
 		p := make([]models.MoMoRef, 0, 1)
 		s := v.([]interface{})
@@ -982,6 +1030,60 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 		o.SetRelatedItems(x)
 	}
 
+	if v, ok := d.GetOk("related_type_options"); ok {
+		x := make([]models.BulkRelatedTypeExportOption, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.BulkRelatedTypeExportOption{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("bulk.RelatedTypeExportOption")
+			if v, ok := l["exclude_relations"]; ok {
+				{
+					x := (v.(bool))
+					o.SetExcludeRelations(x)
+				}
+			}
+			if v, ok := l["excluded_peers"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetExcludedPeers(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["related_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetRelatedType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetRelatedTypeOptions(x)
+	}
+
 	if v, ok := d.GetOk("service_name"); ok {
 		x := (v.(string))
 		o.SetServiceName(x)
@@ -1207,6 +1309,7 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 				temp["export_tags"] = (s.GetExportTags())
 				temp["file_name"] = (s.GetFileName())
 				temp["include_org_identity"] = (s.GetIncludeOrgIdentity())
+				temp["is_aes_key_set"] = (s.GetIsAesKeySet())
 
 				temp["item"] = flattenMapMoMoRef(s.GetItem(), d)
 
@@ -1223,6 +1326,8 @@ func dataSourceBulkExportedItemRead(c context.Context, d *schema.ResourceData, m
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["related_items"] = flattenListBulkExportedItemRelationship(s.GetRelatedItems(), d)
+
+				temp["related_type_options"] = flattenListBulkRelatedTypeExportOption(s.GetRelatedTypeOptions(), d)
 				temp["service_name"] = (s.GetServiceName())
 				temp["service_version"] = (s.GetServiceVersion())
 				temp["shared_scope"] = (s.GetSharedScope())

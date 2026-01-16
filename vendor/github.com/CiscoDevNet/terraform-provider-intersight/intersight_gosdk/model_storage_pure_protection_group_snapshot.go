@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the StoragePureProtectionGroupSnapshot type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StoragePureProtectionGroupSnapshot{}
 
-// StoragePureProtectionGroupSnapshot Protection group snapshot entity in Pure protection group.
+// StoragePureProtectionGroupSnapshot The PureProtectionGroupSnapshot object represents a snapshot entity within a PureProtectionGroup, providing a mechanism for data backup and restoration.   #### Purpose   PureProtectionGroupSnapshot facilitates the creation and management of snapshots within protection groups, ensuring data integrity and recovery capabilities.   #### Key Concepts   - **Snapshot Management:** This provides structured management of snapshots, ensuring organized data backup and recovery processes.  - **Integration:** PureProtectionGroupSnapshot integrates seamlessly with protection groups, offering a cohesive data protection strategy.  - **Secure Access:** Employs privilege sets to control access and management of snapshots within the storage array.
 type StoragePureProtectionGroupSnapshot struct {
 	StorageBaseProtectionGroupSnapshot
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -32,12 +32,15 @@ type StoragePureProtectionGroupSnapshot struct {
 	EradicationConfig *string `json:"EradicationConfig,omitempty"`
 	// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
 	Pod *string `json:"Pod,omitempty"`
+	// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+	RealmName *string `json:"RealmName,omitempty"`
 	// The size of the snapshot created.
 	SnapshotSize *int64 `json:"SnapshotSize,omitempty"`
 	// The overall size of the snapshot allocated by the storage array.
 	TotalProvisioned     *int64                                         `json:"TotalProvisioned,omitempty"`
 	Array                NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
 	ProtectionGroup      NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+	Realm                NullableStoragePureRealmRelationship           `json:"Realm,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -187,6 +190,38 @@ func (o *StoragePureProtectionGroupSnapshot) HasPod() bool {
 // SetPod gets a reference to the given string and assigns it to the Pod field.
 func (o *StoragePureProtectionGroupSnapshot) SetPod(v string) {
 	o.Pod = &v
+}
+
+// GetRealmName returns the RealmName field value if set, zero value otherwise.
+func (o *StoragePureProtectionGroupSnapshot) GetRealmName() string {
+	if o == nil || IsNil(o.RealmName) {
+		var ret string
+		return ret
+	}
+	return *o.RealmName
+}
+
+// GetRealmNameOk returns a tuple with the RealmName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePureProtectionGroupSnapshot) GetRealmNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RealmName) {
+		return nil, false
+	}
+	return o.RealmName, true
+}
+
+// HasRealmName returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroupSnapshot) HasRealmName() bool {
+	if o != nil && !IsNil(o.RealmName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRealmName gets a reference to the given string and assigns it to the RealmName field.
+func (o *StoragePureProtectionGroupSnapshot) SetRealmName(v string) {
+	o.RealmName = &v
 }
 
 // GetSnapshotSize returns the SnapshotSize field value if set, zero value otherwise.
@@ -339,6 +374,49 @@ func (o *StoragePureProtectionGroupSnapshot) UnsetProtectionGroup() {
 	o.ProtectionGroup.Unset()
 }
 
+// GetRealm returns the Realm field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StoragePureProtectionGroupSnapshot) GetRealm() StoragePureRealmRelationship {
+	if o == nil || IsNil(o.Realm.Get()) {
+		var ret StoragePureRealmRelationship
+		return ret
+	}
+	return *o.Realm.Get()
+}
+
+// GetRealmOk returns a tuple with the Realm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StoragePureProtectionGroupSnapshot) GetRealmOk() (*StoragePureRealmRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Realm.Get(), o.Realm.IsSet()
+}
+
+// HasRealm returns a boolean if a field has been set.
+func (o *StoragePureProtectionGroupSnapshot) HasRealm() bool {
+	if o != nil && o.Realm.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRealm gets a reference to the given NullableStoragePureRealmRelationship and assigns it to the Realm field.
+func (o *StoragePureProtectionGroupSnapshot) SetRealm(v StoragePureRealmRelationship) {
+	o.Realm.Set(&v)
+}
+
+// SetRealmNil sets the value for Realm to be an explicit nil
+func (o *StoragePureProtectionGroupSnapshot) SetRealmNil() {
+	o.Realm.Set(nil)
+}
+
+// UnsetRealm ensures that no value is present for Realm, not even an explicit nil
+func (o *StoragePureProtectionGroupSnapshot) UnsetRealm() {
+	o.Realm.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureProtectionGroupSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -414,6 +492,9 @@ func (o StoragePureProtectionGroupSnapshot) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Pod) {
 		toSerialize["Pod"] = o.Pod
 	}
+	if !IsNil(o.RealmName) {
+		toSerialize["RealmName"] = o.RealmName
+	}
 	if !IsNil(o.SnapshotSize) {
 		toSerialize["SnapshotSize"] = o.SnapshotSize
 	}
@@ -425,6 +506,9 @@ func (o StoragePureProtectionGroupSnapshot) ToMap() (map[string]interface{}, err
 	}
 	if o.ProtectionGroup.IsSet() {
 		toSerialize["ProtectionGroup"] = o.ProtectionGroup.Get()
+	}
+	if o.Realm.IsSet() {
+		toSerialize["Realm"] = o.Realm.Get()
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -488,12 +572,15 @@ func (o *StoragePureProtectionGroupSnapshot) UnmarshalJSON(data []byte) (err err
 		EradicationConfig *string `json:"EradicationConfig,omitempty"`
 		// A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays.
 		Pod *string `json:"Pod,omitempty"`
+		// A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance.
+		RealmName *string `json:"RealmName,omitempty"`
 		// The size of the snapshot created.
 		SnapshotSize *int64 `json:"SnapshotSize,omitempty"`
 		// The overall size of the snapshot allocated by the storage array.
 		TotalProvisioned *int64                                         `json:"TotalProvisioned,omitempty"`
 		Array            NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
 		ProtectionGroup  NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+		Realm            NullableStoragePureRealmRelationship           `json:"Realm,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
@@ -506,10 +593,12 @@ func (o *StoragePureProtectionGroupSnapshot) UnmarshalJSON(data []byte) (err err
 		varStoragePureProtectionGroupSnapshot.ObjectType = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.ObjectType
 		varStoragePureProtectionGroupSnapshot.EradicationConfig = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.EradicationConfig
 		varStoragePureProtectionGroupSnapshot.Pod = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.Pod
+		varStoragePureProtectionGroupSnapshot.RealmName = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.RealmName
 		varStoragePureProtectionGroupSnapshot.SnapshotSize = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.SnapshotSize
 		varStoragePureProtectionGroupSnapshot.TotalProvisioned = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.TotalProvisioned
 		varStoragePureProtectionGroupSnapshot.Array = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.Array
 		varStoragePureProtectionGroupSnapshot.ProtectionGroup = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.ProtectionGroup
+		varStoragePureProtectionGroupSnapshot.Realm = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.Realm
 		varStoragePureProtectionGroupSnapshot.RegisteredDevice = varStoragePureProtectionGroupSnapshotWithoutEmbeddedStruct.RegisteredDevice
 		*o = StoragePureProtectionGroupSnapshot(varStoragePureProtectionGroupSnapshot)
 	} else {
@@ -532,10 +621,12 @@ func (o *StoragePureProtectionGroupSnapshot) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EradicationConfig")
 		delete(additionalProperties, "Pod")
+		delete(additionalProperties, "RealmName")
 		delete(additionalProperties, "SnapshotSize")
 		delete(additionalProperties, "TotalProvisioned")
 		delete(additionalProperties, "Array")
 		delete(additionalProperties, "ProtectionGroup")
+		delete(additionalProperties, "Realm")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

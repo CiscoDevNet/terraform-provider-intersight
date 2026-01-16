@@ -3,12 +3,16 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_host"
 description: |-
-        A host entity in PureStorage FlashArray. It is an abstraction used by PureStorage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
+        A host entity in PureStorage FlashArray. It is an abstraction used by PureStorage to organize
+        the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names)
+        of client computers and to control communications between clients and volumes.
 
 ---
 
 # Data Source: intersight_storage_pure_host
-A host entity in PureStorage FlashArray. It is an abstraction used by PureStorage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
+A host entity in PureStorage FlashArray. It is an abstraction used by PureStorage to organize
+the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names)
+of client computers and to control communications between clients and volumes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -23,5 +27,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the host in storage array. 
 * `os_type`:(string) Operating system running on the host. 
+* `realm_name`:(string) A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
  

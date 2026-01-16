@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_target_array"
 description: |-
-        Creates a connection between the current Flast array and the specified Target Flash array for replication.
+        The PureTargetArray object establishes a connection between FlashArrays for replication purposes, enhancing data availability and recovery.
+        #### Purpose
+        PureTargetArray facilitates replication between storage arrays, ensuring data redundancy and availability through synchronized data operations.
+        #### Key Concepts
+        - **Replication Management:** It manages connections for data replication, optimizing data availability and recovery processes.
+        - **Array Integration:** Establishes links between source and target arrays, ensuring cohesive replication strategies.
+        - **Secure Access:** Utilizes privilege sets to secure and manage replication operations within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_target_array
-Creates a connection between the current Flast array and the specified Target Flash array for replication.
+The PureTargetArray object establishes a connection between FlashArrays for replication purposes, enhancing data availability and recovery.  
+#### Purpose  
+PureTargetArray facilitates replication between storage arrays, ensuring data redundancy and availability through synchronized data operations.  
+#### Key Concepts  
+- **Replication Management:** It manages connections for data replication, optimizing data availability and recovery processes. 
+- **Array Integration:** Establishes links between source and target arrays, ensuring cohesive replication strategies.
+- **Secure Access:** Utilizes privilege sets to secure and manage replication operations within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

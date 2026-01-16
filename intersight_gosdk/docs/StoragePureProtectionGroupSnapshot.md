@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureProtectionGroupSnapshot"]
 **EradicationConfig** | Pointer to **string** | The configuration of eradication feature. | [optional] [readonly] 
 **Pod** | Pointer to **string** | A pod representing a collection of protection groups and volumes is created on one array and stretched to another array, resulting in fully synchronized writes between the two arrays. | [optional] [readonly] 
+**RealmName** | Pointer to **string** | A realm is the core multi-tenancy component on a Pure Flash Array, providing a self-contained, virtual storage environment with dedicated policies and quotas for secure data isolation and predictable performance. | [optional] [readonly] 
 **SnapshotSize** | Pointer to **int64** | The size of the snapshot created. | [optional] [readonly] 
 **TotalProvisioned** | Pointer to **int64** | The overall size of the snapshot allocated by the storage array. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **ProtectionGroup** | Pointer to [**NullableStoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
+**Realm** | Pointer to [**NullableStoragePureRealmRelationship**](StoragePureRealmRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -122,6 +124,31 @@ SetPod sets Pod field to given value.
 `func (o *StoragePureProtectionGroupSnapshot) HasPod() bool`
 
 HasPod returns a boolean if a field has been set.
+
+### GetRealmName
+
+`func (o *StoragePureProtectionGroupSnapshot) GetRealmName() string`
+
+GetRealmName returns the RealmName field if non-nil, zero value otherwise.
+
+### GetRealmNameOk
+
+`func (o *StoragePureProtectionGroupSnapshot) GetRealmNameOk() (*string, bool)`
+
+GetRealmNameOk returns a tuple with the RealmName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealmName
+
+`func (o *StoragePureProtectionGroupSnapshot) SetRealmName(v string)`
+
+SetRealmName sets RealmName field to given value.
+
+### HasRealmName
+
+`func (o *StoragePureProtectionGroupSnapshot) HasRealmName() bool`
+
+HasRealmName returns a boolean if a field has been set.
 
 ### GetSnapshotSize
 
@@ -243,6 +270,41 @@ HasProtectionGroup returns a boolean if a field has been set.
 `func (o *StoragePureProtectionGroupSnapshot) UnsetProtectionGroup()`
 
 UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
+### GetRealm
+
+`func (o *StoragePureProtectionGroupSnapshot) GetRealm() StoragePureRealmRelationship`
+
+GetRealm returns the Realm field if non-nil, zero value otherwise.
+
+### GetRealmOk
+
+`func (o *StoragePureProtectionGroupSnapshot) GetRealmOk() (*StoragePureRealmRelationship, bool)`
+
+GetRealmOk returns a tuple with the Realm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealm
+
+`func (o *StoragePureProtectionGroupSnapshot) SetRealm(v StoragePureRealmRelationship)`
+
+SetRealm sets Realm field to given value.
+
+### HasRealm
+
+`func (o *StoragePureProtectionGroupSnapshot) HasRealm() bool`
+
+HasRealm returns a boolean if a field has been set.
+
+### SetRealmNil
+
+`func (o *StoragePureProtectionGroupSnapshot) SetRealmNil(b bool)`
+
+ SetRealmNil sets the value for Realm to be an explicit nil
+
+### UnsetRealm
+`func (o *StoragePureProtectionGroupSnapshot) UnsetRealm()`
+
+UnsetRealm ensures that no value is present for Realm, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureProtectionGroupSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

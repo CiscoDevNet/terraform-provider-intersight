@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_nfs_policy_rule"
 description: |-
-        NFS policy rule entity in PureStorage FlashArray.
+        The PureNfsPolicyRule object represents NFS policy rules within a PureStorage FlashArray, facilitating structured management of storage operations.
+        #### Purpose
+        PureNfsPolicyRule provides a mechanism for managing NFS policies, ensuring organized and efficient storage operations within the FlashArray.
+        #### Key Concepts
+        - **Policy Management:** Facilitates the creation and management of NFS policy rules, optimizing storage operations and resource allocation.
+        - **Integration:** Supports integration with directory objects, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage NFS policy rules within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_nfs_policy_rule
-NFS policy rule entity in PureStorage FlashArray.
+The PureNfsPolicyRule object represents NFS policy rules within a PureStorage FlashArray, facilitating structured management of storage operations. 
+#### Purpose  
+PureNfsPolicyRule provides a mechanism for managing NFS policies, ensuring organized and efficient storage operations within the FlashArray. 
+#### Key Concepts  
+- **Policy Management:** Facilitates the creation and management of NFS policy rules, optimizing storage operations and resource allocation. 
+- **Integration:** Supports integration with directory objects, enhancing storage management capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage NFS policy rules within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

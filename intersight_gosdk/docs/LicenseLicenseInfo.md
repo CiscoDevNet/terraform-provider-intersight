@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **EvaluationPeriod** | Pointer to **int64** | The default Trial or Grace period customer is entitled to. | [optional] 
 **ExpireTime** | Pointer to **time.Time** | The date and time when the next expiration time of license subscription. | [optional] [readonly] 
 **ExtraEvaluation** | Pointer to **int64** | The number of days the trial Trial or Grace period is extended. The trial or grace period can be extended once. | [optional] 
+**LastTrialGraceEvalTime** | Pointer to **time.Time** | The last time the trial/grace period evaluation was performed for this license. | [optional] [readonly] 
 **LicenseCount** | Pointer to **int64** | The total number of license consumed in the Intersight account. | [optional] [readonly] 
 **LicenseCountPurchased** | Pointer to **int64** | The total number of license purchased from cisco. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The license state defined by Intersight. The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired. * &#x60;NotLicensed&#x60; - The license token is neither activated nor registered. * &#x60;GraceExpired&#x60; - The license grace period has expired. * &#x60;TrialPeriod&#x60; - The 90 days of trial period. * &#x60;OutOfCompliance&#x60; - The license is out of compliance. * &#x60;Compliance&#x60; - The license is in compliance. * &#x60;TrialExpired&#x60; - The trial period of 90 days has expired. | [optional] [readonly] [default to "NotLicensed"]
@@ -309,6 +310,31 @@ SetExtraEvaluation sets ExtraEvaluation field to given value.
 `func (o *LicenseLicenseInfo) HasExtraEvaluation() bool`
 
 HasExtraEvaluation returns a boolean if a field has been set.
+
+### GetLastTrialGraceEvalTime
+
+`func (o *LicenseLicenseInfo) GetLastTrialGraceEvalTime() time.Time`
+
+GetLastTrialGraceEvalTime returns the LastTrialGraceEvalTime field if non-nil, zero value otherwise.
+
+### GetLastTrialGraceEvalTimeOk
+
+`func (o *LicenseLicenseInfo) GetLastTrialGraceEvalTimeOk() (*time.Time, bool)`
+
+GetLastTrialGraceEvalTimeOk returns a tuple with the LastTrialGraceEvalTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastTrialGraceEvalTime
+
+`func (o *LicenseLicenseInfo) SetLastTrialGraceEvalTime(v time.Time)`
+
+SetLastTrialGraceEvalTime sets LastTrialGraceEvalTime field to given value.
+
+### HasLastTrialGraceEvalTime
+
+`func (o *LicenseLicenseInfo) HasLastTrialGraceEvalTime() bool`
+
+HasLastTrialGraceEvalTime returns a boolean if a field has been set.
 
 ### GetLicenseCount
 

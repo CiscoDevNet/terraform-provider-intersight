@@ -3,29 +3,27 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_profile_template"
 description: |-
-        ### Overview
         The ProfileTemplate object is an essential element in configuration management, providing a templated approach to server profile creation and updates. This simplifies the management of server profiles by allowing standardized configurations to be reused across multiple instances.
         #### Purpose
         ProfileTemplate serves as the blueprint for creating server profiles, enabling efficient configuration management and consistency across deployments. It allows bulk operations such as cloning and updating profiles based on template changes.
         #### Key Concepts
-        - **Template-Based Management:** - Offers a structured approach to server configuration by establishing baseline settings that can be propagated to derived profiles.
-        - **Bulk Operations:** - Supports asynchronous operations such as cloning and updating, facilitating large-scale management of server profiles.
-        - **Version Control:** - Ensures template modifications are safely propagated to profiles without compromising existing configurations.
-        - **Access Governance:** - Privilege sets govern access to the template, maintaining secure control over server configuration processes.
+        - **Template-Based Management:** Offers a structured approach to server configuration by establishing baseline settings that can be propagated to derived profiles.
+        - **Bulk Operations:** Supports asynchronous operations such as cloning and updating, facilitating large-scale management of server profiles.
+        - **Version Control:** Ensures template modifications are safely propagated to profiles without compromising existing configurations.
+        - **Access Governance:** Privilege sets govern access to the template, maintaining secure control over server configuration processes.
         A profile template specifying configuration settings for a physical server.
 
 ---
 
 # Resource: intersight_server_profile_template
-### Overview
 The ProfileTemplate object is an essential element in configuration management, providing a templated approach to server profile creation and updates. This simplifies the management of server profiles by allowing standardized configurations to be reused across multiple instances.   
 #### Purpose  
 ProfileTemplate serves as the blueprint for creating server profiles, enabling efficient configuration management and consistency across deployments. It allows bulk operations such as cloning and updating profiles based on template changes.  
-#### Key Concepts  
-- **Template-Based Management:** - Offers a structured approach to server configuration by establishing baseline settings that can be propagated to derived profiles. 
-- **Bulk Operations:** - Supports asynchronous operations such as cloning and updating, facilitating large-scale management of server profiles.  
-- **Version Control:** - Ensures template modifications are safely propagated to profiles without compromising existing configurations.
-- **Access Governance:** - Privilege sets govern access to the template, maintaining secure control over server configuration processes. 
+#### Key Concepts
+- **Template-Based Management:** Offers a structured approach to server configuration by establishing baseline settings that can be propagated to derived profiles. 
+- **Bulk Operations:** Supports asynchronous operations such as cloning and updating, facilitating large-scale management of server profiles. 
+- **Version Control:** Ensures template modifications are safely propagated to profiles without compromising existing configurations.
+- **Access Governance:** Privilege sets govern access to the template, maintaining secure control over server configuration processes. 
 A profile template specifying configuration settings for a physical server.
 ## Usage Example
 ### Resource Creation

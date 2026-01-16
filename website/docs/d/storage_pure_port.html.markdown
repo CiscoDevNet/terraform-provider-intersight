@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_port"
 description: |-
-        Port entity in Pure FlashArray.
+        The PurePort object represents a port entity within a PureStorage FlashArray, facilitating network connectivity and data flow.
+        #### Purpose
+        PurePort facilitates the management of storage ports, ensuring efficient network connectivity and data operations within the FlashArray.
+        #### Key Concepts
+        - **Port Management:** Offers structured management of ports, optimizing network connectivity and data flow operations.
+        - **Integration:** Supports integration with controller and array objects, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage port operations within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_port
-Port entity in Pure FlashArray.
+The PurePort object represents a port entity within a PureStorage FlashArray, facilitating network connectivity and data flow.  
+#### Purpose  
+PurePort facilitates the management of storage ports, ensuring efficient network connectivity and data operations within the FlashArray. 
+#### Key Concepts  
+- **Port Management:** Offers structured management of ports, optimizing network connectivity and data flow operations. 
+- **Integration:** Supports integration with controller and array objects, enhancing storage management capabilities. 
+ - **Secure Access:** Utilizes privilege sets to secure and manage port operations within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -21,7 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
-* `mode`:(string) This field identifies the Fan Control Mode on the endpoint.* `Balanced` - Value of Fan Speed is Balanced.* `LowPower` - Value of Fan Speed is LowPower.* `HighPower` - Value of Fan Speed is HighPower.* `MaximumPower` - Value of Fan Speed is MaximumPower.* `Acoustic` - Value of Fan Speed is Acoustic. 
+* `mode`:(string) This field identifies the Fan Control Mode on the endpoint.* `Balanced` - Value of Fan Speed is Balanced.* `LowPower` - Value of Fan Speed is LowPower.* `HighPower` - Value of Fan Speed is HighPower.* `MaximumPower` - Value of Fan Speed is MaximumPower.* `MaximumCooling` - Value of Fan Speed is MaximumCooling.* `Acoustic` - Value of Fan Speed is Acoustic. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 

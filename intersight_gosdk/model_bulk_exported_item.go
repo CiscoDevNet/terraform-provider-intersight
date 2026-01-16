@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -36,15 +36,18 @@ type BulkExportedItem struct {
 	// Name of the file corresponding to item MO.
 	FileName *string `json:"FileName,omitempty"`
 	// Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties.
-	IncludeOrgIdentity *bool    `json:"IncludeOrgIdentity,omitempty"`
-	Item               *MoMoRef `json:"Item,omitempty"`
+	IncludeOrgIdentity *bool `json:"IncludeOrgIdentity,omitempty"`
+	// Indicates whether the value of the 'aesKey' property has been set.
+	IsAesKeySet *bool    `json:"IsAesKeySet,omitempty"`
+	Item        *MoMoRef `json:"Item,omitempty"`
 	// MO item identity (the moref corresponding to item) expressed as a string.
-	Name *string `json:"Name,omitempty"`
+	Name               *string                       `json:"Name,omitempty"`
+	RelatedTypeOptions []BulkRelatedTypeExportOption `json:"RelatedTypeOptions,omitempty"`
 	// Name of the target service that owns the item MO. Service responsible for handling exported item mo notifications.
 	ServiceName *string `json:"ServiceName,omitempty"`
 	// Version of the service that owns the item MO.
 	ServiceVersion *string `json:"ServiceVersion,omitempty"`
-	// Status of the item's export operation. * `` - The operation has not started. * `ValidationInProgress` - The validation operation is in progress. * `Valid` - The content to be imported is valid. * `InValid` - The content to be imported is not valid and the status message will have the reason. * `InProgress` - The operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `RollBackInitiated` - The rollback has been inititiated for import failure. * `RollBackFailed` - The rollback has failed for import failure. * `RollbackCompleted` - The rollback has completed for import failure. * `RollbackAborted` - The rollback has been aborted for import failure. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been canceled. * `CancelInProgress` - The operation is being canceled.
+	// Status of the item's export operation. * `` - The operation has not started. * `Ready` - The operation is ready to start. * `ValidationInProgress` - The validation operation is in progress. * `Valid` - The content to be imported is valid. * `InValid` - The content to be imported is not valid and the status message will have the reason. * `InProgress` - The operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `RollBackInitiated` - The rollback has been initiated for import failure. * `RollBackFailed` - The rollback has failed for import failure. * `RollbackCompleted` - The rollback has completed for import failure. * `RollbackAborted` - The rollback has been aborted for import failure. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been canceled. * `CancelInProgress` - The operation is being canceled.
 	Status *string `json:"Status,omitempty"`
 	// Progress or error message for the MO's export operation.
 	StatusMessage *string                              `json:"StatusMessage,omitempty"`
@@ -299,6 +302,38 @@ func (o *BulkExportedItem) SetIncludeOrgIdentity(v bool) {
 	o.IncludeOrgIdentity = &v
 }
 
+// GetIsAesKeySet returns the IsAesKeySet field value if set, zero value otherwise.
+func (o *BulkExportedItem) GetIsAesKeySet() bool {
+	if o == nil || IsNil(o.IsAesKeySet) {
+		var ret bool
+		return ret
+	}
+	return *o.IsAesKeySet
+}
+
+// GetIsAesKeySetOk returns a tuple with the IsAesKeySet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkExportedItem) GetIsAesKeySetOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsAesKeySet) {
+		return nil, false
+	}
+	return o.IsAesKeySet, true
+}
+
+// HasIsAesKeySet returns a boolean if a field has been set.
+func (o *BulkExportedItem) HasIsAesKeySet() bool {
+	if o != nil && !IsNil(o.IsAesKeySet) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAesKeySet gets a reference to the given bool and assigns it to the IsAesKeySet field.
+func (o *BulkExportedItem) SetIsAesKeySet(v bool) {
+	o.IsAesKeySet = &v
+}
+
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *BulkExportedItem) GetItem() MoMoRef {
 	if o == nil || IsNil(o.Item) {
@@ -361,6 +396,39 @@ func (o *BulkExportedItem) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *BulkExportedItem) SetName(v string) {
 	o.Name = &v
+}
+
+// GetRelatedTypeOptions returns the RelatedTypeOptions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BulkExportedItem) GetRelatedTypeOptions() []BulkRelatedTypeExportOption {
+	if o == nil {
+		var ret []BulkRelatedTypeExportOption
+		return ret
+	}
+	return o.RelatedTypeOptions
+}
+
+// GetRelatedTypeOptionsOk returns a tuple with the RelatedTypeOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BulkExportedItem) GetRelatedTypeOptionsOk() ([]BulkRelatedTypeExportOption, bool) {
+	if o == nil || IsNil(o.RelatedTypeOptions) {
+		return nil, false
+	}
+	return o.RelatedTypeOptions, true
+}
+
+// HasRelatedTypeOptions returns a boolean if a field has been set.
+func (o *BulkExportedItem) HasRelatedTypeOptions() bool {
+	if o != nil && !IsNil(o.RelatedTypeOptions) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelatedTypeOptions gets a reference to the given []BulkRelatedTypeExportOption and assigns it to the RelatedTypeOptions field.
+func (o *BulkExportedItem) SetRelatedTypeOptions(v []BulkRelatedTypeExportOption) {
+	o.RelatedTypeOptions = v
 }
 
 // GetServiceName returns the ServiceName field value if set, zero value otherwise.
@@ -651,11 +719,17 @@ func (o BulkExportedItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IncludeOrgIdentity) {
 		toSerialize["IncludeOrgIdentity"] = o.IncludeOrgIdentity
 	}
+	if !IsNil(o.IsAesKeySet) {
+		toSerialize["IsAesKeySet"] = o.IsAesKeySet
+	}
 	if !IsNil(o.Item) {
 		toSerialize["Item"] = o.Item
 	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
+	}
+	if o.RelatedTypeOptions != nil {
+		toSerialize["RelatedTypeOptions"] = o.RelatedTypeOptions
 	}
 	if !IsNil(o.ServiceName) {
 		toSerialize["ServiceName"] = o.ServiceName
@@ -741,15 +815,18 @@ func (o *BulkExportedItem) UnmarshalJSON(data []byte) (err error) {
 		// Name of the file corresponding to item MO.
 		FileName *string `json:"FileName,omitempty"`
 		// Indicates that exported references for objects which are organization owned should include the organization reference along with the other identity properties.
-		IncludeOrgIdentity *bool    `json:"IncludeOrgIdentity,omitempty"`
-		Item               *MoMoRef `json:"Item,omitempty"`
+		IncludeOrgIdentity *bool `json:"IncludeOrgIdentity,omitempty"`
+		// Indicates whether the value of the 'aesKey' property has been set.
+		IsAesKeySet *bool    `json:"IsAesKeySet,omitempty"`
+		Item        *MoMoRef `json:"Item,omitempty"`
 		// MO item identity (the moref corresponding to item) expressed as a string.
-		Name *string `json:"Name,omitempty"`
+		Name               *string                       `json:"Name,omitempty"`
+		RelatedTypeOptions []BulkRelatedTypeExportOption `json:"RelatedTypeOptions,omitempty"`
 		// Name of the target service that owns the item MO. Service responsible for handling exported item mo notifications.
 		ServiceName *string `json:"ServiceName,omitempty"`
 		// Version of the service that owns the item MO.
 		ServiceVersion *string `json:"ServiceVersion,omitempty"`
-		// Status of the item's export operation. * `` - The operation has not started. * `ValidationInProgress` - The validation operation is in progress. * `Valid` - The content to be imported is valid. * `InValid` - The content to be imported is not valid and the status message will have the reason. * `InProgress` - The operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `RollBackInitiated` - The rollback has been inititiated for import failure. * `RollBackFailed` - The rollback has failed for import failure. * `RollbackCompleted` - The rollback has completed for import failure. * `RollbackAborted` - The rollback has been aborted for import failure. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been canceled. * `CancelInProgress` - The operation is being canceled.
+		// Status of the item's export operation. * `` - The operation has not started. * `Ready` - The operation is ready to start. * `ValidationInProgress` - The validation operation is in progress. * `Valid` - The content to be imported is valid. * `InValid` - The content to be imported is not valid and the status message will have the reason. * `InProgress` - The operation is in progress. * `Success` - The operation has succeeded. * `Failed` - The operation has failed. * `RollBackInitiated` - The rollback has been initiated for import failure. * `RollBackFailed` - The rollback has failed for import failure. * `RollbackCompleted` - The rollback has completed for import failure. * `RollbackAborted` - The rollback has been aborted for import failure. * `OperationTimedOut` - The operation has timed out. * `OperationCancelled` - The operation has been canceled. * `CancelInProgress` - The operation is being canceled.
 		Status *string `json:"Status,omitempty"`
 		// Progress or error message for the MO's export operation.
 		StatusMessage *string                              `json:"StatusMessage,omitempty"`
@@ -771,8 +848,10 @@ func (o *BulkExportedItem) UnmarshalJSON(data []byte) (err error) {
 		varBulkExportedItem.ExportTags = varBulkExportedItemWithoutEmbeddedStruct.ExportTags
 		varBulkExportedItem.FileName = varBulkExportedItemWithoutEmbeddedStruct.FileName
 		varBulkExportedItem.IncludeOrgIdentity = varBulkExportedItemWithoutEmbeddedStruct.IncludeOrgIdentity
+		varBulkExportedItem.IsAesKeySet = varBulkExportedItemWithoutEmbeddedStruct.IsAesKeySet
 		varBulkExportedItem.Item = varBulkExportedItemWithoutEmbeddedStruct.Item
 		varBulkExportedItem.Name = varBulkExportedItemWithoutEmbeddedStruct.Name
+		varBulkExportedItem.RelatedTypeOptions = varBulkExportedItemWithoutEmbeddedStruct.RelatedTypeOptions
 		varBulkExportedItem.ServiceName = varBulkExportedItemWithoutEmbeddedStruct.ServiceName
 		varBulkExportedItem.ServiceVersion = varBulkExportedItemWithoutEmbeddedStruct.ServiceVersion
 		varBulkExportedItem.Status = varBulkExportedItemWithoutEmbeddedStruct.Status
@@ -804,8 +883,10 @@ func (o *BulkExportedItem) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ExportTags")
 		delete(additionalProperties, "FileName")
 		delete(additionalProperties, "IncludeOrgIdentity")
+		delete(additionalProperties, "IsAesKeySet")
 		delete(additionalProperties, "Item")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "RelatedTypeOptions")
 		delete(additionalProperties, "ServiceName")
 		delete(additionalProperties, "ServiceVersion")
 		delete(additionalProperties, "Status")

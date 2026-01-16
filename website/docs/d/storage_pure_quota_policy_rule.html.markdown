@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_quota_policy_rule"
 description: |-
-        Quota policy rule entity in PureStorage FlashArray.
+        The PureQuotaPolicyRule object represents quota policy rules within a PureStorage FlashArray, ensuring organized and efficient storage operations.
+        #### Purpose
+        PureQuotaPolicyRule facilitates the management of quota policies, providing structured control and allocation of storage resources within the FlashArray.
+        #### Key Concepts
+        - **Policy Management:** Offers structured management of quota policy rules, optimizing storage operations and resource allocation.
+        - **Integration:** Supports integration with directory objects, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage quota policy rules within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_quota_policy_rule
-Quota policy rule entity in PureStorage FlashArray.
+The PureQuotaPolicyRule object represents quota policy rules within a PureStorage FlashArray, ensuring organized and efficient storage operations.  
+#### Purpose  
+PureQuotaPolicyRule facilitates the management of quota policies, providing structured control and allocation of storage resources within the FlashArray. 
+#### Key Concepts  
+- **Policy Management:** Offers structured management of quota policy rules, optimizing storage operations and resource allocation. 
+- **Integration:** Supports integration with directory objects, enhancing storage management capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage quota policy rules within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

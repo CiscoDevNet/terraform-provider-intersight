@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type ApplianceNodeOpStatus struct {
 	ClusterNetworkStatus []ApplianceNetworkStatus `json:"ClusterNetworkStatus,omitempty"`
 	// Percentage of CPU currently in use.
 	CpuUsage *float32 `json:"CpuUsage,omitempty"`
+	// Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc.
+	DeploymentSize *string `json:"DeploymentSize,omitempty"`
 	// Percentage of memory currently in use.
 	MemUsage *float32 `json:"MemUsage,omitempty"`
 	// Hostname of the Intersight Appliance node.
@@ -198,6 +200,38 @@ func (o *ApplianceNodeOpStatus) HasCpuUsage() bool {
 // SetCpuUsage gets a reference to the given float32 and assigns it to the CpuUsage field.
 func (o *ApplianceNodeOpStatus) SetCpuUsage(v float32) {
 	o.CpuUsage = &v
+}
+
+// GetDeploymentSize returns the DeploymentSize field value if set, zero value otherwise.
+func (o *ApplianceNodeOpStatus) GetDeploymentSize() string {
+	if o == nil || IsNil(o.DeploymentSize) {
+		var ret string
+		return ret
+	}
+	return *o.DeploymentSize
+}
+
+// GetDeploymentSizeOk returns a tuple with the DeploymentSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceNodeOpStatus) GetDeploymentSizeOk() (*string, bool) {
+	if o == nil || IsNil(o.DeploymentSize) {
+		return nil, false
+	}
+	return o.DeploymentSize, true
+}
+
+// HasDeploymentSize returns a boolean if a field has been set.
+func (o *ApplianceNodeOpStatus) HasDeploymentSize() bool {
+	if o != nil && !IsNil(o.DeploymentSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentSize gets a reference to the given string and assigns it to the DeploymentSize field.
+func (o *ApplianceNodeOpStatus) SetDeploymentSize(v string) {
+	o.DeploymentSize = &v
 }
 
 // GetMemUsage returns the MemUsage field value if set, zero value otherwise.
@@ -630,6 +664,9 @@ func (o ApplianceNodeOpStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CpuUsage) {
 		toSerialize["CpuUsage"] = o.CpuUsage
 	}
+	if !IsNil(o.DeploymentSize) {
+		toSerialize["DeploymentSize"] = o.DeploymentSize
+	}
 	if !IsNil(o.MemUsage) {
 		toSerialize["MemUsage"] = o.MemUsage
 	}
@@ -721,6 +758,8 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
 		ClusterNetworkStatus []ApplianceNetworkStatus `json:"ClusterNetworkStatus,omitempty"`
 		// Percentage of CPU currently in use.
 		CpuUsage *float32 `json:"CpuUsage,omitempty"`
+		// Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc.
+		DeploymentSize *string `json:"DeploymentSize,omitempty"`
 		// Percentage of memory currently in use.
 		MemUsage *float32 `json:"MemUsage,omitempty"`
 		// Hostname of the Intersight Appliance node.
@@ -750,6 +789,7 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
 		varApplianceNodeOpStatus.ObjectType = varApplianceNodeOpStatusWithoutEmbeddedStruct.ObjectType
 		varApplianceNodeOpStatus.ClusterNetworkStatus = varApplianceNodeOpStatusWithoutEmbeddedStruct.ClusterNetworkStatus
 		varApplianceNodeOpStatus.CpuUsage = varApplianceNodeOpStatusWithoutEmbeddedStruct.CpuUsage
+		varApplianceNodeOpStatus.DeploymentSize = varApplianceNodeOpStatusWithoutEmbeddedStruct.DeploymentSize
 		varApplianceNodeOpStatus.MemUsage = varApplianceNodeOpStatusWithoutEmbeddedStruct.MemUsage
 		varApplianceNodeOpStatus.NodeHostname = varApplianceNodeOpStatusWithoutEmbeddedStruct.NodeHostname
 		varApplianceNodeOpStatus.NodeId = varApplianceNodeOpStatusWithoutEmbeddedStruct.NodeId
@@ -782,6 +822,7 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterNetworkStatus")
 		delete(additionalProperties, "CpuUsage")
+		delete(additionalProperties, "DeploymentSize")
 		delete(additionalProperties, "MemUsage")
 		delete(additionalProperties, "NodeHostname")
 		delete(additionalProperties, "NodeId")

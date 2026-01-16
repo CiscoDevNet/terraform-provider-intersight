@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_firmware_summary"
 description: |-
-        Update inventory that contains the details for the firmware running on each component in the compute.Physical object.
+        The FirmwareSummary object provides a comprehensive overview of the firmware running on each component within compute physical objects, such as rack or blade servers. It is an integral part of the inventory management system, ensuring that the firmware details are up-to-date and easily accessible for management and policy enforcement.
+        #### Purpose
+        The FirmwareSummary object is designed to collect and present detailed information about the firmware versions operating across various server components. It plays a crucial role in maintaining system integrity and performance by enabling administrators to monitor, manage, and enforce firmware policies effectively.
+        #### Key Concepts
+        - **Inventory Integration:** FirmwareSummary is deeply integrated with the inventory system, reflecting accurate and current firmware data for each managed server component.
+        - **Policy Enforcement:** Acts as a foundational element for firmware policy implementation, ensuring that firmware versions align with organizational standards and compliance requirements.
+        - **Comprehensive Collection:** Aggregates firmware information across multiple components, providing a holistic view of server firmware status, which aids in decision-making and troubleshooting.
+        - **Access and Permissions:** Equipped with robust access controls, allowing authorized personnel to read, update, and manage firmware information securely.
 
 ---
 
 # Data Source: intersight_firmware_firmware_summary
-Update inventory that contains the details for the firmware running on each component in the compute.Physical object.
+The FirmwareSummary object provides a comprehensive overview of the firmware running on each component within compute physical objects, such as rack or blade servers. It is an integral part of the inventory management system, ensuring that the firmware details are up-to-date and easily accessible for management and policy enforcement.
+#### Purpose
+The FirmwareSummary object is designed to collect and present detailed information about the firmware versions operating across various server components. It plays a crucial role in maintaining system integrity and performance by enabling administrators to monitor, manage, and enforce firmware policies effectively.
+#### Key Concepts
+- **Inventory Integration:** FirmwareSummary is deeply integrated with the inventory system, reflecting accurate and current firmware data for each managed server component.
+- **Policy Enforcement:** Acts as a foundational element for firmware policy implementation, ensuring that firmware versions align with organizational standards and compliance requirements.
+- **Comprehensive Collection:** Aggregates firmware information across multiple components, providing a holistic view of server firmware status, which aids in decision-making and troubleshooting.
+- **Access and Permissions:** Equipped with robust access controls, allowing authorized personnel to read, update, and manage firmware information securely.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

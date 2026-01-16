@@ -1253,6 +1253,30 @@ func TestFlattenListBulkHttpHeader(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListBulkRelatedTypeExportOption(t *testing.T) {
+	p := []models.BulkRelatedTypeExportOption{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"bulk.RelatedTypeExportOption","ExcludeRelations":true,"ObjectType":"bulk.RelatedTypeExportOption","RelatedType":"RelatedType %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListBulkRelatedTypeExportOption(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.BulkRelatedTypeExportOption{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListBulkRelatedTypeExportOption(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "bulk.RelatedTypeExportOption", "exclude_relations": true, "object_type": "bulk.RelatedTypeExportOption", "related_type": "RelatedType 1"}, {"class_id": "bulk.RelatedTypeExportOption", "exclude_relations": true, "object_type": "bulk.RelatedTypeExportOption", "related_type": "RelatedType 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListBulkRestResult(t *testing.T) {
 	p := []models.BulkRestResult{}
 	var d = &schema.ResourceData{}
@@ -7184,7 +7208,7 @@ func TestFlattenListMetaPropDefinition(t *testing.T) {
 func TestFlattenListMetaRelationshipDefinition(t *testing.T) {
 	p := []models.MetaRelationshipDefinition{}
 	var d = &schema.ResourceData{}
-	c := `{"ApiAccess":"ApiAccess %d","ClassId":"meta.RelationshipDefinition","Collection":true,"Export":true,"ExportWithPeer":true,"Name":"Name %d","ObjectType":"meta.RelationshipDefinition","PeerRelName":"PeerRelName %d","PeerSync":true,"Type":"Type %d"}`
+	c := `{"ApiAccess":"ApiAccess %d","ClassId":"meta.RelationshipDefinition","Collection":true,"Export":true,"ExportWithPeer":true,"Name":"Name %d","ObjectType":"meta.RelationshipDefinition","OnDelete":"OnDelete %d","OnPeerDelete":"OnPeerDelete %d","PeerRelName":"PeerRelName %d","PeerSync":true,"Type":"Type %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenListMetaRelationshipDefinition(p, d)
@@ -7199,7 +7223,7 @@ func TestFlattenListMetaRelationshipDefinition(t *testing.T) {
 		p = append(p, x)
 	}
 	ffOp := flattenListMetaRelationshipDefinition(p, d)
-	expectedOp := []map[string]interface{}{{"api_access": "ApiAccess 1", "class_id": "meta.RelationshipDefinition", "collection": true, "export": true, "export_with_peer": true, "name": "Name 1", "object_type": "meta.RelationshipDefinition", "peer_rel_name": "PeerRelName 1", "peer_sync": true, "type": "Type 1"}, {"api_access": "ApiAccess 2", "class_id": "meta.RelationshipDefinition", "collection": true, "export": true, "export_with_peer": true, "name": "Name 2", "object_type": "meta.RelationshipDefinition", "peer_rel_name": "PeerRelName 2", "peer_sync": true, "type": "Type 2"}}
+	expectedOp := []map[string]interface{}{{"api_access": "ApiAccess 1", "class_id": "meta.RelationshipDefinition", "collection": true, "export": true, "export_with_peer": true, "name": "Name 1", "object_type": "meta.RelationshipDefinition", "on_delete": "OnDelete 1", "on_peer_delete": "OnPeerDelete 1", "peer_rel_name": "PeerRelName 1", "peer_sync": true, "type": "Type 1"}, {"api_access": "ApiAccess 2", "class_id": "meta.RelationshipDefinition", "collection": true, "export": true, "export_with_peer": true, "name": "Name 2", "object_type": "meta.RelationshipDefinition", "on_delete": "OnDelete 2", "on_peer_delete": "OnPeerDelete 2", "peer_rel_name": "PeerRelName 2", "peer_sync": true, "type": "Type 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -11405,6 +11429,78 @@ func TestFlattenListStoragePureNfsPolicyRuleRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListStoragePurePodRelationship(t *testing.T) {
+	p := []models.StoragePurePodRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListStoragePurePodRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.StoragePurePodRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListStoragePurePodRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListStoragePureProtectionGroupRelationship(t *testing.T) {
+	p := []models.StoragePureProtectionGroupRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListStoragePureProtectionGroupRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.StoragePureProtectionGroupRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListStoragePureProtectionGroupRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListStoragePureProtectionGroupSnapshotRelationship(t *testing.T) {
+	p := []models.StoragePureProtectionGroupSnapshotRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListStoragePureProtectionGroupSnapshotRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.StoragePureProtectionGroupSnapshotRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListStoragePureProtectionGroupSnapshotRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListStoragePureQuotaPolicyRuleRelationship(t *testing.T) {
 	p := []models.StoragePureQuotaPolicyRuleRelationship{}
 	var d = &schema.ResourceData{}
@@ -11495,6 +11591,30 @@ func TestFlattenListStoragePureVolumeRelationship(t *testing.T) {
 		p = append(p, x)
 	}
 	ffOp := flattenListStoragePureVolumeRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListStoragePureVolumeSnapshotRelationship(t *testing.T) {
+	p := []models.StoragePureVolumeSnapshotRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListStoragePureVolumeSnapshotRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.StoragePureVolumeSnapshotRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListStoragePureVolumeSnapshotRelationship(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
@@ -13128,30 +13248,6 @@ func TestFlattenListWorkloadStateAggregation(t *testing.T) {
 	}
 	ffOp := flattenListWorkloadStateAggregation(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "workload.StateAggregation", "nr_count": 32, "object_type": "workload.StateAggregation", "state": "State 1"}, {"class_id": "workload.StateAggregation", "nr_count": 32, "object_type": "workload.StateAggregation", "state": "State 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListWorkspaceFolderRelationship(t *testing.T) {
-	p := []models.WorkspaceFolderRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListWorkspaceFolderRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.WorkspaceFolderRelationship{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListWorkspaceFolderRelationship(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -23909,6 +24005,42 @@ func TestFlattenMapStoragePureHostGroupRelationship(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapStoragePurePodRelationship(t *testing.T) {
+	p := models.StoragePurePodRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapStoragePurePodRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapStoragePurePodRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapStoragePurePodUtilization(t *testing.T) {
+	p := models.StoragePurePodUtilization{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"storage.PurePodUtilization","DataReduction":32.000000,"Footprint":32,"ObjectType":"storage.PurePodUtilization","Replication":32,"Shared":32,"Snapshots":32,"ThinProvisioning":32.000000,"TotalPhysical":32,"TotalProvisioned":32,"TotalReduction":32.000000,"TotalUsed":32,"Unique":32,"UsedProvisioned":32,"Virtual":32}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapStoragePurePodUtilization(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapStoragePurePodUtilization(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "storage.PurePodUtilization", "data_reduction": 32.000000, "footprint": 32, "object_type": "storage.PurePodUtilization", "replication": 32, "shared": 32, "snapshots": 32, "thin_provisioning": 32.000000, "total_physical": 32, "total_provisioned": 32, "total_reduction": 32.000000, "total_used": 32, "unique": 32, "used_provisioned": 32, "virtual": 32}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapStoragePureProtectionGroupRelationship(t *testing.T) {
 	p := models.StoragePureProtectionGroupRelationship{}
 	var d = &schema.ResourceData{}
@@ -23942,6 +24074,42 @@ func TestFlattenMapStoragePureProtectionGroupSnapshotRelationship(t *testing.T) 
 	CheckError(t, err)
 	ffOp := flattenMapStoragePureProtectionGroupSnapshotRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapStoragePureRealmRelationship(t *testing.T) {
+	p := models.StoragePureRealmRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapStoragePureRealmRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapStoragePureRealmRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapStoragePureRealmUtilization(t *testing.T) {
+	p := models.StoragePureRealmUtilization{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"storage.PureRealmUtilization","DataReduction":32.000000,"Footprint":32,"ObjectType":"storage.PureRealmUtilization","Shared":32,"Snapshots":32,"System":32,"ThinProvisioning":32.000000,"TotalProvisioned":32,"TotalReduction":32.000000,"TotalUsed":32,"Unique":32,"UsedProvisioned":32,"Virtual":32}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapStoragePureRealmUtilization(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapStoragePureRealmUtilization(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "storage.PureRealmUtilization", "data_reduction": 32.000000, "footprint": 32, "object_type": "storage.PureRealmUtilization", "shared": 32, "snapshots": 32, "system": 32, "thin_provisioning": 32.000000, "total_provisioned": 32, "total_reduction": 32.000000, "total_used": 32, "unique": 32, "used_provisioned": 32, "virtual": 32}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
@@ -26677,24 +26845,6 @@ func TestFlattenMapWorkloadWorkloadMetadataRelationship(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapWorkloadWorkloadMetadataRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapWorkspaceFolderRelationship(t *testing.T) {
-	p := models.WorkspaceFolderRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapWorkspaceFolderRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapWorkspaceFolderRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)

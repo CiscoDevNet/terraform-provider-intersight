@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade_validity"
 description: |-
-        Upgrade Validity API that performs basic validity checks for performing a firmware upgrade on the endpoint. The API checks whether the endpoint satisfies the basic platform requirements that are needed for firmware upgrade to happen. Support is currently available only for Standalone servers.
+        The UpgradeValidity object is a crucial element in the firmware upgrade process, ensuring that the target endpoint meets all necessary conditions for a successful firmware upgrade. This provides basic validity checks that are fundamental to initiating a firmware upgrade operation.
+        #### Purpose
+        UpgradeValidity serves as a validation checkpoint before performing firmware upgrades. It evaluates the endpoint's readiness, confirming whether the platform requirements are satisfied to proceed with the upgrade process.
+        #### Key Concepts
+        - **Pre-Upgrade Validation:** Conducts essential checks to determine if the endpoint is a suitable candidate for firmware upgrade, preventing potential issues during the upgrade process.
+        - **Platform Requirement Analysis:** Focuses on verifying the endpoint's compatibility and capability to support the desired firmware upgrade, ensuring system integrity and efficiency.
+        - **Standalone Server Support:** Specifically tailored to provide upgrade validity checks for standalone servers, optimizing the upgrade workflow for these environments.
+        - **Read-Only Access:** Provides a secure and controlled mechanism for administrators to assess upgrade readiness without altering system settings.
 
 ---
 
 # Resource: intersight_firmware_upgrade_validity
-Upgrade Validity API that performs basic validity checks for performing a firmware upgrade on the endpoint. The API checks whether the endpoint satisfies the basic platform requirements that are needed for firmware upgrade to happen. Support is currently available only for Standalone servers.
+The UpgradeValidity object is a crucial element in the firmware upgrade process, ensuring that the target endpoint meets all necessary conditions for a successful firmware upgrade. This provides basic validity checks that are fundamental to initiating a firmware upgrade operation.
+#### Purpose
+UpgradeValidity serves as a validation checkpoint before performing firmware upgrades. It evaluates the endpoint's readiness, confirming whether the platform requirements are satisfied to proceed with the upgrade process.
+#### Key Concepts
+- **Pre-Upgrade Validation:** Conducts essential checks to determine if the endpoint is a suitable candidate for firmware upgrade, preventing potential issues during the upgrade process.
+- **Platform Requirement Analysis:** Focuses on verifying the endpoint's compatibility and capability to support the desired firmware upgrade, ensuring system integrity and efficiency.
+- **Standalone Server Support:** Specifically tailored to provide upgrade validity checks for standalone servers, optimizing the upgrade workflow for these environments.
+- **Read-Only Access:** Provides a secure and controlled mechanism for administrators to assess upgrade readiness without altering system settings.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

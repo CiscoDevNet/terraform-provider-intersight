@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2025121206
+API version: 1.0.11-2026011407
 Contact: intersight@cisco.com
 */
 
@@ -23,20 +23,28 @@ var _ MappedNullable = &ServerDiagnosticStatus{}
 
 // ServerDiagnosticStatus Diagnostics status report of the health check run on the server hardware components.
 type ServerDiagnosticStatus struct {
-	MoBaseMo
+	ConnectorDownloadStatus
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Type of diagnostics to be performed on the server hardware components. * `Quick` - Perform fast and limited diagnostics on server hardware components. * `Comprehensive` - Perform slow and extensive diagnostics on server hardware components.
 	DiagnosticsType *string `json:"DiagnosticsType,omitempty"`
+	// The message from the endpoint during the download.
+	DownloadMessage *string `json:"DownloadMessage,omitempty"`
+	// The percentage of the image downloaded in the endpoint.
+	DownloadPercentage *int64 `json:"DownloadPercentage,omitempty"`
+	// The image download stages. Example:downloading, flashing.
+	DownloadStage *string `json:"DownloadStage,omitempty"`
 	// The name of the diagnostics being run.
 	Name *string `json:"Name,omitempty"`
 	// The overall state of the diagnostics being run. * `Queued` - The diagnostics are queued. * `InProgress` - The diagnostics are in progress. * `Completed` - The diagnostics are completed. * `Failed` - The diagnostics have failed. * `Terminated` - The diagnostics are terminated.
 	OverallState *string `json:"OverallState,omitempty"`
 	// The progress of the diagnostics being run.
-	Progress             *int64                                   `json:"Progress,omitempty"`
-	Result               []ServerDiagnosticResult                 `json:"Result,omitempty"`
+	Progress *int64                   `json:"Progress,omitempty"`
+	Result   []ServerDiagnosticResult `json:"Result,omitempty"`
+	// The error message from the endpoint during the SD card download.
+	SdCardDownloadError  *string                                  `json:"SdCardDownloadError,omitempty"`
 	Diagnostics          NullableServerDiagnosticsRelationship    `json:"Diagnostics,omitempty"`
 	Server               NullableComputePhysicalRelationship      `json:"Server,omitempty"`
 	Workflow             NullableWorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
@@ -160,6 +168,102 @@ func (o *ServerDiagnosticStatus) HasDiagnosticsType() bool {
 // SetDiagnosticsType gets a reference to the given string and assigns it to the DiagnosticsType field.
 func (o *ServerDiagnosticStatus) SetDiagnosticsType(v string) {
 	o.DiagnosticsType = &v
+}
+
+// GetDownloadMessage returns the DownloadMessage field value if set, zero value otherwise.
+func (o *ServerDiagnosticStatus) GetDownloadMessage() string {
+	if o == nil || IsNil(o.DownloadMessage) {
+		var ret string
+		return ret
+	}
+	return *o.DownloadMessage
+}
+
+// GetDownloadMessageOk returns a tuple with the DownloadMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerDiagnosticStatus) GetDownloadMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.DownloadMessage) {
+		return nil, false
+	}
+	return o.DownloadMessage, true
+}
+
+// HasDownloadMessage returns a boolean if a field has been set.
+func (o *ServerDiagnosticStatus) HasDownloadMessage() bool {
+	if o != nil && !IsNil(o.DownloadMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetDownloadMessage gets a reference to the given string and assigns it to the DownloadMessage field.
+func (o *ServerDiagnosticStatus) SetDownloadMessage(v string) {
+	o.DownloadMessage = &v
+}
+
+// GetDownloadPercentage returns the DownloadPercentage field value if set, zero value otherwise.
+func (o *ServerDiagnosticStatus) GetDownloadPercentage() int64 {
+	if o == nil || IsNil(o.DownloadPercentage) {
+		var ret int64
+		return ret
+	}
+	return *o.DownloadPercentage
+}
+
+// GetDownloadPercentageOk returns a tuple with the DownloadPercentage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerDiagnosticStatus) GetDownloadPercentageOk() (*int64, bool) {
+	if o == nil || IsNil(o.DownloadPercentage) {
+		return nil, false
+	}
+	return o.DownloadPercentage, true
+}
+
+// HasDownloadPercentage returns a boolean if a field has been set.
+func (o *ServerDiagnosticStatus) HasDownloadPercentage() bool {
+	if o != nil && !IsNil(o.DownloadPercentage) {
+		return true
+	}
+
+	return false
+}
+
+// SetDownloadPercentage gets a reference to the given int64 and assigns it to the DownloadPercentage field.
+func (o *ServerDiagnosticStatus) SetDownloadPercentage(v int64) {
+	o.DownloadPercentage = &v
+}
+
+// GetDownloadStage returns the DownloadStage field value if set, zero value otherwise.
+func (o *ServerDiagnosticStatus) GetDownloadStage() string {
+	if o == nil || IsNil(o.DownloadStage) {
+		var ret string
+		return ret
+	}
+	return *o.DownloadStage
+}
+
+// GetDownloadStageOk returns a tuple with the DownloadStage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerDiagnosticStatus) GetDownloadStageOk() (*string, bool) {
+	if o == nil || IsNil(o.DownloadStage) {
+		return nil, false
+	}
+	return o.DownloadStage, true
+}
+
+// HasDownloadStage returns a boolean if a field has been set.
+func (o *ServerDiagnosticStatus) HasDownloadStage() bool {
+	if o != nil && !IsNil(o.DownloadStage) {
+		return true
+	}
+
+	return false
+}
+
+// SetDownloadStage gets a reference to the given string and assigns it to the DownloadStage field.
+func (o *ServerDiagnosticStatus) SetDownloadStage(v string) {
+	o.DownloadStage = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -289,6 +393,38 @@ func (o *ServerDiagnosticStatus) HasResult() bool {
 // SetResult gets a reference to the given []ServerDiagnosticResult and assigns it to the Result field.
 func (o *ServerDiagnosticStatus) SetResult(v []ServerDiagnosticResult) {
 	o.Result = v
+}
+
+// GetSdCardDownloadError returns the SdCardDownloadError field value if set, zero value otherwise.
+func (o *ServerDiagnosticStatus) GetSdCardDownloadError() string {
+	if o == nil || IsNil(o.SdCardDownloadError) {
+		var ret string
+		return ret
+	}
+	return *o.SdCardDownloadError
+}
+
+// GetSdCardDownloadErrorOk returns a tuple with the SdCardDownloadError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerDiagnosticStatus) GetSdCardDownloadErrorOk() (*string, bool) {
+	if o == nil || IsNil(o.SdCardDownloadError) {
+		return nil, false
+	}
+	return o.SdCardDownloadError, true
+}
+
+// HasSdCardDownloadError returns a boolean if a field has been set.
+func (o *ServerDiagnosticStatus) HasSdCardDownloadError() bool {
+	if o != nil && !IsNil(o.SdCardDownloadError) {
+		return true
+	}
+
+	return false
+}
+
+// SetSdCardDownloadError gets a reference to the given string and assigns it to the SdCardDownloadError field.
+func (o *ServerDiagnosticStatus) SetSdCardDownloadError(v string) {
+	o.SdCardDownloadError = &v
 }
 
 // GetDiagnostics returns the Diagnostics field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -430,13 +566,13 @@ func (o ServerDiagnosticStatus) MarshalJSON() ([]byte, error) {
 
 func (o ServerDiagnosticStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	serializedConnectorDownloadStatus, errConnectorDownloadStatus := json.Marshal(o.ConnectorDownloadStatus)
+	if errConnectorDownloadStatus != nil {
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	errConnectorDownloadStatus = json.Unmarshal([]byte(serializedConnectorDownloadStatus), &toSerialize)
+	if errConnectorDownloadStatus != nil {
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -449,6 +585,15 @@ func (o ServerDiagnosticStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DiagnosticsType) {
 		toSerialize["DiagnosticsType"] = o.DiagnosticsType
 	}
+	if !IsNil(o.DownloadMessage) {
+		toSerialize["DownloadMessage"] = o.DownloadMessage
+	}
+	if !IsNil(o.DownloadPercentage) {
+		toSerialize["DownloadPercentage"] = o.DownloadPercentage
+	}
+	if !IsNil(o.DownloadStage) {
+		toSerialize["DownloadStage"] = o.DownloadStage
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
@@ -460,6 +605,9 @@ func (o ServerDiagnosticStatus) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Result != nil {
 		toSerialize["Result"] = o.Result
+	}
+	if !IsNil(o.SdCardDownloadError) {
+		toSerialize["SdCardDownloadError"] = o.SdCardDownloadError
 	}
 	if o.Diagnostics.IsSet() {
 		toSerialize["Diagnostics"] = o.Diagnostics.Get()
@@ -527,16 +675,24 @@ func (o *ServerDiagnosticStatus) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Type of diagnostics to be performed on the server hardware components. * `Quick` - Perform fast and limited diagnostics on server hardware components. * `Comprehensive` - Perform slow and extensive diagnostics on server hardware components.
 		DiagnosticsType *string `json:"DiagnosticsType,omitempty"`
+		// The message from the endpoint during the download.
+		DownloadMessage *string `json:"DownloadMessage,omitempty"`
+		// The percentage of the image downloaded in the endpoint.
+		DownloadPercentage *int64 `json:"DownloadPercentage,omitempty"`
+		// The image download stages. Example:downloading, flashing.
+		DownloadStage *string `json:"DownloadStage,omitempty"`
 		// The name of the diagnostics being run.
 		Name *string `json:"Name,omitempty"`
 		// The overall state of the diagnostics being run. * `Queued` - The diagnostics are queued. * `InProgress` - The diagnostics are in progress. * `Completed` - The diagnostics are completed. * `Failed` - The diagnostics have failed. * `Terminated` - The diagnostics are terminated.
 		OverallState *string `json:"OverallState,omitempty"`
 		// The progress of the diagnostics being run.
-		Progress    *int64                                   `json:"Progress,omitempty"`
-		Result      []ServerDiagnosticResult                 `json:"Result,omitempty"`
-		Diagnostics NullableServerDiagnosticsRelationship    `json:"Diagnostics,omitempty"`
-		Server      NullableComputePhysicalRelationship      `json:"Server,omitempty"`
-		Workflow    NullableWorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
+		Progress *int64                   `json:"Progress,omitempty"`
+		Result   []ServerDiagnosticResult `json:"Result,omitempty"`
+		// The error message from the endpoint during the SD card download.
+		SdCardDownloadError *string                                  `json:"SdCardDownloadError,omitempty"`
+		Diagnostics         NullableServerDiagnosticsRelationship    `json:"Diagnostics,omitempty"`
+		Server              NullableComputePhysicalRelationship      `json:"Server,omitempty"`
+		Workflow            NullableWorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
 	}
 
 	varServerDiagnosticStatusWithoutEmbeddedStruct := ServerDiagnosticStatusWithoutEmbeddedStruct{}
@@ -547,10 +703,14 @@ func (o *ServerDiagnosticStatus) UnmarshalJSON(data []byte) (err error) {
 		varServerDiagnosticStatus.ClassId = varServerDiagnosticStatusWithoutEmbeddedStruct.ClassId
 		varServerDiagnosticStatus.ObjectType = varServerDiagnosticStatusWithoutEmbeddedStruct.ObjectType
 		varServerDiagnosticStatus.DiagnosticsType = varServerDiagnosticStatusWithoutEmbeddedStruct.DiagnosticsType
+		varServerDiagnosticStatus.DownloadMessage = varServerDiagnosticStatusWithoutEmbeddedStruct.DownloadMessage
+		varServerDiagnosticStatus.DownloadPercentage = varServerDiagnosticStatusWithoutEmbeddedStruct.DownloadPercentage
+		varServerDiagnosticStatus.DownloadStage = varServerDiagnosticStatusWithoutEmbeddedStruct.DownloadStage
 		varServerDiagnosticStatus.Name = varServerDiagnosticStatusWithoutEmbeddedStruct.Name
 		varServerDiagnosticStatus.OverallState = varServerDiagnosticStatusWithoutEmbeddedStruct.OverallState
 		varServerDiagnosticStatus.Progress = varServerDiagnosticStatusWithoutEmbeddedStruct.Progress
 		varServerDiagnosticStatus.Result = varServerDiagnosticStatusWithoutEmbeddedStruct.Result
+		varServerDiagnosticStatus.SdCardDownloadError = varServerDiagnosticStatusWithoutEmbeddedStruct.SdCardDownloadError
 		varServerDiagnosticStatus.Diagnostics = varServerDiagnosticStatusWithoutEmbeddedStruct.Diagnostics
 		varServerDiagnosticStatus.Server = varServerDiagnosticStatusWithoutEmbeddedStruct.Server
 		varServerDiagnosticStatus.Workflow = varServerDiagnosticStatusWithoutEmbeddedStruct.Workflow
@@ -563,7 +723,7 @@ func (o *ServerDiagnosticStatus) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varServerDiagnosticStatus)
 	if err == nil {
-		o.MoBaseMo = varServerDiagnosticStatus.MoBaseMo
+		o.ConnectorDownloadStatus = varServerDiagnosticStatus.ConnectorDownloadStatus
 	} else {
 		return err
 	}
@@ -574,18 +734,22 @@ func (o *ServerDiagnosticStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DiagnosticsType")
+		delete(additionalProperties, "DownloadMessage")
+		delete(additionalProperties, "DownloadPercentage")
+		delete(additionalProperties, "DownloadStage")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OverallState")
 		delete(additionalProperties, "Progress")
 		delete(additionalProperties, "Result")
+		delete(additionalProperties, "SdCardDownloadError")
 		delete(additionalProperties, "Diagnostics")
 		delete(additionalProperties, "Server")
 		delete(additionalProperties, "Workflow")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectConnectorDownloadStatus := reflect.ValueOf(o.ConnectorDownloadStatus)
+		for i := 0; i < reflectConnectorDownloadStatus.Type().NumField(); i++ {
+			t := reflectConnectorDownloadStatus.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

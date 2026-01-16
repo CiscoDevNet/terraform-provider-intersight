@@ -3,28 +3,26 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_iom_profile"
 description: |-
-        ### Overview
         The IomProfile object is a specialized component within the chassis configuration framework, designed to manage settings specific to Input/Output Module (IOM) configurations. It facilitates streamlined management of IOMs within chassis, ensuring consistent and effective configuration across networked systems.
         #### Purpose
         IomProfile serves as the configuration container for IOM settings within a chassis, supporting efficient deployment and validation of IOM configurations.
         #### Key Concepts
-        - **Targeted Configuration:** - Focuses on IOM-specific settings, ensuring precise control over these critical components.
-        - **Deployment Insight:** - Provides validation and deployment results, aiding in efficient management of IOM configurations.
-        - **Integrated Relationships:** - Maintains connections with related objects for comprehensive configuration management.
-        - **Access Control:** - Governed by privilege sets to ensure secure handling of IOM configuration processes.
+        - **Targeted Configuration:** Focuses on IOM-specific settings, ensuring precise control over these critical components.
+        - **Deployment Insight:** Provides validation and deployment results, aiding in efficient management of IOM configurations.
+        - **Integrated Relationships:** Maintains connections with related objects for comprehensive configuration management.
+        - **Access Control:** Governed by privilege sets to ensure secure handling of IOM configuration processes.
 
 ---
 
 # Data Source: intersight_chassis_iom_profile
-### Overview
 The IomProfile object is a specialized component within the chassis configuration framework, designed to manage settings specific to Input/Output Module (IOM) configurations. It facilitates streamlined management of IOMs within chassis, ensuring consistent and effective configuration across networked systems.   
 #### Purpose  
 IomProfile serves as the configuration container for IOM settings within a chassis, supporting efficient deployment and validation of IOM configurations.   
 #### Key Concepts  
-- **Targeted Configuration:** - Focuses on IOM-specific settings, ensuring precise control over these critical components. 
-- **Deployment Insight:** - Provides validation and deployment results, aiding in efficient management of IOM configurations. 
-- **Integrated Relationships:** - Maintains connections with related objects for comprehensive configuration management. 
-- **Access Control:** - Governed by privilege sets to ensure secure handling of IOM configuration processes.
+- **Targeted Configuration:** Focuses on IOM-specific settings, ensuring precise control over these critical components. 
+- **Deployment Insight:** Provides validation and deployment results, aiding in efficient management of IOM configurations. 
+- **Integrated Relationships:** Maintains connections with related objects for comprehensive configuration management. 
+- **Access Control:** Governed by privilege sets to ensure secure handling of IOM configuration processes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

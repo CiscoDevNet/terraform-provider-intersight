@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_chassis_upgrade"
 description: |-
-        Firmware upgrade operation for chassis that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+        The ChassisUpgrade object is focused on upgrading firmware for chassis systems, providing a streamlined approach to downloading and applying firmware images from cloud repositories or network shares.
+        #### Purpose
+        ChassisUpgrade ensures chassis systems remain secure and performant through firmware updates. This provides options for both direct download and network share–based upgrades for UCSM devices, and supports certain IMM chassis upgrades via direct download. IMM chassis upgrade updates supported PSU and XFM components when connected to the chassis.
+        #### Key Concepts
+        - **Chassis System Enhancement:** Designed to optimize chassis firmware upgrades, improving system reliability and efficiency through structured update processes.
+        - **Exclusion Options:** Offers the ability to exclude certain components from the upgrade, providing flexibility and customization based on specific upgrade needs.
+        - **Integrated Management:** Facilitates comprehensive upgrade operations, from image selection to deployment, ensuring seamless execution and management.
+        - **Security and Access Control: Enforces strict access and compliance measures to protect the upgrade process, maintaining system integrity and security.
 
 ---
 
 # Data Source: intersight_firmware_chassis_upgrade
-Firmware upgrade operation for chassis that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+The ChassisUpgrade object is focused on upgrading firmware for chassis systems, providing a streamlined approach to downloading and applying firmware images from cloud repositories or network shares.
+#### Purpose
+ChassisUpgrade ensures chassis systems remain secure and performant through firmware updates. This provides options for both direct download and network share–based upgrades for UCSM devices, and supports certain IMM chassis upgrades via direct download. IMM chassis upgrade updates supported PSU and XFM components when connected to the chassis.
+#### Key Concepts
+- **Chassis System Enhancement:** Designed to optimize chassis firmware upgrades, improving system reliability and efficiency through structured update processes.
+- **Exclusion Options:** Offers the ability to exclude certain components from the upgrade, providing flexibility and customization based on specific upgrade needs.
+- **Integrated Management:** Facilitates comprehensive upgrade operations, from image selection to deployment, ensuring seamless execution and management.
+- **Security and Access Control: Enforces strict access and compliance measures to protect the upgrade process, maintaining system integrity and security.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

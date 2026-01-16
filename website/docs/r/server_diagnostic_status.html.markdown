@@ -17,6 +17,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `checksum`:(HashMap) - The checksum of the downloaded file as calculated by the download plugin after successfully downloading a file. 
+This complex property has following sub-properties:
+  + `hash_algorithm`:(string) The hash algorithm used to calculate the checksum.* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.* `sha256` - An SHA256 hash as defined by RFC 4634. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `diagnostics`:(HashMap) -(ReadOnly) A reference to a serverDiagnostics resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -25,6 +29,12 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `diagnostics_type`:(string) Type of diagnostics to be performed on the server hardware components.* `Quick` - Perform fast and limited diagnostics on server hardware components.* `Comprehensive` - Perform slow and extensive diagnostics on server hardware components. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `download_error`:(string) Any error encountered. Set to empty when download is in progress or completed. 
+* `download_message`:(string)(ReadOnly) The message from the endpoint during the download. 
+* `download_percentage`:(int)(ReadOnly) The percentage of the image downloaded in the endpoint. 
+* `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible, a value of -1 is sent. 
+* `download_retries`:(int) The number of retries the plugin attempted before succeeding or failing the download. 
+* `download_stage`:(string)(ReadOnly) The image download stages. Example:downloading, flashing. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string)(ReadOnly) The name of the diagnostics being run. 
@@ -51,6 +61,7 @@ This complex property has following sub-properties:
   + `severity`:(string)(ReadOnly) The severity of the diagnostics test performed on the component.* `OK` - The diagnostics severity is successful.* `Warning` - The diagnostics severity is warning.* `Critical` - The diagnostics severity is critical. 
   + `sub_component_name`:(string)(ReadOnly) It represents the sub component name on which diagnostics were performed. It could be a physical component such as CPU1 or CPU2. When the main component, like the CPU, is specified in the diagnostics request to the endpoint, the response will include test reports for subcomponents like CPU1 and CPU2. 
   + `sub_component_progress`:(string)(ReadOnly) Progress of the diagnostics test run on the sub component.* `New` - The diagnostic task state representing new state.* `Running` - The diagnostic task state representing running state.* `Exception` - The diagnostic task state representing exception state.* `Completed` - The diagnostic task state representing completed state. 
+* `sd_card_download_error`:(string)(ReadOnly) The error message from the endpoint during the SD card download. 
 * `server`:(HashMap) - A reference to a computePhysical resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

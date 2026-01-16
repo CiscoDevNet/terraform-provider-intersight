@@ -234,6 +234,17 @@ func resourceLicenseLicenseInfo() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"last_trial_grace_eval_time": {
+				Description: "The last time the trial/grace period evaluation was performed for this license.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"license_count": {
 				Description: "The total number of license consumed in the Intersight account.",
 				Type:        schema.TypeInt,
@@ -1089,6 +1100,10 @@ func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, m
 
 	if err := d.Set("extra_evaluation", (s.GetExtraEvaluation())); err != nil {
 		return diag.Errorf("error occurred while setting property ExtraEvaluation in LicenseLicenseInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("last_trial_grace_eval_time", (s.GetLastTrialGraceEvalTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property LastTrialGraceEvalTime in LicenseLicenseInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("license_count", (s.GetLicenseCount())); err != nil {

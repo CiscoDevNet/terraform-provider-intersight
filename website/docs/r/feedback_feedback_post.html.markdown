@@ -3,24 +3,22 @@ subcategory: "feedback"
 layout: "intersight"
 page_title: "Intersight: intersight_feedback_feedback_post"
 description: |-
-        ### Overview
         The FeedbackPost object serves as the initial entry point for user feedback within the system. This provides a mechanism for users to submit their comments and evaluations directly through the user interface.
         #### Purpose
         Feedback Post enables users to capture and submit first-hand feedback directly from the interface, ensuring that original input is accurately preserved and processed. It supports seamless UI integration, immediate submission, and reliable data retention for effective analysis and response
         #### Key Concepts
-        - **User-Driven:** - Facilitates direct interaction between users and the feedback system, ensuring that user voices are heard and considered.
-        - **Shared Resource:** -Functions as a shared organizational resource, accessible across various departments and privilege sets.
+        - **User-Driven:** Facilitates direct interaction between users and the feedback system, ensuring that user voices are heard and considered.
+        - **Shared Resource:** Functions as a shared organizational resource, accessible across various departments and privilege sets.
 
 ---
 
 # Resource: intersight_feedback_feedback_post
-### Overview
 The FeedbackPost object serves as the initial entry point for user feedback within the system. This provides a mechanism for users to submit their comments and evaluations directly through the user interface. 
 #### Purpose
 Feedback Post enables users to capture and submit first-hand feedback directly from the interface, ensuring that original input is accurately preserved and processed. It supports seamless UI integration, immediate submission, and reliable data retention for effective analysis and response
 #### Key Concepts
-- **User-Driven:** - Facilitates direct interaction between users and the feedback system, ensuring that user voices are heard and considered.
-- **Shared Resource:** -Functions as a shared organizational resource, accessible across various departments and privilege sets.
+- **User-Driven:** Facilitates direct interaction between users and the feedback system, ensuring that user voices are heard and considered.
+- **Shared Resource:** Functions as a shared organizational resource, accessible across various departments and privilege sets.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

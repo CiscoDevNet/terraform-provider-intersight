@@ -3,12 +3,24 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_file_systems"
 description: |-
-        A filesystem entity in PureStorage FlashArray.
+        The PureFileSystems object represents a filesystem within a PureStorage FlashArray, serving as a fundamental unit for organizing storage resources.
+        #### Purpose
+        PureFileSystems provides a mechanism for managing and organizing storage resources, ensuring efficient and secure data operations within the FlashArray.
+        #### Key Concepts
+        - **Filesystem Management:** It offers structured management of filesystems, optimizing storage operations and resource allocation.
+        - **Directory Integration:** Supports integration with directories and export policies, enhancing storage management capabilities.
+        - **Secure Access:** Utilizes privilege sets to secure and manage filesystem operations within the storage network.
 
 ---
 
 # Data Source: intersight_storage_pure_file_systems
-A filesystem entity in PureStorage FlashArray.
+The PureFileSystems object represents a filesystem within a PureStorage FlashArray, serving as a fundamental unit for organizing storage resources.  
+#### Purpose  
+PureFileSystems provides a mechanism for managing and organizing storage resources, ensuring efficient and secure data operations within the FlashArray. 
+#### Key Concepts  
+- **Filesystem Management:** It offers structured management of filesystems, optimizing storage operations and resource allocation. 
+- **Directory Integration:** Supports integration with directories and export policies, enhancing storage management capabilities. 
+- **Secure Access:** Utilizes privilege sets to secure and manage filesystem operations within the storage network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
