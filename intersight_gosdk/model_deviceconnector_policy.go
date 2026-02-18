@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the DeviceconnectorPolicy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeviceconnectorPolicy{}
 
-// DeviceconnectorPolicy Policy to control configuration changes allowed from Cisco IMC.
+// DeviceconnectorPolicy The Device Connector Policy is a reusable policy that controls whether configuration changes are permitted directly on a server's local management interface (Cisco IMC) when it is being managed by Intersight. #### Purpose The purpose of this policy is to enforce a single source of truth for server configuration. When a server is managed by Intersight, this policy can be used to \"lock\" the configuration on the endpoint, preventing out-of-band changes that could cause configuration drift and conflicts with the settings defined in the Intersight server profile. #### Key Concepts - **Configuration Lockout:** Its primary feature is the lockoutEnabled flag, which, when set to true, prevents administrators from making configuration changes through the local Cisco IMC interface. - **Standalone Server Management:** This policy is specifically designed for servers operating in Standalone Mode (not connected to Fabric Interconnect, i.e. not in IMM mode). - **Profile-Based Enforcement:** It is applied to servers by including it in a Server Profile. - **Impact Awareness:** Applying this policy can cause a brief management network disconnection, which is flagged by the MgmtNetworkDisconnection disruption type.
 type DeviceconnectorPolicy struct {
 	PolicyAbstractPolicy
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

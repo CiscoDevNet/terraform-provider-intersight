@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_system_qos_policy"
 description: |-
-        Configuration object sent by user to setup Quality of Service (QoS) for this switch.
+        The SystemQosPolicy object provides the global QoS configuration for the switch, enabling traffic prioritization and efficient resource allocation to optimize overall network performance.
+        #### Purpose
+        SystemQosPolicy serves to configure QoS parameters, supporting structured traffic management and resource allocation. It helps maintain network performance and reliability, ensuring that critical traffic receives appropriate priority.
+        #### Key Concepts
+        - **QoS Configuration:** Allows the definition of QoS classes and settings, supporting traffic prioritization and network performance optimization.
+        - **Traffic Management:** Enhances network efficiency by managing bandwidth allocation and packet handling, ensuring balanced resource usage.
+        - **Policy-Based Control:** Provides a centralized approach to QoS management, streamlining operations and enhancing consistency.
+        - **Integration:** Works in conjunction with other network policies and configurations, ensuring cohesive and integrated network management.
 
 ---
 
 # Resource: intersight_fabric_system_qos_policy
-Configuration object sent by user to setup Quality of Service (QoS) for this switch.
+The SystemQosPolicy object provides the global QoS configuration for the switch, enabling traffic prioritization and efficient resource allocation to optimize overall network performance.
+#### Purpose
+SystemQosPolicy serves to configure QoS parameters, supporting structured traffic management and resource allocation. It helps maintain network performance and reliability, ensuring that critical traffic receives appropriate priority.
+#### Key Concepts
+- **QoS Configuration:** Allows the definition of QoS classes and settings, supporting traffic prioritization and network performance optimization.
+- **Traffic Management:** Enhances network efficiency by managing bandwidth allocation and packet handling, ensuring balanced resource usage.
+- **Policy-Based Control:** Provides a centralized approach to QoS management, streamlining operations and enhancing consistency.
+- **Integration:** Works in conjunction with other network policies and configurations, ensuring cohesive and integrated network management.
 ## Usage Example
 ### Resource Creation
 

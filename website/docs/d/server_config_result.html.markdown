@@ -9,7 +9,7 @@ description: |-
         #### Key Concepts
         - **Result Tracking:** Captures detailed information about configuration results, including errors, warnings, and successful actions.
         - **Validation and Deployment:** Provides insights into the validation and deployment stages, supporting troubleshooting and optimization of server configurations.
-        - ** Relationship Management:** Linked with other objects to offer comprehensive views of configuration impacts.
+        - **Relationship Management:** Linked with other objects to offer comprehensive views of configuration impacts.
         - **Read-Only Access:** Primarily designed for consumption, ensuring safe integration with systems requiring configuration insights.
 
 ---
@@ -21,7 +21,7 @@ ConfigResult is essential for tracking the outcomes of server profile configurat
 #### Key Concepts  
 - **Result Tracking:** Captures detailed information about configuration results, including errors, warnings, and successful actions. 
 - **Validation and Deployment:** Provides insights into the validation and deployment stages, supporting troubleshooting and optimization of server configurations.
-- ** Relationship Management:** Linked with other objects to offer comprehensive views of configuration impacts. 
+- **Relationship Management:** Linked with other objects to offer comprehensive views of configuration impacts. 
 - **Read-Only Access:** Primarily designed for consumption, ensuring safe integration with systems requiring configuration insights.
 ## Argument Reference
 The results of this data source are stored in `results` property.

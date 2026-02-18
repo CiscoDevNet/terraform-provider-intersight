@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_hweol"
 description: |-
-        The hardware end of life notice for APIC.
+        The ApicHweol object is central to hardware lifecycle management, detailing end-of-life status for hardware components specific to the APIC platform. It supports users in planning transitions and maintaining system operability.
+        #### Purpose
+        ApicHweol provides timelines for the cessation of sales and support for hardware components on the APIC platform, including end-of-maintenance and analysis dates.
+        #### Key Concepts
+        - **Platform-Specific Lifecycle:** Offers a schedule for hardware lifecycle stages on the APIC platform.
+        - **Transition Planning:** Provides URLs for migration notices, guiding users in hardware transitions.
+        - **Complete Visibility:** Details important dates for end-of-sale and support.
 
 ---
 
 # Data Source: intersight_niaapi_apic_hweol
-The hardware end of life notice for APIC.
+The ApicHweol object is central to hardware lifecycle management, detailing end-of-life status for hardware components specific to the APIC platform. It supports users in planning transitions and maintaining system operability.
+#### Purpose
+ApicHweol provides timelines for the cessation of sales and support for hardware components on the APIC platform, including end-of-maintenance and analysis dates.
+#### Key Concepts
+- **Platform-Specific Lifecycle:** Offers a schedule for hardware lifecycle stages on the APIC platform.
+- **Transition Planning:** Provides URLs for migration notices, guiding users in hardware transitions.
+- **Complete Visibility:** Details important dates for end-of-sale and support.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

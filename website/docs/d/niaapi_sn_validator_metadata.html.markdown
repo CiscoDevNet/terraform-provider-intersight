@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_sn_validator_metadata"
 description: |-
-        Contains the Serial Metadata Version.
+        The SnValidatorMetadata object is crucial for metadata management, offering structured information about Serial Metadata files. It supports users in accessing and verifying metadata efficiently.
+        #### Purpose
+        SnValidatorMetadata provides comprehensive details about Serial Metadata files, including versioning and checksum information. It is essential for users to verify the integrity of metadata files.
+        #### Key Concepts
+        - **Metadata Management:** Facilitates the download and verification of Serial Metadata files.
+        - **Versioning and Integrity:** Provides version numbers and checksums for metadata files.
+        - **Structured Access:** Ensures users can efficiently access Serial Metadata in their systems.
 
 ---
 
 # Data Source: intersight_niaapi_sn_validator_metadata
-Contains the Serial Metadata Version.
+The SnValidatorMetadata object is crucial for metadata management, offering structured information about Serial Metadata files. It supports users in accessing and verifying metadata efficiently.
+#### Purpose
+SnValidatorMetadata provides comprehensive details about Serial Metadata files, including versioning and checksum information. It is essential for users to verify the integrity of metadata files.
+#### Key Concepts
+- **Metadata Management:** Facilitates the download and verification of Serial Metadata files.
+- **Versioning and Integrity:** Provides version numbers and checksums for metadata files.
+- **Structured Access:** Ensures users can efficiently access Serial Metadata in their systems.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the FabricConfigChangeDetail type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FabricConfigChangeDetail{}
 
-// FabricConfigChangeDetail This captures details of configuration changes.
+// FabricConfigChangeDetail The ConfigChangeDetail object is an essential element in the configuration change management framework, designed to capture detailed information about configuration changes. It supports transparent tracking and reporting of configuration modifications.  #### Purpose The ConfigChangeDetail serves as a comprehensive record of configuration changes, providing detailed insights into modifications made during configuration processes. It aids in understanding the impact and scope of changes, facilitating effective management and troubleshooting.  #### Key Concepts - **Change Documentation:** Captures detailed information about configuration changes, supporting accurate tracking and reporting of modifications. - **Impact Assessment:** Facilitates the assessment of configuration change impacts, enabling informed decision-making and management. - **Access and Security:** Implements privilege sets to secure access to configuration change details, maintaining integrity and security of change management. - **Relationship Management:** Integrates with related objects to provide context for configuration changes, enhancing understanding and management of change processes.
 type FabricConfigChangeDetail struct {
 	PolicyAbstractConfigChangeDetail
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

@@ -153,6 +153,11 @@ func getIamUserSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"external_identifier": {
+			Description: "External identifier for the user, used for integration with external identity systems.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"first_name": {
 			Description: "First name of the user. For remote users, this field is populated from the IdP attributes received after authentication.",
 			Type:        schema.TypeString,
@@ -933,6 +938,11 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 		o.SetEmail(x)
 	}
 
+	if v, ok := d.GetOk("external_identifier"); ok {
+		x := (v.(string))
+		o.SetExternalIdentifier(x)
+	}
+
 	if v, ok := d.GetOk("first_name"); ok {
 		x := (v.(string))
 		o.SetFirstName(x)
@@ -1580,6 +1590,7 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["email"] = (s.GetEmail())
+				temp["external_identifier"] = (s.GetExternalIdentifier())
 				temp["first_name"] = (s.GetFirstName())
 
 				temp["idp"] = flattenMapIamIdpRelationship(s.GetIdp(), d)

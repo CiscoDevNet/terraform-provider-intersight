@@ -3,12 +3,26 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_unit"
 description: |-
-        The physical adapter present on a server.
+        The adapter.Unit object represents a physical network adapter installed in a server. It serves as a central inventory object for a server's network interface cards (NICs), encapsulating hardware details, operational status, and connectivity information.
+        #### Purpose
+        The primary purpose of the adapter.Unit object is to provide a detailed, queryable representation of a physical adapter. This includes its identity (model, serial, part number), its physical location (PCI slot), and its current operational health. It acts as a parent object for more specific interface types, such as host-facing Ethernet and Fibre Channel interfaces.
+        #### Key Concepts
+        - **Centralized Inventory:** Aggregates all relevant information about a single adapter card, from hardware specifications to its power and thermal state.
+        - **Hierarchical Structure:** Acts as a container for related interface objects like HostEthInterface and HostFcInterface, providing a structured view of the adapter's capabilities.
+        - **Health Monitoring:** Reports on the adapter's operability, power, and thermal status, including specific operational reasons for any issues detected (e.g., AdapterNotReachable, Counterfeit).
+        - **Physical Location:** Clearly identifies the adapter's location within the server via its pciSlot property, aiding in physical identification and maintenance.
 
 ---
 
 # Data Source: intersight_adapter_unit
-The physical adapter present on a server.
+The adapter.Unit object represents a physical network adapter installed in a server. It serves as a central inventory object for a server's network interface cards (NICs), encapsulating hardware details, operational status, and connectivity information.
+#### Purpose
+The primary purpose of the adapter.Unit object is to provide a detailed, queryable representation of a physical adapter. This includes its identity (model, serial, part number), its physical location (PCI slot), and its current operational health. It acts as a parent object for more specific interface types, such as host-facing Ethernet and Fibre Channel interfaces.
+#### Key Concepts
+- **Centralized Inventory:** Aggregates all relevant information about a single adapter card, from hardware specifications to its power and thermal state.
+- **Hierarchical Structure:** Acts as a container for related interface objects like HostEthInterface and HostFcInterface, providing a structured view of the adapter's capabilities.
+- **Health Monitoring:** Reports on the adapter's operability, power, and thermal status, including specific operational reasons for any issues detected (e.g., AdapterNotReachable, Counterfeit).
+- **Physical Location:** Clearly identifies the adapter's location within the server via its pciSlot property, aiding in physical identification and maintenance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

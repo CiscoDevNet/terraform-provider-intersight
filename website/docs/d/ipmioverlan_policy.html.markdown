@@ -3,12 +3,26 @@ subcategory: "ipmioverlan"
 layout: "intersight"
 page_title: "Intersight: intersight_ipmioverlan_policy"
 description: |-
-        Intelligent Platform Management Interface Over LAN Policy.
+        The IPMI Over LAN Policy object is a reusable policy for configuring the Intelligent Platform Management Interface (IPMI) over LAN service on a server.
+        #### Purpose
+        The purpose of this policy is to enable and secure out-of-band server management using the IPMI protocol. It allows administrators to control the state of the IPMI service, set the maximum privilege level for IPMI sessions, and configure an encryption key to secure communications.
+        #### Key Concepts
+        - **Service Control:** The policy allows administrators to enable or disable the IPMI over LAN service on the endpoint.
+        - **Privilege Level Management:** It defines the highest privilege level (admin, user, or read-only) that can be assigned to an IPMI session, providing a layer of access control.
+        - **Security:** An optional encryption key can be configured to encrypt IPMI traffic, enhancing the security of out-of-band management. The key is a write-only, encrypted property.
+        - **Profile-Based Application:** The policy is attached to a Server Profile to apply the IPMI settings to the assigned physical server.
 
 ---
 
 # Data Source: intersight_ipmioverlan_policy
-Intelligent Platform Management Interface Over LAN Policy.
+The IPMI Over LAN Policy object is a reusable policy for configuring the Intelligent Platform Management Interface (IPMI) over LAN service on a server.
+#### Purpose
+The purpose of this policy is to enable and secure out-of-band server management using the IPMI protocol. It allows administrators to control the state of the IPMI service, set the maximum privilege level for IPMI sessions, and configure an encryption key to secure communications.
+#### Key Concepts
+- **Service Control:** The policy allows administrators to enable or disable the IPMI over LAN service on the endpoint.
+- **Privilege Level Management:** It defines the highest privilege level (admin, user, or read-only) that can be assigned to an IPMI session, providing a layer of access control.
+- **Security:** An optional encryption key can be configured to encrypt IPMI traffic, enhancing the security of out-of-band management. The key is a write-only, encrypted property.
+- **Profile-Based Application:** The policy is attached to a Server Profile to apply the IPMI settings to the assigned physical server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

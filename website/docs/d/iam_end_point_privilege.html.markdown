@@ -3,12 +3,24 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_privilege"
 description: |-
-        The privilege defined at the end point which can be assigned to a user.
+        EndPointPrivilege models privileges defined on managed endpoints (e.g., UCS, IMC), enabling cross-launch or delegated actions.
+        #### Purpose
+        It exposes endpoint-side authorization elements that can be assigned to platform users via endpoint roles.
+        #### Key Concepts
+        - **Endpoint Integration:** Bridges device-level capabilities to platform users.
+        - **Read-only Catalog:** Reflects endpoint-defined actions.
+        - **Role Assignment:** Consumed by EndPointRole for user access.
 
 ---
 
 # Data Source: intersight_iam_end_point_privilege
-The privilege defined at the end point which can be assigned to a user.
+EndPointPrivilege models privileges defined on managed endpoints (e.g., UCS, IMC), enabling cross-launch or delegated actions.
+#### Purpose
+It exposes endpoint-side authorization elements that can be assigned to platform users via endpoint roles.
+#### Key Concepts
+- **Endpoint Integration:** Bridges device-level capabilities to platform users.
+- **Read-only Catalog:** Reflects endpoint-defined actions.
+- **Role Assignment:** Consumed by EndPointRole for user access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

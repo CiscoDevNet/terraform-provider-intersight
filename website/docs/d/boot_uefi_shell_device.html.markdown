@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_uefi_shell_device"
 description: |-
-        UefiShell Boot Device configured on the server.
+        The boot.UefiShellDevice object represents the UEFI (Unified Extensible Firmware Interface) Shell as a configurable boot option within a server's boot policy.
+        #### Purpose
+        The UefiShellDevice object allows administrators to include the UEFI Shell as a target in the server's boot sequence. The UEFI Shell provides a command-line environment for scripting, diagnostics, and manually launching UEFI applications, which can be a valuable tool for advanced troubleshooting and system maintenance before an operating system loads.
+        #### Key Concepts
+        - **Diagnostic Environment:** Defines the built-in UEFI Shell as a bootable target.
+        - **Configurable Priority:** The order property determines its position in the boot sequence, allowing it to be prioritized for maintenance tasks.
+        - **Enable/Disable Control:** The state property allows the UEFI Shell to be easily enabled or disabled as a boot option within a policy.
+        - **Boot Policy Element:** Functions as a component within a boot policy that is associated with a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_uefi_shell_device
-UefiShell Boot Device configured on the server.
+The boot.UefiShellDevice object represents the UEFI (Unified Extensible Firmware Interface) Shell as a configurable boot option within a server's boot policy.
+#### Purpose
+The UefiShellDevice object allows administrators to include the UEFI Shell as a target in the server's boot sequence. The UEFI Shell provides a command-line environment for scripting, diagnostics, and manually launching UEFI applications, which can be a valuable tool for advanced troubleshooting and system maintenance before an operating system loads.
+#### Key Concepts
+- **Diagnostic Environment:** Defines the built-in UEFI Shell as a bootable target.
+- **Configurable Priority:** The order property determines its position in the boot sequence, allowing it to be prioritized for maintenance tasks.
+- **Enable/Disable Control:** The state property allows the UEFI Shell to be easily enabled or disabled as a boot option within a policy.
+- **Boot Policy Element:** Functions as a component within a boot policy that is associated with a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

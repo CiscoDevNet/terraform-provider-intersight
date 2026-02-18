@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_user_policy_inventory"
 description: |-
-        Enables creation of local users on endpoints.
+        The IAM EndPointUserPolicy object is a reusable policy that enables the creation and management of local user accounts on endpoints, such as server management controllers.
+        #### Purpose
+        The purpose of this policy is to standardize local user account configurations across multiple servers. It allows administrators to define password complexity rules, password expiration settings, and associate specific roles and permissions with local users, ensuring consistent and secure access control.
+        #### Key Concepts
+        - **Centralized User Management:** Provides a single policy to define local user accounts, their roles, and password settings that can be applied to many servers.
+        - **Password Properties:** The policy includes a comprehensive set of password controls, such as enforcing strong passwords, setting expiration durations, and maintaining a password history.
+        - **Role-Based Access Control:** It works in conjunction with EndPointUser and EndPointUserRole objects to map users to specific roles (e.g., admin, read-only) on the endpoint.
+        - **Profile-Based Application:** The policy is attached to a Server Profile to apply the user configurations to the assigned physical server.
 
 ---
 
 # Data Source: intersight_iam_end_point_user_policy_inventory
-Enables creation of local users on endpoints.
+The IAM EndPointUserPolicy object is a reusable policy that enables the creation and management of local user accounts on endpoints, such as server management controllers.
+#### Purpose
+The purpose of this policy is to standardize local user account configurations across multiple servers. It allows administrators to define password complexity rules, password expiration settings, and associate specific roles and permissions with local users, ensuring consistent and secure access control.
+#### Key Concepts
+- **Centralized User Management:** Provides a single policy to define local user accounts, their roles, and password settings that can be applied to many servers.
+- **Password Properties:** The policy includes a comprehensive set of password controls, such as enforcing strong passwords, setting expiration durations, and maintaining a password history.
+- **Role-Based Access Control:** It works in conjunction with EndPointUser and EndPointUserRole objects to map users to specific roles (e.g., admin, read-only) on the endpoint.
+- **Profile-Based Application:** The policy is attached to a Server Profile to apply the user configurations to the assigned physical server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

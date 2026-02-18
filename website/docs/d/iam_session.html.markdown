@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `idle_time_expiration`:(string) Idle time expiration for the session. 
 * `last_login_client`:(string) The client address from which last login is initiated. 
 * `last_login_time`:(string) The last login time for user. 
+* `login_type`:(string) The type of login that created this session. Indicates whether the session was created through standard web login or JWT token exchange.* `weblogin` - Session created through standard web login process.* `tokenexchange` - Session created through JWT token exchange process. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `role`:(string) Role of the user who launched the session. 

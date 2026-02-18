@@ -3,12 +3,22 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_pool_member"
 description: |-
-        PoolMember represents a single WWN ID that is part of a pool.
+        Pool Member object represents a single WWN (Worldwide Name) address within a pool that tracks its state, availability, and allocation.
+        #### Purpose
+        The PoolMember object serves as a representation of individual resources within a pool, facilitating their management and allocation. It serves as a bridge between the pool's address inventory and active leases or reservation, maintaining the relationship between the WWN identifier and its current usage status. Each pool member object represents an identity that was reserver or leased and its current allocation state.
+        #### Key Concepts
+        - **Resource Representation:** Acts as a representation of WWN address within pools and its current state, availability, and allocation.
+        - **Access Control:** Ensures secure management and allocation of pool members, supporting authorized access and operations.
 
 ---
 
 # Data Source: intersight_fcpool_pool_member
-PoolMember represents a single WWN ID that is part of a pool.
+Pool Member object represents a single WWN (Worldwide Name) address within a pool that tracks its state, availability, and allocation.
+#### Purpose
+The PoolMember object serves as a representation of individual resources within a pool, facilitating their management and allocation. It serves as a bridge between the pool's address inventory and active leases or reservation, maintaining the relationship between the WWN identifier and its current usage status. Each pool member object represents an identity that was reserver or leased and its current allocation state.
+#### Key Concepts
+- **Resource Representation:** Acts as a representation of WWN address within pools and its current state, availability, and allocation.
+- **Access Control:** Ensures secure management and allocation of pool members, supporting authorized access and operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

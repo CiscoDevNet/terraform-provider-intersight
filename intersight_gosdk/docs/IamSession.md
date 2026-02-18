@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **IdleTimeExpiration** | Pointer to **time.Time** | Idle time expiration for the session. | [optional] [readonly] 
 **LastLoginClient** | Pointer to **string** | The client address from which last login is initiated. | [optional] [readonly] 
 **LastLoginTime** | Pointer to **time.Time** | The last login time for user. | [optional] [readonly] 
+**LoginType** | Pointer to **string** | The type of login that created this session. Indicates whether the session was created through standard web login or JWT token exchange. * &#x60;weblogin&#x60; - Session created through standard web login process. * &#x60;tokenexchange&#x60; - Session created through JWT token exchange process. | [optional] [readonly] [default to "weblogin"]
 **Scope** | Pointer to [**NullableIamSwitchScopePermissions**](IamSwitchScopePermissions.md) |  | [optional] 
 **SessionId** | Pointer to **string** | Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization. | [optional] 
 **Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
@@ -235,6 +236,31 @@ SetLastLoginTime sets LastLoginTime field to given value.
 `func (o *IamSession) HasLastLoginTime() bool`
 
 HasLastLoginTime returns a boolean if a field has been set.
+
+### GetLoginType
+
+`func (o *IamSession) GetLoginType() string`
+
+GetLoginType returns the LoginType field if non-nil, zero value otherwise.
+
+### GetLoginTypeOk
+
+`func (o *IamSession) GetLoginTypeOk() (*string, bool)`
+
+GetLoginTypeOk returns a tuple with the LoginType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoginType
+
+`func (o *IamSession) SetLoginType(v string)`
+
+SetLoginType sets LoginType field to given value.
+
+### HasLoginType
+
+`func (o *IamSession) HasLoginType() bool`
+
+HasLoginType returns a boolean if a field has been set.
 
 ### GetScope
 

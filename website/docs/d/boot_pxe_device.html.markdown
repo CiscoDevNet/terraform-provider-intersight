@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_pxe_device"
 description: |-
-        Pxe Boot Device configured on the server.
+        The boot.PxeDevice object represents a Preboot Execution Environment (PXE) network interface as a configurable boot option within a server's boot policy.
+        #### Purpose
+        The PxeDevice object is used to define a network-based boot process using PXE. It allows a server to boot by loading an operating system image from a network server, which is essential for automated provisioning and diskless client setups. The object specifies which network interface to use and its priority in the boot sequence.
+        #### Key Concepts
+        - **Network-Based Boot:** Defines a network interface as a bootable source using the PXE protocol.
+        - **Ordered Boot Sequence:** The order property allows its position to be set relative to other boot options like local disks or SAN LUNs.
+        - **Interface Selection:** Can be configured to use a specific network interface for the PXE boot attempt.
+        - **Boot Policy Element:** Acts as a fundamental component within a boot policy that is applied to a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_pxe_device
-Pxe Boot Device configured on the server.
+The boot.PxeDevice object represents a Preboot Execution Environment (PXE) network interface as a configurable boot option within a server's boot policy.
+#### Purpose
+The PxeDevice object is used to define a network-based boot process using PXE. It allows a server to boot by loading an operating system image from a network server, which is essential for automated provisioning and diskless client setups. The object specifies which network interface to use and its priority in the boot sequence.
+#### Key Concepts
+- **Network-Based Boot:** Defines a network interface as a bootable source using the PXE protocol.
+- **Ordered Boot Sequence:** The order property allows its position to be set relative to other boot options like local disks or SAN LUNs.
+- **Interface Selection:** Can be configured to use a specific network interface for the PXE boot attempt.
+- **Boot Policy Element:** Acts as a fundamental component within a boot policy that is applied to a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

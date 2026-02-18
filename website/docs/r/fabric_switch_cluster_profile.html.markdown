@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_cluster_profile"
 description: |-
-        This specifies the configuration policies for a cluster of switches.
+        The SwitchClusterProfile object is an essential element in the network management domain, designed to specify configuration policies for a cluster of switches. It consolidates the configuration context of all the switch profiles referred by the Switch Cluster Profile, ensuring seamless integration and management of network resources.
+        #### Purpose
+        The SwitchClusterProfile serves as a comprehensive configuration entity for managing multiple switches as a unified cluster. It allows administrators to define, deploy, and manage network switch profiles efficiently, providing a streamlined approach to switch configuration and deployment.
+        #### Key Concepts
+        - **Configuration Consolidation:** Aggregates configuration policies across multiple switch profiles, providing a single point of management for cluster configurations.
+        - **Deployment Management:** Facilitates the deployment of switch profiles across different switches in the cluster, ensuring coordinated configuration changes and updates.
+        - **Access Control:** Incorporates privilege sets to manage access and operations, ensuring secure configuration management.
+        - **Template Utilization:** Supports the creation and management of switch profiles from templates, promoting consistency and reducing setup time.
 
 ---
 
 # Resource: intersight_fabric_switch_cluster_profile
-This specifies the configuration policies for a cluster of switches.
+The SwitchClusterProfile object is an essential element in the network management domain, designed to specify configuration policies for a cluster of switches. It consolidates the configuration context of all the switch profiles referred by the Switch Cluster Profile, ensuring seamless integration and management of network resources.
+#### Purpose
+The SwitchClusterProfile serves as a comprehensive configuration entity for managing multiple switches as a unified cluster. It allows administrators to define, deploy, and manage network switch profiles efficiently, providing a streamlined approach to switch configuration and deployment.
+#### Key Concepts
+- **Configuration Consolidation:** Aggregates configuration policies across multiple switch profiles, providing a single point of management for cluster configurations.
+- **Deployment Management:** Facilitates the deployment of switch profiles across different switches in the cluster, ensuring coordinated configuration changes and updates.
+- **Access Control:** Incorporates privilege sets to manage access and operations, ensuring secure configuration management.
+- **Template Utilization:** Supports the creation and management of switch profiles from templates, promoting consistency and reducing setup time.
 ## Usage Example
 ### Resource Creation
 

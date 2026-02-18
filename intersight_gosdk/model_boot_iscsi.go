@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type BootIscsi struct {
 	Bootloader NullableBootBootloader `json:"Bootloader,omitempty"`
 	// The name of the underlying virtual ethernet interface used by the iSCSI boot device.
 	InterfaceName *string `json:"InterfaceName,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]*$"`
+	// Lists the supported methods to provide network boot device configuration. Supported values are \"name\" and \"port\". * `name` - Use interface name to select virtual ethernet interface. * `mac` - Use MAC address to select virtual ethernet interface. * `port` - Use port to select virtual ethernet interface.
+	InterfaceSource *string `json:"InterfaceSource,omitempty"`
 	// Port ID of the ISCSI boot device.
 	Port *int64 `json:"Port,omitempty"`
 	// The slot id of the device. Supported values are (1 - 255, \"MLOM\", \"L\", \"L1\", \"L2\", \"OCP\").
@@ -50,6 +52,8 @@ func NewBootIscsi(classId string, objectType string) *BootIscsi {
 	this.ObjectType = objectType
 	var enabled bool = false
 	this.Enabled = &enabled
+	var interfaceSource string = "name"
+	this.InterfaceSource = &interfaceSource
 	var port int64 = 0
 	this.Port = &port
 	return &this
@@ -64,6 +68,8 @@ func NewBootIscsiWithDefaults() *BootIscsi {
 	this.ClassId = classId
 	var objectType string = "boot.Iscsi"
 	this.ObjectType = objectType
+	var interfaceSource string = "name"
+	this.InterfaceSource = &interfaceSource
 	var port int64 = 0
 	this.Port = &port
 	return &this
@@ -202,6 +208,38 @@ func (o *BootIscsi) SetInterfaceName(v string) {
 	o.InterfaceName = &v
 }
 
+// GetInterfaceSource returns the InterfaceSource field value if set, zero value otherwise.
+func (o *BootIscsi) GetInterfaceSource() string {
+	if o == nil || IsNil(o.InterfaceSource) {
+		var ret string
+		return ret
+	}
+	return *o.InterfaceSource
+}
+
+// GetInterfaceSourceOk returns a tuple with the InterfaceSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BootIscsi) GetInterfaceSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.InterfaceSource) {
+		return nil, false
+	}
+	return o.InterfaceSource, true
+}
+
+// HasInterfaceSource returns a boolean if a field has been set.
+func (o *BootIscsi) HasInterfaceSource() bool {
+	if o != nil && !IsNil(o.InterfaceSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetInterfaceSource gets a reference to the given string and assigns it to the InterfaceSource field.
+func (o *BootIscsi) SetInterfaceSource(v string) {
+	o.InterfaceSource = &v
+}
+
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *BootIscsi) GetPort() int64 {
 	if o == nil || IsNil(o.Port) {
@@ -298,6 +336,9 @@ func (o BootIscsi) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InterfaceName) {
 		toSerialize["InterfaceName"] = o.InterfaceName
 	}
+	if !IsNil(o.InterfaceSource) {
+		toSerialize["InterfaceSource"] = o.InterfaceSource
+	}
 	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
@@ -362,6 +403,8 @@ func (o *BootIscsi) UnmarshalJSON(data []byte) (err error) {
 		Bootloader NullableBootBootloader `json:"Bootloader,omitempty"`
 		// The name of the underlying virtual ethernet interface used by the iSCSI boot device.
 		InterfaceName *string `json:"InterfaceName,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]*$"`
+		// Lists the supported methods to provide network boot device configuration. Supported values are \"name\" and \"port\". * `name` - Use interface name to select virtual ethernet interface. * `mac` - Use MAC address to select virtual ethernet interface. * `port` - Use port to select virtual ethernet interface.
+		InterfaceSource *string `json:"InterfaceSource,omitempty"`
 		// Port ID of the ISCSI boot device.
 		Port *int64 `json:"Port,omitempty"`
 		// The slot id of the device. Supported values are (1 - 255, \"MLOM\", \"L\", \"L1\", \"L2\", \"OCP\").
@@ -377,6 +420,7 @@ func (o *BootIscsi) UnmarshalJSON(data []byte) (err error) {
 		varBootIscsi.ObjectType = varBootIscsiWithoutEmbeddedStruct.ObjectType
 		varBootIscsi.Bootloader = varBootIscsiWithoutEmbeddedStruct.Bootloader
 		varBootIscsi.InterfaceName = varBootIscsiWithoutEmbeddedStruct.InterfaceName
+		varBootIscsi.InterfaceSource = varBootIscsiWithoutEmbeddedStruct.InterfaceSource
 		varBootIscsi.Port = varBootIscsiWithoutEmbeddedStruct.Port
 		varBootIscsi.Slot = varBootIscsiWithoutEmbeddedStruct.Slot
 		*o = BootIscsi(varBootIscsi)
@@ -400,6 +444,7 @@ func (o *BootIscsi) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Bootloader")
 		delete(additionalProperties, "InterfaceName")
+		delete(additionalProperties, "InterfaceSource")
 		delete(additionalProperties, "Port")
 		delete(additionalProperties, "Slot")
 

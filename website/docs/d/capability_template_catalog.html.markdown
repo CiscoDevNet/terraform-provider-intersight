@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_template_catalog"
 description: |-
-        Catalog of override allowed configurations for vNIC and vHBA templates.
+        The TemplateCatalog object lists the settings that can be overridden in vNIC and vHBA templates, allowing flexible template management and customization.
+        #### Purpose
+        A TemplateCatalog serves as an authoritative source for allowed overrides in template configurations, facilitating efficient management of vNIC and vHBA resources. It supports read operations to ensure consistent access to override options.
+        #### Key Concepts
+        - **Override Management:** Catalogs properties that can be overridden, enhancing flexibility and customization in template configurations.
+        - **Template Integration:** Focuses on vNIC and vHBA templates, ensuring streamlined management and deployment within server environments.
+        - **Access Control:** Managed through privilege sets to ensure secure and reliable access to template catalog information.
+        - **Versioning and Updates:** Supports meta version updates, ensuring that override capabilities are current and aligned with system requirements.
 
 ---
 
 # Data Source: intersight_capability_template_catalog
-Catalog of override allowed configurations for vNIC and vHBA templates.
+The TemplateCatalog object lists the settings that can be overridden in vNIC and vHBA templates, allowing flexible template management and customization.
+#### Purpose
+A TemplateCatalog serves as an authoritative source for allowed overrides in template configurations, facilitating efficient management of vNIC and vHBA resources. It supports read operations to ensure consistent access to override options.
+#### Key Concepts
+- **Override Management:** Catalogs properties that can be overridden, enhancing flexibility and customization in template configurations.
+- **Template Integration:** Focuses on vNIC and vHBA templates, ensuring streamlined management and deployment within server environments.
+- **Access Control:** Managed through privilege sets to ensure secure and reliable access to template catalog information.
+- **Versioning and Updates:** Supports meta version updates, ensuring that override capabilities are current and aligned with system requirements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

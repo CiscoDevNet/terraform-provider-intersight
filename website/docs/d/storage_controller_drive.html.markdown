@@ -3,12 +3,26 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_controller_drive"
 description: |-
-        The Local Storage present in a server.
+        The equipment.ChassisController object represents the controller embedded within a network element that is responsible for managing a chassis. It is particularly relevant in architectures like UCS X-Series Direct, where the Fabric Interconnects directly manage the chassis.
+        #### Purpose
+        The primary function of this object is to inventory the existence and state of the chassis management controller function within a network element. It reports on its health and equipment type (e.g., ECMC for an X-Series chassis), providing visibility into the component responsible for chassis-level management tasks.
+        #### Key Concepts
+        - **Management Function Inventory:** Models the logical chassis controller as a distinct entity within a network element.
+        - **Health Reporting:** The operReason property provides details on any health issues affecting the controller's operation.
+        - **Type Identification:** The equipmentType property specifies the kind of chassis controller, which can inform management logic.
+        - **Network Element Association:** It is a child of a network.Element, clearly linking the chassis management function to the physical switch that hosts it.
 
 ---
 
 # Data Source: intersight_storage_controller_drive
-The Local Storage present in a server.
+The equipment.ChassisController object represents the controller embedded within a network element that is responsible for managing a chassis. It is particularly relevant in architectures like UCS X-Series Direct, where the Fabric Interconnects directly manage the chassis.
+#### Purpose
+The primary function of this object is to inventory the existence and state of the chassis management controller function within a network element. It reports on its health and equipment type (e.g., ECMC for an X-Series chassis), providing visibility into the component responsible for chassis-level management tasks.
+#### Key Concepts
+- **Management Function Inventory:** Models the logical chassis controller as a distinct entity within a network element.
+- **Health Reporting:** The operReason property provides details on any health issues affecting the controller's operation.
+- **Type Identification:** The equipmentType property specifies the kind of chassis controller, which can inform management logic.
+- **Network Element Association:** It is a child of a network.Element, clearly linking the chassis management function to the physical switch that hosts it.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

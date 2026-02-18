@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the CapabilityAdapterDeprecatedDef type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CapabilityAdapterDeprecatedDef{}
 
-// CapabilityAdapterDeprecatedDef Object to represent an unsupported/deprecated adapter. Meant to be used under server descriptor object.
+// CapabilityAdapterDeprecatedDef The capability.AdapterDeprecatedDef object is a capability definition used to identify network adapters that are unsupported or have been deprecated in the current system release. It is typically used within a server descriptor to flag incompatible hardware. #### Purpose The primary purpose of this object is to maintain a catalog of unsupported adapters. When a server is discovered, its adapters can be checked against this catalog. If a match is found, the system can raise an alarm or prevent certain operations, ensuring that only supported hardware configurations are used. #### Key Concepts - **Hardware Compatibility Catalog:** Acts as a list of known unsupported or deprecated adapters. - **Identification by Vendor and Model:** Uses vendor and model properties to uniquely identify an adapter type. - **Proactive Issue Detection:** Enables the system to flag potential support and functionality issues by identifying deprecated hardware during server inventory. - **Nested Definition:** Designed to be used as a sub-object within a capability.ServerDescriptor, linking unsupported adapters to specific server models where they are not applicable.
 type CapabilityAdapterDeprecatedDef struct {
 	CapabilityCapability
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

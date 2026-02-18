@@ -3,28 +3,26 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_cloner"
 description: |-
-        ### Overview
         The MoCloner object is an interface designed to facilitate the cloning of managed objects (MOs) in bulk operations. It enables the creation of multiple copies of a specified resource instance.
         #### Purpose
         MoCloner is used primarily for template derivation operations, allowing users to replicate existing templates into new derived instances while applying specific overrides to identity properties or other configurations.
         #### Key Concepts
-        - **Bulk Cloning:** - Supports the generation of multiple clones in a single operation, optimizing resource duplication processes.
-        - **Template Derivation:** - Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances.
-        - **Configuration Override:** - Allows for customization of cloned instances by specifying new values for identity and other properties.
-        - **Async Processing:** - Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
+        - **Bulk Cloning:** Supports the generation of multiple clones in a single operation, optimizing resource duplication processes.
+        - **Template Derivation:** Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances.
+        - **Configuration Override:** Allows for customization of cloned instances by specifying new values for identity and other properties.
+        - **Async Processing:** Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
 
 ---
 
 # Resource: intersight_bulk_mo_cloner
-### Overview
 The MoCloner object is an interface designed to facilitate the cloning of managed objects (MOs) in bulk operations. It enables the creation of multiple copies of a specified resource instance.   
-#### Purpose  
+#### Purpose
 MoCloner is used primarily for template derivation operations, allowing users to replicate existing templates into new derived instances while applying specific overrides to identity properties or other configurations.   
-#### Key Concepts 
-- **Bulk Cloning:** - Supports the generation of multiple clones in a single operation, optimizing resource duplication processes. 
-- **Template Derivation:** - Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances. 
-- **Configuration Override:** - Allows for customization of cloned instances by specifying new values for identity and other properties. 
-- **Async Processing:** - Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
+#### Key Concepts
+- **Bulk Cloning:** Supports the generation of multiple clones in a single operation, optimizing resource duplication processes. 
+- **Template Derivation:** Facilitates the derivation of server profiles, vNIC templates, and vHBA templates, ensuring consistency across cloned instances. 
+- **Configuration Override:** Allows for customization of cloned instances by specifying new values for identity and other properties. 
+- **Async Processing:** Supports asynchronous operation, enabling efficient handling of large-scale cloning tasks.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

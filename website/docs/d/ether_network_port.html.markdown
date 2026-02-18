@@ -3,12 +3,22 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_network_port"
 description: |-
-        Ethernet network port connected to the Fabric Interconnect. These ports facilitate the connection of the Fabric Interconnect to other network devices.
+        The ether.NetworkPort object represents a network-facing port on a Fabric Extender (FEX) or I/O Module (IOM). These ports, also known as Network Interfaces (NIFs), provide the uplink connection from the FEX/IOM to the parent Fabric Interconnect.
+        #### Purpose
+        The NetworkPort object is used to model and inventory the physical uplink ports of a FEX or IOM. It captures the port's identity, its operational speed, and its connection status to the parent switch. It is essential for monitoring the health and bandwidth of the connection between the fabric extender and the core fabric.
+        #### Key Concepts
+        - **Uplink Port Model:** Represents a physical port used for uplinking a FEX or IOM to a Fabric Interconnect.
+        - **Connectivity Status:** The operReason property provides specific details on the link's status, such as LinkMissing or LinkMisconnect.
 
 ---
 
 # Data Source: intersight_ether_network_port
-Ethernet network port connected to the Fabric Interconnect. These ports facilitate the connection of the Fabric Interconnect to other network devices.
+The ether.NetworkPort object represents a network-facing port on a Fabric Extender (FEX) or I/O Module (IOM). These ports, also known as Network Interfaces (NIFs), provide the uplink connection from the FEX/IOM to the parent Fabric Interconnect.
+#### Purpose
+The NetworkPort object is used to model and inventory the physical uplink ports of a FEX or IOM. It captures the port's identity, its operational speed, and its connection status to the parent switch. It is essential for monitoring the health and bandwidth of the connection between the fabric extender and the core fabric.
+#### Key Concepts
+- **Uplink Port Model:** Represents a physical port used for uplinking a FEX or IOM to a Fabric Interconnect.
+- **Connectivity Status:** The operReason property provides specific details on the link's status, such as LinkMissing or LinkMisconnect.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

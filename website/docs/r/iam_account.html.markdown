@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_account"
 description: |-
-        The Intersight Account used to access Intersight.
+        The Account object defines the organizational framework within which users and resources are managed, serving as the central hub for access and permissions.
+        #### Purpose
+        An Account encapsulates the structure and permissions associated with a specific organizational unit, providing a secure environment for managing users and resources.
+        #### Key Concepts
+        - **Access Management:** Governs user access and permissions, ensuring appropriate roles are assigned to users within the account.
+        - **Resource Organization:** Structures resources under the account, facilitating management and oversight of assets.
+        - **Security Configuration:** Enforces security policies and configurations, including IP access management and session limits.
+        - **Identity Providers:** Integrates with identity providers to streamline authentication and user management, enhancing security and user experience.
 
 ---
 
 # Resource: intersight_iam_account
-The Intersight Account used to access Intersight.
+The Account object defines the organizational framework within which users and resources are managed, serving as the central hub for access and permissions.
+#### Purpose
+An Account encapsulates the structure and permissions associated with a specific organizational unit, providing a secure environment for managing users and resources.
+#### Key Concepts
+- **Access Management:** Governs user access and permissions, ensuring appropriate roles are assigned to users within the account.
+- **Resource Organization:** Structures resources under the account, facilitating management and oversight of assets.
+- **Security Configuration:** Enforces security policies and configurations, including IP access management and session limits.
+- **Identity Providers:** Integrates with identity providers to streamline authentication and user management, enhancing security and user experience.
 ## Usage Example
 ### Resource Creation
 
@@ -69,6 +83,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `external_identifier`:(string)(ReadOnly) External identifier for the account, used for integration with external identity systems. 
 * `idpreferences`:(Array)(ReadOnly) An array of relationships to iamIdpReference resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

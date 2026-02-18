@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_drives_endpoint_descriptor"
 description: |-
-        Descriptor that uniquely identifies a drive.
+        The capability.DrivesEndpointDescriptor object is a descriptor used to uniquely identify a storage drive (e.g., HDD, SSD) within the capability catalog. It serves as a centralized inventory record for all supported drive models.
+        #### Purpose
+        The main function of this object is to create and maintain a definitive catalog of storage drives. It stores essential identification attributes like vendor, model, pid (Product ID), and partNumber. This catalog is used by the system to validate drive compatibility with server platforms, verify hardware configurations, and provide detailed inventory reports.
+        #### Key Concepts
+        - **Storage Drive Catalog:** Provides a structured system for managing information about various drive models.
+        - **Unique Identification:** Uniquely identifies each drive type using a combination of vendor, model, and pid.
+        - **Alias Support:** The aliasModel property allows for mapping multiple model names to a single descriptor, accommodating vendor rebranding or minor variations.
+        - **Platform Compatibility:** The supportedPlatformsPids list links each drive to the specific server platforms it is supported on, enabling automated compatibility checks.
 
 ---
 
 # Data Source: intersight_capability_drives_endpoint_descriptor
-Descriptor that uniquely identifies a drive.
+The capability.DrivesEndpointDescriptor object is a descriptor used to uniquely identify a storage drive (e.g., HDD, SSD) within the capability catalog. It serves as a centralized inventory record for all supported drive models.
+#### Purpose
+The main function of this object is to create and maintain a definitive catalog of storage drives. It stores essential identification attributes like vendor, model, pid (Product ID), and partNumber. This catalog is used by the system to validate drive compatibility with server platforms, verify hardware configurations, and provide detailed inventory reports.
+#### Key Concepts
+- **Storage Drive Catalog:** Provides a structured system for managing information about various drive models.
+- **Unique Identification:** Uniquely identifies each drive type using a combination of vendor, model, and pid.
+- **Alias Support:** The aliasModel property allows for mapping multiple model names to a single descriptor, accommodating vendor rebranding or minor variations.
+- **Platform Compatibility:** The supportedPlatformsPids list links each drive to the specific server platforms it is supported on, enabling automated compatibility checks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,28 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_policy_inventory"
 description: |-
-        Policy to configure KVM Launch settings.
+        The Virtual KVM Policy is a reusable policy used to configure the virtual Keyboard, Video, and Mouse (KVM) settings for a server.
+        #### Purpose
+        The purpose of this policy is to standardize and control remote console access to servers. It allows administrators to manage the vKVM service, define the number of concurrent sessions, configure network ports, and enforce encryption for secure remote management.
+        #### Key Concepts
+        - **Service Control:** The policy enables or disables the vKVM service on the endpoint.
+        - **Session Management:** It allows administrators to set the maximum number of concurrent vKVM sessions, helping to manage resources and access.
+        - **Security:** The policy can enforce encryption for all video information sent through the KVM, securing the remote console session.
+        - **Tunneled KVM:** Supports enabling Tunneled vKVM, which allows secure KVM access through the Intersight platform without requiring direct network access to the server's management IP.
+        - **Profile-Based Application:** It is attached to a Server Profile to apply the vKVM settings to the assigned physical server.
 
 ---
 
 # Data Source: intersight_kvm_policy_inventory
-Policy to configure KVM Launch settings.
+The Virtual KVM Policy is a reusable policy used to configure the virtual Keyboard, Video, and Mouse (KVM) settings for a server.
+#### Purpose
+The purpose of this policy is to standardize and control remote console access to servers. It allows administrators to manage the vKVM service, define the number of concurrent sessions, configure network ports, and enforce encryption for secure remote management.
+#### Key Concepts
+- **Service Control:** The policy enables or disables the vKVM service on the endpoint.
+- **Session Management:** It allows administrators to set the maximum number of concurrent vKVM sessions, helping to manage resources and access.
+- **Security:** The policy can enforce encryption for all video information sent through the KVM, securing the remote console session.
+- **Tunneled KVM:** Supports enabling Tunneled vKVM, which allows secure KVM access through the Intersight platform without requiring direct network access to the server's management IP.
+- **Profile-Based Application:** It is attached to a Server Profile to apply the vKVM settings to the assigned physical server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

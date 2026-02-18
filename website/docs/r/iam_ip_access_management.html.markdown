@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ip_access_management"
 description: |-
-        The access management based on IP address.
+        IpAccessManagement governs IP-based access restrictions for an account, enabling administrators to allowlist trusted ranges and recover from misconfiguration.
+        #### Purpose
+        It provides an additional security control layer that restricts access to the account based on client IP addresses.
+        #### Key Concepts
+        - **Allowlisting:** Enforces access based on configured addresses and ranges.
+        - **Recovery Controls:** Supports account recovery from restrictive misconfigurations.
+        - **Policy Toggle:** Enables or disables IP restriction enforcement.
+        - **Centralized Management:** Hosted under the account’s security holder.
 
 ---
 
 # Resource: intersight_iam_ip_access_management
-The access management based on IP address.
+IpAccessManagement governs IP-based access restrictions for an account, enabling administrators to allowlist trusted ranges and recover from misconfiguration.
+#### Purpose
+It provides an additional security control layer that restricts access to the account based on client IP addresses.
+#### Key Concepts
+- **Allowlisting:** Enforces access based on configured addresses and ranges.
+- **Recovery Controls:** Supports account recovery from restrictive misconfigurations.
+- **Policy Toggle:** Enables or disables IP restriction enforcement.
+- **Centralized Management:** Hosted under the account’s security holder.
 ## Usage Example
 ### Resource Creation
 

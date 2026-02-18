@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_unit_descriptor"
 description: |-
-        Descriptor that uniquely identifies an adapter.
+        The AdapterUnitDescriptor object uniquely identifies an adapter within a hardware environment. This provides detailed attributes and descriptors that facilitate the management and recognition of adapters for server integration and inventory purposes.
+        #### Purpose
+        An AdapterUnitDescriptor acts as a detailed descriptor for adapters, ensuring precise identification and integration within server systems.
+        #### Key Concepts
+        - **Hardware Descriptor:** Serves as an extension of the base hardware descriptor, focusing on adapter-specific attributes.
+        - **Inventory Integration:** Facilitates integration with inventory systems, ensuring accurate tracking and management of adapter resources.
+        - **Access Control:** Managed through privilege sets to ensure secure handling of adapter descriptors, maintaining integrity and reliability.
+        - **Comprehensive Attributes:** Includes detailed properties such as prom card type, DCE port count, and connectivity order, supporting thorough adapter management.
 
 ---
 
 # Data Source: intersight_capability_adapter_unit_descriptor
-Descriptor that uniquely identifies an adapter.
+The AdapterUnitDescriptor object uniquely identifies an adapter within a hardware environment. This provides detailed attributes and descriptors that facilitate the management and recognition of adapters for server integration and inventory purposes.
+#### Purpose
+An AdapterUnitDescriptor acts as a detailed descriptor for adapters, ensuring precise identification and integration within server systems.
+#### Key Concepts
+- **Hardware Descriptor:** Serves as an extension of the base hardware descriptor, focusing on adapter-specific attributes.
+- **Inventory Integration:** Facilitates integration with inventory systems, ensuring accurate tracking and management of adapter resources.
+- **Access Control:** Managed through privilege sets to ensure secure handling of adapter descriptors, maintaining integrity and reliability.
+- **Comprehensive Attributes:** Includes detailed properties such as prom card type, DCE port count, and connectivity order, supporting thorough adapter management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

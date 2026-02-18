@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_scrub_policy"
 description: |-
-        The scrub policy models the data cleanup on the host. If scrub policy is associated, then its configuration will be used to initiate data erase during the server profile undeploy or disassociation.
+        The ScrubPolicy object defines the parameters for data cleanup on servers, particularly during server profile undeployments. It ensures that server components are effectively scrubbed as per configuration.
+        #### Purpose
+        ScrubPolicy provides a framework for executing data cleanup tasks during server profile operations, safeguarding data integrity and compliance with policies. It plays a critical role in managing server disassociations.
+        #### Key Concepts
+        - **Policy Definition:** Sets clear guidelines for scrub operations, detailing which components should be cleaned during undeployments.
+        - **Integration:** Links with server profiles to ensure scrub operations are executed as part of broader server management tasks.
+        - **Security and Compliance:** Supports compliance by ensuring data cleanup is performed consistently and securely.
+        - **Access Control:** Establishes privilege sets for policy management, ensuring controlled access to scrub configurations.
 
 ---
 
 # Resource: intersight_compute_scrub_policy
-The scrub policy models the data cleanup on the host. If scrub policy is associated, then its configuration will be used to initiate data erase during the server profile undeploy or disassociation.
+The ScrubPolicy object defines the parameters for data cleanup on servers, particularly during server profile undeployments. It ensures that server components are effectively scrubbed as per configuration.
+#### Purpose
+ScrubPolicy provides a framework for executing data cleanup tasks during server profile operations, safeguarding data integrity and compliance with policies. It plays a critical role in managing server disassociations.
+#### Key Concepts
+- **Policy Definition:** Sets clear guidelines for scrub operations, detailing which components should be cleaned during undeployments.
+- **Integration:** Links with server profiles to ensure scrub operations are executed as part of broader server management tasks.
+- **Security and Compliance:** Supports compliance by ensuring data cleanup is performed consistently and securely.
+- **Access Control:** Establishes privilege sets for policy management, ensuring controlled access to scrub configurations.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

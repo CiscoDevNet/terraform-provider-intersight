@@ -75,6 +75,11 @@ func getApplianceFileSystemOpStatusSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"disk_order": {
+			Description: "Symbolic order identifier of the physical disk from /dev/disk/by-order (e.g., disk1, disk2).\nThis provides a stable, human-readable identifier for the disk that persists across reboots,\nunlike device names which may change. Currently, the relationship between filesystems to disks\nis one-to-one and this is unlikely to change in the future.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -92,6 +97,11 @@ func getApplianceFileSystemOpStatusSchema() map[string]*schema.Schema {
 		},
 		"mountpoint": {
 			Description: "Mount point of this file system.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_hostname": {
+			Description: "Hostname of the Intersight Appliance node on which this filesystem is located.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -569,6 +579,11 @@ func dataSourceApplianceFileSystemOpStatusRead(c context.Context, d *schema.Reso
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("disk_order"); ok {
+		x := (v.(string))
+		o.SetDiskOrder(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -587,6 +602,11 @@ func dataSourceApplianceFileSystemOpStatusRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("mountpoint"); ok {
 		x := (v.(string))
 		o.SetMountpoint(x)
+	}
+
+	if v, ok := d.GetOk("node_hostname"); ok {
+		x := (v.(string))
+		o.SetNodeHostname(x)
 	}
 
 	if v, ok := d.GetOk("node_op_status"); ok {
@@ -982,11 +1002,13 @@ func dataSourceApplianceFileSystemOpStatusRead(c context.Context, d *schema.Reso
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["disk_order"] = (s.GetDiskOrder())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["mountpoint"] = (s.GetMountpoint())
+				temp["node_hostname"] = (s.GetNodeHostname())
 
 				temp["node_op_status"] = flattenMapApplianceNodeOpStatusRelationship(s.GetNodeOpStatus(), d)
 				temp["object_type"] = (s.GetObjectType())

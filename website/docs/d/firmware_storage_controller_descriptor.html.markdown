@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_storage_controller_descriptor"
 description: |-
-        Descriptor to uniquely identify a storage controller.
+        The StorageControllerDescriptor object uniquely identifies a storage controller within the system. It is essential for managing storage components and ensuring compatibility with system operations.
+        #### Purpose
+        StorageControllerDescriptor provides identification for storage controllers, supporting software deployment and upgrade processes by ensuring compatibility.
+        #### Key Concepts
+        - **Storage Management:** Uniquely identifies storage controllers, facilitating accurate mapping and compatibility checks.
+        - **Upgrade Support:** Supports software deployment and upgrade processes through precise controller identification.
+        - **Catalog Integration:** Links controller descriptors with the Intersight catalog for comprehensive management.
+        - **Administration:** Offers tools for managing controller identification and compatibility checks.
 
 ---
 
 # Data Source: intersight_firmware_storage_controller_descriptor
-Descriptor to uniquely identify a storage controller.
+The StorageControllerDescriptor object uniquely identifies a storage controller within the system. It is essential for managing storage components and ensuring compatibility with system operations.
+#### Purpose
+StorageControllerDescriptor provides identification for storage controllers, supporting software deployment and upgrade processes by ensuring compatibility.
+#### Key Concepts
+- **Storage Management:** Uniquely identifies storage controllers, facilitating accurate mapping and compatibility checks.
+- **Upgrade Support:** Supports software deployment and upgrade processes through precise controller identification.
+- **Catalog Integration:** Links controller descriptors with the Intersight catalog for comprehensive management.
+- **Administration:** Offers tools for managing controller identification and compatibility checks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

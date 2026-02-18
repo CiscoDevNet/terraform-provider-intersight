@@ -3,12 +3,28 @@ subcategory: "syslog"
 layout: "intersight"
 page_title: "Intersight: intersight_syslog_policy_inventory"
 description: |-
-        The syslog policy configure the syslog server to receive CIMC log entries.
+        The Syslog Policy is a reusable policy for configuring how system log messages are handled on an endpoint.
+        #### Purpose
+        The purpose of this policy is to centralize and standardize the logging configuration for managed devices. It allows administrators to forward system logs to one or more remote syslog servers for aggregation, analysis, and long-term storage, which is essential for monitoring, troubleshooting, and security auditing.
+        #### Key Concepts
+        - **Remote and Local Logging:** The policy supports configuring both remote logging clients (to forward logs to a central server) and local logging clients (to control how logs are handled on the device itself).
+        - **Multiple Destinations:** Administrators can define a list of remote syslog servers, each with its own specific configuration.
+        - **Flexible Transport:** For remote logging, the policy supports both UDP and TCP as transport protocols.
+        - **Severity Filtering:** It allows for the configuration of a minSeverity level for both local and remote logs, enabling administrators to filter out less important messages and reduce noise.
+        - **Profile-Based Application:** The policy is attached to a Server Profile to apply a consistent logging configuration across multiple servers.
 
 ---
 
 # Data Source: intersight_syslog_policy_inventory
-The syslog policy configure the syslog server to receive CIMC log entries.
+The Syslog Policy is a reusable policy for configuring how system log messages are handled on an endpoint.
+#### Purpose
+The purpose of this policy is to centralize and standardize the logging configuration for managed devices. It allows administrators to forward system logs to one or more remote syslog servers for aggregation, analysis, and long-term storage, which is essential for monitoring, troubleshooting, and security auditing.
+#### Key Concepts
+- **Remote and Local Logging:** The policy supports configuring both remote logging clients (to forward logs to a central server) and local logging clients (to control how logs are handled on the device itself).
+- **Multiple Destinations:** Administrators can define a list of remote syslog servers, each with its own specific configuration.
+- **Flexible Transport:** For remote logging, the policy supports both UDP and TCP as transport protocols.
+- **Severity Filtering:** It allows for the configuration of a minSeverity level for both local and remote logs, enabling administrators to filter out less important messages and reduce noise.
+- **Profile-Based Application:** The policy is attached to a Server Profile to apply a consistent logging configuration across multiple servers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

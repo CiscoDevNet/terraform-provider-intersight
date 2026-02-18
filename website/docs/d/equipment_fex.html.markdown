@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fex"
 description: |-
-        Fabric Extender which can mutiplex traffic from the host facing ports.
+        The equipment.FEX object represents a Fabric Extender (FEX), a device that acts as a remote line card for a parent Fabric Interconnect. It multiplexes traffic from servers and other endpoints to the main switch.
+        #### Purpose
+        The FEX object is the primary inventory and management entity for a Fabric Extender. This provides a comprehensive view of the FEX's identity, its connection status to the parent switch, and its contained hardware components, such as power supplies, fans, and host-facing ports.
+        #### Key Concepts
+        - **Remote Line Card Model:** Represents the FEX as an extension of a parent network.Element (Fabric Interconnect).
+        - **Hierarchical Inventory:** Serves as a container for its own hardware components, including equipment.Psu, equipment.Fan, and ether.HostPort objects.
+        - **Connectivity and Health:** Tracks its connectionPath and connectionStatus to the parent switch, and reports its overall operState and any specific health issues (operReason).
+        - **Lifecycle Management:** The discoveryState property tracks its progress through the discovery and inventory process.
 
 ---
 
 # Data Source: intersight_equipment_fex
-Fabric Extender which can mutiplex traffic from the host facing ports.
+The equipment.FEX object represents a Fabric Extender (FEX), a device that acts as a remote line card for a parent Fabric Interconnect. It multiplexes traffic from servers and other endpoints to the main switch.
+#### Purpose
+The FEX object is the primary inventory and management entity for a Fabric Extender. This provides a comprehensive view of the FEX's identity, its connection status to the parent switch, and its contained hardware components, such as power supplies, fans, and host-facing ports.
+#### Key Concepts
+- **Remote Line Card Model:** Represents the FEX as an extension of a parent network.Element (Fabric Interconnect).
+- **Hierarchical Inventory:** Serves as a container for its own hardware components, including equipment.Psu, equipment.Fan, and ether.HostPort objects.
+- **Connectivity and Health:** Tracks its connectionPath and connectionStatus to the parent switch, and reports its overall operState and any specific health issues (operReason).
+- **Lifecycle Management:** The discoveryState property tracks its progress through the discovery and inventory process.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

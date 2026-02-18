@@ -3,12 +3,28 @@ subcategory: "access"
 layout: "intersight"
 page_title: "Intersight: intersight_access_policy"
 description: |-
-        Policy to configure server or chassis management options.
+        The Access Policy object is a reusable policy that configures server and chassis management access options. It allows administrators to define how In-Band and Out-of-Band management IP addresses are assigned and used for endpoints.
+        #### Purpose
+        The primary purpose of an Access Policy is to standardize the network access configuration for server management controllers (CIMCs). By defining settings for IP address pools and VLANs, this policy ensures that servers and chassis are consistently and correctly configured for management access across an organization.
+        #### Key Concepts
+        - **Reusable Configuration:** As an object extending policy.AbstractPolicy, this provides a template for access settings that can be applied to multiple server and chassis profiles.
+        - **In-Band and Out-of-Band:** The policy supports both In-Band (shared with data traffic) and Out-of-Band (dedicated management network) configurations.
+        - **IP Address Management:** It integrates with Intersight's IP Pool (ippool.Pool) and VRF (vrf.Vrf) objects to automate the assignment of management IP addresses.
+        - **Profile-Based Application:** This policy is attached to Server or Chassis profiles to apply its configuration to the associated physical hardware.
+        - **Impact Awareness:** Changes to this policy are flagged with MgmtNetworkDisconnection, indicating that applying updates may temporarily interrupt management connectivity to the endpoint.
 
 ---
 
 # Resource: intersight_access_policy
-Policy to configure server or chassis management options.
+The Access Policy object is a reusable policy that configures server and chassis management access options. It allows administrators to define how In-Band and Out-of-Band management IP addresses are assigned and used for endpoints.
+#### Purpose
+The primary purpose of an Access Policy is to standardize the network access configuration for server management controllers (CIMCs). By defining settings for IP address pools and VLANs, this policy ensures that servers and chassis are consistently and correctly configured for management access across an organization.
+#### Key Concepts
+- **Reusable Configuration:** As an object extending policy.AbstractPolicy, this provides a template for access settings that can be applied to multiple server and chassis profiles.
+- **In-Band and Out-of-Band:** The policy supports both In-Band (shared with data traffic) and Out-of-Band (dedicated management network) configurations.
+- **IP Address Management:** It integrates with Intersight's IP Pool (ippool.Pool) and VRF (vrf.Vrf) objects to automate the assignment of management IP addresses.
+- **Profile-Based Application:** This policy is attached to Server or Chassis profiles to apply its configuration to the associated physical hardware.
+- **Impact Awareness:** Changes to this policy are flagged with MgmtNetworkDisconnection, indicating that applying updates may temporarily interrupt management connectivity to the endpoint.
 ## Usage Example
 ### Resource Creation
 

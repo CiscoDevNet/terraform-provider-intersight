@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ip_address"
 description: |-
-        Add an IP address to enable IP address based access management.
+        IpAddress represents a single allowlisted IP, CIDR block, or range used by IpAccessManagement.
+        #### Purpose
+        It models an individual entry in the IP access policy to refine allowed sources.
+        #### Key Concepts
+        - **Entry Granularity:** Supports point IPs, CIDR, and address ranges.
+        - **Descriptive Policy:** Accommodates human-readable rationale for entries.
+        - **Policy Membership:** Always associated with an IpAccessManagement policy.
+        - **Enforcement-ready:** Used directly in access control evaluations.
 
 ---
 
 # Data Source: intersight_iam_ip_address
-Add an IP address to enable IP address based access management.
+IpAddress represents a single allowlisted IP, CIDR block, or range used by IpAccessManagement.
+#### Purpose
+It models an individual entry in the IP access policy to refine allowed sources.
+#### Key Concepts
+- **Entry Granularity:** Supports point IPs, CIDR, and address ranges.
+- **Descriptive Policy:** Accommodates human-readable rationale for entries.
+- **Policy Membership:** Always associated with an IpAccessManagement policy.
+- **Enforcement-ready:** Used directly in access control evaluations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

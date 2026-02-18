@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_device_cluster_install"
 description: |-
-        DeviceClusterInstall is a singleton that tracks the Intersight Cluster Appliance's install.
+        The DeviceClusterInstall object tracks the installation process of Intersight Cluster Appliances, providing insights into system setup and configuration.
+        #### Purpose
+        DeviceClusterInstall monitors the various phases of cluster installation, aiding in successful deployments and system readiness.
+        #### Key Concepts
+        - **Phase Tracking:** Records current and completed installation phases, ensuring comprehensive monitoring and progress visibility.
+        - **Node Management:** Documents node information, supporting efficient network configuration and cluster management.
+        - **Error Reporting:** Captures installation errors, facilitating troubleshooting and ensuring successful setups.
 
 ---
 
 # Data Source: intersight_appliance_device_cluster_install
-DeviceClusterInstall is a singleton that tracks the Intersight Cluster Appliance's install.
+The DeviceClusterInstall object tracks the installation process of Intersight Cluster Appliances, providing insights into system setup and configuration.
+#### Purpose
+DeviceClusterInstall monitors the various phases of cluster installation, aiding in successful deployments and system readiness.
+#### Key Concepts
+- **Phase Tracking:** Records current and completed installation phases, ensuring comprehensive monitoring and progress visibility.
+- **Node Management:** Documents node information, supporting efficient network configuration and cluster management.
+- **Error Reporting:** Captures installation errors, facilitating troubleshooting and ensuring successful setups.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

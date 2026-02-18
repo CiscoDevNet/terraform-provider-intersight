@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_device_summary"
 description: |-
-        Aggregation of properties pertaining to different inventory MOs.
+        The equipment.DeviceSummary object provides a simplified, aggregated view of an inventory component, such as a server or chassis. It is designed to be a lightweight object for use in summary lists and high-level dashboards.
+        #### Purpose
+        The main purpose of DeviceSummary is to offer a consolidated and easy-to-query representation of a piece of equipment. It abstracts away the complexity of different device types (e.g., compute.Blade vs. compute.RackUnit) and presents a consistent set of key identifiers like model, serial, and dn. This simplifies the development of user interfaces that display lists of mixed hardware.
+        #### Key Concepts
+        - **Aggregated View:** Combines the most common and essential properties of an inventory object into a single, flat structure.
+        - **Unified Model:** Provides a consistent representation for different types of underlying hardware, simplifying data consumption.
+        - **Performance-Oriented:** Designed to be lightweight and efficiently queried, making it suitable for high-level summary views.
+        - **Source Traceability:** The sourceObjectType and parent relationships allow for drilling down from the summary view to the full, detailed inventory object.
 
 ---
 
 # Data Source: intersight_equipment_device_summary
-Aggregation of properties pertaining to different inventory MOs.
+The equipment.DeviceSummary object provides a simplified, aggregated view of an inventory component, such as a server or chassis. It is designed to be a lightweight object for use in summary lists and high-level dashboards.
+#### Purpose
+The main purpose of DeviceSummary is to offer a consolidated and easy-to-query representation of a piece of equipment. It abstracts away the complexity of different device types (e.g., compute.Blade vs. compute.RackUnit) and presents a consistent set of key identifiers like model, serial, and dn. This simplifies the development of user interfaces that display lists of mixed hardware.
+#### Key Concepts
+- **Aggregated View:** Combines the most common and essential properties of an inventory object into a single, flat structure.
+- **Unified Model:** Provides a consistent representation for different types of underlying hardware, simplifying data consumption.
+- **Performance-Oriented:** Designed to be lightweight and efficiently queried, making it suitable for high-level summary views.
+- **Source Traceability:** The sourceObjectType and parent relationships allow for drilling down from the summary view to the full, detailed inventory object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

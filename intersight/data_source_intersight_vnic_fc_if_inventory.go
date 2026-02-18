@@ -653,7 +653,7 @@ func getVnicFcIfInventorySchema() map[string]*schema.Schema {
 			},
 		},
 		"stale": {
-			Description: "An FcIf is marked stale if it was deployed to the endpoint and the San Connectivity Policy associated with the server profile does not have this EthIf anymore. This maybe due to the San Connectivity Policy being removed from the server profile or a different San Connectivity Policy is attached which does not include any FcIf with the same name.",
+			Description: "The FcIf object represents a virtual Fibre Channel interface (vHBA) within the Cisco environment. It abstracts the configuration and management of storage connectivity for servers.\n#### Purpose\nFcIf provides a programmable interface for defining, deploying, and managing vHBAs, ensuring that storage resources are accessible and policy-compliant.\n#### Key Concepts\n- **Storage Connectivity Abstraction:** Represents the vHBA as a managed object.\n- **Policy-Driven Configuration:** Associates with SAN, QoS, and adapter policies for end-to-end control.\n- **Template and Override Support:** Can derive configuration from templates with support for property overrides.\n- **Integration with Zoning and WWN Pools:** Facilitates automated and secure storage access.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},

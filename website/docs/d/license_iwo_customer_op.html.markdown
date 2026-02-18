@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_iwo_customer_op"
 description: |-
-        Customer operation object to refresh the registration or re-authenticate, pre-created.
+        The IwoCustomerOp object focuses on operations related to the Intersight Workload Optimizer (IWO) licensing, offering tools for managing license tiers and trials within the workload optimization context.
+        #### Purpose
+        IwoCustomerOp serves as the operational interface for managing workload optimizer licensing. It supports administrative functions, trial enablement, and tier management, ensuring customers can optimize their licensing configurations.
+        #### Key Concepts
+        - **Workload Optimization:** Facilitates management of IWO license entitlements, allowing customers to tailor their optimization settings to specific needs.
+        - **License Tier Management:** Supports setting and managing active license types, providing flexibility in how services are configured and utilized.
+        - **Trial Operations:**Enables trial periods for customers to assess the workload optimizer features and benefits.
+        - **Administrative Activation:** Allows activation of license entitlements, ensuring operational continuity and access to optimizer capabilities.
 
 ---
 
 # Data Source: intersight_license_iwo_customer_op
-Customer operation object to refresh the registration or re-authenticate, pre-created.
+The IwoCustomerOp object focuses on operations related to the Intersight Workload Optimizer (IWO) licensing, offering tools for managing license tiers and trials within the workload optimization context.
+#### Purpose
+IwoCustomerOp serves as the operational interface for managing workload optimizer licensing. It supports administrative functions, trial enablement, and tier management, ensuring customers can optimize their licensing configurations.
+#### Key Concepts
+- **Workload Optimization:** Facilitates management of IWO license entitlements, allowing customers to tailor their optimization settings to specific needs.
+- **License Tier Management:** Supports setting and managing active license types, providing flexibility in how services are configured and utilized.
+- **Trial Operations:**Enables trial periods for customers to assess the workload optimizer features and benefits.
+- **Administrative Activation:** Allows activation of license entitlements, ensuring operational continuity and access to optimizer capabilities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

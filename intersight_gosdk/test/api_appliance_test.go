@@ -580,6 +580,32 @@ func Test_intersight_ApplianceApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ApplianceApiService GetApplianceCpuUtilizationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceCpuUtilizationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ApplianceApiService GetApplianceCpuUtilizationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceCpuUtilizationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ApplianceApiService GetApplianceDataExportPolicyByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -970,6 +996,32 @@ func Test_intersight_ApplianceApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ApplianceApiService GetApplianceMemoryUtilizationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceMemoryUtilizationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ApplianceApiService GetApplianceMemoryUtilizationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceMemoryUtilizationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ApplianceApiService GetApplianceMetaManifestByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1093,6 +1145,32 @@ func Test_intersight_ApplianceApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceNodeInfoList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ApplianceApiService GetApplianceNodeIopsMetricByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceNodeIopsMetricByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ApplianceApiService GetApplianceNodeIopsMetricList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceNodeIopsMetricList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

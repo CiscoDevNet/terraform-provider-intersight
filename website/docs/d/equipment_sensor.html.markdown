@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_sensor"
 description: |-
-        Concrete class for Sensor reports on a device.
+        The equipment.Sensor object represents a hardware sensor on a network device that monitors a specific environmental or operational metric, such as temperature, voltage, or fan speed.
+        #### Purpose
+        The primary purpose of the Sensor object is to provide inventory and real-time status for the various sensors within a network device. It reports the sensor's name and its current alarmStatus (e.g., normal, minor, major, failed). It is fundamental for health monitoring and proactive fault detection.
+        #### Key Concepts
+        - **Health Monitoring:** Provides the status of individual hardware sensors, which is a key input for the overall health status of a device.
+        - **Threshold-Based Alarms:** The alarmStatus reflects whether the sensor's readings have crossed predefined thresholds (minor or major), which can trigger alarms.
+        - **Granular Inventory:** Allows for a detailed inventory of all monitoring points within a device.
+        - **Device-Specific:** It is a child of a network.Element, providing sensor data for a specific switch.
 
 ---
 
 # Data Source: intersight_equipment_sensor
-Concrete class for Sensor reports on a device.
+The equipment.Sensor object represents a hardware sensor on a network device that monitors a specific environmental or operational metric, such as temperature, voltage, or fan speed.
+#### Purpose
+The primary purpose of the Sensor object is to provide inventory and real-time status for the various sensors within a network device. It reports the sensor's name and its current alarmStatus (e.g., "normal", "minor", "major", "failed"). It is fundamental for health monitoring and proactive fault detection.
+#### Key Concepts
+- **Health Monitoring:** Provides the status of individual hardware sensors, which is a key input for the overall health status of a device.
+- **Threshold-Based Alarms:** The alarmStatus reflects whether the sensor's readings have crossed predefined thresholds (minor or major), which can trigger alarms.
+- **Granular Inventory:** Allows for a detailed inventory of all monitoring points within a device.
+- **Device-Specific:** It is a child of a network.Element, providing sensor data for a specific switch.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

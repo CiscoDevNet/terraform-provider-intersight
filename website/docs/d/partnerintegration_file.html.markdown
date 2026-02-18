@@ -3,12 +3,26 @@ subcategory: "partnerintegration"
 layout: "intersight"
 page_title: "Intersight: intersight_partnerintegration_file"
 description: |-
-        A partner integration artifact which will be files containing development code uploaded by our partners to get the build for dc/microservice.
+        The PartnerIntegrationFile object is a partner integration artifact, containing development code uploaded by partners for building DC/microservices. It supports collaborative development and integration processes.
+        #### Purpose
+        PartnerIntegrationFile serves as a repository for partner development artifacts, facilitating integration and collaboration within the development ecosystem.
+        #### Key Concepts
+        - **Collaboration:** Supports partner development efforts by providing a structured artifact repository.
+        - **Integration:** Facilitates integration processes by housing development code for DC/microservice builds.
+        - **Management Tools:** Offers administrative capabilities for managing partner uploads and integrations.
+        - **Security:** Ensures that partner artifacts are securely managed and accessed within the system.
 
 ---
 
 # Data Source: intersight_partnerintegration_file
-A partner integration artifact which will be files containing development code uploaded by our partners to get the build for dc/microservice.
+The PartnerIntegrationFile object is a partner integration artifact, containing development code uploaded by partners for building DC/microservices. It supports collaborative development and integration processes.
+#### Purpose
+PartnerIntegrationFile serves as a repository for partner development artifacts, facilitating integration and collaboration within the development ecosystem.
+#### Key Concepts
+- **Collaboration:** Supports partner development efforts by providing a structured artifact repository.
+- **Integration:** Facilitates integration processes by housing development code for DC/microservice builds.
+- **Management Tools:** Offers administrative capabilities for managing partner uploads and integrations.
+- **Security:** Ensures that partner artifacts are securely managed and accessed within the system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -19,7 +33,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
-* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
+* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
 * `file_path`:(string) Path of the file being uploaded. 
 * `file_type`:(string) Type of the file being uploaded.* `None` - Invalid file type for partnerIntegration appliance.* `Model` - Model file of Generic Device.* `Etl` - ETL file of Generic Device.* `Ui` - UI file of Generic Device.* `DeviceConnector` - Generic Device Connector file. 
 * `import_action`:(string) The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.* `None` - No action should be taken on the imported file.* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.* `PreCache` - Cache the file into the Intersight Appliance.* `Cancel` - The cancel import process for the file into the repository.* `Extract` - The action to extract the file in the external repository.* `Evict` - Evict the cached file from the Intersight Appliance. 

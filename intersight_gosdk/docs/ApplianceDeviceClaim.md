@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Status of the device claim process. * &#x60;started&#x60; - Device claim operation has started. * &#x60;failed&#x60; - Device claim operation has failed. * &#x60;completed&#x60; - Device claim operation has completed. | [optional] [readonly] [default to "started"]
 **Username** | Pointer to **string** | Username to log in to the endpoint device. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**AssignedLocation** | Pointer to [**NullableAssetGeoLocationRelationship**](AssetGeoLocationRelationship.md) |  | [optional] 
 **Reservation** | Pointer to [**NullableResourceReservationRelationship**](ResourceReservationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -389,6 +390,41 @@ HasAccount returns a boolean if a field has been set.
 `func (o *ApplianceDeviceClaim) UnsetAccount()`
 
 UnsetAccount ensures that no value is present for Account, not even an explicit nil
+### GetAssignedLocation
+
+`func (o *ApplianceDeviceClaim) GetAssignedLocation() AssetGeoLocationRelationship`
+
+GetAssignedLocation returns the AssignedLocation field if non-nil, zero value otherwise.
+
+### GetAssignedLocationOk
+
+`func (o *ApplianceDeviceClaim) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool)`
+
+GetAssignedLocationOk returns a tuple with the AssignedLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedLocation
+
+`func (o *ApplianceDeviceClaim) SetAssignedLocation(v AssetGeoLocationRelationship)`
+
+SetAssignedLocation sets AssignedLocation field to given value.
+
+### HasAssignedLocation
+
+`func (o *ApplianceDeviceClaim) HasAssignedLocation() bool`
+
+HasAssignedLocation returns a boolean if a field has been set.
+
+### SetAssignedLocationNil
+
+`func (o *ApplianceDeviceClaim) SetAssignedLocationNil(b bool)`
+
+ SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+
+### UnsetAssignedLocation
+`func (o *ApplianceDeviceClaim) UnsetAssignedLocation()`
+
+UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
 ### GetReservation
 
 `func (o *ApplianceDeviceClaim) GetReservation() ResourceReservationRelationship`

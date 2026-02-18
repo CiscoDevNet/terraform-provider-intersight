@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the LicenseIncCustomerOp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LicenseIncCustomerOp{}
 
-// LicenseIncCustomerOp Customer operation object to refresh the registration or start the trial period of the Intersight Nexus Cloud license tiers.
+// LicenseIncCustomerOp The IncCustomerOp object is central to managing operations related to the Intersight Nexus Cloud (INC) licensing, offering functionalities for trial management and administrative control. #### Purpose     IncCustomerOp facilitates management of Nexus Cloud licenses, providing tools for trial enablement and tier configuration. It ensures customers can access and manage cloud services efficiently. #### Key Concepts   - **Nexus Cloud Licensing:** Centralizes management of cloud service licenses, allowing customers to optimize their cloud configurations. - **Trial Management:** Supports enabling and terminating trial periods, providing flexibility in evaluating cloud services. - **Tier Configuration:** Offers settings for active license tiers, ensuring customers can tailor cloud services to their operational needs. - **Administrative Activation:** Empowers users to activate license entitlements, ensuring access to cloud service capabilities.
 type LicenseIncCustomerOp struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

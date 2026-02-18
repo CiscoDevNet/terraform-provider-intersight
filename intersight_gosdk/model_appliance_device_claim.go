@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -51,6 +51,7 @@ type ApplianceDeviceClaim struct {
 	// Username to log in to the endpoint device.
 	Username             *string                                 `json:"Username,omitempty"`
 	Account              NullableIamAccountRelationship          `json:"Account,omitempty"`
+	AssignedLocation     NullableAssetGeoLocationRelationship    `json:"AssignedLocation,omitempty"`
 	Reservation          NullableResourceReservationRelationship `json:"Reservation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -541,6 +542,49 @@ func (o *ApplianceDeviceClaim) UnsetAccount() {
 	o.Account.Unset()
 }
 
+// GetAssignedLocation returns the AssignedLocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplianceDeviceClaim) GetAssignedLocation() AssetGeoLocationRelationship {
+	if o == nil || IsNil(o.AssignedLocation.Get()) {
+		var ret AssetGeoLocationRelationship
+		return ret
+	}
+	return *o.AssignedLocation.Get()
+}
+
+// GetAssignedLocationOk returns a tuple with the AssignedLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplianceDeviceClaim) GetAssignedLocationOk() (*AssetGeoLocationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AssignedLocation.Get(), o.AssignedLocation.IsSet()
+}
+
+// HasAssignedLocation returns a boolean if a field has been set.
+func (o *ApplianceDeviceClaim) HasAssignedLocation() bool {
+	if o != nil && o.AssignedLocation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedLocation gets a reference to the given NullableAssetGeoLocationRelationship and assigns it to the AssignedLocation field.
+func (o *ApplianceDeviceClaim) SetAssignedLocation(v AssetGeoLocationRelationship) {
+	o.AssignedLocation.Set(&v)
+}
+
+// SetAssignedLocationNil sets the value for AssignedLocation to be an explicit nil
+func (o *ApplianceDeviceClaim) SetAssignedLocationNil() {
+	o.AssignedLocation.Set(nil)
+}
+
+// UnsetAssignedLocation ensures that no value is present for AssignedLocation, not even an explicit nil
+func (o *ApplianceDeviceClaim) UnsetAssignedLocation() {
+	o.AssignedLocation.Unset()
+}
+
 // GetReservation returns the Reservation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceClaim) GetReservation() ResourceReservationRelationship {
 	if o == nil || IsNil(o.Reservation.Get()) {
@@ -646,6 +690,9 @@ func (o ApplianceDeviceClaim) ToMap() (map[string]interface{}, error) {
 	if o.Account.IsSet() {
 		toSerialize["Account"] = o.Account.Get()
 	}
+	if o.AssignedLocation.IsSet() {
+		toSerialize["AssignedLocation"] = o.AssignedLocation.Get()
+	}
 	if o.Reservation.IsSet() {
 		toSerialize["Reservation"] = o.Reservation.Get()
 	}
@@ -725,9 +772,10 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
 		// Status of the device claim process. * `started` - Device claim operation has started. * `failed` - Device claim operation has failed. * `completed` - Device claim operation has completed.
 		Status *string `json:"Status,omitempty"`
 		// Username to log in to the endpoint device.
-		Username    *string                                 `json:"Username,omitempty"`
-		Account     NullableIamAccountRelationship          `json:"Account,omitempty"`
-		Reservation NullableResourceReservationRelationship `json:"Reservation,omitempty"`
+		Username         *string                                 `json:"Username,omitempty"`
+		Account          NullableIamAccountRelationship          `json:"Account,omitempty"`
+		AssignedLocation NullableAssetGeoLocationRelationship    `json:"AssignedLocation,omitempty"`
+		Reservation      NullableResourceReservationRelationship `json:"Reservation,omitempty"`
 	}
 
 	varApplianceDeviceClaimWithoutEmbeddedStruct := ApplianceDeviceClaimWithoutEmbeddedStruct{}
@@ -749,6 +797,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
 		varApplianceDeviceClaim.Status = varApplianceDeviceClaimWithoutEmbeddedStruct.Status
 		varApplianceDeviceClaim.Username = varApplianceDeviceClaimWithoutEmbeddedStruct.Username
 		varApplianceDeviceClaim.Account = varApplianceDeviceClaimWithoutEmbeddedStruct.Account
+		varApplianceDeviceClaim.AssignedLocation = varApplianceDeviceClaimWithoutEmbeddedStruct.AssignedLocation
 		varApplianceDeviceClaim.Reservation = varApplianceDeviceClaimWithoutEmbeddedStruct.Reservation
 		*o = ApplianceDeviceClaim(varApplianceDeviceClaim)
 	} else {
@@ -781,6 +830,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "Username")
 		delete(additionalProperties, "Account")
+		delete(additionalProperties, "AssignedLocation")
 		delete(additionalProperties, "Reservation")
 
 		// remove fields from embedded structs

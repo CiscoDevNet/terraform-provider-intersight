@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_expander"
 description: |-
-        I/O expander card which is used as an extension for servers in a Colusa Chassis.
+        The equipment.IoExpander object represents an I/O expander card, which serves as an extension for servers, particularly within a Colusa-type chassis architecture.
+        #### Purpose
+        The primary purpose of this object is to inventory and report the status of an I/O expander card. These cards provide additional I/O capabilities or connectivity options for the servers they are attached to. The object captures the expander's identity and its operational state.
+        #### Key Concepts
+        - **I/O Extension:** Models a card that expands the I/O capabilities of a server.
+        - **State Reporting:** The operState property provides the current operational status of the expander card.
+        - **Hardware Inventory:** Captures the base identity of the card, including its model, vendor, and serial number.
+        - **Server Component:** It is a child of a compute.Blade, linking it directly to the server it expands.
 
 ---
 
 # Data Source: intersight_equipment_io_expander
-I/O expander card which is used as an extension for servers in a Colusa Chassis.
+The equipment.IoExpander object represents an I/O expander card, which serves as an extension for servers, particularly within a Colusa-type chassis architecture.
+#### Purpose
+The primary purpose of this object is to inventory and report the status of an I/O expander card. These cards provide additional I/O capabilities or connectivity options for the servers they are attached to. The object captures the expander's identity and its operational state.
+#### Key Concepts
+- **I/O Extension:** Models a card that expands the I/O capabilities of a server.
+- **State Reporting:** The operState property provides the current operational status of the expander card.
+- **Hardware Inventory:** Captures the base identity of the card, including its model, vendor, and serial number.
+- **Server Component:** It is a child of a compute.Blade, linking it directly to the server it expands.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

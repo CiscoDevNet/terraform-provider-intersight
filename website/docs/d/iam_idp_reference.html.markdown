@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_idp_reference"
 description: |-
-        Default Cisco IdP for authentication.
+        The IdpReference object represents the system-provided Cisco IdP association within an account, acting as the default reference for user and group assignments.
+        #### Purpose
+        IdpReference simplifies managing the default IdP relationship for user onboarding, preferences, and access.
+        #### Key Concepts
+        - **Default IdP linkage:** Provides a stable, system-backed IdP reference.
+        - **User/group Association:** Central to managing users and groups tied to the Cisco IdP.
+        - **Preference Anchor:** Links user UI preferences and settings to the IdP context.
+        - **Account Scope:** Managed within the owning account's boundaries.
 
 ---
 
 # Data Source: intersight_iam_idp_reference
-Default Cisco IdP for authentication.
+The IdpReference object represents the system-provided Cisco IdP association within an account, acting as the default reference for user and group assignments.
+#### Purpose
+IdpReference simplifies managing the default IdP relationship for user onboarding, preferences, and access.
+#### Key Concepts
+- **Default IdP linkage:** Provides a stable, system-backed IdP reference.
+- **User/group Association:** Central to managing users and groups tied to the Cisco IdP.
+- **Preference Anchor:** Links user UI preferences and settings to the IdP context.
+- **Account Scope:** Managed within the owning account's boundaries.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -17,7 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `domain_name`:(string) The email domain name for this IdP of the user. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication. 
+* `domain_name`:(string) The DomainNameInfo object represents an organization’s email domain used during login mapping and ownership verification. It supports verifying domain control via DNS to enhance trust.#### PurposeDomainNameInfo ensures that only verified domains are used to route users to the correct identity provider, improving login integrity.#### Key Concepts- **Domain Routing:** Associates email domains with IdPs for seamless login.- **Ownership Verification:** Supports DNS-based verification for trust establishment.- **Status Tracking:** Maintains domain verification lifecycle state.- **Account Scoped:** Managed within the context of the owning account. 
 * `idp_entity_id`:(string) Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP/Service Provider. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

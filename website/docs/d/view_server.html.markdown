@@ -3,16 +3,22 @@ subcategory: "view"
 layout: "intersight"
 page_title: "Intersight: intersight_view_server"
 description: |-
-        Expose a Rest endpoint to query a list of UCS servers (compute.Blade and compute.RackUnit) along with
-        associated MO information like asset.DeviceRegistration, cond.HclStatus and server.Profile (partial list).
-        This Rest endpoint supports Odata operators $filter and $orderby on all fields present within the response body.
+        The Server object facilitates querying a list of UCS servers, including API resource types compute.Blade and compute.RackUnit, along with associated managed object information.
+        #### Purpose
+        The Server object is intended to provide a REST endpoint for accessing and managing server-related data within the UCS ecosystem. It helps users query comprehensive server information, supporting various operational and management tasks.
+        #### Key Concepts
+        - **REST Endpoint:** Offers a standardized interface for querying server data, supporting OData operators for filtering and ordering results.
+        - **Integration with MO Information:** Allows access to related managed object information such as device registration and health status.
 
 ---
 
 # Data Source: intersight_view_server
-Expose a Rest endpoint to query a list of UCS servers (compute.Blade and compute.RackUnit) along with
-associated MO information like asset.DeviceRegistration, cond.HclStatus and server.Profile (partial list).
-This Rest endpoint supports Odata operators $filter and $orderby on all fields present within the response body.
+The Server object facilitates querying a list of UCS servers, including API resource types compute.Blade and compute.RackUnit, along with associated managed object information.
+#### Purpose
+The Server object is intended to provide a REST endpoint for accessing and managing server-related data within the UCS ecosystem. It helps users query comprehensive server information, supporting various operational and management tasks.
+#### Key Concepts
+- **REST Endpoint:** Offers a standardized interface for querying server data, supporting OData operators for filtering and ordering results.
+- **Integration with MO Information:** Allows access to related managed object information such as device registration and health status.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

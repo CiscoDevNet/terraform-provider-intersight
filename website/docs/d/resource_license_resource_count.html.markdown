@@ -3,12 +3,24 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_license_resource_count"
 description: |-
-        LicenseResourceCount tracks the server count info for 3 different licensing tiers.
+        The LicenseResourceCount object tracks the number of resources associated with different licensing tiers, aiding in licensing management and resource allocation.
+        #### Purpose
+        LicenseResourceCount provides a structured approach to managing licensing information within the system, ensuring that resources are accurately accounted for and associated with appropriate licensing tiers. It supports efficient resource tracking and licensing compliance.
+        #### Key Concepts
+        - **Licensing Management:** Facilitates the tracking and management of resources based on licensing tiers, aiding in compliance and resource allocation.
+        - **Resource Tracking:** Provides accurate counts of resources within each licensing tier, supporting efficient resource management.
+        - **Integration:** Seamlessly integrates with resource groups to ensure that licensing information is properly managed and utilized.
 
 ---
 
 # Data Source: intersight_resource_license_resource_count
-LicenseResourceCount tracks the server count info for 3 different licensing tiers.
+The LicenseResourceCount object tracks the number of resources associated with different licensing tiers, aiding in licensing management and resource allocation.
+#### Purpose
+LicenseResourceCount provides a structured approach to managing licensing information within the system, ensuring that resources are accurately accounted for and associated with appropriate licensing tiers. It supports efficient resource tracking and licensing compliance.
+#### Key Concepts
+- **Licensing Management:** Facilitates the tracking and management of resources based on licensing tiers, aiding in compliance and resource allocation.
+- **Resource Tracking:** Provides accurate counts of resources within each licensing tier, supporting efficient resource management.
+- **Integration:** Seamlessly integrates with resource groups to ensure that licensing information is properly managed and utilized.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

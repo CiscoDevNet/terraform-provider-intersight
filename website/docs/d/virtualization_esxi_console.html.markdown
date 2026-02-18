@@ -3,12 +3,24 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_esxi_console"
 description: |-
-        Vmware Esxi Console Session that provides request validation and Session Management.
+        The EsxiConsole object manages VMware Esxi console sessions, providing request validation and session management capabilities. It supports efficient and secure console operations for VMware hosts.
+        #### Purpose
+        EsxiConsole object enables organizations to manage VMware Esxi hosts efficiently through console session management. It facilitates secure and streamlined operations by providing robust session management capabilities.
+        #### Key Concepts
+        - **Console Session Management:** Manages VMware Esxi console sessions, supporting efficient and secure operations.
+        - **Request Validation:** Provides request validation capabilities to ensure accurate and reliable console operations.
+        - **Host Relationship:** Establishes relationships with VMware hosts to ensure accurate console management.
 
 ---
 
 # Data Source: intersight_virtualization_esxi_console
-Vmware Esxi Console Session that provides request validation and Session Management.
+The EsxiConsole object manages VMware Esxi console sessions, providing request validation and session management capabilities. It supports efficient and secure console operations for VMware hosts.
+#### Purpose
+EsxiConsole object enables organizations to manage VMware Esxi hosts efficiently through console session management. It facilitates secure and streamlined operations by providing robust session management capabilities.
+#### Key Concepts
+- **Console Session Management:** Manages VMware Esxi console sessions, supporting efficient and secure operations.
+- **Request Validation:** Provides request validation capabilities to ensure accurate and reliable console operations.
+- **Host Relationship:** Establishes relationships with VMware hosts to ensure accurate console management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

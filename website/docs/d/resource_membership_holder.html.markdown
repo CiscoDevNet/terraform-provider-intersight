@@ -3,12 +3,24 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_membership_holder"
 description: |-
-        A holder of REST resources and their membership.
+        The MembershipHolder object acts as a container for REST resources and their membership within the system. It plays a crucial role in managing and organizing resources by associating them with specific memberships.
+        #### Purpose
+        A MembershipHolder serves as the central entity for resource membership management, enabling efficient organization and retrieval of resources based on their membership status. This provides a structured approach to handling resource memberships, supporting multi-tenancy and resource classification.
+        #### Key Concepts
+        - **Resource Organization:** Facilitates the grouping and classification of resources according to membership criteria.
+        - **Access Control:** Ensures that membership data is managed securely, with access restricted to authorized users.
+        - **Relationship Management:** Maintains associations between resources and their respective accounts, ensuring consistent and organized membership handling.
 
 ---
 
 # Data Source: intersight_resource_membership_holder
-A holder of REST resources and their membership.
+The MembershipHolder object acts as a container for REST resources and their membership within the system. It plays a crucial role in managing and organizing resources by associating them with specific memberships.
+#### Purpose
+A MembershipHolder serves as the central entity for resource membership management, enabling efficient organization and retrieval of resources based on their membership status. This provides a structured approach to handling resource memberships, supporting multi-tenancy and resource classification.
+#### Key Concepts
+- **Resource Organization:** Facilitates the grouping and classification of resources according to membership criteria.
+- **Access Control:** Ensures that membership data is managed securely, with access restricted to authorized users.
+- **Relationship Management:** Maintains associations between resources and their respective accounts, ensuring consistent and organized membership handling.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ConsoleConsoleConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConsoleConsoleConfig{}
 
-// ConsoleConsoleConfig Concrete class for terminal Console.
+// ConsoleConsoleConfig The console.ConsoleConfig object represents the configuration of a terminal console port on a network device. This provides inventory details for the asynchronous serial line settings. #### Purpose The primary purpose of this object is to provide a read-only inventory of the serial console port's communication parameters. This includes settings like speed (baud rate), dataBits, stopBits, and parity. This information is crucial for administrators who need to establish a direct serial connection for out-of-band management or troubleshooting. #### Key Concepts - **Serial Port Inventory:** Captures the complete set of configuration parameters for a device's console port. - **Connectivity Parameters:** Provides the exact settings required for a terminal client to successfully connect to the device. - **Read-Only State:** Reflects the current configuration on the device, serving as a source of truth for its console settings. - **Device-Specific:** Associated with a specific network element, providing the console configuration for that particular device.
 type ConsoleConsoleConfig struct {
 	InventoryBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

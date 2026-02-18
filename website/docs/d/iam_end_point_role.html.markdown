@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_role"
 description: |-
-        The role defined in the end point which can be assigned to a user.
+        EndPointRole represents roles defined on managed endpoints that encapsulate one or more endpoint privileges.
+        #### Purpose
+        It allows administrators to assign endpoint-specific capabilities to platform users in a structured way.
+        #### Key Concepts
+        - **Role Abstraction:** Groups endpoint privileges for ease of assignment.
+        - **Device-type Aware:** Specific to endpoint platform types.
+        - **User Linkage:** Assignable to users for GUI/CLI cross-launch and more.
+        - **Discoverable:** Tied to endpoint-reported security models.
 
 ---
 
 # Data Source: intersight_iam_end_point_role
-The role defined in the end point which can be assigned to a user.
+EndPointRole represents roles defined on managed endpoints that encapsulate one or more endpoint privileges.
+#### Purpose
+It allows administrators to assign endpoint-specific capabilities to platform users in a structured way.
+#### Key Concepts
+- **Role Abstraction:** Groups endpoint privileges for ease of assignment.
+- **Device-type Aware:** Specific to endpoint platform types.
+- **User Linkage:** Assignable to users for GUI/CLI cross-launch and more.
+- **Discoverable:** Tied to endpoint-reported security models.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

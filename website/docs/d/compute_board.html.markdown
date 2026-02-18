@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_board"
 description: |-
-        Mother board of a server.
+        The compute.Board object represents the main motherboard of a server. It serves as a central container for the core components of the server, such as CPUs, memory, and storage controllers, and reports on its own operational health.
+        #### Purpose
+        The primary purpose of the compute.Board object is to model the server's motherboard as a distinct inventory entity. It aggregates the most critical hardware components and provides a focal point for monitoring the board's health, including its power state and any temperature or voltage issues.
+        #### Key Concepts
+        - **Central Component Hub:** Acts as the parent object for essential hardware like processor.Unit, memory.Array, and storage.Controller, providing a logical grouping for the server's core components.
+        - **Health Monitoring:** Reports on its operational status, including power state (operPowerState) and specific health issues (operReason) like temperature or voltage warnings.
+        - **Unique Identification:** Identified by a boardId within the server, ensuring it can be uniquely referenced.
+        - **Hierarchical Inventory:** Is a child of a compute.RackUnit or compute.Blade, linking it directly to the server it belongs to.
 
 ---
 
 # Data Source: intersight_compute_board
-Mother board of a server.
+The compute.Board object represents the main motherboard of a server. It serves as a central container for the core components of the server, such as CPUs, memory, and storage controllers, and reports on its own operational health.
+#### Purpose
+The primary purpose of the compute.Board object is to model the server's motherboard as a distinct inventory entity. It aggregates the most critical hardware components and provides a focal point for monitoring the board's health, including its power state and any temperature or voltage issues.
+#### Key Concepts
+- **Central Component Hub:** Acts as the parent object for essential hardware like processor.Unit, memory.Array, and storage.Controller, providing a logical grouping for the server's core components.
+- **Health Monitoring:** Reports on its operational status, including power state (operPowerState) and specific health issues (operReason) like temperature or voltage warnings.
+- **Unique Identification:** Identified by a boardId within the server, ensuring it can be uniquely referenced.
+- **Hierarchical Inventory:** Is a child of a compute.RackUnit or compute.Blade, linking it directly to the server it belongs to.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

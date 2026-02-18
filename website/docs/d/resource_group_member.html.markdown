@@ -3,12 +3,22 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_group_member"
 description: |-
-        A resolved member of a resource group.
+        The GroupMember object identifies resolved members within a resource group, providing clarity and organization to resource membership management.
+        #### Purpose
+        A GroupMember serves as the link between individual resources and their associated groups, ensuring that resources are accurately represented within the system. It simplifies membership management by providing a clear representation of resource-group associations.
+        #### Key Concepts
+        - **Membership Resolution:** Ensures that resource memberships are accurately resolved and maintained within the system.
+        - **Resource References:** Facilitates easy access and management of resources within groups, supporting efficient resource handling.
 
 ---
 
 # Data Source: intersight_resource_group_member
-A resolved member of a resource group.
+The GroupMember object identifies resolved members within a resource group, providing clarity and organization to resource membership management.
+#### Purpose
+A GroupMember serves as the link between individual resources and their associated groups, ensuring that resources are accurately represented within the system. It simplifies membership management by providing a clear representation of resource-group associations.
+#### Key Concepts
+- **Membership Resolution:** Ensures that resource memberships are accurately resolved and maintained within the system.
+- **Resource References:** Facilitates easy access and management of resources within groups, supporting efficient resource handling.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_default_authentication"
 description: |-
-        Default authentication method as chosen by the user to login into Intersight Appliance.
+        DefaultAuthentication specifies the default login method for an account in appliance contexts, optionally linking to a default LDAP domain.
+        #### Purpose
+        It streamlines user sign-in by preselecting the primary authentication method.
+        #### Key Concepts
+        - **Method Selection:** Chooses among local, SSO, or LDAP modes for default use.
+        - **LDAP Affinity:** Can associate a default LDAP IdP for convenience.
+        - **Account-level Policy:** Configurable by account administrators.
+        - **User Experience:** Reduces friction during authentication flows.
 
 ---
 
 # Data Source: intersight_iam_default_authentication
-Default authentication method as chosen by the user to login into Intersight Appliance.
+DefaultAuthentication specifies the default login method for an account in appliance contexts, optionally linking to a default LDAP domain.
+#### Purpose
+It streamlines user sign-in by preselecting the primary authentication method.
+#### Key Concepts
+- **Method Selection:** Chooses among local, SSO, or LDAP modes for default use.
+- **LDAP Affinity:** Can associate a default LDAP IdP for convenience.
+- **Account-level Policy:** Configurable by account administrators.
+- **User Experience:** Reduces friction during authentication flows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_local_user_password"
 description: |-
-        LocalUserPassword type is used for changing local user's password. Caller must send old password in Password field and new password in newPassword field. Intersight will verify the old password and sets the new password if everything is OK. This API must not be used for resetting user's password.
+        LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context.
+        #### Purpose
+        It enforces secure password-change operations for local users while keeping reset flows separate.
+        #### Key Concepts
+        - **Self-service Change:** Allows users to update their own password.
+        - **Policy-aware:** Works alongside password policy configurations.
+        - **Scoped to User:** Inherits permissions from the associated user.
+        - **Appliance Focus:** Applicable to local authentication scenarios.
 
 ---
 
 # Resource: intersight_iam_local_user_password
-LocalUserPassword type is used for changing local user's password. Caller must send old password in Password field and new password in newPassword field. Intersight will verify the old password and sets the new password if everything is OK. This API must not be used for resetting user's password.
+LocalUserPassword provides the mechanism for a local user to change their own password within the platform appliance context.
+#### Purpose
+It enforces secure password-change operations for local users while keeping reset flows separate.
+#### Key Concepts
+- **Self-service Change:** Allows users to update their own password.
+- **Policy-aware:** Works alongside password policy configurations.
+- **Scoped to User:** Inherits permissions from the associated user.
+- **Appliance Focus:** Applicable to local authentication scenarios.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

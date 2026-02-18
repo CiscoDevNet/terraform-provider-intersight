@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_server_setting"
 description: |-
-        Models the configurable properties of a server in Intersight.
+        The ServerSetting object models the configurable properties of a server within Cisco's Intersight platform. This provides a comprehensive interface for managing server settings and operations.
+        #### Purpose
+        ServerSetting enables users to configure various server properties, such as power state, locator led and TPM actions, directly from Intersight. It supports server management tasks by offering a unified configuration model.
+        #### Key Concepts
+        - **Configuration Management:** Allows configuration of server settings, such as power state and asset tags, enhancing server management capabilities.
+        - **Integration with Devices:** Links with device endpoints to ensure settings are applied correctly across the network.
+        - **Access Control** Utilizes privilege sets to manage read and update operations, supporting secure server management.
+        - **Relationship Management:** Connects with related objects like locator LEDs and storage operations for cohesive configuration management.
 
 ---
 
 # Data Source: intersight_compute_server_setting
-Models the configurable properties of a server in Intersight.
+The ServerSetting object models the configurable properties of a server within Cisco's Intersight platform. This provides a comprehensive interface for managing server settings and operations.
+#### Purpose
+ServerSetting enables users to configure various server properties, such as power state, locator led and TPM actions, directly from Intersight. It supports server management tasks by offering a unified configuration model.
+#### Key Concepts
+- **Configuration Management:** Allows configuration of server settings, such as power state and asset tags, enhancing server management capabilities.
+- **Integration with Devices:** Links with device endpoints to ensure settings are applied correctly across the network.
+- **Access Control** Utilizes privilege sets to manage read and update operations, supporting secure server management.
+- **Relationship Management:** Connects with related objects like locator LEDs and storage operations for cohesive configuration management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

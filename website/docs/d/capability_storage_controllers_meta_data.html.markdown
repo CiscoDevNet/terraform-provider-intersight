@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_storage_controllers_meta_data"
 description: |-
-        Metadata or constraints of various storage server actions supported in Intersight for storage controllers. It is validated against the target provided and the actions are allowed only upon successful validation.
+        The capability.StorageControllersMetaData object provides metadata and constraints for actions related to storage controllers on a server. It defines which storage management actions are supported for a specific combination of server and controller hardware.
+        #### Purpose
+        The main function of this object is to act as a validation gate for storage operations. Before an action (like creating a virtual drive or configuring a drive security policy) is performed, the system checks this metadata to ensure the action is supported on the target server's specific storage controller. This prevents unsupported operations and ensures configuration integrity.
+        #### Key Concepts
+        - **Action Validation:** Defines the set of supportedStorageServerActions for a given controller, enabling pre-flight checks for storage management tasks.
+        - **Hardware-Specific Constraints:** The metadata is tied to a specific targetType (server platform) and controllerPid (controller model), ensuring granular control.
+        - **Feature Support Indication:** Includes flags like isHybridDriveSlotsSupported to indicate whether specific hardware features are available on the controller.
+        - ** Centralized Capability Catalog:** Serves as a single source of truth for storage controller capabilities, simplifying management logic and ensuring consistency.
 
 ---
 
 # Data Source: intersight_capability_storage_controllers_meta_data
-Metadata or constraints of various storage server actions supported in Intersight for storage controllers. It is validated against the target provided and the actions are allowed only upon successful validation.
+The capability.StorageControllersMetaData object provides metadata and constraints for actions related to storage controllers on a server. It defines which storage management actions are supported for a specific combination of server and controller hardware.
+#### Purpose
+The main function of this object is to act as a validation gate for storage operations. Before an action (like creating a virtual drive or configuring a drive security policy) is performed, the system checks this metadata to ensure the action is supported on the target server's specific storage controller. This prevents unsupported operations and ensures configuration integrity.
+#### Key Concepts
+- **Action Validation:** Defines the set of supportedStorageServerActions for a given controller, enabling pre-flight checks for storage management tasks.
+- **Hardware-Specific Constraints:** The metadata is tied to a specific targetType (server platform) and controllerPid (controller model), ensuring granular control.
+- **Feature Support Indication:** Includes flags like isHybridDriveSlotsSupported to indicate whether specific hardware features are available on the controller.
+- ** Centralized Capability Catalog:** Serves as a single source of truth for storage controller capabilities, simplifying management logic and ensuring consistency.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

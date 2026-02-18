@@ -3,16 +3,26 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_appliance_distributable"
 description: |-
-        Appliance image distributed by Cisco. This image is required to upgrade the on-premise Intersight Appliance.
-        There are two use cases. In Intersight SaaS, the object represents a downloadable image, whereas on the
-        Appliance the represents the image that is uploaded by the user and to be used for upgrade.
+        The ApplianceDistributable object represents an appliance image distributed by Cisco. It is designed for upgrading on-premise Intersight Appliances, supporting both SaaS and appliance deployments.
+        #### Purpose
+        ApplianceDistributable serves as a downloadable image for SaaS environments and a user-uploaded image for on-premise upgrades, ensuring that Intersight Appliances remain up-to-date.
+        #### Key Concepts
+        - **Upgrade Facilitation:** Provides the necessary images for upgrading Intersight Appliances, maintaining system performance and security.
+        - **Dual Use:** Supports SaaS downloadable images and on-premise appliance upgrades, offering flexibility.
+        - **Management Integration:** Integrates with the Intersight catalog to ensure seamless upgrade processes.
+        - **System Support:** Ensures that appliances receive essential updates to support ongoing operations.
 
 ---
 
 # Data Source: intersight_software_appliance_distributable
-Appliance image distributed by Cisco. This image is required to upgrade the on-premise Intersight Appliance.
-There are two use cases. In Intersight SaaS, the object represents a downloadable image, whereas on the
-Appliance the represents the image that is uploaded by the user and to be used for upgrade.
+The ApplianceDistributable object represents an appliance image distributed by Cisco. It is designed for upgrading on-premise Intersight Appliances, supporting both SaaS and appliance deployments.
+#### Purpose
+ApplianceDistributable serves as a downloadable image for SaaS environments and a user-uploaded image for on-premise upgrades, ensuring that Intersight Appliances remain up-to-date.
+#### Key Concepts
+- **Upgrade Facilitation:** Provides the necessary images for upgrading Intersight Appliances, maintaining system performance and security.
+- **Dual Use:** Supports SaaS downloadable images and on-premise appliance upgrades, offering flexibility.
+- **Management Integration:** Integrates with the Intersight catalog to ensure seamless upgrade processes.
+- **System Support:** Ensures that appliances receive essential updates to support ongoing operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -24,7 +34,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
-* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
+* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
 * `guid`:(string) The unique identifier for an image in a Cisco repository. 
 * `image_type`:(string) The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, UCS Managed Fabric Interconnect. The field is used in private appliance mode, where image does not have description populated from CCO. 
 * `import_action`:(string) The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.* `None` - No action should be taken on the imported file.* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.* `PreCache` - Cache the file into the Intersight Appliance.* `Cancel` - The cancel import process for the file into the repository.* `Extract` - The action to extract the file in the external repository.* `Evict` - Evict the cached file from the Intersight Appliance. 

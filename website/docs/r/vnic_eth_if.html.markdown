@@ -3,12 +3,26 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_if"
 description: |-
-        Virtual Ethernet Interface.
+        The EthIf object represents a virtual Ethernet interface (vNIC) within Cisco’s infrastructure. It serves as an abstraction of a network interface presented to the operating system, managed through higher-level policies.
+        #### Purpose
+        EthIf enables detailed configuration of virtual Ethernet connectivity for servers, including placement, MAC address assignment, and association with policies governing network behavior and quality of service.
+        #### Key Concepts
+        - **Abstraction of Network Interfaces:** Provides a virtualized representation of Ethernet interfaces on server hardware.
+        - **Policy Attachment:** Integrates with various policies (network, QoS, adapter) for unified control.
+        - **Template Support:** Can be instantiated from templates, supporting both inheritance and overrides for flexibility.
+        - **Failover and Redundancy:** Supports features like failover for high availability in fabric-attached environments.
 
 ---
 
 # Resource: intersight_vnic_eth_if
-Virtual Ethernet Interface.
+The EthIf object represents a virtual Ethernet interface (vNIC) within Cisco’s infrastructure. It serves as an abstraction of a network interface presented to the operating system, managed through higher-level policies.
+#### Purpose
+EthIf enables detailed configuration of virtual Ethernet connectivity for servers, including placement, MAC address assignment, and association with policies governing network behavior and quality of service.
+#### Key Concepts
+- **Abstraction of Network Interfaces:** Provides a virtualized representation of Ethernet interfaces on server hardware.
+- **Policy Attachment:** Integrates with various policies (network, QoS, adapter) for unified control.
+- **Template Support:** Can be instantiated from templates, supporting both inheritance and overrides for flexibility.
+- **Failover and Redundancy:** Supports features like failover for high availability in fabric-attached environments.
 ## Usage Example
 ### Resource Creation
 

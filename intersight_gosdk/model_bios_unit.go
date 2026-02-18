@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the BiosUnit type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BiosUnit{}
 
-// BiosUnit The BIOS Unit present on a server.
+// BiosUnit The bios.Unit object represents the BIOS (Basic Input/Output System) of a server. It acts as a container for BIOS-related inventory and configuration objects, such as the running firmware version and the system boot order. #### Purpose The primary purpose of the bios.Unit object is to serve as a central anchor point for all BIOS-related information within the server's inventory. It aggregates critical components of the BIOS configuration, making them accessible for monitoring and management. #### Key Concepts - **Central BIOS Anchor:** Provides a single, identifiable object representing the server's BIOS. - **Firmware Tracking:** Links to firmware.RunningFirmware objects to provide the current, detailed version of the BIOS firmware. - **Boot Order Management:** Contains the bios.SystemBootOrder object, which details the actual boot sequence of the server as configured in the BIOS. - **Hierarchical Inventory:** Exists within the context of a compute.Blade or compute.RackUnit, tying the BIOS information directly to the physical server.
 type BiosUnit struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

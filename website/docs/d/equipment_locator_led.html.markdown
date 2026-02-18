@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_locator_led"
 description: |-
-        Locator Led of an Equipment like Rack, Disk etc.
+        The equipment.LocatorLed object represents the physical locator LED (Light Emitting Diode) on a piece of equipment, such as a server, chassis, or Fabric Interconnect.
+        #### Purpose
+        The main function of this object is to inventory and control the state of a locator LED. The locator LED is a visual indicator used by data center technicians to physically identify a specific piece of hardware among many others in a rack. It allows an administrator to remotely turn the LED on or off.
+        #### Key Concepts
+        - **Physical Identification:** Provides a mechanism to visually identify hardware in a data center.
+        - **State Control:** While the operState property is read-only in the inventory model, it is the target of actions that change the LED's state (typically on or off).
+        - **Visual Feedback:** The color property reports the color of the LED, which is often blue.
+        - **Broad Applicability:** Can be associated with various types of equipment, including compute.RackUnit, compute.Blade, equipment.Chassis, and network.Element.
 
 ---
 
 # Data Source: intersight_equipment_locator_led
-Locator Led of an Equipment like Rack, Disk etc.
+The equipment.LocatorLed object represents the physical locator LED (Light Emitting Diode) on a piece of equipment, such as a server, chassis, or Fabric Interconnect.
+#### Purpose
+The main function of this object is to inventory and control the state of a locator LED. The locator LED is a visual indicator used by data center technicians to physically identify a specific piece of hardware among many others in a rack. It allows an administrator to remotely turn the LED on or off.
+#### Key Concepts
+- **Physical Identification:** Provides a mechanism to visually identify hardware in a data center.
+- **State Control:** While the operState property is read-only in the inventory model, it is the target of actions that change the LED's state (typically "on" or "off").
+- **Visual Feedback:** The color property reports the color of the LED, which is often blue.
+- **Broad Applicability:** Can be associated with various types of equipment, including compute.RackUnit, compute.Blade, equipment.Chassis, and network.Element.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the CondAlarmSuppression type satisfies the MappedNullable interface at compile time
@@ -27,11 +28,23 @@ type CondAlarmSuppression struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType string                    `json:"ObjectType"`
+	AlarmRules []CondAlarmRuleExpression `json:"AlarmRules,omitempty"`
 	// User given description on why the suppression is enabled at this entity.
 	Description *string `json:"Description,omitempty"`
+	// Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false. The property is set to true when the suppression is created. The user can set this to false to disable the suppression. The suppression rule should be active only if both systemEnabled and enabled are true.
+	Enabled *bool `json:"Enabled,omitempty"`
+	// The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation.
+	EndDate *time.Time `json:"EndDate,omitempty"`
 	// The name that identifies the alarm suppression.
 	Name *string `json:"Name,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][\\\\w\\\\s.-]{1,255}$"`
+	// Odata filter string managed internally. It is built by combining all the rules.
+	OdataFilterInternal *string `json:"OdataFilterInternal,omitempty"`
+	// Operation that binds all the different rules together. * `All` - All is an AND condition applied against the individual conditions. * `Any` - Any is an OR condition applied against the individual conditions.
+	RulesOperator *string `json:"RulesOperator,omitempty"`
+	// The start date for enabling this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. If this date more than 60 seconds in the past, the suppression rule will be rejected. If the date is within 60 seconds of the present time (plus or minus), the suppression will be started immediately. Otherwise, the suppression will be scheduled to start at the requested time.
+	StartDate *time.Time                     `json:"StartDate,omitempty"`
+	Account   NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to condAlarmClassification resources.
 	Classifications      []CondAlarmClassificationRelationship `json:"Classifications,omitempty"`
 	Entity               NullableMoBaseMoRelationship          `json:"Entity,omitempty"`
@@ -48,6 +61,10 @@ func NewCondAlarmSuppression(classId string, objectType string) *CondAlarmSuppre
 	this := CondAlarmSuppression{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var enabled bool = true
+	this.Enabled = &enabled
+	var rulesOperator string = "All"
+	this.RulesOperator = &rulesOperator
 	return &this
 }
 
@@ -60,6 +77,10 @@ func NewCondAlarmSuppressionWithDefaults() *CondAlarmSuppression {
 	this.ClassId = classId
 	var objectType string = "cond.AlarmSuppression"
 	this.ObjectType = objectType
+	var enabled bool = true
+	this.Enabled = &enabled
+	var rulesOperator string = "All"
+	this.RulesOperator = &rulesOperator
 	return &this
 }
 
@@ -121,6 +142,39 @@ func (o *CondAlarmSuppression) GetDefaultObjectType() interface{} {
 	return "cond.AlarmSuppression"
 }
 
+// GetAlarmRules returns the AlarmRules field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmSuppression) GetAlarmRules() []CondAlarmRuleExpression {
+	if o == nil {
+		var ret []CondAlarmRuleExpression
+		return ret
+	}
+	return o.AlarmRules
+}
+
+// GetAlarmRulesOk returns a tuple with the AlarmRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmSuppression) GetAlarmRulesOk() ([]CondAlarmRuleExpression, bool) {
+	if o == nil || IsNil(o.AlarmRules) {
+		return nil, false
+	}
+	return o.AlarmRules, true
+}
+
+// HasAlarmRules returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasAlarmRules() bool {
+	if o != nil && !IsNil(o.AlarmRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlarmRules gets a reference to the given []CondAlarmRuleExpression and assigns it to the AlarmRules field.
+func (o *CondAlarmSuppression) SetAlarmRules(v []CondAlarmRuleExpression) {
+	o.AlarmRules = v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CondAlarmSuppression) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -153,6 +207,70 @@ func (o *CondAlarmSuppression) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *CondAlarmSuppression) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmSuppression) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
+		return nil, false
+	}
+	return o.Enabled, true
+}
+
+// HasEnabled returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *CondAlarmSuppression) SetEnabled(v bool) {
+	o.Enabled = &v
+}
+
+// GetEndDate returns the EndDate field value if set, zero value otherwise.
+func (o *CondAlarmSuppression) GetEndDate() time.Time {
+	if o == nil || IsNil(o.EndDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.EndDate
+}
+
+// GetEndDateOk returns a tuple with the EndDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmSuppression) GetEndDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.EndDate) {
+		return nil, false
+	}
+	return o.EndDate, true
+}
+
+// HasEndDate returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasEndDate() bool {
+	if o != nil && !IsNil(o.EndDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndDate gets a reference to the given time.Time and assigns it to the EndDate field.
+func (o *CondAlarmSuppression) SetEndDate(v time.Time) {
+	o.EndDate = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CondAlarmSuppression) GetName() string {
 	if o == nil || IsNil(o.Name) {
@@ -183,6 +301,145 @@ func (o *CondAlarmSuppression) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *CondAlarmSuppression) SetName(v string) {
 	o.Name = &v
+}
+
+// GetOdataFilterInternal returns the OdataFilterInternal field value if set, zero value otherwise.
+func (o *CondAlarmSuppression) GetOdataFilterInternal() string {
+	if o == nil || IsNil(o.OdataFilterInternal) {
+		var ret string
+		return ret
+	}
+	return *o.OdataFilterInternal
+}
+
+// GetOdataFilterInternalOk returns a tuple with the OdataFilterInternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmSuppression) GetOdataFilterInternalOk() (*string, bool) {
+	if o == nil || IsNil(o.OdataFilterInternal) {
+		return nil, false
+	}
+	return o.OdataFilterInternal, true
+}
+
+// HasOdataFilterInternal returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasOdataFilterInternal() bool {
+	if o != nil && !IsNil(o.OdataFilterInternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetOdataFilterInternal gets a reference to the given string and assigns it to the OdataFilterInternal field.
+func (o *CondAlarmSuppression) SetOdataFilterInternal(v string) {
+	o.OdataFilterInternal = &v
+}
+
+// GetRulesOperator returns the RulesOperator field value if set, zero value otherwise.
+func (o *CondAlarmSuppression) GetRulesOperator() string {
+	if o == nil || IsNil(o.RulesOperator) {
+		var ret string
+		return ret
+	}
+	return *o.RulesOperator
+}
+
+// GetRulesOperatorOk returns a tuple with the RulesOperator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmSuppression) GetRulesOperatorOk() (*string, bool) {
+	if o == nil || IsNil(o.RulesOperator) {
+		return nil, false
+	}
+	return o.RulesOperator, true
+}
+
+// HasRulesOperator returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasRulesOperator() bool {
+	if o != nil && !IsNil(o.RulesOperator) {
+		return true
+	}
+
+	return false
+}
+
+// SetRulesOperator gets a reference to the given string and assigns it to the RulesOperator field.
+func (o *CondAlarmSuppression) SetRulesOperator(v string) {
+	o.RulesOperator = &v
+}
+
+// GetStartDate returns the StartDate field value if set, zero value otherwise.
+func (o *CondAlarmSuppression) GetStartDate() time.Time {
+	if o == nil || IsNil(o.StartDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.StartDate
+}
+
+// GetStartDateOk returns a tuple with the StartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmSuppression) GetStartDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.StartDate) {
+		return nil, false
+	}
+	return o.StartDate, true
+}
+
+// HasStartDate returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasStartDate() bool {
+	if o != nil && !IsNil(o.StartDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartDate gets a reference to the given time.Time and assigns it to the StartDate field.
+func (o *CondAlarmSuppression) SetStartDate(v time.Time) {
+	o.StartDate = &v
+}
+
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmSuppression) GetAccount() IamAccountRelationship {
+	if o == nil || IsNil(o.Account.Get()) {
+		var ret IamAccountRelationship
+		return ret
+	}
+	return *o.Account.Get()
+}
+
+// GetAccountOk returns a tuple with the Account field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmSuppression) GetAccountOk() (*IamAccountRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Account.Get(), o.Account.IsSet()
+}
+
+// HasAccount returns a boolean if a field has been set.
+func (o *CondAlarmSuppression) HasAccount() bool {
+	if o != nil && o.Account.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
+func (o *CondAlarmSuppression) SetAccount(v IamAccountRelationship) {
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *CondAlarmSuppression) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *CondAlarmSuppression) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetClassifications returns the Classifications field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -287,11 +544,32 @@ func (o CondAlarmSuppression) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if o.AlarmRules != nil {
+		toSerialize["AlarmRules"] = o.AlarmRules
+	}
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
+	if !IsNil(o.Enabled) {
+		toSerialize["Enabled"] = o.Enabled
+	}
+	if !IsNil(o.EndDate) {
+		toSerialize["EndDate"] = o.EndDate
+	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
+	}
+	if !IsNil(o.OdataFilterInternal) {
+		toSerialize["OdataFilterInternal"] = o.OdataFilterInternal
+	}
+	if !IsNil(o.RulesOperator) {
+		toSerialize["RulesOperator"] = o.RulesOperator
+	}
+	if !IsNil(o.StartDate) {
+		toSerialize["StartDate"] = o.StartDate
+	}
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.Classifications != nil {
 		toSerialize["Classifications"] = o.Classifications
@@ -353,11 +631,23 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType string                    `json:"ObjectType"`
+		AlarmRules []CondAlarmRuleExpression `json:"AlarmRules,omitempty"`
 		// User given description on why the suppression is enabled at this entity.
 		Description *string `json:"Description,omitempty"`
+		// Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false. The property is set to true when the suppression is created. The user can set this to false to disable the suppression. The suppression rule should be active only if both systemEnabled and enabled are true.
+		Enabled *bool `json:"Enabled,omitempty"`
+		// The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation.
+		EndDate *time.Time `json:"EndDate,omitempty"`
 		// The name that identifies the alarm suppression.
 		Name *string `json:"Name,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][\\\\w\\\\s.-]{1,255}$"`
+		// Odata filter string managed internally. It is built by combining all the rules.
+		OdataFilterInternal *string `json:"OdataFilterInternal,omitempty"`
+		// Operation that binds all the different rules together. * `All` - All is an AND condition applied against the individual conditions. * `Any` - Any is an OR condition applied against the individual conditions.
+		RulesOperator *string `json:"RulesOperator,omitempty"`
+		// The start date for enabling this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. If this date more than 60 seconds in the past, the suppression rule will be rejected. If the date is within 60 seconds of the present time (plus or minus), the suppression will be started immediately. Otherwise, the suppression will be scheduled to start at the requested time.
+		StartDate *time.Time                     `json:"StartDate,omitempty"`
+		Account   NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to condAlarmClassification resources.
 		Classifications []CondAlarmClassificationRelationship `json:"Classifications,omitempty"`
 		Entity          NullableMoBaseMoRelationship          `json:"Entity,omitempty"`
@@ -370,8 +660,15 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarmSuppression := _CondAlarmSuppression{}
 		varCondAlarmSuppression.ClassId = varCondAlarmSuppressionWithoutEmbeddedStruct.ClassId
 		varCondAlarmSuppression.ObjectType = varCondAlarmSuppressionWithoutEmbeddedStruct.ObjectType
+		varCondAlarmSuppression.AlarmRules = varCondAlarmSuppressionWithoutEmbeddedStruct.AlarmRules
 		varCondAlarmSuppression.Description = varCondAlarmSuppressionWithoutEmbeddedStruct.Description
+		varCondAlarmSuppression.Enabled = varCondAlarmSuppressionWithoutEmbeddedStruct.Enabled
+		varCondAlarmSuppression.EndDate = varCondAlarmSuppressionWithoutEmbeddedStruct.EndDate
 		varCondAlarmSuppression.Name = varCondAlarmSuppressionWithoutEmbeddedStruct.Name
+		varCondAlarmSuppression.OdataFilterInternal = varCondAlarmSuppressionWithoutEmbeddedStruct.OdataFilterInternal
+		varCondAlarmSuppression.RulesOperator = varCondAlarmSuppressionWithoutEmbeddedStruct.RulesOperator
+		varCondAlarmSuppression.StartDate = varCondAlarmSuppressionWithoutEmbeddedStruct.StartDate
+		varCondAlarmSuppression.Account = varCondAlarmSuppressionWithoutEmbeddedStruct.Account
 		varCondAlarmSuppression.Classifications = varCondAlarmSuppressionWithoutEmbeddedStruct.Classifications
 		varCondAlarmSuppression.Entity = varCondAlarmSuppressionWithoutEmbeddedStruct.Entity
 		*o = CondAlarmSuppression(varCondAlarmSuppression)
@@ -393,8 +690,15 @@ func (o *CondAlarmSuppression) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AlarmRules")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "Enabled")
+		delete(additionalProperties, "EndDate")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "OdataFilterInternal")
+		delete(additionalProperties, "RulesOperator")
+		delete(additionalProperties, "StartDate")
+		delete(additionalProperties, "Account")
 		delete(additionalProperties, "Classifications")
 		delete(additionalProperties, "Entity")
 

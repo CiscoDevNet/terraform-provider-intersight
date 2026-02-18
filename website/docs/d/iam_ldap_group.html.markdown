@@ -3,12 +3,24 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_group"
 description: |-
-        Mapping of LDAP Group to EndPointRoles.
+        The LDAP Group object creates a mapping between a group in a remote LDAP directory and a set of local roles on an endpoint.
+        #### Purpose
+        The purpose is to grant permissions to remote users. When a user authenticates via LDAP and is found to be a member of a specified LDAP group, they are granted the permissions of the EndPointRoles associated with this LdapGroup object. This enables role-based access control for remote directory users.
+        #### Key Concepts
+        - **Group-to-Role Mapping:** Its core function is to link an LDAP group name (or DN) to one or more local endpoint roles (e.g., admin, read-only).
+        - **Component of a Policy:** It is always defined within the context of an LdapPolicy.
+        - **Authorization Mechanism:** Serves as the primary mechanism for authorizing remote users by assigning them appropriate privileges based on their directory group membership.
 
 ---
 
 # Data Source: intersight_iam_ldap_group
-Mapping of LDAP Group to EndPointRoles.
+The LDAP Group object creates a mapping between a group in a remote LDAP directory and a set of local roles on an endpoint.
+#### Purpose
+The purpose is to grant permissions to remote users. When a user authenticates via LDAP and is found to be a member of a specified LDAP group, they are granted the permissions of the EndPointRoles associated with this LdapGroup object. This enables role-based access control for remote directory users.
+#### Key Concepts
+- **Group-to-Role Mapping:** Its core function is to link an LDAP group name (or DN) to one or more local endpoint roles (e.g., admin, read-only).
+- **Component of a Policy:** It is always defined within the context of an LdapPolicy.
+- **Authorization Mechanism:** Serves as the primary mechanism for authorizing remote users by assigning them appropriate privileges based on their directory group membership.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

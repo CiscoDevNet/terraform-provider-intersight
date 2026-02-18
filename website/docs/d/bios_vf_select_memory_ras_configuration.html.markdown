@@ -3,12 +3,26 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_vf_select_memory_ras_configuration"
 description: |-
-        Memory Reliability, availability and serviceability (RAS) configuration.
+        The bios.VfSelectMemoryRasConfiguration object represents the currently active Memory Reliability, Availability, and Serviceability (RAS) configuration as reported by the server's BIOS.
+        #### Purpose
+        This object serves as a read-only inventory point for the server's memory RAS mode. It allows administrators and automation tools to quickly identify the active memory configuration, such as maximum performance,  mirroring, or sparing . It is critical for validating that the server's memory is configured for the desired level of performance and resilience.
+        #### Key Concepts
+        - **Active State Reporting:** The vpSelectMemoryRasConfiguration property provides the single, currently active memory RAS mode from a list of possible values.
+        - **Configuration Verification:** Enables a direct check of the applied memory settings against a desired policy, ensuring the server is operating as expected.
+        - **Read-Only Inventory:** Provides a factual snapshot of the BIOS-reported state, distinct from policy objects that define a target configuration.
+        - **Server-Specific:** Directly associated with a physical server, ensuring the memory RAS information is tied to the correct hardware.
 
 ---
 
 # Data Source: intersight_bios_vf_select_memory_ras_configuration
-Memory Reliability, availability and serviceability (RAS) configuration.
+The bios.VfSelectMemoryRasConfiguration object represents the currently active Memory Reliability, Availability, and Serviceability (RAS) configuration as reported by the server's BIOS.
+#### Purpose
+This object serves as a read-only inventory point for the server's memory RAS mode. It allows administrators and automation tools to quickly identify the active memory configuration, such as "maximum performance",  "mirroring", or "sparing" . It is critical for validating that the server's memory is configured for the desired level of performance and resilience.
+#### Key Concepts
+- **Active State Reporting:** The vpSelectMemoryRasConfiguration property provides the single, currently active memory RAS mode from a list of possible values.
+- **Configuration Verification:** Enables a direct check of the applied memory settings against a desired policy, ensuring the server is operating as expected.
+- **Read-Only Inventory:** Provides a factual snapshot of the BIOS-reported state, distinct from policy objects that define a target configuration.
+- **Server-Specific:** Directly associated with a physical server, ensuring the memory RAS information is tied to the correct hardware.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

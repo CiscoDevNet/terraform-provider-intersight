@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_cimc_firmware_descriptor"
 description: |-
-        Descriptor that identifies the server's redfish integration capability using cimc firmware info.
+        The capability.CimcFirmwareDescriptor is a hardware descriptor object that defines server capabilities based on its Cisco Integrated Management Controller (CIMC) firmware version. It is used to determine feature support for specific firmware releases.
+        #### Purpose
+        The main purpose of this object is to create a catalog that maps CIMC firmware versions to specific features. This allows the management system to dynamically determine if a server's firmware supports functionalities like UUID-based identification or local user password management, ensuring that operations are only attempted on compatible firmware.
+        #### Key Concepts
+        - **Firmware-Based Capability Mapping:** Links server capabilities directly to the vendor, model, and version of its CIMC firmware.
+        - **Feature Support Gates:** Provides minimum firmware versions (uuidSupportedVer, localUserPswdSupportedVer) required for certain features to be available.
+        - **Integration Logic:** Informs the system about specific integration details, such as whether the server uses an endpoint proxy (adapterEpProxyEnabled) to communicate with its adapters.
+        - **Extensible Catalog:** As a HardwareDescriptor, it is part of an extensible catalog that can be updated to reflect new firmware releases and their corresponding capabilities.
 
 ---
 
 # Resource: intersight_capability_cimc_firmware_descriptor
-Descriptor that identifies the server's redfish integration capability using cimc firmware info.
+The capability.CimcFirmwareDescriptor is a hardware descriptor object that defines server capabilities based on its Cisco Integrated Management Controller (CIMC) firmware version. It is used to determine feature support for specific firmware releases.
+#### Purpose
+The main purpose of this object is to create a catalog that maps CIMC firmware versions to specific features. This allows the management system to dynamically determine if a server's firmware supports functionalities like UUID-based identification or local user password management, ensuring that operations are only attempted on compatible firmware.
+#### Key Concepts
+- **Firmware-Based Capability Mapping:** Links server capabilities directly to the vendor, model, and version of its CIMC firmware.
+- **Feature Support Gates:** Provides minimum firmware versions (uuidSupportedVer, localUserPswdSupportedVer) required for certain features to be available.
+- **Integration Logic:** Informs the system about specific integration details, such as whether the server uses an endpoint proxy (adapterEpProxyEnabled) to communicate with its adapters.
+- **Extensible Catalog:** As a HardwareDescriptor, it is part of an extensible catalog that can be updated to reflect new firmware releases and their corresponding capabilities.
 ## Usage Example
 ### Resource Creation
 

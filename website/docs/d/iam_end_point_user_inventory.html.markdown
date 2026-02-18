@@ -3,12 +3,24 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_user_inventory"
 description: |-
-        Endpoint User or Local User.
+        The IAM EndPointUser object represents a single local user account. It is a building block used within the EndPointUserPolicy to define the users that should be created on an endpoint.
+        #### Purpose
+        The purpose is to define the identity of a local user, primarily their username. It acts as a referenceable entity that can be associated with roles and a password within the broader EndPointUserPolicy.
+        #### Key Concepts
+        - **User Identity:** The core function of this is to specify the name (username) of the local user.
+        - **Component of a Policy:** It does not function on its own but is created as part of an EndPointUserPolicy.
+        - **Reusable within an Organization:** As an organization-owned object, a single EndPointUser can be referenced in multiple EndPointUserRole mappings across different policies, though it typically represents a unique user identity.
 
 ---
 
 # Data Source: intersight_iam_end_point_user_inventory
-Endpoint User or Local User.
+The IAM EndPointUser object represents a single local user account. It is a building block used within the EndPointUserPolicy to define the users that should be created on an endpoint.
+#### Purpose
+The purpose is to define the identity of a local user, primarily their username. It acts as a referenceable entity that can be associated with roles and a password within the broader EndPointUserPolicy.
+#### Key Concepts
+- **User Identity:** The core function of this is to specify the name (username) of the local user.
+- **Component of a Policy:** It does not function on its own but is created as part of an EndPointUserPolicy.
+- **Reusable within an Organization:** As an organization-owned object, a single EndPointUser can be referenced in multiple EndPointUserRole mappings across different policies, though it typically represents a unique user identity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

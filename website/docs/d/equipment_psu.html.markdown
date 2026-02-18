@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_psu"
 description: |-
-        This represents power supply unit for chassis/server.
+        The equipment.Psu object represents a Power Supply Unit, a fundamental component responsible for providing electrical power to a server, chassis, or network switch.
+        #### Purpose
+        The Psu object is used to inventory and monitor the state of an individual power supply. It captures key identity information (model, serial, part number), its operational state (operState), and detailed health information. It is critical for power management, redundancy monitoring, and fault detection.
+        #### Key Concepts
+        - **Power Component Inventory:** Provides a detailed record of each PSU in a system.
+        - **Health and Status Monitoring:** Reports its operState and a collection of operReason values that give specific details on issues like temperature thresholds, input voltage problems, or output current faults.
+        - **Redundancy Management:** The spareStatus property can indicate if the PSU is acting as a spare in a redundant configuration.
+        - **Hierarchical Context:** Exists as a child of the equipment it powers, such as an equipment.Chassis, compute.RackUnit, or network.Element.
 
 ---
 
 # Data Source: intersight_equipment_psu
-This represents power supply unit for chassis/server.
+The equipment.Psu object represents a Power Supply Unit, a fundamental component responsible for providing electrical power to a server, chassis, or network switch.
+#### Purpose
+The Psu object is used to inventory and monitor the state of an individual power supply. It captures key identity information (model, serial, part number), its operational state (operState), and detailed health information. It is critical for power management, redundancy monitoring, and fault detection.
+#### Key Concepts
+- **Power Component Inventory:** Provides a detailed record of each PSU in a system.
+- **Health and Status Monitoring:** Reports its operState and a collection of operReason values that give specific details on issues like temperature thresholds, input voltage problems, or output current faults.
+- **Redundancy Management:** The spareStatus property can indicate if the PSU is acting as a spare in a redundant configuration.
+- **Hierarchical Context:** Exists as a child of the equipment it powers, such as an equipment.Chassis, compute.RackUnit, or network.Element.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

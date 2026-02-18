@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_cpu_endpoint_descriptor"
 description: |-
-        Descriptor that uniquely identifies a cpu.
+        The capability.CpuEndpointDescriptor object is a descriptor used to uniquely identify a CPU (Central Processing Unit) within the capability catalog. It serves as an inventory record for CPU models, providing key identification details.
+        #### Purpose
+        The purpose of this object is to maintain a definitive catalog of supported CPU models. It stores essential information such as the vendor, model, pid (Product ID), and partNumber. This catalog can be used to validate the CPUs installed in a server, check for compatibility, and provide detailed inventory reports.
+        #### Key Concepts
+        - **CPU Cataloging:** Provides a structured way to catalog and manage information about different CPU models.
+        - **Unique Identification:** Uses a combination of vendor, model, and pid to uniquely identify each CPU type.
+        - **Platform Support:** The supportedPlatformsPids property links a CPU to the specific server platforms on which it is supported, enabling compatibility checks.
+        - **Read-Only Inventory:** Designed as a read-only reference, ensuring the integrity of the hardware capability data.
 
 ---
 
 # Data Source: intersight_capability_cpu_endpoint_descriptor
-Descriptor that uniquely identifies a cpu.
+The capability.CpuEndpointDescriptor object is a descriptor used to uniquely identify a CPU (Central Processing Unit) within the capability catalog. It serves as an inventory record for CPU models, providing key identification details.
+#### Purpose
+The purpose of this object is to maintain a definitive catalog of supported CPU models. It stores essential information such as the vendor, model, pid (Product ID), and partNumber. This catalog can be used to validate the CPUs installed in a server, check for compatibility, and provide detailed inventory reports.
+#### Key Concepts
+- **CPU Cataloging:** Provides a structured way to catalog and manage information about different CPU models.
+- **Unique Identification:** Uses a combination of vendor, model, and pid to uniquely identify each CPU type.
+- **Platform Support:** The supportedPlatformsPids property links a CPU to the specific server platforms on which it is supported, enabling compatibility checks.
+- **Read-Only Inventory:** Designed as a read-only reference, ensuring the integrity of the hardware capability data.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

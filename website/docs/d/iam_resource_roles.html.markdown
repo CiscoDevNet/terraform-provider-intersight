@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_resource_roles"
 description: |-
-        ResourceRoles provides a way to specify the roles associated with a resource like organization in a permission which can be assigned to a user or user group.
+        ResourceRoles maps roles to a specific resource (e.g., an organization) within a permission, shaping the effective access model.
+        #### Purpose
+        It provides fine-grained control over which roles apply to which resources for a given permission.
+        #### Key Concepts
+        - **Resource-scoped Roles:** Tailors access at the resource boundary.
+        - **Role Composition:** Works with roles, privilege sets, and endpoint roles.
+        - **Permission-centric:** Operates within a permission’s assignment context.
+        - **Flexible Governance:** Enables nuanced, resource-level authorization design.
 
 ---
 
 # Data Source: intersight_iam_resource_roles
-ResourceRoles provides a way to specify the roles associated with a resource like organization in a permission which can be assigned to a user or user group.
+ResourceRoles maps roles to a specific resource (e.g., an organization) within a permission, shaping the effective access model.
+#### Purpose
+It provides fine-grained control over which roles apply to which resources for a given permission.
+#### Key Concepts
+- **Resource-scoped Roles:** Tailors access at the resource boundary.
+- **Role Composition:** Works with roles, privilege sets, and endpoint roles.
+- **Permission-centric:** Operates within a permission’s assignment context.
+- **Flexible Governance:** Enables nuanced, resource-level authorization design.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

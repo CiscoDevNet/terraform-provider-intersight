@@ -6,8 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.AlarmSuppression"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmSuppression"]
+**AlarmRules** | Pointer to [**[]CondAlarmRuleExpression**](CondAlarmRuleExpression.md) |  | [optional] 
 **Description** | Pointer to **string** | User given description on why the suppression is enabled at this entity. | [optional] 
+**Enabled** | Pointer to **bool** | Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false. The property is set to true when the suppression is created. The user can set this to false to disable the suppression. The suppression rule should be active only if both systemEnabled and enabled are true. | [optional] [default to true]
+**EndDate** | Pointer to **time.Time** | The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. | [optional] 
 **Name** | Pointer to **string** | The name that identifies the alarm suppression. | [optional] 
+**OdataFilterInternal** | Pointer to **string** | Odata filter string managed internally. It is built by combining all the rules. | [optional] [readonly] 
+**RulesOperator** | Pointer to **string** | Operation that binds all the different rules together. * &#x60;All&#x60; - All is an AND condition applied against the individual conditions. * &#x60;Any&#x60; - Any is an OR condition applied against the individual conditions. | [optional] [default to "All"]
+**StartDate** | Pointer to **time.Time** | The start date for enabling this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. If this date more than 60 seconds in the past, the suppression rule will be rejected. If the date is within 60 seconds of the present time (plus or minus), the suppression will be started immediately. Otherwise, the suppression will be scheduled to start at the requested time. | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Classifications** | Pointer to [**[]CondAlarmClassificationRelationship**](CondAlarmClassificationRelationship.md) | An array of relationships to condAlarmClassification resources. | [optional] 
 **Entity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
@@ -70,6 +77,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAlarmRules
+
+`func (o *CondAlarmSuppression) GetAlarmRules() []CondAlarmRuleExpression`
+
+GetAlarmRules returns the AlarmRules field if non-nil, zero value otherwise.
+
+### GetAlarmRulesOk
+
+`func (o *CondAlarmSuppression) GetAlarmRulesOk() (*[]CondAlarmRuleExpression, bool)`
+
+GetAlarmRulesOk returns a tuple with the AlarmRules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlarmRules
+
+`func (o *CondAlarmSuppression) SetAlarmRules(v []CondAlarmRuleExpression)`
+
+SetAlarmRules sets AlarmRules field to given value.
+
+### HasAlarmRules
+
+`func (o *CondAlarmSuppression) HasAlarmRules() bool`
+
+HasAlarmRules returns a boolean if a field has been set.
+
+### SetAlarmRulesNil
+
+`func (o *CondAlarmSuppression) SetAlarmRulesNil(b bool)`
+
+ SetAlarmRulesNil sets the value for AlarmRules to be an explicit nil
+
+### UnsetAlarmRules
+`func (o *CondAlarmSuppression) UnsetAlarmRules()`
+
+UnsetAlarmRules ensures that no value is present for AlarmRules, not even an explicit nil
 ### GetDescription
 
 `func (o *CondAlarmSuppression) GetDescription() string`
@@ -94,6 +136,56 @@ SetDescription sets Description field to given value.
 `func (o *CondAlarmSuppression) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetEnabled
+
+`func (o *CondAlarmSuppression) GetEnabled() bool`
+
+GetEnabled returns the Enabled field if non-nil, zero value otherwise.
+
+### GetEnabledOk
+
+`func (o *CondAlarmSuppression) GetEnabledOk() (*bool, bool)`
+
+GetEnabledOk returns a tuple with the Enabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnabled
+
+`func (o *CondAlarmSuppression) SetEnabled(v bool)`
+
+SetEnabled sets Enabled field to given value.
+
+### HasEnabled
+
+`func (o *CondAlarmSuppression) HasEnabled() bool`
+
+HasEnabled returns a boolean if a field has been set.
+
+### GetEndDate
+
+`func (o *CondAlarmSuppression) GetEndDate() time.Time`
+
+GetEndDate returns the EndDate field if non-nil, zero value otherwise.
+
+### GetEndDateOk
+
+`func (o *CondAlarmSuppression) GetEndDateOk() (*time.Time, bool)`
+
+GetEndDateOk returns a tuple with the EndDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndDate
+
+`func (o *CondAlarmSuppression) SetEndDate(v time.Time)`
+
+SetEndDate sets EndDate field to given value.
+
+### HasEndDate
+
+`func (o *CondAlarmSuppression) HasEndDate() bool`
+
+HasEndDate returns a boolean if a field has been set.
 
 ### GetName
 
@@ -120,6 +212,116 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetOdataFilterInternal
+
+`func (o *CondAlarmSuppression) GetOdataFilterInternal() string`
+
+GetOdataFilterInternal returns the OdataFilterInternal field if non-nil, zero value otherwise.
+
+### GetOdataFilterInternalOk
+
+`func (o *CondAlarmSuppression) GetOdataFilterInternalOk() (*string, bool)`
+
+GetOdataFilterInternalOk returns a tuple with the OdataFilterInternal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdataFilterInternal
+
+`func (o *CondAlarmSuppression) SetOdataFilterInternal(v string)`
+
+SetOdataFilterInternal sets OdataFilterInternal field to given value.
+
+### HasOdataFilterInternal
+
+`func (o *CondAlarmSuppression) HasOdataFilterInternal() bool`
+
+HasOdataFilterInternal returns a boolean if a field has been set.
+
+### GetRulesOperator
+
+`func (o *CondAlarmSuppression) GetRulesOperator() string`
+
+GetRulesOperator returns the RulesOperator field if non-nil, zero value otherwise.
+
+### GetRulesOperatorOk
+
+`func (o *CondAlarmSuppression) GetRulesOperatorOk() (*string, bool)`
+
+GetRulesOperatorOk returns a tuple with the RulesOperator field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRulesOperator
+
+`func (o *CondAlarmSuppression) SetRulesOperator(v string)`
+
+SetRulesOperator sets RulesOperator field to given value.
+
+### HasRulesOperator
+
+`func (o *CondAlarmSuppression) HasRulesOperator() bool`
+
+HasRulesOperator returns a boolean if a field has been set.
+
+### GetStartDate
+
+`func (o *CondAlarmSuppression) GetStartDate() time.Time`
+
+GetStartDate returns the StartDate field if non-nil, zero value otherwise.
+
+### GetStartDateOk
+
+`func (o *CondAlarmSuppression) GetStartDateOk() (*time.Time, bool)`
+
+GetStartDateOk returns a tuple with the StartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartDate
+
+`func (o *CondAlarmSuppression) SetStartDate(v time.Time)`
+
+SetStartDate sets StartDate field to given value.
+
+### HasStartDate
+
+`func (o *CondAlarmSuppression) HasStartDate() bool`
+
+HasStartDate returns a boolean if a field has been set.
+
+### GetAccount
+
+`func (o *CondAlarmSuppression) GetAccount() IamAccountRelationship`
+
+GetAccount returns the Account field if non-nil, zero value otherwise.
+
+### GetAccountOk
+
+`func (o *CondAlarmSuppression) GetAccountOk() (*IamAccountRelationship, bool)`
+
+GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccount
+
+`func (o *CondAlarmSuppression) SetAccount(v IamAccountRelationship)`
+
+SetAccount sets Account field to given value.
+
+### HasAccount
+
+`func (o *CondAlarmSuppression) HasAccount() bool`
+
+HasAccount returns a boolean if a field has been set.
+
+### SetAccountNil
+
+`func (o *CondAlarmSuppression) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *CondAlarmSuppression) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetClassifications
 
 `func (o *CondAlarmSuppression) GetClassifications() []CondAlarmClassificationRelationship`

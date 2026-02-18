@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_config_change_detail"
 description: |-
-        This captures details of configuration changes.
+        The ConfigChangeDetail object is an essential element in the configuration change management framework, designed to capture detailed information about configuration changes. It supports transparent tracking and reporting of configuration modifications.
+        #### Purpose
+        The ConfigChangeDetail serves as a comprehensive record of configuration changes, providing detailed insights into modifications made during configuration processes. It aids in understanding the impact and scope of changes, facilitating effective management and troubleshooting.
+        #### Key Concepts
+        - **Change Documentation:** Captures detailed information about configuration changes, supporting accurate tracking and reporting of modifications.
+        - **Impact Assessment:** Facilitates the assessment of configuration change impacts, enabling informed decision-making and management.
+        - **Access and Security:** Implements privilege sets to secure access to configuration change details, maintaining integrity and security of change management.
+        - **Relationship Management:** Integrates with related objects to provide context for configuration changes, enhancing understanding and management of change processes.
 
 ---
 
 # Data Source: intersight_fabric_config_change_detail
-This captures details of configuration changes.
+The ConfigChangeDetail object is an essential element in the configuration change management framework, designed to capture detailed information about configuration changes. It supports transparent tracking and reporting of configuration modifications. 
+#### Purpose
+The ConfigChangeDetail serves as a comprehensive record of configuration changes, providing detailed insights into modifications made during configuration processes. It aids in understanding the impact and scope of changes, facilitating effective management and troubleshooting. 
+#### Key Concepts
+- **Change Documentation:** Captures detailed information about configuration changes, supporting accurate tracking and reporting of modifications.
+- **Impact Assessment:** Facilitates the assessment of configuration change impacts, enabling informed decision-making and management.
+- **Access and Security:** Implements privilege sets to secure access to configuration change details, maintaining integrity and security of change management.
+- **Relationship Management:** Integrates with related objects to provide context for configuration changes, enhancing understanding and management of change processes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

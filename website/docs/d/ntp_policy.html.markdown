@@ -3,12 +3,24 @@ subcategory: "ntp"
 layout: "intersight"
 page_title: "Intersight: intersight_ntp_policy"
 description: |-
-        Policy to configure the NTP Servers.
+        The NTP Policy is a reusable policy for configuring Network Time Protocol (NTP) settings on an endpoint.
+        #### Purpose
+        The purpose of this policy is to ensure that all managed devices have accurate and synchronized time. By centralizing the configuration of NTP servers and the system timezone, administrators can maintain consistent timekeeping across their infrastructure, which is crucial for accurate logging, event correlation, and security.
+        #### Key Concepts
+        - **Time Synchronization:** Its primary function is to configure endpoints to synchronize their clocks with designated NTP servers.
+        - **Timezone Management:** The policy allows for the setting of a specific timezone for the endpoint.
+        - **Profile-Based Application:** The policy is attached to a Server Profile or other profile types to apply the NTP settings to the assigned physical endpoint.
 
 ---
 
 # Data Source: intersight_ntp_policy
-Policy to configure the NTP Servers.
+The NTP Policy is a reusable policy for configuring Network Time Protocol (NTP) settings on an endpoint.
+#### Purpose
+The purpose of this policy is to ensure that all managed devices have accurate and synchronized time. By centralizing the configuration of NTP servers and the system timezone, administrators can maintain consistent timekeeping across their infrastructure, which is crucial for accurate logging, event correlation, and security.
+#### Key Concepts
+- **Time Synchronization:** Its primary function is to configure endpoints to synchronize their clocks with designated NTP servers.
+- **Timezone Management:** The policy allows for the setting of a specific timezone for the endpoint.
+- **Profile-Based Application:** The policy is attached to a Server Profile or other profile types to apply the NTP settings to the assigned physical endpoint.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_zone_policy"
 description: |-
-        List of target path entries of storage arrays that are used to configure zones on the switch.
+        The FcZonePolicy object manages FC (Fibre Channel) zoning configurations within the system, enabling the organization and control of SAN (Storage Area Network) environments. It is crucial for maintaining efficient and secure storage network operations.
+        #### Purpose
+        FcZonePolicy is designed to facilitate the configuration of FC zones, supporting structured and secure SAN management. This provides a framework for organizing initiator and target endpoints, optimizing storage network efficiency and security.
+        #### Key Concepts
+        - **Zoning Configuration:** Enables the definition and management of FC zones, supporting various zoning types and configurations.
+        - **SAN Optimization:** Organizes and defines SAN endpoint interaction rules, enabling consistent and predictable SAN communication behavior.
+        - **Security:** Supports secure SAN operations by defining access controls and zoning parameters, protecting data integrity.
+        - **Policy Integration:** Works in concert with other SAN policies and configurations, ensuring integrated and streamlined storage management.
 
 ---
 
 # Data Source: intersight_fabric_fc_zone_policy
-List of target path entries of storage arrays that are used to configure zones on the switch.
+The FcZonePolicy object manages FC (Fibre Channel) zoning configurations within the system, enabling the organization and control of SAN (Storage Area Network) environments. It is crucial for maintaining efficient and secure storage network operations.
+#### Purpose
+FcZonePolicy is designed to facilitate the configuration of FC zones, supporting structured and secure SAN management. This provides a framework for organizing initiator and target endpoints, optimizing storage network efficiency and security.
+#### Key Concepts
+- **Zoning Configuration:** Enables the definition and management of FC zones, supporting various zoning types and configurations.
+- **SAN Optimization:** Organizes and defines SAN endpoint interaction rules, enabling consistent and predictable SAN communication behavior.
+- **Security:** Supports secure SAN operations by defining access controls and zoning parameters, protecting data integrity.
+- **Policy Integration:** Works in concert with other SAN policies and configurations, ensuring integrated and streamlined storage management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

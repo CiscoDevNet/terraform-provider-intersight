@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_nib_file_downloader"
 description: |-
-        Provide a presigned url to download the metadata file from server.
+        The NibFileDownloader object is central to file management, offering presigned URLs for downloading metadata files from servers. It supports secure and efficient data retrieval.
+        #### Purpose
+        NibFileDownloader provides presigned URLs for metadata file downloads, ensuring users have reliable access to necessary data for their systems.
+        #### Key Concepts
+        - **Secure Retrieval:** Offers presigned URLs for safe and efficient metadata file downloads.
+        - **Data Accessibility:** Facilitates quick and reliable access to metadata files, supporting user needs.
+        - **System Integration:** Ensures compatibility with systems for efficient file management and download.
 
 ---
 
 # Data Source: intersight_niaapi_nib_file_downloader
-Provide a presigned url to download the metadata file from server.
+The NibFileDownloader object is central to file management, offering presigned URLs for downloading metadata files from servers. It supports secure and efficient data retrieval.
+#### Purpose
+NibFileDownloader provides presigned URLs for metadata file downloads, ensuring users have reliable access to necessary data for their systems.
+#### Key Concepts
+- **Secure Retrieval:** Offers presigned URLs for safe and efficient metadata file downloads.
+- **Data Accessibility:** Facilitates quick and reliable access to metadata files, supporting user needs.
+- **System Integration:** Ensures compatibility with systems for efficient file management and download.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

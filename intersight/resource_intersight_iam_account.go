@@ -226,6 +226,17 @@ func resourceIamAccount() *schema.Resource {
 					},
 				},
 			},
+			"external_identifier": {
+				Description: "External identifier for the account, used for integration with external identity systems.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"idpreferences": {
 				Description: "An array of relationships to iamIdpReference resources.",
 				Type:        schema.TypeList,
@@ -1231,6 +1242,10 @@ func resourceIamAccountRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("end_point_roles", flattenListIamEndPointRoleRelationship(s.GetEndPointRoles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property EndPointRoles in IamAccount object: %s", err.Error())
+	}
+
+	if err := d.Set("external_identifier", (s.GetExternalIdentifier())); err != nil {
+		return diag.Errorf("error occurred while setting property ExternalIdentifier in IamAccount object: %s", err.Error())
 	}
 
 	if err := d.Set("idpreferences", flattenListIamIdpReferenceRelationship(s.GetIdpreferences(), d)); err != nil {

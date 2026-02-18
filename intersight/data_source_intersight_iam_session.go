@@ -252,6 +252,11 @@ func getIamSessionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"login_type": {
+			Description: "The type of login that created this session. Indicates whether the session was created through standard web login or JWT token exchange.\n* `weblogin` - Session created through standard web login process.\n* `tokenexchange` - Session created through JWT token exchange process.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -1029,6 +1034,11 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetLastLoginTime(x)
 	}
 
+	if v, ok := d.GetOk("login_type"); ok {
+		x := (v.(string))
+		o.SetLoginType(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1517,6 +1527,7 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 				temp["last_login_client"] = (s.GetLastLoginClient())
 
 				temp["last_login_time"] = (s.GetLastLoginTime()).String()
+				temp["login_type"] = (s.GetLoginType())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

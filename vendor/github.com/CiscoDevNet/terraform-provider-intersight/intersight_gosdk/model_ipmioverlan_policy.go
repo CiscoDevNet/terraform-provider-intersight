@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the IpmioverlanPolicy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IpmioverlanPolicy{}
 
-// IpmioverlanPolicy Intelligent Platform Management Interface Over LAN Policy.
+// IpmioverlanPolicy The IPMI Over LAN Policy object is a reusable policy for configuring the Intelligent Platform Management Interface (IPMI) over LAN service on a server. #### Purpose The purpose of this policy is to enable and secure out-of-band server management using the IPMI protocol. It allows administrators to control the state of the IPMI service, set the maximum privilege level for IPMI sessions, and configure an encryption key to secure communications. #### Key Concepts - **Service Control:** The policy allows administrators to enable or disable the IPMI over LAN service on the endpoint. - **Privilege Level Management:** It defines the highest privilege level (admin, user, or read-only) that can be assigned to an IPMI session, providing a layer of access control. - **Security:** An optional encryption key can be configured to encrypt IPMI traffic, enhancing the security of out-of-band management. The key is a write-only, encrypted property. - **Profile-Based Application:** The policy is attached to a Server Profile to apply the IPMI settings to the assigned physical server.
 type IpmioverlanPolicy struct {
 	PolicyAbstractPolicy
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

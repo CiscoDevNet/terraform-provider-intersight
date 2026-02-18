@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_config_result"
 description: |-
-        This provides overall state and detailed information for the deploy and validation profile configuration results.
+        The ConfigResult object is an integral part of the configuration management framework, designed to provide comprehensive state and detailed information for deploy and validation profile configuration results. It facilitates the tracking and reporting of configuration outcomes.
+        #### Purpose
+        The ConfigResult serves as a consolidated entity for capturing the results of configuration deployments and validations, ensuring transparent reporting and management of configuration states. It aids in identifying errors, warnings, and informational messages during configuration processes.
+        #### Key Concepts
+        - **Result Tracking:** Captures detailed configuration results, including errors and warnings, to facilitate informed decision-making and troubleshooting.
+        - **Validation and Deployment:** Supports validation and deployment processes, ensuring accurate and reliable configuration management.
+        - **Access and Security:** Leverages privilege sets to manage access to configuration results, maintaining security and integrity of configuration data.
+        - **Relationship Management:** Integrates with related objects to provide context for configuration results, enhancing understanding and management of configuration states.
 
 ---
 
 # Data Source: intersight_fabric_config_result
-This provides overall state and detailed information for the deploy and validation profile configuration results.
+The ConfigResult object is an integral part of the configuration management framework, designed to provide comprehensive state and detailed information for deploy and validation profile configuration results. It facilitates the tracking and reporting of configuration outcomes. 
+#### Purpose
+The ConfigResult serves as a consolidated entity for capturing the results of configuration deployments and validations, ensuring transparent reporting and management of configuration states. It aids in identifying errors, warnings, and informational messages during configuration processes. 
+#### Key Concepts
+- **Result Tracking:** Captures detailed configuration results, including errors and warnings, to facilitate informed decision-making and troubleshooting.
+- **Validation and Deployment:** Supports validation and deployment processes, ensuring accurate and reliable configuration management.
+- **Access and Security:** Leverages privilege sets to manage access to configuration results, maintaining security and integrity of configuration data.
+- **Relationship Management:** Integrates with related objects to provide context for configuration results, enhancing understanding and management of configuration states.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

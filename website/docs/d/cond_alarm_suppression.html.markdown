@@ -30,8 +30,13 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) User given description on why the suppression is enabled at this entity. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `enabled`:(bool) Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false.The property is set to true when the suppression is created. The user can set this to false to disable the suppression.The suppression rule should be active only if both systemEnabled and enabled are true. 
+* `end_date`:(string) The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name that identifies the alarm suppression. 
+* `odata_filter_internal`:(string) Odata filter string managed internally. It is built by combining all the rules. 
+* `rules_operator`:(string) Operation that binds all the different rules together.* `All` - All is an AND condition applied against the individual conditions.* `Any` - Any is an OR condition applied against the individual conditions. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `start_date`:(string) The start date for enabling this alarm suppression rule. The date must followthe RFC 3339 format for date and time representation. If this date more than60 seconds in the past, the suppression rule will be rejected. If the date iswithin 60 seconds of the present time (plus or minus), the suppression will bestarted immediately. Otherwise, the suppression will be scheduled to start atthe requested time. 
  

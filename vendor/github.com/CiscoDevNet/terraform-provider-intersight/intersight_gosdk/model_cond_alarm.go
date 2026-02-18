@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -76,13 +76,17 @@ type CondAlarm struct {
 	// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 	Severity *string `json:"Severity,omitempty"`
 	// Indicates whether the alarm is marked for suppression or not.
-	Suppressed *bool                        `json:"Suppressed,omitempty"`
-	AffectedMo NullableMoBaseMoRelationship `json:"AffectedMo,omitempty"`
+	Suppressed *bool `json:"Suppressed,omitempty"`
+	// Time at which the last alarm suppression state change happened.
+	SuppressedTime *time.Time                   `json:"SuppressedTime,omitempty"`
+	AffectedMo     NullableMoBaseMoRelationship `json:"AffectedMo,omitempty"`
 	// An array of relationships to moBaseMo resources.
 	AlarmSummaryAggregators []MoBaseMoRelationship                      `json:"AlarmSummaryAggregators,omitempty"`
 	Definition              NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
 	RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	// An array of relationships to condAlarmSuppression resources.
+	SuppressionRules     []CondAlarmSuppressionRelationship `json:"SuppressionRules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CondAlarm CondAlarm
@@ -902,6 +906,38 @@ func (o *CondAlarm) SetSuppressed(v bool) {
 	o.Suppressed = &v
 }
 
+// GetSuppressedTime returns the SuppressedTime field value if set, zero value otherwise.
+func (o *CondAlarm) GetSuppressedTime() time.Time {
+	if o == nil || IsNil(o.SuppressedTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.SuppressedTime
+}
+
+// GetSuppressedTimeOk returns a tuple with the SuppressedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarm) GetSuppressedTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.SuppressedTime) {
+		return nil, false
+	}
+	return o.SuppressedTime, true
+}
+
+// HasSuppressedTime returns a boolean if a field has been set.
+func (o *CondAlarm) HasSuppressedTime() bool {
+	if o != nil && !IsNil(o.SuppressedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressedTime gets a reference to the given time.Time and assigns it to the SuppressedTime field.
+func (o *CondAlarm) SetSuppressedTime(v time.Time) {
+	o.SuppressedTime = &v
+}
+
 // GetAffectedMo returns the AffectedMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondAlarm) GetAffectedMo() MoBaseMoRelationship {
 	if o == nil || IsNil(o.AffectedMo.Get()) {
@@ -1064,6 +1100,39 @@ func (o *CondAlarm) UnsetRegisteredDevice() {
 	o.RegisteredDevice.Unset()
 }
 
+// GetSuppressionRules returns the SuppressionRules field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarm) GetSuppressionRules() []CondAlarmSuppressionRelationship {
+	if o == nil {
+		var ret []CondAlarmSuppressionRelationship
+		return ret
+	}
+	return o.SuppressionRules
+}
+
+// GetSuppressionRulesOk returns a tuple with the SuppressionRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarm) GetSuppressionRulesOk() ([]CondAlarmSuppressionRelationship, bool) {
+	if o == nil || IsNil(o.SuppressionRules) {
+		return nil, false
+	}
+	return o.SuppressionRules, true
+}
+
+// HasSuppressionRules returns a boolean if a field has been set.
+func (o *CondAlarm) HasSuppressionRules() bool {
+	if o != nil && !IsNil(o.SuppressionRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressionRules gets a reference to the given []CondAlarmSuppressionRelationship and assigns it to the SuppressionRules field.
+func (o *CondAlarm) SetSuppressionRules(v []CondAlarmSuppressionRelationship) {
+	o.SuppressionRules = v
+}
+
 func (o CondAlarm) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1156,6 +1225,9 @@ func (o CondAlarm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Suppressed) {
 		toSerialize["Suppressed"] = o.Suppressed
 	}
+	if !IsNil(o.SuppressedTime) {
+		toSerialize["SuppressedTime"] = o.SuppressedTime
+	}
 	if o.AffectedMo.IsSet() {
 		toSerialize["AffectedMo"] = o.AffectedMo.Get()
 	}
@@ -1167,6 +1239,9 @@ func (o CondAlarm) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
+	}
+	if o.SuppressionRules != nil {
+		toSerialize["SuppressionRules"] = o.SuppressionRules
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1270,12 +1345,16 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 		Severity *string `json:"Severity,omitempty"`
 		// Indicates whether the alarm is marked for suppression or not.
-		Suppressed *bool                        `json:"Suppressed,omitempty"`
-		AffectedMo NullableMoBaseMoRelationship `json:"AffectedMo,omitempty"`
+		Suppressed *bool `json:"Suppressed,omitempty"`
+		// Time at which the last alarm suppression state change happened.
+		SuppressedTime *time.Time                   `json:"SuppressedTime,omitempty"`
+		AffectedMo     NullableMoBaseMoRelationship `json:"AffectedMo,omitempty"`
 		// An array of relationships to moBaseMo resources.
 		AlarmSummaryAggregators []MoBaseMoRelationship                      `json:"AlarmSummaryAggregators,omitempty"`
 		Definition              NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
 		RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		// An array of relationships to condAlarmSuppression resources.
+		SuppressionRules []CondAlarmSuppressionRelationship `json:"SuppressionRules,omitempty"`
 	}
 
 	varCondAlarmWithoutEmbeddedStruct := CondAlarmWithoutEmbeddedStruct{}
@@ -1307,10 +1386,12 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarm.OrigSeverity = varCondAlarmWithoutEmbeddedStruct.OrigSeverity
 		varCondAlarm.Severity = varCondAlarmWithoutEmbeddedStruct.Severity
 		varCondAlarm.Suppressed = varCondAlarmWithoutEmbeddedStruct.Suppressed
+		varCondAlarm.SuppressedTime = varCondAlarmWithoutEmbeddedStruct.SuppressedTime
 		varCondAlarm.AffectedMo = varCondAlarmWithoutEmbeddedStruct.AffectedMo
 		varCondAlarm.AlarmSummaryAggregators = varCondAlarmWithoutEmbeddedStruct.AlarmSummaryAggregators
 		varCondAlarm.Definition = varCondAlarmWithoutEmbeddedStruct.Definition
 		varCondAlarm.RegisteredDevice = varCondAlarmWithoutEmbeddedStruct.RegisteredDevice
+		varCondAlarm.SuppressionRules = varCondAlarmWithoutEmbeddedStruct.SuppressionRules
 		*o = CondAlarm(varCondAlarm)
 	} else {
 		return err
@@ -1352,10 +1433,12 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OrigSeverity")
 		delete(additionalProperties, "Severity")
 		delete(additionalProperties, "Suppressed")
+		delete(additionalProperties, "SuppressedTime")
 		delete(additionalProperties, "AffectedMo")
 		delete(additionalProperties, "AlarmSummaryAggregators")
 		delete(additionalProperties, "Definition")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "SuppressionRules")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

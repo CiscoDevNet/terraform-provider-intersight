@@ -3,12 +3,24 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_reservation"
 description: |-
-        The WWN reservation object, used to hold reserved identities.
+        The Reservation object is utilized to hold reserved identity information, managing the allocation of resources within pools.
+        #### Purpose
+        The Reservation object serves as a mechanism to manage reserved identities within pools for future allocation, providing a structured approach to resource allocation and reservation management.
+        #### Key Concepts
+        - **Identity Management:** Facilitates the reservation of WWN identities for future allocation within pools.
+        - **Resource Allocation:** Ensures that reserved identities are allocated appropriately, supporting dynamic and static allocation types.
+        - **Access Control:** Enables authorized users to manage reservations, maintaining secure and efficient resource management.
 
 ---
 
 # Data Source: intersight_fcpool_reservation
-The WWN reservation object, used to hold reserved identities.
+The Reservation object is utilized to hold reserved identity information, managing the allocation of resources within pools.
+#### Purpose
+The Reservation object serves as a mechanism to manage reserved identities within pools for future allocation, providing a structured approach to resource allocation and reservation management.
+#### Key Concepts
+- **Identity Management:** Facilitates the reservation of WWN identities for future allocation within pools.
+- **Resource Allocation:** Ensures that reserved identities are allocated appropriately, supporting dynamic and static allocation types.
+- **Access Control:** Enables authorized users to manage reservations, maintaining secure and efficient resource management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

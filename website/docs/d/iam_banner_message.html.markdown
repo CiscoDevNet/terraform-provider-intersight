@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_banner_message"
 description: |-
-        Configuration for the banner message, including title, contents, and display toggle.
+        BannerMessage configures a global banner for an account, controlling whether it is displayed and what content it shows.
+        ####  Purpose
+        It provides a mechanism to communicate important notices or policies to users across the account.
+        #### Key Concepts
+        - **User Communication:** Surfaces messages consistently in the UI.
+        - **Administrative Control:** Managed by account administrators.
+        - **Non-intrusive:** Designed for clarity without operational disruption.
+        - **Account-wide Scope:** Applies across the account's user base.
 
 ---
 
 # Data Source: intersight_iam_banner_message
-Configuration for the banner message, including title, contents, and display toggle.
+BannerMessage configures a global banner for an account, controlling whether it is displayed and what content it shows.
+####  Purpose
+It provides a mechanism to communicate important notices or policies to users across the account.
+#### Key Concepts
+- **User Communication:** Surfaces messages consistently in the UI.
+- **Administrative Control:** Managed by account administrators.
+- **Non-intrusive:** Designed for clarity without operational disruption.
+- **Account-wide Scope:** Applies across the account's user base.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

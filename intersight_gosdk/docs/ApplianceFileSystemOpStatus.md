@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.FileSystemOpStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.FileSystemOpStatus"]
 **Capacity** | Pointer to **int64** | Capacity of the file system in bytes. | [optional] [readonly] 
+**DiskOrder** | Pointer to **string** | Symbolic order identifier of the physical disk from /dev/disk/by-order (e.g., disk1, disk2). This provides a stable, human-readable identifier for the disk that persists across reboots, unlike device names which may change. Currently, the relationship between filesystems to disks is one-to-one and this is unlikely to change in the future. | [optional] [readonly] 
 **Mountpoint** | Pointer to **string** | Mount point of this file system. | [optional] [readonly] 
+**NodeHostname** | Pointer to **string** | Hostname of the Intersight Appliance node on which this filesystem is located. | [optional] [readonly] 
 **OperationalStatus** | Pointer to **string** | Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. * &#x60;WorkerNodeInstInProgress&#x60; - The worker node installation is in progress. * &#x60;WorkerNodeInstSuccess&#x60; - The worker node installation succeeded. * &#x60;WorkerNodeInstFailed&#x60; - The worker node installation failed. | [optional] [readonly] [default to "Unknown"]
 **Usage** | Pointer to **float32** | Percentage of the file system capacity currently in use. | [optional] [readonly] 
 **NodeOpStatus** | Pointer to [**NullableApplianceNodeOpStatusRelationship**](ApplianceNodeOpStatusRelationship.md) |  | [optional] 
@@ -97,6 +99,31 @@ SetCapacity sets Capacity field to given value.
 
 HasCapacity returns a boolean if a field has been set.
 
+### GetDiskOrder
+
+`func (o *ApplianceFileSystemOpStatus) GetDiskOrder() string`
+
+GetDiskOrder returns the DiskOrder field if non-nil, zero value otherwise.
+
+### GetDiskOrderOk
+
+`func (o *ApplianceFileSystemOpStatus) GetDiskOrderOk() (*string, bool)`
+
+GetDiskOrderOk returns a tuple with the DiskOrder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskOrder
+
+`func (o *ApplianceFileSystemOpStatus) SetDiskOrder(v string)`
+
+SetDiskOrder sets DiskOrder field to given value.
+
+### HasDiskOrder
+
+`func (o *ApplianceFileSystemOpStatus) HasDiskOrder() bool`
+
+HasDiskOrder returns a boolean if a field has been set.
+
 ### GetMountpoint
 
 `func (o *ApplianceFileSystemOpStatus) GetMountpoint() string`
@@ -121,6 +148,31 @@ SetMountpoint sets Mountpoint field to given value.
 `func (o *ApplianceFileSystemOpStatus) HasMountpoint() bool`
 
 HasMountpoint returns a boolean if a field has been set.
+
+### GetNodeHostname
+
+`func (o *ApplianceFileSystemOpStatus) GetNodeHostname() string`
+
+GetNodeHostname returns the NodeHostname field if non-nil, zero value otherwise.
+
+### GetNodeHostnameOk
+
+`func (o *ApplianceFileSystemOpStatus) GetNodeHostnameOk() (*string, bool)`
+
+GetNodeHostnameOk returns a tuple with the NodeHostname field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeHostname
+
+`func (o *ApplianceFileSystemOpStatus) SetNodeHostname(v string)`
+
+SetNodeHostname sets NodeHostname field to given value.
+
+### HasNodeHostname
+
+`func (o *ApplianceFileSystemOpStatus) HasNodeHostname() bool`
+
+HasNodeHostname returns a boolean if a field has been set.
 
 ### GetOperationalStatus
 

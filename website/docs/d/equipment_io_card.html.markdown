@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_card"
 description: |-
-        I/O module on a chassis which multiplexes traffic from blade servers.
+        The equipment.IoCard (IOM) object represents an I/O Module, a critical component in a blade chassis that multiplexes and forwards network traffic between the blade servers and the upstream Fabric Interconnects.
+        #### Purpose
+        The IoCard object is the primary inventory and management entity for an IOM. This provides a comprehensive view of the module's identity, operational state, health, and its connection path to the parent Fabric Interconnect. It also serves as a container for its own sub-components, such as fan modules.
+        #### Key Concepts
+        - **Chassis Network Hub:** Models the central networking component within a chassis that connects servers to the fabric.
+        - **Connectivity and Pathing:** The connectionPath property (e.g., A or B) and its relationship to a network.Element define its role and connection to the fabric.
+        - **Health Monitoring:** Reports its overall operState and specific health issues (operReason), such as temperature warnings or low memory conditions.
+        - **Hierarchical Inventory:** Acts as a parent container for its own components, like equipment.FanModule, and for the host-facing ports that connect to the servers.
 
 ---
 
 # Data Source: intersight_equipment_io_card
-I/O module on a chassis which multiplexes traffic from blade servers.
+The equipment.IoCard (IOM) object represents an I/O Module, a critical component in a blade chassis that multiplexes and forwards network traffic between the blade servers and the upstream Fabric Interconnects.
+#### Purpose
+The IoCard object is the primary inventory and management entity for an IOM. This provides a comprehensive view of the module's identity, operational state, health, and its connection path to the parent Fabric Interconnect. It also serves as a container for its own sub-components, such as fan modules.
+#### Key Concepts
+- **Chassis Network Hub:** Models the central networking component within a chassis that connects servers to the fabric.
+- **Connectivity and Pathing:** The connectionPath property (e.g., "A" or "B") and its relationship to a network.Element define its role and connection to the fabric.
+- **Health Monitoring:** Reports its overall operState and specific health issues (operReason), such as temperature warnings or low memory conditions.
+- **Hierarchical Inventory:** Acts as a parent container for its own components, like equipment.FanModule, and for the host-facing ports that connect to the servers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

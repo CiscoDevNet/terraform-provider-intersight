@@ -2056,6 +2056,14 @@ func resourceServerProfile() *schema.Resource {
 				Optional:     true,
 				Default:      "instance",
 			},
+			"undeploy_wf_tasks": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"user_label": {
 				Description:  "User label assigned to the server profile.",
 				Type:         schema.TypeString,
@@ -3440,6 +3448,19 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("undeploy_wf_tasks"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetUndeployWfTasks(x)
+		}
+	}
+
 	if v, ok := d.GetOk("user_label"); ok {
 		x := (v.(string))
 		o.SetUserLabel(x)
@@ -3836,6 +3857,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("undeploy_wf_tasks", (s.GetUndeployWfTasks())); err != nil {
+		return diag.Errorf("error occurred while setting property UndeployWfTasks in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("user_label", (s.GetUserLabel())); err != nil {
@@ -4989,6 +5014,18 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		v := d.Get("type")
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if d.HasChange("undeploy_wf_tasks") {
+		v := d.Get("undeploy_wf_tasks")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUndeployWfTasks(x)
 	}
 
 	if d.HasChange("user_label") {

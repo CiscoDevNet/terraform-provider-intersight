@@ -16,15 +16,88 @@ import (
 
 func getCondAlarmSuppressionSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
+	schemaMap = map[string]*schema.Schema{"account": {
+		Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		Type:        schema.TypeList,
+		MaxItems:    1,
 		Optional:    true,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+				"class_id": {
+					Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"moid": {
+					Description: "The Moid of the referenced REST resource.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"object_type": {
+					Description: "The fully-qualified name of the remote type referred by this relationship.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"selector": {
+					Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+			},
+		},
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"alarm_rules": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"operator": {
+						Description: "The operator to apply. Operators supported are: eq, contains, in.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"property": {
+						Description: "The property name keyword to filter on. For a list of supported property keywords\nsee the Intersight Help Center.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+				},
+			},
 		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -114,6 +187,16 @@ func getCondAlarmSuppressionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enabled": {
+			Description: "Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false.\nThe property is set to true when the suppression is created. The user can set this to false to disable the suppression.\nThe suppression rule should be active only if both systemEnabled and enabled are true.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"end_date": {
+			Description: "The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"entity": {
 			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -166,6 +249,11 @@ func getCondAlarmSuppressionSchema() map[string]*schema.Schema {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"odata_filter_internal": {
+			Description: "Odata filter string managed internally. It is built by combining all the rules.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -243,8 +331,18 @@ func getCondAlarmSuppressionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"rules_operator": {
+			Description: "Operation that binds all the different rules together.\n* `All` - All is an AND condition applied against the individual conditions.\n* `Any` - Any is an OR condition applied against the individual conditions.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"start_date": {
+			Description: "The start date for enabling this alarm suppression rule. The date must follow\nthe RFC 3339 format for date and time representation. If this date more than\n60 seconds in the past, the suppression rule will be rejected. If the date is\nwithin 60 seconds of the present time (plus or minus), the suppression will be\nstarted immediately. Otherwise, the suppression will be scheduled to start at\nthe requested time.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -489,6 +587,49 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CondAlarmSuppression{}
+	if v, ok := d.GetOk("account"); ok {
+		p := make([]models.IamAccountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAccount(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -501,6 +642,60 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOk("alarm_rules"); ok {
+		x := make([]models.CondAlarmRuleExpression, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CondAlarmRuleExpression{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("cond.AlarmRuleExpression")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["operator"]; ok {
+				{
+					x := (v.(string))
+					o.SetOperator(x)
+				}
+			}
+			if v, ok := l["property"]; ok {
+				{
+					x := (v.(string))
+					o.SetProperty(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetValue(x)
+					}
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetAlarmRules(x)
 	}
 
 	if v, ok := d.GetOk("ancestors"); ok {
@@ -603,6 +798,16 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
+
+	if v, ok := d.GetOk("end_date"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetEndDate(x)
+	}
+
 	if v, ok := d.GetOk("entity"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -664,6 +869,11 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOk("odata_filter_internal"); ok {
+		x := (v.(string))
+		o.SetOdataFilterInternal(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -760,9 +970,19 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("rules_operator"); ok {
+		x := (v.(string))
+		o.SetRulesOperator(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOk("start_date"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetStartDate(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -950,8 +1170,12 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
+
+				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["alarm_rules"] = flattenListCondAlarmRuleExpression(s.GetAlarmRules(), d)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -961,6 +1185,9 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enabled"] = (s.GetEnabled())
+
+				temp["end_date"] = (s.GetEndDate()).String()
 
 				temp["entity"] = flattenMapMoBaseMoRelationship(s.GetEntity(), d)
 
@@ -968,12 +1195,16 @@ func dataSourceCondAlarmSuppressionRead(c context.Context, d *schema.ResourceDat
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["odata_filter_internal"] = (s.GetOdataFilterInternal())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["rules_operator"] = (s.GetRulesOperator())
 				temp["shared_scope"] = (s.GetSharedScope())
+
+				temp["start_date"] = (s.GetStartDate()).String()
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

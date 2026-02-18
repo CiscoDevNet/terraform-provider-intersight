@@ -3,12 +3,22 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_alarm_definition"
 description: |-
-        The definition of an issue which encompases the criteria for identifying when the issue exists, documentation of the detected issue and the alarms to be raised/cleared by Intersight.
+        AlarmDefinition describes alarm messages, including their meaning and recommended recovery actions. It helps identify alarms by providing details such as the alarm name, description, severity, and suggested troubleshooting steps, aiding administrators in managing and responding to system alarms effectively.
+        #### Purpose
+        An AlarmDefinition specifies the conditions under which an alarm is generated and the corresponding actions to be performed. It acts as a blueprint for alarm creation by combining detection logic, descriptive information, and the defined response actions.
+        #### Key Concepts
+        - **Alarm Actions:** Specifies the set of alarms to be raised, including detailed messaging and severity levels, providing a consistent and automated response to detected issues.
+        - **Read-Only Access:** Designed exclusively primarily for consumption, supporting safe and consistent integration with external systems and user interfaces.
 
 ---
 
 # Data Source: intersight_cond_alarm_definition
-The definition of an issue which encompases the criteria for identifying when the issue exists, documentation of the detected issue and the alarms to be raised/cleared by Intersight.
+AlarmDefinition describes alarm messages, including their meaning and recommended recovery actions. It helps identify alarms by providing details such as the alarm name, description, severity, and suggested troubleshooting steps, aiding administrators in managing and responding to system alarms effectively.
+#### Purpose
+An AlarmDefinition specifies the conditions under which an alarm is generated and the corresponding actions to be performed. It acts as a blueprint for alarm creation by combining detection logic, descriptive information, and the defined response actions.
+#### Key Concepts
+- **Alarm Actions:** Specifies the set of alarms to be raised, including detailed messaging and severity levels, providing a consistent and automated response to detected issues.
+- **Read-Only Access:** Designed exclusively primarily for consumption, supporting safe and consistent integration with external systems and user interfaces.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

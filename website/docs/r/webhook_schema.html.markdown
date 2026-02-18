@@ -3,12 +3,24 @@ subcategory: "webhook"
 layout: "intersight"
 page_title: "Intersight: intersight_webhook_schema"
 description: |-
-        The schema which a generated event follows.
+        The Schema object is integral to event management, providing the framework that defines the structure of events. It ensures consistency and validity in the way events are described and handled across the system.
+        #### Purpose
+        A Schema outlines the format and content of events, acting as a template for event generation. It is essential for maintaining uniformity and accuracy in event data processing and interpretation.
+        #### Key Concepts
+        - **Event Definition:** Specifies the event type and source, ensuring each schema represents a unique event scenario within the system.
+        - **Data Integrity:** Enforces constraints on event data, guaranteeing that events adhere to predefined standards and formats.
+        - **Access Control:** Utilizes privilege sets to regulate schema creation, updates, and deletion, protecting the integrity of event definitions.
 
 ---
 
 # Resource: intersight_webhook_schema
-The schema which a generated event follows.
+The Schema object is integral to event management, providing the framework that defines the structure of events. It ensures consistency and validity in the way events are described and handled across the system.
+#### Purpose
+A Schema outlines the format and content of events, acting as a template for event generation. It is essential for maintaining uniformity and accuracy in event data processing and interpretation.
+#### Key Concepts
+- **Event Definition:** Specifies the event type and source, ensuring each schema represents a unique event scenario within the system.
+- **Data Integrity:** Enforces constraints on event data, guaranteeing that events adhere to predefined standards and formats.
+- **Access Control:** Utilizes privilege sets to regulate schema creation, updates, and deletion, protecting the integrity of event definitions.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

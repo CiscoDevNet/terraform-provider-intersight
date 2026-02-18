@@ -3,12 +3,24 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_reservation"
 description: |-
-        A Reservation is used to reserve a place for a new resource in the resource groups.
+        The Reservation object is responsible for reserving slots for new resources within resource groups, ensuring organized and planned resource allocation.
+        #### Purpose
+        A Reservation acts as a placeholder for resources that are yet to be added to the system, providing a structured approach to resource planning and allocation. It supports seamless integration with resource groups, facilitating efficient resource management.
+        #### Key Concepts
+        - **Resource Allocation:** Provides a mechanism for reserving space for new resources, aiding in planned resource allocation.
+        - **Integration:** Seamlessly integrates with resource groups to ensure that reserved resources are properly managed and allocated.
+        - **Access Control:** Implements privilege sets to manage access to reservation data, ensuring secure and controlled resource planning.
 
 ---
 
 # Data Source: intersight_resource_reservation
-A Reservation is used to reserve a place for a new resource in the resource groups.
+The Reservation object is responsible for reserving slots for new resources within resource groups, ensuring organized and planned resource allocation.
+#### Purpose
+A Reservation acts as a placeholder for resources that are yet to be added to the system, providing a structured approach to resource planning and allocation. It supports seamless integration with resource groups, facilitating efficient resource management.
+#### Key Concepts
+- **Resource Allocation:** Provides a mechanism for reserving space for new resources, aiding in planned resource allocation.
+- **Integration:** Seamlessly integrates with resource groups to ensure that reserved resources are properly managed and allocated.
+- **Access Control:** Implements privilege sets to manage access to reservation data, ensuring secure and controlled resource planning.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

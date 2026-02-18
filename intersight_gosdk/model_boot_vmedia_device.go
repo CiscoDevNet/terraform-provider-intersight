@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the BootVmediaDevice type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BootVmediaDevice{}
 
-// BootVmediaDevice Virtual Media Boot Device configured on the server.
+// BootVmediaDevice The boot.VmediaDevice object represents a virtual media device as a configurable boot option within a server's boot policy. Virtual media allows mounting of a remote image (like an ISO or IMG file) as if it were a local physical device (like a CD/DVD or USB drive). #### Purpose The VmediaDevice object is used to enable booting from a remotely mounted image file. It is crucial for OS installation, recovery operations, and diagnostics without needing physical access to the server. It allows administrators to define virtual media as a boot source and set its priority within a boot policy. #### Key Concepts - **Remote Media Boot:** Defines a virtual CD/DVD or USB drive, sourced from a remote image file, as a bootable device. - **Flexible OS Installation:** Facilitates the installation of operating systems and software from ISO images without physical media. - **Ordered Boot Sequence:** The order property allows its position in the boot process to be controlled relative to other physical or network devices. - **Boot Policy Component:** Acts as a key element within a boot policy that is applied to a compute.Physical server object.
 type BootVmediaDevice struct {
 	BootConfiguredDevice
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

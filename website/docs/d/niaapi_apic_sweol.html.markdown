@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_sweol"
 description: |-
-        The software end of life notice for APIC.
+        The ApicSweol object is crucial for software lifecycle management, outlining the end-of-life status of software releases specific to the APIC platform. It helps users plan transitions and maintain system continuity.
+        #### Purpose
+        ApicSweol provides detailed information about the end-of-life schedule for software releases on the APIC platform, including dates for maintenance termination.
+        #### Key Concepts
+        - **Platform-Specific Lifecycle:** Defines the timeline for software support on the APIC platform.
+        - **Transition Assistance:** Offers migration URLs and notices for APIC software releases.
+        - **Comprehensive Details:** Includes dates for lifecycle stages on the APIC platform.
 
 ---
 
 # Data Source: intersight_niaapi_apic_sweol
-The software end of life notice for APIC.
+The ApicSweol object is crucial for software lifecycle management, outlining the end-of-life status of software releases specific to the APIC platform. It helps users plan transitions and maintain system continuity.
+#### Purpose
+ApicSweol provides detailed information about the end-of-life schedule for software releases on the APIC platform, including dates for maintenance termination.
+#### Key Concepts
+- **Platform-Specific Lifecycle:** Defines the timeline for software support on the APIC platform.
+- **Transition Assistance:** Offers migration URLs and notices for APIC software releases.
+- **Comprehensive Details:** Includes dates for lifecycle stages on the APIC platform.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

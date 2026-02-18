@@ -3,12 +3,26 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_host_eth_interface"
 description: |-
-        Physical / Virtual port of an adapter as seen by the host.
+        The adapter.HostEthInterface object represents a virtual Ethernet interface (vNIC) or a physical port of a non-Cisco adapter as it is presented to the host operating system. It serves as the primary inventory object for a server's logical network connections.
+        #### Purpose
+        The HostEthInterface object is designed to model the host-visible network interfaces, providing a comprehensive view of their configuration, status, and relationship with the underlying physical and virtual network infrastructure. It bridges the gap between the server's OS-level view and the network management plane.
+        #### Key Concepts
+        - **Logical Interface Model:** Represents a vNIC, capturing its name, MAC address, and administrative state.
+        - **Failover and Redundancy:** For failover-enabled vNICs, it tracks the status of both primary and standby paths, including their respective virtual interface IDs (vifId and standbyVifId).
+        - **Operational State Tracking:** Provides detailed operational states for both the vNIC itself (activeOperState, standbyOperState) and its peer Vethernet interfaces (activeVethOperState, standbyVethOperState) in an Intersight Managed Mode domain.
+        - **Action-Oriented:** Supports administrative actions like ResetConnectivity, Enable, and Disable through the vethAction property, allowing for dynamic control over the interface.
 
 ---
 
 # Data Source: intersight_adapter_host_eth_interface
-Physical / Virtual port of an adapter as seen by the host.
+The adapter.HostEthInterface object represents a virtual Ethernet interface (vNIC) or a physical port of a non-Cisco adapter as it is presented to the host operating system. It serves as the primary inventory object for a server's logical network connections.
+#### Purpose
+The HostEthInterface object is designed to model the host-visible network interfaces, providing a comprehensive view of their configuration, status, and relationship with the underlying physical and virtual network infrastructure. It bridges the gap between the server's OS-level view and the network management plane.
+#### Key Concepts
+- **Logical Interface Model:** Represents a vNIC, capturing its name, MAC address, and administrative state.
+- **Failover and Redundancy:** For failover-enabled vNICs, it tracks the status of both primary and standby paths, including their respective virtual interface IDs (vifId and standbyVifId).
+- **Operational State Tracking:** Provides detailed operational states for both the vNIC itself (activeOperState, standbyOperState) and its peer Vethernet interfaces (activeVethOperState, standbyVethOperState) in an Intersight Managed Mode domain.
+- **Action-Oriented:** Supports administrative actions like ResetConnectivity, Enable, and Disable through the vethAction property, allowing for dynamic control over the interface.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_dcnm_field_notice"
 description: |-
-        The field notice reporting bug and related software or hardware for DCNM.
+        The DcnmFieldNotice object is vital for version management, providing updates on bugs and related software or hardware issues specific to the DCNM platform. It ensures users are informed about critical changes.
+        #### Purpose
+        DcnmFieldNotice disseminates information about software or hardware issues on the DCNM platform, including bug identification and proposed workarounds.
+        #### Key Concepts
+        - **Platform-Specific Reporting:** Reports bugs and provides descriptions for the DCNM platform.
+        - **Solution Proposals:** Offers workarounds and recommendations for DCNM issues.
+        - **Details:** Includes revision information for DCNM field notices.
 
 ---
 
 # Data Source: intersight_niaapi_dcnm_field_notice
-The field notice reporting bug and related software or hardware for DCNM.
+The DcnmFieldNotice object is vital for version management, providing updates on bugs and related software or hardware issues specific to the DCNM platform. It ensures users are informed about critical changes.
+#### Purpose
+DcnmFieldNotice disseminates information about software or hardware issues on the DCNM platform, including bug identification and proposed workarounds.
+#### Key Concepts
+- **Platform-Specific Reporting:** Reports bugs and provides descriptions for the DCNM platform.
+- **Solution Proposals:** Offers workarounds and recommendations for DCNM issues.
+- **Details:** Includes revision information for DCNM field notices.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user_group"
 description: |-
-        User Group provides a way to assign permissions to a group of users based on the IdP attributes received after authentication.
+        UserGroup provides a policy mechanism to assign permissions to cohorts of users based on identity attributes or explicit guest inclusion.
+        #### Purpose
+        UserGroup simplifies access management by mapping identity attributes (or guest lists) to permissions at scale.
+        #### Key Concepts
+        - **Attribute-based Access:** Qualifies users into groups using IdP attributes.
+        - **Guest Access Mode:** Supports time-bound, link-based access for guest users.
+        - **Permission Binding:** Assigns roles and privileges via permissions to the group.
+        - **Lifecycle Governance:** Tracks activation/expiry for guest access scenarios.
 
 ---
 
 # Resource: intersight_iam_user_group
-User Group provides a way to assign permissions to a group of users based on the IdP attributes received after authentication.
+UserGroup provides a policy mechanism to assign permissions to cohorts of users based on identity attributes or explicit guest inclusion.
+#### Purpose
+UserGroup simplifies access management by mapping identity attributes (or guest lists) to permissions at scale.
+#### Key Concepts
+- **Attribute-based Access:** Qualifies users into groups using IdP attributes.
+- **Guest Access Mode:** Supports time-bound, link-based access for guest users.
+- **Permission Binding:** Assigns roles and privileges via permissions to the group.
+- **Lifecycle Governance:** Tracks activation/expiry for guest access scenarios.
 ## Usage Example
 ### Resource Creation
 

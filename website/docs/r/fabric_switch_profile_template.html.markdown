@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_profile_template"
 description: |-
-        The template specifies the policy configuration for each of the managed network switch.
+        The SwitchProfileTemplate object is a fundamental aspect of network switch configuration, designed to offer predefined policy configurations for managed network switches. It acts as a template for creating individual switch profiles, fostering standardization and efficiency.
+        #### Purpose
+        The SwitchProfileTemplate serves as a predefined set of configuration policies that can be applied to network switches, streamlining the creation and management of switch profiles. It facilitates the deployment of consistent configurations across multiple switches.
+        #### Key Concepts
+        - **Template-Based Configuration:** Provides standardized configuration templates that can be applied across various switches, ensuring uniform network operations.
+        - **Operational Versatility:** Enables a range of operations including reading, creating, updating, and deleting switch profiles, enhancing flexibility in configuration management.
+        - **Security and Access:** Implements access control through privilege sets, safeguarding configuration processes and switch management.
+        - **Integration:** Supports seamless integration with existing network environments, aiding in efficient deployment of switch configurations.
 
 ---
 
 # Resource: intersight_fabric_switch_profile_template
-The template specifies the policy configuration for each of the managed network switch.
+The SwitchProfileTemplate object is a fundamental aspect of network switch configuration, designed to offer predefined policy configurations for managed network switches. It acts as a template for creating individual switch profiles, fostering standardization and efficiency. 
+#### Purpose
+The SwitchProfileTemplate serves as a predefined set of configuration policies that can be applied to network switches, streamlining the creation and management of switch profiles. It facilitates the deployment of consistent configurations across multiple switches. 
+#### Key Concepts
+- **Template-Based Configuration:** Provides standardized configuration templates that can be applied across various switches, ensuring uniform network operations.
+- **Operational Versatility:** Enables a range of operations including reading, creating, updating, and deleting switch profiles, enhancing flexibility in configuration management.
+- **Security and Access:** Implements access control through privilege sets, safeguarding configuration processes and switch management.
+- **Integration:** Supports seamless integration with existing network environments, aiding in efficient deployment of switch configurations.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

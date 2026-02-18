@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_physical_summary"
 description: |-
-        Consolidated view of Blades and RackUnits.
+        The compute.PhysicalSummary object provides a consolidated, high-level view of a physical server, aggregating key information from both compute.Blade and compute.RackUnit objects. It is designed for efficient display and querying in user interfaces and summary dashboards.
+        #### Purpose
+        The primary purpose of this object is to offer a flattened, easy-to-consume summary of a server's most important attributes. It combines identity, status, configuration, and capacity information into a single object, reducing the need to query multiple, more detailed objects for a high-level overview.
+        #### Key Concepts
+        - **Aggregated View:** Consolidates essential properties like name, model, serial, operPowerState, faultSummary, and totalMemory into one place.
+        - **Unified Server Model:** Provides a consistent structure for both blade and rack servers, simplifying client-side logic for displaying server lists.
+        - **Performance-Oriented:** Designed to be efficiently queried and indexed, making it ideal for populating dashboards and summary views with minimal latency.
+        - **Link to Source:** The sourceObjectType property maintains a reference to the original, more detailed object (Blade or RackUnit), allowing for drill-down to more specific information.
 
 ---
 
 # Data Source: intersight_compute_physical_summary
-Consolidated view of Blades and RackUnits.
+The compute.PhysicalSummary object provides a consolidated, high-level view of a physical server, aggregating key information from both compute.Blade and compute.RackUnit objects. It is designed for efficient display and querying in user interfaces and summary dashboards.
+#### Purpose
+The primary purpose of this object is to offer a flattened, easy-to-consume summary of a server's most important attributes. It combines identity, status, configuration, and capacity information into a single object, reducing the need to query multiple, more detailed objects for a high-level overview.
+#### Key Concepts
+- **Aggregated View:** Consolidates essential properties like name, model, serial, operPowerState, faultSummary, and totalMemory into one place.
+- **Unified Server Model:** Provides a consistent structure for both blade and rack servers, simplifying client-side logic for displaying server lists.
+- **Performance-Oriented:** Designed to be efficiently queried and indexed, making it ideal for populating dashboards and summary views with minimal latency.
+- **Link to Source:** The sourceObjectType property maintains a reference to the original, more detailed object (Blade or RackUnit), allowing for drill-down to more specific information.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

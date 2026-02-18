@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_fc_qos_policy"
 description: |-
-        A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
+        The FcQosPolicy object specifies Quality of Service (QoS) for Fibre Channel traffic on virtual HBAs, enabling administrators to control bandwidth, priority, and class of service for storage communications.
+        #### Purpose
+        FcQosPolicy ensures storage traffic receives appropriate prioritization and resource allocation, optimizing performance and reliability for storage-intensive workloads.
+        #### Key Concepts
+        - **Storage QoS Control:** Sets limits and priorities for Fibre Channel data flows.
+        - **Integration with vHBAs:** Applied to virtual HBAs for consistent QoS enforcement.
 
 ---
 
 # Resource: intersight_vnic_fc_qos_policy
-A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
+The FcQosPolicy object specifies Quality of Service (QoS) for Fibre Channel traffic on virtual HBAs, enabling administrators to control bandwidth, priority, and class of service for storage communications.
+#### Purpose
+FcQosPolicy ensures storage traffic receives appropriate prioritization and resource allocation, optimizing performance and reliability for storage-intensive workloads.
+#### Key Concepts
+- **Storage QoS Control:** Sets limits and priorities for Fibre Channel data flows.
+- **Integration with vHBAs:** Applied to virtual HBAs for consistent QoS enforcement.
 ## Usage Example
 ### Resource Creation
 

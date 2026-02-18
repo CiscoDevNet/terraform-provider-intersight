@@ -1780,6 +1780,68 @@ func flattenListComputeServerOpStatus(p []models.ComputeServerOpStatus, d *schem
 	}
 	return computeserveropstatuss
 }
+func flattenListCondAdapterDetail(p []models.CondAdapterDetail, d *schema.ResourceData) []map[string]interface{} {
+	var condadapterdetails []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		condadapterdetail := make(map[string]interface{})
+		condadapterdetail["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		condadapterdetail["class_id"] = item.GetClassId()
+		condadapterdetail["driver_name"] = item.GetDriverName()
+		condadapterdetail["driver_version"] = item.GetDriverVersion()
+		condadapterdetail["firmware"] = item.GetFirmware()
+		condadapterdetail["hcl_reason"] = item.GetHclReason()
+		condadapterdetail["hcl_status"] = item.GetHclStatus()
+		condadapterdetail["model"] = item.GetModel()
+		condadapterdetail["object_type"] = item.GetObjectType()
+		condadapterdetail["type"] = item.GetType()
+		condadapterdetail["vendor"] = item.GetVendor()
+		condadapterdetails = append(condadapterdetails, condadapterdetail)
+	}
+	return condadapterdetails
+}
+func flattenListCondAdapterInstance(p []models.CondAdapterInstance, d *schema.ResourceData) []map[string]interface{} {
+	var condadapterinstances []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		condadapterinstance := make(map[string]interface{})
+		adapters_x, _ := d.GetOk("adapters")
+		condadapterinstance["adapter"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetAdapter(), adapters_x)
+		condadapterinstance["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		condadapterinstance["class_id"] = item.GetClassId()
+		condadapterinstance["driver_name"] = item.GetDriverName()
+		condadapterinstance["driver_version"] = item.GetDriverVersion()
+		condadapterinstance["firmware"] = item.GetFirmware()
+		condadapterinstance["hcl_reason"] = item.GetHclReason()
+		condadapterinstance["hcl_status"] = item.GetHclStatus()
+		condadapterinstance["model"] = item.GetModel()
+		condadapterinstance["object_type"] = item.GetObjectType()
+		condadapterinstance["type"] = item.GetType()
+		condadapterinstance["vendor"] = item.GetVendor()
+		condadapterinstances = append(condadapterinstances, condadapterinstance)
+	}
+	return condadapterinstances
+}
 func flattenListCondAlarmAction(p []models.CondAlarmAction, d *schema.ResourceData) []map[string]interface{} {
 	var condalarmactions []map[string]interface{}
 	if len(p) == 0 {
@@ -1867,6 +1929,47 @@ func flattenListCondAlarmDefinitionRelationship(p []models.CondAlarmDefinitionRe
 	}
 	return condalarmdefinitionrelationships
 }
+func flattenListCondAlarmRuleExpression(p []models.CondAlarmRuleExpression, d *schema.ResourceData) []map[string]interface{} {
+	var condalarmruleexpressions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		condalarmruleexpression := make(map[string]interface{})
+		condalarmruleexpression["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		condalarmruleexpression["class_id"] = item.GetClassId()
+		condalarmruleexpression["object_type"] = item.GetObjectType()
+		condalarmruleexpression["operator"] = item.GetOperator()
+		condalarmruleexpression["property"] = item.GetProperty()
+		condalarmruleexpression["value"] = item.GetValue()
+		condalarmruleexpressions = append(condalarmruleexpressions, condalarmruleexpression)
+	}
+	return condalarmruleexpressions
+}
+func flattenListCondAlarmSuppressionRelationship(p []models.CondAlarmSuppressionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var condalarmsuppressionrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		condalarmsuppressionrelationship := flattenMoMoRef(item)
+		condalarmsuppressionrelationships = append(condalarmsuppressionrelationships, condalarmsuppressionrelationship)
+	}
+	return condalarmsuppressionrelationships
+}
+func flattenListCondCustomHclBaselineRelationship(p []models.CondCustomHclBaselineRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var condcustomhclbaselinerelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		condcustomhclbaselinerelationship := flattenMoMoRef(item)
+		condcustomhclbaselinerelationships = append(condcustomhclbaselinerelationships, condcustomhclbaselinerelationship)
+	}
+	return condcustomhclbaselinerelationships
+}
 func flattenListCondHclStatusDetailRelationship(p []models.CondHclStatusDetailRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var condhclstatusdetailrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -1878,6 +1981,86 @@ func flattenListCondHclStatusDetailRelationship(p []models.CondHclStatusDetailRe
 		condhclstatusdetailrelationships = append(condhclstatusdetailrelationships, condhclstatusdetailrelationship)
 	}
 	return condhclstatusdetailrelationships
+}
+func flattenListCondServerBaselineStatus(p []models.CondServerBaselineStatus, d *schema.ResourceData) []map[string]interface{} {
+	var condserverbaselinestatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		condserverbaselinestatus := make(map[string]interface{})
+		condserverbaselinestatus["adapter_compliance"] = item.GetAdapterCompliance()
+		condserverbaselinestatus["adapter_reason"] = item.GetAdapterReason()
+		baseline_status_details_x, _ := d.GetOk("baseline_status_details")
+		condserverbaselinestatus["adapters_status"] = (func(p []models.CondAdapterBaselineStatus, v interface{}) []map[string]interface{} {
+			var condadapterbaselinestatuss []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				condadapterbaselinestatus := make(map[string]interface{})
+
+				var adapters_status_x interface{}
+				if isNonEmptySliceOfMaps(v) {
+					adapters_status_x = v.([]interface{})[len(condadapterbaselinestatuss)].(map[string]interface{})["adapters_status"]
+				}
+
+				condadapterbaselinestatus["adapter"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+					var momorefs []map[string]interface{}
+					var ret models.MoMoRef
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					momoref := make(map[string]interface{})
+					momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					momoref["class_id"] = item.GetClassId()
+					momoref["moid"] = item.GetMoid()
+					momoref["object_type"] = item.GetObjectType()
+					momoref["selector"] = item.GetSelector()
+
+					momorefs = append(momorefs, momoref)
+					return momorefs
+				})(item.GetAdapter(), adapters_status_x)
+				condadapterbaselinestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				condadapterbaselinestatus["class_id"] = item.GetClassId()
+				condadapterbaselinestatus["object_type"] = item.GetObjectType()
+				condadapterbaselinestatus["reason"] = item.GetReason()
+				condadapterbaselinestatus["status"] = item.GetStatus()
+				condadapterbaselinestatuss = append(condadapterbaselinestatuss, condadapterbaselinestatus)
+			}
+			return condadapterbaselinestatuss
+		})(item.GetAdaptersStatus(), baseline_status_details_x)
+		condserverbaselinestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		condserverbaselinestatus["class_id"] = item.GetClassId()
+		condserverbaselinestatus["custom_hcl_baseline"] = (func(p models.MoMoRef, v interface{}) []map[string]interface{} {
+			var momorefs []map[string]interface{}
+			var ret models.MoMoRef
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+
+			momorefs = append(momorefs, momoref)
+			return momorefs
+		})(item.GetCustomHclBaseline(), baseline_status_details_x)
+		condserverbaselinestatus["hardware_compliance"] = item.GetHardwareCompliance()
+		condserverbaselinestatus["hardware_reason"] = item.GetHardwareReason()
+		condserverbaselinestatus["object_type"] = item.GetObjectType()
+		condserverbaselinestatus["reason"] = item.GetReason()
+		condserverbaselinestatus["software_compliance"] = item.GetSoftwareCompliance()
+		condserverbaselinestatus["software_reason"] = item.GetSoftwareReason()
+		condserverbaselinestatus["status"] = item.GetStatus()
+		condserverbaselinestatus["validation_time"] = item.GetValidationTime().String()
+		condserverbaselinestatuss = append(condserverbaselinestatuss, condserverbaselinestatus)
+	}
+	return condserverbaselinestatuss
 }
 func flattenListConnectorpackConnectorPackUpdate(p []models.ConnectorpackConnectorPackUpdate, d *schema.ResourceData) []map[string]interface{} {
 	var connectorpackconnectorpackupdates []map[string]interface{}
@@ -5192,6 +5375,22 @@ func flattenListIamSessionRelationship(p []models.IamSessionRelationship, d *sch
 	}
 	return iamsessionrelationships
 }
+func flattenListIamTenantLinking(p []models.IamTenantLinking, d *schema.ResourceData) []map[string]interface{} {
+	var iamtenantlinkings []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		iamtenantlinking := make(map[string]interface{})
+		iamtenantlinking["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		iamtenantlinking["class_id"] = item.GetClassId()
+		iamtenantlinking["object_type"] = item.GetObjectType()
+		iamtenantlinking["product"] = item.GetProduct()
+		iamtenantlinking["tenant_id"] = item.GetTenantId()
+		iamtenantlinkings = append(iamtenantlinkings, iamtenantlinking)
+	}
+	return iamtenantlinkings
+}
 func flattenListIamUserRelationship(p []models.IamUserRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamuserrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -6293,7 +6492,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 		mobasemo := make(map[string]interface{})
 		mobasemo["account_moid"] = item.GetAccountMoid()
 		mobasemo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		targets_x, _ := d.GetOk("targets")
+		sources_x, _ := d.GetOk("sources")
 		mobasemo["ancestors"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6305,7 +6504,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetAncestors(), targets_x)
+		})(item.GetAncestors(), sources_x)
 		mobasemo["class_id"] = item.GetClassId()
 		mobasemo["create_time"] = item.GetCreateTime().String()
 		mobasemo["domain_group_moid"] = item.GetDomainGroupMoid()
@@ -6330,7 +6529,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			return mobasemorelationships
-		})(item.GetParent(), targets_x)
+		})(item.GetParent(), sources_x)
 		mobasemo["permission_resources"] = (func(p []models.MoBaseMoRelationship, v interface{}) []map[string]interface{} {
 			var mobasemorelationships []map[string]interface{}
 			if len(p) == 0 {
@@ -6342,7 +6541,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 			}
 			return mobasemorelationships
-		})(item.GetPermissionResources(), targets_x)
+		})(item.GetPermissionResources(), sources_x)
 		mobasemo["shared_scope"] = item.GetSharedScope()
 		mobasemo["tags"] = (func(p []models.MoTag, v interface{}) []map[string]interface{} {
 			var motags []map[string]interface{}
@@ -6399,7 +6598,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 				motags = append(motags, motag)
 			}
 			return motags
-		})(item.GetTags(), targets_x)
+		})(item.GetTags(), sources_x)
 		mobasemo["version_context"] = (func(p models.MoVersionContext, v interface{}) []map[string]interface{} {
 			var moversioncontexts []map[string]interface{}
 			var ret models.MoVersionContext
@@ -6457,7 +6656,7 @@ func flattenListMoBaseMo(p []models.MoBaseMo, d *schema.ResourceData) []map[stri
 
 			moversioncontexts = append(moversioncontexts, moversioncontext)
 			return moversioncontexts
-		})(item.GetVersionContext(), targets_x)
+		})(item.GetVersionContext(), sources_x)
 		mobasemos = append(mobasemos, mobasemo)
 	}
 	return mobasemos
@@ -10224,7 +10423,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		attribute_definition_x, _ := d.GetOk("attribute_definition")
+		input_definition_x, _ := d.GetOk("input_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -10242,7 +10441,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), attribute_definition_x)
+		})(item.GetDefault(), input_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -10260,7 +10459,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), attribute_definition_x)
+		})(item.GetDisplayMeta(), input_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()

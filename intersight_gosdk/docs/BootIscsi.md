@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.Iscsi"]
 **Bootloader** | Pointer to [**NullableBootBootloader**](BootBootloader.md) |  | [optional] 
 **InterfaceName** | Pointer to **string** | The name of the underlying virtual ethernet interface used by the iSCSI boot device. | [optional] 
+**InterfaceSource** | Pointer to **string** | Lists the supported methods to provide network boot device configuration. Supported values are \&quot;name\&quot; and \&quot;port\&quot;. * &#x60;name&#x60; - Use interface name to select virtual ethernet interface. * &#x60;mac&#x60; - Use MAC address to select virtual ethernet interface. * &#x60;port&#x60; - Use port to select virtual ethernet interface. | [optional] [default to "name"]
 **Port** | Pointer to **int64** | Port ID of the ISCSI boot device. | [optional] [default to 0]
 **Slot** | Pointer to **string** | The slot id of the device. Supported values are (1 - 255, \&quot;MLOM\&quot;, \&quot;L\&quot;, \&quot;L1\&quot;, \&quot;L2\&quot;, \&quot;OCP\&quot;). | [optional] 
 
@@ -129,6 +130,31 @@ SetInterfaceName sets InterfaceName field to given value.
 `func (o *BootIscsi) HasInterfaceName() bool`
 
 HasInterfaceName returns a boolean if a field has been set.
+
+### GetInterfaceSource
+
+`func (o *BootIscsi) GetInterfaceSource() string`
+
+GetInterfaceSource returns the InterfaceSource field if non-nil, zero value otherwise.
+
+### GetInterfaceSourceOk
+
+`func (o *BootIscsi) GetInterfaceSourceOk() (*string, bool)`
+
+GetInterfaceSourceOk returns a tuple with the InterfaceSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterfaceSource
+
+`func (o *BootIscsi) SetInterfaceSource(v string)`
+
+SetInterfaceSource sets InterfaceSource field to given value.
+
+### HasInterfaceSource
+
+`func (o *BootIscsi) HasInterfaceSource() bool`
+
+HasInterfaceSource returns a boolean if a field has been set.
 
 ### GetPort
 

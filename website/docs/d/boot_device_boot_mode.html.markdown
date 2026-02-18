@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_device_boot_mode"
 description: |-
-        Boot mode of the devices that BIOS uses to boot them.
+        The boot.DeviceBootMode object represents the user-configured BIOS boot mode for a server, as defined in its boot policy. It reflects the intended state that should be applied to the server's BIOS.
+        #### Purpose
+        The primary purpose of this object is to inventory the desired boot mode (e.g., Legacy or Uefi) from a server's configuration policy. This allows for a clear distinction and comparison between the intended configuration (configuredBootMode) and the actual, running state of the server, which is reported by the BIOS.BootMode object.
+        #### Key Concepts
+        - **Desired State Representation:** Captures the configuredBootMode from a boot policy, representing what the boot mode should be.
+        - **Policy Verification:** Facilitates auditing and compliance checks by allowing a direct comparison between the configured and actual boot modes.
+        - **Configuration-Centric:** Unlike BIOS.BootMode, which reports the hardware's state, this object reflects the state defined in a management policy.
+        - **Server Association:** Directly linked to a compute.Physical object, ensuring the configured boot mode is tied to a specific server.
 
 ---
 
 # Data Source: intersight_boot_device_boot_mode
-Boot mode of the devices that BIOS uses to boot them.
+The boot.DeviceBootMode object represents the user-configured BIOS boot mode for a server, as defined in its boot policy. It reflects the intended state that should be applied to the server's BIOS.
+#### Purpose
+The primary purpose of this object is to inventory the desired boot mode (e.g., "Legacy" or "Uefi") from a server's configuration policy. This allows for a clear distinction and comparison between the intended configuration (configuredBootMode) and the actual, running state of the server, which is reported by the BIOS.BootMode object.
+#### Key Concepts
+- **Desired State Representation:** Captures the configuredBootMode from a boot policy, representing what the boot mode should be.
+- **Policy Verification:** Facilitates auditing and compliance checks by allowing a direct comparison between the configured and actual boot modes.
+- **Configuration-Centric:** Unlike BIOS.BootMode, which reports the hardware's state, this object reflects the state defined in a management policy.
+- **Server Association:** Directly linked to a compute.Physical object, ensuring the configured boot mode is tied to a specific server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

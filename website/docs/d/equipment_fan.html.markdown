@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan"
 description: |-
-        Fan in a Fabric Interconnect / Chassis / RackUnit.
+        The equipment.Fan object represents an individual cooling fan within a larger piece of equipment, such as a fan module, chassis, or Fabric Extender (FEX).
+        #### Purpose
+        The Fan object is designed to provide granular inventory and monitoring for a single fan. It captures the fan's identity (fanId), its operational state (operState), and any specific health issues (operReason). This level of detail is crucial for precise thermal management and fault detection within a system.
+        #### Key Concepts
+        - **Granular Component Monitoring:** Allows for the tracking of the status of each individual fan in a system.
+        - **Health and State Reporting:** Provides the current operState (e.g., ok, fail) and detailed health reasons, such as speed or temperature threshold conditions.
+        - **Unique Identification:** Identified by a fanId and moduleId, which specify its position within its parent fan module.
+        - **Hierarchical Context:** Exists as a child of an equipment.FanModule or equipment.FEX, linking it to its physical housing and the larger system.
 
 ---
 
 # Data Source: intersight_equipment_fan
-Fan in a Fabric Interconnect / Chassis / RackUnit.
+The equipment.Fan object represents an individual cooling fan within a larger piece of equipment, such as a fan module, chassis, or Fabric Extender (FEX).
+#### Purpose
+The Fan object is designed to provide granular inventory and monitoring for a single fan. It captures the fan's identity (fanId), its operational state (operState), and any specific health issues (operReason). This level of detail is crucial for precise thermal management and fault detection within a system.
+#### Key Concepts
+- **Granular Component Monitoring:** Allows for the tracking of the status of each individual fan in a system.
+- **Health and State Reporting:** Provides the current operState (e.g., "ok", "fail") and detailed health reasons, such as speed or temperature threshold conditions.
+- **Unique Identification:** Identified by a fanId and moduleId, which specify its position within its parent fan module.
+- **Hierarchical Context:** Exists as a child of an equipment.FanModule or equipment.FEX, linking it to its physical housing and the larger system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

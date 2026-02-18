@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis_identity"
 description: |-
-        ChassisIdentity object contains connectivity information about IOMs of the chassis. ChassisID is uniquely allocated for the combination of vendor, model and serial number of the chassis.
+        The ChassisIdentity object uniquely identifies a chassis and includes connectivity details for its IOMs. It enables lifecycle operations such as decommission, recommission, and rediscover, ensuring accurate tracking and control within the system.
+        #### Purpose
+        ChassisIdentity serves as a central point for managing chassis attributes, including connectivity and identity data. It is essential for operations involving chassis recognition and interaction, facilitating seamless integration with connected devices and systems.
+        #### Key Concepts
+        - **Connectivity Information:** ChassisIdentity captures detailed connectivity data, enabling precise management of IOMs and ensuring robust operational control.
+        - **Unique Identification:** It provides a unique identifier for each chassis based on vendor, model, and serial number, ensuring accurate traceability and management.
+        - **Integration:** Facilitates integration with other system components by maintaining relationships with inventoried remote chassis and associated objects.
+        - **Lifecycle Management:** Supports operations such as discovery and recommission, ensuring efficient lifecycle management of chassis within the system.
 
 ---
 
 # Data Source: intersight_equipment_chassis_identity
-ChassisIdentity object contains connectivity information about IOMs of the chassis. ChassisID is uniquely allocated for the combination of vendor, model and serial number of the chassis.
+The ChassisIdentity object uniquely identifies a chassis and includes connectivity details for its IOMs. It enables lifecycle operations such as decommission, recommission, and rediscover, ensuring accurate tracking and control within the system.
+#### Purpose
+ChassisIdentity serves as a central point for managing chassis attributes, including connectivity and identity data. It is essential for operations involving chassis recognition and interaction, facilitating seamless integration with connected devices and systems.
+#### Key Concepts
+- **Connectivity Information:** ChassisIdentity captures detailed connectivity data, enabling precise management of IOMs and ensuring robust operational control.
+- **Unique Identification:** It provides a unique identifier for each chassis based on vendor, model, and serial number, ensuring accurate traceability and management.
+- **Integration:** Facilitates integration with other system components by maintaining relationships with inventoried remote chassis and associated objects.
+- **Lifecycle Management:** Supports operations such as discovery and recommission, ensuring efficient lifecycle management of chassis within the system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_rack_enclosure_slot"
 description: |-
-        Rack Server Slot in a RackEnclosure.
+        The equipment.RackEnclosureSlot object represents a physical slot within a rack enclosure that is designed to hold a rack-mounted server.
+        #### Purpose
+        The main function of this object is to model the individual server slots within a larger rack enclosure. It establishes the link between a physical slot and the compute.RackUnit that occupies it. It is essential for accurately representing the physical topology of the enclosure and its contained servers.
+        #### Key Concepts
+        - **Physical Slot Representation:** Models a single server bay within a rack enclosure.
+        - **Server-to-Slot Mapping:** The relationship to a compute.RackUnit and the rackUnitDn property create the explicit link between the server and its physical location.
+        - **Location Identification:** The rackId property (equivalent to the server ID) and its parent equipment.RackEnclosure uniquely identify the slot's position.
+        - **Hierarchical Structure:** Exists as a child of an equipment.RackEnclosure, forming part of the overall enclosure inventory.
 
 ---
 
 # Data Source: intersight_equipment_rack_enclosure_slot
-Rack Server Slot in a RackEnclosure.
+The equipment.RackEnclosureSlot object represents a physical slot within a rack enclosure that is designed to hold a rack-mounted server.
+#### Purpose
+The main function of this object is to model the individual server slots within a larger rack enclosure. It establishes the link between a physical slot and the compute.RackUnit that occupies it. It is essential for accurately representing the physical topology of the enclosure and its contained servers.
+#### Key Concepts
+- **Physical Slot Representation:** Models a single server bay within a rack enclosure.
+- **Server-to-Slot Mapping:** The relationship to a compute.RackUnit and the rackUnitDn property create the explicit link between the server and its physical location.
+- **Location Identification:** The rackId property (equivalent to the server ID) and its parent equipment.RackEnclosure uniquely identify the slot's position.
+- **Hierarchical Structure:** Exists as a child of an equipment.RackEnclosure, forming part of the overall enclosure inventory.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

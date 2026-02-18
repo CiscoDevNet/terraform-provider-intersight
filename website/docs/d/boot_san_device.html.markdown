@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_san_device"
 description: |-
-        San Boot Device configured on the server.
+        The boot.SanDevice object represents a Storage Area Network (SAN) LUN (Logical Unit Number) as a configurable boot option within a server's boot policy.
+        #### Purpose
+        The SanDevice object is used to enable a boot from SAN configuration, where a server's operating system resides on a LUN provided by a remote Fibre Channel storage array. It allows administrators to specify the SAN target (via its WWN) and its priority in the boot sequence, facilitating centralized storage management and diskless server deployments.
+        #### Key Concepts
+        - **Boot From SAN:** Defines a remote Fibre Channel LUN as a bootable source.
+        - **Target Identification:** Specifies the target LUN to boot from, typically using its World Wide Name (WWN).
+        - **Configurable Priority:** The order property determines its position in the boot sequence relative to other local or network devices.
+        - **Boot Policy Component:** Functions as a key element within a boot policy that is associated with a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_san_device
-San Boot Device configured on the server.
+The boot.SanDevice object represents a Storage Area Network (SAN) LUN (Logical Unit Number) as a configurable boot option within a server's boot policy.
+#### Purpose
+The SanDevice object is used to enable a "boot from SAN" configuration, where a server's operating system resides on a LUN provided by a remote Fibre Channel storage array. It allows administrators to specify the SAN target (via its WWN) and its priority in the boot sequence, facilitating centralized storage management and diskless server deployments.
+#### Key Concepts
+- **Boot From SAN:** Defines a remote Fibre Channel LUN as a bootable source.
+- **Target Identification:** Specifies the target LUN to boot from, typically using its World Wide Name (WWN).
+- **Configurable Priority:** The order property determines its position in the boot sequence relative to other local or network devices.
+- **Boot Policy Component:** Functions as a key element within a boot policy that is associated with a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

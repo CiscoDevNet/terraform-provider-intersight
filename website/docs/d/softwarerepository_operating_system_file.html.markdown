@@ -3,12 +3,26 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_operating_system_file"
 description: |-
-        An operating system image that resides either in an external repository or has been imported to the local repository. If the file is available in the local repository, it is marked as cached. If not, it represents a pointer to a file in an external repository.
+        The OperatingSystemFile object represents an operating system image that can reside in an external repository or be imported to a local repository. It supports efficient software deployment and upgrade processes.
+        #### Purpose
+        OperatingSystemFile serves as the repository for OS images, ensuring that systems can be updated and maintained with the latest operating system versions.
+        #### Key Concepts
+        - **OS Management:** Provides a structured approach to managing operating system images, supporting efficient upgrades.
+        - **Deployment Support:** Facilitates software deployment through readily available OS images.
+        - **Catalog Integration:** Works seamlessly with the Intersight catalog for comprehensive OS image management.
+        - **Security:** Ensures image integrity and security through checksums and encryption.
 
 ---
 
 # Data Source: intersight_softwarerepository_operating_system_file
-An operating system image that resides either in an external repository or has been imported to the local repository. If the file is available in the local repository, it is marked as cached. If not, it represents a pointer to a file in an external repository.
+The OperatingSystemFile object represents an operating system image that can reside in an external repository or be imported to a local repository. It supports efficient software deployment and upgrade processes.
+#### Purpose
+OperatingSystemFile serves as the repository for OS images, ensuring that systems can be updated and maintained with the latest operating system versions.
+#### Key Concepts
+- **OS Management:** Provides a structured approach to managing operating system images, supporting efficient upgrades.
+- **Deployment Support:** Facilitates software deployment through readily available OS images.
+- **Catalog Integration:** Works seamlessly with the Intersight catalog for comprehensive OS image management.
+- **Security:** Ensures image integrity and security through checksums and encryption.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -20,7 +34,8 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
-* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
+* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
+* `file_name`:(string) File name of the uploaded image. 
 * `guid`:(string) The unique identifier for an image in a Cisco repository. 
 * `image_type`:(string) The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, Unified Edge server. The field is used in private appliance mode, where image does not have description populated from CCO. 
 * `import_action`:(string) The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.* `None` - No action should be taken on the imported file.* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.* `PreCache` - Cache the file into the Intersight Appliance.* `Cancel` - The cancel import process for the file into the repository.* `Extract` - The action to extract the file in the external repository.* `Evict` - Evict the cached file from the Intersight Appliance. 

@@ -3,12 +3,24 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_port_group_aggregation_def"
 description: |-
-        FEX/IOCARD module port group aggregation capabilities.
+        The PortGroupAggregationDef defines how port-groups on FEX/IOCARD modules can be aggregated.
+        #### Purpose
+        A PortGroupAggregationDef serves as the blueprint for defining port group aggregation capabilities, supporting efficient network management and configuration.
+        #### Key Concepts
+        - **Aggregation Capability:** Specifies the aggregation capabilities associated with port groups, enhancing network efficiency and resource management.
+        - **Module Integration:** Focuses on FEX/IOCARD module port groups, ensuring seamless integration and configuration within network systems.
+        - **Access Management:** Utilizes privilege sets to ensure secure access and management of port group capabilities, maintaining system integrity.
 
 ---
 
 # Resource: intersight_capability_port_group_aggregation_def
-FEX/IOCARD module port group aggregation capabilities.
+The PortGroupAggregationDef defines how port-groups on FEX/IOCARD modules can be aggregated.
+#### Purpose
+A PortGroupAggregationDef serves as the blueprint for defining port group aggregation capabilities, supporting efficient network management and configuration. 
+#### Key Concepts
+- **Aggregation Capability:** Specifies the aggregation capabilities associated with port groups, enhancing network efficiency and resource management.
+- **Module Integration:** Focuses on FEX/IOCARD module port groups, ensuring seamless integration and configuration within network systems.
+- **Access Management:** Utilizes privilege sets to ensure secure access and management of port group capabilities, maintaining system integrity.
 ## Usage Example
 ### Resource Creation
 

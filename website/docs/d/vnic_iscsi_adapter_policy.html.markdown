@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_adapter_policy"
 description: |-
-        Set of iSCSI properties that govern the host-side behavior of the adapter.
+        The IscsiAdapterPolicy object governs the operational behavior of iSCSI adapters, including timeout and retry settings, to ensure robust and reliable storage connectivity.
+        #### Purpose
+        IscsiAdapterPolicy provides fine-grained control over iSCSI adapter parameters, optimizing connectivity and performance for network-based storage.
+        #### Key Concepts
+        - **Operational Control:** Manages connection timeouts, retry counts, and DHCP timeouts for iSCSI operations.
+        - *Integration with Boot Policies:** Works in tandem with iSCSI boot and target policies.
 
 ---
 
 # Data Source: intersight_vnic_iscsi_adapter_policy
-Set of iSCSI properties that govern the host-side behavior of the adapter.
+The IscsiAdapterPolicy object governs the operational behavior of iSCSI adapters, including timeout and retry settings, to ensure robust and reliable storage connectivity.
+#### Purpose 
+IscsiAdapterPolicy provides fine-grained control over iSCSI adapter parameters, optimizing connectivity and performance for network-based storage.
+#### Key Concepts
+- **Operational Control:** Manages connection timeouts, retry counts, and DHCP timeouts for iSCSI operations.
+- *Integration with Boot Policies:** Works in tandem with iSCSI boot and target policies.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "power"
 layout: "intersight"
 page_title: "Intersight: intersight_power_policy"
 description: |-
-        Power Management policy models a configuration that can be applied to Chassis or Server to manage Power Related Features.
+        The Power Policy is a versatile, reusable policy for configuring power management features on both servers and chassis.
+        #### Purpose
+        The purpose of this policy is to provide centralized control over power-related settings, allowing administrators to optimize for performance, power efficiency, or redundancy based on their specific needs. It standardizes settings like power redundancy for a chassis, power restore behavior for a server, and power allocation priorities for blades.
+        #### Key Concepts
+        - **Chassis and Server Application:** The policy contains settings applicable to both chassis (e.g., redundancyMode) and servers (e.g., powerRestoreState), and is applied via the corresponding profile type.
+        - **Power Redundancy:** For chassis, it can define the redundancy mode (e.g., N+1, N+2, Grid), which determines how many Power Supply Units (PSUs) are kept in reserve.
+        - **Power Restore State:** For servers, it dictates the power state (Always On, Always Off, or Last State) the server should return to after a power loss event.
+        - **Power Allocation:** It can set a power budget for a chassis and define the power priority for individual servers, influencing how power is allocated in constrained environments.
 
 ---
 
 # Data Source: intersight_power_policy
-Power Management policy models a configuration that can be applied to Chassis or Server to manage Power Related Features.
+The Power Policy is a versatile, reusable policy for configuring power management features on both servers and chassis.
+#### Purpose
+The purpose of this policy is to provide centralized control over power-related settings, allowing administrators to optimize for performance, power efficiency, or redundancy based on their specific needs. It standardizes settings like power redundancy for a chassis, power restore behavior for a server, and power allocation priorities for blades.
+#### Key Concepts
+- **Chassis and Server Application:** The policy contains settings applicable to both chassis (e.g., redundancyMode) and servers (e.g., powerRestoreState), and is applied via the corresponding profile type.
+- **Power Redundancy:** For chassis, it can define the redundancy mode (e.g., N+1, N+2, Grid), which determines how many Power Supply Units (PSUs) are kept in reserve.
+- **Power Restore State:** For servers, it dictates the power state (Always On, Always Off, or Last State) the server should return to after a power loss event.
+- **Power Allocation:** It can set a power budget for a chassis and define the power priority for individual servers, influencing how power is allocated in constrained environments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

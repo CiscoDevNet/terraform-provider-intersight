@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_user_role"
 description: |-
-        Mapping of endpoint user to endpoint roles.
+        The IAM EndPointUserRole object is a mapping object that links a local user to their assigned roles and password within the context of an EndPointUserPolicy.
+        #### Purpose
+        The IAM EndPointUserRole objects purpose is to bind together three key pieces of information: the user, their password, and their permissions. It serves as the mechanism for granting specific roles (like admin or read-only) to an EndPointUser and securely storing the encrypted password for that user's account on the endpoint.
+        #### Key Concepts
+        - **User-Role-Password Mapping:** It connects an EndPointUser object with a collection of EndPointRole objects and contains the password for that user.
+        - **Secure Password Handling:** The password property is write-only and encrypted, ensuring credentials are not exposed after being set.
+        - **Component of a Policy:** It exists as part of the endPointUserRoles collection within an EndPointUserPolicy and is essential for defining a complete user account.
+        - **Account Status:** Includes an enabled flag to control whether the user account is active on the endpoint.
 
 ---
 
 # Data Source: intersight_iam_end_point_user_role
-Mapping of endpoint user to endpoint roles.
+The IAM EndPointUserRole object is a mapping object that links a local user to their assigned roles and password within the context of an EndPointUserPolicy.
+#### Purpose
+The IAM EndPointUserRole objects purpose is to bind together three key pieces of information: the user, their password, and their permissions. It serves as the mechanism for granting specific roles (like admin or read-only) to an EndPointUser and securely storing the encrypted password for that user's account on the endpoint.
+#### Key Concepts
+- **User-Role-Password Mapping:** It connects an EndPointUser object with a collection of EndPointRole objects and contains the password for that user.
+- **Secure Password Handling:** The password property is write-only and encrypted, ensuring credentials are not exposed after being set.
+- **Component of a Policy:** It exists as part of the endPointUserRoles collection within an EndPointUserPolicy and is essential for defining a complete user account.
+- **Account Status:** Includes an enabled flag to control whether the user account is active on the endpoint.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

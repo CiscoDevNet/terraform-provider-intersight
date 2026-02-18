@@ -3,12 +3,26 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_system_boot_order"
 description: |-
-        Actual Boot Order of the system.
+        The BIOS.SystemBootOrder object represents the actual boot order of a server as enumerated by its BIOS. This provides a comprehensive, read-only view of the boot sequence, including the configured boot mode and the list of bootable devices.
+        #### Purpose
+        The SystemBootOrder object is designed to provide a definitive inventory of how a server will attempt to boot. It captures not only the sequence of devices but also the overarching boot mode (Legacy or UEFI) and the status of Secure Boot. It is essential for verifying boot configurations and troubleshooting boot-related issues.
+        #### Key Concepts
+        - **Actual Boot Sequence:** Lists the bootDevices in the precise order that the BIOS will use them.
+        - **Boot Mode and Security:** Reports the configured bootMode (Legacy/Uefi) and the secureBoot state, providing a complete picture of the boot environment.
+        - **Read-Only Inventory:** Acts as a source of truth for the server's current boot configuration, as opposed to a policy object that defines a desired state.
+        - **Hierarchical Structure:** Contains a collection of BIOS.BootDevice objects, each representing a specific device in the boot sequence.
 
 ---
 
 # Data Source: intersight_bios_system_boot_order
-Actual Boot Order of the system.
+The BIOS.SystemBootOrder object represents the actual boot order of a server as enumerated by its BIOS. This provides a comprehensive, read-only view of the boot sequence, including the configured boot mode and the list of bootable devices.
+#### Purpose
+The SystemBootOrder object is designed to provide a definitive inventory of how a server will attempt to boot. It captures not only the sequence of devices but also the overarching boot mode (Legacy or UEFI) and the status of Secure Boot. It is essential for verifying boot configurations and troubleshooting boot-related issues.
+#### Key Concepts
+- **Actual Boot Sequence:** Lists the bootDevices in the precise order that the BIOS will use them.
+- **Boot Mode and Security:** Reports the configured bootMode (Legacy/Uefi) and the secureBoot state, providing a complete picture of the boot environment.
+- **Read-Only Inventory:** Acts as a source of truth for the server's current boot configuration, as opposed to a policy object that defines a desired state.
+- **Hierarchical Structure:** Contains a collection of BIOS.BootDevice objects, each representing a specific device in the boot sequence.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

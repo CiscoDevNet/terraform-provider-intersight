@@ -3,16 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_trust_point"
 description: |-
-        To affirm the identity of trusted source.
-        Allows import of third-party CA certificates in X.509 (CER) format.
-        It can be a root CA or an trust chain that leads to a root CA.
+        The TrustPoint object represents a trusted source of certificates within the system, enabling secure communication and authentication.
+        #### Purpose
+        A TrustPoint serves as a repository for certificates, affirming the identity of trusted entities and facilitating secure interactions with external systems.
+        #### Key Concepts
+        - **Certificate Management:** Stores and manages X.509 certificates, supporting both root and intermediate certificates for authentication purposes.
+        - **Security Assurance:** Provides a basis for secure communication by validating the identity of external entities through trusted certificates.
+        - **Account Association:** Associates certificates with specific accounts, ensuring they are available for authentication within the account's scope.
+        - **Certificate Import:** Allows the import of third-party certificates, enhancing security through integration with external certificate authorities.
 
 ---
 
 # Resource: intersight_iam_trust_point
-To affirm the identity of trusted source.
-Allows import of third-party CA certificates in X.509 (CER) format.
-It can be a root CA or an trust chain that leads to a root CA.
+The TrustPoint object represents a trusted source of certificates within the system, enabling secure communication and authentication.
+#### Purpose
+A TrustPoint serves as a repository for certificates, affirming the identity of trusted entities and facilitating secure interactions with external systems.
+#### Key Concepts
+- **Certificate Management:** Stores and manages X.509 certificates, supporting both root and intermediate certificates for authentication purposes.
+- **Security Assurance:** Provides a basis for secure communication by validating the identity of external entities through trusted certificates.
+- **Account Association:** Associates certificates with specific accounts, ensuring they are available for authentication within the account's scope.
+- **Certificate Import:** Allows the import of third-party certificates, enhancing security through integration with external certificate authorities.
 ## Usage Example
 ### Resource Creation
 

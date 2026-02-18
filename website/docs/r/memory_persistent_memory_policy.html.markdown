@@ -3,12 +3,28 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_policy"
 description: |-
-        The Persistent Memory policy defines the reusable Persistent Memory related configuration that can be applied on many servers. This policy allows the application of Persistent Memory Goals and creation of Persistent Memory Regions and Namespaces. The encryption of the Persistent Memory Modules can be enabled through this policy by providing a passphrase.
+        The PersistentMemoryPolicy is a reusable policy for configuring Intel Optane Persistent Memory (PMem) modules on supported servers. This provides a comprehensive framework for defining memory operating modes, creating logical namespaces, and managing security.
+        #### Purpose
+        The purpose of this policy is to automate and standardize the complex configuration of persistent memory. It allows administrators to define how the PMem modules should be partitioned between volatile memory (Memory Mode) and persistent storage (App Direct Mode). It also handles the creation of namespaces and the application of security passphrases, enabling consistent and repeatable deployments of PMem-enabled servers.
+        #### Key Concepts
+        - **Memory Goals:** The policy uses Goals to define the desired ratio of Memory Mode to App Direct Mode for all PMem modules on a given CPU socket.
+        - **Logical Namespaces:** Within the App Direct portion, the policy can define one or more logical namespaces, which appear to the operating system as block or raw (DAX) devices.
+        - **Local Security:** It supports enabling encryption on the PMem modules by setting a secure passphrase.
+        - **Profile-Based and Reboot Required:** The policy is applied via a Server Profile, and its application requires a server reboot to reconfigure the memory subsystem.
+        - **Management Mode:** Allows administrators to choose whether the persistent memory is configured by Intersight or managed directly by the operating system.
 
 ---
 
 # Resource: intersight_memory_persistent_memory_policy
-The Persistent Memory policy defines the reusable Persistent Memory related configuration that can be applied on many servers. This policy allows the application of Persistent Memory Goals and creation of Persistent Memory Regions and Namespaces. The encryption of the Persistent Memory Modules can be enabled through this policy by providing a passphrase.
+The PersistentMemoryPolicy is a reusable policy for configuring Intel Optane Persistent Memory (PMem) modules on supported servers. This provides a comprehensive framework for defining memory operating modes, creating logical namespaces, and managing security.
+#### Purpose
+The purpose of this policy is to automate and standardize the complex configuration of persistent memory. It allows administrators to define how the PMem modules should be partitioned between volatile memory (Memory Mode) and persistent storage (App Direct Mode). It also handles the creation of namespaces and the application of security passphrases, enabling consistent and repeatable deployments of PMem-enabled servers. 
+#### Key Concepts
+- **Memory Goals:** The policy uses "Goals" to define the desired ratio of Memory Mode to App Direct Mode for all PMem modules on a given CPU socket.
+- **Logical Namespaces:** Within the App Direct portion, the policy can define one or more logical namespaces, which appear to the operating system as block or raw (DAX) devices.
+- **Local Security:** It supports enabling encryption on the PMem modules by setting a secure passphrase.
+- **Profile-Based and Reboot Required:** The policy is applied via a Server Profile, and its application requires a server reboot to reconfigure the memory subsystem.
+- **Management Mode:** Allows administrators to choose whether the persistent memory is configured by Intersight or managed directly by the operating system.
 ## Usage Example
 ### Resource Creation
 

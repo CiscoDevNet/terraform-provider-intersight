@@ -3,12 +3,26 @@ subcategory: "snmp"
 layout: "intersight"
 page_title: "Intersight: intersight_snmp_policy"
 description: |-
-        Policy to configure SNMP settings on endpoint.
+        The SNMP Policy is a reusable policy for configuring Simple Network Management Protocol (SNMP) settings on endpoints like servers and chassis.
+        #### Purpose
+        The purpose of this policy is to enable and standardize device monitoring and management via SNMP. It allows administrators to configure the SNMP agent on bghendpoints, define access credentials for different SNMP versions, and specify destinations for SNMP traps, integrating the devices into existing network management systems.
+        #### Key Concepts
+        - **Multi-Version Support:** The policy allows for the independent configuration of SNMPv2c and SNMPv3, including enabling or disabling each version.
+        - **User and Community Strings:** It supports the configuration of read-only community strings for SNMPv2c and detailed user-based security models (USM) for SNMPv3, including authentication and privacy protocols.
+        - **Trap Configuration:** Administrators can define a list of trap destinations, specifying the recipient's address, port, and the SNMP version to use for the trap messages.
+        - **Profile-Based Application:** The policy is attached to Server or Chassis Profiles to apply a consistent SNMP configuration across multiple devices.
 
 ---
 
 # Resource: intersight_snmp_policy
-Policy to configure SNMP settings on endpoint.
+The SNMP Policy is a reusable policy for configuring Simple Network Management Protocol (SNMP) settings on endpoints like servers and chassis.
+#### Purpose
+The purpose of this policy is to enable and standardize device monitoring and management via SNMP. It allows administrators to configure the SNMP agent on bghendpoints, define access credentials for different SNMP versions, and specify destinations for SNMP traps, integrating the devices into existing network management systems.
+#### Key Concepts
+- **Multi-Version Support:** The policy allows for the independent configuration of SNMPv2c and SNMPv3, including enabling or disabling each version.
+- **User and Community Strings:** It supports the configuration of read-only community strings for SNMPv2c and detailed user-based security models (USM) for SNMPv3, including authentication and privacy protocols.
+- **Trap Configuration:** Administrators can define a list of trap destinations, specifying the recipient's address, port, and the SNMP version to use for the trap messages.
+- **Profile-Based Application:** The policy is attached to Server or Chassis Profiles to apply a consistent SNMP configuration across multiple devices.
 ## Usage Example
 ### Resource Creation
 

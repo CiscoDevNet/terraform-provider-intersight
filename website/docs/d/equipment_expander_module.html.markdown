@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_expander_module"
 description: |-
-        Expander module inside the chassis.
+        The equipment.ExpanderModule object represents a physical expander module installed within a chassis. These modules typically provide additional connectivity or resources for the components within the chassis.
+        #### Purpose
+        The main purpose of this object is to inventory and monitor the state of an expander module. It captures the module's identity, its operational state, and any health-related issues. For example, it can house its own set of fan modules for cooling, which are represented as child objects.
+        #### Key Concepts
+        - **Hardware Inventory:** Provides a detailed record of the expander module, including its moduleId, partNumber, and operState.
+        - **Health Monitoring:** The operReason collection provides specific details on any health issues affecting the module.
+        - **Hierarchical Structure:** Acts as a container for its own sub-components, such as equipment.FanModule objects.
+        - **Chassis Component:** It is a child of an equipment.Chassis object, clearly defining its location and role within the overall system.
 
 ---
 
 # Data Source: intersight_equipment_expander_module
-Expander module inside the chassis.
+The equipment.ExpanderModule object represents a physical expander module installed within a chassis. These modules typically provide additional connectivity or resources for the components within the chassis.
+#### Purpose
+The main purpose of this object is to inventory and monitor the state of an expander module. It captures the module's identity, its operational state, and any health-related issues. For example, it can house its own set of fan modules for cooling, which are represented as child objects.
+#### Key Concepts
+- **Hardware Inventory:** Provides a detailed record of the expander module, including its moduleId, partNumber, and operState.
+- **Health Monitoring:** The operReason collection provides specific details on any health issues affecting the module.
+- **Hierarchical Structure:** Acts as a container for its own sub-components, such as equipment.FanModule objects.
+- **Chassis Component:** It is a child of an equipment.Chassis object, clearly defining its location and role within the overall system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

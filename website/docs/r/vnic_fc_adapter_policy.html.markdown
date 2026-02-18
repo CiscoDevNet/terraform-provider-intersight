@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_fc_adapter_policy"
 description: |-
-        A Fibre Channel Adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. You can enable FCP Error Recovery, change the default settings of Queues and Interrupt handling for performance enhancement.
+        The FcAdapterPolicy object manages the configuration and operational parameters of Fibre Channel adapters. It governs how adapters handle traffic, error recovery, and performance tuning.
+        #### Purpose
+        FcAdapterPolicy centralizes the management of advanced features for Fibre Channel adapters, including error recovery, queue management, and interrupt handling to maximize storage performance.
+        #### Key Concepts
+        - **Advanced Adapter Settings:** Controls error recovery, queue depths, and I/O throttling.
+        - **Integration with vHBAs:** Applied to vHBA objects to govern their runtime behavior.
 
 ---
 
 # Resource: intersight_vnic_fc_adapter_policy
-A Fibre Channel Adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. You can enable FCP Error Recovery, change the default settings of Queues and Interrupt handling for performance enhancement.
+The FcAdapterPolicy object manages the configuration and operational parameters of Fibre Channel adapters. It governs how adapters handle traffic, error recovery, and performance tuning.
+#### Purpose
+FcAdapterPolicy centralizes the management of advanced features for Fibre Channel adapters, including error recovery, queue management, and interrupt handling to maximize storage performance.
+#### Key Concepts
+- **Advanced Adapter Settings:** Controls error recovery, queue depths, and I/O throttling.
+- **Integration with vHBAs:** Applied to vHBA objects to govern their runtime behavior.
 ## Usage Example
 ### Resource Creation
 

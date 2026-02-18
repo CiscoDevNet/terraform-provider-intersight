@@ -3,12 +3,26 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_host_iscsi_interface"
 description: |-
-        Iscsi interface on a server adapter.
+        The adapter.HostIscsiInterface object represents a virtual iSCSI interface as it is presented to the host operating system. It is used to model and manage iSCSI-based storage connectivity for a server.
+        #### Purpose
+        The main function of the HostIscsiInterface object is to provide an inventory of iSCSI interfaces on a server's adapter. It captures the essential configuration and status details required for iSCSI network communication, such as its name, administrative state, and MAC address.
+        #### Key Concepts
+        - **iSCSI Interface Model:** Represents a logical iSCSI initiator interface on the adapter.
+        - **Identity and State:** Tracks the interface's unique name, administrative state (adminState), and operational state (operState).
+        - **Host Visibility:** The hostVisible property indicates whether the interface is exposed to the host operating system.
+        - **Hierarchical Context:** Is a child of an adapter.Unit object, linking it directly to the physical adapter it resides on.
 
 ---
 
 # Data Source: intersight_adapter_host_iscsi_interface
-Iscsi interface on a server adapter.
+The adapter.HostIscsiInterface object represents a virtual iSCSI interface as it is presented to the host operating system. It is used to model and manage iSCSI-based storage connectivity for a server.
+#### Purpose
+The main function of the HostIscsiInterface object is to provide an inventory of iSCSI interfaces on a server's adapter. It captures the essential configuration and status details required for iSCSI network communication, such as its name, administrative state, and MAC address.
+#### Key Concepts
+- **iSCSI Interface Model:** Represents a logical iSCSI initiator interface on the adapter.
+- **Identity and State:** Tracks the interface's unique name, administrative state (adminState), and operational state (operState).
+- **Host Visibility:** The hostVisible property indicates whether the interface is exposed to the host operating system.
+- **Hierarchical Context:** Is a child of an adapter.Unit object, linking it directly to the physical adapter it resides on.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

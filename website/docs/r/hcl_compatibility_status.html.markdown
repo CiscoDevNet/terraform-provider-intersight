@@ -3,28 +3,26 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_compatibility_status"
 description: |-
-        ### Overview
         The CompatibilityStatus object evaluates the compatibility of hardware and software configurations within the system. This provides insights into the compatibility status of various configurations, aiding in decision-making and system optimization.
         #### Purpose
         CompatibilityStatus is integral to ensuring that hardware and software components are compatible with each other. It facilitates the evaluation of configurations to determine their suitability for deployment within the system.
         #### Key Concepts
-        - **Configuration Evaluation:** - Enables the assessment of compatibility across diverse hardware and software configurations, helping to identify potential issues before deployment.
-        - **Request Types:** - Offers flexible request types to serve different compatibility evaluation needs, from checking compatibility to filling supported version details.
-        - **Access Control:** - Privilege sets dictate who can interact with the CompatibilityStatus object, ensuring secure and appropriate usage.
-        - **Entitlements and Licenses:** - Operates under specific entitlements, aligning with organizational policies and ensuring compliance with licensing requirements.
+        - **Configuration Evaluation:** Enables the assessment of compatibility across diverse hardware and software configurations, helping to identify potential issues before deployment.
+        - **Request Types:** Offers flexible request types to serve different compatibility evaluation needs, from checking compatibility to filling supported version details.
+        - **Access Control:** Privilege sets dictate who can interact with the CompatibilityStatus object, ensuring secure and appropriate usage.
+        - **Entitlements and Licenses:** Operates under specific entitlements, aligning with organizational policies and ensuring compliance with licensing requirements.
 
 ---
 
 # Resource: intersight_hcl_compatibility_status
-### Overview
 The CompatibilityStatus object evaluates the compatibility of hardware and software configurations within the system. This provides insights into the compatibility status of various configurations, aiding in decision-making and system optimization.
 #### Purpose
 CompatibilityStatus is integral to ensuring that hardware and software components are compatible with each other. It facilitates the evaluation of configurations to determine their suitability for deployment within the system.
 #### Key Concepts
-- **Configuration Evaluation:** - Enables the assessment of compatibility across diverse hardware and software configurations, helping to identify potential issues before deployment.
-- **Request Types:** - Offers flexible request types to serve different compatibility evaluation needs, from checking compatibility to filling supported version details.
-- **Access Control:** - Privilege sets dictate who can interact with the CompatibilityStatus object, ensuring secure and appropriate usage.
-- **Entitlements and Licenses:** - Operates under specific entitlements, aligning with organizational policies and ensuring compliance with licensing requirements.
+- **Configuration Evaluation:** Enables the assessment of compatibility across diverse hardware and software configurations, helping to identify potential issues before deployment.
+- **Request Types:** Offers flexible request types to serve different compatibility evaluation needs, from checking compatibility to filling supported version details.
+- **Access Control:** Privilege sets dictate who can interact with the CompatibilityStatus object, ensuring secure and appropriate usage.
+- **Entitlements and Licenses:** Operates under specific entitlements, aligning with organizational policies and ensuring compliance with licensing requirements.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

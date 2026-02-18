@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user"
 description: |-
-        The Intersight account user.
+        The User object represents individual users within the system, encompassing their identity, permissions, and roles.
+        #### Purpose
+        A User is a central entity within the system, defining the attributes, and roles associated with an individual accessing the system. It enables personalized and secure interactions with the system's resources.
+        #### Key Concepts
+        - **Identity Management:** Maintains user identification details, including name, email, and unique identifiers, for authentication and authorization purposes.
+        - **Role Assignment:** Associates users with roles, defining their access levels and capabilities within the system.
+        - **Session Tracking:** Tracks user sessions, providing insights into login activity and enabling session management features.
+        - **Security Controls:** Implements security measures such as password policies and account lockout features, ensuring user accounts are protected against unauthorized access.
 
 ---
 
 # Data Source: intersight_iam_user
-The Intersight account user.
+The User object represents individual users within the system, encompassing their identity, permissions, and roles.
+#### Purpose
+A User is a central entity within the system, defining the attributes, and roles associated with an individual accessing the system. It enables personalized and secure interactions with the system's resources.
+ #### Key Concepts
+ - **Identity Management:** Maintains user identification details, including name, email, and unique identifiers, for authentication and authorization purposes.
+ - **Role Assignment:** Associates users with roles, defining their access levels and capabilities within the system.
+ - **Session Tracking:** Tracks user sessions, providing insights into login activity and enabling session management features.
+ - **Security Controls:** Implements security measures such as password policies and account lockout features, ensuring user accounts are protected against unauthorized access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -19,6 +33,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `email`:(string) Email of the user. Remote users are added to Intersight using the email configured in the IdP. 
+* `external_identifier`:(string) External identifier for the user, used for integration with external identity systems. 
 * `first_name`:(string) First name of the user. For remote users, this field is populated from the IdP attributes received after authentication. 
 * `last_login_time`:(string) Last successful login time for user. 
 * `last_name`:(string) Last name of the user. For remote users, this field is populated from the IdP attributes received after authentication. 

@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_private_key_spec"
 description: |-
-        Parameters used to generate a private key.
+        PrivateKeySpec defines parameters for generating a private key that will be used to sign a certificate signing request (CSR).
+        #### Purpose
+        It standardizes the key generation process for certificate workflows.
+        #### Key Concepts
+        - **CSR Workflow:** Couples key generation with a certificate request.
+        - **Algorithm Selection:** Encapsulates key algorithm and parameters.
+        - **Scoped Inheritance:** Governed by the associated certificate request.
+        - **Security Posture:** Ensures consistent, policy-aligned key creation.
 
 ---
 
 # Data Source: intersight_iam_private_key_spec
-Parameters used to generate a private key.
+PrivateKeySpec defines parameters for generating a private key that will be used to sign a certificate signing request (CSR).
+#### Purpose
+It standardizes the key generation process for certificate workflows.
+#### Key Concepts
+- **CSR Workflow:** Couples key generation with a certificate request.
+- **Algorithm Selection:** Encapsulates key algorithm and parameters.
+- **Scoped Inheritance:** Governed by the associated certificate request.
+- **Security Posture:** Ensures consistent, policy-aligned key creation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

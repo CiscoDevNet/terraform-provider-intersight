@@ -3,12 +3,22 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_config_policy"
 description: |-
-        An Adapter Configuration Policy configures the Ethernet and Fibre-Channel settings for the VIC adapter.
+        The ConfigPolicy object is a core element for managing adapter configurations on standalone rack servers. It defines and maintains Ethernet and Fibre Channel settings for Cisco VIC adapters. This policy is not supported on Intersight Managed Mode (IMM) servers.
+        #### Purpose
+        A ConfigPolicy serves as a policy framework for configuring vital adapter settings, allowing administrators to manage and deploy configurations efficiently. It supports operations such as read, create, update, and delete, facilitating seamless integration with server management workflows.
+        #### Key Concepts
+        - **Adapter Configuration:** Focuses on configuring Ethernet and Fibre-Channel settings, addressing the needs of various server environments.
+        - **Access Control:** Ensures that only authorized users can perform configuration tasks, enhancing security and reliability.
 
 ---
 
 # Resource: intersight_adapter_config_policy
-An Adapter Configuration Policy configures the Ethernet and Fibre-Channel settings for the VIC adapter.
+The ConfigPolicy object is a core element for managing adapter configurations on standalone rack servers. It defines and maintains Ethernet and Fibre Channel settings for Cisco VIC adapters. This policy is not supported on Intersight Managed Mode (IMM) servers.
+#### Purpose
+A ConfigPolicy serves as a policy framework for configuring vital adapter settings, allowing administrators to manage and deploy configurations efficiently. It supports operations such as read, create, update, and delete, facilitating seamless integration with server management workflows.
+#### Key Concepts
+- **Adapter Configuration:** Focuses on configuring Ethernet and Fibre-Channel settings, addressing the needs of various server environments.
+- **Access Control:** Ensures that only authorized users can perform configuration tasks, enhancing security and reliability.
 ## Usage Example
 ### Resource Creation
 

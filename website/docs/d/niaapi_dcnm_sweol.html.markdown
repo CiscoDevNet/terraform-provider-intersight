@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_dcnm_sweol"
 description: |-
-        The software end of life notice for DCNM.
+        The DcnmSweol object is crucial for software lifecycle management, outlining the end-of-life status of software releases specific to the DCNM platform. It helps users plan transitions and maintain system continuity.
+        #### Purpose
+        DcnmSweol provides detailed information about the end-of-life schedule for software releases on the DCNM platform, including dates for maintenance termination.
+        #### Key Concepts
+        - **Platform-Specific Lifecycle:** Defines the timeline for software support on the DCNM platform.
+        - **Transition Assistance:** Offers migration URLs and notices for DCNM software releases.
+        - **Comprehensive Details:** Includes dates for lifecycle stages on the DCNM platform.
 
 ---
 
 # Data Source: intersight_niaapi_dcnm_sweol
-The software end of life notice for DCNM.
+The DcnmSweol object is crucial for software lifecycle management, outlining the end-of-life status of software releases specific to the DCNM platform. It helps users plan transitions and maintain system continuity.
+#### Purpose
+DcnmSweol provides detailed information about the end-of-life schedule for software releases on the DCNM platform, including dates for maintenance termination.
+#### Key Concepts
+- **Platform-Specific Lifecycle:** Defines the timeline for software support on the DCNM platform.
+- **Transition Assistance:** Offers migration URLs and notices for DCNM software releases.
+- **Comprehensive Details:** Includes dates for lifecycle stages on the DCNM platform.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

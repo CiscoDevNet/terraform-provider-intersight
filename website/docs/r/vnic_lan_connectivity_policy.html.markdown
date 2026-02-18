@@ -3,12 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_lan_connectivity_policy"
 description: |-
-        A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
+        The LanConnectivityPolicy object defines the network resources and connection topology between servers and the LAN within Cisco systems. It abstracts the configuration of virtual network interfaces (vNICs), ensuring consistent device naming, optimized placement, and advanced features such as usNIC and VMQ for improved network performance.
+        #### Purpose
+        A LanConnectivityPolicy centralizes the management of LAN connectivity for servers by specifying how virtual interfaces are created and associated with network resources. It enables both automatic and custom placement of vNICs, supports the assignment of MAC addresses, and integrates with relevant network and adapter policies.
+        #### Key Concepts
+        - **Policy-Based Networking:** Facilitates consistent and scalable LAN connectivity across multiple servers.
+        - **Integration with Network Policies:** Links to Ethernet network, QoS, and adapter policies for comprehensive configuration.
+        - **Device Naming and Placement:** Supports consistent device naming and controls vNIC placement for optimal performance.
 
 ---
 
 # Resource: intersight_vnic_lan_connectivity_policy
-A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
+The LanConnectivityPolicy object defines the network resources and connection topology between servers and the LAN within Cisco systems. It abstracts the configuration of virtual network interfaces (vNICs), ensuring consistent device naming, optimized placement, and advanced features such as usNIC and VMQ for improved network performance.
+#### Purpose
+A LanConnectivityPolicy centralizes the management of LAN connectivity for servers by specifying how virtual interfaces are created and associated with network resources. It enables both automatic and custom placement of vNICs, supports the assignment of MAC addresses, and integrates with relevant network and adapter policies.
+#### Key Concepts
+- **Policy-Based Networking:** Facilitates consistent and scalable LAN connectivity across multiple servers.
+- **Integration with Network Policies:** Links to Ethernet network, QoS, and adapter policies for comprehensive configuration.
+- **Device Naming and Placement:** Supports consistent device naming and controls vNIC placement for optimal performance.
 ## Usage Example
 ### Resource Creation
 

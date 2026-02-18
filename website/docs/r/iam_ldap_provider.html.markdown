@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_provider"
 description: |-
-        LDAP Provider or LDAP Server for user authentication.
+        ### Overview
+        The LDAP Provider object represents a single LDAP server that an endpoint will use for authentication. It is a component of an LdapPolicy.
+        #### Purpose
+        The purpose is to define the connection details for one LDAP server. An LdapPolicy can contain a list of LdapProvider objects, creating an ordered list of servers that the endpoint will attempt to contact for authentication.
+        #### Key Concepts
+        - **Server Endpoint:** - Specifies the IP address or hostname and the port of the LDAP server.
+        - **Component of a Policy:** - It does not function independently but is always part of an LdapPolicy.
+        - **Ordered List:** - The order of LdapProvider objects within the policy determines the failover sequence for authentication attempts.
 
 ---
 
 # Resource: intersight_iam_ldap_provider
-LDAP Provider or LDAP Server for user authentication.
+### Overview
+The LDAP Provider object represents a single LDAP server that an endpoint will use for authentication. It is a component of an LdapPolicy.
+#### Purpose
+The purpose is to define the connection details for one LDAP server. An LdapPolicy can contain a list of LdapProvider objects, creating an ordered list of servers that the endpoint will attempt to contact for authentication.
+#### Key Concepts
+- **Server Endpoint:** - Specifies the IP address or hostname and the port of the LDAP server.
+- **Component of a Policy:** - It does not function independently but is always part of an LdapPolicy.
+- **Ordered List:** - The order of LdapProvider objects within the policy determines the failover sequence for authentication attempts.
 ## Usage Example
 ### Resource Creation
 

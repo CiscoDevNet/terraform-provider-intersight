@@ -3,12 +3,30 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_policy"
 description: |-
-        LDAP Policy configurations.
+        ### Overview
+        The LDAP Policy object is a reusable policy for configuring Lightweight Directory Access Protocol (LDAP) settings, enabling remote user authentication for endpoints like servers and chassis.
+        #### Purpose
+        The primary purpose of an LDAP Policy is to integrate endpoints with a central directory service (like Microsoft Active Directory or OpenLDAP) for user authentication. This centralizes user management and allows administrators to grant access to Intersight-managed devices based on existing corporate directory groups and users, rather than creating separate local accounts on each device.
+        #### Key Concepts
+        - **Centralized Authentication:** - Enables endpoints to authenticate users against one or more external LDAP servers.
+        - **Reusable and Profile-Based:** - As a policy object, this provides a standardized LDAP configuration that can be applied to multiple server or chassis profiles.
+        - **Flexible Configuration:** - Supports various settings including the Base DN for searches, bind methods (Anonymous, Configured Credentials, Login Credentials), and connection settings like encryption and timeout.
+        - **Group-to-Role Mapping:** - Works with LdapGroup objects to map directory groups to local endpoint roles, enabling granular, role-based access control for remote users.
+        - **Provider and DNS Settings:** - Manages a list of LDAP servers (LdapProvider objects) and can be configured to use DNS for server discovery.
 
 ---
 
 # Data Source: intersight_iam_ldap_policy
-LDAP Policy configurations.
+### Overview
+The LDAP Policy object is a reusable policy for configuring Lightweight Directory Access Protocol (LDAP) settings, enabling remote user authentication for endpoints like servers and chassis.
+#### Purpose
+The primary purpose of an LDAP Policy is to integrate endpoints with a central directory service (like Microsoft Active Directory or OpenLDAP) for user authentication. This centralizes user management and allows administrators to grant access to Intersight-managed devices based on existing corporate directory groups and users, rather than creating separate local accounts on each device.
+#### Key Concepts
+- **Centralized Authentication:** - Enables endpoints to authenticate users against one or more external LDAP servers.
+- **Reusable and Profile-Based:** - As a policy object, this provides a standardized LDAP configuration that can be applied to multiple server or chassis profiles.
+- **Flexible Configuration:** - Supports various settings including the Base DN for searches, bind methods (Anonymous, Configured Credentials, Login Credentials), and connection settings like encryption and timeout.
+- **Group-to-Role Mapping:** - Works with LdapGroup objects to map directory groups to local endpoint roles, enabling granular, role-based access control for remote users.
+- **Provider and DNS Settings:** - Manages a list of LDAP servers (LdapProvider objects) and can be configured to use DNS for server discovery.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

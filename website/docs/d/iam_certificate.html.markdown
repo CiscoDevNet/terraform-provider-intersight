@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_certificate"
 description: |-
-        Holds a certificate, signed by a CAcert.
+        Certificate holds a user-provided certificate (signed by a CA) associated with a previously generated CSR, including validation status.
+        #### Purpose
+        It completes the certificate lifecycle by attaching the signed artifact to the originating request.
+        #### Key Concepts
+        - **CSR Pairing:** Linked to a specific certificate request.
+        - **Validation State:** Tracks readiness and correctness of the certificate.
+        - **Account Process:** Operates within account certificate workflows.
+        - **Trust Enablement:** Supports secure endpoint and service identities.
 
 ---
 
 # Data Source: intersight_iam_certificate
-Holds a certificate, signed by a CAcert.
+Certificate holds a user-provided certificate (signed by a CA) associated with a previously generated CSR, including validation status.
+#### Purpose
+It completes the certificate lifecycle by attaching the signed artifact to the originating request.
+#### Key Concepts
+- **CSR Pairing:** Linked to a specific certificate request.
+- **Validation State:** Tracks readiness and correctness of the certificate.
+- **Account Process:** Operates within account certificate workflows.
+- **Trust Enablement:** Supports secure endpoint and service identities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

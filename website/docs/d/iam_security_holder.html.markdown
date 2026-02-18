@@ -3,16 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_security_holder"
 description: |-
-        Holder for organization aggregated permissions and global account permissions.
-        User configures permissions for entire account or subset of organizations and specifies associated roles with each organization.
-        Intersight aggregates all the permissions and stores per organization aggregate permissions in iam.ResourcePermission object.
+        SecurityHolder aggregates account-wide and organization-scoped permissions, serving as the nexus for effective authorization state across the accounts resource hierarchy.
+        #### Purpose
+        SecurityHolder centralizes derived permissions and related controls like IP access management for consistent policy enforcement.
+        #### Key Concepts
+        - **Aggregated Permissions:** Collects effective permissions per resource (organization).
+        - **Policy Container:** Anchors resource-permission mappings for authorization checks.
+        - **Access Governance:** Hosts IP-based access management settings for the account.
+        - **Account Integration:** Bound to the accounts overall security structure.
 
 ---
 
 # Data Source: intersight_iam_security_holder
-Holder for organization aggregated permissions and global account permissions.
-User configures permissions for entire account or subset of organizations and specifies associated roles with each organization.
-Intersight aggregates all the permissions and stores per organization aggregate permissions in iam.ResourcePermission object.
+SecurityHolder aggregates account-wide and organization-scoped permissions, serving as the nexus for effective authorization state across the accounts resource hierarchy.
+#### Purpose
+SecurityHolder centralizes derived permissions and related controls like IP access management for consistent policy enforcement.
+#### Key Concepts
+- **Aggregated Permissions:** Collects effective permissions per resource (organization).
+- **Policy Container:** Anchors resource-permission mappings for authorization checks.
+- **Access Governance:** Hosts IP-based access management settings for the account.
+- **Account Integration:** Bound to the accounts overall security structure.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

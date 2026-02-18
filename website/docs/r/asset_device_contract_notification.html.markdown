@@ -3,12 +3,26 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_contract_notification"
 description: |-
-        Appliances use this object to send request to cloud to compute contract status. Cloud uses this to send the contract status response back to appliance.
+        The DeviceContractNotification object facilitates communication between appliances and cloud systems, supporting contract status computations. It acts as an intermediary for sending and receiving contract status data, ensuring seamless integration and updates.
+        #### Purpose
+        DeviceContractNotification serves as a communication bridge between appliances and cloud systems, supporting efficient contract status management and updates.
+        #### Key Concepts
+        - **Communication Management:** Facilitates data exchange between appliances and cloud systems for contract status computations.
+        - **Integration:** Supports seamless integration with Cisco systems for accurate and timely contract status updates.
+        - **Access Management:** Ensures secure handling of contract data through defined privileges and permissions.
+        - **Data Persistence:** Maintains reliable data exchange for contract status management, supporting consistent updates.
 
 ---
 
 # Resource: intersight_asset_device_contract_notification
-Appliances use this object to send request to cloud to compute contract status. Cloud uses this to send the contract status response back to appliance.
+The DeviceContractNotification object facilitates communication between appliances and cloud systems, supporting contract status computations. It acts as an intermediary for sending and receiving contract status data, ensuring seamless integration and updates.
+#### Purpose
+DeviceContractNotification serves as a communication bridge between appliances and cloud systems, supporting efficient contract status management and updates.
+#### Key Concepts
+- **Communication Management:** Facilitates data exchange between appliances and cloud systems for contract status computations.
+- **Integration:** Supports seamless integration with Cisco systems for accurate and timely contract status updates.
+- **Access Management:** Ensures secure handling of contract data through defined privileges and permissions.
+- **Data Persistence:** Maintains reliable data exchange for contract status management, supporting consistent updates.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

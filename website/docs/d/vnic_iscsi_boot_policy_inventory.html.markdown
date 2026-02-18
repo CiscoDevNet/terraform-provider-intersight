@@ -3,12 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_boot_policy_inventory"
 description: |-
-        Configuration parameters to enable a server to boot its operating system from an iSCSI target machine located remotely over a network.
+        The IscsiBootPolicy object encapsulates the configuration required to enable servers to boot from remote iSCSI targets over the network.
+        #### Purpose
+        IscsiBootPolicy automates and standardizes the process of configuring iSCSI boot, including authentication, target selection, and IP address assignment, to ensure reliable and secure remote booting.
+        #### Key Concepts
+        - **Remote Boot Enablement:** Supports network-based operating system boot via iSCSI.
+        - **Comprehensive Configuration:** Manages authentication, IP assignment, and target discovery.
+        - **Policy Integration:** Links to adapter and IP pool policies for end-to-end automation.
 
 ---
 
 # Data Source: intersight_vnic_iscsi_boot_policy_inventory
-Configuration parameters to enable a server to boot its operating system from an iSCSI target machine located remotely over a network.
+The IscsiBootPolicy object encapsulates the configuration required to enable servers to boot from remote iSCSI targets over the network. 
+#### Purpose
+IscsiBootPolicy automates and standardizes the process of configuring iSCSI boot, including authentication, target selection, and IP address assignment, to ensure reliable and secure remote booting.
+#### Key Concepts
+- **Remote Boot Enablement:** Supports network-based operating system boot via iSCSI.
+- **Comprehensive Configuration:** Manages authentication, IP assignment, and target discovery.
+- **Policy Integration:** Links to adapter and IP pool policies for end-to-end automation.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
