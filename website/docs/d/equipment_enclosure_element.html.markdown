@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_enclosure_element"
 description: |-
-        This represents Enclosure element of chassis/server which holds the manageable sub comoponents.
+        The equipment.EnclosureElement object represents a physical enclosure within a server or chassis that holds manageable sub-components, such as GPUs. It serves as a container for these specialized hardware units.
+        #### Purpose
+        The primary function of this object is to model and inventory a sub-enclosure within a larger system. It is particularly useful for systems with modular components, like a GPU enclosure that can be added to a server. This provides a logical grouping for the components it contains and reports on its own health and identity.
+        #### Key Concepts
+        - **Modular Component Container:** Acts as a physical and logical container for a set of related hardware components, like graphics.Card objects.
+        - **Health and Status Monitoring:** Reports its own operState and any specific health issues through the operReason property, such as temperature warnings.
+        - **Unique Identification:** Identified by an enclosureId and other hardware details like pid, vid, and sku.
+        - **Hierarchical Inventory:** Exists as a child of a compute.RackUnit, linking it directly to the server that houses it.
 
 ---
 
 # Data Source: intersight_equipment_enclosure_element
-This represents Enclosure element of chassis/server which holds the manageable sub comoponents.
+The equipment.EnclosureElement object represents a physical enclosure within a server or chassis that holds manageable sub-components, such as GPUs. It serves as a container for these specialized hardware units.
+#### Purpose
+The primary function of this object is to model and inventory a sub-enclosure within a larger system. It is particularly useful for systems with modular components, like a GPU enclosure that can be added to a server. This provides a logical grouping for the components it contains and reports on its own health and identity.
+#### Key Concepts
+- **Modular Component Container:** Acts as a physical and logical container for a set of related hardware components, like graphics.Card objects.
+- **Health and Status Monitoring:** Reports its own operState and any specific health issues through the operReason property, such as temperature warnings.
+- **Unique Identification:** Identified by an enclosureId and other hardware details like pid, vid, and sku.
+- **Hierarchical Inventory:** Exists as a child of a compute.RackUnit, linking it directly to the server that houses it.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

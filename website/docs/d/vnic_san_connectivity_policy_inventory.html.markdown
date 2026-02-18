@@ -3,12 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_san_connectivity_policy_inventory"
 description: |-
-        SAN connectivity policy determines the network storage resources and the connections between the server and the SAN on the network. This policy enables configuration of vHBAs that the servers use to communicate with the storage network.
+        The SanConnectivityPolicy object governs the connectivity between servers and the storage area network (SAN). It abstracts the configuration of virtual host bus adapters (vHBAs), ensuring streamlined storage access and management.
+        #### Purpose
+        SanConnectivityPolicy centralizes the definition and management of SAN connections, handling assignment of WWN addresses, zoning, and integration with storage-related policies.
+        #### Key Concepts
+        - **Centralized SAN Management:** Simplifies and standardizes SAN connectivity for server environments.
+        - **vHBA Configuration:** Manages the lifecycle and settings of virtual HBAs.
+        - **Policy Integration:** Connects to WWN pools and storage zoning policies for comprehensive SAN.
 
 ---
 
 # Data Source: intersight_vnic_san_connectivity_policy_inventory
-SAN connectivity policy determines the network storage resources and the connections between the server and the SAN on the network. This policy enables configuration of vHBAs that the servers use to communicate with the storage network.
+The SanConnectivityPolicy object governs the connectivity between servers and the storage area network (SAN). It abstracts the configuration of virtual host bus adapters (vHBAs), ensuring streamlined storage access and management.
+#### Purpose
+SanConnectivityPolicy centralizes the definition and management of SAN connections, handling assignment of WWN addresses, zoning, and integration with storage-related policies.
+#### Key Concepts
+- **Centralized SAN Management:** Simplifies and standardizes SAN connectivity for server environments.
+- **vHBA Configuration:** Manages the lifecycle and settings of virtual HBAs.
+- **Policy Integration:** Connects to WWN pools and storage zoning policies for comprehensive SAN.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

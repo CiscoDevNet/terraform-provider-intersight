@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_nib_metadata"
 description: |-
-        Contains the latest metadata available for download from server.
+        The NibMetadata object is central to metadata management, offering detailed information about downloadable metadata packages. It supports users in accessing and verifying metadata for their systems.
+        #### Purpose
+        NibMetadata provides structured details about metadata files, including versioning and checksum data. It is crucial for ensuring users have access to reliable and verified metadata information.
+        #### Key Concepts
+        - **Metadata Accessibility:** Supports the efficient download and verification of metadata files, ensuring users have reliable data.
+        - **Integrity Assurance:** Offers version numbers and checksum information, aiding users in verifying metadata integrity.
+        - **Version Management:** Facilitates access to up-to-date metadata versions, promoting system accuracy and reliability.
 
 ---
 
 # Data Source: intersight_niaapi_nib_metadata
-Contains the latest metadata available for download from server.
+The NibMetadata object is central to metadata management, offering detailed information about downloadable metadata packages. It supports users in accessing and verifying metadata for their systems.
+#### Purpose
+NibMetadata provides structured details about metadata files, including versioning and checksum data. It is crucial for ensuring users have access to reliable and verified metadata information.
+#### Key Concepts
+- **Metadata Accessibility:** Supports the efficient download and verification of metadata files, ensuring users have reliable data.
+- **Integrity Assurance:** Offers version numbers and checksum information, aiding users in verifying metadata integrity.
+- **Version Management:** Facilitates access to up-to-date metadata versions, promoting system accuracy and reliability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

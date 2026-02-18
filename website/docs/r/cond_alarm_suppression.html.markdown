@@ -23,7 +23,19 @@ AlarmSuppression provides a mechanism to control and manage alarms by suppressin
 - **Operational Flexibility:** Suppressions can be tailored to specific server maintenance needs, allowing users to focus on critical alerts during maintenance windows.
 ## Argument Reference
 The following arguments are supported:
+* `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `alarm_rules`:(Array)
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `operator`:(string) The operator to apply. Operators supported are: eq, contains, in. 
+  + `property`:(string) The property name keyword to filter on. For a list of supported property keywordssee the Intersight Help Center. 
+  + `value`:
+                (Array of schema.TypeString) -
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -37,6 +49,8 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) User given description on why the suppression is enabled at this entity. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `enabled`:(bool) Indicates whether the suppression is enabled by the user or not. The user should be able to toggle this between true and false.The property is set to true when the suppression is created. The user can set this to false to disable the suppression.The suppression rule should be active only if both systemEnabled and enabled are true. 
+* `end_date`:(string) The end date for this alarm suppression rule. The date must follow the RFC 3339 format for date and time representation. 
 * `entity`:(HashMap) - A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -45,6 +59,7 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name that identifies the alarm suppression. 
+* `odata_filter_internal`:(string)(ReadOnly) Odata filter string managed internally. It is built by combining all the rules. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -57,7 +72,9 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `rules_operator`:(string) Operation that binds all the different rules together.* `All` - All is an AND condition applied against the individual conditions.* `Any` - Any is an OR condition applied against the individual conditions. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `start_date`:(string) The start date for enabling this alarm suppression rule. The date must followthe RFC 3339 format for date and time representation. If this date more than60 seconds in the past, the suppression rule will be rejected. If the date iswithin 60 seconds of the present time (plus or minus), the suppression will bestarted immediately. Otherwise, the suppression will be scheduled to start atthe requested time. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `ancestor_definitions`:(Array)

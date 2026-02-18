@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -39,8 +39,10 @@ type IamSession struct {
 	// The client address from which last login is initiated.
 	LastLoginClient *string `json:"LastLoginClient,omitempty"`
 	// The last login time for user.
-	LastLoginTime *time.Time                        `json:"LastLoginTime,omitempty"`
-	Scope         NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
+	LastLoginTime *time.Time `json:"LastLoginTime,omitempty"`
+	// The type of login that created this session. Indicates whether the session was created through standard web login or JWT token exchange. * `weblogin` - Session created through standard web login process. * `tokenexchange` - Session created through JWT token exchange process.
+	LoginType *string                           `json:"LoginType,omitempty"`
+	Scope     NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
 	// Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.
 	SessionId            *string                           `json:"SessionId,omitempty"`
 	Permission           NullableIamPermissionRelationship `json:"Permission,omitempty"`
@@ -326,6 +328,38 @@ func (o *IamSession) SetLastLoginTime(v time.Time) {
 	o.LastLoginTime = &v
 }
 
+// GetLoginType returns the LoginType field value if set, zero value otherwise.
+func (o *IamSession) GetLoginType() string {
+	if o == nil || IsNil(o.LoginType) {
+		var ret string
+		return ret
+	}
+	return *o.LoginType
+}
+
+// GetLoginTypeOk returns a tuple with the LoginType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamSession) GetLoginTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.LoginType) {
+		return nil, false
+	}
+	return o.LoginType, true
+}
+
+// HasLoginType returns a boolean if a field has been set.
+func (o *IamSession) HasLoginType() bool {
+	if o != nil && !IsNil(o.LoginType) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoginType gets a reference to the given string and assigns it to the LoginType field.
+func (o *IamSession) SetLoginType(v string) {
+	o.LoginType = &v
+}
+
 // GetScope returns the Scope field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamSession) GetScope() IamSwitchScopePermissions {
 	if o == nil || IsNil(o.Scope.Get()) {
@@ -531,6 +565,9 @@ func (o IamSession) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastLoginTime) {
 		toSerialize["LastLoginTime"] = o.LastLoginTime
 	}
+	if !IsNil(o.LoginType) {
+		toSerialize["LoginType"] = o.LoginType
+	}
 	if o.Scope.IsSet() {
 		toSerialize["Scope"] = o.Scope.Get()
 	}
@@ -608,8 +645,10 @@ func (o *IamSession) UnmarshalJSON(data []byte) (err error) {
 		// The client address from which last login is initiated.
 		LastLoginClient *string `json:"LastLoginClient,omitempty"`
 		// The last login time for user.
-		LastLoginTime *time.Time                        `json:"LastLoginTime,omitempty"`
-		Scope         NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
+		LastLoginTime *time.Time `json:"LastLoginTime,omitempty"`
+		// The type of login that created this session. Indicates whether the session was created through standard web login or JWT token exchange. * `weblogin` - Session created through standard web login process. * `tokenexchange` - Session created through JWT token exchange process.
+		LoginType *string                           `json:"LoginType,omitempty"`
+		Scope     NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
 		// Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.
 		SessionId  *string                           `json:"SessionId,omitempty"`
 		Permission NullableIamPermissionRelationship `json:"Permission,omitempty"`
@@ -629,6 +668,7 @@ func (o *IamSession) UnmarshalJSON(data []byte) (err error) {
 		varIamSession.IdleTimeExpiration = varIamSessionWithoutEmbeddedStruct.IdleTimeExpiration
 		varIamSession.LastLoginClient = varIamSessionWithoutEmbeddedStruct.LastLoginClient
 		varIamSession.LastLoginTime = varIamSessionWithoutEmbeddedStruct.LastLoginTime
+		varIamSession.LoginType = varIamSessionWithoutEmbeddedStruct.LoginType
 		varIamSession.Scope = varIamSessionWithoutEmbeddedStruct.Scope
 		varIamSession.SessionId = varIamSessionWithoutEmbeddedStruct.SessionId
 		varIamSession.Permission = varIamSessionWithoutEmbeddedStruct.Permission
@@ -658,6 +698,7 @@ func (o *IamSession) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "IdleTimeExpiration")
 		delete(additionalProperties, "LastLoginClient")
 		delete(additionalProperties, "LastLoginTime")
+		delete(additionalProperties, "LoginType")
 		delete(additionalProperties, "Scope")
 		delete(additionalProperties, "SessionId")
 		delete(additionalProperties, "Permission")

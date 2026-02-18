@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis"
 description: |-
-        A physical holder housing blade servers.
+        The equipment.Chassis object represents a physical chassis, a modular enclosure that houses and provides power, cooling, and connectivity for multiple blade servers and I/O modules (IOMs).
+        #### Purpose
+        The Chassis object serves as the primary inventory and management entity for a server chassis. It acts as a top-level container for all the components within it, including compute.Blade servers, equipment.IoCard modules, equipment.Psu power supply units, and equipment.FanModule fan modules. This provides a comprehensive, queryable view of the chassis's identity, health, and contained hardware.
+        #### Key Concepts
+        - **Centralized Enclosure Management:** Aggregates all components of a chassis into a single, manageable entity.
+        - **Hierarchical Inventory:** Provides a structured parent-child relationship to all its contained components, such as blades, IOMs, PSUs, and fans.
+        - **Health and Status Monitoring:** Reports on the overall operState of the chassis and provides a summary of alarms (alarmSummary) and fault conditions (faultSummary).
+        - **Location and Identity:** Uniquely identified by a chassisId and serial number, and provides its name and user-assigned label for easy identification.
 
 ---
 
 # Data Source: intersight_equipment_chassis
-A physical holder housing blade servers.
+The equipment.Chassis object represents a physical chassis, a modular enclosure that houses and provides power, cooling, and connectivity for multiple blade servers and I/O modules (IOMs).
+#### Purpose
+The Chassis object serves as the primary inventory and management entity for a server chassis. It acts as a top-level container for all the components within it, including compute.Blade servers, equipment.IoCard modules, equipment.Psu power supply units, and equipment.FanModule fan modules. This provides a comprehensive, queryable view of the chassis's identity, health, and contained hardware.
+#### Key Concepts
+- **Centralized Enclosure Management:** Aggregates all components of a chassis into a single, manageable entity.
+- **Hierarchical Inventory:** Provides a structured parent-child relationship to all its contained components, such as blades, IOMs, PSUs, and fans.
+- **Health and Status Monitoring:** Reports on the overall operState of the chassis and provides a summary of alarms (alarmSummary) and fault conditions (faultSummary).
+- **Location and Identity:** Uniquely identified by a chassisId and serial number, and provides its name and user-assigned label for easy identification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -32,6 +32,8 @@ type ConnectorHttpRequest struct {
 	AssetTargetMoid *string `json:"AssetTargetMoid,omitempty"`
 	// Contents of the request body to send for PUT/PATCH/POST requests.
 	Body *string `json:"Body,omitempty"`
+	// An SSL certificate to use to authenticate the identity of the remote server if the target of the request is an HTTPS server. Format of the certificate is a PEM encoded x509 certificate.
+	Certificate *string `json:"Certificate,omitempty"`
 	// The timeout for establishing the TCP connection to the target host. If not set, the request timeout value is used.
 	DialTimeout *int64 `json:"DialTimeout,omitempty"`
 	// The MO id of the asset.EndpointConnection this request is directed to. If set, plugin will insert connection details into the request, including credentials if defined.
@@ -193,6 +195,38 @@ func (o *ConnectorHttpRequest) HasBody() bool {
 // SetBody gets a reference to the given string and assigns it to the Body field.
 func (o *ConnectorHttpRequest) SetBody(v string) {
 	o.Body = &v
+}
+
+// GetCertificate returns the Certificate field value if set, zero value otherwise.
+func (o *ConnectorHttpRequest) GetCertificate() string {
+	if o == nil || IsNil(o.Certificate) {
+		var ret string
+		return ret
+	}
+	return *o.Certificate
+}
+
+// GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectorHttpRequest) GetCertificateOk() (*string, bool) {
+	if o == nil || IsNil(o.Certificate) {
+		return nil, false
+	}
+	return o.Certificate, true
+}
+
+// HasCertificate returns a boolean if a field has been set.
+func (o *ConnectorHttpRequest) HasCertificate() bool {
+	if o != nil && !IsNil(o.Certificate) {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificate gets a reference to the given string and assigns it to the Certificate field.
+func (o *ConnectorHttpRequest) SetCertificate(v string) {
+	o.Certificate = &v
 }
 
 // GetDialTimeout returns the DialTimeout field value if set, zero value otherwise.
@@ -463,6 +497,9 @@ func (o ConnectorHttpRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Body) {
 		toSerialize["Body"] = o.Body
 	}
+	if !IsNil(o.Certificate) {
+		toSerialize["Certificate"] = o.Certificate
+	}
 	if !IsNil(o.DialTimeout) {
 		toSerialize["DialTimeout"] = o.DialTimeout
 	}
@@ -543,6 +580,8 @@ func (o *ConnectorHttpRequest) UnmarshalJSON(data []byte) (err error) {
 		AssetTargetMoid *string `json:"AssetTargetMoid,omitempty"`
 		// Contents of the request body to send for PUT/PATCH/POST requests.
 		Body *string `json:"Body,omitempty"`
+		// An SSL certificate to use to authenticate the identity of the remote server if the target of the request is an HTTPS server. Format of the certificate is a PEM encoded x509 certificate.
+		Certificate *string `json:"Certificate,omitempty"`
 		// The timeout for establishing the TCP connection to the target host. If not set, the request timeout value is used.
 		DialTimeout *int64 `json:"DialTimeout,omitempty"`
 		// The MO id of the asset.EndpointConnection this request is directed to. If set, plugin will insert connection details into the request, including credentials if defined.
@@ -567,6 +606,7 @@ func (o *ConnectorHttpRequest) UnmarshalJSON(data []byte) (err error) {
 		varConnectorHttpRequest.ObjectType = varConnectorHttpRequestWithoutEmbeddedStruct.ObjectType
 		varConnectorHttpRequest.AssetTargetMoid = varConnectorHttpRequestWithoutEmbeddedStruct.AssetTargetMoid
 		varConnectorHttpRequest.Body = varConnectorHttpRequestWithoutEmbeddedStruct.Body
+		varConnectorHttpRequest.Certificate = varConnectorHttpRequestWithoutEmbeddedStruct.Certificate
 		varConnectorHttpRequest.DialTimeout = varConnectorHttpRequestWithoutEmbeddedStruct.DialTimeout
 		varConnectorHttpRequest.EndpointMoid = varConnectorHttpRequestWithoutEmbeddedStruct.EndpointMoid
 		varConnectorHttpRequest.Header = varConnectorHttpRequestWithoutEmbeddedStruct.Header
@@ -595,6 +635,7 @@ func (o *ConnectorHttpRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AssetTargetMoid")
 		delete(additionalProperties, "Body")
+		delete(additionalProperties, "Certificate")
 		delete(additionalProperties, "DialTimeout")
 		delete(additionalProperties, "EndpointMoid")
 		delete(additionalProperties, "Header")

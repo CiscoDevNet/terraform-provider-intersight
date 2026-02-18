@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.HttpRequest"]
 **AssetTargetMoid** | Pointer to **string** | The Target endpoint Moid which is used to fetch the previously persisted Target information in Intersight to create HTTP request along with any authentication info specified. | [optional] 
 **Body** | Pointer to **string** | Contents of the request body to send for PUT/PATCH/POST requests. | [optional] 
+**Certificate** | Pointer to **string** | An SSL certificate to use to authenticate the identity of the remote server if the target of the request is an HTTPS server. Format of the certificate is a PEM encoded x509 certificate. | [optional] 
 **DialTimeout** | Pointer to **int64** | The timeout for establishing the TCP connection to the target host. If not set, the request timeout value is used. | [optional] 
 **EndpointMoid** | Pointer to **string** | The MO id of the asset.EndpointConnection this request is directed to. If set, plugin will insert connection details into the request, including credentials if defined. | [optional] 
 **Header** | Pointer to **interface{}** | Collection of key/value pairs to set in the request header. | [optional] 
@@ -124,6 +125,31 @@ SetBody sets Body field to given value.
 `func (o *ConnectorHttpRequest) HasBody() bool`
 
 HasBody returns a boolean if a field has been set.
+
+### GetCertificate
+
+`func (o *ConnectorHttpRequest) GetCertificate() string`
+
+GetCertificate returns the Certificate field if non-nil, zero value otherwise.
+
+### GetCertificateOk
+
+`func (o *ConnectorHttpRequest) GetCertificateOk() (*string, bool)`
+
+GetCertificateOk returns a tuple with the Certificate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificate
+
+`func (o *ConnectorHttpRequest) SetCertificate(v string)`
+
+SetCertificate sets Certificate field to given value.
+
+### HasCertificate
+
+`func (o *ConnectorHttpRequest) HasCertificate() bool`
+
+HasCertificate returns a boolean if a field has been set.
 
 ### GetDialTimeout
 

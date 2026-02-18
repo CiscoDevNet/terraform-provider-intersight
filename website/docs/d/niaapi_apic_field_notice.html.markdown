@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_field_notice"
 description: |-
-        The field notice reporting bug and related software or hardware for APIC.
+        The ApicFieldNotice object is vital for version management, providing updates on bugs and related software or hardware issues specific to the APIC platform. It ensures users are informed about critical changes.
+        #### Purpose
+        ApicFieldNotice disseminates information about software or hardware issues on the APIC platform, including bug identification and proposed workarounds.
+        #### Key Concepts
+        - **Platform-Specific Reporting:** Reports bugs and provides descriptions for the APIC platform.
+        - **Solution Proposals:** Offers workarounds and recommendations for APIC issues.
+        - **Revision Details:** Includes revision information for APIC field notices.
 
 ---
 
 # Data Source: intersight_niaapi_apic_field_notice
-The field notice reporting bug and related software or hardware for APIC.
+The ApicFieldNotice object is vital for version management, providing updates on bugs and related software or hardware issues specific to the APIC platform. It ensures users are informed about critical changes.
+#### Purpose
+ApicFieldNotice disseminates information about software or hardware issues on the APIC platform, including bug identification and proposed workarounds.
+#### Key Concepts
+- **Platform-Specific Reporting:** Reports bugs and provides descriptions for the APIC platform.
+- **Solution Proposals:** Offers workarounds and recommendations for APIC issues.
+- **Revision Details:** Includes revision information for APIC field notices.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

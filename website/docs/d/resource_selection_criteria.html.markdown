@@ -3,12 +3,24 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_selection_criteria"
 description: |-
-        One or more resources are selected based on a criteria. SelectionCriteria can refer to static resources using  object reference or dynamic resources using OData query filters.
+        The SelectionCriteria object enables the selection of resources based on specific criteria, providing flexibility and precision in resource management.
+        #### Purpose
+        SelectionCriteria serves as the mechanism for defining conditions that select resources within the system, offering a customizable and efficient approach to resource retrieval and management. It supports both static and dynamic resource selection methods.
+        #### Key Concepts
+        - **Dynamic Selection:** Allows for the use of OData query filters to dynamically select resources, enhancing flexibility in resource management.
+        - **Customization:** Supports the definition of custom criteria for resource selection, providing tailored resource management solutions.
+        - **Access Control:** Implements privilege sets to manage access to selection criteria data, ensuring secure and controlled resource selection.
 
 ---
 
 # Data Source: intersight_resource_selection_criteria
-One or more resources are selected based on a criteria. SelectionCriteria can refer to static resources using  object reference or dynamic resources using OData query filters.
+The SelectionCriteria object enables the selection of resources based on specific criteria, providing flexibility and precision in resource management.
+#### Purpose
+SelectionCriteria serves as the mechanism for defining conditions that select resources within the system, offering a customizable and efficient approach to resource retrieval and management. It supports both static and dynamic resource selection methods.
+#### Key Concepts
+- **Dynamic Selection:** Allows for the use of OData query filters to dynamically select resources, enhancing flexibility in resource management.
+- **Customization:** Supports the definition of custom criteria for resource selection, providing tailored resource management solutions.
+- **Access Control:** Implements privilege sets to manage access to selection criteria data, ensuring secure and controlled resource selection.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

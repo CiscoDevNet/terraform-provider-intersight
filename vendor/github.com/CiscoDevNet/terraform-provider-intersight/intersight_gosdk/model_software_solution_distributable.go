@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the SoftwareSolutionDistributable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SoftwareSolutionDistributable{}
 
-// SoftwareSolutionDistributable A solution image distributed by Cisco.
+// SoftwareSolutionDistributable The SolutionDistributable object represents a solution image distributed by Cisco. It is a key component in deploying and upgrading solution-specific images within the system. #### Purpose SolutionDistributable serves as the repository for solution-specific images, supporting deployment and upgrade processes within solution environments. #### Key Concepts - **Solution Management:** Provides solution-specific images for deployment and upgrades, ensuring compatibility. - **Catalog Integration:** Links solution images with the Intersight catalog for comprehensive management. - **Compatibility Assurance:** Ensures that solution images are compatible with system components. - **Administrative Tools:** Offers tools for managing solution-specific image distributions.
 type SoftwareSolutionDistributable struct {
 	FirmwareBaseDistributable
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -50,8 +50,6 @@ func NewSoftwareSolutionDistributable(classId string, objectType string) *Softwa
 	this.ObjectType = objectType
 	var importAction string = "None"
 	this.ImportAction = &importAction
-	var importState string = "ReadyForImport"
-	this.ImportState = &importState
 	var vendor string = "Cisco"
 	this.Vendor = &vendor
 	var subType string = "osimage"

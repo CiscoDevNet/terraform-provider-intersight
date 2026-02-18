@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_mapping"
 description: |-
-        Virtual Media image uploaded on the server.
+        The compute.Mapping object represents a single virtual media image that has been uploaded or mapped to a server. This provides the inventory details for a specific virtual media connection.
+        #### Purpose
+        The Mapping object is used to track the state of a virtual media mapping. It inventories key details such as the imageName, the type of media (mediaTypes), and a server-assigned identifier. This allows administrators to see which images are currently available to the server for tasks like OS installation or diagnostics.
+        #### Key Concepts
+        - **Virtual Media Inventory:** Provides a record of a specific virtual media image connected to the server.
+        - **Image Identification:** Stores the imageName and fileLocation (if applicable) to identify the source of the virtual media.
+        - **State Tracking:** Although primarily for inventory, it represents a specific mapping session that can be created or removed.
+        - **Hierarchical Relationship:** Is a child of the compute.Vmedia object, which represents the overall virtual media configuration for the server.
 
 ---
 
 # Data Source: intersight_compute_mapping
-Virtual Media image uploaded on the server.
+The compute.Mapping object represents a single virtual media image that has been uploaded or mapped to a server. This provides the inventory details for a specific virtual media connection.
+#### Purpose
+The Mapping object is used to track the state of a virtual media mapping. It inventories key details such as the imageName, the type of media (mediaTypes), and a server-assigned identifier. This allows administrators to see which images are currently available to the server for tasks like OS installation or diagnostics.
+#### Key Concepts
+- **Virtual Media Inventory:** Provides a record of a specific virtual media image connected to the server.
+- **Image Identification:** Stores the imageName and fileLocation (if applicable) to identify the source of the virtual media.
+- **State Tracking:** Although primarily for inventory, it represents a specific mapping session that can be created or removed.
+- **Hierarchical Relationship:** Is a child of the compute.Vmedia object, which represents the overall virtual media configuration for the server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

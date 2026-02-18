@@ -3,26 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_task_definition"
 description: |-
-        ### Overview
         The TaskDefinition object is a foundational element of the workflow system, designed to define individual tasks that can be orchestrated within a workflow. It encapsulates the intent of an operation, providing a standardized way to describe the purpose and function of a task within automation and orchestration processes.
         #### Purpose
         A TaskDefinition serves as the blueprint for tasks that can be executed as part of a workflow. It supports both standalone tasks, which are tightly bound to a single implementation, and interface tasks, which are generalized definitions that can be linked to multiple specific implementations. This flexibility allows a single TaskDefinition to represent different ways of accomplishing a task, each with its own implementation.
         #### Key Concepts
-        - **Reusability:** - TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
-        - **Versioning:** - Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
-        - **Access Control:** - Use of privilege sets ensures only authorized users can create, update, or execute tasks.
+        - **Reusability:** TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
+        - **Versioning:** Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
+        - **Access Control:** Use of privilege sets ensures only authorized users can create, update, or execute tasks.
 
 ---
 
 # Resource: intersight_workflow_task_definition
-### Overview
 The TaskDefinition object is a foundational element of the workflow system, designed to define individual tasks that can be orchestrated within a workflow. It encapsulates the intent of an operation, providing a standardized way to describe the purpose and function of a task within automation and orchestration processes.
 #### Purpose
 A TaskDefinition serves as the blueprint for tasks that can be executed as part of a workflow. It supports both standalone tasks, which are tightly bound to a single implementation, and interface tasks, which are generalized definitions that can be linked to multiple specific implementations. This flexibility allows a single TaskDefinition to represent different ways of accomplishing a task, each with its own implementation.
 #### Key Concepts
-- **Reusability:** - TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
-- **Versioning:** - Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
-- **Access Control:** - Use of privilege sets ensures only authorized users can create, update, or execute tasks.
+- **Reusability:** TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
+- **Versioning:** Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
+- **Access Control:** Use of privilege sets ensures only authorized users can create, update, or execute tasks.
 ## Usage Example
 ### Resource Creation
 
@@ -157,7 +155,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector.* `MultiSelect` - Display the widget as a multi-select. 
+    + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector.* `MultiSelect` - Display the widget as a multi-select.* `Switcher` - Display the widget as a switcher. 
   + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
   + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character. 
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
@@ -186,7 +184,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector.* `MultiSelect` - Display the widget as a multi-select. 
+    + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector.* `MultiSelect` - Display the widget as a multi-select.* `Switcher` - Display the widget as a switcher. 
   + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
   + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ), forward slash (/) or an underscore (_). The first and last character in label must be an alphanumeric character. 
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 

@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_personality"
 description: |-
-        This can be used to model a server based on a defined personality without having to reprogram the server PID.
+        The compute.Personality object provides a mechanism to model a server with a defined software personality, separate from its physical hardware identity (PID). This allows for logical grouping or classification of servers based on their role or software stack.
+        #### Purpose
+        The main purpose of the compute.Personality object is to assign a logical identity to a server. This can be used for organizing servers, applying specific software-defined policies, or identifying servers that belong to a particular solution (e.g., a node in a hyper-converged cluster). This provides a flexible way to manage servers based on their function rather than just their hardware.
+        #### Key Concepts
+        - **Logical Identity:** Assigns a name and personalityId to a server that is independent of its physical model or serial number.
+        - **Flexible Grouping:** Allows servers to be grouped and managed based on their assigned personality.
+        - **Extensibility:** The additionalInfo field provides a space for custom metadata related to the personality.
+        - **Server Association:** Directly linked to a compute.RackUnit or compute.Blade, applying the logical identity to a specific physical server.
 
 ---
 
 # Data Source: intersight_compute_personality
-This can be used to model a server based on a defined personality without having to reprogram the server PID.
+The compute.Personality object provides a mechanism to model a server with a defined software personality, separate from its physical hardware identity (PID). This allows for logical grouping or classification of servers based on their role or software stack.
+#### Purpose
+The main purpose of the compute.Personality object is to assign a logical identity to a server. This can be used for organizing servers, applying specific software-defined policies, or identifying servers that belong to a particular solution (e.g., a node in a hyper-converged cluster). This provides a flexible way to manage servers based on their function rather than just their hardware.
+#### Key Concepts
+- **Logical Identity:** Assigns a name and personalityId to a server that is independent of its physical model or serial number.
+- **Flexible Grouping:** Allows servers to be grouped and managed based on their assigned personality.
+- **Extensibility:** The additionalInfo field provides a space for custom metadata related to the personality.
+- **Server Association:** Directly linked to a compute.RackUnit or compute.Blade, applying the logical identity to a specific physical server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

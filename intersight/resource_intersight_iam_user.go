@@ -204,6 +204,11 @@ func resourceIamUser() *schema.Resource {
 				Optional:     true,
 				ForceNew:     true,
 			},
+			"external_identifier": {
+				Description: "External identifier for the user, used for integration with external identity systems.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"first_name": {
 				Description: "First name of the user. For remote users, this field is populated from the IdP attributes received after authentication.",
 				Type:        schema.TypeString,
@@ -999,6 +1004,11 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 		o.SetEmail(x)
 	}
 
+	if v, ok := d.GetOk("external_identifier"); ok {
+		x := (v.(string))
+		o.SetExternalIdentifier(x)
+	}
+
 	if v, ok := d.GetOk("first_name"); ok {
 		x := (v.(string))
 		o.SetFirstName(x)
@@ -1313,6 +1323,10 @@ func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interfa
 		return diag.Errorf("error occurred while setting property Email in IamUser object: %s", err.Error())
 	}
 
+	if err := d.Set("external_identifier", (s.GetExternalIdentifier())); err != nil {
+		return diag.Errorf("error occurred while setting property ExternalIdentifier in IamUser object: %s", err.Error())
+	}
+
 	if err := d.Set("first_name", (s.GetFirstName())); err != nil {
 		return diag.Errorf("error occurred while setting property FirstName in IamUser object: %s", err.Error())
 	}
@@ -1440,6 +1454,12 @@ func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta inter
 		v := d.Get("email")
 		x := (v.(string))
 		o.SetEmail(x)
+	}
+
+	if d.HasChange("external_identifier") {
+		v := d.Get("external_identifier")
+		x := (v.(string))
+		o.SetExternalIdentifier(x)
 	}
 
 	if d.HasChange("first_name") {

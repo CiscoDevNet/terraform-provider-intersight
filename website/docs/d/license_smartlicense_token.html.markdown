@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_smartlicense_token"
 description: |-
-        SmartlicenseToken collection stores license registration tokens.
+        The SmartlicenseToken object manages the collection of license registration tokens, ensuring secure and efficient handling of licensing credentials.
+        #### Purpose
+        SmartlicenseToken serves as the repository for license registration tokens, providing mechanisms for secure storage and retrieval of licensing credentials.
+        #### Key Concepts
+        - **Token Management:** Centralizes storage and management of license registration tokens, ensuring secure handling of credentials.
+        - **Credential Security:** Focuses on the security aspects of token management, ensuring tokens are protected and accessible only to authorized users.
+        - **Organizational Resource:** Operates within shared organizational contexts, allowing consistent application across different accounts and user roles.
+        - **Integration:** Designed to integrate seamlessly with licensing processes, supporting efficient registration and authorization flows.
 
 ---
 
 # Data Source: intersight_license_smartlicense_token
-SmartlicenseToken collection stores license registration tokens.
+The SmartlicenseToken object manages the collection of license registration tokens, ensuring secure and efficient handling of licensing credentials.
+#### Purpose
+SmartlicenseToken serves as the repository for license registration tokens, providing mechanisms for secure storage and retrieval of licensing credentials.
+#### Key Concepts
+- **Token Management:** Centralizes storage and management of license registration tokens, ensuring secure handling of credentials.
+- **Credential Security:** Focuses on the security aspects of token management, ensuring tokens are protected and accessible only to authorized users.
+- **Organizational Resource:** Operates within shared organizational contexts, allowing consistent application across different accounts and user roles.
+- **Integration:** Designed to integrate seamlessly with licensing processes, supporting efficient registration and authorization flows.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

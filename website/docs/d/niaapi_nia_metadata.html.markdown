@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_nia_metadata"
 description: |-
-        Contains the latest Metadata available for download from server.
+        The NiaMetadata object is a key element in metadata management, providing structured information about the latest metadata files available for download. It aids users in accessing up-to-date metadata efficiently.
+        #### Purpose
+        NiaMetadata offers comprehensive details about metadata packages, including versioning and checksum information. It is essential for users to access and verify the integrity of metadata files.
+        #### Key Concepts
+        - **Metadata Management:** Facilitates the download and verification of metadata files, ensuring users have access to accurate information.
+        - **Versioning and Integrity:** Provides version numbers and checksums for metadata files, supporting integrity verification.
+        - **Structured Access:** Ensures users can efficiently access and utilize metadata in their systems.
 
 ---
 
 # Data Source: intersight_niaapi_nia_metadata
-Contains the latest Metadata available for download from server.
+The NiaMetadata object is a key element in metadata management, providing structured information about the latest metadata files available for download. It aids users in accessing up-to-date metadata efficiently.
+#### Purpose
+NiaMetadata offers comprehensive details about metadata packages, including versioning and checksum information. It is essential for users to access and verify the integrity of metadata files.
+#### Key Concepts
+- **Metadata Management:** Facilitates the download and verification of metadata files, ensuring users have access to accurate information.
+- **Versioning and Integrity:** Provides version numbers and checksums for metadata files, supporting integrity verification.
+- **Structured Access:** Ensures users can efficiently access and utilize metadata in their systems.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

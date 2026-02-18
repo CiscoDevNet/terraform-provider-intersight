@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_hdd_device"
 description: |-
-        Local Disk Boot Device configured on the server.
+        The boot.HddDevice object represents a local hard disk drive (HDD) or logical volume as a configurable boot option within a server's boot policy.
+        #### Purpose
+        The HddDevice object provides a standardized way to specify a local disk as a bootable device in a server's boot sequence. It allows administrators to define the disk's position in the boot order and its enabled state within a managed boot policy.
+        #### Key Concepts
+        - **Local Disk Boot:** Defines a local HDD or RAID volume as a bootable source.
+        - **Ordered Boot Sequence:** The order property determines its priority in the boot process relative to other configured devices like PXE, SAN, or USB.
+        - **Enable/Disable Control:** The state property allows the HDD to be included in a policy but easily enabled or disabled as a boot option.
+        - **Boot Policy Element:** Acts as a fundamental component within a boot policy that is applied to a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_hdd_device
-Local Disk Boot Device configured on the server.
+The boot.HddDevice object represents a local hard disk drive (HDD) or logical volume as a configurable boot option within a server's boot policy.
+#### Purpose
+The HddDevice object provides a standardized way to specify a local disk as a bootable device in a server's boot sequence. It allows administrators to define the disk's position in the boot order and its enabled state within a managed boot policy.
+#### Key Concepts
+- **Local Disk Boot:** Defines a local HDD or RAID volume as a bootable source.
+- **Ordered Boot Sequence:** The order property determines its priority in the boot process relative to other configured devices like PXE, SAN, or USB.
+- **Enable/Disable Control:** The state property allows the HDD to be included in a policy but easily enabled or disabled as a boot option.
+- **Boot Policy Element:** Acts as a fundamental component within a boot policy that is applied to a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

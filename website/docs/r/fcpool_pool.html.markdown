@@ -3,12 +3,24 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_pool"
 description: |-
-        Pool represents a collection of WWN addresses that can be allocated to VHBAs of a server profile.
+        The Pool object represents a collection of WWN addresses, that can be allocated to server profiles.
+        #### Purpose
+        The Pool object provides a structured approach to managing collections of identifiers, ensuring efficient allocation and management within server profiles and other entities.
+        #### Key Concepts
+        - **Resource Collection:** Manages a collection of identifiers, facilitating their allocation to various entities within the system.
+        - **Dynamic Management** Supports dynamic allocation and reassignment of identifiers based on pool policies and conditions.
+        - **Access Control:** Ensures secure management of resources within pools, enabling authorized actions such as creation, update, and deletion.
 
 ---
 
 # Resource: intersight_fcpool_pool
-Pool represents a collection of WWN addresses that can be allocated to VHBAs of a server profile.
+The Pool object represents a collection of WWN addresses, that can be allocated to server profiles.
+#### Purpose
+The Pool object provides a structured approach to managing collections of identifiers, ensuring efficient allocation and management within server profiles and other entities.
+#### Key Concepts
+- **Resource Collection:** Manages a collection of identifiers, facilitating their allocation to various entities within the system.
+- **Dynamic Management** Supports dynamic allocation and reassignment of identifiers based on pool policies and conditions.
+- **Access Control:** Ensures secure management of resources within pools, enabling authorized actions such as creation, update, and deletion.
 ## Usage Example
 ### Resource Creation
 

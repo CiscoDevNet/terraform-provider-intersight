@@ -3,12 +3,26 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_token_settings"
 description: |-
-        Token settings for Memory Reliability, availability and serviceability (RAS) configuration.
+        The bios.TokenSettings object represents the status of a specific BIOS token, particularly for Memory Reliability, Availability, and Serviceability (RAS) configurations. It indicates whether a given RAS setting is currently active on the server.
+        #### Purpose
+        The primary function of this object is to provide a granular view of which memory RAS feature is currently enabled in the BIOS. By querying this object, administrators can confirm if a setting like Sparing or Mirroring is the active configuration, which is crucial for verifying server resilience and performance settings.
+        #### Key Concepts
+        - **Granular Configuration State:** Provides the status (isAssigned) for a single, specific BIOS setting identified by settingsMoRn.
+        - **Memory RAS Focus:** Specifically designed to report on memory-related RAS configurations, such as ADDDC-Sparing or Mirror-Mode-1LM.
+        - **Verification Tool:** Allows for programmatic verification that a desired memory RAS policy has been successfully applied to the server.
+        - **Server-Specific Inventory:** Tied directly to a physical server, providing an accurate snapshot of its active BIOS token settings.
 
 ---
 
 # Data Source: intersight_bios_token_settings
-Token settings for Memory Reliability, availability and serviceability (RAS) configuration.
+The bios.TokenSettings object represents the status of a specific BIOS token, particularly for Memory Reliability, Availability, and Serviceability (RAS) configurations. It indicates whether a given RAS setting is currently active on the server.
+#### Purpose
+The primary function of this object is to provide a granular view of which memory RAS feature is currently enabled in the BIOS. By querying this object, administrators can confirm if a setting like "Sparing" or "Mirroring" is the active configuration, which is crucial for verifying server resilience and performance settings.
+#### Key Concepts
+- **Granular Configuration State:** Provides the status (isAssigned) for a single, specific BIOS setting identified by settingsMoRn.
+- **Memory RAS Focus:** Specifically designed to report on memory-related RAS configurations, such as "ADDDC-Sparing" or "Mirror-Mode-1LM".
+- **Verification Tool:** Allows for programmatic verification that a desired memory RAS policy has been successfully applied to the server.
+- **Server-Specific Inventory:** Tied directly to a physical server, providing an accurate snapshot of its active BIOS token settings.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

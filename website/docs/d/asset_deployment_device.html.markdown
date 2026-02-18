@@ -3,12 +3,30 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_deployment_device"
 description: |-
-        Contains information about Cisco devices associated with consumption-based subscriptions. In addition to device installation status, information about returns and replacements is also recorded here. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+        The DeploymentDevice object is pivotal in managing device information within consumption-based subscriptions. This provides a detailed view of device installation status, replacements, and transaction history, facilitating seamless management through Cisco Install Base integration.
+        #### Purpose
+        DeploymentDevice acts as a detailed repository for device-related data within deployments, ensuring accurate tracking under consumption-based subscriptions. This information is also queried by downstream OPUS team for billing purposes.
+        #### Key Concepts
+        - **Device Management:** Centralizes device data, supporting efficient tracking and management within deployments.
+        - **Integration with Install Base:** Listens to messages from Cisco Install Base for automated data updates, ensuring accuracy.
+        - **Access Management:** Enforces secure access through defined privileges, ensuring only authorized users can interact with DeploymentDevice data.
+        - **Heartbeat generation:** Active DeploymentDevice records are used to publish hourly heartbeats to track device level subscription usage for billing purposes.
+        - **Relationship Management:** Manages associations between devices and deployments, supporting effective data management.
+        - **Consumption metering Alerts:** It keeps track of  device level consumption based metering related alerts.
 
 ---
 
 # Data Source: intersight_asset_deployment_device
-Contains information about Cisco devices associated with consumption-based subscriptions. In addition to device installation status, information about returns and replacements is also recorded here. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+The DeploymentDevice object is pivotal in managing device information within consumption-based subscriptions. This provides a detailed view of device installation status, replacements, and transaction history, facilitating seamless management through Cisco Install Base integration.
+#### Purpose
+DeploymentDevice acts as a detailed repository for device-related data within deployments, ensuring accurate tracking under consumption-based subscriptions. This information is also queried by downstream OPUS team for billing purposes. 
+#### Key Concepts
+- **Device Management:** Centralizes device data, supporting efficient tracking and management within deployments.
+- **Integration with Install Base:** Listens to messages from Cisco Install Base for automated data updates, ensuring accuracy.
+- **Access Management:** Enforces secure access through defined privileges, ensuring only authorized users can interact with DeploymentDevice data.
+- **Heartbeat generation:** Active DeploymentDevice records are used to publish hourly heartbeats to track device level subscription usage for billing purposes.
+- **Relationship Management:** Manages associations between devices and deployments, supporting effective data management.
+- **Consumption metering Alerts:** It keeps track of  device level consumption based metering related alerts.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

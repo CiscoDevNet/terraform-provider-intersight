@@ -3,12 +3,26 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_lease"
 description: |-
-        Lease represents a single WWN ID that is part of the universe, allocated either from a pool or through static assignment.
+        ### Overview
+        A Lease object represents a single allocated WWN (World Wide Name) address from a pool or static assignment.
+        #### Purpose
+        It maintains the association between the allocated identifier and its consumer, tracking ownership and lifecycle of the WWN address within the system.
+        #### Key aspects:
+        - **Resource Management:** - Facilitates the allocation of a single WWN address within pools, ensuring efficient allocation.
+        - **Integration with Pools:** - Directly interacts with pool objects to manage resource leases and reservations.
+        - **Access Control:** - Supports secure management of resource leases, allowing authorized users to execute lease operations.
 
 ---
 
 # Data Source: intersight_fcpool_lease
-Lease represents a single WWN ID that is part of the universe, allocated either from a pool or through static assignment.
+### Overview
+A Lease object represents a single allocated WWN (World Wide Name) address from a pool or static assignment.
+#### Purpose
+It maintains the association between the allocated identifier and its consumer, tracking ownership and lifecycle of the WWN address within the system.
+#### Key aspects:
+- **Resource Management:** - Facilitates the allocation of a single WWN address within pools, ensuring efficient allocation.
+- **Integration with Pools:** - Directly interacts with pool objects to manage resource leases and reservations.
+- **Access Control:** - Supports secure management of resource leases, allowing authorized users to execute lease operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

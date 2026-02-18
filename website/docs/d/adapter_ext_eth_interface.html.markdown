@@ -3,12 +3,26 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_ext_eth_interface"
 description: |-
-        Physical port of a virtual interface card.
+        The adapter.ExtEthInterface object represents a physical external port on a Cisco network adapter. This provides a detailed view of the physical link between the adapter and a peer networking device, such as a Fabric Interconnect or a FEX.
+        #### Purpose
+        The main purpose of this object is to model and monitor the physical connectivity of an adapter's external-facing ports. It captures essential link-level details, including the MAC address, administrative state, and the identity of the connected peer device. This allows for precise tracking of network topology and troubleshooting of physical link issues.
+        #### Key Concepts
+        - **Physical Port Representation:** Models a single external Ethernet port on an adapter card.
+        - **Peer Discovery:** Identifies the connected peer device and port through properties like peerDn and peerPortId, which is crucial for understanding network topology.
+        - **Link State Monitoring:** Tracks the operational status and provides specific reasons (operReason) for link failures, such as LinkMissing or LinkMisconnect.
+        - **Hierarchical Context:** Inherits from the adapter.Unit object, linking the physical port back to its parent adapter card.
 
 ---
 
 # Data Source: intersight_adapter_ext_eth_interface
-Physical port of a virtual interface card.
+The adapter.ExtEthInterface object represents a physical external port on a Cisco network adapter. This provides a detailed view of the physical link between the adapter and a peer networking device, such as a Fabric Interconnect or a FEX.
+#### Purpose
+The main purpose of this object is to model and monitor the physical connectivity of an adapter's external-facing ports. It captures essential link-level details, including the MAC address, administrative state, and the identity of the connected peer device. This allows for precise tracking of network topology and troubleshooting of physical link issues.
+#### Key Concepts
+- **Physical Port Representation:** Models a single external Ethernet port on an adapter card.
+- **Peer Discovery:** Identifies the connected peer device and port through properties like peerDn and peerPortId, which is crucial for understanding network topology.
+- **Link State Monitoring:** Tracks the operational status and provides specific reasons (operReason) for link failures, such as LinkMissing or LinkMisconnect.
+- **Hierarchical Context:** Inherits from the adapter.Unit object, linking the physical port back to its parent adapter card.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

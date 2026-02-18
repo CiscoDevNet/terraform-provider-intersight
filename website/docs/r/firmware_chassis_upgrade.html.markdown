@@ -10,7 +10,7 @@ description: |-
         - **Chassis System Enhancement:** Designed to optimize chassis firmware upgrades, improving system reliability and efficiency through structured update processes.
         - **Exclusion Options:** Offers the ability to exclude certain components from the upgrade, providing flexibility and customization based on specific upgrade needs.
         - **Integrated Management:** Facilitates comprehensive upgrade operations, from image selection to deployment, ensuring seamless execution and management.
-        - **Security and Access Control: Enforces strict access and compliance measures to protect the upgrade process, maintaining system integrity and security.
+        - **Security and Access Control:** Enforces strict access and compliance measures to protect the upgrade process, maintaining system integrity and security.
 
 ---
 
@@ -22,7 +22,7 @@ ChassisUpgrade ensures chassis systems remain secure and performant through firm
 - **Chassis System Enhancement:** Designed to optimize chassis firmware upgrades, improving system reliability and efficiency through structured update processes.
 - **Exclusion Options:** Offers the ability to exclude certain components from the upgrade, providing flexibility and customization based on specific upgrade needs.
 - **Integrated Management:** Facilitates comprehensive upgrade operations, from image selection to deployment, ensuring seamless execution and management.
-- **Security and Access Control: Enforces strict access and compliance measures to protect the upgrade process, maintaining system integrity and security.
+- **Security and Access Control:** Enforces strict access and compliance measures to protect the upgrade process, maintaining system integrity and security.
 ## Usage Example
 ### Resource Creation
 

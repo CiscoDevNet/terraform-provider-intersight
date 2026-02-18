@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
 **TemplateSyncErrors** | Pointer to [**[]MotemplateSyncError**](MotemplateSyncError.md) |  | [optional] 
 **TemplateSyncStatus** | Pointer to **string** | The sync status of the current MO wrt the attached Template MO. * &#x60;None&#x60; - The Enum value represents that the object is not attached to any template. * &#x60;OK&#x60; - The Enum value represents that the object values are in sync with attached template. * &#x60;Scheduled&#x60; - The Enum value represents that the object sync from attached template is scheduled from template. * &#x60;InProgress&#x60; - The Enum value represents that the object sync with the attached template is in progress. * &#x60;OutOfSync&#x60; - The Enum value represents that the object values are not in sync with attached template. | [optional] [readonly] [default to "None"]
+**UndeployWfTasks** | Pointer to **[]string** |  | [optional] 
 **UserLabel** | Pointer to **string** | User label assigned to the server profile. | [optional] 
 **Uuid** | Pointer to **string** | The UUID address that is assigned to the server based on the UUID pool. | [optional] [readonly] 
 **AssignedServer** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -646,6 +647,41 @@ SetTemplateSyncStatus sets TemplateSyncStatus field to given value.
 
 HasTemplateSyncStatus returns a boolean if a field has been set.
 
+### GetUndeployWfTasks
+
+`func (o *ServerProfile) GetUndeployWfTasks() []string`
+
+GetUndeployWfTasks returns the UndeployWfTasks field if non-nil, zero value otherwise.
+
+### GetUndeployWfTasksOk
+
+`func (o *ServerProfile) GetUndeployWfTasksOk() (*[]string, bool)`
+
+GetUndeployWfTasksOk returns a tuple with the UndeployWfTasks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUndeployWfTasks
+
+`func (o *ServerProfile) SetUndeployWfTasks(v []string)`
+
+SetUndeployWfTasks sets UndeployWfTasks field to given value.
+
+### HasUndeployWfTasks
+
+`func (o *ServerProfile) HasUndeployWfTasks() bool`
+
+HasUndeployWfTasks returns a boolean if a field has been set.
+
+### SetUndeployWfTasksNil
+
+`func (o *ServerProfile) SetUndeployWfTasksNil(b bool)`
+
+ SetUndeployWfTasksNil sets the value for UndeployWfTasks to be an explicit nil
+
+### UnsetUndeployWfTasks
+`func (o *ServerProfile) UnsetUndeployWfTasks()`
+
+UnsetUndeployWfTasks ensures that no value is present for UndeployWfTasks, not even an explicit nil
 ### GetUserLabel
 
 `func (o *ServerProfile) GetUserLabel() string`

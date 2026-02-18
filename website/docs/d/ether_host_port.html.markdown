@@ -3,12 +3,26 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_host_port"
 description: |-
-        Host Interface ports available on the I/O module or the Fabric Extender that facilitate connectivity between the Fabric Interconnect and the Cisco UCS B/C/X-Series servers.
+        The ether.HostPort object represents a host-facing physical port on an I/O Module (IOM) or Fabric Extender (FEX). These ports provide the physical connection from the server's network adapter to the fabric.
+        #### Purpose
+        The HostPort object is used to model and inventory the physical server-facing ports on an IOM or FEX. It captures the port's identity, its administrative and operational state, and its discovered peer interface. It is fundamental to understanding the physical topology between the servers and the fabric.
+        #### Key Concepts
+        - **Server-Facing Port Model:** Represents a physical port that connects directly to a server's adapter.
+        - **Peer Discovery:** The peerInterface relationship links the host port to the specific adapter.ExtEthInterface on the server that is connected to it, which is key for topology mapping and fault correlation.
+        - **State Monitoring:** Tracks the adminState and operState of the port, allowing for monitoring of the physical link status.
+        - **Location Identification:** Identified by its portId, slotId, and moduleId, which define its precise physical location on the IOM/FEX.
 
 ---
 
 # Data Source: intersight_ether_host_port
-Host Interface ports available on the I/O module or the Fabric Extender that facilitate connectivity between the Fabric Interconnect and the Cisco UCS B/C/X-Series servers.
+The ether.HostPort object represents a host-facing physical port on an I/O Module (IOM) or Fabric Extender (FEX). These ports provide the physical connection from the server's network adapter to the fabric.
+#### Purpose
+The HostPort object is used to model and inventory the physical server-facing ports on an IOM or FEX. It captures the port's identity, its administrative and operational state, and its discovered peer interface. It is fundamental to understanding the physical topology between the servers and the fabric.
+#### Key Concepts
+- **Server-Facing Port Model:** Represents a physical port that connects directly to a server's adapter.
+- **Peer Discovery:** The peerInterface relationship links the host port to the specific adapter.ExtEthInterface on the server that is connected to it, which is key for topology mapping and fault correlation.
+- **State Monitoring:** Tracks the adminState and operState of the port, allowing for monitoring of the physical link status.
+- **Location Identification:** Identified by its portId, slotId, and moduleId, which define its precise physical location on the IOM/FEX.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

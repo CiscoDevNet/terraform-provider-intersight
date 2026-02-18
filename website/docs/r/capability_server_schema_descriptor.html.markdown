@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_schema_descriptor"
 description: |-
-        Descriptor that identifies the server's redfish locatorled using cimc firmware info.
+        The capability.ServerSchemaDescriptor is a hardware descriptor that identifies a server's Redfish capability for specific actions, such as controlling the locator LED, based on its CIMC firmware and Redfish schema version.
+        #### Purpose
+        The primary purpose of this object is to create a mapping between a server's firmware version and the specific Redfish properties used to control certain hardware features. For example, it defines the correct locatorLedName property to use for toggling the locator LED, which can vary between different Redfish schema versions. This allows for consistent management actions across a diverse range of server firmware.
+        #### Key Concepts
+        - **Redfish Capability Mapping:** Links server hardware actions to specific Redfish schema properties (redfishSchema, locatorLedName).
+        - **Firmware-Dependent Logic:** The descriptor is identified by vendor, model, and version, making the mapping dependent on the server's firmware.
+        - **Action Abstraction:** Allows the management system to use a consistent action (e.g., turn on locator LED) while the descriptor provides the specific implementation detail for the target server.
+        - **Extensible Catalog:** As a HardwareDescriptor, it is part of a catalog that can be updated to support new server models and Redfish schema versions without changing core management logic.
 
 ---
 
 # Resource: intersight_capability_server_schema_descriptor
-Descriptor that identifies the server's redfish locatorled using cimc firmware info.
+The capability.ServerSchemaDescriptor is a hardware descriptor that identifies a server's Redfish capability for specific actions, such as controlling the locator LED, based on its CIMC firmware and Redfish schema version.
+#### Purpose
+The primary purpose of this object is to create a mapping between a server's firmware version and the specific Redfish properties used to control certain hardware features. For example, it defines the correct locatorLedName property to use for toggling the locator LED, which can vary between different Redfish schema versions. This allows for consistent management actions across a diverse range of server firmware.
+#### Key Concepts
+- **Redfish Capability Mapping:** Links server hardware actions to specific Redfish schema properties (redfishSchema, locatorLedName).
+- **Firmware-Dependent Logic:** The descriptor is identified by vendor, model, and version, making the mapping dependent on the server's firmware.
+- **Action Abstraction:** Allows the management system to use a consistent action (e.g., "turn on locator LED") while the descriptor provides the specific implementation detail for the target server.
+- **Extensible Catalog:** As a HardwareDescriptor, it is part of a catalog that can be updated to support new server models and Redfish schema versions without changing core management logic.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

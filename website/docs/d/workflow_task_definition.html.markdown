@@ -3,26 +3,24 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_task_definition"
 description: |-
-        ### Overview
         The TaskDefinition object is a foundational element of the workflow system, designed to define individual tasks that can be orchestrated within a workflow. It encapsulates the intent of an operation, providing a standardized way to describe the purpose and function of a task within automation and orchestration processes.
         #### Purpose
         A TaskDefinition serves as the blueprint for tasks that can be executed as part of a workflow. It supports both standalone tasks, which are tightly bound to a single implementation, and interface tasks, which are generalized definitions that can be linked to multiple specific implementations. This flexibility allows a single TaskDefinition to represent different ways of accomplishing a task, each with its own implementation.
         #### Key Concepts
-        - **Reusability:** - TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
-        - **Versioning:** - Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
-        - **Access Control:** - Use of privilege sets ensures only authorized users can create, update, or execute tasks.
+        - **Reusability:** TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
+        - **Versioning:** Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
+        - **Access Control:** Use of privilege sets ensures only authorized users can create, update, or execute tasks.
 
 ---
 
 # Data Source: intersight_workflow_task_definition
-### Overview
 The TaskDefinition object is a foundational element of the workflow system, designed to define individual tasks that can be orchestrated within a workflow. It encapsulates the intent of an operation, providing a standardized way to describe the purpose and function of a task within automation and orchestration processes.
 #### Purpose
 A TaskDefinition serves as the blueprint for tasks that can be executed as part of a workflow. It supports both standalone tasks, which are tightly bound to a single implementation, and interface tasks, which are generalized definitions that can be linked to multiple specific implementations. This flexibility allows a single TaskDefinition to represent different ways of accomplishing a task, each with its own implementation.
 #### Key Concepts
-- **Reusability:** - TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
-- **Versioning:** - Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
-- **Access Control:** - Use of privilege sets ensures only authorized users can create, update, or execute tasks.
+- **Reusability:** TaskDefinitions can be referenced across multiple workflows, supporting consistency and reducing redundancy.
+- **Versioning:** Each TaskDefinition supports version control, allowing safe updates and maintenance without affecting existing workflows.
+- **Access Control:** Use of privilege sets ensures only authorized users can create, update, or execute tasks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

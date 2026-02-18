@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_control_policy"
 description: |-
-        The features that are applied on a vethernet that is connected to the vNIC.
+        The EthNetworkControlPolicy object defines control settings for vEthernet (veth) interfaces connected to vNICs, improving interface management and security. It helps maintain the operational integrity and performance of these network interfaces.
+        #### Purpose
+        EthNetworkControlPolicy focuses on enforcing control settings on veth interfaces, providing a structured framework for managing interface behaviors and security. It ensures that network interfaces operate optimally, supporting robust and secure network operations.
+        #### Key Concepts
+        - **Interface Control:** Defines settings such as MAC registration, LLDP, and uplink failure actions, ensuring consistent control over network interfaces.
+        - **Security:** Enhances security by controlling MAC forging and other interface behaviors, protecting against unauthorized access.
+        - **Integration:** Seamlessly integrates with vNIC configurations and network policies, ensuring cohesive network management.
+        - **Policy-Based Management:** Provides a centralized approach to managing interface control settings, streamlining operations and enhancing efficiency.
 
 ---
 
 # Resource: intersight_fabric_eth_network_control_policy
-The features that are applied on a vethernet that is connected to the vNIC.
+The EthNetworkControlPolicy object defines control settings for vEthernet (veth) interfaces connected to vNICs, improving interface management and security. It helps maintain the operational integrity and performance of these network interfaces.
+#### Purpose
+EthNetworkControlPolicy focuses on enforcing control settings on veth interfaces, providing a structured framework for managing interface behaviors and security. It ensures that network interfaces operate optimally, supporting robust and secure network operations.
+#### Key Concepts
+- **Interface Control:** Defines settings such as MAC registration, LLDP, and uplink failure actions, ensuring consistent control over network interfaces.
+- **Security:** Enhances security by controlling MAC forging and other interface behaviors, protecting against unauthorized access.
+- **Integration:** Seamlessly integrates with vNIC configurations and network policies, ensuring cohesive network management.
+- **Policy-Based Management:** Provides a centralized approach to managing interface control settings, streamlining operations and enhancing efficiency.
 ## Usage Example
 ### Resource Creation
 

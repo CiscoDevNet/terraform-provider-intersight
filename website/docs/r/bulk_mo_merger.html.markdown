@@ -3,28 +3,26 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_merger"
 description: |-
-        ### Overview
         The MoMerger object is an interface designed to merge properties of managed object (MO) instances. It allows for the synchronization and updating of multiple target MOs based on specified source configurations.
         #### Purpose
         MoMerger is instrumental in template synchronization, enabling bulk updates of derived instances with changes made to their parent templates, ensuring consistency across configurations.
         #### Key Concepts
-        - **Property Merging: Supports the merging of selected properties from source to target instances, allowing for efficient updates and configuration synchronization.
-        - **Template Synchronization: Facilitates the propagation of template changes to derived profiles, ensuring uniformity and adherence to updated configurations.
-        - **Configuration Application: Offers the ability to apply specific configuration changes across all target instances during the merge process.
-        - **Async Processing: Operates asynchronously, accommodating large-scale merge operations without impacting system performance.
+        - **Property Merging:** Supports the merging of selected properties from source to target instances, allowing for efficient updates and configuration synchronization.
+        - **Template Synchronization:** Facilitates the propagation of template changes to derived profiles, ensuring uniformity and adherence to updated configurations.
+        - **Configuration Application:** Offers the ability to apply specific configuration changes across all target instances during the merge process.
+        - **Async Processing:** Operates asynchronously, accommodating large-scale merge operations without impacting system performance.
 
 ---
 
 # Resource: intersight_bulk_mo_merger
-### Overview
 The MoMerger object is an interface designed to merge properties of managed object (MO) instances. It allows for the synchronization and updating of multiple target MOs based on specified source configurations.   
-#### Purpose  
+#### Purpose
 MoMerger is instrumental in template synchronization, enabling bulk updates of derived instances with changes made to their parent templates, ensuring consistency across configurations.   
-#### Key Concepts 
-- **Property Merging: Supports the merging of selected properties from source to target instances, allowing for efficient updates and configuration synchronization. 
-- **Template Synchronization: Facilitates the propagation of template changes to derived profiles, ensuring uniformity and adherence to updated configurations. 
-- **Configuration Application: Offers the ability to apply specific configuration changes across all target instances during the merge process. 
-- **Async Processing: Operates asynchronously, accommodating large-scale merge operations without impacting system performance.
+#### Key Concepts
+- **Property Merging:** Supports the merging of selected properties from source to target instances, allowing for efficient updates and configuration synchronization. 
+- **Template Synchronization:** Facilitates the propagation of template changes to derived profiles, ensuring uniformity and adherence to updated configurations. 
+- **Configuration Application:** Offers the ability to apply specific configuration changes across all target instances during the merge process. 
+- **Async Processing:** Operates asynchronously, accommodating large-scale merge operations without impacting system performance.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

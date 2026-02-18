@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_log_download"
 description: |-
-        Download the log collected from end point.
+        The LogDownload object facilitates the download of collected logs from Cisco endpoints. It supports efficient retrieval and management of log files.
+        #### Purpose
+        LogDownload enables users to access and download logs collected from endpoints, aiding in troubleshooting and data management. It is a key component in log retrieval processes within Cisco environments.
+        #### Key Concepts
+        - **Log Retrieval:** Provides mechanisms for downloading logs from endpoints, supporting efficient access to collected data.
+        - **Access Control:** Establishes privilege sets for log download operations, ensuring secure management.
+        - **Integration with Devices:** Connects with servers to ensure log downloads are associated correctly within the network.
+        - **Security:** Ensures log downloads are performed securely, supporting compliance and data integrity.
 
 ---
 
 # Data Source: intersight_equipment_log_download
-Download the log collected from end point.
+The LogDownload object facilitates the download of collected logs from Cisco endpoints. It supports efficient retrieval and management of log files.
+#### Purpose
+LogDownload enables users to access and download logs collected from endpoints, aiding in troubleshooting and data management. It is a key component in log retrieval processes within Cisco environments.
+#### Key Concepts
+- **Log Retrieval:** Provides mechanisms for downloading logs from endpoints, supporting efficient access to collected data.
+- **Access Control:** Establishes privilege sets for log download operations, ensuring secure management.
+- **Integration with Devices:** Connects with servers to ensure log downloads are associated correctly within the network.
+- **Security:** Ensures log downloads are performed securely, supporting compliance and data integrity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

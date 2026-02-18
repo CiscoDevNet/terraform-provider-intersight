@@ -1901,6 +1901,54 @@ func TestFlattenListComputeServerOpStatus(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListCondAdapterDetail(t *testing.T) {
+	p := []models.CondAdapterDetail{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"cond.AdapterDetail","DriverName":"DriverName %d","DriverVersion":"DriverVersion %d","Firmware":"Firmware %d","HclReason":"HclReason %d","HclStatus":"HclStatus %d","Model":"Model %d","ObjectType":"cond.AdapterDetail","Type":"Type %d","Vendor":"Vendor %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListCondAdapterDetail(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.CondAdapterDetail{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListCondAdapterDetail(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "cond.AdapterDetail", "driver_name": "DriverName 1", "driver_version": "DriverVersion 1", "firmware": "Firmware 1", "hcl_reason": "HclReason 1", "hcl_status": "HclStatus 1", "model": "Model 1", "object_type": "cond.AdapterDetail", "type": "Type 1", "vendor": "Vendor 1"}, {"class_id": "cond.AdapterDetail", "driver_name": "DriverName 2", "driver_version": "DriverVersion 2", "firmware": "Firmware 2", "hcl_reason": "HclReason 2", "hcl_status": "HclStatus 2", "model": "Model 2", "object_type": "cond.AdapterDetail", "type": "Type 2", "vendor": "Vendor 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListCondAdapterInstance(t *testing.T) {
+	p := []models.CondAdapterInstance{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"cond.AdapterInstance","DriverName":"DriverName %d","DriverVersion":"DriverVersion %d","Firmware":"Firmware %d","HclReason":"HclReason %d","HclStatus":"HclStatus %d","Model":"Model %d","ObjectType":"cond.AdapterInstance","Type":"Type %d","Vendor":"Vendor %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListCondAdapterInstance(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.CondAdapterInstance{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListCondAdapterInstance(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "cond.AdapterInstance", "driver_name": "DriverName 1", "driver_version": "DriverVersion 1", "firmware": "Firmware 1", "hcl_reason": "HclReason 1", "hcl_status": "HclStatus 1", "model": "Model 1", "object_type": "cond.AdapterInstance", "type": "Type 1", "vendor": "Vendor 1"}, {"class_id": "cond.AdapterInstance", "driver_name": "DriverName 2", "driver_version": "DriverVersion 2", "firmware": "Firmware 2", "hcl_reason": "HclReason 2", "hcl_status": "HclStatus 2", "model": "Model 2", "object_type": "cond.AdapterInstance", "type": "Type 2", "vendor": "Vendor 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListCondAlarmAction(t *testing.T) {
 	p := []models.CondAlarmAction{}
 	var d = &schema.ResourceData{}
@@ -1997,6 +2045,78 @@ func TestFlattenListCondAlarmDefinitionRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListCondAlarmRuleExpression(t *testing.T) {
+	p := []models.CondAlarmRuleExpression{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"cond.AlarmRuleExpression","ObjectType":"cond.AlarmRuleExpression","Operator":"Operator %d","Property":"Property %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListCondAlarmRuleExpression(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.CondAlarmRuleExpression{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListCondAlarmRuleExpression(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "cond.AlarmRuleExpression", "object_type": "cond.AlarmRuleExpression", "operator": "Operator 1", "property": "Property 1"}, {"class_id": "cond.AlarmRuleExpression", "object_type": "cond.AlarmRuleExpression", "operator": "Operator 2", "property": "Property 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListCondAlarmSuppressionRelationship(t *testing.T) {
+	p := []models.CondAlarmSuppressionRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListCondAlarmSuppressionRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.CondAlarmSuppressionRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListCondAlarmSuppressionRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListCondCustomHclBaselineRelationship(t *testing.T) {
+	p := []models.CondCustomHclBaselineRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListCondCustomHclBaselineRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.CondCustomHclBaselineRelationship{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListCondCustomHclBaselineRelationship(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListCondHclStatusDetailRelationship(t *testing.T) {
 	p := []models.CondHclStatusDetailRelationship{}
 	var d = &schema.ResourceData{}
@@ -2016,6 +2136,30 @@ func TestFlattenListCondHclStatusDetailRelationship(t *testing.T) {
 	}
 	ffOp := flattenListCondHclStatusDetailRelationship(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListCondServerBaselineStatus(t *testing.T) {
+	p := []models.CondServerBaselineStatus{}
+	var d = &schema.ResourceData{}
+	c := `{"AdapterCompliance":"AdapterCompliance %d","AdapterReason":"AdapterReason %d","ClassId":"cond.ServerBaselineStatus","HardwareCompliance":"HardwareCompliance %d","HardwareReason":"HardwareReason %d","ObjectType":"cond.ServerBaselineStatus","Reason":"Reason %d","SoftwareCompliance":"SoftwareCompliance %d","SoftwareReason":"SoftwareReason %d","Status":"Status %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListCondServerBaselineStatus(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.CondServerBaselineStatus{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListCondServerBaselineStatus(p, d)
+	expectedOp := []map[string]interface{}{{"adapter_compliance": "AdapterCompliance 1", "adapter_reason": "AdapterReason 1", "class_id": "cond.ServerBaselineStatus", "hardware_compliance": "HardwareCompliance 1", "hardware_reason": "HardwareReason 1", "object_type": "cond.ServerBaselineStatus", "reason": "Reason 1", "software_compliance": "SoftwareCompliance 1", "software_reason": "SoftwareReason 1", "status": "Status 1"}, {"adapter_compliance": "AdapterCompliance 2", "adapter_reason": "AdapterReason 2", "class_id": "cond.ServerBaselineStatus", "hardware_compliance": "HardwareCompliance 2", "hardware_reason": "HardwareReason 2", "object_type": "cond.ServerBaselineStatus", "reason": "Reason 2", "software_compliance": "SoftwareCompliance 2", "software_reason": "SoftwareReason 2", "status": "Status 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -5832,6 +5976,30 @@ func TestFlattenListIamSessionRelationship(t *testing.T) {
 	}
 	ffOp := flattenListIamSessionRelationship(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListIamTenantLinking(t *testing.T) {
+	p := []models.IamTenantLinking{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"iam.TenantLinking","ObjectType":"iam.TenantLinking","Product":"Product %d","TenantId":"TenantId %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListIamTenantLinking(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.IamTenantLinking{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListIamTenantLinking(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "iam.TenantLinking", "object_type": "iam.TenantLinking", "product": "Product 1", "tenant_id": "TenantId 1"}, {"class_id": "iam.TenantLinking", "object_type": "iam.TenantLinking", "product": "Product 2", "tenant_id": "TenantId 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)

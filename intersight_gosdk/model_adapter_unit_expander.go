@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the AdapterUnitExpander type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AdapterUnitExpander{}
 
-// AdapterUnitExpander The adapter unit extension card present on a server.
+// AdapterUnitExpander The adapter.UnitExpander object represents a physical extension card for a network adapter within a server. It is used for inventory and to identify expander cards that augment the functionality or port count of a primary adapter. #### Purpose The UnitExpander object serves to inventory adapter extension cards, which are not full-featured adapters themselves but provide additional physical connectivity. It captures key hardware identifiers to ensure the component can be correctly identified and managed within the system. #### Key Concepts - **Hardware Identification:** Provides essential hardware details such as partNumber and vid (virtual ID) for unique identification. - **Hierarchical Relationship:** It is directly associated with a parent adapter.Unit object, clearly defining its role as an extension of a primary adapter. - **Simplified Model:** Focuses purely on the identity of the expander hardware, distinct from the more complex adapter.Unit which models the full adapter.
 type AdapterUnitExpander struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

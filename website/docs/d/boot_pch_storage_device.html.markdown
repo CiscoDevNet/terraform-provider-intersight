@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_pch_storage_device"
 description: |-
-        Pch Storage Boot Device configured on the server.
+        The boot.PchStorageDevice object represents a storage device connected to the Platform Controller Hub (PCH) as a configurable boot option within a server's boot policy. This typically refers to onboard SATA or M.2 devices managed by the chipset.
+        #### Purpose
+        The PchStorageDevice object provides a standardized way to include PCH-attached storage, such as an M.2 SATA drive, in a server's boot order. It allows administrators to define the device's boot priority and enabled state within a managed boot policy.
+        #### Key Concepts
+        - **Onboard Storage Boot:** Defines a device connected directly to the motherboard's PCH as a bootable source.
+        - **Configurable Priority:** The order property determines its position in the boot sequence relative to other devices like RAID controllers or PCIe drives.
+        - **State Management:** The state property allows the PCH storage device to be enabled or disabled as a boot option within a policy.
+        - **Boot Policy Component:** Functions as an element within a boot policy that is associated with a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_pch_storage_device
-Pch Storage Boot Device configured on the server.
+The boot.PchStorageDevice object represents a storage device connected to the Platform Controller Hub (PCH) as a configurable boot option within a server's boot policy. This typically refers to onboard SATA or M.2 devices managed by the chipset.
+#### Purpose
+The PchStorageDevice object provides a standardized way to include PCH-attached storage, such as an M.2 SATA drive, in a server's boot order. It allows administrators to define the device's boot priority and enabled state within a managed boot policy.
+#### Key Concepts
+- **Onboard Storage Boot:** Defines a device connected directly to the motherboard's PCH as a bootable source.
+- **Configurable Priority:** The order property determines its position in the boot sequence relative to other devices like RAID controllers or PCIe drives.
+- **State Management:** The state property allows the PCH storage device to be enabled or disabled as a boot option within a policy.
+- **Boot Policy Component:** Functions as an element within a boot policy that is associated with a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

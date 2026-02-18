@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user_setting"
 description: |-
-        Holder for UI Settings such as preference of the user for Session Recording.
+        UserSetting stores specific UI-related settings that are not part of general preferences, such as session recording opt-in status.
+        #### Purpose
+        It allows storing discrete user settings that drive UI features and compliance preferences.
+        #### Key Concepts
+        - **Fine-grained Settings:** Captures individual flags or controls.
+        - **Per-user Scope:** Stored per user and IdP/IdP reference context.
+        - **Complementary to Preferences:** Designed for settings distinct from bulk UI preferences.
+        - **Self-managed:** Users can create and update their own settings.
 
 ---
 
 # Data Source: intersight_iam_user_setting
-Holder for UI Settings such as preference of the user for Session Recording.
+UserSetting stores specific UI-related settings that are not part of general preferences, such as session recording opt-in status.
+#### Purpose
+It allows storing discrete user settings that drive UI features and compliance preferences.
+#### Key Concepts
+- **Fine-grained Settings:** Captures individual flags or controls.
+- **Per-user Scope:** Stored per user and IdP/IdP reference context.
+- **Complementary to Preferences:** Designed for settings distinct from bulk UI preferences.
+- **Self-managed:** Users can create and update their own settings.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

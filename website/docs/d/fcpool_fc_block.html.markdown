@@ -3,12 +3,26 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_fc_block"
 description: |-
-        A block of contiguous WWN addresses that are part of a pool.
+        A Block object represents a sequential range of WWN (World Wide Name) addresses defined by a start and end address. A pool can contain multiple blocks.
+        #### Purpose
+        The block object serves as a fundamental unit within a WWN pool, enabling efficient management and allocation of contiguous network identifiers.
+        #### Key Concepts
+        - **Range Definition:** Represents a contiguous range of WWN addresses with defined start and end values.
+        - **Identifier Type:** Manages WWN-based identifiers used in network fabrics.
+        - **Pool Association:** Functions as a core component within WWN pools for structured resource management.
+        - **Contiguity:** Ensures sequential and non-overlapping address allocation for optimal utilization.
 
 ---
 
 # Data Source: intersight_fcpool_fc_block
-A block of contiguous WWN addresses that are part of a pool.
+A Block object represents a sequential range of WWN (World Wide Name) addresses defined by a start and end address. A pool can contain multiple blocks.
+#### Purpose
+The block object serves as a fundamental unit within a WWN pool, enabling efficient management and allocation of contiguous network identifiers.
+#### Key Concepts
+- **Range Definition:** Represents a contiguous range of WWN addresses with defined start and end values.
+- **Identifier Type:** Manages WWN-based identifiers used in network fabrics.
+- **Pool Association:** Functions as a core component within WWN pools for structured resource management.
+- **Contiguity:** Ensures sequential and non-overlapping address allocation for optimal utilization.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

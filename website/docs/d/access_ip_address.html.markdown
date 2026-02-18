@@ -3,12 +3,26 @@ subcategory: "access"
 layout: "intersight"
 page_title: "Intersight: intersight_access_ip_address"
 description: |-
-        IP address and Lease information for a specific Server Profile.
+        The Access IpAddress object is a read-only inventory object that represents the IP address lease information for a specific server profile. This provides a consolidated view of the management IP addresses assigned to a server's management controller.
+        #### Purpose
+        This serves as a status and reporting entity, not a configurable one. Its purpose is to display the IPv4 and IPv6 addresses that have been leased to a server profile from the IP pools specified in the corresponding Access Policy. This allows administrators and automation systems to easily query the assigned management IP addresses for a given server.
+        #### Key Concepts
+        - **Inventory Object:** It reflects the current state of IP allocation and is not directly configurable by users. Its data is populated by the system after an Access policy is successfully deployed.
+        - **Read-Only Access:** The API methods for this are limited to READ, reinforcing its role as an informational object.
+        - **Lease Association:** It maintains relationships to the underlying IP lease objects (ippool.IpLease), providing a clear link between the assigned address and its source pool.
+        - **Profile-Specific:** Each IpAddress instance is tied to a single server profile, showing the specific addresses in use by that server.
 
 ---
 
 # Data Source: intersight_access_ip_address
-IP address and Lease information for a specific Server Profile.
+The Access IpAddress object is a read-only inventory object that represents the IP address lease information for a specific server profile. This provides a consolidated view of the management IP addresses assigned to a server's management controller.
+#### Purpose
+This serves as a status and reporting entity, not a configurable one. Its purpose is to display the IPv4 and IPv6 addresses that have been leased to a server profile from the IP pools specified in the corresponding Access Policy. This allows administrators and automation systems to easily query the assigned management IP addresses for a given server.
+#### Key Concepts
+- **Inventory Object:** It reflects the current state of IP allocation and is not directly configurable by users. Its data is populated by the system after an Access policy is successfully deployed.
+- **Read-Only Access:** The API methods for this are limited to READ, reinforcing its role as an informational object.
+- **Lease Association:** It maintains relationships to the underlying IP lease objects (ippool.IpLease), providing a clear link between the assigned address and its source pool.
+- **Profile-Specific:** Each IpAddress instance is tied to a single server profile, showing the specific addresses in use by that server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

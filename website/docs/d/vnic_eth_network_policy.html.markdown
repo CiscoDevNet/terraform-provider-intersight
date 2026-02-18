@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_network_policy"
 description: |-
-        An Ethernet Network policy determines if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. You can specify the VLAN to be associated with an Ethernet packet if no tag is found.
+        The EthNetworkPolicy object controls the VLAN and Ethernet network configuration for virtual interfaces. It defines how VLAN traffic is managed and tagged as it traverses the network infrastructure. This policy applies only to standalone servers.
+        #### Purpose
+        EthNetworkPolicy enforces VLAN policies and traffic handling for vNICs, ensuring that network segmentation and access controls are applied consistently across all connected endpoints.
+        #### Key Concepts
+        - **VLAN Management:** Specifies access or trunk modes, native VLANs, and allowed VLANs for interfaces.
+        - **Policy Attachment:** Linked to vNICs and LAN connectivity policies for unified configuration.
 
 ---
 
 # Data Source: intersight_vnic_eth_network_policy
-An Ethernet Network policy determines if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. You can specify the VLAN to be associated with an Ethernet packet if no tag is found.
+The EthNetworkPolicy object controls the VLAN and Ethernet network configuration for virtual interfaces. It defines how VLAN traffic is managed and tagged as it traverses the network infrastructure. This policy applies only to standalone servers.
+#### Purpose
+EthNetworkPolicy enforces VLAN policies and traffic handling for vNICs, ensuring that network segmentation and access controls are applied consistently across all connected endpoints.
+#### Key Concepts
+- **VLAN Management:** Specifies access or trunk modes, native VLANs, and allowed VLANs for interfaces.
+- **Policy Attachment:** Linked to vNICs and LAN connectivity policies for unified configuration.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

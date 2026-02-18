@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_license_info_view"
 description: |-
-        Custom LicenseInfo view list to be displayed by the UI.
+        The LicenseInfoView object provides a custom view for license information, designed to be displayed by user interfaces, enhancing user experience and information accessibility.
+        #### Purpose
+        LicenseInfoView serves as a presentation layer for license information, offering structured views that enhance the user's ability to access and understand licensing data.
+        #### Key Concepts
+        - **Custom View Creation:** Facilitates the creation of tailored views for license information, ensuring data is presented in an accessible and user-friendly manner.
+        - **UI Integration:** Designed for integration with user interfaces, providing seamless access to licensing data.
+        - **Information Accessibility:** Enhances the ability of users to access and interpret license information, supporting informed decision-making.
+        - **Organizational Resource:** Operates within shared organizational contexts, ensuring consistent presentation across different accounts and user roles.
 
 ---
 
 # Data Source: intersight_license_license_info_view
-Custom LicenseInfo view list to be displayed by the UI.
+The LicenseInfoView object provides a custom view for license information, designed to be displayed by user interfaces, enhancing user experience and information accessibility.
+#### Purpose
+LicenseInfoView serves as a presentation layer for license information, offering structured views that enhance the user's ability to access and understand licensing data.
+#### Key Concepts
+- **Custom View Creation:** Facilitates the creation of tailored views for license information, ensuring data is presented in an accessible and user-friendly manner.
+- **UI Integration:** Designed for integration with user interfaces, providing seamless access to licensing data.
+- **Information Accessibility:** Enhances the ability of users to access and interpret license information, supporting informed decision-making.
+- **Organizational Resource:** Operates within shared organizational contexts, ensuring consistent presentation across different accounts and user roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

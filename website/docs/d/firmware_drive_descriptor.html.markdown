@@ -3,12 +3,26 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_drive_descriptor"
 description: |-
-        Descriptor to uniquely identify a Drive.
+        The DriveDescriptor object uniquely identifies a drive within the system. It is a critical part of managing storage components and ensuring compatibility with system operations.
+        #### Purpose
+        DriveDescriptor provides identification for storage components, supporting software deployment and upgrade processes by ensuring compatibility.
+        #### Key Concepts
+        - **Storage Identification:** Uniquely identifies storage drives, facilitating accurate mapping and compatibility checks.
+        - **Upgrade Management:** Supports software deployment and upgrade processes through precise drive identification.
+        - **Catalog Integration:** Links drive descriptors with the Intersight catalog for comprehensive management.
+        - **Administration:** Offers tools for managing drive identification and compatibility checks.
 
 ---
 
 # Data Source: intersight_firmware_drive_descriptor
-Descriptor to uniquely identify a Drive.
+The DriveDescriptor object uniquely identifies a drive within the system. It is a critical part of managing storage components and ensuring compatibility with system operations.
+#### Purpose
+DriveDescriptor provides identification for storage components, supporting software deployment and upgrade processes by ensuring compatibility.
+#### Key Concepts
+- **Storage Identification:** Uniquely identifies storage drives, facilitating accurate mapping and compatibility checks.
+- **Upgrade Management:** Supports software deployment and upgrade processes through precise drive identification.
+- **Catalog Integration:** Links drive descriptors with the Intersight catalog for comprehensive management.
+- **Administration:** Offers tools for managing drive identification and compatibility checks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

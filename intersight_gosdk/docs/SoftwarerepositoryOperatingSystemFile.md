@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.OperatingSystemFile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.OperatingSystemFile"]
+**FileName** | Pointer to **string** | File name of the uploaded image. | [optional] 
 **ImportProgress** | Pointer to **int64** | The progress percentage for the import operation. | [optional] 
 **SampleHashes** | Pointer to **string** | File sample hashes at deterministic positions for efficient duplicate detection of large files. | [optional] 
 **Vendor** | Pointer to **string** | The vendor or publisher of this file. | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetFileName
+
+`func (o *SoftwarerepositoryOperatingSystemFile) GetFileName() string`
+
+GetFileName returns the FileName field if non-nil, zero value otherwise.
+
+### GetFileNameOk
+
+`func (o *SoftwarerepositoryOperatingSystemFile) GetFileNameOk() (*string, bool)`
+
+GetFileNameOk returns a tuple with the FileName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileName
+
+`func (o *SoftwarerepositoryOperatingSystemFile) SetFileName(v string)`
+
+SetFileName sets FileName field to given value.
+
+### HasFileName
+
+`func (o *SoftwarerepositoryOperatingSystemFile) HasFileName() bool`
+
+HasFileName returns a boolean if a field has been set.
 
 ### GetImportProgress
 

@@ -11,7 +11,6 @@ description: |-
         - **Bulk Operations:** Supports asynchronous operations such as cloning and updating, facilitating large-scale management of server profiles.
         - **Version Control:** Ensures template modifications are safely propagated to profiles without compromising existing configurations.
         - **Access Governance:** Privilege sets govern access to the template, maintaining secure control over server configuration processes.
-        A profile template specifying configuration settings for a physical server.
 
 ---
 
@@ -23,8 +22,7 @@ ProfileTemplate serves as the blueprint for creating server profiles, enabling e
 - **Template-Based Management:** Offers a structured approach to server configuration by establishing baseline settings that can be propagated to derived profiles. 
 - **Bulk Operations:** Supports asynchronous operations such as cloning and updating, facilitating large-scale management of server profiles. 
 - **Version Control:** Ensures template modifications are safely propagated to profiles without compromising existing configurations.
-- **Access Governance:** Privilege sets govern access to the template, maintaining secure control over server configuration processes. 
-A profile template specifying configuration settings for a physical server.
+- **Access Governance:** Privilege sets govern access to the template, maintaining secure control over server configuration processes.
 ## Usage Example
 ### Resource Creation
 

@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_static_target_policy_inventory"
 description: |-
-        Configuration parameters that defines the reachability of iSCSI Target portal.
+        The IscsiStaticTargetPolicy object defines the parameters for connecting to specific iSCSI targets, ensuring reachability and correct configuration for iSCSI boot or storage access.
+        ####Purpose
+        IscsiStaticTargetPolicy provides a standardized way to specify static iSCSI targets, including target names, IP addresses, ports, and associated LUN configurations.
+        #### Key Concepts
+        - **Target Specification:** Standardizes the definition of iSCSI targets for boot or data access.
+        - **Policy Integration:** Used in conjunction with iSCSI boot policies for automated deployment.
 
 ---
 
 # Data Source: intersight_vnic_iscsi_static_target_policy_inventory
-Configuration parameters that defines the reachability of iSCSI Target portal.
+The IscsiStaticTargetPolicy object defines the parameters for connecting to specific iSCSI targets, ensuring reachability and correct configuration for iSCSI boot or storage access.
+####Purpose
+IscsiStaticTargetPolicy provides a standardized way to specify static iSCSI targets, including target names, IP addresses, ports, and associated LUN configurations.
+#### Key Concepts
+- **Target Specification:** Standardizes the definition of iSCSI targets for boot or data access.
+- **Policy Integration:** Used in conjunction with iSCSI boot policies for automated deployment.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

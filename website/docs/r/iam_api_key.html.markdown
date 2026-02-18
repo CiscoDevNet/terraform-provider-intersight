@@ -3,22 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_api_key"
 description: |-
-        An API key is used to authenticate and authorize API requests sent by a client using the HTTP signature scheme. API keys can be used by unattended, daemon clients that need to send requests to Intersight programmatically. API keys are based on public key cryptography.
-        To create an API key, the user must specify: 1. The purpose (description) of the API key, 2. The cryptographic hash algorithm, which is used to compute the digest of the body of HTTP requests, 3. The cryptographic parameters to generate a private/public key pair, e.g. RSA, ECDSA, EDDSA, key modulus, and 4. The signing algorithm, e.g. RSA PKCS v1.5, RSA PSS, ECDSA, EDDSA. The generated private key and public key are encoded in PEM format.
-        The client owns the private key and is responsible for maintaining the confidentiality of the private key. The server holds the public key.
-        The client must have a cryptographic provider compatible with the cryptographic parameters specified in the API key. For example, if you use the powershell SDK to write the client, make sure the appropriate cryptographic providers are installed on the local system. If you create an RSA key pair with modulus set to 2048, the client must support 2048-bit private keys. A maximum of 3 API keys per user is allowed.
-        API keys are used to sign HTTP requests as follows: 1. A cryptographic digest of the body of the HTTP request is calculated using one of the supported cryptographic hash algorithms. 2. The value of the digest is base-64 encoded in the `Digest` HTTP header. 3. A signature is calculated as specified in the HTTP signature scheme, and the signature is added to the `Authorization` HTTP request header.
-        All published Intersight SDKs support API keys.
+        The ApiKey object is a critical component for secure authentication and authorization within the system. It allows clients to make API requests programmatically using a secure HTTP signature scheme.
+        #### Purpose
+        An ApiKey serves as a mechanism for authentication and authorization, enabling unattended clients, such as daemons, to interact with the API securely. This provides the means to verify the identity of a client and ensure they have the appropriate permissions to perform specific actions.
+        #### Key Concepts
+        - **Public Key Cryptography:** Utilizes public key cryptography to ensure secure authentication, with the server holding the public key and the client maintaining the confidentiality of the private key.
+        - **Request Signing:** Involves signing HTTP requests to ensure integrity and authenticity, using cryptographic digest and signature mechanisms.
+        - **Access Control:** Restricted to specific privilege sets, ensuring only authorized users can create, read, update, or delete API keys.
+        - **Expiration and Rotation:** Supports expiration settings and key rotation, enhancing security by limiting the validity period of keys and facilitating the replacement of compromised or expired keys.
 
 ---
 
 # Resource: intersight_iam_api_key
-An API key is used to authenticate and authorize API requests sent by a client using the HTTP signature scheme. API keys can be used by unattended, daemon clients that need to send requests to Intersight programmatically. API keys are based on public key cryptography.
-To create an API key, the user must specify: 1. The purpose (description) of the API key, 2. The cryptographic hash algorithm, which is used to compute the digest of the body of HTTP requests, 3. The cryptographic parameters to generate a private/public key pair, e.g. RSA, ECDSA, EDDSA, key modulus, and 4. The signing algorithm, e.g. RSA PKCS v1.5, RSA PSS, ECDSA, EDDSA. The generated private key and public key are encoded in PEM format.
-The client owns the private key and is responsible for maintaining the confidentiality of the private key. The server holds the public key.
-The client must have a cryptographic provider compatible with the cryptographic parameters specified in the API key. For example, if you use the powershell SDK to write the client, make sure the appropriate cryptographic providers are installed on the local system. If you create an RSA key pair with modulus set to 2048, the client must support 2048-bit private keys. A maximum of 3 API keys per user is allowed.
-API keys are used to sign HTTP requests as follows: 1. A cryptographic digest of the body of the HTTP request is calculated using one of the supported cryptographic hash algorithms. 2. The value of the digest is base-64 encoded in the `Digest` HTTP header. 3. A signature is calculated as specified in the HTTP signature scheme, and the signature is added to the `Authorization` HTTP request header.
-All published Intersight SDKs support API keys.
+The ApiKey object is a critical component for secure authentication and authorization within the system. It allows clients to make API requests programmatically using a secure HTTP signature scheme.
+#### Purpose
+An ApiKey serves as a mechanism for authentication and authorization, enabling unattended clients, such as daemons, to interact with the API securely. This provides the means to verify the identity of a client and ensure they have the appropriate permissions to perform specific actions.
+#### Key Concepts
+- **Public Key Cryptography:** Utilizes public key cryptography to ensure secure authentication, with the server holding the public key and the client maintaining the confidentiality of the private key.
+- **Request Signing:** Involves signing HTTP requests to ensure integrity and authenticity, using cryptographic digest and signature mechanisms.
+- **Access Control:** Restricted to specific privilege sets, ensuring only authorized users can create, read, update, or delete API keys.
+- **Expiration and Rotation:** Supports expiration settings and key rotation, enhancing security by limiting the validity period of keys and facilitating the replacement of compromised or expired keys.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

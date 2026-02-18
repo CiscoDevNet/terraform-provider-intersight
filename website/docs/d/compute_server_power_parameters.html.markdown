@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_server_power_parameters"
 description: |-
-        Managed object used to track server power parameters information.
+        The compute.ServerPowerParameters object is a managed object used to inventory and track key power-related settings and parameters for a server.
+        #### Purpose
+        The primary purpose of this object is to provide a centralized view of a server's power configuration and status. It consolidates several important power settings, such as the allocated power budget, the power restore policy, and the status of power profiling. This allows administrators to monitor and verify the power management configuration of their servers.
+        #### Key Concepts
+        - **Power Budgeting:** The powerAllocation property shows the maximum power in Watts that has been allocated to the server by a chassis management controller (CMC).
+        - **Power Restore Policy:** The powerRestore property indicates what the server will do after a power loss event (e.g., Always On, Last State), which is critical for service recovery.
+        - **Advanced Power Management:** Tracks the status of modern power features like powerProfiling (for determining power needs) and processorPackagePowerLimit (for CPU power capping).
+        - **Prioritization:** The powerPriority property shows the server's priority level (Low, Medium, High), which influences its initial power allocation in a power-constrained chassis.
 
 ---
 
 # Data Source: intersight_compute_server_power_parameters
-Managed object used to track server power parameters information.
+The compute.ServerPowerParameters object is a managed object used to inventory and track key power-related settings and parameters for a server.
+#### Purpose
+The primary purpose of this object is to provide a centralized view of a server's power configuration and status. It consolidates several important power settings, such as the allocated power budget, the power restore policy, and the status of power profiling. This allows administrators to monitor and verify the power management configuration of their servers.
+#### Key Concepts
+- **Power Budgeting:** The powerAllocation property shows the maximum power in Watts that has been allocated to the server by a chassis management controller (CMC).
+- **Power Restore Policy:** The powerRestore property indicates what the server will do after a power loss event (e.g., "Always On", "Last State"), which is critical for service recovery.
+- **Advanced Power Management:** Tracks the status of modern power features like powerProfiling (for determining power needs) and processorPackagePowerLimit (for CPU power capping).
+- **Prioritization:** The powerPriority property shows the server's priority level (Low, Medium, High), which influences its initial power allocation in a power-constrained chassis.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

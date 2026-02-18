@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_system_io_controller"
 description: |-
-        I/O Controller on a chassis which provides the data path to S-series server.
+        The equipment.SystemIoController (SIOC) object represents an I/O controller on a chassis, specifically designed to provide the data path for Cisco S-Series storage servers.
+        #### Purpose
+        The SystemIoController object is the primary inventory and management entity for a SIOC. It models the controller that connects an S-Series server to the fabric. It captures the SIOC's identity, its operational state (operState), and its connection path to the Fabric Interconnects. It also serves as the container for the equipment.SharedIoModule (SIOM) that it houses.
+        #### Key Concepts
+        - **Storage Server I/O:** Represents the specialized I/O component for S-Series servers.
+        - **Hierarchical Inventory:** Acts as the parent container for the equipment.SharedIoModule and the chassis management controller (management.Controller) associated with it.
+        - **Connectivity Status:** The connectionPath and connectionStatus properties track its link to the upstream fabric.
+        - **Chassis Component:** It is a child of an equipment.Chassis, defining its location within the storage server chassis.
 
 ---
 
 # Data Source: intersight_equipment_system_io_controller
-I/O Controller on a chassis which provides the data path to S-series server.
+The equipment.SystemIoController (SIOC) object represents an I/O controller on a chassis, specifically designed to provide the data path for Cisco S-Series storage servers.
+#### Purpose
+The SystemIoController object is the primary inventory and management entity for a SIOC. It models the controller that connects an S-Series server to the fabric. It captures the SIOC's identity, its operational state (operState), and its connection path to the Fabric Interconnects. It also serves as the container for the equipment.SharedIoModule (SIOM) that it houses.
+#### Key Concepts
+- **Storage Server I/O:** Represents the specialized I/O component for S-Series servers.
+- **Hierarchical Inventory:** Acts as the parent container for the equipment.SharedIoModule and the chassis management controller (management.Controller) associated with it.
+- **Connectivity Status:** The connectionPath and connectionStatus properties track its link to the upstream fabric.
+- **Chassis Component:** It is a child of an equipment.Chassis, defining its location within the storage server chassis.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

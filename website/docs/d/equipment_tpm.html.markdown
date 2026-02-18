@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_tpm"
 description: |-
-        TPM security chip on server board.
+        The equipment.Tpm object represents a Trusted Platform Module (TPM) security chip installed on a server's motherboard. A TPM is a hardware-based security component that provides secure storage for cryptographic keys, platform integrity measurements, and authentication.
+        #### Purpose
+        The Tpm object is used to inventory and report the status of the TPM on a server. It captures key information such as the TPM version, its activationStatus, and its administrative state (adminState). It is essential for security auditing and for enabling features that rely on hardware-based trust, such as secure boot and measured boot.
+        #### Key Concepts
+        - **Hardware Security Inventory:** Provides a detailed record of the server's TPM chip.
+        - **Security State Reporting:** The activationStatus and ownership properties indicate the current security state of the TPM.
+        - **Firmware and Versioning:** Captures the firmwareVersion and TPM specification version (e.g., 2.0).
+        - **Server Component:** It is a child of a compute.Board, linking the TPM directly to the motherboard it is part of.
 
 ---
 
 # Data Source: intersight_equipment_tpm
-TPM security chip on server board.
+The equipment.Tpm object represents a Trusted Platform Module (TPM) security chip installed on a server's motherboard. A TPM is a hardware-based security component that provides secure storage for cryptographic keys, platform integrity measurements, and authentication.
+#### Purpose
+The Tpm object is used to inventory and report the status of the TPM on a server. It captures key information such as the TPM version, its activationStatus, and its administrative state (adminState). It is essential for security auditing and for enabling features that rely on hardware-based trust, such as secure boot and measured boot.
+#### Key Concepts
+- **Hardware Security Inventory:** Provides a detailed record of the server's TPM chip.
+- **Security State Reporting:** The activationStatus and ownership properties indicate the current security state of the TPM.
+- **Firmware and Versioning:** Captures the firmwareVersion and TPM specification version (e.g., "2.0").
+- **Server Component:** It is a child of a compute.Board, linking the TPM directly to the motherboard it is part of.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

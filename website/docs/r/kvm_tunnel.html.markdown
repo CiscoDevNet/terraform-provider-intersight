@@ -3,14 +3,22 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_tunnel"
 description: |-
-        Tunneled Virtual KVM access to the vKVM console of a server.
-        This must be specified while creating the vKVM session to gain tunneled access.
+        The Tunnel object provides tunneled virtual KVM access for server, enhancing security and flexibility. It supports the creation and management of tunnels for efficient server access.
+        #### Purpose
+        Tunnel object facilitates secure and flexible access to server through tunneled virtual KVM connections. It enhances server management operations by providing robust and secure access mechanisms.
+        #### Key Concepts
+        - **Tunneled Access:** Supports tunneled virtual KVM access to server consoles, enhancing security and flexibility.
+        - **Connection Management:** Manages the creation and maintenance of tunnels, ensuring efficient server access.
 
 ---
 
 # Resource: intersight_kvm_tunnel
-Tunneled Virtual KVM access to the vKVM console of a server.
-This must be specified while creating the vKVM session to gain tunneled access.
+The Tunnel object provides tunneled virtual KVM access for server, enhancing security and flexibility. It supports the creation and management of tunnels for efficient server access.
+#### Purpose
+Tunnel object facilitates secure and flexible access to server through tunneled virtual KVM connections. It enhances server management operations by providing robust and secure access mechanisms.
+#### Key Concepts
+- **Tunneled Access:** Supports tunneled virtual KVM access to server consoles, enhancing security and flexibility.
+- **Connection Management:** Manages the creation and maintenance of tunnels, ensuring efficient server access.
 ## Usage Example
 ### Resource Creation
 

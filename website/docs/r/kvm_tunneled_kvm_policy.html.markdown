@@ -3,12 +3,22 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_tunneled_kvm_policy"
 description: |-
-        Policy to control Tunelled vKVM for a specific account.
+        The TunneledKvmPolicy object manages policies controlling tunneled vKVM access within the account. This provides configuration options for enabling or disabling tunneled access and configuration within the account.
+        #### Purpose
+        TunneledKvmPolicy object enables organizations to manage and control tunneled vKVM access through policy configuration. It ensures secure and efficient access by allowing account-specific configurations.
+        #### Key Concepts
+        - **Policy Management:** Manages policies for tunneled vKVM access, ensuring secure and efficient access operations.
+        - **Configuration Options:** Provides options to enable or disable tunneled vKVM access and tunneled vKVM access configuration within the account, supporting tailored access control.
 
 ---
 
 # Resource: intersight_kvm_tunneled_kvm_policy
-Policy to control Tunelled vKVM for a specific account.
+The TunneledKvmPolicy object manages policies controlling tunneled vKVM access within the account. This provides configuration options for enabling or disabling tunneled access and configuration within the account.
+#### Purpose
+TunneledKvmPolicy object enables organizations to manage and control tunneled vKVM access through policy configuration. It ensures secure and efficient access by allowing account-specific configurations.
+#### Key Concepts
+- **Policy Management:** Manages policies for tunneled vKVM access, ensuring secure and efficient access operations.
+- **Configuration Options:** Provides options to enable or disable tunneled vKVM access and tunneled vKVM access configuration within the account, supporting tailored access control.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(ReadOnly) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

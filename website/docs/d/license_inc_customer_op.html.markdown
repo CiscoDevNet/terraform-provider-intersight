@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_inc_customer_op"
 description: |-
-        Customer operation object to refresh the registration or start the trial period of the Intersight Nexus Cloud license tiers.
+        The IncCustomerOp object is central to managing operations related to the Intersight Nexus Cloud (INC) licensing, offering functionalities for trial management and administrative control.
+        #### Purpose
+        IncCustomerOp facilitates management of Nexus Cloud licenses, providing tools for trial enablement and tier configuration. It ensures customers can access and manage cloud services efficiently.
+        #### Key Concepts
+        - **Nexus Cloud Licensing:** Centralizes management of cloud service licenses, allowing customers to optimize their cloud configurations.
+        - **Trial Management:** Supports enabling and terminating trial periods, providing flexibility in evaluating cloud services.
+        - **Tier Configuration:** Offers settings for active license tiers, ensuring customers can tailor cloud services to their operational needs.
+        - **Administrative Activation:** Empowers users to activate license entitlements, ensuring access to cloud service capabilities.
 
 ---
 
 # Data Source: intersight_license_inc_customer_op
-Customer operation object to refresh the registration or start the trial period of the Intersight Nexus Cloud license tiers.
+The IncCustomerOp object is central to managing operations related to the Intersight Nexus Cloud (INC) licensing, offering functionalities for trial management and administrative control.
+#### Purpose    
+IncCustomerOp facilitates management of Nexus Cloud licenses, providing tools for trial enablement and tier configuration. It ensures customers can access and manage cloud services efficiently.
+#### Key Concepts  
+- **Nexus Cloud Licensing:** Centralizes management of cloud service licenses, allowing customers to optimize their cloud configurations.
+- **Trial Management:** Supports enabling and terminating trial periods, providing flexibility in evaluating cloud services.
+- **Tier Configuration:** Offers settings for active license tiers, ensuring customers can tailor cloud services to their operational needs.
+- **Administrative Activation:** Empowers users to activate license entitlements, ensuring access to cloud service capabilities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

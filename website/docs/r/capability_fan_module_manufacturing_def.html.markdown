@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fan_module_manufacturing_def"
 description: |-
-        Fan module unit that contains multiple fans.
+        The capability.FanModuleManufacturingDef object is a capability definition that stores manufacturing-specific details for a fan module. This provides a comprehensive set of identifiers used for inventory and product identification.
+        #### Purpose
+        This object's primary function is to serve as a reference for the manufacturing details of a fan module unit, which may contain multiple individual fans. It aggregates key product identifiers like pid (Product Identifier), vid (Vendor ID), sku (Stock Keeping Unit), and productName. This information is crucial for accurate inventory management, asset tracking, and support.
+        #### Key Concepts
+        - **Manufacturing Data:** Centralizes key manufacturing and product identifiers for a fan module.
+        - **Product Identification:** Provides standard identifiers (pid, sku, productName) for easy lookup and integration with other systems like ordering and support tools.
+        - **Descriptive Information:** Includes a caption and description to provide human-readable context about the fan module.
+        - **Capability Reference:** Acts as a definition within the capability catalog, referenced by other objects to retrieve detailed manufacturing information.
 
 ---
 
 # Resource: intersight_capability_fan_module_manufacturing_def
-Fan module unit that contains multiple fans.
+The capability.FanModuleManufacturingDef object is a capability definition that stores manufacturing-specific details for a fan module. This provides a comprehensive set of identifiers used for inventory and product identification.
+#### Purpose
+This object's primary function is to serve as a reference for the manufacturing details of a fan module unit, which may contain multiple individual fans. It aggregates key product identifiers like pid (Product Identifier), vid (Vendor ID), sku (Stock Keeping Unit), and productName. This information is crucial for accurate inventory management, asset tracking, and support.
+#### Key Concepts
+- **Manufacturing Data:** Centralizes key manufacturing and product identifiers for a fan module.
+- **Product Identification:** Provides standard identifiers (pid, sku, productName) for easy lookup and integration with other systems like ordering and support tools.
+- **Descriptive Information:** Includes a caption and description to provide human-readable context about the fan module.
+- **Capability Reference:** Acts as a definition within the capability catalog, referenced by other objects to retrieve detailed manufacturing information.
 ## Usage Example
 ### Resource Creation
 

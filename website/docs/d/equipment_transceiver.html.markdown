@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_transceiver"
 description: |-
-        Transceiver information on the chassis.
+        The equipment.Transceiver object represents a pluggable optical or copper transceiver (e.g., SFP, QSFP) installed in a port of a network device like a Fabric Interconnect.
+        #### Purpose
+        The Transceiver object is used to inventory the details of a specific transceiver. It captures critical information such as its type, operSpeed, and operState. It is essential for troubleshooting physical layer connectivity issues, verifying compatibility, and managing network port configurations.
+        #### Key Concepts
+        - **Physical Layer Inventory:** Provides a detailed record of the pluggable module in a network port.
+        - **Compatibility and Type:** The type property (e.g., QSFP-40G-SR-BD) is crucial for verifying that a supported transceiver is being used for a given port speed and media type.
+        - **Operational Status:** The operState and operStateQual properties provide the current status and the reason for that status (e.g., xcvr-absent, sfp-mismatch), which is vital for troubleshooting.
+        - **Port-Specific:** It is a child of a physical port object (ether.PhysicalPort or fc.PhysicalPort), directly linking it to the port it is installed in.
 
 ---
 
 # Data Source: intersight_equipment_transceiver
-Transceiver information on the chassis.
+The equipment.Transceiver object represents a pluggable optical or copper transceiver (e.g., SFP, QSFP) installed in a port of a network device like a Fabric Interconnect.
+#### Purpose
+The Transceiver object is used to inventory the details of a specific transceiver. It captures critical information such as its type, operSpeed, and operState. It is essential for troubleshooting physical layer connectivity issues, verifying compatibility, and managing network port configurations.
+#### Key Concepts
+- **Physical Layer Inventory:** Provides a detailed record of the pluggable module in a network port.
+- **Compatibility and Type:** The type property (e.g., "QSFP-40G-SR-BD") is crucial for verifying that a supported transceiver is being used for a given port speed and media type.
+- **Operational Status:** The operState and operStateQual properties provide the current status and the reason for that status (e.g., "xcvr-absent", "sfp-mismatch"), which is vital for troubleshooting.
+- **Port-Specific:** It is a child of a physical port object (ether.PhysicalPort or fc.PhysicalPort), directly linking it to the port it is installed in.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

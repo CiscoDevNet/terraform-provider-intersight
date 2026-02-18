@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_rack_enclosure"
 description: |-
-        A physical holder housing rack servers.
+        The equipment.RackEnclosure object represents a physical enclosure that houses multiple rack-mounted servers, providing shared infrastructure like power and cooling.
+        #### Purpose
+        The RackEnclosure object serves as a container and management entity for a group of rack servers that are part of a single physical unit. This provides a way to inventory the enclosure itself and acts as a parent for the components it contains, such as equipment.RackEnclosureSlot objects, equipment.Psu units, and equipment.FanModule modules.
+        #### Key Concepts
+        - **Server Aggregation:** Groups multiple rack servers into a single managed enclosure.
+        - **Hierarchical Inventory:** Provides a structured parent-child relationship to its contained slots, PSUs, and fan modules.
+        - **Unique Identification:** Identified by a system-assigned enclosureId.
+        - **Shared Infrastructure Model:** Represents the shared resources (power, cooling) that are common to all servers within the enclosure.
 
 ---
 
 # Data Source: intersight_equipment_rack_enclosure
-A physical holder housing rack servers.
+The equipment.RackEnclosure object represents a physical enclosure that houses multiple rack-mounted servers, providing shared infrastructure like power and cooling.
+#### Purpose
+The RackEnclosure object serves as a container and management entity for a group of rack servers that are part of a single physical unit. This provides a way to inventory the enclosure itself and acts as a parent for the components it contains, such as equipment.RackEnclosureSlot objects, equipment.Psu units, and equipment.FanModule modules.
+#### Key Concepts
+- **Server Aggregation:** Groups multiple rack servers into a single managed enclosure.
+- **Hierarchical Inventory:** Provides a structured parent-child relationship to its contained slots, PSUs, and fan modules.
+- **Unique Identification:** Identified by a system-assigned enclosureId.
+- **Shared Infrastructure Model:** Represents the shared resources (power, cooling) that are common to all servers within the enclosure.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

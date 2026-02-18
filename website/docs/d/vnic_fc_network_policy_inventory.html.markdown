@@ -3,12 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_fc_network_policy_inventory"
 description: |-
-        A Fibre Channel Network policy governs the vSAN configuration for the virtual interfaces.
+        The FcNetworkPolicy object defines Fibre Channel network settings, particularly the configuration of vSANs for virtual Fibre Channel interfaces.
+        #### Purpose
+        FcNetworkPolicy abstracts the vSAN configuration, enabling centralized, policy-based management of storage network segmentation and access.
+        #### Key Concepts
+        - **vSAN Configuration:** Specifies vSAN IDs and related settings for storage connectivity.
+        - **Policy-Based Management:** Ensures consistent SAN segmentation across all managed endpoints.
+        - **Integration with vHBAs:** Directly linked to vHBA configurations for seamless deployment.
 
 ---
 
 # Data Source: intersight_vnic_fc_network_policy_inventory
-A Fibre Channel Network policy governs the vSAN configuration for the virtual interfaces.
+The FcNetworkPolicy object defines Fibre Channel network settings, particularly the configuration of vSANs for virtual Fibre Channel interfaces.
+#### Purpose
+FcNetworkPolicy abstracts the vSAN configuration, enabling centralized, policy-based management of storage network segmentation and access.
+#### Key Concepts
+- **vSAN Configuration:** Specifies vSAN IDs and related settings for storage connectivity.
+- **Policy-Based Management:** Ensures consistent SAN segmentation across all managed endpoints.
+- **Integration with vHBAs:** Directly linked to vHBA configurations for seamless deployment.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

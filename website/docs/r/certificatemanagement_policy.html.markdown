@@ -3,12 +3,26 @@ subcategory: "certificatemanagement"
 layout: "intersight"
 page_title: "Intersight: intersight_certificatemanagement_policy"
 description: |-
-        Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers or Fabric Interconnects via profile association.
+        The Certificate Management Policy is a reusable policy for managing security certificates on endpoints such as servers and Fabric Interconnects. This provides a centralized way to deploy custom certificates and their corresponding private keys.
+        #### Purpose
+        The main purpose of this policy is to replace the default, self-signed certificates on management controllers (like a server's CIMC) with custom certificates signed by a trusted Certificate Authority (CA). This enhances security by ensuring that management interfaces are trusted and that communication is encrypted. It also supports the deployment of Root CA certificates for validating external services.
+        #### Key Concepts
+        - **Centralized Certificate Deployment:** Allows administrators to manage and deploy X.509 certificates and private keys from a single policy to multiple endpoints.
+        - **Reusable and Profile-Based:** As a policy object, it can be attached to Server or Chassis Profiles to ensure consistent certificate configuration across managed devices.
+        - **Supports Multiple Certificate Types:** The policy can manage different types of certificates, including IMC certificates (for the management controller itself) and Root CA certificates (for trusting external services like LDAP).
+        - **Secure Credential Handling:** The private key associated with a certificate is a write-only, encrypted property, ensuring it is handled securely within the system.
 
 ---
 
 # Resource: intersight_certificatemanagement_policy
-Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers or Fabric Interconnects via profile association.
+The Certificate Management Policy is a reusable policy for managing security certificates on endpoints such as servers and Fabric Interconnects. This provides a centralized way to deploy custom certificates and their corresponding private keys.
+#### Purpose
+The main purpose of this policy is to replace the default, self-signed certificates on management controllers (like a server's CIMC) with custom certificates signed by a trusted Certificate Authority (CA). This enhances security by ensuring that management interfaces are trusted and that communication is encrypted. It also supports the deployment of Root CA certificates for validating external services.
+#### Key Concepts
+- **Centralized Certificate Deployment:** Allows administrators to manage and deploy X.509 certificates and private keys from a single policy to multiple endpoints.
+- **Reusable and Profile-Based:** As a policy object, it can be attached to Server or Chassis Profiles to ensure consistent certificate configuration across managed devices.
+- **Supports Multiple Certificate Types:** The policy can manage different types of certificates, including IMC certificates (for the management controller itself) and Root CA certificates (for trusting external services like LDAP).
+- **Secure Credential Handling:** The private key associated with a certificate is a write-only, encrypted property, ensuring it is handled securely within the system.
 ## Usage Example
 ### Resource Creation
 

@@ -3,12 +3,26 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_category_unsupported_models"
 description: |-
-        Defines constraints for models which are unsupported after specific infra version.
+        The CategoryUnsupportedModels object defines constraints for models that become unsupported after specific infra versions. It is crucial for managing software deployment and avoiding unsupported configurations.
+        #### Purpose
+        CategoryUnsupportedModels helps identify models that are no longer supported for updates after certain versions, aiding in the management of software upgrades.
+        #### Key Concepts
+        - **Unsupported Constraints:** Lists models that become unsupported after specific software versions, preventing upgrade errors.
+        - **Software Deployment:** Guides software installation processes by identifying unsupported configurations.
+        - **Safety Measures:** Ensures that only supported models are considered for updates, reducing risk.
+        - **Catalog Integration:** Utilizes the Intersight catalog for model verification and support checks.
 
 ---
 
 # Resource: intersight_softwarerepository_category_unsupported_models
-Defines constraints for models which are unsupported after specific infra version.
+The CategoryUnsupportedModels object defines constraints for models that become unsupported after specific infra versions. It is crucial for managing software deployment and avoiding unsupported configurations.
+#### Purpose
+CategoryUnsupportedModels helps identify models that are no longer supported for updates after certain versions, aiding in the management of software upgrades.
+#### Key Concepts
+- **Unsupported Constraints:** Lists models that become unsupported after specific software versions, preventing upgrade errors.
+- **Software Deployment:** Guides software installation processes by identifying unsupported configurations.
+- **Safety Measures:** Ensures that only supported models are considered for updates, reducing risk.
+- **Catalog Integration:** Utilizes the Intersight catalog for model verification and support checks.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

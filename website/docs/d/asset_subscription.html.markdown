@@ -3,12 +3,26 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_subscription"
 description: |-
-        Contains information about consumption-based Subscriptions related to the Cisco devices associated. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+        The Subscription object is central to managing consumption-based subscriptions within the Cisco technology ecosystem. It encapsulates details about the subscriptions linked to Cisco devices, facilitating automated updates and management through integration with Cisco Install Base.
+        #### Purpose
+        Subscription provides a comprehensive structure for managing consumption-based subscriptions, ensuring seamless integration with Cisco Install Base for accurate data representation and updates. This information is also queried by downstream OPUS team for billing purposes.
+        #### Key Concepts
+        - **Integration:** Automates subscription management through real-time updates from Cisco Install Base, ensuring data accuracy and currency.
+        - **Data Management:** Supports efficient tracking and management of consumption-based subscriptions.
+        - **Access Control:** Ensures secure handling of subscription data through defined privileges and permissions.
+        - **Relationship Management:** Maintains robust linkage with associated accounts and deployments, supporting comprehensive subscription management.
 
 ---
 
 # Data Source: intersight_asset_subscription
-Contains information about consumption-based Subscriptions related to the Cisco devices associated. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+The Subscription object is central to managing consumption-based subscriptions within the Cisco technology ecosystem. It encapsulates details about the subscriptions linked to Cisco devices, facilitating automated updates and management through integration with Cisco Install Base.
+#### Purpose
+Subscription provides a comprehensive structure for managing consumption-based subscriptions, ensuring seamless integration with Cisco Install Base for accurate data representation and updates. This information is also queried by downstream OPUS team for billing purposes. 
+#### Key Concepts
+- **Integration:** Automates subscription management through real-time updates from Cisco Install Base, ensuring data accuracy and currency.
+- **Data Management:** Supports efficient tracking and management of consumption-based subscriptions.
+- **Access Control:** Ensures secure handling of subscription data through defined privileges and permissions.
+- **Relationship Management:** Maintains robust linkage with associated accounts and deployments, supporting comprehensive subscription management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

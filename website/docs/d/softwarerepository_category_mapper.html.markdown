@@ -3,12 +3,26 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_category_mapper"
 description: |-
-        Maps a Cisco software repository image category identifier to its applicable hardware models.
+        The CategoryMapper object serves as a mapping tool to associate Cisco software repository image categories with applicable hardware models. This ensures compatibility and supports efficient software deployment.
+        #### Purpose
+        CategoryMapper is used to identify compatible hardware models for specific software categories, aiding in software deployment and upgrade processes.
+        #### Key Concepts
+        - **Mapping:** Establishes connections between software categories and hardware models, ensuring compatibility.
+        - **Software Deployment:** Facilitates the identification of suitable hardware for software installations and updates.
+        - **Administration:** Provides administrative capabilities to create, update, and manage mappings.
+        - **Catalog Integration:** Links software categories to hardware models within the Intersight catalog.
 
 ---
 
 # Data Source: intersight_softwarerepository_category_mapper
-Maps a Cisco software repository image category identifier to its applicable hardware models.
+The CategoryMapper object serves as a mapping tool to associate Cisco software repository image categories with applicable hardware models. This ensures compatibility and supports efficient software deployment.
+#### Purpose
+CategoryMapper is used to identify compatible hardware models for specific software categories, aiding in software deployment and upgrade processes.
+#### Key Concepts
+- **Mapping:** Establishes connections between software categories and hardware models, ensuring compatibility.
+- **Software Deployment:** Facilitates the identification of suitable hardware for software installations and updates.
+- **Administration:** Provides administrative capabilities to create, update, and manage mappings.
+- **Catalog Integration:** Links software categories to hardware models within the Intersight catalog.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -111,7 +111,7 @@ func getIamIdpReferenceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"domain_name": {
-			Description: "The email domain name for this IdP of the user. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.",
+			Description: "The DomainNameInfo object represents an organization’s email domain used during login mapping and ownership verification. It supports verifying domain control via DNS to enhance trust.\n#### Purpose\nDomainNameInfo ensures that only verified domains are used to route users to the correct identity provider, improving login integrity.\n#### Key Concepts\n- **Domain Routing:** Associates email domains with IdPs for seamless login.\n- **Ownership Verification:** Supports DNS-based verification for trust establishment.\n- **Status Tracking:** Maintains domain verification lifecycle state.\n- **Account Scoped:** Managed within the context of the owning account.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

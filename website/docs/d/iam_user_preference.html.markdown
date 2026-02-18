@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user_preference"
 description: |-
-        Holder for UI preferences such as theme, columns.
+        UserPreference captures user interface preferences—such as layout, view state, or theme—persisted per user and identity context.
+        #### Purpose
+        It enables consistent, personalized UI experiences across sessions and devices.
+        #### Key Concepts
+        - **Per-user Configuration:** Bound to a user and IdP/IdP reference context.
+        - **Shared Resource:** Accessible across organizations where applicable.
+        - **Self-service Updates:** Users can read and update their preferences.
+        - **UI-centric:** Focused on client experience, not authorization.
 
 ---
 
 # Data Source: intersight_iam_user_preference
-Holder for UI preferences such as theme, columns.
+UserPreference captures user interface preferences—such as layout, view state, or theme—persisted per user and identity context.
+#### Purpose
+It enables consistent, personalized UI experiences across sessions and devices.
+#### Key Concepts
+- **Per-user Configuration:** Bound to a user and IdP/IdP reference context.
+- **Shared Resource:** Accessible across organizations where applicable.
+- **Self-service Updates:** Users can read and update their preferences.
+- **UI-centric:** Focused on client experience, not authorization.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

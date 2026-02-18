@@ -3,12 +3,26 @@ subcategory: "ssh"
 layout: "intersight"
 page_title: "Intersight: intersight_ssh_policy"
 description: |-
-        Secure shell policy on the endpoint.
+        The SSH Policy is a reusable policy for configuring the Secure Shell (SSH) service on an endpoint's management controller.
+        #### Purpose
+        The purpose of this policy is to enable and standardize secure command-line access to managed devices. It allows administrators to control the state of the SSH service, the network port it listens on, and the session timeout period, ensuring consistent and secure remote access.
+        #### Key Concepts
+        - **Service Control:** The policy's primary function is to enable or disable the SSH service on the endpoint.
+        - **Port and Timeout Configuration:** It allows administrators to customize the SSH port and the session timeout duration in seconds.
+        - **Reusable and Profile-Based:** As a policy object, it can be attached to a Server Profile to apply a consistent SSH configuration across multiple servers.
+        - **Fundamental Security:** Configuring SSH access is a fundamental step in securing the management plane of a server.
 
 ---
 
 # Resource: intersight_ssh_policy
-Secure shell policy on the endpoint.
+The SSH Policy is a reusable policy for configuring the Secure Shell (SSH) service on an endpoint's management controller.
+#### Purpose
+The purpose of this policy is to enable and standardize secure command-line access to managed devices. It allows administrators to control the state of the SSH service, the network port it listens on, and the session timeout period, ensuring consistent and secure remote access.
+#### Key Concepts
+- **Service Control:** The policy's primary function is to enable or disable the SSH service on the endpoint.
+- **Port and Timeout Configuration:** It allows administrators to customize the SSH port and the session timeout duration in seconds.
+- **Reusable and Profile-Based:** As a policy object, it can be attached to a Server Profile to apply a consistent SSH configuration across multiple servers.
+- **Fundamental Security:** Configuring SSH access is a fundamental step in securing the management plane of a server.
 ## Usage Example
 ### Resource Creation
 

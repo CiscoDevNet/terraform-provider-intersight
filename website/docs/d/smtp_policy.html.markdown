@@ -3,12 +3,24 @@ subcategory: "smtp"
 layout: "intersight"
 page_title: "Intersight: intersight_smtp_policy"
 description: |-
-        Name that identifies the SMTP Policy.
+        The SMTP Policy is a reusable policy for configuring the Simple Mail Transfer Protocol (SMTP) client on an endpoint, enabling it to send email alerts.
+        #### Purpose
+        The purpose of this policy is to enable and standardize the configuration for email-based alerting from managed devices. Administrators can define an SMTP server, port, and authentication credentials, and specify a list of recipients who should receive email notifications for system faults.
+        #### Key Concepts
+        - **Email-Based Alerting:** Its core function is to configure an endpoint to send email alerts for hardware or system faults.
+        - **Centralized Configuration:** The policy allows for a single, consistent SMTP configuration to be applied to multiple servers via profiles.
+        - **Recipient and Severity Control:** Administrators can specify a list of email recipients and set the minimum fault severity level (e.g., critical, warning) that should trigger an email notification.
 
 ---
 
 # Data Source: intersight_smtp_policy
-Name that identifies the SMTP Policy.
+The SMTP Policy is a reusable policy for configuring the Simple Mail Transfer Protocol (SMTP) client on an endpoint, enabling it to send email alerts.
+#### Purpose
+The purpose of this policy is to enable and standardize the configuration for email-based alerting from managed devices. Administrators can define an SMTP server, port, and authentication credentials, and specify a list of recipients who should receive email notifications for system faults.
+#### Key Concepts
+- **Email-Based Alerting:** Its core function is to configure an endpoint to send email alerts for hardware or system faults.
+- **Centralized Configuration:** The policy allows for a single, consistent SMTP configuration to be applied to multiple servers via profiles.
+- **Recipient and Severity Control:** Administrators can specify a list of email recipients and set the minimum fault severity level (e.g., critical, warning) that should trigger an email notification.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

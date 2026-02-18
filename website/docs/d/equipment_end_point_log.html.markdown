@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_end_point_log"
 description: |-
-        End point log file information.
+        The EndPointLog object encapsulates log file information collected from Cisco endpoints. This provides insights into log collection and management processes.
+        #### Purpose
+        EndPointLog serves to document and manage log files collected from endpoints, supporting troubleshooting and operational insights. It aids in maintaining transparency and accountability in log management.
+        #### Key Concepts
+        - **Log Management:** Handles log file types and collection statuses, offering visibility into endpoint operations.
+        - **Access Control:** Defines privilege sets for reading log information, ensuring secure and controlled access.
+        - **Integration with Devices:** Links with registered devices and servers to ensure logs are associated correctly within the network.
+        - **Relationship Management:** Facilitates connections with related objects, supporting cohesive log management.
 
 ---
 
 # Data Source: intersight_equipment_end_point_log
-End point log file information.
+The EndPointLog object encapsulates log file information collected from Cisco endpoints. This provides insights into log collection and management processes.
+#### Purpose
+EndPointLog serves to document and manage log files collected from endpoints, supporting troubleshooting and operational insights. It aids in maintaining transparency and accountability in log management.
+#### Key Concepts
+- **Log Management:** Handles log file types and collection statuses, offering visibility into endpoint operations.
+- **Access Control:** Defines privilege sets for reading log information, ensuring secure and controlled access.
+- **Integration with Devices:** Links with registered devices and servers to ensure logs are associated correctly within the network.
+- **Relationship Management:** Facilitates connections with related objects, supporting cohesive log management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

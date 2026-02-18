@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_blade"
 description: |-
-        Server which is housed in a chassis and shares some of the hardware with other servers in the chassis.
+        The compute.Blade object represents a blade server, which is a modular server designed to be housed in a chassis. It encapsulates the server's identity, physical location, lifecycle state, and relationships to its hardware components and management systems.
+        #### Purpose
+        The compute.Blade object serves as the primary inventory and management entity for a blade server. This provides a comprehensive, queryable view of the server's state, from its hardware configuration (CPUs, memory, adapters) to its operational status and physical location within a chassis. It is fundamental for all management operations, including discovery, inventory, and lifecycle management.
+        #### Key Concepts
+        - **Physical Location:** Uniquely identifies the server's location through its chassisId and slotId. It also tracks movement with currentChassisId and currentSlotId.
+        - **Lifecycle Management:** The lifecycle property tracks critical events like Moved, Replaced, or SlotMismatch, enabling the system to raise alarms and guide administrative actions.
+        - **Hierarchical Inventory:** Acts as a parent container for all of its internal hardware components, such as compute.Board, adapter.Unit, processor.Unit, and memory.Array.
+        - **Chassis-Based Resource:** Inherits from equipment.Chassis, establishing its dependency on the chassis for power and connectivity.
 
 ---
 
 # Data Source: intersight_compute_blade
-Server which is housed in a chassis and shares some of the hardware with other servers in the chassis.
+The compute.Blade object represents a blade server, which is a modular server designed to be housed in a chassis. It encapsulates the server's identity, physical location, lifecycle state, and relationships to its hardware components and management systems.
+#### Purpose
+The compute.Blade object serves as the primary inventory and management entity for a blade server. This provides a comprehensive, queryable view of the server's state, from its hardware configuration (CPUs, memory, adapters) to its operational status and physical location within a chassis. It is fundamental for all management operations, including discovery, inventory, and lifecycle management.
+#### Key Concepts
+- **Physical Location:** Uniquely identifies the server's location through its chassisId and slotId. It also tracks movement with currentChassisId and currentSlotId.
+- **Lifecycle Management:** The lifecycle property tracks critical events like Moved, Replaced, or SlotMismatch, enabling the system to raise alarms and guide administrative actions.
+- **Hierarchical Inventory:** Acts as a parent container for all of its internal hardware components, such as compute.Board, adapter.Unit, processor.Unit, and memory.Array.
+- **Chassis-Based Resource:** Inherits from equipment.Chassis, establishing its dependency on the chassis for power and connectivity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

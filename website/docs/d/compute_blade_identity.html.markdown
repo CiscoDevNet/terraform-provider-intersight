@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_blade_identity"
 description: |-
-        Identity object that uniquely represents a blade server object under a DR.
+        The BladeIdentity object represents a blade server within a chassis and supports lifecycle management operations including decommission, recommission, and rediscover.
+        #### Purpose
+        A BladeIdentity serves as the canonical record for a blade server's identity and location. It enables consistent discovery and inventory of blades across multiple fabric interconnects, supports lifecycle tracking—from discovery to decommission and recommission-linked to the chassis and device registration, and provides a precise target for policy and configuration deployments scoped to a specific blade instance.
+        #### Key Concepts
+        - **PhysicalPlacement:** Encodes chassis-and-slot coordinates to locate the blade server in the fabric.
+        - **Unique Identification:** Leverages vendor/model/serial and device registration to ensure global uniqueness.
+        - **Lifecycle Integration:** Tracks and synchronizes blade discovery, removal, and replacement events.
+        - **Relationship Management:** Links to parent device registration and peer blade identities for migrations or replacements.
 
 ---
 
 # Data Source: intersight_compute_blade_identity
-Identity object that uniquely represents a blade server object under a DR.
+The BladeIdentity object represents a blade server within a chassis and supports lifecycle management operations including decommission, recommission, and rediscover.
+#### Purpose  
+A BladeIdentity serves as the canonical record for a blade server's identity and location. It enables consistent discovery and inventory of blades across multiple fabric interconnects, supports lifecycle tracking—from discovery to decommission and recommission-linked to the chassis and device registration, and provides a precise target for policy and configuration deployments scoped to a specific blade instance.
+#### Key Concepts  
+- **PhysicalPlacement:** Encodes chassis-and-slot coordinates to locate the blade server in the fabric.  
+- **Unique Identification:** Leverages vendor/model/serial and device registration to ensure global uniqueness.  
+- **Lifecycle Integration:** Tracks and synchronizes blade discovery, removal, and replacement events.  
+- **Relationship Management:** Links to parent device registration and peer blade identities for migrations or replacements.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_iks_customer_op"
 description: |-
-        Customer operation object to refresh the registration or start the trial period of the IKS license tiers.
+        The IksCustomerOp object handles customer operations related to the Intersight Kubernetes Service (IKS) licensing, providing mechanisms for trial enablement and tier management.
+        #### Purpose
+        IksCustomerOp is designed to facilitate the management of Kubernetes service licenses. It enables trial periods, tier settings, and administrative controls, ensuring customers can leverage Kubernetes services effectively.
+        #### Key Concepts
+        - **Kubernetes Service Management:** Focuses on the licensing aspects of Kubernetes services, ensuring customers can optimize their configurations.
+        - **Trial Enablement:** Allows users to activate trial modes, providing opportunities to explore Kubernetes service features.
+        - **License Tier Configuration:** Supports active tier settings, allowing customization based on customer requirements and service levels.
+        - **Administrative Entitlements:** Provides controls to activate licenses, ensuring customers maintain access to Kubernetes service capabilities.
 
 ---
 
 # Data Source: intersight_license_iks_customer_op
-Customer operation object to refresh the registration or start the trial period of the IKS license tiers.
+The IksCustomerOp object handles customer operations related to the Intersight Kubernetes Service (IKS) licensing, providing mechanisms for trial enablement and tier management.
+#### Purpose
+IksCustomerOp is designed to facilitate the management of Kubernetes service licenses. It enables trial periods, tier settings, and administrative controls, ensuring customers can leverage Kubernetes services effectively.
+#### Key Concepts
+- **Kubernetes Service Management:** Focuses on the licensing aspects of Kubernetes services, ensuring customers can optimize their configurations.
+- **Trial Enablement:** Allows users to activate trial modes, providing opportunities to explore Kubernetes service features.
+- **License Tier Configuration:** Supports active tier settings, allowing customization based on customer requirements and service levels.
+- **Administrative Entitlements:** Provides controls to activate licenses, ensuring customers maintain access to Kubernetes service capabilities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

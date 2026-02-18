@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the FabricSwitchProfileTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FabricSwitchProfileTemplate{}
 
-// FabricSwitchProfileTemplate The template specifies the policy configuration for each of the managed network switch.
+// FabricSwitchProfileTemplate The SwitchProfileTemplate object is a fundamental aspect of network switch configuration, designed to offer predefined policy configurations for managed network switches. It acts as a template for creating individual switch profiles, fostering standardization and efficiency.  #### Purpose The SwitchProfileTemplate serves as a predefined set of configuration policies that can be applied to network switches, streamlining the creation and management of switch profiles. It facilitates the deployment of consistent configurations across multiple switches.  #### Key Concepts - **Template-Based Configuration:** Provides standardized configuration templates that can be applied across various switches, ensuring uniform network operations. - **Operational Versatility:** Enables a range of operations including reading, creating, updating, and deleting switch profiles, enhancing flexibility in configuration management. - **Security and Access:** Implements access control through privilege sets, safeguarding configuration processes and switch management. - **Integration:** Supports seamless integration with existing network environments, aiding in efficient deployment of switch configurations.
 type FabricSwitchProfileTemplate struct {
 	FabricBaseSwitchProfile
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

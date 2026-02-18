@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_local_user_password_policy"
 description: |-
-        Configuration for LocalUserPasswordPolicy.
+        LocalUserPasswordPolicy defines the password complexity and lockout policy for local users within an account.
+        #### Purpose
+        It establishes compliance and security requirements for local user credentials.
+        #### Key Concepts
+        - **Complexity Rules:** Configures length, character requirements, and reuse constraints.
+        - **Lockout Behavior:** Sets thresholds and lock durations for failed logins.
+        - **Admin-governed:** Managed by authorized roles in the account.
+        - **Consistent Enforcement:** Applies to all local user password operations.
 
 ---
 
 # Data Source: intersight_iam_local_user_password_policy
-Configuration for LocalUserPasswordPolicy.
+LocalUserPasswordPolicy defines the password complexity and lockout policy for local users within an account.
+#### Purpose
+It establishes compliance and security requirements for local user credentials.
+#### Key Concepts
+- **Complexity Rules:** Configures length, character requirements, and reuse constraints.
+- **Lockout Behavior:** Sets thresholds and lock durations for failed logins.
+- **Admin-governed:** Managed by authorized roles in the account.
+- **Consistent Enforcement:** Applies to all local user password operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,12 +3,26 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_host_fc_interface"
 description: |-
-        Host facing fibre channel interface on a server adapter.
+        The adapter.HostFcInterface object represents a virtual Fibre Channel Host Bus Adapter (vHBA) as it is presented to the host operating system. It is the primary inventory object for a server's logical storage connections over a Fibre Channel network.
+        #### Purpose
+        The HostFcInterface object models a host-visible vHBA, providing a complete view of its configuration, identity, and operational status. It is essential for managing and monitoring Fibre Channel connectivity from the server to the storage area network (SAN).
+        #### Key Concepts
+        - **Logical Storage Interface:** Represents a vHBA, capturing its unique identity through World Wide Port Name (WWPN) and World Wide Node Name (WWNN).
+        - **Identity Management:** Tracks both the configured (wwpn, wwnn) and factory-default (originalWwpn, originalWwnn) worldwide names.
+        - **Connectivity Pinning:** Identifies the pinned uplink SAN interface (pinnedInterface) and the associated virtual Fibre Channel interface (vfc) on the Fabric Interconnect.
+        - **Operational Control:** Supports administrative actions like ResetConnectivity, Enable, and Disable via the vfcAction property, enabling direct management of the vHBA's state.
 
 ---
 
 # Data Source: intersight_adapter_host_fc_interface
-Host facing fibre channel interface on a server adapter.
+The adapter.HostFcInterface object represents a virtual Fibre Channel Host Bus Adapter (vHBA) as it is presented to the host operating system. It is the primary inventory object for a server's logical storage connections over a Fibre Channel network.
+#### Purpose
+The HostFcInterface object models a host-visible vHBA, providing a complete view of its configuration, identity, and operational status. It is essential for managing and monitoring Fibre Channel connectivity from the server to the storage area network (SAN).
+#### Key Concepts
+- **Logical Storage Interface:** Represents a vHBA, capturing its unique identity through World Wide Port Name (WWPN) and World Wide Node Name (WWNN).
+- **Identity Management:** Tracks both the configured (wwpn, wwnn) and factory-default (originalWwpn, originalWwnn) worldwide names.
+- **Connectivity Pinning:** Identifies the pinned uplink SAN interface (pinnedInterface) and the associated virtual Fibre Channel interface (vfc) on the Fabric Interconnect.
+- **Operational Control:** Supports administrative actions like ResetConnectivity, Enable, and Disable via the vfcAction property, enabling direct management of the vHBA's state.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

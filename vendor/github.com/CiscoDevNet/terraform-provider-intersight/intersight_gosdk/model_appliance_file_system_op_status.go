@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -30,8 +30,12 @@ type ApplianceFileSystemOpStatus struct {
 	ObjectType string `json:"ObjectType"`
 	// Capacity of the file system in bytes.
 	Capacity *int64 `json:"Capacity,omitempty"`
+	// Symbolic order identifier of the physical disk from /dev/disk/by-order (e.g., disk1, disk2). This provides a stable, human-readable identifier for the disk that persists across reboots, unlike device names which may change. Currently, the relationship between filesystems to disks is one-to-one and this is unlikely to change in the future.
+	DiskOrder *string `json:"DiskOrder,omitempty"`
 	// Mount point of this file system.
 	Mountpoint *string `json:"Mountpoint,omitempty"`
+	// Hostname of the Intersight Appliance node on which this filesystem is located.
+	NodeHostname *string `json:"NodeHostname,omitempty"`
 	// Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement. * `WorkerNodeInstInProgress` - The worker node installation is in progress. * `WorkerNodeInstSuccess` - The worker node installation succeeded. * `WorkerNodeInstFailed` - The worker node installation failed.
 	OperationalStatus *string `json:"OperationalStatus,omitempty"`
 	// Percentage of the file system capacity currently in use.
@@ -156,6 +160,38 @@ func (o *ApplianceFileSystemOpStatus) SetCapacity(v int64) {
 	o.Capacity = &v
 }
 
+// GetDiskOrder returns the DiskOrder field value if set, zero value otherwise.
+func (o *ApplianceFileSystemOpStatus) GetDiskOrder() string {
+	if o == nil || IsNil(o.DiskOrder) {
+		var ret string
+		return ret
+	}
+	return *o.DiskOrder
+}
+
+// GetDiskOrderOk returns a tuple with the DiskOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceFileSystemOpStatus) GetDiskOrderOk() (*string, bool) {
+	if o == nil || IsNil(o.DiskOrder) {
+		return nil, false
+	}
+	return o.DiskOrder, true
+}
+
+// HasDiskOrder returns a boolean if a field has been set.
+func (o *ApplianceFileSystemOpStatus) HasDiskOrder() bool {
+	if o != nil && !IsNil(o.DiskOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskOrder gets a reference to the given string and assigns it to the DiskOrder field.
+func (o *ApplianceFileSystemOpStatus) SetDiskOrder(v string) {
+	o.DiskOrder = &v
+}
+
 // GetMountpoint returns the Mountpoint field value if set, zero value otherwise.
 func (o *ApplianceFileSystemOpStatus) GetMountpoint() string {
 	if o == nil || IsNil(o.Mountpoint) {
@@ -186,6 +222,38 @@ func (o *ApplianceFileSystemOpStatus) HasMountpoint() bool {
 // SetMountpoint gets a reference to the given string and assigns it to the Mountpoint field.
 func (o *ApplianceFileSystemOpStatus) SetMountpoint(v string) {
 	o.Mountpoint = &v
+}
+
+// GetNodeHostname returns the NodeHostname field value if set, zero value otherwise.
+func (o *ApplianceFileSystemOpStatus) GetNodeHostname() string {
+	if o == nil || IsNil(o.NodeHostname) {
+		var ret string
+		return ret
+	}
+	return *o.NodeHostname
+}
+
+// GetNodeHostnameOk returns a tuple with the NodeHostname field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceFileSystemOpStatus) GetNodeHostnameOk() (*string, bool) {
+	if o == nil || IsNil(o.NodeHostname) {
+		return nil, false
+	}
+	return o.NodeHostname, true
+}
+
+// HasNodeHostname returns a boolean if a field has been set.
+func (o *ApplianceFileSystemOpStatus) HasNodeHostname() bool {
+	if o != nil && !IsNil(o.NodeHostname) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeHostname gets a reference to the given string and assigns it to the NodeHostname field.
+func (o *ApplianceFileSystemOpStatus) SetNodeHostname(v string) {
+	o.NodeHostname = &v
 }
 
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
@@ -367,8 +435,14 @@ func (o ApplianceFileSystemOpStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Capacity) {
 		toSerialize["Capacity"] = o.Capacity
 	}
+	if !IsNil(o.DiskOrder) {
+		toSerialize["DiskOrder"] = o.DiskOrder
+	}
 	if !IsNil(o.Mountpoint) {
 		toSerialize["Mountpoint"] = o.Mountpoint
+	}
+	if !IsNil(o.NodeHostname) {
+		toSerialize["NodeHostname"] = o.NodeHostname
 	}
 	if !IsNil(o.OperationalStatus) {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
@@ -439,8 +513,12 @@ func (o *ApplianceFileSystemOpStatus) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Capacity of the file system in bytes.
 		Capacity *int64 `json:"Capacity,omitempty"`
+		// Symbolic order identifier of the physical disk from /dev/disk/by-order (e.g., disk1, disk2). This provides a stable, human-readable identifier for the disk that persists across reboots, unlike device names which may change. Currently, the relationship between filesystems to disks is one-to-one and this is unlikely to change in the future.
+		DiskOrder *string `json:"DiskOrder,omitempty"`
 		// Mount point of this file system.
 		Mountpoint *string `json:"Mountpoint,omitempty"`
+		// Hostname of the Intersight Appliance node on which this filesystem is located.
+		NodeHostname *string `json:"NodeHostname,omitempty"`
 		// Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement. * `WorkerNodeInstInProgress` - The worker node installation is in progress. * `WorkerNodeInstSuccess` - The worker node installation succeeded. * `WorkerNodeInstFailed` - The worker node installation failed.
 		OperationalStatus *string `json:"OperationalStatus,omitempty"`
 		// Percentage of the file system capacity currently in use.
@@ -457,7 +535,9 @@ func (o *ApplianceFileSystemOpStatus) UnmarshalJSON(data []byte) (err error) {
 		varApplianceFileSystemOpStatus.ClassId = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.ClassId
 		varApplianceFileSystemOpStatus.ObjectType = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.ObjectType
 		varApplianceFileSystemOpStatus.Capacity = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.Capacity
+		varApplianceFileSystemOpStatus.DiskOrder = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.DiskOrder
 		varApplianceFileSystemOpStatus.Mountpoint = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.Mountpoint
+		varApplianceFileSystemOpStatus.NodeHostname = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.NodeHostname
 		varApplianceFileSystemOpStatus.OperationalStatus = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.OperationalStatus
 		varApplianceFileSystemOpStatus.Usage = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.Usage
 		varApplianceFileSystemOpStatus.NodeOpStatus = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.NodeOpStatus
@@ -482,7 +562,9 @@ func (o *ApplianceFileSystemOpStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")
+		delete(additionalProperties, "DiskOrder")
 		delete(additionalProperties, "Mountpoint")
+		delete(additionalProperties, "NodeHostname")
 		delete(additionalProperties, "OperationalStatus")
 		delete(additionalProperties, "Usage")
 		delete(additionalProperties, "NodeOpStatus")

@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_descriptor"
 description: |-
-        Descriptor that uniquely identifies an IMM server.
+        The capability.ServerDescriptor object is a hardware descriptor that uniquely identifies an Intersight Managed Mode (IMM) server model and defines its specific capabilities and characteristics.
+        #### Purpose
+        The ServerDescriptor object serves as a central point in the capability catalog for defining model-specific server attributes. It allows the system to understand the unique features, limitations, and default configurations of a particular server model, such as UCSB-B200-M5. It is crucial for applying correct policies, enabling or disabling features, and ensuring proper management.
+        #### Key Concepts
+        - **Model-Specific Capabilities:** Defines attributes that are specific to a server model, such as whether the NCSI side-band interface is enabled (isNcsiEnabled) or the default PCIe slot for an MLOM adapter (mlomAdapterPcieSlotNumber).
+        - **Policy Applicability:** The unsupportedPolicies property lists policies that are not applicable to a specific server model, preventing misconfiguration.
+        - **Form Factor Identification:** Specifies the server's physical form factor (serverFormFactor), such as blade or rack which influences management logic.
+        - **Unique Identification:** Uniquely identifies a server capability profile by its vendor and model.
 
 ---
 
 # Data Source: intersight_capability_server_descriptor
-Descriptor that uniquely identifies an IMM server.
+The capability.ServerDescriptor object is a hardware descriptor that uniquely identifies an Intersight Managed Mode (IMM) server model and defines its specific capabilities and characteristics.
+#### Purpose
+The ServerDescriptor object serves as a central point in the capability catalog for defining model-specific server attributes. It allows the system to understand the unique features, limitations, and default configurations of a particular server model, such as UCSB-B200-M5. It is crucial for applying correct policies, enabling or disabling features, and ensuring proper management.
+#### Key Concepts
+- **Model-Specific Capabilities:** Defines attributes that are specific to a server model, such as whether the NCSI side-band interface is enabled (isNcsiEnabled) or the default PCIe slot for an MLOM adapter (mlomAdapterPcieSlotNumber).
+- **Policy Applicability:** The unsupportedPolicies property lists policies that are not applicable to a specific server model, preventing misconfiguration.
+- **Form Factor Identification:** Specifies the server's physical form factor (serverFormFactor), such as "blade" or "rack" which influences management logic.
+- **Unique Identification:** Uniquely identifies a server capability profile by its vendor and model.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

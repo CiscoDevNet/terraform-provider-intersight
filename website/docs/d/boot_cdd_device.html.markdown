@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_cdd_device"
 description: |-
-        Cdd Boot Device configured on the server.
+        The boot.CddDevice object represents a CD/DVD drive as a configurable boot option within a server's boot policy.
+        #### Purpose
+        The CddDevice object allows for the inclusion of a physical CD/DVD drive in a server's boot order. This provides a standardized way to define the CDD as a bootable source, including its name, order, and enabled state, within a boot policy.
+        #### Key Concepts
+        - **Bootable Source:** Defines a physical CD/DVD drive as a potential boot device.
+        - **Configurable Order:** The order property allows its position in the boot sequence to be precisely controlled relative to other devices.
+        - **State Management:** The state property (Enabled or Disabled) allows the device to be included in a policy but toggled on or off without removing it.
+        - **Policy Component:** Functions as a building block within a larger boot policy, associated with a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_cdd_device
-Cdd Boot Device configured on the server.
+The boot.CddDevice object represents a CD/DVD drive as a configurable boot option within a server's boot policy.
+#### Purpose
+The CddDevice object allows for the inclusion of a physical CD/DVD drive in a server's boot order. This provides a standardized way to define the CDD as a bootable source, including its name, order, and enabled state, within a boot policy.
+#### Key Concepts
+- **Bootable Source:** Defines a physical CD/DVD drive as a potential boot device.
+- **Configurable Order:** The order property allows its position in the boot sequence to be precisely controlled relative to other devices.
+- **State Management:** The state property ("Enabled" or "Disabled") allows the device to be included in a policy but toggled on or off without removing it.
+- **Policy Component:** Functions as a building block within a larger boot policy, associated with a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

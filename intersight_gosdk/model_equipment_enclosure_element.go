@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the EquipmentEnclosureElement type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EquipmentEnclosureElement{}
 
-// EquipmentEnclosureElement This represents Enclosure element of chassis/server which holds the manageable sub comoponents.
+// EquipmentEnclosureElement The equipment.EnclosureElement object represents a physical enclosure within a server or chassis that holds manageable sub-components, such as GPUs. It serves as a container for these specialized hardware units. #### Purpose The primary function of this object is to model and inventory a sub-enclosure within a larger system. It is particularly useful for systems with modular components, like a GPU enclosure that can be added to a server. This provides a logical grouping for the components it contains and reports on its own health and identity. #### Key Concepts - **Modular Component Container:** Acts as a physical and logical container for a set of related hardware components, like graphics.Card objects. - **Health and Status Monitoring:** Reports its own operState and any specific health issues through the operReason property, such as temperature warnings. - **Unique Identification:** Identified by an enclosureId and other hardware details like pid, vid, and sku. - **Hierarchical Inventory:** Exists as a child of a compute.RackUnit, linking it directly to the server that houses it.
 type EquipmentEnclosureElement struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

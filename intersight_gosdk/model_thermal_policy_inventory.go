@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ThermalPolicyInventory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ThermalPolicyInventory{}
 
-// ThermalPolicyInventory Thermal Management policy models a configuration that can be applied to Chassis or Server to manage Thermal Features.
+// ThermalPolicyInventory The Thermal Policy is a reusable policy for managing the thermal and fan control settings of a server or chassis. #### Purpose The purpose of this policy is to allow administrators to define a cooling strategy for their hardware. By selecting a specific fan control mode, they can balance the trade-offs between cooling performance, power consumption, and acoustic noise to best suit the operating environment and workload requirements. #### Key Concepts - **Fan Control Mode:** The core of the policy is the fanControlMode setting, which offers several presets (e.g., Balanced, Low Power, Maximum Cooling, Acoustic) to dictate fan speed behavior. - **Chassis and Server Application:** The policy can be applied to both Server Profiles and Chassis Profiles, allowing for consistent thermal management at both the individual server and chassis levels. - **Platform-Specific Options:** The available fan control modes can vary depending on the server or chassis model (e.g., certain modes are exclusive to UCS X-Series). - **Profile-Based Management:** As a policy object, it ensures that all devices associated with a profile adhere to the same thermal strategy.
 type ThermalPolicyInventory struct {
 	PolicyAbstractPolicyInventory
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

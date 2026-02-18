@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan_module"
 description: |-
-        This represents Fan module housing multiple fans for chassis/server.
+        The equipment.FanModule object represents a physical, often hot-swappable, module that houses one or more individual fans. These modules are key components for cooling in chassis, servers, and network switches.
+        #### Purpose
+        The FanModule object serves as a container and management point for a group of fans. This provides inventory details for the module itself (model, serial, etc.) and reports on its overall operational state. It also acts as the parent for the individual equipment.Fan objects it contains.
+        #### Key Concepts
+        - **Component Aggregation:** Groups multiple individual fans into a single, field-replaceable unit (FRU).
+        - **Hierarchical Inventory:** Acts as a parent container for a collection of equipment.Fan objects, providing a structured view of the cooling system.
+        - **Health and Status Monitoring:** Reports its own operState and provides a summary of its health through the operReason property.
+        - **Location Identification:** Identified by a moduleId and trayId, which specify its physical location within the parent equipment (e.g., a chassis or an I/O module).
 
 ---
 
 # Data Source: intersight_equipment_fan_module
-This represents Fan module housing multiple fans for chassis/server.
+The equipment.FanModule object represents a physical, often hot-swappable, module that houses one or more individual fans. These modules are key components for cooling in chassis, servers, and network switches.
+#### Purpose
+The FanModule object serves as a container and management point for a group of fans. This provides inventory details for the module itself (model, serial, etc.) and reports on its overall operational state. It also acts as the parent for the individual equipment.Fan objects it contains.
+#### Key Concepts
+- **Component Aggregation:** Groups multiple individual fans into a single, field-replaceable unit (FRU).
+- **Hierarchical Inventory:** Acts as a parent container for a collection of equipment.Fan objects, providing a structured view of the cooling system.
+- **Health and Status Monitoring:** Reports its own operState and provides a summary of its health through the operReason property.
+- **Location Identification:** Identified by a moduleId and trayId, which specify its physical location within the parent equipment (e.g., a chassis or an I/O module).
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

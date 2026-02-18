@@ -3,28 +3,26 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_info"
 description: |-
-        ### Overview
         The WorkflowInfo object encapsulates the execution instance of a workflow, providing details about its progress, state, and execution context. It is essential for monitoring and managing workflow execution.
         #### Purpose
         WorkflowInfo serves as a runtime representation of a workflow execution, capturing all relevant data such as inputs, outputs, status, and execution context. It is vital for tracking the lifecycle and performance of workflows in real-time.
         #### Key Concepts
-        - **Execution Tracking:** - Monitors workflow progress, status, and execution metrics, providing insights into workflow performance.
-        - **Contextual Information:** - Contains initiator and target information, ensuring that workflows are executed within the correct context. organizational and security context.
-        - **State Management:** - Captures the state transitions of workflows, facilitating retries, rollbacks, and recovery actions.
-        - **Role-Based Access:** - Ensures secure management and visibility of workflow executions based on user privileges.
+        - **Execution Tracking:** Monitors workflow progress, status, and execution metrics, providing insights into workflow performance.
+        - **Contextual Information:** Contains initiator and target information, ensuring that workflows are executed within the correct context. organizational and security context.
+        - **State Management:** Captures the state transitions of workflows, facilitating retries, rollbacks, and recovery actions.
+        - **Role-Based Access:** Ensures secure management and visibility of workflow executions based on user privileges.
 
 ---
 
 # Resource: intersight_workflow_workflow_info
-### Overview
 The WorkflowInfo object encapsulates the execution instance of a workflow, providing details about its progress, state, and execution context. It is essential for monitoring and managing workflow execution.
 #### Purpose
 WorkflowInfo serves as a runtime representation of a workflow execution, capturing all relevant data such as inputs, outputs, status, and execution context. It is vital for tracking the lifecycle and performance of workflows in real-time.
 #### Key Concepts
-- **Execution Tracking:** - Monitors workflow progress, status, and execution metrics, providing insights into workflow performance.
-- **Contextual Information:** - Contains initiator and target information, ensuring that workflows are executed within the correct context. organizational and security context.
-- **State Management:** - Captures the state transitions of workflows, facilitating retries, rollbacks, and recovery actions.
-- **Role-Based Access:** - Ensures secure management and visibility of workflow executions based on user privileges.
+- **Execution Tracking:** Monitors workflow progress, status, and execution metrics, providing insights into workflow performance.
+- **Contextual Information:** Contains initiator and target information, ensuring that workflows are executed within the correct context. organizational and security context.
+- **State Management:** Captures the state transitions of workflows, facilitating retries, rollbacks, and recovery actions.
+- **Role-Based Access:** Ensures secure management and visibility of workflow executions based on user privileges.
 ## Usage Example
 ### Resource Creation
 

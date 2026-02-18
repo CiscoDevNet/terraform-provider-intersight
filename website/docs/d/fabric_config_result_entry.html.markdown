@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_config_result_entry"
 description: |-
-        This provides detailed information for the deploy and validation profile configuration results.
+        The ConfigResultEntry object is a critical component in the configuration result management domain, designed to provide detailed information for deploy and validation profile configuration results. It offers granular insights into configuration outcomes.
+        #### Purpose
+        The ConfigResultEntry serves as a detailed report of configuration results, offering specific information on errors, warnings, and other status messages. It enhances the understanding of configuration processes and outcomes, aiding in effective management and troubleshooting.
+        #### Key Concepts
+        - **Detailed Reporting:** Provides in-depth information on configuration results, supporting accurate analysis and management of configuration states.
+        - **Error and Warning Identification:** Facilitates the identification of errors and warnings during configuration, enabling proactive resolution and management.
+        - **Access Control:** Utilizes privilege sets to secure access to configuration result entries, ensuring reliable and secure configuration management.
+        - **Integration and Context:** Integrates with related objects to provide context for configuration results, enhancing understanding and management of configuration processes.
 
 ---
 
 # Data Source: intersight_fabric_config_result_entry
-This provides detailed information for the deploy and validation profile configuration results.
+The ConfigResultEntry object is a critical component in the configuration result management domain, designed to provide detailed information for deploy and validation profile configuration results. It offers granular insights into configuration outcomes. 
+#### Purpose
+The ConfigResultEntry serves as a detailed report of configuration results, offering specific information on errors, warnings, and other status messages. It enhances the understanding of configuration processes and outcomes, aiding in effective management and troubleshooting. 
+#### Key Concepts
+- **Detailed Reporting:** Provides in-depth information on configuration results, supporting accurate analysis and management of configuration states.
+- **Error and Warning Identification:** Facilitates the identification of errors and warnings during configuration, enabling proactive resolution and management.
+- **Access Control:** Utilizes privilege sets to secure access to configuration result entries, ensuring reliable and secure configuration management.
+- **Integration and Context:** Integrates with related objects to provide context for configuration results, enhancing understanding and management of configuration processes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

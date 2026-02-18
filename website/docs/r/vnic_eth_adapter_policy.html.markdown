@@ -3,12 +3,22 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_adapter_policy"
 description: |-
-        An Ethernet adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. For each VIC Virtual Ethernet Interface various features like VXLAN, NVGRE, ARFS, Interrupt settings, and TCP Offload settings can be configured.
+        The EthAdapterPolicy object governs the behavior of Ethernet adapters, focusing on host-side features such as offloads, virtualization support, and advanced network functions.
+        #### Purpose
+        EthAdapterPolicy allows administrators to control the detailed functionality of network adapters, including enabling or disabling features like VXLAN, SR-IOV, and interrupt handling for performance tuning.
+        #### Key Concepts
+        - **Host-Side Feature Management:** Configures advanced adapter features for improved efficiency and performance.
+        - **Comprehensive Control:** Supports settings for offloads, virtualization, and queue management.
 
 ---
 
 # Resource: intersight_vnic_eth_adapter_policy
-An Ethernet adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. For each VIC Virtual Ethernet Interface various features like VXLAN, NVGRE, ARFS, Interrupt settings, and TCP Offload settings can be configured.
+The EthAdapterPolicy object governs the behavior of Ethernet adapters, focusing on host-side features such as offloads, virtualization support, and advanced network functions.
+#### Purpose
+EthAdapterPolicy allows administrators to control the detailed functionality of network adapters, including enabling or disabling features like VXLAN, SR-IOV, and interrupt handling for performance tuning.
+#### Key Concepts
+- **Host-Side Feature Management:** Configures advanced adapter features for improved efficiency and performance.
+- **Comprehensive Control:** Supports settings for offloads, virtualization, and queue management.
 ## Usage Example
 ### Resource Creation
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ComputeScrubPolicy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ComputeScrubPolicy{}
 
-// ComputeScrubPolicy The scrub policy models the data cleanup on the host. If scrub policy is associated, then its configuration will be used to initiate data erase during the server profile undeploy or disassociation.
+// ComputeScrubPolicy The ScrubPolicy object defines the parameters for data cleanup on servers, particularly during server profile undeployments. It ensures that server components are effectively scrubbed as per configuration. #### Purpose ScrubPolicy provides a framework for executing data cleanup tasks during server profile operations, safeguarding data integrity and compliance with policies. It plays a critical role in managing server disassociations. #### Key Concepts - **Policy Definition:** Sets clear guidelines for scrub operations, detailing which components should be cleaned during undeployments. - **Integration:** Links with server profiles to ensure scrub operations are executed as part of broader server management tasks. - **Security and Compliance:** Supports compliance by ensuring data cleanup is performed consistently and securely. - **Access Control:** Establishes privilege sets for policy management, ensuring controlled access to scrub configurations.
 type ComputeScrubPolicy struct {
 	PolicyAbstractPolicy
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

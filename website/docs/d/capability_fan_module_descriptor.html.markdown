@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fan_module_descriptor"
 description: |-
-        Descriptor that uniquely identifies a fan module.
+        The capability.FanModuleDescriptor object is a hardware descriptor that uniquely identifies a fan module within the capability catalog. It serves as an inventory record for specific models of fan modules used in chassis and other equipment.
+        #### Purpose
+        The purpose of this object is to maintain a catalog of known fan module models. It captures key identification details such as vendor, model, version, and revision. This allows the system to validate the hardware components of a chassis or server, ensuring that only supported and compatible fan modules are recognized.
+        #### Key Concepts
+        - **Hardware Cataloging:** Provides a structured entry for a specific fan module model in the system's hardware catalog.
+        - **Unique Identification:** Uses a composite key of vendor, model, version, and revision to uniquely identify a fan module type.
+        - **Component Validation:** Enables the system to verify that the fan modules discovered in a chassis match the known, supported hardware definitions.
+        - **Extensible Descriptor:** As a HardwareDescriptor, it is part of a flexible and extensible catalog system.
 
 ---
 
 # Data Source: intersight_capability_fan_module_descriptor
-Descriptor that uniquely identifies a fan module.
+The capability.FanModuleDescriptor object is a hardware descriptor that uniquely identifies a fan module within the capability catalog. It serves as an inventory record for specific models of fan modules used in chassis and other equipment.
+#### Purpose
+The purpose of this object is to maintain a catalog of known fan module models. It captures key identification details such as vendor, model, version, and revision. This allows the system to validate the hardware components of a chassis or server, ensuring that only supported and compatible fan modules are recognized.
+#### Key Concepts
+- **Hardware Cataloging:** Provides a structured entry for a specific fan module model in the system's hardware catalog.
+- **Unique Identification:** Uses a composite key of vendor, model, version, and revision to uniquely identify a fan module type.
+- **Component Validation:** Enables the system to verify that the fan modules discovered in a chassis match the known, supported hardware definitions.
+- **Extensible Descriptor:** As a HardwareDescriptor, it is part of a flexible and extensible catalog system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

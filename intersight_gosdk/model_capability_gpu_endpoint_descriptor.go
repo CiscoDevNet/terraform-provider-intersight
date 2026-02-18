@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the CapabilityGpuEndpointDescriptor type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CapabilityGpuEndpointDescriptor{}
 
-// CapabilityGpuEndpointDescriptor Descriptor that uniquely identifies a cpu.
+// CapabilityGpuEndpointDescriptor The capability.GpuEndpointDescriptor object is a descriptor used to uniquely identify a GPU (Graphics Processing Unit) within the capability catalog. It acts as a definitive inventory record for all supported GPU models. #### Purpose The main purpose of this object is to maintain a catalog of GPU models, storing key identification information such as vendor, model, pid (Product ID), and partNumber. This catalog enables the system to validate installed GPUs, check their compatibility with specific server platforms, and provide accurate, detailed hardware inventory. #### Key Concepts - **GPU Cataloging:** Provides a structured repository for managing information about different GPU models. - **Unique Identification:** Uniquely defines each GPU type using a combination of vendor, model, and pid. - **Platform Compatibility:** The supportedPlatformsPids property links each GPU to the server platforms it is certified for, facilitating automated configuration checks. - **Read-Only Reference:** Serves as a source of truth for GPU specifications, used for system validation and inventory reporting.
 type CapabilityGpuEndpointDescriptor struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

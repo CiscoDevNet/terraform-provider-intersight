@@ -3,12 +3,26 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_solution_distributable"
 description: |-
-        A solution image distributed by Cisco.
+        The SolutionDistributable object represents a solution image distributed by Cisco. It is a key component in deploying and upgrading solution-specific images within the system.
+        #### Purpose
+        SolutionDistributable serves as the repository for solution-specific images, supporting deployment and upgrade processes within solution environments.
+        #### Key Concepts
+        - **Solution Management:** Provides solution-specific images for deployment and upgrades, ensuring compatibility.
+        - **Catalog Integration:** Links solution images with the Intersight catalog for comprehensive management.
+        - **Compatibility Assurance:** Ensures that solution images are compatible with system components.
+        - **Administrative Tools:** Offers tools for managing solution-specific image distributions.
 
 ---
 
 # Data Source: intersight_software_solution_distributable
-A solution image distributed by Cisco.
+The SolutionDistributable object represents a solution image distributed by Cisco. It is a key component in deploying and upgrading solution-specific images within the system.
+#### Purpose
+SolutionDistributable serves as the repository for solution-specific images, supporting deployment and upgrade processes within solution environments.
+#### Key Concepts
+- **Solution Management:** Provides solution-specific images for deployment and upgrades, ensuring compatibility.
+- **Catalog Integration:** Links solution images with the Intersight catalog for comprehensive management.
+- **Compatibility Assurance:** Ensures that solution images are compatible with system components.
+- **Administrative Tools:** Offers tools for managing solution-specific image distributions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -20,7 +34,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
-* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
+* `feature_source`:(string) The name of the feature to which the uploaded file belongs.* `System` - This indicates system initiated file uploads.* `OpenAPIImport` - This indicates an OpenAPI file upload.* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads. 
 * `file_path`:(string) The path of the file in S3/minio bucket. 
 * `guid`:(string) The unique identifier for an image in a Cisco repository. 
 * `image_type`:(string) The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, UCS Managed Fabric Interconnect. The field is used in private appliance mode, where image does not have description populated from CCO. 

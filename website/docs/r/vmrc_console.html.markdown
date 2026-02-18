@@ -3,12 +3,24 @@ subcategory: "vmrc"
 layout: "intersight"
 page_title: "Intersight: intersight_vmrc_console"
 description: |-
-        API to launch VMRC console to a VMware virtual machine.
+        The Console object provides API access to launch VMRC consoles to VMware virtual machines. It facilitates secure and efficient virtual machine management through robust console access.
+        #### Purpose
+        Console object enables organizations to manage VMware virtual machines efficiently through VMRC console access. It supports secure and streamlined operations by providing robust console management capabilities.
+        #### Key Concepts
+        - **VMRC Console Access:** Provides access to launch VMRC consoles, supporting efficient virtual machine management.
+        - **Virtual Machine Relationship:** Establishes relationships with virtual machines to ensure accurate console operations.
+        - **VCenter Integration:** Integrates with vCenters to facilitate seamless console access and management.
 
 ---
 
 # Resource: intersight_vmrc_console
-API to launch VMRC console to a VMware virtual machine.
+The Console object provides API access to launch VMRC consoles to VMware virtual machines. It facilitates secure and efficient virtual machine management through robust console access.
+#### Purpose
+Console object enables organizations to manage VMware virtual machines efficiently through VMRC console access. It supports secure and streamlined operations by providing robust console management capabilities.
+#### Key Concepts
+- **VMRC Console Access:** Provides access to launch VMRC consoles, supporting efficient virtual machine management.
+- **Virtual Machine Relationship:** Establishes relationships with virtual machines to ensure accurate console operations.
+- **VCenter Integration:** Integrates with vCenters to facilitate seamless console access and management.
 ## Usage Example
 ### Resource Creation
 

@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_cco_post"
 description: |-
-        The post reporting a new release is available for APIC.
+        The ApicCcoPost object is integral to software release management, conveying information about new software versions specific to the APIC platform. It ensures users are informed about the latest releases.
+        #### Purpose
+        ApicCcoPost provides comprehensive details about new software releases on the APIC platform, including the title, description, and links to download the release.
+        #### Key Concepts
+        - **Platform-Specific Communication:** Serves as a notice board for APIC software releases.
+        - **Structured Information:** Contains detailed content about APIC releases.
+        - **System Integration:** Supports integration with systems for APIC updates.
 
 ---
 
 # Data Source: intersight_niaapi_apic_cco_post
-The post reporting a new release is available for APIC.
+The ApicCcoPost object is integral to software release management, conveying information about new software versions specific to the APIC platform. It ensures users are informed about the latest releases.
+#### Purpose
+ApicCcoPost provides comprehensive details about new software releases on the APIC platform, including the title, description, and links to download the release.
+#### Key Concepts
+- **Platform-Specific Communication:** Serves as a notice board for APIC software releases.
+- **Structured Information:** Contains detailed content about APIC releases.
+- **System Integration:** Supports integration with systems for APIC updates.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

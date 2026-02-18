@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_actions_meta"
 description: |-
-        Internal meta-data to enable HSU related action.
+        The ServerActionsMeta object plays an integral role in enabling Host Server Utility (HSU) actions within Cisco's Intersight platform. This provides internal metadata necessary to support specific server operations.
+        #### Purpose
+        ServerActionsMeta is designed to support and manage HSU-related actions, ensuring that operations are executed correctly within the constraints defined. It helps streamline server management tasks by providing essential metadata for action validation.
+        #### Key Concepts
+        - **Support for HSU Actions:** Encapsulates necessary information to enable server actions related to Host Server Utility.
+        - **Privilege Sets:** Establishes access levels required for executing read, update, and delete operations.
+        - **Target Validation:** Contains properties that aid in the validation of actions, ensuring that operations are performed on compatible server models and firmware versions.
+        - ** Efficiency:** Enhances operational efficiency by providing metadata that supports streamlined server management.
 
 ---
 
 # Data Source: intersight_capability_server_actions_meta
-Internal meta-data to enable HSU related action.
+The ServerActionsMeta object plays an integral role in enabling Host Server Utility (HSU) actions within Cisco's Intersight platform. This provides internal metadata necessary to support specific server operations.
+#### Purpose
+ServerActionsMeta is designed to support and manage HSU-related actions, ensuring that operations are executed correctly within the constraints defined. It helps streamline server management tasks by providing essential metadata for action validation.
+#### Key Concepts
+- **Support for HSU Actions:** Encapsulates necessary information to enable server actions related to Host Server Utility.
+- **Privilege Sets:** Establishes access levels required for executing read, update, and delete operations.
+- **Target Validation:** Contains properties that aid in the validation of actions, ensuring that operations are performed on compatible server models and firmware versions.
+- ** Efficiency:** Enhances operational efficiency by providing metadata that supports streamlined server management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

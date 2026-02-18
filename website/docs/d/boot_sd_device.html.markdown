@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_sd_device"
 description: |-
-        Sd Boot Device configured on the server.
+        The boot.SdDevice object represents an SD (Secure Digital) card as a configurable boot option within a server's boot policy. This typically refers to an internal SD card slot, often used for booting hypervisors.
+        #### Purpose
+        The SdDevice object provides a standardized way to include an SD card in a server's boot order. It allows administrators to define the SD card as a bootable source, set its priority, and manage its state (enabled/disabled) within a boot policy. It is particularly useful for embedded operating systems or hypervisor installations.
+        #### Key Concepts
+        - **Embedded OS Boot:** Defines an internal SD card as a bootable source, commonly used for lightweight hypervisors like VMware ESXi.
+        - **Ordered Boot Sequence:** The order property allows its position in the boot process to be controlled relative to other devices.
+        - **State Management:** The state property allows the SD card to be easily enabled or disabled as a boot option within a policy.
+        - **Boot Policy Component:** Acts as an element within a boot policy that is applied to a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_sd_device
-Sd Boot Device configured on the server.
+The boot.SdDevice object represents an SD (Secure Digital) card as a configurable boot option within a server's boot policy. This typically refers to an internal SD card slot, often used for booting hypervisors.
+#### Purpose
+The SdDevice object provides a standardized way to include an SD card in a server's boot order. It allows administrators to define the SD card as a bootable source, set its priority, and manage its state (enabled/disabled) within a boot policy. It is particularly useful for embedded operating systems or hypervisor installations.
+#### Key Concepts
+- **Embedded OS Boot:** Defines an internal SD card as a bootable source, commonly used for lightweight hypervisors like VMware ESXi. 
+- **Ordered Boot Sequence:** The order property allows its position in the boot process to be controlled relative to other devices.
+- **State Management:** The state property allows the SD card to be easily enabled or disabled as a boot option within a policy.
+- **Boot Policy Component:** Acts as an element within a boot policy that is applied to a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

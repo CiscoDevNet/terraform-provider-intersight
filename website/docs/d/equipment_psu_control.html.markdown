@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_psu_control"
 description: |-
-        This represents the power states of an equipment.
+        The equipment.PsuControl object represents the overall power state and redundancy configuration of the Power Supply Units (PSUs) within a chassis.
+        #### Purpose
+        The primary function of this object is to provide a consolidated view of the chassis's power redundancy status. It reports on the collective state of the PSUs, including the overall redundancy mode (redundancy), the input and output power states, and any system-level power-related health issues.
+        #### Key Concepts
+        - **System-Level Power State:** Aggregates the status of all PSUs in a chassis into a single management object.
+        - **Redundancy Monitoring:** The redundancy and clusterState properties are key indicators of the chassis's power fault tolerance (e.g., N+1, non-redundant).
+        - **Health Aggregation:** The operReason property provides details on chassis-wide power issues, such as a loss of redundancy (PsuRedundancyLostCritical).
+        - **Chassis-Specific:** It is a child of an equipment.Chassis, providing a summary of the power subsystem for that specific enclosure.
 
 ---
 
 # Data Source: intersight_equipment_psu_control
-This represents the power states of an equipment.
+The equipment.PsuControl object represents the overall power state and redundancy configuration of the Power Supply Units (PSUs) within a chassis.
+#### Purpose
+The primary function of this object is to provide a consolidated view of the chassis's power redundancy status. It reports on the collective state of the PSUs, including the overall redundancy mode (redundancy), the input and output power states, and any system-level power-related health issues.
+#### Key Concepts
+- **System-Level Power State:** Aggregates the status of all PSUs in a chassis into a single management object.
+- **Redundancy Monitoring:** The redundancy and clusterState properties are key indicators of the chassis's power fault tolerance (e.g., N+1, non-redundant).
+- **Health Aggregation:** The operReason property provides details on chassis-wide power issues, such as a loss of redundancy (PsuRedundancyLostCritical).
+- **Chassis-Specific:** It is a child of an equipment.Chassis, providing a summary of the power subsystem for that specific enclosure.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

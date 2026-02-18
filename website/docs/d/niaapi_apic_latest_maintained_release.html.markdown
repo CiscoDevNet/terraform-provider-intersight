@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_latest_maintained_release"
 description: |-
-        This contains the latest maintained release information for each release on APIC.
+        The ApicLatestMaintainedRelease object is crucial in software lifecycle management, focusing on maintained releases for the APIC platform. It ensures users have access to stable and supported software versions.
+        #### Purpose
+        ApicLatestMaintainedRelease provides information on the latest maintained software releases for the APIC platform, ensuring users are informed about stable and supported versions.
+        #### Key Concepts
+        - **Platform-Specific Maintenance:** Focuses on maintained releases for the APIC platform, supporting system stability.
+        - **Version Continuity:** Ensures users can rely on maintained releases for consistent operation.
+        - **Release Updates:** Keeps users informed about updates to maintained software versions, promoting reliability.
 
 ---
 
 # Data Source: intersight_niaapi_apic_latest_maintained_release
-This contains the latest maintained release information for each release on APIC.
+The ApicLatestMaintainedRelease object is crucial in software lifecycle management, focusing on maintained releases for the APIC platform. It ensures users have access to stable and supported software versions.
+#### Purpose
+ApicLatestMaintainedRelease provides information on the latest maintained software releases for the APIC platform, ensuring users are informed about stable and supported versions.
+#### Key Concepts
+- **Platform-Specific Maintenance:** Focuses on maintained releases for the APIC platform, supporting system stability.
+- **Version Continuity:** Ensures users can rely on maintained releases for consistent operation.
+- **Release Updates:** Keeps users informed about updates to maintained software versions, promoting reliability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

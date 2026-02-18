@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_span_session"
 description: |-
-        Configures an Ethernet SPAN session per Fabric Interconnect.
+        The SpanSession object defines SPAN (Switched Port Analyzer) sessions used for traffic monitoring and analysis. It supports network visibility by directing selected traffic to monitoring interfaces. The operational state and reason fields reflect the status of the SPAN session itself, not underlying network issues.
+        #### Purpose
+        SpanSession serves to establish and manage SPAN sessions, allowing administrators to capture and analyze network traffic for troubleshooting and performance monitoring. It plays a crucial role in network diagnostics and operational efficiency.
+        #### Key Concepts
+        - **Traffic Monitoring:** Allows the configuration of sources and destinations for traffic capture, providing insights into network performance and issues.
+        - **Dynamic Configuration:** Supports the dynamic setup and adjustment of SPAN sessions, enabling flexible and responsive network management.
+        - **Integrated Network Management:** Works in conjunction with network elements to ensure comprehensive monitoring capabilities, enhancing overall network oversight.
+        - **Operational State Tracking:** Provides detailed information on the SPAN session's operational state and reasons, helping administrators quickly identify and address SPAN session-related issues.
 
 ---
 
 # Resource: intersight_fabric_span_session
-Configures an Ethernet SPAN session per Fabric Interconnect.
+The SpanSession object defines SPAN (Switched Port Analyzer) sessions used for traffic monitoring and analysis. It supports network visibility by directing selected traffic to monitoring interfaces. The operational state and reason fields reflect the status of the SPAN session itself, not underlying network issues.
+#### Purpose
+SpanSession serves to establish and manage SPAN sessions, allowing administrators to capture and analyze network traffic for troubleshooting and performance monitoring. It plays a crucial role in network diagnostics and operational efficiency.
+#### Key Concepts
+- **Traffic Monitoring:** Allows the configuration of sources and destinations for traffic capture, providing insights into network performance and issues.
+- **Dynamic Configuration:** Supports the dynamic setup and adjustment of SPAN sessions, enabling flexible and responsive network management.
+- **Integrated Network Management:** Works in conjunction with network elements to ensure comprehensive monitoring capabilities, enhancing overall network oversight.
+- **Operational State Tracking:** Provides detailed information on the SPAN session's operational state and reasons, helping administrators quickly identify and address SPAN session-related issues.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

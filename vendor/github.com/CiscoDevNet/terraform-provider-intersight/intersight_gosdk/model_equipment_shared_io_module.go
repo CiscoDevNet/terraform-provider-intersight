@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the EquipmentSharedIoModule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EquipmentSharedIoModule{}
 
-// EquipmentSharedIoModule I/O Controller present inside SIOC to provide data path from S-series server to FI.
+// EquipmentSharedIoModule The equipment.SharedIoModule object represents a shared I/O module (SIOM), which is an adapter-like component typically found in a System I/O Controller (SIOC) for Cisco S-Series storage servers. This provides the data path from the server to the Fabric Interconnects. #### Purpose       The SharedIoModule object is used to inventory and manage the SIOM. It captures the module's identity, its operational state (operState), and its connectivity status (reachability) to the A and B sides of the fabric. It acts as a container for the network ports (port.Group objects). #### Key Concepts - **Storage Server Connectivity:** Models the specific I/O adapter used in S-Series servers. - **Redundancy and Reachability:** The reachability property indicates its connection status to both Fabric Interconnects, which is key for monitoring high availability. - **Hierarchical Inventory:** Serves as a parent for port.Group objects and is itself a child of an equipment.SystemIoController. - **Configuration State:** The configState property tracks its configuration status within the system.
 type EquipmentSharedIoModule struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

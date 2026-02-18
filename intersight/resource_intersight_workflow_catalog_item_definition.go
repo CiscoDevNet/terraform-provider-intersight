@@ -494,9 +494,9 @@ func resourceWorkflowCatalogItemDefinition() *schema.Resource {
 																Default:     "workflow.DisplayMeta",
 															},
 															"widget_type": {
-																Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.\n* `MultiSelect` - Display the widget as a multi-select.",
+																Description:  "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.\n* `MultiSelect` - Display the widget as a multi-select.\n* `Switcher` - Display the widget as a switcher.",
 																Type:         schema.TypeString,
-																ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector", "MultiSelect"}, false),
+																ValidateFunc: validation.StringInSlice([]string{"None", "Radio", "Dropdown", "GridSelector", "DrawerSelector", "MultiSelect", "Switcher"}, false),
 																Optional:     true,
 																Default:      "None",
 															},

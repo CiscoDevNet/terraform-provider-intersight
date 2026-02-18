@@ -126,7 +126,12 @@ func getSoftwarerepositoryOperatingSystemFileSchema() map[string]*schema.Schema 
 			Optional:    true,
 		},
 		"feature_source": {
-			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.\n* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads.",
+			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.\n* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.\n* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"file_name": {
+			Description: "File name of the uploaded image.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -772,6 +777,11 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetFeatureSource(x)
 	}
 
+	if v, ok := d.GetOk("file_name"); ok {
+		x := (v.(string))
+		o.SetFileName(x)
+	}
+
 	if v, ok := d.GetOk("guid"); ok {
 		x := (v.(string))
 		o.SetGuid(x)
@@ -1274,6 +1284,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
 				temp["feature_source"] = (s.GetFeatureSource())
+				temp["file_name"] = (s.GetFileName())
 				temp["guid"] = (s.GetGuid())
 				temp["image_type"] = (s.GetImageType())
 				temp["import_action"] = (s.GetImportAction())

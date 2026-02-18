@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_switch_card"
 description: |-
-        Fixed / Removable module on a Fabric Interconnect / Switch.
+        The equipment.SwitchCard object represents a physical module, either fixed or removable, within a Fabric Interconnect or network switch. This can be a main supervisor card or a line card that provides network ports.
+        #### Purpose
+        The SwitchCard object serves as a primary inventory entity for the major modules within a switch. It captures the card's identity (model, serial), its operational state, and its physical location (slotId). It also acts as a container for the network interfaces this provides, such as port.Group, ether.PortChannel, and fc.PhysicalPort objects.
+        #### Key Concepts
+        - **Modular Switch Inventory:** Models the physical cards that make up a modular switch or Fabric Interconnect.
+        - **Hierarchical Port Container:** Acts as the parent for all physical and logical ports that reside on the card, providing a structured view of the switch's interfaces.
+        - **Health and Status:** The state and status properties report on the operational health of the card itself.
+        - **Switching Mode Configuration:** Reports the configured ethernetSwitchingMode and fcSwitchingMode (End-Host or Switch), which defines the fundamental behavior of the Fabric Interconnect.
 
 ---
 
 # Data Source: intersight_equipment_switch_card
-Fixed / Removable module on a Fabric Interconnect / Switch.
+The equipment.SwitchCard object represents a physical module, either fixed or removable, within a Fabric Interconnect or network switch. This can be a main supervisor card or a line card that provides network ports.
+#### Purpose
+The SwitchCard object serves as a primary inventory entity for the major modules within a switch. It captures the card's identity (model, serial), its operational state, and its physical location (slotId). It also acts as a container for the network interfaces this provides, such as port.Group, ether.PortChannel, and fc.PhysicalPort objects.
+#### Key Concepts
+- **Modular Switch Inventory:** Models the physical cards that make up a modular switch or Fabric Interconnect.
+- **Hierarchical Port Container:** Acts as the parent for all physical and logical ports that reside on the card, providing a structured view of the switch's interfaces.
+- **Health and Status:** The state and status properties report on the operational health of the card itself.
+- **Switching Mode Configuration:** Reports the configured ethernetSwitchingMode and fcSwitchingMode (End-Host or Switch), which defines the fundamental behavior of the Fabric Interconnect.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

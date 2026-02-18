@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_estimate_impact"
 description: |-
-        Before submitting switch profile deploy operation, the estimate impact helps to know the list of components be impacted and require switch reboot.
+        The EstimateImpact object is a pivotal aspect of configuration change management, designed to assess the impact of configuration changes before submitting switch profile deploy operations. It supports informed decision-making and management of configuration impacts.
+        #### Purpose
+        The EstimateImpact serves as a predictive tool for assessing the impact of configuration changes on network components, enabling proactive management and resolution of potential issues. It aids in understanding the scope and consequences of configuration modifications.
+        #### Key Concepts
+        - **Impact Prediction:** Provides insights into the potential impact of configuration changes, supporting informed decision-making and proactive management.
+        - **Pre-Deployment Assessment:** Facilitates the assessment of configuration impacts prior to deployment, ensuring reliable and efficient configuration management.
+        - **Access Control:** Leverages privilege sets to manage access to impact assessments, maintaining security and integrity of configuration processes.
+        - **Integration and Context:** Integrates with related objects to provide context for impact assessments, enhancing understanding and management of configuration changes.
 
 ---
 
 # Resource: intersight_fabric_estimate_impact
-Before submitting switch profile deploy operation, the estimate impact helps to know the list of components be impacted and require switch reboot.
+The EstimateImpact object is a pivotal aspect of configuration change management, designed to assess the impact of configuration changes before submitting switch profile deploy operations. It supports informed decision-making and management of configuration impacts. 
+#### Purpose
+The EstimateImpact serves as a predictive tool for assessing the impact of configuration changes on network components, enabling proactive management and resolution of potential issues. It aids in understanding the scope and consequences of configuration modifications. 
+#### Key Concepts
+- **Impact Prediction:** Provides insights into the potential impact of configuration changes, supporting informed decision-making and proactive management.
+- **Pre-Deployment Assessment:** Facilitates the assessment of configuration impacts prior to deployment, ensuring reliable and efficient configuration management.
+- **Access Control:** Leverages privilege sets to manage access to impact assessments, maintaining security and integrity of configuration processes.
+- **Integration and Context:** Integrates with related objects to provide context for impact assessments, enhancing understanding and management of configuration changes.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

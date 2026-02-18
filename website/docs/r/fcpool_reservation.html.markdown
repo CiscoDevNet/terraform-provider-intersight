@@ -3,12 +3,24 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_reservation"
 description: |-
-        The WWN reservation object, used to hold reserved identities.
+        The Reservation object is utilized to hold reserved identity information, managing the allocation of resources within pools.
+        #### Purpose
+        The Reservation object serves as a mechanism to manage reserved identities within pools for future allocation, providing a structured approach to resource allocation and reservation management.
+        #### Key Concepts
+        - **Identity Management:** Facilitates the reservation of WWN identities for future allocation within pools.
+        - **Resource Allocation:** Ensures that reserved identities are allocated appropriately, supporting dynamic and static allocation types.
+        - **Access Control:** Enables authorized users to manage reservations, maintaining secure and efficient resource management.
 
 ---
 
 # Resource: intersight_fcpool_reservation
-The WWN reservation object, used to hold reserved identities.
+The Reservation object is utilized to hold reserved identity information, managing the allocation of resources within pools.
+#### Purpose
+The Reservation object serves as a mechanism to manage reserved identities within pools for future allocation, providing a structured approach to resource allocation and reservation management.
+#### Key Concepts
+- **Identity Management:** Facilitates the reservation of WWN identities for future allocation within pools.
+- **Resource Allocation:** Ensures that reserved identities are allocated appropriately, supporting dynamic and static allocation types.
+- **Access Control:** Enables authorized users to manage reservations, maintaining secure and efficient resource management.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

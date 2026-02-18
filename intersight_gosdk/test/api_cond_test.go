@@ -35,6 +35,42 @@ func Test_intersight_CondApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CondApiService CreateCondAlarmSuppressionDryRun", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.CreateCondAlarmSuppressionDryRun(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService CreateCondCustomHclBaseline", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.CreateCondCustomHclBaseline(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService CreateCondCustomHclStatus", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.CreateCondCustomHclStatus(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService DeleteCondAlarmSuppression", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -42,6 +78,19 @@ func Test_intersight_CondApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.CondApi.DeleteCondAlarmSuppression(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService DeleteCondCustomHclBaseline", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.CondApi.DeleteCondCustomHclBaseline(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -178,6 +227,58 @@ func Test_intersight_CondApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CondApiService GetCondCustomHclBaselineByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.GetCondCustomHclBaselineByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService GetCondCustomHclBaselineList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.GetCondCustomHclBaselineList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService GetCondCustomHclStatusByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.GetCondCustomHclStatusByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService GetCondCustomHclStatusList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.GetCondCustomHclStatusList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService GetCondHclStatusByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -284,6 +385,20 @@ func Test_intersight_CondApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CondApiService PatchCondCustomHclBaseline", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.PatchCondCustomHclBaseline(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService UpdateCondAlarm", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -305,6 +420,20 @@ func Test_intersight_CondApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.CondApi.UpdateCondAlarmSuppression(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService UpdateCondCustomHclBaseline", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.UpdateCondCustomHclBaseline(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,12 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_qos_policy_inventory"
 description: |-
-        An Ethernet Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vNIC. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can be specified like burst and rate on the outgoing traffic.
+        The EthQosPolicy object defines Quality of Service (QoS) parameters for Ethernet traffic on virtual network interfaces. It enables prioritization and control of outbound traffic for optimized performance.
+        #### Purpose
+        EthQosPolicy centralizes QoS settings, such as bandwidth limits and class of service, ensuring predictable and enforceable traffic behavior across vNICs.
+        #### Key Concepts
+        - **QoS Enforcement:** Regulates traffic classes, bandwidth, and packet handling.
+        - **Integration with vNICs:** Directly associated with Ethernet interfaces for seamless policy application.
+        - **Scalable Management:** Supports centralized control for consistent QoS across multiple environments.
 
 ---
 
 # Data Source: intersight_vnic_eth_qos_policy_inventory
-An Ethernet Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vNIC. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can be specified like burst and rate on the outgoing traffic.
+The EthQosPolicy object defines Quality of Service (QoS) parameters for Ethernet traffic on virtual network interfaces. It enables prioritization and control of outbound traffic for optimized performance.
+#### Purpose
+EthQosPolicy centralizes QoS settings, such as bandwidth limits and class of service, ensuring predictable and enforceable traffic behavior across vNICs.
+#### Key Concepts
+- **QoS Enforcement:** Regulates traffic classes, bandwidth, and packet handling.
+- **Integration with vNICs:** Directly associated with Ethernet interfaces for seamless policy application.
+- **Scalable Management:** Supports centralized control for consistent QoS across multiple environments.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

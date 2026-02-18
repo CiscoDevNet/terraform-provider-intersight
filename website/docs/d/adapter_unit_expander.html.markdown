@@ -3,12 +3,24 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_unit_expander"
 description: |-
-        The adapter unit extension card present on a server.
+        The adapter.UnitExpander object represents a physical extension card for a network adapter within a server. It is used for inventory and to identify expander cards that augment the functionality or port count of a primary adapter.
+        #### Purpose
+        The UnitExpander object serves to inventory adapter extension cards, which are not full-featured adapters themselves but provide additional physical connectivity. It captures key hardware identifiers to ensure the component can be correctly identified and managed within the system.
+        #### Key Concepts
+        - **Hardware Identification:** Provides essential hardware details such as partNumber and vid (virtual ID) for unique identification.
+        - **Hierarchical Relationship:** It is directly associated with a parent adapter.Unit object, clearly defining its role as an extension of a primary adapter.
+        - **Simplified Model:** Focuses purely on the identity of the expander hardware, distinct from the more complex adapter.Unit which models the full adapter.
 
 ---
 
 # Data Source: intersight_adapter_unit_expander
-The adapter unit extension card present on a server.
+The adapter.UnitExpander object represents a physical extension card for a network adapter within a server. It is used for inventory and to identify expander cards that augment the functionality or port count of a primary adapter.
+#### Purpose
+The UnitExpander object serves to inventory adapter extension cards, which are not full-featured adapters themselves but provide additional physical connectivity. It captures key hardware identifiers to ensure the component can be correctly identified and managed within the system.
+#### Key Concepts
+- **Hardware Identification:** Provides essential hardware details such as partNumber and vid (virtual ID) for unique identification.
+- **Hierarchical Relationship:** It is directly associated with a parent adapter.Unit object, clearly defining its role as an extension of a primary adapter.
+- **Simplified Model:** Focuses purely on the identity of the expander hardware, distinct from the more complex adapter.Unit which models the full adapter.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

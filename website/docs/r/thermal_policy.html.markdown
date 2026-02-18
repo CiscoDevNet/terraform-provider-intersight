@@ -3,12 +3,26 @@ subcategory: "thermal"
 layout: "intersight"
 page_title: "Intersight: intersight_thermal_policy"
 description: |-
-        Thermal Management policy models a configuration that can be applied to Chassis or Server to manage Thermal Features.
+        The Thermal Policy is a reusable policy for managing the thermal and fan control settings of a server or chassis.
+        #### Purpose
+        The purpose of this policy is to allow administrators to define a cooling strategy for their hardware. By selecting a specific fan control mode, they can balance the trade-offs between cooling performance, power consumption, and acoustic noise to best suit the operating environment and workload requirements.
+        #### Key Concepts
+        - **Fan Control Mode:** The core of the policy is the fanControlMode setting, which offers several presets (e.g., Balanced, Low Power, Maximum Cooling, Acoustic) to dictate fan speed behavior.
+        - **Chassis and Server Application:** The policy can be applied to both Server Profiles and Chassis Profiles, allowing for consistent thermal management at both the individual server and chassis levels.
+        - **Platform-Specific Options:** The available fan control modes can vary depending on the server or chassis model (e.g., certain modes are exclusive to UCS X-Series).
+        - **Profile-Based Management:** As a policy object, it ensures that all devices associated with a profile adhere to the same thermal strategy.
 
 ---
 
 # Resource: intersight_thermal_policy
-Thermal Management policy models a configuration that can be applied to Chassis or Server to manage Thermal Features.
+The Thermal Policy is a reusable policy for managing the thermal and fan control settings of a server or chassis.
+#### Purpose
+The purpose of this policy is to allow administrators to define a cooling strategy for their hardware. By selecting a specific fan control mode, they can balance the trade-offs between cooling performance, power consumption, and acoustic noise to best suit the operating environment and workload requirements.
+#### Key Concepts
+- **Fan Control Mode:** The core of the policy is the fanControlMode setting, which offers several presets (e.g., Balanced, Low Power, Maximum Cooling, Acoustic) to dictate fan speed behavior.
+- **Chassis and Server Application:** The policy can be applied to both Server Profiles and Chassis Profiles, allowing for consistent thermal management at both the individual server and chassis levels.
+- **Platform-Specific Options:** The available fan control modes can vary depending on the server or chassis model (e.g., certain modes are exclusive to UCS X-Series).
+- **Profile-Based Management:** As a policy object, it ensures that all devices associated with a profile adhere to the same thermal strategy.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

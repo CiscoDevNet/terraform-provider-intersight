@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_device_upgrade_policy"
 description: |-
-        DeviceUpgradePolicy stores the current upgrade policy of the Intersight Appliances.
+        The DeviceUpgradePolicy object defines the upgrade policies of Intersight Appliances, guiding the automated and scheduled distribution of software updates.
+        #### Purpose
+        DeviceUpgradePolicy establishes comprehensive rules for software upgrades, ensuring systematic and controlled deployment across appliances.
+        ####Key Concepts
+        - **Automation Control:** Provides settings for auto-upgrade initiation, allowing flexibility in update scheduling and execution.
+        - **Metadata Synchronization:** Supports immediate or scheduled metadata file syncing, enhancing data consistency and appliance performance.
+        - **Blackout Management:** Enables definition of blackout periods to prevent upgrades during specific times, maintaining operational stability.
 
 ---
 
 # Data Source: intersight_appliance_device_upgrade_policy
-DeviceUpgradePolicy stores the current upgrade policy of the Intersight Appliances.
+The DeviceUpgradePolicy object defines the upgrade policies of Intersight Appliances, guiding the automated and scheduled distribution of software updates.
+#### Purpose
+DeviceUpgradePolicy establishes comprehensive rules for software upgrades, ensuring systematic and controlled deployment across appliances.
+####Key Concepts
+- **Automation Control:** Provides settings for auto-upgrade initiation, allowing flexibility in update scheduling and execution.
+- **Metadata Synchronization:** Supports immediate or scheduled metadata file syncing, enhancing data consistency and appliance performance.
+- **Blackout Management:** Enables definition of blackout periods to prevent upgrades during specific times, maintaining operational stability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Account"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Account"]
+**ExternalIdentifier** | Pointer to **string** | External identifier for the account, used for integration with external identity systems. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the Intersight account. By default, name is same as the MoID of the account. | [optional] 
 **Regions** | Pointer to **[]string** |  | [optional] 
 **SingleAdminLockout** | Pointer to **bool** | Indicates if the account is prone to lockout as it has only a single Account Administrator.  An account is prone to lockout if it has only one configured Account Administrator and no user groups configured that  can grant Account Administrator role to dynamic users. | [optional] [readonly] 
@@ -81,6 +82,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetExternalIdentifier
+
+`func (o *IamAccount) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *IamAccount) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *IamAccount) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *IamAccount) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
 
 ### GetName
 

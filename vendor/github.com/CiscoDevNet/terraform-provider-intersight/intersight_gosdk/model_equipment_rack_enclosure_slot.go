@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the EquipmentRackEnclosureSlot type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EquipmentRackEnclosureSlot{}
 
-// EquipmentRackEnclosureSlot Rack Server Slot in a RackEnclosure.
+// EquipmentRackEnclosureSlot The equipment.RackEnclosureSlot object represents a physical slot within a rack enclosure that is designed to hold a rack-mounted server. #### Purpose The main function of this object is to model the individual server slots within a larger rack enclosure. It establishes the link between a physical slot and the compute.RackUnit that occupies it. It is essential for accurately representing the physical topology of the enclosure and its contained servers. #### Key Concepts - **Physical Slot Representation:** Models a single server bay within a rack enclosure. - **Server-to-Slot Mapping:** The relationship to a compute.RackUnit and the rackUnitDn property create the explicit link between the server and its physical location. - **Location Identification:** The rackId property (equivalent to the server ID) and its parent equipment.RackEnclosure uniquely identify the slot's position. - **Hierarchical Structure:** Exists as a child of an equipment.RackEnclosure, forming part of the overall enclosure inventory.
 type EquipmentRackEnclosureSlot struct {
 	EquipmentBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_deprecated_def"
 description: |-
-        Object to represent an unsupported/deprecated adapter. Meant to be used under server descriptor object.
+        The capability.AdapterDeprecatedDef object is a capability definition used to identify network adapters that are unsupported or have been deprecated in the current system release. It is typically used within a server descriptor to flag incompatible hardware.
+        #### Purpose
+        The primary purpose of this object is to maintain a catalog of unsupported adapters. When a server is discovered, its adapters can be checked against this catalog. If a match is found, the system can raise an alarm or prevent certain operations, ensuring that only supported hardware configurations are used.
+        #### Key Concepts
+        - **Hardware Compatibility Catalog:** Acts as a list of known unsupported or deprecated adapters.
+        - **Identification by Vendor and Model:** Uses vendor and model properties to uniquely identify an adapter type.
+        - **Proactive Issue Detection:** Enables the system to flag potential support and functionality issues by identifying deprecated hardware during server inventory.
+        - **Nested Definition:** Designed to be used as a sub-object within a capability.ServerDescriptor, linking unsupported adapters to specific server models where they are not applicable.
 
 ---
 
 # Resource: intersight_capability_adapter_deprecated_def
-Object to represent an unsupported/deprecated adapter. Meant to be used under server descriptor object.
+The capability.AdapterDeprecatedDef object is a capability definition used to identify network adapters that are unsupported or have been deprecated in the current system release. It is typically used within a server descriptor to flag incompatible hardware.
+#### Purpose
+The primary purpose of this object is to maintain a catalog of unsupported adapters. When a server is discovered, its adapters can be checked against this catalog. If a match is found, the system can raise an alarm or prevent certain operations, ensuring that only supported hardware configurations are used.
+#### Key Concepts
+- **Hardware Compatibility Catalog:** Acts as a list of known unsupported or deprecated adapters.
+- **Identification by Vendor and Model:** Uses vendor and model properties to uniquely identify an adapter type.
+- **Proactive Issue Detection:** Enables the system to flag potential support and functionality issues by identifying deprecated hardware during server inventory.
+- **Nested Definition:** Designed to be used as a sub-object within a capability.ServerDescriptor, linking unsupported adapters to specific server models where they are not applicable.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

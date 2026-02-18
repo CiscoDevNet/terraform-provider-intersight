@@ -243,7 +243,7 @@ func getFirmwareServerConfigurationUtilityDistributableSchema() map[string]*sche
 			Optional:    true,
 		},
 		"feature_source": {
-			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.\n* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads.",
+			Description: "The name of the feature to which the uploaded file belongs.\n* `System` - This indicates system initiated file uploads.\n* `OpenAPIImport` - This indicates an OpenAPI file upload.\n* `ConfigBackupImport` - This indicates the user uploaded configuration backup file.\n* `PartnerIntegrationImport` - This indicates a Partner-Integration Appliance user file uploads.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

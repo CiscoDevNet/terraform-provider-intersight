@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_erp_customer_op"
 description: |-
-        Customer operation object to refresh the registration or start the trial period of the ERP license tiers.
+        The ErpCustomerOp object is crucial for managing operations related to ERP licensing, providing tools for trial enablement and administrative controls.
+        #### Purpose
+        ErpCustomerOp serves as the operational interface for ERP license management, offering functionalities for trial periods and tier settings, ensuring customers can effectively manage their ERP configurations.
+        #### Key Concepts
+        - **ERP Licensing:** Focuses on the management of ERP service licenses, ensuring customers can tailor their configurations to business needs.
+        - **Trial Enablement:** Allows activation of trial modes, offering opportunities to explore ERP service features.
+        - **License Tier Management:** Supports settings for active tiers, providing flexibility in service configuration and utilization.
+        - **Administrative Activation:** Provides controls for activating licenses, ensuring customers maintain access to ERP service capabilities.
 
 ---
 
 # Data Source: intersight_license_erp_customer_op
-Customer operation object to refresh the registration or start the trial period of the ERP license tiers.
+The ErpCustomerOp object is crucial for managing operations related to ERP licensing, providing tools for trial enablement and administrative controls.
+#### Purpose
+ErpCustomerOp serves as the operational interface for ERP license management, offering functionalities for trial periods and tier settings, ensuring customers can effectively manage their ERP configurations.
+#### Key Concepts
+- **ERP Licensing:** Focuses on the management of ERP service licenses, ensuring customers can tailor their configurations to business needs.
+- **Trial Enablement:** Allows activation of trial modes, offering opportunities to explore ERP service features.
+- **License Tier Management:** Supports settings for active tiers, providing flexibility in service configuration and utilization.
+- **Administrative Activation:** Provides controls for activating licenses, ensuring customers maintain access to ERP service capabilities.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -3,18 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_device_state"
 description: |-
-        DeviceState keeps tracks the Intersight Appliance's current state. Intersight Appliance's
-        device connector queries its DeviceState managed object during the startup. Device connector
-        also updates DeviceState managed object periodically by pushing modified DeviceState managed
-        object from the Intersight Appliance to the Intersight.
+        The DeviceState object captures the current operational state of Intersight Appliances, providing critical data for system monitoring and management.
+        #### Purpose
+        DeviceState serves as a snapshot of an appliance's status, aiding in diagnostics, upgrades, and overall system health assessments.
+        #### Key Concepts
+        - **State Monitoring:** Records key attributes such as version, connectivity status, and upgrade capabilities, supporting informed decision-making.
+        - **Cluster Information:** Provides insights into cluster configurations and node details, enhancing network management and scalability.
+        - **Upgrade Facilitation:** Supports upgrade processes by tracking device state changes and readiness for updates.
 
 ---
 
 # Data Source: intersight_appliance_device_state
-DeviceState keeps tracks the Intersight Appliance's current state. Intersight Appliance's
-device connector queries its DeviceState managed object during the startup. Device connector
-also updates DeviceState managed object periodically by pushing modified DeviceState managed
-object from the Intersight Appliance to the Intersight.
+The DeviceState object captures the current operational state of Intersight Appliances, providing critical data for system monitoring and management.
+#### Purpose
+DeviceState serves as a snapshot of an appliance's status, aiding in diagnostics, upgrades, and overall system health assessments.
+#### Key Concepts
+- **State Monitoring:** Records key attributes such as version, connectivity status, and upgrade capabilities, supporting informed decision-making.
+- **Cluster Information:** Provides insights into cluster configurations and node details, enhancing network management and scalability.
+- **Upgrade Facilitation:** Supports upgrade processes by tracking device state changes and readiness for updates.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

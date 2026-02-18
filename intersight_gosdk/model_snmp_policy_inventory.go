@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the SnmpPolicyInventory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SnmpPolicyInventory{}
 
-// SnmpPolicyInventory Policy to configure SNMP settings on endpoint.
+// SnmpPolicyInventory The SNMP Policy is a reusable policy for configuring Simple Network Management Protocol (SNMP) settings on endpoints like servers and chassis. #### Purpose The purpose of this policy is to enable and standardize device monitoring and management via SNMP. It allows administrators to configure the SNMP agent on bghendpoints, define access credentials for different SNMP versions, and specify destinations for SNMP traps, integrating the devices into existing network management systems. #### Key Concepts - **Multi-Version Support:** The policy allows for the independent configuration of SNMPv2c and SNMPv3, including enabling or disabling each version. - **User and Community Strings:** It supports the configuration of read-only community strings for SNMPv2c and detailed user-based security models (USM) for SNMPv3, including authentication and privacy protocols. - **Trap Configuration:** Administrators can define a list of trap destinations, specifying the recipient's address, port, and the SNMP version to use for the trap messages. - **Profile-Based Application:** The policy is attached to Server or Chassis Profiles to apply a consistent SNMP configuration across multiple devices.
 type SnmpPolicyInventory struct {
 	PolicyAbstractPolicyInventory
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

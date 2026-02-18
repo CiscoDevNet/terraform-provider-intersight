@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_device_boot_security"
 description: |-
-        Boot Security of the devices that BIOS uses to boot them.
+        The boot.DeviceBootSecurity object represents the user-configured state of UEFI Secure Boot for a server, as defined in its boot policy.
+        #### Purpose
+        This object's main function is to inventory the desired state of Secure Boot (Enabled or Disabled) from a server's applied policy. This provides a clear record of the intended security posture for the server's boot process. This allows for auditing and verification against the actual Secure Boot state reported by the BIOS.
+        #### Key Concepts
+        - **Desired Security State:** The secureBoot property captures the intended configuration from a boot policy.
+        - **Compliance and Auditing:** Enables administrators to verify that servers are compliant with security policies requiring Secure Boot to be enabled.
+        - **Configuration-Centric View:** Reflects the policy-defined setting, which can be compared against the actual hardware state for consistency.
+        - **Server-Specific:** Associated with a compute.Physical object, linking the configured Secure Boot state to a specific server.
 
 ---
 
 # Data Source: intersight_boot_device_boot_security
-Boot Security of the devices that BIOS uses to boot them.
+The boot.DeviceBootSecurity object represents the user-configured state of UEFI Secure Boot for a server, as defined in its boot policy.
+#### Purpose
+This object's main function is to inventory the desired state of Secure Boot ("Enabled" or "Disabled") from a server's applied policy. This provides a clear record of the intended security posture for the server's boot process. This allows for auditing and verification against the actual Secure Boot state reported by the BIOS.
+#### Key Concepts
+- **Desired Security State:** The secureBoot property captures the intended configuration from a boot policy.
+- **Compliance and Auditing:** Enables administrators to verify that servers are compliant with security policies requiring Secure Boot to be enabled.
+- **Configuration-Centric View:** Reflects the policy-defined setting, which can be compared against the actual hardware state for consistency.
+- **Server-Specific:** Associated with a compute.Physical object, linking the configured Secure Boot state to a specific server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

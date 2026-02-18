@@ -3,106 +3,24 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_vnic_template"
 description: |-
-        The vNIC template consists of the common vNIC configuration, which can be reused across multiple vNICs. vNICs can be created from the template using the Derive operation. Additionally, an existing vNIC can be attached to a template to use the configuration set in the template.
-        To derive vNICs from a vNIC template, you must use the asynchronous /v1/bulk/MoCloners bulk API.
-        Deriving vNICs from a vNIC Template
-        URL: /v1/bulk/MoCloners
-        Method: POST
-        Headers:
-        - Key: prefer
-        Value: respond-async
-        Body: >
-        {
-        Sources: [
-        {
-        Moid: xxxxx,
-        ObjectType: vnic.VnicTemplate
-        }
-        ],
-        Targets: [
-        {
-        Name: test-vn2,
-        MacAddressType: POOL,
-        Placement: {
-        AutoSlotId: true,
-        AutoPciLink: true
-        },
-        LanConnectivityPolicy: aaaaa,
-        ObjectType: vnic.EthIf
-        }
-        ],
-        WorkflowNameSuffix: Derive vNIC from a Template,
-        Organization: {
-        Moid: ooooo,
-        ObjectType: organization.Organization
-        }
-        }
-        The API response includes the AsyncResult->bulk.Result MO reference. API clients must poll the bulk.Result MO to monitor the status of the operation.
-        The bulk.Result object also includes a reference to a monitoring workflow, which is accessible from the 'Requests' tab in the UI.
-        Managing Template Updates
-        When the vNIC template is updated, the system initiates an automatic call to the /v1/bulk/MoMergers API to synchronize the template changes to all derived vNIC instances asynchronously. The status of the sync operation can be obtained by performing a query on vnic EthIf MO -
-        $filter=SrcTemplate.Moid eq 'xxx'&$apply=groupby ( (TemplateSyncStatus), aggregate ($count as count))
-        Override Option for vNIC Templates
-        When enabled, this feature allows the configuration of the derived vNIC to override the configuration available in the template during vNIC create or update.
-        You can query the list of overridable properties for a vNIC template from the Template Catalog. Use the following catalog API query:
-        URL: /v1/capability/TemplateCatalogs
-        Query: $filter= (Name eq ‘VnicTemplate’)&$select=AllowedOverrideList
-        Once a property is overridden on a derived vNIC, it will be added to the ‘OverriddenList’ property on the vnic EthIf MO:
-        URL: /v1/vnic/EthIfs
-        Query: $select=SrcTemplate, OverriddenList
-        When override is disabled on the template, derived vNIC will have same configuration as the template.
+        The VnicTemplate object encapsulates a reusable template for vNIC configuration. It standardizes the creation and management of multiple vNICs with consistent settings.
+        #### Purpose
+        A VnicTemplate simplifies and accelerates the deployment of standardized vNIC configurations across servers. It allows for the derivation of new vNICs from a common template and supports synchronization and property overrides to accommodate evolving requirements.
+        #### Key Concepts
+        - **Reusability:** Enables the rapid creation of vNICs with predefined settings.
+        - **Template-Driven Management:** Supports synchronization of template changes to derived objects.
+        - **Override Mechanism:** Provides flexibility to override specific properties as needed.
 
 ---
 
 # Data Source: intersight_vnic_vnic_template
-The vNIC template consists of the common vNIC configuration, which can be reused across multiple vNICs. vNICs can be created from the template using the Derive operation. Additionally, an existing vNIC can be attached to a template to use the configuration set in the template.
-To derive vNICs from a vNIC template, you must use the asynchronous /v1/bulk/MoCloners bulk API.
-Deriving vNICs from a vNIC Template
-URL: /v1/bulk/MoCloners
-Method: POST
-Headers:
-  - Key: "prefer"
-    Value: "respond-async"
-Body: >
- {
-    "Sources": [
-      {
-        "Moid": "xxxxx",
-        "ObjectType": "vnic.VnicTemplate"
-     }
-    ],
-    "Targets": [
-      {
-        "Name": "test-vn2",
-        "MacAddressType": "POOL",
-        "Placement": {
-            "AutoSlotId": true,
-            "AutoPciLink": true
-        },
-        "LanConnectivityPolicy": "aaaaa",
-        "ObjectType": "vnic.EthIf"
-     }
-    ],
-    "WorkflowNameSuffix": "Derive vNIC from a Template",
-    "Organization": {
-        "Moid": "ooooo",
-        "ObjectType": "organization.Organization"
-    }
-}
-The API response includes the "AsyncResult"->bulk.Result MO reference. API clients must poll the bulk.Result MO to monitor the status of the operation.
-The bulk.Result object also includes a reference to a monitoring workflow, which is accessible from the 'Requests' tab in the UI.
-Managing Template Updates
-When the vNIC template is updated, the system initiates an automatic call to the /v1/bulk/MoMergers API to synchronize the template changes to all derived vNIC instances asynchronously. The status of the sync operation can be obtained by performing a query on vnic EthIf MO -
-$filter=SrcTemplate.Moid eq 'xxx'&$apply=groupby ( (TemplateSyncStatus), aggregate ($count as count))
-Override Option for vNIC Templates
-When enabled, this feature allows the configuration of the derived vNIC to override the configuration available in the template during vNIC create or update.
-You can query the list of overridable properties for a vNIC template from the Template Catalog. Use the following catalog API query:
-URL: /v1/capability/TemplateCatalogs
-Query: $filter= (Name eq ‘VnicTemplate’)&$select=AllowedOverrideList
-Once a property is overridden on a derived vNIC, it will be added to the ‘OverriddenList’ property on the vnic EthIf MO:
-URL: /v1/vnic/EthIfs
-Query: $select=SrcTemplate, OverriddenList
-When override is disabled on the template, derived vNIC will have same configuration as the template.
+The VnicTemplate object encapsulates a reusable template for vNIC configuration. It standardizes the creation and management of multiple vNICs with consistent settings.
+#### Purpose
+A VnicTemplate simplifies and accelerates the deployment of standardized vNIC configurations across servers. It allows for the derivation of new vNICs from a common template and supports synchronization and property overrides to accommodate evolving requirements.
+#### Key Concepts
+- **Reusability:** Enables the rapid creation of vNICs with predefined settings.
+- **Template-Driven Management:** Supports synchronization of template changes to derived objects.
+- **Override Mechanism:** Provides flexibility to override specific properties as needed.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

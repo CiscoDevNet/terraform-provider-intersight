@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fru"
 description: |-
-        Managed object for all equipments which contains the previous vendor /model / serial before insertion/replacement/removal.
+        The equipment.Fru object represents a Field-Replaceable Unit (FRU). It is a special object used to track the history and state changes of hardware components that have been inserted, removed, or replaced.
+        #### Purpose
+        The primary purpose of the Fru object is to provide an audit trail for hardware maintenance actions. When a component is replaced, the previousFru relationship on the new component's inventory object will point to a Fru object that contains the vendor, model, and serial number of the old part. It is essential for asset tracking and troubleshooting issues related to hardware changes.
+        #### Key Concepts
+        - **Hardware Change Tracking:** Records the identity of a component that has been physically replaced or removed.
+        - **Action Logging:** The action property specifies what happened to the FRU, with states like Inserted, Removed, or ReplacedWithAlarm.
+        - **Historical Data:** Preserves the identity information of the old component, which would otherwise be lost after a replacement.
+        - **Alarm Integration:** The ReplacedWithAlarm action is used to trigger alarms when a hardware replacement is detected, prompting administrative review and action.
 
 ---
 
 # Data Source: intersight_equipment_fru
-Managed object for all equipments which contains the previous vendor /model / serial before insertion/replacement/removal.
+The equipment.Fru object represents a Field-Replaceable Unit (FRU). It is a special object used to track the history and state changes of hardware components that have been inserted, removed, or replaced.
+#### Purpose
+The primary purpose of the Fru object is to provide an audit trail for hardware maintenance actions. When a component is replaced, the previousFru relationship on the new component's inventory object will point to a Fru object that contains the vendor, model, and serial number of the old part. It is essential for asset tracking and troubleshooting issues related to hardware changes.
+#### Key Concepts
+- **Hardware Change Tracking:** Records the identity of a component that has been physically replaced or removed.
+- **Action Logging:** The action property specifies what happened to the FRU, with states like Inserted, Removed, or ReplacedWithAlarm.
+- **Historical Data:** Preserves the identity information of the old component, which would otherwise be lost after a replacement.
+- **Alarm Integration:** The ReplacedWithAlarm action is used to trigger alarms when a hardware replacement is detected, prompting administrative review and action.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

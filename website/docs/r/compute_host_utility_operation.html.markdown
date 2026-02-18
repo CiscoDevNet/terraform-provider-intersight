@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_host_utility_operation"
 description: |-
-        Host operation that need to be performed using host utility (HSU), like secure erase, secure erase with decommission and scrub are managed by this MO.
+        The HostUtilityOperation object manages host operations such as secure erase and scrub within Cisco servers. It facilitates data cleanup tasks while adhering to established policies.
+        #### Purpose
+        HostUtilityOperation is designed to execute host utility operations efficiently, ensuring that server components are securely erased or scrubbed according to defined configurations. It supports data management policies within Cisco environments.
+        #### Key Concepts
+        - **Operational Modes:** Supports various modes of operation such as secure erase and scrub, providing flexibility in data cleanup.
+        - **Configuration Management:** Includes configurations related to host operations, allowing for tailored data management tasks.
+        - **Workflow Integration:** Works with workflows to ensure operations are conducted smoothly and status updates are accurately reflected.
+        - **Security:** Ensures operations are performed safely by inheriting permissions from related servers.
 
 ---
 
 # Resource: intersight_compute_host_utility_operation
-Host operation that need to be performed using host utility (HSU), like secure erase, secure erase with decommission and scrub are managed by this MO.
+The HostUtilityOperation object manages host operations such as secure erase and scrub within Cisco servers. It facilitates data cleanup tasks while adhering to established policies.
+#### Purpose
+HostUtilityOperation is designed to execute host utility operations efficiently, ensuring that server components are securely erased or scrubbed according to defined configurations. It supports data management policies within Cisco environments.
+#### Key Concepts
+- **Operational Modes:** Supports various modes of operation such as secure erase and scrub, providing flexibility in data cleanup.
+- **Configuration Management:** Includes configurations related to host operations, allowing for tailored data management tasks.
+- **Workflow Integration:** Works with workflows to ensure operations are conducted smoothly and status updates are accurately reflected.
+- **Security:** Ensures operations are performed safely by inheriting permissions from related servers.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

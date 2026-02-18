@@ -3,12 +3,24 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_file_downloader"
 description: |-
-        Provide a presigned url to download the metadata file from server.
+        The FileDownloader object is pivotal in file management, providing presigned URLs for downloading metadata files from servers. It ensures users have efficient access to required data.
+        #### Purpose
+        FileDownloader offers presigned URLs for secure and efficient download of metadata files, supporting users in accessing necessary information for their systems.
+        #### Key Concepts
+        - **Secure Access:** Provides presigned URLs for metadata file downloads, ensuring secure and reliable access.
+        - **Efficient Download:** Facilitates the retrieval of metadata files, supporting users in accessing required data quickly.
+        - **System Integration:** Ensures seamless integration with systems for efficient data management and access.
 
 ---
 
 # Data Source: intersight_niaapi_file_downloader
-Provide a presigned url to download the metadata file from server.
+The FileDownloader object is pivotal in file management, providing presigned URLs for downloading metadata files from servers. It ensures users have efficient access to required data.
+#### Purpose
+FileDownloader offers presigned URLs for secure and efficient download of metadata files, supporting users in accessing necessary information for their systems.
+#### Key Concepts
+- **Secure Access:** Provides presigned URLs for metadata file downloads, ensuring secure and reliable access.
+- **Efficient Download:** Facilitates the retrieval of metadata files, supporting users in accessing required data quickly.
+- **System Integration:** Ensures seamless integration with systems for efficient data management and access.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

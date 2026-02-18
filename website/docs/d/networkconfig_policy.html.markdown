@@ -3,12 +3,28 @@ subcategory: "networkconfig"
 layout: "intersight"
 page_title: "Intersight: intersight_networkconfig_policy"
 description: |-
-        Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on Cisco IMC.
+        The Network Connectivity Policy is a reusable policy that configures DNS settings for a server's management interface (Cisco IMC).
+        #### Purpose
+        The purpose of this policy is to standardize the DNS configuration for server management across an organization. It allows administrators to define primary and alternate DNS servers for both IPv4 and IPv6, and to control whether the server should attempt to dynamically register its hostname with a DNS server.
+        #### Key Concepts
+        - **Centralized DNS Configuration:** Provides a single policy to manage DNS server settings, ensuring consistency across multiple endpoints.
+        - **IPv4 and IPv6 Support:** The policy allows for separate DNS configurations for both IP address families.
+        - **Dynamic DNS (DDNS):** Includes options to enable dynamic DNS and specify a domain, allowing the server's management controller to automatically update its DNS record.
+        - **Profile-Based Application:** The policy is attached to a Server Profile to apply the settings to the assigned physical server.
+        - **Impact Awareness:** Changes to this policy are flagged with MgmtNetworkDisconnection, as updating DNS settings can cause a brief interruption in management connectivity.
 
 ---
 
 # Data Source: intersight_networkconfig_policy
-Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on Cisco IMC.
+The Network Connectivity Policy is a reusable policy that configures DNS settings for a server's management interface (Cisco IMC).
+#### Purpose
+The purpose of this policy is to standardize the DNS configuration for server management across an organization. It allows administrators to define primary and alternate DNS servers for both IPv4 and IPv6, and to control whether the server should attempt to dynamically register its hostname with a DNS server.
+#### Key Concepts
+- **Centralized DNS Configuration:** Provides a single policy to manage DNS server settings, ensuring consistency across multiple endpoints.
+- **IPv4 and IPv6 Support:** The policy allows for separate DNS configurations for both IP address families.
+- **Dynamic DNS (DDNS):** Includes options to enable dynamic DNS and specify a domain, allowing the server's management controller to automatically update its DNS record.
+- **Profile-Based Application:** The policy is attached to a Server Profile to apply the settings to the assigned physical server.
+- **Impact Awareness:** Changes to this policy are flagged with MgmtNetworkDisconnection, as updating DNS settings can cause a brief interruption in management connectivity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

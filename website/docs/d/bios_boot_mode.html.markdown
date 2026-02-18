@@ -3,12 +3,26 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_boot_mode"
 description: |-
-        The mode through which bios has booted.
+        The bios.BootMode object represents the configured boot mode of a server as reported by its BIOS. This provides a clear distinction between the actual boot mode used by the platform and the desired mode set in a policy.
+        #### Purpose
+        The main function of this object is to provide an accurate, read-only inventory of the server's current boot mode (e.g., UEFI or Legacy). This allows administrators and automation systems to verify that the server is operating in the expected boot mode and to detect any discrepancies with configured policies.
+        #### Key Concepts
+        - **Actual State Inventory:** Captures the actualBootMode as reported directly by the server's BIOS, providing a ground-truth value.
+        - **Configuration Verification:** Enables comparison between the actual state and the desired state defined in a boot policy.
+        - **Read-Only:** Serves as a reporting mechanism rather than a configuration object, ensuring data integrity.
+        - **Server-Specific:** Directly associated with a compute.Blade or compute.RackUnit, providing boot mode information for a specific physical server.
 
 ---
 
 # Data Source: intersight_bios_boot_mode
-The mode through which bios has booted.
+The bios.BootMode object represents the configured boot mode of a server as reported by its BIOS. This provides a clear distinction between the actual boot mode used by the platform and the desired mode set in a policy.
+#### Purpose
+The main function of this object is to provide an accurate, read-only inventory of the server's current boot mode (e.g., UEFI or Legacy). This allows administrators and automation systems to verify that the server is operating in the expected boot mode and to detect any discrepancies with configured policies.
+#### Key Concepts
+- **Actual State Inventory:** Captures the actualBootMode as reported directly by the server's BIOS, providing a ground-truth value.
+- **Configuration Verification:** Enables comparison between the actual state and the desired state defined in a boot policy.
+- **Read-Only:** Serves as a reporting mechanism rather than a configuration object, ensuring data integrity.
+- **Server-Specific:** Directly associated with a compute.Blade or compute.RackUnit, providing boot mode information for a specific physical server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

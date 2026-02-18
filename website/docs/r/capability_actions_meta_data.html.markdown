@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_actions_meta_data"
 description: |-
-        Metadata or constraints of various server actions supported in Intersight for 3rd Party servers. It is validated against the target provided  and the actions are allowed only upon successful validation.
+        The ActionsMetaData object helps in managing third-party server actions within Cisco's Intersight platform. This provides metadata and constraints necessary to validate actions before they are executed, ensuring that operations are permissible according to defined rules.
+        #### Purpose
+        ActionsMetaData ensures that server actions are carried out only after successful validation against specified targets. It serves as a control mechanism to maintain integrity and compliance in server operations, particularly when integrating third-party servers into the Intersight ecosystem.
+        #### Key Concepts
+        - **Validation:** The object includes attributes that help in validating server actions, such as firmware versions and server models.
+        - **Privilege Management:** Defines various privilege sets needed to perform read, create, update, and delete operations, thereby controlling access to server actions.
+        - **Integration:** Facilitates seamless integration of third-party servers by providing necessary metadata to support cross-platform operations.
+        - **Security:** Ensures actions are compliant and secure by restricting operations based on validation outcomes.
 
 ---
 
 # Resource: intersight_capability_actions_meta_data
-Metadata or constraints of various server actions supported in Intersight for 3rd Party servers. It is validated against the target provided  and the actions are allowed only upon successful validation.
+The ActionsMetaData object helps in managing third-party server actions within Cisco's Intersight platform. This provides metadata and constraints necessary to validate actions before they are executed, ensuring that operations are permissible according to defined rules.
+#### Purpose
+ActionsMetaData ensures that server actions are carried out only after successful validation against specified targets. It serves as a control mechanism to maintain integrity and compliance in server operations, particularly when integrating third-party servers into the Intersight ecosystem.
+#### Key Concepts
+- **Validation:** The object includes attributes that help in validating server actions, such as firmware versions and server models.
+- **Privilege Management:** Defines various privilege sets needed to perform read, create, update, and delete operations, thereby controlling access to server actions.
+- **Integration:** Facilitates seamless integration of third-party servers by providing necessary metadata to support cross-platform operations.
+- **Security:** Ensures actions are compliant and secure by restricting operations based on validation outcomes.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

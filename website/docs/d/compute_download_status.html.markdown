@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_download_status"
 description: |-
-        The status for the file download initiated in the endpoint.
+        The DownloadStatus object captures the status of file downloads initiated in Cisco endpoints. This provides insights into the progress and completion of download operations.
+        #### Purpose
+        DownloadStatus serves to track and report the progress of image downloads, ensuring that updates are applied efficiently and correctly. It is an integral part of the workflow for managing server updates and configurations.
+        #### Key Concepts
+        - **Progress Tracking:** Records stages and percentages of download completion, offering visibility into ongoing operations.
+        - **Messaging:** Provides endpoint messages and error details, aiding in troubleshooting download-related issues.
+        - **Integration with Workflows:** Links with associated workflows to update status, ensuring synchronized operations.
+        - **Access Control:** Defines privilege sets for reading download status, supporting secure management.
 
 ---
 
 # Data Source: intersight_compute_download_status
-The status for the file download initiated in the endpoint.
+The DownloadStatus object captures the status of file downloads initiated in Cisco endpoints. This provides insights into the progress and completion of download operations.
+#### Purpose
+DownloadStatus serves to track and report the progress of image downloads, ensuring that updates are applied efficiently and correctly. It is an integral part of the workflow for managing server updates and configurations.
+#### Key Concepts
+- **Progress Tracking:** Records stages and percentages of download completion, offering visibility into ongoing operations.
+- **Messaging:** Provides endpoint messages and error details, aiding in troubleshooting download-related issues.
+- **Integration with Workflows:** Links with associated workflows to update status, ensuring synchronized operations.
+- **Access Control:** Defines privilege sets for reading download status, supporting secure management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

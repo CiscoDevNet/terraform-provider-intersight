@@ -3,12 +3,26 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_hybrid_drive_slot"
 description: |-
-        NVMe HybridDriveSlots present in a server.
+        The equipment.HybridDriveSlot object represents a specialized drive slot in a server that can operate in different modes, typically supporting NVMe or other drive types.
+        #### Purpose
+        The main function of this object is to inventory and report on the configuration of a hybrid drive slot. It captures both the requestedMode (the desired configuration from a policy) and the currentMode (the actual operational mode). This allows administrators to manage and verify the configuration of these flexible drive bays.
+        #### Key Concepts
+        - **Flexible Drive Bay Model:** Represents a server slot that supports multiple operational modes for the installed drive (e.g., Controller or Direct mode).
+        - **Configuration State Tracking:** Provides both the desired (requestedMode) and actual (currentMode) states, which is crucial for configuration management and verification.
+        - **Slot Identification:** Uniquely identified by its slotId within the server.
+        - **Server Component:** It is a child of a compute.Blade or compute.RackUnit, linking it directly to the server it belongs to.
 
 ---
 
 # Data Source: intersight_equipment_hybrid_drive_slot
-NVMe HybridDriveSlots present in a server.
+The equipment.HybridDriveSlot object represents a specialized drive slot in a server that can operate in different modes, typically supporting NVMe or other drive types.
+#### Purpose
+The main function of this object is to inventory and report on the configuration of a hybrid drive slot. It captures both the requestedMode (the desired configuration from a policy) and the currentMode (the actual operational mode). This allows administrators to manage and verify the configuration of these flexible drive bays.
+#### Key Concepts
+- **Flexible Drive Bay Model:** Represents a server slot that supports multiple operational modes for the installed drive (e.g., "Controller" or "Direct" mode).
+- **Configuration State Tracking:** Provides both the desired (requestedMode) and actual (currentMode) states, which is crucial for configuration management and verification.
+- **Slot Identification:** Uniquely identified by its slotId within the server.
+- **Server Component:** It is a child of a compute.Blade or compute.RackUnit, linking it directly to the server it belongs to.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

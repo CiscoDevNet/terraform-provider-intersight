@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_meta"
 description: |-
-        Meta object which stores the names of the internal Ldap connectors of an Ldap cluster configuration.
+        LdapMeta stores metadata for internal LDAP connectors created to support an appliance LDAP cluster configuration.
+        #### Purpose
+        It provides system-managed insight into the LDAP integration topology associated with an IdP.
+        #### Key Concepts
+        - **Connector Inventory:** Lists internal connector names for an LDAP cluster.
+        - **IdP Linkage:** Tied to the corresponding LDAP IdP domain.
+        - **System-managed:** Created and maintained by internal services.
+        - **Operational Visibility:** Aids diagnostics and lifecycle management.
 
 ---
 
 # Data Source: intersight_iam_ldap_meta
-Meta object which stores the names of the internal Ldap connectors of an Ldap cluster configuration.
+LdapMeta stores metadata for internal LDAP connectors created to support an appliance LDAP cluster configuration.
+#### Purpose
+It provides system-managed insight into the LDAP integration topology associated with an IdP.
+#### Key Concepts
+- **Connector Inventory:** Lists internal connector names for an LDAP cluster.
+- **IdP Linkage:** Tied to the corresponding LDAP IdP domain.
+- **System-managed:** Created and maintained by internal services.
+- **Operational Visibility:** Aids diagnostics and lifecycle management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

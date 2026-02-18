@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_psu_manufacturing_def"
 description: |-
-        Power supply unit properties.
+        The capability.PsuManufacturingDef object is a capability definition that stores manufacturing-specific details for a Power Supply Unit (PSU). This provides a comprehensive set of identifiers for product and inventory management.
+        #### Purpose
+        This object's primary function is to act as a reference for the manufacturing details of a PSU. It aggregates key product identifiers such as pid (Product Identifier), vid (Vendor ID), sku (Stock Keeping Unit), and productName. This information is essential for accurate inventory, asset tracking, and integration with support and ordering systems.
+        #### Key Concepts
+        - **Manufacturing Reference:** Centralizes key manufacturing and product data for a specific PSU model.
+        - **Product Identification:** Provides standard identifiers (pid, sku, productName) that allow for easy lookup and correlation with external product databases.
+        - **Descriptive Data:** Includes a caption and description to offer human-readable context about the PSU.
+        - **Capability Catalog Entry:** Serves as a definition within the capability catalog, which can be referenced by other objects to retrieve detailed manufacturing information.
 
 ---
 
 # Resource: intersight_capability_psu_manufacturing_def
-Power supply unit properties.
+The capability.PsuManufacturingDef object is a capability definition that stores manufacturing-specific details for a Power Supply Unit (PSU). This provides a comprehensive set of identifiers for product and inventory management.
+#### Purpose
+This object's primary function is to act as a reference for the manufacturing details of a PSU. It aggregates key product identifiers such as pid (Product Identifier), vid (Vendor ID), sku (Stock Keeping Unit), and productName. This information is essential for accurate inventory, asset tracking, and integration with support and ordering systems.
+#### Key Concepts
+- **Manufacturing Reference:** Centralizes key manufacturing and product data for a specific PSU model.
+- **Product Identification:** Provides standard identifiers (pid, sku, productName) that allow for easy lookup and correlation with external product databases.
+- **Descriptive Data:** Includes a caption and description to offer human-readable context about the PSU.
+- **Capability Catalog Entry:** Serves as a definition within the capability catalog, which can be referenced by other objects to retrieve detailed manufacturing information.
 ## Usage Example
 ### Resource Creation
 

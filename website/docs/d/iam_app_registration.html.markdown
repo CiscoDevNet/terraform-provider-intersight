@@ -3,36 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_app_registration"
 description: |-
-        AppRegistration encapsulates the meta-data values of a registered OAuth2 client application, as described in
-        https://tools.ietf.org/html/rfc7591#section-2.
-        Registered client applications have a set of metadata values associated with their client identifier
-        at the Intersight authorization server, including the list of valid redirection URIs or a display name.
-        The meta-data is used to specify how a client application can retrieve a OAuth2 Access Token and subsequently
-        invoke Intersight API on behalf of this AppRegistration.
-        To register an OAuth2 application, the following information must be provided.
-        1) Application name
-        2) An icon for the application
-        3) URL to the application's home page
-        4) A short description of the application
-        5) A list of redirect URLs
-        When an AppRegistration is created, a unique OAuth2 clientId is generated and returned in the HTTP response.
+        The AppRegistration object facilitates the registration of OAuth2 client applications, enabling secure access to APIs using OAuth2 credentials.
+        #### Purpose
+        An AppRegistration defines the metadata and configuration required for OAuth2 client applications to authenticate and obtain access tokens. The metadata defines how a client application retrieves an OAuth2 access token and uses it to invoke the Intersight API on behalf of the AppRegistration. It ensures a secure and controlled mechanism for applications to interact with the system.
+        #### Key Concepts
+        - **OAuth2 Compliance:** Adheres to OAuth2 standards, supporting various grant types and response types for secure API access.
+        - **Client Identification:** Provides unique client IDs and secrets for registered applications, ensuring each client is identifiable and secure.
+        - **Redirect URIs:** Specifies the redirection endpoints for OAuth2 flows, ensuring the safe transfer of authorization codes or tokens.
+        - **Token Management:** Includes mechanisms for token expiration, revocation, and renewal, maintaining security by managing the lifecycle of access tokens.
 
 ---
 
 # Data Source: intersight_iam_app_registration
-AppRegistration encapsulates the meta-data values of a registered OAuth2 client application, as described in
-https://tools.ietf.org/html/rfc7591#section-2.
-Registered client applications have a set of metadata values associated with their client identifier
-at the Intersight authorization server, including the list of valid redirection URIs or a display name.
-The meta-data is used to specify how a client application can retrieve a OAuth2 Access Token and subsequently
-invoke Intersight API on behalf of this AppRegistration.
-To register an OAuth2 application, the following information must be provided.
-1) Application name
-2) An icon for the application
-3) URL to the application's home page
-4) A short description of the application
-5) A list of redirect URLs
-When an AppRegistration is created, a unique OAuth2 clientId is generated and returned in the HTTP response.
+The AppRegistration object facilitates the registration of OAuth2 client applications, enabling secure access to APIs using OAuth2 credentials.
+#### Purpose
+An AppRegistration defines the metadata and configuration required for OAuth2 client applications to authenticate and obtain access tokens. The metadata defines how a client application retrieves an OAuth2 access token and uses it to invoke the Intersight API on behalf of the AppRegistration. It ensures a secure and controlled mechanism for applications to interact with the system.
+#### Key Concepts
+- **OAuth2 Compliance:** Adheres to OAuth2 standards, supporting various grant types and response types for secure API access.
+- **Client Identification:** Provides unique client IDs and secrets for registered applications, ensuring each client is identifiable and secure.
+- **Redirect URIs:** Specifies the redirection endpoints for OAuth2 flows, ensuring the safe transfer of authorization codes or tokens.
+- **Token Management:** Includes mechanisms for token expiration, revocation, and renewal, maintaining security by managing the lifecycle of access tokens.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

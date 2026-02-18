@@ -3,12 +3,24 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_qualification_policy"
 description: |-
-        The QualificationPolicy maintains the qualifiers, and each qualifier manages a set of conditions to qualify the server. The QualificationPolicy can be attached to the pool to extract the resources that match the qualifiers specified in the policy.
+        The QualificationPolicy object is pivotal in managing conditions that qualify server resources within a pool. It is attached to pools to dynamically extract resources based on specified qualifiers.
+        #### Purpose
+        The QualificationPolicy object enables resource pools to maintain a set of conditions that qualify server resources. It ensures that resources match the qualifiers specified in the policy, allowing pools to dynamically manage their contents according to predefined criteria.
+        #### Key Concepts
+        - **Dynamic Resource Allocation:** Allows the pool to adapt its contents dynamically based on changing resource conditions and criteria.
+        - **Integration with Resource Pools:** Directly influences the composition of resource pools by applying qualification rules and policies.
+        - **Access Control:** Provides a structured approach to resource qualification, ensuring only authorized users can modify policies.
 
 ---
 
 # Resource: intersight_resourcepool_qualification_policy
-The QualificationPolicy maintains the qualifiers, and each qualifier manages a set of conditions to qualify the server. The QualificationPolicy can be attached to the pool to extract the resources that match the qualifiers specified in the policy.
+The QualificationPolicy object is pivotal in managing conditions that qualify server resources within a pool. It is attached to pools to dynamically extract resources based on specified qualifiers.
+#### Purpose
+The QualificationPolicy object enables resource pools to maintain a set of conditions that qualify server resources. It ensures that resources match the qualifiers specified in the policy, allowing pools to dynamically manage their contents according to predefined criteria.
+#### Key Concepts
+- **Dynamic Resource Allocation:** Allows the pool to adapt its contents dynamically based on changing resource conditions and criteria.
+- **Integration with Resource Pools:** Directly influences the composition of resource pools by applying qualification rules and policies.
+- **Access Control:** Provides a structured approach to resource qualification, ensuring only authorized users can modify policies.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

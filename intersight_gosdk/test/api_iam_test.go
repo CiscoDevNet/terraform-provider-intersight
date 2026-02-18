@@ -941,6 +941,32 @@ func Test_intersight_IamApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test IamApiService GetIamCuiIntegrationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.IamApi.GetIamCuiIntegrationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test IamApiService GetIamCuiIntegrationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.IamApi.GetIamCuiIntegrationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test IamApiService GetIamDefaultAuthenticationByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

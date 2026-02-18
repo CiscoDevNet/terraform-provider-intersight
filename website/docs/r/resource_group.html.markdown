@@ -3,12 +3,24 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_group"
 description: |-
-        A group of REST resources, such as a group of compute.Blade MOs. A ResourceGroup can contain static members which are specified as a set of object references, or it can contain dynamic members, which are specified through OData query filters. A Resource can be part of multiple resource groups.
+        The Group object represents a collection of REST resources within the system, designed to streamline resource management through organized groupings.
+        #### Purpose
+        A Group is intended to aggregate resources into a single entity, simplifying management tasks such as resource allocation, access control, and membership evaluation. It supports both static and dynamic resource memberships, allowing for flexible and efficient resource grouping.
+        #### Key Concepts
+        - **Dynamic Memberships:** Allows resources to be grouped dynamically using OData query filters, enhancing flexibility in resource management.
+        - **Access Control:** Ensures only authorized users can view or perform actions on Group data.
+        - **Resource Aggregation:** Supports the organization of resources into cohesive groups, aiding in resource management and allocation.
 
 ---
 
 # Resource: intersight_resource_group
-A group of REST resources, such as a group of compute.Blade MOs. A ResourceGroup can contain static members which are specified as a set of object references, or it can contain dynamic members, which are specified through OData query filters. A Resource can be part of multiple resource groups.
+The Group object represents a collection of REST resources within the system, designed to streamline resource management through organized groupings.
+#### Purpose
+A Group is intended to aggregate resources into a single entity, simplifying management tasks such as resource allocation, access control, and membership evaluation. It supports both static and dynamic resource memberships, allowing for flexible and efficient resource grouping.
+#### Key Concepts
+- **Dynamic Memberships:** Allows resources to be grouped dynamically using OData query filters, enhancing flexibility in resource management.
+- **Access Control:** Ensures only authorized users can view or perform actions on Group data.
+- **Resource Aggregation:** Supports the organization of resources into cohesive groups, aiding in resource management and allocation.
 ## Usage Example
 ### Resource Creation
 

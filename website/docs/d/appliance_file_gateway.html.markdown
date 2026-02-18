@@ -3,22 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_file_gateway"
 description: |-
-        FileGateway is a non-persistent model for accessing files from the Intersight.
-        Intersight Appliances queries the FileGateway API, supplying a filename and version,
-        to get the signed URL from the Intersight. Intersight Appliance services uses the
-        signed URLs to download files and store them in the local image cache. Intersight
-        will not store any record of the file access in the initial revision. This model is
-        a pure pass through proxy for the cloud storage service.
+        The FileGateway object provides non-persistent access to files from the Intersight, facilitating efficient file retrieval and storage.
+        #### Purpose
+        FileGateway acts as a proxy for accessing files stored in the cloud, ensuring reliable and timely data access for Intersight Appliances.
+        #### Key Concepts
+        - **URL Provisioning:** Supplies pre-signed URLs for file downloads, streamlining data transfer processes and reducing latency.
+        - **Access Transparency:** Does not store access records, simplifying file retrieval and enhancing privacy.
+        - **Integration:** Enables seamless file access through signed URLs, supporting efficient data handling and storage management.
 
 ---
 
 # Data Source: intersight_appliance_file_gateway
-FileGateway is a non-persistent model for accessing files from the Intersight.
-Intersight Appliances queries the FileGateway API, supplying a filename and version,
-to get the signed URL from the Intersight. Intersight Appliance services uses the
-signed URLs to download files and store them in the local image cache. Intersight
-will not store any record of the file access in the initial revision. This model is
-a pure pass through proxy for the cloud storage service.
+The FileGateway object provides non-persistent access to files from the Intersight, facilitating efficient file retrieval and storage.
+#### Purpose
+FileGateway acts as a proxy for accessing files stored in the cloud, ensuring reliable and timely data access for Intersight Appliances.
+#### Key Concepts
+- **URL Provisioning:** Supplies pre-signed URLs for file downloads, streamlining data transfer processes and reducing latency.
+- **Access Transparency:** Does not store access records, simplifying file retrieval and enhancing privacy.
+- **Integration:** Enables seamless file access through signed URLs, supporting efficient data handling and storage management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

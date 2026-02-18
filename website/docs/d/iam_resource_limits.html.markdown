@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_resource_limits"
 description: |-
-        The resource limits used to limit resources such as User accounts.
+        ResourceLimits establishes account-level limits and policies for identity-related resources and credentials.
+        #### Purpose
+        It ensures controlled growth and predictable operational parameters for users and machine credentials.
+        #### Key Concepts
+        - **User Caps:** Governs the maximum number of users per account.
+        - **Credential Lifecycles:** Defines expiration policies for API keys and app registrations.
+        - **Exceptions Policy:** Controls whether non-expiring credentials are allowed.
+        - **Broad Readability:** Exposed to multiple roles for visibility and governance.
 
 ---
 
 # Data Source: intersight_iam_resource_limits
-The resource limits used to limit resources such as User accounts.
+ResourceLimits establishes account-level limits and policies for identity-related resources and credentials.
+#### Purpose
+It ensures controlled growth and predictable operational parameters for users and machine credentials.
+#### Key Concepts
+- **User Caps:** Governs the maximum number of users per account.
+- **Credential Lifecycles:** Defines expiration policies for API keys and app registrations.
+- **Exceptions Policy:** Controls whether non-expiring credentials are allowed.
+- **Broad Readability:** Exposed to multiple roles for visibility and governance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

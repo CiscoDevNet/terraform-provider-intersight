@@ -3,12 +3,26 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_customer_op"
 description: |-
-        Customer operation object to refresh the registration or re-authenticate, pre-created.
+        CustomerOp object is integral to managing customer operations related to license registration and authentication within the system. This provides mechanisms for refreshing registration, renewing authorization, and enabling licensing features, ensuring seamless interaction with licensing services.
+        #### Purpose
+        CustomerOp object facilitates the management of licensing-related operations for customers. It allows users to trigger renewals, initiate trials, and manage registration states, providing a central interface for these critical operations.
+        #### Key Concepts
+        - **License Management:** Offers functionality to renew registration and authorization, ensuring licenses remain valid and operational.
+        - **Trial Enablement:** Supports enabling trial modes for licensing, allowing customers to evaluate services before committing.
+        - **Administrative Control:** Provides properties for activating license entitlements, ensuring customers can manage their license states effectively.
+        - **Shared Organizational Resource:** Designed to operate within shared organizational contexts, allowing consistent application across different accounts and user roles.
 
 ---
 
 # Data Source: intersight_license_customer_op
-Customer operation object to refresh the registration or re-authenticate, pre-created.
+CustomerOp object is integral to managing customer operations related to license registration and authentication within the system. This provides mechanisms for refreshing registration, renewing authorization, and enabling licensing features, ensuring seamless interaction with licensing services.
+#### Purpose
+CustomerOp object facilitates the management of licensing-related operations for customers. It allows users to trigger renewals, initiate trials, and manage registration states, providing a central interface for these critical operations.
+#### Key Concepts
+- **License Management:** Offers functionality to renew registration and authorization, ensuring licenses remain valid and operational.
+- **Trial Enablement:** Supports enabling trial modes for licensing, allowing customers to evaluate services before committing.
+- **Administrative Control:** Provides properties for activating license entitlements, ensuring customers can manage their license states effectively.
+- **Shared Organizational Resource:** Designed to operate within shared organizational contexts, allowing consistent application across different accounts and user roles.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

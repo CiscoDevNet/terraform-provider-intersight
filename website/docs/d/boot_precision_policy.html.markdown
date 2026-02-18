@@ -3,12 +3,28 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_precision_policy"
 description: |-
-        Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
+        The Boot PrecisionPolicy object is a reusable policy that defines a precise and ordered list of bootable devices for a server. It supports both UEFI and Legacy boot modes and provides granular control over the boot sequence.
+        #### Purpose
+        The primary purpose of this policy is to automate and enforce a specific boot order on servers. It is critical for ensuring that servers boot from the correct media, whether it is a local disk, a SAN LUN, a PXE server, or a virtual media device. By using a policy, administrators can guarantee consistent boot behavior for servers assigned to a Server Profile.
+        #### Key Concepts
+        - **UEFI and Legacy Support:** The policy allows administrators to specify the desired boot mode (Uefi or Legacy) and whether to enforce UEFI Secure Boot.
+        - **Ordered Device List:** It contains an ordered list of boot devices, where each entry specifies the device type (e.g., LocalDisk, Pxe, San, Nvme) and its specific configuration.
+        - **Profile-Based Application:** The policy is attached to a Server Profile to apply the defined boot order to a physical server.
+        - **Reboot Required:** Changes to the boot order policy are flagged with ActivationRequiresReboot, as a server reboot is necessary to apply the new boot sequence.
+        - **Dependent on Connectivity Policies:** The policy's effectiveness can depend on other policies, such as LAN and SAN connectivity policies, which configure the network interfaces used for PXE or SAN booting.
 
 ---
 
 # Data Source: intersight_boot_precision_policy
-Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
+The Boot PrecisionPolicy object is a reusable policy that defines a precise and ordered list of bootable devices for a server. It supports both UEFI and Legacy boot modes and provides granular control over the boot sequence.
+#### Purpose
+The primary purpose of this policy is to automate and enforce a specific boot order on servers. It is critical for ensuring that servers boot from the correct media, whether it is a local disk, a SAN LUN, a PXE server, or a virtual media device. By using a policy, administrators can guarantee consistent boot behavior for servers assigned to a Server Profile.
+#### Key Concepts
+- **UEFI and Legacy Support:** The policy allows administrators to specify the desired boot mode (Uefi or Legacy) and whether to enforce UEFI Secure Boot.
+- **Ordered Device List:** It contains an ordered list of boot devices, where each entry specifies the device type (e.g., LocalDisk, Pxe, San, Nvme) and its specific configuration.
+- **Profile-Based Application:** The policy is attached to a Server Profile to apply the defined boot order to a physical server.
+- **Reboot Required:** Changes to the boot order policy are flagged with ActivationRequiresReboot, as a server reboot is necessary to apply the new boot sequence.
+- **Dependent on Connectivity Policies:** The policy's effectiveness can depend on other policies, such as LAN and SAN connectivity policies, which configure the network interfaces used for PXE or SAN booting.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

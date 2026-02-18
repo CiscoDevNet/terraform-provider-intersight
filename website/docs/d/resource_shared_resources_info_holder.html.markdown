@@ -3,12 +3,24 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_shared_resources_info_holder"
 description: |-
-        For each MO, the shared config resource relationships from a permission resource are maintained by SharedResourcesInfoHolder. For example, let orgCommon is shared with orgRegular. A user having Server Administrator privilege on orgRegular and a minimum of READ access on sol policy API for orgCommon will be able to create a server profile in orgRegular by referencing an sol policy of orgCommon.
+        The SharedResourcesInfoHolder object manages holds shared resource configurations within the system, facilitating resource sharing and collaboration.
+        #### Purpose
+        SharedResourcesInfoHolder acts as the central entity for managing holding shared resources, this object provides a centralized view of all shared resource configurations between two organizations. It supports efficient resource management and organizational integration.
+        #### Key Concepts
+        - ** Resource Sharing:** Facilitates the sharing of resources between different organizational units, aiding in collaboration and integration.
+        - **Configuration Management:** Manages shared resource configurations, ensuring consistent and organized resource sharing.
+        - **Access Control:** Integrates access restrictions to ensure secure and controlled management of shared resources.
 
 ---
 
 # Data Source: intersight_resource_shared_resources_info_holder
-For each MO, the shared config resource relationships from a permission resource are maintained by SharedResourcesInfoHolder. For example, let orgCommon is shared with orgRegular. A user having Server Administrator privilege on orgRegular and a minimum of READ access on sol policy API for orgCommon will be able to create a server profile in orgRegular by referencing an sol policy of orgCommon.
+The SharedResourcesInfoHolder object manages holds shared resource configurations within the system, facilitating resource sharing and collaboration.
+#### Purpose
+SharedResourcesInfoHolder acts as the central entity for managing holding shared resources, this object provides a centralized view of all shared resource configurations between two organizations. It supports efficient resource management and organizational integration.
+#### Key Concepts
+- ** Resource Sharing:** Facilitates the sharing of resources between different organizational units, aiding in collaboration and integration.
+- **Configuration Management:** Manages shared resource configurations, ensuring consistent and organized resource sharing.
+- **Access Control:** Integrates access restrictions to ensure secure and controlled management of shared resources.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

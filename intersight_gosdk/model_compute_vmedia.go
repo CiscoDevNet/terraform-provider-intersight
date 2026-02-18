@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ComputeVmedia type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ComputeVmedia{}
 
-// ComputeVmedia Inventory of Virtual Media configuration and images uploaded.
+// ComputeVmedia The compute.vMedia object represents the virtual media configuration and inventory for a server. It acts as a container for virtual media settings and any currently mapped virtual media images. #### Purpose The vMedia object is used to manage and monitor the virtual media service on a server. This provides a central point to ensure that the service is enabled, if encryption is active, and what virtual media images are currently mapped. It is essential for remote OS installation, diagnostics, and maintenance. #### Key Concepts - **Service Configuration:** Provides key settings for the virtual media service, including whether it is enabled and if encryption is active for communications. - **Image Inventory:** Contains a collection of compute.Mapping objects, each representing a specific virtual media image that has been mounted to the server. - **Boot Integration:** The lowPowerUsb setting controls whether virtual drives appear in the host's boot selection menu, integrating virtual media directly into the boot process. - **Centralized Management:** Aggregates all virtual media information for a server into a single, manageable object.
 type ComputeVmedia struct {
 	InventoryBase
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

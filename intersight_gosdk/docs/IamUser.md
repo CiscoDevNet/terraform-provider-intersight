@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.User"]
 **ClientIpAddress** | Pointer to **string** | IP address from which the user last logged in to Intersight. | [optional] [readonly] 
 **Email** | Pointer to **string** | Email of the user. Remote users are added to Intersight using the email configured in the IdP. | [optional] 
+**ExternalIdentifier** | Pointer to **string** | External identifier for the user, used for integration with external identity systems. | [optional] 
 **FirstName** | Pointer to **string** | First name of the user. For remote users, this field is populated from the IdP attributes received after authentication. | [optional] 
 **LastLoginTime** | Pointer to **time.Time** | Last successful login time for user. | [optional] [readonly] 
 **LastName** | Pointer to **string** | Last name of the user. For remote users, this field is populated from the IdP attributes received after authentication. | [optional] 
@@ -135,6 +136,31 @@ SetEmail sets Email field to given value.
 `func (o *IamUser) HasEmail() bool`
 
 HasEmail returns a boolean if a field has been set.
+
+### GetExternalIdentifier
+
+`func (o *IamUser) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *IamUser) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *IamUser) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *IamUser) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
 
 ### GetFirstName
 

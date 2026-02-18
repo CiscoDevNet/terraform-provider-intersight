@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_vmedia"
 description: |-
-        Inventory of Virtual Media configuration and images uploaded.
+        The compute.vMedia object represents the virtual media configuration and inventory for a server. It acts as a container for virtual media settings and any currently mapped virtual media images.
+        #### Purpose
+        The vMedia object is used to manage and monitor the virtual media service on a server. This provides a central point to ensure that the service is enabled, if encryption is active, and what virtual media images are currently mapped. It is essential for remote OS installation, diagnostics, and maintenance.
+        #### Key Concepts
+        - **Service Configuration:** Provides key settings for the virtual media service, including whether it is enabled and if encryption is active for communications.
+        - **Image Inventory:** Contains a collection of compute.Mapping objects, each representing a specific virtual media image that has been mounted to the server.
+        - **Boot Integration:** The lowPowerUsb setting controls whether virtual drives appear in the host's boot selection menu, integrating virtual media directly into the boot process.
+        - **Centralized Management:** Aggregates all virtual media information for a server into a single, manageable object.
 
 ---
 
 # Data Source: intersight_compute_vmedia
-Inventory of Virtual Media configuration and images uploaded.
+The compute.vMedia object represents the virtual media configuration and inventory for a server. It acts as a container for virtual media settings and any currently mapped virtual media images.
+#### Purpose
+The vMedia object is used to manage and monitor the virtual media service on a server. This provides a central point to ensure that the service is enabled, if encryption is active, and what virtual media images are currently mapped. It is essential for remote OS installation, diagnostics, and maintenance.
+#### Key Concepts
+- **Service Configuration:** Provides key settings for the virtual media service, including whether it is enabled and if encryption is active for communications.
+- **Image Inventory:** Contains a collection of compute.Mapping objects, each representing a specific virtual media image that has been mounted to the server.
+- **Boot Integration:** The lowPowerUsb setting controls whether virtual drives appear in the host's boot selection menu, integrating virtual media directly into the boot process.
+- **Centralized Management:** Aggregates all virtual media information for a server into a single, manageable object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

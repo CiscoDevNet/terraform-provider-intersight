@@ -3,12 +3,26 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_policy"
 description: |-
-        A policy for all the Virtual LAN networks to be deployed on the Fabric Interconnect.
+        The EthNetworkPolicy object defines the VLAN settings applied to system interfaces, ensuring consistent network segmentation and management. In simple terms, it specifies the set of VLANs assigned to those interfaces.
+        #### Purpose
+        EthNetworkPolicy is designed to manage VLAN configurations for interfaces, providing a structured approach to network segmentation and traffic management. It helps maintain organized and efficient network operations, reducing complexity and enhancing control.
+        #### Key Concepts
+        - **VLAN Management:** Enables the definition and application of VLAN settings, including native and allowed VLANs, ensuring consistent network segmentation.
+        - **Policy-Based Approach:** Offers a centralized policy framework for managing VLAN configurations, streamlining network operations.
+        - **Scalability:** Supports scalable network management by allowing efficient configuration of multiple interfaces, facilitating growth and adaptation.
+        - **Integration:** Works seamlessly with other network policies and configurations, ensuring cohesive and integrated network management.
 
 ---
 
 # Resource: intersight_fabric_eth_network_policy
-A policy for all the Virtual LAN networks to be deployed on the Fabric Interconnect.
+The EthNetworkPolicy object defines the VLAN settings applied to system interfaces, ensuring consistent network segmentation and management. In simple terms, it specifies the set of VLANs assigned to those interfaces.
+#### Purpose
+EthNetworkPolicy is designed to manage VLAN configurations for interfaces, providing a structured approach to network segmentation and traffic management. It helps maintain organized and efficient network operations, reducing complexity and enhancing control.
+#### Key Concepts
+- **VLAN Management:** Enables the definition and application of VLAN settings, including native and allowed VLANs, ensuring consistent network segmentation.
+- **Policy-Based Approach:** Offers a centralized policy framework for managing VLAN configurations, streamlining network operations.
+- **Scalability:** Supports scalable network management by allowing efficient configuration of multiple interfaces, facilitating growth and adaptation.
+- **Integration:** Works seamlessly with other network policies and configurations, ensuring cohesive and integrated network management.
 ## Usage Example
 ### Resource Creation
 

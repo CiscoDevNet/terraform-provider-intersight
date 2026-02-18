@@ -3,12 +3,28 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_shared_io_module"
 description: |-
-        I/O Controller present inside SIOC to provide data path from S-series server to FI.
+        The equipment.SharedIoModule object represents a shared I/O module (SIOM), which is an adapter-like component typically found in a System I/O Controller (SIOC) for Cisco S-Series storage servers. This provides the data path from the server to the Fabric Interconnects.
+        #### Purpose
+        
+        The SharedIoModule object is used to inventory and manage the SIOM. It captures the module's identity, its operational state (operState), and its connectivity status (reachability) to the A and B sides of the fabric. It acts as a container for the network ports (port.Group objects).
+        #### Key Concepts
+        - **Storage Server Connectivity:** Models the specific I/O adapter used in S-Series servers.
+        - **Redundancy and Reachability:** The reachability property indicates its connection status to both Fabric Interconnects, which is key for monitoring high availability.
+        - **Hierarchical Inventory:** Serves as a parent for port.Group objects and is itself a child of an equipment.SystemIoController.
+        - **Configuration State:** The configState property tracks its configuration status within the system.
 
 ---
 
 # Data Source: intersight_equipment_shared_io_module
-I/O Controller present inside SIOC to provide data path from S-series server to FI.
+The equipment.SharedIoModule object represents a shared I/O module (SIOM), which is an adapter-like component typically found in a System I/O Controller (SIOC) for Cisco S-Series storage servers. This provides the data path from the server to the Fabric Interconnects.
+#### Purpose
+     
+The SharedIoModule object is used to inventory and manage the SIOM. It captures the module's identity, its operational state (operState), and its connectivity status (reachability) to the A and B sides of the fabric. It acts as a container for the network ports (port.Group objects).
+#### Key Concepts
+- **Storage Server Connectivity:** Models the specific I/O adapter used in S-Series servers.
+- **Redundancy and Reachability:** The reachability property indicates its connection status to both Fabric Interconnects, which is key for monitoring high availability.
+- **Hierarchical Inventory:** Serves as a parent for port.Group objects and is itself a child of an equipment.SystemIoController.
+- **Configuration State:** The configState property tracks its configuration status within the system.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

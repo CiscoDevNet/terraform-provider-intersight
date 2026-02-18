@@ -3,12 +3,30 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_policy"
 description: |-
-        Policy for setting BIOS tokens on the endpoint.
+        The BIOS Policy object is a reusable policy for configuring a comprehensive set of low-level system settings, known as BIOS tokens, on a server.
+        #### Purpose
+        The purpose of a BIOS Policy is to standardize and automate the configuration of server BIOS settings at scale. Instead of manually configuring each server's BIOS, administrators can define a single policy with desired settings for performance, power management, boot options, and device configuration, and apply it consistently across multiple servers through profiles.
+        #### Key Concepts
+        - **Token-Based Configuration:** The policy exposes a wide array of BIOS settings as individual tokens (properties) that can be enabled, disabled, or set to specific values.
+        - **Reusable and Enforceable:** As a policy object, it can be attached to multiple server profiles, ensuring that all associated servers maintain a consistent BIOS configuration.
+        - **Profile-Based Application:** It is designed to be included in a Server Profile, which then applies the configuration to the assigned physical server.
+        - **Reboot Required:** Changes to the BIOS policy are flagged with ActivationRequiresReboot, indicating that a server reboot is necessary for the new settings to take effect.
+        - **Organization-Owned:** The policy is managed at the organization level, allowing for standardized configurations across different teams or environments.
+        - **Cisco Provided Configuration:** Pre-configured settings available to be selected for specific workloads like Cpu Intensive, Computation Intensive, Analytics etc for specific server models.
 
 ---
 
 # Data Source: intersight_bios_policy
-Policy for setting BIOS tokens on the endpoint.
+The BIOS Policy object is a reusable policy for configuring a comprehensive set of low-level system settings, known as BIOS tokens, on a server.
+#### Purpose
+The purpose of a BIOS Policy is to standardize and automate the configuration of server BIOS settings at scale. Instead of manually configuring each server's BIOS, administrators can define a single policy with desired settings for performance, power management, boot options, and device configuration, and apply it consistently across multiple servers through profiles.
+#### Key Concepts
+- **Token-Based Configuration:** The policy exposes a wide array of BIOS settings as individual "tokens" (properties) that can be enabled, disabled, or set to specific values.
+- **Reusable and Enforceable:** As a policy object, it can be attached to multiple server profiles, ensuring that all associated servers maintain a consistent BIOS configuration.
+- **Profile-Based Application:** It is designed to be included in a Server Profile, which then applies the configuration to the assigned physical server.
+- **Reboot Required:** Changes to the BIOS policy are flagged with ActivationRequiresReboot, indicating that a server reboot is necessary for the new settings to take effect.
+- **Organization-Owned:** The policy is managed at the organization level, allowing for standardized configurations across different teams or environments.
+- **Cisco Provided Configuration:** Pre-configured settings available to be selected for specific workloads like Cpu Intensive, Computation Intensive, Analytics etc for specific server models.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

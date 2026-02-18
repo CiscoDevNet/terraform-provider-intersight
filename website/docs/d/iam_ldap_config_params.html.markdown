@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_config_params"
 description: |-
-        Stores the additional internal LDAP configuration details.
+        LdapConfigParams stores additional configuration metadata used internally to support LDAP integration in appliance contexts.
+        #### Purpose
+        It centralizes internal parameters that influence LDAP issuer and connector behaviors.
+        #### Key Concepts
+        - **Internal Config:** Not end-user facing; supports system connectors.
+        - **Issuer Derivation:** Assists in building correct LDAP issuer URLs.
+        - **Account Binding:** Parameters are scoped to the owning account.
+        - **Lifecycle Managed:** Maintained by system services for stability.
 
 ---
 
 # Data Source: intersight_iam_ldap_config_params
-Stores the additional internal LDAP configuration details.
+LdapConfigParams stores additional configuration metadata used internally to support LDAP integration in appliance contexts.
+#### Purpose
+It centralizes internal parameters that influence LDAP issuer and connector behaviors.
+#### Key Concepts
+- **Internal Config:** Not end-user facing; supports system connectors.
+- **Issuer Derivation:** Assists in building correct LDAP issuer URLs.
+- **Account Binding:** Parameters are scoped to the owning account.
+- **Lifecycle Managed:** Maintained by system services for stability.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

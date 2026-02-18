@@ -3,12 +3,26 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_dimms_endpoint_descriptor"
 description: |-
-        Descriptor that uniquely identifies a dimm.
+        The capability.DimmsEndpointDescriptor object is a descriptor used to uniquely identify a DIMM (Dual In-line Memory Module) within the capability catalog. It functions as a primary inventory record for memory module models.
+        #### Purpose
+        The primary purpose of this object is to maintain a comprehensive catalog of supported DIMM models. It stores key identification details, including vendor, model, pid (Product ID), and partNumber. This catalog is essential for validating memory configurations, verifying compatibility with server platforms, and providing accurate inventory data.
+        #### Key Concepts
+        - **Memory Module Catalog:** Establishes a structured repository for information about different DIMM models.
+        - **Unique Identification:** Uses a combination of vendor, model, and pid to uniquely define each type of DIMM.
+        - **Compatibility Mapping:** The supportedPlatformsPids property links each DIMM to the server platforms it is certified for, which is critical for configuration validation.
+        - **Reference Data:** Serves as a read-only source of truth for DIMM specifications, used by the system for inventory and validation purposes.
 
 ---
 
 # Data Source: intersight_capability_dimms_endpoint_descriptor
-Descriptor that uniquely identifies a dimm.
+The capability.DimmsEndpointDescriptor object is a descriptor used to uniquely identify a DIMM (Dual In-line Memory Module) within the capability catalog. It functions as a primary inventory record for memory module models.
+#### Purpose
+The primary purpose of this object is to maintain a comprehensive catalog of supported DIMM models. It stores key identification details, including vendor, model, pid (Product ID), and partNumber. This catalog is essential for validating memory configurations, verifying compatibility with server platforms, and providing accurate inventory data.
+#### Key Concepts
+- **Memory Module Catalog:** Establishes a structured repository for information about different DIMM models.
+- **Unique Identification:** Uses a combination of vendor, model, and pid to uniquely define each type of DIMM.
+- **Compatibility Mapping:** The supportedPlatformsPids property links each DIMM to the server platforms it is certified for, which is critical for configuration validation.
+- **Reference Data:** Serves as a read-only source of truth for DIMM specifications, used by the system for inventory and validation purposes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -1605,6 +1605,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"undeploy_wf_tasks": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"user_label": {
 			Description: "User label assigned to the server profile.",
 			Type:        schema.TypeString,
@@ -3506,6 +3511,17 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("undeploy_wf_tasks"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetUndeployWfTasks(x)
+	}
+
 	if v, ok := d.GetOk("user_label"); ok {
 		x := (v.(string))
 		o.SetUserLabel(x)
@@ -3805,6 +3821,7 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["template_sync_errors"] = flattenListMotemplateSyncError(s.GetTemplateSyncErrors(), d)
 				temp["template_sync_status"] = (s.GetTemplateSyncStatus())
 				temp["type"] = (s.GetType())
+				temp["undeploy_wf_tasks"] = (s.GetUndeployWfTasks())
 				temp["user_label"] = (s.GetUserLabel())
 				temp["uuid"] = (s.GetUuid())
 				temp["uuid_address_type"] = (s.GetUuidAddressType())

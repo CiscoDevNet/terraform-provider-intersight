@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the BootNvmeDevice type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BootNvmeDevice{}
 
-// BootNvmeDevice Nvme Boot Device configured on the server.
+// BootNvmeDevice The boot.NvmeDevice object represents an NVMe (Non-Volatile Memory Express) drive as a configurable boot option within a server's boot policy. #### Purpose The NvmeDevice object is used to specify a local NVMe drive as a bootable device in a server's boot sequence. This provides a standardized method for including high-performance NVMe storage in the boot order, allowing administrators to define its priority and state within a boot policy. #### Key Concepts - **High-Performance Boot:** Defines a local NVMe SSD as a bootable source, leveraging its high speed for faster OS startup. - **Ordered Boot Sequence:** The order property allows its position in the boot process to be precisely controlled relative to other devices. - **Enable/Disable Control:** The state property allows the NVMe drive to be easily enabled or disabled as a boot option within a policy. - **Boot Policy Element:** Acts as a component within a boot policy that is applied to a compute.Physical server object.
 type BootNvmeDevice struct {
 	BootConfiguredDevice
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

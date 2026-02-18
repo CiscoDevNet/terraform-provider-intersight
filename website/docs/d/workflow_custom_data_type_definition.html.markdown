@@ -3,24 +3,22 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_custom_data_type_definition"
 description: |-
-        ### Overview
         The CustomDataTypeDefinition object provides a framework for defining customized data types used within workflows, enhancing flexibility and reusability.
         #### Purpose
         CustomDataTypeDefinition allows users to create and manage data types that can be used as inputs or outputs in workflows, tailoring data handling to specific use cases and requirements.
         #### Key Concepts
-        - **Flexibility:** - Supports the creation of complex data structures that can be reused across multiple workflows.
-        - **Type Management:** - Provides capabilities to define properties, constraints, and relationships for custom data types.
+        - **Flexibility:** Supports the creation of complex data structures that can be reused across multiple workflows.
+        - **Type Management:** Provides capabilities to define properties, constraints, and relationships for custom data types.
 
 ---
 
 # Data Source: intersight_workflow_custom_data_type_definition
-### Overview
 The CustomDataTypeDefinition object provides a framework for defining customized data types used within workflows, enhancing flexibility and reusability.
 #### Purpose
 CustomDataTypeDefinition allows users to create and manage data types that can be used as inputs or outputs in workflows, tailoring data handling to specific use cases and requirements.
 #### Key Concepts
-- **Flexibility:** - Supports the creation of complex data structures that can be reused across multiple workflows.
-- **Type Management:** - Provides capabilities to define properties, constraints, and relationships for custom data types.
+- **Flexibility:** Supports the creation of complex data structures that can be reused across multiple workflows.
+- **Type Management:** Provides capabilities to define properties, constraints, and relationships for custom data types.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

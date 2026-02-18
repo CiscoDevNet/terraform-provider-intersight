@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the SoftwarerepositoryCategoryMapper type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SoftwarerepositoryCategoryMapper{}
 
-// SoftwarerepositoryCategoryMapper Maps a Cisco software repository image category identifier to its applicable hardware models.
+// SoftwarerepositoryCategoryMapper The CategoryMapper object serves as a mapping tool to associate Cisco software repository image categories with applicable hardware models. This ensures compatibility and supports efficient software deployment. #### Purpose CategoryMapper is used to identify compatible hardware models for specific software categories, aiding in software deployment and upgrade processes. #### Key Concepts - **Mapping:** Establishes connections between software categories and hardware models, ensuring compatibility. - **Software Deployment:** Facilitates the identification of suitable hardware for software installations and updates. - **Administration:** Provides administrative capabilities to create, update, and manage mappings. - **Catalog Integration:** Links software categories to hardware models within the Intersight catalog.
 type SoftwarerepositoryCategoryMapper struct {
 	CapabilityCapability
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.

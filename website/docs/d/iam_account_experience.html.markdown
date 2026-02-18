@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_account_experience"
 description: |-
-        The beta features enabled for the specified account.
+        AccountExperience captures the set of beta or preview features enabled for a specific account.
+        #### Purpose
+        It allows controlled enablement of new capabilities for evaluation and phased rollout.
+        #### Key Concepts
+        - **Feature Flags:** Represents toggles for account-specific experiences.
+        - **Marketing and OPS Control:** Managed by authorized internal roles.
+        - **Shared Scope:** Visible across organizations where applicable.
+        - **Rollout Safety:** Enables granular, account-level previews.
 
 ---
 
 # Data Source: intersight_iam_account_experience
-The beta features enabled for the specified account.
+AccountExperience captures the set of beta or preview features enabled for a specific account.
+#### Purpose
+It allows controlled enablement of new capabilities for evaluation and phased rollout.
+#### Key Concepts
+- **Feature Flags:** Represents toggles for account-specific experiences.
+- **Marketing and OPS Control:** Managed by authorized internal roles.
+- **Shared Scope:** Visible across organizations where applicable.
+- **Rollout Safety:** Enables granular, account-level previews.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

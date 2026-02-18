@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user_qualifier"
 description: |-
-        User Qualifier holds list of guest user details configured for guest user group type, which then can be used for guest user login.
+        UserQualifier specifies explicit guest user lists for a guest-type UserGroup and supports notification flows.
+        #### Purpose
+        It streamlines management of guest access by enumerating allowed users and automating communication to them.
+        #### Key Concepts
+        - **Explicit Inclusion:** Lists guest users for controlled access.
+        - **Notification Control:** Supports emailing access details to users.
+        - **Guest Lifecycle:** Aligns with group activation and expiry.
+        - **Group-bound:** Functions in the context of a guest user group.
 
 ---
 
 # Resource: intersight_iam_user_qualifier
-User Qualifier holds list of guest user details configured for guest user group type, which then can be used for guest user login.
+UserQualifier specifies explicit guest user lists for a guest-type UserGroup and supports notification flows.
+#### Purpose
+It streamlines management of guest access by enumerating allowed users and automating communication to them.
+#### Key Concepts
+- **Explicit Inclusion:** Lists guest users for controlled access.
+- **Notification Control:** Supports emailing access details to users.
+- **Guest Lifecycle:** Aligns with group activation and expiry.
+- **Group-bound:** Functions in the context of a guest user group.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

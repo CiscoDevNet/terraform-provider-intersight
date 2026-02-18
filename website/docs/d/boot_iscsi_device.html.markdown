@@ -3,12 +3,26 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_iscsi_device"
 description: |-
-        Iscsi Boot Device configured on the server.
+        The boot.IscsiDevice object represents an iSCSI LUN (Logical Unit Number) as a configurable boot option within a server's boot policy. It allows a server to boot from a remote storage target over an IP network.
+        #### Purpose
+        The IscsiDevice object provides a standardized way to define an iSCSI target as a bootable source. It encapsulates the necessary parameters, such as the iSCSI initiator and target details, to establish a boot-from-iSCSI session. This enables diskless server configurations where the operating system resides on a centralized storage array.
+        #### Key Concepts
+        - **Network Boot:** Defines a remote iSCSI LUN as a primary or secondary boot device.
+        - **Configurable Order:** The order property allows its position in the boot sequence to be set relative to other local or network boot devices.
+        - **State Management:** The state property allows the iSCSI boot option to be enabled or disabled within a policy without removing the configuration.
+        - **Boot Policy Component:** Functions as a key element within a boot policy, which is then associated with a compute.Physical server object.
 
 ---
 
 # Data Source: intersight_boot_iscsi_device
-Iscsi Boot Device configured on the server.
+The boot.IscsiDevice object represents an iSCSI LUN (Logical Unit Number) as a configurable boot option within a server's boot policy. It allows a server to boot from a remote storage target over an IP network.
+#### Purpose
+The IscsiDevice object provides a standardized way to define an iSCSI target as a bootable source. It encapsulates the necessary parameters, such as the iSCSI initiator and target details, to establish a boot-from-iSCSI session. This enables diskless server configurations where the operating system resides on a centralized storage array.
+#### Key Concepts
+- **Network Boot:** Defines a remote iSCSI LUN as a primary or secondary boot device.
+- **Configurable Order:** The order property allows its position in the boot sequence to be set relative to other local or network boot devices.
+- **State Management:** The state property allows the iSCSI boot option to be enabled or disabled within a policy without removing the configuration.
+- **Boot Policy Component:** Functions as a key element within a boot policy, which is then associated with a compute.Physical server object.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

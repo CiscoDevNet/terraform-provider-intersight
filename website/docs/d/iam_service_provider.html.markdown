@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_service_provider"
 description: |-
-        SAML Service provider related information in Intersight.
+        ServiceProvider encapsulates the platforms SAML Service Provider (SP) identity and metadata, used to integrate with external IdPs.
+        #### Purpose
+        It provides SP metadata for administrators to configure their IdPs to trust and federate with the platform.
+        #### Key Concepts
+        - **SP Identity:** Exposes canonical entity identifiers and metadata.
+        - **Integrator-facing:** Consumed by admins setting up external SSO.
+        - **Read-only:** Ensures the consistency of official SP materials.
+        - **Trust Foundation:** Essential for secure federation with IdPs.
 
 ---
 
 # Data Source: intersight_iam_service_provider
-SAML Service provider related information in Intersight.
+ServiceProvider encapsulates the platforms SAML Service Provider (SP) identity and metadata, used to integrate with external IdPs.
+#### Purpose
+It provides SP metadata for administrators to configure their IdPs to trust and federate with the platform.
+#### Key Concepts
+- **SP Identity:** Exposes canonical entity identifiers and metadata.
+- **Integrator-facing:** Consumed by admins setting up external SSO.
+- **Read-only:** Ensures the consistency of official SP materials.
+- **Trust Foundation:** Essential for secure federation with IdPs.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

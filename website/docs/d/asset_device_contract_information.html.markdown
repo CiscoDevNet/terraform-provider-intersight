@@ -3,12 +3,26 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_contract_information"
 description: |-
-        Contains information about the Cisco device identified by a unique identifier like serial number. It also contains information about warranty, contract status, validity of the device. In future this object could be expanded to store Case, RMA, device topology details. We observe new asset.DeviceRegisteration and use it as a trigger for creating an instance of this object. Currently the data is restricted to Cisco Standalone IMC servers and Fabric Interconnects. Support for more product lines will be added in future.
+        The DeviceContractInformation object provides a comprehensive structure for managing contract-related information of Cisco devices identified by unique identifiers. It integrates data from Cisco APIs to ensure valid device status and contract details, supporting efficient device management.
+        #### Purpose
+        DeviceContractInformation serves as a central repository for viewing contract-related data of Cisco devices, facilitating efficient tracking and validation through Cisco API integration.
+        #### Key Concepts
+        - **Contract Management:** Provides detailed information on device contracts, supporting efficient tracking.
+        - **Integration with Cisco APIs:** Ensures accurate and validated device information through periodic data synchronization.
+        - **Access Control:** Enforces secure access through defined privileges, ensuring authorized interactions with contract data.
+        - **Detailed Information:** Maintains comprehensive records of contract status, warranty details, and customer information, supporting reliable data management.
 
 ---
 
 # Data Source: intersight_asset_device_contract_information
-Contains information about the Cisco device identified by a unique identifier like serial number. It also contains information about warranty, contract status, validity of the device. In future this object could be expanded to store Case, RMA, device topology details. We observe new asset.DeviceRegisteration and use it as a trigger for creating an instance of this object. Currently the data is restricted to Cisco Standalone IMC servers and Fabric Interconnects. Support for more product lines will be added in future.
+The DeviceContractInformation object provides a comprehensive structure for managing contract-related information of Cisco devices identified by unique identifiers. It integrates data from Cisco APIs to ensure valid device status and contract details, supporting efficient device management.
+#### Purpose
+DeviceContractInformation serves as a central repository for viewing contract-related data of Cisco devices, facilitating efficient tracking and validation through Cisco API integration.
+#### Key Concepts
+- **Contract Management:** Provides detailed information on device contracts, supporting efficient tracking.
+- **Integration with Cisco APIs:** Ensures accurate and validated device information through periodic data synchronization.
+- **Access Control:** Enforces secure access through defined privileges, ensuring authorized interactions with contract data.
+- **Detailed Information:** Maintains comprehensive records of contract status, warranty details, and customer information, supporting reliable data management.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

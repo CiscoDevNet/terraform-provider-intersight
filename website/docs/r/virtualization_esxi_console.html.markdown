@@ -3,12 +3,24 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_esxi_console"
 description: |-
-        Vmware Esxi Console Session that provides request validation and Session Management.
+        The EsxiConsole object manages VMware Esxi console sessions, providing request validation and session management capabilities. It supports efficient and secure console operations for VMware hosts.
+        #### Purpose
+        EsxiConsole object enables organizations to manage VMware Esxi hosts efficiently through console session management. It facilitates secure and streamlined operations by providing robust session management capabilities.
+        #### Key Concepts
+        - **Console Session Management:** Manages VMware Esxi console sessions, supporting efficient and secure operations.
+        - **Request Validation:** Provides request validation capabilities to ensure accurate and reliable console operations.
+        - **Host Relationship:** Establishes relationships with VMware hosts to ensure accurate console management.
 
 ---
 
 # Resource: intersight_virtualization_esxi_console
-Vmware Esxi Console Session that provides request validation and Session Management.
+The EsxiConsole object manages VMware Esxi console sessions, providing request validation and session management capabilities. It supports efficient and secure console operations for VMware hosts.
+#### Purpose
+EsxiConsole object enables organizations to manage VMware Esxi hosts efficiently through console session management. It facilitates secure and streamlined operations by providing robust session management capabilities.
+#### Key Concepts
+- **Console Session Management:** Manages VMware Esxi console sessions, supporting efficient and secure operations.
+- **Request Validation:** Provides request validation capabilities to ensure accurate and reliable console operations.
+- **Host Relationship:** Establishes relationships with VMware hosts to ensure accurate console management.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

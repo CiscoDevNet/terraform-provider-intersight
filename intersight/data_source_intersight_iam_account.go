@@ -177,6 +177,11 @@ func getIamAccountSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"external_identifier": {
+			Description: "External identifier for the account, used for integration with external identity systems.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"idpreferences": {
 			Description: "An array of relationships to iamIdpReference resources.",
 			Type:        schema.TypeList,
@@ -1030,6 +1035,11 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetEndPointRoles(x)
 	}
 
+	if v, ok := d.GetOk("external_identifier"); ok {
+		x := (v.(string))
+		o.SetExternalIdentifier(x)
+	}
+
 	if v, ok := d.GetOk("idpreferences"); ok {
 		x := make([]models.IamIdpReferenceRelationship, 0)
 		s := v.([]interface{})
@@ -1738,6 +1748,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 				temp["domain_groups"] = flattenListIamDomainGroupRelationship(s.GetDomainGroups(), d)
 
 				temp["end_point_roles"] = flattenListIamEndPointRoleRelationship(s.GetEndPointRoles(), d)
+				temp["external_identifier"] = (s.GetExternalIdentifier())
 
 				temp["idpreferences"] = flattenListIamIdpReferenceRelationship(s.GetIdpreferences(), d)
 

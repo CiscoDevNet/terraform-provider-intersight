@@ -27,11 +27,13 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. | [optional] [readonly] 
 **OrigSeverity** | Pointer to **string** | The original severity when the alarm was first created. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
 **Severity** | Pointer to **string** | The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
-**Suppressed** | Pointer to **bool** | Indicates whether the alarm is marked for suppression or not. | [optional] 
+**Suppressed** | Pointer to **bool** | Indicates whether the alarm is marked for suppression or not. | [optional] [readonly] 
+**SuppressedTime** | Pointer to **time.Time** | Time at which the last alarm suppression state change happened. | [optional] [readonly] 
 **AffectedMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **AlarmSummaryAggregators** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Definition** | Pointer to [**NullableCondAlarmDefinitionRelationship**](CondAlarmDefinitionRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SuppressionRules** | Pointer to [**[]CondAlarmSuppressionRelationship**](CondAlarmSuppressionRelationship.md) | An array of relationships to condAlarmSuppression resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -652,6 +654,31 @@ SetSuppressed sets Suppressed field to given value.
 
 HasSuppressed returns a boolean if a field has been set.
 
+### GetSuppressedTime
+
+`func (o *CondAlarm) GetSuppressedTime() time.Time`
+
+GetSuppressedTime returns the SuppressedTime field if non-nil, zero value otherwise.
+
+### GetSuppressedTimeOk
+
+`func (o *CondAlarm) GetSuppressedTimeOk() (*time.Time, bool)`
+
+GetSuppressedTimeOk returns a tuple with the SuppressedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressedTime
+
+`func (o *CondAlarm) SetSuppressedTime(v time.Time)`
+
+SetSuppressedTime sets SuppressedTime field to given value.
+
+### HasSuppressedTime
+
+`func (o *CondAlarm) HasSuppressedTime() bool`
+
+HasSuppressedTime returns a boolean if a field has been set.
+
 ### GetAffectedMo
 
 `func (o *CondAlarm) GetAffectedMo() MoBaseMoRelationship`
@@ -792,6 +819,41 @@ HasRegisteredDevice returns a boolean if a field has been set.
 `func (o *CondAlarm) UnsetRegisteredDevice()`
 
 UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+### GetSuppressionRules
+
+`func (o *CondAlarm) GetSuppressionRules() []CondAlarmSuppressionRelationship`
+
+GetSuppressionRules returns the SuppressionRules field if non-nil, zero value otherwise.
+
+### GetSuppressionRulesOk
+
+`func (o *CondAlarm) GetSuppressionRulesOk() (*[]CondAlarmSuppressionRelationship, bool)`
+
+GetSuppressionRulesOk returns a tuple with the SuppressionRules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressionRules
+
+`func (o *CondAlarm) SetSuppressionRules(v []CondAlarmSuppressionRelationship)`
+
+SetSuppressionRules sets SuppressionRules field to given value.
+
+### HasSuppressionRules
+
+`func (o *CondAlarm) HasSuppressionRules() bool`
+
+HasSuppressionRules returns a boolean if a field has been set.
+
+### SetSuppressionRulesNil
+
+`func (o *CondAlarm) SetSuppressionRulesNil(b bool)`
+
+ SetSuppressionRulesNil sets the value for SuppressionRules to be an explicit nil
+
+### UnsetSuppressionRules
+`func (o *CondAlarm) UnsetSuppressionRules()`
+
+UnsetSuppressionRules ensures that no value is present for SuppressionRules, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

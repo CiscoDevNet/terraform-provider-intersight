@@ -3,12 +3,26 @@ subcategory: "sol"
 layout: "intersight"
 page_title: "Intersight: intersight_sol_policy"
 description: |-
-        Policy for configuring Serial Over LAN settings on endpoint.
+        The SOL Policy is a reusable policy for configuring the Serial Over LAN (SOL) service on a server's management controller.
+        #### Purpose
+        The purpose of this policy is to enable and standardize out-of-band access to a server's serial console. This provides a low-level, text-based interface for server management and troubleshooting, which is particularly useful when the primary network or graphical console is unavailable.
+        #### Key Concepts
+        - **Service Control:** The policy allows administrators to enable or disable the SOL service on the endpoint.
+        - **Communication Parameters:** This provides options to configure the baudRate and comPort to ensure compatibility with the server's operating system and terminal clients.
+        - **Direct SSH Access:** A key feature is the ability to configure a dedicated sshPort for SOL, which allows administrators to bypass the main CIMC shell and connect directly to the serial console via SSH.
+        - **Profile-Based Application:** The policy is attached to a Server Profile to apply a consistent SOL configuration across multiple servers.
 
 ---
 
 # Resource: intersight_sol_policy
-Policy for configuring Serial Over LAN settings on endpoint.
+The SOL Policy is a reusable policy for configuring the Serial Over LAN (SOL) service on a server's management controller.
+#### Purpose
+The purpose of this policy is to enable and standardize out-of-band access to a server's serial console. This provides a low-level, text-based interface for server management and troubleshooting, which is particularly useful when the primary network or graphical console is unavailable.
+#### Key Concepts
+- **Service Control:** The policy allows administrators to enable or disable the SOL service on the endpoint.
+- **Communication Parameters:** This provides options to configure the baudRate and comPort to ensure compatibility with the server's operating system and terminal clients.
+- **Direct SSH Access:** A key feature is the ability to configure a dedicated sshPort for SOL, which allows administrators to bypass the main CIMC shell and connect directly to the serial console via SSH.
+- **Profile-Based Application:** The policy is attached to a Server Profile to apply a consistent SOL configuration across multiple servers.
 ## Usage Example
 ### Resource Creation
 

@@ -3,12 +3,26 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_test_idp_configuration"
 description: |-
-        API used to test an Intersight IdP configuration.
+        TestIdpConfiguration supports validating an IdP setup by performing a controlled authentication, currently supported only for testing LDAP configurations. test and capturing outcomes.
+        #### Purpose
+        It helps administrators verify IdP integration parameters and diagnose configuration issues before production use.
+        #### Key Concepts
+        - **Validation Utility:** Initiates a test flow against the configured IdP.
+        - **Diagnostic Feedback:** Provides success status and error details.
+        - **Readiness Signal:** Confirms correctness of protocol and mapping settings.
+        - **Admin Tool:** Designed for identity administrators managing SSO.
 
 ---
 
 # Data Source: intersight_iam_test_idp_configuration
-API used to test an Intersight IdP configuration.
+TestIdpConfiguration supports validating an IdP setup by performing a controlled authentication, currently supported only for testing LDAP configurations. test and capturing outcomes.
+#### Purpose
+It helps administrators verify IdP integration parameters and diagnose configuration issues before production use.
+#### Key Concepts
+- **Validation Utility:** Initiates a test flow against the configured IdP.
+- **Diagnostic Feedback:** Provides success status and error details.
+- **Readiness Signal:** Confirms correctness of protocol and mapping settings.
+- **Admin Tool:** Designed for identity administrators managing SSO.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

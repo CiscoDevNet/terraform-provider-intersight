@@ -3,12 +3,26 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_category_mapper_model"
 description: |-
-        Maps a Cisco hardware model Series to its applicable hardware models.
+        The CategoryMapperModel object maps Cisco hardware model series to their applicable hardware models. It is a critical component in defining hardware compatibility for software deployment.
+        #### Purpose
+        CategoryMapperModel assists in identifying the relationship between hardware series and models, supporting hardware-specific software deployments.
+        #### Key Concepts
+        - **Series Mapping:** Connects hardware model series with specific models to define software compatibility.
+        - **Deployment Support:** Ensures software is deployed on compatible hardware models, streamlining upgrade processes.
+        - **Administrative Control:** Offers tools for managing and updating model-series mappings.
+        - **Catalog Integration:** Integrates with the Intersight catalog for comprehensive mapping and compatibility checks.
 
 ---
 
 # Data Source: intersight_softwarerepository_category_mapper_model
-Maps a Cisco hardware model Series to its applicable hardware models.
+The CategoryMapperModel object maps Cisco hardware model series to their applicable hardware models. It is a critical component in defining hardware compatibility for software deployment.
+#### Purpose
+CategoryMapperModel assists in identifying the relationship between hardware series and models, supporting hardware-specific software deployments.
+#### Key Concepts
+- **Series Mapping:** Connects hardware model series with specific models to define software compatibility.
+- **Deployment Support:** Ensures software is deployed on compatible hardware models, streamlining upgrade processes.
+- **Administrative Control:** Offers tools for managing and updating model-series mappings.
+- **Catalog Integration:** Integrates with the Intersight catalog for comprehensive mapping and compatibility checks.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

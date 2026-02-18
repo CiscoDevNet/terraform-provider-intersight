@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026011407
+API version: 1.0.11-2026021105
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,7 @@ import (
 // checks if the IamUser type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IamUser{}
 
-// IamUser The Intersight account user.
+// IamUser The User object represents individual users within the system, encompassing their identity, permissions, and roles. #### Purpose A User is a central entity within the system, defining the attributes, and roles associated with an individual accessing the system. It enables personalized and secure interactions with the system's resources.  #### Key Concepts  - **Identity Management:** Maintains user identification details, including name, email, and unique identifiers, for authentication and authorization purposes.  - **Role Assignment:** Associates users with roles, defining their access levels and capabilities within the system.  - **Session Tracking:** Tracks user sessions, providing insights into login activity and enabling session management features.  - **Security Controls:** Implements security measures such as password policies and account lockout features, ensuring user accounts are protected against unauthorized access.
 type IamUser struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -33,6 +33,8 @@ type IamUser struct {
 	ClientIpAddress *string `json:"ClientIpAddress,omitempty"`
 	// Email of the user. Remote users are added to Intersight using the email configured in the IdP.
 	Email *string "json:\"Email,omitempty\" validate:\"regexp=^$|^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$\""
+	// External identifier for the user, used for integration with external identity systems.
+	ExternalIdentifier *string `json:"ExternalIdentifier,omitempty"`
 	// First name of the user. For remote users, this field is populated from the IdP attributes received after authentication.
 	FirstName *string `json:"FirstName,omitempty"`
 	// Last successful login time for user.
@@ -214,6 +216,38 @@ func (o *IamUser) HasEmail() bool {
 // SetEmail gets a reference to the given string and assigns it to the Email field.
 func (o *IamUser) SetEmail(v string) {
 	o.Email = &v
+}
+
+// GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise.
+func (o *IamUser) GetExternalIdentifier() string {
+	if o == nil || IsNil(o.ExternalIdentifier) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalIdentifier
+}
+
+// GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamUser) GetExternalIdentifierOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalIdentifier) {
+		return nil, false
+	}
+	return o.ExternalIdentifier, true
+}
+
+// HasExternalIdentifier returns a boolean if a field has been set.
+func (o *IamUser) HasExternalIdentifier() bool {
+	if o != nil && !IsNil(o.ExternalIdentifier) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalIdentifier gets a reference to the given string and assigns it to the ExternalIdentifier field.
+func (o *IamUser) SetExternalIdentifier(v string) {
+	o.ExternalIdentifier = &v
 }
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
@@ -863,6 +897,9 @@ func (o IamUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Email) {
 		toSerialize["Email"] = o.Email
 	}
+	if !IsNil(o.ExternalIdentifier) {
+		toSerialize["ExternalIdentifier"] = o.ExternalIdentifier
+	}
 	if !IsNil(o.FirstName) {
 		toSerialize["FirstName"] = o.FirstName
 	}
@@ -976,6 +1013,8 @@ func (o *IamUser) UnmarshalJSON(data []byte) (err error) {
 		ClientIpAddress *string `json:"ClientIpAddress,omitempty"`
 		// Email of the user. Remote users are added to Intersight using the email configured in the IdP.
 		Email *string "json:\"Email,omitempty\" validate:\"regexp=^$|^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$\""
+		// External identifier for the user, used for integration with external identity systems.
+		ExternalIdentifier *string `json:"ExternalIdentifier,omitempty"`
 		// First name of the user. For remote users, this field is populated from the IdP attributes received after authentication.
 		FirstName *string `json:"FirstName,omitempty"`
 		// Last successful login time for user.
@@ -1020,6 +1059,7 @@ func (o *IamUser) UnmarshalJSON(data []byte) (err error) {
 		varIamUser.ObjectType = varIamUserWithoutEmbeddedStruct.ObjectType
 		varIamUser.ClientIpAddress = varIamUserWithoutEmbeddedStruct.ClientIpAddress
 		varIamUser.Email = varIamUserWithoutEmbeddedStruct.Email
+		varIamUser.ExternalIdentifier = varIamUserWithoutEmbeddedStruct.ExternalIdentifier
 		varIamUser.FirstName = varIamUserWithoutEmbeddedStruct.FirstName
 		varIamUser.LastLoginTime = varIamUserWithoutEmbeddedStruct.LastLoginTime
 		varIamUser.LastName = varIamUserWithoutEmbeddedStruct.LastName
@@ -1059,6 +1099,7 @@ func (o *IamUser) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClientIpAddress")
 		delete(additionalProperties, "Email")
+		delete(additionalProperties, "ExternalIdentifier")
 		delete(additionalProperties, "FirstName")
 		delete(additionalProperties, "LastLoginTime")
 		delete(additionalProperties, "LastName")

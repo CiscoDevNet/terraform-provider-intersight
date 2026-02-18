@@ -3,12 +3,26 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_rack_unit"
 description: |-
-        Describes a standalone or FI-attached Rack-mounted server.
+        The compute.RackUnit object represents a standalone or FI-attached rack-mounted server. It is a primary inventory object that encapsulates the server's identity, hardware components, operational status, and management details.
+        #### Purpose
+        The compute.RackUnit object serves as the central management and inventory entity for a rack server. This provides a comprehensive, queryable model of the server, from its physical hardware (motherboard, adapters, PSUs, fans) to its management state (IP address, management mode). It is the foundation for all management operations performed on the server.
+        #### Key Concepts
+        - **Comprehensive Inventory:** Acts as the top-level container for all of the rack server's hardware components, including compute.Board, adapter.Unit, storage.Controller, and equipment.Psu.
+        - **Management State:** Captures key management details, including its managementMode (e.g., IntersightStandalone), mgmtIpAddress, and connectivity status.
+        - **Unique Identification:** Uniquely identified by its serial number and a system-assigned serverId.
+        - **Topology Awareness:** The topologyScanStatus and connectionStatus properties track its connectivity to upstream switches, providing insight into the network topology.
 
 ---
 
 # Data Source: intersight_compute_rack_unit
-Describes a standalone or FI-attached Rack-mounted server.
+The compute.RackUnit object represents a standalone or FI-attached rack-mounted server. It is a primary inventory object that encapsulates the server's identity, hardware components, operational status, and management details.
+#### Purpose
+The compute.RackUnit object serves as the central management and inventory entity for a rack server. This provides a comprehensive, queryable model of the server, from its physical hardware (motherboard, adapters, PSUs, fans) to its management state (IP address, management mode). It is the foundation for all management operations performed on the server.
+#### Key Concepts
+- **Comprehensive Inventory:** Acts as the top-level container for all of the rack server's hardware components, including compute.Board, adapter.Unit, storage.Controller, and equipment.Psu.
+- **Management State:** Captures key management details, including its managementMode (e.g., IntersightStandalone), mgmtIpAddress, and connectivity status.
+- **Unique Identification:** Uniquely identified by its serial number and a system-assigned serverId.
+- **Topology Awareness:** The topologyScanStatus and connectionStatus properties track its connectivity to upstream switches, providing insight into the network topology.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

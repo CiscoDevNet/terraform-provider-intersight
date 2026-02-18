@@ -3,12 +3,26 @@ subcategory: "console"
 layout: "intersight"
 page_title: "Intersight: intersight_console_console_config"
 description: |-
-        Concrete class for terminal Console.
+        The console.ConsoleConfig object represents the configuration of a terminal console port on a network device. This provides inventory details for the asynchronous serial line settings.
+        #### Purpose
+        The primary purpose of this object is to provide a read-only inventory of the serial console port's communication parameters. This includes settings like speed (baud rate), dataBits, stopBits, and parity. This information is crucial for administrators who need to establish a direct serial connection for out-of-band management or troubleshooting.
+        #### Key Concepts
+        - **Serial Port Inventory:** Captures the complete set of configuration parameters for a device's console port.
+        - **Connectivity Parameters:** Provides the exact settings required for a terminal client to successfully connect to the device.
+        - **Read-Only State:** Reflects the current configuration on the device, serving as a source of truth for its console settings.
+        - **Device-Specific:** Associated with a specific network element, providing the console configuration for that particular device.
 
 ---
 
 # Data Source: intersight_console_console_config
-Concrete class for terminal Console.
+The console.ConsoleConfig object represents the configuration of a terminal console port on a network device. This provides inventory details for the asynchronous serial line settings.
+#### Purpose
+The primary purpose of this object is to provide a read-only inventory of the serial console port's communication parameters. This includes settings like speed (baud rate), dataBits, stopBits, and parity. This information is crucial for administrators who need to establish a direct serial connection for out-of-band management or troubleshooting.
+#### Key Concepts
+- **Serial Port Inventory:** Captures the complete set of configuration parameters for a device's console port.
+- **Connectivity Parameters:** Provides the exact settings required for a terminal client to successfully connect to the device.
+- **Read-Only State:** Reflects the current configuration on the device, serving as a source of truth for its console settings.
+- **Device-Specific:** Associated with a specific network element, providing the console configuration for that particular device.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
