@@ -995,7 +995,8 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1005,12 +1006,14 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndTime(x)
 	}
 
 	if v, ok := d.GetOk("expiration"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetExpiration(x)
 	}
 
@@ -1020,7 +1023,8 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("idle_time_expiration"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetIdleTimeExpiration(x)
 	}
 
@@ -1030,7 +1034,8 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("last_login_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetLastLoginTime(x)
 	}
 
@@ -1040,7 +1045,8 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 

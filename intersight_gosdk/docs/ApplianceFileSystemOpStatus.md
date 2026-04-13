@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NodeHostname** | Pointer to **string** | Hostname of the Intersight Appliance node on which this filesystem is located. | [optional] [readonly] 
 **OperationalStatus** | Pointer to **string** | Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. * &#x60;WorkerNodeInstInProgress&#x60; - The worker node installation is in progress. * &#x60;WorkerNodeInstSuccess&#x60; - The worker node installation succeeded. * &#x60;WorkerNodeInstFailed&#x60; - The worker node installation failed. | [optional] [readonly] [default to "Unknown"]
 **Usage** | Pointer to **float32** | Percentage of the file system capacity currently in use. | [optional] [readonly] 
+**FileSystemOpSummary** | Pointer to [**NullableApplianceFileSystemOpSummaryRelationship**](ApplianceFileSystemOpSummaryRelationship.md) |  | [optional] 
 **NodeOpStatus** | Pointer to [**NullableApplianceNodeOpStatusRelationship**](ApplianceNodeOpStatusRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -224,6 +225,41 @@ SetUsage sets Usage field to given value.
 
 HasUsage returns a boolean if a field has been set.
 
+### GetFileSystemOpSummary
+
+`func (o *ApplianceFileSystemOpStatus) GetFileSystemOpSummary() ApplianceFileSystemOpSummaryRelationship`
+
+GetFileSystemOpSummary returns the FileSystemOpSummary field if non-nil, zero value otherwise.
+
+### GetFileSystemOpSummaryOk
+
+`func (o *ApplianceFileSystemOpStatus) GetFileSystemOpSummaryOk() (*ApplianceFileSystemOpSummaryRelationship, bool)`
+
+GetFileSystemOpSummaryOk returns a tuple with the FileSystemOpSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileSystemOpSummary
+
+`func (o *ApplianceFileSystemOpStatus) SetFileSystemOpSummary(v ApplianceFileSystemOpSummaryRelationship)`
+
+SetFileSystemOpSummary sets FileSystemOpSummary field to given value.
+
+### HasFileSystemOpSummary
+
+`func (o *ApplianceFileSystemOpStatus) HasFileSystemOpSummary() bool`
+
+HasFileSystemOpSummary returns a boolean if a field has been set.
+
+### SetFileSystemOpSummaryNil
+
+`func (o *ApplianceFileSystemOpStatus) SetFileSystemOpSummaryNil(b bool)`
+
+ SetFileSystemOpSummaryNil sets the value for FileSystemOpSummary to be an explicit nil
+
+### UnsetFileSystemOpSummary
+`func (o *ApplianceFileSystemOpStatus) UnsetFileSystemOpSummary()`
+
+UnsetFileSystemOpSummary ensures that no value is present for FileSystemOpSummary, not even an explicit nil
 ### GetNodeOpStatus
 
 `func (o *ApplianceFileSystemOpStatus) GetNodeOpStatus() ApplianceNodeOpStatusRelationship`

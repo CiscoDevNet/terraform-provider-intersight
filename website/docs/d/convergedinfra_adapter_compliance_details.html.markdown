@@ -3,28 +3,26 @@ subcategory: "convergedinfra"
 layout: "intersight"
 page_title: "Intersight: intersight_convergedinfra_adapter_compliance_details"
 description: |-
-        ### Overview
         The AdapterComplianceDetails object captures compliance details for adapters within servers of a converged infrastructure pod, focusing on hardware compatibility and firmware status.
         #### Purpose
         AdapterComplianceDetails provides essential insights into adapter compliance, assessing compatibility with standards and operational criteria necessary for seamless infrastructure operation.
         #### Key Concepts
-        - **Hardware Compatibility:** - Evaluates adapter compliance against hardware compatibility lists, ensuring alignment with industry standards.
-        - **Firmware and Driver Information:** - Includes detailed information about adapter firmware and drivers, supporting thorough compliance checks.
-        - **Server Integration:** - Associates adapter compliance details with server compliance data, promoting integrated compliance assessments.
-        - **Administrative Control:** - Accessible through defined privilege sets, ensuring secure and authorized interaction with adapter compliance information.
+        - **Hardware Compatibility:** Evaluates adapter compliance against hardware compatibility lists, ensuring alignment with industry standards.
+        - **Firmware and Driver Information:** Includes detailed information about adapter firmware and drivers, supporting thorough compliance checks.
+        - **Server Integration:** Associates adapter compliance details with server compliance data, promoting integrated compliance assessments.
+        - **Administrative Control:** Accessible through defined privilege sets, ensuring secure and authorized interaction with adapter compliance information.
 
 ---
 
 # Data Source: intersight_convergedinfra_adapter_compliance_details
-### Overview
 The AdapterComplianceDetails object captures compliance details for adapters within servers of a converged infrastructure pod, focusing on hardware compatibility and firmware status.  
-#### Purpose 
+#### Purpose
 AdapterComplianceDetails provides essential insights into adapter compliance, assessing compatibility with standards and operational criteria necessary for seamless infrastructure operation.   
-#### Key Concepts  
-- **Hardware Compatibility:** - Evaluates adapter compliance against hardware compatibility lists, ensuring alignment with industry standards. 
-- **Firmware and Driver Information:** - Includes detailed information about adapter firmware and drivers, supporting thorough compliance checks.
-- **Server Integration:** - Associates adapter compliance details with server compliance data, promoting integrated compliance assessments.
-- **Administrative Control:** - Accessible through defined privilege sets, ensuring secure and authorized interaction with adapter compliance information.
+#### Key Concepts
+- **Hardware Compatibility:** Evaluates adapter compliance against hardware compatibility lists, ensuring alignment with industry standards. 
+- **Firmware and Driver Information:** Includes detailed information about adapter firmware and drivers, supporting thorough compliance checks.
+- **Server Integration:** Associates adapter compliance details with server compliance data, promoting integrated compliance assessments.
+- **Administrative Control:** Accessible through defined privilege sets, ensuring secure and authorized interaction with adapter compliance information.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

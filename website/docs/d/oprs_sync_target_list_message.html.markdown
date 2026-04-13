@@ -3,12 +3,22 @@ subcategory: "oprs"
 layout: "intersight"
 page_title: "Intersight: intersight_oprs_sync_target_list_message"
 description: |-
-        The targets sync messages are sent to assist and back to euclid for reconciliation.
+        The SyncTargetListMessage object manages the synchronization of target lists between assist environments and Euclid for reconciliation purposes. It ensures consistent data exchange and alignment of target configurations.
+        #### Purpose
+        SyncTargetListMessage is designed to streamline the synchronization process, facilitating accurate and timely data updates between interconnected systems.
+        #### Key Concepts
+        - **Data Synchronization:** Coordinates the exchange and alignment of target lists across systems.
+        - **Access Control:** Employs privilege sets to manage permissions and ensure secure data exchange.
 
 ---
 
 # Data Source: intersight_oprs_sync_target_list_message
-The targets sync messages are sent to assist and back to euclid for reconciliation.
+The SyncTargetListMessage object manages the synchronization of target lists between assist environments and Euclid for reconciliation purposes. It ensures consistent data exchange and alignment of target configurations.
+#### Purpose
+SyncTargetListMessage is designed to streamline the synchronization process, facilitating accurate and timely data updates between interconnected systems.
+#### Key Concepts
+- **Data Synchronization:** Coordinates the exchange and alignment of target lists across systems.
+- **Access Control:** Employs privilege sets to manage permissions and ensure secure data exchange.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

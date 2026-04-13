@@ -556,7 +556,8 @@ func dataSourceApplianceMemoryUtilizationRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -566,7 +567,8 @@ func dataSourceApplianceMemoryUtilizationRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndTime(x)
 	}
 
@@ -576,7 +578,8 @@ func dataSourceApplianceMemoryUtilizationRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -776,7 +779,8 @@ func dataSourceApplianceMemoryUtilizationRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetTime(x)
 	}
 

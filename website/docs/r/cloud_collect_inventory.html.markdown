@@ -3,14 +3,26 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_collect_inventory"
 description: |-
-        REST API endpoint for inventory collection. It is invoked asynchronously after TFC creation.
-        The new target is sent to inventory collector to fetch organizations, agent pools and workspaces.
+        The CollectInventory object plays a crucial role in managing and collecting inventory data asynchronously after the creation of new Terraform Cloud targets. It interfaces with inventory collectors to gather information about organizations, agent pools, and workspaces on Terraform Cloud.
+        #### Purpose
+        CollectInventory is designed to streamline inventory management by automating data collection processes. It ensures accurate tracking of cloud assets and their associated organizational structures.
+        #### Key Concepts
+        - **Asynchronous Operations:** Supports non-blocking inventory collection processes.
+        - **Data Aggregation:** Collects and consolidates data pertaining to organizations and resources.
+        - **Integration with Terraform Cloud:** Seamlessly interfaces with Terraform Cloud assets.
+        - **Access Control:** Employs privilege sets for managing permissions and ensuring secure data handling.
 
 ---
 
 # Resource: intersight_cloud_collect_inventory
-REST API endpoint for inventory collection. It is invoked asynchronously after TFC creation.
-The new target is sent to inventory collector to fetch organizations, agent pools and workspaces.
+The CollectInventory object plays a crucial role in managing and collecting inventory data asynchronously after the creation of new Terraform Cloud targets. It interfaces with inventory collectors to gather information about organizations, agent pools, and workspaces on Terraform Cloud.
+#### Purpose
+CollectInventory is designed to streamline inventory management by automating data collection processes. It ensures accurate tracking of cloud assets and their associated organizational structures.
+#### Key Concepts
+- **Asynchronous Operations:** Supports non-blocking inventory collection processes.
+- **Data Aggregation:** Collects and consolidates data pertaining to organizations and resources.
+- **Integration with Terraform Cloud:** Seamlessly interfaces with Terraform Cloud assets.
+- **Access Control:** Employs privilege sets for managing permissions and ensuring secure data handling.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

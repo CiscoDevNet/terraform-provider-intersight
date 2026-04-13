@@ -3,12 +3,22 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_tfc_agentpool"
 description: |-
-        An agent pool represents a group of agents that can be used to allow Terraform Cloud to communicate with isolated, private, or on-premises infrastructure.
+        The TfcAgentpool object is integral to managing groups of agents within Terraform Cloud, enabling communication with isolated, private, or on-premises infrastructure.
+        #### Purpose
+        Intersight discovers the Agent Pools in the Terraform Cloud account whose credentials are specified in the Terraform Cloud target.
+        #### Key Concepts
+        - **Agent Grouping:** Represents a collection of Terraform Cloud agents used to execute runs against private, isolated, or on-premises environments.
+        - **Credential-Based Discovery:** Intersight identifies available agent pools using the credentials specified in the Terraform Cloud target.
 
 ---
 
 # Data Source: intersight_cloud_tfc_agentpool
-An agent pool represents a group of agents that can be used to allow Terraform Cloud to communicate with isolated, private, or on-premises infrastructure.
+The TfcAgentpool object is integral to managing groups of agents within Terraform Cloud, enabling communication with isolated, private, or on-premises infrastructure. 
+#### Purpose
+Intersight discovers the Agent Pools in the Terraform Cloud account whose credentials are specified in the Terraform Cloud target.
+#### Key Concepts
+- **Agent Grouping:** Represents a collection of Terraform Cloud agents used to execute runs against private, isolated, or on-premises environments.
+- **Credential-Based Discovery:** Intersight identifies available agent pools using the credentials specified in the Terraform Cloud target.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

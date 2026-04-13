@@ -16,11 +16,46 @@ import (
 
 func getCondAlarmDefinitionSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
+	schemaMap = map[string]*schema.Schema{"account": {
+		Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		Type:        schema.TypeList,
+		MaxItems:    1,
 		Optional:    true,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+				"class_id": {
+					Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"moid": {
+					Description: "The Moid of the referenced REST resource.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"object_type": {
+					Description: "The fully-qualified name of the remote type referred by this relationship.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"selector": {
+					Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+			},
+		},
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"actions": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -188,6 +223,41 @@ func getCondAlarmDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"device": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -302,6 +372,11 @@ func getCondAlarmDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "Controls the behavior of alarm processing depending upon the status. If Enabled, alarm is evaluated for any condition that meets the criteria. If Disabled or SystemDisabled, alarm is not evaluated and the existing alarms for this AlarmDefinition is cleared. If Inactive, alarm is not evaluated and the existing alarms for this AlarmDefinition is deleted.\n* `Enabled` - Enables alarm evaluation for any condition that meets the criteria.\n* `Disabled` - Disables alarm evaluation temporarily and clears the existing alarms.\n* `SystemDisabled` - Disables alarm evaluation temporarily and clears the existing alarms once alarm limit per alarm rule is reached.\n* `Inactive` - Stops alarm evaluation permanently and deletes the existing alarms.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"system_classifications": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -407,6 +482,41 @@ func getCondAlarmDefinitionSchema() map[string]*schema.Schema {
 					},
 					"value": {
 						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"threshold_definition": {
+			Description: "A reference to a condThresholdDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -548,6 +658,49 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CondAlarmDefinition{}
+	if v, ok := d.GetOk("account"); ok {
+		p := make([]models.IamAccountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAccount(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -757,7 +910,8 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -766,13 +920,57 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("device"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDevice(x)
+		}
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -900,6 +1098,11 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
 	if v, ok := d.GetOk("system_classifications"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -985,6 +1188,49 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("threshold_definition"); ok {
+		p := make([]models.CondThresholdDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsCondThresholdDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetThresholdDefinition(x)
+		}
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1096,6 +1342,8 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
+
+				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 
 				temp["actions"] = flattenListCondAlarmAction(s.GetActions(), d)
@@ -1108,6 +1356,8 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
+
+				temp["device"] = flattenMapMoBaseMoRelationship(s.GetDevice(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1122,9 +1372,12 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 				temp["probable_cause"] = (s.GetProbableCause())
 				temp["remediation"] = (s.GetRemediation())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
 				temp["system_classifications"] = (s.GetSystemClassifications())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["threshold_definition"] = flattenMapCondThresholdDefinitionRelationship(s.GetThresholdDefinition(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				condAlarmDefinitionResults = append(condAlarmDefinitionResults, temp)

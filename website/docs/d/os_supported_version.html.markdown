@@ -3,16 +3,26 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_supported_version"
 description: |-
-        The supported operating system version by SCU. The API is mainly for UI operation. In the software management page,
-        operating system configuration will be created by providing the vendor and version. The version will be filtered
-        based on vendor.
+        The SupportedVersion object provides information on operating system versions supported by the Server Configuration Utility (SCU). It is essential for UI operations and aids in filtering OS configurations based on vendor and version.
+        #### Purpose
+        SupportedVersion serves as a reference for operating system versions that are supported by SCU, ensuring that users can easily identify compatible versions for installation processes. It aids in UI operations by providing clear and concise version information.
+        #### Key Concepts
+        - **Version Reference:** Provides a list of supported OS versions by SCU, enabling users to select compatible configurations.
+        - **Vendor Integration:** Filters OS versions based on vendor, ensuring alignment with vendor-specific requirements.
+        - **Access Control:** Privilege sets such as Account Administrator and Manage Servers ensure secure access and management of version information.
+        - **UI Operations:** Facilitates UI operations by providing essential version information, supporting efficient configuration and deployment processes.
 
 ---
 
 # Data Source: intersight_os_supported_version
-The supported operating system version by SCU. The API is mainly for UI operation. In the software management page,
-operating system configuration will be created by providing the vendor and version. The version will be filtered
-based on vendor.
+The SupportedVersion object provides information on operating system versions supported by the Server Configuration Utility (SCU). It is essential for UI operations and aids in filtering OS configurations based on vendor and version.
+#### Purpose
+SupportedVersion serves as a reference for operating system versions that are supported by SCU, ensuring that users can easily identify compatible versions for installation processes. It aids in UI operations by providing clear and concise version information.
+#### Key Concepts
+- **Version Reference:** Provides a list of supported OS versions by SCU, enabling users to select compatible configurations.
+- **Vendor Integration:** Filters OS versions based on vendor, ensuring alignment with vendor-specific requirements.
+- **Access Control:** Privilege sets such as Account Administrator and Manage Servers ensure secure access and management of version information.
+- **UI Operations:** Facilitates UI operations by providing essential version information, supporting efficient configuration and deployment processes.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

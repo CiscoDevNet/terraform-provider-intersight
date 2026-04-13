@@ -3,20 +3,26 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_template_file"
 description: |-
-        A TemplateFile is an OS specific answer file that helps with the unattended installation.
-        The file can also be a template file with placeholders instead of actual answers.
-        Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/.
-        The values for these placeholders shall be given during OS installation in the form of 'additionalProperties'
-        in os.OsInstall object.
+        The TemplateFile object is a specialized component that encapsulates OS-specific answer files for unattended installations. It supports both static and template-based content, utilizing golang template syntax.
+        #### Purpose
+        TemplateFile objects provide customizable OS installation configurations through answer files, supporting unattended installation processes. They allow users to define installation parameters using static content or dynamic templates with placeholders.
+        #### Key Concepts
+        - **Unattended Installations:** Facilitates automated OS installations by providing answer files with predefined parameters.
+        - **Template Support:** Utilizes golang template syntax to allow dynamic content creation with placeholders.
+        - **Customization:** Enables users to tailor installation configurations, supporting unique requirements and environments.
+        - **Access Control:** Privilege sets such as Account Administrator and Manage Servers ensure secure creation and management of template files.
 
 ---
 
 # Resource: intersight_os_template_file
-A TemplateFile is an OS specific answer file that helps with the unattended installation.
-The file can also be a template file with placeholders instead of actual answers.
-Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/.
-The values for these placeholders shall be given during OS installation in the form of 'additionalProperties'
-in os.OsInstall object.
+The TemplateFile object is a specialized component that encapsulates OS-specific answer files for unattended installations. It supports both static and template-based content, utilizing golang template syntax.
+#### Purpose
+TemplateFile objects provide customizable OS installation configurations through answer files, supporting unattended installation processes. They allow users to define installation parameters using static content or dynamic templates with placeholders.
+#### Key Concepts
+- **Unattended Installations:** Facilitates automated OS installations by providing answer files with predefined parameters.
+- **Template Support:** Utilizes golang template syntax to allow dynamic content creation with placeholders.
+- **Customization:** Enables users to tailor installation configurations, supporting unique requirements and environments.
+- **Access Control:** Privilege sets such as Account Administrator and Manage Servers ensure secure creation and management of template files.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

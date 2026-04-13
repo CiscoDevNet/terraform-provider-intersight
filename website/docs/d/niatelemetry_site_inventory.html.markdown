@@ -15,9 +15,11 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_niatelemetry_site_inventory.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `configuration_change_tracking_count`:(int) Count of configuration change tracking. 
 * `connectivity_analysis_count`:(int) Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `endpoint_locator_count`:(int) Count of total Endpoint Locators. 
 * `firmware_version`:(string) Version of the specified site. 
 * `install_type`:(string) Fine-grained type DCNM either SAN or LAN. 
 * `mod_time`:(string) The time when this managed object was last modified. 
@@ -25,7 +27,12 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the APIC / DCNM site onboarded. 
 * `nexus_dashboard`:(string) Name of ND on which site has been onboarded. 
 * `nodes`:(int) Number of nodes the site contains. 
+* `on_demand_backups`:(bool) Count of number of manual backups. 
 * `record_type`:(string) Specifies whether Site object is DCNM or APIC or ND. 
+* `scheduled_backups`:(bool) Count of number of scheduled backups. 
+* `security_groups_count`:(int) Count of total security groups. 
+* `service_clusters_count`:(int) Count of total Service Clusters. 
+* `service_function_count`:(int) Count of total Service Functions configured. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `type`:(string) Type of site onboarded either APIC or DCNM. 
  

@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_restore_operation"
 description: |-
-        Invoke Virtual Machine restore operation.
+        The VmRestoreOperation object provides mechanisms for restoring Virtual Machines within the HyperFlex infrastructure. It is crucial for disaster recovery scenarios, enabling quick and efficient restoration of Virtual Machines to a predefined state.
+        #### Purpose
+        VmRestoreOperation is designed to manage the restoration processes, ensuring that Virtual Machines can be rapidly recovered in case of data loss or corruption. It supports both planned and unplanned restoration events, offering flexibility and control.
+        #### Key Concepts
+        - **Disaster Recovery:** Central to the object’s functionality, enabling organizations to restore Virtual Machines efficiently in response to failures.
+        - **Automated Processes:** Supports automation of restoration tasks, reducing manual intervention and potential for errors.
+        - **Flexibility:** Offers options for restoring Virtual Machines to different states or configurations, catering to varied recovery needs.
+        - **Access Control:** Ensures secure execution of restore operations, with permissions designed to limit access to authorized users only.
 
 ---
 
 # Resource: intersight_hyperflex_vm_restore_operation
-Invoke Virtual Machine restore operation.
+The VmRestoreOperation object provides mechanisms for restoring Virtual Machines within the HyperFlex infrastructure. It is crucial for disaster recovery scenarios, enabling quick and efficient restoration of Virtual Machines to a predefined state.
+#### Purpose
+VmRestoreOperation is designed to manage the restoration processes, ensuring that Virtual Machines can be rapidly recovered in case of data loss or corruption. It supports both planned and unplanned restoration events, offering flexibility and control.
+#### Key Concepts
+- **Disaster Recovery:** Central to the object’s functionality, enabling organizations to restore Virtual Machines efficiently in response to failures.
+- **Automated Processes:** Supports automation of restoration tasks, reducing manual intervention and potential for errors.
+- **Flexibility:** Offers options for restoring Virtual Machines to different states or configurations, catering to varied recovery needs.
+- **Access Control:** Ensures secure execution of restore operations, with permissions designed to limit access to authorized users only.
 ## Usage Example
 ### Resource Creation
 

@@ -235,6 +235,11 @@ func getEquipmentFanSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nr_threshold_min_rpm_speed": {
+			Description: "This field identifies the Non Recoverable Threshold Minimum Revolutions Per Minute Speed for this Fan Unit.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -750,7 +755,8 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -919,7 +925,8 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -941,6 +948,11 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOkExists("nr_threshold_min_rpm_speed"); ok {
+		x := int64(v.(int))
+		o.SetNrThresholdMinRpmSpeed(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1410,6 +1422,7 @@ func dataSourceEquipmentFanRead(c context.Context, d *schema.ResourceData, meta 
 				temp["module_id"] = (s.GetModuleId())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["nr_threshold_min_rpm_speed"] = (s.GetNrThresholdMinRpmSpeed())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())

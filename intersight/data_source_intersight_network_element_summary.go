@@ -575,13 +575,33 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"out_of_band_ipv6_error": {
+			Description: "The IPv6 error message if any issue occurred during address configuration.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"out_of_band_ipv6_gateway": {
 			Description: "The default IPv6 gateway of the network Element out-of-band management interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"out_of_band_ipv6_mode": {
+			Description: "The IPv6 address configuration mode of the network Element out-of-band management interface.\n* `` - The IPv6 address mode is not available or not applicable.\n* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).\n* `static` - IPv6 address is statically configured.\n* `disabled` - IPv6 is disabled on the out-of-band management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"out_of_band_ipv6_prefix": {
 			Description: "The network mask of the network Element out-of-band management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"out_of_band_ipv6_slaac_iid_mode": {
+			Description: "The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address.\n* `` - The SLAAC IID mode is not available or not applicable.\n* `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method.\n* `opaque` - The SLAAC IID is generated using an opaque identifier for privacy.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"out_of_band_ipv6_status": {
+			Description: "The status of the IPv6 configuration on the network Element out-of-band management interface.\n* `` - The IPv6 address status is not available or not applicable.\n* `active` - The IPv6 address is active and in use.\n* `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress).\n* `duplicate` - The IPv6 address is a duplicate (DAD failed).\n* `disabled` - The IPv6 address is disabled.\n* `error` - An error occurred during IPv6 address configuration.\n* `unknown` - The IPv6 address status is unknown.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -721,6 +741,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 		},
 		"rn": {
 			Description: "The Relative Name uniquely identifies an object within a given context.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"router_mac": {
+			Description: "This MAC address will be the source MAC address for NetFlow packets.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1166,7 +1191,8 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1393,7 +1419,8 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1497,14 +1524,34 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetOutOfBandIpv6Address(x)
 	}
 
+	if v, ok := d.GetOk("out_of_band_ipv6_error"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpv6Error(x)
+	}
+
 	if v, ok := d.GetOk("out_of_band_ipv6_gateway"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Gateway(x)
 	}
 
+	if v, ok := d.GetOk("out_of_band_ipv6_mode"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpv6Mode(x)
+	}
+
 	if v, ok := d.GetOk("out_of_band_ipv6_prefix"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Prefix(x)
+	}
+
+	if v, ok := d.GetOk("out_of_band_ipv6_slaac_iid_mode"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpv6SlaacIidMode(x)
+	}
+
+	if v, ok := d.GetOk("out_of_band_ipv6_status"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpv6Status(x)
 	}
 
 	if v, ok := d.GetOk("out_of_band_mac"); ok {
@@ -1672,6 +1719,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
+	}
+
+	if v, ok := d.GetOk("router_mac"); ok {
+		x := (v.(string))
+		o.SetRouterMac(x)
 	}
 
 	if v, ok := d.GetOk("serial"); ok {
@@ -1995,8 +2047,12 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["out_of_band_ipv4_gateway"] = (s.GetOutOfBandIpv4Gateway())
 				temp["out_of_band_ipv4_mask"] = (s.GetOutOfBandIpv4Mask())
 				temp["out_of_band_ipv6_address"] = (s.GetOutOfBandIpv6Address())
+				temp["out_of_band_ipv6_error"] = (s.GetOutOfBandIpv6Error())
 				temp["out_of_band_ipv6_gateway"] = (s.GetOutOfBandIpv6Gateway())
+				temp["out_of_band_ipv6_mode"] = (s.GetOutOfBandIpv6Mode())
 				temp["out_of_band_ipv6_prefix"] = (s.GetOutOfBandIpv6Prefix())
+				temp["out_of_band_ipv6_slaac_iid_mode"] = (s.GetOutOfBandIpv6SlaacIidMode())
+				temp["out_of_band_ipv6_status"] = (s.GetOutOfBandIpv6Status())
 				temp["out_of_band_mac"] = (s.GetOutOfBandMac())
 				temp["owners"] = (s.GetOwners())
 
@@ -2010,6 +2066,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["reserved_vlan_start_id"] = (s.GetReservedVlanStartId())
 				temp["revision"] = (s.GetRevision())
 				temp["rn"] = (s.GetRn())
+				temp["router_mac"] = (s.GetRouterMac())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())

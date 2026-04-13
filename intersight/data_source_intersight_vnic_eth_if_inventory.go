@@ -639,6 +639,39 @@ func getVnicEthIfInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"net_flow_monitor_sessions": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"flow_direction": {
+						Description: "Direction of the flow to monitor (ingress, egress, or both).\n* `both` - Both direction for NetFlow monitor.\n* `rx` - Input direction for NetFlow monitor.\n* `tx` - Output direction for NetFlow monitor.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"monitor_name": {
+						Description: "Name of the NetFlow monitor to use for this vNIC. The NetFlow monitor must be pre-configured on the Fabric Interconnects. It is configured as part of the NetFlow policy attached to the Fabric Switch Cluster profile.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -1600,7 +1633,8 @@ func dataSourceVnicEthIfInventoryRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -2230,7 +2264,8 @@ func dataSourceVnicEthIfInventoryRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -2242,6 +2277,46 @@ func dataSourceVnicEthIfInventoryRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("net_flow_monitor_sessions"); ok {
+		x := make([]models.VnicNetFlowMonitorSession, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.VnicNetFlowMonitorSession{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("vnic.NetFlowMonitorSession")
+			if v, ok := l["flow_direction"]; ok {
+				{
+					x := (v.(string))
+					o.SetFlowDirection(x)
+				}
+			}
+			if v, ok := l["monitor_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetMonitorName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetNetFlowMonitorSessions(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -3102,6 +3177,8 @@ func dataSourceVnicEthIfInventoryRead(c context.Context, d *schema.ResourceData,
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+
+				temp["net_flow_monitor_sessions"] = flattenListVnicNetFlowMonitorSession(s.GetNetFlowMonitorSessions(), d)
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["old_info"] = flattenMapVnicEthIfOldInfo(s.GetOldInfo(), d)

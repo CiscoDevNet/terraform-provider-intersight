@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_snapshot_info"
 description: |-
-        Virtual Machine Snapshot information like replication status, snapshot point and status.
+        The VmSnapshotInfo object offers insights into VM snapshot details, including replication status and snapshot points.
+        #### Purpose
+        VmSnapshotInfo is designed to provide detailed information about VM snapshots, supporting effective management of snapshot status and replication processes within HyperFlex clusters.
+        #### Key Concepts
+        - **Snapshot Management:** Details replication and snapshot status, enabling effective tracking and recovery operations.
+        - **Cluster Associations:** Maps snapshot data to cluster IDs, facilitating organized management and operational continuity.
+        - **Controlled Access:** Utilizes privilege sets to ensure secure access to snapshot information, maintaining data integrity.
 
 ---
 
 # Data Source: intersight_hyperflex_vm_snapshot_info
-Virtual Machine Snapshot information like replication status, snapshot point and status.
+The VmSnapshotInfo object offers insights into VM snapshot details, including replication status and snapshot points.
+#### Purpose
+VmSnapshotInfo is designed to provide detailed information about VM snapshots, supporting effective management of snapshot status and replication processes within HyperFlex clusters.
+#### Key Concepts
+- **Snapshot Management:** Details replication and snapshot status, enabling effective tracking and recovery operations.
+- **Cluster Associations:** Maps snapshot data to cluster IDs, facilitating organized management and operational continuity.
+- **Controlled Access:** Utilizes privilege sets to ensure secure access to snapshot information, maintaining data integrity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

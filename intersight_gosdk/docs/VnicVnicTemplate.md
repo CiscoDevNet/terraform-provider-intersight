@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **EnableOverride** | Pointer to **bool** | When enabled, the configuration of the derived instances may override the template configuration. | [optional] 
 **LcpUsageCount** | Pointer to **int64** | The count of the Lan Connectivity Policies using vNIC template. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the vNIC template. | [optional] 
+**NetFlowMonitorSessions** | Pointer to [**[]VnicNetFlowMonitorSession**](VnicNetFlowMonitorSession.md) |  | [optional] 
 **PeerVnicName** | Pointer to **string** | Name of the peer vNIC which belongs to the peer FI. | [optional] 
 **SwitchId** | Pointer to **string** | The fabric port to which the vNICs will be associated. * &#x60;None&#x60; - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value &#39;None&#39; should be used. * &#x60;A&#x60; - Fabric A of the FI cluster. * &#x60;B&#x60; - Fabric B of the FI cluster. | [optional] [default to "None"]
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 
@@ -176,6 +177,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetNetFlowMonitorSessions
+
+`func (o *VnicVnicTemplate) GetNetFlowMonitorSessions() []VnicNetFlowMonitorSession`
+
+GetNetFlowMonitorSessions returns the NetFlowMonitorSessions field if non-nil, zero value otherwise.
+
+### GetNetFlowMonitorSessionsOk
+
+`func (o *VnicVnicTemplate) GetNetFlowMonitorSessionsOk() (*[]VnicNetFlowMonitorSession, bool)`
+
+GetNetFlowMonitorSessionsOk returns a tuple with the NetFlowMonitorSessions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetFlowMonitorSessions
+
+`func (o *VnicVnicTemplate) SetNetFlowMonitorSessions(v []VnicNetFlowMonitorSession)`
+
+SetNetFlowMonitorSessions sets NetFlowMonitorSessions field to given value.
+
+### HasNetFlowMonitorSessions
+
+`func (o *VnicVnicTemplate) HasNetFlowMonitorSessions() bool`
+
+HasNetFlowMonitorSessions returns a boolean if a field has been set.
+
+### SetNetFlowMonitorSessionsNil
+
+`func (o *VnicVnicTemplate) SetNetFlowMonitorSessionsNil(b bool)`
+
+ SetNetFlowMonitorSessionsNil sets the value for NetFlowMonitorSessions to be an explicit nil
+
+### UnsetNetFlowMonitorSessions
+`func (o *VnicVnicTemplate) UnsetNetFlowMonitorSessions()`
+
+UnsetNetFlowMonitorSessions ensures that no value is present for NetFlowMonitorSessions, not even an explicit nil
 ### GetPeerVnicName
 
 `func (o *VnicVnicTemplate) GetPeerVnicName() string`

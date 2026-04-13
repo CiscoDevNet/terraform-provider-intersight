@@ -560,7 +560,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("announcement_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetAnnouncementDate(x)
 	}
 
@@ -580,7 +581,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -595,7 +597,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_new_service_attachment_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndofNewServiceAttachmentDate(x)
 	}
 
@@ -605,7 +608,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_service_contract_renewal_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndofServiceContractRenewalDate(x)
 	}
 
@@ -615,7 +619,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_sw_maintenance_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndofSwMaintenanceDate(x)
 	}
 
@@ -630,7 +635,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("last_dateof_support"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetLastDateofSupport(x)
 	}
 
@@ -640,7 +646,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("last_ship_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetLastShipDate(x)
 	}
 
@@ -655,7 +662,8 @@ func dataSourceNiaapiDcnmSweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 

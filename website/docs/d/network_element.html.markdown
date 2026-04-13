@@ -54,8 +54,12 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_ipv4_gateway`:(string) The default IPv4 gateway of the network Element out-of-band management interface. 
 * `out_of_band_ipv4_mask`:(string) The network mask of the network Element out-of-band management interface. 
 * `out_of_band_ipv6_address`:(string) The IPv6 address of the network Element out-of-band management interface. 
+* `out_of_band_ipv6_error`:(string) Any error message related to IPv6 configuration on the network Element out-of-band management interface. 
 * `out_of_band_ipv6_gateway`:(string) The default IPv6 gateway of the network Element out-of-band management interface. 
+* `out_of_band_ipv6_mode`:(string) The IPv6 address configuration mode of the network Element out-of-band management interface.* `` - The IPv6 address mode is not available or not applicable.* `slaac` - IPv6 address is configured via Stateless Address Autoconfiguration (SLAAC).* `static` - IPv6 address is statically configured.* `disabled` - IPv6 is disabled on the out-of-band management interface. 
 * `out_of_band_ipv6_prefix`:(string) The network mask of the network Element out-of-band management interface. 
+* `out_of_band_ipv6_slaac_iid_mode`:(string) The SLAAC Interface Identifier (IID) mode for the network Element out-of-band management IPv6 address.* `` - The SLAAC IID mode is not available or not applicable.* `eui64` - The SLAAC IID is derived from the MAC address using the EUI-64 method.* `opaque` - The SLAAC IID is generated using an opaque identifier for privacy. 
+* `out_of_band_ipv6_status`:(string) The status of the IPv6 configuration on the network Element out-of-band management interface.* `` - The IPv6 address status is not available or not applicable.* `active` - The IPv6 address is active and in use.* `tentative` - The IPv6 address is in tentative state (Duplicate Address Detection in progress).* `duplicate` - The IPv6 address is a duplicate (DAD failed).* `disabled` - The IPv6 address is disabled.* `error` - An error occurred during IPv6 address configuration.* `unknown` - The IPv6 address status is unknown. 
 * `out_of_band_mac`:(string) The MAC address of the network Element out-of-band management interface. 
 * `part_number`:(string) Part number of the switch. 
 * `peer_firmware_out_of_sync`:(bool) The flag to indicate the firmware of peer Fabric Interconnect is out of sync. 
@@ -63,6 +67,7 @@ The following arguments can be used to get data of already created objects in In
 * `reserved_vlan_start_id`:(int) The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
+* `router_mac`:(string) This MAC address will be the source MAC address for NetFlow packets. 
 * `serial`:(string) This field displays the serial number of the associated component or hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `slot_id`:(int) The Slot Id of the network Element when embedded inside a chassis. 

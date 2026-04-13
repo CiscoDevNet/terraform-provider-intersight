@@ -6,10 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NexusDashboards"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NexusDashboards"]
+**BandwidthUsageMonitoring** | Pointer to **bool** | Feature operational state of bandwidth monitoring. | [optional] [readonly] 
+**ChangeApprovalCount** | Pointer to **int64** | Count of total Change Control tickets that have been approved and completed. | [optional] [readonly] 
+**ChangeRollbackCount** | Pointer to **int64** | Count the number of change control tickets that have been rolled back. | [optional] [readonly] 
 **ClusterName** | Pointer to **string** | Nexus Dashboard can onboard multiple APIC clusters/sites. | [optional] 
 **ClusterUuid** | Pointer to **string** | UUID of the Nexus Dashboard cluster. | [optional] 
+**DeviceSnapshotsCount** | Pointer to **int64** | Count of number of image snapshots taken. | [optional] [readonly] 
 **Dn** | Pointer to **string** | Dn of the objects present for Nexus Dashboard devices. | [optional] 
+**FabricImagePoliciesCount** | Pointer to **int64** | Count of number of devices with attached image policies. | [optional] [readonly] 
+**FeatureOperStatus** | Pointer to **bool** | Feature Operation status of change management. | [optional] 
+**ImageFileStagingCount** | Pointer to **int64** | Count of number of image operations of type stage. | [optional] [readonly] 
+**IpamOperState** | Pointer to **string** | Feature Operation status of Integration with IPAM. | [optional] [readonly] 
 **IsClusterHealthy** | Pointer to **string** | Health of Nexus Dashboard cluster. | [optional] 
+**K8VisualizerAdminState** | Pointer to **string** | Feature Operation status of Kubernetes Visualizer. | [optional] [readonly] 
 **NdClusterSize** | Pointer to **int64** | Number of nodes in Nexus Dashboard cluster. | [optional] 
 **NdSites** | Pointer to [**[]NiatelemetrySites**](NiatelemetrySites.md) |  | [optional] 
 **NdType** | Pointer to **string** | Node type in Nexus Dashboard cluster. | [optional] 
@@ -22,8 +31,13 @@ Name | Type | Description | Notes
 **NumberOfSitesServiced** | Pointer to **int64** | Number of sites serviced by ND. | [optional] 
 **NumberOfTenantsInMso** | Pointer to **int64** | Number of total tenants in Multi-Site Orchestrator. | [optional] 
 **NumberOfVxlanFabricSitesInMso** | Pointer to **int64** | Number of sites with vxLan type fabric in Multi-Site Orchestrator. | [optional] 
+**PerformanceMonitoring** | Pointer to **bool** | Feature operational state of performance Monitoring. | [optional] [readonly] 
+**PostUpgradeReportGenerationCount** | Pointer to **int64** | Count of post upgrade report generation. | [optional] [readonly] 
+**PreUpgradeReportGenerationCount** | Pointer to **int64** | Count of pre upgrade report generation. | [optional] [readonly] 
+**PtpAdminState** | Pointer to **string** | Feature Operation status of Precision Time Protocol Monitoring. | [optional] [readonly] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **TypeOfSiteInMso** | Pointer to **string** | Type of site added to Multi-Site Orchestrator. | [optional] 
+**VmmVisualizerAdminState** | Pointer to **string** | Feature Operation status of VMM Visualizer. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -85,6 +99,81 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetBandwidthUsageMonitoring
+
+`func (o *NiatelemetryNexusDashboards) GetBandwidthUsageMonitoring() bool`
+
+GetBandwidthUsageMonitoring returns the BandwidthUsageMonitoring field if non-nil, zero value otherwise.
+
+### GetBandwidthUsageMonitoringOk
+
+`func (o *NiatelemetryNexusDashboards) GetBandwidthUsageMonitoringOk() (*bool, bool)`
+
+GetBandwidthUsageMonitoringOk returns a tuple with the BandwidthUsageMonitoring field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBandwidthUsageMonitoring
+
+`func (o *NiatelemetryNexusDashboards) SetBandwidthUsageMonitoring(v bool)`
+
+SetBandwidthUsageMonitoring sets BandwidthUsageMonitoring field to given value.
+
+### HasBandwidthUsageMonitoring
+
+`func (o *NiatelemetryNexusDashboards) HasBandwidthUsageMonitoring() bool`
+
+HasBandwidthUsageMonitoring returns a boolean if a field has been set.
+
+### GetChangeApprovalCount
+
+`func (o *NiatelemetryNexusDashboards) GetChangeApprovalCount() int64`
+
+GetChangeApprovalCount returns the ChangeApprovalCount field if non-nil, zero value otherwise.
+
+### GetChangeApprovalCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetChangeApprovalCountOk() (*int64, bool)`
+
+GetChangeApprovalCountOk returns a tuple with the ChangeApprovalCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChangeApprovalCount
+
+`func (o *NiatelemetryNexusDashboards) SetChangeApprovalCount(v int64)`
+
+SetChangeApprovalCount sets ChangeApprovalCount field to given value.
+
+### HasChangeApprovalCount
+
+`func (o *NiatelemetryNexusDashboards) HasChangeApprovalCount() bool`
+
+HasChangeApprovalCount returns a boolean if a field has been set.
+
+### GetChangeRollbackCount
+
+`func (o *NiatelemetryNexusDashboards) GetChangeRollbackCount() int64`
+
+GetChangeRollbackCount returns the ChangeRollbackCount field if non-nil, zero value otherwise.
+
+### GetChangeRollbackCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetChangeRollbackCountOk() (*int64, bool)`
+
+GetChangeRollbackCountOk returns a tuple with the ChangeRollbackCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChangeRollbackCount
+
+`func (o *NiatelemetryNexusDashboards) SetChangeRollbackCount(v int64)`
+
+SetChangeRollbackCount sets ChangeRollbackCount field to given value.
+
+### HasChangeRollbackCount
+
+`func (o *NiatelemetryNexusDashboards) HasChangeRollbackCount() bool`
+
+HasChangeRollbackCount returns a boolean if a field has been set.
+
 ### GetClusterName
 
 `func (o *NiatelemetryNexusDashboards) GetClusterName() string`
@@ -135,6 +224,31 @@ SetClusterUuid sets ClusterUuid field to given value.
 
 HasClusterUuid returns a boolean if a field has been set.
 
+### GetDeviceSnapshotsCount
+
+`func (o *NiatelemetryNexusDashboards) GetDeviceSnapshotsCount() int64`
+
+GetDeviceSnapshotsCount returns the DeviceSnapshotsCount field if non-nil, zero value otherwise.
+
+### GetDeviceSnapshotsCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetDeviceSnapshotsCountOk() (*int64, bool)`
+
+GetDeviceSnapshotsCountOk returns a tuple with the DeviceSnapshotsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceSnapshotsCount
+
+`func (o *NiatelemetryNexusDashboards) SetDeviceSnapshotsCount(v int64)`
+
+SetDeviceSnapshotsCount sets DeviceSnapshotsCount field to given value.
+
+### HasDeviceSnapshotsCount
+
+`func (o *NiatelemetryNexusDashboards) HasDeviceSnapshotsCount() bool`
+
+HasDeviceSnapshotsCount returns a boolean if a field has been set.
+
 ### GetDn
 
 `func (o *NiatelemetryNexusDashboards) GetDn() string`
@@ -160,6 +274,106 @@ SetDn sets Dn field to given value.
 
 HasDn returns a boolean if a field has been set.
 
+### GetFabricImagePoliciesCount
+
+`func (o *NiatelemetryNexusDashboards) GetFabricImagePoliciesCount() int64`
+
+GetFabricImagePoliciesCount returns the FabricImagePoliciesCount field if non-nil, zero value otherwise.
+
+### GetFabricImagePoliciesCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetFabricImagePoliciesCountOk() (*int64, bool)`
+
+GetFabricImagePoliciesCountOk returns a tuple with the FabricImagePoliciesCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFabricImagePoliciesCount
+
+`func (o *NiatelemetryNexusDashboards) SetFabricImagePoliciesCount(v int64)`
+
+SetFabricImagePoliciesCount sets FabricImagePoliciesCount field to given value.
+
+### HasFabricImagePoliciesCount
+
+`func (o *NiatelemetryNexusDashboards) HasFabricImagePoliciesCount() bool`
+
+HasFabricImagePoliciesCount returns a boolean if a field has been set.
+
+### GetFeatureOperStatus
+
+`func (o *NiatelemetryNexusDashboards) GetFeatureOperStatus() bool`
+
+GetFeatureOperStatus returns the FeatureOperStatus field if non-nil, zero value otherwise.
+
+### GetFeatureOperStatusOk
+
+`func (o *NiatelemetryNexusDashboards) GetFeatureOperStatusOk() (*bool, bool)`
+
+GetFeatureOperStatusOk returns a tuple with the FeatureOperStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureOperStatus
+
+`func (o *NiatelemetryNexusDashboards) SetFeatureOperStatus(v bool)`
+
+SetFeatureOperStatus sets FeatureOperStatus field to given value.
+
+### HasFeatureOperStatus
+
+`func (o *NiatelemetryNexusDashboards) HasFeatureOperStatus() bool`
+
+HasFeatureOperStatus returns a boolean if a field has been set.
+
+### GetImageFileStagingCount
+
+`func (o *NiatelemetryNexusDashboards) GetImageFileStagingCount() int64`
+
+GetImageFileStagingCount returns the ImageFileStagingCount field if non-nil, zero value otherwise.
+
+### GetImageFileStagingCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetImageFileStagingCountOk() (*int64, bool)`
+
+GetImageFileStagingCountOk returns a tuple with the ImageFileStagingCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageFileStagingCount
+
+`func (o *NiatelemetryNexusDashboards) SetImageFileStagingCount(v int64)`
+
+SetImageFileStagingCount sets ImageFileStagingCount field to given value.
+
+### HasImageFileStagingCount
+
+`func (o *NiatelemetryNexusDashboards) HasImageFileStagingCount() bool`
+
+HasImageFileStagingCount returns a boolean if a field has been set.
+
+### GetIpamOperState
+
+`func (o *NiatelemetryNexusDashboards) GetIpamOperState() string`
+
+GetIpamOperState returns the IpamOperState field if non-nil, zero value otherwise.
+
+### GetIpamOperStateOk
+
+`func (o *NiatelemetryNexusDashboards) GetIpamOperStateOk() (*string, bool)`
+
+GetIpamOperStateOk returns a tuple with the IpamOperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpamOperState
+
+`func (o *NiatelemetryNexusDashboards) SetIpamOperState(v string)`
+
+SetIpamOperState sets IpamOperState field to given value.
+
+### HasIpamOperState
+
+`func (o *NiatelemetryNexusDashboards) HasIpamOperState() bool`
+
+HasIpamOperState returns a boolean if a field has been set.
+
 ### GetIsClusterHealthy
 
 `func (o *NiatelemetryNexusDashboards) GetIsClusterHealthy() string`
@@ -184,6 +398,31 @@ SetIsClusterHealthy sets IsClusterHealthy field to given value.
 `func (o *NiatelemetryNexusDashboards) HasIsClusterHealthy() bool`
 
 HasIsClusterHealthy returns a boolean if a field has been set.
+
+### GetK8VisualizerAdminState
+
+`func (o *NiatelemetryNexusDashboards) GetK8VisualizerAdminState() string`
+
+GetK8VisualizerAdminState returns the K8VisualizerAdminState field if non-nil, zero value otherwise.
+
+### GetK8VisualizerAdminStateOk
+
+`func (o *NiatelemetryNexusDashboards) GetK8VisualizerAdminStateOk() (*string, bool)`
+
+GetK8VisualizerAdminStateOk returns a tuple with the K8VisualizerAdminState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetK8VisualizerAdminState
+
+`func (o *NiatelemetryNexusDashboards) SetK8VisualizerAdminState(v string)`
+
+SetK8VisualizerAdminState sets K8VisualizerAdminState field to given value.
+
+### HasK8VisualizerAdminState
+
+`func (o *NiatelemetryNexusDashboards) HasK8VisualizerAdminState() bool`
+
+HasK8VisualizerAdminState returns a boolean if a field has been set.
 
 ### GetNdClusterSize
 
@@ -495,6 +734,106 @@ SetNumberOfVxlanFabricSitesInMso sets NumberOfVxlanFabricSitesInMso field to giv
 
 HasNumberOfVxlanFabricSitesInMso returns a boolean if a field has been set.
 
+### GetPerformanceMonitoring
+
+`func (o *NiatelemetryNexusDashboards) GetPerformanceMonitoring() bool`
+
+GetPerformanceMonitoring returns the PerformanceMonitoring field if non-nil, zero value otherwise.
+
+### GetPerformanceMonitoringOk
+
+`func (o *NiatelemetryNexusDashboards) GetPerformanceMonitoringOk() (*bool, bool)`
+
+GetPerformanceMonitoringOk returns a tuple with the PerformanceMonitoring field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPerformanceMonitoring
+
+`func (o *NiatelemetryNexusDashboards) SetPerformanceMonitoring(v bool)`
+
+SetPerformanceMonitoring sets PerformanceMonitoring field to given value.
+
+### HasPerformanceMonitoring
+
+`func (o *NiatelemetryNexusDashboards) HasPerformanceMonitoring() bool`
+
+HasPerformanceMonitoring returns a boolean if a field has been set.
+
+### GetPostUpgradeReportGenerationCount
+
+`func (o *NiatelemetryNexusDashboards) GetPostUpgradeReportGenerationCount() int64`
+
+GetPostUpgradeReportGenerationCount returns the PostUpgradeReportGenerationCount field if non-nil, zero value otherwise.
+
+### GetPostUpgradeReportGenerationCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetPostUpgradeReportGenerationCountOk() (*int64, bool)`
+
+GetPostUpgradeReportGenerationCountOk returns a tuple with the PostUpgradeReportGenerationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPostUpgradeReportGenerationCount
+
+`func (o *NiatelemetryNexusDashboards) SetPostUpgradeReportGenerationCount(v int64)`
+
+SetPostUpgradeReportGenerationCount sets PostUpgradeReportGenerationCount field to given value.
+
+### HasPostUpgradeReportGenerationCount
+
+`func (o *NiatelemetryNexusDashboards) HasPostUpgradeReportGenerationCount() bool`
+
+HasPostUpgradeReportGenerationCount returns a boolean if a field has been set.
+
+### GetPreUpgradeReportGenerationCount
+
+`func (o *NiatelemetryNexusDashboards) GetPreUpgradeReportGenerationCount() int64`
+
+GetPreUpgradeReportGenerationCount returns the PreUpgradeReportGenerationCount field if non-nil, zero value otherwise.
+
+### GetPreUpgradeReportGenerationCountOk
+
+`func (o *NiatelemetryNexusDashboards) GetPreUpgradeReportGenerationCountOk() (*int64, bool)`
+
+GetPreUpgradeReportGenerationCountOk returns a tuple with the PreUpgradeReportGenerationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreUpgradeReportGenerationCount
+
+`func (o *NiatelemetryNexusDashboards) SetPreUpgradeReportGenerationCount(v int64)`
+
+SetPreUpgradeReportGenerationCount sets PreUpgradeReportGenerationCount field to given value.
+
+### HasPreUpgradeReportGenerationCount
+
+`func (o *NiatelemetryNexusDashboards) HasPreUpgradeReportGenerationCount() bool`
+
+HasPreUpgradeReportGenerationCount returns a boolean if a field has been set.
+
+### GetPtpAdminState
+
+`func (o *NiatelemetryNexusDashboards) GetPtpAdminState() string`
+
+GetPtpAdminState returns the PtpAdminState field if non-nil, zero value otherwise.
+
+### GetPtpAdminStateOk
+
+`func (o *NiatelemetryNexusDashboards) GetPtpAdminStateOk() (*string, bool)`
+
+GetPtpAdminStateOk returns a tuple with the PtpAdminState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPtpAdminState
+
+`func (o *NiatelemetryNexusDashboards) SetPtpAdminState(v string)`
+
+SetPtpAdminState sets PtpAdminState field to given value.
+
+### HasPtpAdminState
+
+`func (o *NiatelemetryNexusDashboards) HasPtpAdminState() bool`
+
+HasPtpAdminState returns a boolean if a field has been set.
+
 ### GetRecordType
 
 `func (o *NiatelemetryNexusDashboards) GetRecordType() string`
@@ -544,6 +883,31 @@ SetTypeOfSiteInMso sets TypeOfSiteInMso field to given value.
 `func (o *NiatelemetryNexusDashboards) HasTypeOfSiteInMso() bool`
 
 HasTypeOfSiteInMso returns a boolean if a field has been set.
+
+### GetVmmVisualizerAdminState
+
+`func (o *NiatelemetryNexusDashboards) GetVmmVisualizerAdminState() string`
+
+GetVmmVisualizerAdminState returns the VmmVisualizerAdminState field if non-nil, zero value otherwise.
+
+### GetVmmVisualizerAdminStateOk
+
+`func (o *NiatelemetryNexusDashboards) GetVmmVisualizerAdminStateOk() (*string, bool)`
+
+GetVmmVisualizerAdminStateOk returns a tuple with the VmmVisualizerAdminState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmmVisualizerAdminState
+
+`func (o *NiatelemetryNexusDashboards) SetVmmVisualizerAdminState(v string)`
+
+SetVmmVisualizerAdminState sets VmmVisualizerAdminState field to given value.
+
+### HasVmmVisualizerAdminState
+
+`func (o *NiatelemetryNexusDashboards) HasVmmVisualizerAdminState() bool`
+
+HasVmmVisualizerAdminState returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

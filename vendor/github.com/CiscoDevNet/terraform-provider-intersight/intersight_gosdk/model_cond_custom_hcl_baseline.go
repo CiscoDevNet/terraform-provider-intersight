@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026021105
+API version: 1.0.11-2026030305
 Contact: intersight@cisco.com
 */
 
@@ -50,9 +50,9 @@ type CondCustomHclBaseline struct {
 	// Operation state specifies the state of custom Hcl baseline whether the server's baseline status is evaluated or not. \"InProgress\" - Server's baseline status assessment is currently in progress \"Pending\" - Server's baseline status assessment is not yet started \"Active\" - Server's baseline status assessment is completed. * `Pending` - Server's custom hcl status assessment is not yet started. * `Active` - Server's custom hcl status assessment is completed. * `InProgress` - Server's custom hcl status assessment is currently in progress. * `Failed` - Server's custom hcl status assessment is failed.
 	OperationState *string `json:"OperationState,omitempty"`
 	// The operating system vendor name running on the server.
-	OsVendor *string `json:"OsVendor,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ ]+$"`
+	OsVendor *string `json:"OsVendor,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ -]+$"`
 	// Operating System version running on the server.
-	OsVersion *string `json:"OsVersion,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ .]+$"`
+	OsVersion *string `json:"OsVersion,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ .()-]+$"`
 	// The processor family associated with the server for example processor model Intel (R) Xeon (R) Platinum 8454H or AMD EPYC 9654. will be validated using its corresponding processor family. Processor model Intel (R) Xeon (R) Platinum 8454H -> 4th Gen Intel Xeon Processor Scalable Family Processor model AMD EPYC 9654 -> 4th Gen AMD EPYC 9004 Series Processors.
 	ProcessorFamily      *string                                      `json:"ProcessorFamily,omitempty"`
 	ServerModel          []string                                     `json:"ServerModel,omitempty"`
@@ -819,9 +819,9 @@ func (o *CondCustomHclBaseline) UnmarshalJSON(data []byte) (err error) {
 		// Operation state specifies the state of custom Hcl baseline whether the server's baseline status is evaluated or not. \"InProgress\" - Server's baseline status assessment is currently in progress \"Pending\" - Server's baseline status assessment is not yet started \"Active\" - Server's baseline status assessment is completed. * `Pending` - Server's custom hcl status assessment is not yet started. * `Active` - Server's custom hcl status assessment is completed. * `InProgress` - Server's custom hcl status assessment is currently in progress. * `Failed` - Server's custom hcl status assessment is failed.
 		OperationState *string `json:"OperationState,omitempty"`
 		// The operating system vendor name running on the server.
-		OsVendor *string `json:"OsVendor,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ ]+$"`
+		OsVendor *string `json:"OsVendor,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ -]+$"`
 		// Operating System version running on the server.
-		OsVersion *string `json:"OsVersion,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ .]+$"`
+		OsVersion *string `json:"OsVersion,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_ .()-]+$"`
 		// The processor family associated with the server for example processor model Intel (R) Xeon (R) Platinum 8454H or AMD EPYC 9654. will be validated using its corresponding processor family. Processor model Intel (R) Xeon (R) Platinum 8454H -> 4th Gen Intel Xeon Processor Scalable Family Processor model AMD EPYC 9654 -> 4th Gen AMD EPYC 9004 Series Processors.
 		ProcessorFamily *string                                      `json:"ProcessorFamily,omitempty"`
 		ServerModel     []string                                     `json:"ServerModel,omitempty"`

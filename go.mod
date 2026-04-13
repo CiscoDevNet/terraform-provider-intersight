@@ -1,8 +1,6 @@
 module github.com/CiscoDevNet/terraform-provider-intersight
 
-go 1.24.0
-
-toolchain go1.24.7
+go 1.25.0
 
 require (
 	github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk v0.0.0
@@ -36,9 +34,9 @@ require (
 	github.com/oklog/run v1.0.0 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
 	github.com/zclconf/go-cty v1.2.1 // indirect
-	golang.org/x/net v0.50.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
+	golang.org/x/net v0.53.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/genproto v0.0.0-20200825200019-8632dd797987 // indirect
 	google.golang.org/grpc v1.32.0 // indirect

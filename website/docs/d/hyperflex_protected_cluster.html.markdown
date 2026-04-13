@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_protected_cluster"
 description: |-
-        Object for the protected clusters view.
+        The ProtectedCluster object represents the protected clusters view, highlighting protection details and associations. This enables a disaster recovery strategy, allowing VMs to be restored and run on the protection cluster if the primary cluster fails, ensuring business continuity
+        #### Purpose
+        ProtectedCluster provides a comprehensive overview of protection status and configurations for clusters within HyperFlex environments, supporting effective management of protected resources.
+        #### Key Concepts
+        - **Protection Overview:** Offers insights into protected VMs and datastores, ensuring robust data management and security.
+        - **Cluster Associations:** Maps protection data to clusters, facilitating organized management and operational continuity.
+        - **Access Control:** Utilizes privilege sets to ensure secure access to protection information, maintaining data integrity.
 
 ---
 
 # Data Source: intersight_hyperflex_protected_cluster
-Object for the protected clusters view.
+The ProtectedCluster object represents the protected clusters view, highlighting protection details and associations. This enables a disaster recovery strategy, allowing VMs to be restored and run on the protection cluster if the primary cluster fails, ensuring business continuity
+#### Purpose
+ProtectedCluster provides a comprehensive overview of protection status and configurations for clusters within HyperFlex environments, supporting effective management of protected resources.
+#### Key Concepts
+- **Protection Overview:** Offers insights into protected VMs and datastores, ensuring robust data management and security.
+- **Cluster Associations:** Maps protection data to clusters, facilitating organized management and operational continuity.
+- **Access Control:** Utilizes privilege sets to ensure secure access to protection information, maintaining data integrity.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

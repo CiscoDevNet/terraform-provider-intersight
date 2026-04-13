@@ -740,7 +740,8 @@ func resourceIwotenantMaintenanceNotificationCreate(c context.Context, d *schema
 	}
 
 	if v, ok := d.GetOk("maintenance_start_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetMaintenanceStartTime(x)
 	}
 
@@ -757,12 +758,14 @@ func resourceIwotenantMaintenanceNotificationCreate(c context.Context, d *schema
 	o.SetObjectType("iwotenant.MaintenanceNotification")
 
 	if v, ok := d.GetOk("show_from_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetShowFromTime(x)
 	}
 
 	if v, ok := d.GetOk("show_until_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetShowUntilTime(x)
 	}
 

@@ -3,28 +3,26 @@ subcategory: "convergedinfra"
 layout: "intersight"
 page_title: "Intersight: intersight_convergedinfra_storage_compliance_details"
 description: |-
-        ### Overview
         The StorageComplianceDetails object provides compliance information for storage arrays within a converged infrastructure pod, assessing their interoperability and operational standards.
         #### Purpose
         StorageComplianceDetails focuses on evaluating storage compliance, ensuring that storage components meet interoperability criteria and operational guidelines necessary for efficient data management.
         #### Key Concepts
-        - **Operating System and Protocol Evaluation:** - Assesses compliance of storage arrays based on their operating systems and communication protocols.
-        - **Integration with Network Components:** - Evaluates storage compliance in relation to switches and adapters, promoting integrated infrastructure assessments.
-        - **Pod-Level Compliance:** - Connects storage compliance details with broader pod compliance information, supporting cohesive compliance management.
-        - **Secure Access:** - Provides controlled access to storage compliance data through privilege sets, ensuring secure and authorized interactions.
+        - **Operating System and Protocol Evaluation:** Assesses compliance of storage arrays based on their operating systems and communication protocols.
+        - **Integration with Network Components:** Evaluates storage compliance in relation to switches and adapters, promoting integrated infrastructure assessments.
+        - **Pod-Level Compliance:** Connects storage compliance details with broader pod compliance information, supporting cohesive compliance management.
+        - **Secure Access:** Provides controlled access to storage compliance data through privilege sets, ensuring secure and authorized interactions.
 
 ---
 
 # Data Source: intersight_convergedinfra_storage_compliance_details
-### Overview
 The StorageComplianceDetails object provides compliance information for storage arrays within a converged infrastructure pod, assessing their interoperability and operational standards.  
-#### Purpose  
+#### Purpose
 StorageComplianceDetails focuses on evaluating storage compliance, ensuring that storage components meet interoperability criteria and operational guidelines necessary for efficient data management.  
-#### Key Concepts 
-- **Operating System and Protocol Evaluation:** - Assesses compliance of storage arrays based on their operating systems and communication protocols. 
-- **Integration with Network Components:** - Evaluates storage compliance in relation to switches and adapters, promoting integrated infrastructure assessments. 
-- **Pod-Level Compliance:** - Connects storage compliance details with broader pod compliance information, supporting cohesive compliance management. 
-- **Secure Access:** - Provides controlled access to storage compliance data through privilege sets, ensuring secure and authorized interactions.
+#### Key Concepts
+- **Operating System and Protocol Evaluation:** Assesses compliance of storage arrays based on their operating systems and communication protocols. 
+- **Integration with Network Components:** Evaluates storage compliance in relation to switches and adapters, promoting integrated infrastructure assessments. 
+- **Pod-Level Compliance:** Connects storage compliance details with broader pod compliance information, supporting cohesive compliance management. 
+- **Secure Access:** Provides controlled access to storage compliance data through privilege sets, ensuring secure and authorized interactions.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

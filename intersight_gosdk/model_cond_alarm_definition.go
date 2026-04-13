@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026021105
+API version: 1.0.11-2026030305
 Contact: intersight@cisco.com
 */
 
@@ -27,8 +27,13 @@ type CondAlarmDefinition struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string            `json:"ObjectType"`
-	Actions              []CondAlarmAction `json:"Actions,omitempty"`
+	ObjectType string            `json:"ObjectType"`
+	Actions    []CondAlarmAction `json:"Actions,omitempty"`
+	// Controls the behavior of alarm processing depending upon the status. If Enabled, alarm is evaluated for any condition that meets the criteria. If Disabled or SystemDisabled, alarm is not evaluated and the existing alarms for this AlarmDefinition is cleared. If Inactive, alarm is not evaluated and the existing alarms for this AlarmDefinition is deleted. * `Enabled` - Enables alarm evaluation for any condition that meets the criteria. * `Disabled` - Disables alarm evaluation temporarily and clears the existing alarms. * `SystemDisabled` - Disables alarm evaluation temporarily and clears the existing alarms once alarm limit per alarm rule is reached. * `Inactive` - Stops alarm evaluation permanently and deletes the existing alarms.
+	Status               *string                                     `json:"Status,omitempty"`
+	Account              NullableIamAccountRelationship              `json:"Account,omitempty"`
+	Device               NullableMoBaseMoRelationship                `json:"Device,omitempty"`
+	ThresholdDefinition  NullableCondThresholdDefinitionRelationship `json:"ThresholdDefinition,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,6 +47,8 @@ func NewCondAlarmDefinition(classId string, objectType string) *CondAlarmDefinit
 	this := CondAlarmDefinition{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var status string = "Enabled"
+	this.Status = &status
 	return &this
 }
 
@@ -54,6 +61,8 @@ func NewCondAlarmDefinitionWithDefaults() *CondAlarmDefinition {
 	this.ClassId = classId
 	var objectType string = "cond.AlarmDefinition"
 	this.ObjectType = objectType
+	var status string = "Enabled"
+	this.Status = &status
 	return &this
 }
 
@@ -148,6 +157,167 @@ func (o *CondAlarmDefinition) SetActions(v []CondAlarmAction) {
 	o.Actions = v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *CondAlarmDefinition) GetStatus() string {
+	if o == nil || IsNil(o.Status) {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarmDefinition) GetStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *CondAlarmDefinition) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *CondAlarmDefinition) SetStatus(v string) {
+	o.Status = &v
+}
+
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmDefinition) GetAccount() IamAccountRelationship {
+	if o == nil || IsNil(o.Account.Get()) {
+		var ret IamAccountRelationship
+		return ret
+	}
+	return *o.Account.Get()
+}
+
+// GetAccountOk returns a tuple with the Account field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmDefinition) GetAccountOk() (*IamAccountRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Account.Get(), o.Account.IsSet()
+}
+
+// HasAccount returns a boolean if a field has been set.
+func (o *CondAlarmDefinition) HasAccount() bool {
+	if o != nil && o.Account.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
+func (o *CondAlarmDefinition) SetAccount(v IamAccountRelationship) {
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *CondAlarmDefinition) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *CondAlarmDefinition) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmDefinition) GetDevice() MoBaseMoRelationship {
+	if o == nil || IsNil(o.Device.Get()) {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.Device.Get()
+}
+
+// GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmDefinition) GetDeviceOk() (*MoBaseMoRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Device.Get(), o.Device.IsSet()
+}
+
+// HasDevice returns a boolean if a field has been set.
+func (o *CondAlarmDefinition) HasDevice() bool {
+	if o != nil && o.Device.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDevice gets a reference to the given NullableMoBaseMoRelationship and assigns it to the Device field.
+func (o *CondAlarmDefinition) SetDevice(v MoBaseMoRelationship) {
+	o.Device.Set(&v)
+}
+
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *CondAlarmDefinition) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *CondAlarmDefinition) UnsetDevice() {
+	o.Device.Unset()
+}
+
+// GetThresholdDefinition returns the ThresholdDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarmDefinition) GetThresholdDefinition() CondThresholdDefinitionRelationship {
+	if o == nil || IsNil(o.ThresholdDefinition.Get()) {
+		var ret CondThresholdDefinitionRelationship
+		return ret
+	}
+	return *o.ThresholdDefinition.Get()
+}
+
+// GetThresholdDefinitionOk returns a tuple with the ThresholdDefinition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarmDefinition) GetThresholdDefinitionOk() (*CondThresholdDefinitionRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ThresholdDefinition.Get(), o.ThresholdDefinition.IsSet()
+}
+
+// HasThresholdDefinition returns a boolean if a field has been set.
+func (o *CondAlarmDefinition) HasThresholdDefinition() bool {
+	if o != nil && o.ThresholdDefinition.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholdDefinition gets a reference to the given NullableCondThresholdDefinitionRelationship and assigns it to the ThresholdDefinition field.
+func (o *CondAlarmDefinition) SetThresholdDefinition(v CondThresholdDefinitionRelationship) {
+	o.ThresholdDefinition.Set(&v)
+}
+
+// SetThresholdDefinitionNil sets the value for ThresholdDefinition to be an explicit nil
+func (o *CondAlarmDefinition) SetThresholdDefinitionNil() {
+	o.ThresholdDefinition.Set(nil)
+}
+
+// UnsetThresholdDefinition ensures that no value is present for ThresholdDefinition, not even an explicit nil
+func (o *CondAlarmDefinition) UnsetThresholdDefinition() {
+	o.ThresholdDefinition.Unset()
+}
+
 func (o CondAlarmDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -176,6 +346,18 @@ func (o CondAlarmDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize["ObjectType"] = o.ObjectType
 	if o.Actions != nil {
 		toSerialize["Actions"] = o.Actions
+	}
+	if !IsNil(o.Status) {
+		toSerialize["Status"] = o.Status
+	}
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
+	}
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
+	}
+	if o.ThresholdDefinition.IsSet() {
+		toSerialize["ThresholdDefinition"] = o.ThresholdDefinition.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -233,6 +415,11 @@ func (o *CondAlarmDefinition) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string            `json:"ObjectType"`
 		Actions    []CondAlarmAction `json:"Actions,omitempty"`
+		// Controls the behavior of alarm processing depending upon the status. If Enabled, alarm is evaluated for any condition that meets the criteria. If Disabled or SystemDisabled, alarm is not evaluated and the existing alarms for this AlarmDefinition is cleared. If Inactive, alarm is not evaluated and the existing alarms for this AlarmDefinition is deleted. * `Enabled` - Enables alarm evaluation for any condition that meets the criteria. * `Disabled` - Disables alarm evaluation temporarily and clears the existing alarms. * `SystemDisabled` - Disables alarm evaluation temporarily and clears the existing alarms once alarm limit per alarm rule is reached. * `Inactive` - Stops alarm evaluation permanently and deletes the existing alarms.
+		Status              *string                                     `json:"Status,omitempty"`
+		Account             NullableIamAccountRelationship              `json:"Account,omitempty"`
+		Device              NullableMoBaseMoRelationship                `json:"Device,omitempty"`
+		ThresholdDefinition NullableCondThresholdDefinitionRelationship `json:"ThresholdDefinition,omitempty"`
 	}
 
 	varCondAlarmDefinitionWithoutEmbeddedStruct := CondAlarmDefinitionWithoutEmbeddedStruct{}
@@ -243,6 +430,10 @@ func (o *CondAlarmDefinition) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarmDefinition.ClassId = varCondAlarmDefinitionWithoutEmbeddedStruct.ClassId
 		varCondAlarmDefinition.ObjectType = varCondAlarmDefinitionWithoutEmbeddedStruct.ObjectType
 		varCondAlarmDefinition.Actions = varCondAlarmDefinitionWithoutEmbeddedStruct.Actions
+		varCondAlarmDefinition.Status = varCondAlarmDefinitionWithoutEmbeddedStruct.Status
+		varCondAlarmDefinition.Account = varCondAlarmDefinitionWithoutEmbeddedStruct.Account
+		varCondAlarmDefinition.Device = varCondAlarmDefinitionWithoutEmbeddedStruct.Device
+		varCondAlarmDefinition.ThresholdDefinition = varCondAlarmDefinitionWithoutEmbeddedStruct.ThresholdDefinition
 		*o = CondAlarmDefinition(varCondAlarmDefinition)
 	} else {
 		return err
@@ -263,6 +454,10 @@ func (o *CondAlarmDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Actions")
+		delete(additionalProperties, "Status")
+		delete(additionalProperties, "Account")
+		delete(additionalProperties, "Device")
+		delete(additionalProperties, "ThresholdDefinition")
 
 		// remove fields from embedded structs
 		reflectIssueDefinition := reflect.ValueOf(o.IssueDefinition)

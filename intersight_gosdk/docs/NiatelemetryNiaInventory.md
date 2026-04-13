@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **NxosBootflashDetails** | Pointer to [**NullableNiatelemetryBootflashDetails**](NiatelemetryBootflashDetails.md) |  | [optional] 
 **NxosDciInterfaceStatus** | Pointer to **string** | Returns the status of dci interface configured. | [optional] 
 **NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](NiatelemetryInterface.md) |  | [optional] 
+**NxosModuleDetails** | Pointer to [**[]NiatelemetryNxosModuleInfo**](NiatelemetryNxosModuleInfo.md) |  | [optional] 
 **NxosNveInterfaceStatus** | Pointer to **string** | Returns the value of the nxosNveInterface field. | [optional] 
 **NxosNvePacketCounters** | Pointer to [**NullableNiatelemetryNvePacketCounters**](NiatelemetryNvePacketCounters.md) |  | [optional] 
 **NxosNveVni** | Pointer to [**NullableNiatelemetryNveVni**](NiatelemetryNveVni.md) |  | [optional] 
@@ -1096,6 +1097,41 @@ HasNxosInterfaceBrief returns a boolean if a field has been set.
 `func (o *NiatelemetryNiaInventory) UnsetNxosInterfaceBrief()`
 
 UnsetNxosInterfaceBrief ensures that no value is present for NxosInterfaceBrief, not even an explicit nil
+### GetNxosModuleDetails
+
+`func (o *NiatelemetryNiaInventory) GetNxosModuleDetails() []NiatelemetryNxosModuleInfo`
+
+GetNxosModuleDetails returns the NxosModuleDetails field if non-nil, zero value otherwise.
+
+### GetNxosModuleDetailsOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosModuleDetailsOk() (*[]NiatelemetryNxosModuleInfo, bool)`
+
+GetNxosModuleDetailsOk returns a tuple with the NxosModuleDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosModuleDetails
+
+`func (o *NiatelemetryNiaInventory) SetNxosModuleDetails(v []NiatelemetryNxosModuleInfo)`
+
+SetNxosModuleDetails sets NxosModuleDetails field to given value.
+
+### HasNxosModuleDetails
+
+`func (o *NiatelemetryNiaInventory) HasNxosModuleDetails() bool`
+
+HasNxosModuleDetails returns a boolean if a field has been set.
+
+### SetNxosModuleDetailsNil
+
+`func (o *NiatelemetryNiaInventory) SetNxosModuleDetailsNil(b bool)`
+
+ SetNxosModuleDetailsNil sets the value for NxosModuleDetails to be an explicit nil
+
+### UnsetNxosModuleDetails
+`func (o *NiatelemetryNiaInventory) UnsetNxosModuleDetails()`
+
+UnsetNxosModuleDetails ensures that no value is present for NxosModuleDetails, not even an explicit nil
 ### GetNxosNveInterfaceStatus
 
 `func (o *NiatelemetryNiaInventory) GetNxosNveInterfaceStatus() string`

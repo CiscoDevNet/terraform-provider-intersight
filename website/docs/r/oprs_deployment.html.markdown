@@ -3,12 +3,22 @@ subcategory: "oprs"
 layout: "intersight"
 page_title: "Intersight: intersight_oprs_deployment"
 description: |-
-        Monitors the status of operator deployed in the assist.
+        The Deployment object monitors the status of operators deployed within the assist environment. This provides insights into the operational health and configuration of deployed agents.
+        #### Purpose
+        Deployment is designed to ensure the continuous monitoring and management of operator deployments, providing real-time status updates and facilitating proactive maintenance.
+        #### Key Concepts
+        - **Status Monitoring:** Tracks the health and operational status of deployed agents.
+        - **Access Control:** Utilizes privilege sets to regulate monitoring operations and ensure secure data handling.
 
 ---
 
 # Resource: intersight_oprs_deployment
-Monitors the status of operator deployed in the assist.
+The Deployment object monitors the status of operators deployed within the assist environment. This provides insights into the operational health and configuration of deployed agents.
+#### Purpose
+Deployment is designed to ensure the continuous monitoring and management of operator deployments, providing real-time status updates and facilitating proactive maintenance.
+#### Key Concepts
+- **Status Monitoring:** Tracks the health and operational status of deployed agents.
+- **Access Control:** Utilizes privilege sets to regulate monitoring operations and ensure secure data handling.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

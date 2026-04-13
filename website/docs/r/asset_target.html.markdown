@@ -3,26 +3,24 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_target"
 description: |-
-        ### Overview
         The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem.
         #### Purpose
         Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets.
         #### Key Concepts
-        - **Type and Status Management:** - Defines the type of the managed entity and provides insights into its connection and operational status.
-        - **Service Integration:** - Supports the enablement of services for the target, facilitating comprehensive management and optimization.
-        - **Connection and Authentication:** - Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
+        - **Type and Status Management:** Defines the type of the managed entity and provides insights into its connection and operational status.
+        - **Service Integration:** Supports the enablement of services for the target, facilitating comprehensive management and optimization.
+        - **Connection and Authentication:** Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
 
 ---
 
 # Resource: intersight_asset_target
-### Overview 
 The Target object represents an entity managed by Intersight. It encompasses both physical and software entities, such as UCS servers or cloud accounts, and serves as the cornerstone for target management within Intersight's ecosystem.
 #### Purpose
 Target serves as the interface for managing entities within Intersight, offering a comprehensive view of the status and capabilities of each managed entity. It supports the establishment of connections, monitoring, and service enablement, facilitating effective management of diverse targets.
 #### Key Concepts
-- **Type and Status Management:** - Defines the type of the managed entity and provides insights into its connection and operational status.
-- **Service Integration:** - Supports the enablement of services for the target, facilitating comprehensive management and optimization.
-- **Connection and Authentication:** - Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
+- **Type and Status Management:** Defines the type of the managed entity and provides insights into its connection and operational status.
+- **Service Integration:** Supports the enablement of services for the target, facilitating comprehensive management and optimization.
+- **Connection and Authentication:** Manages methods for connecting to targets, ensuring secure and reliable interaction between Intersight and the managed entities.
 ## Usage Example
 ### Resource Creation
 
@@ -231,7 +229,7 @@ HttpConnection provides the necessary details for Intersight to connect to and a
 
 ### [asset.IntersightDeviceConnectorConnection](#argument-reference)
 Target is connected to Intersight using a Device Connector.
-* `security_token`:(string) ### OverviewThe SecurityToken object holds a time-limited random string used for claiming a device. It is created implicitly for each device connector at the time of registration, providing a secure mechanism for users to assert administrative access during device claim operations.#### PurposeSecurityToken acts as a temporary credential that proves a user's administrative access to a device, allowing them to claim the device within Intersight. It strengthens the security of claim operations, preventing unauthorized device claims by restricting access to users who possess the token.#### Key Concepts- **Time-Bound Security:** - Tokens are generated with expiration times, ensuring they are only valid for a limited duration to reduce the risk of misuse.- **Claim Validation:** - Used during claim operations to validate that the user has the necessary privileges to manage the device.- **Access Control:** - Integrates with Intersight's security model, providing controlled access to device claim functionalities. 
+* `security_token`:(string) The SecurityToken object holds a time-limited random string used for claiming a device. It is created implicitly for each device connector at the time of registration, providing a secure mechanism for users to assert administrative access during device claim operations.#### PurposeSecurityToken acts as a temporary credential that proves a user's administrative access to a device, allowing them to claim the device within Intersight. It strengthens the security of claim operations, preventing unauthorized device claims by restricting access to users who possess the token.#### Key Concepts- **Time-Bound Security:** Tokens are generated with expiration times, ensuring they are only valid for a limited duration to reduce the risk of misuse.- **Claim Validation:** Used during claim operations to validate that the user has the necessary privileges to manage the device.- **Access Control:** Integrates with Intersight's security model, providing controlled access to device claim functionalities. 
 * `serial_number`:(string) Obtained from the device connector management UI or API (REST endpoint '/connector/DeviceIdentifiers'). 
 
 ### [asset.ScopedTargetConnection](#argument-reference)

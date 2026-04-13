@@ -8,10 +8,10 @@ description: |-
         #### Purpose
         The Pod object serves as a central entity in converged infrastructure management, offering a comprehensive view of the components and their states within a deployment. It acts as a repository of information essential for monitoring, compliance checks, and resource management.
         #### Key Concepts
-        - **Deployment Unit:** - A Pod is a modular deployment component, enabling scalable and efficient infrastructure management.
-        - **Interoperability and Compliance:** - Facilitates the assessment of the interoperability status and compliance with predefined standards, ensuring optimal operation.
-        - **Resource Integration:** - Integrates various resources, including servers, adapters, switches, and storage arrays, into a cohesive management structure.
-        - **Privilege Management:** - Access to Pod details is controlled through privilege sets, ensuring secure and authorized interactions with the infrastructure data.
+        - **Deployment Unit:** A Pod is a modular deployment component, enabling scalable and efficient infrastructure management.
+        - **Interoperability and Compliance:** Facilitates the assessment of the interoperability status and compliance with predefined standards, ensuring optimal operation.
+        - **Resource Integration:** Integrates various resources, including servers, adapters, switches, and storage arrays, into a cohesive management structure.
+        - **Privilege Management:** Access to Pod details is controlled through privilege sets, ensuring secure and authorized interactions with the infrastructure data.
 
 ---
 
@@ -21,10 +21,10 @@ The Pod object represents a unit of deployment within a converged infrastructure
 #### Purpose 
 The Pod object serves as a central entity in converged infrastructure management, offering a comprehensive view of the components and their states within a deployment. It acts as a repository of information essential for monitoring, compliance checks, and resource management.  
 #### Key Concepts  
-- **Deployment Unit:** - A Pod is a modular deployment component, enabling scalable and efficient infrastructure management. 
-- **Interoperability and Compliance:** - Facilitates the assessment of the interoperability status and compliance with predefined standards, ensuring optimal operation. 
-- **Resource Integration:** - Integrates various resources, including servers, adapters, switches, and storage arrays, into a cohesive management structure. 
-- **Privilege Management:** - Access to Pod details is controlled through privilege sets, ensuring secure and authorized interactions with the infrastructure data.
+- **Deployment Unit:** A Pod is a modular deployment component, enabling scalable and efficient infrastructure management. 
+- **Interoperability and Compliance:** Facilitates the assessment of the interoperability status and compliance with predefined standards, ensuring optimal operation. 
+- **Resource Integration:** Integrates various resources, including servers, adapters, switches, and storage arrays, into a cohesive management structure. 
+- **Privilege Management:** Access to Pod details is controlled through privilege sets, ensuring secure and authorized interactions with the infrastructure data.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

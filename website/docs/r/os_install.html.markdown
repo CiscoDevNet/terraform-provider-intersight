@@ -3,20 +3,26 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_install"
 description: |-
-        This MO models the target server, answers and other properties needed for
-        OS installation. The OS installation can be started in the target server by doing
-        a POST on this MO.
-        The requests to this MO starts a OS installation workflow that can be tracked
-        using workflow engine MO workflow.WorkflowInfo.
+        The Install object is the execution point for initiating operating system installations on target servers. It models the necessary configuration and relationships required to start OS installations through Intersight's workflow system.
+        #### Purpose
+        The Install object captures all required properties and relationships for initiating OS installations. It acts as a launch point for installation workflows, ensuring that all necessary configurations are validated and tracked through Intersight's workflow engine.
+        #### Key Concepts
+        - **Workflow Integration:** Initiates OS installation workflows, allowing tracking and management through the workflow engine.
+        - **Configuration Management:** Encapsulates all necessary installation configurations, ensuring comprehensive setup before deployment.
+        - **Access Control:** Enforces privilege sets such as Account Administrator and Manage Servers, safeguarding the initiation and management of installations.
+        - **Relationship Management:** Links to critical components such as OS images and configuration files, ensuring seamless installation processes.
 
 ---
 
 # Resource: intersight_os_install
-This MO models the target server, answers and other properties needed for
-OS installation. The OS installation can be started in the target server by doing
-a POST on this MO.
-The requests to this MO starts a OS installation workflow that can be tracked
-using workflow engine MO workflow.WorkflowInfo.
+The Install object is the execution point for initiating operating system installations on target servers. It models the necessary configuration and relationships required to start OS installations through Intersight's workflow system.
+#### Purpose
+The Install object captures all required properties and relationships for initiating OS installations. It acts as a launch point for installation workflows, ensuring that all necessary configurations are validated and tracked through Intersight's workflow engine.
+#### Key Concepts
+- **Workflow Integration:** Initiates OS installation workflows, allowing tracking and management through the workflow engine.
+- **Configuration Management:** Encapsulates all necessary installation configurations, ensuring comprehensive setup before deployment.
+- **Access Control:** Enforces privilege sets such as Account Administrator and Manage Servers, safeguarding the initiation and management of installations.
+- **Relationship Management:** Links to critical components such as OS images and configuration files, ensuring seamless installation processes.
 ## Usage Example
 ### Resource Creation
 

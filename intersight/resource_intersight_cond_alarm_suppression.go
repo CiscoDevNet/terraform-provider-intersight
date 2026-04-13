@@ -861,7 +861,8 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("end_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndDate(x)
 	}
 
@@ -926,7 +927,8 @@ func resourceCondAlarmSuppressionCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("start_date"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetStartDate(x)
 	}
 
@@ -1291,7 +1293,8 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("end_date") {
 		v := d.Get("end_date")
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetEndDate(x)
 	}
 
@@ -1361,7 +1364,8 @@ func resourceCondAlarmSuppressionUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("start_date") {
 		v := d.Get("start_date")
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetStartDate(x)
 	}
 

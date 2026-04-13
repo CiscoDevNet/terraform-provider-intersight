@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Certificate** | Pointer to [**CertificatemanagementImc**](CertificatemanagementImc.md) |  | [optional] 
 **KmipClientCertificate** | Pointer to [**CertificatemanagementImc**](CertificatemanagementImc.md) |  | [optional] 
 **Model** | Pointer to **string** | Model of the endpoint that houses the management controller. | [optional] [readonly] 
+**ReplayConfigInfo** | Pointer to [**NullableManagementReplayConfigInfo**](ManagementReplayConfigInfo.md) |  | [optional] 
 **RootCaCertificates** | Pointer to [**[]CertificatemanagementRootCaCertificate**](CertificatemanagementRootCaCertificate.md) |  | [optional] 
 **UemStreamAdminState** | Pointer to **string** | Desired state of the UEM stream. * &#x60;Disabled&#x60; - The UEM event channel is disabled. * &#x60;Enabled&#x60; - The UEM event channel is enabled. | [optional] [default to "Disabled"]
 **AdapterUnit** | Pointer to [**NullableAdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
@@ -159,6 +160,41 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### GetReplayConfigInfo
+
+`func (o *ManagementController) GetReplayConfigInfo() ManagementReplayConfigInfo`
+
+GetReplayConfigInfo returns the ReplayConfigInfo field if non-nil, zero value otherwise.
+
+### GetReplayConfigInfoOk
+
+`func (o *ManagementController) GetReplayConfigInfoOk() (*ManagementReplayConfigInfo, bool)`
+
+GetReplayConfigInfoOk returns a tuple with the ReplayConfigInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplayConfigInfo
+
+`func (o *ManagementController) SetReplayConfigInfo(v ManagementReplayConfigInfo)`
+
+SetReplayConfigInfo sets ReplayConfigInfo field to given value.
+
+### HasReplayConfigInfo
+
+`func (o *ManagementController) HasReplayConfigInfo() bool`
+
+HasReplayConfigInfo returns a boolean if a field has been set.
+
+### SetReplayConfigInfoNil
+
+`func (o *ManagementController) SetReplayConfigInfoNil(b bool)`
+
+ SetReplayConfigInfoNil sets the value for ReplayConfigInfo to be an explicit nil
+
+### UnsetReplayConfigInfo
+`func (o *ManagementController) UnsetReplayConfigInfo()`
+
+UnsetReplayConfigInfo ensures that no value is present for ReplayConfigInfo, not even an explicit nil
 ### GetRootCaCertificates
 
 `func (o *ManagementController) GetRootCaCertificates() []CertificatemanagementRootCaCertificate`

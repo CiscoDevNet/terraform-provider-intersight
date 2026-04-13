@@ -251,6 +251,54 @@ func Test_intersight_FabricApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FabricApiService CreateFabricNetFlowExporter", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.CreateFabricNetFlowExporter(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService CreateFabricNetFlowMonitor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.CreateFabricNetFlowMonitor(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService CreateFabricNetFlowPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.CreateFabricNetFlowPolicy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService CreateFabricNetFlowRecord", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.CreateFabricNetFlowRecord(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FabricApiService CreateFabricPcOperation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -743,6 +791,58 @@ func Test_intersight_FabricApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.FabricApi.DeleteFabricMulticastPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService DeleteFabricNetFlowExporter", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FabricApi.DeleteFabricNetFlowExporter(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService DeleteFabricNetFlowMonitor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FabricApi.DeleteFabricNetFlowMonitor(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService DeleteFabricNetFlowPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FabricApi.DeleteFabricNetFlowPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService DeleteFabricNetFlowRecord", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.FabricApi.DeleteFabricNetFlowRecord(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -1652,6 +1752,110 @@ func Test_intersight_FabricApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FabricApi.GetFabricMulticastPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowExporterByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowExporterByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowExporterList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowExporterList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowMonitorByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowMonitorByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowMonitorList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowMonitorList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowRecordByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowRecordByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService GetFabricNetFlowRecordList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FabricApi.GetFabricNetFlowRecordList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -2601,6 +2805,62 @@ func Test_intersight_FabricApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FabricApiService PatchFabricNetFlowExporter", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.PatchFabricNetFlowExporter(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService PatchFabricNetFlowMonitor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.PatchFabricNetFlowMonitor(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService PatchFabricNetFlowPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.PatchFabricNetFlowPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService PatchFabricNetFlowRecord", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.PatchFabricNetFlowRecord(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FabricApiService PatchFabricPcOperation", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -3112,6 +3372,62 @@ func Test_intersight_FabricApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.FabricApi.UpdateFabricMulticastPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService UpdateFabricNetFlowExporter", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.UpdateFabricNetFlowExporter(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService UpdateFabricNetFlowMonitor", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.UpdateFabricNetFlowMonitor(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService UpdateFabricNetFlowPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.UpdateFabricNetFlowPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FabricApiService UpdateFabricNetFlowRecord", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FabricApi.UpdateFabricNetFlowRecord(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,12 +3,22 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_tfc_workspace"
 description: |-
-        Terraform workspace which represents running infrastructure managed by Terraform.
+        The TfcWorkspace object serves as a representation of running infrastructure managed by Terraform.
+        #### Purpose
+        Intersight discovers the Workspaces in the Terraform Cloud account whose credentials are specified in the Terraform Cloud target.
+        #### Key Concepts
+        - **Infrastructure Representation:** Represents an active Terraform-managed environment, encapsulating configuration, state, and execution history.
+        - **Credential-Based Discovery:** Intersight automatically discovers Terraform Cloud workspaces using the credentials defined in the Terraform Cloud target.
 
 ---
 
 # Data Source: intersight_cloud_tfc_workspace
-Terraform workspace which represents running infrastructure managed by Terraform.
+The TfcWorkspace object serves as a representation of running infrastructure managed by Terraform. 
+#### Purpose
+Intersight discovers the Workspaces in the Terraform Cloud account whose credentials are specified in the Terraform Cloud target.
+#### Key Concepts
+- **Infrastructure Representation:** Represents an active Terraform-managed environment, encapsulating configuration, state, and execution history.
+- **Credential-Based Discovery:** Intersight automatically discovers Terraform Cloud workspaces using the credentials defined in the Terraform Cloud target.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

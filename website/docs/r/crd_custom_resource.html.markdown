@@ -3,12 +3,22 @@ subcategory: "crd"
 layout: "intersight"
 page_title: "Intersight: intersight_crd_custom_resource"
 description: |-
-        Custom Kubernetes resource launcher service.
+        The CustomResource object is used internally to launch required resources for certain targets.
+        #### Purpose
+        The CustomResource object is a component of the Cloud DC Life Cycle Management, enabling the deployment and management of Cloud DCs within a cloud environment. It is created internally for each Cloud DC targets.
+        #### Key Concepts
+        - **Access Control:** Utilizes privilege sets to manage who can read, create, update, and delete resources, ensuring secure and controlled access.
+        - **Identity Management:** Uses unique identifiers to enforce constraints and maintain resource uniqueness within the system.
 
 ---
 
 # Resource: intersight_crd_custom_resource
-Custom Kubernetes resource launcher service.
+The CustomResource object is used internally to launch required resources for certain targets.      
+#### Purpose  
+The CustomResource object is a component of the Cloud DC Life Cycle Management, enabling the deployment and management of Cloud DCs within a cloud environment. It is created internally for each Cloud DC targets. 
+#### Key Concepts
+- **Access Control:** Utilizes privilege sets to manage who can read, create, update, and delete resources, ensuring secure and controlled access.
+- **Identity Management:** Uses unique identifiers to enforce constraints and maintain resource uniqueness within the system.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

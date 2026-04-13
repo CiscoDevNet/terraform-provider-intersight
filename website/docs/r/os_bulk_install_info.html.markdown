@@ -3,14 +3,26 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_bulk_install_info"
 description: |-
-        This MO models the CSV file content which the user uploaded for OS installation. As part of the handler, necessary filed
-        in the model can be populated along with respective validation.
+        The BulkInstallInfo object is a critical element in the automation of operating system installations across multiple servers. It models the content of CSV files that hold configuration parameters for bulk OS installations, ensuring streamlined and efficient deployment.
+        #### Purpose
+        BulkInstallInfo facilitates the mass deployment of operating systems by encapsulating necessary parameters within a CSV file. This supports validation processes and manages installation configurations, enabling administrators to efficiently deploy OS across multiple servers.
+        #### Key Concepts
+        - **CSV-Based Deployment:** Utilizes CSV files to store OS installation parameters, providing a scalable solution for deploying operating systems to numerous servers.
+        - **Validation Process:** Includes built-in validation mechanisms to ensure the accuracy and completeness of installation configurations.
+        - **Access Control:** Enforces privilege sets such as Account Administrator and Manage Servers, ensuring that only authorized personnel can create and manage bulk installations.
+        - **Server-Specific Configurations:** Manages configurations specific to each server, allowing customized installations tailored to individual server requirements.
 
 ---
 
 # Resource: intersight_os_bulk_install_info
-This MO models the CSV file content which the user uploaded for OS installation. As part of the handler, necessary filed
-in the model can be populated along with respective validation.
+The BulkInstallInfo object is a critical element in the automation of operating system installations across multiple servers. It models the content of CSV files that hold configuration parameters for bulk OS installations, ensuring streamlined and efficient deployment.
+#### Purpose
+BulkInstallInfo facilitates the mass deployment of operating systems by encapsulating necessary parameters within a CSV file. This supports validation processes and manages installation configurations, enabling administrators to efficiently deploy OS across multiple servers.
+#### Key Concepts
+- **CSV-Based Deployment:** Utilizes CSV files to store OS installation parameters, providing a scalable solution for deploying operating systems to numerous servers.
+- **Validation Process:** Includes built-in validation mechanisms to ensure the accuracy and completeness of installation configurations.
+- **Access Control:** Enforces privilege sets such as Account Administrator and Manage Servers, ensuring that only authorized personnel can create and manage bulk installations.
+- **Server-Specific Configurations:** Manages configurations specific to each server, allowing customized installations tailored to individual server requirements.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
