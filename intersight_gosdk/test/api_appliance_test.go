@@ -866,6 +866,32 @@ func Test_intersight_ApplianceApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ApplianceApiService GetApplianceFileSystemOpSummaryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceFileSystemOpSummaryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ApplianceApiService GetApplianceFileSystemOpSummaryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ApplianceApi.GetApplianceFileSystemOpSummaryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ApplianceApiService GetApplianceFileSystemStatusByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

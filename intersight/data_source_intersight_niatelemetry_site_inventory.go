@@ -70,6 +70,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"configuration_change_tracking_count": {
+			Description: "Count of configuration change tracking.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"connectivity_analysis_count": {
 			Description: "Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics.",
 			Type:        schema.TypeInt,
@@ -83,6 +88,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endpoint_locator_count": {
+			Description: "Count of total Endpoint Locators.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"firmware_version": {
@@ -128,6 +138,11 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"on_demand_backups": {
+			Description: "Count of number of manual backups.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"owners": {
@@ -243,6 +258,26 @@ func getNiatelemetrySiteInventorySchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"scheduled_backups": {
+			Description: "Count of number of scheduled backups.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"security_groups_count": {
+			Description: "Count of total security groups.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"service_clusters_count": {
+			Description: "Count of total Service Clusters.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"service_function_count": {
+			Description: "Count of total Service Functions configured.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -565,19 +600,30 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOkExists("configuration_change_tracking_count"); ok {
+		x := int64(v.(int))
+		o.SetConfigurationChangeTrackingCount(x)
+	}
+
 	if v, ok := d.GetOkExists("connectivity_analysis_count"); ok {
 		x := int64(v.(int))
 		o.SetConnectivityAnalysisCount(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("endpoint_locator_count"); ok {
+		x := int64(v.(int))
+		o.SetEndpointLocatorCount(x)
 	}
 
 	if v, ok := d.GetOk("firmware_version"); ok {
@@ -602,7 +648,8 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -629,6 +676,11 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOkExists("on_demand_backups"); ok {
+		x := (v.(bool))
+		o.SetOnDemandBackups(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -771,6 +823,26 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 			x := p[0]
 			o.SetRegisteredDevice(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("scheduled_backups"); ok {
+		x := (v.(bool))
+		o.SetScheduledBackups(x)
+	}
+
+	if v, ok := d.GetOkExists("security_groups_count"); ok {
+		x := int64(v.(int))
+		o.SetSecurityGroupsCount(x)
+	}
+
+	if v, ok := d.GetOkExists("service_clusters_count"); ok {
+		x := int64(v.(int))
+		o.SetServiceClustersCount(x)
+	}
+
+	if v, ok := d.GetOkExists("service_function_count"); ok {
+		x := int64(v.(int))
+		o.SetServiceFunctionCount(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -974,10 +1046,12 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["apps"] = (s.GetApps())
 				temp["class_id"] = (s.GetClassId())
+				temp["configuration_change_tracking_count"] = (s.GetConfigurationChangeTrackingCount())
 				temp["connectivity_analysis_count"] = (s.GetConnectivityAnalysisCount())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["endpoint_locator_count"] = (s.GetEndpointLocatorCount())
 				temp["firmware_version"] = (s.GetFirmwareVersion())
 				temp["install_type"] = (s.GetInstallType())
 				temp["ip_address"] = (s.GetIpAddress())
@@ -988,6 +1062,7 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["nexus_dashboard"] = (s.GetNexusDashboard())
 				temp["nodes"] = (s.GetNodes())
 				temp["object_type"] = (s.GetObjectType())
+				temp["on_demand_backups"] = (s.GetOnDemandBackups())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -996,6 +1071,10 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["record_type"] = (s.GetRecordType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["scheduled_backups"] = (s.GetScheduledBackups())
+				temp["security_groups_count"] = (s.GetSecurityGroupsCount())
+				temp["service_clusters_count"] = (s.GetServiceClustersCount())
+				temp["service_function_count"] = (s.GetServiceFunctionCount())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

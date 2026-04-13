@@ -829,7 +829,8 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("acknowledge_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetAcknowledgeTime(x)
 	}
 
@@ -1006,12 +1007,14 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("creation_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreationTime(x)
 	}
 
@@ -1079,12 +1082,14 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("flapping_start_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetFlappingStartTime(x)
 	}
 
 	if v, ok := d.GetOk("last_transition_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetLastTransitionTime(x)
 	}
 
@@ -1120,7 +1125,8 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1302,7 +1308,8 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("suppressed_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetSuppressedTime(x)
 	}
 

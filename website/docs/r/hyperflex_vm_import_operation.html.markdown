@@ -3,12 +3,26 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_import_operation"
 description: |-
-        Invoke Virtual Machine import operation.
+        The VmImportOperation object is designed to facilitate the import of Virtual Machines into the HyperFlex environment. It serves as a bridge for integrating external Virtual Machines into the HyperFlex ecosystem, ensuring seamless transitions and resource management.
+        #### Purpose
+        The object enables the systematic import of Virtual Machines, allowing for the expansion and integration of existing infrastructure within HyperFlex. It addresses both the operational aspects of importing and the necessary configurations required for successful deployment.
+        #### Key Concepts
+        - **Integration:** Supports the incorporation of Virtual Machines from external environments, broadening the operational scope of HyperFlex clusters.
+        - **Configuration Management:** Provides detailed configurations to ensure that imported Virtual Machines align with existing cluster policies and resources.
+        - **Operational Efficiency:** Streamlines the import process, reducing downtime and complexity associated with integrating new Virtual Machines.
+        - **Security and Permissions:** Incorporates robust access controls to safeguard the import process, ensuring that only authorized personnel can initiate and manage imports.
 
 ---
 
 # Resource: intersight_hyperflex_vm_import_operation
-Invoke Virtual Machine import operation.
+The VmImportOperation object is designed to facilitate the import of Virtual Machines into the HyperFlex environment. It serves as a bridge for integrating external Virtual Machines into the HyperFlex ecosystem, ensuring seamless transitions and resource management.
+#### Purpose
+The object enables the systematic import of Virtual Machines, allowing for the expansion and integration of existing infrastructure within HyperFlex. It addresses both the operational aspects of importing and the necessary configurations required for successful deployment.
+#### Key Concepts
+- **Integration:** Supports the incorporation of Virtual Machines from external environments, broadening the operational scope of HyperFlex clusters.
+- **Configuration Management:** Provides detailed configurations to ensure that imported Virtual Machines align with existing cluster policies and resources.
+- **Operational Efficiency:** Streamlines the import process, reducing downtime and complexity associated with integrating new Virtual Machines.
+- **Security and Permissions:** Incorporates robust access controls to safeguard the import process, ensuring that only authorized personnel can initiate and manage imports.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

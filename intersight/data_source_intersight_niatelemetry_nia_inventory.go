@@ -571,6 +571,69 @@ func getNiatelemetryNiaInventorySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"nxos_module_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"hw": {
+						Description: "Hardware version reported for the module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"mod": {
+						Description: "Module number or slot identifier in the switch chassis.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"model": {
+						Description: "Model name or product ID of the module hardware.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"online_diag_status": {
+						Description: "Online diagnostic status of the module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"serial_number": {
+						Description: "Serial number of the module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"slot": {
+						Description: "Slot type reported for the module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Operational status of the module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"sw": {
+						Description: "Software version reported for the module.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"nxos_nve_interface_status": {
 			Description: "Returns the value of the nxosNveInterface field.",
 			Type:        schema.TypeString,
@@ -1289,7 +1352,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1610,7 +1674,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1852,6 +1917,34 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 			x := p[0]
 			o.SetNxosInterfaceBrief(x)
 		}
+	}
+
+	if v, ok := d.GetOk("nxos_module_details"); ok {
+		x := make([]models.NiatelemetryNxosModuleInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryNxosModuleInfo{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.NxosModuleInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetNxosModuleDetails(x)
 	}
 
 	if v, ok := d.GetOk("nxos_nve_interface_status"); ok {
@@ -2567,6 +2660,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["nxos_dci_interface_status"] = (s.GetNxosDciInterfaceStatus())
 
 				temp["nxos_interface_brief"] = flattenMapNiatelemetryInterface(s.GetNxosInterfaceBrief(), d)
+
+				temp["nxos_module_details"] = flattenListNiatelemetryNxosModuleInfo(s.GetNxosModuleDetails(), d)
 				temp["nxos_nve_interface_status"] = (s.GetNxosNveInterfaceStatus())
 
 				temp["nxos_nve_packet_counters"] = flattenMapNiatelemetryNvePacketCounters(s.GetNxosNvePacketCounters(), d)

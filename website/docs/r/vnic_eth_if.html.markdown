@@ -185,6 +185,11 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the virtual ethernet interface. 
+* `net_flow_monitor_sessions`:(Array)
+This complex property has following sub-properties:
+  + `flow_direction`:(string) Direction of the flow to monitor (ingress, egress, or both).* `both` - Both direction for NetFlow monitor.* `rx` - Input direction for NetFlow monitor.* `tx` - Output direction for NetFlow monitor. 
+  + `monitor_name`:(string) Name of the NetFlow monitor to use for this vNIC. The NetFlow monitor must be pre-configured on the Fabric Interconnects. It is configured as part of the NetFlow policy attached to the Fabric Switch Cluster profile. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `old_info`:(HashMap) -(ReadOnly) Deployed information related to lease and vif id. 
 This complex property has following sub-properties:
   + `mac_address`:(string)(ReadOnly) Old MAC Address associated with the interface. 

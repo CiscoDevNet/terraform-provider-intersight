@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **MacAddress** | Pointer to **string** | The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
 **MacAddressType** | Pointer to **string** | Type of allocation selected to assign a MAC address for the vnic. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [readonly] [default to "POOL"]
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] [readonly] 
+**NetFlowMonitorSessions** | Pointer to [**[]VnicNetFlowMonitorSession**](VnicNetFlowMonitorSession.md) |  | [optional] 
 **OldInfo** | Pointer to [**NullableVnicEthIfOldInfo**](VnicEthIfOldInfo.md) |  | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two. | [optional] [readonly] 
 **OverriddenList** | Pointer to **[]string** |  | [optional] 
@@ -410,6 +411,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetNetFlowMonitorSessions
+
+`func (o *VnicEthIfInventory) GetNetFlowMonitorSessions() []VnicNetFlowMonitorSession`
+
+GetNetFlowMonitorSessions returns the NetFlowMonitorSessions field if non-nil, zero value otherwise.
+
+### GetNetFlowMonitorSessionsOk
+
+`func (o *VnicEthIfInventory) GetNetFlowMonitorSessionsOk() (*[]VnicNetFlowMonitorSession, bool)`
+
+GetNetFlowMonitorSessionsOk returns a tuple with the NetFlowMonitorSessions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetFlowMonitorSessions
+
+`func (o *VnicEthIfInventory) SetNetFlowMonitorSessions(v []VnicNetFlowMonitorSession)`
+
+SetNetFlowMonitorSessions sets NetFlowMonitorSessions field to given value.
+
+### HasNetFlowMonitorSessions
+
+`func (o *VnicEthIfInventory) HasNetFlowMonitorSessions() bool`
+
+HasNetFlowMonitorSessions returns a boolean if a field has been set.
+
+### SetNetFlowMonitorSessionsNil
+
+`func (o *VnicEthIfInventory) SetNetFlowMonitorSessionsNil(b bool)`
+
+ SetNetFlowMonitorSessionsNil sets the value for NetFlowMonitorSessions to be an explicit nil
+
+### UnsetNetFlowMonitorSessions
+`func (o *VnicEthIfInventory) UnsetNetFlowMonitorSessions()`
+
+UnsetNetFlowMonitorSessions ensures that no value is present for NetFlowMonitorSessions, not even an explicit nil
 ### GetOldInfo
 
 `func (o *VnicEthIfInventory) GetOldInfo() VnicEthIfOldInfo`

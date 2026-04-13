@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_datastore_statistic"
 description: |-
-        Datastore Statistic describing more detailed information about the Data Protection Peer.
+        The DatastoreStatistic object provides detailed information about the datastore, aiding in performance and capacity management.
+        #### Purpose
+        DatastoreStatistic offers comprehensive insights into datastore attributes such as capacity, usage, and status, supporting efficient management and optimization of storage resources.
+        #### Key Concepts
+        - **Capacity Management:** Details total and free capacity, unshared and uncompressed usage, supporting resource optimization.
+        - **Performance Tracking:** Provides timestamps for creation, access, and modification, facilitating performance monitoring.
+        - **Security and Compliance:** Enforces encryption status and privilege sets to uphold data protection standards.
 
 ---
 
 # Data Source: intersight_hyperflex_datastore_statistic
-Datastore Statistic describing more detailed information about the Data Protection Peer.
+The DatastoreStatistic object provides detailed information about the datastore, aiding in performance and capacity management.
+#### Purpose
+DatastoreStatistic offers comprehensive insights into datastore attributes such as capacity, usage, and status, supporting efficient management and optimization of storage resources.
+#### Key Concepts
+- **Capacity Management:** Details total and free capacity, unshared and uncompressed usage, supporting resource optimization.
+- **Performance Tracking:** Provides timestamps for creation, access, and modification, facilitating performance monitoring.
+- **Security and Compliance:** Enforces encryption status and privilege sets to uphold data protection standards.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

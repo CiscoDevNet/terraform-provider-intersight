@@ -3,12 +3,22 @@ subcategory: "oprs"
 layout: "intersight"
 page_title: "Intersight: intersight_oprs_sync_target_list_message"
 description: |-
-        The targets sync messages are sent to assist and back to euclid for reconciliation.
+        The SyncTargetListMessage object manages the synchronization of target lists between assist environments and Euclid for reconciliation purposes. It ensures consistent data exchange and alignment of target configurations.
+        #### Purpose
+        SyncTargetListMessage is designed to streamline the synchronization process, facilitating accurate and timely data updates between interconnected systems.
+        #### Key Concepts
+        - **Data Synchronization:** Coordinates the exchange and alignment of target lists across systems.
+        - **Access Control:** Employs privilege sets to manage permissions and ensure secure data exchange.
 
 ---
 
 # Resource: intersight_oprs_sync_target_list_message
-The targets sync messages are sent to assist and back to euclid for reconciliation.
+The SyncTargetListMessage object manages the synchronization of target lists between assist environments and Euclid for reconciliation purposes. It ensures consistent data exchange and alignment of target configurations.
+#### Purpose
+SyncTargetListMessage is designed to streamline the synchronization process, facilitating accurate and timely data updates between interconnected systems.
+#### Key Concepts
+- **Data Synchronization:** Coordinates the exchange and alignment of target lists across systems.
+- **Access Control:** Employs privilege sets to manage permissions and ensure secure data exchange.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

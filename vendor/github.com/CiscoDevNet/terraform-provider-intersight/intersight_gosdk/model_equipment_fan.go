@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026021105
+API version: 1.0.11-2026030305
 Contact: intersight@cisco.com
 */
 
@@ -37,8 +37,10 @@ type EquipmentFan struct {
 	// Fan module Identifier for the fan.
 	ModuleId *int64 `json:"ModuleId,omitempty"`
 	// The name of the pluggable Fan.
-	Name       *string  `json:"Name,omitempty"`
-	OperReason []string `json:"OperReason,omitempty"`
+	Name *string `json:"Name,omitempty"`
+	// This field identifies the Non Recoverable Threshold Minimum Revolutions Per Minute Speed for this Fan Unit.
+	NrThresholdMinRpmSpeed *int64   `json:"NrThresholdMinRpmSpeed,omitempty"`
+	OperReason             []string `json:"OperReason,omitempty"`
 	// This field is used to indicate this fan unit's operational state.
 	OperState *string `json:"OperState,omitempty"`
 	// This field identifies the Part Number for this Fan Unit.
@@ -299,6 +301,38 @@ func (o *EquipmentFan) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *EquipmentFan) SetName(v string) {
 	o.Name = &v
+}
+
+// GetNrThresholdMinRpmSpeed returns the NrThresholdMinRpmSpeed field value if set, zero value otherwise.
+func (o *EquipmentFan) GetNrThresholdMinRpmSpeed() int64 {
+	if o == nil || IsNil(o.NrThresholdMinRpmSpeed) {
+		var ret int64
+		return ret
+	}
+	return *o.NrThresholdMinRpmSpeed
+}
+
+// GetNrThresholdMinRpmSpeedOk returns a tuple with the NrThresholdMinRpmSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentFan) GetNrThresholdMinRpmSpeedOk() (*int64, bool) {
+	if o == nil || IsNil(o.NrThresholdMinRpmSpeed) {
+		return nil, false
+	}
+	return o.NrThresholdMinRpmSpeed, true
+}
+
+// HasNrThresholdMinRpmSpeed returns a boolean if a field has been set.
+func (o *EquipmentFan) HasNrThresholdMinRpmSpeed() bool {
+	if o != nil && !IsNil(o.NrThresholdMinRpmSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetNrThresholdMinRpmSpeed gets a reference to the given int64 and assigns it to the NrThresholdMinRpmSpeed field.
+func (o *EquipmentFan) SetNrThresholdMinRpmSpeed(v int64) {
+	o.NrThresholdMinRpmSpeed = &v
 }
 
 // GetOperReason returns the OperReason field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -739,6 +773,9 @@ func (o EquipmentFan) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
+	if !IsNil(o.NrThresholdMinRpmSpeed) {
+		toSerialize["NrThresholdMinRpmSpeed"] = o.NrThresholdMinRpmSpeed
+	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
@@ -836,8 +873,10 @@ func (o *EquipmentFan) UnmarshalJSON(data []byte) (err error) {
 		// Fan module Identifier for the fan.
 		ModuleId *int64 `json:"ModuleId,omitempty"`
 		// The name of the pluggable Fan.
-		Name       *string  `json:"Name,omitempty"`
-		OperReason []string `json:"OperReason,omitempty"`
+		Name *string `json:"Name,omitempty"`
+		// This field identifies the Non Recoverable Threshold Minimum Revolutions Per Minute Speed for this Fan Unit.
+		NrThresholdMinRpmSpeed *int64   `json:"NrThresholdMinRpmSpeed,omitempty"`
+		OperReason             []string `json:"OperReason,omitempty"`
 		// This field is used to indicate this fan unit's operational state.
 		OperState *string `json:"OperState,omitempty"`
 		// This field identifies the Part Number for this Fan Unit.
@@ -868,6 +907,7 @@ func (o *EquipmentFan) UnmarshalJSON(data []byte) (err error) {
 		varEquipmentFan.FanModuleId = varEquipmentFanWithoutEmbeddedStruct.FanModuleId
 		varEquipmentFan.ModuleId = varEquipmentFanWithoutEmbeddedStruct.ModuleId
 		varEquipmentFan.Name = varEquipmentFanWithoutEmbeddedStruct.Name
+		varEquipmentFan.NrThresholdMinRpmSpeed = varEquipmentFanWithoutEmbeddedStruct.NrThresholdMinRpmSpeed
 		varEquipmentFan.OperReason = varEquipmentFanWithoutEmbeddedStruct.OperReason
 		varEquipmentFan.OperState = varEquipmentFanWithoutEmbeddedStruct.OperState
 		varEquipmentFan.PartNumber = varEquipmentFanWithoutEmbeddedStruct.PartNumber
@@ -903,6 +943,7 @@ func (o *EquipmentFan) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "FanModuleId")
 		delete(additionalProperties, "ModuleId")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "NrThresholdMinRpmSpeed")
 		delete(additionalProperties, "OperReason")
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "PartNumber")

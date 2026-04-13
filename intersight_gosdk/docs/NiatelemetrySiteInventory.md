@@ -7,14 +7,21 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.SiteInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.SiteInventory"]
 **Apps** | Pointer to **[]string** |  | [optional] 
+**ConfigurationChangeTrackingCount** | Pointer to **int64** | Count of configuration change tracking. | [optional] [readonly] 
 **ConnectivityAnalysisCount** | Pointer to **int64** | Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics. | [optional] 
+**EndpointLocatorCount** | Pointer to **int64** | Count of total Endpoint Locators. | [optional] [readonly] 
 **FirmwareVersion** | Pointer to **string** | Version of the specified site. | [optional] 
 **InstallType** | Pointer to **string** | Fine-grained type DCNM either SAN or LAN. | [optional] 
 **IpAddress** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** | Name of the APIC / DCNM site onboarded. | [optional] 
 **NexusDashboard** | Pointer to **string** | Name of ND on which site has been onboarded. | [optional] 
 **Nodes** | Pointer to **int64** | Number of nodes the site contains. | [optional] 
+**OnDemandBackups** | Pointer to **bool** | Count of number of manual backups. | [optional] [readonly] 
 **RecordType** | Pointer to **string** | Specifies whether Site object is DCNM or APIC or ND. | [optional] 
+**ScheduledBackups** | Pointer to **bool** | Count of number of scheduled backups. | [optional] [readonly] 
+**SecurityGroupsCount** | Pointer to **int64** | Count of total security groups. | [optional] [readonly] 
+**ServiceClustersCount** | Pointer to **int64** | Count of total Service Clusters. | [optional] [readonly] 
+**ServiceFunctionCount** | Pointer to **int64** | Count of total Service Functions configured. | [optional] [readonly] 
 **Type** | Pointer to **string** | Type of site onboarded either APIC or DCNM. | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -112,6 +119,31 @@ HasApps returns a boolean if a field has been set.
 `func (o *NiatelemetrySiteInventory) UnsetApps()`
 
 UnsetApps ensures that no value is present for Apps, not even an explicit nil
+### GetConfigurationChangeTrackingCount
+
+`func (o *NiatelemetrySiteInventory) GetConfigurationChangeTrackingCount() int64`
+
+GetConfigurationChangeTrackingCount returns the ConfigurationChangeTrackingCount field if non-nil, zero value otherwise.
+
+### GetConfigurationChangeTrackingCountOk
+
+`func (o *NiatelemetrySiteInventory) GetConfigurationChangeTrackingCountOk() (*int64, bool)`
+
+GetConfigurationChangeTrackingCountOk returns a tuple with the ConfigurationChangeTrackingCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationChangeTrackingCount
+
+`func (o *NiatelemetrySiteInventory) SetConfigurationChangeTrackingCount(v int64)`
+
+SetConfigurationChangeTrackingCount sets ConfigurationChangeTrackingCount field to given value.
+
+### HasConfigurationChangeTrackingCount
+
+`func (o *NiatelemetrySiteInventory) HasConfigurationChangeTrackingCount() bool`
+
+HasConfigurationChangeTrackingCount returns a boolean if a field has been set.
+
 ### GetConnectivityAnalysisCount
 
 `func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCount() int64`
@@ -136,6 +168,31 @@ SetConnectivityAnalysisCount sets ConnectivityAnalysisCount field to given value
 `func (o *NiatelemetrySiteInventory) HasConnectivityAnalysisCount() bool`
 
 HasConnectivityAnalysisCount returns a boolean if a field has been set.
+
+### GetEndpointLocatorCount
+
+`func (o *NiatelemetrySiteInventory) GetEndpointLocatorCount() int64`
+
+GetEndpointLocatorCount returns the EndpointLocatorCount field if non-nil, zero value otherwise.
+
+### GetEndpointLocatorCountOk
+
+`func (o *NiatelemetrySiteInventory) GetEndpointLocatorCountOk() (*int64, bool)`
+
+GetEndpointLocatorCountOk returns a tuple with the EndpointLocatorCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndpointLocatorCount
+
+`func (o *NiatelemetrySiteInventory) SetEndpointLocatorCount(v int64)`
+
+SetEndpointLocatorCount sets EndpointLocatorCount field to given value.
+
+### HasEndpointLocatorCount
+
+`func (o *NiatelemetrySiteInventory) HasEndpointLocatorCount() bool`
+
+HasEndpointLocatorCount returns a boolean if a field has been set.
 
 ### GetFirmwareVersion
 
@@ -297,6 +354,31 @@ SetNodes sets Nodes field to given value.
 
 HasNodes returns a boolean if a field has been set.
 
+### GetOnDemandBackups
+
+`func (o *NiatelemetrySiteInventory) GetOnDemandBackups() bool`
+
+GetOnDemandBackups returns the OnDemandBackups field if non-nil, zero value otherwise.
+
+### GetOnDemandBackupsOk
+
+`func (o *NiatelemetrySiteInventory) GetOnDemandBackupsOk() (*bool, bool)`
+
+GetOnDemandBackupsOk returns a tuple with the OnDemandBackups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnDemandBackups
+
+`func (o *NiatelemetrySiteInventory) SetOnDemandBackups(v bool)`
+
+SetOnDemandBackups sets OnDemandBackups field to given value.
+
+### HasOnDemandBackups
+
+`func (o *NiatelemetrySiteInventory) HasOnDemandBackups() bool`
+
+HasOnDemandBackups returns a boolean if a field has been set.
+
 ### GetRecordType
 
 `func (o *NiatelemetrySiteInventory) GetRecordType() string`
@@ -321,6 +403,106 @@ SetRecordType sets RecordType field to given value.
 `func (o *NiatelemetrySiteInventory) HasRecordType() bool`
 
 HasRecordType returns a boolean if a field has been set.
+
+### GetScheduledBackups
+
+`func (o *NiatelemetrySiteInventory) GetScheduledBackups() bool`
+
+GetScheduledBackups returns the ScheduledBackups field if non-nil, zero value otherwise.
+
+### GetScheduledBackupsOk
+
+`func (o *NiatelemetrySiteInventory) GetScheduledBackupsOk() (*bool, bool)`
+
+GetScheduledBackupsOk returns a tuple with the ScheduledBackups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduledBackups
+
+`func (o *NiatelemetrySiteInventory) SetScheduledBackups(v bool)`
+
+SetScheduledBackups sets ScheduledBackups field to given value.
+
+### HasScheduledBackups
+
+`func (o *NiatelemetrySiteInventory) HasScheduledBackups() bool`
+
+HasScheduledBackups returns a boolean if a field has been set.
+
+### GetSecurityGroupsCount
+
+`func (o *NiatelemetrySiteInventory) GetSecurityGroupsCount() int64`
+
+GetSecurityGroupsCount returns the SecurityGroupsCount field if non-nil, zero value otherwise.
+
+### GetSecurityGroupsCountOk
+
+`func (o *NiatelemetrySiteInventory) GetSecurityGroupsCountOk() (*int64, bool)`
+
+GetSecurityGroupsCountOk returns a tuple with the SecurityGroupsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityGroupsCount
+
+`func (o *NiatelemetrySiteInventory) SetSecurityGroupsCount(v int64)`
+
+SetSecurityGroupsCount sets SecurityGroupsCount field to given value.
+
+### HasSecurityGroupsCount
+
+`func (o *NiatelemetrySiteInventory) HasSecurityGroupsCount() bool`
+
+HasSecurityGroupsCount returns a boolean if a field has been set.
+
+### GetServiceClustersCount
+
+`func (o *NiatelemetrySiteInventory) GetServiceClustersCount() int64`
+
+GetServiceClustersCount returns the ServiceClustersCount field if non-nil, zero value otherwise.
+
+### GetServiceClustersCountOk
+
+`func (o *NiatelemetrySiteInventory) GetServiceClustersCountOk() (*int64, bool)`
+
+GetServiceClustersCountOk returns a tuple with the ServiceClustersCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceClustersCount
+
+`func (o *NiatelemetrySiteInventory) SetServiceClustersCount(v int64)`
+
+SetServiceClustersCount sets ServiceClustersCount field to given value.
+
+### HasServiceClustersCount
+
+`func (o *NiatelemetrySiteInventory) HasServiceClustersCount() bool`
+
+HasServiceClustersCount returns a boolean if a field has been set.
+
+### GetServiceFunctionCount
+
+`func (o *NiatelemetrySiteInventory) GetServiceFunctionCount() int64`
+
+GetServiceFunctionCount returns the ServiceFunctionCount field if non-nil, zero value otherwise.
+
+### GetServiceFunctionCountOk
+
+`func (o *NiatelemetrySiteInventory) GetServiceFunctionCountOk() (*int64, bool)`
+
+GetServiceFunctionCountOk returns a tuple with the ServiceFunctionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceFunctionCount
+
+`func (o *NiatelemetrySiteInventory) SetServiceFunctionCount(v int64)`
+
+SetServiceFunctionCount sets ServiceFunctionCount field to given value.
+
+### HasServiceFunctionCount
+
+`func (o *NiatelemetrySiteInventory) HasServiceFunctionCount() bool`
+
+HasServiceFunctionCount returns a boolean if a field has been set.
 
 ### GetType
 

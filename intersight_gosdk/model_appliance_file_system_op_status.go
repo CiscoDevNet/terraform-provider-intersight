@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026021105
+API version: 1.0.11-2026030305
 Contact: intersight@cisco.com
 */
 
@@ -21,7 +21,7 @@ import (
 // checks if the ApplianceFileSystemOpStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApplianceFileSystemOpStatus{}
 
-// ApplianceFileSystemOpStatus Status of a file system on an Intersight Appliance node.
+// ApplianceFileSystemOpStatus The FileSystemOpStatus object denotes the operational status of file systems within an Intersight Appliance node. It highlights the capacity and usage metrics critical to maintaining system efficiency. #### Purpose FileSystemOpStatus ensures the health and functionality of file systems, presenting data on usage and capacity that supports system reliability and performance. #### Key Concepts - **File System Health:** Determines the operational status through checks that categorize the state as Operational, AttentionNeeded, or Impaired. - **Capacity Management:** Provides insights into file system capacity and usage to prevent overutilization and maintain optimal performance. - **System Linkages:** Connects with device registration to integrate file system status within broader system health metrics.
 type ApplianceFileSystemOpStatus struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -39,9 +39,10 @@ type ApplianceFileSystemOpStatus struct {
 	// Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement. * `WorkerNodeInstInProgress` - The worker node installation is in progress. * `WorkerNodeInstSuccess` - The worker node installation succeeded. * `WorkerNodeInstFailed` - The worker node installation failed.
 	OperationalStatus *string `json:"OperationalStatus,omitempty"`
 	// Percentage of the file system capacity currently in use.
-	Usage                *float32                                    `json:"Usage,omitempty"`
-	NodeOpStatus         NullableApplianceNodeOpStatusRelationship   `json:"NodeOpStatus,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Usage                *float32                                         `json:"Usage,omitempty"`
+	FileSystemOpSummary  NullableApplianceFileSystemOpSummaryRelationship `json:"FileSystemOpSummary,omitempty"`
+	NodeOpStatus         NullableApplianceNodeOpStatusRelationship        `json:"NodeOpStatus,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -320,6 +321,49 @@ func (o *ApplianceFileSystemOpStatus) SetUsage(v float32) {
 	o.Usage = &v
 }
 
+// GetFileSystemOpSummary returns the FileSystemOpSummary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplianceFileSystemOpStatus) GetFileSystemOpSummary() ApplianceFileSystemOpSummaryRelationship {
+	if o == nil || IsNil(o.FileSystemOpSummary.Get()) {
+		var ret ApplianceFileSystemOpSummaryRelationship
+		return ret
+	}
+	return *o.FileSystemOpSummary.Get()
+}
+
+// GetFileSystemOpSummaryOk returns a tuple with the FileSystemOpSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplianceFileSystemOpStatus) GetFileSystemOpSummaryOk() (*ApplianceFileSystemOpSummaryRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FileSystemOpSummary.Get(), o.FileSystemOpSummary.IsSet()
+}
+
+// HasFileSystemOpSummary returns a boolean if a field has been set.
+func (o *ApplianceFileSystemOpStatus) HasFileSystemOpSummary() bool {
+	if o != nil && o.FileSystemOpSummary.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFileSystemOpSummary gets a reference to the given NullableApplianceFileSystemOpSummaryRelationship and assigns it to the FileSystemOpSummary field.
+func (o *ApplianceFileSystemOpStatus) SetFileSystemOpSummary(v ApplianceFileSystemOpSummaryRelationship) {
+	o.FileSystemOpSummary.Set(&v)
+}
+
+// SetFileSystemOpSummaryNil sets the value for FileSystemOpSummary to be an explicit nil
+func (o *ApplianceFileSystemOpStatus) SetFileSystemOpSummaryNil() {
+	o.FileSystemOpSummary.Set(nil)
+}
+
+// UnsetFileSystemOpSummary ensures that no value is present for FileSystemOpSummary, not even an explicit nil
+func (o *ApplianceFileSystemOpStatus) UnsetFileSystemOpSummary() {
+	o.FileSystemOpSummary.Unset()
+}
+
 // GetNodeOpStatus returns the NodeOpStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceFileSystemOpStatus) GetNodeOpStatus() ApplianceNodeOpStatusRelationship {
 	if o == nil || IsNil(o.NodeOpStatus.Get()) {
@@ -450,6 +494,9 @@ func (o ApplianceFileSystemOpStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Usage) {
 		toSerialize["Usage"] = o.Usage
 	}
+	if o.FileSystemOpSummary.IsSet() {
+		toSerialize["FileSystemOpSummary"] = o.FileSystemOpSummary.Get()
+	}
 	if o.NodeOpStatus.IsSet() {
 		toSerialize["NodeOpStatus"] = o.NodeOpStatus.Get()
 	}
@@ -522,9 +569,10 @@ func (o *ApplianceFileSystemOpStatus) UnmarshalJSON(data []byte) (err error) {
 		// Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement. * `WorkerNodeInstInProgress` - The worker node installation is in progress. * `WorkerNodeInstSuccess` - The worker node installation succeeded. * `WorkerNodeInstFailed` - The worker node installation failed.
 		OperationalStatus *string `json:"OperationalStatus,omitempty"`
 		// Percentage of the file system capacity currently in use.
-		Usage            *float32                                    `json:"Usage,omitempty"`
-		NodeOpStatus     NullableApplianceNodeOpStatusRelationship   `json:"NodeOpStatus,omitempty"`
-		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Usage               *float32                                         `json:"Usage,omitempty"`
+		FileSystemOpSummary NullableApplianceFileSystemOpSummaryRelationship `json:"FileSystemOpSummary,omitempty"`
+		NodeOpStatus        NullableApplianceNodeOpStatusRelationship        `json:"NodeOpStatus,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
 	}
 
 	varApplianceFileSystemOpStatusWithoutEmbeddedStruct := ApplianceFileSystemOpStatusWithoutEmbeddedStruct{}
@@ -540,6 +588,7 @@ func (o *ApplianceFileSystemOpStatus) UnmarshalJSON(data []byte) (err error) {
 		varApplianceFileSystemOpStatus.NodeHostname = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.NodeHostname
 		varApplianceFileSystemOpStatus.OperationalStatus = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.OperationalStatus
 		varApplianceFileSystemOpStatus.Usage = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.Usage
+		varApplianceFileSystemOpStatus.FileSystemOpSummary = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.FileSystemOpSummary
 		varApplianceFileSystemOpStatus.NodeOpStatus = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.NodeOpStatus
 		varApplianceFileSystemOpStatus.RegisteredDevice = varApplianceFileSystemOpStatusWithoutEmbeddedStruct.RegisteredDevice
 		*o = ApplianceFileSystemOpStatus(varApplianceFileSystemOpStatus)
@@ -567,6 +616,7 @@ func (o *ApplianceFileSystemOpStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "NodeHostname")
 		delete(additionalProperties, "OperationalStatus")
 		delete(additionalProperties, "Usage")
+		delete(additionalProperties, "FileSystemOpSummary")
 		delete(additionalProperties, "NodeOpStatus")
 		delete(additionalProperties, "RegisteredDevice")
 

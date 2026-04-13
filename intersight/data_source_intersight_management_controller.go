@@ -938,6 +938,46 @@ func getManagementControllerSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"replay_config_info": {
+			Description: "Information about config replay after a reboot of the Fabric Interconnect.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"replay_config_end_time": {
+						Description: "Time at which replay config ended.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"replay_config_start_time": {
+						Description: "Time at which replay config started.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"replay_config_status": {
+						Description: "Status of replay config of the Fabric Interconnect.\n* `Completed` - Configuration replay is complete.\n* `InProgress` - Configuration replay is in progress.\n* `TimedOut` - Configuration replay timed out.\n* `Fail` - Configuration replay failed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"rn": {
 			Description: "The Relative Name uniquely identifies an object within a given context.",
 			Type:        schema.TypeString,
@@ -1767,7 +1807,8 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -2086,7 +2127,8 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -2282,6 +2324,37 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 		if len(p) > 0 {
 			x := p[0]
 			o.SetRegisteredDevice(x)
+		}
+	}
+
+	if v, ok := d.GetOk("replay_config_info"); ok {
+		p := make([]models.ManagementReplayConfigInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ManagementReplayConfigInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("management.ReplayConfigInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetReplayConfigInfo(x)
 		}
 	}
 
@@ -2733,6 +2806,8 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+
+				temp["replay_config_info"] = flattenMapManagementReplayConfigInfo(s.GetReplayConfigInfo(), d)
 				temp["rn"] = (s.GetRn())
 
 				temp["root_ca_certificates"] = flattenListCertificatemanagementRootCaCertificate(s.GetRootCaCertificates(), d)

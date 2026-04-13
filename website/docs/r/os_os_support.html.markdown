@@ -3,12 +3,24 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_os_support"
 description: |-
-        OsSupport is used to validate the support for an Operating System's version.
+        The OsSupport object is designed to validate the support status of a specific operating system version within Intersight. It ensures compatibility and readiness of OS versions for installation processes.
+        #### Purpose
+        OsSupport provides validation for operating system versions, confirming their compatibility with Intersight's installation services. It is essential for maintaining reliability and ensuring that only supported OS versions are utilized in installation configurations.
+        #### Key Concepts
+        - **Version Validation:** Confirms compatibility of OS versions, ensuring they meet the criteria for support within Intersight.
+        - **Access Control:** Privilege sets such as Account Administrator and Manage Servers guarantee secure validation processes.
+        - **Integration with HCL:** Works in conjunction with Hardware Compatibility Lists (HCL) to verify version support, maintaining alignment with hardware r requirements.
 
 ---
 
 # Resource: intersight_os_os_support
-OsSupport is used to validate the support for an Operating System's version.
+The OsSupport object is designed to validate the support status of a specific operating system version within Intersight. It ensures compatibility and readiness of OS versions for installation processes.
+#### Purpose
+OsSupport provides validation for operating system versions, confirming their compatibility with Intersight's installation services. It is essential for maintaining reliability and ensuring that only supported OS versions are utilized in installation configurations.
+#### Key Concepts
+- **Version Validation:** Confirms compatibility of OS versions, ensuring they meet the criteria for support within Intersight.
+- **Access Control:** Privilege sets such as Account Administrator and Manage Servers guarantee secure validation processes.
+- **Integration with HCL:** Works in conjunction with Hardware Compatibility Lists (HCL) to verify version support, maintaining alignment with hardware r requirements.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

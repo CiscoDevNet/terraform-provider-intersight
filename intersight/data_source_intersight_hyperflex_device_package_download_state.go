@@ -530,7 +530,8 @@ func dataSourceHyperflexDevicePackageDownloadStateRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -556,7 +557,8 @@ func dataSourceHyperflexDevicePackageDownloadStateRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -789,7 +791,8 @@ func dataSourceHyperflexDevicePackageDownloadStateRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("timestamp"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetTimestamp(x)
 	}
 

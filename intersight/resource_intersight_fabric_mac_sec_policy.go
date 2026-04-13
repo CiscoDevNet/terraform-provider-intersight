@@ -1051,7 +1051,8 @@ func resourceFabricMacSecPolicyCreate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_end_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeEndTime(x)
 							}
 						}
@@ -1063,7 +1064,8 @@ func resourceFabricMacSecPolicyCreate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_start_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeStartTime(x)
 							}
 						}
@@ -1287,7 +1289,8 @@ func resourceFabricMacSecPolicyCreate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_end_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeEndTime(x)
 							}
 						}
@@ -1299,7 +1302,8 @@ func resourceFabricMacSecPolicyCreate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_start_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeStartTime(x)
 							}
 						}
@@ -1708,7 +1712,8 @@ func resourceFabricMacSecPolicyUpdate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_end_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeEndTime(x)
 							}
 						}
@@ -1720,7 +1725,8 @@ func resourceFabricMacSecPolicyUpdate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_start_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeStartTime(x)
 							}
 						}
@@ -1951,7 +1957,8 @@ func resourceFabricMacSecPolicyUpdate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_end_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeEndTime(x)
 							}
 						}
@@ -1963,7 +1970,8 @@ func resourceFabricMacSecPolicyUpdate(c context.Context, d *schema.ResourceData,
 						}
 						if v, ok := l["send_lifetime_start_time"]; ok {
 							{
-								x, _ := time.Parse(time.RFC1123, v.(string))
+								// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+								x, _ := time.Parse(time.RFC3339, v.(string))
 								o.SetSendLifetimeStartTime(x)
 							}
 						}

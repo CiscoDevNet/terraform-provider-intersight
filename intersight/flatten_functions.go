@@ -2062,6 +2062,32 @@ func flattenListCondServerBaselineStatus(p []models.CondServerBaselineStatus, d 
 	}
 	return condserverbaselinestatuss
 }
+func flattenListCondThresholdDefinitionRelationship(p []models.CondThresholdDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var condthresholddefinitionrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		condthresholddefinitionrelationship := flattenMoMoRef(item)
+		condthresholddefinitionrelationships = append(condthresholddefinitionrelationships, condthresholddefinitionrelationship)
+	}
+	return condthresholddefinitionrelationships
+}
+func flattenListCondThresholdDefinitionState(p []models.CondThresholdDefinitionState, d *schema.ResourceData) []map[string]interface{} {
+	var condthresholddefinitionstates []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		condthresholddefinitionstate := make(map[string]interface{})
+		condthresholddefinitionstate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		condthresholddefinitionstate["class_id"] = item.GetClassId()
+		condthresholddefinitionstate["object_type"] = item.GetObjectType()
+		condthresholddefinitionstates = append(condthresholddefinitionstates, condthresholddefinitionstate)
+	}
+	return condthresholddefinitionstates
+}
 func flattenListConnectorpackConnectorPackUpdate(p []models.ConnectorpackConnectorPackUpdate, d *schema.ResourceData) []map[string]interface{} {
 	var connectorpackconnectorpackupdates []map[string]interface{}
 	if len(p) == 0 {
@@ -2685,6 +2711,30 @@ func flattenListFabricFcZonePolicyRelationship(p []models.FabricFcZonePolicyRela
 		fabricfczonepolicyrelationships = append(fabricfczonepolicyrelationships, fabricfczonepolicyrelationship)
 	}
 	return fabricfczonepolicyrelationships
+}
+func flattenListFabricNetFlowExporterRelationship(p []models.FabricNetFlowExporterRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricnetflowexporterrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		fabricnetflowexporterrelationship := flattenMoMoRef(item)
+		fabricnetflowexporterrelationships = append(fabricnetflowexporterrelationships, fabricnetflowexporterrelationship)
+	}
+	return fabricnetflowexporterrelationships
+}
+func flattenListFabricNetFlowMonitorRelationship(p []models.FabricNetFlowMonitorRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricnetflowmonitorrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		fabricnetflowmonitorrelationship := flattenMoMoRef(item)
+		fabricnetflowmonitorrelationships = append(fabricnetflowmonitorrelationships, fabricnetflowmonitorrelationship)
+	}
+	return fabricnetflowmonitorrelationships
 }
 func flattenListFabricPortIdentifier(p []models.FabricPortIdentifier, d *schema.ResourceData) []map[string]interface{} {
 	var fabricportidentifiers []map[string]interface{}
@@ -7224,6 +7274,28 @@ func flattenListNiatelemetryMdsNeighborInfo(p []models.NiatelemetryMdsNeighborIn
 	}
 	return niatelemetrymdsneighborinfos
 }
+func flattenListNiatelemetryNxosModuleInfo(p []models.NiatelemetryNxosModuleInfo, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrynxosmoduleinfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrynxosmoduleinfo := make(map[string]interface{})
+		niatelemetrynxosmoduleinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrynxosmoduleinfo["class_id"] = item.GetClassId()
+		niatelemetrynxosmoduleinfo["hw"] = item.GetHw()
+		niatelemetrynxosmoduleinfo["mod"] = item.GetMod()
+		niatelemetrynxosmoduleinfo["model"] = item.GetModel()
+		niatelemetrynxosmoduleinfo["object_type"] = item.GetObjectType()
+		niatelemetrynxosmoduleinfo["online_diag_status"] = item.GetOnlineDiagStatus()
+		niatelemetrynxosmoduleinfo["serial_number"] = item.GetSerialNumber()
+		niatelemetrynxosmoduleinfo["slot"] = item.GetSlot()
+		niatelemetrynxosmoduleinfo["status"] = item.GetStatus()
+		niatelemetrynxosmoduleinfo["sw"] = item.GetSw()
+		niatelemetrynxosmoduleinfos = append(niatelemetrynxosmoduleinfos, niatelemetrynxosmoduleinfo)
+	}
+	return niatelemetrynxosmoduleinfos
+}
 func flattenListNiatelemetrySites(p []models.NiatelemetrySites, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrysitess []map[string]interface{}
 	if len(p) == 0 {
@@ -10359,6 +10431,22 @@ func flattenListVnicFcIfInventoryRelationship(p []models.VnicFcIfInventoryRelati
 	}
 	return vnicfcifinventoryrelationships
 }
+func flattenListVnicNetFlowMonitorSession(p []models.VnicNetFlowMonitorSession, d *schema.ResourceData) []map[string]interface{} {
+	var vnicnetflowmonitorsessions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		vnicnetflowmonitorsession := make(map[string]interface{})
+		vnicnetflowmonitorsession["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		vnicnetflowmonitorsession["class_id"] = item.GetClassId()
+		vnicnetflowmonitorsession["flow_direction"] = item.GetFlowDirection()
+		vnicnetflowmonitorsession["monitor_name"] = item.GetMonitorName()
+		vnicnetflowmonitorsession["object_type"] = item.GetObjectType()
+		vnicnetflowmonitorsessions = append(vnicnetflowmonitorsessions, vnicnetflowmonitorsession)
+	}
+	return vnicnetflowmonitorsessions
+}
 func flattenListVnicVifStatus(p []models.VnicVifStatus, d *schema.ResourceData) []map[string]interface{} {
 	var vnicvifstatuss []map[string]interface{}
 	if len(p) == 0 {
@@ -10423,7 +10511,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		input_definition_x, _ := d.GetOk("input_definition")
+		type_definition_x, _ := d.GetOk("type_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -10441,7 +10529,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), input_definition_x)
+		})(item.GetDefault(), type_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -10459,7 +10547,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), input_definition_x)
+		})(item.GetDisplayMeta(), type_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -11666,6 +11754,24 @@ func flattenMapApplianceDeviceUpgradePolicyRelationship(p models.ApplianceDevice
 
 	appliancedeviceupgradepolicyrelationships = append(appliancedeviceupgradepolicyrelationships, appliancedeviceupgradepolicyrelationship)
 	return appliancedeviceupgradepolicyrelationships
+}
+func flattenMapApplianceFileSystemOpSummaryRelationship(p models.ApplianceFileSystemOpSummaryRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var appliancefilesystemopsummaryrelationships []map[string]interface{}
+	var ret models.ApplianceFileSystemOpSummaryRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	appliancefilesystemopsummaryrelationship := make(map[string]interface{})
+	appliancefilesystemopsummaryrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	appliancefilesystemopsummaryrelationship["class_id"] = item.GetClassId()
+	appliancefilesystemopsummaryrelationship["moid"] = item.GetMoid()
+	appliancefilesystemopsummaryrelationship["object_type"] = item.GetObjectType()
+	appliancefilesystemopsummaryrelationship["selector"] = item.GetSelector()
+
+	appliancefilesystemopsummaryrelationships = append(appliancefilesystemopsummaryrelationships, appliancefilesystemopsummaryrelationship)
+	return appliancefilesystemopsummaryrelationships
 }
 func flattenMapApplianceGroupOpStatusRelationship(p models.ApplianceGroupOpStatusRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var appliancegroupopstatusrelationships []map[string]interface{}
@@ -14023,6 +14129,24 @@ func flattenMapCondHclStatusRelationship(p models.CondHclStatusRelationship, d *
 	condhclstatusrelationships = append(condhclstatusrelationships, condhclstatusrelationship)
 	return condhclstatusrelationships
 }
+func flattenMapCondThresholdDefinitionRelationship(p models.CondThresholdDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var condthresholddefinitionrelationships []map[string]interface{}
+	var ret models.CondThresholdDefinitionRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	condthresholddefinitionrelationship := make(map[string]interface{})
+	condthresholddefinitionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	condthresholddefinitionrelationship["class_id"] = item.GetClassId()
+	condthresholddefinitionrelationship["moid"] = item.GetMoid()
+	condthresholddefinitionrelationship["object_type"] = item.GetObjectType()
+	condthresholddefinitionrelationship["selector"] = item.GetSelector()
+
+	condthresholddefinitionrelationships = append(condthresholddefinitionrelationships, condthresholddefinitionrelationship)
+	return condthresholddefinitionrelationships
+}
 func flattenMapConnectorFileChecksum(p models.ConnectorFileChecksum, d *schema.ResourceData) []map[string]interface{} {
 	var connectorfilechecksums []map[string]interface{}
 	var ret models.ConnectorFileChecksum
@@ -14924,6 +15048,84 @@ func flattenMapFabricFlowControlPolicyRelationship(p models.FabricFlowControlPol
 	fabricflowcontrolpolicyrelationships = append(fabricflowcontrolpolicyrelationships, fabricflowcontrolpolicyrelationship)
 	return fabricflowcontrolpolicyrelationships
 }
+func flattenMapFabricFlowNonKey(p models.FabricFlowNonKey, d *schema.ResourceData) []map[string]interface{} {
+	var fabricflownonkeys []map[string]interface{}
+	var ret models.FabricFlowNonKey
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricflownonkey := make(map[string]interface{})
+	fabricflownonkey["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricflownonkey["byte_counters"] = item.GetByteCounters()
+	fabricflownonkey["class_id"] = item.GetClassId()
+	fabricflownonkey["first_system_time"] = item.GetFirstSystemTime()
+	fabricflownonkey["last_system_time"] = item.GetLastSystemTime()
+	fabricflownonkey["object_type"] = item.GetObjectType()
+	fabricflownonkey["packet_counters"] = item.GetPacketCounters()
+
+	fabricflownonkeys = append(fabricflownonkeys, fabricflownonkey)
+	return fabricflownonkeys
+}
+func flattenMapFabricIpv4FlowKey(p models.FabricIpv4FlowKey, d *schema.ResourceData) []map[string]interface{} {
+	var fabricipv4flowkeys []map[string]interface{}
+	var ret models.FabricIpv4FlowKey
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricipv4flowkey := make(map[string]interface{})
+	fabricipv4flowkey["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricipv4flowkey["class_id"] = item.GetClassId()
+	fabricipv4flowkey["destination_ip_address"] = item.GetDestinationIpAddress()
+	fabricipv4flowkey["destination_port"] = item.GetDestinationPort()
+	fabricipv4flowkey["object_type"] = item.GetObjectType()
+	fabricipv4flowkey["protocol"] = item.GetProtocol()
+	fabricipv4flowkey["source_ip_address"] = item.GetSourceIpAddress()
+	fabricipv4flowkey["source_port"] = item.GetSourcePort()
+	fabricipv4flowkey["tos"] = item.GetTos()
+
+	fabricipv4flowkeys = append(fabricipv4flowkeys, fabricipv4flowkey)
+	return fabricipv4flowkeys
+}
+func flattenMapFabricIpv6FlowKey(p models.FabricIpv6FlowKey, d *schema.ResourceData) []map[string]interface{} {
+	var fabricipv6flowkeys []map[string]interface{}
+	var ret models.FabricIpv6FlowKey
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricipv6flowkey := make(map[string]interface{})
+	fabricipv6flowkey["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricipv6flowkey["class_id"] = item.GetClassId()
+	fabricipv6flowkey["destination_ip_address"] = item.GetDestinationIpAddress()
+	fabricipv6flowkey["destination_port"] = item.GetDestinationPort()
+	fabricipv6flowkey["object_type"] = item.GetObjectType()
+	fabricipv6flowkey["protocol"] = item.GetProtocol()
+	fabricipv6flowkey["source_ip_address"] = item.GetSourceIpAddress()
+	fabricipv6flowkey["source_port"] = item.GetSourcePort()
+
+	fabricipv6flowkeys = append(fabricipv6flowkeys, fabricipv6flowkey)
+	return fabricipv6flowkeys
+}
+func flattenMapFabricL2FlowKey(p models.FabricL2FlowKey, d *schema.ResourceData) []map[string]interface{} {
+	var fabricl2flowkeys []map[string]interface{}
+	var ret models.FabricL2FlowKey
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricl2flowkey := make(map[string]interface{})
+	fabricl2flowkey["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricl2flowkey["class_id"] = item.GetClassId()
+	fabricl2flowkey["destination_mac"] = item.GetDestinationMac()
+	fabricl2flowkey["ether_type"] = item.GetEtherType()
+	fabricl2flowkey["object_type"] = item.GetObjectType()
+	fabricl2flowkey["source_mac"] = item.GetSourceMac()
+
+	fabricl2flowkeys = append(fabricl2flowkeys, fabricl2flowkey)
+	return fabricl2flowkeys
+}
 func flattenMapFabricLinkAggregationPolicyRelationship(p models.FabricLinkAggregationPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fabriclinkaggregationpolicyrelationships []map[string]interface{}
 	var ret models.FabricLinkAggregationPolicyRelationship
@@ -15046,6 +15248,42 @@ func flattenMapFabricMulticastPolicyRelationship(p models.FabricMulticastPolicyR
 
 	fabricmulticastpolicyrelationships = append(fabricmulticastpolicyrelationships, fabricmulticastpolicyrelationship)
 	return fabricmulticastpolicyrelationships
+}
+func flattenMapFabricNetFlowPolicyRelationship(p models.FabricNetFlowPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricnetflowpolicyrelationships []map[string]interface{}
+	var ret models.FabricNetFlowPolicyRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fabricnetflowpolicyrelationship := make(map[string]interface{})
+	fabricnetflowpolicyrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricnetflowpolicyrelationship["class_id"] = item.GetClassId()
+	fabricnetflowpolicyrelationship["moid"] = item.GetMoid()
+	fabricnetflowpolicyrelationship["object_type"] = item.GetObjectType()
+	fabricnetflowpolicyrelationship["selector"] = item.GetSelector()
+
+	fabricnetflowpolicyrelationships = append(fabricnetflowpolicyrelationships, fabricnetflowpolicyrelationship)
+	return fabricnetflowpolicyrelationships
+}
+func flattenMapFabricNetFlowRecordRelationship(p models.FabricNetFlowRecordRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var fabricnetflowrecordrelationships []map[string]interface{}
+	var ret models.FabricNetFlowRecordRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	fabricnetflowrecordrelationship := make(map[string]interface{})
+	fabricnetflowrecordrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricnetflowrecordrelationship["class_id"] = item.GetClassId()
+	fabricnetflowrecordrelationship["moid"] = item.GetMoid()
+	fabricnetflowrecordrelationship["object_type"] = item.GetObjectType()
+	fabricnetflowrecordrelationship["selector"] = item.GetSelector()
+
+	fabricnetflowrecordrelationships = append(fabricnetflowrecordrelationships, fabricnetflowrecordrelationship)
+	return fabricnetflowrecordrelationships
 }
 func flattenMapFabricPortPolicyRelationship(p models.FabricPortPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fabricportpolicyrelationships []map[string]interface{}
@@ -15220,6 +15458,26 @@ func flattenMapFabricUdldSettings(p models.FabricUdldSettings, d *schema.Resourc
 
 	fabricudldsettingss = append(fabricudldsettingss, fabricudldsettings)
 	return fabricudldsettingss
+}
+func flattenMapFabricVlanExportInterface(p models.FabricVlanExportInterface, d *schema.ResourceData) []map[string]interface{} {
+	var fabricvlanexportinterfaces []map[string]interface{}
+	var ret models.FabricVlanExportInterface
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	fabricvlanexportinterface := make(map[string]interface{})
+	fabricvlanexportinterface["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	fabricvlanexportinterface["class_id"] = item.GetClassId()
+	fabricvlanexportinterface["object_type"] = item.GetObjectType()
+	fabricvlanexportinterface["switch_aip"] = item.GetSwitchAip()
+	fabricvlanexportinterface["switch_asubnetmask"] = item.GetSwitchAsubnetmask()
+	fabricvlanexportinterface["switch_bip"] = item.GetSwitchBip()
+	fabricvlanexportinterface["switch_bsubnetmask"] = item.GetSwitchBsubnetmask()
+	fabricvlanexportinterface["vlan_id"] = item.GetVlanId()
+
+	fabricvlanexportinterfaces = append(fabricvlanexportinterfaces, fabricvlanexportinterface)
+	return fabricvlanexportinterfaces
 }
 func flattenMapFabricVlanSetRelationship(p models.FabricVlanSetRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var fabricvlansetrelationships []map[string]interface{}
@@ -19446,7 +19704,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 	kubernetesbasevirtualmachineinfraconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesbasevirtualmachineinfraconfig["class_id"] = item.GetClassId()
 	kubernetesbasevirtualmachineinfraconfig["interfaces"] = item.GetInterfaces()
-	infra_config_x, _ := d.GetOk("infra_config")
+	vm_config_x, _ := d.GetOk("vm_config")
 	kubernetesbasevirtualmachineinfraconfig["network_interfaces"] = (func(p []models.KubernetesNetworkInterfaceSpec, v interface{}) []map[string]interface{} {
 		var kubernetesnetworkinterfacespecs []map[string]interface{}
 		if len(p) == 0 {
@@ -19502,7 +19760,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 			kubernetesnetworkinterfacespecs = append(kubernetesnetworkinterfacespecs, kubernetesnetworkinterfacespec)
 		}
 		return kubernetesnetworkinterfacespecs
-	})(item.GetNetworkInterfaces(), infra_config_x)
+	})(item.GetNetworkInterfaces(), vm_config_x)
 	kubernetesbasevirtualmachineinfraconfig["object_type"] = item.GetObjectType()
 
 	kubernetesbasevirtualmachineinfraconfigs = append(kubernetesbasevirtualmachineinfraconfigs, kubernetesbasevirtualmachineinfraconfig)
@@ -19962,7 +20220,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
 
-	password_x, exists := d.GetOk("http_proxy")
+	password_x, exists := d.GetOk("docker_http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -20604,6 +20862,24 @@ func flattenMapManagementInterfaceRelationship(p models.ManagementInterfaceRelat
 
 	managementinterfacerelationships = append(managementinterfacerelationships, managementinterfacerelationship)
 	return managementinterfacerelationships
+}
+func flattenMapManagementReplayConfigInfo(p models.ManagementReplayConfigInfo, d *schema.ResourceData) []map[string]interface{} {
+	var managementreplayconfiginfos []map[string]interface{}
+	var ret models.ManagementReplayConfigInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	managementreplayconfiginfo := make(map[string]interface{})
+	managementreplayconfiginfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	managementreplayconfiginfo["class_id"] = item.GetClassId()
+	managementreplayconfiginfo["object_type"] = item.GetObjectType()
+	managementreplayconfiginfo["replay_config_end_time"] = item.GetReplayConfigEndTime().String()
+	managementreplayconfiginfo["replay_config_start_time"] = item.GetReplayConfigStartTime().String()
+	managementreplayconfiginfo["replay_config_status"] = item.GetReplayConfigStatus()
+
+	managementreplayconfiginfos = append(managementreplayconfiginfos, managementreplayconfiginfo)
+	return managementreplayconfiginfos
 }
 func flattenMapMemoryArrayRelationship(p models.MemoryArrayRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var memoryarrayrelationships []map[string]interface{}
@@ -27884,7 +28160,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 	x509certificate := make(map[string]interface{})
 	x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	x509certificate["class_id"] = item.GetClassId()
-	certificate_x, _ := d.GetOk("certificate")
+	ca_cert_x, _ := d.GetOk("ca_cert")
 	x509certificate["issuer"] = (func(p models.PkixDistinguishedName, v interface{}) []map[string]interface{} {
 		var pkixdistinguishednames []map[string]interface{}
 		var ret models.PkixDistinguishedName
@@ -27905,7 +28181,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetIssuer(), certificate_x)
+	})(item.GetIssuer(), ca_cert_x)
 	x509certificate["not_after"] = item.GetNotAfter().String()
 	x509certificate["not_before"] = item.GetNotBefore().String()
 	x509certificate["object_type"] = item.GetObjectType()
@@ -27932,7 +28208,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetSubject(), certificate_x)
+	})(item.GetSubject(), ca_cert_x)
 
 	x509certificates = append(x509certificates, x509certificate)
 	return x509certificates

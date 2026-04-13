@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_backup_info"
 description: |-
-        Virtual Machine backup information.
+        The VmBackupInfo object is key to managing protected Virtual Machine information for backups within HyperFlex clusters.
+        #### Purpose
+        VmBackupInfo provides detailed insights into the backup status and protection information for Virtual Machines, aiding in the effective management and monitoring of VM backups.
+        #### Key Concepts
+        - **Protection Status:** Offers visibility into the backup and protection status of Virtual Machines.
+        - **Cluster Associations:** Maps VM backup data to cluster IDs, facilitating organized tracking and management of backup operations.
+        - **Privilege Management:** Utilizes privilege sets for controlled access to VM backup information, ensuring data security and compliance.
 
 ---
 
 # Data Source: intersight_hyperflex_vm_backup_info
-Virtual Machine backup information.
+The VmBackupInfo object is key to managing protected Virtual Machine information for backups within HyperFlex clusters.
+#### Purpose
+VmBackupInfo provides detailed insights into the backup status and protection information for Virtual Machines, aiding in the effective management and monitoring of VM backups.
+#### Key Concepts
+- **Protection Status:** Offers visibility into the backup and protection status of Virtual Machines.
+- **Cluster Associations:** Maps VM backup data to cluster IDs, facilitating organized tracking and management of backup operations.
+- **Privilege Management:** Utilizes privilege sets for controlled access to VM backup information, ensuring data security and compliance.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

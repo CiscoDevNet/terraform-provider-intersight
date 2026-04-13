@@ -348,13 +348,13 @@ func resourceCondCustomHclBaseline() *schema.Resource {
 			"os_vendor": {
 				Description:  "The operating system vendor name running on the server.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_ ]+$"), ""), validation.StringLenBetween(0, 255)),
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_ -]+$"), ""), validation.StringLenBetween(0, 255)),
 				Optional:     true,
 			},
 			"os_version": {
 				Description:  "Operating System version running on the server.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_ .]+$"), ""), validation.StringLenBetween(0, 255)),
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9_ .()-]+$"), ""), validation.StringLenBetween(0, 255)),
 				Optional:     true,
 			},
 			"owners": {

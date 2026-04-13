@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_data_protection_peer"
 description: |-
-        Data Protection Peer describing the cluster pair from the HyperFlex backend.
+        The DataProtectionPeer object describes the cluster pair from the HyperFlex backend, emphasizing data protection relationships.
+        #### Purpose
+        DataProtectionPeer focuses on the relationships between cluster pairs, providing essential information for managing data protection across HyperFlex environments.
+        #### Key Concepts
+        - **Peer Relationships:** Defines the connections between clusters, ensuring coherent data protection strategies.
+        - **Status Tracking:** Offers insights into the status and health of peer clusters, supporting informed decision-making.
+        - **Controlled Access:** Manages access through privilege sets, maintaining security and data integrity in peer operations.
 
 ---
 
 # Data Source: intersight_hyperflex_data_protection_peer
-Data Protection Peer describing the cluster pair from the HyperFlex backend.
+The DataProtectionPeer object describes the cluster pair from the HyperFlex backend, emphasizing data protection relationships.
+#### Purpose
+DataProtectionPeer focuses on the relationships between cluster pairs, providing essential information for managing data protection across HyperFlex environments.
+#### Key Concepts
+- **Peer Relationships:** Defines the connections between clusters, ensuring coherent data protection strategies.
+- **Status Tracking:** Offers insights into the status and health of peer clusters, supporting informed decision-making.
+- **Controlled Access:** Manages access through privilege sets, maintaining security and data integrity in peer operations.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

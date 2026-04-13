@@ -1314,7 +1314,8 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 			}
 			if v, ok := l["start_time"]; ok {
 				{
-					x, _ := time.Parse(time.RFC1123, v.(string))
+					// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+					x, _ := time.Parse(time.RFC3339, v.(string))
 					o.SetStartTime(x)
 				}
 			}
@@ -1333,7 +1334,8 @@ func resourceSchedulerTaskScheduleCreate(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("suspend_end_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetSuspendEndTime(x)
 	}
 
@@ -1835,7 +1837,8 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 			}
 			if v, ok := l["start_time"]; ok {
 				{
-					x, _ := time.Parse(time.RFC1123, v.(string))
+					// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+					x, _ := time.Parse(time.RFC3339, v.(string))
 					o.SetStartTime(x)
 				}
 			}
@@ -1855,7 +1858,8 @@ func resourceSchedulerTaskScheduleUpdate(c context.Context, d *schema.ResourceDa
 
 	if d.HasChange("suspend_end_time") {
 		v := d.Get("suspend_end_time")
-		x, _ := time.Parse(time.RFC1123, v.(string))
+		// Please ensure the input value follows the RFC3339 time format (e.g., "2006-01-02T15:04:05Z07:00")
+		x, _ := time.Parse(time.RFC3339, v.(string))
 		o.SetSuspendEndTime(x)
 	}
 

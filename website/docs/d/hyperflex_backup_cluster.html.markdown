@@ -3,12 +3,24 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_backup_cluster"
 description: |-
-        BackupCluster object associated with Hyperflex cluster describing the backup related information.
+        The BackupCluster object is central to managing backup-related operations for HyperFlex clusters, providing comprehensive information about the backup source and target clusters.
+        #### Purpose
+        BackupCluster is designed to offer insights into the backup processes associated with HyperFlex clusters. It outlines the relationships and UUIDs pertinent to backup operations, facilitating seamless tracking and management of backup activities.
+        #### Key Concepts
+        - **Cluster Associations:** Establishes connections between source and target clusters, ensuring clarity in backup operations.
+        - **Protection Details:** Describes backup sources and references, aiding in the management and validation of backup integrity.
+        - **Access Control:** Utilizes privilege sets to regulate access to backup information, maintaining security and data protection standards.
 
 ---
 
 # Data Source: intersight_hyperflex_backup_cluster
-BackupCluster object associated with Hyperflex cluster describing the backup related information.
+The BackupCluster object is central to managing backup-related operations for HyperFlex clusters, providing comprehensive information about the backup source and target clusters.
+#### Purpose
+BackupCluster is designed to offer insights into the backup processes associated with HyperFlex clusters. It outlines the relationships and UUIDs pertinent to backup operations, facilitating seamless tracking and management of backup activities.
+#### Key Concepts
+- **Cluster Associations:** Establishes connections between source and target clusters, ensuring clarity in backup operations.
+- **Protection Details:** Describes backup sources and references, aiding in the management and validation of backup integrity.
+- **Access Control:** Utilizes privilege sets to regulate access to backup information, maintaining security and data protection standards.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

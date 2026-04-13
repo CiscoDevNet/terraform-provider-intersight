@@ -3,12 +3,24 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_file_system_op_status"
 description: |-
-        Status of a file system on an Intersight Appliance node.
+        The FileSystemOpStatus object denotes the operational status of file systems within an Intersight Appliance node. It highlights the capacity and usage metrics critical to maintaining system efficiency.
+        #### Purpose
+        FileSystemOpStatus ensures the health and functionality of file systems, presenting data on usage and capacity that supports system reliability and performance.
+        #### Key Concepts
+        - **File System Health:** Determines the operational status through checks that categorize the state as Operational, AttentionNeeded, or Impaired.
+        - **Capacity Management:** Provides insights into file system capacity and usage to prevent overutilization and maintain optimal performance.
+        - **System Linkages:** Connects with device registration to integrate file system status within broader system health metrics.
 
 ---
 
 # Data Source: intersight_appliance_file_system_op_status
-Status of a file system on an Intersight Appliance node.
+The FileSystemOpStatus object denotes the operational status of file systems within an Intersight Appliance node. It highlights the capacity and usage metrics critical to maintaining system efficiency.
+#### Purpose
+FileSystemOpStatus ensures the health and functionality of file systems, presenting data on usage and capacity that supports system reliability and performance.
+#### Key Concepts
+- **File System Health:** Determines the operational status through checks that categorize the state as Operational, AttentionNeeded, or Impaired.
+- **Capacity Management:** Provides insights into file system capacity and usage to prevent overutilization and maintain optimal performance.
+- **System Linkages:** Connects with device registration to integrate file system status within broader system health metrics.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

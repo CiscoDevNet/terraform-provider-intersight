@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **FanModuleId** | Pointer to **int64** | This field is used to identify the Fan Module to which this Fan belongs. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Fan module Identifier for the fan. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the pluggable Fan. | [optional] [readonly] 
+**NrThresholdMinRpmSpeed** | Pointer to **int64** | This field identifies the Non Recoverable Threshold Minimum Revolutions Per Minute Speed for this Fan Unit. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field is used to indicate this fan unit&#39;s operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Fan Unit. | [optional] [readonly] 
@@ -206,6 +207,31 @@ SetName sets Name field to given value.
 `func (o *EquipmentFan) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetNrThresholdMinRpmSpeed
+
+`func (o *EquipmentFan) GetNrThresholdMinRpmSpeed() int64`
+
+GetNrThresholdMinRpmSpeed returns the NrThresholdMinRpmSpeed field if non-nil, zero value otherwise.
+
+### GetNrThresholdMinRpmSpeedOk
+
+`func (o *EquipmentFan) GetNrThresholdMinRpmSpeedOk() (*int64, bool)`
+
+GetNrThresholdMinRpmSpeedOk returns a tuple with the NrThresholdMinRpmSpeed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNrThresholdMinRpmSpeed
+
+`func (o *EquipmentFan) SetNrThresholdMinRpmSpeed(v int64)`
+
+SetNrThresholdMinRpmSpeed sets NrThresholdMinRpmSpeed field to given value.
+
+### HasNrThresholdMinRpmSpeed
+
+`func (o *EquipmentFan) HasNrThresholdMinRpmSpeed() bool`
+
+HasNrThresholdMinRpmSpeed returns a boolean if a field has been set.
 
 ### GetOperReason
 

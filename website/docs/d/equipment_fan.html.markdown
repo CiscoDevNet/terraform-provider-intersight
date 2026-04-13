@@ -42,6 +42,7 @@ The following arguments can be used to get data of already created objects in In
 * `module_id`:(int) Fan module Identifier for the fan. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the pluggable Fan. 
+* `nr_threshold_min_rpm_speed`:(int) This field identifies the Non Recoverable Threshold Minimum Revolutions Per Minute Speed for this Fan Unit. 
 * `oper_state`:(string) This field is used to indicate this fan unit's operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Fan Unit. 
 * `pid`:(string) This field identifies the Product ID for the fans. 

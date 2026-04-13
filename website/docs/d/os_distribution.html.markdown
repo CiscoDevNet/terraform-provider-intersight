@@ -3,14 +3,26 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_distribution"
 description: |-
-        Intersight has the distribution details for all the Intersight supported OS
-        distributions. There will be a Distribution object for each supported OS.
+        The Distribution object encompasses the details of operating system distributions that are validated and supported by Intersight for automated installation. It acts as a repository of supported OS versions and their associated metadata.
+        #### Purpose
+        Distribution objects serve as a reference for all supported operating system distributions within Intersight, ensuring compatibility and reliability of automated installations. They provide essential metadata required for managing and deploying these OS distributions efficiently.
+        #### Key Concepts
+        - **OS Validation:** Contains validated OS distribution details, ensuring reliability and compatibility with Intersight's automated installation services.
+        - **Intersight-Supported:** Lists OS distributions that are officially supported for automated installation, backed by thorough validation processes.
+        - **Integration with Configuration Files:** Works in conjunction with OS configuration files and post-install scripts to facilitate seamless installation processes.
+        - **Access Control:** Privileges such as System Administrator and Account Administrator ensure secure access and management of distribution details.
 
 ---
 
 # Data Source: intersight_os_distribution
-Intersight has the distribution details for all the Intersight supported OS
-distributions. There will be a Distribution object for each supported OS.
+The Distribution object encompasses the details of operating system distributions that are validated and supported by Intersight for automated installation. It acts as a repository of supported OS versions and their associated metadata.
+#### Purpose
+Distribution objects serve as a reference for all supported operating system distributions within Intersight, ensuring compatibility and reliability of automated installations. They provide essential metadata required for managing and deploying these OS distributions efficiently.
+#### Key Concepts
+- **OS Validation:** Contains validated OS distribution details, ensuring reliability and compatibility with Intersight's automated installation services.
+- **Intersight-Supported:** Lists OS distributions that are officially supported for automated installation, backed by thorough validation processes.
+- **Integration with Configuration Files:** Works in conjunction with OS configuration files and post-install scripts to facilitate seamless installation processes.
+- **Access Control:** Privileges such as System Administrator and Account Administrator ensure secure access and management of distribution details.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

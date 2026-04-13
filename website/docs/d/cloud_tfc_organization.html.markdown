@@ -3,11 +3,23 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_tfc_organization"
 description: |-
+        The TfcOrganization object represents a collaborative space within Terraform Cloud, enabling teams to work together on shared workspaces. Intersight discovers the Organizations in the Terraform Cloud account whose credentials are specified in the Terraform Cloud target.
+        #### Purpose
+        Defines a collaborative space in Terraform Cloud where teams manage shared workspaces and enables Intersight to discover Terraform Cloud organizations using the credentials specified in the Terraform Cloud target.
+        #### Key Concepts
+        - **Collaborative Workspace Boundary:** Represents a logical grouping in Terraform Cloud where users, teams, and workspaces are organized for shared IaC operations.
+        - **Credential-Based Discovery:** Intersight automatically identifies all Terraform Cloud organizations accessible through the credentials defined in a Terraform Cloud target.
         Organizations are a shared space for teams to collaborate on workspaces in Terraform Cloud.
 
 ---
 
 # Data Source: intersight_cloud_tfc_organization
+The TfcOrganization object represents a collaborative space within Terraform Cloud, enabling teams to work together on shared workspaces. Intersight discovers the Organizations in the Terraform Cloud account whose credentials are specified in the Terraform Cloud target.
+#### Purpose
+Defines a collaborative space in Terraform Cloud where teams manage shared workspaces and enables Intersight to discover Terraform Cloud organizations using the credentials specified in the Terraform Cloud target.
+#### Key Concepts
+- **Collaborative Workspace Boundary:** Represents a logical grouping in Terraform Cloud where users, teams, and workspaces are organized for shared IaC operations.
+- **Credential-Based Discovery:** Intersight automatically identifies all Terraform Cloud organizations accessible through the credentials defined in a Terraform Cloud target.
 Organizations are a shared space for teams to collaborate on workspaces in Terraform Cloud.
 ## Argument Reference
 The results of this data source are stored in `results` property.

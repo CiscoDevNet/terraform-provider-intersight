@@ -23,6 +23,18 @@ func Test_intersight_CondApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test CondApiService CreateCondAlarmRule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.CreateCondAlarmRule(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService CreateCondAlarmSuppression", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -71,6 +83,31 @@ func Test_intersight_CondApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CondApiService CreateCondThresholdDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.CreateCondThresholdDefinition(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService DeleteCondAlarmRule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.CondApi.DeleteCondAlarmRule(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService DeleteCondAlarmSuppression", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -91,6 +128,19 @@ func Test_intersight_CondApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.CondApi.DeleteCondCustomHclBaseline(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService DeleteCondThresholdDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.CondApi.DeleteCondThresholdDefinition(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -194,6 +244,32 @@ func Test_intersight_CondApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CondApi.GetCondAlarmList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService GetCondAlarmRuleByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.GetCondAlarmRuleByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService GetCondAlarmRuleList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.GetCondAlarmRuleList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -357,6 +433,32 @@ func Test_intersight_CondApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CondApiService GetCondThresholdDefinitionByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.GetCondThresholdDefinitionByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService GetCondThresholdDefinitionList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CondApi.GetCondThresholdDefinitionList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService PatchCondAlarm", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -364,6 +466,20 @@ func Test_intersight_CondApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.CondApi.PatchCondAlarm(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService PatchCondAlarmRule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.PatchCondAlarmRule(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -399,6 +515,20 @@ func Test_intersight_CondApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CondApiService PatchCondThresholdDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.PatchCondThresholdDefinition(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CondApiService UpdateCondAlarm", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -406,6 +536,20 @@ func Test_intersight_CondApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.CondApi.UpdateCondAlarm(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService UpdateCondAlarmRule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.UpdateCondAlarmRule(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -434,6 +578,20 @@ func Test_intersight_CondApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.CondApi.UpdateCondCustomHclBaseline(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CondApiService UpdateCondThresholdDefinition", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CondApi.UpdateCondThresholdDefinition(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2026021105
+API version: 1.0.11-2026030305
 Contact: intersight@cisco.com
 */
 
@@ -45,7 +45,9 @@ type ApplianceNodeOpStatus struct {
 	OperationalStatus *string                        `json:"OperationalStatus,omitempty"`
 	Account           NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to applianceFileSystemOpStatus resources.
-	FileSystemOpStatuses []ApplianceFileSystemOpStatusRelationship `json:"FileSystemOpStatuses,omitempty"`
+	// Deprecated
+	FileSystemOpStatuses []ApplianceFileSystemOpStatusRelationship        `json:"FileSystemOpStatuses,omitempty"`
+	FileSystemOpSummary  NullableApplianceFileSystemOpSummaryRelationship `json:"FileSystemOpSummary,omitempty"`
 	// An array of relationships to applianceNetworkLinkStatus resources.
 	NetworkLinkStatuses  []ApplianceNetworkLinkStatusRelationship    `json:"NetworkLinkStatuses,omitempty"`
 	NodeInfo             NullableApplianceNodeInfoRelationship       `json:"NodeInfo,omitempty"`
@@ -438,6 +440,7 @@ func (o *ApplianceNodeOpStatus) UnsetAccount() {
 }
 
 // GetFileSystemOpStatuses returns the FileSystemOpStatuses field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *ApplianceNodeOpStatus) GetFileSystemOpStatuses() []ApplianceFileSystemOpStatusRelationship {
 	if o == nil {
 		var ret []ApplianceFileSystemOpStatusRelationship
@@ -449,6 +452,7 @@ func (o *ApplianceNodeOpStatus) GetFileSystemOpStatuses() []ApplianceFileSystemO
 // GetFileSystemOpStatusesOk returns a tuple with the FileSystemOpStatuses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *ApplianceNodeOpStatus) GetFileSystemOpStatusesOk() ([]ApplianceFileSystemOpStatusRelationship, bool) {
 	if o == nil || IsNil(o.FileSystemOpStatuses) {
 		return nil, false
@@ -466,8 +470,52 @@ func (o *ApplianceNodeOpStatus) HasFileSystemOpStatuses() bool {
 }
 
 // SetFileSystemOpStatuses gets a reference to the given []ApplianceFileSystemOpStatusRelationship and assigns it to the FileSystemOpStatuses field.
+// Deprecated
 func (o *ApplianceNodeOpStatus) SetFileSystemOpStatuses(v []ApplianceFileSystemOpStatusRelationship) {
 	o.FileSystemOpStatuses = v
+}
+
+// GetFileSystemOpSummary returns the FileSystemOpSummary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplianceNodeOpStatus) GetFileSystemOpSummary() ApplianceFileSystemOpSummaryRelationship {
+	if o == nil || IsNil(o.FileSystemOpSummary.Get()) {
+		var ret ApplianceFileSystemOpSummaryRelationship
+		return ret
+	}
+	return *o.FileSystemOpSummary.Get()
+}
+
+// GetFileSystemOpSummaryOk returns a tuple with the FileSystemOpSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplianceNodeOpStatus) GetFileSystemOpSummaryOk() (*ApplianceFileSystemOpSummaryRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FileSystemOpSummary.Get(), o.FileSystemOpSummary.IsSet()
+}
+
+// HasFileSystemOpSummary returns a boolean if a field has been set.
+func (o *ApplianceNodeOpStatus) HasFileSystemOpSummary() bool {
+	if o != nil && o.FileSystemOpSummary.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFileSystemOpSummary gets a reference to the given NullableApplianceFileSystemOpSummaryRelationship and assigns it to the FileSystemOpSummary field.
+func (o *ApplianceNodeOpStatus) SetFileSystemOpSummary(v ApplianceFileSystemOpSummaryRelationship) {
+	o.FileSystemOpSummary.Set(&v)
+}
+
+// SetFileSystemOpSummaryNil sets the value for FileSystemOpSummary to be an explicit nil
+func (o *ApplianceNodeOpStatus) SetFileSystemOpSummaryNil() {
+	o.FileSystemOpSummary.Set(nil)
+}
+
+// UnsetFileSystemOpSummary ensures that no value is present for FileSystemOpSummary, not even an explicit nil
+func (o *ApplianceNodeOpStatus) UnsetFileSystemOpSummary() {
+	o.FileSystemOpSummary.Unset()
 }
 
 // GetNetworkLinkStatuses returns the NetworkLinkStatuses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -688,6 +736,9 @@ func (o ApplianceNodeOpStatus) ToMap() (map[string]interface{}, error) {
 	if o.FileSystemOpStatuses != nil {
 		toSerialize["FileSystemOpStatuses"] = o.FileSystemOpStatuses
 	}
+	if o.FileSystemOpSummary.IsSet() {
+		toSerialize["FileSystemOpSummary"] = o.FileSystemOpSummary.Get()
+	}
 	if o.NetworkLinkStatuses != nil {
 		toSerialize["NetworkLinkStatuses"] = o.NetworkLinkStatuses
 	}
@@ -772,7 +823,9 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
 		OperationalStatus *string                        `json:"OperationalStatus,omitempty"`
 		Account           NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to applianceFileSystemOpStatus resources.
-		FileSystemOpStatuses []ApplianceFileSystemOpStatusRelationship `json:"FileSystemOpStatuses,omitempty"`
+		// Deprecated
+		FileSystemOpStatuses []ApplianceFileSystemOpStatusRelationship        `json:"FileSystemOpStatuses,omitempty"`
+		FileSystemOpSummary  NullableApplianceFileSystemOpSummaryRelationship `json:"FileSystemOpSummary,omitempty"`
 		// An array of relationships to applianceNetworkLinkStatus resources.
 		NetworkLinkStatuses []ApplianceNetworkLinkStatusRelationship    `json:"NetworkLinkStatuses,omitempty"`
 		NodeInfo            NullableApplianceNodeInfoRelationship       `json:"NodeInfo,omitempty"`
@@ -797,6 +850,7 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
 		varApplianceNodeOpStatus.OperationalStatus = varApplianceNodeOpStatusWithoutEmbeddedStruct.OperationalStatus
 		varApplianceNodeOpStatus.Account = varApplianceNodeOpStatusWithoutEmbeddedStruct.Account
 		varApplianceNodeOpStatus.FileSystemOpStatuses = varApplianceNodeOpStatusWithoutEmbeddedStruct.FileSystemOpStatuses
+		varApplianceNodeOpStatus.FileSystemOpSummary = varApplianceNodeOpStatusWithoutEmbeddedStruct.FileSystemOpSummary
 		varApplianceNodeOpStatus.NetworkLinkStatuses = varApplianceNodeOpStatusWithoutEmbeddedStruct.NetworkLinkStatuses
 		varApplianceNodeOpStatus.NodeInfo = varApplianceNodeOpStatusWithoutEmbeddedStruct.NodeInfo
 		varApplianceNodeOpStatus.RegisteredDevice = varApplianceNodeOpStatusWithoutEmbeddedStruct.RegisteredDevice
@@ -830,6 +884,7 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OperationalStatus")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "FileSystemOpStatuses")
+		delete(additionalProperties, "FileSystemOpSummary")
 		delete(additionalProperties, "NetworkLinkStatuses")
 		delete(additionalProperties, "NodeInfo")
 		delete(additionalProperties, "RegisteredDevice")

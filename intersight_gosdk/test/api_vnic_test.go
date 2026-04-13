@@ -1282,6 +1282,58 @@ func Test_intersight_VnicApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test VnicApiService GetVnicServiceEthIfByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.VnicApi.GetVnicServiceEthIfByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VnicApiService GetVnicServiceEthIfInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.VnicApi.GetVnicServiceEthIfInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VnicApiService GetVnicServiceEthIfInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.VnicApi.GetVnicServiceEthIfInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test VnicApiService GetVnicServiceEthIfList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.VnicApi.GetVnicServiceEthIfList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test VnicApiService GetVnicVhbaTemplateByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

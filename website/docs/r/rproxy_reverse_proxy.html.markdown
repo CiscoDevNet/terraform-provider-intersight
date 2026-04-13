@@ -3,16 +3,22 @@ subcategory: "rproxy"
 layout: "intersight"
 page_title: "Intersight: intersight_rproxy_reverse_proxy"
 description: |-
-        REST API endpoint for reverse proxy implementation. It receives an REST API request with URL and target type.
-        Based on the target type, credentials is fetched from the target prior to being forwarded to the right upstream
-        endpoint.
+        The ReverseProxy object serves as a pivotal element within the network infrastructure, enabling the implementation of REST API endpoints for reverse proxy operations. It is responsible for processing API requests and directing them to Terraform Cloud based on the credentials in Terrform Cloud target.
+        #### Purpose
+        The ReverseProxy object is designed to efficiently manage and forward API requests. It acts as an intermediary, fetching necessary credentials from targets and ensuring seamless redirection to Terraform Cloud.
+        #### Key Concepts
+        - **Credential Management:** Ensures the retrieval of appropriate credentials before request forwarding.
+        - **Target-Based Routing:** Determines the routing of requests based on specified target types.
 
 ---
 
 # Resource: intersight_rproxy_reverse_proxy
-REST API endpoint for reverse proxy implementation. It receives an REST API request with URL and target type.
-Based on the target type, credentials is fetched from the target prior to being forwarded to the right upstream
-endpoint.
+The ReverseProxy object serves as a pivotal element within the network infrastructure, enabling the implementation of REST API endpoints for reverse proxy operations. It is responsible for processing API requests and directing them to Terraform Cloud based on the credentials in Terrform Cloud target.
+#### Purpose
+The ReverseProxy object is designed to efficiently manage and forward API requests. It acts as an intermediary, fetching necessary credentials from targets and ensuring seamless redirection to Terraform Cloud.
+#### Key Concepts
+- **Credential Management:** Ensures the retrieval of appropriate credentials before request forwarding.
+- **Target-Based Routing:** Determines the routing of requests based on specified target types.
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
