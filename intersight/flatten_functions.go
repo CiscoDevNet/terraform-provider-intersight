@@ -19704,7 +19704,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 	kubernetesbasevirtualmachineinfraconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesbasevirtualmachineinfraconfig["class_id"] = item.GetClassId()
 	kubernetesbasevirtualmachineinfraconfig["interfaces"] = item.GetInterfaces()
-	vm_config_x, _ := d.GetOk("vm_config")
+	infra_config_x, _ := d.GetOk("infra_config")
 	kubernetesbasevirtualmachineinfraconfig["network_interfaces"] = (func(p []models.KubernetesNetworkInterfaceSpec, v interface{}) []map[string]interface{} {
 		var kubernetesnetworkinterfacespecs []map[string]interface{}
 		if len(p) == 0 {
@@ -19760,7 +19760,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 			kubernetesnetworkinterfacespecs = append(kubernetesnetworkinterfacespecs, kubernetesnetworkinterfacespec)
 		}
 		return kubernetesnetworkinterfacespecs
-	})(item.GetNetworkInterfaces(), vm_config_x)
+	})(item.GetNetworkInterfaces(), infra_config_x)
 	kubernetesbasevirtualmachineinfraconfig["object_type"] = item.GetObjectType()
 
 	kubernetesbasevirtualmachineinfraconfigs = append(kubernetesbasevirtualmachineinfraconfigs, kubernetesbasevirtualmachineinfraconfig)
